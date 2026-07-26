@@ -1,0 +1,7 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "Core permissions for the QuixiChat shell window. The UI is served over the loopback service, not the Tauri IPC bridge, so nothing beyond the defaults is granted.",
+  "windows": ["main"],
+  "permissions": ["core:default"]
+}

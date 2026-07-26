@@ -1,0 +1,38 @@
+[package]
+name = "quixi-chat"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+description = "Minimal native chat for fast local Gemma 4 E2B inference"
+build = "build.rs"
+
+[features]
+default = ["metal", "metal-kernels", "desktop"]
+metal = ["quixi-chat-kernels/metal", "quixi-chat-engine/metal", "quixi-chat-server/metal"]
+metal-kernels = ["metal", "quixi-chat-kernels/metal-kernels", "quixi-chat-engine/metal-kernels", "quixi-chat-server/metal-kernels"]
+desktop = ["dep:tauri", "custom-protocol"]
+# Tauri's release asset protocol; the conventional name lets `cargo tauri build`
+# select it automatically.
+custom-protocol = ["tauri?/custom-protocol"]
+
+[dependencies]
+anyhow.workspace = true
+clap.workspace = true
+futures-util.workspace = true
+quixi-chat-kernels = { path = "../quixi-chat-kernels" }
+quixi-chat-engine = { path = "../quixi-chat-engine" }
+quixi-chat-server = { path = "../quixi-chat-server" }
+reqwest.workspace = true
+serde_json.workspace = true
+sha2.workspace = true
+tauri = { workspace = true, optional = true }
+tokio.workspace = true
+tracing.workspace = true
+tracing-subscriber.workspace = true
+
+[build-dependencies]
+tauri-build.workspace = true
+
+[lints]
+workspace = true

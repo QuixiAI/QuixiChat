@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>QuixiChat</title>
+    <style>
+      :root {
+        --bg: #0d0d0d;
+        --fg: #ececec;
+        --muted: #8f8f8f;
+        --user-bg: #ececec;
+        --user-fg: #0d0d0d;
+        --field: #2a2a2a;
+        --line: #2f2f2f;
+      }
+      @media (prefers-color-scheme: light) {
+        :root {
+          --bg: #ffffff;
+          --fg: #0d0d0d;
+          --muted: #6b6b6b;
+          --user-bg: #ececec;
+          --user-fg: #0d0d0d;
+          --field: #f2f2f2;
+          --line: #e4e4e4;
+        }
+      }
+      * { box-sizing: border-box; }
+      html, body { height: 100%; }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--fg);
+        font: 16px/1.65 ui-sans-serif, -apple-system, "SF Pro Text", system-ui, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .log { flex: 1; overflow-y: auto; scrollbar-width: thin; }
+      .inner { max-width: 46rem; margin: 0 auto; padding: 2.5rem 1.5rem 1rem; }
+
+      .empty {
+        height: 60vh;
+        display: grid;
+        place-items: center;
+        text-align: center;
+        color: var(--muted);
+      }
+      .empty h1 { margin: 0; font-size: 1.6rem; font-weight: 550; color: var(--fg); letter-spacing: -.02em; }
+      .empty p { margin: .5rem 0 0; font-size: .9rem; }
+
+      .turn { margin-bottom: 1.9rem; }
+      .turn.user { display: flex; justify-content: flex-end; }
+      .turn.user .bubble {
+        background: var(--user-bg);
+        color: var(--user-fg);
+        border-radius: 1.35rem;
+        padding: .6rem 1.1rem;
+        max-width: 75%;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+      }
+      .turn.assistant { white-space: pre-wrap; word-wrap: break-word; }
+      .turn.assistant.error { color: #f87171; }
+      .turn.assistant.context { color: var(--muted); }
+      .role-label {
+        margin-bottom: .3rem; color: var(--muted); font-size: .7rem;
+        font-weight: 650; letter-spacing: .08em; text-transform: uppercase;
+      }
+      .thought { margin: 0 0 .8rem; color: var(--muted); font-size: .84rem; }
+      .thought summary {
+        display: flex; width: max-content; align-items: center; gap: .45rem;
+        cursor: pointer; list-style: none; user-select: none;
+      }
+      .thought summary::-webkit-details-marker { display: none; }
+      .thought summary::before {
+        content: "›"; display: inline-block; transition: transform .15s ease;
+      }
+      .thought[open] summary::before { transform: rotate(90deg); }
+      .thought-body {
+        margin: .55rem 0 0 .35rem; padding-left: .8rem;
+        border-left: 1px solid var(--line); white-space: pre-wrap; word-wrap: break-word;
+      }
+
+      .thinking { display: inline-flex; gap: .3rem; align-items: center; height: 1.65em; }
+      .thinking i {
+        width: .42rem; height: .42rem; border-radius: 50%;
+        background: var(--muted); display: block;
+        animation: blink 1.4s ease-in-out infinite;
+      }
+      .thinking i:nth-child(2) { animation-delay: .2s; }
+      .thinking i:nth-child(3) { animation-delay: .4s; }
+      @keyframes blink { 0%, 60%, 100% { opacity: .25 } 30% { opacity: 1 } }
+
+      .dock { padding: 0 1.5rem 1.4rem; }
+      .composer {
+        max-width: 46rem; margin: 0 auto;
+        background: var(--field);
+        border: 1px solid var(--line);
+        border-radius: 1.65rem;
+        padding: .45rem .45rem .45rem 1.15rem;
+        display: flex; align-items: flex-end; gap: .5rem;
+      }
+      .composer textarea {
+        flex: 1; border: 0; outline: 0; resize: none; background: transparent;
+        color: inherit; font: inherit; line-height: 1.55;
+        padding: .55rem 0; max-height: 12rem; overflow-y: auto;
+      }
+      .composer textarea::placeholder { color: var(--muted); }
+      .composer button {
+        flex: none; width: 2.1rem; height: 2.1rem; border: 0; border-radius: 50%;
+        background: var(--fg); color: var(--bg);
+        cursor: pointer; display: grid; place-items: center;
+        font-size: 1rem; line-height: 1; transition: opacity .15s;
+      }
+      .composer button:disabled { opacity: .25; cursor: default; }
+      .hint {
+        max-width: 46rem; margin: .6rem auto 0;
+        text-align: center; font-size: .74rem; color: var(--muted);
+        min-height: 1em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="log" id="log">
+      <div class="inner" id="inner">
+        <div class="empty" id="empty">
+          <div>
+            <h1>QuixiChat</h1>
+            <p id="empty-sub">Gemma runs on this machine. Nothing leaves it.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dock">
+      <div class="composer">
+        <textarea id="draft" rows="1" placeholder="Ask Gemma"></textarea>
+        <button id="send" disabled aria-label="Send">↑</button>
+      </div>
+      <div class="hint" id="hint"></div>
+    </div>
+
+    <script>
+      const token = new URLSearchParams(location.search).get("t") ?? "";
+      const $ = (id) => document.getElementById(id);
+      const log = $("log"), inner = $("inner"), draft = $("draft"), send = $("send"), hint = $("hint");
+
+      let turns = [];
+      let busy = false;
+      let compacting = false;
+
+      const escapeHtml = (s) =>
+        s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
+
+      function render() {
+        if (turns.length === 0) return;
+        inner.innerHTML = turns
+          .map((t, i) =>
+            t.role === "user"
+              ? `<div class="turn user"><div class="bubble">${escapeHtml(t.content)}</div></div>`
+              : `<div class="turn assistant ${t.role !== "assistant" ? "context" : ""} ${t.error ? "error" : ""}">${
+                  t.role !== "assistant"
+                    ? `<div class="role-label">${escapeHtml(t.role)}</div>`
+                    : ""
+                }${
+                  t.role === "assistant" && (t.pending || t.thinking)
+                    ? `<details class="thought" data-turn="${i}" ${t.thoughtOpen ? "open" : ""}><summary><span>Thinking</span>${
+                        t.pending
+                          ? '<span class="thinking" aria-label="Thinking"><i></i><i></i><i></i></span>'
+                          : ""
+                      }</summary>${
+                        t.thinking
+                          ? `<div class="thought-body">${escapeHtml(t.thinking)}</div>`
+                          : ""
+                      }</details>`
+                    : ""
+                }${t.pending ? "" : escapeHtml(t.content)}</div>`,
+          )
+          .join("");
+        inner.querySelectorAll("details[data-turn]").forEach((details) => {
+          details.addEventListener("toggle", () => {
+            turns[Number(details.dataset.turn)].thoughtOpen = details.open;
+          });
+        });
+        log.scrollTop = log.scrollHeight;
+      }
+
+      function autosize() {
+        draft.style.height = "auto";
+        draft.style.height = `${Math.min(draft.scrollHeight, 192)}px`;
+        send.disabled = busy || draft.value.trim() === "";
+      }
+
+      const health = () =>
+        fetch(`/api/health?t=${encodeURIComponent(token)}`).then((r) => r.json());
+
+      // The first message loads ~3.3 GB onto the GPU. Say so, rather than
+      // leaving a spinner unexplained for a minute.
+      function watchLoading() {
+        let stop = false;
+        const tick = () =>
+          health()
+            .then((h) => {
+              if (stop) return;
+              if (compacting) {
+                hint.textContent =
+                  "Compacting conversation history — preserving active instructions and work";
+                return;
+              }
+              hint.textContent =
+                h.llm.state === "loading"
+                  ? "Loading Gemma onto the GPU — this happens once"
+                  : "";
+            })
+            .catch(() => {});
+        tick();
+        const timer = setInterval(tick, 1200);
+        return () => {
+          stop = true;
+          clearInterval(timer);
+          hint.textContent = "";
+        };
+      }
+
+      async function submit() {
+        const content = draft.value.trim();
+        if (!content || busy) return;
+
+        const history = turns
+          .filter((t) => !t.error && !t.pending)
+          .map(({ role, content }) => ({ role, content }));
+        history.push({ role: "user", content });
+
+        turns.push({ role: "user", content }, { role: "assistant", content: "", pending: true });
+        draft.value = "";
+        busy = true;
+        autosize();
+        render();
+
+        const stopWatching = watchLoading();
+        try {
+          const response = await fetch("/api/chat", {
+            method: "POST",
+            headers: { "content-type": "application/json", "x-quixi-chat-token": token },
+            body: JSON.stringify({ messages: history }),
+          });
+          if (!response.ok) throw new Error((await response.text()) || `HTTP ${response.status}`);
+          if (!response.body) throw new Error("the chat response did not include a stream");
+
+          const reader = response.body.getReader();
+          const decoder = new TextDecoder();
+          let buffered = "";
+          let completed = false;
+          while (!completed) {
+            const { done, value } = await reader.read();
+            buffered += decoder.decode(value, { stream: !done });
+            let newline = buffered.indexOf("\n");
+            while (newline !== -1) {
+              const line = buffered.slice(0, newline).trim();
+              buffered = buffered.slice(newline + 1);
+              newline = buffered.indexOf("\n");
+              if (!line) continue;
+
+              const event = JSON.parse(line);
+              if (event.type === "compacting") {
+                compacting = true;
+                hint.textContent = `Compacting ${event.original_tokens.toLocaleString()} tokens — preserving active instructions and work`;
+              } else if (event.type === "compacted") {
+                console.info(
+                  `compacted ${event.original_tokens} tokens to ${event.compacted_tokens}`,
+                );
+                turns = [
+                  ...event.messages,
+                  { role: "assistant", content: "", pending: true },
+                ];
+                compacting = false;
+                render();
+              } else if (event.type === "thinking") {
+                turns[turns.length - 1].pending = true;
+                render();
+              } else if (event.type === "thinking_delta") {
+                const assistant = turns[turns.length - 1];
+                assistant.thinking = (assistant.thinking ?? "") + event.text;
+                assistant.pending = true;
+                render();
+                await new Promise((resolve) =>
+                  requestAnimationFrame(() => setTimeout(resolve, 0)),
+                );
+              } else if (event.type === "answering") {
+                turns[turns.length - 1].pending = false;
+                render();
+              } else if (event.type === "delta") {
+                const assistant = turns[turns.length - 1];
+                assistant.content += event.text;
+                assistant.pending = false;
+                render();
+                await new Promise((resolve) =>
+                  requestAnimationFrame(() => setTimeout(resolve, 0)),
+                );
+              } else if (event.type === "done") {
+                console.info(`reply in ${(event.elapsed_ms / 1000).toFixed(1)}s`);
+                const assistant = turns[turns.length - 1];
+                turns[turns.length - 1] = {
+                  role: "assistant",
+                  content: event.reply,
+                  thinking: event.thinking,
+                  thoughtOpen: assistant.thoughtOpen,
+                };
+                compacting = false;
+                completed = true;
+                break;
+              } else if (event.type === "error") {
+                throw new Error(event.message);
+              }
+            }
+            if (done && !completed) {
+              throw new Error("the chat stream ended before its completion event");
+            }
+          }
+        } catch (error) {
+          const assistant = turns[turns.length - 1];
+          turns[turns.length - 1] = {
+            role: "assistant",
+            content: String(error.message ?? error),
+            thinking: assistant.thinking,
+            thoughtOpen: assistant.thoughtOpen,
+            error: true,
+          };
+        } finally {
+          compacting = false;
+          stopWatching();
+          busy = false;
+          autosize();
+          render();
+          draft.focus();
+        }
+      }
+
+      send.addEventListener("click", submit);
+      draft.addEventListener("input", autosize);
+      draft.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" && !e.shiftKey) {
+          e.preventDefault();
+          submit();
+        }
+      });
+
+      autosize();
+      draft.focus();
+      health()
+        .then((h) => {
+          if (h.llm.state === "not_installed") {
+            $("empty-sub").textContent = "The model set is not installed.";
+          }
+        })
+        .catch(() => {
+          $("empty-sub").textContent = "The local service is unreachable.";
+        });
+    </script>
+  </body>
+</html>

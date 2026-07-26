@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>QuixiChat</title>
+    <style>
+      :root { color-scheme: light dark; }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        font: 15px/1.55 ui-sans-serif, -apple-system, "SF Pro Text", system-ui, sans-serif;
+        background: #0e0f13;
+        color: #e7e9ee;
+      }
+      @media (prefers-color-scheme: light) { body { background: #f6f7f9; color: #14161c; } }
+      main { width: min(30rem, 88vw); text-align: center; }
+      h1 { margin: 0 0 .4rem; font-size: 1.15rem; font-weight: 600; }
+      p { margin: 0; opacity: .62; font-size: .88rem; line-height: 1.5; }
+      .dot {
+        width: .5rem; height: .5rem; border-radius: 50%;
+        background: currentColor; margin: 0 auto 1.1rem;
+        animation: pulse 1.1s ease-in-out infinite;
+      }
+      @keyframes pulse { 0%, 100% { opacity: .25 } 50% { opacity: 1 } }
+      .bar {
+        margin-top: 1.4rem; height: .35rem; border-radius: .35rem;
+        background: color-mix(in oklab, currentColor 14%, transparent);
+        overflow: hidden; display: none;
+      }
+      .bar > i { display: block; height: 100%; width: 0; background: #3fb950; transition: width .25s ease; }
+      .pct { margin-top: .55rem; font-size: .78rem; opacity: .5; font-variant-numeric: tabular-nums; display: none; }
+      .error h1 { color: #f85149; }
+      .error .dot { display: none; }
+      .error p { white-space: pre-wrap; text-align: left; opacity: .8; font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .8rem; }
+    </style>
+  </head>
+  <body>
+    <!--
+      Boot splash, served over Tauri's asset protocol so the window has content
+      the instant it opens. The Rust side installs the model set on first run
+      It drives this screen through window.quixiChatStatus /
+      window.quixiChatProgress, then navigates to the local service.
+    -->
+    <main id="root">
+      <div class="dot"></div>
+      <h1 id="title">Starting QuixiChat…</h1>
+      <p id="detail">Preparing the on-device service.</p>
+      <div class="bar" id="bar"><i id="fill"></i></div>
+      <div class="pct" id="pct"></div>
+    </main>
+
+    <script>
+      const $ = (id) => document.getElementById(id);
+
+      window.quixiChatStatus = (title, detail, isError) => {
+        $("title").textContent = title;
+        $("detail").textContent = detail;
+        $("root").classList.toggle("error", Boolean(isError));
+      };
+
+      window.quixiChatProgress = (label, done, total) => {
+        const pct = total > 0 ? (done / total) * 100 : 0;
+        $("bar").style.display = "block";
+        $("pct").style.display = "block";
+        $("fill").style.width = `${pct.toFixed(1)}%`;
+        $("pct").textContent =
+          `${label} — ${(done / 1e9).toFixed(2)} / ${(total / 1e9).toFixed(2)} GB (${pct.toFixed(1)}%)`;
+      };
+    </script>
+  </body>
+</html>

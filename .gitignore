@@ -1,0 +1,42 @@
+# Rust
+/target/
+crates/quixi-chat/gen/
+**/*.profraw
+**/*.profdata
+lcov.info
+
+# Frontend
+frontend/node_modules/
+frontend/dist/*
+!frontend/dist/.gitkeep
+frontend/*.tsbuildinfo
+
+# Downloaded model weights
+*.gguf
+*.safetensors
+*.part
+
+# macOS and editor state
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# Local agent/tool state
+.recursor/
+.vibe/
+.vibeloop/
+
+# Secrets and signing material
+.env
+.env.*
+!.env.example
+.npmrc
+.cargo/credentials
+.cargo/credentials.toml
+AuthKey_*.p8
+*.keychain-db
+
+# Local distribution artifacts
+*.dmg
+*.pkg
