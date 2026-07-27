@@ -161,6 +161,7 @@ mod tests {
     /// Asserts the kernel reproduces `gelu_approximate(gate) * up` as burn
     /// computes it — the constant and the term order both matter, since a
     /// mismatch here shifts every FFN output slightly.
+    #[allow(clippy::single_range_in_vec_init)]
     fn check(width: usize) {
         let device = Default::default();
         let values: Vec<f32> = (0..width * 2)

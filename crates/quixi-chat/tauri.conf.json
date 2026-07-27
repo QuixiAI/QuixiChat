@@ -4,8 +4,7 @@
   "version": "0.0.1",
   "identifier": "ai.quixi.chat",
   "build": {
-    "frontendDist": "shell",
-    "beforeBuildCommand": "../scripts/prepare-desktop-bundle.sh"
+    "frontendDist": "shell"
   },
   "app": {
     "windows": [

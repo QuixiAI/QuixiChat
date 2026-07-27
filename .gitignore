@@ -5,12 +5,6 @@ crates/quixi-chat/gen/
 **/*.profdata
 lcov.info
 
-# Frontend
-frontend/node_modules/
-frontend/dist/*
-!frontend/dist/.gitkeep
-frontend/*.tsbuildinfo
-
 # Downloaded model weights
 *.gguf
 *.safetensors

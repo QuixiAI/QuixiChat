@@ -24,8 +24,6 @@ const MAX_GRID_DIMENSION: u32 = 65_535;
 pub(crate) const ARGMAX_TILE_ROWS: u32 = 1_024;
 const Q4_SOURCE: &str =
     include_str!("../../../../kernels/metal/src/quantization/qgemv/quixi_chat_q4_0_f32.metal");
-const Q6_SOURCE: &str =
-    include_str!("../../../../kernels/metal/src/quantization/qgemv/quixi_chat_q6_k_f32.metal");
 
 /// A load-once packed Metal allocation; Burn never interprets its quantized dtype.
 #[derive(Clone)]
@@ -177,25 +175,15 @@ impl PackedMetalMatrix {
 }
 
 #[derive(Debug)]
-struct QgemvTask {
-    format: QuantFormat,
-}
+struct QgemvTask;
 
 impl QgemvTask {
     const fn entry_point(&self) -> &'static str {
-        match self.format {
-            QuantFormat::Q4_0 => "quixi_chat_qgemv_q4_0_f32",
-            QuantFormat::Q6K => "quixi_chat_qgemv_q6_K_f32",
-            QuantFormat::Q8_0 => panic!("Q8_0 f32 GEMV is not wired"),
-        }
+        "quixi_chat_qgemv_q4_0_f32"
     }
 
     const fn source(&self) -> &'static str {
-        match self.format {
-            QuantFormat::Q4_0 => Q4_SOURCE,
-            QuantFormat::Q6K => Q6_SOURCE,
-            QuantFormat::Q8_0 => panic!("Q8_0 f32 GEMV is not wired"),
-        }
+        Q4_SOURCE
     }
 }
 
@@ -205,9 +193,7 @@ impl KernelMetadata for QgemvTask {
     }
 
     fn id(&self) -> KernelId {
-        KernelId::new::<Self>()
-            .cube_dim(CubeDim::new_1d(SIMD_WIDTH))
-            .info(self.format)
+        KernelId::new::<Self>().cube_dim(CubeDim::new_1d(SIMD_WIDTH))
     }
 
     fn address_type(&self) -> StorageType {
@@ -297,6 +283,7 @@ pub fn qgemv_f32(
     input: CubeTensor<WgpuRuntime>,
     output: CubeTensor<WgpuRuntime>,
 ) -> CubeTensor<WgpuRuntime> {
+    assert_eq!(matrix.format, QuantFormat::Q4_0);
     assert_eq!(input.meta.num_elements(), matrix.columns);
     assert_eq!(output.meta.num_elements(), matrix.rows);
     let rows = u32::try_from(matrix.rows).expect("qgemv rows exceed u32");
@@ -308,9 +295,7 @@ pub fn qgemv_f32(
         .with_buffer(input.handle.clone().binding())
         .with_buffer(matrix.qgemv_params_binding());
     matrix.client.launch(
-        Box::new(QgemvTask {
-            format: matrix.format,
-        }),
+        Box::new(QgemvTask),
         CubeCount::Static(groups_x, groups_y, 1),
         arguments,
     );
@@ -365,56 +350,12 @@ mod tests {
             assert!((actual - expected).abs() <= 2e-5, "{actual} != {expected}");
         }
     }
-
-    #[test]
-    fn native_q6_k_gemv_matches_cpu_reference() {
-        let rows = 3;
-        let columns = 256;
-        let mut packed = vec![0_u8; rows * 210];
-        for (row, block) in packed.chunks_exact_mut(210).enumerate() {
-            for (index, value) in block[..192].iter_mut().enumerate() {
-                *value = (index * 29 + row * 17) as u8;
-            }
-            for (index, value) in block[192..208].iter_mut().enumerate() {
-                *value = (index as i8 - 7 + row as i8).to_ne_bytes()[0];
-            }
-            block[208..].copy_from_slice(
-                &f16::from_f32(0.0025 * (row + 1) as f32)
-                    .to_bits()
-                    .to_le_bytes(),
-            );
-        }
-        let input_data = (0..columns)
-            .map(|index| (index as f32 * 0.031).cos())
-            .collect::<Vec<_>>();
-        let expected =
-            dequantize_matvec(QuantFormat::Q6K, &packed, rows, columns, &input_data).unwrap();
-        let device = Default::default();
-        let input = Tensor::<Metal, 1>::from_data(TensorData::new(input_data, [columns]), &device);
-        let output = Tensor::<Metal, 1>::zeros([rows], &device);
-        let TensorPrimitive::Float(input) = input.into_primitive() else {
-            panic!("input must be f32")
-        };
-        let matrix = PackedMetalMatrix::upload(&input, packed, QuantFormat::Q6K, rows, columns);
-        let TensorPrimitive::Float(output) = output.into_primitive() else {
-            panic!("output must be f32")
-        };
-        let actual = Tensor::<Metal, 1>::from_primitive(TensorPrimitive::Float(qgemv_f32(
-            &matrix, input, output,
-        )))
-        .to_data()
-        .to_vec::<f32>()
-        .unwrap();
-        for (actual, expected) in actual.iter().zip(expected) {
-            assert!((actual - expected).abs() <= 3e-5, "{actual} != {expected}");
-        }
-    }
 }
 
 /// Throughput probe for the GEMV launch geometry.
 ///
 /// Ignored by default; this is a tuning tool, not a gate. Run with
-/// `cargo test -p quixi-chat-kernels --release --features metal,metal-kernels \
+/// `cargo test -p quixi-chat-kernels --release \
 ///  gemv_throughput -- --ignored --nocapture`
 #[cfg(test)]
 mod throughput {

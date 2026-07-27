@@ -22,21 +22,18 @@ burn = { version = "=0.21.0", default-features = false, features = ["std"] }
 clap = { version = "4.5", features = ["derive"] }
 futures-util = "0.3"
 half = "2.7"
-mime_guess = "2.0"
 minijinja = { version = "2", default-features = false, features = ["builtins", "macros", "std_collections", "serde"] }
 minijinja-contrib = { version = "2", default-features = false, features = ["pycompat"] }
 rand = "0.9"
 reqwest = { version = "0.12", default-features = false, features = ["rustls-tls", "stream"] }
-rust-embed = "8.11"
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 sha2 = "0.10"
 tauri = "=2.11.5"
 tauri-build = "2.6"
 thiserror = "2.0"
-tokenizers = { version = "0.22", default-features = false, features = ["onig", "progressbar"] }
-tokio = { version = "1.46", features = ["fs", "io-util", "macros", "net", "rt-multi-thread", "signal", "sync", "time"] }
-tower-http = { version = "0.6", features = ["limit", "trace"] }
+tokenizers = { version = "0.22", default-features = false, features = ["onig"] }
+tokio = { version = "1.46", features = ["fs", "io-util", "macros", "net", "rt-multi-thread", "sync", "time"] }
 tracing = "0.1"
 tracing-subscriber = { version = "0.3", features = ["env-filter", "fmt"] }
 

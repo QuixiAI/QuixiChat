@@ -128,7 +128,7 @@
         <div class="empty" id="empty">
           <div>
             <h1>QuixiChat</h1>
-            <p id="empty-sub">Gemma runs on this machine. Nothing leaves it.</p>
+            <p>Gemma runs on this machine. Nothing leaves it.</p>
           </div>
         </div>
       </div>
@@ -149,7 +149,6 @@
 
       let turns = [];
       let busy = false;
-      let compacting = false;
 
       const escapeHtml = (s) =>
         s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
@@ -193,37 +192,6 @@
         send.disabled = busy || draft.value.trim() === "";
       }
 
-      const health = () =>
-        fetch(`/api/health?t=${encodeURIComponent(token)}`).then((r) => r.json());
-
-      // The first message loads ~3.3 GB onto the GPU. Say so, rather than
-      // leaving a spinner unexplained for a minute.
-      function watchLoading() {
-        let stop = false;
-        const tick = () =>
-          health()
-            .then((h) => {
-              if (stop) return;
-              if (compacting) {
-                hint.textContent =
-                  "Compacting conversation history — preserving active instructions and work";
-                return;
-              }
-              hint.textContent =
-                h.llm.state === "loading"
-                  ? "Loading Gemma onto the GPU — this happens once"
-                  : "";
-            })
-            .catch(() => {});
-        tick();
-        const timer = setInterval(tick, 1200);
-        return () => {
-          stop = true;
-          clearInterval(timer);
-          hint.textContent = "";
-        };
-      }
-
       async function submit() {
         const content = draft.value.trim();
         if (!content || busy) return;
@@ -239,7 +207,6 @@
         autosize();
         render();
 
-        const stopWatching = watchLoading();
         try {
           const response = await fetch("/api/chat", {
             method: "POST",
@@ -264,8 +231,9 @@
               if (!line) continue;
 
               const event = JSON.parse(line);
-              if (event.type === "compacting") {
-                compacting = true;
+              if (event.type === "loading") {
+                hint.textContent = "Loading Gemma onto the GPU — this happens once";
+              } else if (event.type === "compacting") {
                 hint.textContent = `Compacting ${event.original_tokens.toLocaleString()} tokens — preserving active instructions and work`;
               } else if (event.type === "compacted") {
                 console.info(
@@ -275,9 +243,10 @@
                   ...event.messages,
                   { role: "assistant", content: "", pending: true },
                 ];
-                compacting = false;
+                hint.textContent = "";
                 render();
               } else if (event.type === "thinking") {
+                hint.textContent = "";
                 turns[turns.length - 1].pending = true;
                 render();
               } else if (event.type === "thinking_delta") {
@@ -285,9 +254,6 @@
                 assistant.thinking = (assistant.thinking ?? "") + event.text;
                 assistant.pending = true;
                 render();
-                await new Promise((resolve) =>
-                  requestAnimationFrame(() => setTimeout(resolve, 0)),
-                );
               } else if (event.type === "answering") {
                 turns[turns.length - 1].pending = false;
                 render();
@@ -296,9 +262,6 @@
                 assistant.content += event.text;
                 assistant.pending = false;
                 render();
-                await new Promise((resolve) =>
-                  requestAnimationFrame(() => setTimeout(resolve, 0)),
-                );
               } else if (event.type === "done") {
                 console.info(`reply in ${(event.elapsed_ms / 1000).toFixed(1)}s`);
                 const assistant = turns[turns.length - 1];
@@ -308,7 +271,6 @@
                   thinking: event.thinking,
                   thoughtOpen: assistant.thoughtOpen,
                 };
-                compacting = false;
                 completed = true;
                 break;
               } else if (event.type === "error") {
@@ -329,8 +291,7 @@
             error: true,
           };
         } finally {
-          compacting = false;
-          stopWatching();
+          hint.textContent = "";
           busy = false;
           autosize();
           render();
@@ -349,15 +310,6 @@
 
       autosize();
       draft.focus();
-      health()
-        .then((h) => {
-          if (h.llm.state === "not_installed") {
-            $("empty-sub").textContent = "The model set is not installed.";
-          }
-        })
-        .catch(() => {
-          $("empty-sub").textContent = "The local service is unreachable.";
-        });
     </script>
   </body>
 </html>

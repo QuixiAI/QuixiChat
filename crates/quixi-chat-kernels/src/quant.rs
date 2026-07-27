@@ -6,7 +6,6 @@ use thiserror::Error;
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub enum QuantFormat {
     Q4_0,
-    Q8_0,
     Q6K,
 }
 
@@ -14,7 +13,7 @@ impl QuantFormat {
     #[must_use]
     pub const fn block_elements(self) -> usize {
         match self {
-            Self::Q4_0 | Self::Q8_0 => 32,
+            Self::Q4_0 => 32,
             Self::Q6K => 256,
         }
     }
@@ -23,7 +22,6 @@ impl QuantFormat {
     pub const fn block_bytes(self) -> usize {
         match self {
             Self::Q4_0 => 18,
-            Self::Q8_0 => 34,
             Self::Q6K => 210,
         }
     }
@@ -32,7 +30,6 @@ impl QuantFormat {
     pub const fn from_ggml_type(ggml_type: u32) -> Option<Self> {
         match ggml_type {
             2 => Some(Self::Q4_0),
-            8 => Some(Self::Q8_0),
             14 => Some(Self::Q6K),
             _ => None,
         }
@@ -193,7 +190,6 @@ fn decode_block(format: QuantFormat, block: &[u8], output: &mut [f32]) {
     debug_assert_eq!(output.len(), format.block_elements());
     match format {
         QuantFormat::Q4_0 => decode_q4_0(block, output),
-        QuantFormat::Q8_0 => decode_q8_0(block, output),
         QuantFormat::Q6K => decode_q6_k(block, output),
     }
 }
@@ -209,13 +205,6 @@ fn decode_q4_0(block: &[u8], output: &mut [f32]) {
         let byte = qs[column % 16];
         let nibble = if column < 16 { byte & 0x0f } else { byte >> 4 };
         output[column] = d * (f32::from(nibble) - 8.0);
-    }
-}
-
-fn decode_q8_0(block: &[u8], output: &mut [f32]) {
-    let d = f16_at(block, 0);
-    for (value, code) in output.iter_mut().zip(&block[2..34]) {
-        *value = d * f32::from(i8::from_ne_bytes([*code]));
     }
 }
 
@@ -260,17 +249,6 @@ mod tests {
         assert_eq!(values[15], 3.5);
         assert_eq!(values[16], 3.5);
         assert_eq!(values[31], -4.0);
-    }
-
-    #[test]
-    fn q8_0_signed_codes_are_preserved() {
-        let mut block = vec![0_u8; 34];
-        block[..2].copy_from_slice(&f16::from_f32(0.25).to_bits().to_le_bytes());
-        block[2] = (-128_i8).to_ne_bytes()[0];
-        block[3] = 127;
-        let values = dequantize_row(QuantFormat::Q8_0, &block, 32, 2.0).unwrap();
-        assert_eq!(values[0], -64.0);
-        assert_eq!(values[1], 63.5);
     }
 
     #[test]

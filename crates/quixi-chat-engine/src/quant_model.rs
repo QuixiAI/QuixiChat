@@ -39,8 +39,6 @@ pub enum QuantModelError {
         name: String,
         expected: &'static str,
     },
-    #[error("prompt is empty")]
-    EmptyPrompt,
     #[error("context limit {limit} exceeded at position {position}")]
     Context { limit: usize, position: usize },
 }
@@ -436,20 +434,6 @@ impl Gemma4QuantizedMetal {
         })
     }
 
-    /// Consume one token and return its next-token logits.
-    pub fn forward_token(
-        &self,
-        token_id: u32,
-        state: &mut QuantGenerationState,
-    ) -> Result<Tensor<Metal, 1>, QuantModelError> {
-        let hidden = self.forward_hidden(token_id, state)?;
-        let logits = self.token_embedding_matvec(hidden);
-        Ok(
-            (logits.clone() / self.config.final_logit_softcap as f64).tanh()
-                * self.config.final_logit_softcap as f64,
-        )
-    }
-
     /// Consume a prompt token without evaluating the unused tied vocabulary head.
     pub fn consume_token(
         &self,
@@ -458,33 +442,6 @@ impl Gemma4QuantizedMetal {
     ) -> Result<(), QuantModelError> {
         drop(self.forward_hidden(token_id, state)?);
         Ok(())
-    }
-
-    /// One greedy decode step that never leaves the GPU.
-    ///
-    /// Chaining the argmax result into the next step's embedding lookup lets a
-    /// caller batch the device-to-host reads instead of stalling every step.
-    /// Measured worth +2.8% decode on its own — but batching means speculating
-    /// past the stop token, which leaves the KV cache ahead of the recorded
-    /// token stream and breaks the cross-turn prefix reuse in `ChatEngine`,
-    /// which is worth far more. Wiring this up needs a cache that can rewind by
-    /// up to one batch; until then `reply` reads every step.
-    pub fn forward_token_greedy_device(
-        &self,
-        ids: &Tensor<Metal, 1, Int>,
-        state: &mut QuantGenerationState,
-    ) -> Result<Tensor<Metal, 1, Int>, QuantModelError> {
-        let hidden = self.forward_hidden_ids(ids, state)?;
-        Ok(self.token_embedding_argmax_device(hidden))
-    }
-
-    /// Wrap a host token id for `forward_token_greedy_device`.
-    #[must_use]
-    pub fn device_token(&self, token_id: u32) -> Tensor<Metal, 1, Int> {
-        Tensor::<Metal, 1, Int>::from_data(
-            TensorData::new(vec![token_id as i32], [1]),
-            &self.device,
-        )
     }
 
     /// Consume one token and select the next token in the fused Q6_K head.
@@ -557,40 +514,6 @@ impl Gemma4QuantizedMetal {
         }
         state.position += 1;
         Ok(self.norm(hidden, Some(&self.output_norm), 1, self.config.hidden_size))
-    }
-
-    pub fn greedy_next(logits: Tensor<Metal, 1>) -> u32 {
-        let value = logits
-            .argmax(0)
-            .to_data()
-            .convert::<i64>()
-            .to_vec::<i64>()
-            .expect("argmax must return an integer")[0];
-        u32::try_from(value).expect("Gemma token id must fit u32")
-    }
-
-    pub fn generate_ids(
-        &self,
-        prompt: &[u32],
-        max_new_tokens: usize,
-    ) -> Result<Vec<u32>, QuantModelError> {
-        if prompt.is_empty() {
-            return Err(QuantModelError::EmptyPrompt);
-        }
-        let mut state = self.new_state()?;
-        for &token in &prompt[..prompt.len() - 1] {
-            self.consume_token(token, &mut state)?;
-        }
-        let mut next = self.forward_token_greedy(prompt[prompt.len() - 1], &mut state)?;
-        let mut generated = Vec::new();
-        for _ in 0..max_new_tokens {
-            generated.push(next);
-            if next == self.tokenizer.eos_token_id {
-                break;
-            }
-            next = self.forward_token_greedy(next, &mut state)?;
-        }
-        Ok(generated)
     }
 
     fn forward_layer(
@@ -745,21 +668,6 @@ impl Gemma4QuantizedMetal {
         )))
         .cast(DType::F32)
         .reshape([table.columns()])
-    }
-
-    fn token_embedding_matvec(&self, hidden: Tensor<Metal, 1>) -> Tensor<Metal, 1> {
-        let output = Tensor::<Metal, 1>::zeros([self.config.vocab_size], &self.device);
-        let TensorPrimitive::Float(hidden) = hidden.into_primitive() else {
-            panic!("LM head input must be a float primitive")
-        };
-        let TensorPrimitive::Float(output) = output.into_primitive() else {
-            panic!("LM head output must be a float primitive")
-        };
-        Tensor::from_primitive(TensorPrimitive::Float(qgemv_f32(
-            &self.token_embedding,
-            hidden,
-            output,
-        )))
     }
 
     fn token_embedding_argmax(&self, hidden: Tensor<Metal, 1>) -> u32 {
@@ -1071,32 +979,5 @@ mod tests {
         assert_eq!(sin[512 + 64], 0.0);
         assert_ne!(cos[512], 1.0);
         assert_eq!(cos[512], cos[512 + 256]);
-    }
-
-    #[test]
-    #[ignore = "loads the staged 3.35 GB model and runs a full Metal decode step"]
-    fn staged_model_loads_and_produces_finite_logits() {
-        let model =
-            Gemma4QuantizedMetal::load("../../models/gemma-4-E2B_q4_0-it.gguf", 32).unwrap();
-        let mut state = model.new_state().unwrap();
-        let logits = model.forward_token(2, &mut state).unwrap();
-        assert_eq!(logits.dims(), [262_144]);
-        assert_eq!(Gemma4QuantizedMetal::greedy_next(logits.clone()), 236_761);
-        let values = logits.to_data().to_vec::<f32>().unwrap();
-        assert!(values.iter().all(|value| value.is_finite()));
-        assert_eq!(state.position(), 1);
-    }
-
-    #[test]
-    #[ignore = "loads the staged model and runs eight greedy Metal decode steps"]
-    fn staged_greedy_tokens_match_llama_cpp() {
-        let model =
-            Gemma4QuantizedMetal::load("../../models/gemma-4-E2B_q4_0-it.gguf", 32).unwrap();
-        assert_eq!(
-            model.generate_ids(&[2], 8).unwrap(),
-            [
-                236_761, 108, 1_408, 236_743, 244_549, 236_743, 236_770, 236_761
-            ]
-        );
     }
 }

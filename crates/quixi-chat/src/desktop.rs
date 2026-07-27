@@ -1,14 +1,10 @@
 //! The native desktop shell.
 //!
 //! The window opens on a boot splash served over Tauri's asset protocol. A
-//! background thread installs the model set if it is not already present,
+//! background thread installs the model if it is not already present,
 //! brings up the local axum service, and navigates the window to it. That is
-//! MoleculAI's arrangement: one binary, one loopback port serving both the UI
-//! and the API, no nginx, no dev server in production.
-//!
-//! Per spec §12.2 the install is automatic and total: the user is never asked
-//! to run a command, and a failed install ends the launch rather than opening a
-//! half-working editor.
+//! one loopback port serving both the UI and API. Installation is automatic; a
+//! failure ends the launch rather than opening a half-working app.
 
 use std::{
     sync::{Arc, Mutex},
@@ -40,7 +36,7 @@ pub fn launch() -> Result<()> {
                         tracing::error!(error = %format!("{error:#}"), "QuixiChat could not start");
                         show_error(&window, &error);
                         // Give the message a moment to render, then stop. A
-                        // half-installed editor is the worse outcome (§12.2).
+                        // half-installed app is the worse outcome.
                         thread::sleep(std::time::Duration::from_secs(8));
                         handle.exit(1);
                     }
@@ -80,7 +76,7 @@ fn run_service(shutdown: oneshot::Receiver<()>, window: &WebviewWindow) -> Resul
         .context("failed to start the async runtime")?;
 
     runtime.block_on(async move {
-        install_models(window).await?;
+        install_model(window).await?;
 
         set_status(
             window,
@@ -88,7 +84,7 @@ fn run_service(shutdown: oneshot::Receiver<()>, window: &WebviewWindow) -> Resul
             "Bringing up the on-device service…",
         );
 
-        let server = quixi_chat_server::Server::bind(models::llm_path()?).await?;
+        let server = quixi_chat_server::Server::bind(models::installed_model_path()?).await?;
         let url = server.url();
         tracing::info!(%url, "navigating the window to the local service");
 
@@ -109,17 +105,16 @@ fn run_service(shutdown: oneshot::Receiver<()>, window: &WebviewWindow) -> Resul
 
 /// First run installs the whole set, with progress on the splash. Later runs
 /// verify sizes and continue immediately.
-async fn install_models(window: &WebviewWindow) -> Result<()> {
+async fn install_model(window: &WebviewWindow) -> Result<()> {
     if models::installed() {
         return Ok(());
     }
 
-    let total: u64 = models::MODEL_SET.iter().map(|a| a.bytes).sum();
     #[allow(clippy::cast_precision_loss)]
-    let gigabytes = total as f64 / 1e9;
+    let gigabytes = models::MODEL_BYTES as f64 / 1e9;
     set_status(
         window,
-        "Installing models",
+        "Installing Gemma",
         &format!(
             "QuixiChat runs entirely on this machine. Fetching {gigabytes:.1} GB of model weights, once."
         ),

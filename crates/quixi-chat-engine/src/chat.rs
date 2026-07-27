@@ -1,17 +1,15 @@
 //! Conversation on top of the quantized Gemma engine.
 //!
-//! Replaces MoleculAI's `extract`/`generate` pair, which existed to coerce the
-//! model into a chemical-extraction JSON schema. The generation loop underneath
-//! is the same one.
+//! It preserves the model's separate thinking and answer channels and compacts
+//! long histories before they reach the context limit.
 
 use serde::{Deserialize, Serialize};
 use thiserror::Error;
 
-#[cfg(feature = "metal-kernels")]
 use crate::quant_model::{Gemma4QuantizedMetal, QuantGenerationState, QuantModelError};
 
 /// Maximum number of tokens one chat turn may generate.
-pub const MAX_NEW_TOKENS: usize = 32_768;
+const MAX_NEW_TOKENS: usize = 32_768;
 /// Compact before a new answer would have to carry a very long conversation.
 pub const COMPACTION_TRIGGER_TOKENS: usize = 90_000;
 const COMPACTION_TARGET_TOKENS: usize = 24_000;
@@ -88,27 +86,6 @@ Additional requirements for this compaction:
 Conversation to compact:
 "#;
 
-#[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize)]
-pub struct GenerationOptions {
-    pub max_new_tokens: usize,
-    pub temperature: f32,
-    pub top_p: f32,
-    pub seed: u64,
-}
-
-impl Default for GenerationOptions {
-    fn default() -> Self {
-        Self {
-            max_new_tokens: MAX_NEW_TOKENS,
-            // Greedy by default: the same prompt gives the same answer on every
-            // machine, which is what makes a bug report reproducible (§13.6).
-            temperature: 0.0,
-            top_p: 0.95,
-            seed: 0,
-        }
-    }
-}
-
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "lowercase")]
 pub enum ChatRole {
@@ -150,8 +127,6 @@ pub struct ChatMessage {
 
 #[derive(Debug, Error)]
 pub enum ChatError {
-    #[error("the model is still loading")]
-    Loading,
     #[error("generation failed: {0}")]
     Backend(String),
     #[error("the conversation was empty")]
@@ -165,7 +140,6 @@ pub enum ChatError {
     Compaction(String),
 }
 
-#[cfg(feature = "metal-kernels")]
 impl From<QuantModelError> for ChatError {
     fn from(error: QuantModelError) -> Self {
         Self::Backend(error.to_string())
@@ -236,7 +210,6 @@ fn clean_thought(text: &str) -> String {
 /// Keeping this between turns is what stops turn N from re-ingesting turns
 /// 1..N-1. At ~50 tok/s of prefill, a 500-token history costs ten seconds
 /// before the model emits anything; reused, it costs nothing.
-#[cfg(feature = "metal-kernels")]
 struct Session {
     state: QuantGenerationState,
     /// The token sequence already fed through the model, in order.
@@ -251,7 +224,6 @@ pub struct Compaction {
 }
 
 /// A loaded model plus the prompt formatting around it.
-#[cfg(feature = "metal-kernels")]
 pub struct ChatEngine {
     model: Gemma4QuantizedMetal,
     end_of_turn: Option<u32>,
@@ -261,7 +233,6 @@ pub struct ChatEngine {
     last_reuse: usize,
 }
 
-#[cfg(feature = "metal-kernels")]
 impl ChatEngine {
     pub fn load(
         path: impl AsRef<std::path::Path>,
@@ -364,12 +335,8 @@ impl ChatEngine {
     ///
     /// The history is rendered and tokenized each turn; unchanged prefixes reuse
     /// their existing KV state, while edited or replaced histories start clean.
-    pub fn reply(
-        &mut self,
-        history: &[ChatMessage],
-        options: GenerationOptions,
-    ) -> Result<String, ChatError> {
-        self.reply_stream(history, options, |_| true)
+    pub fn reply(&mut self, history: &[ChatMessage]) -> Result<String, ChatError> {
+        self.reply_stream(history, |_| true)
             .map(|generated| generated.reply)
     }
 
@@ -382,7 +349,6 @@ impl ChatEngine {
     pub fn reply_stream(
         &mut self,
         history: &[ChatMessage],
-        options: GenerationOptions,
         mut on_event: impl FnMut(GenerationEvent<'_>) -> bool,
     ) -> Result<GeneratedReply, ChatError> {
         if history.is_empty() {
@@ -421,7 +387,7 @@ impl ChatEngine {
         if reusable == 0 {
             self.session = Some(Session {
                 state: self.model.new_state()?,
-                consumed: Vec::with_capacity(ids.len() + options.max_new_tokens),
+                consumed: Vec::with_capacity(ids.len() + MAX_NEW_TOKENS),
             });
         }
         self.last_reuse = reusable;
@@ -440,7 +406,7 @@ impl ChatEngine {
 
         let eos = self.model.tokenizer().eos_token_id;
         let available = context_limit.saturating_sub(session.state.position());
-        let token_limit = options.max_new_tokens.min(available);
+        let token_limit = MAX_NEW_TOKENS.min(available);
         let mut visible = Vec::with_capacity(token_limit);
         let mut thought = Vec::new();
         let mut visible_decoder = self.model.tokenizer().inner().decode_stream(true);
@@ -457,11 +423,11 @@ impl ChatEngine {
             }
 
             if next == self.channel_open {
-                if !thinking {
+                if thinking {
+                    cancelled = !on_event(GenerationEvent::ThinkingToken);
+                } else {
                     thinking = true;
                     cancelled = !on_event(GenerationEvent::ThinkingStarted);
-                } else {
-                    cancelled = !on_event(GenerationEvent::ThinkingToken);
                 }
             } else if next == self.channel_close {
                 if thinking {
@@ -528,11 +494,6 @@ impl ChatEngine {
         })
     }
 
-    #[must_use]
-    pub fn context_limit(&self) -> usize {
-        self.model.context_limit()
-    }
-
     /// Count the exact rendered prompt tokens the next model turn would see.
     pub fn history_tokens(&self, history: &[ChatMessage]) -> Result<usize, ChatError> {
         let prompt = self.render(history)?;
@@ -551,16 +512,10 @@ impl ChatEngine {
         }
         let original_tokens = self.history_tokens(history)?;
         let request = compaction_request(history);
-        let output = self.reply(
-            &[ChatMessage {
-                role: ChatRole::User,
-                content: request,
-            }],
-            GenerationOptions {
-                max_new_tokens: MAX_NEW_TOKENS,
-                ..GenerationOptions::default()
-            },
-        )?;
+        let output = self.reply(&[ChatMessage {
+            role: ChatRole::User,
+            content: request,
+        }])?;
         let messages = parse_compacted_history(&output)?;
         let source_roles = history
             .iter()
@@ -603,7 +558,7 @@ mod tests {
 
     #[test]
     fn default_generation_budget_is_32k() {
-        assert_eq!(GenerationOptions::default().max_new_tokens, 32_768);
+        assert_eq!(MAX_NEW_TOKENS, 32_768);
         assert_eq!(COMPACTION_TRIGGER_TOKENS, 90_000);
     }
 
@@ -755,7 +710,6 @@ impl Bench {
 /// `token_to_id` alone is not enough: this GGUF's tokenizer does not resolve the
 /// marker that way, so fall through to encoding it, and finally to a one-time
 /// scan of the vocabulary at load.
-#[cfg(feature = "metal-kernels")]
 fn resolve_special_token(model: &Gemma4QuantizedMetal, marker: &str) -> Option<u32> {
     let tokenizer = model.tokenizer();
     if let Some(id) = tokenizer.inner().token_to_id(marker) {

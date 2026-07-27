@@ -6,13 +6,8 @@ rust-version.workspace = true
 license.workspace = true
 description = "Fast in-process Gemma 4 E2B inference on Metal"
 
-[features]
-default = []
-metal = ["burn/metal", "quixi-chat-kernels/metal"]
-metal-kernels = ["metal", "quixi-chat-kernels/metal-kernels"]
-
 [dependencies]
-burn.workspace = true
+burn = { workspace = true, features = ["metal"] }
 half.workspace = true
 quixi-chat-kernels = { path = "../quixi-chat-kernels" }
 minijinja.workspace = true

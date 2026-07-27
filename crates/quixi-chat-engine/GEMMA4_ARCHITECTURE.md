@@ -1,14 +1,13 @@
 # Gemma 4 E2B text architecture pin
 
-This is the executable text-model contract for MoleculAI. It is pinned to:
+This is QuixiChat's executable text-model contract. It is pinned to:
 
 - Hugging Face Transformers commit `63f32a8782cb70da3365acab16f2b67947737985`,
   `modeling_gemma4.py` and `configuration_gemma4.py`.
 - `google/gemma-4-e2b-it` commit
   `9dbdf8a839e4e9e0eb56ed80cc8886661d3817cf`, especially `config.json` and
   `tokenizer.json`.
-- The staged `models/gemma-4-E2B_q4_0-it.gguf`, audited into
-  `testdata/gemma4-gguf-audit.json`.
+- The Gemma GGUF revision and SHA-256 pinned in `crates/quixi-chat/src/models.rs`.
 
 The upstream sources are the authority when this file and a prose design disagree.
 
@@ -88,7 +87,7 @@ wide FFN in the 20 shared-KV layers.
 
 ## Checkpoint formats
 
-The staged GGUF stores linear weights as Q4_0, token and PLE tables as Q6_K, the
+The pinned GGUF stores linear weights as Q4_0, token and PLE tables as Q6_K, the
 packed PLE context projection as F16, and normalization/scalar tensors as F32. The
 text GGUF has no `v.*`, `a.*`, or `mm.*` tensors. Its tokenizer is a 262,144-entry
 byte-fallback BPE with 514,906 merges; it is not a SentencePiece Unigram model.

@@ -1,15 +1,10 @@
 //! In-process Gemma 4 E2B inference on Metal.
 //!
-//! The engine — GGUF reader, architecture config, tokenizer, hybrid KV cache and
-//! the quantized Metal model — is ported from MoleculAI's `moleculai-llm`
-//! unchanged. MoleculAI's chemistry-extraction layer is replaced by `chat`,
-//! since QuixiChat wants a conversation rather than structured chemical output.
+//! The engine owns GGUF loading, the tokenizer and chat template, hybrid KV
+//! caching, and the quantized Metal model.
 
-// Ported from MoleculAI. These files are kept byte-identical to their source
-// so the two trees stay diffable and fixes flow both ways; the pedantic lints
-// below fire on deliberate, bounds-checked numeric conversions in quantization
-// and kernel-dispatch code. Silencing them per-site would be the change that
-// makes the port drift.
+// The inference and kernel code uses deliberate, bounds-checked numeric
+// conversions that are clearer than per-site lint annotations.
 #![allow(
     clippy::cast_possible_truncation,
     clippy::cast_possible_wrap,
@@ -45,26 +40,15 @@
     clippy::trivially_copy_pass_by_ref
 )]
 
-pub mod cache;
-pub mod chat;
-pub mod gguf;
-pub mod model;
-#[cfg(feature = "metal-kernels")]
-pub mod quant_model;
-pub mod template;
-pub mod tokenizer;
+mod cache;
+mod chat;
+mod gguf;
+mod model;
+mod quant_model;
+mod template;
+mod tokenizer;
 
-pub use cache::{CacheError, CachePlan, LayerCacheMode, LayerKvCache};
 pub use chat::{
-    COMPACTION_TRIGGER_TOKENS, ChatError, ChatMessage, ChatRole, Compaction, GeneratedReply,
-    GenerationEvent, GenerationOptions, MAX_NEW_TOKENS,
+    Bench, COMPACTION_TRIGGER_TOKENS, ChatEngine, ChatError, ChatMessage, ChatRole, Compaction,
+    GeneratedReply, GenerationEvent,
 };
-pub use gguf::{GgufAudit, GgufError, audit_gguf};
-pub use model::{ArchitectureError, AttentionKind, Gemma4Config, LayerSpec};
-#[cfg(feature = "metal-kernels")]
-pub use quant_model::{Gemma4QuantizedMetal, QuantGenerationState, QuantModelError};
-pub use template::{TURN_CLOSE, TemplateError, TemplateMessage};
-pub use tokenizer::{Gemma4Tokenizer, TokenizerError, tokenizer_json};
-
-#[cfg(feature = "metal-kernels")]
-pub use chat::ChatEngine;

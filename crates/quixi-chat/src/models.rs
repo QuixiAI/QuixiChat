@@ -1,9 +1,4 @@
-//! The one pinned, digest-verified model QuixiChat installs on first launch.
-//!
-//! Ported from MoleculAI's installer. The set is a compile-time constant, the
-//! cache path is fixed, and there is nothing for a user to choose. QuixiChat
-//! redistributes no weights: each artifact is fetched from its publisher on the
-//! user's behalf and verified against a digest compiled into this binary.
+//! The pinned, digest-verified model installed on first launch.
 
 use std::{
     path::{Path, PathBuf},
@@ -18,35 +13,15 @@ use tokio::io::AsyncWriteExt;
 
 const DOWNLOAD_RETRIES: u32 = 3;
 
-/// One artifact in the set: where it comes from, and exactly what it must be.
-#[derive(Debug, Clone, Copy)]
-pub struct Artifact {
-    pub role: &'static str,
-    pub label: &'static str,
-    pub filename: &'static str,
-    pub url: &'static str,
-    pub revision: &'static str,
-    pub bytes: u64,
-    pub sha256: &'static str,
-    pub license: &'static str,
-}
+const MODEL_LABEL: &str = "Gemma 4 E2B (q4_0)";
+pub const MODEL_BYTES: u64 = 3_349_514_112;
+const MODEL_FILENAME: &str = "gemma-4-E2B_q4_0-it.gguf";
+const MODEL_URL: &str = "https://huggingface.co/google/gemma-4-E2B-it-qat-q4_0-gguf/resolve/69536a21d70340464240401ba38223d805f6a709/gemma-4-E2B_q4_0-it.gguf";
+const MODEL_SHA256: &str = "3646b4c147cd235a44d91df1546d3b7d8e29b547dbe4e1f80856419aa455e6fd";
 
-/// The complete model inventory. QuixiChat intentionally has no model picker.
-pub static MODEL_SET: &[Artifact] = &[Artifact {
-    role: "llm",
-    label: "Gemma 4 E2B (q4_0)",
-    filename: "gemma-4-E2B_q4_0-it.gguf",
-    url: "https://huggingface.co/google/gemma-4-E2B-it-qat-q4_0-gguf/resolve/69536a21d70340464240401ba38223d805f6a709/gemma-4-E2B_q4_0-it.gguf",
-    revision: "69536a21d70340464240401ba38223d805f6a709",
-    bytes: 3_349_514_112,
-    sha256: "3646b4c147cd235a44d91df1546d3b7d8e29b547dbe4e1f80856419aa455e6fd",
-    license: "Gemma Terms of Use",
-}];
-
-/// The one cache location, on every launch type. Not overridable — there is no
-/// variable to override it with (spec §12.2).
+/// The one cache location. It is intentionally not configurable.
 #[must_use]
-pub fn models_dir() -> PathBuf {
+fn models_dir() -> PathBuf {
     home().join(".cache/quixi-chat/models")
 }
 
@@ -55,23 +30,17 @@ fn home() -> PathBuf {
 }
 
 #[must_use]
-pub fn path_for(role: &str) -> Option<PathBuf> {
-    MODEL_SET
-        .iter()
-        .find(|artifact| artifact.role == role)
-        .map(|artifact| models_dir().join(artifact.filename))
+fn model_path() -> PathBuf {
+    models_dir().join(MODEL_FILENAME)
 }
 
-/// Cheap startup check: every artifact present at its pinned size.
+/// Cheap startup check: the model is present at its pinned size.
 ///
 /// Full SHA-256 verification happens during install; re-hashing four gigabytes
 /// on every launch would be a poor trade.
 #[must_use]
 pub fn installed() -> bool {
-    MODEL_SET.iter().all(|artifact| {
-        std::fs::metadata(models_dir().join(artifact.filename))
-            .is_ok_and(|meta| meta.len() == artifact.bytes)
-    })
+    std::fs::metadata(model_path()).is_ok_and(|meta| meta.len() == MODEL_BYTES)
 }
 
 /// Progress for the first-run install screen.
@@ -90,8 +59,7 @@ pub enum Progress {
 
 pub type Observer = Box<dyn Fn(Progress) + Send + Sync>;
 
-/// Install every artifact, or fail. There is no partial-feature mode: the caller
-/// exits if this returns an error (spec §12.2).
+/// Install and verify the model, or fail.
 pub async fn install(observer: Option<&Observer>) -> Result<()> {
     let dir = models_dir();
     std::fs::create_dir_all(&dir).with_context(|| format!("failed to create {}", dir.display()))?;
@@ -101,24 +69,20 @@ pub async fn install(observer: Option<&Observer>) -> Result<()> {
         .build()
         .context("failed to build the HTTP client")?;
 
-    for artifact in MODEL_SET {
-        download_verified(&client, artifact, &dir.join(artifact.filename), observer).await?;
-    }
-    Ok(())
+    download_verified(&client, &dir.join(MODEL_FILENAME), observer).await
 }
 
 async fn download_verified(
     client: &Client,
-    spec: &Artifact,
     target: &Path,
     observer: Option<&Observer>,
 ) -> Result<()> {
     notify(
         observer,
-        "Checking required models",
-        format!("Verifying {}…", spec.label),
+        "Checking Gemma",
+        format!("Verifying {MODEL_LABEL}…"),
     );
-    if file_matches(target, spec.bytes, spec.sha256)? {
+    if file_matches(target, MODEL_BYTES, MODEL_SHA256)? {
         tracing::info!(path = %target.display(), "using verified model");
         return Ok(());
     }
@@ -130,21 +94,21 @@ async fn download_verified(
     let partial = target.with_extension("part");
     if partial.exists() {
         let partial_bytes = std::fs::metadata(&partial)?.len();
-        if partial_bytes > spec.bytes
-            || (partial_bytes == spec.bytes && !file_matches(&partial, spec.bytes, spec.sha256)?)
+        if partial_bytes > MODEL_BYTES
+            || (partial_bytes == MODEL_BYTES && !file_matches(&partial, MODEL_BYTES, MODEL_SHA256)?)
         {
             std::fs::remove_file(&partial)
                 .with_context(|| format!("failed to remove invalid {}", partial.display()))?;
         }
     }
-    if file_matches(&partial, spec.bytes, spec.sha256)? {
+    if file_matches(&partial, MODEL_BYTES, MODEL_SHA256)? {
         std::fs::rename(&partial, target)?;
         return Ok(());
     }
 
     let mut last_error = None;
     for attempt in 1..=DOWNLOAD_RETRIES {
-        match attempt_download(client, spec, &partial, observer).await {
+        match attempt_download(client, &partial, observer).await {
             Ok(()) => {
                 last_error = None;
                 break;
@@ -162,16 +126,15 @@ async fn download_verified(
         }
     }
     if let Some(error) = last_error {
-        return Err(error).with_context(|| format!("failed to download {}", spec.filename));
+        return Err(error).context("failed to download Gemma");
     }
 
     notify(
         observer,
         "Verifying downloaded model",
-        format!("Checking the SHA-256 digest for {}…", spec.label),
+        format!("Checking the SHA-256 digest for {MODEL_LABEL}…"),
     );
-    verify(&partial, spec.bytes, spec.sha256)
-        .with_context(|| format!("download verification failed for {}", spec.filename))?;
+    verify(&partial, MODEL_BYTES, MODEL_SHA256).context("download verification failed")?;
     std::fs::rename(&partial, target)?;
     tracing::info!(path = %target.display(), "downloaded and verified");
     Ok(())
@@ -180,23 +143,22 @@ async fn download_verified(
 /// Resume from `.part` with a Range request, so a retry costs the remainder.
 async fn attempt_download(
     client: &Client,
-    spec: &Artifact,
     partial: &Path,
     observer: Option<&Observer>,
 ) -> Result<()> {
     let mut offset = std::fs::metadata(partial).map_or(0, |meta| meta.len());
-    if offset == spec.bytes {
+    if offset == MODEL_BYTES {
         return Ok(());
     }
 
-    let mut request = client.get(spec.url);
+    let mut request = client.get(MODEL_URL);
     if offset > 0 {
         request = request.header(header::RANGE, format!("bytes={offset}-"));
     }
     let response = request
         .send()
         .await
-        .with_context(|| format!("request failed for {}", spec.url))?;
+        .with_context(|| format!("request failed for {MODEL_URL}"))?;
 
     if offset > 0 && response.status() != reqwest::StatusCode::PARTIAL_CONTENT {
         // The server ignored the range; start over rather than corrupt the file.
@@ -205,7 +167,7 @@ async fn attempt_download(
     }
     let response = response
         .error_for_status()
-        .with_context(|| format!("unexpected status for {}", spec.url))?;
+        .with_context(|| format!("unexpected status for {MODEL_URL}"))?;
 
     let mut file = tokio::fs::OpenOptions::new()
         .create(true)
@@ -224,9 +186,9 @@ async fn attempt_download(
         written += chunk.len() as u64;
         if let Some(observe) = observer {
             observe(Progress::Bytes {
-                label: spec.label.to_owned(),
+                label: MODEL_LABEL.to_owned(),
                 done: written,
-                total: spec.bytes,
+                total: MODEL_BYTES,
             });
         }
     }
@@ -282,12 +244,12 @@ fn notify(observer: Option<&Observer>, title: &str, detail: String) {
     }
 }
 
-/// Resolve the LLM weights, or explain precisely what is missing.
-pub fn llm_path() -> Result<PathBuf> {
-    let path = path_for("llm").context("no llm artifact is bound in MODEL_SET")?;
+/// Resolve the weights, or explain precisely what is missing.
+pub fn installed_model_path() -> Result<PathBuf> {
+    let path = model_path();
     if !path.exists() {
         bail!(
-            "Gemma is not installed; run `quixi-chat download-model` (expected {})",
+            "Gemma is not installed; launch QuixiChat once to install it (expected {})",
             path.display()
         );
     }

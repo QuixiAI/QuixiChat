@@ -5,19 +5,12 @@ edition.workspace = true
 rust-version.workspace = true
 license.workspace = true
 
-[features]
-default = []
-metal = ["burn/metal"]
-metal-kernels = ["metal", "dep:burn-wgpu", "dep:cubecl", "dep:cubecl-cpp"]
-test-cpu = ["burn/ndarray"]
-
 [dependencies]
-burn.workspace = true
-burn-wgpu = { version = "=0.21.0", default-features = false, features = ["metal", "std"], optional = true }
-cubecl = { version = "=0.10.0", default-features = false, features = ["metal", "std"], optional = true }
-cubecl-cpp = { version = "=0.10.0", default-features = false, features = ["metal", "std"], optional = true }
+burn = { workspace = true, features = ["metal"] }
+burn-wgpu = { version = "=0.21.0", default-features = false, features = ["metal", "std"] }
+cubecl = { version = "=0.10.0", default-features = false, features = ["metal", "std"] }
+cubecl-cpp = { version = "=0.10.0", default-features = false, features = ["metal", "std"] }
 half.workspace = true
-serde.workspace = true
 thiserror.workspace = true
 
 [dev-dependencies]

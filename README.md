@@ -14,24 +14,12 @@ The fixed model is downloaded directly from its publisher on first launch and ve
 
 ## Development
 
-Requirements: macOS on Apple silicon, Rust 1.92+, Xcode with the Metal toolchain, and Node LTS through `nvm`.
+Requirements: macOS on Apple silicon, Rust 1.92+, and Xcode with the Metal toolchain.
 
 ```sh
-nvm use lts
-cd frontend
-npm ci
-npm run build
-
-cd ..
-cargo test --workspace --features metal-kernels
-cargo run -- doctor
+cargo test --workspace
 cargo run
-```
-
-The model can also be installed before launch:
-
-```sh
-cargo run -- download-model
+cargo run -- bench
 ```
 
 Build both distributable macOS artifacts with:

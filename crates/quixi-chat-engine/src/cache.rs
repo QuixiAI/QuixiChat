@@ -81,7 +81,6 @@ pub struct LayerKvCache<B: Backend> {
     head_dim: usize,
     len: usize,
     cursor: usize,
-    total_seen: usize,
 }
 
 impl<B: Backend> LayerKvCache<B> {
@@ -106,24 +105,7 @@ impl<B: Backend> LayerKvCache<B> {
             head_dim,
             len: 0,
             cursor: 0,
-            total_seen: 0,
         })
-    }
-
-    #[must_use]
-    pub const fn len(&self) -> usize {
-        self.len
-    }
-
-    #[must_use]
-    pub const fn total_seen(&self) -> usize {
-        self.total_seen
-    }
-
-    pub fn reset(&mut self) {
-        self.len = 0;
-        self.cursor = 0;
-        self.total_seen = 0;
     }
 
     /// Append a prefill chunk or decode token and return chronological K/V views.
@@ -183,7 +165,6 @@ impl<B: Backend> LayerKvCache<B> {
                     self.cursor = (self.cursor + 1) % window;
                     self.len = (self.len + 1).min(window);
                 }
-                self.total_seen += steps;
                 Ok((
                     self.ordered_local(self.keys.clone()),
                     self.ordered_local(self.values.clone()),
@@ -216,7 +197,6 @@ impl<B: Backend> LayerKvCache<B> {
                     values,
                 );
                 self.len = requested;
-                self.total_seen += steps;
                 Ok((
                     self.keys.clone().slice([
                         0..self.batch,
@@ -293,8 +273,6 @@ mod tests {
             );
             latest = Some(cache.push(tensor.clone(), tensor).unwrap().0);
         }
-        assert_eq!(cache.len(), 3);
-        assert_eq!(cache.total_seen(), 5);
         assert_eq!(
             latest.unwrap().to_data().to_vec::<f32>().unwrap(),
             [2.0, 3.0, 4.0]

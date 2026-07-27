@@ -1,6 +1,6 @@
-//! Authenticated health and streaming chat API routes.
+//! The authenticated streaming chat route.
 
-use std::{convert::Infallible, net::SocketAddr};
+use std::convert::Infallible;
 
 use axum::{
     Json,
@@ -11,11 +11,10 @@ use axum::{
     response::Response,
 };
 use futures_util::stream;
-use serde::{Deserialize, Serialize};
+use serde::Deserialize;
 
 #[derive(Clone)]
 pub struct State {
-    pub address: SocketAddr,
     pub token: String,
     pub llm: crate::LlmService,
 }
@@ -45,65 +44,9 @@ pub async fn require_token(
     }
 }
 
-#[derive(Debug, Serialize)]
-pub struct Health {
-    pub app: &'static str,
-    pub version: &'static str,
-    pub greeting: &'static str,
-    pub address: String,
-    pub frontend: &'static str,
-    /// True when nothing in this process can reach the network. The model
-    /// installer is the only component that ever could, and it does not exist
-    /// yet in this scaffold (spec §2.1).
-    pub offline: bool,
-    pub device: quixi_chat_kernels::DeviceReport,
-    pub smoke: quixi_chat_kernels::SmokeTest,
-    pub llm: LlmReport,
-}
-
-#[derive(Debug, Serialize)]
-pub struct LlmReport {
-    pub state: crate::LlmState,
-    pub model: &'static str,
-    pub path: String,
-}
-
-/// Report what this build is and prove the GPU works.
-pub async fn health(AxumState(state): AxumState<State>) -> Result<Json<Health>, StatusCode> {
-    let (device, smoke) = tokio::task::spawn_blocking(quixi_chat_kernels::smoke_test)
-        .await
-        .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?
-        .map_err(|error| {
-            tracing::error!(%error, "no compute device");
-            StatusCode::SERVICE_UNAVAILABLE
-        })?;
-
-    Ok(Json(Health {
-        app: "QuixiChat",
-        version: env!("CARGO_PKG_VERSION"),
-        greeting: "Fast, private Gemma chat",
-        address: state.address.to_string(),
-        frontend: if crate::assets::bundle_present() {
-            "embedded Vite bundle"
-        } else {
-            "built-in fallback"
-        },
-        offline: true,
-        device,
-        smoke,
-        llm: LlmReport {
-            state: state.llm.state(),
-            model: state.llm.model(),
-            path: state.llm.path().display().to_string(),
-        },
-    }))
-}
-
 #[derive(Debug, Deserialize)]
 pub struct ChatRequest {
     pub messages: Vec<quixi_chat_engine::ChatMessage>,
-    #[serde(default)]
-    pub max_new_tokens: Option<usize>,
 }
 
 /// One conversational turn, returned as newline-delimited JSON events. Keeping
@@ -119,7 +62,7 @@ pub async fn chat(
 
     let events = state
         .llm
-        .chat(request.messages, generation_options(request.max_new_tokens))
+        .chat(request.messages)
         .await
         .map_err(|error| (StatusCode::SERVICE_UNAVAILABLE, error))?;
     Ok(stream_response(events))
@@ -144,29 +87,14 @@ fn stream_response(events: tokio::sync::mpsc::Receiver<crate::ChatStreamEvent>) 
     response
 }
 
-fn generation_options(requested: Option<usize>) -> quixi_chat_engine::GenerationOptions {
-    let mut options = quixi_chat_engine::GenerationOptions::default();
-    if let Some(limit) = requested {
-        options.max_new_tokens = limit.clamp(1, quixi_chat_engine::MAX_NEW_TOKENS);
-    }
-    options
-}
-
 #[cfg(test)]
 mod tests {
     use super::*;
 
-    #[test]
-    fn chat_generation_defaults_to_32k_and_clamps_overrides() {
-        assert_eq!(generation_options(None).max_new_tokens, 32_768);
-        assert_eq!(generation_options(Some(0)).max_new_tokens, 1);
-        assert_eq!(generation_options(Some(17)).max_new_tokens, 17);
-        assert_eq!(generation_options(Some(usize::MAX)).max_new_tokens, 32_768);
-    }
-
     #[tokio::test]
     async fn chat_stream_is_incremental_ndjson() {
-        let (sender, receiver) = tokio::sync::mpsc::channel(7);
+        let (sender, receiver) = tokio::sync::mpsc::channel(8);
+        sender.send(crate::ChatStreamEvent::Loading).await.unwrap();
         sender
             .send(crate::ChatStreamEvent::Compacting {
                 original_tokens: 90_001,
@@ -221,7 +149,8 @@ mod tests {
             .unwrap();
         assert_eq!(
             std::str::from_utf8(&body).unwrap(),
-            "{\"type\":\"compacting\",\"original_tokens\":90001}\n\
+            "{\"type\":\"loading\"}\n\
+             {\"type\":\"compacting\",\"original_tokens\":90001}\n\
              {\"type\":\"compacted\",\"messages\":[{\"role\":\"user\",\"content\":\"continue\"}],\"original_tokens\":90001,\"compacted_tokens\":12345}\n\
              {\"type\":\"thinking\"}\n\
              {\"type\":\"thinking_delta\",\"text\":\"private\"}\n\

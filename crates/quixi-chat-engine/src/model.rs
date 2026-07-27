@@ -209,7 +209,7 @@ impl Gemma4Config {
         Ok(())
     }
 
-    /// Require every staged text tensor to map to the pinned E2B forward pass.
+    /// Require every text tensor to map to the pinned E2B forward pass.
     pub fn validate_tensor_contract(&self, gguf: &Gguf) -> Result<(), ArchitectureError> {
         let mut expected = BTreeSet::new();
         expect(
@@ -372,76 +372,4 @@ fn f32_value(gguf: &Gguf, key: &str) -> Result<f32, ArchitectureError> {
         .as_f64()
         .map(|value| value as f32)
         .ok_or_else(|| ArchitectureError::Metadata(key.to_owned()))
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    #[ignore = "requires the staged Gemma GGUF"]
-    fn staged_e2b_has_exhaustive_pinned_tensor_contract() {
-        let gguf = Gguf::open("../../models/gemma-4-E2B_q4_0-it.gguf").unwrap();
-        let config = Gemma4Config::from_gguf(&gguf).unwrap();
-        config.validate_tensor_contract(&gguf).unwrap();
-        assert_eq!(
-            config.layers.iter().filter(|layer| layer.owns_kv).count(),
-            15
-        );
-        assert_eq!(
-            config
-                .layers
-                .iter()
-                .filter(|layer| layer.attention == AttentionKind::Global)
-                .map(|layer| layer.index)
-                .collect::<Vec<_>>(),
-            [4, 9, 14, 19, 24, 29, 34]
-        );
-        assert_eq!(config.layers[14].feed_forward_size, 6_144);
-        assert_eq!(config.layers[15].feed_forward_size, 12_288);
-    }
-
-    #[cfg(feature = "metal-kernels")]
-    #[test]
-    #[ignore = "requires the staged Gemma GGUF and Apple Metal"]
-    fn staged_q4_attention_projection_matches_native_metal() {
-        use burn::{
-            backend::Metal,
-            tensor::{Tensor, TensorData, TensorPrimitive},
-        };
-        use quixi_chat_kernels::{
-            metal::{PackedMetalMatrix, qgemv_f32},
-            quant::{QuantFormat, dequantize_matvec},
-        };
-
-        let gguf = Gguf::open("../../models/gemma-4-E2B_q4_0-it.gguf").unwrap();
-        let packed = gguf.read_tensor("blk.0.attn_q.weight").unwrap();
-        let input_data = (0..1_536)
-            .map(|index| (index as f32 * 0.013).sin() * 0.2)
-            .collect::<Vec<_>>();
-        let expected =
-            dequantize_matvec(QuantFormat::Q4_0, &packed, 2_048, 1_536, &input_data).unwrap();
-        let device = Default::default();
-        let input = Tensor::<Metal, 1>::from_data(TensorData::new(input_data, [1_536]), &device);
-        let output = Tensor::<Metal, 1>::zeros([2_048], &device);
-        let TensorPrimitive::Float(input) = input.into_primitive() else {
-            panic!("input must be f32")
-        };
-        let matrix = PackedMetalMatrix::upload(&input, packed, QuantFormat::Q4_0, 2_048, 1_536);
-        let TensorPrimitive::Float(output) = output.into_primitive() else {
-            panic!("output must be f32")
-        };
-        let actual = Tensor::<Metal, 1>::from_primitive(TensorPrimitive::Float(qgemv_f32(
-            &matrix, input, output,
-        )))
-        .to_data()
-        .to_vec::<f32>()
-        .unwrap();
-        let max_error = actual
-            .iter()
-            .zip(&expected)
-            .map(|(actual, expected)| (actual - expected).abs())
-            .fold(0.0_f32, f32::max);
-        assert!(max_error <= 2e-5, "max error was {max_error}");
-    }
 }

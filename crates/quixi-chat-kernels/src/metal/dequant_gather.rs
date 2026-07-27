@@ -23,8 +23,6 @@ use super::qgemv::PackedMetalMatrix;
 const WORKGROUP_SIZE: u32 = 256;
 const Q4_0_SOURCE: &str =
     include_str!("../../../../kernels/metal/src/quantization/dequant_gather/q4_0.metal");
-const Q8_0_SOURCE: &str =
-    include_str!("../../../../kernels/metal/src/quantization/dequant_gather/q8_0.metal");
 const Q6_K_SOURCE: &str =
     include_str!("../../../../kernels/metal/src/quantization/dequant_gather/q6_k.metal");
 
@@ -37,7 +35,6 @@ impl DequantGatherTask {
     const fn entry_point(&self) -> &'static str {
         match self.format {
             QuantFormat::Q4_0 => "dequant_gather_q4_0",
-            QuantFormat::Q8_0 => "dequant_gather_q8_0",
             QuantFormat::Q6K => "dequant_gather_q6_K",
         }
     }
@@ -45,7 +42,6 @@ impl DequantGatherTask {
     const fn source(&self) -> &'static str {
         match self.format {
             QuantFormat::Q4_0 => Q4_0_SOURCE,
-            QuantFormat::Q8_0 => Q8_0_SOURCE,
             QuantFormat::Q6K => Q6_K_SOURCE,
         }
     }

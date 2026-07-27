@@ -1,6 +1,7 @@
 # QuixiChat patch
 
-Source: `cubecl-runtime` 0.10.0 from crates.io (MIT OR Apache-2.0).
+Source: `cubecl-runtime` 0.10.0 from crates.io, upstream commit
+`7cf203735e095e640a2c03b2400d0faa03196bb4` (MIT OR Apache-2.0).
 
 QuixiChat changes one ownership operation in `ComputeClient::do_create`: the
 method already owns each `Bytes` payload, so it moves that payload into the

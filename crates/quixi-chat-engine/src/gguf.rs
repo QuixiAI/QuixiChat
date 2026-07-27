@@ -7,7 +7,6 @@ use std::{
     path::{Path, PathBuf},
 };
 
-use serde::Serialize;
 use thiserror::Error;
 
 const MAGIC: &[u8; 4] = b"GGUF";
@@ -54,12 +53,6 @@ pub enum GgufError {
     },
     #[error("GGUF does not contain tensor {0:?}")]
     MissingTensor(String),
-    #[error("tensor {tensor:?} row {row} is outside its {rows} rows")]
-    TensorRow {
-        tensor: String,
-        row: usize,
-        rows: usize,
-    },
 }
 
 /// A decoded GGUF metadata value.
@@ -147,28 +140,14 @@ pub struct GgmlBlockLayout {
     pub block_bytes: u64,
 }
 
-/// Storage formats needed by the staged Gemma checkpoint plus scalar GGUF types.
+/// Storage formats used by the pinned Gemma checkpoint.
 #[must_use]
 pub const fn ggml_block_layout(ggml_type: u32) -> Option<GgmlBlockLayout> {
     let (block_elements, block_bytes) = match ggml_type {
-        0 => (1, 4),       // F32
-        1 | 30 => (1, 2),  // F16 / BF16
-        2 => (32, 18),     // Q4_0
-        3 => (32, 20),     // Q4_1
-        6 => (32, 22),     // Q5_0
-        7 => (32, 24),     // Q5_1
-        8 => (32, 34),     // Q8_0
-        9 => (32, 40),     // Q8_1
-        10 => (256, 84),   // Q2_K
-        11 => (256, 110),  // Q3_K
-        12 => (256, 144),  // Q4_K
-        13 => (256, 176),  // Q5_K
-        14 => (256, 210),  // Q6_K
-        15 => (256, 292),  // Q8_K
-        24 => (1, 1),      // I8
-        25 => (1, 2),      // I16
-        26 => (1, 4),      // I32
-        27 | 28 => (1, 8), // I64 / F64
+        0 => (1, 4),      // F32
+        1 => (1, 2),      // F16
+        2 => (32, 18),    // Q4_0
+        14 => (256, 210), // Q6_K
         _ => return None,
     };
     Some(GgmlBlockLayout {
@@ -191,11 +170,6 @@ pub struct GgufTensor {
 
 impl GgufTensor {
     #[must_use]
-    pub fn elements(&self) -> u64 {
-        self.shape.iter().product()
-    }
-
-    #[must_use]
     pub fn absolute_offset(&self, gguf: &Gguf) -> u64 {
         gguf.data_offset + self.offset
     }
@@ -205,10 +179,7 @@ impl GgufTensor {
 #[derive(Debug, Clone)]
 pub struct Gguf {
     path: PathBuf,
-    pub version: u32,
-    pub file_bytes: u64,
     pub data_offset: u64,
-    pub alignment: u64,
     pub metadata: BTreeMap<String, GgufValue>,
     pub tensors: BTreeMap<String, GgufTensor>,
 }
@@ -311,16 +282,12 @@ impl Gguf {
 
         Ok(Self {
             path,
-            version,
-            file_bytes,
             data_offset,
-            alignment,
             metadata,
             tensors,
         })
     }
 
-    #[must_use]
     /// Read one tensor's packed bytes from the file.
     ///
     /// Normal loading streams straight from disk into device memory; this exists
@@ -358,140 +325,10 @@ impl Gguf {
         Ok(data)
     }
 
-    /// Read one row from a tensor whose first GGUF dimension is the row width.
-    pub fn read_tensor_row(&self, name: &str, row: usize) -> Result<Vec<u8>, GgufError> {
-        let tensor = self
-            .tensor(name)
-            .ok_or_else(|| GgufError::MissingTensor(name.to_owned()))?;
-        let rows = tensor
-            .shape
-            .iter()
-            .skip(1)
-            .try_fold(1_u64, |acc, value| acc.checked_mul(*value))
-            .and_then(|value| usize::try_from(value).ok())
-            .ok_or_else(|| GgufError::TensorShape {
-                tensor: name.to_owned(),
-            })?;
-        if row >= rows {
-            return Err(GgufError::TensorRow {
-                tensor: name.to_owned(),
-                row,
-                rows,
-            });
-        }
-        let row_bytes = usize::try_from(tensor.bytes).map_err(|_| GgufError::TensorShape {
-            tensor: name.to_owned(),
-        })? / rows;
-        let offset = tensor
-            .offset
-            .checked_add(
-                u64::try_from(row.checked_mul(row_bytes).ok_or_else(|| {
-                    GgufError::TensorShape {
-                        tensor: name.to_owned(),
-                    }
-                })?)
-                .map_err(|_| GgufError::TensorShape {
-                    tensor: name.to_owned(),
-                })?,
-            )
-            .ok_or_else(|| GgufError::TensorShape {
-                tensor: name.to_owned(),
-            })?;
-        let mut file = File::open(&self.path)?;
-        file.seek(SeekFrom::Start(self.data_offset + offset))?;
-        let mut data = vec![0_u8; row_bytes];
-        file.read_exact(&mut data)?;
-        Ok(data)
-    }
-
     #[must_use]
     pub fn metadata_value(&self, key: &str) -> Option<&GgufValue> {
         self.metadata.get(key)
     }
-}
-
-#[derive(Debug, Clone, Serialize)]
-pub struct MetadataSummary {
-    pub value_type: &'static str,
-    pub display: String,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub length: Option<usize>,
-}
-
-#[derive(Debug, Clone, Serialize)]
-pub struct TensorAudit {
-    pub name: String,
-    pub shape: Vec<u64>,
-    pub ggml_type: u32,
-    pub type_name: &'static str,
-    pub offset: u64,
-    pub bytes: u64,
-    pub namespace: String,
-}
-
-#[derive(Debug, Clone, Serialize)]
-pub struct GgufAudit {
-    pub version: u32,
-    pub file_bytes: u64,
-    pub data_offset: u64,
-    pub metadata_count: usize,
-    pub tensor_count: usize,
-    pub architecture: Option<String>,
-    pub quantization_version: Option<u64>,
-    pub alignment: u64,
-    pub namespace_counts: BTreeMap<String, usize>,
-    pub metadata: BTreeMap<String, MetadataSummary>,
-    pub tensors: Vec<TensorAudit>,
-}
-
-pub fn audit_gguf(path: impl AsRef<Path>) -> Result<GgufAudit, GgufError> {
-    let gguf = Gguf::open(path)?;
-    let mut namespace_counts = BTreeMap::new();
-    let tensors = gguf
-        .tensors
-        .values()
-        .map(|tensor| {
-            let namespace = tensor_namespace(&tensor.name);
-            *namespace_counts.entry(namespace.clone()).or_insert(0) += 1;
-            TensorAudit {
-                name: tensor.name.clone(),
-                shape: tensor.shape.clone(),
-                ggml_type: tensor.ggml_type,
-                type_name: ggml_type_name(tensor.ggml_type),
-                offset: tensor.offset,
-                bytes: tensor.bytes,
-                namespace,
-            }
-        })
-        .collect();
-    let architecture = gguf
-        .metadata_value("general.architecture")
-        .and_then(GgufValue::as_str)
-        .map(str::to_owned);
-    let quantization_version = gguf
-        .metadata_value("general.quantization_version")
-        .and_then(GgufValue::as_u64);
-    let metadata_count = gguf.metadata.len();
-    let tensor_count = gguf.tensors.len();
-    let metadata = gguf
-        .metadata
-        .iter()
-        .map(|(key, value)| (key.clone(), summarize(value)))
-        .collect();
-
-    Ok(GgufAudit {
-        version: gguf.version,
-        file_bytes: gguf.file_bytes,
-        data_offset: gguf.data_offset,
-        metadata_count,
-        tensor_count,
-        architecture,
-        quantization_version,
-        alignment: gguf.alignment,
-        namespace_counts,
-        metadata,
-        tensors,
-    })
 }
 
 fn read_value(reader: &mut impl Read, value_type: u32) -> Result<GgufValue, GgufError> {
@@ -519,98 +356,6 @@ fn read_value(reader: &mut impl Read, value_type: u32) -> Result<GgufValue, Gguf
         12 => GgufValue::F64(f64::from_bits(read_u64(reader)?)),
         value_type => return Err(GgufError::ValueType(value_type)),
     })
-}
-
-fn summarize(value: &GgufValue) -> MetadataSummary {
-    let (value_type, display, length) = match value {
-        GgufValue::U8(value) => ("u8", value.to_string(), None),
-        GgufValue::I8(value) => ("i8", value.to_string(), None),
-        GgufValue::U16(value) => ("u16", value.to_string(), None),
-        GgufValue::I16(value) => ("i16", value.to_string(), None),
-        GgufValue::U32(value) => ("u32", value.to_string(), None),
-        GgufValue::I32(value) => ("i32", value.to_string(), None),
-        GgufValue::F32(value) => ("f32", value.to_string(), None),
-        GgufValue::Bool(value) => ("bool", value.to_string(), None),
-        GgufValue::String(value) => ("string", value.clone(), Some(value.len())),
-        GgufValue::Array(values) => {
-            let sample = values
-                .iter()
-                .take(8)
-                .map(scalar_display)
-                .collect::<Vec<_>>()
-                .join(", ");
-            let suffix = if values.len() > 8 { ", …" } else { "" };
-            ("array", format!("[{sample}{suffix}]"), Some(values.len()))
-        }
-        GgufValue::U64(value) => ("u64", value.to_string(), None),
-        GgufValue::I64(value) => ("i64", value.to_string(), None),
-        GgufValue::F64(value) => ("f64", value.to_string(), None),
-    };
-    MetadataSummary {
-        value_type,
-        display,
-        length,
-    }
-}
-
-fn scalar_display(value: &GgufValue) -> String {
-    match value {
-        GgufValue::String(value) => format!("{value:?}"),
-        GgufValue::Array(values) => format!("array({})", values.len()),
-        value => summarize(value).display,
-    }
-}
-
-fn tensor_namespace(name: &str) -> String {
-    if name.starts_with("blk.") {
-        "text.block".to_owned()
-    } else if name.starts_with("v.") {
-        "vision".to_owned()
-    } else if name.starts_with("a.") {
-        "audio".to_owned()
-    } else if name.starts_with("mm.") {
-        "multimodal_projector".to_owned()
-    } else {
-        name.split('.').next().unwrap_or("other").to_owned()
-    }
-}
-
-#[must_use]
-pub const fn ggml_type_name(value: u32) -> &'static str {
-    match value {
-        0 => "F32",
-        1 => "F16",
-        2 => "Q4_0",
-        3 => "Q4_1",
-        6 => "Q5_0",
-        7 => "Q5_1",
-        8 => "Q8_0",
-        9 => "Q8_1",
-        10 => "Q2_K",
-        11 => "Q3_K",
-        12 => "Q4_K",
-        13 => "Q5_K",
-        14 => "Q6_K",
-        15 => "Q8_K",
-        16 => "IQ2_XXS",
-        17 => "IQ2_XS",
-        18 => "IQ3_XXS",
-        19 => "IQ1_S",
-        20 => "IQ4_NL",
-        21 => "IQ3_S",
-        22 => "IQ2_S",
-        23 => "IQ4_XS",
-        24 => "I8",
-        25 => "I16",
-        26 => "I32",
-        27 => "I64",
-        28 => "F64",
-        29 => "IQ1_M",
-        30 => "BF16",
-        34 => "TQ1_0",
-        35 => "TQ2_0",
-        _ => "UNKNOWN",
-    }
 }
 
 fn checked_len(value: u64) -> Result<usize, GgufError> {
@@ -661,9 +406,6 @@ mod tests {
 
     #[test]
     fn known_quantization_layouts_are_stable() {
-        assert_eq!(ggml_type_name(2), "Q4_0");
-        assert_eq!(ggml_type_name(14), "Q6_K");
-        assert_eq!(ggml_type_name(30), "BF16");
         assert_eq!(
             ggml_block_layout(14),
             Some(GgmlBlockLayout {
@@ -671,94 +413,5 @@ mod tests {
                 block_bytes: 210,
             })
         );
-    }
-
-    #[test]
-    fn namespace_classifier_separates_modal_weights() {
-        assert_eq!(tensor_namespace("blk.2.attn_q.weight"), "text.block");
-        assert_eq!(tensor_namespace("v.patch_embd.weight"), "vision");
-        assert_eq!(tensor_namespace("a.conv.weight"), "audio");
-    }
-
-    #[test]
-    #[ignore = "requires the staged 3.35 GB Gemma GGUF"]
-    fn staged_gemma_directory_and_exact_tensor_size_are_valid() {
-        let gguf = Gguf::open("../../models/gemma-4-E2B_q4_0-it.gguf").unwrap();
-        assert_eq!(gguf.version, 3);
-        assert_eq!(gguf.tensors.len(), 541);
-        let embedding = gguf.tensor("token_embd.weight").unwrap();
-        assert_eq!(embedding.shape, [1536, 262_144]);
-        assert_eq!(embedding.ggml_type, 14);
-        assert_eq!(embedding.bytes, 330_301_440);
-        assert_eq!(
-            gguf.read_tensor_row("token_embd.weight", 2).unwrap().len(),
-            1_260
-        );
-    }
-
-    #[cfg(feature = "metal-kernels")]
-    #[test]
-    #[ignore = "requires the staged Gemma GGUF and Apple Metal"]
-    fn staged_q6_k_embedding_rows_match_native_metal_exactly() {
-        use burn::{
-            backend::Metal,
-            tensor::{DType, Int, Tensor, TensorData, TensorPrimitive},
-        };
-        use half::f16;
-        use quixi_chat_kernels::{
-            metal::dequant_gather,
-            quant::{QuantFormat, dequantize_gather},
-        };
-
-        let gguf = Gguf::open("../../models/gemma-4-E2B_q4_0-it.gguf").unwrap();
-        let source_rows = [2_usize, 105, 65_537, 262_143];
-        let packed = source_rows
-            .iter()
-            .flat_map(|row| gguf.read_tensor_row("token_embd.weight", *row).unwrap())
-            .collect::<Vec<_>>();
-        let ids_data = vec![3_i32, 0, 2, 1];
-        let ids_cpu = [3_u32, 0, 2, 1];
-        let scale = 1_536_f32.sqrt();
-        let expected = dequantize_gather(
-            QuantFormat::Q6K,
-            &packed,
-            source_rows.len(),
-            1_536,
-            &ids_cpu,
-            scale,
-        )
-        .unwrap()
-        .into_iter()
-        .map(|value| f16::from_f32(value).to_f32())
-        .collect::<Vec<_>>();
-
-        let device = Default::default();
-        let table = Tensor::<Metal, 1, Int>::from_data(
-            TensorData::new(packed.clone(), [packed.len()]),
-            &device,
-        )
-        .cast(DType::U8)
-        .into_primitive();
-        let ids = Tensor::<Metal, 1, Int>::from_data(TensorData::new(ids_data, [4]), &device)
-            .into_primitive();
-        let output = Tensor::<Metal, 2>::zeros([4, 1_536], &device).cast(DType::F16);
-        let TensorPrimitive::Float(output) = output.into_primitive() else {
-            panic!("fp16 output must have a float primitive")
-        };
-        let output = dequant_gather(
-            table,
-            ids,
-            output,
-            QuantFormat::Q6K,
-            source_rows.len(),
-            1_536,
-            scale,
-        );
-        let actual = Tensor::<Metal, 2>::from_primitive(TensorPrimitive::Float(output))
-            .to_data()
-            .convert::<f32>()
-            .to_vec::<f32>()
-            .unwrap();
-        assert_eq!(actual, expected);
     }
 }

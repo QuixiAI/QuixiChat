@@ -1,15 +1,14 @@
-//! The local service: axum on loopback, serving the embedded UI and the API on
-//! one port (spec §17). The Tauri window is pointed at it.
+//! The loopback service serving the embedded UI and streaming chat API.
 //!
 //! There is no configuration here. The port is ephemeral, the interface is
 //! always `127.0.0.1`, and the session token is generated per launch — none of
 //! it is a setting, because none of it is an editorial choice (§2.11).
 
-pub mod assets;
+mod assets;
 mod llm_service;
 mod routes;
 
-pub use llm_service::{ChatStreamEvent, LlmService, LlmState};
+use llm_service::{ChatStreamEvent, LlmService};
 
 use std::{
     net::{Ipv4Addr, SocketAddr},
@@ -17,7 +16,7 @@ use std::{
 };
 
 use anyhow::{Context, Result};
-use axum::{Router, routing::get};
+use axum::Router;
 use rand::Rng;
 use tokio::net::TcpListener;
 
@@ -49,11 +48,6 @@ impl Server {
         })
     }
 
-    #[must_use]
-    pub const fn address(&self) -> SocketAddr {
-        self.address
-    }
-
     /// The URL the desktop window should load.
     #[must_use]
     pub fn url(&self) -> String {
@@ -63,13 +57,11 @@ impl Server {
     /// Serve until `shutdown` resolves.
     pub async fn run(self, shutdown: impl Future<Output = ()> + Send + 'static) -> Result<()> {
         let state = routes::State {
-            address: self.address,
             token: self.token,
             llm: LlmService::spawn(self.model_path),
         };
 
         let api = Router::new()
-            .route("/health", get(routes::health))
             .route("/chat", axum::routing::post(routes::chat))
             .route_layer(axum::middleware::from_fn_with_state(
                 state.clone(),
@@ -77,10 +69,7 @@ impl Server {
             ))
             .with_state(state);
 
-        let app = Router::new()
-            .nest("/api", api)
-            .fallback(assets::serve)
-            .layer(tower_http::trace::TraceLayer::new_for_http());
+        let app = Router::new().nest("/api", api).fallback(assets::serve);
 
         tracing::info!(address = %self.address, "local service listening");
         axum::serve(self.listener, app)
@@ -90,7 +79,7 @@ impl Server {
     }
 }
 
-/// A per-launch token, so only the window we opened can call the API (§15).
+/// A per-launch token, so only the window we opened can call the API.
 ///
 /// Loopback binding already excludes other machines; this excludes other
 /// processes on this one.
