@@ -1,5 +1,8 @@
 # QuixiChat
 
+<img width="960" height="640" alt="image" src="https://github.com/user-attachments/assets/3bc39718-094a-4f4c-924a-c56ae9a77f50" />
+
+
 QuixiChat is a small, complete native chat app for running Gemma 4 E2B locally on Apple silicon. It implements the entire path from a pinned GGUF file to streamed text: model loading, tokenization, the checkpoint's chat template, KV caching, Metal inference, thinking, conversation compaction, authenticated loopback HTTP, and the desktop UI.
 
 This is an opinionated teaching implementation, not a framework. There is one model, one Metal backend, greedy decoding, no runtime settings, and no JavaScript toolchain. The binary opens the app when run without arguments; `bench` is its only subcommand.
