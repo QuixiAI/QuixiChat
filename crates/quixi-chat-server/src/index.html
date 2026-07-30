@@ -144,11 +144,13 @@
 
     <script>
       const token = new URLSearchParams(location.search).get("t") ?? "";
+      window.history.replaceState(null, "", location.pathname);
       const $ = (id) => document.getElementById(id);
       const log = $("log"), inner = $("inner"), draft = $("draft"), send = $("send"), hint = $("hint");
 
       let turns = [];
       let busy = false;
+      let renderQueued = false;
 
       const escapeHtml = (s) =>
         s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
@@ -184,6 +186,15 @@
           });
         });
         log.scrollTop = log.scrollHeight;
+      }
+
+      function scheduleRender() {
+        if (renderQueued) return;
+        renderQueued = true;
+        requestAnimationFrame(() => {
+          renderQueued = false;
+          render();
+        });
       }
 
       function autosize() {
@@ -253,7 +264,7 @@
                 const assistant = turns[turns.length - 1];
                 assistant.thinking = (assistant.thinking ?? "") + event.text;
                 assistant.pending = true;
-                render();
+                scheduleRender();
               } else if (event.type === "answering") {
                 turns[turns.length - 1].pending = false;
                 render();
@@ -261,7 +272,7 @@
                 const assistant = turns[turns.length - 1];
                 assistant.content += event.text;
                 assistant.pending = false;
-                render();
+                scheduleRender();
               } else if (event.type === "done") {
                 console.info(`reply in ${(event.elapsed_ms / 1000).toFixed(1)}s`);
                 const assistant = turns[turns.length - 1];

@@ -9,7 +9,9 @@ cd "$root"
 cargo tauri build --bundles app,dmg --no-sign --ci
 
 app="$root/target/release/bundle/macos/QuixiChat.app"
-dmg="$root/target/release/bundle/dmg/QuixiChat_0.0.1_aarch64.dmg"
+set -- "$root"/target/release/bundle/dmg/QuixiChat_*_aarch64.dmg
+[ "$#" -eq 1 ]
+dmg=$1
 test -d "$app"
 test -f "$dmg"
 

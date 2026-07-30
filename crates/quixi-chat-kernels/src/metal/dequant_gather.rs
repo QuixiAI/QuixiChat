@@ -142,9 +142,10 @@ impl CubeTask<AutoCompiler> for DequantGatherTask {
 ///
 /// `table` must be U8, `ids` must be I32, and `output` must be fp16 with
 /// `ids.num_elements() * columns` elements. The returned tensor owns the same Burn allocation.
+#[must_use]
 pub fn dequant_gather(
-    table: CubeTensor<WgpuRuntime>,
-    ids: CubeTensor<WgpuRuntime>,
+    table: &CubeTensor<WgpuRuntime>,
+    ids: &CubeTensor<WgpuRuntime>,
     output: CubeTensor<WgpuRuntime>,
     format: QuantFormat,
     rows: usize,
@@ -184,9 +185,10 @@ pub fn dequant_gather(
 }
 
 /// Gather from a load-once packed matrix owned by the native kernels crate.
+#[must_use]
 pub fn dequant_gather_matrix(
     table: &PackedMetalMatrix,
-    ids: CubeTensor<WgpuRuntime>,
+    ids: &CubeTensor<WgpuRuntime>,
     output: CubeTensor<WgpuRuntime>,
     scale: f32,
 ) -> CubeTensor<WgpuRuntime> {
@@ -221,6 +223,8 @@ pub fn dequant_gather_matrix(
 
 #[cfg(test)]
 mod tests {
+    #![allow(clippy::cast_possible_truncation)]
+
     use burn::{
         backend::Metal,
         tensor::{DType, Int, Tensor, TensorData, TensorPrimitive},
@@ -269,7 +273,7 @@ mod tests {
         assert_eq!(table.dtype, DType::U8);
         assert_eq!(ids.dtype, DType::I32);
         assert_eq!(output.dtype, DType::F16);
-        let output = dequant_gather(table, ids, output, QuantFormat::Q6K, 2, 256, 16.0);
+        let output = dequant_gather(&table, &ids, output, QuantFormat::Q6K, 2, 256, 16.0);
         let actual = Tensor::<Metal, 2>::from_primitive(TensorPrimitive::Float(output))
             .to_data()
             .convert::<f32>()

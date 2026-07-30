@@ -86,6 +86,7 @@ pub fn dequantize_row(
             &mut output[start..start + format.block_elements()],
         );
     }
+    #[allow(clippy::float_cmp)]
     if scale != 1.0 {
         for value in &mut output {
             *value *= scale;
@@ -176,15 +177,6 @@ pub fn dequantize_matvec(
         .collect()
 }
 
-/// Round a reference result exactly as an fp16-output native kernel does.
-#[must_use]
-pub fn to_f16_bits(values: &[f32]) -> Vec<u16> {
-    values
-        .iter()
-        .map(|value| f16::from_f32(*value).to_bits())
-        .collect()
-}
-
 fn decode_block(format: QuantFormat, block: &[u8], output: &mut [f32]) {
     debug_assert_eq!(block.len(), format.block_bytes());
     debug_assert_eq!(output.len(), format.block_elements());
@@ -208,13 +200,14 @@ fn decode_q4_0(block: &[u8], output: &mut [f32]) {
     }
 }
 
+#[allow(clippy::cast_precision_loss)]
 fn decode_q6_k(block: &[u8], output: &mut [f32]) {
     let ql = &block[..128];
     let qh = &block[128..192];
     let scales = &block[192..208];
     let d = f16_at(block, 208);
 
-    for column in 0..256 {
+    for (column, output) in output.iter_mut().enumerate() {
         let chunk = column >> 7;
         let position = column & 127;
         let group = position >> 5;
@@ -229,12 +222,14 @@ fn decode_q6_k(block: &[u8], output: &mut [f32]) {
         let quant = i32::from(nibble | (high << 4)) - 32;
         let scale_index = chunk * 8 + (lane >> 4) + group * 2;
         let sub_scale = i32::from(i8::from_ne_bytes([scales[scale_index]]));
-        output[column] = d * (sub_scale * quant) as f32;
+        *output = d * (sub_scale * quant) as f32;
     }
 }
 
 #[cfg(test)]
 mod tests {
+    #![allow(clippy::cast_possible_truncation, clippy::float_cmp)]
+
     use super::*;
 
     #[test]

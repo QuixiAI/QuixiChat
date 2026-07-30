@@ -202,11 +202,12 @@ impl CubeTask<AutoCompiler> for ReduceTask {
 }
 
 /// Return the exact greedy token for `matrix * input` without allocating logits.
+#[must_use]
 pub fn q6_k_argmax_f32(
     matrix: &PackedMetalMatrix,
-    input: CubeTensor<WgpuRuntime>,
-    partial_values: CubeTensor<WgpuRuntime>,
-    partial_ids: CubeTensor<WgpuRuntime>,
+    input: &CubeTensor<WgpuRuntime>,
+    partial_values: &CubeTensor<WgpuRuntime>,
+    partial_ids: &CubeTensor<WgpuRuntime>,
     output: CubeTensor<WgpuRuntime>,
 ) -> CubeTensor<WgpuRuntime> {
     assert_eq!(matrix.format(), QuantFormat::Q6K);
@@ -242,6 +243,12 @@ pub fn q6_k_argmax_f32(
 
 #[cfg(test)]
 mod tests {
+    #![allow(
+        clippy::cast_possible_truncation,
+        clippy::cast_possible_wrap,
+        clippy::cast_precision_loss
+    )]
+
     use burn::{
         backend::Metal,
         tensor::{Int, Tensor, TensorData, TensorPrimitive},
@@ -295,7 +302,7 @@ mod tests {
         };
         let partial_ids = partial_ids.into_primitive();
         let output = output.into_primitive();
-        let output = q6_k_argmax_f32(&matrix, input, partial_values, partial_ids, output);
+        let output = q6_k_argmax_f32(&matrix, &input, &partial_values, &partial_ids, output);
         let actual = Tensor::<Metal, 1, Int>::from_primitive(output)
             .to_data()
             .to_vec::<i32>()

@@ -334,11 +334,11 @@ impl Gguf {
 fn read_value(reader: &mut impl Read, value_type: u32) -> Result<GgufValue, GgufError> {
     Ok(match value_type {
         0 => GgufValue::U8(read_u8(reader)?),
-        1 => GgufValue::I8(read_u8(reader)? as i8),
+        1 => GgufValue::I8(read_u8(reader)?.cast_signed()),
         2 => GgufValue::U16(read_u16(reader)?),
-        3 => GgufValue::I16(read_u16(reader)? as i16),
+        3 => GgufValue::I16(read_u16(reader)?.cast_signed()),
         4 => GgufValue::U32(read_u32(reader)?),
-        5 => GgufValue::I32(read_u32(reader)? as i32),
+        5 => GgufValue::I32(read_u32(reader)?.cast_signed()),
         6 => GgufValue::F32(f32::from_bits(read_u32(reader)?)),
         7 => GgufValue::Bool(read_u8(reader)? != 0),
         8 => GgufValue::String(read_string(reader)?),
@@ -352,7 +352,7 @@ fn read_value(reader: &mut impl Read, value_type: u32) -> Result<GgufValue, Gguf
             GgufValue::Array(values)
         }
         10 => GgufValue::U64(read_u64(reader)?),
-        11 => GgufValue::I64(read_u64(reader)? as i64),
+        11 => GgufValue::I64(read_u64(reader)?.cast_signed()),
         12 => GgufValue::F64(f64::from_bits(read_u64(reader)?)),
         value_type => return Err(GgufError::ValueType(value_type)),
     })

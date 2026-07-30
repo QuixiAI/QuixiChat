@@ -33,6 +33,7 @@ pub struct GegluPlan {
 }
 
 impl GegluPlan {
+    #[must_use]
     pub fn new(client: &ComputeClient<WgpuRuntime>, width: usize) -> Self {
         let params: [u32; 1] = [u32::try_from(width).expect("geglu width exceeds u32")];
         let bytes: Vec<u8> = params
@@ -47,6 +48,7 @@ impl GegluPlan {
 }
 
 /// `out = gelu(gate_up[..width]) * gate_up[width..]`, on the client's own stream.
+#[must_use]
 pub fn geglu_f32(
     plan: &GegluPlan,
     client: &ComputeClient<WgpuRuntime>,
@@ -151,6 +153,8 @@ impl CubeTask<AutoCompiler> for GegluTask {
 
 #[cfg(test)]
 mod tests {
+    #![allow(clippy::cast_precision_loss)]
+
     use burn::{
         backend::Metal,
         tensor::{Tensor, TensorPrimitive, activation},

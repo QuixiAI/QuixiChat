@@ -5,7 +5,7 @@ use std::convert::Infallible;
 use axum::{
     Json,
     body::Body,
-    extract::{Query, Request, State as AxumState},
+    extract::{Request, State as AxumState},
     http::{HeaderMap, HeaderValue, StatusCode, header},
     middleware::Next,
     response::Response,
@@ -19,23 +19,16 @@ pub struct State {
     pub llm: crate::LlmService,
 }
 
-#[derive(Debug, Deserialize)]
-pub struct TokenQuery {
-    t: Option<String>,
-}
-
 /// Reject API calls that do not carry this launch's session token.
 pub async fn require_token(
     AxumState(state): AxumState<State>,
-    Query(query): Query<TokenQuery>,
     headers: HeaderMap,
     request: Request,
     next: Next,
 ) -> Result<Response, StatusCode> {
-    let header = headers
+    let presented = headers
         .get("x-quixi-chat-token")
         .and_then(|value| value.to_str().ok());
-    let presented = query.t.as_deref().or(header);
 
     if presented.is_some_and(|token| token == state.token) {
         Ok(next.run(request).await)

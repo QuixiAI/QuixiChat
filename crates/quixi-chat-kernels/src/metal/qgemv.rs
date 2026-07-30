@@ -22,6 +22,7 @@ use crate::quant::{QuantFormat, packed_row_bytes};
 const SIMD_WIDTH: u32 = 32;
 const MAX_GRID_DIMENSION: u32 = 65_535;
 pub(crate) const ARGMAX_TILE_ROWS: u32 = 1_024;
+const ENTRY_POINT: &str = "quixi_chat_qgemv_q4_0_f32";
 const Q4_SOURCE: &str =
     include_str!("../../../../kernels/metal/src/quantization/qgemv/quixi_chat_q4_0_f32.metal");
 
@@ -51,6 +52,7 @@ impl std::fmt::Debug for PackedMetalMatrix {
 
 impl PackedMetalMatrix {
     /// Upload one exact row-major packed tensor using the same CubeCL client as `reference`.
+    #[must_use]
     pub fn upload(
         reference: &CubeTensor<WgpuRuntime>,
         packed: Vec<u8>,
@@ -68,6 +70,7 @@ impl PackedMetalMatrix {
     }
 
     /// Upload a packed tensor directly from one range of a GGUF file.
+    #[must_use]
     pub fn upload_file(
         reference: &CubeTensor<WgpuRuntime>,
         path: impl AsRef<Path>,
@@ -177,19 +180,9 @@ impl PackedMetalMatrix {
 #[derive(Debug)]
 struct QgemvTask;
 
-impl QgemvTask {
-    const fn entry_point(&self) -> &'static str {
-        "quixi_chat_qgemv_q4_0_f32"
-    }
-
-    const fn source(&self) -> &'static str {
-        Q4_SOURCE
-    }
-}
-
 impl KernelMetadata for QgemvTask {
     fn name(&self) -> &'static str {
-        self.entry_point()
+        ENTRY_POINT
     }
 
     fn id(&self) -> KernelId {
@@ -264,12 +257,12 @@ impl CubeTask<AutoCompiler> for QgemvTask {
             extensions: Vec::new(),
             flags,
             items: HashSet::from([f32_item, f16_item, u8_item, u32_item]),
-            kernel_name: self.entry_point().to_owned(),
+            kernel_name: ENTRY_POINT.to_owned(),
         };
         Ok(CompiledKernel {
-            entrypoint_name: self.entry_point().to_owned(),
+            entrypoint_name: ENTRY_POINT.to_owned(),
             debug_name: Some("QuixiChat packed f32 GEMV"),
-            source: self.source().to_owned(),
+            source: Q4_SOURCE.to_owned(),
             repr: Some(AutoRepresentation::Msl(representation)),
             cube_dim,
             debug_info: None,
@@ -278,9 +271,10 @@ impl CubeTask<AutoCompiler> for QgemvTask {
 }
 
 /// Compute `output = matrix * input` into an already allocated contiguous f32 vector.
+#[must_use]
 pub fn qgemv_f32(
     matrix: &PackedMetalMatrix,
-    input: CubeTensor<WgpuRuntime>,
+    input: &CubeTensor<WgpuRuntime>,
     output: CubeTensor<WgpuRuntime>,
 ) -> CubeTensor<WgpuRuntime> {
     assert_eq!(matrix.format, QuantFormat::Q4_0);
@@ -304,6 +298,8 @@ pub fn qgemv_f32(
 
 #[cfg(test)]
 mod tests {
+    #![allow(clippy::cast_possible_truncation, clippy::cast_precision_loss)]
+
     use burn::{
         backend::Metal,
         tensor::{Tensor, TensorData, TensorPrimitive},
@@ -341,7 +337,7 @@ mod tests {
             panic!("output must be f32")
         };
         let actual = Tensor::<Metal, 1>::from_primitive(TensorPrimitive::Float(qgemv_f32(
-            &matrix, input, output,
+            &matrix, &input, output,
         )))
         .to_data()
         .to_vec::<f32>()
@@ -359,6 +355,8 @@ mod tests {
 ///  gemv_throughput -- --ignored --nocapture`
 #[cfg(test)]
 mod throughput {
+    #![allow(clippy::cast_possible_truncation, clippy::cast_precision_loss)]
+
     use burn::{
         backend::Metal,
         tensor::{Tensor, TensorPrimitive},
@@ -390,7 +388,7 @@ mod throughput {
             let TensorPrimitive::Float(out) = out.into_primitive() else {
                 panic!("float")
             };
-            qgemv_f32(&matrix, input.clone(), out);
+            let _ = qgemv_f32(&matrix, &input, out);
         }
         cubecl_common::future::block_on(matrix.client.sync()).expect("Metal warmup must finish");
 
@@ -400,7 +398,7 @@ mod throughput {
             let TensorPrimitive::Float(out) = out.into_primitive() else {
                 panic!("float")
             };
-            qgemv_f32(&matrix, input.clone(), out);
+            let _ = qgemv_f32(&matrix, &input, out);
         }
         cubecl_common::future::block_on(matrix.client.sync()).expect("Metal benchmark must finish");
         let elapsed = started.elapsed().as_secs_f64();
@@ -436,7 +434,7 @@ mod throughput {
             let TensorPrimitive::Float(out) = out.into_primitive() else {
                 panic!("float")
             };
-            qgemv_f32(matrix, input.clone(), out);
+            let _ = qgemv_f32(matrix, &input, out);
         }
         cubecl_common::future::block_on(uploaded[0].client.sync())
             .expect("Metal warmup must finish");
@@ -448,7 +446,7 @@ mod throughput {
             let TensorPrimitive::Float(out) = out.into_primitive() else {
                 panic!("float")
             };
-            qgemv_f32(matrix, input.clone(), out);
+            let _ = qgemv_f32(matrix, &input, out);
         }
         cubecl_common::future::block_on(uploaded[0].client.sync())
             .expect("Metal benchmark must finish");
@@ -491,11 +489,11 @@ mod throughput {
             let TensorPrimitive::Float(pv) = pv.into_primitive() else {
                 panic!("float")
             };
-            q6_k_argmax_f32(
+            let _ = q6_k_argmax_f32(
                 &matrix,
-                input.clone(),
-                pv,
-                pi.into_primitive(),
+                &input,
+                &pv,
+                &pi.into_primitive(),
                 out.into_primitive(),
             );
         };

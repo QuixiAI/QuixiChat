@@ -77,6 +77,7 @@ impl Gemma4Tokenizer {
 }
 
 /// Materialize a standard Hugging Face `tokenizer.json` from GGUF metadata.
+#[allow(clippy::too_many_lines)]
 fn tokenizer_json(gguf: &Gguf) -> Result<Vec<u8>, TokenizerError> {
     let tokens = metadata_array(gguf, "tokenizer.ggml.tokens")?;
     let scores = metadata_array(gguf, "tokenizer.ggml.scores")?;

@@ -251,6 +251,8 @@ impl<B: Backend> LayerKvCache<B> {
 
 #[cfg(test)]
 mod tests {
+    #![allow(clippy::cast_precision_loss, clippy::default_trait_access)]
+
     use burn::{
         backend::NdArray,
         tensor::{Tensor, TensorData},

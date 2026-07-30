@@ -346,6 +346,7 @@ impl ChatEngine {
     /// Returning `false` from `on_event` stops generation early. The HTTP layer
     /// uses that signal when the browser disconnects, so an abandoned request
     /// does not keep the GPU busy for the rest of a 32K-token turn.
+    #[allow(clippy::too_many_lines)]
     pub fn reply_stream(
         &mut self,
         history: &[ChatMessage],
@@ -605,6 +606,51 @@ Preserve this literal line:
             "Useful reasoning"
         );
     }
+
+    #[test]
+    #[ignore = "requires the installed 3.35 GB checkpoint"]
+    fn pinned_checkpoint_has_stable_greedy_prefix() {
+        let path = std::env::var_os("QUIXI_CHAT_MODEL").map_or_else(
+            || {
+                std::path::PathBuf::from(std::env::var_os("HOME").expect("HOME is set"))
+                    .join(".cache/quixi-chat/models/gemma-4-E2B_q4_0-it.gguf")
+            },
+            std::path::PathBuf::from,
+        );
+        let engine = ChatEngine::load(path, 128).expect("the pinned checkpoint loads");
+        let prompt = engine
+            .render(&[ChatMessage {
+                role: ChatRole::User,
+                content: "Say hello.".to_owned(),
+            }])
+            .expect("the pinned template renders");
+        let ids = engine
+            .model
+            .tokenizer()
+            .encode(&prompt, false)
+            .expect("the pinned tokenizer encodes");
+        let mut state = engine.model.new_state().expect("KV state allocates");
+        for &token in &ids[..ids.len() - 1] {
+            engine
+                .model
+                .consume_token(token, &mut state)
+                .expect("prompt token runs");
+        }
+
+        let mut token = engine
+            .model
+            .forward_token_greedy(ids[ids.len() - 1], &mut state)
+            .expect("first token runs");
+        let mut prefix = Vec::with_capacity(8);
+        for _ in 0..8 {
+            prefix.push(token);
+            token = engine
+                .model
+                .forward_token_greedy(token, &mut state)
+                .expect("decode token runs");
+        }
+        assert_eq!(prefix, [9_259, 236_888, 2_088, 740, 564, 1_601, 611, 3_124]);
+    }
 }
 
 fn compaction_request(history: &[ChatMessage]) -> String {
@@ -695,11 +741,13 @@ pub struct Bench {
 
 impl Bench {
     #[must_use]
+    #[allow(clippy::cast_precision_loss)]
     pub fn prefill_per_second(&self) -> f64 {
         self.prompt_tokens as f64 / self.prefill.as_secs_f64().max(f64::EPSILON)
     }
 
     #[must_use]
+    #[allow(clippy::cast_precision_loss)]
     pub fn decode_per_second(&self) -> f64 {
         self.decode_tokens as f64 / self.decode.as_secs_f64().max(f64::EPSILON)
     }
@@ -720,8 +768,9 @@ fn resolve_special_token(model: &Gemma4QuantizedMetal, marker: &str) -> Option<u
     {
         return Some(ids[0]);
     }
-    let scanned = (0..model.config().vocab_size as u32)
-        .find(|&id| tokenizer.inner().id_to_token(id).as_deref() == Some(marker));
+    let vocab_size = u32::try_from(model.config().vocab_size).ok()?;
+    let scanned =
+        (0..vocab_size).find(|&id| tokenizer.inner().id_to_token(id).as_deref() == Some(marker));
     if let Some(id) = scanned {
         tracing::debug!(id, "resolved {marker} by vocabulary scan");
     }

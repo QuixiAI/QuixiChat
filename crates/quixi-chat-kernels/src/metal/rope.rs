@@ -34,6 +34,7 @@ pub struct RopePlan {
 }
 
 impl RopePlan {
+    #[must_use]
     pub fn new(client: &ComputeClient<WgpuRuntime>, rows: usize, dim: usize) -> Self {
         let params: [u32; 2] = [
             u32::try_from(rows).expect("rope rows exceed u32"),
@@ -62,6 +63,7 @@ pub struct RopeTables<'a> {
     pub dim: usize,
 }
 
+#[must_use]
 pub fn rope_f32(
     plan: &RopePlan,
     client: &ComputeClient<WgpuRuntime>,

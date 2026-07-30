@@ -210,6 +210,7 @@ impl Gemma4Config {
     }
 
     /// Require every text tensor to map to the pinned E2B forward pass.
+    #[allow(clippy::too_many_lines)]
     pub fn validate_tensor_contract(&self, gguf: &Gguf) -> Result<(), ArchitectureError> {
         let mut expected = BTreeSet::new();
         expect(
@@ -367,6 +368,7 @@ fn usize_value(gguf: &Gguf, key: &str) -> Result<usize, ArchitectureError> {
         .ok_or_else(|| ArchitectureError::Metadata(key.to_owned()))
 }
 
+#[allow(clippy::cast_possible_truncation)]
 fn f32_value(gguf: &Gguf, key: &str) -> Result<f32, ArchitectureError> {
     value(gguf, key)?
         .as_f64()

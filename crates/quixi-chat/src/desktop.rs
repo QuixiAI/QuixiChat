@@ -86,7 +86,7 @@ fn run_service(shutdown: oneshot::Receiver<()>, window: &WebviewWindow) -> Resul
 
         let server = quixi_chat_server::Server::bind(models::installed_model_path()?).await?;
         let url = server.url();
-        tracing::info!(%url, "navigating the window to the local service");
+        tracing::info!("navigating the window to the local service");
 
         let target = url
             .parse()

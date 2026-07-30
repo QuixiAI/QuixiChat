@@ -7,7 +7,6 @@ lcov.info
 
 # Downloaded model weights
 *.gguf
-*.safetensors
 *.part
 
 # macOS and editor state
@@ -16,16 +15,10 @@ lcov.info
 .vscode/
 *.swp
 
-# Local agent/tool state
-.recursor/
-.vibe/
-.vibeloop/
-
 # Secrets and signing material
 .env
 .env.*
 !.env.example
-.npmrc
 .cargo/credentials
 .cargo/credentials.toml
 AuthKey_*.p8

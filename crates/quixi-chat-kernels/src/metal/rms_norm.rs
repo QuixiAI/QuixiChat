@@ -38,6 +38,7 @@ pub struct RmsNormPlan {
 impl RmsNormPlan {
     /// `weighted` selects the `* weight` tail; `residual` folds in a trailing
     /// `+ residual`, which is how the layer's three residual adds disappear.
+    #[must_use]
     pub fn new(
         client: &ComputeClient<WgpuRuntime>,
         rows: usize,
@@ -68,6 +69,7 @@ impl RmsNormPlan {
 /// `weight` and `residual` must be bound even when the plan does not use them;
 /// the kernel does not read them in that case, so callers pass any live f32
 /// buffer.
+#[must_use]
 pub fn rms_norm_f32(
     plan: &RmsNormPlan,
     client: &ComputeClient<WgpuRuntime>,
@@ -188,6 +190,8 @@ impl CubeTask<AutoCompiler> for RmsNormTask {
 
 #[cfg(test)]
 mod tests {
+    #![allow(clippy::cast_precision_loss)]
+
     use burn::{
         backend::Metal,
         tensor::{Tensor, TensorPrimitive},

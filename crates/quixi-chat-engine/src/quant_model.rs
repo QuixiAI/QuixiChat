@@ -64,7 +64,7 @@ impl QuantLinear {
         };
         Tensor::from_primitive(TensorPrimitive::Float(qgemv_f32(
             &self.weight,
-            input,
+            &input,
             output,
         )))
     }
@@ -225,6 +225,7 @@ impl Gemma4QuantizedMetal {
 }
 
 impl Gemma4QuantizedMetal {
+    #[allow(clippy::default_trait_access, clippy::too_many_lines)]
     pub fn load(path: impl AsRef<Path>, context_limit: usize) -> Result<Self, QuantModelError> {
         let gguf = Gguf::open(path)?;
         let config = Gemma4Config::from_gguf(&gguf)?;
@@ -460,12 +461,16 @@ impl Gemma4QuantizedMetal {
         state: &mut QuantGenerationState,
     ) -> Result<Tensor<Metal, 1>, QuantModelError> {
         let ids = Tensor::<Metal, 1, Int>::from_data(
-            TensorData::new(vec![token_id as i32], [1]),
+            TensorData::new(
+                vec![i32::try_from(token_id).expect("Gemma token id fits i32")],
+                [1],
+            ),
             &self.device,
         );
         self.forward_hidden_ids(&ids, state)
     }
 
+    #[allow(clippy::cast_precision_loss)]
     fn forward_hidden_ids(
         &self,
         ids: &Tensor<Metal, 1, Int>,
@@ -516,6 +521,7 @@ impl Gemma4QuantizedMetal {
         Ok(self.norm(hidden, Some(&self.output_norm), 1, self.config.hidden_size))
     }
 
+    #[allow(clippy::too_many_lines)]
     fn forward_layer(
         &self,
         layer: &QuantLayer,
@@ -643,7 +649,7 @@ impl Gemma4QuantizedMetal {
                 1,
                 self.config.hidden_size,
             );
-        Ok(hidden * layer.layer_scalar as f64)
+        Ok(hidden * f64::from(layer.layer_scalar))
     }
 
     /// Gather using an id that is already on the device.
@@ -664,7 +670,7 @@ impl Gemma4QuantizedMetal {
             panic!("embedding output must be a float primitive")
         };
         Tensor::<Metal, 2>::from_primitive(TensorPrimitive::Float(dequant_gather_matrix(
-            table, ids, output, scale,
+            table, &ids, output, scale,
         )))
         .cast(DType::F32)
         .reshape([table.columns()])
@@ -695,9 +701,9 @@ impl Gemma4QuantizedMetal {
         let output = output.into_primitive();
         let output = q6_k_argmax_f32(
             &self.token_embedding,
-            hidden,
-            partial_values,
-            partial_ids,
+            &hidden,
+            &partial_values,
+            &partial_ids,
             output,
         );
         Tensor::<Metal, 1, Int>::from_primitive(output)
@@ -757,6 +763,11 @@ impl Gemma4QuantizedMetal {
     }
 }
 
+#[allow(
+    clippy::cast_possible_truncation,
+    clippy::cast_precision_loss,
+    clippy::cast_sign_loss
+)]
 fn rope_table(
     context: usize,
     head_dim: usize,
@@ -967,6 +978,8 @@ fn load_f16_matrix(
 
 #[cfg(test)]
 mod tests {
+    #![allow(clippy::default_trait_access, clippy::float_cmp)]
+
     use super::*;
 
     #[test]
