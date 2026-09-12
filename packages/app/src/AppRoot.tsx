@@ -306,6 +306,11 @@ export function AppRoot({
   const onboarding = useMemo(() => createOnboardingController({ storage: services.storage, host: services.host, hostProvidesModel: !!services.embedding }), [services]);
   const onboardingState = useSyncExternalStore(onboarding.subscribe, onboarding.getSnapshot);
   const preference = useSyncExternalStore(preferences.subscribe, preferences.getSnapshot);
+  // Product §92: the theme is a root attribute so tokens restyle the whole document.
+  useEffect(() => {
+    document.documentElement.dataset.theme = preference.value.theme;
+    return () => { delete document.documentElement.dataset.theme; };
+  }, [preference.value.theme]);
   const aliases = useMemo(() => createAliasController(services.storage), [services]);
   const aliasState = useSyncExternalStore(aliases.subscribe, aliases.getSnapshot);
   useEffect(() => {

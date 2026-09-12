@@ -18,10 +18,17 @@ test("closed v1 preferences normalize to v2 without mutating input or shared def
   assert.throws(() => assertLocalPreferences(legacy), /preserved/);
 });
 
-test("closed v2 preferences normalize to v3 showing onboarding once, without mutating input", () => {
+test("closed v2 and v3 preferences normalize to v4 (onboarding once for v2, default theme for both), without mutating input", () => {
   const stored = Object.freeze({ version: 2, revision: 4, sendKey: "enter", ...preferences });
   const value = normalizeLocalPreferences(stored);
-  assert.deepEqual(value, { ...DEFAULT_LOCAL_PREFERENCES, ...preferences, revision: 4, sendKey: "enter", version: 3, onboardingCompletedAt: null });
+  assert.deepEqual(value, { ...DEFAULT_LOCAL_PREFERENCES, ...preferences, revision: 4, sendKey: "enter", version: 4, onboardingCompletedAt: null, theme: "warm-reading" });
+  const storedV3 = Object.freeze({ version: 3, revision: 9, sendKey: "enter", ...preferences, onboardingCompletedAt: 1_700_000_000_000 });
+  assert.deepEqual(normalizeLocalPreferences(storedV3), { ...DEFAULT_LOCAL_PREFERENCES, ...preferences, revision: 9, sendKey: "enter", version: 4, onboardingCompletedAt: 1_700_000_000_000, theme: "warm-reading" });
+  assert.equal((storedV3 as { theme?: unknown }).theme, undefined);
+  assert.throws(() => assertLocalPreferences(storedV3), /preserved/);
+  assert.doesNotThrow(() => assertPreferenceArgs("setTheme", { expectedRevision: 9, theme: "terminal" }));
+  for (const args of [{ expectedRevision: 9, theme: "neon" }, { expectedRevision: 9 }, { expectedRevision: 9, theme: "focus", extra: 1 }])
+    assert.throws(() => assertPreferenceArgs("setTheme", args));
   assert.equal((stored as { onboardingCompletedAt?: unknown }).onboardingCompletedAt, undefined);
   assert.throws(() => assertLocalPreferences(stored), /preserved/);
   assert.doesNotThrow(() => assertPreferenceArgs("setOnboardingState", { expectedRevision: 4, onboardingCompletedAt: 1_700_000_000_000 }));
@@ -30,7 +37,7 @@ test("closed v2 preferences normalize to v3 showing onboarding once, without mut
     assert.throws(() => assertPreferenceArgs("setOnboardingState", args));
 });
 
-test("v3 preferences are closed and copied, and an old closed v1 reader refuses expanded results", () => {
+test("v4 preferences are closed and copied, and an old closed v1 reader refuses expanded results", () => {
   const value = { ...DEFAULT_LOCAL_PREFERENCES, ...preferences, revision: 7 };
   assert.doesNotThrow(() => assertLocalPreferences(value));
   const copy = normalizeLocalPreferences(value);
@@ -38,7 +45,7 @@ test("v3 preferences are closed and copied, and an old closed v1 reader refuses 
   // The previous reader accepted exactly version/revision/sendKey at version 1.
   const oldReaderAccepts = (row: Record<string, unknown>) => Object.keys(row).length === 3 && row.version === 1;
   assert.equal(oldReaderAccepts(value), false);
-  for (const invalid of [null, [], {}, { ...value, version: 4 }, { ...value, future: true }, { ...value, onboardingCompletedAt: -5 },
+  for (const invalid of [null, [], {}, { ...value, version: 5 }, { ...value, future: true }, { ...value, onboardingCompletedAt: -5 }, { ...value, theme: "neon" },
     { ...value, revision: -1 }, { ...value, revision: Number.MAX_SAFE_INTEGER },
     { ...value, sendKey: "unknown" }, { ...value, showTimestamps: 1 },
     { ...value, composerLayout: "tiny" }, { ...value, modelSwitcherStyle: "radio" },

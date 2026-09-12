@@ -30,6 +30,11 @@ export class PreferenceRepository {
     const current = this.read();
     return this.write(args.expectedRevision, { ...current, revision: current.revision + 1, onboardingCompletedAt: args.onboardingCompletedAt });
   }
+  setTheme(args: PreferenceOperations["setTheme"]["args"]): LocalPreferences {
+    assertPreferenceArgs("setTheme", args);
+    const current = this.read();
+    return this.write(args.expectedRevision, { ...current, revision: current.revision + 1, theme: args.theme });
+  }
   private write(expectedRevision: number, next: LocalPreferences): LocalPreferences {
     if (next.revision !== expectedRevision + 1)
       throw new BlobStorageError("CONFLICT", "Preferences changed in another view. Reload preferences before applying your choice again.");

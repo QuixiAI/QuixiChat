@@ -1,4 +1,6 @@
-import type { InteractionPreferences, SendKey } from "@quixi/core/contracts";
+import type { InteractionPreferences, SendKey, ThemeName } from "@quixi/core/contracts";
+import { THEME_NAMES } from "@quixi/core/contracts";
+const THEME_LABELS: Record<ThemeName, string> = { "warm-reading": "Warm Reading", "cool-minimal": "Cool Minimal", "compact-ops": "Compact Ops", terminal: "Terminal", bubbles: "Bubbles", focus: "Focus" };
 import type { PreferenceController, PreferenceSnapshot } from "./controller.ts";
 import { useFocusRecovery } from '../accessibility/useFocusRecovery.ts';
 
@@ -15,6 +17,12 @@ export function PreferencesPanel({ controller, snapshot, onboarding }: { control
   return <section aria-label="Preferences" ref={focus.rootRef} onFocusCapture={focus.onFocusCapture}>
     <h1 ref={focus.anchorRef} tabIndex={-1} className="focus-anchor">Preferences</h1>
     <p>These preferences apply to this archive on this device and browser profile. History exports do not include them.</p>
+    <label htmlFor="theme-preference">Theme</label>
+    <select id="theme-preference" value={snapshot.value.theme} disabled={disabled}
+      onChange={event => void controller.setTheme(event.target.value as ThemeName)}>
+      {THEME_NAMES.map(name => <option key={name} value={name}>{THEME_LABELS[name]}</option>)}
+    </select>
+    <p className="muted">Themes change appearance only; the send key, timestamps, badges, composer layout and model switcher stay as chosen.</p>
     <label htmlFor="send-key-preference">Send key</label>
       <select id="send-key-preference" value={snapshot.value.sendKey} disabled={disabled}
         onChange={event => void controller.setSendKey(event.target.value as SendKey)}>

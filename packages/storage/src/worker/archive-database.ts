@@ -612,6 +612,8 @@ export class ArchiveDatabase {
         return new PreferenceRepository(this.db).setInteractionPreferences(request.args);
       case "setOnboardingState":
         return new PreferenceRepository(this.db).setOnboardingState(request.args);
+      case "setTheme":
+        return new PreferenceRepository(this.db).setTheme(request.args);
       case "listLibrary":
         return this.views.library(request.args);
       case "readSummarySourceInfo": return summarySourceInfo(this.db,request.args.contextSnapshotId,request.args.throughMessageId);

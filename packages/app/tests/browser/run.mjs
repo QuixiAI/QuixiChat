@@ -745,14 +745,40 @@ try {
       await peer.goto(url);
       await expect(peer.getByRole("heading", { name: "Pick up where you left off." })).toBeVisible();
       const sharedPreferences = await peer.evaluate(() => window.appAcceptance.preferences());
-      expect(sharedPreferences).toEqual({ version: 3, revision: oldPreferences.revision + 1, sendKey: "enter", ...defaultInteractions, onboardingCompletedAt: sharedPreferences.onboardingCompletedAt });
+      expect(sharedPreferences).toEqual({ version: 4, revision: oldPreferences.revision + 1, sendKey: "enter", ...defaultInteractions, onboardingCompletedAt: sharedPreferences.onboardingCompletedAt, theme: "warm-reading" });
       expect(typeof sharedPreferences.onboardingCompletedAt === "number" || sharedPreferences.onboardingCompletedAt === null).toBe(true);
+      // Product §92: themes change appearance only. Every built-in theme applies
+      // through the root attribute, keeps body and muted text at 4.5:1 or better
+      // against the page background, leaves every interaction preference as it
+      // was (only the revision moves), and keeps the panel's status visible.
+      const themeBefore = await page.evaluate(() => window.appAcceptance.preferences());
+      const contrast = (a, b) => { const lum = (hex) => { const [r, g, b2] = hex.match(/\d+/g).map(Number).map((v) => { const c = v / 255; return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4; }); return 0.2126 * r + 0.7152 * g + 0.0722 * b2; }; const [l1, l2] = [lum(a), lum(b)].sort((x, y) => y - x); return (l1 + 0.05) / (l2 + 0.05); };
+      const themeEvidence = [];
+      for (const theme of ["cool-minimal", "compact-ops", "terminal", "bubbles", "focus", "warm-reading"]) {
+        await page.getByLabel("Theme", { exact: true }).selectOption(theme);
+        await expect(page.getByText("Preferences are saved on this device.", { exact: true })).toBeVisible();
+        await expect(page.getByLabel("Theme", { exact: true })).toHaveValue(theme);
+        const sample = await page.evaluate(() => { const root = document.documentElement, body = getComputedStyle(document.body), muted = document.querySelector(".muted, small"); return { theme: root.dataset.theme, text: body.color, background: getComputedStyle(root).backgroundColor, muted: muted ? getComputedStyle(muted).color : null, font: body.fontFamily.split(",")[0] }; });
+        expect(sample.theme).toBe(theme);
+        const textContrast = contrast(sample.text, sample.background), mutedContrast = sample.muted ? contrast(sample.muted, sample.background) : null;
+        expect(textContrast).toBeGreaterThanOrEqual(4.5);
+        if (mutedContrast !== null) expect(mutedContrast).toBeGreaterThanOrEqual(4.5);
+        const now = await page.evaluate(() => window.appAcceptance.preferences());
+        expect({ ...now, revision: 0, theme: "x" }).toEqual({ ...themeBefore, revision: 0, theme: "x" });
+        expect(now.theme).toBe(theme);
+        themeEvidence.push({ theme, background: sample.background, textContrast: Number(textContrast.toFixed(2)), mutedContrast: mutedContrast === null ? null : Number(mutedContrast.toFixed(2)), font: sample.font });
+      }
+      expect(new Set(themeEvidence.map((entry) => entry.background)).size).toBe(6);
+      expect(themeEvidence.find((entry) => entry.theme === "terminal").font).toMatch(/mono|Menlo|Consolas/i);
+      evidence.themes = themeEvidence;
+      evidence.checks.push(`all six themes apply through the root attribute with distinct backgrounds, body and muted text at ≥ 4.5:1 (${themeEvidence.map((entry) => `${entry.theme} ${entry.textContrast}`).join(", ")}), interaction preferences unchanged apart from the revision, and the saved status stays visible`);
       const stalePreferenceError = await peer.evaluate(async revision => {
         try { await window.appAcceptance.setSendKey(revision, "mod-enter"); return null; }
         catch (error) { return String(error); }
       }, oldPreferences.revision);
       expect(stalePreferenceError).toContain("changed in another view");
-      expect(await peer.evaluate(() => window.appAcceptance.preferences())).toEqual(sharedPreferences);
+      // The theme changes above moved only the revision; the peer reads the same shared row.
+      expect(await peer.evaluate(() => window.appAcceptance.preferences())).toEqual({ ...sharedPreferences, revision: sharedPreferences.revision + themeEvidence.length });
       await peer.evaluate(() => window.appAcceptance.close());
       await peer.close();
       await page.getByRole("button", { name: "Library", exact: true }).click();

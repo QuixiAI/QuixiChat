@@ -76,3 +76,10 @@ report now has 33 passing groups in each browser, including the existing
 preference/alias checks. Earlier counts above describe the original feature slice.
 [Compaction acceptance](context-compaction.md) records schema 11/protocol 3,
 portable restore and remaining gates; summary and explicit branch choices stay open.
+
+## Version 4 — 2026-09-12
+
+`theme` (one of the six product §92 names) joins the closed row; `setTheme`
+writes it under the same conditional revision. Versions 1–3 normalize to
+version 4 with `theme: "warm-reading"`; an unknown theme or an unsupported
+version is refused with the stored row preserved ([ADR 0039](../decisions/0039-appearance-themes.md)).

@@ -110,7 +110,9 @@ attempt qualification remains open.
 
 ## Recorded checks
 
-Since 2026-09-12 the proof records 86 checks per engine. The two newest: a
+Since 2026-09-12 the proof records 87 checks per engine. The newest is the
+six-theme scenario of [ADR 0039](../decisions/0039-appearance-themes.md)
+(see [interaction-preferences.md](interaction-preferences.md#themes--2026-09-12-adr-0039)). The two before it: a
 streamed two-part reply changes the polite generation status exactly twice
 (in progress, complete), observed with a MutationObserver on the status
 region, so committed chunks never re-announce; and the conversation library

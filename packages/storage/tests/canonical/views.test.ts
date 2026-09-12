@@ -164,7 +164,7 @@ test("local preferences preserve unsupported rows and roll back interrupted writ
   const { db } = open();
   try {
     const preferences = new PreferenceRepository(db);
-    for (const value of [{ version: 2, revision: 0, sendKey: "enter" }, { ...DEFAULT_LOCAL_PREFERENCES, version: 4 },
+    for (const value of [{ version: 2, revision: 0, sendKey: "enter" }, { ...DEFAULT_LOCAL_PREFERENCES, version: 5 },
       { ...DEFAULT_LOCAL_PREFERENCES, showTimestamps: "yes" }, { ...DEFAULT_LOCAL_PREFERENCES, future: true },
       { version: 1, revision: 0, sendKey: "unknown" }, {}, { version: 1, revision: 1, sendKey: "enter", secret: "refused" }]) {
       db.exec({ sql: "INSERT OR REPLACE INTO quixi_local_state VALUES('interactionPreferences',?)", bind: [JSON.stringify(value)] });

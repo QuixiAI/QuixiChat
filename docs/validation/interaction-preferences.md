@@ -67,3 +67,25 @@ locale and timezone; the test checks valid dates rather than one locale's text.
 Sources: [focused browser scenario](../../packages/app/tests/browser/interaction-preferences.mjs),
 [browser fixture](../../packages/app/tests/browser/index.ts), and
 [application runner](../../packages/app/tests/browser/run.mjs).
+
+## Themes — 2026-09-12 ([ADR 0039](../decisions/0039-appearance-themes.md))
+
+Local preferences are version 4 with a `theme` field and a `setTheme`
+operation; rows from versions 1–3 normalize to version 4 with the default
+theme (core preference tests, canonical preference tests). The shared-app
+proof (87 checks per engine, Chromium and WebKit) switches through all six
+built-in themes from the Preferences panel and, for each, checks the root
+`data-theme` attribute, the computed page background and body/muted text
+contrast, that the interaction preferences are unchanged apart from the
+revision, and that the "Preferences are saved on this device." status stays
+visible; six distinct backgrounds and a monospace body font under Terminal
+are asserted. Chromium sample:
+
+| Theme | Page background | Body text contrast | Muted text contrast | Body font |
+| --- | --- | --- | --- | --- |
+| cool-minimal | rgb(247, 248, 250) | 13.89 | 5.71 | Inter |
+| compact-ops | rgb(244, 246, 248) | 14.42 | 6.22 | Inter |
+| terminal | rgb(15, 20, 18) | 14.03 | 8.39 | ui-monospace |
+| bubbles | rgb(251, 251, 253) | 13.18 | 5.75 | Inter |
+| focus | rgb(252, 252, 250) | 13.97 | 6.22 | Inter |
+| warm-reading | rgb(249, 250, 247) | 12.55 | 5.7 | Inter |
