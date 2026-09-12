@@ -472,7 +472,7 @@ try {
     "packages/app/src/runtime/usage.ts",
     "packages/app/src/runtime/events.ts",
     "packages/app/src/runtime/switching.ts",
-    "packages/app/src/runtime/portability.ts", "packages/app/src/features/migration/controller.ts", "packages/app/src/features/migration/MigrationPanel.tsx",
+    "packages/app/src/runtime/portability.ts", "packages/app/src/features/migration/controller.ts", "packages/app/src/features/migration/MigrationPanel.tsx", "packages/app/src/features/compare/CompareCandidates.tsx", "packages/app/src/workflows/chat.ts", "packages/app/src/runtime/events.ts",
     "packages/app/src/runtime/fallback.ts",
     "packages/app/src/runtime/routing.ts",
     "packages/app/src/runtime/request-cost.ts",
@@ -3020,6 +3020,110 @@ try {
       );
       await verifyReasoningContinuationRestart({ page, records, send, requests, connect }, evidence.reasoningContinuation);
       evidence.checks.push("after a fresh browser process the thinking receipts still verify and a follow-up on the producing model carries the same signed and redacted blocks first and unchanged");
+      // Plan 12 compare (ADR 0042): one user turn sent to two models at once,
+      // each answer its own Generation and sibling branch recorded by a
+      // Compare event; the turn stays selected until the user picks one.
+      {
+        const generationsBefore = (await records(page, "generations")).items.length;
+        const messagesBeforeCompare = (await records(page, "messages")).items.length;
+        await page.getByLabel("Message", { exact: true }).fill("Compare the synthetic comet facts");
+        const compareOptions = page.getByTestId("compare-options");
+        const openCompare = async () => { if (!(await compareOptions.evaluate((element) => element.open))) await compareOptions.locator("summary").click(); };
+        await openCompare();
+        // Earlier scenarios removed the OpenAI connection; compare needs a second target.
+        if (!(await compareOptions.getByRole("checkbox", { name: /^OpenAI/ }).count())) {
+          await connect(page, "OpenAI");
+          await page.getByRole("button", { name: "Library", exact: true }).click();
+          await expect(page.getByLabel("Message", { exact: true })).toBeVisible();
+          await page.getByLabel("Message", { exact: true }).fill("Compare the synthetic comet facts");
+          await openCompare();
+        }
+        const compareChoices = await compareOptions.getByRole("checkbox").evaluateAll((nodes) => nodes.map((node) => node.closest("label").textContent.trim()));
+        console.log(`${name}: compare choices ${JSON.stringify(compareChoices)}`);
+        evidence.compareChoices = compareChoices;
+        const haikuChoice = compareChoices.find((label) => /Claude Haiku 4\.5$/.test(label));
+        const otherChoice = compareChoices.find((label) => !label.startsWith("Anthropic"));
+        expect(haikuChoice).toBeTruthy(); expect(otherChoice).toBeTruthy();
+        const haikuBox = compareOptions.getByRole("checkbox", { name: haikuChoice, exact: true });
+        const miniBox = compareOptions.getByRole("checkbox", { name: otherChoice, exact: true });
+        await haikuBox.check();
+        await miniBox.check();
+        await expect(compareOptions.locator("summary")).toHaveText("Compare answers (2 selected)");
+        await compareOptions.getByRole("button", { name: "Send to 2 models", exact: true }).click();
+        const compared = page.getByTestId("compare-candidates");
+        await expect(compared).toBeVisible({ timeout: 30_000 });
+        await expect(compared.locator("li[data-outcome='complete']")).toHaveCount(2, { timeout: 60_000 });
+        await expect(page.getByLabel("Provider", { exact: true })).toBeEnabled({ timeout: 30_000 });
+        const generations = (await records(page, "generations")).items.sort((a, b) => a.createdAt - b.createdAt);
+        expect(generations).toHaveLength(generationsBefore + 2);
+        const candidates = generations.slice(-2);
+        expect(new Set(candidates.map((value) => value.parentMessageId)).size).toBe(1);
+        expect(candidates.map((value) => value.status)).toEqual(["complete", "complete"]);
+        expect(new Set(candidates.map((value) => value.provider)).size).toBe(2);
+        const compareEvents = (await records(page, "events")).items.filter((value) => value.type === "Compare");
+        expect(compareEvents).toHaveLength(1);
+        expect(compareEvents[0].messageId).toBe(candidates[0].parentMessageId);
+        expect(compareEvents[0].details.candidates.map((value) => value.generationId).sort()).toEqual(candidates.map((value) => value.id).sort());
+        const outputs = (await records(page, "messages")).items.filter((value) => candidates.some((candidate) => candidate.outputMessageId === value.id));
+        expect(outputs.every((value) => value.sealed)).toBe(true);
+        expect((await records(page, "messages")).items).toHaveLength(messagesBeforeCompare + 3);
+        await expect(page.getByRole("list", { name: "Conversation events" })).toContainText(/Compared 2 answers: Anthropic claude-haiku-4-5-20251001, .+ · every answer is kept as its own branch/);
+        await expect(page.getByRole("region", { name: "Branch choices", exact: true })).toContainText("Branch continuations");
+        expect(await page.getByRole("region", { name: "Branch choices", exact: true }).getByRole("button", { name: /^assistant · / }).count()).toBe(2);
+        expect(await compared.getByRole("button", { name: "Select this answer", exact: true }).count()).toBe(2);
+        // Select the second candidate; it becomes the active path and the compare view marks it.
+        const second = compared.locator("li").nth(1);
+        const secondModel = (await second.locator("strong").textContent()).split(" · ").at(-1);
+        await second.getByRole("button", { name: "Select this answer", exact: true }).click();
+        await expect(second).toContainText("Selected");
+        await expect(compared.locator("li").nth(0).getByRole("button", { name: "Select this answer", exact: true })).toBeVisible();
+        await expect(page.locator("article.message.assistant").last()).toContainText(secondModel);
+        const selectedOutput = candidates.find((value) => value.model === secondModel).outputMessageId;
+        expect((await records(page, "threadStates")).items.find((value) => value.threadId === candidates[0].threadId).activeLeafMessageId).toBe(selectedOutput);
+        // Reopen: the compare view and the selection persist from the records alone.
+        const comparedTitle = (await records(page, "threadStates")).items.find((value) => value.threadId === candidates[0].threadId).title;
+        await page.reload();
+        await expect(page.getByRole("button", { name: "New conversation", exact: true })).toBeEnabled({ timeout: 30_000 });
+        // Credentials live in this session's host; reconnect both as every restart scenario does.
+        await connect(page, "Anthropic");
+        await connect(page, "OpenAI");
+        await page.getByRole("button", { name: "Library", exact: true }).click();
+        await page.getByRole("button", { name: comparedTitle, exact: true }).first().click();
+        await expect(page.getByLabel("Provider", { exact: true })).toBeEnabled({ timeout: 30_000 });
+        await expect(page.getByTestId("compare-candidates")).toContainText("Selected");
+        await expect(page.getByTestId("compare-candidates").locator("li[data-selected='true']")).toContainText(secondModel);
+        // Continue from the selected alternative: the next turn's parent is that answer.
+        await send(page, "Continue from the selected comparison answer");
+        await expect.poll(async () => (await records(page, "messages")).items.length).toBe(messagesBeforeCompare + 5);
+        await expect(page.getByLabel("Provider", { exact: true })).toBeEnabled({ timeout: 30_000 });
+        const continued = (await records(page, "messages")).items.filter((value) => value.role === "user").sort((a, b) => a.createdAt - b.createdAt).at(-1);
+        expect(continued.parentId).toBe(selectedOutput);
+        evidence.checks.push("compare sends one turn to two models at once: each answer is its own generation and sibling branch, a Compare event names both, the turn stays selected until one answer is chosen, the choice and the compare view survive a reload, and the next turn continues from the chosen answer");
+        // Failure of one compared model keeps the other: the Anthropic fixture
+        // fails mid-stream on request while the OpenAI fixture completes.
+        await page.getByLabel("Message", { exact: true }).fill("Compare and fail mid-stream");
+        await openCompare();
+        // The reload reset the composer's selection; tick the same two candidates again.
+        if (!(await haikuBox.isChecked())) await haikuBox.check();
+        if (!(await miniBox.isChecked())) await miniBox.check();
+        await compareOptions.getByRole("button", { name: "Send to 2 models", exact: true }).click();
+        const comparedAgain = page.getByTestId("compare-candidates").last();
+        await expect(comparedAgain.locator("li[data-outcome='complete']")).toHaveCount(1, { timeout: 60_000 });
+        await expect(comparedAgain.locator("li[data-outcome='failed'], li[data-outcome='partial']")).toHaveCount(1, { timeout: 60_000 });
+        await expect(page.getByLabel("Provider", { exact: true })).toBeEnabled({ timeout: 30_000 });
+        await expect(page.getByRole("alert").filter({ hasText: "1 of 2 compared answers did not complete" })).toBeVisible();
+        const afterFailure = (await records(page, "generations")).items.sort((a, b) => a.createdAt - b.createdAt).slice(-2);
+        const failureStatuses = afterFailure.map((value) => value.status).sort();
+        expect(failureStatuses[0]).toBe("complete"); expect(["failed", "partial"]).toContain(failureStatuses[1]);
+        evidence.compareFailureStatuses = failureStatuses;
+        const messagesAfterFailure = (await records(page, "messages")).items;
+        expect(afterFailure.every((value) => messagesAfterFailure.some((message) => message.id === value.outputMessageId && message.sealed))).toBe(true);
+        await comparedAgain.locator("li[data-outcome='complete']").getByRole("button", { name: "Select this answer", exact: true }).click();
+        await expect(comparedAgain.locator("li[data-outcome='complete']")).toContainText("Selected");
+        evidence.checks.push("when one compared model fails mid-stream the other candidate completes and stays selectable, the failure is named per candidate, and both attempts remain in history");
+        await haikuBox.uncheck();
+        await miniBox.uncheck();
+      }
       // The follow-up above added a user turn and a response.
       evidence.savedMessages = (await records(page, "messages")).items.length;
       await page.evaluate(() => window.appAcceptance.close());

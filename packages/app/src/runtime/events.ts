@@ -24,5 +24,13 @@ export function describeThreadEvent(
     const to = details.to as { provider?: string; model?: string } | undefined;
     return `${when} · Fell back ${providerLabel(String(from?.provider ?? "unknown"))} ${from?.model ?? ""} → ${providerLabel(String(to?.provider ?? "unknown"))} ${to?.model ?? ""} · ${typeof details.reason === "string" ? details.reason : "no reason recorded"}`;
   }
+  if (event.type === "Compare" && Array.isArray(details.candidates)) {
+    const candidates = details.candidates as { provider?: string; model?: string }[];
+    return `${when} · Compared ${candidates.length} answers: ${candidates.map((candidate) => `${providerLabel(String(candidate.provider ?? "unknown"))} ${candidate.model ?? ""}`).join(", ")} · every answer is kept as its own branch`;
+  }
+  if (event.type === "Critique") {
+    const reviewed = details.reviewed as { provider?: string; model?: string } | undefined;
+    return `${when} · Critique of the ${providerLabel(String(reviewed?.provider ?? "unknown"))} ${reviewed?.model ?? ""} answer · the reviewed answer is unchanged`;
+  }
   return `${when} · ${event.type}`;
 }

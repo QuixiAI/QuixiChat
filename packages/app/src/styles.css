@@ -769,3 +769,12 @@ form label {
 }
 :root[data-theme="focus"] .message { border-color: transparent; padding-left: 0; padding-right: 0; }
 :root[data-theme="focus"] .message.user { background: var(--surface-alt); padding-left: 1rem; padding-right: 1rem; }
+
+.compare-options { flex-basis: 100%; }
+.compare-options summary { cursor: pointer; }
+.compare-choices { list-style: none; padding: 0; margin: .5rem 0; display: flex; flex-wrap: wrap; gap: .5rem 1rem; }
+.compare-candidates { margin-block-start: .75rem; padding: .75rem; border: 1px solid var(--border); border-radius: var(--radius-md); }
+.compare-candidates ol { padding-inline-start: 1.25rem; }
+.compare-candidates li { margin-block: .35rem; }
+.compare-candidates button { margin-inline-start: .5rem; }
+.compare-selected { font-weight: 600; }

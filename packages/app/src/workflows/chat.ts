@@ -25,6 +25,8 @@ import type {
 import { startCoordinatedGeneration } from "./generation.ts";
 const id = () => crypto.randomUUID(),
   page = { maxItems: 64, maxBytes: 900_000, cursor: null };
+/** Product §39: answers compared at once (ADR 0042 bound). */
+export const COMPARE_LIMIT = 4;
 /** Composer generation settings. An absent key keeps the provider default; the
  * adapter rejects keys the reviewed catalog does not permit before any commit. */
 export type GenerationSettings = ProviderInput["parameters"];
@@ -117,6 +119,8 @@ export function createChatController(
   library: LibraryController,
   services: AppServices,
 ) {
+  /** Concurrent compare attempts; `run` stays the single ordinary attempt. */
+  const runs = new Set<GenerationRun>();
   let run: GenerationRun | null = null,
     busy = false,
     disposed = false,
@@ -565,11 +569,13 @@ export function createChatController(
     revision: number,
     createWith?: (generationId: string) => CanonicalMutation[],
     originatingRequirements: RoutingRequirements = {},
+    options: { ids?: { generationId: string; outputId: string }; select?: boolean; expectRevision?: boolean } = {},
   ): Promise<AttemptOutcome> {
+    const select = options.select ?? true, expectRevision = options.expectRevision ?? true;
     const view = await services.storage.request(id(), "readThreadView", {
       threadId,
     });
-    if (view.state.revision !== revision)
+    if (expectRevision && view.state.revision !== revision)
       throw new Error(
         "This conversation changed. Review the selected branch before starting a new attempt.",
       );
@@ -584,8 +590,8 @@ export function createChatController(
     const evidence = processingRegionKey(provider);
     provider.adapter.prepare(input);
     const now = Date.now(),
-      generationId = id(),
-      outputId = id();
+      generationId = options.ids?.generationId ?? id(),
+      outputId = options.ids?.outputId ?? id();
     const generation: Generation = {
       id: generationId,
       threadId,
@@ -623,13 +629,13 @@ export function createChatController(
     };
     if (cancelled || disposed)
       throw new Error("Generation cancelled before sending.");
-    run = await startCoordinatedGeneration({
+    const started = await startCoordinatedGeneration({
       archiveId: services.archiveId,
       adapter: provider.adapter,
       input,
       storage: services.storage,
       attempt: { generation, output },
-      initialThreadRevision: view.state.revision,
+      ...(expectRevision ? { initialThreadRevision: view.state.revision } : {}),
       beforeDispatch: () => beforeRegionDispatch(provider, input, threadId, contextId, originatingRequirements, evidence, { profile: JSON.stringify(view.state.routingProfile) }),
       nextId: id,
       now: () => Date.now(),
@@ -637,6 +643,11 @@ export function createChatController(
       async onCreated() {
         if (cancelled || disposed)
           throw new Error("Generation cancelled before sending.");
+        if (!select) {
+          // Compare: the parent stays selected; the new sibling shows among the branches.
+          if (library.getSnapshot().thread?.thread.id === threadId) await library.loadView(threadId, parent.id);
+          return;
+        }
         await library.commit(
           [library.mutation("SetActiveBranch", { threadId, value: outputId })],
           { threadId, revision: view.state.revision },
@@ -645,10 +656,12 @@ export function createChatController(
           await library.loadView(threadId, outputId);
       },
     });
-    if (cancelled || disposed) await run.cancel();
-    const result = await run.result;
+    if (select) run = started; else runs.add(started);
+    if (cancelled || disposed) await started.cancel();
+    let result;
+    try { result = await started.result; } finally { runs.delete(started); }
     if (library.getSnapshot().thread?.thread.id === threadId)
-      await library.loadView(threadId, outputId);
+      await library.loadView(threadId, select ? outputId : parent.id);
     if (!result.persisted || result.error)
       throw new Error(
         result.error?.message ??
@@ -1139,6 +1152,82 @@ export function createChatController(
       }
       return saved;
     },
+    /** Product §39 compare (ADR 0042): one user turn, one attempt per selected
+     * model, each its own Generation and sibling branch; a `Compare` event on
+     * the turn lists them. The turn stays selected until the user picks one.
+     * Attempts run concurrently and independently: a failure or cancellation
+     * of one leaves the others streaming and their outputs sealed. */
+    async compare(
+      text: string,
+      candidates: readonly { provider: ConfiguredProvider; modelId: string }[],
+      parameters: GenerationSettings = { maxOutputTokens: 1024 },
+      images: readonly ComposerAttachment[] = [],
+    ): Promise<{ saved: boolean; failures: { provider: string; model: string; reason: string }[] }> {
+      const failures: { provider: string; model: string; reason: string }[] = [];
+      if (busy || disposed) return { saved: false, failures };
+      const current = library.getSnapshot();
+      if (!current.thread || (!text.trim() && !images.length) || text.length > 16_384 || candidates.length < 2 || candidates.length > COMPARE_LIMIT) return { saved: false, failures };
+      busy = true;
+      cancelled = false;
+      library.patch({ busy: true, error: null });
+      let saved = false;
+      try {
+        const view = current.thread, threadId = view.thread.id, parentId = current.leaf;
+        const prior = await context(threadId, parentId, view.context);
+        const now = Date.now();
+        const { messageId, parts, attachments, requestAttachments } = composeTurn(text, images, prior);
+        const message: Message = { id: messageId, threadId, parentId, role: "user", createdAt: now, recordedAt: now, generationId: null, editedFromMessageId: null, partCount: parts.length, sealed: true };
+        const requirements = routingRequirements(view.state.routingProfile);
+        // Every candidate's request is prepared and checked before anything is committed.
+        const prepared = candidates.map(({ provider, modelId }) => {
+          const unshaped: ProviderInput = {
+            requestId: id(), modelId, systemPrompt: view.context.systemPrompt,
+            messages: [...prior.messages, { role: "user", parts }],
+            parameters: requestParameters(parameters), reasoning: prior.reasoning,
+            ...(Object.keys(requestAttachments).length ? { attachments: requestAttachments } : {}),
+          };
+          const input = shapeReasoningForTarget(unshaped, { protocol: provider.adapter.protocol, modelId }).input;
+          requireRegion(provider, modelId, requirements);
+          provider.adapter.prepare(input);
+          return { provider, modelId, input, ids: { generationId: id(), outputId: id() } };
+        });
+        for (const item of prepared) {
+          const cost = await requestCost(item.provider, item.input, requirements);
+          if (!cost.allowed) throw new Error(`Request cost limit for ${item.provider.label} ${item.modelId}: ${cost.reason}.`);
+        }
+        if (cancelled || disposed) throw new Error("Generation cancelled before sending.");
+        const event: ThreadEvent = {
+          id: id(), threadId, type: "Compare", createdAt: now, recordedAt: now, messageId: message.id, generationId: null,
+          details: { version: 1, candidates: prepared.map((item) => ({ generationId: item.ids.generationId, outputId: item.ids.outputId, provider: item.provider.adapter.binding.providerId, connection: item.provider.id, model: item.modelId })) } as unknown as JsonObject,
+        };
+        await library.commit(
+          [
+            ...attachments.map((attachment) => library.mutation("RegisterAttachment", { attachment })),
+            library.mutation("CreateMessage", { message, parts }),
+            library.mutation("CreateThreadEvent", { event }),
+            library.mutation("SetActiveBranch", { threadId, value: message.id }),
+          ],
+          { threadId, revision: view.state.revision },
+          images.map((image) => image.transferId),
+        );
+        saved = true;
+        if (library.getSnapshot().thread?.thread.id === threadId) await library.loadView(threadId, message.id);
+        const outcomes = await Promise.allSettled(prepared.map((item) =>
+          attempt(item.provider, item.modelId, threadId, message, item.input, view.context.id, view.state.revision + 1, undefined, requirements, { ids: item.ids, select: false, expectRevision: false })));
+        outcomes.forEach((outcome, index) => {
+          const item = prepared[index]!;
+          if (outcome.status === "rejected") failures.push({ provider: item.provider.label, model: item.modelId, reason: outcome.reason instanceof Error ? outcome.reason.message : String(outcome.reason) });
+          else if (outcome.value.failure) failures.push({ provider: item.provider.label, model: item.modelId, reason: outcome.value.failure.message });
+        });
+        if (failures.length) library.patch({ error: `${failures.length} of ${prepared.length} compared answers did not complete: ${failures.map((failure) => `${failure.provider} ${failure.model} (${failure.reason})`).join("; ")}. The others are kept.` });
+      } catch (error) {
+        library.patch({ error: error instanceof Error ? error.message : String(error) });
+      } finally {
+        busy = false;
+        library.patch({ busy: false });
+      }
+      return { saved, failures };
+    },
     async regenerate(
       parent: Message,
       provider: ConfiguredProvider,
@@ -1209,7 +1298,7 @@ export function createChatController(
     },
     async stop() {
       cancelled = true;
-      await run?.cancel();
+      await Promise.allSettled([run?.cancel(), ...[...runs].map((item) => item.cancel())]);
     },
     async dispose() {
       disposed = true;

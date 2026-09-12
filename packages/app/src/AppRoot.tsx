@@ -11,6 +11,8 @@ import { BlobHashAuditPanel } from './features/diagnostics/BlobHashAuditPanel.ts
 import { createCleanupController } from './features/diagnostics/cleanup-controller.ts';
 import { createMigrationController } from './features/migration/controller.ts';
 import { MigrationPanel } from './features/migration/MigrationPanel.tsx';
+import { CompareCandidates } from './features/compare/CompareCandidates.tsx';
+import { COMPARE_LIMIT } from './workflows/chat.ts';
 import { DoctorAuditPanel } from './features/diagnostics/DoctorAuditPanel.tsx';
 import { createDiagnosticsController } from './features/diagnostics/report-controller.ts';
 import { DiagnosticsPanel } from './features/diagnostics/DiagnosticsPanel.tsx';
@@ -363,6 +365,8 @@ export function AppRoot({
   );
   const [dropping, setDropping] = useState(false);
   const [providers, setProviders] = useState(services.providers ?? []);
+  /** Composer compare candidates as `connection|model` keys (product §39). */
+  const [compareKeys, setCompareKeys] = useState<string[]>([]);
   const providersRef = useRef(providers); providersRef.current = providers;
   const migration = useMemo(() => createMigrationController({ storage: services.storage, assess: (threadId, targets, settings) => chat.assessThreadPortability(threadId, targets, settings), providers: () => providersRef.current, settings: () => ({ maxOutputTokens: 1024 }) }), [services, chat]);
   // The device's own offline signal is authoritative when false; the
@@ -739,6 +743,21 @@ export function AppRoot({
       attachments.consumed(images.map((image) => image.id));
       if (library.getSnapshot().thread?.thread.id === threadId)
         setDraft((current) => (current === value ? "" : current));
+    }
+  };
+  const compareTargets = compareKeys.flatMap((key) => {
+    const [connection, modelId] = key.split("|");
+    const candidateProvider = providers.find((value) => value.id === connection);
+    return candidateProvider && candidateProvider.models.some((item) => item.id === modelId) ? [{ provider: candidateProvider, modelId: modelId! }] : [];
+  });
+  const compare = async () => {
+    if (openingSearch || selectionChanged || !validSettings || attachments.getSnapshot().busy || compareTargets.length < 2 || compareTargets.length > COMPARE_LIMIT) return;
+    messageRef.current?.focus({ preventScroll: true });
+    const value = draft, threadId = state.thread?.thread.id, images = attachments.staged();
+    const result = await chat.compare(value, compareTargets, generationSettings, images);
+    if (result.saved) {
+      attachments.consumed(images.map((image) => image.id));
+      if (library.getSnapshot().thread?.thread.id === threadId) setDraft((current) => (current === value ? "" : current));
     }
   };
   const imagesSupported = capabilities?.images === "supported" && capabilities.inputModalities.includes("image");
@@ -1741,6 +1760,17 @@ export function AppRoot({
                         >
                           Continue from here
                         </button>
+                        {item.message.role === "user" && state.events.some((event) => event.type === "Compare" && event.messageId === item.message.id) && (
+                          <CompareCandidates
+                            storage={services.storage}
+                            event={state.events.find((event) => event.type === "Compare" && event.messageId === item.message.id)!}
+                            leaf={state.leaf}
+                            pathIds={new Set(state.messages.map((entry) => entry.message.id))}
+                            providerLabel={(connection, providerId) => providers.find((value) => value.id === connection)?.label ?? providerId}
+                            disabled={state.busy || state.pendingMutation}
+                            onSelect={(outputId) => void library.selectBranch(outputId)}
+                          />
+                        )}
                         {item.message.role === "user" && (
                           <button
                           aria-label={`Generate another response — ${item.message.role === "user" ? "You" : item.message.role === "assistant" ? "Assistant" : item.message.role}, message ${messageIndex + 1} on this page`}
@@ -1862,6 +1892,22 @@ export function AppRoot({
                       placeholder={primary && !model ? `${primary.model} (not configured)` : "No model selected"}
                       disabled={state.busy || state.pendingMutation || routingSaving}
                       onSelect={modelId => { if (provider) selectPrimary(provider.id, modelId); }} />
+                    {providers.length > 0 && (
+                      <details className="compare-options" data-testid="compare-options">
+                        <summary>Compare answers{compareTargets.length ? ` (${compareTargets.length} selected)` : ""}</summary>
+                        <p className="muted">Send this message to several models at once. Each answer is kept as its own branch; select one afterwards to continue.</p>
+                        <ul className="compare-choices" aria-label="Models to compare">
+                          {providers.flatMap((candidateProvider) => candidateProvider.models.map((item) => {
+                            const key = `${candidateProvider.id}|${item.id}`;
+                            const checked = compareKeys.includes(key);
+                            return <li key={key}><label><input type="checkbox" checked={checked} disabled={state.busy || state.pendingMutation || (!checked && compareTargets.length >= COMPARE_LIMIT)} onChange={() => setCompareKeys((current) => checked ? current.filter((value) => value !== key) : [...current, key])} /> {candidateProvider.label} · {item.name}</label></li>;
+                          }))}
+                        </ul>
+                        <button type="button" disabled={state.busy || state.pendingMutation || routingSaving || selectionChanged || !validSettings || compareTargets.length < 2 || (!draft.trim() && !attachments.getSnapshot().items.length)} onClick={() => void compare()}>
+                          {compareTargets.length < 2 ? "Choose at least two models" : `Send to ${compareTargets.length} models`}
+                        </button>
+                      </details>
+                    )}
                     {supportsOutputLimit && (
                       <label>
                         Maximum output tokens

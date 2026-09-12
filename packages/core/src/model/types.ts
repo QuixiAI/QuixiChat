@@ -61,7 +61,7 @@ export type ContentPart = PartBase & (
   | { kind: "ProviderArtifact"; data: { providerKind: string; rawObjectId: QuixiId; locator: string } }
   | { kind: "Note"; data: TextData }
 );
-export type ThreadEventType = "ProviderSwitch" | "AutomaticFallback" | "ContextCompaction" | "ImportWarning" | "Migration" | "UserNote";
+export type ThreadEventType = "ProviderSwitch" | "AutomaticFallback" | "ContextCompaction" | "ImportWarning" | "Migration" | "UserNote" | "Compare" | "Critique";
 export interface ThreadEvent {
   id: QuixiId; threadId: QuixiId; type: ThreadEventType; createdAt: Timestamp | null; recordedAt: Timestamp;
   messageId: QuixiId | null; generationId: QuixiId | null; details: JsonObject;

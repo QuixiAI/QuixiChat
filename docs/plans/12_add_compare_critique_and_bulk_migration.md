@@ -1,6 +1,6 @@
 # 12 — Add compare, critique, and bulk migration
 
-**Status:** In progress — design fixed in [ADR 0042](../decisions/0042-compare-critique-bulk-migration.md); bulk portability analysis implemented and proven; compare, critique and the reviewed migration remain open
+**Status:** In progress — design fixed in [ADR 0042](../decisions/0042-compare-critique-bulk-migration.md); bulk portability analysis and compare mode implemented and proven; critique and the reviewed migration remain open
 
 **Workstream:** Product workflows — multiple generations and portability
 
@@ -25,8 +25,8 @@ Let users compare alternative model attempts, request critiques, and assess or m
 
 ## Tasks
 
-- [ ] Implement compare requests that create separate Generation attempts for selected models from the same canonical prompt/path.
-- [ ] Build comparison views with independent streaming/status, usage/cost metadata, candidate selection, and continuation from any alternative.
+- [x] Implement compare requests that create separate Generation attempts for selected models from the same canonical prompt/path. `compare` commits the user turn once with a `Compare` event naming each candidate's pre-allocated generation and output, then runs one coordinated attempt per candidate concurrently without moving the selection ([validation](../validation/compare.md)).
+- [x] Build comparison views with independent streaming/status, usage/cost metadata, candidate selection, and continuation from any alternative. The Compared answers section under the turn shows each candidate's live status, tokens and estimated cost with Select this answer; the selection and the view persist from the records after a reload and the next turn continues from the chosen answer ([validation](../validation/compare.md)).
 - [ ] Implement critique as a new generation with an explicit reference to the reviewed answer; never overwrite the original generation.
 - [x] Implement paginated bulk portability analysis with counts and inspectable reasons for fully portable, transformed, provider-dependent, and blocked threads. The Portability section analyses every library conversation's selected branch in 32-conversation pages against every configured target through the same reports the open conversation shows, with counts per outcome, per-conversation reasons, an outcome filter, 32-row pages and a way to open each conversation ([ADR 0042](../decisions/0042-compare-critique-bulk-migration.md), [validation](../validation/bulk-portability.md)).
 - [ ] Reuse the compatibility inspector and context-compaction choices for bulk operations. Review transformations before committing routing or continuation changes.
@@ -40,8 +40,8 @@ Let users compare alternative model attempts, request critiques, and assess or m
 
 ## Acceptance criteria
 
-- [ ] Failure or cancellation of one compared model does not discard other candidates.
-- [ ] Users can select and branch from any retained answer after reopening the thread.
+- [x] Failure or cancellation of one compared model does not discard other candidates. Attempts run independently; the proof fails the Anthropic candidate mid-stream while the OpenAI candidate completes and stays selectable, with both attempts and their sealed outputs retained ([validation](../validation/compare.md)).
+- [x] Users can select and branch from any retained answer after reopening the thread. After a reload the compare view is rebuilt from the Compare event and the generation records, the chosen answer is marked, the other stays selectable, and a new turn continues from the selection ([validation](../validation/compare.md)).
 - [ ] Critiques and bulk transformations retain their source relationships and original history.
 - [x] Bulk processing remains paginated and reports per-thread blocked/failed outcomes. The analysis walks library pages one conversation at a time, can be stopped between conversations keeping what was analysed, records a per-conversation failed outcome with its reason (and a Retry) instead of stopping, and reports blocked conversations with the blocking parts named per target ([validation](../validation/bulk-portability.md): 3 controller tests, both engines in the shared-app proof).
 
