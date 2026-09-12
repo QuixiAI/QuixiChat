@@ -110,7 +110,9 @@ attempt qualification remains open.
 
 ## Recorded checks
 
-Since 2026-09-12 the proof records 88 checks per engine. The newest: a
+Since 2026-09-12 the proof records 90 checks per engine. The two newest
+assert the empty states added by the [presentation review](presentation-review.md):
+a search with no matches and a conversation with no messages. Before them: a
 160-character conversation title with a 70-character unbroken token wraps
 in the library, the heading and the settings form at 320px and 200% root
 text without overflow, and renaming back restores the original. Before it,

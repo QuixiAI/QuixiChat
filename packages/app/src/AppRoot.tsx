@@ -1456,6 +1456,11 @@ export function AppRoot({
                   · {state.search.index.pendingSources} sources awaiting
                   indexing
                 </p>
+                {state.search.items.length === 0 && (
+                  <p className="search-empty" data-testid="search-empty">
+                    No matches. Try fewer or different words, use quotes for an exact phrase, or check that indexing has finished.
+                  </p>
+                )}
                 {state.search.items.map((hit) => (
                   <article key={hit.chunkId}>
                     <button
@@ -1570,6 +1575,11 @@ export function AppRoot({
                   className="messages"
                   aria-busy={state.busy}
                 >
+                  {state.messages.length === 0 && !state.busy && (
+                    <p className="messages-empty muted" data-testid="messages-empty">
+                      No messages yet. Write the first message below; it is saved on this device as soon as you send it.
+                    </p>
+                  )}
                   {state.messages.map((item, messageIndex) => (
                     <article
                       className={`message ${item.message.role}`}

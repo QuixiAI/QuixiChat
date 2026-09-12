@@ -590,6 +590,9 @@ try {
       await expect(
         page.getByRole("heading", { name: "New conversation", exact: true }),
       ).toBeVisible();
+      // Empty state: a conversation with no messages says so above the composer.
+      await expect(page.getByTestId("messages-empty")).toHaveText(/No messages yet/);
+      evidence.checks.push("a new conversation shows an explicit empty state above the composer until the first message is saved");
       await page.getByText("Conversation settings", { exact: true }).click();
       await page.getByLabel("Title", { exact: true }).fill("Comet notebook");
       await page.getByRole("button", { name: "Rename", exact: true }).click();
@@ -1289,6 +1292,12 @@ try {
           .first(),
       ).toBeVisible();
       await page.getByRole("button", { name: "Close results" }).click();
+      // Empty state: a query with no matches says so inside the results region.
+      await searchField.fill("zqxjvkwplm");
+      await page.keyboard.press("Enter");
+      await expect(page.getByRole("region", { name: "Search results" }).getByTestId("search-empty")).toHaveText(/No matches/);
+      await page.getByRole("button", { name: "Close results", exact: true }).click();
+      evidence.checks.push("a search with no matches shows an explicit empty state with what to try, and closing it restores the view");
       evidence.checks.push(
         "automatic derived indexing supplies lexical search across streamed deltas in the shared interface",
       );

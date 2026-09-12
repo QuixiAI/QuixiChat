@@ -17,6 +17,7 @@ export function ProviderSettingsPanel({controller}:{controller:ProviderSettingsC
     <p>Connect an API account to chat. Consumer ChatGPT and Claude subscriptions are separate from these API connections.</p>
     {!state.credentialCapability.available&&<p role="status">{state.credentialCapability.reason}</p>}
     {state.error&&<><p role="alert">{state.error}</p><button disabled={busy} onClick={()=>void controller.initialize()}>Retry connection setup</button></>}
+    {state.connections.length===0&&!state.error&&<p data-testid="providers-empty">No provider connections are configured on this host. Reading, searching and importing history never need one.</p>}
     {state.connections.map(connection=>{const health=observedHealth(controller.health(connection.id))??connection.health;return <article key={connection.id} className="quixi-provider-card">
       <h3>{connection.label}</h3>
       <p>{connection.origin?`${privacyLabels[connection.privacy??'']??'Transport'} · ${connection.origin}`:'No reviewed transport configured'}</p>
