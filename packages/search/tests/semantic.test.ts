@@ -8,7 +8,7 @@ import type { CanonicalSqlite } from "../../storage/src/worker/canonical/reposit
 import { SearchRepository } from "../../storage/src/worker/search/index.ts";
 import type { SearchBlobAccess, SearchChunkTokenizer } from "../../storage/src/worker/search/index.ts";
 import { createStorageChunkTokenizer } from "../../storage/src/worker/search/tokenizer.ts";
-import { semanticInput, semanticInputDigest, SEMANTIC_CLAIM_LEASE_MS } from "../../storage/src/worker/search/semantic.ts";
+import { semanticInput, semanticInputDigest, SEMANTIC_CLAIM_LEASE_MS, SEMANTIC_PROJECTION, quantizeInt8 } from "../../storage/src/worker/search/semantic.ts";
 import { SEARCH_POLICY } from "../../storage/src/worker/search/schema.ts";
 import { MODEL_LOCK } from "@quixi/quixi-embed";
 import type { CanonicalMutation, EmbeddingModelIdentity, SearchFilters, SearchOperations } from "@quixi/core/contracts";
@@ -37,11 +37,11 @@ const noBlobs: SearchBlobAccess = {
   advanceVerifiedRead: async () => { throw new Error("no blobs"); }, sliceRead: () => { throw new Error("no blobs"); },
   readChunk: () => { throw new Error("no blobs"); }, acknowledge: () => {}, discard: async () => {},
 };
-function open(options: { tokenizer?: boolean; now?: () => number } = {}) {
+function open(options: { tokenizer?: boolean; now?: () => number; coarseThreshold?: number } = {}) {
   const db = new sqlite.oo1.DB(`/semantic-${id()}.sqlite3`, "c"),
     canonical = new CanonicalRepository(db, { assertBlobAvailable: () => {} });
   canonical.migrate();
-  const make = (clock?: () => number) => new SearchRepository(db, noBlobs, { ...(options.tokenizer === false ? {} : { chunkTokenizer }), ...(clock ? { now: clock } : {}) });
+  const make = (clock?: () => number) => new SearchRepository(db, noBlobs, { ...(options.tokenizer === false ? {} : { chunkTokenizer }), ...(clock ? { now: clock } : {}), ...(options.coarseThreshold === undefined ? {} : { semanticCoarseThreshold: options.coarseThreshold }) });
   const search = make(options.now);
   search.initialize();
   return { db, canonical, search, reopen: (clock?: () => number) => { const next = make(clock); next.initialize(); return next; } };
@@ -373,6 +373,71 @@ test("extracted document pages flow through the same claim pipeline; identical p
     assert.deepEqual(hits.items.map((hit) => hit.position.page).sort(), [1, 2]);
     assert.ok(hits.items.every((hit) => hit.documentId === pdfDocument && hit.explanation === "Semantic match"));
     assert.equal(page(search, { mode: "semantic", queryVector: queryVector(7) }, { sourceTypes: ["message"] }).items.length, 1);
+  } finally { await search.close(); db.close(); }
+});
+
+test("the int8 projection (ADR 0036) stays complete, serves coarse retrieval above the threshold with float rerank, and is rebuilt after an upgrade or representation change", async () => {
+  const { db, canonical, search, reopen } = open({ coarseThreshold: 4 });
+  try {
+    const threadId = thread(canonical, "Topics");
+    const texts = ["Alpha passage about kittens purring.", "Beta passage about migrations.", "Gamma passage about balcony gardens.", "Delta passage about comets.", "Epsilon passage about sauces."];
+    for (const text of texts) message(canonical, threadId, text);
+    await drain(search);
+    search.enrollSemantic({ operationId: id(), model: model(search.version) });
+    let status = search.semanticStatus();
+    assert.equal(status.projection.representation, SEMANTIC_PROJECTION.representation);
+    assert.equal(status.projection.coarseRetrieval, false, "nothing stored yet");
+    const claim = search.claimSemanticChunks({ maxChunks: 64, maxBytes: 1_048_576 });
+    // Distinct topic directions so float and coarse rankings are unambiguous.
+    const topicOf = (text: string) => texts.findIndex((entry) => text.endsWith(entry)) + 10;
+    search.publishSemanticVectors({ generation: claim.generation, items: claim.items.map((item) => ({ chunkId: item.chunkId, textDigest: item.textDigest, vector: vectorFor(topicOf(item.text), item.text) })) });
+    status = search.semanticStatus();
+    assert.equal(status.projection.projected, 5, "every published vector is projected immediately");
+    assert.equal(status.projection.complete, true);
+    assert.equal(status.projection.coarseRetrieval, true, "5 vectors ≥ threshold 4");
+    // Coarse → rerank returns the same order as the exact float path.
+    const coarse = page(search, { mode: "semantic", queryVector: queryVector(12) });
+    assert.equal(coarse.items.length, 5);
+    assert.ok(coarse.items[0]!.excerpt.text.includes("Gamma"));
+    const exactOnly = open({ coarseThreshold: 1_000_000 });
+    try {
+      const t2 = thread(exactOnly.canonical, "Topics");
+      for (const text of texts) message(exactOnly.canonical, t2, text);
+      await drain(exactOnly.search);
+      exactOnly.search.enrollSemantic({ operationId: id(), model: model(exactOnly.search.version) });
+      const claim2 = exactOnly.search.claimSemanticChunks({ maxChunks: 64, maxBytes: 1_048_576 });
+      exactOnly.search.publishSemanticVectors({ generation: claim2.generation, items: claim2.items.map((item) => ({ chunkId: item.chunkId, textDigest: item.textDigest, vector: vectorFor(topicOf(item.text), item.text) })) });
+      assert.equal(exactOnly.search.semanticStatus().projection.coarseRetrieval, false);
+      const exact = page(exactOnly.search, { mode: "semantic", queryVector: queryVector(12) });
+      assert.deepEqual(coarse.items.map((hit) => hit.excerpt.text), exact.items.map((hit) => hit.excerpt.text), "coarse→rerank order equals the exact float order");
+    } finally { await exactOnly.search.close(); exactOnly.db.close(); }
+    // Quantization is the fixed symmetric representation, clamped.
+    assert.deepEqual([...quantizeInt8(new Float32Array(384).fill(0.5)).slice(0, 2)], [127, 127]);
+    assert.equal(quantizeInt8(vectorFor(12, "x"))[12], 127);
+    // A version-1 namespace (no projection) upgrades in place and maintenance backfills it.
+    db.exec("DELETE FROM quixi_semantic_schema WHERE version=2; DROP TABLE quixi_semantic_int8; DROP TABLE quixi_semantic_projection");
+    const upgraded = reopen();
+    status = upgraded.semanticStatus();
+    assert.equal(status.vectors, 5, "float vectors survive the upgrade");
+    assert.equal(status.projection.projected, 0);
+    assert.equal(status.projection.coarseRetrieval, false, "an incomplete projection never serves queries");
+    assert.equal(page(upgraded, { mode: "semantic", queryVector: queryVector(12) }).items[0]!.excerpt.text.includes("Gamma"), true, "exact path meanwhile");
+    let rounds = 0; while (upgraded.maintainSemantic(2).remaining && rounds++ < 10);
+    status = upgraded.semanticStatus();
+    assert.equal(status.projection.projected, 5);
+    assert.equal(status.projection.coarseRetrieval, true);
+    // A projection written under another representation is dropped, never mixed, then rebuilt.
+    db.exec("UPDATE quixi_semantic_projection SET representation='int8-other-v0'");
+    const replaced = reopen();
+    assert.equal(replaced.semanticStatus().projection.projected, 0, "foreign projection discarded at open");
+    assert.equal(replaced.semanticStatus().projection.representation, SEMANTIC_PROJECTION.representation);
+    rounds = 0; while (replaced.maintainSemantic(64).remaining && rounds++ < 10);
+    assert.equal(replaced.semanticStatus().projection.projected, 5);
+    // Deleting the semantic index drops the projection with the vectors; lexical stays.
+    const deleted = replaced.deleteSemanticIndex({ operationId: id() });
+    assert.equal(deleted.projection.projected, 0);
+    assert.equal(page(replaced, { mode: "best", query: "kittens" }).items.length, 1);
+    await upgraded.close(); await replaced.close();
   } finally { await search.close(); db.close(); }
 });
 

@@ -87,6 +87,12 @@ function quantizeInt8Global(pool, size) {
   for (let i = 0; i < size * D; i++) q[i] = Math.round(pool[i] / scale);
   return { q, scale };
 }
+const FIXED_SCALE = 0.4 / 127;
+function quantizeInt8Fixed(pool, size) {
+  const q = new Int8Array(size * D);
+  for (let i = 0; i < size * D; i++) q[i] = Math.max(-127, Math.min(127, Math.round(pool[i] / FIXED_SCALE)));
+  return { q, scale: FIXED_SCALE };
+}
 function quantizeBits(pool, size) {
   const bits = new Uint8Array(size * (D / 8));
   for (let n = 0; n < size; n++) for (let d = 0; d < D; d++) if (pool[n * D + d] >= 0) bits[n * 48 + (d >> 3)] |= 1 << (d & 7);
@@ -143,24 +149,28 @@ const REPS = 3, CANDIDATES = [200, 500, 1000];
 for (const size of sizes) {
   console.error(`pool ${size}`);
   const pool = buildPool(size);
-  const int8 = quantizeInt8PerVector(pool, size), int8g = quantizeInt8Global(pool, size), bits = quantizeBits(pool, size);
+  const int8 = quantizeInt8PerVector(pool, size), int8g = quantizeInt8Global(pool, size), int8f = quantizeInt8Fixed(pool, size), bits = quantizeBits(pool, size);
   const result = { bytes: { float32: size * D * 4, int8: size * D + size * 4, int8Global: size * D, binary: size * 48 }, pipelines: {} };
   const exactRanks = {}, exactChunkTop = {};
   const scoresFloat = new Float64Array(size), scoresInt = new Float64Array(size), distances = new Float64Array(size);
   const lat = { float: [], int8: [], int8Global: [], binaryCoarse: [], int8Coarse: [], rerankFloat: {}, rerankInt8: {} };
   const rankings = { float: {}, int8: {}, int8Global: {}, binaryCoarse: {}, int8Coarse: {} };
   for (const k of CANDIDATES) { rankings[`binary${k}float`] = {}; rankings[`binary${k}int8`] = {}; rankings[`int8${k}float`] = {}; rankings[`int8g${k}float`] = {}; }
-  const coarseOverlap = { binary: { 100: [], 500: [] }, int8: { 100: [], 500: [] }, int8Global: { 100: [], 500: [] } };
+  const coarseOverlap = { binary: { 100: [], 500: [] }, int8: { 100: [], 500: [] }, int8Global: { 100: [], 500: [] }, int8Fixed: { 100: [], 500: [] } };
+  rankings.int8Fixed500float = {};
   for (let rep = 0; rep < REPS; rep++) for (const [row, query] of queries.entries()) {
     const qv = queryVectors[row], qi = queryInt8(qv), qb = queryBits(qv);
     let t = performance.now(); for (let n = 0; n < size; n++) scoresFloat[n] = dotFloat(pool, n, qv); const exact = topK(scoresFloat, 1000); lat.float.push(performance.now() - t);
     t = performance.now(); for (let n = 0; n < size; n++) scoresInt[n] = dotInt8(int8.q, n, qi.q) * int8.scales[n]; const int8Rank = topK(scoresInt, 1000); lat.int8.push(performance.now() - t);
     t = performance.now(); for (let n = 0; n < size; n++) scoresInt[n] = dotInt8(int8g.q, n, qi.q); const int8gRank = topK(scoresInt, 1000); lat.int8Global.push(performance.now() - t);
     t = performance.now(); for (let n = 0; n < size; n++) distances[n] = -hamming(bits, n, qb); const binaryRank = topK(distances, 1000); lat.binaryCoarse.push(performance.now() - t);
+    const qf = Int8Array.from(qv, (value) => Math.max(-127, Math.min(127, Math.round(value / FIXED_SCALE))));
+    for (let n = 0; n < size; n++) scoresInt[n] = dotInt8(int8f.q, n, qf); const int8fRank = topK(scoresInt, 1000);
     if (rep === 0) {
       exactRanks[query.id] = exact; exactChunkTop[query.id] = exact;
       rankings.float[query.id] = collapse(exact); rankings.int8[query.id] = collapse(int8Rank); rankings.int8Global[query.id] = collapse(int8gRank); rankings.binaryCoarse[query.id] = collapse(binaryRank); rankings.int8Coarse[query.id] = collapse(int8Rank);
-      for (const k of [100, 500]) { coarseOverlap.binary[k].push(overlap(binaryRank.slice(0, k), exact, k)); coarseOverlap.int8[k].push(overlap(int8Rank.slice(0, k), exact, k)); coarseOverlap.int8Global[k].push(overlap(int8gRank.slice(0, k), exact, k)); }
+      for (const k of [100, 500]) { coarseOverlap.binary[k].push(overlap(binaryRank.slice(0, k), exact, k)); coarseOverlap.int8[k].push(overlap(int8Rank.slice(0, k), exact, k)); coarseOverlap.int8Global[k].push(overlap(int8gRank.slice(0, k), exact, k)); coarseOverlap.int8Fixed[k].push(overlap(int8fRank.slice(0, k), exact, k)); }
+      rankings.int8Fixed500float[query.id] = collapse(int8fRank.slice(0, 500).map((n) => [n, dotFloat(pool, n, qv)]).sort((a, b) => b[1] - a[1] || a[0] - b[0]).map(([n]) => n));
     }
     for (const k of CANDIDATES) {
       // Binary coarse → float rerank / int8 rerank; int8 coarse → float rerank.
@@ -176,6 +186,7 @@ for (const size of sizes) {
   result.pipelines.int8GlobalFullScan = { judged: judged(rankings.int8Global), latency: timing(lat.int8Global), scale: `global symmetric ${int8g.scale}` };
   result.pipelines.binaryCoarse = { judged: judged(rankings.binaryCoarse), latency: timing(lat.binaryCoarse), candidateOverlapWithExactChunks: { 100: coarseOverlap.binary[100].reduce((a, b) => a + b, 0) / queries.length, 500: coarseOverlap.binary[500].reduce((a, b) => a + b, 0) / queries.length } };
   result.pipelines.int8Coarse = { candidateOverlapWithExactChunks: { 100: coarseOverlap.int8[100].reduce((a, b) => a + b, 0) / queries.length, 500: coarseOverlap.int8[500].reduce((a, b) => a + b, 0) / queries.length } };
+  result.pipelines.int8FixedCoarse500_float32Rerank = { judged: judged(rankings.int8Fixed500float), scale: `fixed symmetric ${FIXED_SCALE} (0.4/127, clamped)`, candidateOverlapWithExactChunks: { 100: coarseOverlap.int8Fixed[100].reduce((a, b) => a + b, 0) / queries.length, 500: coarseOverlap.int8Fixed[500].reduce((a, b) => a + b, 0) / queries.length } };
   result.pipelines.int8GlobalCoarse = { candidateOverlapWithExactChunks: { 100: coarseOverlap.int8Global[100].reduce((a, b) => a + b, 0) / queries.length, 500: coarseOverlap.int8Global[500].reduce((a, b) => a + b, 0) / queries.length } };
   for (const k of CANDIDATES) {
     result.pipelines[`binaryCoarse${k}_float32Rerank`] = { judged: judged(rankings[`binary${k}float`]), rerankLatency: timing(lat.rerankFloat[k]) };

@@ -78,6 +78,8 @@ export interface SearchChunkTokenizer extends ChunkTokenizer {
 export interface SearchRepositoryOptions {
   chunkTokenizer?: SearchChunkTokenizer;
   now?: () => number;
+  /** Vectors at or above which queries use the int8 coarse projection (ADR 0036); fixtures lower it. */
+  semanticCoarseThreshold?: number;
   publishedSources?: PublishedExtractionSources;
   nextId?: () => string;
   onProgress?: (status: SearchIndexStatus) => void;
@@ -131,7 +133,7 @@ export class SearchRepository {
       ...(options.chunkTokenizer ? { tokenizer: options.chunkTokenizer, maxTokens: SEARCH_POLICY.maxTokens } : {}),
     });
     this.version = searchVersion(`${LEXICAL_CHUNKER_VERSION}:${this.policy.maxCharacters}:${this.policy.overlapCharacters}:${options.chunkTokenizer?.version ?? "none"}:${options.chunkTokenizer ? SEARCH_POLICY.maxTokens : "none"}`);
-    this.semantic = new SemanticRepository(db, options.now ?? (() => Date.now()));
+    this.semantic = new SemanticRepository(db, options.now ?? (() => Date.now()), options.semanticCoarseThreshold);
     this.extractionVisibility = new ExtractionVisibility(
       db,
       options.publishedSources,

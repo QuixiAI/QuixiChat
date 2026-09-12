@@ -1,8 +1,8 @@
 # ADR 0036 — Compressed candidate generation: int8 coarse retrieval with float32 rerank
 
 Date: 2026-09-12. Status: accepted as plan 22's representation decision from
-benchmark evidence; the storage implementation and browser-scale measurements
-follow in later slices.
+benchmark evidence and implemented in storage the same day (see
+"Implementation"); browser-scale measurements follow in later slices.
 
 ## Question
 
@@ -68,23 +68,69 @@ reranking 500 candidates in float32 costs about 0.26 ms.
 
 ## Representation metadata and lifecycle
 
-The int8 projection carries `{ representation: "int8-global-symmetric-v1",
-scale, generation, modelIdentity }` in the semantic metadata and is rebuilt
-from the float vectors whenever the generation, model identity or scale
-changes; a mismatch refuses queries with a named reason and never mixes
-formats (product §71, plan 22 task 8). Deleting the projection leaves the float
+The int8 projection carries `{ representation, scale, generation }` in the
+semantic namespace next to the model identity and is rebuilt from the float
+vectors whenever the generation, model identity, representation or scale
+changes; a foreign projection is discarded at open and never mixed with the
+current one (product §71, plan 22 task 8). While a projection is incomplete,
+queries use the exact float path and the status names the reason. Deleting the projection leaves the float
 vectors, canonical text and FTS usable; deleting the semantic index deletes
 both. Filtering follows the existing bounded-candidate path (ADR 0034): the
 coarse KNN uses sqlite-vec partition/metadata columns where a filter maps to
 one, otherwise a larger candidate bound, and RRF fuses the reranked list with
 the lexical ranking unchanged.
 
+## Implementation (same day)
+
+`packages/storage/src/worker/search/semantic.ts`, semantic namespace version 2:
+
+- **Fixed scale instead of a per-generation maximum.** The benchmark's global
+  scale was `max|x| / 127` over the pool; a scale that depends on the data
+  would force a projection rebuild whenever a new vector exceeds the old
+  maximum, and a rebuild rescans every float row. The implemented
+  representation is `int8-fixed-symmetric-v1` with `s = 0.4 / 127` and
+  clamping to ±127: Arctic XS unit vectors have components far below 0.4
+  (the 1M pool's maximum was below it), and the benchmark variant
+  `int8FixedCoarse500_float32Rerank` reproduces every judged float metric
+  with 0.973 / 0.993 candidate overlap at top-100 / top-500, within noise of
+  the data-dependent scale. The scale is stored, so a future change is a
+  representation change, not a silent drift.
+- **Tables.** `quixi_semantic_int8 USING vec0(embedding int8[384])` written
+  with `vec_int8(?)` (sqlite-vec refuses raw blobs on int8 columns), plus a
+  singleton `quixi_semantic_projection(representation, scale, generation)`
+  row. Publication writes the float row and its int8 projection in the same
+  transaction; enrolment, re-enrolment with a different identity and deletion
+  clear both.
+- **Upgrade and repair.** A version-1 namespace is upgraded in place at open
+  (float vectors kept, projection empty); bounded maintenance backfills the
+  missing int8 rows from the float blobs and reports what remains. A
+  projection row with another representation or scale is cleared at open and
+  rebuilt the same way. The float table stays the correctness oracle.
+- **Retrieval switch.** Below `SEMANTIC_COARSE_THRESHOLD` (20,000 vectors) or
+  while the projection is incomplete, `candidates()` runs the exact float
+  KNN as before. At or above it with a complete projection, it takes the top
+  `max(k, 500)` int8 neighbours (`MATCH vec_int8(query)`) and reranks them by
+  exact float32 L2 distance before the bounded-candidate / RRF path of ADR
+  0034, which is unchanged. The threshold is a constructor option
+  (`semanticCoarseThreshold`) so tests exercise the coarse path on tiny
+  indexes and compare its ranking with the exact one.
+- **Status.** `SemanticIndexStatus.projection` reports representation, scale,
+  projected count, completeness, whether coarse retrieval is active and the
+  threshold; the app's semantic panel shows it.
+
+Pinned-SQLite measurement in Node ([sqlite-vec-knn.mjs](../../perf/retrieval/sqlite-vec-knn.mjs),
+[sqlite-vec-knn-100000.json](../../perf/retrieval/sqlite-vec-knn-100000.json)),
+100k pseudo-random vectors, brute-force vec0 scans, 20 queries: float KNN
+top-64 median 20.9 ms; int8 coarse top-500 median 56.0 ms; coarse + float
+rerank 76.2 ms; top-64 agreement with the exact ranking 1.0. In this build
+sqlite-vec's int8 scan is *slower* than its float scan, so the projection's
+benefit at 100k is memory and I/O (0.37 GB versus 1.46 GB at 1M), not CPU;
+the browser measurements below decide whether a binary pre-filter or an ANN
+structure is needed before the 1M gate. The 20,000 threshold is a first
+setting, not a measured optimum.
+
 ## What remains before the semantic-scale gate
 
-- Implement the projection in `packages/storage` (sqlite-vec `int8[384]`
-  vec0 table, scale metadata, rebuild path) and switch `candidates()` to
-  coarse→rerank above a size threshold, keeping the float table for small
-  indexes and reranking.
 - Measure in the browser: sqlite-vec int8 KNN latency, OPFS reads and memory at
   100k/500k/1M in Chromium and WebKit, under foreground and backfill load
   (product §112), and the WASM overhead of query quantization.

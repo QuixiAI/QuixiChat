@@ -1,0 +1,18 @@
+{
+  "size": 100000,
+  "buildMs": 2690.75575,
+  "floatKnnTop64": {
+    "medianMs": 20.94683299999997,
+    "p95Ms": 22.144208000000162
+  },
+  "int8CoarseTop500": {
+    "medianMs": 55.963457999999264,
+    "p95Ms": 57.441249999999854
+  },
+  "int8CoarseThenFloatRerankTop64": {
+    "medianMs": 76.17795899999965,
+    "p95Ms": 82.09816599999976
+  },
+  "top64AgreementWithFloat": 1,
+  "note": "Pinned SQLite WASM (sqlite-vec) in Node; brute-force vec0 scans, pseudo-random unit-ish vectors; not browser OPFS timings."
+}

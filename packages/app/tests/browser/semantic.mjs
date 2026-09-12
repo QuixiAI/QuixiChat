@@ -74,6 +74,12 @@ export async function exerciseSemanticSearch({ engine, profile, name, origin }) 
     expect(enrolled.model.modelName).toBe('snowflake-arctic-embed-xs');
     expect(enrolled.vectors).toBe(3);
     expect(enrolled.vectorBytes).toBe(3 * 384 * 4);
+    // ADR 0036: every published vector is projected to int8 at once; small
+    // indexes keep exact retrieval and say so.
+    expect(enrolled.projection.projected).toBe(3);
+    expect(enrolled.projection.complete).toBe(true);
+    expect(enrolled.projection.coarseRetrieval).toBe(false);
+    await expect(page.getByTestId("semantic-projection")).toHaveText(/3 \/ 3 int8 · exact retrieval below 20,000 vectors/);
     evidence.model = enrolled.model;
     evidence.checks.push(`enrolment verifies the pinned model, selects ${evidence.backend} and indexes every visible chunk with progress, backend, speed and size shown`);
     // Semantic: a paraphrase with no shared words finds the feline thread first.

@@ -104,6 +104,10 @@ export interface SemanticIndexStatus {
   /** Distinct stored vectors and their float32 payload bytes. */
   vectors: number;
   vectorBytes: number;
+  /** The derived compressed coarse-retrieval projection (ADR 0036): its
+   * representation identity, how many vectors it covers, and whether coarse
+   * retrieval is currently used for queries. */
+  projection: { representation: string; scale: number; projected: number; complete: boolean; coarseRetrieval: boolean; threshold: number };
 }
 export interface SemanticClaim {
   generation: number;
