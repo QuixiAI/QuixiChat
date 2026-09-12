@@ -4,7 +4,7 @@
     "webkit"
   ],
   "status": "passed",
-  "startedAt": "2026-09-12T22:54:35.807Z",
+  "startedAt": "2026-09-12T23:29:12.486Z",
   "hosts": [
     {
       "name": "chromium",
@@ -49,6 +49,7 @@
         "a stored fallback continues a failed or partial primary attempt with the other connection as a separate attempt whose AutomaticFallback event is committed with it and names the failure, the partial attempt keeps its committed text off the active path, and a user stop never falls back",
         "the conversation's routing profile chooses the route before the first attempt: a selected connection that fails the minimum context requirement or whose credential the provider rejected is routed around with the reason recorded as an AutomaticFallback event on the attempt, no qualifying candidate refuses sending with every reason stated, and clearing the requirement restores the selected connection",
         "the open conversation shows its portability status with one inspectable reason per configured target and what is never sent, and a path whose assistant turn carries a reasoning marker without a verified provider block is portable to every target with that omission named per target and no invented block",
+        "reviewed migration routes the 4 eligible conversations to OpenAI · GPT-4.1 mini: the review lists each one with what it would carry, Keep the current routing changes nothing, confirming commits one SetRoutingProfile and one Migration event per conversation against its revision, messages are untouched, ineligible conversations are left alone, a migrated conversation opens on the target connection with its Migration event listed, and a second reviewed migration routes the same conversations back to Anthropic · Claude Haiku 4.5 with one more event each",
         "bulk portability analyses all 4 library conversations page by page against the configured targets (2 fully portable, 1 with transformations, 1 provider-dependent, 0 blocked, 0 without messages, 0 failed) with inspectable per-target reasons, an outcome filter, 32-row pages and a way to open each conversation",
         "keyboard import picker, start and report preparation preserve focus through async work; opening the saved conversation focuses its heading, and import live progress announces phases without changing numeric counters",
         "settled compatibility announcements retain one atomic status node through repeated valid settings edits; blocked reasons remain readable without remounted alerts, focus and draft remain, and inspection sends no HTTP or canonical writes",
@@ -70,7 +71,7 @@
         "WAV/MP3 picker and drop retain exact Audio parts and verified bytes, refuse unsupported/mislabeled/oversized drafts, send and regenerate input_audio with text-only output, block unsupported models without dispatch, and preserve originals through portable restore and restored regeneration",
         "an Anthropic response with a citation and an unknown output block, and an OpenAI response with a URL annotation and a provider-specific delta, are retained as Citation and stream-located ProviderArtifact parts; the next send, count, regeneration and cross-provider switch carry the answer text plus a plain source note and none of the provider-specific records, with the switch report naming each transformation, while import-derived artifacts remain refused by name",
         "manual thinking for the reviewed Haiku 4.5 profile refuses budgets below 1,024, at or above the output limit, with temperature or an out-of-range top-p without writes or HTTP; a thinking-enabled send carries the enabled budget and records signed and redacted receipts beside their markers; count, a later send, and regeneration carry those blocks first and unchanged from verified receipts on the producing model; the OpenAI switch report and portability name the omitted blocks and the OpenAI request carries none; returning to Anthropic restores them with the response's records unchanged",
-        "accessibility audit passes on 10 views: every visible control named, visible text at 4.5:1 or better, unique landmark names, no skipped heading levels, no live region inside the message list, status regions with text, and outlines on keyboard-focused controls (549 controls, 843 text nodes)",
+        "accessibility audit passes on 10 views: every visible control named, visible text at 4.5:1 or better, unique landmark names, no skipped heading levels, no live region inside the message list, status regions with text, and outlines on keyboard-focused controls (548 controls, 842 text nodes)",
         "the conversation library and an open conversation with saved messages fit 320px at normal and 200% root text size without horizontal overflow",
         "a 180-character title with a 70-character unbroken token wraps in the library, the heading and the settings form at 320px and 200% text without overflow, and renaming back restores the original",
         "all four interaction preferences survive a fresh browser process with exact revision and send-key preserved; saved timestamps, hidden badges, compact composer and model list render without credentials or HTTP at 390px, then defaults are restored for subsequent checks",
@@ -415,9 +416,9 @@
         },
         "imports": {
           "view": "imports",
-          "controls": 27,
+          "controls": 26,
           "unnamed": [],
-          "textNodes": 44,
+          "textNodes": 43,
           "contrast": [],
           "landmarks": [
             {
@@ -2188,7 +2189,7 @@
         }
       ],
       "interactionPreferences": {
-        "canonicalSha256": "803b07e8d8962942a010beef59184aac3964989c29a04a5a7f6392619e1e5efd",
+        "canonicalSha256": "f201c817760a528f995db89352f8916fc7cfe9fa28688f881aece4271a0ac831",
         "syncHighWater": 80,
         "initialRevision": 17,
         "finalRevision": 25,
@@ -2213,13 +2214,13 @@
       "exports": [
         {
           "format": "portable",
-          "byteLength": 1482752,
-          "sha256": "1bcccef023a1ee808eb83707420b8fab58d30ef08f6603843216867671396928"
+          "byteLength": 1474560,
+          "sha256": "8a228bd6e0a36f05227956d0ec636454428614870d33f5889c146e60e9798329"
         },
         {
           "format": "open",
           "byteLength": 608256,
-          "sha256": "f508338b1e64211ba2d6d2d222f5a47f41fc38a5c23669cad5288ba644d80bc8"
+          "sha256": "2ee4309c007c0aea327f62693af416130e724a5951f35226c9e5d23d031dad57"
         }
       ],
       "healthRefresh": {
@@ -2232,7 +2233,7 @@
           "offline-cancels-held-probe-without-poisoning-health"
         ],
         "scope": "Production shared UI, session controller, provider adapters and HTTP/OPFS; synthetic model responses and an advanced health clock, with real visibility/connectivity event handling.",
-        "canonicalAndContentSha256": "5d838455d9c56889ee1d3e7a563ff339f23ae2353a6997a6d8644b9b93072c4d",
+        "canonicalAndContentSha256": "46bebef9ac56dd16861742c990ff74c21b69f34a84f5396c5ff01c0900758072",
         "unchangedCanonicalAndContent": true,
         "modelRequests": [
           {
@@ -2303,6 +2304,17 @@
           }
         ]
       },
+      "bulkMigration": {
+        "target": "openai|gpt-4.1-mini-2025-04-14",
+        "migrated": 4,
+        "titles": [
+          "Comet notebook",
+          "Keyboard notebook",
+          "Portability thread",
+          "Image thread"
+        ],
+        "restoredTo": "anthropic|claude-haiku-4-5-20251001"
+      },
       "bulkPortability": {
         "threads": 4,
         "counts": {
@@ -2349,8 +2361,8 @@
           "Blocked ProviderArtifact: Provider-specific unsupported-part content has no input representation on this protocol."
         ],
         "before": {
-          "syncSequence": 726,
-          "commitCalls": 414,
+          "syncSequence": 742,
+          "commitCalls": 422,
           "providerDispatches": [
             {
               "binding": {
@@ -2745,8 +2757,8 @@
           ]
         },
         "after": {
-          "syncSequence": 726,
-          "commitCalls": 414,
+          "syncSequence": 742,
+          "commitCalls": 422,
           "providerDispatches": [
             {
               "binding": {
@@ -3153,11 +3165,11 @@
           "labels": [
             {
               "text": "Routing alias",
-              "htmlFor": "_r_1s_",
+              "htmlFor": "_r_21_",
               "sibling": true
             }
           ],
-          "id": "_r_1s_",
+          "id": "_r_21_",
           "ariaLabel": null
         },
         "closedLayout": {
@@ -3368,7 +3380,7 @@
               "rootFontSize": "16px",
               "focused": {
                 "tag": "SELECT",
-                "id": "_r_1s_",
+                "id": "_r_21_",
                 "label": "Routing alias",
                 "insideRegion": true
               },
@@ -3512,7 +3524,7 @@
               "rootFontSize": "32px",
               "focused": {
                 "tag": "SELECT",
-                "id": "_r_1s_",
+                "id": "_r_21_",
                 "label": "Routing alias",
                 "insideRegion": true
               },
@@ -3672,22 +3684,22 @@
         },
         "allowPrivacyChange": false,
         "aliasSource": {
-          "id": "436a19e7-3d98-466e-8940-64bac82e4933",
+          "id": "52c9cc34-be1b-4aaa-8ab9-0bb4f043230a",
           "revision": 8
         }
       },
-      "exclusionPartId": "dc943a31-2eae-4b8b-b584-627c4cbd9430",
+      "exclusionPartId": "769016df-4578-4ffc-869d-0eb94c052a85",
       "pendingRecovery": {
         "scope": "Actual durable lost-summary reply, dedicated recovery across error dismissal, thread navigation and lexical search; one precommit refusal and one held idempotent retry; no extra canonical writes or provider requests.",
         "status": "passed",
         "before": {
           "threadStates": [
             {
-              "activeLeafMessageId": "9b526614-3cdc-4b48-81e4-186e1caf12c0",
+              "activeLeafMessageId": "7a51c865-f37d-4184-96ab-dd6dda787803",
               "archived": false,
-              "contextSnapshotId": "d0bcaa72-bd71-44cc-b3c9-9baec454a65f",
+              "contextSnapshotId": "24d7579b-e529-4406-ab09-1c715ca49524",
               "pinned": false,
-              "revision": 53,
+              "revision": 55,
               "routingProfile": {
                 "alias": null,
                 "allowPrivacyChange": false,
@@ -3697,20 +3709,24 @@
                     "provider": "openai"
                   }
                 ],
+                "primary": {
+                  "model": "claude-haiku-4-5-20251001",
+                  "provider": "anthropic"
+                },
                 "requirements": {},
-                "version": 2
+                "version": 3
               },
               "tags": [
                 "space",
                 "ideas"
               ],
-              "threadId": "b62cb284-051d-42b3-8479-902fef036572",
+              "threadId": "5ce89b0a-36f7-45ba-b678-ba21a51238d5",
               "title": "Comet notebook"
             },
             {
-              "activeLeafMessageId": "249e1e74-683f-43ac-8bea-0b3cc273ca89",
+              "activeLeafMessageId": "4c72b024-67c6-4163-92db-2da4e043f8fe",
               "archived": false,
-              "contextSnapshotId": "4dfa3bf2-0e58-4002-80f3-a411649ea4a3",
+              "contextSnapshotId": "a8b81ed4-b5f3-4b13-bfb5-bd0ed29c0f24",
               "pinned": false,
               "revision": 7,
               "routingProfile": {
@@ -3726,42 +3742,42 @@
                 "version": 2
               },
               "tags": [],
-              "threadId": "e4764a88-7939-4939-aade-57e0297d9ff3",
+              "threadId": "5f5e9e72-062d-4d0e-a96e-11e76d7c861d",
               "title": "Summary notebook"
             }
           ],
           "collections": {
             "threadStates": {
               "count": 6,
-              "sha256": "f6a01a3cea531ebed098391bd2c72c7da7eae7801e9fa3e99a404bcbab317602"
+              "sha256": "a97fabca944ae417ca4cfdd1ca3a15005fac94acb5b46d641c216c585371edf8"
             },
             "messages": {
               "count": 64,
-              "sha256": "6d3053ed5b11f4ab8a35ed18067a757ee23f01ecd5b2d5c0b6f1a3d559cfff3f"
+              "sha256": "32bd428a955bfab977217acb00c6e5ca91905bdba026548ccc11120bac77ae3b"
             },
             "parts": {
               "count": 331,
-              "sha256": "a29e6439f832ec1f4303fa5371330f2ca8ebc2ad574ac9afa51cee340b2878ea"
+              "sha256": "bfd8d7b0d5a29228f1329284e3e1b14f0942edf59010bea4c4a4422172484d3e"
             },
             "events": {
-              "count": 26,
-              "sha256": "c684a45de620971d8a31e6c81d329f6abc5e43c1ab8dc3b9b87563d35ce13c45"
+              "count": 34,
+              "sha256": "f902bc0d71bc9da0e5b74b7486bd6da47f39282152008c0ed3582290ce3bc147"
             },
             "contexts": {
               "count": 13,
-              "sha256": "afc223b1c8e839266a5aad5c4a56d843f8cd8be55b1663428816289c3430ef94"
+              "sha256": "2c901adb20819c7d76e24c9b24c31e278df946d1fe1dc7cf81a37df2d1855dab"
             },
             "generations": {
               "count": 32,
-              "sha256": "aee7946504c32f4f6723f6e17f599da41abba8b77becbf3098e2c98ab02fd8d3"
+              "sha256": "73280765e347c994e879cd02f6118cd99696fdbf47fb63a0b910ce3805dbcebe"
             },
             "summaryProposals": {
               "count": 1,
-              "sha256": "a4d84488916451541a1052001a6adbfd4ea1a57d28d9657c33d2540834b710bc"
+              "sha256": "b194f165711f17c3f7a210dc7c2752c58c1ed8e13378a7a43ec9b6e1acac4dbd"
             }
           },
-          "syncSha256": "8eb8eb50acae8ee817148688d58dbacb17bb410937c8e102b1ae0519fa395956",
-          "highWaterSequence": 1001,
+          "syncSha256": "cc5c4256cca05d10132974af9722b5afafcb175a96922d1019264926da521e77",
+          "highWaterSequence": 1017,
           "providerDispatchCount": 49,
           "providerDispatchSha256": "b27c048efc9bc32edfa58dd78440c77beae76c75d1311e3fe3676c8b0728348c"
         },
@@ -3777,11 +3793,11 @@
         "after": {
           "threadStates": [
             {
-              "activeLeafMessageId": "9b526614-3cdc-4b48-81e4-186e1caf12c0",
+              "activeLeafMessageId": "7a51c865-f37d-4184-96ab-dd6dda787803",
               "archived": false,
-              "contextSnapshotId": "d0bcaa72-bd71-44cc-b3c9-9baec454a65f",
+              "contextSnapshotId": "24d7579b-e529-4406-ab09-1c715ca49524",
               "pinned": false,
-              "revision": 53,
+              "revision": 55,
               "routingProfile": {
                 "alias": null,
                 "allowPrivacyChange": false,
@@ -3791,20 +3807,24 @@
                     "provider": "openai"
                   }
                 ],
+                "primary": {
+                  "model": "claude-haiku-4-5-20251001",
+                  "provider": "anthropic"
+                },
                 "requirements": {},
-                "version": 2
+                "version": 3
               },
               "tags": [
                 "space",
                 "ideas"
               ],
-              "threadId": "b62cb284-051d-42b3-8479-902fef036572",
+              "threadId": "5ce89b0a-36f7-45ba-b678-ba21a51238d5",
               "title": "Comet notebook"
             },
             {
-              "activeLeafMessageId": "249e1e74-683f-43ac-8bea-0b3cc273ca89",
+              "activeLeafMessageId": "4c72b024-67c6-4163-92db-2da4e043f8fe",
               "archived": false,
-              "contextSnapshotId": "4dfa3bf2-0e58-4002-80f3-a411649ea4a3",
+              "contextSnapshotId": "a8b81ed4-b5f3-4b13-bfb5-bd0ed29c0f24",
               "pinned": false,
               "revision": 7,
               "routingProfile": {
@@ -3820,42 +3840,42 @@
                 "version": 2
               },
               "tags": [],
-              "threadId": "e4764a88-7939-4939-aade-57e0297d9ff3",
+              "threadId": "5f5e9e72-062d-4d0e-a96e-11e76d7c861d",
               "title": "Summary notebook"
             }
           ],
           "collections": {
             "threadStates": {
               "count": 6,
-              "sha256": "f6a01a3cea531ebed098391bd2c72c7da7eae7801e9fa3e99a404bcbab317602"
+              "sha256": "a97fabca944ae417ca4cfdd1ca3a15005fac94acb5b46d641c216c585371edf8"
             },
             "messages": {
               "count": 64,
-              "sha256": "6d3053ed5b11f4ab8a35ed18067a757ee23f01ecd5b2d5c0b6f1a3d559cfff3f"
+              "sha256": "32bd428a955bfab977217acb00c6e5ca91905bdba026548ccc11120bac77ae3b"
             },
             "parts": {
               "count": 331,
-              "sha256": "a29e6439f832ec1f4303fa5371330f2ca8ebc2ad574ac9afa51cee340b2878ea"
+              "sha256": "bfd8d7b0d5a29228f1329284e3e1b14f0942edf59010bea4c4a4422172484d3e"
             },
             "events": {
-              "count": 26,
-              "sha256": "c684a45de620971d8a31e6c81d329f6abc5e43c1ab8dc3b9b87563d35ce13c45"
+              "count": 34,
+              "sha256": "f902bc0d71bc9da0e5b74b7486bd6da47f39282152008c0ed3582290ce3bc147"
             },
             "contexts": {
               "count": 13,
-              "sha256": "afc223b1c8e839266a5aad5c4a56d843f8cd8be55b1663428816289c3430ef94"
+              "sha256": "2c901adb20819c7d76e24c9b24c31e278df946d1fe1dc7cf81a37df2d1855dab"
             },
             "generations": {
               "count": 32,
-              "sha256": "aee7946504c32f4f6723f6e17f599da41abba8b77becbf3098e2c98ab02fd8d3"
+              "sha256": "73280765e347c994e879cd02f6118cd99696fdbf47fb63a0b910ce3805dbcebe"
             },
             "summaryProposals": {
               "count": 1,
-              "sha256": "a4d84488916451541a1052001a6adbfd4ea1a57d28d9657c33d2540834b710bc"
+              "sha256": "b194f165711f17c3f7a210dc7c2752c58c1ed8e13378a7a43ec9b6e1acac4dbd"
             }
           },
-          "syncSha256": "8eb8eb50acae8ee817148688d58dbacb17bb410937c8e102b1ae0519fa395956",
-          "highWaterSequence": 1001,
+          "syncSha256": "cc5c4256cca05d10132974af9722b5afafcb175a96922d1019264926da521e77",
+          "highWaterSequence": 1017,
           "providerDispatchCount": 49,
           "providerDispatchSha256": "b27c048efc9bc32edfa58dd78440c77beae76c75d1311e3fe3676c8b0728348c"
         },
@@ -3878,28 +3898,28 @@
         "clipPath": "none"
       },
       "summary": {
-        "threadId": "e4764a88-7939-4939-aade-57e0297d9ff3",
-        "exclusionPartId": "2001c91d-bdf9-411b-b6ca-bf28a3c30ff7",
-        "proposalId": "e61423b1-555e-479d-bcd0-386939c1a283",
-        "stoppedProposalId": "4bbb8780-70cd-45ad-9eca-6eb259f7a84f",
-        "inputSha256": "9d659fef430fec052c804c59bb94459fae3a27397af1ecbc36abcc9acd72afb3",
-        "reviewedText": "Reviewed synthetic summary: preserve the picture question and its unresolved details. Source dea005c9-8bcf-4638-ba42-af2df0e6bca7.",
-        "cutoff": "dea005c9-8bcf-4638-ba42-af2df0e6bca7"
+        "threadId": "5f5e9e72-062d-4d0e-a96e-11e76d7c861d",
+        "exclusionPartId": "a9a535bb-5f9b-49ef-9b63-2e005c7e6927",
+        "proposalId": "0b9faa89-53d6-4e59-ad11-64d4578752f1",
+        "stoppedProposalId": "04414391-3ccd-4d76-8fe1-8291d1848eeb",
+        "inputSha256": "75d67be9d44af6fb0519ecc1a9d8f586881e76dbfcaaa54123a40311e9768c10",
+        "reviewedText": "Reviewed synthetic summary: preserve the picture question and its unresolved details. Source d389b6c6-ef44-460c-9668-c70473060315.",
+        "cutoff": "d389b6c6-ef44-460c-9668-c70473060315"
       },
       "branch": {
-        "threadId": "a476b942-bf85-4c42-a1c6-91d5a8a9f841",
-        "oldRootId": "2b0f5212-d850-4906-8f5e-34edbb91b390",
-        "newRootId": "4758a234-1eee-4386-91f5-1fe99cd49acf",
-        "freshContextId": "b27bd413-2e98-46a4-be29-d46780b887bd",
-        "restartContextId": "6fbd7580-9fae-42ad-9348-e1840f9fdea4",
-        "sourceLeafId": "2734b3d3-bc31-4ee1-9ae1-aec763a9daca"
+        "threadId": "34601b76-156e-4c0c-a8cb-c7e334a0c8f1",
+        "oldRootId": "51ed724f-5f75-4039-868e-a1cf0f859bc9",
+        "newRootId": "0291dade-9ece-446a-ac27-46f45a5fb75e",
+        "freshContextId": "98183d39-37c3-42ca-9655-85cf17f5e6fb",
+        "restartContextId": "47922333-2720-4672-8b4f-59bb1a60f3a2",
+        "sourceLeafId": "d874fe07-2165-4194-bbe2-9cea8d6f5a87"
       },
       "cost": {
-        "threadId": "55cbc2b7-3e04-4a03-bfdc-401bffadcbbb",
+        "threadId": "3a2e2dbe-eb6c-4b13-9c69-d7679ebcc833",
         "profile": {
           "alias": "Budget",
           "aliasSource": {
-            "id": "fb2a6ef5-07c0-4fb0-bdb4-334ac467e4f3",
+            "id": "a53178fa-69ca-4949-b52e-d39a9a3d7ff6",
             "revision": 13
           },
           "allowPrivacyChange": false,
@@ -3918,16 +3938,16 @@
           },
           "version": 4
         },
-        "aliasId": "fb2a6ef5-07c0-4fb0-bdb4-334ac467e4f3",
+        "aliasId": "a53178fa-69ca-4949-b52e-d39a9a3d7ff6",
         "blockedFallbackPrimaryRequests": 1,
         "allowedFallbackRequests": 2
       },
       "regions": {
-        "threadId": "09a80557-6d8b-406f-b16f-518d09e988bb",
+        "threadId": "85b93d02-5434-4433-b547-c02c083ffb40",
         "profile": {
           "alias": "Regional",
           "aliasSource": {
-            "id": "cad2f216-7b65-46e9-8db6-a113b8067e6f",
+            "id": "fc3068a8-e599-4207-abae-dcec2ed4e2a7",
             "revision": 14
           },
           "allowPrivacyChange": false,
@@ -3946,17 +3966,17 @@
           },
           "version": 5
         },
-        "aliasId": "cad2f216-7b65-46e9-8db6-a113b8067e6f",
+        "aliasId": "fc3068a8-e599-4207-abae-dcec2ed4e2a7",
         "aliasCurrentRegion": "eu",
-        "freshContextId": "a648e729-366c-4ad7-8819-07601d2b008a",
-        "oldLeaf": "a7920ca8-52d1-4e1f-9037-d44a283715b3",
-        "summaryProposalId": "b3e17d0e-36e5-4e86-b117-f93cd9edb788",
-        "initialEventId": "ac7236b0-80ed-4fa6-bac7-13ae04a0f291",
+        "freshContextId": "91fd790a-65b2-41c1-8006-18c13d6c50ac",
+        "oldLeaf": "bd58995b-5f00-4e02-9c36-d6807a06e2b5",
+        "summaryProposalId": "144012d3-df51-444d-954e-b482ca8110e4",
+        "initialEventId": "d1e3577c-5e99-468d-b1c6-d84f6ebfb49a",
         "generationIds": [
-          "7ec6feaa-c69e-41b4-9656-4740683f44e9",
-          "169b5b70-6f63-43e9-8aa2-3c2c4f5a567f",
-          "af89b15e-efcf-4965-8f17-930fb084c2bd",
-          "1344881f-83e9-448e-8d97-868236d5d414"
+          "9751dc2b-6e93-452f-a045-26baf8111165",
+          "a4d706df-680b-477c-98f1-d6b687267a73",
+          "4a74450f-da27-4a2c-9f13-543831bd99b6",
+          "b06f16f8-bd62-4235-a098-28115497ff11"
         ],
         "dispatchBinding": {
           "providerId": "openai",
@@ -3968,13 +3988,13 @@
       },
       "composerFiles": {
         "title": "PDF notebook",
-        "threadId": "9627dd0d-99af-4251-b741-094d62db1ca4",
-        "messageId": "af26ffb1-3887-4883-aa20-28adca03d5e6",
+        "threadId": "d91786d8-0875-4835-a8c1-a2f33f632eb4",
+        "messageId": "c616e1da-d5b4-426c-a058-835b0717cbae",
         "attachment": {
           "availability": "available",
           "blobSha256": "fc1f224f40483a95a367f1737828dc76fb910e1fbf6fb434ca5051632c7375d2",
           "filename": "original-synthetic.pdf",
-          "id": "f3a45e04-a03d-4348-8496-077225c704b7",
+          "id": "a404bbb2-2808-4991-829a-85bc1c65f634",
           "mimeType": "application/pdf",
           "rawObjectId": null,
           "sizeBytes": 601
@@ -3984,25 +4004,25 @@
             "data": {
               "text": "Read the original synthetic PDF."
             },
-            "id": "e3c13d92-faef-4e6d-adbf-0585d13efe4c",
+            "id": "2f32d41c-2d78-4679-9d6c-6482b274469e",
             "kind": "Text",
-            "messageId": "af26ffb1-3887-4883-aa20-28adca03d5e6",
+            "messageId": "c616e1da-d5b4-426c-a058-835b0717cbae",
             "order": 0
           },
           {
             "data": {
-              "attachmentId": "f3a45e04-a03d-4348-8496-077225c704b7",
+              "attachmentId": "a404bbb2-2808-4991-829a-85bc1c65f634",
               "description": "original-synthetic.pdf"
             },
-            "id": "ee8ae43e-9564-4d4e-994a-27f2a5de1bf6",
+            "id": "11778349-5e05-4813-933c-6e2e859c061f",
             "kind": "File",
-            "messageId": "af26ffb1-3887-4883-aa20-28adca03d5e6",
+            "messageId": "c616e1da-d5b4-426c-a058-835b0717cbae",
             "order": 1
           }
         ],
         "sha256": "fc1f224f40483a95a367f1737828dc76fb910e1fbf6fb434ca5051632c7375d2",
         "byteLength": 601,
-        "archiveSha256": "b500b8e706d2361e95ee8ef3a8a6916ab3cea3543a583e9d90fc80fbde2c318e",
+        "archiveSha256": "7c8afccebdf912335cd6906394ba873f5a7e52b694dfd2cd56674c91bffbdcd8",
         "restoredRegeneration": true,
         "regionalFileRefusedBeforeDispatch": true,
         "regionalImageEligibilityReportRefreshed": true,
@@ -4010,36 +4030,36 @@
       },
       "audioInput": {
         "title": "Audio notebook",
-        "threadId": "f731347a-6044-4ff5-9da4-38e695622147",
-        "messageId": "2c55c72f-df31-4d2e-8c23-4237dc723732",
+        "threadId": "3e11ffd1-e880-4a9a-aed6-95cad4a4e852",
+        "messageId": "acf74c0d-b645-4da1-aa21-2afd71eeddce",
         "parts": [
           {
             "data": {
               "text": "Describe these two original synthetic audio clips in text."
             },
-            "id": "2355f773-e447-42fb-ab49-65e9fb67cd11",
+            "id": "dc78f2fa-99b7-423b-bead-7e9b1588fde4",
             "kind": "Text",
-            "messageId": "2c55c72f-df31-4d2e-8c23-4237dc723732",
+            "messageId": "acf74c0d-b645-4da1-aa21-2afd71eeddce",
             "order": 0
           },
           {
             "data": {
-              "attachmentId": "070bda5a-d24e-4b80-a666-27083926e120",
+              "attachmentId": "6c18a51a-cc51-4e47-91dc-c3f51a7a292d",
               "description": "original-synthetic.wav"
             },
-            "id": "b631e472-392d-41c8-bf66-19aadbca7835",
+            "id": "74a148c0-9e1a-48a0-adea-8fb9c4abb1bf",
             "kind": "Audio",
-            "messageId": "2c55c72f-df31-4d2e-8c23-4237dc723732",
+            "messageId": "acf74c0d-b645-4da1-aa21-2afd71eeddce",
             "order": 1
           },
           {
             "data": {
-              "attachmentId": "eb434543-4fef-4a1c-a92b-d58c5456e0c0",
+              "attachmentId": "633eb547-69f0-4def-826d-699d2113e9a9",
               "description": "original-synthetic.mp3"
             },
-            "id": "61f55b1c-28ab-47c4-a72d-bcc6195a0abf",
+            "id": "1935896c-cee7-416e-9fff-40e490007583",
             "kind": "Audio",
-            "messageId": "2c55c72f-df31-4d2e-8c23-4237dc723732",
+            "messageId": "acf74c0d-b645-4da1-aa21-2afd71eeddce",
             "order": 2
           }
         ],
@@ -4048,7 +4068,7 @@
             "availability": "available",
             "blobSha256": "627ce34972f0cf95ed882ef9c4e7b5edcd222b39aa40aa334df3c1c49d75c1f1",
             "filename": "original-synthetic.wav",
-            "id": "070bda5a-d24e-4b80-a666-27083926e120",
+            "id": "6c18a51a-cc51-4e47-91dc-c3f51a7a292d",
             "mimeType": "audio/wav",
             "rawObjectId": null,
             "sizeBytes": 1644
@@ -4057,7 +4077,7 @@
             "availability": "available",
             "blobSha256": "a6c92fb7f5cda4fde942e35151c6fa9008fb929cd1f51ca49551568aa5f65f02",
             "filename": "original-synthetic.mp3",
-            "id": "eb434543-4fef-4a1c-a92b-d58c5456e0c0",
+            "id": "633eb547-69f0-4def-826d-699d2113e9a9",
             "mimeType": "audio/mpeg",
             "rawObjectId": null,
             "sizeBytes": 522
@@ -4077,7 +4097,7 @@
             "byteLength": 522
           }
         ],
-        "archiveSha256": "46994911bc2f7f7e6eebb81a0152e2407548ef2d5647d8d95f47ffe7757a9ebc",
+        "archiveSha256": "6c32308f2f480b316e26902eec95c7ed5e9d0c7b663b6d3f8fab293a71bda6a3",
         "restoredRegeneration": true,
         "unsupportedModels": [
           "gpt-4.1-mini-2025-04-14",
@@ -4087,38 +4107,38 @@
         "textOutputOnly": true
       },
       "outputParts": {
-        "threadId": "cfb8a089-97ec-4d43-a1e7-9451e1b1f5a7",
-        "citedMessageId": "33014c1f-1e17-4eb9-b8b5-aa8b9f96d95a",
-        "openaiMessageId": "eaf72b94-1f15-4078-bf5f-31aa4fe8f98d"
+        "threadId": "3071d65e-3a7f-4bc4-bfbb-74c4e4ea8007",
+        "citedMessageId": "ac79efd8-6a3a-426c-8162-c365182fb165",
+        "openaiMessageId": "32db3f21-6e9a-45b4-81e3-809ccfc306d8"
       },
       "reasoningContinuation": {
-        "threadId": "ec587685-2b9f-46d1-98af-fb5d73bb62b0",
-        "outputMessageId": "997d4b00-bf5a-44ee-9f69-f7352ab09d8d",
+        "threadId": "29c97c9a-8794-4f81-a569-3c0d70576d93",
+        "outputMessageId": "0a305254-9f42-4880-8273-8df0559e1fb0",
         "receipts": [
-          "ebfee00b-1d1a-4127-b5ae-5ac4388f486a",
-          "f8b76f3f-e215-449a-b190-4e771750d133"
+          "e4eaa58c-dd4c-4ecf-92e9-aff767982f79",
+          "97f528e4-69f9-492c-9d78-431bc5681085"
         ]
       },
       "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36",
       "unclaimedExport": {
         "candidate": null,
-        "completedBytes": 5576192,
+        "completedBytes": 5625344,
         "completedRecords": 0,
         "entryCount": 0,
         "failure": null,
         "format": "portable",
-        "jobId": "2e667783-cd85-4212-9883-779f796f6589",
+        "jobId": "78c0fb3a-601c-46b0-aae8-d77a95d53a40",
         "kind": "export",
         "output": {
-          "name": "quixi-portable-2e667783-cd85-4212-9883-779f796f6589.tar",
+          "name": "quixi-portable-78c0fb3a-601c-46b0-aae8-d77a95d53a40.tar",
           "mediaType": "application/x-tar",
-          "byteLength": 5576192,
-          "sha256": "d41db9f53450bcc9e39ca4d4f2ac62d9ffbaaeb6591c237bfa2eada255b9391f"
+          "byteLength": 5625344,
+          "sha256": "8044ff64a44649ee42485a97fd92ee33491af86acc959217e4563b6bea6d9eab"
         },
         "phase": "ready",
         "sourceSchemaVersion": null,
         "state": "ready",
-        "totalBytes": 5576192,
+        "totalBytes": 5625344,
         "totalRecords": null
       },
       "savedMessages": 130,
@@ -4150,8 +4170,8 @@
         ],
         "backend": "WASM SIMD · CPU",
         "runtimeNote": "Local runtime ready on WASM SIMD · CPU. WebGPU was not used: No WebGPU adapter.",
-        "enableMs": 847,
-        "indexMs": 921,
+        "enableMs": 846,
+        "indexMs": 1024,
         "model": {
           "chunkingVersion": "fts-v1:quixi-structural-utf16-v1:4096:64:arctic-xs-offsets-1.0.2:d15cd90acf9df739:256:code-v1:nul-space-v1",
           "dimensions": 384,
@@ -4172,7 +4192,7 @@
           },
           "route": "wasm-simd-fp32",
           "kind": "cpu",
-          "elapsedMs": 1232,
+          "elapsedMs": 1277,
           "checks": [
             {
               "id": "model_hash",
@@ -4233,7 +4253,7 @@
         },
         "faultInjected": false,
         "backendAfterFault": "WASM SIMD · CPU",
-        "restartMs": 824,
+        "restartMs": 827,
         "rebuild": {
           "generationBefore": 2,
           "generationAfter": 4,
@@ -4307,6 +4327,7 @@
         "a stored fallback continues a failed or partial primary attempt with the other connection as a separate attempt whose AutomaticFallback event is committed with it and names the failure, the partial attempt keeps its committed text off the active path, and a user stop never falls back",
         "the conversation's routing profile chooses the route before the first attempt: a selected connection that fails the minimum context requirement or whose credential the provider rejected is routed around with the reason recorded as an AutomaticFallback event on the attempt, no qualifying candidate refuses sending with every reason stated, and clearing the requirement restores the selected connection",
         "the open conversation shows its portability status with one inspectable reason per configured target and what is never sent, and a path whose assistant turn carries a reasoning marker without a verified provider block is portable to every target with that omission named per target and no invented block",
+        "reviewed migration routes the 4 eligible conversations to OpenAI · GPT-4.1 mini: the review lists each one with what it would carry, Keep the current routing changes nothing, confirming commits one SetRoutingProfile and one Migration event per conversation against its revision, messages are untouched, ineligible conversations are left alone, a migrated conversation opens on the target connection with its Migration event listed, and a second reviewed migration routes the same conversations back to Anthropic · Claude Haiku 4.5 with one more event each",
         "bulk portability analyses all 4 library conversations page by page against the configured targets (2 fully portable, 1 with transformations, 1 provider-dependent, 0 blocked, 0 without messages, 0 failed) with inspectable per-target reasons, an outcome filter, 32-row pages and a way to open each conversation",
         "keyboard import picker, start and report preparation preserve focus through async work; opening the saved conversation focuses its heading, and import live progress announces phases without changing numeric counters",
         "settled compatibility announcements retain one atomic status node through repeated valid settings edits; blocked reasons remain readable without remounted alerts, focus and draft remain, and inspection sends no HTTP or canonical writes",
@@ -4328,7 +4349,7 @@
         "WAV/MP3 picker and drop retain exact Audio parts and verified bytes, refuse unsupported/mislabeled/oversized drafts, send and regenerate input_audio with text-only output, block unsupported models without dispatch, and preserve originals through portable restore and restored regeneration",
         "an Anthropic response with a citation and an unknown output block, and an OpenAI response with a URL annotation and a provider-specific delta, are retained as Citation and stream-located ProviderArtifact parts; the next send, count, regeneration and cross-provider switch carry the answer text plus a plain source note and none of the provider-specific records, with the switch report naming each transformation, while import-derived artifacts remain refused by name",
         "manual thinking for the reviewed Haiku 4.5 profile refuses budgets below 1,024, at or above the output limit, with temperature or an out-of-range top-p without writes or HTTP; a thinking-enabled send carries the enabled budget and records signed and redacted receipts beside their markers; count, a later send, and regeneration carry those blocks first and unchanged from verified receipts on the producing model; the OpenAI switch report and portability name the omitted blocks and the OpenAI request carries none; returning to Anthropic restores them with the response's records unchanged",
-        "accessibility audit passes on 10 views: every visible control named, visible text at 4.5:1 or better, unique landmark names, no skipped heading levels, no live region inside the message list, status regions with text, and outlines on keyboard-focused controls (556 controls, 859 text nodes)",
+        "accessibility audit passes on 10 views: every visible control named, visible text at 4.5:1 or better, unique landmark names, no skipped heading levels, no live region inside the message list, status regions with text, and outlines on keyboard-focused controls (555 controls, 858 text nodes)",
         "the conversation library and an open conversation with saved messages fit 320px at normal and 200% root text size without horizontal overflow",
         "a 180-character title with a 70-character unbroken token wraps in the library, the heading and the settings form at 320px and 200% text without overflow, and renaming back restores the original",
         "all four interaction preferences survive a fresh browser process with exact revision and send-key preserved; saved timestamps, hidden badges, compact composer and model list render without credentials or HTTP at 390px, then defaults are restored for subsequent checks",
@@ -4673,9 +4694,9 @@
         },
         "imports": {
           "view": "imports",
-          "controls": 27,
+          "controls": 26,
           "unnamed": [],
-          "textNodes": 44,
+          "textNodes": 43,
           "contrast": [],
           "landmarks": [
             {
@@ -6446,7 +6467,7 @@
         }
       ],
       "interactionPreferences": {
-        "canonicalSha256": "afdf3956ff281bf3016b37cfb1dc76006fb4134027074a9b50e52178d07469f6",
+        "canonicalSha256": "6bbc5208d7489b2293099cedee3f22f906e7d19986a4dca22342175ddd0f9521",
         "syncHighWater": 80,
         "initialRevision": 17,
         "finalRevision": 25,
@@ -6472,12 +6493,12 @@
         {
           "format": "portable",
           "byteLength": 1482752,
-          "sha256": "e559d6e30172f9767b82d4f0a59b3c8df8b06f21ae197094b17b0e509ab6f8a3"
+          "sha256": "7e13f70438724f47c035ab8f1f2fa6b6fb672d0f0d616870b82e0bb87f86562c"
         },
         {
           "format": "open",
           "byteLength": 608256,
-          "sha256": "19e0cb964f632243c3adad9cb723fd00176962cee7398085680cb37314d25044"
+          "sha256": "3a4f7b955861e97f310193d4926b58bdd09baf6a0761a0d512870d4a8bd9da7a"
         }
       ],
       "healthRefresh": {
@@ -6490,7 +6511,7 @@
           "offline-cancels-held-probe-without-poisoning-health"
         ],
         "scope": "Production shared UI, session controller, provider adapters and HTTP/OPFS; synthetic model responses and an advanced health clock, with real visibility/connectivity event handling.",
-        "canonicalAndContentSha256": "152e5142f8f32bc283f1207472b58a8ad18115726f3d311f85abe6dc48bb184f",
+        "canonicalAndContentSha256": "14600bbef084c1ffc9b1a85757f6bd6ac578628af0eb0d5d9350e765d2b7d52f",
         "unchangedCanonicalAndContent": true,
         "modelRequests": [
           {
@@ -6561,6 +6582,17 @@
           }
         ]
       },
+      "bulkMigration": {
+        "target": "openai|gpt-4.1-mini-2025-04-14",
+        "migrated": 4,
+        "titles": [
+          "Comet notebook",
+          "Keyboard notebook",
+          "Portability thread",
+          "Image thread"
+        ],
+        "restoredTo": "anthropic|claude-haiku-4-5-20251001"
+      },
       "bulkPortability": {
         "threads": 4,
         "counts": {
@@ -6607,8 +6639,8 @@
           "Blocked ProviderArtifact: Provider-specific unsupported-part content has no input representation on this protocol."
         ],
         "before": {
-          "syncSequence": 726,
-          "commitCalls": 414,
+          "syncSequence": 742,
+          "commitCalls": 422,
           "providerDispatches": [
             {
               "binding": {
@@ -7003,8 +7035,8 @@
           ]
         },
         "after": {
-          "syncSequence": 726,
-          "commitCalls": 414,
+          "syncSequence": 742,
+          "commitCalls": 422,
           "providerDispatches": [
             {
               "binding": {
@@ -7411,11 +7443,11 @@
           "labels": [
             {
               "text": "Routing alias",
-              "htmlFor": "_r_1s_",
+              "htmlFor": "_r_21_",
               "sibling": true
             }
           ],
-          "id": "_r_1s_",
+          "id": "_r_21_",
           "ariaLabel": null
         },
         "closedLayout": {
@@ -7626,7 +7658,7 @@
               "rootFontSize": "16px",
               "focused": {
                 "tag": "SELECT",
-                "id": "_r_1s_",
+                "id": "_r_21_",
                 "label": "Routing alias",
                 "insideRegion": true
               },
@@ -7770,7 +7802,7 @@
               "rootFontSize": "32px",
               "focused": {
                 "tag": "SELECT",
-                "id": "_r_1s_",
+                "id": "_r_21_",
                 "label": "Routing alias",
                 "insideRegion": true
               },
@@ -7930,45 +7962,20 @@
         },
         "allowPrivacyChange": false,
         "aliasSource": {
-          "id": "65c20074-721c-4cd5-9f68-6113b8b5d8ba",
+          "id": "7b8c5f18-7d40-4626-b1f8-12b46696f2b7",
           "revision": 8
         }
       },
-      "exclusionPartId": "06e74ea2-e948-45b7-a2a1-1a24d31df13d",
+      "exclusionPartId": "aea13de1-cb59-411d-83f2-6015a99e46c9",
       "pendingRecovery": {
         "scope": "Actual durable lost-summary reply, dedicated recovery across error dismissal, thread navigation and lexical search; one precommit refusal and one held idempotent retry; no extra canonical writes or provider requests.",
         "status": "passed",
         "before": {
           "threadStates": [
             {
-              "activeLeafMessageId": "1272e818-4885-4fa1-84ca-e0678f1a8387",
+              "activeLeafMessageId": "4d48977e-3bb8-46f6-bfe4-1eec09a8044e",
               "archived": false,
-              "contextSnapshotId": "08179171-d5f8-4f4e-b6e1-e69042b1750f",
-              "pinned": false,
-              "revision": 53,
-              "routingProfile": {
-                "alias": null,
-                "allowPrivacyChange": false,
-                "candidates": [
-                  {
-                    "model": "gpt-4.1-mini-2025-04-14",
-                    "provider": "openai"
-                  }
-                ],
-                "requirements": {},
-                "version": 2
-              },
-              "tags": [
-                "space",
-                "ideas"
-              ],
-              "threadId": "91a81896-c317-4621-9b54-157b7da37c59",
-              "title": "Comet notebook"
-            },
-            {
-              "activeLeafMessageId": "1451176b-c368-42a1-9bec-313fe6c9a4be",
-              "archived": false,
-              "contextSnapshotId": "f0ee61a5-5ec3-4d71-9211-96ecf43d9512",
+              "contextSnapshotId": "e712d3ac-b2fb-41f9-86c5-4251b7bd2d9d",
               "pinned": false,
               "revision": 7,
               "routingProfile": {
@@ -7984,42 +7991,71 @@
                 "version": 2
               },
               "tags": [],
-              "threadId": "ebf92ce1-abd4-4f7f-871b-ca616436ef5a",
+              "threadId": "6c7a0693-fa1e-4a5f-9ceb-6c5666ef5650",
               "title": "Summary notebook"
+            },
+            {
+              "activeLeafMessageId": "b22f029b-4e50-444d-8494-6875d37a48f5",
+              "archived": false,
+              "contextSnapshotId": "30698ecc-a3e2-42d7-857d-1618f1769d25",
+              "pinned": false,
+              "revision": 55,
+              "routingProfile": {
+                "alias": null,
+                "allowPrivacyChange": false,
+                "candidates": [
+                  {
+                    "model": "gpt-4.1-mini-2025-04-14",
+                    "provider": "openai"
+                  }
+                ],
+                "primary": {
+                  "model": "claude-haiku-4-5-20251001",
+                  "provider": "anthropic"
+                },
+                "requirements": {},
+                "version": 3
+              },
+              "tags": [
+                "space",
+                "ideas"
+              ],
+              "threadId": "6ef19dcd-888b-4408-a99d-d486812e0805",
+              "title": "Comet notebook"
             }
           ],
           "collections": {
             "threadStates": {
               "count": 6,
-              "sha256": "45b1bb71438f21368094b007bf904935ace4c0aa4c66ec3c2f73c35815ab009d"
+              "sha256": "436c3c740ba53f7689fdd58806626c723e1d3555879315e6a8e2b4a92929c028"
             },
             "messages": {
               "count": 64,
-              "sha256": "fedb0985e70bab414516d8651853db27414df227bda5bec83127a3754081b1f0"
+              "sha256": "cc83c318e802b2b1c822dfdd96258543d4d119206f59f143ac75c7f88e632ac0"
             },
             "parts": {
               "count": 331,
-              "sha256": "76bfaacffd2cf8de2a89afe983d1273d4667bafe3ba2464956b3f369c7ad1f96"
+              "sha256": "6d8db45d1b5ba444ad1a3683216df27b665886b01600cf47f0fdc4a06e0ca478"
             },
             "events": {
-              "count": 26,
-              "sha256": "16d5c075ad52d186e64f416ea61c5c7c6ec34704a492907d59db9880dc4b4a2c"
+              "count": 34,
+              "sha256": "c2bc09a105c07f1c66f025b73f7f40b1b3c76d7af5ff5fd80dca7c8bdf7b1ede"
             },
             "contexts": {
               "count": 13,
-              "sha256": "3c2907ef9bf5247a0106d985ca1f9a20541d7b9366ddb1738f97eec8509c9b30"
+              "sha256": "57c118dc294a701f3443144134c71e7fcb322e8dc1d43e9c1be74d2a9b395d07"
             },
             "generations": {
               "count": 32,
-              "sha256": "c33e33b9448821eb2a2a393123f261d20cf1acbca16a8c6b400b956635b20284"
+              "sha256": "bacca0f06bf40a8bf39c662f4112a6e056e414f2469a32bfe9d9affec1fa8f36"
             },
             "summaryProposals": {
               "count": 1,
-              "sha256": "7dbdd858aebd2245285ef3c15af4ced93803f8f3d08590198a7fd2ab64137e65"
+              "sha256": "54a68a0efcb8197919fdff8ecd388a72f51307243c65580b622902807b1bc5d2"
             }
           },
-          "syncSha256": "4e4e93aa130290f7e2923ab349975875b2c2e77574a6971c403489c2ecadcef4",
-          "highWaterSequence": 1001,
+          "syncSha256": "2065fd359776a4115e87931246e0a6d460421ddf4547adf076785f5dd0184f5e",
+          "highWaterSequence": 1017,
           "providerDispatchCount": 49,
           "providerDispatchSha256": "b27c048efc9bc32edfa58dd78440c77beae76c75d1311e3fe3676c8b0728348c"
         },
@@ -8035,34 +8071,9 @@
         "after": {
           "threadStates": [
             {
-              "activeLeafMessageId": "1272e818-4885-4fa1-84ca-e0678f1a8387",
+              "activeLeafMessageId": "4d48977e-3bb8-46f6-bfe4-1eec09a8044e",
               "archived": false,
-              "contextSnapshotId": "08179171-d5f8-4f4e-b6e1-e69042b1750f",
-              "pinned": false,
-              "revision": 53,
-              "routingProfile": {
-                "alias": null,
-                "allowPrivacyChange": false,
-                "candidates": [
-                  {
-                    "model": "gpt-4.1-mini-2025-04-14",
-                    "provider": "openai"
-                  }
-                ],
-                "requirements": {},
-                "version": 2
-              },
-              "tags": [
-                "space",
-                "ideas"
-              ],
-              "threadId": "91a81896-c317-4621-9b54-157b7da37c59",
-              "title": "Comet notebook"
-            },
-            {
-              "activeLeafMessageId": "1451176b-c368-42a1-9bec-313fe6c9a4be",
-              "archived": false,
-              "contextSnapshotId": "f0ee61a5-5ec3-4d71-9211-96ecf43d9512",
+              "contextSnapshotId": "e712d3ac-b2fb-41f9-86c5-4251b7bd2d9d",
               "pinned": false,
               "revision": 7,
               "routingProfile": {
@@ -8078,42 +8089,71 @@
                 "version": 2
               },
               "tags": [],
-              "threadId": "ebf92ce1-abd4-4f7f-871b-ca616436ef5a",
+              "threadId": "6c7a0693-fa1e-4a5f-9ceb-6c5666ef5650",
               "title": "Summary notebook"
+            },
+            {
+              "activeLeafMessageId": "b22f029b-4e50-444d-8494-6875d37a48f5",
+              "archived": false,
+              "contextSnapshotId": "30698ecc-a3e2-42d7-857d-1618f1769d25",
+              "pinned": false,
+              "revision": 55,
+              "routingProfile": {
+                "alias": null,
+                "allowPrivacyChange": false,
+                "candidates": [
+                  {
+                    "model": "gpt-4.1-mini-2025-04-14",
+                    "provider": "openai"
+                  }
+                ],
+                "primary": {
+                  "model": "claude-haiku-4-5-20251001",
+                  "provider": "anthropic"
+                },
+                "requirements": {},
+                "version": 3
+              },
+              "tags": [
+                "space",
+                "ideas"
+              ],
+              "threadId": "6ef19dcd-888b-4408-a99d-d486812e0805",
+              "title": "Comet notebook"
             }
           ],
           "collections": {
             "threadStates": {
               "count": 6,
-              "sha256": "45b1bb71438f21368094b007bf904935ace4c0aa4c66ec3c2f73c35815ab009d"
+              "sha256": "436c3c740ba53f7689fdd58806626c723e1d3555879315e6a8e2b4a92929c028"
             },
             "messages": {
               "count": 64,
-              "sha256": "fedb0985e70bab414516d8651853db27414df227bda5bec83127a3754081b1f0"
+              "sha256": "cc83c318e802b2b1c822dfdd96258543d4d119206f59f143ac75c7f88e632ac0"
             },
             "parts": {
               "count": 331,
-              "sha256": "76bfaacffd2cf8de2a89afe983d1273d4667bafe3ba2464956b3f369c7ad1f96"
+              "sha256": "6d8db45d1b5ba444ad1a3683216df27b665886b01600cf47f0fdc4a06e0ca478"
             },
             "events": {
-              "count": 26,
-              "sha256": "16d5c075ad52d186e64f416ea61c5c7c6ec34704a492907d59db9880dc4b4a2c"
+              "count": 34,
+              "sha256": "c2bc09a105c07f1c66f025b73f7f40b1b3c76d7af5ff5fd80dca7c8bdf7b1ede"
             },
             "contexts": {
               "count": 13,
-              "sha256": "3c2907ef9bf5247a0106d985ca1f9a20541d7b9366ddb1738f97eec8509c9b30"
+              "sha256": "57c118dc294a701f3443144134c71e7fcb322e8dc1d43e9c1be74d2a9b395d07"
             },
             "generations": {
               "count": 32,
-              "sha256": "c33e33b9448821eb2a2a393123f261d20cf1acbca16a8c6b400b956635b20284"
+              "sha256": "bacca0f06bf40a8bf39c662f4112a6e056e414f2469a32bfe9d9affec1fa8f36"
             },
             "summaryProposals": {
               "count": 1,
-              "sha256": "7dbdd858aebd2245285ef3c15af4ced93803f8f3d08590198a7fd2ab64137e65"
+              "sha256": "54a68a0efcb8197919fdff8ecd388a72f51307243c65580b622902807b1bc5d2"
             }
           },
-          "syncSha256": "4e4e93aa130290f7e2923ab349975875b2c2e77574a6971c403489c2ecadcef4",
-          "highWaterSequence": 1001,
+          "syncSha256": "2065fd359776a4115e87931246e0a6d460421ddf4547adf076785f5dd0184f5e",
+          "highWaterSequence": 1017,
           "providerDispatchCount": 49,
           "providerDispatchSha256": "b27c048efc9bc32edfa58dd78440c77beae76c75d1311e3fe3676c8b0728348c"
         },
@@ -8136,28 +8176,28 @@
         "clipPath": "none"
       },
       "summary": {
-        "threadId": "ebf92ce1-abd4-4f7f-871b-ca616436ef5a",
-        "exclusionPartId": "0b3f4b11-f1ed-42f1-8aa6-ee555e0774d5",
-        "proposalId": "0b309abe-4e58-4817-9100-adfa8f5a80f1",
-        "stoppedProposalId": "37c9684a-5bfc-4fec-80c0-2fb7d337a360",
-        "inputSha256": "9c8308ab8e47001b1413a5be7d6e1e4ed62053b1bd8c25eb3e4def9bba2658ed",
-        "reviewedText": "Reviewed synthetic summary: preserve the picture question and its unresolved details. Source 4a07003b-bd46-435c-a760-8043e6da945a.",
-        "cutoff": "4a07003b-bd46-435c-a760-8043e6da945a"
+        "threadId": "6c7a0693-fa1e-4a5f-9ceb-6c5666ef5650",
+        "exclusionPartId": "496c7ff0-c70d-48b1-8c54-56bf30f7a60a",
+        "proposalId": "6258def9-e9d1-4e25-850b-d7afbb9f246e",
+        "stoppedProposalId": "e6ae5eb0-c5b6-459d-8e4f-e8e2bb322d3e",
+        "inputSha256": "1d5616b91eb2dd483144966d429b42bcf7b60a90b823dfe4b0401a4c187499c7",
+        "reviewedText": "Reviewed synthetic summary: preserve the picture question and its unresolved details. Source 8113da43-10fd-4b2a-ac73-7ea1dea25382.",
+        "cutoff": "8113da43-10fd-4b2a-ac73-7ea1dea25382"
       },
       "branch": {
-        "threadId": "be5ef9f7-3495-4606-b519-8846a86d241c",
-        "oldRootId": "d206d825-73d0-470d-9671-138432b42221",
-        "newRootId": "d59a8b3e-602c-4790-98e6-be5df437c614",
-        "freshContextId": "00946a48-4cf9-4ee8-8aa2-98607681172b",
-        "restartContextId": "b49abbbf-8e4c-4247-807e-9269458026bb",
-        "sourceLeafId": "d0a1018d-7a54-4841-a3c5-7e723a53c0e0"
+        "threadId": "af0ca24a-57a3-4bb7-bcbd-ceae2fb51d2a",
+        "oldRootId": "9f973b6b-c9f8-4e89-81cf-c04e76019880",
+        "newRootId": "7b4c72ec-1e87-4dbf-9e80-d3942cd48b88",
+        "freshContextId": "6ddaed80-841b-4ae2-a73c-ba565c01b528",
+        "restartContextId": "eef801f0-722c-4bc9-bb67-1ca6470a1749",
+        "sourceLeafId": "57104030-3bb3-47b0-ad33-21697506f093"
       },
       "cost": {
-        "threadId": "26c737aa-af94-4831-9bc4-6f53c96baa8c",
+        "threadId": "ef1b2de9-de76-4304-8193-b54869a051dd",
         "profile": {
           "alias": "Budget",
           "aliasSource": {
-            "id": "6531eba1-966c-49de-aaa3-1105bf6eef47",
+            "id": "b68f6f70-3f4b-4bf7-b025-a8d383c3789a",
             "revision": 13
           },
           "allowPrivacyChange": false,
@@ -8176,16 +8216,16 @@
           },
           "version": 4
         },
-        "aliasId": "6531eba1-966c-49de-aaa3-1105bf6eef47",
+        "aliasId": "b68f6f70-3f4b-4bf7-b025-a8d383c3789a",
         "blockedFallbackPrimaryRequests": 1,
         "allowedFallbackRequests": 2
       },
       "regions": {
-        "threadId": "0568ba57-cb1a-4d8e-8a16-59b623379dfd",
+        "threadId": "7a497fa4-2916-457a-b788-b00e82457c17",
         "profile": {
           "alias": "Regional",
           "aliasSource": {
-            "id": "8482fcab-20b8-4de8-a592-7452be9b1c02",
+            "id": "76287d80-7cee-4fab-879f-0b09f3d19976",
             "revision": 14
           },
           "allowPrivacyChange": false,
@@ -8204,17 +8244,17 @@
           },
           "version": 5
         },
-        "aliasId": "8482fcab-20b8-4de8-a592-7452be9b1c02",
+        "aliasId": "76287d80-7cee-4fab-879f-0b09f3d19976",
         "aliasCurrentRegion": "eu",
-        "freshContextId": "7f0a73af-3f30-418e-ab9a-9434e3542d45",
-        "oldLeaf": "7472da82-87b2-44af-9c1d-fad956788360",
-        "summaryProposalId": "c85fcbd0-3153-441f-bae5-e598f6c2432c",
-        "initialEventId": "2b36c8d8-6729-4f74-9d0c-f164f087d8f7",
+        "freshContextId": "f17f36b4-a130-44dd-845c-dbd70d205354",
+        "oldLeaf": "611cc4ae-78d3-42fa-9de5-d618b4295116",
+        "summaryProposalId": "328b3afb-5af2-49e8-a9c2-09d88f4598f6",
+        "initialEventId": "16e3cfc3-7203-441a-866a-afcad255a227",
         "generationIds": [
-          "52d402a9-498a-46ea-a18b-25a2695f4719",
-          "7d8a5416-95a7-475a-a656-668c8dc11411",
-          "5dd1f877-98d4-485c-83b8-654399e926bd",
-          "5bdd19bd-6032-48ba-bbe9-03808987adb9"
+          "2baa055a-f9ba-452e-a2d0-4d938f0d513f",
+          "22d51aa1-1904-4f0c-a186-e66cd91aa0db",
+          "76ccdf02-8095-4751-8998-0b5ff0146cee",
+          "77c99f1e-6c60-4f8d-8177-d4a0c9107a6c"
         ],
         "dispatchBinding": {
           "providerId": "openai",
@@ -8226,13 +8266,13 @@
       },
       "composerFiles": {
         "title": "PDF notebook",
-        "threadId": "ead007dd-d547-44ab-96c0-6cee35a2b567",
-        "messageId": "b1c1998c-5140-4ff2-af31-f6b02213c50b",
+        "threadId": "776e8377-72cb-4ded-a0b8-e0c4e2efa60a",
+        "messageId": "a085d1a3-104d-4a44-b626-2a4bf006dfb1",
         "attachment": {
           "availability": "available",
           "blobSha256": "fc1f224f40483a95a367f1737828dc76fb910e1fbf6fb434ca5051632c7375d2",
           "filename": "original-synthetic.pdf",
-          "id": "80d244f1-4230-4fda-9aba-3c969e4acaef",
+          "id": "67f5b6b5-431d-454f-a1c9-e1c3589dfa41",
           "mimeType": "application/pdf",
           "rawObjectId": null,
           "sizeBytes": 601
@@ -8242,25 +8282,25 @@
             "data": {
               "text": "Read the original synthetic PDF."
             },
-            "id": "a7bac740-6b49-4468-92fb-c7ca91fe82ff",
+            "id": "cb9ae58f-3320-43f9-867e-b0ec143a5473",
             "kind": "Text",
-            "messageId": "b1c1998c-5140-4ff2-af31-f6b02213c50b",
+            "messageId": "a085d1a3-104d-4a44-b626-2a4bf006dfb1",
             "order": 0
           },
           {
             "data": {
-              "attachmentId": "80d244f1-4230-4fda-9aba-3c969e4acaef",
+              "attachmentId": "67f5b6b5-431d-454f-a1c9-e1c3589dfa41",
               "description": "original-synthetic.pdf"
             },
-            "id": "a7f9d706-3e98-40fa-b173-36fd4b5845bd",
+            "id": "34eb66e4-901d-47b1-aab9-fd4247998c91",
             "kind": "File",
-            "messageId": "b1c1998c-5140-4ff2-af31-f6b02213c50b",
+            "messageId": "a085d1a3-104d-4a44-b626-2a4bf006dfb1",
             "order": 1
           }
         ],
         "sha256": "fc1f224f40483a95a367f1737828dc76fb910e1fbf6fb434ca5051632c7375d2",
         "byteLength": 601,
-        "archiveSha256": "d16f157595640d68b1f0d20db67b06b7741aeeb4dcd6309654c5008f95464fdc",
+        "archiveSha256": "069fb017eb0f0abe919f1e9c196fbb82a8a9bcfd9778ca10e8225eb9b7e4d3c5",
         "restoredRegeneration": true,
         "regionalFileRefusedBeforeDispatch": true,
         "regionalImageEligibilityReportRefreshed": true,
@@ -8268,36 +8308,36 @@
       },
       "audioInput": {
         "title": "Audio notebook",
-        "threadId": "0a625d0d-e9cd-4c5d-bad8-d2fa43d3b518",
-        "messageId": "a6aff577-533d-4ebc-8c24-c425caac0e42",
+        "threadId": "f620a5bf-50b1-4c61-8bf8-68e8a91d724a",
+        "messageId": "009d8365-b757-4edf-87c7-bacb317ecb87",
         "parts": [
           {
             "data": {
               "text": "Describe these two original synthetic audio clips in text."
             },
-            "id": "f3489678-4dd6-4f10-b507-07ed80074e6a",
+            "id": "c3410167-e5e7-4b83-aaed-efd7214c8ebd",
             "kind": "Text",
-            "messageId": "a6aff577-533d-4ebc-8c24-c425caac0e42",
+            "messageId": "009d8365-b757-4edf-87c7-bacb317ecb87",
             "order": 0
           },
           {
             "data": {
-              "attachmentId": "c05e9f8b-7508-4c53-b317-1bee27711c66",
+              "attachmentId": "c919d0f1-8423-4cd9-b740-c1eb53712346",
               "description": "original-synthetic.wav"
             },
-            "id": "afc619e3-c5bb-4aef-b005-66f21b1486b7",
+            "id": "15ef17af-f4ef-4622-8a09-471f5389598a",
             "kind": "Audio",
-            "messageId": "a6aff577-533d-4ebc-8c24-c425caac0e42",
+            "messageId": "009d8365-b757-4edf-87c7-bacb317ecb87",
             "order": 1
           },
           {
             "data": {
-              "attachmentId": "6dff2f3d-5aa5-41b2-99e1-c3833a0a6c1f",
+              "attachmentId": "eb54c432-15b0-4be1-aedb-3728677ab401",
               "description": "original-synthetic.mp3"
             },
-            "id": "c4bf932c-7c51-4711-abc2-b1464fd0b230",
+            "id": "4d76cba6-a37b-4c74-9f32-479887079cff",
             "kind": "Audio",
-            "messageId": "a6aff577-533d-4ebc-8c24-c425caac0e42",
+            "messageId": "009d8365-b757-4edf-87c7-bacb317ecb87",
             "order": 2
           }
         ],
@@ -8306,7 +8346,7 @@
             "availability": "available",
             "blobSha256": "627ce34972f0cf95ed882ef9c4e7b5edcd222b39aa40aa334df3c1c49d75c1f1",
             "filename": "original-synthetic.wav",
-            "id": "c05e9f8b-7508-4c53-b317-1bee27711c66",
+            "id": "c919d0f1-8423-4cd9-b740-c1eb53712346",
             "mimeType": "audio/wav",
             "rawObjectId": null,
             "sizeBytes": 1644
@@ -8315,7 +8355,7 @@
             "availability": "available",
             "blobSha256": "a6c92fb7f5cda4fde942e35151c6fa9008fb929cd1f51ca49551568aa5f65f02",
             "filename": "original-synthetic.mp3",
-            "id": "6dff2f3d-5aa5-41b2-99e1-c3833a0a6c1f",
+            "id": "eb54c432-15b0-4be1-aedb-3728677ab401",
             "mimeType": "audio/mpeg",
             "rawObjectId": null,
             "sizeBytes": 522
@@ -8335,7 +8375,7 @@
             "byteLength": 522
           }
         ],
-        "archiveSha256": "a774b63bc045524c8d98cc731a0c588b29405fb086659cca6bfab882675671bc",
+        "archiveSha256": "34788f9d408494ce697f9d811a3346fd0deae7cc893dd76f40ccdd1b4daff672",
         "restoredRegeneration": true,
         "unsupportedModels": [
           "gpt-4.1-mini-2025-04-14",
@@ -8345,38 +8385,38 @@
         "textOutputOnly": true
       },
       "outputParts": {
-        "threadId": "75b6e523-baaf-4352-8d83-020918083be8",
-        "citedMessageId": "f9c031a2-5fa2-4124-bfad-01e216be51e6",
-        "openaiMessageId": "c6ab7833-d905-4f00-b29c-8442dd404652"
+        "threadId": "ee044796-c5e8-49b5-a8da-1c9bbea2ee30",
+        "citedMessageId": "a0c0a1db-ea37-4483-b535-4b994d6633cb",
+        "openaiMessageId": "b3d3fe22-a1fd-48db-a21f-fe21cc873ddd"
       },
       "reasoningContinuation": {
-        "threadId": "d4e5e43e-b2c2-4f7a-8afc-36ff897ea3a8",
-        "outputMessageId": "0f7ec1b4-a1a4-4055-8d45-3599d46fbd06",
+        "threadId": "e5279c5a-9eb8-4160-888f-4751ddc3c9cd",
+        "outputMessageId": "fef456f0-a30c-43b7-97bf-ce66f19fc460",
         "receipts": [
-          "c6dc0bb2-7237-4af7-b994-09a2e1d72a97",
-          "bc062e5c-8285-486c-970b-45cd7d187520"
+          "5f986d88-a183-442f-af08-c7de4f5a0746",
+          "e7bac1ca-1172-44e9-b430-78f42c187b53"
         ]
       },
       "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
       "unclaimedExport": {
         "candidate": null,
-        "completedBytes": 5592576,
+        "completedBytes": 5608960,
         "completedRecords": 0,
         "entryCount": 0,
         "failure": null,
         "format": "portable",
-        "jobId": "0bc92224-33bd-4e0e-b2d5-ddb4c7fb7461",
+        "jobId": "5652d313-a215-4950-8f5c-f18cecc235f7",
         "kind": "export",
         "output": {
-          "name": "quixi-portable-0bc92224-33bd-4e0e-b2d5-ddb4c7fb7461.tar",
+          "name": "quixi-portable-5652d313-a215-4950-8f5c-f18cecc235f7.tar",
           "mediaType": "application/x-tar",
-          "byteLength": 5592576,
-          "sha256": "a9be94723bcc1f7d39bc1e8f80efec7dde6106716ff21ea59b69826abab29946"
+          "byteLength": 5608960,
+          "sha256": "c59bed951173e6b54e99b9edff730e06f1d22c6da0468682aeb0fa61d76fa2b1"
         },
         "phase": "ready",
         "sourceSchemaVersion": null,
         "state": "ready",
-        "totalBytes": 5592576,
+        "totalBytes": 5608960,
         "totalRecords": null
       },
       "savedMessages": 130,
@@ -8408,8 +8448,8 @@
         ],
         "backend": "WebGPU · FP32",
         "runtimeNote": "Local runtime ready on WebGPU · FP32 from the cached model.",
-        "enableMs": 853,
-        "indexMs": 855,
+        "enableMs": 850,
+        "indexMs": 852,
         "model": {
           "chunkingVersion": "fts-v1:quixi-structural-utf16-v1:4096:64:arctic-xs-offsets-1.0.2:d15cd90acf9df739:256:code-v1:nul-space-v1",
           "dimensions": 384,
@@ -8430,7 +8470,7 @@
           },
           "route": "webgpu-fp32",
           "kind": "gpu",
-          "elapsedMs": 1253,
+          "elapsedMs": 1285,
           "checks": [
             {
               "id": "model_hash",
@@ -8491,7 +8531,7 @@
         },
         "faultInjected": true,
         "backendAfterFault": "WASM SIMD · CPU",
-        "restartMs": 193,
+        "restartMs": 201,
         "rebuild": {
           "generationBefore": 2,
           "generationAfter": 4,
@@ -8548,7 +8588,7 @@
     "packages/app/src/features/accessibility/CompatibilityAnnouncement.tsx": "7c586581a5333777d0cedfdd34039a935fca9b253fcd51462a24d7a02c4478ab",
     "packages/app/tests/browser/compatibility-announcements.mjs": "3c188088c2c28cd7827be5ca25cd46f70a80e9b304898ce04c3da16451d96e84",
     "packages/app/tests/browser/alias-application-accessibility.mjs": "581f95299594d3620f34078288df295c7176aef8439758b1dd1ca0ab67eb209d",
-    "packages/app/src/AppRoot.tsx": "d37e7b7ec78eecfbcc3f848e5af59bb409e7cbe3a5896153fa896c0350b1c51d",
+    "packages/app/src/AppRoot.tsx": "da9961b4875e54a640c844bfd81f5a2ebae6d52357f2f4fd0161af0d32b4d2ee",
     "packages/core/src/model/compaction.ts": "33e724d0610024ebe5b9247196beea0971d72afe77e53f8ccebacfada2c54d28",
     "packages/core/src/model/summaries.ts": "ebb396a3f6ec22c26d244845dbfef77a0de04dc9ddbc106263d81f3d8e4d7d86",
     "packages/storage/src/worker/canonical/summary-source.ts": "5fc70e1137f9630fa5975b4a3ae3a31bd7eba82e224e8777620ef75d5b6b865c",
@@ -8609,11 +8649,11 @@
     "packages/app/src/features/providers/controller.ts": "3f2cccb8090922b2ee936b9578f46f873da4e8b4f0c786497f8e083d6cc99ed9",
     "packages/app/src/features/providers/health.ts": "9f36a742e627678e5a8e898b9b237cd716f24d0fd6ef2b9176e414886ebc622a",
     "packages/app/src/runtime/usage.ts": "01a3b2bebe56976ca6a857d560061cb1790c5e273fb9370a6ace5b1b085fc8ab",
-    "packages/app/src/runtime/events.ts": "ca9f26ff7b803691ffd18af743bd0d81a1cfc5576d0c00dc16ffa0c3260a9b4c",
+    "packages/app/src/runtime/events.ts": "ffa6db8f643408ebc6fc3ceed238909a77a5bba7270869f9abbd8b5c86c6fceb",
     "packages/app/src/runtime/switching.ts": "7a56fcdd73c1307653713954e4ed0f2c1f28a4a69538e51a97d45710f9bc9f23",
     "packages/app/src/runtime/portability.ts": "b4ab7c84ed079b75df8246a4e87a56a90132db9e57f80348866471b02a4b62d5",
-    "packages/app/src/features/migration/controller.ts": "9d054c28937149a307372ecaf015211fe8404b250025b9b569db0a1962827940",
-    "packages/app/src/features/migration/MigrationPanel.tsx": "c3efdf9c3dfd3ea854ed024b752717d0bcca97f4c73a79d232ed990390d5d3e8",
+    "packages/app/src/features/migration/controller.ts": "d852dad5df3c227018168743925ef49cf6fd8ac38e866db76d8a14d35f6da4fe",
+    "packages/app/src/features/migration/MigrationPanel.tsx": "aa7e38d108e75e2d40ffede87f5b9a91d8ff1393ea5f0237d1ea16db612edc2d",
     "packages/app/src/features/compare/CompareCandidates.tsx": "dc7e05c3f090ca030ec280e243a43c822191a1ffec00cf3d14a0d21db707c6b8",
     "packages/app/src/runtime/fallback.ts": "c3d7b0a42f7b0696e70b5e438358067f893496f3622b549047b19aacbde2cd53",
     "packages/app/src/runtime/routing.ts": "c603127b9ef84049f2cfc74a40dd759d7bbd6ed173e99cb4d4613e61125af2ad",
@@ -8649,7 +8689,7 @@
     "packages/app/tests/attachments/controller.test.ts": "60dfbd9a2fb046b1337bdfdc6266ec662091d956120651ab6836f75c26c84797",
     "packages/app/src/features/providers/tests/controller.test.mjs": "88792587d4dcfc73d48a2ecf21514a8a5d4748014e6ead6f7689791533788bd5",
     "packages/app/tests/browser/composer-files-restore.html": "5c5523f111a36567f6e0e1ea7bba614e8ec26fd15a8c03416aabbc21c0810528",
-    "packages/app/tests/browser/run.mjs": "c485f6164a46907c87d1400b94ad2093c75e8af1c04ae56bebd53b70d57af3ec",
+    "packages/app/tests/browser/run.mjs": "eebcac971640689a91cfdf0a739f826ea1c7fa8d3393d2825dd6b41bfaf02cc7",
     "packages/app/tests/browser/semantic.mjs": "defe67b8b6333e990442cf48e737954c83904ea08b79df5a8a7890a5c3e7c800",
     "packages/app/tests/browser/onboarding.mjs": "f84735b9decf933654db47bf1f252730f6683fd36b5ae935a298149f53539ad7",
     "packages/app/src/features/onboarding/controller.ts": "49659b9b3e5c191220b74cd42364cd948242f399fbc301c5e0312cbce3615468",
@@ -8671,5 +8711,5 @@
     "node": "v22.23.1"
   },
   "sourceStable": true,
-  "finishedAt": "2026-09-12T22:59:47.874Z"
+  "finishedAt": "2026-09-12T23:34:30.510Z"
 }

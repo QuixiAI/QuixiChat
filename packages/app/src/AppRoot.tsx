@@ -368,7 +368,7 @@ export function AppRoot({
   /** Composer compare candidates as `connection|model` keys (product §39). */
   const [compareKeys, setCompareKeys] = useState<string[]>([]);
   const providersRef = useRef(providers); providersRef.current = providers;
-  const migration = useMemo(() => createMigrationController({ storage: services.storage, assess: (threadId, targets, settings) => chat.assessThreadPortability(threadId, targets, settings), providers: () => providersRef.current, settings: () => ({ maxOutputTokens: 1024 }) }), [services, chat]);
+  const migration = useMemo(() => createMigrationController({ storage: services.storage, assess: (threadId, targets, settings) => chat.assessThreadPortability(threadId, targets, settings), providers: () => providersRef.current, settings: () => ({ maxOutputTokens: 1024 }), onMigrated: () => { void library.refresh(); } }), [services, chat, library]);
   // The device's own offline signal is authoritative when false; the
   // provider's answers establish everything else about a connection.
   const [online, setOnline] = useState(
@@ -1419,7 +1419,7 @@ export function AppRoot({
           <BlobHashAuditPanel controller={hashAudit} disabled={selectionChanged} />
         </>}
         {section === 'semantic' && <SemanticPanel controller={semantic} snapshot={semanticState} />}
-        {section === 'portability' && <MigrationPanel controller={migration} onOpen={threadId => { setSection('library'); void library.open(threadId); }} disabled={selectionChanged} />}
+        {section === 'portability' && <MigrationPanel controller={migration} targets={providers.flatMap((candidate) => candidate.models.map((item) => ({ key: `${candidate.id}|${item.id}`, label: `${candidate.label} · ${item.name}` })))} onOpen={threadId => { setSection('library'); void library.open(threadId); }} disabled={selectionChanged} />}
         {section === "imports" && state.workspaceId && (
           <ImportPanel
             storage={services.storage}

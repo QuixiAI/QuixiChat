@@ -28,6 +28,12 @@ export function describeThreadEvent(
     const candidates = details.candidates as { provider?: string; model?: string }[];
     return `${when} · Compared ${candidates.length} answers: ${candidates.map((candidate) => `${providerLabel(String(candidate.provider ?? "unknown"))} ${candidate.model ?? ""}`).join(", ")} · every answer is kept as its own branch`;
   }
+  if (event.type === "Migration") {
+    const from = details.from as { provider?: string; model?: string } | null | undefined;
+    const to = details.to as { provider?: string; model?: string } | undefined;
+    const transformations = Array.isArray(details.transformations) ? (details.transformations as string[]) : [];
+    return `${when} · Migrated ${from ? `${providerLabel(String(from.provider ?? "unknown"))} ${from.model ?? ""}` : "no primary"} → ${providerLabel(String(to?.provider ?? "unknown"))} ${to?.model ?? ""} (reviewed bulk migration)${transformations.length ? ` · ${transformations.join("; ")}` : ""} · history unchanged`;
+  }
   if (event.type === "Critique") {
     const reviewed = details.reviewed as { provider?: string; model?: string } | undefined;
     return `${when} · Critique of the ${providerLabel(String(reviewed?.provider ?? "unknown"))} ${reviewed?.model ?? ""} answer · the reviewed answer is unchanged`;
