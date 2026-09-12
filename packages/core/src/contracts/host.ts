@@ -39,6 +39,9 @@ export interface HostCapabilities {
   clipboard: CapabilityState;
   /** Receiving provider history bundles from the Quixi browser extension (product §24). */
   extensionTransfers: CapabilityState;
+  /** Product §14: whether this host can ask the browser to exempt local data
+   * from storage-pressure eviction; `permission` reflects the current grant. */
+  persistentStorage: CapabilityState;
   secretPersistence: "session" | "native"; providerTransports: ProviderTransport[];
 }
 /** The host owns the page-boundary listener, pairing and staging; the shared
@@ -135,4 +138,6 @@ export interface HostClient {
   writeClipboardText(requestId: QuixiId, text: string): Promise<void>;
   /** Present only where `capabilities().extensionTransfers` can be available. */
   extensionBridge?: ExtensionBridge;
+  /** From a user action; resolves with the browser's actual decision. Unsupported hosts fail with UNSUPPORTED. */
+  requestPersistentStorage(requestId: QuixiId): Promise<{ persisted: boolean }>;
 }

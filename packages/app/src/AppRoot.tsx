@@ -75,6 +75,8 @@ import type { PortabilityInspection } from "./workflows/chat.ts";
 import type { ProviderSwitch, SwitchInspection } from "./workflows/chat.ts";
 import { createDocumentController } from './features/documents/controller.ts';
 import { createSemanticController } from './features/semantic/controller.ts';
+import { createOnboardingController } from './features/onboarding/controller.ts';
+import { OnboardingPanel, StorageStatus } from './features/onboarding/OnboardingPanel.tsx';
 import { SemanticPanel } from './features/semantic/SemanticPanel.tsx';
 import { DocumentPanel } from './features/documents/DocumentPanel.tsx';
 import {
@@ -301,6 +303,8 @@ export function AppRoot({
   const storageHealth = useMemo(() => createStorageHealthController(services.storage), [services]);
   const semantic = useMemo(() => createSemanticController({ storage: services.storage, embedding: services.embedding }), [services]);
   const semanticState = useSyncExternalStore(semantic.subscribe, semantic.getSnapshot);
+  const onboarding = useMemo(() => createOnboardingController({ storage: services.storage, host: services.host, hostProvidesModel: !!services.embedding }), [services]);
+  const onboardingState = useSyncExternalStore(onboarding.subscribe, onboarding.getSnapshot);
   const preference = useSyncExternalStore(preferences.subscribe, preferences.getSnapshot);
   const aliases = useMemo(() => createAliasController(services.storage), [services]);
   const aliasState = useSyncExternalStore(aliases.subscribe, aliases.getSnapshot);
@@ -589,8 +593,10 @@ export function AppRoot({
     void library.initialize();
     void settings?.initialize();
     void semantic.initialize();
+    void onboarding.initialize();
     return () => {
       const task = Promise.allSettled([
+        onboarding.dispose(),
         semantic.dispose(),
         chat.dispose(),
         summaries.dispose(),
@@ -606,7 +612,7 @@ export function AppRoot({
       ]).then(() => {});
       onShutdown?.(task);
     };
-  }, [library, chat, summaries, attachments, settings, content, conversationSearch, exports, restore, documents, storageHealth, semantic, onShutdown]);
+  }, [library, chat, summaries, attachments, settings, content, conversationSearch, exports, restore, documents, storageHealth, semantic, onboarding, onShutdown]);
   useEffect(() => {
     setPromptCount(null);
     setSwitchReviewed(null);
@@ -1196,7 +1202,7 @@ export function AppRoot({
             aria-current={section === "preferences" ? "page" : undefined}
             onClick={() => { setSection("preferences"); void preferences.refresh(); void aliases.refresh(); }}
           >Preferences</button>
-          <button aria-current={section === 'storage-health' ? 'page' : undefined} onClick={() => setSection('storage-health')}>Storage health</button>
+          <button aria-current={section === 'storage-health' ? 'page' : undefined} onClick={() => { setSection('storage-health'); void onboarding.refresh(); }}>Storage health</button>
           <button aria-current={section === 'semantic' ? 'page' : undefined} onClick={() => { setSection('semantic'); void semantic.refresh(); }}>Semantic search</button>
           <button
             aria-current={section === "library" ? "page" : undefined}
@@ -1356,11 +1362,16 @@ export function AppRoot({
         {state.loading && <p role="status">Opening your library…</p>}
         </section>
         {section === "preferences" && <>
-          <PreferencesPanel controller={preferences} snapshot={preference} />
+          <PreferencesPanel controller={preferences} snapshot={preference} onboarding={{ completedAt: onboardingState.completedAt ?? null, busy: onboardingState.busy, showAgain: async () => { await onboarding.reset(); setSection("library"); } }} />
           <RoutingAliasesPanel controller={aliases} snapshot={aliasState} providers={providers} />
         </>}
         {section === 'documents' && <DocumentPanel controller={documents} workspaceId={state.workspaceId} />}
-        {section === 'storage-health' && <StorageHealthPanel controller={storageHealth} disabled={selectionChanged} />}
+        {section === 'storage-health' && <>
+          <section aria-label="Storage" className="storage-section"><h2>Storage</h2>
+            <StorageStatus status={onboardingState.storage} busy={onboardingState.busy} onRequestPersistence={() => void onboarding.requestPersistentStorage()} onExportBackup={() => setSection("exports")} notice={onboardingState.notice} />
+          </section>
+          <StorageHealthPanel controller={storageHealth} disabled={selectionChanged} />
+        </>}
         {section === 'semantic' && <SemanticPanel controller={semantic} snapshot={semanticState} />}
         {section === "imports" && state.workspaceId && (
           <ImportPanel
@@ -1468,6 +1479,11 @@ export function AppRoot({
             )}
             {(selectedContent.busy || openingSearch) && <p role="status">Opening the matching message content…</p>}
             {selectedContent.error && <p role="alert">{selectedContent.error}</p>}
+            {!state.thread && !state.loading && onboardingState.loaded && onboardingState.completedAt === null && (
+              <OnboardingPanel controller={onboarding} snapshot={onboardingState} semantic={semantic} semanticState={semanticState}
+                providersConfigured={services.providerSettings?.connections.length ?? providers.length}
+                navigate={{ imports: () => setSection("imports"), exports: () => setSection("exports"), providers: () => setSection("providers"), semantic: () => setSection("semantic"), extension: () => setSection("imports") }} />
+            )}
             {!state.thread && !state.loading && (
               <section className="welcome">
                 <p className="eyebrow">A home for your conversations</p>

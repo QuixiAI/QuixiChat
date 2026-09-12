@@ -7,18 +7,22 @@ export interface InteractionPreferences {
   modelSwitcherStyle: "select" | "list";
 }
 export interface LocalPreferences extends InteractionPreferences {
-  version: 2;
+  version: 3;
   revision: number;
   sendKey: SendKey;
+  /** Product §94: when this device finished or skipped the first-run steps; null shows them. */
+  onboardingCompletedAt: number | null;
 }
 export const DEFAULT_LOCAL_PREFERENCES: Readonly<LocalPreferences> = Object.freeze({
-  version: 2, revision: 0, sendKey: "mod-enter",
+  version: 3, revision: 0, sendKey: "mod-enter",
   showTimestamps: false, showModelBadges: true, composerLayout: "comfortable", modelSwitcherStyle: "select",
+  onboardingCompletedAt: null,
 });
 export interface PreferenceOperations {
   readLocalPreferences: { args: null; result: LocalPreferences };
   setSendKey: { args: { expectedRevision: number; sendKey: SendKey }; result: LocalPreferences };
   setInteractionPreferences: { args: { expectedRevision: number; preferences: InteractionPreferences }; result: LocalPreferences };
+  setOnboardingState: { args: { expectedRevision: number; onboardingCompletedAt: number | null }; result: LocalPreferences };
 }
 const revision = (value: unknown): value is number =>
   typeof value === "number" && Number.isSafeInteger(value) && value >= 0 && value < Number.MAX_SAFE_INTEGER;
@@ -34,15 +38,19 @@ const interactionValues = (row: Record<string, unknown>): boolean =>
 export function assertInteractionPreferences(value: unknown): asserts value is InteractionPreferences {
   if (!closed(value, interactionKeys) || !interactionValues(value)) throw new Error("Invalid interaction preferences");
 }
+const completedAt = (value: unknown): value is number | null => value === null || (typeof value === "number" && Number.isSafeInteger(value) && value >= 0);
 export function assertLocalPreferences(value: unknown): asserts value is LocalPreferences {
-  if (!closed(value, ["version", "revision", "sendKey", ...interactionKeys]) ||
-    value.version !== 2 || !revision(value.revision) || !sendKey(value.sendKey) || !interactionValues(value))
+  if (!closed(value, ["version", "revision", "sendKey", ...interactionKeys, "onboardingCompletedAt"]) ||
+    value.version !== 3 || !revision(value.revision) || !sendKey(value.sendKey) || !interactionValues(value) || !completedAt(value.onboardingCompletedAt))
     throw new Error("Local preferences are invalid or from an unsupported version. Stored preferences have been preserved.");
 }
-/** Decode a stored closed v1 row without writing a migration. Public results are always v2. */
+/** Decode stored closed v1/v2 rows without writing a migration. Public results
+ * are always v3; older rows show onboarding once, as a fresh device would. */
 export function normalizeLocalPreferences(value: unknown): LocalPreferences {
   if (closed(value, ["version", "revision", "sendKey"]) && value.version === 1 && revision(value.revision) && sendKey(value.sendKey))
     return { ...DEFAULT_LOCAL_PREFERENCES, revision: value.revision, sendKey: value.sendKey };
+  if (closed(value, ["version", "revision", "sendKey", ...interactionKeys]) && value.version === 2 && revision(value.revision) && sendKey(value.sendKey) && interactionValues(value))
+    return { ...DEFAULT_LOCAL_PREFERENCES, ...(value as unknown as InteractionPreferences), revision: value.revision, sendKey: value.sendKey, version: 3, onboardingCompletedAt: null };
   assertLocalPreferences(value);
   return { ...value };
 }
@@ -51,11 +59,13 @@ export function assertPreferenceArgs(operation: keyof PreferenceOperations, valu
     if (value !== null) throw new Error("Reading local preferences takes null arguments");
     return;
   }
-  const field = operation === "setSendKey" ? "sendKey" : "preferences";
+  const field = operation === "setSendKey" ? "sendKey" : operation === "setOnboardingState" ? "onboardingCompletedAt" : "preferences";
   if (!closed(value, ["expectedRevision", field]) || !revision(value.expectedRevision) || value.expectedRevision >= Number.MAX_SAFE_INTEGER - 1)
     throw new Error("Invalid preference change or revision");
   if (operation === "setSendKey") {
     if (!sendKey(value.sendKey)) throw new Error("Invalid send key");
   } else if (operation === "setInteractionPreferences") assertInteractionPreferences(value.preferences);
-  else throw new Error("Unsupported preference operation");
+  else if (operation === "setOnboardingState") {
+    if (!completedAt(value.onboardingCompletedAt)) throw new Error("Invalid onboarding state");
+  } else throw new Error("Unsupported preference operation");
 }

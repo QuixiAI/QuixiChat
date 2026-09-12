@@ -236,6 +236,17 @@ export function createWebHost(config: WebHostConfig): HostClient & {
     typeof navigator.clipboard.writeText === "function"
       ? (text) => navigator.clipboard.writeText(text)
       : null;
+  // Capability reads must stay synchronous-fast (controllers read them on
+  // every change); the persistence grant is probed once at start and after
+  // each request, never awaited inside capabilities().
+  const persistenceSupported = typeof navigator !== 'undefined' && !!navigator.storage && typeof navigator.storage.persist === 'function';
+  let persistenceGranted: boolean | null = null;
+  const probePersistence = () => { if (persistenceSupported) void navigator.storage.persisted().then(value => { persistenceGranted = value; }, () => { persistenceGranted = null; }); };
+  probePersistence();
+  const persistentStorageCapability = (): CapabilityState => {
+    if (!persistenceSupported) return unavailable('This browser does not expose persistent-storage requests to the page.');
+    return { available: true, permission: persistenceGranted === true ? 'granted' : 'prompt', reason: persistenceGranted === true ? null : 'Your browser may remove local Quixi data under storage pressure until persistent storage is granted.' };
+  };
   const adopt = (file: AdoptableFile, requestId: string): AdoptableFile => {
     if (
       typeof file.name !== "string" ||
@@ -487,6 +498,7 @@ export function createWebHost(config: WebHostConfig): HostClient & {
           : unavailable(
               "This browser does not expose clipboard writing to the page.",
             ),
+        persistentStorage: persistentStorageCapability(),
         oauth: closed || suspended ? unavailable('Host is closed or awaiting restoration cleanup.') : oauth.capability(),
         providerTransports: destinations.map((destination) => ({
           id: destination.binding.transportId,
@@ -1123,6 +1135,16 @@ export function createWebHost(config: WebHostConfig): HostClient & {
       new Notification(notification.title, { body: notification.body });
     },
     ...(extensionBridge ? { extensionBridge } : {}),
+    async requestPersistentStorage(requestId) {
+      begin(requestId);
+      try {
+        if (typeof navigator === 'undefined' || !navigator.storage || typeof navigator.storage.persist !== 'function')
+          throw failure('UNSUPPORTED', 'This browser does not expose persistent-storage requests to the page.', requestId);
+        const persisted = await navigator.storage.persist();
+        persistenceGranted = persisted;
+        return { persisted };
+      } finally { finish(requestId); }
+    },
     async dispose() {
       if (closed) return;
       closed = true;

@@ -28,7 +28,11 @@ export async function createDesktopHost(): Promise<HostClient & { dispose(): Pro
     secretStore: Object.freeze({ ...opened.secretStore }),
     // The WebView exposes the clipboard to the page in its secure custom
     // scheme; Rust capabilities are augmented here and nothing native runs.
-    capabilities: async () => ({ ...(await call<Omit<HostCapabilities, "clipboard" | "extensionTransfers">>("capabilities")), extensionTransfers: { available: false, permission: "denied" as const, reason: "Browser extensions cannot reach the desktop app. Import the official export file or a Quixi archive instead." }, clipboard: clipboardWriter() ? { available: true, permission: "prompt" as const, reason: null } : { available: false, permission: "denied" as const, reason: "This WebView does not expose clipboard writing to the page." } }),
+    async requestPersistentStorage(requestId) {
+      if (!isQuixiId(requestId)) throw invalid(requestId, "Invalid request id.");
+      throw Object.assign(new Error("Desktop storage lives in the app's data directory and is not subject to browser eviction; there is nothing to request."), { code: "UNSUPPORTED", requestId });
+    },
+    capabilities: async () => ({ ...(await call<Omit<HostCapabilities, "clipboard" | "extensionTransfers" | "persistentStorage">>("capabilities")), persistentStorage: { available: false, permission: "not_required" as const, reason: "Desktop storage lives in the app's data directory and is not subject to browser eviction." }, extensionTransfers: { available: false, permission: "denied" as const, reason: "Browser extensions cannot reach the desktop app. Import the official export file or a Quixi archive instead." }, clipboard: clipboardWriter() ? { available: true, permission: "prompt" as const, reason: null } : { available: false, permission: "denied" as const, reason: "This WebView does not expose clipboard writing to the page." } }),
     async writeClipboardText(requestId, text) {
       if (closed) throw Object.assign(new Error("Desktop host session is closed."), { code: "CLOSED" });
       if (!isQuixiId(requestId) || typeof text !== "string" || text.length > HOST_BOUNDARIES.maxClipboardChars) throw invalid(requestId, "Clipboard text exceeds its bound.");

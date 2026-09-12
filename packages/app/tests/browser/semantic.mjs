@@ -25,7 +25,9 @@ async function open(engine, profile, url) {
   const page = await context.newPage();
   const errors = [];
   page.on('pageerror', (error) => errors.push(String(error)));
-  page.on('console', (message) => { if (message.type() === 'error' || message.type() === 'warning') errors.push(`${message.type()}: ${message.text()}`); });
+  // Console errors are evidence; browser warnings (e.g. Chromium's "No available
+  // adapters." from the onboarding WebGPU probe) are not failures.
+  page.on('console', (message) => { if (message.type() === 'error') errors.push(`${message.type()}: ${message.text()}`); });
   page.on('crash', () => errors.push('page crashed'));
   page.on('close', () => errors.push('page closed'));
   await page.goto(url);

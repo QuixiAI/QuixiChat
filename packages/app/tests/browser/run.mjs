@@ -12,6 +12,7 @@ import { exerciseAliasRemovalFocus } from './alias-removal-focus.mjs';
 import { exerciseReasoningContinuation, verifyReasoningContinuationRestart } from './reasoning-continuation.mjs';
 import { exerciseOutputParts } from './output-parts.mjs';
 import { exerciseSemanticSearch } from './semantic.mjs';
+import { exerciseOnboarding } from './onboarding.mjs';
 import { browserEngines } from "../../../../tooling/browser-engines.mjs";
 import { embeddingModelAssets } from "../../../../tooling/embedding-assets.ts";
 const selectedEngines = browserEngines({ chromium, webkit });
@@ -514,6 +515,9 @@ try {
     "packages/app/tests/browser/composer-files-restore.html",
     "packages/app/tests/browser/run.mjs",
     "packages/app/tests/browser/semantic.mjs",
+    "packages/app/tests/browser/onboarding.mjs",
+    "packages/app/src/features/onboarding/controller.ts",
+    "packages/app/src/features/onboarding/OnboardingPanel.tsx",
     "packages/app/src/features/semantic/controller.ts",
     "packages/app/src/features/semantic/SemanticPanel.tsx",
     "packages/app/src/features/semantic/assets.ts",
@@ -741,7 +745,8 @@ try {
       await peer.goto(url);
       await expect(peer.getByRole("heading", { name: "Pick up where you left off." })).toBeVisible();
       const sharedPreferences = await peer.evaluate(() => window.appAcceptance.preferences());
-      expect(sharedPreferences).toEqual({ version: 2, revision: oldPreferences.revision + 1, sendKey: "enter", ...defaultInteractions });
+      expect(sharedPreferences).toEqual({ version: 3, revision: oldPreferences.revision + 1, sendKey: "enter", ...defaultInteractions, onboardingCompletedAt: sharedPreferences.onboardingCompletedAt });
+      expect(typeof sharedPreferences.onboardingCompletedAt === "number" || sharedPreferences.onboardingCompletedAt === null).toBe(true);
       const stalePreferenceError = await peer.evaluate(async revision => {
         try { await window.appAcceptance.setSendKey(revision, "mod-enter"); return null; }
         catch (error) { return String(error); }
@@ -2960,6 +2965,9 @@ try {
     // pinned model (plan 21); the model directory is served by the preview.
     evidence.semantic = await exerciseSemanticSearch({ engine, profile: resolve(temporary, `${name}-semantic`), name, origin: "http://127.0.0.1:4197" });
     evidence.checks.push(...evidence.semantic.checks);
+    // First-run onboarding and storage status in a fresh archive (plans 13/21).
+    evidence.onboarding = await exerciseOnboarding({ engine, profile: resolve(temporary, `${name}-onboarding`), name, origin: "http://127.0.0.1:4197" });
+    evidence.checks.push(...evidence.onboarding.checks);
     evidence.status = "passed";
     await save();
     console.log(`${name}: ${evidence.checks.length} application checks passed`);

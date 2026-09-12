@@ -1,6 +1,6 @@
 # 13 — Complete onboarding, appearance, and accessibility
 
-**Status:** In progress — all five interaction preferences persist and pass two-engine qualification; onboarding, themes and the broader accessibility audit remain open
+**Status:** In progress — interaction preferences, the five-step first-run onboarding and the §13/§14 storage status pass two-engine qualification ([onboarding](../validation/onboarding.md)); themes and the broader accessibility audit remain open
 
 **Workstream:** Shared product experience
 
@@ -26,8 +26,8 @@ Make the local-first product understandable and accessible from first launch thr
 
 ## Tasks
 
-- [ ] Implement onboarding steps for local-storage disclosure, capability checks, bringing history, connecting providers now or later, and optional semantic-search enrollment when available.
-- [ ] Show actual persistence-grant and quota state, device/profile/origin ownership, and export/backup actions. Do not equate successful startup with guaranteed storage durability.
+- [x] Implement onboarding steps for local-storage disclosure, capability checks, bringing history, connecting providers now or later, and optional semantic-search enrollment when available. — `packages/app/src/features/onboarding/` renders product §94 steps 1–5 on the landing until completed or skipped (device-local preference row v3, [ADR 0018 addendum](../decisions/0018-local-preferences-and-routing-presets.md#onboarding-state--2026-09-12)); step 2 reads actual diagnostics and host capabilities, step 3 links extension/export/archive imports, step 4 reports configured connections, step 5 enrols semantic search through the plan 21 controller; Preferences can show it again. Eight checks per engine in the [onboarding qualification](../validation/onboarding.md).
+- [x] Show actual persistence-grant and quota state, device/profile/origin ownership, and export/backup actions. Do not equate successful startup with guaranteed storage durability. — the §13/§14 storage block (onboarding step 2 and the Storage health section) reports the worker's persistence observation and the host's `persistentStorage` capability, usage/quota, the ownership note and Export backup; "Request persistent storage" reports the browser's actual answer (both headless engines refuse it, shown as not granted with the eviction warning).
 - [ ] Complete import and compatibility warning review, recoverable error states, empty states, and progress/cancellation presentation across the application.
 - [ ] Implement Warm Reading, Cool Minimal, Compact Ops, Terminal, Bubbles, and Focus themes through shared appearance tokens and layouts.
 - [x] Keep interaction settings independent of themes: send-key behavior, timestamps, model badges, composer layout, and model-switcher style. Persist preferences through the agreed local settings path.
@@ -53,7 +53,7 @@ Make the local-first product understandable and accessible from first launch thr
 - [ ] A user can bring history and use the local product without creating a Quixi account or enabling semantic search.
 - [ ] Changing a theme does not change interaction preferences or hide required warnings.
 - [ ] Core workflows can be completed with keyboard and screen reader, including import, branch selection, switching, and export.
-- [ ] Persistence and semantic availability are reported from actual capabilities/state rather than hardcoded success indicators.
+- [x] Persistence and semantic availability are reported from actual capabilities/state rather than hardcoded success indicators. — onboarding step 2 and Storage health read diagnostics, host capabilities, `supportsWasmSimd`, a WebGPU adapter probe and the host model presence; the proof records different WebGPU answers per engine and the refused persistence request.
 
 ## Boundaries and sequencing
 

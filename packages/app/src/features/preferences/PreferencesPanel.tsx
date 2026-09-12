@@ -2,7 +2,7 @@ import type { InteractionPreferences, SendKey } from "@quixi/core/contracts";
 import type { PreferenceController, PreferenceSnapshot } from "./controller.ts";
 import { useFocusRecovery } from '../accessibility/useFocusRecovery.ts';
 
-export function PreferencesPanel({ controller, snapshot }: { controller: PreferenceController; snapshot: PreferenceSnapshot }) {
+export function PreferencesPanel({ controller, snapshot, onboarding }: { controller: PreferenceController; snapshot: PreferenceSnapshot; onboarding?: { completedAt: number | null; busy: boolean; showAgain(): Promise<void> } }) {
   const focus = useFocusRecovery();
   const disabled = !snapshot.ready || snapshot.busy;
   const update = (change: Partial<InteractionPreferences>) => void controller.setInteractionPreferences({
@@ -39,5 +39,6 @@ export function PreferencesPanel({ controller, snapshot }: { controller: Prefere
     </select>
     <p role="status">{snapshot.busy ? "Loading or saving preferences…" : snapshot.ready ? "Preferences are saved on this device." : "Preferences are unavailable."}</p>
     <button disabled={snapshot.busy} onClick={() => void controller.refresh()}>Reload preferences</button>
+    {onboarding && <p className="onboarding-preference">{onboarding.completedAt === null ? "First-time setup is shown on the library page until you finish or skip it." : `First-time setup finished ${new Date(onboarding.completedAt).toLocaleString()}.`} <button disabled={onboarding.busy || onboarding.completedAt === null} onClick={() => void onboarding.showAgain()}>Show first-time setup again</button></p>}
   </section>;
 }

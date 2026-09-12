@@ -579,3 +579,10 @@ form label {
 .pending-recovery {
   overflow-wrap: anywhere;
 }
+
+.onboarding { max-width: 640px; margin: 4vh auto 0; padding: 20px 24px; border: 1px solid var(--border, #cfd8d2); border-radius: 12px; background: var(--surface, #fff); }
+.onboarding h2 { margin: 4px 0 8px; }
+.onboarding .onboarding-nav { margin-top: 16px; }
+.capability-check dt, .storage-status dt { font-weight: 600; margin-top: 8px; }
+.capability-check dd, .storage-status dd { margin: 2px 0 0 0; }
+.storage-section { max-width: 720px; }

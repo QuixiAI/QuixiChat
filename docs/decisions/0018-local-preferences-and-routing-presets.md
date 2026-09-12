@@ -168,3 +168,13 @@ excluded from portable/open exports and clean rescue copies. A separate host
 store, arbitrary CSS preferences and a generic key/value write API would break
 the existing ownership or validation contract and are not introduced.
 Qualification is recorded in [interaction preferences](../validation/interaction-preferences.md).
+
+## Onboarding state — 2026-09-12
+
+The local row is now **version 3**: the closed v2 fields plus
+`onboardingCompletedAt: number | null` (product §94). `normalizeLocalPreferences`
+decodes closed v1 and v2 rows to v3 without writing, with the onboarding shown
+once as on a fresh device; `setOnboardingState` is the only writer and uses
+the same conditional-revision statement. No canonical or sync record is
+produced. [Qualification](../validation/onboarding.md) covers normalization,
+the storage boundary and the two-engine first-run flow.

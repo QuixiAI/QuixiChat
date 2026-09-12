@@ -18,7 +18,19 @@ test("closed v1 preferences normalize to v2 without mutating input or shared def
   assert.throws(() => assertLocalPreferences(legacy), /preserved/);
 });
 
-test("v2 preferences are closed and copied, and an old closed v1 reader refuses expanded results", () => {
+test("closed v2 preferences normalize to v3 showing onboarding once, without mutating input", () => {
+  const stored = Object.freeze({ version: 2, revision: 4, sendKey: "enter", ...preferences });
+  const value = normalizeLocalPreferences(stored);
+  assert.deepEqual(value, { ...DEFAULT_LOCAL_PREFERENCES, ...preferences, revision: 4, sendKey: "enter", version: 3, onboardingCompletedAt: null });
+  assert.equal((stored as { onboardingCompletedAt?: unknown }).onboardingCompletedAt, undefined);
+  assert.throws(() => assertLocalPreferences(stored), /preserved/);
+  assert.doesNotThrow(() => assertPreferenceArgs("setOnboardingState", { expectedRevision: 4, onboardingCompletedAt: 1_700_000_000_000 }));
+  assert.doesNotThrow(() => assertPreferenceArgs("setOnboardingState", { expectedRevision: 4, onboardingCompletedAt: null }));
+  for (const args of [{ expectedRevision: 4, onboardingCompletedAt: -1 }, { expectedRevision: 4, onboardingCompletedAt: "now" }, { expectedRevision: 4 }, { expectedRevision: 4, onboardingCompletedAt: null, extra: 1 }])
+    assert.throws(() => assertPreferenceArgs("setOnboardingState", args));
+});
+
+test("v3 preferences are closed and copied, and an old closed v1 reader refuses expanded results", () => {
   const value = { ...DEFAULT_LOCAL_PREFERENCES, ...preferences, revision: 7 };
   assert.doesNotThrow(() => assertLocalPreferences(value));
   const copy = normalizeLocalPreferences(value);
@@ -26,7 +38,7 @@ test("v2 preferences are closed and copied, and an old closed v1 reader refuses 
   // The previous reader accepted exactly version/revision/sendKey at version 1.
   const oldReaderAccepts = (row: Record<string, unknown>) => Object.keys(row).length === 3 && row.version === 1;
   assert.equal(oldReaderAccepts(value), false);
-  for (const invalid of [null, [], {}, { ...value, version: 3 }, { ...value, future: true },
+  for (const invalid of [null, [], {}, { ...value, version: 4 }, { ...value, future: true }, { ...value, onboardingCompletedAt: -5 },
     { ...value, revision: -1 }, { ...value, revision: Number.MAX_SAFE_INTEGER },
     { ...value, sendKey: "unknown" }, { ...value, showTimestamps: 1 },
     { ...value, composerLayout: "tiny" }, { ...value, modelSwitcherStyle: "radio" },

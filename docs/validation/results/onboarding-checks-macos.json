@@ -1,0 +1,78 @@
+{
+  "selectedEngines": [
+    "chromium",
+    "webkit"
+  ],
+  "status": "passed",
+  "startedAt": "2026-09-12T09:26:22.529Z",
+  "hosts": [
+    {
+      "name": "chromium",
+      "status": "passed",
+      "checks": [
+        "a fresh archive shows step 1 (local storage disclosure) above the usable landing page, with onboarding recorded as not completed",
+        "step 2 reports SQLite WASM/OPFS, FTS5, WASM SIMD, the host model, WebGPU (unavailable) and persistence (not granted) from actual capabilities and diagnostics",
+        "requesting persistent storage reports the browser's actual answer (not granted) and re-reads the status",
+        "step 3 offers extension, provider export and Quixi archive; the import section opens with the extension pairing code and the steps resume where they were",
+        "step 4 reports the configured provider connections and says history stays usable without one",
+        "Later on step 5 records completion in device-local preferences; after a browser restart the steps stay hidden",
+        "Preferences can show the setup again; Enable on step 5 enrols local semantic search through the same controller and completes the setup",
+        "Storage health shows location, database, usage/quota, persistence and an Export backup action that opens the export section"
+      ],
+      "capabilities": {
+        "gpu": false,
+        "persistedBefore": false,
+        "backend": "SQLite WASM / OPFS · schema 12 · integrity ok",
+        "persistedAfter": false
+      }
+    },
+    {
+      "name": "webkit",
+      "status": "passed",
+      "checks": [
+        "a fresh archive shows step 1 (local storage disclosure) above the usable landing page, with onboarding recorded as not completed",
+        "step 2 reports SQLite WASM/OPFS, FTS5, WASM SIMD, the host model, WebGPU (available) and persistence (not granted) from actual capabilities and diagnostics",
+        "requesting persistent storage reports the browser's actual answer (not granted) and re-reads the status",
+        "step 3 offers extension, provider export and Quixi archive; the import section opens with the extension pairing code and the steps resume where they were",
+        "step 4 reports the configured provider connections and says history stays usable without one",
+        "Later on step 5 records completion in device-local preferences; after a browser restart the steps stay hidden",
+        "Preferences can show the setup again; Enable on step 5 enrols local semantic search through the same controller and completes the setup",
+        "Storage health shows location, database, usage/quota, persistence and an Export backup action that opens the export section"
+      ],
+      "capabilities": {
+        "gpu": true,
+        "persistedBefore": false,
+        "backend": "SQLite WASM / OPFS · schema 12 · integrity ok",
+        "persistedAfter": false
+      }
+    }
+  ],
+  "sourceSha256": {
+    "packages/app/src/features/onboarding/controller.ts": "49659b9b3e5c191220b74cd42364cd948242f399fbc301c5e0312cbce3615468",
+    "packages/app/src/features/onboarding/OnboardingPanel.tsx": "4a36edd54d6a3fac0a9514d59232abe0e55dc2f826a353b28dedb9dfe6318eb4",
+    "packages/app/src/features/preferences/PreferencesPanel.tsx": "1e85312d110cd7d93b0d5e97f6eb67755450c6fb0ffe14232f81e00f9c59e944",
+    "packages/app/src/AppRoot.tsx": "1bf6515fbe9f40a16101ed0ded0b4250a757301856ca8e67128923cfb3b8119d",
+    "packages/app/tests/browser/index.ts": "6b7d41878e545e8bc33bb4ed5ea752ed7958040ef20fc73a8c1e94140243e97d",
+    "packages/app/tests/browser/onboarding.mjs": "f84735b9decf933654db47bf1f252730f6683fd36b5ae935a298149f53539ad7",
+    "packages/app/tests/browser/onboarding-run.mjs": "f819063cfd56d03657d9c3b82a497908a74f258951d9164dda6636f880493f9b",
+    "packages/core/src/contracts/preferences.ts": "32c131339404036b392dc54d17184ee50de0941d5397035923c3a525bbff3280",
+    "packages/core/src/contracts/host.ts": "72a8e3e6aafcd2b48f295baad5567b57b12c17252ecd29ee0731c5672a4e793b",
+    "packages/storage/src/worker/preferences.ts": "d53e3717c373a59c051bd43bf253a2a88961a6a9352a38c55c14694b12879099",
+    "apps/web/src/host/index.ts": "89dd7e593cb6c7b3fa6d2bcf6c3ac7c66583aae795d44ad521f72187b3b79f21",
+    "apps/desktop/src/host/index.ts": "9a8125ad7453579d162292fe803bb343bb8b3838122212d8ffe56b57aedd0023",
+    "/Users/eric/QuixiChat/packages/quixi-embed/build/arctic-xs.qxmodel": "e1ef345cd35088b06f70c199f5a4e0311bda5983716ad6a3e7d0a604202efffc"
+  },
+  "environment": {
+    "platform": "darwin",
+    "release": "25.6.0",
+    "arch": "arm64",
+    "osVersion": "26.6.2",
+    "node": "v22.23.1"
+  },
+  "model": {
+    "source": "/Users/eric/QuixiChat/packages/quixi-embed/build/arctic-xs.qxmodel",
+    "provisioned": true
+  },
+  "sourceStable": true,
+  "finishedAt": "2026-09-12T09:26:30.284Z"
+}
