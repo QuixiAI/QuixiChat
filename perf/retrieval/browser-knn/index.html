@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Quixi sqlite-vec browser measurement</title></head>
+<body><pre id="log">sqlite-vec KNN measurement harness; driven by run.mjs through Playwright.</pre>
+<script type="module">
+  const worker = new Worker("./worker.js", { type: "module" });
+  const pending = new Map();
+  worker.onmessage = (event) => { const { id, result, error, log } = event.data; if (log) { document.getElementById("log").textContent += `\n${log}`; return; } const entry = pending.get(id); pending.delete(id); error ? entry.reject(new Error(error)) : entry.resolve(result); };
+  let next = 0;
+  window.quixiMeasure = (command) => new Promise((resolve, reject) => { const id = ++next; pending.set(id, { resolve, reject }); worker.postMessage({ id, ...command }); });
+  window.quixiReady = true;
+</script></body></html>

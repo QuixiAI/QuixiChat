@@ -77,6 +77,8 @@
     "test:documents:clear": "tsc --noEmit -p packages/documents/tests/tsconfig.clear.json && node --experimental-transform-types --test packages/documents/tests/clear.test.ts",
     "test:storage:retained-extraction": "node packages/storage/tests/retained-extraction/run.mjs",
     "perf:documents": "tsc --noEmit -p perf/documents/tsconfig.json && node perf/documents/run.mjs",
+    "perf:knn:node": "node perf/retrieval/sqlite-vec-knn.mjs",
+    "perf:knn:browser": "node perf/retrieval/browser-knn/run.mjs",
     "test:app:documents:browser": "tsc --noEmit -p packages/app/src/features/documents/tests/browser/tsconfig.json && node packages/app/src/features/documents/tests/browser/run.mjs",
     "test:app:summaries": "tsc --noEmit -p packages/app/tsconfig.tests.json && node --experimental-transform-types --test packages/app/tests/compaction/*.test.ts",
     "test:host:regional": "tsc --noEmit -p apps/web/tests/tsconfig.json && node --experimental-transform-types --test apps/web/tests/regional-*.test.ts",

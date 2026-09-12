@@ -170,3 +170,23 @@ costs are unmeasured here.
 node --experimental-transform-types perf/retrieval/compressed.mjs            # 100k, 500k, 1M
 node --experimental-transform-types perf/retrieval/compressed.mjs --sizes=100000
 ```
+
+## sqlite-vec in the browser — 2026-09-12 (plan 22)
+
+[browser-knn/run.mjs](browser-knn/run.mjs) serves the pinned SQLite WASM and a
+dedicated worker ([browser-knn/worker.js](browser-knn/worker.js)) that builds
+vec0 `float[384]` and `int8[384]` tables on the OPFS SAHPool VFS and measures
+float KNN, int8 coarse KNN, coarse→float rerank, page-cache misses, SQLite
+memory, cold reopen and queries interleaved with publication batches in
+Chromium and WebKit; [sqlite-vec-knn.mjs](sqlite-vec-knn.mjs) is the Node
+in-memory counterpart. Reports: `browser-knn-<size>[-chunk<n>].json`,
+`sqlite-vec-knn-<size>.json`. Result (ADR 0036 amendment): the int8 scan is
+CPU-slower than the float scan in this build and vec0 point lookups read whole
+chunks, so the coarse stage is off by default.
+
+```sh
+npm run perf:knn:browser                                        # 100k, both engines
+QUIXI_KNN_SIZES=100000,500000 npm run perf:knn:browser
+QUIXI_KNN_FLOAT_CHUNK=16 QUIXI_TEST_BROWSERS=chromium npm run perf:knn:browser
+npm run perf:knn:node -- --size=100000
+```

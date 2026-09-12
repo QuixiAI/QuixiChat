@@ -13,7 +13,7 @@ const unit = () => { const v = new Float32Array(384); v[0] = 1; return v; };
 function fakeStorage(texts: string[], leaseMs = 30) {
   const chunks = texts.map((text, index) => ({ chunkId: index.toString(16).padStart(64, "0"), text, digest: digest(text), vector: false, leased: 0 }));
   const state = { generation: 1, state: "enrolled" as SemanticIndexStatus["state"], claims: 0, publishes: 0 };
-  const status = (): SemanticIndexStatus => ({ state: state.state, model: identity, generation: state.generation, indexedChunks: chunks.filter((c) => c.vector).length, pendingChunks: chunks.filter((c) => !c.vector).length, vectors: chunks.filter((c) => c.vector).length, vectorBytes: 0, projection: { representation: "int8-fixed-symmetric-v1", scale: 0.4 / 127, projected: chunks.filter((c) => c.vector).length, complete: true, coarseRetrieval: false, threshold: 20_000 } });
+  const status = (): SemanticIndexStatus => ({ state: state.state, model: identity, generation: state.generation, indexedChunks: chunks.filter((c) => c.vector).length, pendingChunks: chunks.filter((c) => !c.vector).length, vectors: chunks.filter((c) => c.vector).length, vectorBytes: 0, projection: { representation: "int8-fixed-symmetric-v1", scale: 0.4 / 127, projected: chunks.filter((c) => c.vector).length, complete: true, coarseRetrieval: false, threshold: null } });
   return {
     state, chunks,
     async request<K extends keyof StorageOperations>(_id: string, operation: K, args: StorageOperations[K]["args"]): Promise<StorageOperations[K]["result"]> {

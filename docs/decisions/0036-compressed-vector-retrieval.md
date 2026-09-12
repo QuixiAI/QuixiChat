@@ -2,7 +2,9 @@
 
 Date: 2026-09-12. Status: accepted as plan 22's representation decision from
 benchmark evidence and implemented in storage the same day (see
-"Implementation"); browser-scale measurements follow in later slices.
+"Implementation"). Amended the same day after the browser measurement (see
+"Browser measurement"): the coarse stage is **off by default** because it is
+slower than the exact float scan in the pinned sqlite-vec WASM build.
 
 ## Question
 
@@ -129,11 +131,81 @@ the browser measurements below decide whether a binary pre-filter or an ANN
 structure is needed before the 1M gate. The 20,000 threshold is a first
 setting, not a measured optimum.
 
+## Browser measurement (2026-09-12) and amendment
+
+[perf/retrieval/browser-knn/run.mjs](../../perf/retrieval/browser-knn/run.mjs)
+runs the pinned SQLite WASM with sqlite-vec on the OPFS SAHPool VFS in a
+dedicated worker (the Storage Worker's configuration: 8 KiB pages, 16 MiB page
+cache, `journal_mode=DELETE`, `synchronous=FULL`) in Playwright Chromium
+153.0.8010.12 and WebKit 26.6 on macOS 26.6.2 / Apple M5 Max. Reports:
+[browser-knn-100000.json](../../perf/retrieval/browser-knn-100000.json),
+[browser-knn-500000.json](../../perf/retrieval/browser-knn-500000.json),
+[browser-knn-100000-chunk16.json](../../perf/retrieval/browser-knn-100000-chunk16.json).
+Median of 36 queries; "pages" are page-cache misses per query
+(`SQLITE_DBSTATUS_CACHE_MISS`), i.e. 8 KiB reads from OPFS.
+
+| Size | Engine | float32 KNN top-64 | int8 coarse top-500 | int8 coarse → float rerank | Pages read: float / int8 / rerank |
+| --- | --- | --- | --- | --- | --- |
+| 100k | Chromium | 41.5 ms | 56.2 ms | 102.5 ms | 18,940 / 4,828 / 46,684 |
+| 100k | WebKit | 43.0 ms | 78.0 ms | 126.0 ms | same |
+| 500k | Chromium | 211.1 ms | 282.1 ms | 337.1 ms | 94,501 / 24,085 / 71,955 |
+| 500k | WebKit | 219.0 ms | 388.0 ms | 445.0 ms | same |
+| 100k, float `chunk_size=16` | Chromium | 47.4 ms | 54.3 ms | 58.4 ms | 19,642 / 4,828 / 6,332 |
+| 100k, float `chunk_size=16` | WebKit | 46.0 ms | 75.0 ms | 77.0 ms | same |
+
+Other observations: top-64 agreement between coarse→rerank and the exact
+ranking was 1.0 for every query; query quantization costs under 0.1 ms;
+SQLite's memory high-water stayed at 19 MB (100k) and 29 MB (500k) with a
+25–44 MB WASM heap, so the float scan streams from OPFS through the page cache
+rather than holding the index in memory; a cold reopen (fresh connection, no
+page cache) costs the same as the steady state in both engines; a 1,000-row
+publication batch takes 17–34 ms and the first query after it is unchanged;
+OPFS holds 198 MB at 100k and 986 MB at 500k for the two tables together;
+build (insert) throughput was 30–45k vectors/s.
+
+Two findings change the decision's operating point:
+
+1. **The int8 scan is CPU-bound and slower than the float scan in this
+   build.** sqlite-vec v0.1.9 compiled to WASM computes int8 L2 distances
+   1.3–1.8× slower than float32 (SIMD-less integer path), while OPFS reads
+   are not the bottleneck: 155 MB of float pages stream in ~40 ms, so the
+   4× smaller int8 table saves bytes but not time. The ADR's expectation that
+   the coarse stage pays for itself in I/O does not hold here.
+2. **vec0 point lookups read whole chunks.** The first implementation's
+   rerank (`rowid IN (subquery)`) made vec0 scan the entire float table; the
+   corrected join uses vec0's point plan, but each lookup still loads the
+   row's 1024-vector chunk blob (1.5 MB), so 500 candidates cost more pages
+   than the full float scan. A float table declared with `chunk_size=16`
+   brings the rerank down to +4 ms and 1,500 pages, at a ~13% slower exact
+   scan (Chromium 47.4 vs 41.5 ms).
+
+Amendment: `SEMANTIC_COARSE_THRESHOLD` is `null` — every size uses the exact
+float KNN, and `status.projection.threshold` reports null so the app says
+"coarse stage off by measurement". The projection, its upgrade/backfill/
+mismatch lifecycle, the join-shaped rerank and the tests stay; a repository can
+enable the stage with `semanticCoarseThreshold`, and the tests do. The
+projection costs 25% extra vector bytes and one extra insert per vector while
+it is unused; the next slice decides whether it stays. The memory finding also
+means product §76's "1.46 GB float scan" concern is about latency, not
+resident memory, on the OPFS path: the exact scan is linear (≈0.42 µs/vector
+in both engines), so 1M vectors is about 420 ms per query.
+
+What a faster coarse stage would need, for the next slice to measure: a
+`bit[384]` vec0 table with Hamming distance (popcount is cheap in WASM; 46 MB
+at 1M) used as a **pre-filter with a candidate set in the thousands**, then
+float32 rerank of those candidates through a `chunk_size=16` float table
+(or a plain rowid-keyed blob table, which measures the same in Node). The
+quality question is whether binary at 5k–20k candidates recovers the exact
+neighbours that it misses at 200–1000 (`compressed.mjs` needs those candidate
+counts added); the latency question is the Hamming KNN in the browser at
+100k/500k/1M with the harness's `QUIXI_KNN_*` options extended for it.
+
 ## What remains before the semantic-scale gate
 
-- Measure in the browser: sqlite-vec int8 KNN latency, OPFS reads and memory at
-  100k/500k/1M in Chromium and WebKit, under foreground and backfill load
-  (product §112), and the WASM overhead of query quantization.
+- Measured above at 100k and 500k in Chromium and WebKit (latency, OPFS
+  pages, memory, backfill interleaving, quantization); 1M remains, and a
+  binary Hamming pre-filter is the candidate for a coarse stage that is
+  actually faster than the float scan.
 - Re-run the hybrid benchmark with RRF and source filters over the selected
   representation, and the chunk-size sweep from product §50, on a larger
   independently judged corpus before any broad quality claim.

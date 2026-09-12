@@ -40,7 +40,14 @@ export const SEMANTIC_PROJECTION_CHECKSUM = searchDigest(SEMANTIC_PROJECTION_SCH
  * a fixed scale keeps quantization incremental and identical across devices. */
 export const SEMANTIC_PROJECTION = Object.freeze({ representation: "int8-fixed-symmetric-v1", scale: 0.4 / 127, coarseCandidates: 500 });
 /** Below this many vectors the exact float table is scanned directly. */
-export const SEMANTIC_COARSE_THRESHOLD = 20_000;
+/** Vector count from which queries use the int8 coarse stage; `null` keeps the
+ * exact float KNN at every size. Disabled by measurement (ADR 0036, browser
+ * evidence 2026-09-12): in the pinned sqlite-vec WASM build the int8 scan is
+ * CPU-slower than the float scan in Chromium and WebKit at 100k and 500k, so
+ * coarse→rerank would only add latency. The projection is still maintained so
+ * the path can be enabled per repository (tests) or once a faster coarse
+ * stage is measured. */
+export const SEMANTIC_COARSE_THRESHOLD: number | null = null;
 export function quantizeInt8(vector: ArrayLike<number>): Int8Array {
   const out = new Int8Array(SEMANTIC_DIMENSIONS);
   for (let i = 0; i < SEMANTIC_DIMENSIONS; i++) out[i] = Math.max(-127, Math.min(127, Math.round(vector[i]! / SEMANTIC_PROJECTION.scale)));
@@ -73,7 +80,8 @@ function validVector(vector: readonly number[]): boolean {
 }
 export class SemanticRepository {
   private unavailable: string | null = null;
-  constructor(private readonly db: CanonicalSqlite, private readonly now: () => number = () => Date.now(), private readonly coarseThreshold: number = SEMANTIC_COARSE_THRESHOLD) {}
+  constructor(private readonly db: CanonicalSqlite, private readonly now: () => number = () => Date.now(), private readonly coarseThreshold: number | null = SEMANTIC_COARSE_THRESHOLD) {}
+  private coarse(vectors: number, projected: number): boolean { return this.coarseThreshold !== null && vectors >= this.coarseThreshold && projected === vectors; }
   private rows(sql: string, bind: SqlValue[] = []) {
     return rows(this.db, sql, bind);
   }
@@ -176,7 +184,7 @@ export class SemanticRepository {
     const pending = model ? this.scalar(`SELECT count(*) ${visible.from} LEFT JOIN quixi_semantic_links l ON l.chunk_id=c.chunk_id WHERE ${visible.where} AND (l.chunk_id IS NULL OR (l.vector_id IS NULL AND l.failure IS NULL))`, visible.bind) : 0;
     const vectors = this.scalar("SELECT count(*) FROM quixi_semantic_vectors");
     const projected = this.scalar("SELECT count(*) FROM quixi_semantic_int8");
-    const projection = { ...emptyProjection, projected, complete: projected === vectors, coarseRetrieval: vectors >= this.coarseThreshold && projected === vectors };
+    const projection = { ...emptyProjection, projected, complete: projected === vectors, coarseRetrieval: this.coarse(vectors, projected) };
     return { state: String(meta.state) as SemanticIndexStatus["state"], model, generation: Number(meta.generation), indexedChunks: indexed, pendingChunks: pending, vectors, vectorBytes: vectors * VECTOR_BYTES, projection };
   }
   enroll(args: SearchOperations["enrollSemantic"]["args"], visible: VisibleChunkSql): SemanticIndexStatus {
@@ -328,11 +336,14 @@ export class SemanticRepository {
     const projected = this.scalar("SELECT count(*) FROM quixi_semantic_int8");
     // ADR 0036: above the threshold, int8 coarse retrieval over a generous
     // candidate set, then an exact float32 rerank of those candidates. A
-    // projection that is not yet complete never serves queries.
-    const knn = vectors >= this.coarseThreshold && projected === vectors
-      ? `SELECT v.rowid AS vector_id,vec_distance_L2(v.embedding,?) AS distance FROM quixi_semantic_vec v WHERE v.rowid IN (SELECT rowid FROM quixi_semantic_int8 WHERE embedding MATCH vec_int8(?) AND k=?)`
+    // projection that is not yet complete never serves queries. The rerank
+    // must join the coarse rows to the float table (vec0 point lookups,
+    // plan "INDEX 3:2"); `rowid IN (subquery)` makes vec0 scan every float
+    // vector, which the browser measurement exposed (perf/retrieval/browser-knn).
+    const knn = this.coarse(vectors, projected)
+      ? `SELECT v.rowid AS vector_id,vec_distance_L2(v.embedding,?) AS distance FROM (SELECT rowid FROM quixi_semantic_int8 WHERE embedding MATCH vec_int8(?) AND k=?) coarse CROSS JOIN quixi_semantic_vec v ON v.rowid=coarse.rowid`
       : `SELECT rowid AS vector_id,distance FROM quixi_semantic_vec WHERE embedding MATCH ? AND k=?`;
-    const knnBind: SqlValue[] = vectors >= this.coarseThreshold && projected === vectors
+    const knnBind: SqlValue[] = this.coarse(vectors, projected)
       ? [bytes, new Uint8Array(quantizeInt8(vector).buffer), Math.max(k, SEMANTIC_PROJECTION.coarseCandidates)]
       : [bytes, k];
     return this.rows(

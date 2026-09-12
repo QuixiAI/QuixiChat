@@ -1,0 +1,233 @@
+{
+  "version": 1,
+  "measuredAt": "2026-09-12T10:39:09.943Z",
+  "size": 100000,
+  "floatChunkSize": 16,
+  "batch": 5000,
+  "queries": 12,
+  "repetitions": 3,
+  "environment": {
+    "platform": "darwin",
+    "release": "25.6.0",
+    "arch": "arm64",
+    "cpu": "Apple M5 Max",
+    "cores": 18,
+    "totalMemoryBytes": 137438953472,
+    "osVersion": "26.6.2",
+    "node": "v22.23.1",
+    "sqliteWasmSha256": "dd7c22431a3b8ad51ab5e6ed91065593574c34c5959d2efdef2f17484eedcb2c"
+  },
+  "engines": {
+    "chromium": {
+      "browser": "chromium",
+      "version": "153.0.8010.12",
+      "opened": {
+        "floatChunkSize": 16,
+        "vecVersion": "v0.1.9",
+        "sqliteVersion": "3.53.4",
+        "pageSize": 8192,
+        "cacheSize": -16384,
+        "rows": 0,
+        "cacheMissCounter": true
+      },
+      "buildMs": 2503,
+      "insertBatchMs": {
+        "medianMs": 116.5,
+        "maxMs": 132.2000000178814
+      },
+      "steady": {
+        "rows": 100000,
+        "pageSize": 8192,
+        "queryQuantization": {
+          "samples": 36,
+          "medianMs": 0,
+          "p95Ms": 0.09999999403953552,
+          "maxMs": 0.10000002384185791,
+          "pageCacheMissesPerQuery": 0
+        },
+        "floatKnnTop64": {
+          "samples": 36,
+          "medianMs": 47.400000005960464,
+          "p95Ms": 49.80000001192093,
+          "maxMs": 58.10000002384186,
+          "pageCacheMissesPerQuery": 19642
+        },
+        "int8CoarseTop500": {
+          "samples": 36,
+          "medianMs": 54.30000001192093,
+          "p95Ms": 58.099999994039536,
+          "maxMs": 60.099999994039536,
+          "pageCacheMissesPerQuery": 4828.055555555556
+        },
+        "int8CoarseThenFloatRerankTop64": {
+          "samples": 36,
+          "medianMs": 58.400000005960464,
+          "p95Ms": 60.900000005960464,
+          "maxMs": 61.69999998807907,
+          "pageCacheMissesPerQuery": 6331.666666666667
+        },
+        "top64AgreementWithFloat": 1,
+        "memory": {
+          "sqliteMemoryUsedBytes": 17013632,
+          "sqliteMemoryHighwaterBytes": 19366832,
+          "wasmHeapBytes": 25296896
+        },
+        "opfsBytes": 203423744
+      },
+      "underBackfill": {
+        "batch": 1000,
+        "batches": 5,
+        "rowsAfter": 105000,
+        "writeMs": {
+          "samples": 5,
+          "medianMs": 27.099999994039536,
+          "p95Ms": 29,
+          "maxMs": 29
+        },
+        "coarseRerankAfterWrite": {
+          "samples": 5,
+          "medianMs": 61.39999997615814,
+          "p95Ms": 62.5,
+          "maxMs": 62.5
+        },
+        "memory": {
+          "sqliteMemoryUsedBytes": 17013632,
+          "sqliteMemoryHighwaterBytes": 19486832,
+          "wasmHeapBytes": 25296896
+        }
+      },
+      "coldReopen": {
+        "rows": 105000,
+        "floatKnnTop64": {
+          "samples": 1,
+          "medianMs": 50.69999998807907,
+          "p95Ms": 50.69999998807907,
+          "maxMs": 50.69999998807907,
+          "pageCacheMissesPerQuery": 20628
+        },
+        "int8CoarseTop500": {
+          "samples": 1,
+          "medianMs": 58.900000005960464,
+          "p95Ms": 58.900000005960464,
+          "maxMs": 58.900000005960464,
+          "pageCacheMissesPerQuery": 5075
+        },
+        "int8CoarseThenFloatRerankTop64": {
+          "samples": 1,
+          "medianMs": 62.599999994039536,
+          "p95Ms": 62.599999994039536,
+          "maxMs": 62.599999994039536,
+          "pageCacheMissesPerQuery": 6568
+        },
+        "opfsBytes": 213630976
+      },
+      "errors": []
+    },
+    "webkit": {
+      "browser": "webkit",
+      "version": "26.6",
+      "opened": {
+        "floatChunkSize": 16,
+        "vecVersion": "v0.1.9",
+        "sqliteVersion": "3.53.4",
+        "pageSize": 8192,
+        "cacheSize": -16384,
+        "rows": 0,
+        "cacheMissCounter": true
+      },
+      "buildMs": 1546,
+      "insertBatchMs": {
+        "medianMs": 68,
+        "maxMs": 96
+      },
+      "steady": {
+        "rows": 100000,
+        "pageSize": 8192,
+        "queryQuantization": {
+          "samples": 36,
+          "medianMs": 0,
+          "p95Ms": 0,
+          "maxMs": 0,
+          "pageCacheMissesPerQuery": 0
+        },
+        "floatKnnTop64": {
+          "samples": 36,
+          "medianMs": 46,
+          "p95Ms": 48,
+          "maxMs": 54,
+          "pageCacheMissesPerQuery": 19642
+        },
+        "int8CoarseTop500": {
+          "samples": 36,
+          "medianMs": 75,
+          "p95Ms": 79,
+          "maxMs": 79,
+          "pageCacheMissesPerQuery": 4828.055555555556
+        },
+        "int8CoarseThenFloatRerankTop64": {
+          "samples": 36,
+          "medianMs": 77,
+          "p95Ms": 81,
+          "maxMs": 83,
+          "pageCacheMissesPerQuery": 6331.666666666667
+        },
+        "top64AgreementWithFloat": 1,
+        "memory": {
+          "sqliteMemoryUsedBytes": 17013632,
+          "sqliteMemoryHighwaterBytes": 19366832,
+          "wasmHeapBytes": 25296896
+        },
+        "opfsBytes": 203423744
+      },
+      "underBackfill": {
+        "batch": 1000,
+        "batches": 5,
+        "rowsAfter": 105000,
+        "writeMs": {
+          "samples": 5,
+          "medianMs": 16,
+          "p95Ms": 16,
+          "maxMs": 16
+        },
+        "coarseRerankAfterWrite": {
+          "samples": 5,
+          "medianMs": 81,
+          "p95Ms": 83,
+          "maxMs": 83
+        },
+        "memory": {
+          "sqliteMemoryUsedBytes": 17013632,
+          "sqliteMemoryHighwaterBytes": 19486832,
+          "wasmHeapBytes": 25296896
+        }
+      },
+      "coldReopen": {
+        "rows": 105000,
+        "floatKnnTop64": {
+          "samples": 1,
+          "medianMs": 47,
+          "p95Ms": 47,
+          "maxMs": 47,
+          "pageCacheMissesPerQuery": 20628
+        },
+        "int8CoarseTop500": {
+          "samples": 1,
+          "medianMs": 78,
+          "p95Ms": 78,
+          "maxMs": 78,
+          "pageCacheMissesPerQuery": 5075
+        },
+        "int8CoarseThenFloatRerankTop64": {
+          "samples": 1,
+          "medianMs": 80,
+          "p95Ms": 80,
+          "maxMs": 80,
+          "pageCacheMissesPerQuery": 6568
+        },
+        "opfsBytes": 213630976
+      },
+      "errors": []
+    }
+  },
+  "note": "Pinned SQLite WASM + sqlite-vec on the OPFS SAHPool VFS in a dedicated worker; brute-force vec0 scans; pseudo-random vectors; single observations on a shared development host."
+}

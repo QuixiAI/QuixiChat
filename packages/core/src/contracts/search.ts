@@ -107,7 +107,7 @@ export interface SemanticIndexStatus {
   /** The derived compressed coarse-retrieval projection (ADR 0036): its
    * representation identity, how many vectors it covers, and whether coarse
    * retrieval is currently used for queries. */
-  projection: { representation: string; scale: number; projected: number; complete: boolean; coarseRetrieval: boolean; threshold: number };
+  projection: { representation: string; scale: number; projected: number; complete: boolean; coarseRetrieval: boolean; /** null: the coarse stage is disabled and every size uses the exact float KNN. */ threshold: number | null };
 }
 export interface SemanticClaim {
   generation: number;

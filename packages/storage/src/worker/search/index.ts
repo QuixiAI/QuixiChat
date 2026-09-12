@@ -79,7 +79,7 @@ export interface SearchRepositoryOptions {
   chunkTokenizer?: SearchChunkTokenizer;
   now?: () => number;
   /** Vectors at or above which queries use the int8 coarse projection (ADR 0036); fixtures lower it. */
-  semanticCoarseThreshold?: number;
+  semanticCoarseThreshold?: number | null;
   publishedSources?: PublishedExtractionSources;
   nextId?: () => string;
   onProgress?: (status: SearchIndexStatus) => void;
