@@ -336,6 +336,8 @@ Object.assign(window, {
     semanticStatus: () => storage.request(crypto.randomUUID(), "semanticStatus", null),
     /** Diagnostics hook: injects a GPU device loss into the live embedding service; false when the CPU route is active. */
     injectEmbeddingFault: (fault: "gpu-device-loss") => embeddingService ? embeddingService.injectFault(fault) : Promise.resolve(false),
+    /** Plan 23: the last inference self-test result held by the semantic controller (null before one runs). */
+    embeddingSelfTest: () => embeddingService ? embeddingService.selfTest() : Promise.resolve(null),
     /** Plan 22 scale proof: the production Storage Worker's semantic path at
      * 100k+ chunks on this browser's OPFS. Vectors are deterministic synthetic
      * unit vectors published through the real claim→publish protocol (the

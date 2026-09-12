@@ -105,6 +105,22 @@ export async function exerciseSemanticSearch({ engine, profile, name, origin }) 
     await expect(results(page).getByText('Exact text match', { exact: true })).toBeVisible();
     await page.getByRole('button', { name: 'Close results', exact: true }).click();
     evidence.checks.push('Exact mode stays purely lexical');
+    // Plan 23 inference diagnostics (product §100/§101): the Storage health
+    // self-test re-verifies the model and runs frozen goldens on every backend
+    // present here, while the enrolment's route is still live.
+    await page.getByRole('button', { name: 'Storage health', exact: true }).click();
+    const diagnostics = page.getByRole('region', { name: 'Diagnostics', exact: true });
+    await diagnostics.getByRole('button', { name: 'Run inference self-test', exact: true }).click();
+    await expect(diagnostics.getByTestId('inference-report-meta')).toBeVisible({ timeout: 120_000 });
+    const inference = Object.fromEntries(await diagnostics.locator('[data-testid^="inference-"][data-outcome]').evaluateAll(nodes => nodes.map(node => [node.dataset.testid.slice('inference-'.length), node.dataset.outcome])));
+    const selfTest = await page.evaluate(() => window.appAcceptance.embeddingSelfTest());
+    evidence.selfTest = { outcomes: inference, route: selfTest.route, kind: selfTest.kind, elapsedMs: selfTest.elapsedMs, checks: selfTest.checks.map(check => ({ id: check.id, outcome: check.outcome, measured: check.measured })) };
+    expect(inference).toMatchObject({ model_hash: 'ok', tokenizer: 'ok', scalar_golden: 'ok', wasm_simd_backend: 'ok' });
+    // On a GPU route the live route must reproduce the goldens; on a CPU route the check names why WebGPU is not serving (no adapter, or an adapter refused).
+    if (evidence.backend.startsWith('WebGPU')) expect(inference.webgpu_backend).toBe('ok'); else expect(['unsupported', 'attention']).toContain(inference.webgpu_backend);
+    expect(selfTest.checks.find(check => check.id === 'model_hash').measured.sha256).toBe(enrolled.model.sourceHash);
+    expect(selfTest.cases).toHaveLength(3);
+    evidence.checks.push(`the Storage health inference self-test re-hashes the model (${selfTest.checks.find(check => check.id === 'model_hash').measured.source}), reproduces the frozen token ids and reference vectors on the scalar and SIMD backends, and reports the WebGPU backend as ${inference.webgpu_backend} on the ${evidence.backend} route`);
     // Pause refuses new work; new content waits; resume indexes only it.
     await openPanel(page);
     await panel(page).getByRole('button', { name: 'Pause', exact: true }).click();

@@ -2,7 +2,7 @@ import type { SemanticIndexStatus, StorageClient } from "@quixi/core/contracts";
 import { createSemanticIndexer } from "@quixi/search";
 import type { SemanticIndexer, SemanticIndexerSnapshot } from "@quixi/search";
 import { createEmbeddingService, createEmbeddingWorker, EmbeddingServiceError } from "@quixi/quixi-embed/service";
-import type { EmbeddingBackendReport, EmbeddingService } from "@quixi/quixi-embed/service";
+import type { EmbeddingBackendReport, EmbeddingService, InferenceSelfTest } from "@quixi/quixi-embed/service";
 import { embeddingAssets, embeddingModelIdentity } from "./assets.ts";
 import type { EmbeddingHostOptions } from "./assets.ts";
 import { describeStorageError } from "../../runtime/storage-error.ts";
@@ -21,6 +21,8 @@ export interface SemanticSnapshot {
   error: string | null;
   /** Whether a query can be embedded right now, and why not. */
   query: { available: boolean; reason: string | null };
+  /** Product §100 inference diagnostics from the last explicit self-test. */
+  selfTest: InferenceSelfTest | null;
 }
 export interface SemanticControllerServices {
   storage: StorageClient;
@@ -32,7 +34,7 @@ const describe = (error: unknown) => error instanceof EmbeddingServiceError ? er
 /** Product §72–§74 controls over the storage boundary and the owned runtime.
  * Lexical search never waits on anything here. */
 export function createSemanticController(services: SemanticControllerServices) {
-  let state: SemanticSnapshot = Object.freeze({ status: null, runtime: services.embedding ? "not-loaded" : "no-host-assets", report: null, indexer: null, chunksPerSecond: null, estimatedRemainingSeconds: null, busy: false, error: null, query: { available: false, reason: "Semantic search is not enabled." } });
+  let state: SemanticSnapshot = Object.freeze({ selfTest: null, status: null, runtime: services.embedding ? "not-loaded" : "no-host-assets", report: null, indexer: null, chunksPerSecond: null, estimatedRemainingSeconds: null, busy: false, error: null, query: { available: false, reason: "Semantic search is not enabled." } });
   const listeners = new Set<() => void>();
   let service: EmbeddingService | null = null, loading: Promise<EmbeddingService> | null = null, indexer: SemanticIndexer | null = null;
   // One parked worker per controller lifetime (see createEmbeddingWorker).
@@ -146,6 +148,11 @@ export function createSemanticController(services: SemanticControllerServices) {
     deleteIndex: () => run(async () => {
       await unloadRuntime();
       await services.storage.request(id(), "deleteSemanticIndex", { operationId: id() });
+    }),
+    /** Product §101 "run QuixiEmbed self-test": loads the runtime if needed, re-verifies the model and runs the frozen goldens on every backend here. The runtime stays loaded afterwards. */
+    selfTest: () => run(async () => {
+      const runtime = await ensureRuntime();
+      patch({ selfTest: await runtime.selfTest() });
     }),
     rebuild: () => run(async () => {
       await stopIndexing();

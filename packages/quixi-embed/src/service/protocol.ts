@@ -22,6 +22,7 @@ export interface EmbeddingServiceOptions {
   requestTimeoutMs?: number;
   initializationTimeoutMs?: number;
 }
+import type { InferenceSelfTest } from './self-test.ts';
 export interface EmbeddingBackendReport {
   route: string;
   kind: 'cpu' | 'gpu';
@@ -47,13 +48,15 @@ export type ServiceRequest =
   | { kind: 'clearCache'; id: number }
   | { kind: 'statistics'; id: number; remainingDocuments: number | null }
   | { kind: 'shutdown'; id: number; mode: 'cancel' | 'drain' }
-  | { kind: 'fault'; id: number; fault: 'gpu-device-loss' };
+  | { kind: 'fault'; id: number; fault: 'gpu-device-loss' }
+  | { kind: 'selfTest'; id: number };
 export type ServiceReply =
   | { kind: 'ready'; id: number; report: EmbeddingBackendReport }
   | { kind: 'vector'; id: number; vector: Float32Array; route: string; cacheHit: boolean }
   | { kind: 'done'; id: number }
   | { kind: 'statistics'; id: number | null; statistics: SchedulerStatistics }
   | { kind: 'failure'; id: number; code: EmbeddingServiceFailureCode; message: string }
-  | { kind: 'faulted'; id: number; injected: boolean };
+  | { kind: 'faulted'; id: number; injected: boolean }
+  | { kind: 'selfTest'; id: number; result: InferenceSelfTest };
 export const SERVICE_PROTOCOL_VERSION = 1;
 export type DistributiveOmit<T, K extends keyof T> = T extends unknown ? Omit<T, K> : never;

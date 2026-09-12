@@ -2,6 +2,7 @@ import type { EmbeddingRole } from '../scalar.ts';
 import type { EmbeddingPriority, SchedulerStatistics } from '../scheduler/types.ts';
 import { EmbeddingServiceError, SERVICE_PROTOCOL_VERSION } from './protocol.ts';
 import type { DistributiveOmit, EmbeddingBackendReport, EmbeddingServiceOptions, ServiceReply, ServiceRequest } from './protocol.ts';
+import type { InferenceSelfTest } from './self-test.ts';
 
 export interface EmbeddingService {
   readonly report: Readonly<EmbeddingBackendReport>;
@@ -16,6 +17,8 @@ export interface EmbeddingService {
   clearCache(): Promise<void>;
   /** Diagnostics: injects a backend fault; true when the live backend could take it (a GPU device loss), false otherwise. */
   injectFault(fault: 'gpu-device-loss'): Promise<boolean>;
+  /** Product §100 inference diagnostics: re-verifies the model, runs frozen tokenizer and vector goldens through the scalar, SIMD and live GPU routes, and reports WebGPU availability. Bounded by the request timeout. */
+  selfTest(): Promise<InferenceSelfTest>;
   shutdown(mode?: 'cancel' | 'drain'): Promise<void>;
 }
 type Pending = { resolve: (reply: ServiceReply) => void; reject: (error: EmbeddingServiceError) => void; timer: ReturnType<typeof setTimeout> | undefined };
@@ -95,6 +98,7 @@ export async function createEmbeddingService(options: EmbeddingServiceOptions & 
     async pauseBackground() { await call({ kind: 'pause' }, 10_000); },
     async resumeBackground() { await call({ kind: 'resume' }, 10_000); },
     async clearCache() { await call({ kind: 'clearCache' }, 10_000); },
+    async selfTest() { const reply = await call({ kind: 'selfTest' }, Math.max(requestTimeout, 120_000)); if (reply.kind !== 'selfTest') throw new EmbeddingServiceError('protocol', 'Unexpected self-test reply'); return reply.result; },
     async injectFault(fault) { const reply = await call({ kind: 'fault', fault }, 10_000); return reply.kind === 'faulted' ? reply.injected : false; },
     async shutdown(mode = 'cancel') {
       if (closed) return;

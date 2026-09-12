@@ -1,5 +1,6 @@
 import { useSyncExternalStore } from 'react';
 import type { DiagnosticCheckId, DiagnosticOutcome } from '@quixi/core/contracts';
+import type { InferenceCheckId } from '@quixi/quixi-embed/service';
 import type { DiagnosticsController } from './report-controller.ts';
 import type { SemanticController, SemanticSnapshot } from '../semantic/controller.ts';
 import './diagnostics.css';
@@ -19,6 +20,8 @@ const outcomeLabels: Record<DiagnosticOutcome, { mark: string; label: string }> 
   attention: { mark: '⚠', label: 'Needs attention' },
   unknown: { mark: '?', label: 'Not reported' },
 };
+/** Product §100 inference check names, in the product's order. */
+const inferenceLabels: Record<InferenceCheckId, string> = { model_hash: 'Model hash', tokenizer: 'Tokenizer', scalar_golden: 'Scalar golden', wasm_simd_backend: 'WASM SIMD backend', webgpu_backend: 'WebGPU backend' };
 const sizes = (bytes: number) => bytes < 1024 ** 2 ? `${(bytes / 1024).toFixed(0)} KB` : bytes < 1024 ** 3 ? `${(bytes / 1024 ** 2).toFixed(1)} MB` : `${(bytes / 1024 ** 3).toFixed(1)} GB`;
 export function DiagnosticsPanel({ controller, semantic, semanticState, disabled = false }: { controller: DiagnosticsController; semantic: SemanticController; semanticState: SemanticSnapshot; disabled?: boolean }) {
   const state = useSyncExternalStore(controller.subscribe, controller.getSnapshot), report = state.report;
@@ -54,5 +57,22 @@ export function DiagnosticsPanel({ controller, semantic, semanticState, disabled
     </div>
     {hostless && <p className="muted">Rebuilding the semantic index needs the local embedding model, which this host does not provide.</p>}
     {state.notice && <p role="status" data-testid="diagnostic-notice">{state.notice}</p>}
+    <h3>Inference</h3>
+    <p>Re-verifies the local embedding model against its pinned hash and runs three frozen reference cases through the tokenizer and every backend available here. Loads the model if it is not loaded; nothing is indexed or sent anywhere.</p>
+    <div className="storage-health-actions">
+      <button disabled={disabled || semanticState.busy || hostless} onClick={() => void semantic.selfTest()}>{semanticState.selfTest ? 'Run inference self-test again' : 'Run inference self-test'}</button>
+    </div>
+    {hostless && <p className="muted">This host does not provide the local embedding model, so there is nothing to test.</p>}
+    {semanticState.busy && !semanticState.selfTest && !hostless && <p role="status">{semanticState.runtime === 'loading' ? 'Loading the local model…' : 'Running the self-test…'}</p>}
+    {semanticState.error && <p role="alert">{semanticState.error}</p>}
+    {semanticState.selfTest && <>
+      <dl className="diagnostic-checks" aria-label="Inference checks" data-testid="inference-checks">
+        {semanticState.selfTest.checks.map(check => <div key={check.id} data-testid={`inference-${check.id}`} data-outcome={check.outcome}>
+          <dt>{inferenceLabels[check.id]}</dt>
+          <dd><span className={`diagnostic-outcome diagnostic-${check.outcome}`}>{outcomeLabels[check.outcome].mark} {outcomeLabels[check.outcome].label}</span><br /><span className="muted">{check.summary}</span></dd>
+        </div>)}
+      </dl>
+      <p className="muted" data-testid="inference-report-meta">Serving route {semanticState.selfTest.route} · {semanticState.selfTest.cases.length} reference cases from golden manifest {semanticState.selfTest.goldenManifestSha256.slice(0, 12)}… · {(semanticState.selfTest.elapsedMs / 1000).toFixed(1)} s</p>
+    </>}
   </section>;
 }

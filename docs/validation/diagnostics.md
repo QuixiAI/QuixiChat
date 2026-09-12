@@ -55,6 +55,38 @@ report per run, a fresh operation id per rebuild with the epoch described,
 boundary errors as plain messages with the last report kept, invalidation
 dropping late results, and disposal.
 
+## Inference self-test (product §100 second list, §101 "run QuixiEmbed self-test")
+
+**Classification (Node)** — `npm run test:embed:self-test`, 7 tests,
+`packages/quixi-embed/tests/self-test.mjs`, with substituted encoders: the
+three frozen cases are unit vectors from the pinned golden manifest; a
+healthy CPU host reports model, tokenizer, scalar and SIMD `ok` and a refused
+WebGPU adapter as `attention` with the reason; a digest mismatch is
+`corruption` and skips the golden runs; a tokenizer drifting by one id is
+`corruption`; CPU vectors outside the parity tolerance or not unit length are
+`corruption` while 5e-6 drift is `ok`; no WebAssembly SIMD is `unsupported`;
+WebGPU absent is `unsupported`, present but not attempted is `attention`, an
+active FP16 route within its bound is `ok`, an FP32 route drifting 2e-3 is
+`corruption`, and a route lost mid-test is `attention` naming what served.
+
+**Application (Chromium and WebKit)** — the [semantic proof](semantic-search.md)
+(`npm run test:app:semantic:browser`) now runs the Storage health
+"Run inference self-test" right after enrolment with the real model and
+records every check's outcome and measurements; see the table below for the
+last run. The model hash check re-reads the artifact from its OPFS copy and
+re-hashes it; the reported digest equals the enrolment's source hash.
+
+| Check | Chromium (WASM SIMD · CPU route) | WebKit (WebGPU · FP32 route) |
+| --- | --- | --- |
+| Model hash | `ok`, re-read from cache, 90,785,583 bytes, digest equals the lock | same |
+| Tokenizer | `ok`, 3 cases, exact ids | same |
+| Scalar golden | `ok`, min cosine 1.0, max \|Δ\| 1.09e-7 (bound 2e-5) | same |
+| WASM SIMD backend | `ok`, min cosine 1.0, max \|Δ\| 1.09e-7 | same |
+| WebGPU backend | `unsupported`: no WebGPU adapter in headless Chromium | `ok`, live `webgpu-fp32` route, max \|Δ\| 8.9e-8 (bound 1e-3) |
+| Elapsed | 1.17 s | 1.19 s |
+
+Retained run: [semantic-search-app-macos.json](results/semantic-search-app-macos.json).
+
 ## Limits
 
 - The reference check is bounded (newest 4,096 referencing records, first 64
@@ -68,5 +100,6 @@ dropping late results, and disposal.
   not by this report.
 - Semantic rebuild (re-embedding) is exercised by the semantic proof, not
   here; on this fixture host it is disabled because no model is provided.
-- Inference diagnostics (§100 second list) and the exportable report file are
-  not implemented yet.
+- The exportable report file is not implemented yet. The inference self-test
+  proves the routes present on the two Playwright engines; hardware WebGPU
+  adapters on other machines remain plan 19/21/24 gates.

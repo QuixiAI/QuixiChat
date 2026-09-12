@@ -40,6 +40,7 @@
     "bench:gpu": "node perf/gpu-browser.mjs",
     "bench:gpu:check": "python3 perf/check_gpu.py",
     "test:scheduler:unit": "node --experimental-strip-types --test tests/scheduler.mjs",
+    "test:self-test:unit": "node --experimental-strip-types --test tests/self-test.mjs",
     "test:scheduler": "python3 native/scheduler_ci.py",
     "test:scheduler:gpu": "python3 native/scheduler_ci.py --gpu",
     "test:token-preflight": "node --experimental-strip-types tests/token-preflight.mjs",

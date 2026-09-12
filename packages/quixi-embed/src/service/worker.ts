@@ -9,12 +9,19 @@ import { createWebGpuEncoder, GpuBackendError } from '../gpu/encoder.ts';
 import { SchedulerError } from '../scheduler/scheduler.ts';
 import { cpuSchedulerExecutor, gpuSchedulerExecutor, createSchedulerWithFallback } from '../scheduler/executors.ts';
 import type { EmbeddingScheduler, EmbeddingTicket, SchedulerStatistics } from '../scheduler/types.ts';
-import { fetchVerified, loadModelBytes } from './assets.ts';
+import { fetchVerified, loadModelBytes, sha256Hex } from './assets.ts';
+import { runInferenceSelfTest } from './self-test.ts';
+import type { EmbeddingAssets } from './protocol.ts';
 import { EmbeddingServiceError, SERVICE_PROTOCOL_VERSION } from './protocol.ts';
 import type { EmbeddingBackendReport, ServiceReply, ServiceRequest } from './protocol.ts';
 
 let scheduler: EmbeddingScheduler | undefined;
 let tokenizer: ArcticTokenizer | undefined;
+/** What the self-test needs beyond the live scheduler: the verified small
+ * assets and how the model was obtained. The model bytes themselves are not
+ * retained; the self-test re-reads and re-hashes them. */
+let retained: { assets: EmbeddingAssets; cacheDirectory: string | null; scalarWasm: Uint8Array; simdWasm: Uint8Array | null; simdSupported: boolean; gpuAttempted: boolean; initialGpuError: string | null } | undefined;
+let selfTesting = false;
 let initializing = false, closed = false;
 const tickets = new Map<number, EmbeddingTicket>();
 let statisticsTimer: ReturnType<typeof setTimeout> | undefined, lastStatistics = 0;
@@ -72,6 +79,7 @@ async function initialize(request: Extract<ServiceRequest, { kind: 'init' }>): P
       initialGpuError: initialized.initialGpuError ? String((initialized.initialGpuError as Error).message ?? initialized.initialGpuError) : null,
       modelSource: model.source, cacheWritten: model.cacheWritten, initializationMs: performance.now() - started, identity: scheduler.identity,
     };
+    retained = { assets, cacheDirectory: request.cacheDirectory, scalarWasm, simdWasm, simdSupported, gpuAttempted, initialGpuError: report.initialGpuError };
     post({ kind: 'ready', id: request.id, report });
   } finally {
     preflightTokenizer?.dispose();
@@ -98,11 +106,48 @@ async function handle(request: ServiceRequest): Promise<void> {
     case 'resume': live().resumeBackground(); post({ kind: 'done', id: request.id }); return;
     case 'clearCache': live().clearCache(); post({ kind: 'done', id: request.id }); return;
     case 'fault': post({ kind: 'faulted', id: request.id, injected: request.fault === 'gpu-device-loss' ? live().injectFault('device-loss') : false }); return;
+    case 'selfTest': {
+      const current = live();
+      if (!retained || !tokenizer) throw new EmbeddingServiceError('unavailable', 'The embedding worker has no verified assets to test.');
+      if (selfTesting) throw new EmbeddingServiceError('saturated', 'A self-test is already running.');
+      selfTesting = true;
+      try {
+        const { assets, cacheDirectory, scalarWasm, simdWasm, simdSupported, gpuAttempted, initialGpuError } = retained;
+        const inspector = tokenizer;
+        const statistics = current.statistics();
+        const result = await runInferenceSelfTest({
+          expectedModelSha256: assets.model.sha256,
+          async loadModel() {
+            const model = await loadModelBytes({ url: assets.model.url, sha256: assets.model.sha256, bytes: assets.model.bytes, cacheDirectory });
+            return { sha256: await sha256Hex(model.bytes), source: model.source, model: model.bytes };
+          },
+          tokenize: (text, role) => inspector.tokenize(text, role),
+          createScalar: async model => { const encoder = await createScalarEncoder({ wasm: scalarWasm, model }); return { embed: (text, role) => role === 'query' ? encoder.embedQuery(text) : encoder.embedDocument(text), dispose: () => encoder.dispose() }; },
+          simdSupported,
+          createSimd: simdWasm ? async model => { const encoder = await createSimdEncoder({ wasm: simdWasm, model }); return { embed: (text, role) => role === 'query' ? encoder.embedQuery(text) : encoder.embedDocument(text), dispose: () => encoder.dispose() }; } : null,
+          route: statistics.route, kind: statistics.kind,
+          gpu: {
+            attempted: gpuAttempted, initialError: initialGpuError,
+            // The scheduler memoizes by input, so the cases must not be served from memory.
+            embed: statistics.kind === 'gpu' ? async (text, role) => { current.clearCache(); const ticket = current.submit({ text, role, priority: 0 }); const done = await ticket.result; return { vector: done.vector, route: done.route }; } : null,
+            async probe() {
+              const gpu = (navigator as Navigator & { gpu?: { requestAdapter(options?: unknown): Promise<{ features: Set<string>; isFallbackAdapter?: boolean } | null> } }).gpu;
+              if (!gpu) return { available: false, f16: false, fallbackAdapter: null, reason: 'navigator.gpu is absent' };
+              const adapter = await gpu.requestAdapter({ powerPreference: 'high-performance' }) as { features: Set<string>; isFallbackAdapter?: boolean } | null;
+              if (!adapter) return { available: false, f16: false, fallbackAdapter: null, reason: 'no WebGPU adapter' };
+              return { available: true, f16: adapter.features.has('shader-f16'), fallbackAdapter: adapter.isFallbackAdapter ?? null, reason: null };
+            },
+          },
+        });
+        post({ kind: 'selfTest', id: request.id, result });
+      } finally { selfTesting = false; }
+      return;
+    }
     case 'statistics': post({ kind: 'statistics', id: request.id, statistics: live().statistics(request.remainingDocuments ?? undefined) }); return;
     case 'shutdown': {
       closed = true;
       clearTimeout(statisticsTimer);
-      const current = scheduler; scheduler = undefined;
+      const current = scheduler; scheduler = undefined; retained = undefined;
       try { await current?.shutdown(request.mode); } finally { tokenizer?.dispose(); tokenizer = undefined; }
       // The worker stays parked with its model memory released; see initialize.
       post({ kind: 'done', id: request.id });

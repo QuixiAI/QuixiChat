@@ -29,6 +29,7 @@ try {
     "packages/quixi-embed/src/chunking.ts", "packages/quixi-embed/src/lock.ts", "packages/quixi-embed/src/service/worker.ts", "packages/quixi-embed/src/service/client.ts", "packages/quixi-embed/src/service/assets.ts", "packages/quixi-embed/src/service/protocol.ts",
     "packages/quixi-embed/artifacts/model/lock.json", "packages/quixi-embed/artifacts/model/arctic-xs.qxtokenizer", "packages/quixi-embed/artifacts/1.0.2/quixi-scalar.wasm", "packages/quixi-embed/artifacts/1.0.2/quixi-simd.wasm",
     "packages/core/src/contracts/search.ts", "tooling/embedding-assets.ts",
+    "packages/quixi-embed/src/service/self-test.ts", "packages/quixi-embed/src/service/self-test-cases.ts", "packages/app/src/features/diagnostics/DiagnosticsPanel.tsx", "packages/app/src/features/diagnostics/report-controller.ts",
   ]) report.sourceSha256[file] = createHash("sha256").update(await readFile(file)).digest("hex");
   report.sourceSha256[report.model.source] = createHash("sha256").update(await readFile(report.model.source)).digest("hex");
   const outDir = resolve(temporary, "dist");

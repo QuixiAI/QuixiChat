@@ -53,10 +53,22 @@ panel, but nothing named what a finding meant or offered the FTS rebuild.
 
 - The onboarding capability check keeps reading the lighter `diagnostics`
   operation; the report is a separate, heavier operation.
-- Inference diagnostics (model hash, tokenizer/reference self-test, parity,
-  WebGPU routes) are not part of this report yet; they belong to the
-  embedding service and will be added as their own checks with the same
-  outcome vocabulary.
+- Inference diagnostics live in the embedding service, not in the storage
+  report (amendment 1, 2026-09-12): `EmbeddingService.selfTest()` re-reads
+  and re-hashes the model artifact, runs three frozen golden cases (token ids
+  and reference vectors from the goldens manifest) through the scalar and
+  SIMD WASM backends and through the live WebGPU route when one is active,
+  and probes WebGPU availability otherwise. Its five checks (model hash,
+  tokenizer, scalar golden, WASM SIMD backend, WebGPU backend) use the same
+  outcome vocabulary minus `missing_data` and `rebuildable`, which cannot
+  apply to a runtime. CPU routes must meet the parity suites' tolerance
+  (cosine ≥ 0.999999, |Δ| ≤ 2e-5); the GPU routes carry their own bounds
+  (FP32: cosine ≥ 0.9999, |Δ| ≤ 1e-3; FP16: cosine ≥ 0.999, |Δ| ≤ 5e-3),
+  chosen so a vector outside them would change rankings. A golden mismatch
+  is `corruption` because a runtime that does not reproduce its reference
+  cannot be trusted, whatever the cause. The scheduler's memo is cleared
+  before the GPU cases so they are computed, not recalled. The self-test
+  loads the runtime if it is not loaded and leaves it loaded.
 - Corruption fixtures create real inconsistencies (unreferenced b-tree pages
   after a `writable_schema` edit) rather than mocked results; a fixture that
   needs SQLite to *fail to open* is still outstanding and is covered by
