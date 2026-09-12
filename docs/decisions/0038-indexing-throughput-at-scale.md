@@ -51,7 +51,44 @@ the cost per slice growing as the index grew.
 Node, 10k messages: 404 s → 75 s (7.5 ms per message). The storage suite
 (43 tests) and the application browser proofs pass unchanged.
 
-## Measured after the fixes (browser scale proof, 30,000 messages)
+## Fix 5 (same day): a trigger-maintained `stale` flag on heads
+
+`quixi_search_heads` gains `stale INTEGER NOT NULL DEFAULT 0` with indexes on
+`(epoch, stale)`, `message_id` and `source_key`; the dirty triggers (and the
+code path that dirties extraction scopes) flag the heads a canonical change
+makes invisible with one indexed UPDATE per scope kind, and a published head
+resets the flag. `VISIBLE_HEAD` is now `h.stale=0`: every visibility
+predicate — the counts in `status()` and in the semantic status returned by
+each vector publication, the lexical and semantic query joins, the
+obsolete-row scan and cleanup — is a column test instead of five correlated
+scope lookups per head. The derived schema checksum changes, so a namespace
+recorded under the previous build's checksum (kept as
+`SEARCH_SCHEMA_LEGACY_CHECKSUM`, verified equal to the committed value) is
+upgraded in place at open: triggers replaced, column and indexes added, the
+flag computed once from the scope revisions, ledger row 1 rewritten. No
+derived data is rebuilt. A repository test stages the legacy shape, changes
+a title under the legacy triggers, reopens, and checks the flag, the
+triggers, visibility and re-indexing; the frozen schema-8 archive proof,
+the extraction-search, search-navigation, archive, selection and canonical
+suites and the application browser proof pass over the upgrade.
+
+Node, 10k messages: 75 s → 58 s; `status()` at 10k chunks 15 ms → 3.8 ms; a
+101-record commit with 10k heads costs 57 ms (the trigger UPDATEs seek by
+index). Browser scale proof at 10,000 messages, before → after:
+
+| Phase | Chromium | WebKit |
+| --- | --- | --- |
+| lexical indexing | 380 s → {h['chromium']['phases']['lexical']['ms']/1000:.0f} s | — → {h['webkit']['phases']['lexical']['ms']/1000:.0f} s |
+| publish 10,000 vectors | 23 s → {h['chromium']['phases']['publishBelowThreshold']['ms']/1000:.1f} s | — → {h['webkit']['phases']['publishBelowThreshold']['ms']/1000:.1f} s |
+| semantic query median | 122 ms → {q('chromium','semanticMedianMs'):.0f} ms | — → {q('webkit','semanticMedianMs'):.0f} ms |
+
+What remains is the per-message transaction floor: Chromium's slices settle
+at about 130 ms for 16 messages (four queue steps and three fsynced
+transactions per message on its OPFS; WebKit's commit is roughly ten times
+cheaper), and the semantic query still assembles hits through several
+statements. Those are the next two items of the decision below.
+
+## Measured after fixes 1–4 (browser scale proof, 30,000 messages)
 
 [semantic-scale-browser.json](../../packages/app/tests/browser/results/semantic-scale-browser.json),
 Chromium  / WebKit on macOS 26.6.2, Apple M5 Max.
@@ -91,13 +128,8 @@ filter kept the planted hit. Product §112's foreground budget (5 s) is met at
 Keep the fixes above and continue in storage with, in this order, each
 measured by the same proof:
 
-1. A `stale` flag on `quixi_search_heads` maintained by the dirty triggers
-   (indexes on `message_id` and `document_id` exist or are added), so
-   visibility is a column test instead of five correlated lookups, and the
-   counts in `status()` and the semantic status become covering-index counts.
-   This changes the trigger text and therefore the derived schema checksum:
-   the upgrade path must rebuild derived data in place without a user-facing
-   failure (ADR 0016's recovery semantics apply only to canonical schemas).
+1. ~~A `stale` flag on `quixi_search_heads`~~ — done (fix 5 above), with the
+   in-place upgrade.
 2. Several sources per transaction in a slice (bounded by `maxChunks`), so
    the fsync cost is paid per slice rather than per message, and the
    message-scope expansion no longer re-enqueues a source whose head is

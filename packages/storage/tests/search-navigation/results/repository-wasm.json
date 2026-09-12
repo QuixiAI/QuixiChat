@@ -1,6 +1,6 @@
 {
-  "startedAt": "2026-09-12T06:36:07.361Z",
-  "completedAt": "2026-09-12T06:36:07.812Z",
+  "startedAt": "2026-09-12T14:09:02.112Z",
+  "completedAt": "2026-09-12T14:09:02.603Z",
   "node": "v22.23.1",
   "platform": "darwin",
   "arch": "arm64",
@@ -73,15 +73,15 @@
     }
   ],
   "sourceHashes": {
-    "packages/core/src/contracts/search.ts": "8b496fb4fffcae02425f5c0fd7ca83a1f96468fb30a6e4b2461b285cd095b832",
+    "packages/core/src/contracts/search.ts": "2fd0379ba81e5655cae4da50b39a32af3907a7c0f7652d2a678194a11a18c8ee",
     "packages/core/src/contracts/extraction.ts": "b05bcd2ef02bd60694bff7cc5d83fccbd10e2584f1ba9edf17505241c209b483",
-    "packages/storage/src/worker/search/index.ts": "ae5d113561d6373d7ad8070388c2afdf532579eaede4ddeae6388efed78e3334",
+    "packages/storage/src/worker/search/index.ts": "594fbdf4e5bbdac25de35473de033598094e7bb3e104323d4db677b5a261e256",
     "packages/storage/src/worker/search/navigation.ts": "3dcd3f3e2061af65d03339a77e65ac6711eb8ee868c52dbc988db6600ac21494",
-    "packages/storage/src/worker/search/schema.ts": "85de7888960e84f98f107650e0975080099e1b7f55f748145aaaebdef3d188e7",
+    "packages/storage/src/worker/search/schema.ts": "2996d9c4f5bb2deb547649b8173f579a55cbbbf0e3cf060316f95573ed746edc",
     "packages/storage/src/worker/search/sources.ts": "c3b55d79b0196092fa9cbe2a5bfc97f10903974dede99bbef4419f5bcaa6aebf",
     "packages/storage/src/worker/search/extraction.ts": "ba85bc1954ce553a3268e1b924f8eeed879f0b1dad694108090de77301096033",
     "packages/search/src/chunker.ts": "8e82abb13c825132019055610dab2897909fb191be32f4813eb045285dd57ec4",
-    "packages/search/src/query.ts": "269a950bfacec7e5b384d1c59a2a2a6b21fcbfe2f1be18a423fd0f71728f2976",
+    "packages/search/src/query.ts": "0d80bc08afaa862c1aae568b4df9dd9d8c55eb841846dbbea047afabb5ace6f9",
     "packages/storage/src/worker/extraction/index.ts": "e0175db4d0a20b182d7c31bda46e95dd5eb15e82c60e67cf09ad6c4d5779b92d",
     "packages/storage/tests/extraction-search/fixture.ts": "c4696c106bd9cfb7673d1a295b7c63141c951e966d7d79a12f727af5f4bc7ac5",
     "packages/storage/tests/search-navigation/repository.test.ts": "c8845d3a469440665389b4219a4434c581638b8dd375555deb89b3af2ac22d5c",

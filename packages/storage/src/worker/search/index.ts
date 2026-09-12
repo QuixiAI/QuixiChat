@@ -31,6 +31,10 @@ import type { CanonicalSqlite, SqlValue } from "../canonical/repository.ts";
 import {
   SEARCH_SCHEMA,
   SEARCH_SCHEMA_CHECKSUM,
+  SEARCH_SCHEMA_LEGACY_CHECKSUM,
+  SEARCH_TRIGGERS,
+  SEARCH_HEAD_STALE_INDEXES,
+  LEGACY_VISIBLE_HEAD,
   SEARCH_QUEUE_INDEX_SCHEMA,
   SEARCH_QUEUE_INDEX_CHECKSUM,
   SEARCH_POLICY,
@@ -195,6 +199,14 @@ export class SearchRepository {
       "INSERT INTO quixi_search_queue(epoch,scope,id,revision) VALUES(1,'global','*',0)",
     );
   }
+  private upgradeHeadVisibility(): void {
+    this.disableDerivedTriggers();
+    this.exec("ALTER TABLE quixi_search_heads ADD COLUMN stale INTEGER NOT NULL DEFAULT 0");
+    this.db.exec(SEARCH_HEAD_STALE_INDEXES);
+    this.db.exec(SEARCH_TRIGGERS);
+    this.exec(`UPDATE quixi_search_heads AS h SET stale=1 WHERE NOT (${LEGACY_VISIBLE_HEAD})`);
+    this.exec("UPDATE quixi_search_schema SET checksum=? WHERE version=1", [SEARCH_SCHEMA_CHECKSUM]);
+  }
   private installQueueIndexes(): void {
     this.db.exec(SEARCH_QUEUE_INDEX_SCHEMA);
     this.exec("INSERT INTO quixi_search_schema VALUES(2,?)", [SEARCH_QUEUE_INDEX_CHECKSUM]);
@@ -242,6 +254,13 @@ export class SearchRepository {
       let ledger = this.rows(
         "SELECT version,checksum FROM quixi_search_schema ORDER BY version",
       );
+      // The previous build's schema (no `stale` flag on heads) is upgraded in
+      // place: triggers replaced, the column and its indexes added, and the
+      // flag computed once from the scope revisions. No derived data is lost.
+      if (ledger.length && ledger[0]!.version === 1 && ledger[0]!.checksum === SEARCH_SCHEMA_LEGACY_CHECKSUM) {
+        this.tx(() => this.upgradeHeadVisibility());
+        ledger = this.rows("SELECT version,checksum FROM quixi_search_schema ORDER BY version");
+      }
       if (
         !ledger.length ||
         ledger[0]!.version !== 1 ||
@@ -619,6 +638,10 @@ export class SearchRepository {
       "INSERT INTO quixi_search_scopes VALUES(?,?,?) ON CONFLICT(scope,id) DO UPDATE SET revision=excluded.revision",
       [scope, id, revision],
     );
+    // The same head flagging the dirty triggers perform for canonical writes.
+    const column = { source: "source_key", message: "message_id", thread: "thread_id", document: "document_id" }[scope];
+    if (column) this.exec(`UPDATE quixi_search_heads SET stale=1 WHERE stale=0 AND ${column}=?`, [id]);
+    else if (scope === "global") this.exec("UPDATE quixi_search_heads SET stale=1 WHERE stale=0");
     for (const epoch of [meta.active_epoch, meta.rebuilding_epoch])
       if (epoch !== null)
         this.exec(
@@ -755,7 +778,7 @@ export class SearchRepository {
           ],
         );
       this.exec(
-        `INSERT INTO quixi_search_heads VALUES(${Array(22).fill("?").join(",")}) ON CONFLICT(epoch,source_key) DO UPDATE SET run_id=excluded.run_id,source_type=excluded.source_type,source_id=excluded.source_id,part_id=excluded.part_id,thread_id=excluded.thread_id,message_id=excluded.message_id,document_id=excluded.document_id,title=excluded.title,role=excluded.role,provider=excluded.provider,model=excluded.model,date=excluded.date,tags=excluded.tags,media_type=excluded.media_type,origin=excluded.origin,source_revision=excluded.source_revision,message_revision=excluded.message_revision,thread_revision=excluded.thread_revision,document_revision=excluded.document_revision,global_revision=excluded.global_revision`,
+        `INSERT INTO quixi_search_heads VALUES(${Array(22).fill("?").join(",")},0) ON CONFLICT(epoch,source_key) DO UPDATE SET stale=0,run_id=excluded.run_id,source_type=excluded.source_type,source_id=excluded.source_id,part_id=excluded.part_id,thread_id=excluded.thread_id,message_id=excluded.message_id,document_id=excluded.document_id,title=excluded.title,role=excluded.role,provider=excluded.provider,model=excluded.model,date=excluded.date,tags=excluded.tags,media_type=excluded.media_type,origin=excluded.origin,source_revision=excluded.source_revision,message_revision=excluded.message_revision,thread_revision=excluded.thread_revision,document_revision=excluded.document_revision,global_revision=excluded.global_revision`,
         [
           work.epoch,
           work.key,

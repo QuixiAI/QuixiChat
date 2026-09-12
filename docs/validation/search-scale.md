@@ -45,6 +45,19 @@ stage (≥ 100,000 vectors) is therefore proven in storage tests and the
 `perf/retrieval/browser-knn` harness, not yet through the application at
 scale.
 
+## Result after the stale-flag fix (100 × 100 = 10,000 messages)
+
+| | Chromium | WebKit |
+| --- | --- | --- |
+| lexical indexing | 211 s (1100 slices; 380 s before) | 70 s |
+| publish 10,000 vectors | 10.8 s (23 s before) | 9.2 s |
+| semantic query median / max | 86 / 111 ms (122 before) | 80 / 103 ms |
+| Best / Exact / thread-filtered | 92 / 5 / 95 ms | 80 / 5 / 87 ms |
+| planted topics found first | 10 of 10 | 10 of 10 |
+
+The retained record now holds this 10k run; the 30k numbers above are from
+the run before the stale flag (its report was superseded in place).
+
 ## Limits
 
 Single runs under development load on one machine; synthetic vectors and

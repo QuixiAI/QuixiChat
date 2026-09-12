@@ -9,6 +9,7 @@ import type {
   SqlValue,
 } from "../../storage/src/worker/canonical/repository.ts";
 import { SearchRepository } from "../../storage/src/worker/search/index.ts";
+import { SEARCH_TRIGGERS_LEGACY, SEARCH_SCHEMA_LEGACY_CHECKSUM } from "../../storage/src/worker/search/schema.ts";
 import type { SearchBlobAccess } from "../../storage/src/worker/search/index.ts";
 import type {
   CanonicalMutation,
@@ -1178,4 +1179,39 @@ test("late digest mismatch releases verification without derived publication or 
     assert.equal(canonicalDigest(f.db), before);
     assert.equal(f.db.selectValue("PRAGMA integrity_check"), "ok");
   } finally { await f.search.close(); f.db.close(); }
+});
+
+test("a derived namespace from the previous build (no stale flag) upgrades in place: heads kept, stale computed, triggers replaced", async () => {
+  const { db, canonical, search, bytes } = open();
+  const reopen = () => { const next = new SearchRepository(db, bytes); next.initialize(); return next; };
+  try {
+    const t = thread(canonical);
+    message(canonical, t.threadId, "kept passage about lanterns");
+    const other = thread(canonical);
+    message(canonical, other.threadId, "another passage about anchors");
+    await drain(search);
+    assert.equal(query(search, "lanterns").items.length, 1);
+    // Stage the previous build's shape: legacy triggers, no stale column or its indexes, legacy checksum.
+    await search.close();
+    db.exec("DROP TRIGGER quixi_search_dirty_insert; DROP TRIGGER quixi_search_dirty_update; DROP TRIGGER quixi_search_dirty_delete; DROP INDEX quixi_search_head_message; DROP INDEX quixi_search_head_source; DROP INDEX quixi_search_head_visible; ALTER TABLE quixi_search_heads DROP COLUMN stale");
+    db.exec(SEARCH_TRIGGERS_LEGACY);
+    db.exec({ sql: "UPDATE quixi_search_schema SET checksum=? WHERE version=1", bind: [SEARCH_SCHEMA_LEGACY_CHECKSUM] });
+    // A canonical change under the legacy triggers bumps the thread's scope revision only.
+    commit(canonical, "SetTitle", { threadId: other.threadId, value: "Renamed anchors thread" });
+    const upgraded = reopen();
+    try {
+      assert.equal(db.selectValue("SELECT count(*) FROM quixi_search_heads"), 2, "heads survive the upgrade");
+      assert.equal(db.selectValue("SELECT count(*) FROM quixi_search_heads WHERE stale=1"), 1, "the retitled thread's head is flagged from the scope revisions");
+      assert.ok(String(db.selectValue("SELECT sql FROM sqlite_schema WHERE name='quixi_search_dirty_insert'")).includes("SET stale=1"), "triggers are this build's");
+      assert.equal(query(upgraded, "lanterns").items.length, 1, "unchanged heads stay visible");
+      assert.equal(query(upgraded, "anchors").items.length, 0, "the stale head is invisible until re-indexed");
+      await drain(upgraded);
+      assert.equal(query(upgraded, "anchors").items.length, 1, "re-indexed under the new title");
+      assert.equal(db.selectValue("SELECT count(*) FROM quixi_search_heads WHERE stale=1"), 0);
+      // This build's triggers flag heads directly: a title change makes the head invisible at once.
+      commit(canonical, "SetTitle", { threadId: t.threadId, value: "Renamed lanterns thread" });
+      assert.equal(db.selectValue("SELECT count(*) FROM quixi_search_heads WHERE stale=1"), 1);
+      assert.equal(query(upgraded, "lanterns").items.length, 0);
+    } finally { await upgraded.close(); }
+  } finally { db.close(); }
 });
