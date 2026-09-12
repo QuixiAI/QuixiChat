@@ -268,14 +268,52 @@ Decision (amendment 2):
    (100k: 49 vs 43 ms), so exact retrieval stays the default for typical
    archives and the resident index is not built.
 
+## Implementation of amendment 2 (2026-09-12)
+
+Semantic namespace version 3 in `packages/storage/src/worker/search/semantic.ts`:
+
+- **Base schema**: the float vec0 table is declared with `chunk_size=16`. A
+  namespace recorded under the first build's base checksum (default chunks)
+  has its float table rebuilt in place at open through a plain staging
+  table (vec0 tables cannot be altered), keeping every vector and rowid; the
+  ledger's version-1 checksum is then updated. A version-2 ledger row (int8
+  projection) is dropped with its tables.
+- **Projection**: `quixi_semantic_bits(vector_id, bits)` (48 bytes per
+  vector, sqlite-vec's `vec_quantize_binary` layout) plus the singleton
+  `quixi_semantic_projection(representation = "sign-bit-v1", generation)`;
+  ledger row 3. Publication writes the bits with the float row; enrolment
+  with another identity and deletion clear both; maintenance backfills
+  missing bits from the floats and removes orphans.
+- **Resident index**: the worker loads the bits (ids + 48 bytes each) on the
+  first coarse query of a generation, appends published vectors while it is
+  resident, and drops it after removals, a generation change or a
+  representation rebuild so it is rebuilt lazily. `status.projection.residentBytes`
+  reports what is held; it is 0 until the coarse stage is used.
+- **Query path**: below `SEMANTIC_COARSE_THRESHOLD` (100,000 vectors) or
+  while the projection is incomplete, the exact float KNN as before. At or
+  above it, Hamming top-`max(k, 5000)` over the resident bits (bounded
+  max-heap, ties by lower id), the candidate ids inserted into a temp table
+  through `json_each`, and a rerank by exact float32 L2 through a join on
+  vec0's point plan; the bounded-candidate/RRF path of ADR 0034 is unchanged.
+- **Evidence**: `packages/search/tests/semantic.test.ts` with
+  `semanticCoarseThreshold: 3` compares the coarse ranking with the exact one,
+  asserts the resident index size after the first coarse query and its
+  in-place growth on publish, upgrades a simulated version-1 namespace with
+  legacy float chunks plus a version-2 int8 projection (vectors kept, chunk
+  size rebuilt, int8 gone, ledger 1,3), backfills by maintenance, discards a
+  foreign representation and rebuilds, and deletes leaving the lexical hit;
+  the browser semantic proof asserts the projection status and panel text in
+  Chromium and WebKit. Not yet measured: the end-to-end application query at
+  100k+ real chunks in the browser (the storage-level costs are the harness
+  numbers above).
+
 ## What remains before the semantic-scale gate
 
 - Measured above at 100k and 500k in Chromium and WebKit (latency, OPFS
   pages, memory, backfill interleaving, quantization, sign-bit pre-filter);
   1M in the browser remains (≈ 2 GB of OPFS per engine).
-- Implement amendment 2 in storage (namespace v3, resident sign-bit index,
-  5,000-candidate float rerank, threshold ≈ 100k) and measure the end-to-end
-  query path, then the filtered hybrid rerun.
+- Amendment 2 is implemented (above); measure the end-to-end application
+  query path at 100k+ chunks in the browser, then the filtered hybrid rerun.
 - Re-run the hybrid benchmark with RRF and source filters over the selected
   representation, and the chunk-size sweep from product §50, on a larger
   independently judged corpus before any broad quality claim.

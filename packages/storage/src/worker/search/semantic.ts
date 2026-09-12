@@ -18,40 +18,81 @@ import { rows } from "./sources.ts";
  * input, and a chunk links to at most one vector. Enrolment, deletion and a
  * model change start a new generation; publications from older generations
  * are rejected individually. Nothing here is canonical or exported. */
-export const SEMANTIC_SCHEMA = `
+/** vec0 keeps vectors in chunk blobs and a point lookup reads a whole chunk;
+ * 16 rows (24 KiB) per chunk keeps the coarse→rerank point lookups to a few
+ * pages each (ADR 0036 browser measurement) at a ~13% slower exact scan. */
+export const SEMANTIC_FLOAT_CHUNK_SIZE = 16;
+const floatTable = (chunkSize: number | null) => `CREATE VIRTUAL TABLE quixi_semantic_vec USING vec0(embedding float[${SEMANTIC_DIMENSIONS}]${chunkSize === null ? "" : `, chunk_size=${chunkSize}`});`;
+const baseSchema = (chunkSize: number | null) => `
 CREATE TABLE quixi_semantic_meta(singleton INTEGER PRIMARY KEY CHECK(singleton=1),state TEXT NOT NULL,model TEXT,generation INTEGER NOT NULL,revision INTEGER NOT NULL) STRICT;
 CREATE TABLE quixi_semantic_vectors(id INTEGER PRIMARY KEY,digest TEXT NOT NULL UNIQUE,generation INTEGER NOT NULL) STRICT;
-CREATE VIRTUAL TABLE quixi_semantic_vec USING vec0(embedding float[${SEMANTIC_DIMENSIONS}]);
+${floatTable(chunkSize)}
 CREATE TABLE quixi_semantic_links(chunk_id TEXT PRIMARY KEY,digest TEXT NOT NULL,vector_id INTEGER,generation INTEGER NOT NULL,claimed_at INTEGER,failure TEXT) STRICT;
 CREATE INDEX quixi_semantic_link_vector ON quixi_semantic_links(vector_id);
 CREATE INDEX quixi_semantic_link_digest ON quixi_semantic_links(digest);
 CREATE TABLE quixi_semantic_operations(id TEXT PRIMARY KEY,generation INTEGER NOT NULL) STRICT;
 `;
+export const SEMANTIC_SCHEMA = baseSchema(SEMANTIC_FLOAT_CHUNK_SIZE);
 export const SEMANTIC_SCHEMA_CHECKSUM = searchDigest(SEMANTIC_SCHEMA);
-/** Ledger version 2 (ADR 0036): the int8 coarse projection. Existing version-1
- * namespaces upgrade in place; the projection is backfilled by maintenance. */
+/** The first build's base schema (default 1024-row float chunks); a namespace
+ * recorded under it has its float table rebuilt in place at open. */
+export const SEMANTIC_SCHEMA_LEGACY_CHECKSUM = searchDigest(baseSchema(null));
+/** Ledger version 3 (ADR 0036 amendment 2): the sign-bit coarse projection,
+ * 48 bytes per vector in a plain table, scanned from worker memory. Version-1
+ * namespaces gain it in place; the version-2 int8 vec0 projection (slower
+ * than the float scan in every measured configuration) is dropped. */
 export const SEMANTIC_PROJECTION_SCHEMA = `
-CREATE VIRTUAL TABLE quixi_semantic_int8 USING vec0(embedding int8[${SEMANTIC_DIMENSIONS}]);
-CREATE TABLE quixi_semantic_projection(singleton INTEGER PRIMARY KEY CHECK(singleton=1),representation TEXT NOT NULL,scale REAL NOT NULL,generation INTEGER NOT NULL) STRICT;
+CREATE TABLE quixi_semantic_bits(vector_id INTEGER PRIMARY KEY,bits BLOB NOT NULL) STRICT;
+CREATE TABLE quixi_semantic_projection(singleton INTEGER PRIMARY KEY CHECK(singleton=1),representation TEXT NOT NULL,generation INTEGER NOT NULL) STRICT;
 `;
 export const SEMANTIC_PROJECTION_CHECKSUM = searchDigest(SEMANTIC_PROJECTION_SCHEMA);
-/** Fixed symmetric int8 scale covering the observed |component| maximum of
- * Arctic XS vectors (0.376–0.382 on the plan 16 corpus at 100k–1M) with margin;
- * a fixed scale keeps quantization incremental and identical across devices. */
-export const SEMANTIC_PROJECTION = Object.freeze({ representation: "int8-fixed-symmetric-v1", scale: 0.4 / 127, coarseCandidates: 500 });
-/** Below this many vectors the exact float table is scanned directly. */
-/** Vector count from which queries use the int8 coarse stage; `null` keeps the
- * exact float KNN at every size. Disabled by measurement (ADR 0036, browser
- * evidence 2026-09-12): in the pinned sqlite-vec WASM build the int8 scan is
- * CPU-slower than the float scan in Chromium and WebKit at 100k and 500k, so
- * coarse→rerank would only add latency. The projection is still maintained so
- * the path can be enabled per repository (tests) or once a faster coarse
- * stage is measured. */
-export const SEMANTIC_COARSE_THRESHOLD: number | null = null;
-export function quantizeInt8(vector: ArrayLike<number>): Int8Array {
-  const out = new Int8Array(SEMANTIC_DIMENSIONS);
-  for (let i = 0; i < SEMANTIC_DIMENSIONS; i++) out[i] = Math.max(-127, Math.min(127, Math.round(vector[i]! / SEMANTIC_PROJECTION.scale)));
+export const SEMANTIC_BITS_BYTES = SEMANTIC_DIMENSIONS / 8;
+/** Coarse stage: Hamming top-`coarseCandidates` over the resident sign bits,
+ * then an exact float32 rerank of those candidates through vec0 point
+ * lookups. 5,000 candidates reproduce every judged float metric at 100k–1M
+ * and keep 0.82–0.98 of the exact top-64 neighbours (ADR 0036 amendment 2). */
+export const SEMANTIC_PROJECTION = Object.freeze({ representation: "sign-bit-v1", bytesPerVector: SEMANTIC_BITS_BYTES, coarseCandidates: 5_000 });
+/** Vector count from which queries use the coarse stage; `null` keeps the
+ * exact float KNN at every size. Measured crossover: at 100k the float scan
+ * (49 ms) and coarse→rerank (43 ms) cost the same; at 500k coarse→rerank is
+ * 3.7× faster (ADR 0036 amendment 2). */
+export const SEMANTIC_COARSE_THRESHOLD: number | null = 100_000;
+/** Sign bits, little-endian within each byte: bit d set when component d ≥ 0
+ * (the same layout as sqlite-vec's vec_quantize_binary). */
+export function signBits(vector: ArrayLike<number>): Uint8Array {
+  const out = new Uint8Array(SEMANTIC_BITS_BYTES);
+  for (let d = 0; d < SEMANTIC_DIMENSIONS; d++) if (vector[d]! >= 0) out[d >> 3] = (out[d >> 3] ?? 0) | (1 << (d & 7));
   return out;
+}
+const POPCOUNT = new Uint8Array(256);
+for (let i = 0; i < 256; i++) { let c = 0, v = i; while (v) { c += v & 1; v >>= 1; } POPCOUNT[i] = c; }
+/** The resident coarse index: vector ids and their sign bits, appended on
+ * publish, rebuilt from the table after removals or a generation change. */
+interface ResidentBits { generation: number; count: number; ids: Int32Array; bits: Uint8Array }
+/** Hamming top-k over the resident bits with a bounded max-heap; ties keep the
+ * lower vector id. Returns vector ids, nearest first. */
+export function hammingTopK(index: { count: number; ids: Int32Array; bits: Uint8Array }, query: Uint8Array, k: number): number[] {
+  const size = Math.min(k, index.count), heapId = new Int32Array(size), heapD = new Int32Array(size);
+  let count = 0;
+  const worse = (a: number, b: number) => heapD[a]! > heapD[b]! || (heapD[a] === heapD[b] && heapId[a]! > heapId[b]!);
+  const swap = (a: number, b: number) => { const d = heapD[a]!, i = heapId[a]!; heapD[a] = heapD[b]!; heapId[a] = heapId[b]!; heapD[b] = d; heapId[b] = i; };
+  const { bits, ids } = index;
+  for (let n = 0, base = 0; n < index.count; n++, base += SEMANTIC_BITS_BYTES) {
+    let d = 0;
+    for (let b = 0; b < SEMANTIC_BITS_BYTES; b++) d += POPCOUNT[(bits[base + b] ?? 0) ^ (query[b] ?? 0)] ?? 0;
+    if (count < size) {
+      let c = count++;
+      heapId[c] = ids[n]!; heapD[c] = d;
+      while (c > 0) { const p = (c - 1) >> 1; if (worse(c, p)) { swap(c, p); c = p; } else break; }
+    } else if (d < heapD[0]! || (d === heapD[0] && ids[n]! < heapId[0]!)) {
+      heapId[0] = ids[n]!; heapD[0] = d;
+      let c = 0;
+      for (;;) { const l = 2 * c + 1, r = l + 1; let m = c; if (l < count && worse(l, m)) m = l; if (r < count && worse(r, m)) m = r; if (m === c) break; swap(c, m); c = m; }
+    }
+  }
+  const order: number[] = [];
+  for (let i = 0; i < count; i++) order.push(i);
+  return order.sort((a, b) => heapD[a]! - heapD[b]! || heapId[a]! - heapId[b]!).map((i) => heapId[i]!);
 }
 /** A claimed chunk whose vector never arrives is offered again after this. */
 export const SEMANTIC_CLAIM_LEASE_MS = 5 * 60_000;
@@ -80,8 +121,41 @@ function validVector(vector: readonly number[]): boolean {
 }
 export class SemanticRepository {
   private unavailable: string | null = null;
+  private resident: ResidentBits | null = null;
   constructor(private readonly db: CanonicalSqlite, private readonly now: () => number = () => Date.now(), private readonly coarseThreshold: number | null = SEMANTIC_COARSE_THRESHOLD) {}
   private coarse(vectors: number, projected: number): boolean { return this.coarseThreshold !== null && vectors >= this.coarseThreshold && projected === vectors; }
+  /** Bytes the resident coarse index holds in worker memory right now. */
+  residentBytes(): number { return this.resident ? this.resident.count * SEMANTIC_BITS_BYTES : 0; }
+  /** Loads the sign bits for the current generation; bounded by 48 bytes per vector. */
+  private loadResident(generation: number): ResidentBits {
+    if (this.resident && this.resident.generation === generation) return this.resident;
+    const count = this.scalar("SELECT count(*) FROM quixi_semantic_bits");
+    const ids = new Int32Array(Math.max(count, 16)), bits = new Uint8Array(ids.length * SEMANTIC_BITS_BYTES);
+    let n = 0;
+    for (const row of this.rows("SELECT vector_id,bits FROM quixi_semantic_bits ORDER BY vector_id")) {
+      ids[n] = Number(row.vector_id);
+      bits.set(row.bits as Uint8Array, n * SEMANTIC_BITS_BYTES);
+      n++;
+    }
+    this.resident = { generation, count: n, ids, bits };
+    return this.resident;
+  }
+  private appendResident(vectorId: number, bits: Uint8Array): void {
+    const resident = this.resident;
+    if (!resident) return;
+    if (resident.count === resident.ids.length) {
+      const ids = new Int32Array(resident.ids.length * 2), grown = new Uint8Array(ids.length * SEMANTIC_BITS_BYTES);
+      ids.set(resident.ids);
+      grown.set(resident.bits);
+      resident.ids = ids;
+      resident.bits = grown;
+    }
+    resident.ids[resident.count] = vectorId;
+    resident.bits.set(bits, resident.count * SEMANTIC_BITS_BYTES);
+    resident.count++;
+  }
+  /** Removals and generation changes rebuild the resident index lazily. */
+  private dropResident(): void { this.resident = null; }
   private rows(sql: string, bind: SqlValue[] = []) {
     return rows(this.db, sql, bind);
   }
@@ -115,28 +189,52 @@ export class SemanticRepository {
   }
   private installProjection(): void {
     this.db.exec(SEMANTIC_PROJECTION_SCHEMA);
-    this.exec("INSERT INTO quixi_semantic_schema VALUES(2,?)", [SEMANTIC_PROJECTION_CHECKSUM]);
-    this.exec("INSERT INTO quixi_semantic_projection VALUES(1,?,?,?)", [SEMANTIC_PROJECTION.representation, SEMANTIC_PROJECTION.scale, Number(this.rows("SELECT generation FROM quixi_semantic_meta")[0]?.generation ?? 1)]);
+    this.exec("INSERT INTO quixi_semantic_schema VALUES(3,?)", [SEMANTIC_PROJECTION_CHECKSUM]);
+    this.exec("INSERT INTO quixi_semantic_projection VALUES(1,?,?)", [SEMANTIC_PROJECTION.representation, Number(this.rows("SELECT generation FROM quixi_semantic_meta")[0]?.generation ?? 1)]);
+  }
+  /** Rebuilds the float table with this build's chunk size, keeping every
+   * vector: the rows pass through a plain table because vec0 tables cannot
+   * be altered. Bounded by the index size; runs once per namespace. */
+  private rebuildFloatTable(): void {
+    this.exec("CREATE TABLE quixi_semantic_migrate(id INTEGER PRIMARY KEY,embedding BLOB NOT NULL) STRICT");
+    this.exec("INSERT INTO quixi_semantic_migrate(id,embedding) SELECT rowid,embedding FROM quixi_semantic_vec");
+    this.exec("DROP TABLE quixi_semantic_vec");
+    this.exec(floatTable(SEMANTIC_FLOAT_CHUNK_SIZE));
+    this.exec("INSERT INTO quixi_semantic_vec(rowid,embedding) SELECT id,embedding FROM quixi_semantic_migrate ORDER BY id");
+    this.exec("DROP TABLE quixi_semantic_migrate");
+    this.exec("UPDATE quixi_semantic_schema SET checksum=? WHERE version=1", [SEMANTIC_SCHEMA_CHECKSUM]);
   }
   private validate(): void {
-    const ledger = this.rows("SELECT version,checksum FROM quixi_semantic_schema ORDER BY version");
-    if (!ledger.length || ledger[0]!.version !== 1 || ledger[0]!.checksum !== SEMANTIC_SCHEMA_CHECKSUM)
+    let ledger = this.rows("SELECT version,checksum FROM quixi_semantic_schema ORDER BY version");
+    if (!ledger.length || ledger[0]!.version !== 1 || ![SEMANTIC_SCHEMA_CHECKSUM, SEMANTIC_SCHEMA_LEGACY_CHECKSUM].includes(String(ledger[0]!.checksum)))
       throw new SearchError("MIGRATION_FAILED", "The semantic index schema is from another build; delete and rebuild the semantic index.");
-    // A version-1 namespace gains the projection in place; vectors are kept.
+    // Upgrades in place, vectors kept: the legacy float chunk size, the
+    // version-2 int8 projection (dropped), and the missing version-3 projection.
+    if (ledger[0]!.checksum === SEMANTIC_SCHEMA_LEGACY_CHECKSUM) this.tx(() => this.rebuildFloatTable());
+    if (ledger.some((row) => row.version === 2)) this.tx(() => {
+      this.exec("DROP TABLE IF EXISTS quixi_semantic_int8");
+      this.exec("DROP TABLE IF EXISTS quixi_semantic_projection");
+      this.exec("DELETE FROM quixi_semantic_schema WHERE version=2");
+    });
+    ledger = this.rows("SELECT version,checksum FROM quixi_semantic_schema ORDER BY version");
     if (ledger.length === 1) this.tx(() => this.installProjection());
-    else if (ledger.length !== 2 || ledger[1]!.version !== 2 || ledger[1]!.checksum !== SEMANTIC_PROJECTION_CHECKSUM)
+    else if (ledger.length !== 2 || ledger[1]!.version !== 3 || ledger[1]!.checksum !== SEMANTIC_PROJECTION_CHECKSUM)
       throw new SearchError("MIGRATION_FAILED", "The semantic projection schema is from another build; delete and rebuild the semantic index.");
     for (const match of `${SEMANTIC_SCHEMA}${SEMANTIC_PROJECTION_SCHEMA}`.matchAll(/CREATE (?:VIRTUAL )?(TABLE|INDEX) (quixi_semantic_\w+)/g))
       if (!this.rows("SELECT 1 FROM sqlite_schema WHERE type=? AND name=?", [match[1]!.toLowerCase(), match[2]!]).length)
         throw new SearchError("MIGRATION_FAILED", `Semantic index object ${match[2]} is missing; delete and rebuild the semantic index.`);
     this.rows("SELECT state,model,generation,revision FROM quixi_semantic_meta WHERE singleton=1 LIMIT 0");
     this.rows("SELECT rowid FROM quixi_semantic_vec LIMIT 0");
-    this.rows("SELECT rowid FROM quixi_semantic_int8 LIMIT 0");
-    // A projection built under another representation or scale is never
-    // mixed with this build's: it is dropped and rebuilt by maintenance.
-    const projection = this.rows("SELECT representation,scale FROM quixi_semantic_projection WHERE singleton=1")[0];
-    if (!projection || projection.representation !== SEMANTIC_PROJECTION.representation || Number(projection.scale) !== SEMANTIC_PROJECTION.scale)
-      this.tx(() => { this.exec("DELETE FROM quixi_semantic_int8"); this.exec("INSERT INTO quixi_semantic_projection VALUES(1,?,?,(SELECT generation FROM quixi_semantic_meta)) ON CONFLICT(singleton) DO UPDATE SET representation=excluded.representation,scale=excluded.scale,generation=excluded.generation", [SEMANTIC_PROJECTION.representation, SEMANTIC_PROJECTION.scale]); });
+    this.rows("SELECT vector_id FROM quixi_semantic_bits LIMIT 0");
+    // A projection built under another representation is never mixed with
+    // this build's: it is dropped and rebuilt by maintenance.
+    const projection = this.rows("SELECT representation FROM quixi_semantic_projection WHERE singleton=1")[0];
+    if (!projection || projection.representation !== SEMANTIC_PROJECTION.representation)
+      this.tx(() => {
+        this.exec("DELETE FROM quixi_semantic_bits");
+        this.exec("INSERT INTO quixi_semantic_projection VALUES(1,?,(SELECT generation FROM quixi_semantic_meta)) ON CONFLICT(singleton) DO UPDATE SET representation=excluded.representation,generation=excluded.generation", [SEMANTIC_PROJECTION.representation]);
+      });
+    this.dropResident();
   }
   /** Never throws: a broken semantic namespace leaves lexical search intact. */
   initialize(): void {
@@ -163,6 +261,7 @@ export class SemanticRepository {
     drop("TABLE", "quixi_semantic_int8");
     for (const object of objects)
       if (object.type === "table" && !["quixi_semantic_vec", "quixi_semantic_int8"].includes(String(object.name)) && !/^quixi_semantic_(vec|int8)_/.test(String(object.name))) drop("TABLE", String(object.name));
+    this.dropResident();
   }
   revision(): number {
     return this.unavailable ? -1 : Number(this.meta().revision);
@@ -176,16 +275,24 @@ export class SemanticRepository {
     return this.unavailable ? "disabled" : (String(this.meta().state) as SemanticIndexStatus["state"]);
   }
   status(visible: VisibleChunkSql): SemanticIndexStatus {
-    const emptyProjection = { representation: SEMANTIC_PROJECTION.representation, scale: SEMANTIC_PROJECTION.scale, projected: 0, complete: true, coarseRetrieval: false, threshold: this.coarseThreshold };
+    const emptyProjection = { representation: SEMANTIC_PROJECTION.representation, bytesPerVector: SEMANTIC_PROJECTION.bytesPerVector, candidates: SEMANTIC_PROJECTION.coarseCandidates, projected: 0, complete: true, coarseRetrieval: false, threshold: this.coarseThreshold, residentBytes: 0 };
     if (this.unavailable) return { state: "disabled", model: null, generation: 0, indexedChunks: 0, pendingChunks: 0, vectors: 0, vectorBytes: 0, projection: emptyProjection };
     const meta = this.meta();
     const model = meta.model === null ? null : (JSON.parse(String(meta.model)) as EmbeddingModelIdentity);
     const indexed = model ? this.scalar(`SELECT count(*) ${visible.from} JOIN quixi_semantic_links l ON l.chunk_id=c.chunk_id WHERE ${visible.where} AND l.vector_id IS NOT NULL`, visible.bind) : 0;
     const pending = model ? this.scalar(`SELECT count(*) ${visible.from} LEFT JOIN quixi_semantic_links l ON l.chunk_id=c.chunk_id WHERE ${visible.where} AND (l.chunk_id IS NULL OR (l.vector_id IS NULL AND l.failure IS NULL))`, visible.bind) : 0;
     const vectors = this.scalar("SELECT count(*) FROM quixi_semantic_vectors");
-    const projected = this.scalar("SELECT count(*) FROM quixi_semantic_int8");
-    const projection = { ...emptyProjection, projected, complete: projected === vectors, coarseRetrieval: this.coarse(vectors, projected) };
+    const projected = this.scalar("SELECT count(*) FROM quixi_semantic_bits");
+    const projection = { ...emptyProjection, projected, complete: projected === vectors, coarseRetrieval: this.coarse(vectors, projected), residentBytes: this.residentBytes() };
     return { state: String(meta.state) as SemanticIndexStatus["state"], model, generation: Number(meta.generation), indexedChunks: indexed, pendingChunks: pending, vectors, vectorBytes: vectors * VECTOR_BYTES, projection };
+  }
+  private clearVectors(generation: number): void {
+    this.exec("DELETE FROM quixi_semantic_vec");
+    this.exec("DELETE FROM quixi_semantic_bits");
+    this.exec("DELETE FROM quixi_semantic_vectors");
+    this.exec("DELETE FROM quixi_semantic_links");
+    this.exec("UPDATE quixi_semantic_projection SET generation=?", [generation]);
+    this.dropResident();
   }
   enroll(args: SearchOperations["enrollSemantic"]["args"], visible: VisibleChunkSql): SemanticIndexStatus {
     this.check();
@@ -197,11 +304,7 @@ export class SemanticRepository {
       let generation = Number(meta.generation);
       if (!same) {
         generation += 1;
-        this.exec("DELETE FROM quixi_semantic_vec");
-        this.exec("DELETE FROM quixi_semantic_int8");
-        this.exec("DELETE FROM quixi_semantic_vectors");
-        this.exec("DELETE FROM quixi_semantic_links");
-        this.exec("UPDATE quixi_semantic_projection SET generation=?", [generation]);
+        this.clearVectors(generation);
       }
       this.exec("UPDATE quixi_semantic_meta SET state='enrolled',model=?,generation=?,revision=revision+1", [canonicalJson({ ...args.model } as unknown as JsonValue), generation]);
       this.exec("INSERT INTO quixi_semantic_operations VALUES(?,?)", [args.operationId, generation]);
@@ -226,11 +329,7 @@ export class SemanticRepository {
       if (!this.unavailable) {
         if (this.rows("SELECT id FROM quixi_semantic_operations WHERE id=?", [args.operationId]).length) return;
         const generation = Number(this.meta().generation) + 1;
-        this.exec("DELETE FROM quixi_semantic_vec");
-        this.exec("DELETE FROM quixi_semantic_int8");
-        this.exec("DELETE FROM quixi_semantic_vectors");
-        this.exec("DELETE FROM quixi_semantic_links");
-        this.exec("UPDATE quixi_semantic_projection SET generation=?", [generation]);
+        this.clearVectors(generation);
         this.exec("UPDATE quixi_semantic_meta SET state='disabled',model=NULL,generation=?,revision=revision+1", [generation]);
         this.exec("INSERT INTO quixi_semantic_operations VALUES(?,?)", [args.operationId, generation]);
         return;
@@ -316,8 +415,11 @@ export class SemanticRepository {
           this.exec("INSERT INTO quixi_semantic_vectors(digest,generation) VALUES(?,?)", [item.textDigest, generation]);
           vectorId = Number(this.db.selectValue("SELECT last_insert_rowid()"));
           this.exec("INSERT INTO quixi_semantic_vec(rowid,embedding) VALUES(?,?)", [Number(vectorId), new Uint8Array(new Float32Array(item.vector).buffer)]);
-          // The coarse projection stays complete as vectors arrive.
-          this.exec("INSERT INTO quixi_semantic_int8(rowid,embedding) VALUES(?,vec_int8(?))", [Number(vectorId), new Uint8Array(quantizeInt8(item.vector).buffer)]);
+          // The coarse projection stays complete as vectors arrive, on disk
+          // and in the resident index when it is loaded.
+          const bits = signBits(item.vector);
+          this.exec("INSERT INTO quixi_semantic_bits(vector_id,bits) VALUES(?,?)", [Number(vectorId), bits]);
+          if (this.resident?.generation === generation) this.appendResident(Number(vectorId), bits);
         }
         this.exec("UPDATE quixi_semantic_links SET vector_id=?,claimed_at=NULL WHERE chunk_id=?", [Number(vectorId), item.chunkId]);
         accepted++;
@@ -333,26 +435,32 @@ export class SemanticRepository {
     if (!validVector(vector)) throw new SearchError("INVALID_REQUEST", "Query vectors must be 384 finite, approximately unit values.");
     const bytes = new Uint8Array(new Float32Array(vector).buffer);
     const vectors = this.scalar("SELECT count(*) FROM quixi_semantic_vectors");
-    const projected = this.scalar("SELECT count(*) FROM quixi_semantic_int8");
-    // ADR 0036: above the threshold, int8 coarse retrieval over a generous
-    // candidate set, then an exact float32 rerank of those candidates. A
-    // projection that is not yet complete never serves queries. The rerank
-    // must join the coarse rows to the float table (vec0 point lookups,
-    // plan "INDEX 3:2"); `rowid IN (subquery)` makes vec0 scan every float
-    // vector, which the browser measurement exposed (perf/retrieval/browser-knn).
-    const knn = this.coarse(vectors, projected)
-      ? `SELECT v.rowid AS vector_id,vec_distance_L2(v.embedding,?) AS distance FROM (SELECT rowid FROM quixi_semantic_int8 WHERE embedding MATCH vec_int8(?) AND k=?) coarse CROSS JOIN quixi_semantic_vec v ON v.rowid=coarse.rowid`
-      : `SELECT rowid AS vector_id,distance FROM quixi_semantic_vec WHERE embedding MATCH ? AND k=?`;
-    const knnBind: SqlValue[] = this.coarse(vectors, projected)
-      ? [bytes, new Uint8Array(quantizeInt8(vector).buffer), Math.max(k, SEMANTIC_PROJECTION.coarseCandidates)]
-      : [bytes, k];
+    const projected = this.scalar("SELECT count(*) FROM quixi_semantic_bits");
+    // ADR 0036 amendment 2: above the threshold, Hamming top-N over the
+    // resident sign bits, then an exact float32 rerank of those candidates
+    // through vec0 point lookups (a join on rowid; `rowid IN (subquery)`
+    // would scan the whole float table). A projection that is not yet
+    // complete never serves queries.
+    let knn = "SELECT rowid AS vector_id,distance FROM quixi_semantic_vec WHERE embedding MATCH ? AND k=?";
+    let knnBind: SqlValue[] = [bytes, k];
+    if (this.coarse(vectors, projected)) {
+      const resident = this.loadResident(Number(this.meta().generation));
+      const candidates = hammingTopK(resident, signBits(vector), Math.max(k, SEMANTIC_PROJECTION.coarseCandidates));
+      this.exec("CREATE TEMP TABLE IF NOT EXISTS quixi_semantic_coarse(id INTEGER PRIMARY KEY)");
+      this.exec("DELETE FROM quixi_semantic_coarse");
+      this.exec("INSERT INTO quixi_semantic_coarse(id) SELECT value FROM json_each(?)", [JSON.stringify(candidates)]);
+      knn = "SELECT v.rowid AS vector_id,vec_distance_L2(v.embedding,?) AS distance FROM quixi_semantic_coarse t CROSS JOIN quixi_semantic_vec v ON v.rowid=t.id";
+      knnBind = [bytes];
+    }
     return this.rows(
       `SELECT c.rowid AS rowid,c.chunk_id,knn.distance ${visible.from} JOIN quixi_semantic_links l ON l.chunk_id=c.chunk_id JOIN (${knn}) knn ON knn.vector_id=l.vector_id WHERE ${[visible.where, ...extraWhere].join(" AND ")} ORDER BY knn.distance,c.rowid LIMIT ?`,
       [...knnBind, ...visible.bind, ...extraBind, k],
     ).map((row) => ({ rowid: Number(row.rowid), chunk_id: String(row.chunk_id), distance: Number(row.distance) }));
   }
-  /** Bounded maintenance: links whose chunk no longer exists in any epoch and
-   * vectors no link references. Returns whether work remains. */
+  /** Bounded maintenance: links whose chunk no longer exists in any epoch,
+   * vectors no link references, and projection rows missing for stored
+   * vectors (after an upgrade or a representation change). Returns whether
+   * work remains. */
   maintain(max: number): { remaining: boolean; progressed: boolean } {
     if (this.unavailable) return { remaining: false, progressed: false };
     let progressed = false;
@@ -362,20 +470,21 @@ export class SemanticRepository {
       const orphans = this.rows("SELECT v.id FROM quixi_semantic_vectors v WHERE NOT EXISTS(SELECT 1 FROM quixi_semantic_links l WHERE l.vector_id=v.id) LIMIT ?", [max]);
       for (const orphan of orphans) {
         this.exec("DELETE FROM quixi_semantic_vec WHERE rowid=?", [Number(orphan.id)]);
-        this.exec("DELETE FROM quixi_semantic_int8 WHERE rowid=?", [Number(orphan.id)]);
+        this.exec("DELETE FROM quixi_semantic_bits WHERE vector_id=?", [Number(orphan.id)]);
         this.exec("DELETE FROM quixi_semantic_vectors WHERE id=?", [Number(orphan.id)]);
       }
-      // Backfill the projection for vectors stored before it existed (or after
-      // a representation change), bounded per slice, from the exact floats.
-      const missing = this.rows("SELECT v.id,f.embedding FROM quixi_semantic_vectors v JOIN quixi_semantic_vec f ON f.rowid=v.id WHERE NOT EXISTS(SELECT 1 FROM quixi_semantic_int8 p WHERE p.rowid=v.id) LIMIT ?", [max]);
+      if (orphans.length) this.dropResident();
+      const missing = this.rows("SELECT v.id,f.embedding FROM quixi_semantic_vectors v JOIN quixi_semantic_vec f ON f.rowid=v.id WHERE NOT EXISTS(SELECT 1 FROM quixi_semantic_bits p WHERE p.vector_id=v.id) LIMIT ?", [max]);
       for (const row of missing) {
-        const floats = new Float32Array((row.embedding as Uint8Array).buffer.slice((row.embedding as Uint8Array).byteOffset, (row.embedding as Uint8Array).byteOffset + (row.embedding as Uint8Array).byteLength));
-        this.exec("INSERT INTO quixi_semantic_int8(rowid,embedding) VALUES(?,vec_int8(?))", [Number(row.id), new Uint8Array(quantizeInt8(floats).buffer)]);
+        const blob = row.embedding as Uint8Array;
+        const floats = new Float32Array(blob.buffer.slice(blob.byteOffset, blob.byteOffset + blob.byteLength));
+        this.exec("INSERT INTO quixi_semantic_bits(vector_id,bits) VALUES(?,?)", [Number(row.id), signBits(floats)]);
       }
+      if (missing.length) this.dropResident();
       progressed = this.scalar("SELECT total_changes()") > before;
       if (progressed) this.exec("UPDATE quixi_semantic_meta SET revision=revision+1");
     });
-    const remaining = this.scalar("SELECT EXISTS(SELECT 1 FROM quixi_semantic_links l WHERE NOT EXISTS(SELECT 1 FROM quixi_search_chunks c WHERE c.chunk_id=l.chunk_id)) OR EXISTS(SELECT 1 FROM quixi_semantic_vectors v WHERE NOT EXISTS(SELECT 1 FROM quixi_semantic_links l WHERE l.vector_id=v.id)) OR EXISTS(SELECT 1 FROM quixi_semantic_vectors v WHERE NOT EXISTS(SELECT 1 FROM quixi_semantic_int8 p WHERE p.rowid=v.id))") === 1;
+    const remaining = this.scalar("SELECT EXISTS(SELECT 1 FROM quixi_semantic_links l WHERE NOT EXISTS(SELECT 1 FROM quixi_search_chunks c WHERE c.chunk_id=l.chunk_id)) OR EXISTS(SELECT 1 FROM quixi_semantic_vectors v WHERE NOT EXISTS(SELECT 1 FROM quixi_semantic_links l WHERE l.vector_id=v.id)) OR EXISTS(SELECT 1 FROM quixi_semantic_vectors v WHERE NOT EXISTS(SELECT 1 FROM quixi_semantic_bits p WHERE p.vector_id=v.id))") === 1;
     return { remaining, progressed };
   }
 }

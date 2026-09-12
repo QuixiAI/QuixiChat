@@ -8,7 +8,7 @@ import type { CanonicalSqlite } from "../../storage/src/worker/canonical/reposit
 import { SearchRepository } from "../../storage/src/worker/search/index.ts";
 import type { SearchBlobAccess, SearchChunkTokenizer } from "../../storage/src/worker/search/index.ts";
 import { createStorageChunkTokenizer } from "../../storage/src/worker/search/tokenizer.ts";
-import { semanticInput, semanticInputDigest, SEMANTIC_CLAIM_LEASE_MS, SEMANTIC_PROJECTION, quantizeInt8 } from "../../storage/src/worker/search/semantic.ts";
+import { semanticInput, semanticInputDigest, SEMANTIC_CLAIM_LEASE_MS, SEMANTIC_PROJECTION, SEMANTIC_SCHEMA_LEGACY_CHECKSUM, signBits, hammingTopK } from "../../storage/src/worker/search/semantic.ts";
 import { SEARCH_POLICY } from "../../storage/src/worker/search/schema.ts";
 import { MODEL_LOCK } from "@quixi/quixi-embed";
 import type { CanonicalMutation, EmbeddingModelIdentity, SearchFilters, SearchOperations } from "@quixi/core/contracts";
@@ -376,7 +376,7 @@ test("extracted document pages flow through the same claim pipeline; identical p
   } finally { await search.close(); db.close(); }
 });
 
-test("the int8 projection (ADR 0036) stays complete, serves coarse retrieval above the threshold with float rerank, and is rebuilt after an upgrade or representation change", async () => {
+test("the sign-bit projection (ADR 0036 amendment 2) stays complete, serves coarse retrieval above the threshold with float rerank, and is rebuilt after an upgrade or representation change", async () => {
   const { db, canonical, search, reopen } = open({ coarseThreshold: 4 });
   try {
     const threadId = thread(canonical, "Topics");
@@ -395,10 +395,20 @@ test("the int8 projection (ADR 0036) stays complete, serves coarse retrieval abo
     assert.equal(status.projection.projected, 5, "every published vector is projected immediately");
     assert.equal(status.projection.complete, true);
     assert.equal(status.projection.coarseRetrieval, true, "5 vectors ≥ threshold 4");
+    assert.equal(status.projection.residentBytes, 0, "nothing resident before the first coarse query");
     // Coarse → rerank returns the same order as the exact float path.
     const coarse = page(search, { mode: "semantic", queryVector: queryVector(12) });
     assert.equal(coarse.items.length, 5);
     assert.ok(coarse.items[0]!.excerpt.text.includes("Gamma"));
+    assert.equal(search.semanticStatus().projection.residentBytes, 5 * 48, "the resident index holds 48 bytes per vector after the first coarse query");
+    // A vector published while the index is resident is appended, not reloaded.
+    message(canonical, threadId, "Zeta passage about lighthouses.");
+    await drain(search);
+    const more = search.claimSemanticChunks({ maxChunks: 64, maxBytes: 1_048_576 });
+    assert.equal(more.items.length, 1);
+    search.publishSemanticVectors({ generation: more.generation, items: more.items.map((item) => ({ chunkId: item.chunkId, textDigest: item.textDigest, vector: vectorFor(16, item.text) })) });
+    assert.equal(search.semanticStatus().projection.residentBytes, 6 * 48);
+    assert.ok(page(search, { mode: "semantic", queryVector: queryVector(16) }).items[0]!.excerpt.text.includes("Zeta"), "the appended vector is found through the coarse stage");
     const exactOnly = open({ coarseThreshold: 1_000_000 });
     try {
       const t2 = thread(exactOnly.canonical, "Topics");
@@ -411,28 +421,40 @@ test("the int8 projection (ADR 0036) stays complete, serves coarse retrieval abo
       const exact = page(exactOnly.search, { mode: "semantic", queryVector: queryVector(12) });
       assert.deepEqual(coarse.items.map((hit) => hit.excerpt.text), exact.items.map((hit) => hit.excerpt.text), "coarse→rerank order equals the exact float order");
     } finally { await exactOnly.search.close(); exactOnly.db.close(); }
-    // Quantization is the fixed symmetric representation, clamped.
-    assert.deepEqual([...quantizeInt8(new Float32Array(384).fill(0.5)).slice(0, 2)], [127, 127]);
-    assert.equal(quantizeInt8(vectorFor(12, "x"))[12], 127);
-    // A version-1 namespace (no projection) upgrades in place and maintenance backfills it.
-    db.exec("DELETE FROM quixi_semantic_schema WHERE version=2; DROP TABLE quixi_semantic_int8; DROP TABLE quixi_semantic_projection");
+    // Sign bits follow sqlite-vec's layout (bit d of byte d>>3 when component d ≥ 0).
+    assert.deepEqual([...signBits(new Float32Array(384).fill(0.5)).slice(0, 2)], [255, 255]);
+    assert.equal(signBits(vectorFor(12, "x"))[1]! & (1 << 4), 16);
+    const tiny = { count: 3, ids: Int32Array.of(7, 8, 9), bits: new Uint8Array(3 * 48) };
+    tiny.bits.fill(255, 48, 96);
+    assert.deepEqual(hammingTopK(tiny, new Uint8Array(48), 2), [7, 9], "ties keep the lower id; the all-ones row is farthest");
+    // A version-1 namespace (legacy float chunks, no projection) and a version-2
+    // namespace (int8 projection) both upgrade in place; maintenance backfills.
+    db.exec(`DELETE FROM quixi_semantic_schema WHERE version=3; DROP TABLE quixi_semantic_bits; DROP TABLE quixi_semantic_projection;
+      CREATE VIRTUAL TABLE quixi_semantic_int8 USING vec0(embedding int8[384]); INSERT INTO quixi_semantic_schema VALUES(2,'legacy');
+      CREATE TABLE quixi_semantic_migrate(id INTEGER PRIMARY KEY,embedding BLOB NOT NULL) STRICT; INSERT INTO quixi_semantic_migrate SELECT rowid,embedding FROM quixi_semantic_vec; DROP TABLE quixi_semantic_vec;
+      CREATE VIRTUAL TABLE quixi_semantic_vec USING vec0(embedding float[384]); INSERT INTO quixi_semantic_vec(rowid,embedding) SELECT id,embedding FROM quixi_semantic_migrate; DROP TABLE quixi_semantic_migrate`);
+    db.exec({ sql: "UPDATE quixi_semantic_schema SET checksum=? WHERE version=1", bind: [SEMANTIC_SCHEMA_LEGACY_CHECKSUM] });
     const upgraded = reopen();
     status = upgraded.semanticStatus();
-    assert.equal(status.vectors, 5, "float vectors survive the upgrade");
+    assert.equal(status.vectors, 6, "float vectors survive the upgrade");
+    assert.ok(String(db.selectValue("SELECT sql FROM sqlite_schema WHERE name='quixi_semantic_vec'")).includes("chunk_size=16"), "the float table is rebuilt with this build's chunk size");
+    assert.equal(db.selectValue("SELECT count(*) FROM sqlite_schema WHERE name LIKE 'quixi_semantic_int8%'"), 0, "the int8 projection is gone");
+    assert.equal(db.selectValue("SELECT group_concat(version) FROM (SELECT version FROM quixi_semantic_schema ORDER BY version)"), "1,3");
     assert.equal(status.projection.projected, 0);
     assert.equal(status.projection.coarseRetrieval, false, "an incomplete projection never serves queries");
     assert.equal(page(upgraded, { mode: "semantic", queryVector: queryVector(12) }).items[0]!.excerpt.text.includes("Gamma"), true, "exact path meanwhile");
     let rounds = 0; while (upgraded.maintainSemantic(2).remaining && rounds++ < 10);
     status = upgraded.semanticStatus();
-    assert.equal(status.projection.projected, 5);
+    assert.equal(status.projection.projected, 6);
     assert.equal(status.projection.coarseRetrieval, true);
     // A projection written under another representation is dropped, never mixed, then rebuilt.
-    db.exec("UPDATE quixi_semantic_projection SET representation='int8-other-v0'");
+    db.exec("UPDATE quixi_semantic_projection SET representation='sign-bit-other-v0'");
     const replaced = reopen();
     assert.equal(replaced.semanticStatus().projection.projected, 0, "foreign projection discarded at open");
     assert.equal(replaced.semanticStatus().projection.representation, SEMANTIC_PROJECTION.representation);
     rounds = 0; while (replaced.maintainSemantic(64).remaining && rounds++ < 10);
-    assert.equal(replaced.semanticStatus().projection.projected, 5);
+    assert.equal(replaced.semanticStatus().projection.projected, 6);
+    assert.ok(page(replaced, { mode: "semantic", queryVector: queryVector(12) }).items[0]!.excerpt.text.includes("Gamma"), "coarse retrieval after the rebuild");
     // Deleting the semantic index drops the projection with the vectors; lexical stays.
     const deleted = replaced.deleteSemanticIndex({ operationId: id() });
     assert.equal(deleted.projection.projected, 0);

@@ -79,7 +79,7 @@ export async function exerciseSemanticSearch({ engine, profile, name, origin }) 
     expect(enrolled.projection.projected).toBe(3);
     expect(enrolled.projection.complete).toBe(true);
     expect(enrolled.projection.coarseRetrieval).toBe(false);
-    await expect(page.getByTestId("semantic-projection")).toHaveText(/3 \/ 3 int8 · exact retrieval \(coarse stage off by measurement\)/);
+    await expect(page.getByTestId("semantic-projection")).toHaveText(/3 \/ 3 sign-bit \(0\.0 MB\) · exact retrieval below 100,000 vectors/);
     evidence.model = enrolled.model;
     evidence.checks.push(`enrolment verifies the pinned model, selects ${evidence.backend} and indexes every visible chunk with progress, backend, speed and size shown`);
     // Semantic: a paraphrase with no shared words finds the feline thread first.
