@@ -23,7 +23,7 @@
     "test:host:web": "tsc --noEmit -p apps/web/tests/tsconfig.json && playwright test --config apps/web/tests/playwright.config.ts",
     "test:relay": "npm test --workspace @quixi/relay",
     "test:relay:browser": "npm run test:browser --workspace @quixi/relay",
-    "build": "npm run build --workspace @quixi/web && npm run build --workspace @quixi/desktop",
+    "build": "npm run build --workspace @quixi/web && npm run build --workspace @quixi/desktop && npm run build --workspace @quixi/extension",
     "build:desktop": "npm run tauri --workspace @quixi/desktop -- build",
     "check": "npm run sqlite:verify && npm run typecheck && npm run build",
     "check:desktop": "npm run sqlite:verify && npm run build --workspace @quixi/desktop && cargo check --locked --workspace",
@@ -87,7 +87,10 @@
     "test:storage:blob-inventory": "tsc --noEmit -p packages/storage/tests/blob-inventory/tsconfig.json && node packages/storage/tests/blob-inventory/run.mjs",
     "test:app:storage-health": "tsc --noEmit -p packages/app/tsconfig.tests.json && node --experimental-transform-types --test packages/app/tests/diagnostics/*.test.ts",
     "test:app:storage-health:browser": "tsc --noEmit -p packages/app/tests/browser/diagnostics/tsconfig.json && node packages/app/tests/browser/diagnostics/run.mjs",
-    "test:app:semantic:browser": "tsc --noEmit -p packages/app/tsconfig.tests.json && node packages/app/tests/browser/semantic-run.mjs"
+    "test:app:semantic:browser": "tsc --noEmit -p packages/app/tsconfig.tests.json && node packages/app/tests/browser/semantic-run.mjs",
+    "build:extension": "npm run build --workspace @quixi/extension",
+    "test:extension": "npm run typecheck --workspace @quixi/extension && npm test --workspace @quixi/extension",
+    "test:extension:e2e": "npm run test:e2e --workspace @quixi/extension"
   },
   "devDependencies": {
     "@playwright/test": "1.63.0",

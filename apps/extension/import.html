@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Quixi Import</title>
+    <link rel="stylesheet" href="./src/import.css" />
+  </head>
+  <body>
+    <main>
+      <h1>Quixi Import</h1>
+      <p>Bring your ChatGPT history into your local Quixi archive. You start every step; nothing leaves this browser except to the Quixi page you pair below.</p>
+      <fieldset>
+        <legend>Quixi page</legend>
+        <label for="quixi-origin">Quixi origin</label>
+        <input id="quixi-origin" placeholder="https://quixi.example" value="http://localhost:5173" />
+        <label for="pairing-code">Pairing code (shown on the Quixi page under Import history)</label>
+        <input id="pairing-code" inputmode="numeric" maxlength="6" placeholder="000000" />
+        <label for="account">Source account label (the same label you use in Quixi)</label>
+        <input id="account" maxlength="256" placeholder="For example, personal" />
+      </fieldset>
+      <fieldset>
+        <legend>What to send</legend>
+        <label><input type="radio" name="mode" id="mode-extract" checked /> Extract from the ChatGPT tab you are signed in to</label>
+        <label class="indent"><input type="checkbox" id="only-new" checked /> Only conversations updated since the last import to this Quixi page</label>
+        <details class="indent"><summary>Advanced: provider origin</summary>
+          <label for="provider-origin">ChatGPT origin (leave as is unless testing against a fixture)</label>
+          <input id="provider-origin" value="https://chatgpt.com" />
+        </details>
+        <label><input type="radio" name="mode" id="mode-file" /> Send an official export file instead</label>
+        <div class="indent">
+          <label for="provider">Provider</label>
+          <select id="provider"><option value="openai">ChatGPT</option><option value="anthropic">Claude</option></select>
+          <label for="file">Export file (JSON or ZIP)</label>
+          <input id="file" type="file" accept=".json,.zip,application/json,application/zip" />
+        </div>
+      </fieldset>
+      <div class="actions">
+        <button id="start" type="button">Start</button>
+        <button id="cancel" type="button">Cancel</button>
+        <button id="reconnect" type="button">Reconnect to Quixi</button>
+      </div>
+      <p id="status" role="status" aria-live="polite"></p>
+      <progress id="progress" max="1" value="0"></progress>
+      <p class="muted">Transfer state: <span id="transfer-state">idle</span></p>
+      <p class="muted">Permissions are requested only for the origins you name above, when you press Start. Extraction performs the same requests the ChatGPT page makes for your signed-in session and keeps every record verbatim; Quixi does all normalization and deduplication after you accept the offer.</p>
+    </main>
+    <script type="module" src="./src/import.ts"></script>
+  </body>
+</html>

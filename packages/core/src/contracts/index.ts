@@ -1,6 +1,7 @@
 export * from "./storage.ts";
 export * from "./host.ts";
 export * from "./transfer.ts";
+export * from "./extension-import.ts";
 export * from "./mutations.ts";
 export * from "./serialization.ts";
 

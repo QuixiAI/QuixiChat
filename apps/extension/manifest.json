@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "Quixi Import",
+  "version": "0.1.0",
+  "description": "Bring your ChatGPT history into your local Quixi archive. You start every extraction and approve every transfer; nothing leaves your browser except to the Quixi page you paired.",
+  "action": { "default_title": "Open Quixi Import" },
+  "background": { "service_worker": "background.js", "type": "module" },
+  "permissions": ["scripting", "storage"],
+  "host_permissions": [],
+  "optional_host_permissions": ["https://chatgpt.com/*", "https://*/*", "http://localhost/*", "http://127.0.0.1/*"],
+  "web_accessible_resources": [],
+  "content_security_policy": { "extension_pages": "script-src 'self'; object-src 'self'" }
+}

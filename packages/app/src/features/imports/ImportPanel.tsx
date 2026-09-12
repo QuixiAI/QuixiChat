@@ -29,6 +29,19 @@ export function ImportPanel(props:ImportPanelProps){
    {state.availableBytes!==null&&<p className="import-muted">About {sizes(state.availableBytes)} available on this device.</p>}
    <div className="import-actions"><button type="submit" disabled={state.busy||state.choosing||!state.selectedFile||!account.trim()}>Import history</button>{state.busy&&!state.discarding&&<button type="button" onClick={()=>controller.pause()}>Pause import</button>}</div>
   </form>
+  <section aria-labelledby="import-extension-title" className="import-extension"><h3 id="import-extension-title">Browser extension</h3>
+   {state.extension.capability===null?<p className="import-muted">Checking whether this host can receive extension transfers…</p>
+   :!state.extension.capability.available?<p className="import-muted">{state.extension.capability.reason??'Extension transfers are unavailable on this host.'}</p>
+   :<>
+    <p>In the Quixi extension, enter this page's pairing code <strong data-testid="extension-pairing-code">{state.extension.pairingCode}</strong>, then send a ChatGPT extraction or an official export. Offers appear here for your approval; nothing is imported without it.</p>
+    {state.extension.offer&&<div className="import-offer" role="group" aria-label="Extension offer">
+     <p><strong>{state.extension.offer.bundle.file.name}</strong> · {state.extension.offer.bundle.provider==='openai'?'ChatGPT':'Claude'} · {sizes(state.extension.offer.bundle.file.byteLength)} · {state.extension.offer.bundle.discovered.conversations} conversations{state.extension.offer.bundle.discovered.unavailableAttachments>0&&<> · {state.extension.offer.bundle.discovered.unavailableAttachments} attachments unavailable</>} · {state.extension.offer.bundle.extractor.source==='page_extraction'?'extracted from the provider page':'official export'}</p>
+     {state.extension.progress&&state.extension.progress.state!=='offered'&&<p role="status" data-testid="extension-transfer-state">{state.extension.progress.state==='receiving'?`Receiving ${sizes(state.extension.progress.receivedBytes)} of ${sizes(state.extension.progress.totalBytes)}`:state.extension.progress.state==='verifying'?'Verifying the received bytes…':state.extension.progress.state==='staged'?'Received and verified.':`${state.extension.progress.state}${state.extension.progress.reason?`: ${state.extension.progress.reason}`:''}`}</p>}
+     <div className="import-actions">{(!state.extension.progress||state.extension.progress.state==='offered')&&<button type="button" disabled={state.busy||!account.trim()} onClick={()=>void controller.acceptOffer(account)}>Accept and import</button>}{(!state.extension.progress||state.extension.progress.state==='offered')&&<button type="button" disabled={state.busy} onClick={()=>void controller.rejectOffer()}>Decline</button>}{state.extension.progress?.state==='receiving'&&<button type="button" onClick={()=>void controller.cancelTransfer()}>Cancel transfer</button>}</div>
+     {!account.trim()&&<p className="import-muted">Enter a source account label above to accept.</p>}
+    </div>}
+   </>}
+  </section>
   <p className="import-phase" role="status" aria-atomic="true">{phase}</p>
   {state.busy&&!state.discarding&&<div className="import-progress">{progress?.totalBytes!==null&&progress?.totalBytes!==undefined&&<><progress max={Math.max(1,progress.totalBytes)} value={Math.min(progress.processedBytes,progress.totalBytes)} aria-label="Current import step"/><span>{sizes(progress.processedBytes)} of {sizes(progress.totalBytes)}</span></>}{progress&&(progress.messages>0||progress.parts>0)&&<span>{progress.messages} messages and {progress.parts} content items processed in this pass</span>}</div>}
   {state.error&&<p className="import-error" role="alert">{state.error}</p>}{state.notice&&<p className="import-notice" role="status">{state.notice}</p>}

@@ -1,5 +1,6 @@
 import type { JsonObject, QuixiId } from "../model/types.ts";
 import type { ByteChunk, ChunkAcknowledgement } from "./transfer.ts";
+import type { ExtensionOffer, ExtensionTransferProgress } from "./extension-import.ts";
 
 export interface CapabilityState {
   available: boolean; permission: "not_required" | "prompt" | "granted" | "denied"; reason: string | null;
@@ -36,7 +37,23 @@ export interface HostCapabilities {
   host: "web" | "desktop"; nativeFiles: CapabilityState; notifications: CapabilityState; oauth: CapabilityState;
   /** Writing text to the system clipboard; the interface shows copy controls only when available. */
   clipboard: CapabilityState;
+  /** Receiving provider history bundles from the Quixi browser extension (product §24). */
+  extensionTransfers: CapabilityState;
   secretPersistence: "session" | "native"; providerTransports: ProviderTransport[];
+}
+/** The host owns the page-boundary listener, pairing and staging; the shared
+ * application only sees offers, progress and a verified staged HostFile. */
+export interface ExtensionBridge {
+  /** Shown in the interface for the user to type into the extension; rotates per session. */
+  pairingCode(): string;
+  onOffer(listener: (offer: ExtensionOffer) => void): () => void;
+  onProgress(listener: (progress: ExtensionTransferProgress) => void): () => void;
+  /** Resolves once every byte is received and verified against the bundle digest. */
+  accept(requestId: QuixiId, offerId: QuixiId): Promise<HostFile>;
+  reject(requestId: QuixiId, offerId: QuixiId, reason: string): Promise<void>;
+  cancel(requestId: QuixiId, offerId: QuixiId): Promise<void>;
+  /** Tell the extension how its bundle ended so it can advance its checkpoint. */
+  report(requestId: QuixiId, offerId: QuixiId, outcome: { runId: QuixiId | null; outcome: "complete" | "failed" | "paused"; reason: string | null }): Promise<void>;
 }
 /** Host-registered destination fixes provider, account, credential origin and allowed routes. */
 export interface ProviderBinding { providerId: string; accountId: string; destinationId: string; transportId: string }
@@ -116,4 +133,6 @@ export interface HostClient {
   notify(requestId: QuixiId, notification: { title: string; body: string; action: JsonObject | null }): Promise<void>;
   /** Write bounded text to the system clipboard from a user action; unsupported hosts fail with UNSUPPORTED. */
   writeClipboardText(requestId: QuixiId, text: string): Promise<void>;
+  /** Present only where `capabilities().extensionTransfers` can be available. */
+  extensionBridge?: ExtensionBridge;
 }

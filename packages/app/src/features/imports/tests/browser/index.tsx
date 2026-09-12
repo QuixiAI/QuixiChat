@@ -24,7 +24,7 @@ root.render(<StrictMode><ImportPanel storage={storage} host={host} archiveId={ar
  async diagnostics(){return storage.request(crypto.randomUUID(),'diagnostics',null);},
  handles(){return{selectedHandles,releasedHandles,openedThread};},
  async threads(){return storage.request(crypto.randomUUID(),'readEntities',{collection:'threads',threadId:null,page:{maxItems:10,maxBytes:100_000,cursor:null}});},
- async records(collection:'messages'|'parts'|'rawObjects'|'provenance'|'threads'){return storage.request(crypto.randomUUID(),'readEntities',{collection,threadId:null,page:{maxItems:64,maxBytes:900_000,cursor:null}});},
+ async records(collection:'messages'|'parts'|'rawObjects'|'provenance'|'threads'|'importSources'|'events'){return storage.request(crypto.randomUUID(),'readEntities',{collection,threadId:null,page:{maxItems:64,maxBytes:900_000,cursor:null}});},
  async groups(runId:string){return storage.request(crypto.randomUUID(),'importRunReadGroups',{runId,page:{maxItems:16,maxBytes:900_000,cursor:null}});},
  async search(query:string){return storage.request(crypto.randomUUID(),'searchArchive',{query,mode:'exact',filters:{},page:{maxItems:16,maxBytes:200_000,cursor:null}});},
  async unmount(){root.unmount();await new Promise(resolve=>setTimeout(resolve,100));return{selectedHandles,releasedHandles};},

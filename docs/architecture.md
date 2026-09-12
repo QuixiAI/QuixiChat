@@ -23,8 +23,11 @@ It does not own a canonical history database. The new shell does not start the
 prototype's loopback inference server or install Gemma.
 
 Docker serves the web build. It does not introduce server-side user history.
-The extension extracts provider-native bundles and transfers them to Quixi;
-normalization and canonical writes belong to the importer and Storage Worker.
+The extension (`apps/extension`, Chromium MV3) extracts provider-native records
+in the user's signed-in tab and transfers one export-compatible bundle to the
+paired Quixi page through the web host's `extensionBridge`
+([ADR 0035](decisions/0035-browser-extension-import.md)); normalization and
+canonical writes belong to the importer and Storage Worker.
 
 ## Package boundaries
 

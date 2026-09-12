@@ -23,6 +23,7 @@
   },
   "include": [
     "apps/*/src/**/*.ts",
+    "apps/extension/src/**/*.d.ts",
     "packages/*/src/**/*.ts",
     "packages/*/src/**/*.tsx",
     "apps/*/vite.config.ts",

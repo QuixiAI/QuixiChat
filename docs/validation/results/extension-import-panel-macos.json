@@ -1,0 +1,260 @@
+{
+  "selectedEngines": [
+    "chromium",
+    "webkit"
+  ],
+  "status": "passed",
+  "startedAt": "2026-09-12T08:53:35.159Z",
+  "hosts": [
+    {
+      "name": "chromium",
+      "status": "passed",
+      "checks": [
+        "React StrictMode panel selects a real host File, imports through production storage, releases selected handle and shows durable completion",
+        "bounded source-specific warning review renders missing and unsupported content notices",
+        "conversation action returns the canonical thread ID to host composition",
+        "report is streamed into a verified host transfer and saved via a separate user gesture",
+        "importing the same export again for the same account creates no duplicate threads, messages or parts",
+        "importing changed source text adds a new sealed revision in the same thread while retaining the original message and raw source",
+        "imported text is searchable through the lexical index with no provider account and no semantic indexing",
+        "a malformed message record is skipped with a visible notice while the rest of the export imports and its raw source is retained",
+        "an extension offer with the wrong pairing code is rejected by the page and never shown",
+        "a paired offer is shown with its provenance, accepted explicitly, received with acknowledgements, resumed from the committed offset after an interruption, verified by digest and imported with method \"extension\"",
+        "repeating the same extension bundle for the same account is acknowledged and imported without duplicating history",
+        "declining an offer reports the refusal to the extension and leaves no staged bytes",
+        "pause during an in-flight actual storage acknowledgment retains hidden progress without publishing a partial thread",
+        "saved run listing and warning/report access survive an actual browser-process restart",
+        "paused import resumes after an actual browser-process restart without a selected File or provider account",
+        "explicit discard removes unfinished import work while preserving already saved conversations and original files",
+        "unmount cancels active import, persists paused progress, releases selected host file and publishes no partial thread"
+      ],
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36",
+      "repeatImport": {
+        "before": {
+          "threads": 1,
+          "messages": 3,
+          "parts": 5,
+          "rawObjects": 1
+        },
+        "repeated": {
+          "threads": 1,
+          "messages": 3,
+          "parts": 5,
+          "rawObjects": 2
+        }
+      },
+      "changedImport": {
+        "before": {
+          "threads": 1,
+          "messages": 3,
+          "parts": 5,
+          "rawObjects": 2
+        },
+        "after": {
+          "threads": 1,
+          "messages": 6,
+          "parts": 10,
+          "rawObjects": 3
+        },
+        "changedSha256": "d7d8edb9a01748784203a548728451a321f5fc9ea01896bbc660b363e7925070",
+        "run": {
+          "accountScope": "Personal fixture",
+          "formatProfile": "chatgpt-mapping-observed-2026-v1",
+          "importerName": "quixi-provider-export",
+          "importerVersion": "0.1.0",
+          "provider": "openai",
+          "recordedAt": 1789203217061,
+          "runId": "d7ceb727-7f9c-407a-aa08-b30a4e183ec5",
+          "state": "complete",
+          "summary": {
+            "completedAt": 1789203217433,
+            "format": "json",
+            "sourceKey": "file-0",
+            "sourceName": "chatgpt-observed.changed.json"
+          },
+          "workspaceId": "00000000-0000-4000-8000-000000000021"
+        },
+        "groups": [
+          {
+            "state": "published",
+            "report": {
+              "importSourceId": "f76f6f20-33a2-4f5a-9e55-d9b52d437d56",
+              "mode": "extend",
+              "records": 33,
+              "sourceFingerprint": "62220d325c9de74f1cd5679ad1f896a48b7a647e0f9c674ac47f89dd887d4644",
+              "threadId": "b7fd369d-87e5-473d-b9e5-fd982a1ee461"
+            }
+          },
+          {
+            "state": "complete",
+            "report": {
+              "groups": 1,
+              "rawObjectId": "cbecca7e-8fdb-4076-bc4f-5e47d5ed419f",
+              "sha256": "d7d8edb9a01748784203a548728451a321f5fc9ea01896bbc660b363e7925070"
+            }
+          }
+        ],
+        "rawObjects": [
+          {
+            "sha256": "6872243165447554db289d9ed93d7cfe86ae2a207fffb5dc9cc532523330f141",
+            "byteLength": 763
+          },
+          {
+            "sha256": "6872243165447554db289d9ed93d7cfe86ae2a207fffb5dc9cc532523330f141",
+            "byteLength": 763
+          },
+          {
+            "sha256": "d7d8edb9a01748784203a548728451a321f5fc9ea01896bbc660b363e7925070",
+            "byteLength": 777
+          }
+        ],
+        "events": [
+          "source_message_revision",
+          "source_message_revision",
+          "unsupported_part_preserved",
+          "unsupported_part_preserved",
+          "source_message_revision",
+          "attachment_bytes_missing",
+          "attachment_bytes_missing"
+        ]
+      },
+      "extensionReceiver": {
+        "pairingCodeShape": "six digits",
+        "sha256": "6872243165447554db289d9ed93d7cfe86ae2a207fffb5dc9cc532523330f141"
+      }
+    },
+    {
+      "name": "webkit",
+      "status": "passed",
+      "checks": [
+        "React StrictMode panel selects a real host File, imports through production storage, releases selected handle and shows durable completion",
+        "bounded source-specific warning review renders missing and unsupported content notices",
+        "conversation action returns the canonical thread ID to host composition",
+        "report is streamed into a verified host transfer and saved via a separate user gesture",
+        "importing the same export again for the same account creates no duplicate threads, messages or parts",
+        "importing changed source text adds a new sealed revision in the same thread while retaining the original message and raw source",
+        "imported text is searchable through the lexical index with no provider account and no semantic indexing",
+        "a malformed message record is skipped with a visible notice while the rest of the export imports and its raw source is retained",
+        "an extension offer with the wrong pairing code is rejected by the page and never shown",
+        "a paired offer is shown with its provenance, accepted explicitly, received with acknowledgements, resumed from the committed offset after an interruption, verified by digest and imported with method \"extension\"",
+        "repeating the same extension bundle for the same account is acknowledged and imported without duplicating history",
+        "declining an offer reports the refusal to the extension and leaves no staged bytes",
+        "pause during an in-flight actual storage acknowledgment retains hidden progress without publishing a partial thread",
+        "saved run listing and warning/report access survive an actual browser-process restart",
+        "paused import resumes after an actual browser-process restart without a selected File or provider account",
+        "explicit discard removes unfinished import work while preserving already saved conversations and original files",
+        "unmount cancels active import, persists paused progress, releases selected host file and publishes no partial thread"
+      ],
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+      "repeatImport": {
+        "before": {
+          "threads": 1,
+          "messages": 3,
+          "parts": 5,
+          "rawObjects": 1
+        },
+        "repeated": {
+          "threads": 1,
+          "messages": 3,
+          "parts": 5,
+          "rawObjects": 2
+        }
+      },
+      "changedImport": {
+        "before": {
+          "threads": 1,
+          "messages": 3,
+          "parts": 5,
+          "rawObjects": 2
+        },
+        "after": {
+          "threads": 1,
+          "messages": 6,
+          "parts": 10,
+          "rawObjects": 3
+        },
+        "changedSha256": "d7d8edb9a01748784203a548728451a321f5fc9ea01896bbc660b363e7925070",
+        "run": {
+          "accountScope": "Personal fixture",
+          "formatProfile": "chatgpt-mapping-observed-2026-v1",
+          "importerName": "quixi-provider-export",
+          "importerVersion": "0.1.0",
+          "provider": "openai",
+          "recordedAt": 1789203224267,
+          "runId": "4af61c36-0951-41e3-9ae4-543fdd3aaad7",
+          "state": "complete",
+          "summary": {
+            "completedAt": 1789203224383,
+            "format": "json",
+            "sourceKey": "file-0",
+            "sourceName": "chatgpt-observed.changed.json"
+          },
+          "workspaceId": "00000000-0000-4000-8000-000000000021"
+        },
+        "groups": [
+          {
+            "state": "published",
+            "report": {
+              "importSourceId": "e7cc2994-aed9-42d9-b64c-5003bda7fa5c",
+              "mode": "extend",
+              "records": 33,
+              "sourceFingerprint": "62220d325c9de74f1cd5679ad1f896a48b7a647e0f9c674ac47f89dd887d4644",
+              "threadId": "78143508-152d-448d-b5c9-63603edcb49f"
+            }
+          },
+          {
+            "state": "complete",
+            "report": {
+              "groups": 1,
+              "rawObjectId": "4b0cd5af-43c1-4e17-8236-b455edee219c",
+              "sha256": "d7d8edb9a01748784203a548728451a321f5fc9ea01896bbc660b363e7925070"
+            }
+          }
+        ],
+        "rawObjects": [
+          {
+            "sha256": "6872243165447554db289d9ed93d7cfe86ae2a207fffb5dc9cc532523330f141",
+            "byteLength": 763
+          },
+          {
+            "sha256": "d7d8edb9a01748784203a548728451a321f5fc9ea01896bbc660b363e7925070",
+            "byteLength": 777
+          },
+          {
+            "sha256": "6872243165447554db289d9ed93d7cfe86ae2a207fffb5dc9cc532523330f141",
+            "byteLength": 763
+          }
+        ],
+        "events": [
+          "source_message_revision",
+          "source_message_revision",
+          "attachment_bytes_missing",
+          "unsupported_part_preserved",
+          "attachment_bytes_missing",
+          "source_message_revision",
+          "unsupported_part_preserved"
+        ]
+      },
+      "extensionReceiver": {
+        "pairingCodeShape": "six digits",
+        "sha256": "6872243165447554db289d9ed93d7cfe86ae2a207fffb5dc9cc532523330f141"
+      }
+    }
+  ],
+  "sourceSha256": {
+    "tooling/browser-engines.mjs": "136f16e63e905ae4c8305c7adedfce2411eff13b04f914054f8fb718155d0df1",
+    "packages/app/src/features/imports/ImportPanel.tsx": "c3db6cc74cfb2ae2a381a85d2f952f71591c2a44d124d369d57578a21a2f3ab7",
+    "packages/app/src/features/imports/controller.ts": "30aac196b0a05d565ed99ed983a42d54df540e4c57d3aac0979f87bc7f52bb93",
+    "packages/app/src/features/imports/host-files.ts": "3cf152190b585f932619d53fc64b7fce934fff6291ebf64e96e0fa5a993b9dd6",
+    "packages/app/src/features/imports/discard.ts": "9daf2de2fdfc7caea98346b6eba14058c980fe2448a193994901310a552a2763",
+    "packages/importers/src/host-report.ts": "6c41791c7961f838542d020098469a2557f25ad9de1a1d5b49444dc2058a4d71",
+    "apps/web/src/host/index.ts": "03d17118d919a867520652c0399b3bc043248fe804cdd94a51ba7763d6324ca5",
+    "apps/web/src/host/transfers.ts": "5718b2743caeffb00f4e736393ddff691b94fd896453aafbd696ac50d2e618f1",
+    "apps/web/src/host/extension-bridge.ts": "1025cfafea8a946a24391ad7d4138f0d240eb2e3d073f93a7b46731fde4815e0",
+    "packages/core/src/contracts/extension-import.ts": "cc1a136ba1652b9627028cc2d370cf871b340726b8be30e1c960dced986503d8",
+    "packages/app/src/features/imports/tests/browser/extension-receiver.mjs": "87a8b3d8a0b5bf98c527ac8d1bd6807d94df86993845f833383cb75cbbafb86b",
+    "packages/storage/src/client/archive.ts": "844981f196ebee613c584dadf3d1cef2c1af15f3aa06daf253d6d48c3b553c24",
+    "package-lock.json": "aadb456e2a567a2b91cbb81a502650ebac93541f0a59d54035bdde2cacd97672"
+  },
+  "finishedAt": "2026-09-12T08:53:48.364Z"
+}

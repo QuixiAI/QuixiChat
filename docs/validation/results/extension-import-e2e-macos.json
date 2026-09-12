@@ -1,0 +1,149 @@
+{
+  "status": "passed",
+  "startedAt": "2026-09-12T09:10:06.770Z",
+  "checks": [
+    "an expired provider session is reported as a distinct visible failure before any transfer",
+    "a changed list shape is reported as a provider format change",
+    "the extension extracts two conversations from the synthetic ChatGPT origin in the signed-in tab, stages and offers them, the page accepts explicitly, and the production importer stores them with extension provenance and lexical searchability",
+    "a second extraction with the saved checkpoint finds nothing newer and sends nothing",
+    "after the provider gains one conversation, only that conversation is fetched, offered and imported"
+  ],
+  "providerRequests": [
+    {
+      "path": "/fixture/expire",
+      "authorization": "none"
+    },
+    {
+      "path": "/",
+      "authorization": "none"
+    },
+    {
+      "path": "/favicon.ico",
+      "authorization": "none"
+    },
+    {
+      "path": "/api/auth/session",
+      "authorization": "none"
+    },
+    {
+      "path": "/fixture/restore",
+      "authorization": "none"
+    },
+    {
+      "path": "/fixture/break-shape",
+      "authorization": "none"
+    },
+    {
+      "path": "/api/auth/session",
+      "authorization": "none"
+    },
+    {
+      "path": "/backend-api/conversations?offset=0&limit=50&order=updated",
+      "authorization": "bearer"
+    },
+    {
+      "path": "/fixture/restore",
+      "authorization": "none"
+    },
+    {
+      "path": "/api/auth/session",
+      "authorization": "none"
+    },
+    {
+      "path": "/backend-api/conversations?offset=0&limit=50&order=updated",
+      "authorization": "bearer"
+    },
+    {
+      "path": "/backend-api/conversation/web-conversation-2",
+      "authorization": "bearer"
+    },
+    {
+      "path": "/backend-api/conversation/web-conversation-1",
+      "authorization": "bearer"
+    },
+    {
+      "path": "/api/auth/session",
+      "authorization": "none"
+    },
+    {
+      "path": "/backend-api/conversations?offset=0&limit=50&order=updated",
+      "authorization": "bearer"
+    },
+    {
+      "path": "/fixture/add",
+      "authorization": "none"
+    },
+    {
+      "path": "/api/auth/session",
+      "authorization": "none"
+    },
+    {
+      "path": "/backend-api/conversations?offset=0&limit=50&order=updated",
+      "authorization": "bearer"
+    },
+    {
+      "path": "/backend-api/conversation/web-conversation-3",
+      "authorization": "bearer"
+    }
+  ],
+  "sourceSha256": {
+    "apps/extension/manifest.json": "8e26a6874df1e64ad36af9ff25f90e75cb60054585cea3bcf6c823f91b908382",
+    "apps/extension/src/import.ts": "13538df9198809555e93b44879a584e4a3d0bc5e82a96cc7156a1d955b982a6f",
+    "apps/extension/src/transfer.ts": "14655d15d8a0625da3bb39d404276aa4d214d4d17f07b90913b605a36e6027e5",
+    "apps/extension/src/bridge.ts": "c49d76a2eec7c6e803bf41409e95665e0a9cd2e357202c116e20086d5b30454a",
+    "apps/extension/src/chatgpt.ts": "9115baf713784d4f7243609994fab764610f74b3c0be233f9bfc50b5059c0e4f",
+    "apps/extension/src/chatgpt-extractor.ts": "616cdb726d7b0093f8f5d114a62e6e5f93042a197653caf7dfcbd57e95c312cf",
+    "apps/extension/build.mjs": "e59ba38eeb6184d9f9aa8bca81284d0df5bc1501d77e7cf81952480d9be033db",
+    "apps/extension/tests/e2e.mjs": "89ca5b9e91c94de9304892723eb0c3b34ed87c22f62c46c64f9320d16465f401",
+    "apps/web/src/host/extension-bridge.ts": "1025cfafea8a946a24391ad7d4138f0d240eb2e3d073f93a7b46731fde4815e0",
+    "packages/core/src/contracts/extension-import.ts": "cc1a136ba1652b9627028cc2d370cf871b340726b8be30e1c960dced986503d8",
+    "packages/app/src/features/imports/controller.ts": "30aac196b0a05d565ed99ed983a42d54df540e4c57d3aac0979f87bc7f52bb93",
+    "packages/app/src/features/imports/ImportPanel.tsx": "c3db6cc74cfb2ae2a381a85d2f952f71591c2a44d124d369d57578a21a2f3ab7",
+    "packages/importers/src/normalize.ts": "e1126459ce7599ee0dc96778439035cb7f2de3a6b9ad9575da0ef67262e70f3e"
+  },
+  "environment": {
+    "platform": "darwin",
+    "release": "25.6.0",
+    "arch": "arm64",
+    "osVersion": "26.6.2",
+    "node": "v22.23.1"
+  },
+  "manifest": {
+    "manifest_version": 3,
+    "name": "Quixi Import (test build)",
+    "version": "0.1.0",
+    "description": "Bring your ChatGPT history into your local Quixi archive. You start every extraction and approve every transfer; nothing leaves your browser except to the Quixi page you paired.",
+    "action": {
+      "default_title": "Open Quixi Import"
+    },
+    "background": {
+      "service_worker": "background.js",
+      "type": "module"
+    },
+    "permissions": [
+      "scripting",
+      "storage"
+    ],
+    "host_permissions": [
+      "http://127.0.0.1:4301/*",
+      "http://127.0.0.1:4302/*"
+    ],
+    "optional_host_permissions": [
+      "https://chatgpt.com/*",
+      "https://*/*",
+      "http://localhost/*",
+      "http://127.0.0.1/*"
+    ],
+    "web_accessible_resources": [],
+    "content_security_policy": {
+      "extension_pages": "script-src 'self'; object-src 'self'"
+    }
+  },
+  "extensionId": "eckoifgnokacggjamidmliacdodlpijn",
+  "firstRun": {
+    "threads": 2,
+    "providerRequests": 13
+  },
+  "extConsole": [],
+  "finishedAt": "2026-09-12T09:10:12.278Z"
+}

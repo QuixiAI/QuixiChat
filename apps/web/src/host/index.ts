@@ -14,6 +14,7 @@ import {
   type SecretHandle,
 } from "@quixi/core/contracts";
 import { isQuixiId } from "@quixi/core/model";
+import { createExtensionBridge } from "./extension-bridge.ts";
 import { failure, WEB_HOST_LIMITS, WebTransfers } from "./transfers.ts";
 import { reviewedRegionalTransport } from '@quixi/providers';
 import { verifyRegionalRelay } from './regional-relay.ts';
@@ -248,6 +249,15 @@ export function createWebHost(config: WebHostConfig): HostClient & {
       throw failure("INVALID_REQUEST", "Adopted files need a bounded name, media type and size.", requestId);
     return { name: file.name, mediaType: file.mediaType, byteLength: file.byteLength, read: (start, end) => file.read(start, end) };
   };
+  // The extension bridge listens on this window for the content script's
+  // offers; verified bundles become ordinary selected files (product §24).
+  const extensionBridge = typeof window !== 'undefined' && typeof window.addEventListener === 'function' && typeof window.postMessage === 'function'
+    ? createExtensionBridge({
+        transfers,
+        register: (file) => { const id = crypto.randomUUID(); files.set(id, adopt(file, id)); return { id, name: file.name, mediaType: file.mediaType, byteLength: file.byteLength }; },
+        releaseFile: (fileId) => { files.delete(fileId); },
+      })
+    : null;
   let closed = false;
   let suspended = false;
   let lifecycleEpoch = 0;
@@ -450,6 +460,9 @@ export function createWebHost(config: WebHostConfig): HostClient & {
       return {
         host: "web",
         secretPersistence: "session",
+        extensionTransfers: extensionBridge
+          ? { ...available, permission: "not_required" }
+          : unavailable("This page cannot receive messages from a browser extension."),
         nativeFiles: (window as SaveWindow).showSaveFilePicker
           ? { ...available, permission: "prompt" }
           : unavailable(
@@ -1109,10 +1122,12 @@ export function createWebHost(config: WebHostConfig): HostClient & {
         );
       new Notification(notification.title, { body: notification.body });
     },
+    ...(extensionBridge ? { extensionBridge } : {}),
     async dispose() {
       if (closed) return;
       closed = true;
       resumeRequested = false;
+      await extensionBridge?.dispose();
       if (typeof window !== 'undefined' && typeof window.removeEventListener === 'function') {
         window.removeEventListener('pagehide', pagehide);
         window.removeEventListener('pageshow', pageshow);

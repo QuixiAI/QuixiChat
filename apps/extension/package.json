@@ -1,9 +1,17 @@
 {
   "name": "@quixi/extension",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "private": true,
   "type": "module",
+  "description": "Quixi Import browser extension (Chromium MV3).",
+  "scripts": {
+    "build": "node build.mjs",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "node --experimental-transform-types --test tests/*.test.ts",
+    "test:e2e": "node tests/e2e.mjs"
+  },
   "dependencies": {
+    "@noble/hashes": "2.4.0",
     "@quixi/core": "0.0.1"
   }
 }
