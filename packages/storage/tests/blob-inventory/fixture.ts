@@ -39,3 +39,12 @@ export const fingerprintBlobInventoryFixture = (archiveId: string) => fixtureCal
 export const cleanupBlobInventoryFixture = (archiveId: string) => fixtureCall<void>('cleanup', archiveId);
 /** Deliberately invalid canonical input, available only to isolated tests. */
 export const corruptBlobInventoryReference = (archiveId: string) => fixtureCall<BlobInventoryFingerprint>('malformed-reference', archiveId);
+/** Plan 23 diagnostics faults, available only to isolated tests, applied
+ * while no production owner holds the archive. `derived-failure` rewrites the
+ * derived search ledger's checksum so the next owner refuses the derived index
+ * (a rebuildable derived-index failure). `corrupt-database` creates an index
+ * and removes only its sqlite_master row through writable_schema, leaving its
+ * b-tree pages allocated but unreferenced, which SQLite's integrity_check
+ * reports as pages that are never used (real file-level corruption). */
+export type BlobInventoryFault = 'derived-failure' | 'corrupt-database';
+export const injectBlobInventoryFault = (archiveId: string, fault: BlobInventoryFault) => fixtureCall<{ fault: BlobInventoryFault }>(fault, archiveId);

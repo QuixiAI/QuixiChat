@@ -424,6 +424,20 @@ export class OpfsBlobStore {
   /** Each yielded entry consumes inventory work, including valid prefix
    * directories and unknown entries. Unknown names never cross this boundary.
    * This reads lengths only and does not open, hash, quarantine, or delete blobs. */
+  /** Diagnostics: the published content file's size for one digest, or null
+   * when it is absent. One handle lookup; an in-progress reader keeps the
+   * file readable, so an open handle never counts as missing. */
+  async publishedByteLength(sha256: string): Promise<number | null> {
+    this.checkOpen();
+    if (!validDigest(sha256)) return null;
+    let directory: FileSystemDirectoryHandle;
+    try { directory = await this.blobs.getDirectoryHandle(sha256.slice(0, 2)); }
+    catch (error) { if (error instanceof DOMException && error.name === "NotFoundError") return null; throw ioError(error); }
+    const handle = await exists(directory, sha256);
+    if (!handle) return null;
+    try { return (await handle.getFile()).size; }
+    catch (error) { throw ioError(error); }
+  }
   async *inspectInventory(): AsyncGenerator<{
     kind: 'prefix' | 'blob' | 'staged' | 'unknown';
     sha256: string | null; path: string | null; byteLength: number | null;

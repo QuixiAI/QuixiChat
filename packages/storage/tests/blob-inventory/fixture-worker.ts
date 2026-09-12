@@ -116,6 +116,20 @@ self.onmessage = async (event: MessageEvent<{ operation: string; archiveId: stri
           db.exec({ sql: "INSERT INTO quixi_records(collection,id,payload) VALUES('attachments',?,?)", bind: [attachmentId, JSON.stringify({ id: attachmentId, availability: 'available', filename: 'synthetic-malformed.txt', mimeType: 'text/plain', sizeBytes: 12, blobSha256: null, rawObjectId: null })] });
           return await fingerprint(database, directory);
         }
+        if (operation === 'derived-failure') {
+          const db = (database as unknown as { db: CanonicalSqlite }).db;
+          await database.quiesce();
+          db.exec("UPDATE quixi_search_schema SET checksum='0000000000000000000000000000000000000000000000000000000000000000' WHERE version=1");
+          return { fault: operation };
+        }
+        if (operation === 'corrupt-database') {
+          const db = (database as unknown as { db: CanonicalSqlite }).db;
+          db.exec('CREATE INDEX quixi_fixture_damage ON quixi_records(collection)');
+          db.exec('PRAGMA writable_schema=ON');
+          db.exec("DELETE FROM sqlite_master WHERE type='index' AND name='quixi_fixture_damage'");
+          db.exec('PRAGMA writable_schema=OFF');
+          return { fault: operation };
+        }
         throw new Error('Unknown fixture operation');
       } finally { await database.close('handles'); }
     });

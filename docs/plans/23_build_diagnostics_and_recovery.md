@@ -1,6 +1,6 @@
 # 23 — Build diagnostics and archive recovery tools
 
-**Status:** In progress — bounded read-only blob inventory and shared Storage health UI are implemented; broader audits, diagnostic export and reviewed repair remain open
+**Status:** In progress — the §100 diagnostics report with a fixed outcome vocabulary, the bounded read-only blob inventory, the shared Storage health UI and the distinct FTS/semantic repair actions are implemented; inference diagnostics, the remaining Doctor audits, diagnostic export and reviewed cleanup remain open
 
 **Workstream:** Product reliability — Quixi Doctor
 
@@ -25,9 +25,9 @@ Give users and developers inspectable storage health and narrowly targeted recov
 
 ## Tasks
 
-- [ ] Implement a diagnostics report covering SQLite integrity/schema, OPFS persistence, FTS5/sqlite-vec availability, attachment references, and storage ownership.
+- [x] Implement a diagnostics report covering SQLite integrity/schema, OPFS persistence, FTS5/sqlite-vec availability, attachment references, and storage ownership. `diagnosticsReport` classifies every check as ok, corruption, unsupported, missing data, rebuildable, attention or unknown ([ADR 0040](../decisions/0040-diagnostics-outcomes.md), [validation](../validation/diagnostics.md): 12 Node classification tests on real SQLite WASM, 12 application checks per engine). The attachment-reference check is bounded (newest 4,096 records, 64 file probes) and defers to the storage scan; the report is operational metadata only.
 - [ ] Implement Quixi Doctor checks for blob hashes, missing/orphan blobs, branch invariants, import provenance, and atomic sync-op coverage. Missing/orphan detection and metadata/size mismatch findings are now implemented with protected transfer/import data, malformed-reference refusal and exact preservation evidence ([validation](../validation/blob-inventory.md), [ADR 0024](../decisions/0024-bounded-blob-inventory.md)). Full hash, branch, import-provenance and sync-coverage audits remain open.
-- [ ] Expose rebuild FTS and derived semantic-index delete/rebuild as distinct actions. Keep canonical-content repair separate from safe derived-data recreation.
+- [x] Expose rebuild FTS and derived semantic-index delete/rebuild as distinct actions. Keep canonical-content repair separate from safe derived-data recreation. Storage health now offers Rebuild search index, Delete semantic index and Rebuild semantic index as three buttons under a statement of what they never change; the FTS rebuild repairs a failed derived index in both engines with canonical rows, operations, catalog, transfers and file bytes fingerprinted unchanged ([validation](../validation/diagnostics.md)). No canonical-content repair exists.
 - [ ] Implement bounded scans with progress, cancellation, and resumable work where appropriate. Report findings before destructive cleanup and require explicit selection for deleting orphan blobs. The blob inventory now runs in capped worker slices, has bounded findings pages, progress/Stop and explicit new scans after stale inputs or owner loss; it preserves partial results without inventing a resumable OPFS iterator. The shared panel is keyboard and narrow-layout qualified in both engines. Other audit scans and explicitly reviewed cleanup remain open; no deletion operation is exposed ([validation](../validation/blob-inventory.md)).
 - [ ] Use archive export/restore as the recovery foundation. Define what remains accessible when schema initialization, a migration, or a derived index fails. [ADR 0016](../decisions/0016-startup-failure-and-schema-recovery.md) records the schema-failure answer (exact bytes via rescue export; bounded read-only history at a compatible prefix); derived-index failure never blocks startup because search data is rebuildable.
 - [ ] Add QuixiEmbed diagnostics when that runtime is installed: model hash, tokenizer/reference self-test, scalar/SIMD parity, and available WebGPU routes.
@@ -41,10 +41,25 @@ Give users and developers inspectable storage health and narrowly targeted recov
 
 ## Acceptance criteria
 
-- [ ] Detected corruption is distinguished from unsupported capability, missing data, and a rebuildable derived index.
-- [ ] FTS/semantic rebuilds preserve canonical rows, provenance, branches, and attachment bytes.
+- [x] Detected corruption is distinguished from unsupported capability, missing data, and a rebuildable derived index. One report on the fixture archive names SQLite corruption (unreferenced pages), missing data (a deleted file and a deleted catalog row) and, after a ledger fault, a rebuildable derived index, each on its own check; unsupported capabilities are classified from stated inputs because every host in the matrix has FTS5, sqlite-vec and the tokenizer ([validation](../validation/diagnostics.md)).
+- [x] FTS/semantic rebuilds preserve canonical rows, provenance, branches, and attachment bytes. The FTS rebuild (repair path) and the semantic delete run in both engines with the canonical record table (which holds provenance and branches), sync and blob operations, catalog, transfers and every stored file byte fingerprinted equal to the baseline; the semantic rebuild's storage effect is the same delete followed by enrolment and re-embedding, exercised by the [semantic proof](../validation/semantic-search.md).
 - [ ] Users can inspect the scope of cleanup before any canonical/blob deletion occurs.
 - [ ] Diagnostic exports contain no provider secrets or unsolicited history content.
+
+## Diagnostics report and repair actions — 2026-09-12
+
+The Storage health view gained a Diagnostics section: Run diagnostics asks
+the storage owner for a `diagnosticsReport` covering the nine §100 storage
+checks, each with a fixed outcome and a plain summary, and three repair
+actions (Rebuild search index, Delete semantic index, Rebuild semantic
+index). [ADR 0040](../decisions/0040-diagnostics-outcomes.md) fixes the
+outcome vocabulary and the metadata-only content policy;
+[diagnostics.md](../validation/diagnostics.md) records the Node and
+two-engine evidence, including real corruption, missing-data and
+derived-failure fixtures on the blob-inventory archive. Still open: the
+inference checks (model hash, tokenizer/reference self-test, parity, WebGPU
+routes), the hash/branch/provenance/sync-coverage audits, the exportable
+report file, and reviewed cleanup.
 
 ## Pending mutation recovery increment — 2026-09-10
 

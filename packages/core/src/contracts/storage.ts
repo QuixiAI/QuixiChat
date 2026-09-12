@@ -1,6 +1,8 @@
 import { assertProducerArgs } from './producers.ts';
 import { assertBlobInventoryArgs } from './blob-inventory.ts';
 import type { BlobInventoryOperations } from './blob-inventory.ts';
+import { assertDiagnosticsArgs } from './diagnostics.ts';
+import type { DiagnosticsOperations } from './diagnostics.ts';
 import { assertPreferenceArgs } from './preferences.ts';
 import { assertRoutingAliasArgs } from './routing-aliases.ts';
 import type { RoutingAliasOperations } from './routing-aliases.ts';
@@ -136,7 +138,7 @@ export interface LocalSyncOperation extends SyncOperation { sequence: number }
 export interface SyncOperationPage { items: LocalSyncOperation[]; nextCursor: string | null; bytes: number; lastSequence: number; highWaterSequence: number }
 export interface PageBudget { maxItems: number; maxBytes: number; cursor: string | null }
 export interface EntityPage { items: JsonValue[]; nextCursor: string | null; bytes: number }
-export interface StorageOperations extends NormalizedImportOperations, ImportWorkOperations, SearchOperations, ProducerOperations, ViewOperations, ArchivesOperations, ArchiveSelectionOperations, ExtractionOperations, PreferenceOperations, RoutingAliasOperations, BlobInventoryOperations {
+export interface StorageOperations extends DiagnosticsOperations, NormalizedImportOperations, ImportWorkOperations, SearchOperations, ProducerOperations, ViewOperations, ArchivesOperations, ArchiveSelectionOperations, ExtractionOperations, PreferenceOperations, RoutingAliasOperations, BlobInventoryOperations {
   diagnostics: { args: null; result: {backend:'sqlite-wasm-opfs-sahpool';ownerId:string;schemaVersion:number;integrity:string;canonicalRecords:number;syncOperations:number;persisted:boolean|null;usage:number|null;quota:number|null} };
   commit: { args: MutationBatch; result: CommitResult };
   readEntities: { args: { threadId: QuixiId | null; collection: Exclude<keyof CanonicalHistory,"version">; page: PageBudget }; result: EntityPage };
@@ -190,6 +192,7 @@ export function assertStorageRequest(request: StorageRequest): void {
     case 'searchStatus': case 'rebuildSearch': case 'advanceSearchIndex': case 'resolveDocumentSearchHit': case 'resolveConversationSearchHit': case 'semanticStatus': case 'enrollSemantic': case 'setSemanticState': case 'claimSemanticChunks': case 'publishSemanticVectors': case 'deleteSemanticIndex': assertSearchArgs(request.operation,request.args);break;
     case 'resolveSourceIdentity': case 'readEntity': case 'importRunBegin': case 'importRunStatus': case 'importRunSetState': case 'importAllocateIds': case 'importWorkStage': case 'importWorkSeal': case 'importWorkGroupStatus': case 'importWorkGet': case 'importWorkCheckpoint': case 'importWorkResolve': case 'importGroupFinish': assertImportWorkArgs(request.operation,request.args);break;
     case 'importRunList': case 'importWorkRead': case 'importRunReadGroups': assertImportWorkArgs(request.operation,request.args);assertPageBudget(request.args.page);if(request.args.page.maxItems>128)throw new Error('Import work page is too large');break;
+    case 'diagnosticsReport': assertDiagnosticsArgs(request.operation, request.args); break;
     case 'diagnostics': case 'readArchiveActivationContext': if(request.args!==null)throw new Error('Operation requires null args');break;
     case 'activateRestoredArchive': assertArchiveActivationArgs(request.args);break;
     case 'prepareImportBlobs': case 'beginNormalizedImport': case 'stageImportRecords': case 'validateImportStep': case 'finalizeNormalizedImport': case 'cancelNormalizedImport': case 'normalizedImportStatus': assertNormalizedImportArgs(request.operation,request.args);break;

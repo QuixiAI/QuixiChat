@@ -16,3 +16,4 @@ export * from './extraction.ts';
 export * from './preferences.ts';
 export * from './routing-aliases.ts';
 export * from './blob-inventory.ts';
+export * from './diagnostics.ts';

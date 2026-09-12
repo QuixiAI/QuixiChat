@@ -2,10 +2,12 @@ import { mountApp } from '@quixi/app';
 import type { StorageClient, StorageOperations } from '@quixi/core/contracts';
 import { createWebHost } from '../../../../../apps/web/src/host/index.ts';
 import { createIsolatedStorageClient } from '../../../../storage/tests/isolated-client.ts';
-import { setupBlobInventoryFixture, fingerprintBlobInventoryFixture, cleanupBlobInventoryFixture } from '../../../../storage/tests/blob-inventory/fixture.ts';
+import { setupBlobInventoryFixture, fingerprintBlobInventoryFixture, cleanupBlobInventoryFixture, injectBlobInventoryFault } from '../../../../storage/tests/blob-inventory/fixture.ts';
+import type { BlobInventoryFault } from '../../../../storage/tests/blob-inventory/fixture.ts';
 
 const archiveId = new URL(location.href).searchParams.get('archive')!;
-const fixture = await setupBlobInventoryFixture(archiveId, 96);
+// `reuse`: the archive was seeded by an earlier page on this origin (diagnostics faults reopen it).
+const fixture = new URL(location.href).searchParams.get('fixture') === 'reuse' ? null : await setupBlobInventoryFixture(archiveId, 96);
 let current = createIsolatedStorageClient({ archiveId }), closed = false;
 const changes = new Set<(ids: string[]) => void>(), progress = new Set<Parameters<StorageClient['onProgress']>[0]>();
 let unchanges = current.onChange(ids => { for (const listener of changes) listener(ids); });
@@ -47,6 +49,19 @@ Object.assign(window, { storageHealthAcceptance: {
     unprogress = current.onProgress(value => { for (const listener of progress) listener(value); });
     await current.request(crypto.randomUUID(), 'diagnostics', null);
   },
+  /** Plan 23: applies one fixture fault with no production owner open, then replaces the owner (as after a restart). */
+  async fault(kind: BlobInventoryFault) {
+    unchanges(); unprogress(); await current.close();
+    await injectBlobInventoryFault(archiveId, kind);
+    current = createIsolatedStorageClient({ archiveId });
+    unchanges = current.onChange(ids => { for (const listener of changes) listener(ids); });
+    unprogress = current.onProgress(value => { for (const listener of progress) listener(value); });
+    await current.request(crypto.randomUUID(), 'diagnostics', null);
+  },
+  report: () => current.request(crypto.randomUUID(), 'diagnosticsReport', null),
+  searchStatus: () => current.request(crypto.randomUUID(), 'searchStatus', null),
+  semanticStatus: () => current.request(crypto.randomUUID(), 'semanticStatus', null),
+  counts: async () => { const value = await current.request(crypto.randomUUID(), 'diagnostics', null); return { canonicalRecords: value.canonicalRecords, syncOperations: value.syncOperations }; },
   async fingerprint() { await close(); return fingerprintBlobInventoryFixture(archiveId); },
   async cleanup() { await close(); await cleanupBlobInventoryFixture(archiveId); },
 } });

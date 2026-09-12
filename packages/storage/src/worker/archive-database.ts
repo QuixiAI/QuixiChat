@@ -7,6 +7,7 @@ import type {
   ArchivesOperations,
   CanonicalMutation,
   SearchIndexStatus,
+  SemanticIndexStatus,
   StagedImportRecord,
   StorageRequest,
 } from "@quixi/core/contracts";
@@ -30,6 +31,8 @@ import type {
   ArchiveSqlite,
 } from "./archives/snapshot.ts";
 import { installArchiveOperationFences } from "./archive-operation-fences.ts";
+import { diagnose, probeCapabilities } from "./diagnostics.ts";
+import { CANONICAL_MIGRATIONS } from "../../migrations/index.ts";
 import { OperationClaimError, OperationClaimRegistry, installArchiveOperationClaimFences } from './operation-claims.ts';
 import { ExtractionRepository } from './extraction/index.ts';
 
@@ -787,6 +790,23 @@ export class ArchiveDatabase {
         );
       case "discardBlobTransfer":
         return this.catalog.discard(request.args.transferId);
+      case "diagnosticsReport": {
+        const [estimate, persisted] = await Promise.all([
+          navigator.storage.estimate().catch(() => null),
+          navigator.storage.persisted().catch(() => null),
+        ]);
+        let status: SearchIndexStatus | null = null, semantic: SemanticIndexStatus | null = null;
+        if (this.search && !this.searchFailure) {
+          try { status = this.search.status(); semantic = this.search.semanticStatus(); }
+          catch (error) { this.searchFailure = error; }
+        }
+        return diagnose({
+          db: this.db, ownerId, schemaVersion: this.schemaVersion, expectedSchemaVersion: CANONICAL_MIGRATIONS.length,
+          capabilities: probeCapabilities(this.db), persisted, usage: estimate?.usage ?? null, quota: estimate?.quota ?? null,
+          search: { tokenizerFailure: this.tokenizerFailure, failure: this.searchFailure, status, semantic },
+          blobs: this.blobs,
+        });
+      }
       case "diagnostics": {
         const [estimate, persisted] = await Promise.all([
           navigator.storage.estimate().catch(() => null),

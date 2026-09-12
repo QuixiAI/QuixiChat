@@ -86,6 +86,7 @@
     "test:app:regional:native": "python3 tests/hosts/regional-app-proof/run.py",
     "test:host:oauth:native": "python3 tests/hosts/oauth-proof/run.py",
     "test:host:oauth:web": "tsc --noEmit -p apps/web/tests/tsconfig.json && node --experimental-transform-types --test apps/web/tests/oauth-unit.test.ts && node apps/web/tests/oauth-run.mjs",
+    "test:storage:diagnostics": "tsc --noEmit -p packages/storage/tests/diagnostics/tsconfig.json && node --experimental-transform-types --test packages/storage/tests/diagnostics/*.test.ts",
     "test:storage:blob-inventory": "tsc --noEmit -p packages/storage/tests/blob-inventory/tsconfig.json && node packages/storage/tests/blob-inventory/run.mjs",
     "test:app:storage-health": "tsc --noEmit -p packages/app/tsconfig.tests.json && node --experimental-transform-types --test packages/app/tests/diagnostics/*.test.ts",
     "test:app:storage-health:browser": "tsc --noEmit -p packages/app/tests/browser/diagnostics/tsconfig.json && node packages/app/tests/browser/diagnostics/run.mjs",

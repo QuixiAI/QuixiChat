@@ -83,7 +83,9 @@ bytes. The effective file-backed TEMP setting and cache target are asserted.
 
 The [application report](results/blob-inventory-ui-macos.json) verifies all seven
 categories, unchanged fingerprints, bounded pages, keyboard focus, Stop,
-navigation during a scan, stale results and real storage-owner replacement.
+navigation during a scan, stale results and real storage-owner replacement,
+and since 2026-09-12 the plan 23 [diagnostics report and repair actions](./diagnostics.md)
+on the same fixture archive (12 checks per engine).
 The [Chromium](results/storage-health-chromium-mobile.png) and
 [WebKit](results/storage-health-webkit-mobile.png) 390-pixel screenshots were
 visually inspected. Long identifiers wrap without horizontal page overflow.
@@ -100,6 +102,9 @@ The native regression checks ordinary archive startup and established regional
 workflows under the new TEMP configuration, not native inventory acceptance.
 The [aggregate check report](results/blob-inventory-checks-macos.json) records
 commands, logs and verified artifact/source hashes. No remote CI run is claimed.
+Its fixture-file hashes predate the 2026-09-12 fault operations added to the
+fixture for the diagnostics proof; the worker and application reports above
+were rerun on that date against the current fixture (11 and 12 checks per engine).
 
 ## Acceptance and remaining work
 

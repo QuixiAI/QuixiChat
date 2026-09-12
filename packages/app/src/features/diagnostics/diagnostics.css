@@ -9,3 +9,11 @@
 .storage-health-findings dl { display: grid; grid-template-columns: minmax(0, 9rem) minmax(0, 1fr); gap: .35rem .75rem; }
 .storage-health-findings code { overflow-wrap: anywhere; white-space: normal; }
 @media (max-width: 520px) { .storage-health-findings dl { grid-template-columns: 1fr; } .storage-health-findings dt { margin-block-start: .5rem; } }
+.diagnostics { max-width: 64rem; }
+.diagnostic-checks { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); gap: .75rem 1.5rem; margin-block: 1rem; }
+.diagnostic-checks div { display: grid; gap: .25rem; padding: .75rem; border: 1px solid var(--border, #ddd); border-radius: var(--radius-m, .5rem); }
+.diagnostic-checks dt { font-weight: 600; }
+.diagnostic-checks dd { margin-inline-start: 0; }
+.diagnostic-outcome { font-weight: 600; }
+.diagnostic-corruption, .diagnostic-missing_data { color: var(--danger-text, var(--text)); }
+.diagnostic-attention, .diagnostic-rebuildable { color: var(--warn-text, var(--text)); }
