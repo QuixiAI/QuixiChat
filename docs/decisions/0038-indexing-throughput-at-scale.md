@@ -88,6 +88,29 @@ transactions per message on its OPFS; WebKit's commit is roughly ten times
 cheaper), and the semantic query still assembles hits through several
 statements. Those are the next two items of the decision below.
 
+## Fix 6 (same day): one write transaction per slice, no re-enqueue of current sources
+
+An indexing slice now opens one `BEGIN IMMEDIATE` and every `tx()` inside it
+is a savepoint; the batch commits at the end of the slice (or rolls back if
+an error escapes it, after which the sources are simply picked again). It is
+closed around each await that leaves the worker's synchronous domain — blob
+reads and discards — so a canonical commit handled meanwhile never joins
+it. Message-scope expansion no longer re-enqueues a source whose head is
+current (`stale=0`), which removed two queue steps per message. Node, 10k
+messages: 1,262 → 793 slices (Node's in-memory VFS pays no fsync, so 58 →
+56 s). Browser scale proof at 10,000 messages:
+
+| Phase | Chromium (fix 5 → fix 6) | WebKit (fix 5 → fix 6) |
+| --- | --- | --- |
+| lexical indexing | 211 s → 58 s (788 slices) | 70 s → 47 s |
+| publish 10,000 vectors | 10.8 s → 12.7 s | 9.2 s → 10.2 s |
+| semantic query median | 86 ms → 95 ms | 80 ms → 85 ms |
+
+Lexical indexing in Chromium is now 6.6× faster than before ADR 0038
+(380 s → 58 s for 10k messages). The extraction, extraction-search,
+search-navigation and archive suites (blob reads across the batch
+boundaries) and the application browser proof pass.
+
 ## Measured after fixes 1–4 (browser scale proof, 30,000 messages)
 
 [semantic-scale-browser.json](../../packages/app/tests/browser/results/semantic-scale-browser.json),
@@ -130,12 +153,10 @@ measured by the same proof:
 
 1. ~~A `stale` flag on `quixi_search_heads`~~ — done (fix 5 above), with the
    in-place upgrade.
-2. Several sources per transaction in a slice (bounded by `maxChunks`), so
-   the fsync cost is paid per slice rather than per message, and the
-   message-scope expansion no longer re-enqueues a source whose head is
-   already current.
+2. ~~Several sources per transaction in a slice~~ — done (fix 6 above).
 3. A profile of `search()` at 30k+ (status read, KNN join, hit assembly) with
-   the fix for whatever dominates.
+   the fix for whatever dominates; the semantic query costs 85–95 ms at 10k
+   against a 5 ms bare KNN.
 
 Only after those does the 101k proof (and the 1M browser run of ADR 0036)
 become a bounded exercise.

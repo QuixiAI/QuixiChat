@@ -45,7 +45,17 @@ stage (≥ 100,000 vectors) is therefore proven in storage tests and the
 `perf/retrieval/browser-knn` harness, not yet through the application at
 scale.
 
-## Result after the stale-flag fix (100 × 100 = 10,000 messages)
+## Result after the batched-slice fix (100 × 100 = 10,000 messages, retained record)
+
+| | Chromium | WebKit |
+| --- | --- | --- |
+| lexical indexing | 58 s (788 slices) | 47 s |
+| publish 10,000 vectors | 12.7 s | 10.2 s |
+| semantic query median / max | 95 / 122 ms | 85 / 111 ms |
+| Best / Exact / thread-filtered | 101 / 6 / 104 ms | 86 / 7 / 97 ms |
+| planted topics found first | 10 of 10 | 10 of 10 |
+
+## Result after the stale-flag fix (100 × 100 = 10,000 messages, superseded)
 
 | | Chromium | WebKit |
 | --- | --- | --- |
@@ -55,8 +65,8 @@ scale.
 | Best / Exact / thread-filtered | 92 / 5 / 95 ms | 80 / 5 / 87 ms |
 | planted topics found first | 10 of 10 | 10 of 10 |
 
-The retained record now holds this 10k run; the 30k numbers above are from
-the run before the stale flag (its report was superseded in place).
+The retained record holds the latest 10k run; earlier tables are kept from
+their runs' logs.
 
 ## Limits
 

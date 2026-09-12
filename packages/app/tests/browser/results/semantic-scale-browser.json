@@ -1,6 +1,6 @@
 {
   "status": "passed",
-  "startedAt": "2026-09-12T14:08:19.133Z",
+  "startedAt": "2026-09-12T14:22:59.051Z",
   "sizes": {
     "threads": 100,
     "perThread": 100,
@@ -20,20 +20,20 @@
       "name": "chromium",
       "status": "passed",
       "checks": [
-        "10000 vectors below the coarse threshold: every planted topic is the top semantic hit (median 86 ms, max 111 ms), Best fuses the lexical and semantic hit, the thread filter keeps the planted hit"
+        "10000 vectors below the coarse threshold: every planted topic is the top semantic hit (median 95 ms, max 123 ms), Best fuses the lexical and semantic hit, the thread filter keeps the planted hit"
       ],
       "phases": {
         "seed": {
-          "ms": 8930,
+          "ms": 9820,
           "batches": 85
         },
         "lexical": {
-          "ms": 210813,
-          "slices": 1100,
+          "ms": 57744,
+          "slices": 788,
           "indexedChunks": 10000
         },
         "publishBelowThreshold": {
-          "ms": 10760,
+          "ms": 12670,
           "published": 10000,
           "rounds": 157,
           "projection": {
@@ -52,75 +52,75 @@
         "belowThreshold": {
           "label": "10000 vectors, exact float KNN",
           "semantic": [
-            87.29999995231628,
-            86.70000004768372,
-            87.60000002384186,
-            86.29999995231628,
-            111.10000002384186,
-            84.69999998807907,
-            84,
-            84.69999998807907,
-            84,
-            85.40000003576279
+            105.5,
+            99.69999998807907,
+            94.69999998807907,
+            122.5,
+            92.59999996423721,
+            91.60000002384186,
+            92.90000003576279,
+            95.19999998807907,
+            90.10000002384186,
+            94.19999998807907
           ],
           "correct": 10,
           "best": {
-            "ms": 92.19999998807907,
+            "ms": 101.19999998807907,
             "count": 20,
             "top": [
               {
-                "messageId": "adff90b4-ec05-4ad4-9b5c-338ddc44bc44",
-                "threadId": "188a3362-b321-44ba-9ce8-1d144d8b42cf",
+                "messageId": "b6738fe7-db00-4500-9b80-c3edf9540198",
+                "threadId": "21afacb8-c361-45fa-ad06-44a62d4105ce",
                 "explanation": "Exact + semantic match"
               },
               {
-                "messageId": "a24cb215-fa94-4d80-9747-212a96ec1541",
-                "threadId": "a5f77cbe-fac9-4c4e-92c0-258fdfa598b3",
+                "messageId": "b2784615-c332-4ac4-8410-e8e9233be745",
+                "threadId": "9ab53134-c1dc-4789-9571-d2693e410424",
                 "explanation": "Exact text match"
               },
               {
-                "messageId": "f32b22a2-4378-458d-a6dc-f4b36e8697a1",
-                "threadId": "6172d581-d474-44cf-84f1-0feea3adcaff",
+                "messageId": "bee9c7ac-82d5-416f-8574-3e4d14f10b94",
+                "threadId": "e0dcf80b-7ca7-4ac2-b2fd-d40b6fd95eb8",
                 "explanation": "Semantic match"
               }
             ],
             "bytes": 12517,
-            "expected": "adff90b4-ec05-4ad4-9b5c-338ddc44bc44"
+            "expected": "b6738fe7-db00-4500-9b80-c3edf9540198"
           },
           "exact": {
-            "ms": 4.800000011920929,
+            "ms": 6,
             "count": 2,
             "top": [
               {
-                "messageId": "adff90b4-ec05-4ad4-9b5c-338ddc44bc44",
-                "threadId": "188a3362-b321-44ba-9ce8-1d144d8b42cf",
+                "messageId": "b6738fe7-db00-4500-9b80-c3edf9540198",
+                "threadId": "21afacb8-c361-45fa-ad06-44a62d4105ce",
                 "explanation": "Exact text match"
               },
               {
-                "messageId": "a24cb215-fa94-4d80-9747-212a96ec1541",
-                "threadId": "a5f77cbe-fac9-4c4e-92c0-258fdfa598b3",
+                "messageId": "b2784615-c332-4ac4-8410-e8e9233be745",
+                "threadId": "9ab53134-c1dc-4789-9571-d2693e410424",
                 "explanation": "Exact text match"
               }
             ],
             "bytes": 1397
           },
           "filtered": {
-            "ms": 95.10000002384186,
+            "ms": 104,
             "count": 20,
             "top": [
               {
-                "messageId": "e2eedf54-c36b-4cc3-b8a3-5d31dba40d09",
-                "threadId": "9f2da439-2c8f-40fd-9444-2d3c0f6d07cb",
+                "messageId": "9394b008-1c59-483a-b40e-aa5d19b640af",
+                "threadId": "f39ec51a-37ac-461e-afca-19ec575a7d51",
                 "explanation": "Semantic match"
               },
               {
-                "messageId": "95e70f54-5e95-4bd5-9aac-96993c6d24ce",
-                "threadId": "657a4c0c-d97f-47ba-a076-29eb18001a8a",
+                "messageId": "49c22f85-56c4-41ce-8d8c-3a5d662c83c1",
+                "threadId": "d1f17df0-5e3e-42ab-a3f1-5e3c5a74eec9",
                 "explanation": "Semantic match"
               },
               {
-                "messageId": "9e6be011-796f-4855-9a54-54ed65eb3823",
-                "threadId": "188a3362-b321-44ba-9ce8-1d144d8b42cf",
+                "messageId": "b9038ac8-98cc-46fa-8311-f63796aef046",
+                "threadId": "21afacb8-c361-45fa-ad06-44a62d4105ce",
                 "explanation": "Semantic match"
               }
             ],
@@ -136,8 +136,8 @@
             "threshold": 100000,
             "residentBytes": 0
           },
-          "semanticMedianMs": 86.29999995231628,
-          "semanticMaxMs": 111.10000002384186
+          "semanticMedianMs": 94.69999998807907,
+          "semanticMaxMs": 122.5
         }
       }
     },
@@ -145,20 +145,20 @@
       "name": "webkit",
       "status": "passed",
       "checks": [
-        "10000 vectors below the coarse threshold: every planted topic is the top semantic hit (median 80 ms, max 103 ms), Best fuses the lexical and semantic hit, the thread filter keeps the planted hit"
+        "10000 vectors below the coarse threshold: every planted topic is the top semantic hit (median 85 ms, max 111 ms), Best fuses the lexical and semantic hit, the thread filter keeps the planted hit"
       ],
       "phases": {
         "seed": {
-          "ms": 6381,
+          "ms": 6819,
           "batches": 85
         },
         "lexical": {
-          "ms": 69500,
-          "slices": 1100,
+          "ms": 46582,
+          "slices": 788,
           "indexedChunks": 10000
         },
         "publishBelowThreshold": {
-          "ms": 9153,
+          "ms": 10213,
           "published": 10000,
           "rounds": 157,
           "projection": {
@@ -177,75 +177,75 @@
         "belowThreshold": {
           "label": "10000 vectors, exact float KNN",
           "semantic": [
+            92,
+            89,
+            82,
+            85,
+            111,
+            88,
+            85,
             83,
-            78,
-            79,
-            78,
-            103,
-            81,
-            80,
-            83,
-            79,
-            78
+            82,
+            84
           ],
           "correct": 10,
           "best": {
-            "ms": 80,
+            "ms": 86,
             "count": 20,
             "top": [
               {
-                "messageId": "1404e266-6b62-4668-8727-ddadfe538e64",
-                "threadId": "4a43c036-be68-4fd5-99ea-8f5af1ac8fef",
+                "messageId": "c9cebdaa-09fa-44ff-8add-2478439d9fa7",
+                "threadId": "95cecd32-42d5-4a03-9bc2-eb6ae092a59f",
                 "explanation": "Exact + semantic match"
               },
               {
-                "messageId": "e39f86be-958b-4f13-8328-1a84f1f55289",
-                "threadId": "962d2648-ad74-46c7-9f8c-a2453b540563",
+                "messageId": "d1cac09b-a712-4d3b-a68c-90137ad824f2",
+                "threadId": "a63e814d-ae9c-4c89-aeed-64de7495fede",
                 "explanation": "Exact text match"
               },
               {
-                "messageId": "2c029afb-b413-436a-ab7d-f7cf089b7a5b",
-                "threadId": "e4f3cea9-6668-4dd0-9450-71f4e610dd32",
+                "messageId": "fd0eb3ac-f4db-4796-8b1f-259281ef3450",
+                "threadId": "ab70f45b-a0ce-43dd-83c6-a6d04294749b",
                 "explanation": "Semantic match"
               }
             ],
-            "bytes": 12516,
-            "expected": "1404e266-6b62-4668-8727-ddadfe538e64"
+            "bytes": 12517,
+            "expected": "c9cebdaa-09fa-44ff-8add-2478439d9fa7"
           },
           "exact": {
-            "ms": 5,
+            "ms": 7,
             "count": 2,
             "top": [
               {
-                "messageId": "e39f86be-958b-4f13-8328-1a84f1f55289",
-                "threadId": "962d2648-ad74-46c7-9f8c-a2453b540563",
+                "messageId": "c9cebdaa-09fa-44ff-8add-2478439d9fa7",
+                "threadId": "95cecd32-42d5-4a03-9bc2-eb6ae092a59f",
                 "explanation": "Exact text match"
               },
               {
-                "messageId": "1404e266-6b62-4668-8727-ddadfe538e64",
-                "threadId": "4a43c036-be68-4fd5-99ea-8f5af1ac8fef",
+                "messageId": "d1cac09b-a712-4d3b-a68c-90137ad824f2",
+                "threadId": "a63e814d-ae9c-4c89-aeed-64de7495fede",
                 "explanation": "Exact text match"
               }
             ],
             "bytes": 1397
           },
           "filtered": {
-            "ms": 87,
+            "ms": 97,
             "count": 20,
             "top": [
               {
-                "messageId": "70df8e87-b9c8-4574-a82f-4106ae89da45",
-                "threadId": "35303d1b-2986-46e2-bd96-addad141c83b",
+                "messageId": "41815092-080e-4189-aaee-475509e40357",
+                "threadId": "a33a8d1a-438f-44df-bbe6-5e1ebd8c1324",
                 "explanation": "Semantic match"
               },
               {
-                "messageId": "eb04de12-02ab-47f0-86c2-10aceed4f82e",
-                "threadId": "3f9650f4-a1dc-4fad-88e8-d5ce02047e3e",
+                "messageId": "3127c1d6-19b9-4693-b071-6bf34ad6013f",
+                "threadId": "3c864b04-e97d-4396-b480-b189756aef47",
                 "explanation": "Semantic match"
               },
               {
-                "messageId": "182f664c-0f1a-4f7d-aecf-f2e7573c400c",
-                "threadId": "4a43c036-be68-4fd5-99ea-8f5af1ac8fef",
+                "messageId": "e6222564-473a-4bcb-8480-189693a0d450",
+                "threadId": "95cecd32-42d5-4a03-9bc2-eb6ae092a59f",
                 "explanation": "Semantic match"
               }
             ],
@@ -261,15 +261,15 @@
             "threshold": 100000,
             "residentBytes": 0
           },
-          "semanticMedianMs": 80,
-          "semanticMaxMs": 103
+          "semanticMedianMs": 85,
+          "semanticMaxMs": 111
         }
       }
     }
   ],
   "sourceSha256": {
     "packages/storage/src/worker/search/semantic.ts": "e7b2ccef3d772f16dd834d235b76a4ef2fc911ed1eda7d52d2d101e3069fb32b",
-    "packages/storage/src/worker/search/index.ts": "594fbdf4e5bbdac25de35473de033598094e7bb3e104323d4db677b5a261e256",
+    "packages/storage/src/worker/search/index.ts": "1167f94079ab8bb219107ed22f493ee9bf70b6f06771994de66b8d5c82ebbfe6",
     "packages/core/src/contracts/search.ts": "2fd0379ba81e5655cae4da50b39a32af3907a7c0f7652d2a678194a11a18c8ee",
     "packages/app/tests/browser/index.ts": "b6165c88eaee6d4d7fe49ef7a4a1427095b0eefe49f79ac18e5997ee3d3dc08f",
     "packages/app/tests/browser/semantic-scale.mjs": "34c47831b972b1bff9ee74be9ba8acec0d1010f104b0f02c673516b823d9a23a"
@@ -283,5 +283,5 @@
     "node": "v22.23.1"
   },
   "qualification": "Synthetic unit vectors (seeded per chunk digest; ten planted topic directions) published through the production claim→publish protocol; the real embedding worker is not used. Timings are single runs under development load on one machine.",
-  "finishedAt": "2026-09-12T14:13:39.296Z"
+  "finishedAt": "2026-09-12T14:25:27.880Z"
 }

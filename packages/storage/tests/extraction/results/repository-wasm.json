@@ -1,6 +1,6 @@
 {
-  "startedAt": "2026-09-09T10:51:28.077Z",
-  "completedAt": "2026-09-09T10:51:29.070Z",
+  "startedAt": "2026-09-12T14:24:04.779Z",
+  "completedAt": "2026-09-12T14:24:05.745Z",
   "node": "v22.23.1",
   "platform": "darwin",
   "arch": "arm64",
@@ -60,6 +60,16 @@
       "version": 10,
       "name": "stable_local_operation_claims",
       "checksum": "3f20f0a536ee783777602dda90a3f575cf17ddfe6bba277dc9cfa740e413770b"
+    },
+    {
+      "version": 11,
+      "name": "reviewed_context_attachment_exclusions",
+      "checksum": "5dcdae7dd8c7a054cc3a1cbe4e2bd19f0890e7c213b90b30f3457c43667e75f3"
+    },
+    {
+      "version": 12,
+      "name": "reviewed_summary_proposal_provenance",
+      "checksum": "231dc27fdff21cd5a8c48722f34af18df2b939978f17be62de19dcd24c0427e8"
     }
   ],
   "sourceHashes": {
@@ -75,7 +85,7 @@
       "mapCount": 32768,
       "utf16": 32768,
       "batches": 256,
-      "publishElapsedMs": 89.38795800000003,
+      "publishElapsedMs": 78.429125,
       "sourceDigest": "7119737b44ab8ef9854636193baee3907743655660f80bc884360fe5b23bd480"
     }
   ],

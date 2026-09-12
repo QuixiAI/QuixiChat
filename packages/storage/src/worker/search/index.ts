@@ -156,7 +156,40 @@ export class SearchRepository {
   private exec(sql: string, bind: SqlValue[] = []) {
     this.db.exec({ sql, ...(bind.length ? { bind } : {}) });
   }
+  /** ADR 0038 item 2: an indexing slice runs inside one write transaction so
+   * its sources share one fsync instead of paying three to six each (Chromium
+   * OPFS commits cost ~10 ms; slices settled at 130 ms for 16 messages).
+   * The batch is closed around every await that leaves this worker's
+   * synchronous domain (blob reads), so a canonical commit handled meanwhile
+   * never joins it. Inside a batch, `tx()` is a savepoint. */
+  private batchDepth = 0;
+  private openBatch(): void {
+    if (this.batchDepth++ === 0) this.db.exec("BEGIN IMMEDIATE");
+  }
+  private closeBatch(commit = true): void {
+    if (this.batchDepth === 0) return;
+    if (--this.batchDepth > 0) return;
+    try { this.db.exec(commit ? "COMMIT" : "ROLLBACK"); }
+    catch { try { this.db.exec("ROLLBACK"); } catch { /* already rolled back */ } }
+  }
+  /** Runs an await outside the batch and reopens it afterwards. */
+  private async outsideBatch<T>(work: () => Promise<T>): Promise<T> {
+    const open = this.batchDepth > 0;
+    if (open) { const depth = this.batchDepth; this.batchDepth = 1; this.closeBatch(); try { return await work(); } finally { this.openBatch(); this.batchDepth = depth; } }
+    return work();
+  }
   private tx<T>(work: () => T): T {
+    if (this.batchDepth > 0) {
+      this.db.exec("SAVEPOINT quixi_search_step");
+      try {
+        const value = work();
+        this.db.exec("RELEASE quixi_search_step");
+        return value;
+      } catch (error) {
+        try { this.db.exec("ROLLBACK TO quixi_search_step"); this.db.exec("RELEASE quixi_search_step"); } catch { /* the batch is rolled back by its owner */ }
+        throw error;
+      }
+    }
     this.db.exec("BEGIN IMMEDIATE");
     try {
       const value = work();
@@ -702,10 +735,12 @@ export class SearchRepository {
       }
     }
     this.tx(() => {
+      // A source whose head is current (not flagged stale by any change) needs
+      // no new run; re-enqueueing it cost two queue steps per message.
       for (const entry of entries)
         this.exec(
-          "INSERT INTO quixi_search_queue(epoch,scope,id,revision,failed) VALUES(?,'source',?,?,0) ON CONFLICT(epoch,scope,id) DO UPDATE SET revision=excluded.revision,failed=0",
-          [Number(queue.epoch), String(entry.key), Number(queue.revision)],
+          "INSERT INTO quixi_search_queue(epoch,scope,id,revision,failed) SELECT ?,'source',?,?,0 WHERE NOT EXISTS(SELECT 1 FROM quixi_search_heads h WHERE h.epoch=? AND h.source_key=? AND h.stale=0) ON CONFLICT(epoch,scope,id) DO UPDATE SET revision=excluded.revision,failed=0",
+          [Number(queue.epoch), String(entry.key), Number(queue.revision), Number(queue.epoch), String(entry.key)],
         );
       if (entries.length < 32)
         this.exec(
@@ -732,7 +767,7 @@ export class SearchRepository {
   private async release(work: Work) {
     this.markMaybeObsolete();
     try {
-      if (work.reader) await this.blobs.discard(work.reader).catch(() => {});
+      if (work.reader) await this.outsideBatch(() => this.blobs.discard(work.reader!).catch(() => {}));
     } finally {
       work.reader = null;
       try {
@@ -900,6 +935,8 @@ export class SearchRepository {
       checkedPage = null;
       await this.release(work);
     };
+    let escaped = true;
+    this.openBatch();
     try {
       // A write/ACK failure is a retryable transaction outcome, not evidence
       // that extraction schema is corrupt. Preserve it for the owner caller.
@@ -1010,11 +1047,11 @@ export class SearchRepository {
             // O(n²) in the browser (380 s for 10k messages against 75 s in Node).
             if (source.blob) {
               checkedPage = null;
-              const reader = await this.blobs.beginVerifiedRead(
-                source.blob.sha256,
+              const reader = await this.outsideBatch(() => this.blobs.beginVerifiedRead(
+                source.blob!.sha256,
                 this.nextId,
                 signal,
-              );
+              ));
               work.reader = reader.transferId;
               this.acceptVerification(work, reader);
             }
@@ -1053,7 +1090,7 @@ export class SearchRepository {
           if (work.phase === "verifying") {
             checkedPage = null;
             const allowance = 131072 - bytes;
-            const verification = await this.blobs.advanceVerifiedRead(work.reader!, allowance, signal);
+            const verification = await this.outsideBatch(() => this.blobs.advanceVerifiedRead(work!.reader!, allowance, signal));
             // Charge the full admitted allowance even if a foreground reader
             // completed this shared hash between turns. Progress can then jump
             // without charging that foreground work to this maintenance turn.
@@ -1132,7 +1169,7 @@ export class SearchRepository {
               work.iterator = work.chunker.push(fragment);
             } finally {
               checkedPage = null;
-              await this.blobs.discard(child.transferId).catch(() => {});
+              await this.outsideBatch(() => this.blobs.discard(child.transferId).catch(() => {}));
             }
           } else {
             const allowance = Math.min(16384, Math.floor((131072 - bytes) / 3));
@@ -1172,10 +1209,12 @@ export class SearchRepository {
           await release(work);
         }
       }
-      if (!pageCredit) this.progress();
+      escaped = false;
     } finally {
+      this.closeBatch(!escaped);
       this.busy = false;
     }
+    if (!pageCredit) this.progress();
   }
   resolveConversationHit(
     args: SearchOperations["resolveConversationSearchHit"]["args"],
