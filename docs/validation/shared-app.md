@@ -110,7 +110,8 @@ attempt qualification remains open.
 
 ## Recorded checks
 
-Since 2026-09-12 the proof records 90 checks per engine. The two newest
+Since 2026-09-12 the proof records 91 checks per engine. The newest is the
+[accessibility audit](accessibility-audit.md) across ten views. The two before it
 assert the empty states added by the [presentation review](presentation-review.md):
 a search with no matches and a conversation with no messages. Before them: a
 160-character conversation title with a 70-character unbroken token wraps

@@ -8,6 +8,7 @@ import { exerciseAudioInput, verifyAudioInputRestart } from './audio-input.mjs';
 import { defaultInteractions, exerciseInteractionPreferences, prepareInteractionPreferencesRestart, verifyInteractionPreferencesRestart } from './interaction-preferences.mjs';
 import { exercisePreferenceFocus, keyboardActivate, observeProgress, verifyProgress } from './keyboard-focus.mjs';
 import { exerciseAliasReflow, captureReviewLayout } from './review-accessibility.mjs';
+import { auditView } from './audit.mjs';
 import { exerciseAliasRemovalFocus } from './alias-removal-focus.mjs';
 import { exerciseReasoningContinuation, verifyReasoningContinuationRestart } from './reasoning-continuation.mjs';
 import { exerciseOutputParts } from './output-parts.mjs';
@@ -570,6 +571,7 @@ try {
       await expect(
         page.getByRole("heading", { name: "Pick up where you left off." }),
       ).toBeVisible();
+      evidence.audits = { welcome: await auditView(page, "welcome", { focusSamples: 6 }) };
       await exercisePreferenceFocus({ page, name });
       evidence.aliasReflow = await exerciseAliasReflow({ page, name, mode: process.env.QUIXI_TEST_REVIEW_REFLOW_BASELINE === '1' ? 'capture' : 'assert' });
       if (process.env.QUIXI_TEST_REVIEW_REFLOW_BASELINE === '1') throw new Error('Baseline layout capture complete; the remaining scenario was intentionally not run.');
@@ -993,6 +995,7 @@ try {
       const statusTexts = await page.evaluate(() => window.__quixiStatusTexts);
       expect(statusTexts.slice(1)).toEqual(["Response in progress. Committed text is saved as it arrives.", "Response complete."]);
       evidence.checks.push("a streamed two-part reply changes the polite generation status exactly twice (in progress, complete): committed chunks never re-announce");
+      evidence.audits.conversation = await auditView(page, "conversation");
       const longGeneration = (await records(page, "generations")).items.sort(
         (a, b) => b.createdAt - a.createdAt,
       )[0];
@@ -1229,6 +1232,7 @@ try {
       await page.keyboard.press("Enter");
       const results = page.getByRole("region", { name: "Search results" });
       await expect(results.getByText("Exact text match").first()).toBeVisible();
+      evidence.audits.searchResults = await auditView(page, "search results");
       await tab();
       await tab();
       await tab();
@@ -2002,6 +2006,7 @@ try {
       // switch is reviewed and recorded from the import origin, the request
       // carries the imported path, and every imported record is unchanged.
       await page.getByRole("button", { name: "Import history", exact: true }).first().click();
+      evidence.audits.imports = await auditView(page, "imports");
       await expect(page.getByRole("heading", { name: "Import your history" })).toBeVisible();
       await page.getByLabel("Source account label").fill("Personal fixture");
       const importChooser = page.waitForEvent("filechooser");
@@ -2758,6 +2763,14 @@ try {
         window.appAcceptance.prepareUnclaimedExport(),
       );
       evidence.savedMessages = (await records(page, "messages")).items.length;
+      // Accessibility audit tour of the remaining workspace views (plan 13).
+      for (const [label, key] of [["Providers", "providers"], ["Preferences", "preferences"], ["Documents", "documents"], ["Export history", "exports"], ["Semantic search", "semantic"], ["Storage health", "storageHealth"]]) {
+        await page.getByRole("button", { name: label, exact: true }).click();
+        await expect(page.getByRole("button", { name: label, exact: true })).toHaveAttribute("aria-current", "page");
+        evidence.audits[key] = await auditView(page, key, { focusSamples: 6 });
+      }
+      await page.getByRole("button", { name: "Library", exact: true }).click();
+      evidence.checks.push(`accessibility audit passes on ${Object.keys(evidence.audits).length} views: every visible control named, visible text at 4.5:1 or better, unique landmark names, no skipped heading levels, no live region inside the message list, status regions with text, and outlines on keyboard-focused controls (${Object.values(evidence.audits).reduce((sum, audit) => sum + audit.controls, 0)} controls, ${Object.values(evidence.audits).reduce((sum, audit) => sum + audit.textNodes, 0)} text nodes)`);
       evidence.interactionPreferences.persisted = await prepareInteractionPreferencesRestart(page);
       await page.evaluate(() => window.appAcceptance.close());
     } catch (error) {
