@@ -97,6 +97,7 @@ async function handle(request: ServiceRequest): Promise<void> {
     case 'pause': live().pauseBackground(); post({ kind: 'done', id: request.id }); return;
     case 'resume': live().resumeBackground(); post({ kind: 'done', id: request.id }); return;
     case 'clearCache': live().clearCache(); post({ kind: 'done', id: request.id }); return;
+    case 'fault': post({ kind: 'faulted', id: request.id, injected: request.fault === 'gpu-device-loss' ? live().injectFault('device-loss') : false }); return;
     case 'statistics': post({ kind: 'statistics', id: request.id, statistics: live().statistics(request.remainingDocuments ?? undefined) }); return;
     case 'shutdown': {
       closed = true;

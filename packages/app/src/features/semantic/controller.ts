@@ -80,7 +80,10 @@ export function createSemanticController(services: SemanticControllerServices) {
       const created = await createEmbeddingService({ worker, assets: embeddingAssets(host, index.version), ...(host.preferGpu === undefined ? {} : { preferGpu: host.preferGpu }), ...(host.cacheDirectory === undefined ? {} : { cacheDirectory: host.cacheDirectory }) });
       if (disposed) { await created.shutdown(); throw new EmbeddingServiceError("closed", "Disposed during initialization"); }
       service = created;
-      unsubscribeStatistics = created.onStatistics((statistics) => patch({ chunksPerSecond: statistics.recentChunksPerSecond, estimatedRemainingSeconds: state.indexer?.estimatedRemainingSeconds ?? statistics.estimatedRemainingSeconds }));
+      // Statistics carry the live route: after a GPU device loss the scheduler
+      // falls back to the CPU encoder, and the panel must say so.
+      unsubscribeStatistics = created.onStatistics((statistics) => patch({ chunksPerSecond: statistics.recentChunksPerSecond, estimatedRemainingSeconds: state.indexer?.estimatedRemainingSeconds ?? statistics.estimatedRemainingSeconds, ...(state.report && (state.report.route !== statistics.route || state.report.kind !== statistics.kind) ? { report: { ...state.report, route: statistics.route, kind: statistics.kind } } : {}) }));
+      host.onService?.(created);
       patch({ runtime: "ready", report: created.report });
       return created;
     })();

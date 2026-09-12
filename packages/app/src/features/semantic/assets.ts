@@ -1,3 +1,4 @@
+import type { EmbeddingService } from "@quixi/quixi-embed/service";
 import { MODEL_LOCK, ARCTIC_QUERY_PREFIX, chunkTokenizerVersion } from "@quixi/quixi-embed";
 import type { EmbeddingAssets } from "@quixi/quixi-embed/service";
 import type { EmbeddingModelIdentity } from "@quixi/core/contracts";
@@ -14,6 +15,8 @@ import attention from "@quixi/quixi-embed/kernels/attention.wgsl?raw";
 export interface EmbeddingHostOptions {
   modelUrl: string;
   preferGpu?: boolean;
+  /** Test and diagnostics hook: receives the embedding service once it is ready. */
+  onService?: (service: EmbeddingService) => void;
   /** OPFS directory for the verified model copy; null keeps it in memory only. */
   cacheDirectory?: string | null;
 }

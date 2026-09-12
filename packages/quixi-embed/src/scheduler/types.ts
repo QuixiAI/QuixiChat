@@ -13,6 +13,8 @@ export interface SchedulerExecutor {
   inspect(text:string,role:EmbeddingRole):TokenInspection;
   execute(texts:readonly string[],role:EmbeddingRole):Promise<Float32Array[]>|Float32Array[];
   recoverable?(error:unknown):boolean;
+  /** Diagnostics: make the backend fail the way the named fault would; false when the executor cannot. */
+  injectFault?(fault:'device-loss'):boolean;
   dispose():void;
 }
 export interface CachedEmbedding {
@@ -69,6 +71,8 @@ export interface EmbeddingScheduler {
   drain():Promise<void>;
   statistics(remainingDocuments?:number):SchedulerStatistics;
   clearCache():void;
+  /** Diagnostics: inject a backend fault so the fallback path can be observed end to end. */
+  injectFault(fault:'device-loss'):boolean;
   shutdown(mode?:'cancel'|'drain'):Promise<void>;
 }
 export interface SchedulerOptions {

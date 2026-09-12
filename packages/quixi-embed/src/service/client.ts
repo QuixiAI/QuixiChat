@@ -14,6 +14,8 @@ export interface EmbeddingService {
   pauseBackground(): Promise<void>;
   resumeBackground(): Promise<void>;
   clearCache(): Promise<void>;
+  /** Diagnostics: injects a backend fault; true when the live backend could take it (a GPU device loss), false otherwise. */
+  injectFault(fault: 'gpu-device-loss'): Promise<boolean>;
   shutdown(mode?: 'cancel' | 'drain'): Promise<void>;
 }
 type Pending = { resolve: (reply: ServiceReply) => void; reject: (error: EmbeddingServiceError) => void; timer: ReturnType<typeof setTimeout> | undefined };
@@ -93,6 +95,7 @@ export async function createEmbeddingService(options: EmbeddingServiceOptions & 
     async pauseBackground() { await call({ kind: 'pause' }, 10_000); },
     async resumeBackground() { await call({ kind: 'resume' }, 10_000); },
     async clearCache() { await call({ kind: 'clearCache' }, 10_000); },
+    async injectFault(fault) { const reply = await call({ kind: 'fault', fault }, 10_000); return reply.kind === 'faulted' ? reply.injected : false; },
     async shutdown(mode = 'cancel') {
       if (closed) return;
       let graceful = false;

@@ -31,6 +31,7 @@ export function gpuSchedulerExecutor(options:{encoder:WebGpuEncoder;
       return encoder.embedDocuments(texts);
     },
     recoverable:(error:unknown)=>error instanceof GpuBackendError&&['lost','execution','unavailable','initialization','limits'].includes(error.code),
+    injectFault:(fault:'device-loss')=>{if(fault!=='device-loss')return false;encoder.loseDevice();return true;},
     dispose:()=>encoder.dispose()});
 }
 /** Initial unavailability and later device loss both have explicit CPU factories.

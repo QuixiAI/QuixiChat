@@ -27,6 +27,8 @@ export interface WebGpuEncoder {
   embedDocuments(texts:readonly string[]):Promise<Float32Array[]>;
   diagnostics():GpuDiagnostics;
   lastTimings():GpuTimings|null;
+  /** Diagnostics: destroy the owned device so the real device-loss path runs (the next dispatch fails as lost). */
+  loseDevice():void;
   dispose():void;
 }
 export interface GpuOptions {
@@ -119,6 +121,7 @@ export async function createGpuEncoderInternal(options:GpuOptions & {diagnostic?
   void device.lost.then(info=>unavailable(new GpuBackendError('lost',`Device lost (${info.reason}): ${info.message}`)));
   device.addEventListener('uncapturederror',event=>unavailable(new GpuBackendError('execution',event.error.message)));
   function isDisposed():boolean{return state==='disposed';}
+  function loseDevice():void{if(state==='disposed'||failure)return;device.destroy();}
   function assertLive():void{
     if(failure)throw failure;
     if(state==='disposed')throw new GpuBackendError('disposed','GPU encoder has been disposed');
@@ -311,7 +314,7 @@ export async function createGpuEncoderInternal(options:GpuOptions & {diagnostic?
         features:[...adapter.features].sort(),enabledFeatures:[...device.features].sort(),
         limits:Object.fromEntries(LIMIT_NAMES.map(name=>[name,device.limits[name]])),capacity:{batch:maxBatch,tokens:maxTokens},
         memory:{weightsBytes:weightsBytes+(half?weightsBytes/2:0),scratchBytes,allocatedBytes,bufferCount:owned.length},state};},
-      lastTimings(){return timing?{...timing}:null;},dispose,
+      lastTimings(){return timing?{...timing}:null;},loseDevice,dispose,
     } as GpuDiagnosticEncoder;
   }catch(error){dispose();throw error instanceof GpuBackendError?error:new GpuBackendError('initialization',String(error));}
 }

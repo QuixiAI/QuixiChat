@@ -250,6 +250,7 @@ export function createEmbeddingScheduler(options:SchedulerOptions):EmbeddingSche
       return{id,result,cancel:abort};
     },
     pauseBackground(){if(state==='closed')return;background='paused';if(!active.length)throughputAnchor=null;emit('paused');},
+    injectFault(fault){if(state==='closed'||state==='unavailable'||state==='switching')return false;return executor.injectFault?.(fault)??false;},
     resumeBackground(){if(state==='closed')return;background=resolveBackgroundDrain?'draining':'running';if(jobs.size&&!active.length)throughputAnchor=now();emit('resumed');kick();},
     drainBackground(){
       if(state==='closed')return Promise.resolve();if(backgroundDrain)return backgroundDrain;

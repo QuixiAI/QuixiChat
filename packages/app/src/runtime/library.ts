@@ -43,7 +43,7 @@ export interface AppServices {
   providerSettings?: Omit<ProviderSettingsOptions, "host" | "onChange">;
   /** Where the host serves the separately provisioned embedding model;
    * absent when the host cannot offer local semantic search. */
-  embedding?: { modelUrl: string; preferGpu?: boolean; cacheDirectory?: string | null };
+  embedding?: { modelUrl: string; preferGpu?: boolean; cacheDirectory?: string | null; onService?: (service: import("@quixi/quixi-embed/service").EmbeddingService) => void };
   temporaryDownloads?: {
     list(): Promise<
       readonly {

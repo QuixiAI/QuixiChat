@@ -1,6 +1,7 @@
 import type { EntityPage, HostCapabilities } from "@quixi/core/contracts";
 import { attachmentFingerprint } from './composer-files-storage.ts';
 import { mountApp } from "@quixi/app";
+import type { EmbeddingService } from "@quixi/quixi-embed/service";
 import { createIsolatedStorageClient as createStorageClient } from "../../../storage/tests/isolated-client.ts";
 import { initialProviderCatalogs, openAIRegionalEvidence } from "@quixi/providers";
 import type { ProviderConnection } from "../../src/features/providers/types.ts";
@@ -154,6 +155,7 @@ storage.request = (async (requestId: string, operation: string, args: unknown) =
   return result;
 }) as typeof storage.request;
 let healthClockOffset = 0;
+let embeddingService: EmbeddingService | null = null;
 const unmount = mountApp(document.getElementById("app")!, {
   archiveId,
   storage,
@@ -162,7 +164,7 @@ const unmount = mountApp(document.getElementById("app")!, {
   // unavailability path can be exercised without breaking lexical search.
   embedding: new URL(location.href).searchParams.get("embedding") === "missing"
     ? { modelUrl: "/models/missing.qxmodel", cacheDirectory: null } // no verified OPFS copy may substitute
-    : { modelUrl: "/models/arctic-xs.qxmodel" },
+    : { modelUrl: "/models/arctic-xs.qxmodel", onService: (service: EmbeddingService) => { embeddingService = service; } },
   startupNotice: unavailable?.notice ?? null,
   temporaryDownloads: {
     list: host.listTemporaryDownloads,
@@ -332,6 +334,8 @@ Object.assign(window, {
       return seeded;
     },
     semanticStatus: () => storage.request(crypto.randomUUID(), "semanticStatus", null),
+    /** Diagnostics hook: injects a GPU device loss into the live embedding service; false when the CPU route is active. */
+    injectEmbeddingFault: (fault: "gpu-device-loss") => embeddingService ? embeddingService.injectFault(fault) : Promise.resolve(false),
     /** Plan 22 scale proof: the production Storage Worker's semantic path at
      * 100k+ chunks on this browser's OPFS. Vectors are deterministic synthetic
      * unit vectors published through the real claim→publish protocol (the

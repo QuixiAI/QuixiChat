@@ -109,6 +109,13 @@ export async function exerciseSemanticSearch({ engine, profile, name, origin }) 
     await openPanel(page);
     await panel(page).getByRole('button', { name: 'Pause', exact: true }).click();
     await expect(page.getByTestId('semantic-state')).toHaveText('Paused');
+    // Device loss (plan 21): on the WebGPU route the owned device is destroyed
+    // through the diagnostics hook; the next chunk must be embedded by the CPU
+    // fallback and the panel must report the switch. On the CPU route the
+    // injection is refused and nothing changes.
+    const backendBefore = await page.getByTestId('semantic-backend').textContent();
+    evidence.faultInjected = await page.evaluate(() => window.appAcceptance.injectEmbeddingFault('gpu-device-loss'));
+    expect(evidence.faultInjected).toBe(backendBefore.startsWith('WebGPU'));
     await page.evaluate(() => window.appAcceptance.seedTexts([{ title: 'Gardening', text: 'Water the tomato seedlings every morning before the sun is high.' }]));
     await lexicalReady(page);
     await expect(page.getByTestId('semantic-indexed')).toHaveText(/^3 \/ 4 chunks$/, { timeout: 30_000 });
@@ -122,6 +129,14 @@ export async function exerciseSemanticSearch({ engine, profile, name, origin }) 
     await expect(page.getByTestId('semantic-indexed')).toHaveText(/^4 \/ 4 chunks$/, { timeout: 120_000 });
     expect((await status(page)).vectors).toBe(4);
     evidence.checks.push('Pause keeps stored vectors searchable and refuses new claims; Resume indexes only the chunk added meanwhile');
+    evidence.backendAfterFault = await page.getByTestId('semantic-backend').textContent();
+    if (evidence.faultInjected) {
+      expect(evidence.backendAfterFault).toBe('WASM SIMD · CPU');
+      evidence.checks.push(`after an injected GPU device loss the query and the resumed chunk are embedded by the CPU fallback and the panel reports ${evidence.backendAfterFault} instead of ${backendBefore}`);
+    } else {
+      expect(evidence.backendAfterFault).toBe(backendBefore);
+      evidence.checks.push(`on the CPU route a GPU device-loss injection is refused and the backend stays ${backendBefore}`);
+    }
     // Restart: the enrolment resumes from storage and the model from its OPFS copy.
     expect(errors).toEqual([]);
     await context.close();

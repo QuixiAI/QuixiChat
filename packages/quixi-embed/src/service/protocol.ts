@@ -46,12 +46,14 @@ export type ServiceRequest =
   | { kind: 'resume'; id: number }
   | { kind: 'clearCache'; id: number }
   | { kind: 'statistics'; id: number; remainingDocuments: number | null }
-  | { kind: 'shutdown'; id: number; mode: 'cancel' | 'drain' };
+  | { kind: 'shutdown'; id: number; mode: 'cancel' | 'drain' }
+  | { kind: 'fault'; id: number; fault: 'gpu-device-loss' };
 export type ServiceReply =
   | { kind: 'ready'; id: number; report: EmbeddingBackendReport }
   | { kind: 'vector'; id: number; vector: Float32Array; route: string; cacheHit: boolean }
   | { kind: 'done'; id: number }
   | { kind: 'statistics'; id: number | null; statistics: SchedulerStatistics }
-  | { kind: 'failure'; id: number; code: EmbeddingServiceFailureCode; message: string };
+  | { kind: 'failure'; id: number; code: EmbeddingServiceFailureCode; message: string }
+  | { kind: 'faulted'; id: number; injected: boolean };
 export const SERVICE_PROTOCOL_VERSION = 1;
 export type DistributiveOmit<T, K extends keyof T> = T extends unknown ? Omit<T, K> : never;
