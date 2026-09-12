@@ -52,6 +52,19 @@ export function createDiagnosticsController(storage: StorageClient, host?: HostC
       if (disposed || current !== epoch) return;
       publish({ running: false, ...(report ? { report } : {}) });
     },
+    /** Runs a semantic action under this controller's busy state (buttons disabled, notice cleared), then refreshes the report with the action's outcome. */
+    async trackSemanticAction(action: () => Promise<string>) {
+      if (disposed || state.running) return;
+      const current = ++epoch;
+      publish({ running: true, error: null, notice: null });
+      let notice: string;
+      try { notice = await action(); } catch (error) { notice = `The action did not complete: ${message(error)}`; }
+      if (disposed || current !== epoch) return;
+      publish({ notice });
+      const report = await guard(current, () => storage.request(crypto.randomUUID(), 'diagnosticsReport', null));
+      if (disposed || current !== epoch) return;
+      publish({ running: false, ...(report ? { report } : {}) });
+    },
     /** Called after a semantic action so the report reflects it. */
     async refreshAfter(notice: string) {
       if (disposed) return;

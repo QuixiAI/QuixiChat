@@ -180,6 +180,23 @@ export async function exerciseSemanticSearch({ engine, profile, name, origin }) 
     await expect(results(page).locator('article').first()).toContainText('Gardening');
     await page.getByRole('button', { name: 'Close results', exact: true }).click();
     evidence.checks.push('after a browser restart the enrolment, generation and vectors persist, the verified model loads from its OPFS copy and semantic queries work without re-indexing');
+    // Rebuild (plan 23 repair verification): a new generation re-embeds every chunk while canonical records and sync operations stay exactly as counted.
+    const countsBeforeRebuild = await page.evaluate(() => window.appAcceptance.archiveScale.diagnostics().then(value => ({ canonicalRecords: value.canonicalRecords, syncOperations: value.syncOperations })));
+    const messagesBeforeRebuild = (await page.evaluate(() => window.appAcceptance.records('messages'))).items.length;
+    await openPanel(page);
+    await panel(page).getByRole('button', { name: 'Rebuild semantic index', exact: true }).click();
+    await expect.poll(() => status(page).then(value => value.generation), { timeout: 30_000 }).toBeGreaterThan(enrolled.generation);
+    await expect.poll(() => status(page).then(value => value.vectors), { timeout: 120_000 }).toBe(4);
+    await expect(page.getByTestId('semantic-indexed')).toHaveText(/^4 \/ 4 chunks$/, { timeout: 30_000 });
+    const rebuilt = await status(page);
+    expect(rebuilt.generation).toBeGreaterThan(enrolled.generation); expect(rebuilt.vectors).toBe(4); expect(rebuilt.state).toBe('enrolled');
+    expect(await page.evaluate(() => window.appAcceptance.archiveScale.diagnostics().then(value => ({ canonicalRecords: value.canonicalRecords, syncOperations: value.syncOperations })))).toEqual(countsBeforeRebuild);
+    expect((await page.evaluate(() => window.appAcceptance.records('messages'))).items.length).toBe(messagesBeforeRebuild);
+    await search(page, 'semantic', 'growing vegetables');
+    await expect(results(page).locator('article').first()).toContainText('Gardening');
+    await page.getByRole('button', { name: 'Close results', exact: true }).click();
+    evidence.rebuild = { generationBefore: enrolled.generation, generationAfter: rebuilt.generation, counts: countsBeforeRebuild };
+    evidence.checks.push(`Rebuild semantic index starts generation ${rebuilt.generation} (from ${enrolled.generation}), re-embeds all four chunks and answers the same semantic query, with canonical record and sync-operation counts and the message list unchanged`);
     // Disable keeps the index and releases the runtime; Delete then drops the
     // vectors while canonical records stay and exact search keeps working.
     const recordsBefore = (await page.evaluate(() => window.appAcceptance.records('messages'))).items.length;

@@ -145,6 +145,7 @@ export async function diagnose(input: DiagnoseInput): Promise<DiagnosticsReport>
   // 9. Semantic index: optional and derived; never enrolled is healthy.
   if (!input.capabilities.vec) checks.push(check("semantic_index", "unsupported", "Semantic search needs sqlite-vec, which this build lacks.", { reason: "sqlite-vec" }));
   else if (search.failure) checks.push(check("semantic_index", "rebuildable", "Semantic data shares the failed derived index; rebuilding search recreates its namespace and Rebuild semantic index re-embeds.", { reason: reason(search.failure) }));
+  else if (search.status && search.status.semantic.state === "unavailable" && /unusable/.test(search.status.semantic.reason ?? "")) checks.push(check("semantic_index", "rebuildable", "The semantic namespace is unusable while exact search still works. Delete semantic index recreates it; Rebuild semantic index re-embeds afterwards.", { reason: (search.status.semantic.reason ?? "").slice(0, 200), state: "unusable" }));
   else if (!search.semantic) checks.push(check("semantic_index", "unknown", "The semantic index did not report its status.", {}));
   else {
     const semantic = search.semantic;

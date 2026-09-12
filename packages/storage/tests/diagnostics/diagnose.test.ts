@@ -132,6 +132,15 @@ test("rebuildable: a retained derived-index failure is rebuildable while integri
   db.close();
 });
 
+test("an unusable semantic namespace beside a working lexical index is rebuildable on its own check", async () => {
+  const { db, schemaVersion } = open();
+  const report = await diagnose(input(db, schemaVersion, new Map(), { search: { tokenizerFailure: undefined, failure: undefined, status: { ...readyStatus, semantic: { state: "unavailable", reason: "The semantic index is unusable: The semantic index schema is from another build; delete and rebuild the semantic index." } }, semantic: disabledSemantic } }));
+  assert.equal(outcome(report, "lexical_index").outcome, "ok");
+  assert.equal(outcome(report, "semantic_index").outcome, "rebuildable");
+  assert.match(String(outcome(report, "semantic_index").measured.reason), /another build/);
+  db.close();
+});
+
 test("a failed index status or failed sources classify as rebuildable and attention", async () => {
   const { db, schemaVersion } = open();
   const failed = await diagnose(input(db, schemaVersion, new Map(), { search: { tokenizerFailure: undefined, failure: undefined, status: { ...readyStatus, state: "failed" }, semantic: disabledSemantic } }));

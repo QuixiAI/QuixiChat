@@ -141,6 +141,12 @@ self.onmessage = async (event: MessageEvent<{ operation: string; archiveId: stri
           await physical(directory, sha256, new Uint8Array(size).fill(0x58));
           return { fault: operation, sha256 };
         }
+        if (operation === 'semantic-failure') {
+          const db = (database as unknown as { db: CanonicalSqlite }).db;
+          await database.quiesce();
+          db.exec("UPDATE quixi_semantic_schema SET checksum='0000000000000000000000000000000000000000000000000000000000000000' WHERE version=1");
+          return { fault: operation };
+        }
         if (operation === 'corrupt-database') {
           const db = (database as unknown as { db: CanonicalSqlite }).db;
           db.exec('CREATE INDEX quixi_fixture_damage ON quixi_records(collection)');

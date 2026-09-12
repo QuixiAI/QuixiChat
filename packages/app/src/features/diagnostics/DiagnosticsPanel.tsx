@@ -27,10 +27,14 @@ export function DiagnosticsPanel({ controller, semantic, semanticState, disabled
   const state = useSyncExternalStore(controller.subscribe, controller.getSnapshot), report = state.report;
   const busy = disabled || state.running;
   const hostless = semanticState.runtime === 'no-host-assets';
-  const semanticAction = async (action: 'delete' | 'rebuild') => {
-    if (action === 'delete') { await semantic.deleteIndex(); await controller.refreshAfter('Semantic index deleted. Stored vectors and the enrolment are gone; saved history and the search index are unchanged.'); }
-    else { await semantic.rebuild(); await controller.refreshAfter('Semantic index rebuild started: vectors were dropped and a new generation is enrolled; embedding resumes in the background.'); }
-  };
+  const semanticAction = (action: 'delete' | 'rebuild') => controller.trackSemanticAction(async () => {
+    if (action === 'delete') await semantic.deleteIndex(); else await semantic.rebuild();
+    const failure = semantic.getSnapshot().error;
+    if (failure) return `${action === 'delete' ? 'Semantic index deletion' : 'Semantic index rebuild'} did not complete: ${failure}`;
+    return action === 'delete'
+      ? 'Semantic index deleted. Stored vectors and the enrolment are gone; saved history and the search index are unchanged.'
+      : 'Semantic index rebuild started: vectors were dropped and a new generation is enrolled; embedding resumes in the background.';
+  });
   return <section className="diagnostics" aria-label="Diagnostics">
     <h2>Diagnostics</h2>
     <p>Check SQLite, the schema, persistence, search capabilities, attachment references and the derived indexes. The report holds counts, versions and states, never message text, filenames or secrets.</p>

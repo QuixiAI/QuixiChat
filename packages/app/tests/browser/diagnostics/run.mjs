@@ -131,6 +131,19 @@ try {
       await expect(diagnostics.getByRole('button', { name: 'Delete semantic index', exact: true })).toBeEnabled();
       expect((await page.evaluate(() => window.storageHealthAcceptance.semanticStatus())).state).toBe('disabled');
       evidence.checks.push('Delete semantic index and Rebuild semantic index stand beside Rebuild search index as distinct actions; delete completes with a notice and the report, and rebuild is disabled with its reason on a host without the embedding model');
+      // A broken semantic namespace (its ledger from another build) is its own rebuildable finding while exact search stays OK; Delete semantic index recreates it.
+      await page.evaluate(() => window.storageHealthAcceptance.fault('semantic-failure'));
+      await page.getByRole('button', { name: 'Library', exact: true }).click(); await page.getByRole('button', { name: 'Storage health', exact: true }).click();
+      const semanticBroken = await run();
+      expect(semanticBroken).toMatchObject({ sqlite_integrity: 'ok', lexical_index: 'ok', semantic_index: 'rebuildable' });
+      await expect(diagnostics.getByTestId('diagnostic-semantic_index')).toContainText('Rebuildable derived index');
+      await diagnostics.getByRole('button', { name: 'Delete semantic index', exact: true }).click();
+      await expect(diagnostics.getByTestId('diagnostic-notice')).toContainText('Semantic index deleted');
+      await expect(diagnostics.getByRole('button', { name: 'Delete semantic index', exact: true })).toBeEnabled();
+      expect((await outcomes()).semantic_index).toBe('ok');
+      expect(await page.evaluate(() => window.storageHealthAcceptance.counts())).toEqual(countsBefore);
+      evidence.diagnostics.semanticFault = semanticBroken;
+      evidence.checks.push('a semantic ledger from another build makes the next owner report the semantic index as Rebuildable derived index on its own check while SQLite integrity and the search index stay OK; Delete semantic index recreates the namespace from Storage health and canonical counts are unchanged');
       // File-level corruption, told apart from missing data and from the derived indexes.
       await page.evaluate(() => window.storageHealthAcceptance.fault('corrupt-database'));
       await page.getByRole('button', { name: 'Library', exact: true }).click(); await page.getByRole('button', { name: 'Storage health', exact: true }).click();
@@ -235,6 +248,8 @@ try {
       expect(errors).toHaveLength(0); evidence.status = 'passed';
     } catch (error) {
       evidence.status = 'failed'; evidence.error = String(error?.stack ?? error); evidence.pageErrors = errors;
+      evidence.diagnosticsText = await page.getByRole('region', { name: 'Diagnostics', exact: true }).innerText().catch(() => null);
+      evidence.operationLog = await page.evaluate(() => window.storageHealthAcceptance.log().slice(-40)).catch(() => null);
       evidence.calls = await inventory(page).catch(() => []); await page.screenshot({ path: `test-results/storage-health-${name}-failure.png`, fullPage: true }).catch(() => {}); throw error;
     } finally { await page.evaluate(() => window.storageHealthAcceptance?.cleanup()).catch(() => {}); await context.close(); }
     await save();

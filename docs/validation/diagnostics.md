@@ -158,7 +158,7 @@ review; confirming sends exactly the reviewed digests bound to the scan and
 records deletions and refusals; a new or stale scan drops the selection;
 errors are plain; disposal stops everything.
 
-**Application (Chromium and WebKit)** — the storage-health proof (18 checks
+**Application (Chromium and WebKit)** — the storage-health proof (19 checks
 per engine, [retained](results/blob-inventory-ui-macos.json)): the deletion
 control is disabled until files are ticked; two ticked unreferenced files
 are shown with their digests and total size in a review; "Keep the files"
@@ -175,6 +175,46 @@ verified after reading text blobs, which made a completed scan stale before
 the user could confirm. The inventory and hash-audit triggers now ignore
 catalog updates that change neither digest nor size, and the stale message
 names what changed.
+
+## Fault fixtures and repair verification (plan 23)
+
+The blob-inventory fixture worker plants faults outside the production
+client protocol, as raw rows or files the commit path refuses as mutations:
+
+| Fault | Planted state | Repair exercised | Verified against |
+| --- | --- | --- | --- |
+| `derived-failure` | search ledger checksum from another build | Rebuild search index (repair path) | canonical rows, operations, catalog, transfers, file bytes fingerprinted equal; index returns to `ready` |
+| `semantic-failure` | semantic ledger checksum from another build | Delete semantic index (namespace recreated); Rebuild semantic index re-embeds (semantic proof) | canonical record and sync-operation counts equal; message list equal; the same semantic query answers |
+| `corrupt-database` | an index's pages left unreferenced through `writable_schema` | none offered (export and restore) | report names corruption separately from the derived indexes |
+| `doctor-faults` | missing parent, overcounted parts, missing import source, sync op naming a missing record | none offered (no canonical rewrite) | Doctor audit names exactly those four |
+| `blob-corrupt` | same-length altered bytes in a referenced file | none offered (restore the file from a backup) | file content verification names the digest |
+| fixture seed | deleted file, deleted catalog row, shortened file, orphans, stray staging, unrecognized entries | reviewed cleanup of orphans only | fingerprint after cleanup differs only in the deleted files |
+
+The storage-health proof (19 checks per engine) and the semantic proof (14
+checks per engine) carry these steps; the archive proofs cover restore
+([archive-scale.md](archive-scale.md): a corrupted container is refused and
+the active archive stays intact; an isolated candidate validates every
+record).
+
+## Recovery foundation: what remains accessible per failure class (plan 23)
+
+Archive export/restore is the recovery foundation; every failure class below
+keeps a path to the bytes and, where possible, to the history. Each row cites
+the proof that exercises it.
+
+| Failure class | What remains accessible | Recovery path | Evidence |
+| --- | --- | --- | --- |
+| Storage unavailable or denied at startup (no OPFS, ephemeral context) | Nothing local; the typed startup outcome names the cause and offers retry | Retry once storage is available; an interrupted first run recovers on retry | `tests/e2e/startup-failure.spec.ts`, `startup-unsupported-session.spec.ts` ([storage-proof.md](storage-proof.md), [ADR 0016](../decisions/0016-startup-failure-and-schema-recovery.md)) |
+| Schema initialization or migration fails (ledger from a newer build, tampered ledger) | The exact database and blob bytes through the rescue export; bounded read-only history at a compatible ledger prefix | Rescue export through host staging; rescue restore into a fresh candidate at this build's schema (schema 8 onward, migration-aware upgrade) | `tests/e2e/startup-rescue.spec.ts`, plan 09 schema-8 rescue and portable fixtures ([09](../plans/09_add_archives_and_open_export.md)) |
+| Derived lexical index fails (search ledger from another build) | Every conversation, message, attachment and export; search refuses with the reason | Rebuild search index (repair path replaces the derived tables); canonical rows, operations, catalog, transfers and file bytes fingerprinted unchanged | this document, storage-health proof `derived-failure` fault |
+| Derived semantic namespace fails (semantic ledger from another build) | Everything above plus exact search | Delete semantic index recreates the namespace; Rebuild semantic index re-embeds with a new generation and unchanged canonical counts | this document, storage-health proof `semantic-failure` fault; semantic proof rebuild step |
+| SQLite file corruption (unreferenced pages, damaged b-tree) | Whatever SQLite still reads; the report names corruption separately from the derived indexes | Export a backup (portable or open) while readable; restore it as an isolated candidate before activation; a corrupted container is refused at validation with the active archive intact | storage-health proof `corrupt-database` fault; [archive-scale.md](archive-scale.md) corrupted-container refusal |
+| Stored file missing, shortened or altered | All saved records; the affected attachment is served as unavailable, never as verified | Storage scan and file content verification name the digests; restore the file from an earlier backup; reviewed cleanup removes only unreferenced files | this document (inventory, hash audit, ADR 0041) |
+| Browser storage eviction (persistence not granted) | Nothing local after eviction | Persistent-storage request and exported backups beforehand; the report classifies the grant as attention | onboarding and storage-health status ([onboarding.md](onboarding.md)) |
+
+No repair rewrites canonical history. Restore on a second host (cross-host)
+and the desktop entry's native exercise of the startup outcome remain plan 09
+and plan 01/24 gates.
 
 ## Limits
 

@@ -15,6 +15,8 @@ const changes = new Set<(ids: string[]) => void>(), progress = new Set<Parameter
 let unchanges = current.onChange(ids => { for (const listener of changes) listener(ids); });
 let unprogress = current.onProgress(value => { for (const listener of progress) listener(value); });
 const calls: { operation: string; scanId: string; maxItems?: number; maxBytes?: number; responseItems?: number; responseBytes?: number; state?: string }[] = [];
+/** Every operation name in order, for proofs that need to see what a panel sent. */
+const log: { operation: string; ok: boolean; error?: string }[] = [];
 // Observe bounds without replacing worker results. The owner-loss case alone
 // closes/reopens this real fixture client while retaining the AppRoot controller.
 const storage: StorageClient = {
@@ -25,7 +27,9 @@ const storage: StorageClient = {
       const value = args as { scanId: string; maxItems?: number; page?: { maxItems: number; maxBytes: number } };
       call = { operation, scanId: value.scanId, ...(value.maxItems === undefined ? {} : { maxItems: value.maxItems }), ...(value.page ? { maxItems: value.page.maxItems, maxBytes: value.page.maxBytes } : {}) }; calls.push(call);
     }
-    const result = await current.request(requestId, operation, args);
+    let result: StorageOperations[K]['result'];
+    try { result = await current.request(requestId, operation, args); if (log.length < 4096) log.push({ operation, ok: true }); }
+    catch (error) { if (log.length < 4096) log.push({ operation, ok: false, error: String((error as { message?: unknown })?.message ?? error) }); throw error; }
     if (call) {
       const value = result as { items?: unknown[]; bytes?: number; state?: string };
       if (value.items) call.responseItems = value.items.length;
@@ -44,7 +48,7 @@ const host = createWebHost({ destinations: [], fileStagingNamespace: archiveId }
 const unmount = mountApp(document.getElementById('app')!, { archiveId, storage, host });
 async function close() { if (closed) return; closed = true; await unmount(); unchanges(); unprogress(); await current.close(); await host.dispose(); }
 Object.assign(window, { storageHealthAcceptance: {
-  fixture, calls: () => calls,
+  fixture, calls: () => calls, log: () => log,
   async restartOwner() {
     unchanges(); unprogress(); await current.close(); current = createIsolatedStorageClient({ archiveId });
     unchanges = current.onChange(ids => { for (const listener of changes) listener(ids); });
@@ -62,6 +66,8 @@ Object.assign(window, { storageHealthAcceptance: {
     return result;
   },
   report: () => current.request(crypto.randomUUID(), 'diagnosticsReport', null),
+  /** Direct worker request for proofs that inspect a repair path. */
+  request: <K extends keyof StorageOperations>(operation: K, args: StorageOperations[K]['args']) => current.request(crypto.randomUUID(), operation, args),
   /** Plan 23 cleanup refusals: direct worker requests with digests the panel would never offer. */
   deleteOrphans: (scanId: string, sha256s: string[]) => current.request(crypto.randomUUID(), 'deleteOrphanBlobs', { scanId, sha256s }),
   scanId: () => calls.filter(call => call.operation === 'beginBlobInventory').at(-1)?.scanId ?? null,
