@@ -45,6 +45,15 @@ CREATE INDEX quixi_search_extraction_document ON quixi_search_extractions(docume
 ${trigger("INSERT")}${trigger("UPDATE")}${trigger("DELETE")}
 `;
 export const SEARCH_SCHEMA_CHECKSUM = searchDigest(SEARCH_SCHEMA);
+/** Ledger version 2 (2026-09-12): indexes for the indexing queue's pick order.
+ * Without them every slice step sorted the whole queue (1.5 ms per step at
+ * 19k rows, growing linearly), which made lexical indexing O(n²) at 100k
+ * messages. Existing archives gain the indexes in place at open. */
+export const SEARCH_QUEUE_INDEX_SCHEMA = `
+CREATE INDEX quixi_search_queue_sources ON quixi_search_queue(failed,scope,epoch,id);
+CREATE INDEX quixi_search_queue_order ON quixi_search_queue(failed,epoch,scope,id);
+`;
+export const SEARCH_QUEUE_INDEX_CHECKSUM = searchDigest(SEARCH_QUEUE_INDEX_SCHEMA);
 /** Scope generations make stale records invisible without trigger fan-out. */
 export const VISIBLE_HEAD = `h.source_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='source' AND id=h.source_key),0)
 AND h.message_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='message' AND id=h.message_id),0)

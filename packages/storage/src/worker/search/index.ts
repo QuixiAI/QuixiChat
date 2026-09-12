@@ -31,6 +31,8 @@ import type { CanonicalSqlite, SqlValue } from "../canonical/repository.ts";
 import {
   SEARCH_SCHEMA,
   SEARCH_SCHEMA_CHECKSUM,
+  SEARCH_QUEUE_INDEX_SCHEMA,
+  SEARCH_QUEUE_INDEX_CHECKSUM,
   SEARCH_POLICY,
   searchVersion,
   VISIBLE_HEAD,
@@ -185,6 +187,7 @@ export class SearchRepository {
     this.exec("INSERT INTO quixi_search_schema VALUES(1,?)", [
       SEARCH_SCHEMA_CHECKSUM,
     ]);
+    this.installQueueIndexes();
     this.exec("INSERT INTO quixi_search_meta VALUES(1,?,1,NULL,2,0)", [
       this.version,
     ]);
@@ -192,9 +195,13 @@ export class SearchRepository {
       "INSERT INTO quixi_search_queue(epoch,scope,id,revision) VALUES(1,'global','*',0)",
     );
   }
+  private installQueueIndexes(): void {
+    this.db.exec(SEARCH_QUEUE_INDEX_SCHEMA);
+    this.exec("INSERT INTO quixi_search_schema VALUES(2,?)", [SEARCH_QUEUE_INDEX_CHECKSUM]);
+  }
   private validateDerived(): void {
     const expected = [
-      ...SEARCH_SCHEMA.matchAll(
+      ...`${SEARCH_SCHEMA}${SEARCH_QUEUE_INDEX_SCHEMA}`.matchAll(
         /CREATE (?:VIRTUAL )?(TABLE|TRIGGER|INDEX) (quixi_search_\w+)/g,
       ),
     ];
@@ -232,14 +239,24 @@ export class SearchRepository {
         ).length
       )
         this.tx(() => this.installDerived());
-      const ledger = this.rows(
+      let ledger = this.rows(
         "SELECT version,checksum FROM quixi_search_schema ORDER BY version",
       );
       if (
-        ledger.length !== 1 ||
+        !ledger.length ||
         ledger[0]!.version !== 1 ||
         ledger[0]!.checksum !== SEARCH_SCHEMA_CHECKSUM
       )
+        throw new SearchError(
+          "MIGRATION_FAILED",
+          "Derived search schema is unsupported or changed; rebuild the search index while preserving canonical history.",
+        );
+      // A version-1 ledger gains the queue indexes in place; nothing derived is lost.
+      if (ledger.length === 1) {
+        this.tx(() => this.installQueueIndexes());
+        ledger = this.rows("SELECT version,checksum FROM quixi_search_schema ORDER BY version");
+      }
+      if (ledger.length !== 2 || ledger[1]!.version !== 2 || ledger[1]!.checksum !== SEARCH_QUEUE_INDEX_CHECKSUM)
         throw new SearchError(
           "MIGRATION_FAILED",
           "Derived search schema is unsupported or changed; rebuild the search index while preserving canonical history.",
@@ -277,9 +294,10 @@ export class SearchRepository {
           "SELECT version,checksum FROM quixi_search_schema",
         );
         repeated =
-          ledger.length === 1 &&
+          ledger.length === 2 &&
           ledger[0]!.version === 1 &&
           ledger[0]!.checksum === SEARCH_SCHEMA_CHECKSUM &&
+          ledger[1]!.checksum === SEARCH_QUEUE_INDEX_CHECKSUM &&
           !!this.rows("SELECT id FROM quixi_search_operations WHERE id=?", [
             args.operationId,
           ]).length;
@@ -435,6 +453,7 @@ export class SearchRepository {
     }
   }
   rebuild(args: SearchOperations["rebuildSearch"]["args"]): SearchIndexStatus {
+    this.markMaybeObsolete();
     this.check();
     assertSearchArgs("rebuildSearch", args);
     if (
@@ -612,13 +631,17 @@ export class SearchRepository {
       id = String(queue.id),
       after = String(queue.after_id);
     let sql: string, bind: SqlValue[];
+    // Page refs follow document and global scopes; their expansion may leave rows obsolete.
+    if (scope === "document" || scope === "global") this.markMaybeObsolete();
     if (scope === "message") {
       sql =
         "SELECT 'p:'||id AS key FROM quixi_records WHERE collection='parts' AND message_id=? UNION ALL SELECT 'f:'||id FROM quixi_records WHERE collection='parts' AND message_id=? AND json_extract(payload,'$.kind')='Image'";
       bind = [id, id];
     } else if (scope === "thread") {
+      // Driven from the thread's messages (quixi_thread_records) to their
+      // parts (quixi_part_order); the reverse order scanned every part.
       sql =
-        "SELECT 'p:'||p.id AS key FROM quixi_records p JOIN quixi_records m ON m.collection='messages' AND m.id=p.message_id WHERE p.collection='parts' AND m.thread_id=? UNION ALL SELECT 'f:'||p.id FROM quixi_records p JOIN quixi_records m ON m.collection='messages' AND m.id=p.message_id WHERE p.collection='parts' AND m.thread_id=? AND json_extract(p.payload,'$.kind')='Image'";
+        "SELECT 'p:'||p.id AS key FROM quixi_records m CROSS JOIN quixi_records p ON p.collection='parts' AND p.message_id=m.id WHERE m.collection='messages' AND m.thread_id=? UNION ALL SELECT 'f:'||p.id FROM quixi_records m CROSS JOIN quixi_records p ON p.collection='parts' AND p.message_id=m.id AND json_extract(p.payload,'$.kind')='Image' WHERE m.collection='messages' AND m.thread_id=?";
       bind = [id, id];
     } else if (scope === "document") {
       sql =
@@ -684,6 +707,7 @@ export class SearchRepository {
     work.phase = result.complete ? "chunking" : "verifying";
   }
   private async release(work: Work) {
+    this.markMaybeObsolete();
     try {
       if (work.reader) await this.blobs.discard(work.reader).catch(() => {});
     } finally {
@@ -710,6 +734,7 @@ export class SearchRepository {
           "Extracted source changed before publication.",
         );
       const ref = source.extractionRef;
+      if (ref) this.markMaybeObsolete();
       if (ref)
         this.exec(
           `INSERT INTO quixi_search_page_refs VALUES(${Array(13).fill("?").join(",")}) ON CONFLICT(epoch,source_key) DO UPDATE SET run_id=excluded.run_id,page_id=excluded.page_id,extraction_run_id=excluded.extraction_run_id,page=excluded.page,document_id=excluded.document_id,attachment_id=excluded.attachment_id,attachment_sha256=excluded.attachment_sha256,attachment_bytes=excluded.attachment_bytes,source_digest=excluded.source_digest,publication_revision=excluded.publication_revision,identity=excluded.identity`,
@@ -760,7 +785,21 @@ export class SearchRepository {
     });
     return true;
   }
+  /** Whether derived rows may have become obsolete since the last negative
+   * check. The scans in `obsolete()` walk every chunk and page ref, so they
+   * run only after something that can orphan rows: a replaced head or build,
+   * a released run, page-ref writes, a rebuild or epoch switch, cleanup, and
+   * document/global scope expansion (page refs follow those scopes). Measured
+   * before this gate: every slice step paid the scan, O(chunks) per source. */
+  private maybeObsolete = true;
+  private markMaybeObsolete(): void { this.maybeObsolete = true; }
   private obsolete(): boolean {
+    if (!this.maybeObsolete) return false;
+    const result = this.obsoleteScan();
+    if (!result) this.maybeObsolete = false;
+    return result;
+  }
+  private obsoleteScan(): boolean {
     if (
       this.scalar(
         `SELECT EXISTS(SELECT 1 FROM quixi_search_page_refs er LEFT JOIN quixi_search_heads h ON h.epoch=er.epoch AND h.source_key=er.source_key AND h.run_id=er.run_id WHERE h.source_key IS NULL OR NOT (${this.visibleHead()}))`,
@@ -774,6 +813,7 @@ export class SearchRepository {
     );
   }
   private cleanup(max: number): void {
+    this.markMaybeObsolete();
     this.tx(() => {
       this.exec(
         `DELETE FROM quixi_search_heads WHERE rowid IN(SELECT h.rowid FROM quixi_search_page_refs er JOIN quixi_search_heads h ON h.epoch=er.epoch AND h.source_key=er.source_key AND h.run_id=er.run_id WHERE NOT (${this.visibleHead()}) LIMIT ?)`,
@@ -856,9 +896,11 @@ export class SearchRepository {
             this.cleanup(args.maxChunks - writes);
             break;
           }
-          const queue = this.rows(
-            "SELECT * FROM quixi_search_queue WHERE failed=0 ORDER BY CASE scope WHEN 'source' THEN 0 ELSE 1 END,epoch,scope,id LIMIT 1",
-          )[0];
+          // Sources first, then the scopes that expand into sources; each pick
+          // is an index seek (quixi_search_queue_sources / _order), never a sort.
+          const queue =
+            this.rows("SELECT * FROM quixi_search_queue WHERE failed=0 AND scope='source' ORDER BY epoch,id LIMIT 1")[0] ??
+            this.rows("SELECT * FROM quixi_search_queue WHERE failed=0 AND scope<>'source' ORDER BY epoch,scope,id LIMIT 1")[0];
           if (!queue) {
             const meta = this.meta();
             if (
@@ -868,6 +910,7 @@ export class SearchRepository {
                 [Number(meta.rebuilding_epoch)],
               )
             ) {
+              this.markMaybeObsolete();
               this.tx(() =>
                 this.exec(
                   "UPDATE quixi_search_meta SET active_epoch=rebuilding_epoch,rebuilding_epoch=NULL,version=?,revision=revision+1",
@@ -902,6 +945,7 @@ export class SearchRepository {
                 ? null
                 : loadSource(this.db, key, this.options.publishedSources);
             if (!source) {
+              this.markMaybeObsolete();
               this.tx(() => {
                 this.exec(
                   "DELETE FROM quixi_search_heads WHERE epoch=? AND source_key=?",
@@ -933,11 +977,14 @@ export class SearchRepository {
               phase: source.blob ? "verifying" : "chunking",
             };
             this.active = work;
+            this.markMaybeObsolete();
             this.exec(
               "INSERT INTO quixi_search_builds VALUES(?,?,?) ON CONFLICT(epoch,source_key) DO UPDATE SET run_id=excluded.run_id",
               [epoch, key, work.runId],
             );
-            if (!pageCredit) this.progress();
+            // Progress is reported once at the end of the slice: status() walks
+            // every visible head, and reporting per source made bulk indexing
+            // O(n²) in the browser (380 s for 10k messages against 75 s in Node).
             if (source.blob) {
               checkedPage = null;
               const reader = await this.blobs.beginVerifiedRead(
@@ -947,7 +994,6 @@ export class SearchRepository {
               );
               work.reader = reader.transferId;
               this.acceptVerification(work, reader);
-              if (!pageCredit) this.progress();
             }
           } catch (error) {
             if (this.active) await release(this.active);

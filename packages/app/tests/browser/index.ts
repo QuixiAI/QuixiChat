@@ -331,6 +331,95 @@ Object.assign(window, {
       return seeded;
     },
     semanticStatus: () => storage.request(crypto.randomUUID(), "semanticStatus", null),
+    /** Plan 22 scale proof: the production Storage Worker's semantic path at
+     * 100k+ chunks on this browser's OPFS. Vectors are deterministic synthetic
+     * unit vectors published through the real claim→publish protocol (the
+     * embedding worker is not involved); planted topic vectors make the
+     * expected top hit of each query known. */
+    semanticScale: {
+      async seed(options: { threads: number; perThread: number; planted: number }) {
+        const id = () => crypto.randomUUID();
+        const { workspaceId } = await storage.request(id(), "archiveWorkspace", null);
+        const started = performance.now();
+        let batches = 0;
+        const commit = async (mutations: unknown[]) => {
+          for (let at = 0; at < mutations.length; at += 125) {
+            batches++;
+            await storage.request(id(), "commit", { transactionId: id(), expectedThreadRevisions: [], stagedBlobIds: [], mutations: mutations.slice(at, at + 125) } as never);
+          }
+        };
+        const mutation = (kind: string, payload: unknown, recordedAt: number) => ({ version: 1, operationId: id(), kind, recordedAt, payload });
+        const base = Date.now() - options.threads * options.perThread * 1000, threadIds: string[] = [], planted: { topic: number; messageId: string; threadId: string }[] = [];
+        let pending: unknown[] = [];
+        for (let t = 0; t < options.threads; t++) {
+          const threadId = id(), contextId = id(), at = base + t * options.perThread * 1000;
+          threadIds.push(threadId);
+          pending.push(mutation("CreateThread", {
+            thread: { id: threadId, workspaceId, createdAt: at, recordedAt: at, systemPrompt: null, preferredRoute: null, importSourceId: null },
+            context: { id: contextId, threadId, previousId: null, version: 1, systemPrompt: null, preferredRoute: null, recordedAt: at },
+            state: { threadId, title: `Scale thread ${String(t + 1).padStart(5, "0")}`, tags: [], pinned: false, archived: false, activeLeafMessageId: null, contextSnapshotId: contextId, routingProfile: null, revision: 0 },
+          }, at));
+          let parent: string | null = null;
+          for (let n = 0; n < options.perThread; n++) {
+            const messageId = id(), when = at + n * 1000;
+            const plant = t < options.planted && n === Math.floor(options.perThread / 2) ? t : -1;
+            const text = plant >= 0 ? `Planted topic ${plant} signal passage in thread ${t + 1}.` : `Passage ${n + 1} of thread ${t + 1} discussing item ${(t * 31 + n * 7) % 997}.`;
+            pending.push(mutation("CreateMessage", { message: { id: messageId, threadId, parentId: parent, role: n % 2 ? "assistant" : "user", createdAt: when, recordedAt: when, generationId: null, editedFromMessageId: null, partCount: 1, sealed: true }, parts: [{ id: id(), messageId, order: 0, kind: "Text", data: { text } }] }, when));
+            if (plant >= 0) planted.push({ topic: plant, messageId, threadId });
+            parent = messageId;
+            if (n === options.perThread - 1) pending.push(mutation("SetActiveBranch", { threadId, value: messageId }, when));
+            if (pending.length >= 120) { await commit(pending); pending = []; }
+          }
+        }
+        if (pending.length) await commit(pending);
+        return { seedMs: performance.now() - started, batches, threadIds, planted };
+      },
+      async index() {
+        const started = performance.now();
+        let status = await storage.request(crypto.randomUUID(), "searchStatus", null), slices = 0, lastLog = started;
+        while (status.pendingSources > 0 || status.state === "indexing") {
+          status = await storage.request(crypto.randomUUID(), "advanceSearchIndex", { maxChunks: 128 });
+          slices++;
+          if (slices > 200_000) throw new Error("Lexical indexing did not finish");
+          if (slices % 100 === 0) { const now = performance.now(); console.log(`[scale] slices ${slices} indexed ${status.indexedChunks} pending ${status.pendingSources} ms/slice ${((now - lastLog) / 100).toFixed(1)}`); lastLog = now; }
+        }
+        return { indexMs: performance.now() - started, slices, indexedChunks: status.indexedChunks, version: status.version };
+      },
+      async enroll() {
+        const index = await storage.request(crypto.randomUUID(), "searchStatus", null);
+        return storage.request(crypto.randomUUID(), "enrollSemantic", { operationId: crypto.randomUUID(), model: { modelName: "synthetic-scale-vectors", modelVersion: "seeded-unit-vectors-v1", sourceHash: "0".repeat(64), dimensions: 384, tokenizerVersion: "none", preprocessingVersion: "none", chunkingVersion: index.version, storageRepresentation: "float32" } });
+      },
+      /** Publishes up to `limit` vectors through claim→publish; planted texts get their topic direction. */
+      async publish(options: { limit: number }) {
+        const started = performance.now();
+        let published = 0, rounds = 0;
+        const vectorFor = (text: string, digest: string) => {
+          const v = new Float64Array(384);
+          const plant = /Planted topic (\d+) signal/.exec(text);
+          let seed = parseInt(digest.slice(0, 8), 16) >>> 0;
+          const rand = () => { seed = (seed * 1664525 + 1013904223) >>> 0; return seed / 4294967296; };
+          for (let d = 0; d < 384; d++) v[d] = rand() - 0.5;
+          if (plant) { for (let d = 0; d < 384; d++) v[d] = v[d]! * 0.05; v[Number(plant[1])] = 1; }
+          let n = 0; for (let d = 0; d < 384; d++) n += v[d]! * v[d]!;
+          n = Math.sqrt(n);
+          return Array.from(v, (x) => x / n);
+        };
+        while (published < options.limit) {
+          const claim = await storage.request(crypto.randomUUID(), "claimSemanticChunks", { maxChunks: Math.min(64, options.limit - published), maxBytes: 1_048_576 });
+          if (!claim.items.length) break;
+          const publication = await storage.request(crypto.randomUUID(), "publishSemanticVectors", { generation: claim.generation, items: claim.items.map((item) => ({ chunkId: item.chunkId, textDigest: item.textDigest, vector: vectorFor(item.text, item.textDigest) })) });
+          if (publication.rejected.length) throw new Error(`Rejected: ${JSON.stringify(publication.rejected[0])}`);
+          published += publication.accepted; rounds++;
+        }
+        return { publishMs: performance.now() - started, published, rounds, status: await storage.request(crypto.randomUUID(), "semanticStatus", null) };
+      },
+      topicVector(topic: number) { const v = new Array<number>(384).fill(0); v[topic] = 1; return v; },
+      async query(args: { mode: "exact" | "best" | "semantic"; query: string; queryVector?: number[]; filters: Record<string, unknown>; maxItems: number }) {
+        const started = performance.now();
+        const result = await storage.request(crypto.randomUUID(), "searchArchive", { mode: args.mode, query: args.query, ...(args.queryVector ? { queryVector: args.queryVector } : {}), filters: args.filters, page: { maxItems: args.maxItems, maxBytes: 900_000, cursor: null } } as never);
+        return { ms: performance.now() - started, count: result.items.length, top: result.items.slice(0, 3).map((hit) => ({ messageId: hit.messageId, threadId: hit.threadId, explanation: hit.explanation })), bytes: result.bytes };
+      },
+    },
     resetRequestStats() {
       for (const key of Object.keys(requestStats)) delete requestStats[key];
     },

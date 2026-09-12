@@ -90,6 +90,7 @@
     "test:app:storage-health": "tsc --noEmit -p packages/app/tsconfig.tests.json && node --experimental-transform-types --test packages/app/tests/diagnostics/*.test.ts",
     "test:app:storage-health:browser": "tsc --noEmit -p packages/app/tests/browser/diagnostics/tsconfig.json && node packages/app/tests/browser/diagnostics/run.mjs",
     "test:app:semantic:browser": "tsc --noEmit -p packages/app/tsconfig.tests.json && node packages/app/tests/browser/semantic-run.mjs",
+    "test:app:semantic-scale:browser": "tsc --noEmit -p packages/app/tsconfig.tests.json && node packages/app/tests/browser/semantic-scale.mjs",
     "build:extension": "npm run build --workspace @quixi/extension",
     "test:extension": "npm run typecheck --workspace @quixi/extension && npm test --workspace @quixi/extension",
     "test:extension:e2e": "npm run test:e2e --workspace @quixi/extension",
