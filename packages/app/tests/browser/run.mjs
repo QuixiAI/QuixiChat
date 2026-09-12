@@ -945,6 +945,13 @@ try {
       evidence.checks.push(
         "stop terminates controlled HTTP and retains the committed response prefix",
       );
+      // Streaming announcements are controlled: the polite status region
+      // changes at the start and the end of a reply, never per chunk.
+      await page.evaluate(() => {
+        const node = document.querySelector(".generation-status");
+        window.__quixiStatusTexts = [node.textContent];
+        new MutationObserver(() => { const text = node.textContent; if (text !== window.__quixiStatusTexts.at(-1)) window.__quixiStatusTexts.push(text); }).observe(node, { childList: true, characterData: true, subtree: true });
+      });
       await send(page, "long response");
       await expect
         .poll(async () => (await records(page, "generations")).items.length)
@@ -953,6 +960,10 @@ try {
         page.getByRole("button", { name: "Send message", exact: true }),
       ).toBeVisible({ timeout: 30000 });
       await expect(page.getByRole("alert")).toHaveCount(0);
+      await expect(page.locator(".generation-status")).toHaveText("Response complete.");
+      const statusTexts = await page.evaluate(() => window.__quixiStatusTexts);
+      expect(statusTexts.slice(1)).toEqual(["Response in progress. Committed text is saved as it arrives.", "Response complete."]);
+      evidence.checks.push("a streamed two-part reply changes the polite generation status exactly twice (in progress, complete): committed chunks never re-announce");
       const longGeneration = (await records(page, "generations")).items.sort(
         (a, b) => b.createdAt - a.createdAt,
       )[0];
@@ -2748,6 +2759,11 @@ try {
         page.getByText("Connect a provider to send messages", { exact: true }),
       ).toBeVisible();
       await expect(page.getByRole("alert")).toHaveCount(0);
+      // Core flows reflow at 320px at normal and 200% root text size: the
+      // library and an open conversation with saved messages.
+      await captureReviewLayout({ page, regionName: "Conversation library", role: "complementary", name, caseName: "library-narrow" });
+      await captureReviewLayout({ page, regionName: "Conversation messages", name, caseName: "conversation-narrow" });
+      evidence.checks.push("the conversation library and an open conversation with saved messages fit 320px at normal and 200% root text size without horizontal overflow");
       // The stopped attempt is still shown as partial after the restart.
       await verifyInteractionPreferencesRestart({ page, requests, countRequests, expected: evidence.interactionPreferences.persisted, name });
       evidence.checks.push("all four interaction preferences survive a fresh browser process with exact revision and send-key preserved; saved timestamps, hidden badges, compact composer and model list render without credentials or HTTP at 390px, then defaults are restored for subsequent checks");

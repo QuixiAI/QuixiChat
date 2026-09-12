@@ -110,6 +110,14 @@ attempt qualification remains open.
 
 ## Recorded checks
 
+Since 2026-09-12 the proof records 86 checks per engine. The two newest: a
+streamed two-part reply changes the polite generation status exactly twice
+(in progress, complete), observed with a MutationObserver on the status
+region, so committed chunks never re-announce; and the conversation library
+and an open conversation with saved messages fit 320px at normal and 200%
+root text size without horizontal overflow (measured with the review layout
+capture; screenshots and JSON under `test-results/review-accessibility-*`).
+
 Run `npm run test:app:browser`. The
 [retained report](results/regional-relay-regression-macos.json) records source hashes and
 forty-two checks in each of actual Chromium and Playwright WebKit on macOS 26.6.2.
