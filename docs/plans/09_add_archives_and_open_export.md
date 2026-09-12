@@ -1,6 +1,6 @@
 # 09 — Add portable archives and open export
 
-**Status:** In progress — portable/open export, managed activation, shared replacement UI, retained-history recovery and schema-8 candidate upgrade pass production-path Chromium/WebKit checks; cross-host and host gates remain open; the scale gate passed on 2026-09-12 ([archive-scale.md](../validation/archive-scale.md))
+**Status:** In progress — portable/open export, managed activation, shared replacement UI, retained-history recovery, schema-8 candidate upgrade and the web-to-desktop cross-host restore pass production-path checks; cross-host and host gates remain open; the scale gate passed on 2026-09-12 ([archive-scale.md](../validation/archive-scale.md))
 
 **Workstream:** A7 — ownership and recovery
 
@@ -41,7 +41,7 @@ Let users export a complete local archive, restore it on another supported host,
 
 ## Acceptance criteria
 
-- [ ] An archive exported from one supported host restores on another with matching canonical records, branches, provenance, and blob hashes.
+- [x] An archive exported from one supported host restores on another with matching canonical records, branches, provenance, and blob hashes. — [cross-host-restore.md](../validation/cross-host-restore.md): a portable archive exported by the web host (Playwright Chromium, production Storage Worker) restores in the native Tauri WebView (macOS WebKit, production Storage Worker) into a validated candidate whose fifteen collection digests (threads, states, contexts, messages, generations, parts, events, attachments, provenance and the rest), record and sync-operation counts and blob file hashes equal the export's; the candidate is read back through the retained reader, never activated.
 - [x] A restore failure leaves the previous usable archive intact and reports the cause. — [archive-scale.md](../validation/archive-scale.md): a 106 MB container with 64 KiB zeroed is refused at the checksum claim with a named code and reason in both engines, and the active archive keeps integrity "ok" and answers an exact search afterwards; the archive proofs cover corrupt graph/schema/journal refusals and schema-7 refusal by name.
 - [x] JSONL and Markdown text can be read with ordinary tools without running Quixi. — [archive-scale.md](../validation/archive-scale.md): the system `tar` lists and extracts the open export; `records.jsonl` and `checksums.jsonl` parse line by line with `JSON.parse` (91,503 records, no invalid line, 30,000 message and 300 thread records); `history.md` carries all 30,000 message passages as plain text.
 - [x] Exports remain bounded at large archive sizes and do not require embeddings or a Cloud account. — [archive-scale.md](../validation/archive-scale.md): 30,000 messages export in 1,537 (portable) and 2,209 (open) bounded steps and stream out in 64 KiB chunks in both engines, on a page with no embedding model and no Cloud account.

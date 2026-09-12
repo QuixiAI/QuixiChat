@@ -83,6 +83,7 @@
     "test:app:summaries": "tsc --noEmit -p packages/app/tsconfig.tests.json && node --experimental-transform-types --test packages/app/tests/compaction/*.test.ts",
     "test:host:regional": "tsc --noEmit -p apps/web/tests/tsconfig.json && node --experimental-transform-types --test apps/web/tests/regional-*.test.ts",
     "test:app:relay:browser": "tsc --noEmit -p packages/app/tsconfig.tests.json && node packages/app/tests/browser/relay/run.mjs",
+    "test:app:cross-host:native": "node tests/hosts/archive-cross-host/run.mjs",
     "test:app:regional:native": "python3 tests/hosts/regional-app-proof/run.py",
     "test:host:oauth:native": "python3 tests/hosts/oauth-proof/run.py",
     "test:host:oauth:web": "tsc --noEmit -p apps/web/tests/tsconfig.json && node --experimental-transform-types --test apps/web/tests/oauth-unit.test.ts && node apps/web/tests/oauth-run.mjs",

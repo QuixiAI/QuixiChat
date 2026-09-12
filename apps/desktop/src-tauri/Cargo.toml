@@ -14,6 +14,7 @@ storage-proof = []
 host-proof = ["dep:objc2", "dep:objc2-app-kit"]
 document-proof = []
 regional-app-proof = []
+archive-cross-host-proof = []
 oauth-proof = []
 
 [[bin]]
@@ -30,6 +31,11 @@ required-features = ["document-proof", "custom-protocol"]
 name = "quixi-regional-app-proof"
 path = "../../../tests/hosts/regional-app-proof/native.rs"
 required-features = ["regional-app-proof", "custom-protocol"]
+
+[[bin]]
+name = "quixi-archive-cross-host-proof"
+path = "../../../tests/hosts/archive-cross-host/native.rs"
+required-features = ["archive-cross-host-proof", "custom-protocol"]
 
 [dependencies]
 tauri.workspace = true

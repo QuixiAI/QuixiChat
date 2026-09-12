@@ -593,6 +593,15 @@ Object.assign(window, {
       },
       diagnostics: () => storage.request(crypto.randomUUID(), "diagnostics", null),
     },
+    /** Plan 09 cross-host restore: this archive's record digests and blob hashes, for the native restore side to match. */
+    crossHost: {
+      async dump() {
+        const { dumpCollections, hashBlobDirectory } = await import("../../../storage/tests/archives/cross-host.ts");
+        const collections = await dumpCollections((operation, args) => storage.request(crypto.randomUUID(), operation, args));
+        const diagnostics = await storage.request(crypto.randomUUID(), "diagnostics", null);
+        return { ...collections, blobs: await hashBlobDirectory(`quixi-${archiveId}`), syncOperations: diagnostics.syncOperations, canonicalRecords: diagnostics.canonicalRecords };
+      },
+    },
     async prepareUnclaimedExport() {
       let job = await storage.request(
         crypto.randomUUID(),

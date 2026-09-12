@@ -1,0 +1,508 @@
+{
+  "status": "passed",
+  "startedAt": "2026-09-12T23:47:25.972Z",
+  "sizes": {
+    "threads": 6,
+    "perThread": 5,
+    "planted": 0
+  },
+  "sourceSha256": {
+    "packages/storage/tests/archives/cross-host.ts": "bc1e77e776d47193ea959b7bc793f96bf35a3af71a79af164ee207c405d22c90",
+    "packages/storage/src/worker/archives/index.ts": "f86be726dcbb298934b564f44d32a201b98ea71e58cb18d8b296e775409a9698",
+    "packages/storage/src/worker/archives/export.ts": "8b7ce6aba6b9045b17354464b720e07459672baf06accd7d5834c0e3bb07bcb7",
+    "packages/storage/src/client/retained-archive.ts": "8a2cb708dab495caa9a09585f1611f26856cba4d0ebeb83769ffd5a0f5fc26b2",
+    "packages/storage/src/worker/retained-archive.ts": "79e87d48a4e5559bfb28c8504ac9bc2d854471d59e8988b8eea170cebe290ebd",
+    "packages/app/tests/browser/index.ts": "d45dc0d971c103ea35042571aaab663acca278bd11190f491e00dba60edfe4c6",
+    "tests/hosts/archive-cross-host/index.ts": "9ae818329abb62d97d5a0743c16992b0754119fd9e710222a1db22217e249cd0",
+    "tests/hosts/archive-cross-host/native.rs": "6dcfb12512d6e2f3b017eaa8b1e0af77b50d41af727b789cf21fcfec72050f41",
+    "tests/hosts/archive-cross-host/build.mjs": "2b0df3a04681c4290c76af924498dc61130a95f06b1446758d29daaaaed76ae2",
+    "tests/hosts/archive-cross-host/run.mjs": "725e38cd19081596c4424b97a06388c76093dfb2205937745441455432cf2061",
+    "apps/desktop/src-tauri/tauri.conf.json": "9f37f19b5318efd5c21213eee07fa901d7836cb4caa104d4aff5ba790c6f2a86"
+  },
+  "commands": [
+    {
+      "argv": [
+        "node_modules/.bin/tsc",
+        "--noEmit",
+        "-p",
+        "tests/hosts/archive-cross-host/tsconfig.json"
+      ],
+      "startedAt": "2026-09-12T23:47:27.965Z",
+      "completedAt": "2026-09-12T23:47:28.081Z",
+      "exitCode": 0,
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "tests/hosts/archive-cross-host/build.mjs"
+      ],
+      "startedAt": "2026-09-12T23:47:28.081Z",
+      "completedAt": "2026-09-12T23:47:28.460Z",
+      "exitCode": 0,
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "cargo",
+        "build",
+        "--locked",
+        "-p",
+        "quixi-desktop",
+        "--bin",
+        "quixi-archive-cross-host-proof",
+        "--features",
+        "archive-cross-host-proof"
+      ],
+      "startedAt": "2026-09-12T23:47:28.460Z",
+      "completedAt": "2026-09-12T23:47:29.757Z",
+      "exitCode": 0,
+      "stderr": "   Compiling quixi-desktop v0.0.1 (/Users/eric/QuixiChat/apps/desktop/src-tauri)\nwarning: method `with_oauth_configurations` is never used\n   --> apps/desktop/src-tauri/../../../tests/hosts/archive-cross-host/../../../apps/desktop/src-tauri/src/host/mod.rs:213:12\n    |\n139 | impl NativeHost {\n    | --------------- method in this implementation\n...\n213 |     pub fn with_oauth_configurations(mut self, configurations: Vec<OAuthConfiguration>) -> std::result::Result<Self, String> {\n    |            ^^^^^^^^^^^^^^^^^^^^^^^^^\n    |\n    = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default\n\nwarning: methods `put` and `delete` are never used\n   --> apps/desktop/src-tauri/../../../tests/hosts/archive-cross-host/../../../apps/desktop/src-tauri/src/host/secrets.rs:168:12\n    |\n 26 | impl Secrets {\n    | ------------ methods in this implementation\n...\n168 |     pub fn put(\n    |            ^^^\n...\n275 |     pub fn delete(&self, handle: &SecretHandle, request: &str) -> Result<()> {\n    |            ^^^^^^\n\nwarning: `quixi-desktop` (bin \"quixi-archive-cross-host-proof\") generated 2 warnings\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 1.27s\n"
+    },
+    {
+      "argv": [
+        "./target/debug/quixi-archive-cross-host-proof"
+      ],
+      "startedAt": "2026-09-12T23:47:29.784Z",
+      "completedAt": "2026-09-12T23:47:32.084Z",
+      "exitCode": 0,
+      "stderr": ""
+    }
+  ],
+  "environment": {
+    "platform": "darwin",
+    "release": "25.6.0",
+    "arch": "arm64",
+    "osVersion": "26.6.2",
+    "node": "v22.23.1"
+  },
+  "scope": "Web host export (Playwright Chromium, production Storage Worker) restored in the native Tauri WebView (macOS WebKit, production Storage Worker); the candidate is validated and read back through the retained-archive reader, never activated.",
+  "web": {
+    "engine": "chromium",
+    "seedMs": 50,
+    "imageThread": {
+      "threadId": "0a0d2999-14ca-43bd-8003-bb01d991fe98",
+      "messageId": "70ba8864-fc8f-4d37-9029-1e78ab518423",
+      "attachmentId": "8e214c7a-5649-4e1f-8e1a-5956eb7de362",
+      "sha256": "9e48f631b565170c2adc990778959fa149fce6ed9358e9899446e87f95d78966",
+      "byteLength": 84
+    },
+    "indexedChunks": 33,
+    "export": {
+      "byteLength": 818688,
+      "sha256": "b590d017ab5c557320370b66799d962f32227b1b562958a77aa3cc3bb06e6e67",
+      "advances": 4,
+      "phases": [
+        "snapshot",
+        "ready"
+      ]
+    },
+    "dump": {
+      "collections": {
+        "threads": {
+          "count": 7,
+          "sha256": "159bb0a4753234154599ca15b72a75afc1c1d5ed89b894f2615d26f3c1eb65cb"
+        },
+        "threadStates": {
+          "count": 7,
+          "sha256": "73d85da805d099768ab36977dd696e004f8800ab936dc00ef8cdc55ebf6a6002"
+        },
+        "contexts": {
+          "count": 7,
+          "sha256": "38547b631c3edfbd76f1a7c222ba8686111047959589dce94dcd7937b0d38668"
+        },
+        "messages": {
+          "count": 31,
+          "sha256": "467af67a07a3aba02c6fbc2d619642678613ad2452986a29381b533e0e115834"
+        },
+        "generations": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "parts": {
+          "count": 32,
+          "sha256": "d65f42ce878157a4992195968da80df7d9d974da3dfe12215bb6cb9a9ab54bcc"
+        },
+        "events": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "attachments": {
+          "count": 1,
+          "sha256": "c02ae3b0bebf0f605f7213ca87bdad71886c27daa90d30694ba70bb738fdde16"
+        },
+        "documents": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "rawObjects": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "importSources": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "sourceIdentities": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "provenance": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "tombstones": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "summaryProposals": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        }
+      },
+      "records": 85,
+      "blobs": [
+        {
+          "path": "blobs/9e/9e48f631b565170c2adc990778959fa149fce6ed9358e9899446e87f95d78966",
+          "sha256": "9e48f631b565170c2adc990778959fa149fce6ed9358e9899446e87f95d78966",
+          "bytes": 84
+        }
+      ],
+      "syncOperations": 46,
+      "canonicalRecords": 85
+    }
+  },
+  "native": {
+    "profile": "7a0ed233-c430-4d31-af6a-a59122efbc01",
+    "exitCode": 0,
+    "checkpoints": [
+      "\"archive-loaded\"",
+      "\"storage-open\"",
+      "\"candidate-ready\"",
+      "\"candidate-read\""
+    ],
+    "result": {
+      "configuredCsp": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' asset: http://asset.localhost data:; connect-src 'self' ipc: http://ipc.localhost",
+      "profile": "7a0ed233-c430-4d31-af6a-a59122efbc01",
+      "webview": {
+        "candidateDump": {
+          "blobs": [
+            {
+              "bytes": 84,
+              "path": "blobs/9e/9e48f631b565170c2adc990778959fa149fce6ed9358e9899446e87f95d78966",
+              "sha256": "9e48f631b565170c2adc990778959fa149fce6ed9358e9899446e87f95d78966"
+            }
+          ],
+          "canonicalRecords": 85,
+          "collections": {
+            "attachments": {
+              "count": 1,
+              "sha256": "c02ae3b0bebf0f605f7213ca87bdad71886c27daa90d30694ba70bb738fdde16"
+            },
+            "contexts": {
+              "count": 7,
+              "sha256": "38547b631c3edfbd76f1a7c222ba8686111047959589dce94dcd7937b0d38668"
+            },
+            "documents": {
+              "count": 0,
+              "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+            },
+            "events": {
+              "count": 0,
+              "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+            },
+            "generations": {
+              "count": 0,
+              "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+            },
+            "importSources": {
+              "count": 0,
+              "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+            },
+            "messages": {
+              "count": 31,
+              "sha256": "467af67a07a3aba02c6fbc2d619642678613ad2452986a29381b533e0e115834"
+            },
+            "parts": {
+              "count": 32,
+              "sha256": "d65f42ce878157a4992195968da80df7d9d974da3dfe12215bb6cb9a9ab54bcc"
+            },
+            "provenance": {
+              "count": 0,
+              "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+            },
+            "rawObjects": {
+              "count": 0,
+              "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+            },
+            "sourceIdentities": {
+              "count": 0,
+              "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+            },
+            "summaryProposals": {
+              "count": 0,
+              "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+            },
+            "threadStates": {
+              "count": 7,
+              "sha256": "73d85da805d099768ab36977dd696e004f8800ab936dc00ef8cdc55ebf6a6002"
+            },
+            "threads": {
+              "count": 7,
+              "sha256": "159bb0a4753234154599ca15b72a75afc1c1d5ed89b894f2615d26f3c1eb65cb"
+            },
+            "tombstones": {
+              "count": 0,
+              "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+            }
+          },
+          "records": 85,
+          "syncOperations": 46
+        },
+        "checks": [
+          "the web host's portable archive restores into an isolated candidate at schema 12 after 7 bounded validation steps (schema_validation → record_validation → blob_validation → ready)",
+          "the candidate's 85 canonical records across 15 collections were read back through the retained reader and its 1 blob files hashed from OPFS"
+        ],
+        "diagnostics": {
+          "backend": "sqlite-wasm-opfs-sahpool",
+          "canonicalRecords": 0,
+          "integrity": "ok",
+          "ownerId": "a464890b-d2ce-4e7f-9158-c7024e7ab5d5",
+          "persisted": false,
+          "quota": 20615843021,
+          "schemaVersion": 12,
+          "syncOperations": 0,
+          "usage": 11534336
+        },
+        "input": {
+          "byteLength": 818688,
+          "sha256": "b590d017ab5c557320370b66799d962f32227b1b562958a77aa3cc3bb06e6e67"
+        },
+        "profile": "7a0ed233-c430-4d31-af6a-a59122efbc01",
+        "restore": {
+          "advances": 7,
+          "candidate": {
+            "archiveId": "4f07ee69-8e35-4946-b00c-ddd2a096f53a",
+            "blobBytes": 84,
+            "blobCount": 1,
+            "canonicalRecords": 85,
+            "defaultWorkspaceId": "54af28d0-93c1-45f2-a4c6-2baa0830c695",
+            "manifestSha256": "758dd5ba013e00bbd3465df8b158b994a7253882b4ab2afe4416b1de26a3250c",
+            "schemaVersion": 12,
+            "streamingGenerations": 0,
+            "syncOperations": 46
+          },
+          "failure": null,
+          "ms": 117,
+          "phases": [
+            "schema_validation",
+            "record_validation",
+            "blob_validation",
+            "ready"
+          ],
+          "sourceSchemaVersion": null,
+          "state": "ready"
+        },
+        "scope": "Production Storage Worker, SQLite WASM and OPFS SAH pool inside the Tauri WebView; the portable container is the web host's export, restored through beginArchiveRestore/finishArchiveRestore/advanceArchiveJob and read back through the retained-archive reader.",
+        "secureContext": true,
+        "stage": "candidate-read",
+        "status": "passed",
+        "success": true,
+        "url": "tauri://localhost",
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko)"
+      }
+    }
+  },
+  "comparison": {
+    "collections": {
+      "threads": {
+        "web": {
+          "count": 7,
+          "sha256": "159bb0a4753234154599ca15b72a75afc1c1d5ed89b894f2615d26f3c1eb65cb"
+        },
+        "native": {
+          "count": 7,
+          "sha256": "159bb0a4753234154599ca15b72a75afc1c1d5ed89b894f2615d26f3c1eb65cb"
+        },
+        "equal": true
+      },
+      "threadStates": {
+        "web": {
+          "count": 7,
+          "sha256": "73d85da805d099768ab36977dd696e004f8800ab936dc00ef8cdc55ebf6a6002"
+        },
+        "native": {
+          "count": 7,
+          "sha256": "73d85da805d099768ab36977dd696e004f8800ab936dc00ef8cdc55ebf6a6002"
+        },
+        "equal": true
+      },
+      "contexts": {
+        "web": {
+          "count": 7,
+          "sha256": "38547b631c3edfbd76f1a7c222ba8686111047959589dce94dcd7937b0d38668"
+        },
+        "native": {
+          "count": 7,
+          "sha256": "38547b631c3edfbd76f1a7c222ba8686111047959589dce94dcd7937b0d38668"
+        },
+        "equal": true
+      },
+      "messages": {
+        "web": {
+          "count": 31,
+          "sha256": "467af67a07a3aba02c6fbc2d619642678613ad2452986a29381b533e0e115834"
+        },
+        "native": {
+          "count": 31,
+          "sha256": "467af67a07a3aba02c6fbc2d619642678613ad2452986a29381b533e0e115834"
+        },
+        "equal": true
+      },
+      "generations": {
+        "web": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "native": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "equal": true
+      },
+      "parts": {
+        "web": {
+          "count": 32,
+          "sha256": "d65f42ce878157a4992195968da80df7d9d974da3dfe12215bb6cb9a9ab54bcc"
+        },
+        "native": {
+          "count": 32,
+          "sha256": "d65f42ce878157a4992195968da80df7d9d974da3dfe12215bb6cb9a9ab54bcc"
+        },
+        "equal": true
+      },
+      "events": {
+        "web": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "native": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "equal": true
+      },
+      "attachments": {
+        "web": {
+          "count": 1,
+          "sha256": "c02ae3b0bebf0f605f7213ca87bdad71886c27daa90d30694ba70bb738fdde16"
+        },
+        "native": {
+          "count": 1,
+          "sha256": "c02ae3b0bebf0f605f7213ca87bdad71886c27daa90d30694ba70bb738fdde16"
+        },
+        "equal": true
+      },
+      "documents": {
+        "web": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "native": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "equal": true
+      },
+      "rawObjects": {
+        "web": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "native": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "equal": true
+      },
+      "importSources": {
+        "web": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "native": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "equal": true
+      },
+      "sourceIdentities": {
+        "web": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "native": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "equal": true
+      },
+      "provenance": {
+        "web": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "native": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "equal": true
+      },
+      "tombstones": {
+        "web": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "native": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "equal": true
+      },
+      "summaryProposals": {
+        "web": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "native": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "equal": true
+      }
+    },
+    "records": {
+      "web": 85,
+      "native": 85,
+      "candidateSummary": 85
+    },
+    "syncOperations": {
+      "web": 46,
+      "native": 46
+    },
+    "blobs": {
+      "web": 1,
+      "native": 1,
+      "equal": true
+    }
+  },
+  "checks": [
+    "the web host exports a portable archive of 85 canonical records (1 blob files) in 4 bounded steps",
+    "native: the web host's portable archive restores into an isolated candidate at schema 12 after 7 bounded validation steps (schema_validation → record_validation → blob_validation → ready)",
+    "native: the candidate's 85 canonical records across 15 collections were read back through the retained reader and its 1 blob files hashed from OPFS",
+    "every collection's record digest, the 85 canonical records, the 46 sync operations and all 1 blob file hashes match between the web export and the native restore candidate"
+  ],
+  "binarySha256": "983b172e2a18a4e73a6d8ff781ca6140423a132b730fdcec559f033fa26c9a74",
+  "bundledArchiveSha256": "b590d017ab5c557320370b66799d962f32227b1b562958a77aa3cc3bb06e6e67",
+  "finishedAt": "2026-09-12T23:47:32.084Z"
+}
