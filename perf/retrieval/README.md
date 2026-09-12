@@ -182,7 +182,11 @@ Chromium and WebKit; [sqlite-vec-knn.mjs](sqlite-vec-knn.mjs) is the Node
 in-memory counterpart. Reports: `browser-knn-<size>[-chunk<n>].json`,
 `sqlite-vec-knn-<size>.json`. Result (ADR 0036 amendment): the int8 scan is
 CPU-slower than the float scan in this build and vec0 point lookups read whole
-chunks, so the coarse stage is off by default.
+chunks, so the coarse stage is off by default. The harness also measures
+sqlite-vec's `bit[384]` KNN and a resident in-worker sign-bit Hamming scan with
+float rerank (ADR 0036 amendment 2: the resident scan with 5,000 candidates is
+3.7× faster than the float scan at 500k with identical judged metrics;
+`compressed.mjs` carries the `binaryWide<k>_float32Rerank` quality pipelines).
 
 ```sh
 npm run perf:knn:browser                                        # 100k, both engines

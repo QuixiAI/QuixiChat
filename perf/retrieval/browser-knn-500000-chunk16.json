@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "measuredAt": "2026-09-12T10:45:10.589Z",
-  "size": 100000,
+  "measuredAt": "2026-09-12T10:46:12.520Z",
+  "size": 500000,
   "floatChunkSize": 16,
   "batch": 5000,
   "queries": 12,
@@ -30,13 +30,13 @@
         "rows": 0,
         "cacheMissCounter": true
       },
-      "buildMs": 3117,
+      "buildMs": 18445,
       "insertBatchMs": {
-        "medianMs": 146,
-        "maxMs": 160
+        "medianMs": 146.59999999403954,
+        "maxMs": 165.7999999821186
       },
       "steady": {
-        "rows": 100000,
+        "rows": 500000,
         "pageSize": 8192,
         "queryQuantization": {
           "samples": 36,
@@ -47,160 +47,160 @@
         },
         "floatKnnTop64": {
           "samples": 36,
-          "medianMs": 49,
-          "p95Ms": 52.5,
-          "maxMs": 58.599999994039536,
-          "pageCacheMissesPerQuery": 19642
+          "medianMs": 247.59999999403954,
+          "p95Ms": 259.40000000596046,
+          "maxMs": 282.7999999821186,
+          "pageCacheMissesPerQuery": 98215.05555555556
         },
         "int8CoarseTop500": {
           "samples": 36,
-          "medianMs": 57.099999994039536,
-          "p95Ms": 59.599999994039536,
-          "maxMs": 63.599999994039536,
-          "pageCacheMissesPerQuery": 4828.055555555556
+          "medianMs": 286,
+          "p95Ms": 291.2000000178814,
+          "maxMs": 293.59999999403954,
+          "pageCacheMissesPerQuery": 24085.055555555555
         },
         "int8CoarseThenFloatRerankTop64": {
           "samples": 36,
-          "medianMs": 60,
-          "p95Ms": 62.5,
-          "maxMs": 62.69999998807907,
-          "pageCacheMissesPerQuery": 6331.666666666667
+          "medianMs": 288.5,
+          "p95Ms": 294.69999998807907,
+          "maxMs": 299.7000000178814,
+          "pageCacheMissesPerQuery": 25927.25
         },
         "top64AgreementWithFloat": 1,
         "sqliteVecBitKnn": {
           "k500": {
             "samples": 36,
-            "medianMs": 34.29999998211861,
-            "p95Ms": 35.30000001192093,
-            "maxMs": 36,
-            "pageCacheMissesPerQuery": 19.833333333333332
+            "medianMs": 174.09999999403954,
+            "p95Ms": 181.30000001192093,
+            "maxMs": 181.69999998807907,
+            "pageCacheMissesPerQuery": 3547.0555555555557
           },
           "k2000": {
             "samples": 36,
-            "medianMs": 71.09999999403954,
-            "p95Ms": 74.10000002384186,
-            "maxMs": 74.19999998807907,
-            "pageCacheMissesPerQuery": 0
+            "medianMs": 354.69999998807907,
+            "p95Ms": 365.5,
+            "maxMs": 365.59999999403954,
+            "pageCacheMissesPerQuery": 3547
           },
           "k4000": {
             "samples": 36,
-            "medianMs": 72.19999998807907,
-            "p95Ms": 74.09999999403954,
-            "maxMs": 76.30000001192093,
-            "pageCacheMissesPerQuery": 0
+            "medianMs": 356.7000000178814,
+            "p95Ms": 359.80000001192093,
+            "maxMs": 360.59999999403954,
+            "pageCacheMissesPerQuery": 3547
           }
         },
         "residentBits": {
-          "bytes": 4800000,
-          "loadMs": 73,
+          "bytes": 24000000,
+          "loadMs": 364.5,
           "k2000": {
             "hamming": {
               "samples": 36,
-              "medianMs": 3.4000000059604645,
-              "p95Ms": 3.9000000059604645,
-              "maxMs": 10.300000011920929,
+              "medianMs": 15.800000011920929,
+              "p95Ms": 16.900000005960464,
+              "maxMs": 22.19999998807907,
               "pageCacheMissesPerQuery": 0
             },
             "hammingThenFloatRerankTop64": {
               "samples": 36,
-              "medianMs": 19.599999994039536,
-              "p95Ms": 23.69999998807907,
-              "maxMs": 24.399999976158142,
-              "pageCacheMissesPerQuery": 4658.305555555556
+              "medianMs": 35.30000001192093,
+              "p95Ms": 38.69999998807907,
+              "maxMs": 39.599999994039536,
+              "pageCacheMissesPerQuery": 6815.166666666667
             }
           },
           "k5000": {
             "hamming": {
               "samples": 36,
-              "medianMs": 3.7000000178813934,
-              "p95Ms": 4,
-              "maxMs": 4.100000023841858,
+              "medianMs": 16.30000001192093,
+              "p95Ms": 17.099999994039536,
+              "maxMs": 17.5,
               "pageCacheMissesPerQuery": 0
             },
             "hammingThenFloatRerankTop64": {
               "samples": 36,
-              "medianMs": 43.099999994039536,
-              "p95Ms": 45.29999998211861,
-              "maxMs": 47.10000002384186,
-              "pageCacheMissesPerQuery": 11206.5
+              "medianMs": 66,
+              "p95Ms": 71.19999998807907,
+              "maxMs": 74.39999997615814,
+              "pageCacheMissesPerQuery": 16022.083333333334
             }
           },
           "k20000": {
             "hamming": {
               "samples": 36,
-              "medianMs": 5.0999999940395355,
-              "p95Ms": 5.699999988079071,
-              "maxMs": 6.199999988079071,
+              "medianMs": 18.400000005960464,
+              "p95Ms": 19.099999994039536,
+              "maxMs": 20.599999994039536,
               "pageCacheMissesPerQuery": 0
             },
             "hammingThenFloatRerankTop64": {
               "samples": 36,
-              "medianMs": 146.19999998807907,
-              "p95Ms": 152.69999998807907,
-              "maxMs": 153.7000000178814,
-              "pageCacheMissesPerQuery": 32991.083333333336
+              "medianMs": 192.59999999403954,
+              "p95Ms": 200.69999998807907,
+              "maxMs": 201.30000001192093,
+              "pageCacheMissesPerQuery": 51847.333333333336
             }
           },
           "exactTop64RecallInCandidates": {
-            "k2000": 0.7604166666666666,
-            "k5000": 0.9088541666666666,
-            "k20000": 0.9973958333333334
+            "k2000": 0.6080729166666666,
+            "k5000": 0.79296875,
+            "k20000": 0.9440104166666666
           },
           "note": "pseudo-random vectors: recall here is a lower bound for sign-bit pre-filtering, not the judged quality (compressed.mjs)"
         },
         "memory": {
           "sqliteMemoryUsedBytes": 17016632,
-          "sqliteMemoryHighwaterBytes": 19369832,
-          "wasmHeapBytes": 25296896
+          "sqliteMemoryHighwaterBytes": 28969832,
+          "wasmHeapBytes": 43843584
         },
-        "opfsBytes": 216399872
+        "opfsBytes": 1081720832
       },
       "underBackfill": {
         "batch": 1000,
         "batches": 5,
-        "rowsAfter": 105000,
+        "rowsAfter": 505000,
         "writeMs": {
           "samples": 5,
-          "medianMs": 34,
-          "p95Ms": 36.5,
-          "maxMs": 36.5
+          "medianMs": 34.70000001788139,
+          "p95Ms": 36.30000001192093,
+          "maxMs": 36.30000001192093
         },
         "coarseRerankAfterWrite": {
           "samples": 5,
-          "medianMs": 61.599999994039536,
-          "p95Ms": 62.39999997615814,
-          "maxMs": 62.39999997615814
+          "medianMs": 285,
+          "p95Ms": 287.2999999821186,
+          "maxMs": 287.2999999821186
         },
         "memory": {
           "sqliteMemoryUsedBytes": 17016632,
-          "sqliteMemoryHighwaterBytes": 19489832,
-          "wasmHeapBytes": 25296896
+          "sqliteMemoryHighwaterBytes": 29089832,
+          "wasmHeapBytes": 43843584
         }
       },
       "coldReopen": {
-        "rows": 105000,
+        "rows": 505000,
         "floatKnnTop64": {
           "samples": 1,
-          "medianMs": 49.20000001788139,
-          "p95Ms": 49.20000001788139,
-          "maxMs": 49.20000001788139,
-          "pageCacheMissesPerQuery": 20628
+          "medianMs": 243.40000000596046,
+          "p95Ms": 243.40000000596046,
+          "maxMs": 243.40000000596046,
+          "pageCacheMissesPerQuery": 99201
         },
         "int8CoarseTop500": {
           "samples": 1,
-          "medianMs": 59,
-          "p95Ms": 59,
-          "maxMs": 59,
-          "pageCacheMissesPerQuery": 5075
+          "medianMs": 285.5,
+          "p95Ms": 285.5,
+          "maxMs": 285.5,
+          "pageCacheMissesPerQuery": 24332
         },
         "int8CoarseThenFloatRerankTop64": {
           "samples": 1,
-          "medianMs": 61.79999998211861,
-          "p95Ms": 61.79999998211861,
-          "maxMs": 61.79999998211861,
-          "pageCacheMissesPerQuery": 6568
+          "medianMs": 286.5,
+          "p95Ms": 286.5,
+          "maxMs": 286.5,
+          "pageCacheMissesPerQuery": 26178
         },
-        "opfsBytes": 227254272
+        "opfsBytes": 1092583424
       },
       "errors": []
     },
@@ -216,13 +216,13 @@
         "rows": 0,
         "cacheMissCounter": true
       },
-      "buildMs": 2028,
+      "buildMs": 12717,
       "insertBatchMs": {
-        "medianMs": 92,
-        "maxMs": 120
+        "medianMs": 93,
+        "maxMs": 121
       },
       "steady": {
-        "rows": 100000,
+        "rows": 500000,
         "pageSize": 8192,
         "queryQuantization": {
           "samples": 36,
@@ -233,160 +233,160 @@
         },
         "floatKnnTop64": {
           "samples": 36,
-          "medianMs": 48,
-          "p95Ms": 50,
-          "maxMs": 53,
-          "pageCacheMissesPerQuery": 19642
+          "medianMs": 244,
+          "p95Ms": 255,
+          "maxMs": 256,
+          "pageCacheMissesPerQuery": 98215.05555555556
         },
         "int8CoarseTop500": {
           "samples": 36,
-          "medianMs": 78,
-          "p95Ms": 80,
-          "maxMs": 81,
-          "pageCacheMissesPerQuery": 4828.055555555556
+          "medianMs": 391,
+          "p95Ms": 404,
+          "maxMs": 418,
+          "pageCacheMissesPerQuery": 24085.055555555555
         },
         "int8CoarseThenFloatRerankTop64": {
           "samples": 36,
-          "medianMs": 81,
-          "p95Ms": 82,
-          "maxMs": 84,
-          "pageCacheMissesPerQuery": 6331.666666666667
+          "medianMs": 392,
+          "p95Ms": 396,
+          "maxMs": 400,
+          "pageCacheMissesPerQuery": 25927.25
         },
         "top64AgreementWithFloat": 1,
         "sqliteVecBitKnn": {
           "k500": {
             "samples": 36,
-            "medianMs": 50,
-            "p95Ms": 50,
-            "maxMs": 52,
-            "pageCacheMissesPerQuery": 19.833333333333332
+            "medianMs": 252,
+            "p95Ms": 255,
+            "maxMs": 255,
+            "pageCacheMissesPerQuery": 3547.0555555555557
           },
           "k2000": {
             "samples": 36,
-            "medianMs": 103,
-            "p95Ms": 104,
-            "maxMs": 104,
-            "pageCacheMissesPerQuery": 0
+            "medianMs": 513,
+            "p95Ms": 518,
+            "maxMs": 531,
+            "pageCacheMissesPerQuery": 3547
           },
           "k4000": {
             "samples": 36,
-            "medianMs": 104,
-            "p95Ms": 105,
-            "maxMs": 105,
-            "pageCacheMissesPerQuery": 0
+            "medianMs": 514,
+            "p95Ms": 531,
+            "maxMs": 537,
+            "pageCacheMissesPerQuery": 3547
           }
         },
         "residentBits": {
-          "bytes": 4800000,
-          "loadMs": 91,
+          "bytes": 24000000,
+          "loadMs": 455,
           "k2000": {
             "hamming": {
               "samples": 36,
-              "medianMs": 3,
-              "p95Ms": 4,
-              "maxMs": 10,
+              "medianMs": 13,
+              "p95Ms": 14,
+              "maxMs": 20,
               "pageCacheMissesPerQuery": 0
             },
             "hammingThenFloatRerankTop64": {
               "samples": 36,
-              "medianMs": 20,
-              "p95Ms": 22,
-              "maxMs": 23,
-              "pageCacheMissesPerQuery": 4658.305555555556
+              "medianMs": 34,
+              "p95Ms": 36,
+              "maxMs": 38,
+              "pageCacheMissesPerQuery": 6815.166666666667
             }
           },
           "k5000": {
             "hamming": {
               "samples": 36,
-              "medianMs": 4,
-              "p95Ms": 4,
-              "maxMs": 4,
+              "medianMs": 14,
+              "p95Ms": 14,
+              "maxMs": 15,
               "pageCacheMissesPerQuery": 0
             },
             "hammingThenFloatRerankTop64": {
               "samples": 36,
-              "medianMs": 44,
-              "p95Ms": 46,
-              "maxMs": 49,
-              "pageCacheMissesPerQuery": 11206.5
+              "medianMs": 63,
+              "p95Ms": 66,
+              "maxMs": 68,
+              "pageCacheMissesPerQuery": 16022.083333333334
             }
           },
           "k20000": {
             "hamming": {
               "samples": 36,
-              "medianMs": 6,
-              "p95Ms": 6,
-              "maxMs": 7,
+              "medianMs": 18,
+              "p95Ms": 19,
+              "maxMs": 24,
               "pageCacheMissesPerQuery": 0
             },
             "hammingThenFloatRerankTop64": {
               "samples": 36,
-              "medianMs": 150,
-              "p95Ms": 157,
-              "maxMs": 165,
-              "pageCacheMissesPerQuery": 32991.083333333336
+              "medianMs": 195,
+              "p95Ms": 200,
+              "maxMs": 202,
+              "pageCacheMissesPerQuery": 51847.333333333336
             }
           },
           "exactTop64RecallInCandidates": {
-            "k2000": 0.7604166666666666,
-            "k5000": 0.9088541666666666,
-            "k20000": 0.9973958333333334
+            "k2000": 0.6080729166666666,
+            "k5000": 0.79296875,
+            "k20000": 0.9440104166666666
           },
           "note": "pseudo-random vectors: recall here is a lower bound for sign-bit pre-filtering, not the judged quality (compressed.mjs)"
         },
         "memory": {
           "sqliteMemoryUsedBytes": 17016632,
-          "sqliteMemoryHighwaterBytes": 19369832,
-          "wasmHeapBytes": 25296896
+          "sqliteMemoryHighwaterBytes": 28969832,
+          "wasmHeapBytes": 43843584
         },
-        "opfsBytes": 216399872
+        "opfsBytes": 1081720832
       },
       "underBackfill": {
         "batch": 1000,
         "batches": 5,
-        "rowsAfter": 105000,
+        "rowsAfter": 505000,
         "writeMs": {
           "samples": 5,
-          "medianMs": 24,
-          "p95Ms": 24,
-          "maxMs": 24
+          "medianMs": 25,
+          "p95Ms": 27,
+          "maxMs": 27
         },
         "coarseRerankAfterWrite": {
           "samples": 5,
-          "medianMs": 84,
-          "p95Ms": 85,
-          "maxMs": 85
+          "medianMs": 389,
+          "p95Ms": 400,
+          "maxMs": 400
         },
         "memory": {
           "sqliteMemoryUsedBytes": 17016632,
-          "sqliteMemoryHighwaterBytes": 19489832,
-          "wasmHeapBytes": 25296896
+          "sqliteMemoryHighwaterBytes": 29089832,
+          "wasmHeapBytes": 43843584
         }
       },
       "coldReopen": {
-        "rows": 105000,
+        "rows": 505000,
         "floatKnnTop64": {
           "samples": 1,
-          "medianMs": 49,
-          "p95Ms": 49,
-          "maxMs": 49,
-          "pageCacheMissesPerQuery": 20628
+          "medianMs": 243,
+          "p95Ms": 243,
+          "maxMs": 243,
+          "pageCacheMissesPerQuery": 99201
         },
         "int8CoarseTop500": {
           "samples": 1,
-          "medianMs": 83,
-          "p95Ms": 83,
-          "maxMs": 83,
-          "pageCacheMissesPerQuery": 5075
+          "medianMs": 385,
+          "p95Ms": 385,
+          "maxMs": 385,
+          "pageCacheMissesPerQuery": 24332
         },
         "int8CoarseThenFloatRerankTop64": {
           "samples": 1,
-          "medianMs": 85,
-          "p95Ms": 85,
-          "maxMs": 85,
-          "pageCacheMissesPerQuery": 6568
+          "medianMs": 393,
+          "p95Ms": 393,
+          "maxMs": 393,
+          "pageCacheMissesPerQuery": 26178
         },
-        "opfsBytes": 227254272
+        "opfsBytes": 1092583424
       },
       "errors": []
     }

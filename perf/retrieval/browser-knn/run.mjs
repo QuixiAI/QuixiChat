@@ -18,7 +18,7 @@ import { execFileSync } from "node:child_process";
 import { browserEngines } from "../../../tooling/browser-engines.mjs";
 const here = import.meta.dirname, root = resolve(here, "../../..");
 const sizes = (process.env.QUIXI_KNN_SIZES ?? "100000").split(",").map(Number);
-/** vec0 chunk_size of the float table (rows per stored blob); unset = sqlite-vec default (1024). */
+/** vec0 chunk_size of the float table (rows per stored blob); unset = sqlite-vec default (1024). Use 16 for the rerank measurements. */
 const floatChunkSize = process.env.QUIXI_KNN_FLOAT_CHUNK ? Number(process.env.QUIXI_KNN_FLOAT_CHUNK) : undefined;
 const suffix = floatChunkSize ? `-chunk${floatChunkSize}` : "";
 if (sizes.some((size) => !Number.isInteger(size) || size <= 0)) throw new Error("QUIXI_KNN_SIZES must be positive integers");
@@ -60,6 +60,7 @@ try {
         console.log(`${name} ${size}: built in ${(buildMs / 1000).toFixed(1)} s`);
         const steady = await call({ command: "measure", queries, repetitions });
         console.log(`${name} ${size}: float ${steady.floatKnnTop64.medianMs.toFixed(1)} ms, int8 coarse ${steady.int8CoarseTop500.medianMs.toFixed(1)} ms, coarse+rerank ${steady.int8CoarseThenFloatRerankTop64.medianMs.toFixed(1)} ms, agreement ${steady.top64AgreementWithFloat.toFixed(3)}, misses/query ${steady.int8CoarseThenFloatRerankTop64.pageCacheMissesPerQuery}`);
+        console.log(`${name} ${size}: vec bit knn k500 ${steady.sqliteVecBitKnn.k500.medianMs.toFixed(1)} ms, k4000 ${steady.sqliteVecBitKnn.k4000.medianMs.toFixed(1)} ms; resident bits load ${steady.residentBits.loadMs?.toFixed(0)} ms, hamming k2000 ${steady.residentBits.k2000.hamming.medianMs.toFixed(1)} ms (+rerank ${steady.residentBits.k2000.hammingThenFloatRerankTop64.medianMs.toFixed(1)}), k20000 ${steady.residentBits.k20000.hamming.medianMs.toFixed(1)} ms (+rerank ${steady.residentBits.k20000.hammingThenFloatRerankTop64.medianMs.toFixed(1)}), recall@k2000 ${steady.residentBits.exactTop64RecallInCandidates.k2000.toFixed(3)}`);
         const backfill = await call({ command: "underBackfill", from: size + 1, batch: backfillBatch, batches: backfillBatches });
         console.log(`${name} ${size}: under backfill write ${backfill.writeMs.medianMs.toFixed(0)} ms/${backfillBatch}, query after write ${backfill.coarseRerankAfterWrite.medianMs.toFixed(1)} ms (p95 ${backfill.coarseRerankAfterWrite.p95Ms.toFixed(1)})`);
         // Cold page cache: close the connection, reopen the same files and query once.

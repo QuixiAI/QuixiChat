@@ -12,6 +12,28 @@ let seed = 20260912;
 const rand = () => { seed = (seed * 1664525 + 1013904223) >>> 0; return seed / 4294967296; };
 const vector = () => { const v = new Float32Array(D); let n = 0; for (let d = 0; d < D; d++) { v[d] = rand() - 0.5; n += v[d] * v[d]; } n = Math.sqrt(n); for (let d = 0; d < D; d++) v[d] = v[d] / n * 0.9; v[0] = Math.sqrt(1 - 0.81); return v; };
 const int8 = (v) => Int8Array.from(v, (x) => Math.max(-127, Math.min(127, Math.round(x / SCALE))));
+const bits = (v) => { const b = new Uint8Array(48); for (let d = 0; d < D; d++) if (v[d] >= 0) b[d >> 3] |= 1 << (d & 7); return b; };
+const popcount = new Uint8Array(256); for (let i = 0; i < 256; i++) { let c = 0, v = i; while (v) { c += v & 1; v >>= 1; } popcount[i] = c; }
+/** Resident sign-bit index (48 bytes per vector) loaded from the bits table;
+ * the coarse stage that does not go through vec0's KNN. */
+let resident = null;
+function loadResident() {
+  const rows = db.selectValue("SELECT count(*) FROM bits");
+  const ids = new Int32Array(rows), data = new Uint8Array(rows * 48);
+  let n = 0;
+  db.exec({ sql: "SELECT id,b FROM bits ORDER BY id", rowMode: "array", callback: (row) => { ids[n] = row[0]; data.set(row[1], n * 48); n++; } });
+  resident = { rows, ids, data };
+}
+/** Hamming top-k over the resident index with a bounded max-heap. */
+function hammingTopK(query, k) {
+  const { rows, data, ids } = resident, heapId = new Int32Array(k), heapD = new Int32Array(k); let count = 0;
+  for (let n = 0, base = 0; n < rows; n++, base += 48) {
+    let d = 0; for (let b = 0; b < 48; b++) d += popcount[data[base + b] ^ query[b]];
+    if (count < k) { let c = count++; heapId[c] = ids[n]; heapD[c] = d; while (c > 0) { const p = (c - 1) >> 1; if (heapD[c] > heapD[p]) { [heapD[c], heapD[p]] = [heapD[p], heapD[c]]; [heapId[c], heapId[p]] = [heapId[p], heapId[c]]; c = p; } else break; } }
+    else if (d < heapD[0]) { heapId[0] = ids[n]; heapD[0] = d; let c = 0; for (;;) { const l = 2 * c + 1, r = l + 1; let m = c; if (l < count && heapD[l] > heapD[m]) m = l; if (r < count && heapD[r] > heapD[m]) m = r; if (m === c) break; [heapD[c], heapD[m]] = [heapD[m], heapD[c]]; [heapId[c], heapId[m]] = [heapId[m], heapId[c]]; c = m; } }
+  }
+  return heapId.subarray(0, count);
+}
 const bytes = (typed) => new Uint8Array(typed.buffer, typed.byteOffset, typed.byteLength);
 const log = (text) => postMessage({ log: text });
 const stats = (samples) => { const s = [...samples].sort((a, b) => a - b); return { samples: s.length, medianMs: s[Math.floor(s.length / 2)], p95Ms: s[Math.floor(s.length * 0.95)], maxMs: s[s.length - 1] }; };
@@ -61,16 +83,18 @@ const commands = {
     db.exec("PRAGMA journal_mode=DELETE; PRAGMA synchronous=FULL;");
     // vec0 stores vectors in chunk blobs; a point lookup reads a whole chunk,
     // so the float table's chunk_size decides how many pages a rerank touches.
-    db.exec(`CREATE VIRTUAL TABLE IF NOT EXISTS f USING vec0(embedding float[${D}]${floatChunkSize ? `, chunk_size=${floatChunkSize}` : ""}); CREATE VIRTUAL TABLE IF NOT EXISTS q8 USING vec0(embedding int8[${D}]);`);
+    db.exec(`CREATE VIRTUAL TABLE IF NOT EXISTS f USING vec0(embedding float[${D}]${floatChunkSize ? `, chunk_size=${floatChunkSize}` : ""}); CREATE VIRTUAL TABLE IF NOT EXISTS q8 USING vec0(embedding int8[${D}]); CREATE VIRTUAL TABLE IF NOT EXISTS qb USING vec0(embedding bit[${D}]); CREATE TABLE IF NOT EXISTS bits(id INTEGER PRIMARY KEY, b BLOB NOT NULL);`);
+    resident = null;
     return { floatChunkSize: floatChunkSize ?? "default", vecVersion: db.selectValue("SELECT vec_version()"), sqliteVersion: db.selectValue("SELECT sqlite_version()"), pageSize: db.selectValue("PRAGMA page_size"), cacheSize: db.selectValue("PRAGMA cache_size"), rows: db.selectValue("SELECT count(*) FROM f"), cacheMissCounter: cacheMisses(true) !== null };
   },
   /** Inserts [from, to) in one transaction, the way a publication batch does. */
   insert({ from, to }) {
     const started = performance.now();
     db.exec("BEGIN IMMEDIATE");
-    const insF = db.prepare("INSERT INTO f(rowid,embedding) VALUES(?,?)"), insQ = db.prepare("INSERT INTO q8(rowid,embedding) VALUES(?,vec_int8(?))");
-    try { for (let i = from; i < to; i++) { const v = vector(); insF.bind([i, bytes(v)]).stepReset(); insQ.bind([i, bytes(int8(v))]).stepReset(); } }
-    finally { insF.finalize(); insQ.finalize(); }
+    const insF = db.prepare("INSERT INTO f(rowid,embedding) VALUES(?,?)"), insQ = db.prepare("INSERT INTO q8(rowid,embedding) VALUES(?,vec_int8(?))"), insB = db.prepare("INSERT INTO qb(rowid,embedding) VALUES(?,vec_bit(?))"), insP = db.prepare("INSERT INTO bits(id,b) VALUES(?,?)");
+    try { for (let i = from; i < to; i++) { const v = vector(), b = bits(v); insF.bind([i, bytes(v)]).stepReset(); insQ.bind([i, bytes(int8(v))]).stepReset(); insB.bind([i, b]).stepReset(); insP.bind([i, b]).stepReset(); } }
+    finally { insF.finalize(); insQ.finalize(); insB.finalize(); insP.finalize(); }
+    resident = null;
     db.exec("COMMIT");
     return { ms: performance.now() - started, rows: db.selectValue("SELECT count(*) FROM f") };
   },
@@ -81,13 +105,33 @@ const commands = {
     const floatKnn = run((q) => db.exec({ sql: "SELECT rowid,distance FROM f WHERE embedding MATCH ? AND k=64", bind: [bytes(q)], returnValue: "resultRows" }));
     const int8Knn = run((q) => db.exec({ sql: "SELECT rowid FROM q8 WHERE embedding MATCH vec_int8(?) AND k=500", bind: [bytes(int8(q))], returnValue: "resultRows" }));
     const coarseRerank = run((q) => db.exec({ sql: "SELECT v.rowid,vec_distance_L2(v.embedding,?) AS d FROM (SELECT rowid FROM q8 WHERE embedding MATCH vec_int8(?) AND k=500) c CROSS JOIN f v ON v.rowid=c.rowid ORDER BY d LIMIT 64", bind: [bytes(q), bytes(int8(q))], returnValue: "resultRows" }));
+    // sqlite-vec's own bit[384] Hamming KNN (k is capped near 4096 in v0.1.9).
+    const vecBit = {};
+    for (const k of [500, 2000, 4000]) vecBit[`k${k}`] = run((q) => db.exec({ sql: "SELECT rowid FROM qb WHERE embedding MATCH vec_bit(?) AND k=?", bind: [bits(q), k], returnValue: "resultRows" }));
+    // Resident sign-bit index: load cost, Hamming top-k in the worker, float rerank by point lookups.
+    let loadMs = null;
+    if (!resident) { const t = performance.now(); loadResident(); loadMs = performance.now() - t; }
+    const point = db.prepare("SELECT vec_distance_L2(embedding,?) FROM f WHERE rowid=?");
+    const residentRun = {}, residentAgreement = {};
+    try {
+      for (const k of [2000, 5000, 20000]) {
+        residentRun[`k${k}`] = { hamming: run((q) => hammingTopK(bits(q), k)), hammingThenFloatRerankTop64: run((q) => { const ids = hammingTopK(bits(q), k), qb = bytes(q), out = new Float64Array(ids.length); for (let i = 0; i < ids.length; i++) { point.bind([qb, ids[i]]); point.step(); out[i] = point.get(0); point.reset(); } const order = Array.from(ids.keys()).sort((a, b) => out[a] - out[b] || ids[a] - ids[b]).slice(0, 64); return order.map((i) => ids[i]); }) };
+        let agreeK = 0;
+        for (const q of queries) {
+          const exact = db.exec({ sql: "SELECT rowid FROM f WHERE embedding MATCH ? AND k=64", bind: [bytes(q)], returnValue: "resultRows" }).map((r) => r[0]);
+          const cand = new Set(hammingTopK(bits(q), k));
+          agreeK += exact.filter((id) => cand.has(id)).length / exact.length;
+        }
+        residentAgreement[`k${k}`] = agreeK / queries.length;
+      }
+    } finally { point.finalize(); }
     let agree = 0;
     for (const q of queries) {
       const a = db.exec({ sql: "SELECT rowid FROM f WHERE embedding MATCH ? AND k=64", bind: [bytes(q)], returnValue: "resultRows" }).map((r) => r[0]);
       const b = new Set(db.exec({ sql: "SELECT v.rowid FROM (SELECT rowid FROM q8 WHERE embedding MATCH vec_int8(?) AND k=500) c CROSS JOIN f v ON v.rowid=c.rowid ORDER BY vec_distance_L2(v.embedding,?) LIMIT 64", bind: [bytes(int8(q)), bytes(q)], returnValue: "resultRows" }).map((r) => r[0]));
       agree += a.filter((id) => b.has(id)).length / a.length;
     }
-    return { rows: db.selectValue("SELECT count(*) FROM f"), pageSize: db.selectValue("PRAGMA page_size"), queryQuantization: quantize, floatKnnTop64: floatKnn, int8CoarseTop500: int8Knn, int8CoarseThenFloatRerankTop64: coarseRerank, top64AgreementWithFloat: agree / queries.length, memory: memory(), opfsBytes: await opfsBytes() };
+    return { rows: db.selectValue("SELECT count(*) FROM f"), pageSize: db.selectValue("PRAGMA page_size"), queryQuantization: quantize, floatKnnTop64: floatKnn, int8CoarseTop500: int8Knn, int8CoarseThenFloatRerankTop64: coarseRerank, top64AgreementWithFloat: agree / queries.length, sqliteVecBitKnn: vecBit, residentBits: { bytes: resident.rows * 48, loadMs, ...residentRun, exactTop64RecallInCandidates: residentAgreement, note: "pseudo-random vectors: recall here is a lower bound for sign-bit pre-filtering, not the judged quality (compressed.mjs)" }, memory: memory(), opfsBytes: await opfsBytes() };
   },
   /** Foreground queries interleaved with backfill batches: one batch insert,
    * then one coarse→rerank query, repeated; reports the query latency seen

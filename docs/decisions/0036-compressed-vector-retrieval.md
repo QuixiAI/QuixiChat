@@ -4,7 +4,11 @@ Date: 2026-09-12. Status: accepted as plan 22's representation decision from
 benchmark evidence and implemented in storage the same day (see
 "Implementation"). Amended the same day after the browser measurement (see
 "Browser measurement"): the coarse stage is **off by default** because it is
-slower than the exact float scan in the pinned sqlite-vec WASM build.
+slower than the exact float scan in the pinned sqlite-vec WASM build. Second
+amendment the same day ("Binary pre-filter measurement"): the coarse stage
+that beats the float scan is a **resident sign-bit index scanned in the
+Storage Worker** with a float32 rerank of 5,000 candidates; the int8 vec0
+projection is to be replaced by it in the next storage slice.
 
 ## Question
 
@@ -200,12 +204,78 @@ neighbours that it misses at 200–1000 (`compressed.mjs` needs those candidate
 counts added); the latency question is the Hamming KNN in the browser at
 100k/500k/1M with the harness's `QUIXI_KNN_*` options extended for it.
 
+## Binary pre-filter measurement (2026-09-12, second amendment)
+
+Two measurements, same day. Quality: `compressed.mjs` gained sign-bit
+pre-filtering with 2,000 / 5,000 / 10,000 / 20,000 candidates and a float32
+rerank (`binaryWide<k>_float32Rerank` in
+[compressed-report.json](../../perf/retrieval/compressed-report.json)).
+Latency: the browser harness gained sqlite-vec's own `bit[384]` KNN and a
+**resident sign-bit index** (48 bytes per vector, loaded from a plain table
+into worker memory, Hamming top-k with a bounded heap in JavaScript, then a
+float32 rerank through vec0 point lookups on a `chunk_size=16` float table);
+[browser-knn-100000-chunk16.json](../../perf/retrieval/browser-knn-100000-chunk16.json),
+[browser-knn-500000-chunk16.json](../../perf/retrieval/browser-knn-500000-chunk16.json).
+
+Judged quality (18 queries, real vectors plus real-distribution distractors):
+every binary-pre-filter pipeline with ≥ 2,000 candidates reproduces the float
+metrics (Recall@5 0.8426, Recall@10 0.8981, MRR 0.8611) at 100k, 500k and
+1M. Recall of the exact top-64 / top-100 chunks inside the candidate set:
+
+| Pool | 2,000 | 5,000 | 10,000 | 20,000 |
+| --- | --- | --- | --- | --- |
+| 100k | 0.918 / 0.875 | 0.977 / 0.959 | 0.989 / 0.978 | 0.999 / 0.997 |
+| 500k | 0.780 / 0.701 | 0.874 / 0.819 | 0.925 / 0.886 | 0.966 / 0.947 |
+| 1M | 0.718 / 0.614 | 0.819 / 0.747 | 0.879 / 0.824 | 0.924 / 0.886 |
+
+Browser latency (median of 36 queries; Chromium / WebKit):
+
+| Size | float32 KNN | sqlite-vec bit KNN k=500 / 4,000 | resident Hamming k=5,000 | + float rerank of 5,000 | + rerank of 2,000 / 20,000 |
+| --- | --- | --- | --- | --- | --- |
+| 100k | 49 / 48 ms | 34 / 50 · 72 / 104 ms | 3.7 / 4 ms | 43 / 44 ms | 20 / 20 · 146 / 150 ms |
+| 500k | 248 / 244 ms | 174 / 252 · 357 / 514 ms | 16 / 14 ms | 66 / 63 ms | 35 / 34 · 193 / 195 ms |
+
+Resident index: 4.8 MB at 100k, 24 MB at 500k (48 MB at 1M), loaded in
+73–91 ms (100k) and 364–455 ms (500k). Page reads per rerank ≈ 2.6 per
+candidate (chunk 16). sqlite-vec's bit KNN caps k near 4,096 in v0.1.9 and
+its cost grows with k, so it is not the pre-filter. On the pseudo-random
+browser vectors the exact top-64 recall at 5,000 candidates was 0.91 (100k)
+and 0.79 (500k), consistent with the judged corpus.
+
+Decision (amendment 2):
+
+1. **Coarse stage = resident sign-bit index scanned in the Storage Worker**,
+   not a vec0 KNN. It is the only measured stage faster than the float scan:
+   3.7× at 500k with 5,000 candidates and, by the linear costs measured, about
+   5× at 1M (≈ 35 ms Hamming + ≈ 55 ms rerank against ≈ 500 ms). It stays
+   inside the storage boundary (the worker owns SQLite and its own memory)
+   and its residency is bounded and stated: 48 bytes per vector.
+2. **Candidate set 5,000, float32 rerank.** Judged metrics equal float; exact
+   top-64 recall 0.82–0.98 depending on scale; the rerank cost (≈ 10 µs per
+   candidate through vec0 point lookups) is what caps the candidate count.
+   A plain rowid-keyed float blob table is the rerank source to measure
+   during implementation, since one B-tree page per lookup should halve it.
+3. **The int8 vec0 projection is replaced.** It is slower than the float scan
+   in every measured configuration; keeping it would cost 25% extra bytes for
+   nothing. The next storage slice moves the semantic namespace to version 3:
+   `quixi_semantic_bits(vector_id INTEGER PRIMARY KEY, bits BLOB)` written
+   with each publication, the float table rebuilt with `chunk_size=16` (or the
+   plain blob table), the same upgrade/backfill/mismatch lifecycle already
+   tested for the int8 projection, a resident index built lazily on first
+   query above the threshold and updated incrementally on publish/remove, and
+   `status.projection` reporting the representation `sign-bit-v1`.
+4. **Threshold near 100k vectors**: below it the float scan is as fast
+   (100k: 49 vs 43 ms), so exact retrieval stays the default for typical
+   archives and the resident index is not built.
+
 ## What remains before the semantic-scale gate
 
 - Measured above at 100k and 500k in Chromium and WebKit (latency, OPFS
-  pages, memory, backfill interleaving, quantization); 1M remains, and a
-  binary Hamming pre-filter is the candidate for a coarse stage that is
-  actually faster than the float scan.
+  pages, memory, backfill interleaving, quantization, sign-bit pre-filter);
+  1M in the browser remains (≈ 2 GB of OPFS per engine).
+- Implement amendment 2 in storage (namespace v3, resident sign-bit index,
+  5,000-candidate float rerank, threshold ≈ 100k) and measure the end-to-end
+  query path, then the filtered hybrid rerun.
 - Re-run the hybrid benchmark with RRF and source filters over the selected
   representation, and the chunk-size sweep from product §50, on a larger
   independently judged corpus before any broad quality claim.

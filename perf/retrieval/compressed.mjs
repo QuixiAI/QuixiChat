@@ -146,6 +146,8 @@ const report = {
   generator: GENERATOR, queries: queries.length, sizes: {},
 };
 const REPS = 3, CANDIDATES = [200, 500, 1000];
+/** Binary as a pre-filter (ADR 0036 amendment 2): candidate sets in the thousands, then float32 rerank. */
+const WIDE_CANDIDATES = [2000, 5000, 10000, 20000], WIDE_MAX = Math.max(...WIDE_CANDIDATES);
 for (const size of sizes) {
   console.error(`pool ${size}`);
   const pool = buildPool(size);
@@ -158,6 +160,9 @@ for (const size of sizes) {
   for (const k of CANDIDATES) { rankings[`binary${k}float`] = {}; rankings[`binary${k}int8`] = {}; rankings[`int8${k}float`] = {}; rankings[`int8g${k}float`] = {}; }
   const coarseOverlap = { binary: { 100: [], 500: [] }, int8: { 100: [], 500: [] }, int8Global: { 100: [], 500: [] }, int8Fixed: { 100: [], 500: [] } };
   rankings.int8Fixed500float = {};
+  for (const k of WIDE_CANDIDATES) rankings[`binaryWide${k}float`] = {};
+  const wideOverlap = Object.fromEntries(WIDE_CANDIDATES.map((k) => [k, { 64: [], 100: [], 500: [] }]));
+  const wideLatency = { coarse: [], rerank: Object.fromEntries(WIDE_CANDIDATES.map((k) => [k, []])) };
   for (let rep = 0; rep < REPS; rep++) for (const [row, query] of queries.entries()) {
     const qv = queryVectors[row], qi = queryInt8(qv), qb = queryBits(qv);
     let t = performance.now(); for (let n = 0; n < size; n++) scoresFloat[n] = dotFloat(pool, n, qv); const exact = topK(scoresFloat, 1000); lat.float.push(performance.now() - t);
@@ -166,6 +171,11 @@ for (const size of sizes) {
     t = performance.now(); for (let n = 0; n < size; n++) distances[n] = -hamming(bits, n, qb); const binaryRank = topK(distances, 1000); lat.binaryCoarse.push(performance.now() - t);
     const qf = Int8Array.from(qv, (value) => Math.max(-127, Math.min(127, Math.round(value / FIXED_SCALE))));
     for (let n = 0; n < size; n++) scoresInt[n] = dotInt8(int8f.q, n, qf); const int8fRank = topK(scoresInt, 1000);
+    t = performance.now(); const binaryWide = topK(distances, WIDE_MAX); wideLatency.coarse.push(performance.now() - t);
+    for (const k of WIDE_CANDIDATES) {
+      t = performance.now(); const wide = binaryWide.slice(0, k).map((n) => [n, dotFloat(pool, n, qv)]).sort((a, b) => b[1] - a[1] || a[0] - b[0]).map(([n]) => n); wideLatency.rerank[k].push(performance.now() - t);
+      if (rep === 0) { rankings[`binaryWide${k}float`][query.id] = collapse(wide); for (const top of [64, 100, 500]) wideOverlap[k][top].push(overlap(binaryWide.slice(0, k), exact, top)); }
+    }
     if (rep === 0) {
       exactRanks[query.id] = exact; exactChunkTop[query.id] = exact;
       rankings.float[query.id] = collapse(exact); rankings.int8[query.id] = collapse(int8Rank); rankings.int8Global[query.id] = collapse(int8gRank); rankings.binaryCoarse[query.id] = collapse(binaryRank); rankings.int8Coarse[query.id] = collapse(int8Rank);
@@ -194,6 +204,8 @@ for (const size of sizes) {
     result.pipelines[`int8Coarse${k}_float32Rerank`] = { judged: judged(rankings[`int8${k}float`]) };
     result.pipelines[`int8GlobalCoarse${k}_float32Rerank`] = { judged: judged(rankings[`int8g${k}float`]) };
   }
+  for (const k of WIDE_CANDIDATES) result.pipelines[`binaryWide${k}_float32Rerank`] = { judged: judged(rankings[`binaryWide${k}float`]), candidateRecallOfExactChunks: Object.fromEntries([64, 100, 500].map((top) => [top, wideOverlap[k][top].reduce((a, b) => a + b, 0) / queries.length])), rerankLatency: timing(wideLatency.rerank[k]) };
+  result.pipelines.binaryWideCoarse = { latency: timing(wideLatency.coarse), note: `sign-bit Hamming scan keeping the top ${WIDE_MAX}` };
   report.sizes[size] = result;
   console.error(JSON.stringify({ size, float: result.pipelines.float32FullScan.judged, int8: result.pipelines.int8FullScan.judged, binaryCoarse: result.pipelines.binaryCoarse, b500f: result.pipelines.binaryCoarse500_float32Rerank.judged, b1000f: result.pipelines.binaryCoarse1000_float32Rerank.judged, latency: { float: result.pipelines.float32FullScan.latency, int8: result.pipelines.int8FullScan.latency, binary: result.pipelines.binaryCoarse.latency } }));
   await writeFile(resolve(here, "compressed-report.json"), JSON.stringify(report, null, 2) + "\n");
