@@ -122,6 +122,18 @@ self.onmessage = async (event: MessageEvent<{ operation: string; archiveId: stri
           db.exec("UPDATE quixi_search_schema SET checksum='0000000000000000000000000000000000000000000000000000000000000000' WHERE version=1");
           return { fault: operation };
         }
+        if (operation === 'doctor-faults') {
+          const db = (database as unknown as { db: CanonicalSqlite }).db, at = Date.now();
+          const threadId = String(rows(db, "SELECT id FROM quixi_records WHERE collection='threads' ORDER BY rowid LIMIT 1")[0]!.id);
+          const messageId = String(rows(db, "SELECT id FROM quixi_records WHERE collection='messages' ORDER BY rowid LIMIT 1")[0]!.id);
+          const orphan = id(), provenanceId = id();
+          db.exec({ sql: "INSERT INTO quixi_records(collection,id,payload) VALUES('messages',?,?)", bind: [orphan, JSON.stringify({ id: orphan, threadId, parentId: id(), role: 'user', createdAt: at, recordedAt: at, generationId: null, editedFromMessageId: null, partCount: 0, sealed: true })] });
+          const overcounted = id();
+          db.exec({ sql: "INSERT INTO quixi_records(collection,id,payload) VALUES('messages',?,?)", bind: [overcounted, JSON.stringify({ id: overcounted, threadId, parentId: messageId, role: 'user', createdAt: at, recordedAt: at, generationId: null, editedFromMessageId: null, partCount: 4, sealed: true })] });
+          db.exec({ sql: "INSERT INTO quixi_records(collection,id,payload) VALUES('provenance',?,?)", bind: [provenanceId, JSON.stringify({ id: provenanceId, entityKind: 'message', entityId: messageId, importSourceId: id(), rawObjectId: null, locator: null, sourceCreatedAtText: null, compatibility: [] })] });
+          db.exec({ sql: "INSERT INTO quixi_sync_ops(operation_id,kind,recorded_at,identity,payload,affects,result) VALUES(?,?,?,?,?,?,?)", bind: [id(), 'SetTitle', at, 'fixture', '{}', JSON.stringify([{ kind: 'message', id: id() }]), '{}'] });
+          return { fault: operation };
+        }
         if (operation === 'corrupt-database') {
           const db = (database as unknown as { db: CanonicalSqlite }).db;
           db.exec('CREATE INDEX quixi_fixture_damage ON quixi_records(collection)');

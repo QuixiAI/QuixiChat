@@ -46,5 +46,9 @@ export const corruptBlobInventoryReference = (archiveId: string) => fixtureCall<
  * and removes only its sqlite_master row through writable_schema, leaving its
  * b-tree pages allocated but unreferenced, which SQLite's integrity_check
  * reports as pages that are never used (real file-level corruption). */
-export type BlobInventoryFault = 'derived-failure' | 'corrupt-database';
+/** `doctor-faults` plants branch, provenance and sync-coverage damage as raw
+ * rows: a message with a missing parent, a message whose part count differs
+ * from its parts, a provenance row for a missing import source, and a sync
+ * operation whose affects name a missing record. */
+export type BlobInventoryFault = 'derived-failure' | 'corrupt-database' | 'doctor-faults';
 export const injectBlobInventoryFault = (archiveId: string, fault: BlobInventoryFault) => fixtureCall<{ fault: BlobInventoryFault }>(fault, archiveId);

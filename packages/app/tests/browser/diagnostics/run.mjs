@@ -12,7 +12,7 @@ let server;
 const save = async () => { await mkdir('test-results', { recursive: true }); await writeFile('test-results/app-storage-health-browser.json', JSON.stringify(proof, null, 2) + '\n'); };
 const sourceFiles = [
   'packages/app/src/AppRoot.tsx', 'packages/app/src/features/diagnostics/controller.ts', 'packages/app/src/features/diagnostics/StorageHealthPanel.tsx', 'packages/app/src/features/diagnostics/diagnostics.css',
-  'packages/app/src/features/diagnostics/report-controller.ts', 'packages/app/src/features/diagnostics/DiagnosticsPanel.tsx', 'packages/app/src/features/diagnostics/export.ts', 'packages/core/src/contracts/diagnostics.ts', 'packages/storage/src/worker/diagnostics.ts',
+  'packages/app/src/features/diagnostics/report-controller.ts', 'packages/app/src/features/diagnostics/DiagnosticsPanel.tsx', 'packages/app/src/features/diagnostics/export.ts', 'packages/app/src/features/diagnostics/DoctorAuditPanel.tsx', 'packages/core/src/contracts/doctor-audit.ts', 'packages/storage/src/worker/doctor-audit.ts', 'packages/core/src/contracts/diagnostics.ts', 'packages/storage/src/worker/diagnostics.ts',
   'packages/app/tests/browser/diagnostics/index.ts', 'packages/app/tests/browser/diagnostics/index.html', 'packages/app/tests/browser/diagnostics/run.mjs',
   'packages/core/src/contracts/blob-inventory.ts', 'packages/core/src/contracts/storage.ts', 'packages/storage/tests/blob-inventory/fixture.ts', 'packages/storage/tests/blob-inventory/fixture-worker.ts',
   'packages/storage/tests/isolated-client.ts', 'packages/storage/tests/isolated-worker.ts', 'packages/storage/src/worker/archive-runtime.ts', 'packages/storage/src/worker/archive-database.ts',
@@ -138,11 +138,33 @@ try {
       const corruptReport = await page.evaluate(() => window.storageHealthAcceptance.report());
       evidence.diagnostics.corrupt = corruptReport.checks.find(check => check.id === 'sqlite_integrity').measured;
       evidence.checks.push(`Unreferenced b-tree pages make SQLite integrity report Corruption detected (${evidence.diagnostics.corrupt.errors} integrity messages) in the same report that keeps the schema OK, the search index OK and attachment references Missing data`);
+      // Product §101 Doctor audit: clean on the seeded archive, then planted branch, provenance and sync damage found by kind.
+      const audit = page.getByRole('region', { name: 'Doctor audit', exact: true });
+      const auditComplete = async () => { await expect(audit.getByTestId('doctor-audit-status')).toContainText('Audit complete.', { timeout: 30000 }); };
+      await audit.getByRole('button', { name: 'Start Doctor audit', exact: true }).click(); await auditComplete();
+      await expect(audit.getByTestId('doctor-audit-clean')).toBeVisible();
+      const cleanRecords = Number((await audit.getByTestId('doctor-audit-records').textContent()).replaceAll(',', ''));
+      expect(cleanRecords).toBeGreaterThanOrEqual(4);
+      expect(await audit.getByRole('button').allTextContents()).toEqual(['Start a new audit']);
+      evidence.checks.push(`the Doctor audit walks ${cleanRecords} saved records and every recorded operation of the seeded archive in bounded steps and reports no branch, provenance or sync-coverage finding, with no repair or deletion control`);
       const afterDiagnostics = await page.evaluate(() => window.storageHealthAcceptance.fingerprint());
       const compared = ['canonicalSha256', 'operationsSha256', 'blobOperationsSha256', 'blobCatalogSha256', 'blobTransfersSha256', 'blobsSha256', 'canonicalRecords', 'syncOperations', 'physicalFiles'];
       for (const key of compared) expect({ key, value: afterDiagnostics[key] }).toEqual({ key, value: baseline[key] });
       evidence.afterDiagnostics = afterDiagnostics;
       evidence.checks.push('After diagnostics, the search rebuild, the semantic delete and both faults, canonical rows, sync/blob operation records, the blob catalog and transfers and every stored file byte match the baseline');
+      // Planted damage (raw rows the commit path refuses) is found by kind; findings show managed ids only.
+      await page.evaluate(() => window.storageHealthAcceptance.fault('doctor-faults'));
+      await open(true); await page.getByRole('button', { name: 'Storage health', exact: true }).click();
+      await audit.getByRole('button', { name: 'Start Doctor audit', exact: true }).click(); await auditComplete();
+      const auditCounts = Object.fromEntries(await audit.locator('.storage-health-counts div[data-kind]').evaluateAll(nodes => nodes.map(node => [node.dataset.kind, Number(node.querySelector('dd').textContent.replaceAll(',', ''))])));
+      expect(auditCounts).toEqual({ missing_parent: 1, part_count_mismatch: 1, missing_import_source: 1, sync_affects_missing: 1 });
+      await expect(audit.getByRole('list', { name: 'Audit findings', exact: true }).getByRole('listitem')).toHaveCount(4);
+      const auditText = await audit.innerText();
+      for (const secret of ['Synthetic inventory notebook', 'synthetic-', 'Original bytes']) expect(auditText).not.toContain(secret);
+      expect(auditText).toMatch(/messages\/[0-9a-f-]{36}/);
+      expect(await audit.getByRole('button').allTextContents()).toEqual(['Start a new audit', 'First findings', 'Next findings']);
+      evidence.doctorAudit = { clean: { records: cleanRecords }, planted: auditCounts };
+      evidence.checks.push('after planting a message with a missing parent, a message whose part count differs from its parts, a provenance row for a missing import source and a sync operation naming a missing record, the Doctor audit reports exactly those four findings by kind with record identifiers and no titles or content, and offers no repair');
       await page.evaluate(() => window.storageHealthAcceptance.cleanup());
       await open(); await page.getByRole('button', { name: 'Storage health', exact: true }).click(); await panel(page).getByRole('button', { name: 'Start storage scan', exact: true }).click(); await complete(page);
       await page.getByRole('button', { name: 'New conversation', exact: true }).click(); await expect(page.getByLabel('Message', { exact: true })).toBeVisible();

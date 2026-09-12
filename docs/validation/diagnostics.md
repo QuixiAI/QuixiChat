@@ -109,6 +109,26 @@ equal the self-test's and that the seeded conversation text is absent.
 Headless engines cancel the native save picker, so the proofs disable it and
 take the download path, as the shared-app proof does.
 
+## Doctor audit: branches, provenance, sync coverage (product §101)
+
+**Scan (Node, real SQLite WASM)** — `npm run test:storage:diagnostics` also
+runs `packages/storage/tests/diagnostics/doctor-audit.test.ts` (4 tests): a
+committed archive audits clean across every phase in bounded advances; ten
+branch faults planted as raw rows (the commit path and the immutability
+triggers refuse them as mutations) are each found by kind with record ids,
+declared/found counts and no text; provenance and sync faults likewise; a
+completed audit turns stale on the next canonical row; cancellation, foreign
+scan ids, bad cursors and a closed owner are refused plainly.
+
+**Application (Chromium and WebKit)** — the storage-health proof (15 checks
+per engine, [retained](results/blob-inventory-ui-macos.json)): the seeded
+archive audits clean (records and operations counted, no repair or deletion
+control); after the fixture plants a message with a missing parent, a message
+whose part count differs from its parts, a provenance row for a missing
+import source and a sync operation naming a missing record, the audit reports
+exactly those four kinds with `collection/id` identifiers and none of the
+fixture's titles, filenames or content.
+
 ## Limits
 
 - The reference check is bounded (newest 4,096 referencing records, first 64
@@ -122,6 +142,10 @@ take the download path, as the shared-app proof does.
   not by this report.
 - Semantic rebuild (re-embedding) is exercised by the semantic proof, not
   here; on this fixture host it is disabled because no model is provided.
+- The Doctor audit does not read blob bytes; the blob-hash audit (verifying
+  every stored file against its digest) is still open. Cycle detection in
+  parent chains is not attempted; a self-parent is found, a longer cycle is
+  not.
 - The inference self-test
   proves the routes present on the two Playwright engines; hardware WebGPU
   adapters on other machines remain plan 19/21/24 gates.

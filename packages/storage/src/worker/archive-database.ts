@@ -14,6 +14,7 @@ import type {
 import type { ContentPart, JsonValue } from "@quixi/core/model";
 import { BlobCatalog } from "./blob-catalog.ts";
 import { BlobInventoryRepository } from './blob-inventory.ts';
+import { DoctorAuditRepository } from './doctor-audit.ts';
 import { OpfsBlobStore, BlobStorageError } from "./blobs.ts";
 import { CanonicalRepository } from "./canonical/index.ts";
 import type { CanonicalSqlite } from "./canonical/index.ts";
@@ -142,6 +143,7 @@ export class ArchiveDatabase {
   private extractionFailure: unknown;
   private search: SearchRepository | undefined;
   private inventory: BlobInventoryRepository | undefined;
+  private doctor: DoctorAuditRepository | undefined;
   private searchFailure: unknown;
   private readonly tokenizerFailure: unknown;
   private readonly schemaVersion: number;
@@ -318,6 +320,7 @@ export class ArchiveDatabase {
   async close(mode: 'cleanup' | 'handles' = 'cleanup'): Promise<void> {
     try {
       await this.inventory?.close();
+      this.doctor?.close();
       if (mode === 'handles') this.search?.abandon();
       else await this.search?.close();
     } finally {
@@ -504,6 +507,16 @@ export class ArchiveDatabase {
           "Operation identity belongs to a different storage journal",
         );
     switch (request.operation) {
+      case 'beginDoctorAudit':
+        this.doctor ??= new DoctorAuditRepository(this.db);
+        return this.doctor.begin(request.args.scanId);
+      case 'advanceDoctorAudit': case 'doctorAuditStatus': case 'readDoctorAuditFindings': case 'cancelDoctorAudit': {
+        if (!this.doctor) throw new BlobStorageError('NOT_FOUND', 'Doctor audit belongs to a previous storage owner; start a new audit.');
+        if (request.operation === 'advanceDoctorAudit') return this.doctor.advance(request.args.scanId, request.args.maxItems, signal);
+        if (request.operation === 'doctorAuditStatus') return this.doctor.status(request.args.scanId);
+        if (request.operation === 'readDoctorAuditFindings') return this.doctor.findings(request.args.scanId, request.args.page);
+        return this.doctor.cancel(request.args.scanId);
+      }
       case 'beginBlobInventory':
         this.inventory ??= new BlobInventoryRepository(this.db, this.blobs);
         return this.inventory.begin(request.args.scanId);

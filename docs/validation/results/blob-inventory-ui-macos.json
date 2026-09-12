@@ -1,6 +1,6 @@
 {
   "status": "passed",
-  "startedAt": "2026-09-12T20:30:48.454Z",
+  "startedAt": "2026-09-12T20:40:36.562Z",
   "selectedEngines": [
     "chromium",
     "webkit"
@@ -24,11 +24,13 @@
         "Long managed digests wrap within the narrow layout without horizontal page overflow",
         "Real scan, cancellation and pagination leave canonical rows, sync/blob operation records and every original/staged/unrecognized fixture byte unchanged",
         "Run diagnostics reports the seeded archive: SQLite integrity, schema, FTS5, sqlite-vec, ownership and both derived indexes OK and attachment references Missing data (1 referenced files absent, 1 without metadata among 102 references); the report carries no filenames, content or private names",
-        "Save diagnostics report writes the shown report through the host save flow as quixi-diagnostics-2026-09-12T20-30-50.json (3858 bytes) with only the allow-listed sections, the storage checks equal to the panel, the inference section absent with a reason, and none of the fixture's private names or content",
+        "Save diagnostics report writes the shown report through the host save flow as quixi-diagnostics-2026-09-12T20-40-38.json (3858 bytes) with only the allow-listed sections, the storage checks equal to the panel, the inference section absent with a reason, and none of the fixture's private names or content",
         "A derived search-ledger fault makes the next owner report both derived indexes as Rebuildable derived index while SQLite integrity and schema stay OK; Rebuild search index repairs it from Storage health, the index returns to ready and canonical record and sync-operation counts are unchanged",
         "Delete semantic index and Rebuild semantic index stand beside Rebuild search index as distinct actions; delete completes with a notice and the report, and rebuild is disabled with its reason on a host without the embedding model",
         "Unreferenced b-tree pages make SQLite integrity report Corruption detected (1 integrity messages) in the same report that keeps the schema OK, the search index OK and attachment references Missing data",
+        "the Doctor audit walks 4 saved records and every recorded operation of the seeded archive in bounded steps and reports no branch, provenance or sync-coverage finding, with no repair or deletion control",
         "After diagnostics, the search rebuild, the semantic delete and both faults, canonical rows, sync/blob operation records, the blob catalog and transfers and every stored file byte match the baseline",
+        "after planting a message with a missing parent, a message whose part count differs from its parts, a provenance row for a missing import source and a sync operation naming a missing record, the Doctor audit reports exactly those four findings by kind with record identifiers and no titles or content, and offers no repair",
         "A real canonical change immediately hides stale findings; replacing the real storage owner also discards unavailable results and both require an explicit successful new scan"
       ],
       "requestBounds": {
@@ -39,12 +41,12 @@
         "maxPageBytes": 16384
       },
       "baseline": {
-        "canonicalSha256": "90a0191e6c2e0759f8c03e88738eb696eeba84d030f9c122f9660136e5af7445",
-        "operationsSha256": "901c90070ad326c91eaf1c70e383c95d74ef19f08352d54161abd3fcf2e45991",
-        "blobOperationsSha256": "c026a76c820a59afae22ddd5b535c834e6bf521889db7722e68c7af0fa4f786a",
+        "canonicalSha256": "fccf338786c4e6df4cd76fffcc3a8ae618467bd762ca52b98da0f5383137e9d4",
+        "operationsSha256": "d3fae4eb88c8798c4e08ba4b412981fd97e0d0775baef2abd91951a263fcbed8",
+        "blobOperationsSha256": "f1c0e15ce674458e61d19d3395e93cef6878262e2af7730e80ca86ad976364e0",
         "blobCatalogSha256": "5155ee5f09fdeb05a961b57e53bf52885120709f7a16bc81d2395f0f13e05106",
-        "blobTransfersSha256": "287d9a3ac20961eb6efc9bee5e09f43f2156a0b3116b3839d1febbd49656382e",
-        "blobsSha256": "69c3f5dacb0d690ed1fbbaa9ef46caf86f13ff3dd315ed682bef80c6d5da665c",
+        "blobTransfersSha256": "eec94582b07a3ef2123a53fead7fadaf39913543f5785d9991953ac24ae7c7a2",
+        "blobsSha256": "be0da2fcf242b92bb93a7abf9f0d455df8450fcdc8a3488ec3a3f85abf7e53e7",
         "canonicalRecords": 106,
         "syncOperations": 103,
         "physicalFiles": 112,
@@ -52,12 +54,12 @@
         "sqliteTemporaryCacheKiB": -1024
       },
       "after": {
-        "canonicalSha256": "90a0191e6c2e0759f8c03e88738eb696eeba84d030f9c122f9660136e5af7445",
-        "operationsSha256": "901c90070ad326c91eaf1c70e383c95d74ef19f08352d54161abd3fcf2e45991",
-        "blobOperationsSha256": "c026a76c820a59afae22ddd5b535c834e6bf521889db7722e68c7af0fa4f786a",
+        "canonicalSha256": "fccf338786c4e6df4cd76fffcc3a8ae618467bd762ca52b98da0f5383137e9d4",
+        "operationsSha256": "d3fae4eb88c8798c4e08ba4b412981fd97e0d0775baef2abd91951a263fcbed8",
+        "blobOperationsSha256": "f1c0e15ce674458e61d19d3395e93cef6878262e2af7730e80ca86ad976364e0",
         "blobCatalogSha256": "5155ee5f09fdeb05a961b57e53bf52885120709f7a16bc81d2395f0f13e05106",
-        "blobTransfersSha256": "287d9a3ac20961eb6efc9bee5e09f43f2156a0b3116b3839d1febbd49656382e",
-        "blobsSha256": "69c3f5dacb0d690ed1fbbaa9ef46caf86f13ff3dd315ed682bef80c6d5da665c",
+        "blobTransfersSha256": "eec94582b07a3ef2123a53fead7fadaf39913543f5785d9991953ac24ae7c7a2",
+        "blobsSha256": "be0da2fcf242b92bb93a7abf9f0d455df8450fcdc8a3488ec3a3f85abf7e53e7",
         "canonicalRecords": 106,
         "syncOperations": 103,
         "physicalFiles": 112,
@@ -91,8 +93,8 @@
         },
         "persistence": {
           "persisted": false,
-          "usage": 11097970,
-          "quota": 10748516210
+          "usage": 11097978,
+          "quota": 10748516218
         },
         "sqliteVersion": "3.53.4",
         "schemaVersion": 12,
@@ -124,7 +126,7 @@
         }
       },
       "savedReport": {
-        "name": "quixi-diagnostics-2026-09-12T20-30-50.json",
+        "name": "quixi-diagnostics-2026-09-12T20-40-38.json",
         "bytes": 3858,
         "keys": [
           "format",
@@ -138,17 +140,28 @@
         ]
       },
       "afterDiagnostics": {
-        "canonicalSha256": "90a0191e6c2e0759f8c03e88738eb696eeba84d030f9c122f9660136e5af7445",
-        "operationsSha256": "901c90070ad326c91eaf1c70e383c95d74ef19f08352d54161abd3fcf2e45991",
-        "blobOperationsSha256": "c026a76c820a59afae22ddd5b535c834e6bf521889db7722e68c7af0fa4f786a",
+        "canonicalSha256": "fccf338786c4e6df4cd76fffcc3a8ae618467bd762ca52b98da0f5383137e9d4",
+        "operationsSha256": "d3fae4eb88c8798c4e08ba4b412981fd97e0d0775baef2abd91951a263fcbed8",
+        "blobOperationsSha256": "f1c0e15ce674458e61d19d3395e93cef6878262e2af7730e80ca86ad976364e0",
         "blobCatalogSha256": "5155ee5f09fdeb05a961b57e53bf52885120709f7a16bc81d2395f0f13e05106",
-        "blobTransfersSha256": "287d9a3ac20961eb6efc9bee5e09f43f2156a0b3116b3839d1febbd49656382e",
-        "blobsSha256": "69c3f5dacb0d690ed1fbbaa9ef46caf86f13ff3dd315ed682bef80c6d5da665c",
+        "blobTransfersSha256": "eec94582b07a3ef2123a53fead7fadaf39913543f5785d9991953ac24ae7c7a2",
+        "blobsSha256": "be0da2fcf242b92bb93a7abf9f0d455df8450fcdc8a3488ec3a3f85abf7e53e7",
         "canonicalRecords": 106,
         "syncOperations": 103,
         "physicalFiles": 112,
         "sqliteTemporaryStore": 1,
         "sqliteTemporaryCacheKiB": -1024
+      },
+      "doctorAudit": {
+        "clean": {
+          "records": 4
+        },
+        "planted": {
+          "missing_parent": 1,
+          "part_count_mismatch": 1,
+          "missing_import_source": 1,
+          "sync_affects_missing": 1
+        }
       }
     },
     {
@@ -162,11 +175,13 @@
         "Long managed digests wrap within the narrow layout without horizontal page overflow",
         "Real scan, cancellation and pagination leave canonical rows, sync/blob operation records and every original/staged/unrecognized fixture byte unchanged",
         "Run diagnostics reports the seeded archive: SQLite integrity, schema, FTS5, sqlite-vec, ownership and both derived indexes OK and attachment references Missing data (1 referenced files absent, 1 without metadata among 102 references); the report carries no filenames, content or private names",
-        "Save diagnostics report writes the shown report through the host save flow as quixi-diagnostics-2026-09-12T20-30-56.json (3847 bytes) with only the allow-listed sections, the storage checks equal to the panel, the inference section absent with a reason, and none of the fixture's private names or content",
+        "Save diagnostics report writes the shown report through the host save flow as quixi-diagnostics-2026-09-12T20-40-45.json (3847 bytes) with only the allow-listed sections, the storage checks equal to the panel, the inference section absent with a reason, and none of the fixture's private names or content",
         "A derived search-ledger fault makes the next owner report both derived indexes as Rebuildable derived index while SQLite integrity and schema stay OK; Rebuild search index repairs it from Storage health, the index returns to ready and canonical record and sync-operation counts are unchanged",
         "Delete semantic index and Rebuild semantic index stand beside Rebuild search index as distinct actions; delete completes with a notice and the report, and rebuild is disabled with its reason on a host without the embedding model",
         "Unreferenced b-tree pages make SQLite integrity report Corruption detected (1 integrity messages) in the same report that keeps the schema OK, the search index OK and attachment references Missing data",
+        "the Doctor audit walks 4 saved records and every recorded operation of the seeded archive in bounded steps and reports no branch, provenance or sync-coverage finding, with no repair or deletion control",
         "After diagnostics, the search rebuild, the semantic delete and both faults, canonical rows, sync/blob operation records, the blob catalog and transfers and every stored file byte match the baseline",
+        "after planting a message with a missing parent, a message whose part count differs from its parts, a provenance row for a missing import source and a sync operation naming a missing record, the Doctor audit reports exactly those four findings by kind with record identifiers and no titles or content, and offers no repair",
         "A real canonical change immediately hides stale findings; replacing the real storage owner also discards unavailable results and both require an explicit successful new scan"
       ],
       "requestBounds": {
@@ -177,12 +192,12 @@
         "maxPageBytes": 16384
       },
       "baseline": {
-        "canonicalSha256": "fb37d72f3133a90319ddd44e1cd4e433e67f6563757042bfc97974d97663884b",
-        "operationsSha256": "50812d138a36a87d38be2f3c6eddb47dd288ea23ce7d2e983943f45dcd3ca532",
-        "blobOperationsSha256": "e8a3952c93dd6b6cae83ffbad3d4397e1478337f02ffae21ce6c613d72fbc8af",
+        "canonicalSha256": "9a581f7141959a6762042689fd625295fd23aafea51a79751ebe65f7054399d2",
+        "operationsSha256": "a6b2e90ccbae77a28f8386dd8e520e880be3848b314791da20d00870cf362295",
+        "blobOperationsSha256": "d8c3c12cc7e4905fb6b61e8b4ce8b2bd9c52468d13b45db6a318345dc785aca6",
         "blobCatalogSha256": "5155ee5f09fdeb05a961b57e53bf52885120709f7a16bc81d2395f0f13e05106",
-        "blobTransfersSha256": "e651b52532f9de7fc9bcb444dcc6e653a0a2c17e6d336f8d3dd1bce313f6c497",
-        "blobsSha256": "f5cbecae631a03193a96d4f305f55e221ec15d932b28dfecd8a73ce236e79a04",
+        "blobTransfersSha256": "05417ffd59792d2f5ab6697a5204a7ab76c5e94bdfd94efd89d0236ccac80718",
+        "blobsSha256": "3579e7eb68791d62ccdb0337969c0323bb02c189341767ef81a27796ba45f4a7",
         "canonicalRecords": 106,
         "syncOperations": 103,
         "physicalFiles": 112,
@@ -190,12 +205,12 @@
         "sqliteTemporaryCacheKiB": -1024
       },
       "after": {
-        "canonicalSha256": "fb37d72f3133a90319ddd44e1cd4e433e67f6563757042bfc97974d97663884b",
-        "operationsSha256": "50812d138a36a87d38be2f3c6eddb47dd288ea23ce7d2e983943f45dcd3ca532",
-        "blobOperationsSha256": "e8a3952c93dd6b6cae83ffbad3d4397e1478337f02ffae21ce6c613d72fbc8af",
+        "canonicalSha256": "9a581f7141959a6762042689fd625295fd23aafea51a79751ebe65f7054399d2",
+        "operationsSha256": "a6b2e90ccbae77a28f8386dd8e520e880be3848b314791da20d00870cf362295",
+        "blobOperationsSha256": "d8c3c12cc7e4905fb6b61e8b4ce8b2bd9c52468d13b45db6a318345dc785aca6",
         "blobCatalogSha256": "5155ee5f09fdeb05a961b57e53bf52885120709f7a16bc81d2395f0f13e05106",
-        "blobTransfersSha256": "e651b52532f9de7fc9bcb444dcc6e653a0a2c17e6d336f8d3dd1bce313f6c497",
-        "blobsSha256": "f5cbecae631a03193a96d4f305f55e221ec15d932b28dfecd8a73ce236e79a04",
+        "blobTransfersSha256": "05417ffd59792d2f5ab6697a5204a7ab76c5e94bdfd94efd89d0236ccac80718",
+        "blobsSha256": "3579e7eb68791d62ccdb0337969c0323bb02c189341767ef81a27796ba45f4a7",
         "canonicalRecords": 106,
         "syncOperations": 103,
         "physicalFiles": 112,
@@ -229,7 +244,7 @@
         },
         "persistence": {
           "persisted": false,
-          "usage": 283412271,
+          "usage": 286445404,
           "quota": 20615843021
         },
         "sqliteVersion": "3.53.4",
@@ -262,7 +277,7 @@
         }
       },
       "savedReport": {
-        "name": "quixi-diagnostics-2026-09-12T20-30-56.json",
+        "name": "quixi-diagnostics-2026-09-12T20-40-45.json",
         "bytes": 3847,
         "keys": [
           "format",
@@ -276,41 +291,55 @@
         ]
       },
       "afterDiagnostics": {
-        "canonicalSha256": "fb37d72f3133a90319ddd44e1cd4e433e67f6563757042bfc97974d97663884b",
-        "operationsSha256": "50812d138a36a87d38be2f3c6eddb47dd288ea23ce7d2e983943f45dcd3ca532",
-        "blobOperationsSha256": "e8a3952c93dd6b6cae83ffbad3d4397e1478337f02ffae21ce6c613d72fbc8af",
+        "canonicalSha256": "9a581f7141959a6762042689fd625295fd23aafea51a79751ebe65f7054399d2",
+        "operationsSha256": "a6b2e90ccbae77a28f8386dd8e520e880be3848b314791da20d00870cf362295",
+        "blobOperationsSha256": "d8c3c12cc7e4905fb6b61e8b4ce8b2bd9c52468d13b45db6a318345dc785aca6",
         "blobCatalogSha256": "5155ee5f09fdeb05a961b57e53bf52885120709f7a16bc81d2395f0f13e05106",
-        "blobTransfersSha256": "e651b52532f9de7fc9bcb444dcc6e653a0a2c17e6d336f8d3dd1bce313f6c497",
-        "blobsSha256": "f5cbecae631a03193a96d4f305f55e221ec15d932b28dfecd8a73ce236e79a04",
+        "blobTransfersSha256": "05417ffd59792d2f5ab6697a5204a7ab76c5e94bdfd94efd89d0236ccac80718",
+        "blobsSha256": "3579e7eb68791d62ccdb0337969c0323bb02c189341767ef81a27796ba45f4a7",
         "canonicalRecords": 106,
         "syncOperations": 103,
         "physicalFiles": 112,
         "sqliteTemporaryStore": 1,
         "sqliteTemporaryCacheKiB": -1024
+      },
+      "doctorAudit": {
+        "clean": {
+          "records": 4
+        },
+        "planted": {
+          "missing_parent": 1,
+          "part_count_mismatch": 1,
+          "missing_import_source": 1,
+          "sync_affects_missing": 1
+        }
       }
     }
   ],
   "sourceSha256": {
-    "packages/app/src/AppRoot.tsx": "93e7dc8c9fe53d6bc85abf2b3667f558f8623e0a8521412a19e7e90c82df15c8",
-    "packages/app/src/features/diagnostics/controller.ts": "b1e1e57b6f21b2c1f533df584c72b6e858a8f7d5319eab65fc09a679a7154165",
+    "packages/app/src/AppRoot.tsx": "4c289bfc31a13c5dba256390cb6227669a8176ee51da4e42585dbd23af9ca99f",
+    "packages/app/src/features/diagnostics/controller.ts": "78ce41cb3230f3eadca3e18c2c525b2a3b71816001ce1ae1f2f3c5cefdb644d4",
     "packages/app/src/features/diagnostics/StorageHealthPanel.tsx": "25252c7c0c105425bef82ee99f5592fda31319138bab5d4cb2d84452baf26509",
     "packages/app/src/features/diagnostics/diagnostics.css": "6b199c764a500bafa1bb1c71a87eacea691655208cb540b9ff1208f40ef3cee4",
     "packages/app/src/features/diagnostics/report-controller.ts": "498f66810d7e5d1135aebd1873ba494bb59744202b33ebdd02779e53f6c8bdfb",
     "packages/app/src/features/diagnostics/DiagnosticsPanel.tsx": "8ebe179661b7c28604f9c1aadd326203295c06f0a6d4586891d9a8b691f9f50d",
     "packages/app/src/features/diagnostics/export.ts": "da5b4c0443ef917b544c3e5a4ca06125108da94210d53b72a62d321af4472e88",
+    "packages/app/src/features/diagnostics/DoctorAuditPanel.tsx": "bf6a71ac34c5d301374d211165adeb19eea9cfd38f217eed7d29ec9ab58ef3e5",
+    "packages/core/src/contracts/doctor-audit.ts": "71d8fc15a5f85b78d9679a354e70b7928c14233cd3ed01f7f90e325011e8b7d8",
+    "packages/storage/src/worker/doctor-audit.ts": "1fa3688c7d7291b76d86e07f740b4b1ab80877c2c172f7bad92a8c166526fd22",
     "packages/core/src/contracts/diagnostics.ts": "d7630d791131bcbf7078703e67605f79e7f7964546ec12ff6859b2944745e9e5",
     "packages/storage/src/worker/diagnostics.ts": "8b6472c1213cea93c7fa646db5ac146657f4b2dd544e54c385a78f3e088c0b5c",
     "packages/app/tests/browser/diagnostics/index.ts": "e28c5734fc2fd2a2c27404210fb3a613668a057264d1e9645ca7d2915e21dca7",
     "packages/app/tests/browser/diagnostics/index.html": "964a2f785ece6812fb00fc852f50ecbf83917373231107c5b5b439d6d432f13d",
-    "packages/app/tests/browser/diagnostics/run.mjs": "98cdf9f36049ec2a65601ddf2e9239d6061bf8a8bfe51356162cfeb1317a34d5",
+    "packages/app/tests/browser/diagnostics/run.mjs": "ae2f22bd8ed342b8cd08ae701f617b77145c8c2b4fc6be7d9be81c4a4c179e46",
     "packages/core/src/contracts/blob-inventory.ts": "ca8fde78ea5dcc13d36264f806e22f5437cf2545dd5ca51f1273e1aefac3a886",
-    "packages/core/src/contracts/storage.ts": "b3f3c9cc855b97174c5f471a2a0d7dafb4d91dabad76032e8ca736fab2003812",
-    "packages/storage/tests/blob-inventory/fixture.ts": "76e1812a191f2ffee8baca6fdb8ad3a50433adb8a88adfc23195576fa9dc60b2",
-    "packages/storage/tests/blob-inventory/fixture-worker.ts": "1689e787bf466bf37e073fd05361a6a3aa70d7584ec03ddd94741a17e7258bba",
+    "packages/core/src/contracts/storage.ts": "81c9b1db8032ae5713b95370600e9604fbbe2f6bc948b9e2b108b7532d0f3580",
+    "packages/storage/tests/blob-inventory/fixture.ts": "69edc1e9b5ee81b86240daea52c8e41bed690eea426311ed62bcffd5a665940a",
+    "packages/storage/tests/blob-inventory/fixture-worker.ts": "b7e3a9b33a244e6d9a1df84c27263a7e313cd63484e08c4533391615c3e5e4df",
     "packages/storage/tests/isolated-client.ts": "72b2ace2196bfc8f662b8108d30972da9fe4cf4cf5b4f18714449f08746a4776",
     "packages/storage/tests/isolated-worker.ts": "d05ffe2db78e7808bf7a99884477d11c36b762ff9ec1a4cdf80ed6bf491308bd",
     "packages/storage/src/worker/archive-runtime.ts": "647e0c309c8defd42bb6e0f2a902e98d0a356bde1f75521a512fb23dd1453a2e",
-    "packages/storage/src/worker/archive-database.ts": "82d8f10b25d1af0ebfea4874c6d7db615b8015a030737251c73e13669b81920e",
+    "packages/storage/src/worker/archive-database.ts": "1d6f37f1076f9720a2265c965d50d7a93f251611520ea38544639171f16b7b74",
     "packages/storage/src/worker/blob-inventory.ts": "525c798ec8ee0fd38c68ead55c321897cb23e9343f53aa1c1cb91bfd30f1d418",
     "packages/storage/src/worker/blobs.ts": "20f883d087c60709cdc9b8755d39a1d26f97c5caa32063793abe38636b9f703f",
     "packages/storage/src/worker/blob-catalog.ts": "6004fc6398cf97b3af233e3016db3d4267a20ad7cd2b4b016ec0f9608cc4914f",
@@ -319,5 +348,5 @@
   },
   "changedSources": [],
   "sourceStable": true,
-  "finishedAt": "2026-09-12T20:30:59.572Z"
+  "finishedAt": "2026-09-12T20:40:49.043Z"
 }
