@@ -17,7 +17,7 @@ throughput.
 ## Commands
 
 ```sh
-npm run test:search                   # 27 lexical + 10 semantic storage + 5 indexer tests
+npm run test:search                   # 27 lexical + 10 semantic storage + 5 indexer + 1 query tests
 npm run test:app:semantic:browser     # shared application, Chromium + WebKit, real model
 npm run test:app:browser              # full application proof with the semantic scenario appended
 ```
@@ -38,6 +38,8 @@ unit vectors (a topic direction plus a digest-derived perturbation):
 | rebuild and edits | a lexical epoch rebuild keeps every link (same chunk identity); a title edit changes identity, the two chunks become pending with the new context and bounded maintenance removes the orphaned vectors |
 | deletion and damage | deleting drops vectors, keeps `quixi_records`/`quixi_sync_ops` counts and lexical hits, and is idempotent by operation id; a dropped semantic table leaves lexical status `ready` with an explicit unusable reason, enrolment is refused by name, and delete repairs the namespace |
 | sign-bit projection (ADR 0036 amendment 2, 2026-09-12) | default threshold 100,000 keeps exact retrieval for small indexes (the browser proof shows "3 / 3 sign-bit (0.0 MB) · exact retrieval below 100,000 vectors"); with `semanticCoarseThreshold: 3`, five published vectors are projected at once, the coarse→rerank ranking equals the exact ranking of a second repository on the float path, the resident index is 0 bytes before the first coarse query and 48 bytes per vector after it, a vector published while resident is appended and found; sign bits follow sqlite-vec's layout and `hammingTopK` keeps the lower id on ties; a simulated version-1 namespace with legacy float chunks and a version-2 int8 projection upgrades in place (vectors kept, `chunk_size=16` rebuilt, int8 dropped, ledger 1,3) and maintenance backfills; a foreign representation is discarded at open and rebuilt with coarse retrieval working again; semantic deletion empties the projection while the lexical hit remains. |
+| candidate join order (2026-09-12) | the 658-chunk hybrid benchmark (`perf/retrieval/hybrid.mjs`) exercises the semantic and coarse candidate queries end to end; a 2,000-vector Node probe measured 1,028 ms per page before the KNN was materialized and 28 ms after (ADR 0036, ADR 0037) |
+| lexical matching (ADR 0037) | `query.test.ts`: every term quoted, FTS operators literal, AND join by default and OR under `match: "any"`; the repository test keeps "OR needle" a literal two-term query in Best and Exact |
 | document pages | two registered PDF pages with identical text and one message are claimed together, share one stored vector (3 indexed chunks, 2 vectors) and are found by page with `sourceTypes` filters |
 
 `packages/search/tests/indexer.test.ts` runs the loop against fake storage and

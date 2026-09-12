@@ -295,6 +295,13 @@ Semantic namespace version 3 in `packages/storage/src/worker/search/semantic.ts`
   max-heap, ties by lower id), the candidate ids inserted into a temp table
   through `json_each`, and a rerank by exact float32 L2 through a join on
   vec0's point plan; the bounded-candidate/RRF path of ADR 0034 is unchanged.
+- **Candidate join order (found by the hybrid benchmark, ADR 0037)**: the
+  KNN — exact or coarse — is a `MATERIALIZED` CTE joined before the links
+  and visible chunks. As a plain subquery SQLite put the visible-chunk scan
+  outermost and re-ran the vector scan per chunk: 1,028 ms per semantic page
+  on a 2,000-vector archive in Node (coarse path 2,948 ms), against 28 ms
+  (107 ms) after the change. The browser semantic proof and the earlier
+  storage tests could not see this because they index a handful of vectors.
 - **Evidence**: `packages/search/tests/semantic.test.ts` with
   `semanticCoarseThreshold: 3` compares the coarse ranking with the exact one,
   asserts the resident index size after the first coarse query and its
@@ -305,7 +312,10 @@ Semantic namespace version 3 in `packages/storage/src/worker/search/semantic.ts`
   the browser semantic proof asserts the projection status and panel text in
   Chromium and WebKit. Not yet measured: the end-to-end application query at
   100k+ real chunks in the browser (the storage-level costs are the harness
-  numbers above).
+  numbers above). End to end in Node on the 658-chunk corpus
+  ([hybrid-report.json](../../perf/retrieval/hybrid-report.json)): a
+  semantic query paged to 500 hits costs 69 ms on the exact path and 95 ms
+  with the coarse stage forced on (every vector a candidate).
 
 ## What remains before the semantic-scale gate
 

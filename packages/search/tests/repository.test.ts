@@ -981,7 +981,10 @@ test("search result bytes are bounded and FTS operators remain literal user term
     message(canonical, t.threadId, "literal OR needle");
     message(canonical, t.threadId, "needle without operator");
     await drain(search);
+    // Best and Exact require every term (ADR 0037); OR stays a literal word.
     assert.equal(query(search, "OR needle").items.length, 1);
+    assert.equal(query(search, "OR needle").items[0]!.excerpt.text, "literal OR needle");
+    assert.equal(search.search({ query: "OR needle", mode: "exact", filters: {}, page: { maxItems: 100, maxBytes: 100000, cursor: null } }).items.length, 1);
     const args = {
       query: "needle",
       mode: "exact" as const,

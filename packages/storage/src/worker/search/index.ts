@@ -1264,6 +1264,8 @@ export class SearchRepository {
         throw new SearchError("INVALID_REQUEST", "Semantic search needs the query embedded by the local embedding worker.");
     }
     const useVector = args.mode !== "exact" && index.semantic.state === "ready" && !!args.queryVector;
+    // Every mode requires every term or phrase in the lexical list: the
+    // any-term variant was measured and rejected for Best (ADR 0037).
     const query = lexicalQuery(args.query),
       scope = searchDigest([
         args.query,

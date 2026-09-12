@@ -18,8 +18,11 @@ export class SearchError extends Error {
 }
 export const searchDigest = (value: unknown) =>
   bytesToHex(sha256(new TextEncoder().encode(JSON.stringify(value))));
-/** User quotes group phrases; FTS operators/column selectors are always literals. */
-export function lexicalQuery(query: string): string {
+/** User quotes group phrases; FTS operators/column selectors are always literals.
+ * `match: "all"` (every product mode) requires every term or phrase;
+ * `match: "any"` ranks by BM25 over the terms present — measured for Best
+ * and rejected on the benchmark corpus (ADR 0037), kept for benchmarks. */
+export function lexicalQuery(query: string, options: { match: "all" | "any" } = { match: "all" }): string {
   if (typeof query !== "string" || query.length > 4096)
     throw new SearchError(
       "INVALID_REQUEST",
@@ -51,7 +54,7 @@ export function lexicalQuery(query: string): string {
         "Search supports at most 64 terms or phrases.",
       );
   }
-  return terms.join(" AND ");
+  return terms.join(options.match === "any" ? " OR " : " AND ");
 }
 export function searchExcerpt(
   original: string,

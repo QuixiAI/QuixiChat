@@ -1,0 +1,2419 @@
+{
+  "version": 1,
+  "measuredAt": "2026-09-12T11:21:15.488Z",
+  "environment": {
+    "platform": "darwin",
+    "release": "25.6.0",
+    "arch": "arm64",
+    "osVersion": "26.6.2",
+    "node": "v22.23.1",
+    "cpu": "Apple M5 Max",
+    "note": "Pinned SQLite WASM in Node (in-memory VFS); single observations on a development host, not browser OPFS timings."
+  },
+  "model": {
+    "name": "snowflake-arctic-embed-xs",
+    "artifactSha256": "e1ef345cd35088b06f70c199f5a4e0311bda5983716ad6a3e7d0a604202efffc",
+    "route": "wasm-simd-fp32",
+    "runtime": "1.0.2"
+  },
+  "corpus": {
+    "manifest": {
+      "version": "quixi-synthetic-v1",
+      "license": "CC0-1.0",
+      "documents": 655,
+      "queries": 18,
+      "judgment_policy": "Authored before scoring; grades 1 and 2 both count as relevant.",
+      "limitations": [
+        "English-focused synthetic smoke corpus",
+        "Template distractors",
+        "Not sufficient to approve compression or claim general relevance"
+      ],
+      "files": {
+        "corpus.jsonl": "fe67f43c9a631fdb80b9a33f8c12ef7fd5b4dd2b2f8f3c3cd709ec938657613a",
+        "queries.json": "8cb5414f0f3b1545586ed5991de4f1ce75e9a27625a3008e00a428a9931294dc",
+        "qrels.json": "ebf9286f7f54ee3d0051ed844fa59fb0a79acaf17d996d4f0e4a53513a78e64a"
+      }
+    },
+    "documents": 655,
+    "queries": 18,
+    "kinds": {
+      "conversation": 648,
+      "document": 3,
+      "code": 3,
+      "assistant-answer": 1
+    }
+  },
+  "rrf": {
+    "k": 60,
+    "note": "ADR 0034: Best fuses the top-256 BM25 ranking with a bounded vec0 candidate set by reciprocal rank fusion"
+  },
+  "archive": {
+    "chunkerVersion": "fts-v1:quixi-structural-utf16-v1:4096:64:arctic-xs-offsets-1.0.2:d15cd90acf9df739:256:code-v1:nul-space-v1",
+    "indexedChunks": 658,
+    "vectors": 656,
+    "semanticIndexedChunks": 658,
+    "projection": {
+      "representation": "sign-bit-v1",
+      "bytesPerVector": 48,
+      "candidates": 5000,
+      "projected": 656,
+      "complete": true,
+      "coarseRetrieval": false,
+      "threshold": 100000,
+      "residentBytes": 0
+    },
+    "timing": {
+      "commitMs": 838.6494170000001,
+      "lexicalMs": 3481.293708,
+      "embedMs": 34520.712,
+      "embedded": 658,
+      "reused": 0
+    }
+  },
+  "hybrid": {
+    "unfiltered": {
+      "label": "no filter",
+      "filters": {},
+      "results": {
+        "exact": {
+          "queries": 18,
+          "mean": {
+            "recall@5": 0,
+            "recall@10": 0,
+            "recall@100": 0,
+            "recall@500": 0,
+            "mrr": 0
+          },
+          "per_query": {
+            "opfs": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "desktop": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "credentials": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "oauth": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "switch": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "branch": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "dedup": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "archive": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "fts": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "pdf": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "ocr": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "sync": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "recovery": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "priority": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "cache": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "sql": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "rrf": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "accessibility": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            }
+          },
+          "latency": {
+            "medianMs": 2.009749999997439,
+            "p95Ms": 2.1865839999954915,
+            "samples": 18
+          }
+        },
+        "semantic": {
+          "queries": 18,
+          "mean": {
+            "recall@5": 0.8703703703703703,
+            "recall@10": 0.9259259259259258,
+            "recall@100": 0.9814814814814814,
+            "recall@500": 0.9814814814814814,
+            "mrr": 0.8611111111111112
+          },
+          "per_query": {
+            "opfs": {
+              "recall@5": 0.6666666666666666,
+              "recall@10": 0.6666666666666666,
+              "recall@100": 0.6666666666666666,
+              "recall@500": 0.6666666666666666,
+              "mrr": 0.5
+            },
+            "desktop": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 0.5
+            },
+            "credentials": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "oauth": {
+              "recall@5": 0.5,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 0.5
+            },
+            "switch": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "branch": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "dedup": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "archive": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "fts": {
+              "recall@5": 0.5,
+              "recall@10": 0.5,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "pdf": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 0.5
+            },
+            "ocr": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "sync": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "recovery": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "priority": {
+              "recall@5": 0.5,
+              "recall@10": 0.5,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "cache": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "sql": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 0.5
+            },
+            "rrf": {
+              "recall@5": 0.5,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "accessibility": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            }
+          },
+          "latency": {
+            "medianMs": 69.25370799999655,
+            "p95Ms": 74.72270900000149,
+            "samples": 18
+          }
+        },
+        "best": {
+          "queries": 18,
+          "mean": {
+            "recall@5": 0.7314814814814814,
+            "recall@10": 0.8425925925925926,
+            "recall@100": 1,
+            "recall@500": 1,
+            "mrr": 0.8611111111111112
+          },
+          "per_query": {
+            "opfs": {
+              "recall@5": 0.6666666666666666,
+              "recall@10": 0.6666666666666666,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 0.5
+            },
+            "desktop": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "credentials": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "oauth": {
+              "recall@5": 0.5,
+              "recall@10": 0.5,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 0.5
+            },
+            "switch": {
+              "recall@5": 0.5,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "branch": {
+              "recall@5": 0.5,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "dedup": {
+              "recall@5": 0.5,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 0.5
+            },
+            "archive": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "fts": {
+              "recall@5": 0.5,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "pdf": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "ocr": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "sync": {
+              "recall@5": 0.5,
+              "recall@10": 0.5,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 0.5
+            },
+            "recovery": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "priority": {
+              "recall@5": 0.5,
+              "recall@10": 0.5,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "cache": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "sql": {
+              "recall@5": 0.5,
+              "recall@10": 0.5,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 0.5
+            },
+            "rrf": {
+              "recall@5": 0.5,
+              "recall@10": 0.5,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "accessibility": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            }
+          },
+          "latency": {
+            "medianMs": 148.54383299999608,
+            "p95Ms": 154.7131670000017,
+            "samples": 18
+          }
+        }
+      }
+    },
+    "messagesOnly": {
+      "label": "sourceTypes: message",
+      "filters": {
+        "sourceTypes": [
+          "message"
+        ]
+      },
+      "results": {
+        "exact": {
+          "queries": 16,
+          "mean": {
+            "recall@5": 0,
+            "recall@10": 0,
+            "recall@100": 0,
+            "recall@500": 0,
+            "mrr": 0
+          },
+          "per_query": {
+            "opfs": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "desktop": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "credentials": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "switch": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "branch": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "dedup": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "archive": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "fts": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "pdf": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "ocr": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "sync": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "recovery": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "priority": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "cache": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "rrf": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "accessibility": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            }
+          },
+          "latency": {
+            "medianMs": 2.0364170000029844,
+            "p95Ms": 2.173291999999492,
+            "samples": 18
+          }
+        },
+        "semantic": {
+          "queries": 16,
+          "mean": {
+            "recall@5": 0.8854166666666666,
+            "recall@10": 0.9166666666666666,
+            "recall@100": 0.9791666666666666,
+            "recall@500": 1,
+            "mrr": 0.90625
+          },
+          "per_query": {
+            "opfs": {
+              "recall@5": 0.6666666666666666,
+              "recall@10": 0.6666666666666666,
+              "recall@100": 0.6666666666666666,
+              "recall@500": 1,
+              "mrr": 0.5
+            },
+            "desktop": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 0.5
+            },
+            "credentials": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "switch": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "branch": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "dedup": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "archive": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "fts": {
+              "recall@5": 0.5,
+              "recall@10": 0.5,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "pdf": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 0.5
+            },
+            "ocr": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "sync": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "recovery": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "priority": {
+              "recall@5": 0.5,
+              "recall@10": 0.5,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "cache": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "rrf": {
+              "recall@5": 0.5,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "accessibility": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            }
+          },
+          "latency": {
+            "medianMs": 195.03433299999597,
+            "p95Ms": 196.75033399999666,
+            "samples": 18
+          }
+        },
+        "best": {
+          "queries": 16,
+          "mean": {
+            "recall@5": 0.7604166666666666,
+            "recall@10": 0.8854166666666666,
+            "recall@100": 1,
+            "recall@500": 1,
+            "mrr": 0.90625
+          },
+          "per_query": {
+            "opfs": {
+              "recall@5": 0.6666666666666666,
+              "recall@10": 0.6666666666666666,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 0.5
+            },
+            "desktop": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "credentials": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "switch": {
+              "recall@5": 0.5,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "branch": {
+              "recall@5": 0.5,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "dedup": {
+              "recall@5": 0.5,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 0.5
+            },
+            "archive": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "fts": {
+              "recall@5": 0.5,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "pdf": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "ocr": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "sync": {
+              "recall@5": 0.5,
+              "recall@10": 0.5,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 0.5
+            },
+            "recovery": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "priority": {
+              "recall@5": 0.5,
+              "recall@10": 0.5,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "cache": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "rrf": {
+              "recall@5": 0.5,
+              "recall@10": 0.5,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "accessibility": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            }
+          },
+          "latency": {
+            "medianMs": 234.82050000000163,
+            "p95Ms": 242.44491600000038,
+            "samples": 18
+          }
+        }
+      }
+    },
+    "documentsOnly": {
+      "label": "sourceTypes: document",
+      "filters": {
+        "sourceTypes": [
+          "document"
+        ]
+      },
+      "results": {
+        "exact": {
+          "queries": 2,
+          "mean": {
+            "recall@5": 0,
+            "recall@10": 0,
+            "recall@100": 0,
+            "recall@500": 0,
+            "mrr": 0
+          },
+          "per_query": {
+            "oauth": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "sql": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            }
+          },
+          "latency": {
+            "medianMs": 1.9327080000002752,
+            "p95Ms": 2.0739170000015292,
+            "samples": 18
+          }
+        },
+        "semantic": {
+          "queries": 2,
+          "mean": {
+            "recall@5": 1,
+            "recall@10": 1,
+            "recall@100": 1,
+            "recall@500": 1,
+            "mrr": 0.75
+          },
+          "per_query": {
+            "oauth": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 0.5
+            },
+            "sql": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            }
+          },
+          "latency": {
+            "medianMs": 2.7433339999988675,
+            "p95Ms": 3.045749999997497,
+            "samples": 18
+          }
+        },
+        "best": {
+          "queries": 2,
+          "mean": {
+            "recall@5": 1,
+            "recall@10": 1,
+            "recall@100": 1,
+            "recall@500": 1,
+            "mrr": 0.75
+          },
+          "per_query": {
+            "oauth": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 0.5
+            },
+            "sql": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            }
+          },
+          "latency": {
+            "medianMs": 3.004457999995793,
+            "p95Ms": 3.161832999998296,
+            "samples": 18
+          }
+        }
+      }
+    },
+    "threadFilter": {
+      "label": "threadIds: 32 of 649 threads (32 judged documents inside)",
+      "filters": {
+        "threadIds": [
+          "9a92f671-9c70-4736-adf0-18935b5a3b8a",
+          "38559d09-cc2d-4b3f-9140-c9b6b7da8e25",
+          "0fe9a204-4d44-47a9-aed6-8c968908d6ee",
+          "f0e86def-3376-4091-890d-ec973382d2be",
+          "4803a4d9-5a0a-4be5-b658-8b6ec5108e6c",
+          "37b47a3f-4ae1-47f0-a6ab-314b67fd9eb3",
+          "1c427aac-9a1b-4097-8153-111080ecaff4",
+          "72d1fd7d-7397-4e95-9aa6-5c52609e8540",
+          "37c505b4-72c7-429d-81fd-934fbf876bd1",
+          "f5448c06-c411-42b0-8598-4e1df206cb7a",
+          "08dd88f9-dba1-42db-8571-ec69ae1e739a",
+          "f4e0a1a5-0a5c-4e3f-9070-1c7b718e29b2",
+          "a441bb5a-95c0-4d96-91bb-6594cb40110d",
+          "1205c9d5-c595-40c1-9ceb-7ac3dfc5595b",
+          "fdf3b9ff-a717-48b3-a8fc-202fff2454c1",
+          "ab7c07ae-a494-4ef8-acfa-c6cd5c5ac8b5",
+          "26771394-2cb4-48cb-b873-f27c800ab217",
+          "f0ccb533-ca03-46db-a827-7fccd1430a18",
+          "15b506fd-31e4-467a-b30d-b4cfa9db5e0d",
+          "47d4590a-c1b2-46ce-b7f8-8001000116d3",
+          "8f8dace8-84c4-4d57-8e0c-670ebbfbbd7d",
+          "28b83506-315c-4e3a-bcb3-62666496dc00",
+          "37f88cae-eabb-4a40-a749-d011c3029710",
+          "a053d0dc-9c9b-4fb0-beba-a5dee3b4cf84",
+          "78d60768-442e-43ca-8aa9-de853f05a73a",
+          "05c5aa4f-c37f-460e-84b0-2d12dcb02fb4",
+          "c1b97ecb-9f5c-4f76-8908-c6fbfa1994f8",
+          "d69d822a-8632-4e3b-86ab-197fef64f9c6",
+          "cdf3cec2-3ab5-4902-bf7b-9e3efdfd1b8c",
+          "56a0a5f9-6e41-46f3-8cb5-dd624523301d",
+          "a98ad6fe-00d2-48a1-9ed6-2ced717eeb3f",
+          "fee7c776-2294-4468-9cfe-3ff8fd8ab101"
+        ]
+      },
+      "results": {
+        "exact": {
+          "queries": 16,
+          "mean": {
+            "recall@5": 0,
+            "recall@10": 0,
+            "recall@100": 0,
+            "recall@500": 0,
+            "mrr": 0
+          },
+          "per_query": {
+            "opfs": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "desktop": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "credentials": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "switch": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "branch": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "dedup": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "archive": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "fts": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "pdf": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "ocr": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "sync": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "recovery": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "priority": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "cache": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "rrf": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "accessibility": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            }
+          },
+          "latency": {
+            "medianMs": 2.07050000000163,
+            "p95Ms": 2.229291000003286,
+            "samples": 18
+          }
+        },
+        "semantic": {
+          "queries": 16,
+          "mean": {
+            "recall@5": 0.875,
+            "recall@10": 0.96875,
+            "recall@100": 1,
+            "recall@500": 1,
+            "mrr": 1
+          },
+          "per_query": {
+            "opfs": {
+              "recall@5": 0.5,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "desktop": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "credentials": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "switch": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "branch": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "dedup": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "archive": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "fts": {
+              "recall@5": 0.5,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "pdf": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "ocr": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "sync": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "recovery": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "priority": {
+              "recall@5": 0.5,
+              "recall@10": 0.5,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "cache": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "rrf": {
+              "recall@5": 0.5,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "accessibility": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            }
+          },
+          "latency": {
+            "medianMs": 5.942208000000392,
+            "p95Ms": 6.364165999999386,
+            "samples": 18
+          }
+        },
+        "best": {
+          "queries": 16,
+          "mean": {
+            "recall@5": 0.90625,
+            "recall@10": 0.96875,
+            "recall@100": 1,
+            "recall@500": 1,
+            "mrr": 1
+          },
+          "per_query": {
+            "opfs": {
+              "recall@5": 0.5,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "desktop": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "credentials": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "switch": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "branch": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "dedup": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "archive": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "fts": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "pdf": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "ocr": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "sync": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "recovery": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "priority": {
+              "recall@5": 0.5,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "cache": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "rrf": {
+              "recall@5": 0.5,
+              "recall@10": 0.5,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "accessibility": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            }
+          },
+          "latency": {
+            "medianMs": 6.925833000001148,
+            "p95Ms": 7.2768749999959255,
+            "samples": 18
+          }
+        }
+      }
+    }
+  },
+  "coarse": {
+    "candidates": 5000,
+    "representation": "sign-bit-v1",
+    "note": "semanticCoarseThreshold: 1 forces Hamming top-5000 + float rerank on a 656-vector index (every vector is a candidate, so this proves the path and its overhead, not its scale benefit; see browser-knn for scale)",
+    "unfiltered": {
+      "label": "coarse, no filter",
+      "filters": {},
+      "results": {
+        "exact": {
+          "queries": 18,
+          "mean": {
+            "recall@5": 0,
+            "recall@10": 0,
+            "recall@100": 0,
+            "recall@500": 0,
+            "mrr": 0
+          },
+          "per_query": {
+            "opfs": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "desktop": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "credentials": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "oauth": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "switch": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "branch": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "dedup": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "archive": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "fts": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "pdf": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "ocr": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "sync": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "recovery": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "priority": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "cache": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "sql": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "rrf": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "accessibility": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            }
+          },
+          "latency": {
+            "medianMs": 2.026040999997349,
+            "p95Ms": 2.139000000002852,
+            "samples": 18
+          }
+        },
+        "semantic": {
+          "queries": 18,
+          "mean": {
+            "recall@5": 0.8703703703703703,
+            "recall@10": 0.9259259259259258,
+            "recall@100": 0.9814814814814814,
+            "recall@500": 0.9814814814814814,
+            "mrr": 0.8611111111111112
+          },
+          "per_query": {
+            "opfs": {
+              "recall@5": 0.6666666666666666,
+              "recall@10": 0.6666666666666666,
+              "recall@100": 0.6666666666666666,
+              "recall@500": 0.6666666666666666,
+              "mrr": 0.5
+            },
+            "desktop": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 0.5
+            },
+            "credentials": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "oauth": {
+              "recall@5": 0.5,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 0.5
+            },
+            "switch": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "branch": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "dedup": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "archive": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "fts": {
+              "recall@5": 0.5,
+              "recall@10": 0.5,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "pdf": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 0.5
+            },
+            "ocr": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "sync": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "recovery": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "priority": {
+              "recall@5": 0.5,
+              "recall@10": 0.5,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "cache": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "sql": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 0.5
+            },
+            "rrf": {
+              "recall@5": 0.5,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "accessibility": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            }
+          },
+          "latency": {
+            "medianMs": 95.17958300000464,
+            "p95Ms": 100.5903330000001,
+            "samples": 18
+          }
+        },
+        "best": {
+          "queries": 18,
+          "mean": {
+            "recall@5": 0.7314814814814814,
+            "recall@10": 0.8425925925925926,
+            "recall@100": 1,
+            "recall@500": 1,
+            "mrr": 0.8611111111111112
+          },
+          "per_query": {
+            "opfs": {
+              "recall@5": 0.6666666666666666,
+              "recall@10": 0.6666666666666666,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 0.5
+            },
+            "desktop": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "credentials": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "oauth": {
+              "recall@5": 0.5,
+              "recall@10": 0.5,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 0.5
+            },
+            "switch": {
+              "recall@5": 0.5,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "branch": {
+              "recall@5": 0.5,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "dedup": {
+              "recall@5": 0.5,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 0.5
+            },
+            "archive": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "fts": {
+              "recall@5": 0.5,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "pdf": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "ocr": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "sync": {
+              "recall@5": 0.5,
+              "recall@10": 0.5,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 0.5
+            },
+            "recovery": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "priority": {
+              "recall@5": 0.5,
+              "recall@10": 0.5,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "cache": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "sql": {
+              "recall@5": 0.5,
+              "recall@10": 0.5,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 0.5
+            },
+            "rrf": {
+              "recall@5": 0.5,
+              "recall@10": 0.5,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "accessibility": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            }
+          },
+          "latency": {
+            "medianMs": 193.690125000001,
+            "p95Ms": 198.32666700000118,
+            "samples": 18
+          }
+        }
+      }
+    },
+    "threadFilter": {
+      "label": "coarse, thread filter",
+      "filters": {
+        "threadIds": [
+          "9a92f671-9c70-4736-adf0-18935b5a3b8a",
+          "38559d09-cc2d-4b3f-9140-c9b6b7da8e25",
+          "0fe9a204-4d44-47a9-aed6-8c968908d6ee",
+          "f0e86def-3376-4091-890d-ec973382d2be",
+          "4803a4d9-5a0a-4be5-b658-8b6ec5108e6c",
+          "37b47a3f-4ae1-47f0-a6ab-314b67fd9eb3",
+          "1c427aac-9a1b-4097-8153-111080ecaff4",
+          "72d1fd7d-7397-4e95-9aa6-5c52609e8540",
+          "37c505b4-72c7-429d-81fd-934fbf876bd1",
+          "f5448c06-c411-42b0-8598-4e1df206cb7a",
+          "08dd88f9-dba1-42db-8571-ec69ae1e739a",
+          "f4e0a1a5-0a5c-4e3f-9070-1c7b718e29b2",
+          "a441bb5a-95c0-4d96-91bb-6594cb40110d",
+          "1205c9d5-c595-40c1-9ceb-7ac3dfc5595b",
+          "fdf3b9ff-a717-48b3-a8fc-202fff2454c1",
+          "ab7c07ae-a494-4ef8-acfa-c6cd5c5ac8b5",
+          "26771394-2cb4-48cb-b873-f27c800ab217",
+          "f0ccb533-ca03-46db-a827-7fccd1430a18",
+          "15b506fd-31e4-467a-b30d-b4cfa9db5e0d",
+          "47d4590a-c1b2-46ce-b7f8-8001000116d3",
+          "8f8dace8-84c4-4d57-8e0c-670ebbfbbd7d",
+          "28b83506-315c-4e3a-bcb3-62666496dc00",
+          "37f88cae-eabb-4a40-a749-d011c3029710",
+          "a053d0dc-9c9b-4fb0-beba-a5dee3b4cf84",
+          "78d60768-442e-43ca-8aa9-de853f05a73a",
+          "05c5aa4f-c37f-460e-84b0-2d12dcb02fb4",
+          "c1b97ecb-9f5c-4f76-8908-c6fbfa1994f8",
+          "d69d822a-8632-4e3b-86ab-197fef64f9c6",
+          "cdf3cec2-3ab5-4902-bf7b-9e3efdfd1b8c",
+          "56a0a5f9-6e41-46f3-8cb5-dd624523301d",
+          "a98ad6fe-00d2-48a1-9ed6-2ced717eeb3f",
+          "fee7c776-2294-4468-9cfe-3ff8fd8ab101"
+        ]
+      },
+      "results": {
+        "exact": {
+          "queries": 16,
+          "mean": {
+            "recall@5": 0,
+            "recall@10": 0,
+            "recall@100": 0,
+            "recall@500": 0,
+            "mrr": 0
+          },
+          "per_query": {
+            "opfs": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "desktop": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "credentials": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "switch": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "branch": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "dedup": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "archive": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "fts": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "pdf": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "ocr": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "sync": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "recovery": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "priority": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "cache": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "rrf": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            },
+            "accessibility": {
+              "recall@5": 0,
+              "recall@10": 0,
+              "recall@100": 0,
+              "recall@500": 0,
+              "mrr": 0
+            }
+          },
+          "latency": {
+            "medianMs": 2.0070420000047307,
+            "p95Ms": 2.0652090000003227,
+            "samples": 18
+          }
+        },
+        "semantic": {
+          "queries": 16,
+          "mean": {
+            "recall@5": 0.875,
+            "recall@10": 0.96875,
+            "recall@100": 1,
+            "recall@500": 1,
+            "mrr": 1
+          },
+          "per_query": {
+            "opfs": {
+              "recall@5": 0.5,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "desktop": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "credentials": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "switch": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "branch": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "dedup": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "archive": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "fts": {
+              "recall@5": 0.5,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "pdf": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "ocr": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "sync": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "recovery": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "priority": {
+              "recall@5": 0.5,
+              "recall@10": 0.5,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "cache": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "rrf": {
+              "recall@5": 0.5,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "accessibility": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            }
+          },
+          "latency": {
+            "medianMs": 6.573583000004874,
+            "p95Ms": 6.94695800000045,
+            "samples": 18
+          }
+        },
+        "best": {
+          "queries": 16,
+          "mean": {
+            "recall@5": 0.90625,
+            "recall@10": 0.96875,
+            "recall@100": 1,
+            "recall@500": 1,
+            "mrr": 1
+          },
+          "per_query": {
+            "opfs": {
+              "recall@5": 0.5,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "desktop": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "credentials": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "switch": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "branch": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "dedup": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "archive": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "fts": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "pdf": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "ocr": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "sync": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "recovery": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "priority": {
+              "recall@5": 0.5,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "cache": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "rrf": {
+              "recall@5": 0.5,
+              "recall@10": 0.5,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            },
+            "accessibility": {
+              "recall@5": 1,
+              "recall@10": 1,
+              "recall@100": 1,
+              "recall@500": 1,
+              "mrr": 1
+            }
+          },
+          "latency": {
+            "medianMs": 7.458166999997047,
+            "p95Ms": 7.687833000003593,
+            "samples": 18
+          }
+        }
+      }
+    },
+    "status": {
+      "representation": "sign-bit-v1",
+      "bytesPerVector": 48,
+      "candidates": 5000,
+      "projected": 656,
+      "complete": true,
+      "coarseRetrieval": true,
+      "threshold": 1,
+      "residentBytes": 31488
+    }
+  },
+  "chunkSizes": {
+    "128": {
+      "chunks": 663,
+      "tokens": {
+        "min": 20,
+        "max": 118,
+        "mean": 46.254901960784316
+      },
+      "multiChunkDocuments": 1,
+      "exact_fp32": {
+        "recall@5": 0.8425925925925926,
+        "recall@10": 0.898148148148148,
+        "recall@100": 0.9814814814814814,
+        "recall@500": 1,
+        "mrr": 0.8611111111111112
+      }
+    },
+    "192": {
+      "chunks": 660,
+      "tokens": {
+        "min": 20,
+        "max": 176,
+        "mean": 46.4560606060606
+      },
+      "multiChunkDocuments": 1,
+      "exact_fp32": {
+        "recall@5": 0.8425925925925926,
+        "recall@10": 0.898148148148148,
+        "recall@100": 0.9814814814814814,
+        "recall@500": 1,
+        "mrr": 0.8611111111111112
+      }
+    },
+    "256": {
+      "chunks": 658,
+      "tokens": {
+        "min": 20,
+        "max": 257,
+        "mean": 46.59118541033435
+      },
+      "multiChunkDocuments": 1,
+      "exact_fp32": {
+        "recall@5": 0.8425925925925926,
+        "recall@10": 0.898148148148148,
+        "recall@100": 0.9814814814814814,
+        "recall@500": 1,
+        "mrr": 0.8611111111111112
+      }
+    },
+    "320": {
+      "chunks": 657,
+      "tokens": {
+        "min": 20,
+        "max": 321,
+        "mean": 46.659056316590565
+      },
+      "multiChunkDocuments": 1,
+      "exact_fp32": {
+        "recall@5": 0.8425925925925926,
+        "recall@10": 0.898148148148148,
+        "recall@100": 0.9814814814814814,
+        "recall@500": 1,
+        "mrr": 0.8611111111111112
+      }
+    },
+    "384": {
+      "chunks": 657,
+      "tokens": {
+        "min": 20,
+        "max": 379,
+        "mean": 46.659056316590565
+      },
+      "multiChunkDocuments": 1,
+      "exact_fp32": {
+        "recall@5": 0.8425925925925926,
+        "recall@10": 0.898148148148148,
+        "recall@100": 0.9814814814814814,
+        "recall@500": 1,
+        "mrr": 0.8611111111111112
+      }
+    },
+    "448": {
+      "chunks": 657,
+      "tokens": {
+        "min": 20,
+        "max": 437,
+        "mean": 46.659056316590565
+      },
+      "multiChunkDocuments": 1,
+      "exact_fp32": {
+        "recall@5": 0.8425925925925926,
+        "recall@10": 0.898148148148148,
+        "recall@100": 0.9814814814814814,
+        "recall@500": 1,
+        "mrr": 0.8611111111111112
+      }
+    }
+  },
+  "limitations": [
+    "Same synthetic corpus and 18 judged queries as plan 16; equal scores across variants show the corpus cannot separate them, not that they are equal on real archives.",
+    "Documents are single texts committed as one message per thread (uniform title) or one registered page; multi-message threads, provider metadata and dates are not exercised by these filters.",
+    "Timings are Node in-memory SQLite, single observations; browser OPFS costs are in browser-knn-*.json."
+  ]
+}

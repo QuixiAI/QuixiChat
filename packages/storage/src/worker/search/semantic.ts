@@ -452,8 +452,11 @@ export class SemanticRepository {
       knn = "SELECT v.rowid AS vector_id,vec_distance_L2(v.embedding,?) AS distance FROM quixi_semantic_coarse t CROSS JOIN quixi_semantic_vec v ON v.rowid=t.id";
       knnBind = [bytes];
     }
+    // The KNN is materialized once: as a plain subquery SQLite may put the
+    // visible-chunk scan outermost and re-run the vector scan per chunk
+    // (measured: 1 s per page on 2,000 vectors in Node before this change).
     return this.rows(
-      `SELECT c.rowid AS rowid,c.chunk_id,knn.distance ${visible.from} JOIN quixi_semantic_links l ON l.chunk_id=c.chunk_id JOIN (${knn}) knn ON knn.vector_id=l.vector_id WHERE ${[visible.where, ...extraWhere].join(" AND ")} ORDER BY knn.distance,c.rowid LIMIT ?`,
+      `WITH knn AS MATERIALIZED (${knn}) SELECT c.rowid AS rowid,c.chunk_id,knn.distance FROM knn JOIN quixi_semantic_links l ON l.vector_id=knn.vector_id JOIN quixi_search_chunks c ON c.chunk_id=l.chunk_id ${visible.from.replace(/^FROM quixi_search_chunks c\s*/, "")} WHERE ${[visible.where, ...extraWhere].join(" AND ")} ORDER BY knn.distance,c.rowid LIMIT ?`,
       [...knnBind, ...visible.bind, ...extraBind, k],
     ).map((row) => ({ rowid: Number(row.rowid), chunk_id: String(row.chunk_id), distance: Number(row.distance) }));
   }

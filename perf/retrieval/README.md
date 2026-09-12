@@ -194,3 +194,24 @@ QUIXI_KNN_SIZES=100000,500000 npm run perf:knn:browser
 QUIXI_KNN_FLOAT_CHUNK=16 QUIXI_TEST_BROWSERS=chromium npm run perf:knn:browser
 npm run perf:knn:node -- --size=100000
 ```
+
+## Hybrid benchmark through storage — 2026-09-12 (plan 22 task 7)
+
+[hybrid.mjs](hybrid.mjs) commits the corpus to a canonical archive in the
+pinned SQLite WASM, indexes it with the production lexical chunker and
+tokenizer, embeds it with the WASM SIMD encoder through the real
+claim→publish protocol, and runs every judged query through the product
+search operation in Exact, Semantic and Best with no filter, source-type
+filters and a 32-thread filter, plus the coarse stage forced on; it then
+sweeps the §50 chunk budgets (128–448 tokens) outside storage. Reports:
+[hybrid-report.json](hybrid-report.json) (shipped all-term Best) and
+[hybrid-report-any-term.json](hybrid-report-any-term.json) (the rejected
+any-term variant, [ADR 0037](../../docs/decisions/0037-best-mode-lexical-matching.md)).
+The corpus's questions match nothing in Exact (every term is required), the
+chunk sweep cannot separate budgets on single-passage documents, and the
+run exposed a per-chunk KNN re-execution in the semantic candidate query,
+since fixed (ADR 0036).
+
+```sh
+node --experimental-transform-types perf/retrieval/hybrid.mjs
+```
