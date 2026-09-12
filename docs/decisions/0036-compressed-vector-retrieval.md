@@ -317,11 +317,39 @@ Semantic namespace version 3 in `packages/storage/src/worker/search/semantic.ts`
   semantic query paged to 500 hits costs 69 ms on the exact path and 95 ms
   with the coarse stage forced on (every vector a candidate).
 
+## The 1M browser measurement (2026-09-12)
+
+[browser-knn-1000000-chunk16.json](../../perf/retrieval/browser-knn-1000000-chunk16.json),
+the same harness at one million vectors on OPFS in both engines, no errors:
+
+| 1M vectors | Chromium | WebKit |
+| --- | --- | --- |
+| build (float, int8, bit tables + sign bits) | 43 s | 31 s |
+| OPFS bytes | 2.16 GB | 2.16 GB |
+| float32 KNN top-64 | 468 ms | 473 ms |
+| sqlite-vec int8 coarse k=500 | 542 ms | 743 ms |
+| sqlite-vec bit KNN k=500 | 330 ms | 481 ms |
+| resident sign-bit load (48 MB) | 715 ms | 885 ms |
+| resident Hamming top-5,000 | 30 ms | 27 ms |
+| Hamming 5,000 + float rerank (the production path) | 81 ms | 79 ms |
+| exact top-64 recall in 5,000 / 20,000 candidates (pseudo-random vectors) | 0.784 / 0.943 | 0.784 / 0.943 |
+| Hamming 20,000 + rerank | 217 ms | 219 ms |
+| SQLite memory high-water / WASM heap | 41 / 63 MB | 41 / 63 MB |
+
+The production path (resident sign bits, Hamming top-5,000, float32 rerank
+through vec0 point lookups) answers in 81–79 ms at 1M against a
+468–473 ms float scan, an 6× margin, with 48 MB resident and
+SQLite holding under 41 MB; neither sqlite-vec compressed KNN
+beats the float scan at any size. Exact-neighbour recall at 5,000
+candidates on these pseudo-random vectors (0.78) sits below the judged
+corpus's real-vector value at 1M (0.82, above), which is the number that
+matters for quality; the product's candidate width stays 5,000.
+
 ## What remains before the semantic-scale gate
 
-- Measured above at 100k and 500k in Chromium and WebKit (latency, OPFS
-  pages, memory, backfill interleaving, quantization, sign-bit pre-filter);
-  1M in the browser remains (≈ 2 GB of OPFS per engine).
+- Measured at 100k, 500k and 1M in Chromium and WebKit (latency, OPFS pages,
+  memory, backfill interleaving, quantization, sign-bit pre-filter), and end
+  to end through the application at 101k messages (ADR 0038).
 - Amendment 2 is implemented (above); measure the end-to-end application
   query path at 100k+ chunks in the browser, then the filtered hybrid rerun.
 - Re-run the hybrid benchmark with RRF and source filters over the selected

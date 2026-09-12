@@ -188,6 +188,9 @@ float rerank (ADR 0036 amendment 2: the resident scan with 5,000 candidates is
 3.7× faster than the float scan at 500k with identical judged metrics;
 `compressed.mjs` carries the `binaryWide<k>_float32Rerank` quality pipelines).
 
+At 1M vectors (`browser-knn-1000000-chunk16.json`) the resident sign-bit path
+answers in 81 / 79 ms (Chromium / WebKit) against a 468 / 473 ms float scan.
+
 ```sh
 npm run perf:knn:browser                                        # 100k, both engines
 QUIXI_KNN_SIZES=100000,500000 npm run perf:knn:browser

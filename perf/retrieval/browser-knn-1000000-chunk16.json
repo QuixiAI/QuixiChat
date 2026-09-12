@@ -1,0 +1,395 @@
+{
+  "version": 1,
+  "measuredAt": "2026-09-12T17:40:52.282Z",
+  "size": 1000000,
+  "floatChunkSize": 16,
+  "batch": 5000,
+  "queries": 12,
+  "repetitions": 3,
+  "environment": {
+    "platform": "darwin",
+    "release": "25.6.0",
+    "arch": "arm64",
+    "cpu": "Apple M5 Max",
+    "cores": 18,
+    "totalMemoryBytes": 137438953472,
+    "osVersion": "26.6.2",
+    "node": "v22.23.1",
+    "sqliteWasmSha256": "dd7c22431a3b8ad51ab5e6ed91065593574c34c5959d2efdef2f17484eedcb2c"
+  },
+  "engines": {
+    "chromium": {
+      "browser": "chromium",
+      "version": "153.0.8010.12",
+      "opened": {
+        "floatChunkSize": 16,
+        "vecVersion": "v0.1.9",
+        "sqliteVersion": "3.53.4",
+        "pageSize": 8192,
+        "cacheSize": -16384,
+        "rows": 0,
+        "cacheMissCounter": true
+      },
+      "buildMs": 42523,
+      "insertBatchMs": {
+        "medianMs": 141.80000001192093,
+        "maxMs": 153.70000004768372
+      },
+      "steady": {
+        "rows": 1000000,
+        "pageSize": 8192,
+        "queryQuantization": {
+          "samples": 36,
+          "medianMs": 0,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.10000002384185791,
+          "pageCacheMissesPerQuery": 0
+        },
+        "floatKnnTop64": {
+          "samples": 36,
+          "medianMs": 468.19999998807907,
+          "p95Ms": 485.69999998807907,
+          "maxMs": 545.9000000357628,
+          "pageCacheMissesPerQuery": 196436.05555555556
+        },
+        "int8CoarseTop500": {
+          "samples": 36,
+          "medianMs": 541.8000000119209,
+          "p95Ms": 551.1000000238419,
+          "maxMs": 556,
+          "pageCacheMissesPerQuery": 48119.055555555555
+        },
+        "int8CoarseThenFloatRerankTop64": {
+          "samples": 36,
+          "medianMs": 548.6999999880791,
+          "p95Ms": 556.1999999880791,
+          "maxMs": 561.6999999880791,
+          "pageCacheMissesPerQuery": 50049.666666666664
+        },
+        "top64AgreementWithFloat": 1,
+        "sqliteVecBitKnn": {
+          "k500": {
+            "samples": 36,
+            "medianMs": 329.5,
+            "p95Ms": 339.19999998807907,
+            "maxMs": 339.2999999523163,
+            "pageCacheMissesPerQuery": 7085.055555555556
+          },
+          "k2000": {
+            "samples": 36,
+            "medianMs": 682.9000000357628,
+            "p95Ms": 692.6999999880791,
+            "maxMs": 696,
+            "pageCacheMissesPerQuery": 7085
+          },
+          "k4000": {
+            "samples": 36,
+            "medianMs": 680.5999999642372,
+            "p95Ms": 686.3999999761581,
+            "maxMs": 693.8000000119209,
+            "pageCacheMissesPerQuery": 7085
+          }
+        },
+        "residentBits": {
+          "bytes": 48000000,
+          "loadMs": 715.1000000238419,
+          "k2000": {
+            "hamming": {
+              "samples": 36,
+              "medianMs": 30.400000035762787,
+              "p95Ms": 33.30000001192093,
+              "maxMs": 36.39999997615814,
+              "pageCacheMissesPerQuery": 0
+            },
+            "hammingThenFloatRerankTop64": {
+              "samples": 36,
+              "medianMs": 51.59999996423721,
+              "p95Ms": 54.10000002384186,
+              "maxMs": 54.89999997615814,
+              "pageCacheMissesPerQuery": 7372.472222222223
+            }
+          },
+          "k5000": {
+            "hamming": {
+              "samples": 36,
+              "medianMs": 30.19999998807907,
+              "p95Ms": 30.599999964237213,
+              "maxMs": 31.400000035762787,
+              "pageCacheMissesPerQuery": 0
+            },
+            "hammingThenFloatRerankTop64": {
+              "samples": 36,
+              "medianMs": 80.70000004768372,
+              "p95Ms": 84.5,
+              "maxMs": 84.5,
+              "pageCacheMissesPerQuery": 17594.083333333332
+            }
+          },
+          "k20000": {
+            "hamming": {
+              "samples": 36,
+              "medianMs": 33.19999998807907,
+              "p95Ms": 33.5,
+              "maxMs": 33.80000001192093,
+              "pageCacheMissesPerQuery": 0
+            },
+            "hammingThenFloatRerankTop64": {
+              "samples": 36,
+              "medianMs": 216.80000001192093,
+              "p95Ms": 227.10000002384186,
+              "maxMs": 230.0999999642372,
+              "pageCacheMissesPerQuery": 59408.916666666664
+            }
+          },
+          "exactTop64RecallInCandidates": {
+            "k2000": 0.6328125,
+            "k5000": 0.7838541666666666,
+            "k20000": 0.9427083333333334
+          },
+          "note": "pseudo-random vectors: recall here is a lower bound for sign-bit pre-filtering, not the judged quality (compressed.mjs)"
+        },
+        "memory": {
+          "sqliteMemoryUsedBytes": 17016632,
+          "sqliteMemoryHighwaterBytes": 40969832,
+          "wasmHeapBytes": 63176704
+        },
+        "opfsBytes": 2163712000
+      },
+      "underBackfill": {
+        "batch": 1000,
+        "batches": 5,
+        "rowsAfter": 1005000,
+        "writeMs": {
+          "samples": 5,
+          "medianMs": 35.39999997615814,
+          "p95Ms": 36,
+          "maxMs": 36
+        },
+        "coarseRerankAfterWrite": {
+          "samples": 5,
+          "medianMs": 547.8999999761581,
+          "p95Ms": 551.1000000238419,
+          "maxMs": 551.1000000238419
+        },
+        "memory": {
+          "sqliteMemoryUsedBytes": 17016632,
+          "sqliteMemoryHighwaterBytes": 41089832,
+          "wasmHeapBytes": 63176704
+        }
+      },
+      "coldReopen": {
+        "rows": 1005000,
+        "floatKnnTop64": {
+          "samples": 1,
+          "medianMs": 466.5,
+          "p95Ms": 466.5,
+          "maxMs": 466.5,
+          "pageCacheMissesPerQuery": 197422
+        },
+        "int8CoarseTop500": {
+          "samples": 1,
+          "medianMs": 550.3999999761581,
+          "p95Ms": 550.3999999761581,
+          "maxMs": 550.3999999761581,
+          "pageCacheMissesPerQuery": 48366
+        },
+        "int8CoarseThenFloatRerankTop64": {
+          "samples": 1,
+          "medianMs": 546.8000000119209,
+          "p95Ms": 546.8000000119209,
+          "maxMs": 546.8000000119209,
+          "pageCacheMissesPerQuery": 50281
+        },
+        "opfsBytes": 2174582784
+      },
+      "errors": []
+    },
+    "webkit": {
+      "browser": "webkit",
+      "version": "26.6",
+      "opened": {
+        "floatChunkSize": 16,
+        "vecVersion": "v0.1.9",
+        "sqliteVersion": "3.53.4",
+        "pageSize": 8192,
+        "cacheSize": -16384,
+        "rows": 0,
+        "cacheMissCounter": true
+      },
+      "buildMs": 30877,
+      "insertBatchMs": {
+        "medianMs": 92,
+        "maxMs": 115
+      },
+      "steady": {
+        "rows": 1000000,
+        "pageSize": 8192,
+        "queryQuantization": {
+          "samples": 36,
+          "medianMs": 0,
+          "p95Ms": 0,
+          "maxMs": 0,
+          "pageCacheMissesPerQuery": 0
+        },
+        "floatKnnTop64": {
+          "samples": 36,
+          "medianMs": 473,
+          "p95Ms": 505,
+          "maxMs": 519,
+          "pageCacheMissesPerQuery": 196436.05555555556
+        },
+        "int8CoarseTop500": {
+          "samples": 36,
+          "medianMs": 743,
+          "p95Ms": 763,
+          "maxMs": 768,
+          "pageCacheMissesPerQuery": 48119.055555555555
+        },
+        "int8CoarseThenFloatRerankTop64": {
+          "samples": 36,
+          "medianMs": 744,
+          "p95Ms": 759,
+          "maxMs": 759,
+          "pageCacheMissesPerQuery": 50049.666666666664
+        },
+        "top64AgreementWithFloat": 1,
+        "sqliteVecBitKnn": {
+          "k500": {
+            "samples": 36,
+            "medianMs": 481,
+            "p95Ms": 487,
+            "maxMs": 489,
+            "pageCacheMissesPerQuery": 7085.055555555556
+          },
+          "k2000": {
+            "samples": 36,
+            "medianMs": 986,
+            "p95Ms": 1003,
+            "maxMs": 1004,
+            "pageCacheMissesPerQuery": 7085
+          },
+          "k4000": {
+            "samples": 36,
+            "medianMs": 989,
+            "p95Ms": 1006,
+            "maxMs": 1010,
+            "pageCacheMissesPerQuery": 7085
+          }
+        },
+        "residentBits": {
+          "bytes": 48000000,
+          "loadMs": 885,
+          "k2000": {
+            "hamming": {
+              "samples": 36,
+              "medianMs": 26,
+              "p95Ms": 29,
+              "maxMs": 32,
+              "pageCacheMissesPerQuery": 0
+            },
+            "hammingThenFloatRerankTop64": {
+              "samples": 36,
+              "medianMs": 47,
+              "p95Ms": 50,
+              "maxMs": 52,
+              "pageCacheMissesPerQuery": 7372.472222222223
+            }
+          },
+          "k5000": {
+            "hamming": {
+              "samples": 36,
+              "medianMs": 27,
+              "p95Ms": 29,
+              "maxMs": 29,
+              "pageCacheMissesPerQuery": 0
+            },
+            "hammingThenFloatRerankTop64": {
+              "samples": 36,
+              "medianMs": 79,
+              "p95Ms": 85,
+              "maxMs": 86,
+              "pageCacheMissesPerQuery": 17594.083333333332
+            }
+          },
+          "k20000": {
+            "hamming": {
+              "samples": 36,
+              "medianMs": 32,
+              "p95Ms": 35,
+              "maxMs": 38,
+              "pageCacheMissesPerQuery": 0
+            },
+            "hammingThenFloatRerankTop64": {
+              "samples": 36,
+              "medianMs": 219,
+              "p95Ms": 225,
+              "maxMs": 225,
+              "pageCacheMissesPerQuery": 59408.916666666664
+            }
+          },
+          "exactTop64RecallInCandidates": {
+            "k2000": 0.6328125,
+            "k5000": 0.7838541666666666,
+            "k20000": 0.9427083333333334
+          },
+          "note": "pseudo-random vectors: recall here is a lower bound for sign-bit pre-filtering, not the judged quality (compressed.mjs)"
+        },
+        "memory": {
+          "sqliteMemoryUsedBytes": 17016632,
+          "sqliteMemoryHighwaterBytes": 40969832,
+          "wasmHeapBytes": 63176704
+        },
+        "opfsBytes": 2163712000
+      },
+      "underBackfill": {
+        "batch": 1000,
+        "batches": 5,
+        "rowsAfter": 1005000,
+        "writeMs": {
+          "samples": 5,
+          "medianMs": 24,
+          "p95Ms": 25,
+          "maxMs": 25
+        },
+        "coarseRerankAfterWrite": {
+          "samples": 5,
+          "medianMs": 750,
+          "p95Ms": 763,
+          "maxMs": 763
+        },
+        "memory": {
+          "sqliteMemoryUsedBytes": 17016632,
+          "sqliteMemoryHighwaterBytes": 41089832,
+          "wasmHeapBytes": 63176704
+        }
+      },
+      "coldReopen": {
+        "rows": 1005000,
+        "floatKnnTop64": {
+          "samples": 1,
+          "medianMs": 472,
+          "p95Ms": 472,
+          "maxMs": 472,
+          "pageCacheMissesPerQuery": 197422
+        },
+        "int8CoarseTop500": {
+          "samples": 1,
+          "medianMs": 747,
+          "p95Ms": 747,
+          "maxMs": 747,
+          "pageCacheMissesPerQuery": 48366
+        },
+        "int8CoarseThenFloatRerankTop64": {
+          "samples": 1,
+          "medianMs": 749,
+          "p95Ms": 749,
+          "maxMs": 749,
+          "pageCacheMissesPerQuery": 50281
+        },
+        "opfsBytes": 2174582784
+      },
+      "errors": []
+    }
+  },
+  "note": "Pinned SQLite WASM + sqlite-vec on the OPFS SAHPool VFS in a dedicated worker; brute-force vec0 scans; pseudo-random vectors; single observations on a shared development host."
+}
