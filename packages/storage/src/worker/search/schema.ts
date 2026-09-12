@@ -41,20 +41,24 @@ const staleMarks = (scope: string, id: string, row: string) => `
 export const SEARCH_TRIGGERS = `${trigger("INSERT")}${trigger("UPDATE")}${trigger("DELETE")}`;
 /** The previous build's triggers (no head flagging); tests use them to stage a legacy namespace. */
 export const SEARCH_TRIGGERS_LEGACY = `${trigger("INSERT", false)}${trigger("UPDATE", false)}${trigger("DELETE", false)}`;
-export const SEARCH_HEAD_STALE_INDEXES = `
+const headIndexes = (chunks: boolean) => `
 CREATE INDEX quixi_search_head_message ON quixi_search_heads(message_id);
 CREATE INDEX quixi_search_head_source ON quixi_search_heads(source_key);
-CREATE INDEX quixi_search_head_visible ON quixi_search_heads(epoch,stale);
+CREATE INDEX quixi_search_head_visible ON quixi_search_heads(epoch,stale${chunks ? ",chunks" : ""});
 `;
-const schemaText = (stale: boolean) => `
+export const SEARCH_HEAD_STALE_INDEXES = headIndexes(true);
+/** Schema variants: "legacy" (first build), "stale" (visibility flag, 2026-09-12
+ * morning), "current" (flag plus per-head chunk count for O(heads) status). */
+type SchemaVariant = "legacy" | "stale" | "current";
+const schemaText = (variant: SchemaVariant) => `
 CREATE TABLE quixi_search_meta(singleton INTEGER PRIMARY KEY CHECK(singleton=1),version TEXT NOT NULL,active_epoch INTEGER NOT NULL,rebuilding_epoch INTEGER,next_epoch INTEGER NOT NULL,revision INTEGER NOT NULL) STRICT;
 CREATE TABLE quixi_search_scopes(scope TEXT NOT NULL,id TEXT NOT NULL,revision INTEGER NOT NULL,PRIMARY KEY(scope,id)) STRICT;
 CREATE TABLE quixi_search_queue(epoch INTEGER NOT NULL,scope TEXT NOT NULL,id TEXT NOT NULL,revision INTEGER NOT NULL,after_id TEXT NOT NULL DEFAULT '',failed INTEGER NOT NULL DEFAULT 0,error TEXT,PRIMARY KEY(epoch,scope,id)) STRICT;
 CREATE TABLE quixi_search_builds(epoch INTEGER NOT NULL,source_key TEXT NOT NULL,run_id TEXT NOT NULL,PRIMARY KEY(epoch,source_key)) STRICT;
-CREATE TABLE quixi_search_heads(epoch INTEGER NOT NULL,source_key TEXT NOT NULL,run_id TEXT NOT NULL,source_type TEXT NOT NULL,source_id TEXT NOT NULL,part_id TEXT,thread_id TEXT,message_id TEXT,document_id TEXT,title TEXT NOT NULL,role TEXT,provider TEXT,model TEXT,date INTEGER,tags TEXT NOT NULL,media_type TEXT NOT NULL,origin TEXT NOT NULL,source_revision INTEGER NOT NULL,message_revision INTEGER NOT NULL,thread_revision INTEGER NOT NULL,document_revision INTEGER NOT NULL,global_revision INTEGER NOT NULL,${stale ? "stale INTEGER NOT NULL DEFAULT 0," : ""}PRIMARY KEY(epoch,source_key)) STRICT;
+CREATE TABLE quixi_search_heads(epoch INTEGER NOT NULL,source_key TEXT NOT NULL,run_id TEXT NOT NULL,source_type TEXT NOT NULL,source_id TEXT NOT NULL,part_id TEXT,thread_id TEXT,message_id TEXT,document_id TEXT,title TEXT NOT NULL,role TEXT,provider TEXT,model TEXT,date INTEGER,tags TEXT NOT NULL,media_type TEXT NOT NULL,origin TEXT NOT NULL,source_revision INTEGER NOT NULL,message_revision INTEGER NOT NULL,thread_revision INTEGER NOT NULL,document_revision INTEGER NOT NULL,global_revision INTEGER NOT NULL,${variant === "legacy" ? "" : "stale INTEGER NOT NULL DEFAULT 0,"}${variant === "current" ? "chunks INTEGER NOT NULL DEFAULT 0," : ""}PRIMARY KEY(epoch,source_key)) STRICT;
 CREATE TABLE quixi_search_page_refs(epoch INTEGER NOT NULL,source_key TEXT NOT NULL,run_id TEXT NOT NULL,page_id TEXT NOT NULL,extraction_run_id TEXT NOT NULL,page INTEGER NOT NULL,document_id TEXT NOT NULL,attachment_id TEXT NOT NULL,attachment_sha256 TEXT NOT NULL,attachment_bytes INTEGER NOT NULL,source_digest TEXT NOT NULL,publication_revision INTEGER NOT NULL,identity TEXT NOT NULL,PRIMARY KEY(epoch,source_key)) STRICT;
 CREATE INDEX quixi_search_head_thread ON quixi_search_heads(thread_id,source_key);
-CREATE INDEX quixi_search_head_document ON quixi_search_heads(document_id,source_key);${stale ? SEARCH_HEAD_STALE_INDEXES : "\n"}CREATE TABLE quixi_search_chunks(rowid INTEGER PRIMARY KEY,epoch INTEGER NOT NULL,source_key TEXT NOT NULL,run_id TEXT NOT NULL,chunk_id TEXT NOT NULL,source_type TEXT NOT NULL,has_code INTEGER NOT NULL,text TEXT NOT NULL,context TEXT NOT NULL,position TEXT NOT NULL,payload TEXT NOT NULL,UNIQUE(epoch,run_id,chunk_id)) STRICT;
+CREATE INDEX quixi_search_head_document ON quixi_search_heads(document_id,source_key);${variant === "legacy" ? "\n" : headIndexes(variant === "current")}CREATE TABLE quixi_search_chunks(rowid INTEGER PRIMARY KEY,epoch INTEGER NOT NULL,source_key TEXT NOT NULL,run_id TEXT NOT NULL,chunk_id TEXT NOT NULL,source_type TEXT NOT NULL,has_code INTEGER NOT NULL,text TEXT NOT NULL,context TEXT NOT NULL,position TEXT NOT NULL,payload TEXT NOT NULL,UNIQUE(epoch,run_id,chunk_id)) STRICT;
 CREATE INDEX quixi_search_chunk_lookup ON quixi_search_chunks(epoch,chunk_id);
 CREATE INDEX quixi_search_chunk_source ON quixi_search_chunks(epoch,source_key,run_id);
 CREATE VIRTUAL TABLE quixi_search_fts USING fts5(text,context,content='quixi_search_chunks',content_rowid='rowid',tokenize="unicode61 remove_diacritics 2 tokenchars '_'");
@@ -63,12 +67,13 @@ CREATE TRIGGER quixi_search_fts_delete AFTER DELETE ON quixi_search_chunks BEGIN
 CREATE TABLE quixi_search_operations(id TEXT PRIMARY KEY,epoch INTEGER NOT NULL) STRICT;
 CREATE TABLE quixi_search_extractions(id TEXT PRIMARY KEY,document_id TEXT NOT NULL,attachment_sha256 TEXT NOT NULL,extractor_version TEXT NOT NULL,text TEXT NOT NULL CHECK(length(text)<=65536),page INTEGER,section_path TEXT NOT NULL,offset_base INTEGER NOT NULL) STRICT;
 CREATE INDEX quixi_search_extraction_document ON quixi_search_extractions(document_id,id);
-${stale ? SEARCH_TRIGGERS : SEARCH_TRIGGERS_LEGACY}
+${variant === "legacy" ? SEARCH_TRIGGERS_LEGACY : SEARCH_TRIGGERS}
 `;
-export const SEARCH_SCHEMA = schemaText(true);
+export const SEARCH_SCHEMA = schemaText("current");
 export const SEARCH_SCHEMA_CHECKSUM = searchDigest(SEARCH_SCHEMA);
-/** The previous build's derived schema (no `stale` flag); recognised at open and upgraded in place. */
-export const SEARCH_SCHEMA_LEGACY_CHECKSUM = searchDigest(schemaText(false));
+/** Previous builds' derived schemas; recognised at open and upgraded in place. */
+export const SEARCH_SCHEMA_LEGACY_CHECKSUMS: readonly string[] = [searchDigest(schemaText("legacy")), searchDigest(schemaText("stale"))];
+export const SEARCH_SCHEMA_LEGACY_CHECKSUM = SEARCH_SCHEMA_LEGACY_CHECKSUMS[0]!;
 /** Ledger version 2 (2026-09-12): indexes for the indexing queue's pick order.
  * Without them every slice step sorted the whole queue (1.5 ms per step at
  * 19k rows, growing linearly), which made lexical indexing O(n²) at 100k

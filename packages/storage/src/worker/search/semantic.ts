@@ -104,6 +104,8 @@ export interface VisibleChunkSql {
   from: string;
   where: string;
   bind: SqlValue[];
+  /** The active epoch, so candidate joins can seek chunks by (epoch, chunk_id). */
+  epoch: number;
 }
 export const semanticInputDigest = (input: string) => bytesToHex(sha256(new TextEncoder().encode(input)));
 /** Product §48/§49 embedding input: context prefix, blank line, chunk text. */
@@ -455,9 +457,13 @@ export class SemanticRepository {
     // The KNN is materialized once: as a plain subquery SQLite may put the
     // visible-chunk scan outermost and re-run the vector scan per chunk
     // (measured: 1 s per page on 2,000 vectors in Node before this change).
+    // CROSS JOIN fixes the order knn → links → chunks (by epoch and chunk id)
+    // → heads; left to the planner, the visible-chunk scan went outermost and
+    // compared every chunk against the materialized KNN (285 ms at 30k in
+    // Node against a 9 ms bare KNN).
     return this.rows(
-      `WITH knn AS MATERIALIZED (${knn}) SELECT c.rowid AS rowid,c.chunk_id,knn.distance FROM knn JOIN quixi_semantic_links l ON l.vector_id=knn.vector_id JOIN quixi_search_chunks c ON c.chunk_id=l.chunk_id ${visible.from.replace(/^FROM quixi_search_chunks c\s*/, "")} WHERE ${[visible.where, ...extraWhere].join(" AND ")} ORDER BY knn.distance,c.rowid LIMIT ?`,
-      [...knnBind, ...visible.bind, ...extraBind, k],
+      `WITH knn AS MATERIALIZED (${knn}) SELECT c.rowid AS rowid,c.chunk_id,knn.distance FROM knn CROSS JOIN quixi_semantic_links l ON l.vector_id=knn.vector_id CROSS JOIN quixi_search_chunks c ON c.epoch=? AND c.chunk_id=l.chunk_id ${visible.from.replace(/^FROM quixi_search_chunks c\s*/, "")} WHERE ${[visible.where, ...extraWhere].join(" AND ")} ORDER BY knn.distance,c.rowid LIMIT ?`,
+      [...knnBind, visible.epoch, ...visible.bind, ...extraBind, k],
     ).map((row) => ({ rowid: Number(row.rowid), chunk_id: String(row.chunk_id), distance: Number(row.distance) }));
   }
   /** Bounded maintenance: links whose chunk no longer exists in any epoch,

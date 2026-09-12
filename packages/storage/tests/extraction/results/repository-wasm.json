@@ -1,6 +1,6 @@
 {
-  "startedAt": "2026-09-12T14:24:04.779Z",
-  "completedAt": "2026-09-12T14:24:05.745Z",
+  "startedAt": "2026-09-12T15:55:09.146Z",
+  "completedAt": "2026-09-12T15:55:10.036Z",
   "node": "v22.23.1",
   "platform": "darwin",
   "arch": "arm64",
@@ -85,7 +85,7 @@
       "mapCount": 32768,
       "utf16": 32768,
       "batches": 256,
-      "publishElapsedMs": 78.429125,
+      "publishElapsedMs": 71.23566700000003,
       "sourceDigest": "7119737b44ab8ef9854636193baee3907743655660f80bc884360fe5b23bd480"
     }
   ],

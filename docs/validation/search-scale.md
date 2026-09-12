@@ -68,6 +68,20 @@ scale.
 The retained record holds the latest 10k run; earlier tables are kept from
 their runs' logs.
 
+## The 101,000-message run (Chromium, 2026-09-12, after ADR 0038 fixes 1–7)
+
+| Phase | Chromium |
+| --- | --- |
+| seed 101,000 messages | 137 s |
+| lexical indexing (6,300 slices) | 661 s |
+| publish 101,000 vectors | stopped after 60 minutes, incomplete |
+
+The run was stopped in its vector publication phase; the claim scan and the
+semantic status counts are O(n) per round (ADR 0038, "The 101,000-message
+run"). Its partial report was not retained because the harness saves phase
+timings only at completion; the numbers come from the run log. The retained
+record stays the 10k run above.
+
 ## Limits
 
 Single runs under development load on one machine; synthetic vectors and

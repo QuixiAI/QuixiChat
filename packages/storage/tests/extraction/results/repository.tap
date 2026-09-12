@@ -1,5 +1,5 @@
 TAP version 13
-# (node:29426) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (node:38601) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
 # (Use `node --trace-warnings ...` to show where the warning was created)
 # quixi-extraction-schema [{"version":1,"name":"canonical_records_and_atomic_operations","checksum":"16724a690f441af0162c0b49f3256bac152fb98a31f1a99c6ef40076d7dfd7d5"},{"version":2,"name":"source_and_generation_uniqueness","checksum":"bba4a045a82d42714d43d9ee709412eab759da65122b7abb244186b6a2d9b24f"},{"version":3,"name":"verified_blob_catalog_and_transfer_recovery","checksum":"705b844874dece6b5cc1881cb45ccc3b2907a2719036283fe165a0a07f6fe14e"},{"version":4,"name":"hidden_normalized_import_groups","checksum":"9988edddaf4483b380ab33f1017f141304484b1bc1662e74fb1c2de75ca2467e"},{"version":5,"name":"bounded_importer_work_and_uuid_checkpoints","checksum":"cd43d1aeb7f9fdf33c6efd0dcb3b87d00eef9169fe002c81ee6856750a49468b"},{"version":6,"name":"generation_producer_fences","checksum":"32e6035cd4ea8cabe3d327772c0d291de08a1ae24c2a23b360dc6661c6315c11"},{"version":7,"name":"local_workspace_and_message_recency","checksum":"da34a61082c74eae78301b25b83cc8525addfb6df1b5e450c33c2a63ec974151"},{"version":8,"name":"streaming_text_across_transport_provenance","checksum":"9c6a87fde402ff33d164ee7db92b34088ab05d458686670ee3d317dc24ca1263"},{"version":9,"name":"mandatory_archive_selection_protocol","checksum":"d124a56c86b6b42a8429114e253030b1cbc88e774ec8ff3e44cc9105dd5b6dab"},{"version":10,"name":"stable_local_operation_claims","checksum":"3f20f0a536ee783777602dda90a3f575cf17ddfe6bba277dc9cfa740e413770b"},{"version":11,"name":"reviewed_context_attachment_exclusions","checksum":"5dcdae7dd8c7a054cc3a1cbe4e2bd19f0890e7c213b90b30f3457c43667e75f3"},{"version":12,"name":"reviewed_summary_proposal_provenance","checksum":"231dc27fdff21cd5a8c48722f34af18df2b939978f17be62de19dcd24c0427e8"}]
 # sqlite3_step() rc= 13 SQLITE_FULL SQL = INSERT INTO quixi_extract_text_batches VALUES(?,?,?,?,?)
@@ -7,128 +7,128 @@ TAP version 13
 # Subtest: atomic page source preserves cross-event lexical phrase, Unicode/NUL maps and canonical history
 ok 1 - atomic page source preserves cross-event lexical phrase, Unicode/NUL maps and canonical history
   ---
-  duration_ms: 48.941334
+  duration_ms: 43.897416
   type: 'test'
   ...
 # Subtest: stage and publication lost-reply retries return original immutable receipts after completion
 ok 2 - stage and publication lost-reply retries return original immutable receipts after completion
   ---
-  duration_ms: 15.221833
+  duration_ms: 13.039667
   type: 'test'
   ...
 # Subtest: precommit failure rolls back stage, publication, checkpoint, outbox and durable claims
 ok 3 - precommit failure rolls back stage, publication, checkpoint, outbox and durable claims
   ---
-  duration_ms: 12.614833
+  duration_ms: 10.774542
   type: 'test'
   ...
 # Subtest: interruption retains completed pages, resume CAS fences old writer and cleans abandoned attempts
 ok 4 - interruption retains completed pages, resume CAS fences old writer and cleans abandoned attempts
   ---
-  duration_ms: 17.150166
+  duration_ms: 16.179959
   type: 'test'
   ...
 # Subtest: actual SQLite close/reopen retains staged sequence, checkpoints and receipts without producer-loss inference
 ok 5 - actual SQLite close/reopen retains staged sequence, checkpoints and receipts without producer-loss inference
   ---
-  duration_ms: 12.65675
+  duration_ms: 10.978
   type: 'test'
   ...
 # Subtest: replacement versions switch atomically and stale hash/page refs are suppressed before outbox drain
 ok 6 - replacement versions switch atomically and stale hash/page refs are suppressed before outbox drain
   ---
-  duration_ms: 13.592917
+  duration_ms: 11.9975
   type: 'test'
   ...
 # Subtest: bounded map cursors preserve original spans and reject changed ranges and surrogate slicing
 ok 7 - bounded map cursors preserve original spans and reject changed ranges and surrogate slicing
   ---
-  duration_ms: 70.636417
+  duration_ms: 63.747083
   type: 'test'
   ...
 # Subtest: published page above legacy65536 limit remains one bounded source and cleanup preserves original receipts
 ok 8 - published page above legacy65536 limit remains one bounded source and cleanup preserves original receipts
   ---
-  duration_ms: 33.715208
+  duration_ms: 34.036208
   type: 'test'
   ...
 # Subtest: logical capacity rejection atomically retains earlier page and does not claim failed operation
 ok 9 - logical capacity rejection atomically retains earlier page and does not claim failed operation
   ---
-  duration_ms: 12.1635
+  duration_ms: 8.016667
   type: 'test'
   ...
 # Subtest: empty/scanned pages publish checkpoint and bad final digest leaves page invisible
 ok 10 - empty/scanned pages publish checkpoint and bad final digest leaves page invisible
   ---
-  duration_ms: 8.06575
+  duration_ms: 7.137167
   type: 'test'
   ...
 # Subtest: bounded text windows retain the published page classification, independently of window length
 ok 11 - bounded text windows retain the published page classification, independently of window length
   ---
-  duration_ms: 13.26075
+  duration_ms: 11.754917
   type: 'test'
   ...
 # Subtest: outbox ack composes with owner transaction; subsequent page leaves earlier ref and document revision stable
 ok 12 - outbox ack composes with owner transaction; subsequent page leaves earlier ref and document revision stable
   ---
-  duration_ms: 9.493792
+  duration_ms: 7.896708
   type: 'test'
   ...
 # Subtest: derived schema failure leaves canonical writes usable and does not install canonical trigger dependencies
 ok 13 - derived schema failure leaves canonical writes usable and does not install canonical trigger dependencies
   ---
-  duration_ms: 6.071083
+  duration_ms: 5.460125
   type: 'test'
   ...
 # Subtest: durable claim adapter rejects canonical/other-domain ID reuse and cleans claim on failure
 ok 14 - durable claim adapter rejects canonical/other-domain ID reuse and cleans claim on failure
   ---
-  duration_ms: 4.843958
+  duration_ms: 4.360959
   type: 'test'
   ...
 # Subtest: pure boundary validators reject getters, unknown keys, malformed maps, oversized payload and lone surrogates
 ok 15 - pure boundary validators reject getters, unknown keys, malformed maps, oversized payload and lone surrogates
   ---
-  duration_ms: 0.492041
+  duration_ms: 0.397958
   type: 'test'
   ...
 # Subtest: reserved logical admission permits clear after payload exhaustion and bounded queues reclaim it
 ok 16 - reserved logical admission permits clear after payload exhaustion and bounded queues reclaim it
   ---
-  duration_ms: 8.7455
+  duration_ms: 8.760375
   type: 'test'
   ...
 # Subtest: maximum admitted PDF page publishes without SQL length/NUL truncation and rejects one extra scalar
 ok 17 - maximum admitted PDF page publishes without SQL length/NUL truncation and rejects one extra scalar
   ---
-  duration_ms: 54.675208
+  duration_ms: 53.075625
   type: 'test'
   ...
 # Subtest: map-byte corruption fails the local batch digest instead of returning incorrect provenance
 ok 18 - map-byte corruption fails the local batch digest instead of returning incorrect provenance
   ---
-  duration_ms: 6.93325
+  duration_ms: 6.45875
   type: 'test'
   ...
 # Subtest: array getters are rejected without execution and shared source spans do not split surrogate pairs
 ok 19 - array getters are rejected without execution and shared source spans do not split surrogate pairs
   ---
-  duration_ms: 0.138333
+  duration_ms: 0.113417
   type: 'test'
   ...
 # Subtest: near-limit source maps finalize through bounded batches without retaining a whole map array
 ok 20 - near-limit source maps finalize through bounded batches without retaining a whole map array
   ---
-  duration_ms: 356.19375
+  duration_ms: 330.742291
   type: 'test'
   ...
-# quixi-extraction-metric {"fixture":"near-map-limit","mapCount":32768,"utf16":32768,"batches":256,"publishElapsedMs":78.429125,"sourceDigest":"7119737b44ab8ef9854636193baee3907743655660f80bc884360fe5b23bd480"}
+# quixi-extraction-metric {"fixture":"near-map-limit","mapCount":32768,"utf16":32768,"batches":256,"publishElapsedMs":71.23566700000003,"sourceDigest":"7119737b44ab8ef9854636193baee3907743655660f80bc884360fe5b23bd480"}
 # Subtest: actual SQLite FULL rolls back new stage/claim while retaining committed pages
 ok 21 - actual SQLite FULL rolls back new stage/claim while retaining committed pages
   ---
-  duration_ms: 10.153292
+  duration_ms: 7.63675
   type: 'test'
   ...
 1..21
@@ -139,4 +139,4 @@ ok 21 - actual SQLite FULL rolls back new stage/claim while retaining committed 
 # cancelled 0
 # skipped 0
 # todo 0
-# duration_ms 911.736375
+# duration_ms 841.776791

@@ -111,6 +111,64 @@ Lexical indexing in Chromium is now 6.6× faster than before ADR 0038
 search-navigation and archive suites (blob reads across the batch
 boundaries) and the application browser proof pass.
 
+## Fix 7 (same day): the search profile and the last per-slice scan
+
+The relaunched 101k proof still grew from 208 to 452 ms per slice over the
+first 22k chunks, and a Node profile of the product semantic query at 30k
+vectors showed 294 ms against a 9 ms bare KNN. Three causes, all fixed:
+
+1. **The obsolete scan was re-armed by every new source.** The flag from fix
+   2 was set at every build upsert and every release, so the O(chunks) scan
+   ran once per slice regardless. It is now set only where orphans can
+   appear: a build row that already existed at pick time, a head replaced
+   by a new run at publication, and a run released without publishing
+   (`Work.published`). Chromium's 101k slices: 452 → 49 ms at 22k chunks.
+2. **The candidate join scanned every chunk against the materialized KNN.**
+   SQLite put the visible-chunk scan outermost and compared each of the 30k
+   chunks with the 256-row CTE. The join is now `knn CROSS JOIN links CROSS
+   JOIN chunks (by epoch and chunk id) JOIN heads`, with the active epoch
+   carried in `VisibleChunkSql.epoch` so the chunk seek uses
+   `quixi_search_chunk_lookup`: 285 → 12 ms for the statement.
+3. **`status()` counted visible chunks through a join.** Heads now carry
+   their run's chunk count (`chunks`, written at publication; index
+   `quixi_search_head_visible(epoch, stale, chunks)`), and `indexedChunks`
+   is a sum over visible heads: 13.4 → 4.3 ms at 30k. Every search returns
+   the full status by contract, so this was on the query path too. The
+   schema checksum changed again; the upgrade at open is idempotent over
+   the first build's shape and the morning's stale-only shape (both legacy
+   checksums are kept and verified), adding the missing column, backfilling
+   the counts once, and replacing the triggers.
+
+Node, 30k vectors, product `search()` for 20 hits: semantic 294 → 16.5 ms,
+Best 325 → 50 ms, Exact 45 → 37 ms (a two-term BM25 over 30k matching rows
+is the floor there).
+
+## The 101,000-message run after fixes 1–7 (Chromium)
+
+Seeding took 137 s and **lexical indexing 661 s** (6,300 slices; 49 ms per
+slice at 22k chunks rising to 111 ms at 90k as the FTS index grows), where
+the first run had not finished in 30 minutes. The vector publication phase
+was stopped after 60 minutes without completing its 1,547 claim→publish
+rounds: two remaining O(n) costs per round, measured in Node at 30k vectors
+(183 ms per 64-vector round, 81 ms at 10k in Chromium, 1.06 s at 30k in
+Chromium before fix 5):
+
+1. **`claimSemanticChunks` scans linked chunks.** It orders visible chunks
+   newest first and filters out the linked ones with a LEFT JOIN, so each
+   claim walks past every chunk linked so far before reaching the next
+   unlinked one — O(n) per round, O(n²) for a full index.
+2. **The semantic status counts every visible chunk against its link** twice
+   (indexed and pending), and every publication returns that status; the
+   application's indexer also reads it once per cycle for progress.
+
+Both are the next slice: per-head semantic counters (`vectors`, `failed`)
+maintained at link time with an index on `quixi_search_chunks(chunk_id)`,
+so the semantic status is a sum over visible heads like `indexedChunks`; a
+claim that starts from the oldest unlinked head (a cursor over heads with
+`chunks > vectors + failed`) instead of scanning; and `publishSemanticVectors`
+without a full status in its result, since the indexer reads status on its
+own cadence. Then the 101k run is re-attempted end to end.
+
 ## Measured after fixes 1–4 (browser scale proof, 30,000 messages)
 
 [semantic-scale-browser.json](../../packages/app/tests/browser/results/semantic-scale-browser.json),
@@ -154,9 +212,7 @@ measured by the same proof:
 1. ~~A `stale` flag on `quixi_search_heads`~~ — done (fix 5 above), with the
    in-place upgrade.
 2. ~~Several sources per transaction in a slice~~ — done (fix 6 above).
-3. A profile of `search()` at 30k+ (status read, KNN join, hit assembly) with
-   the fix for whatever dominates; the semantic query costs 85–95 ms at 10k
-   against a 5 ms bare KNN.
+3. ~~A profile of `search()` at 30k+~~ — done (fix 7 above).
 
 Only after those does the 101k proof (and the 1M browser run of ADR 0036)
 become a bounded exercise.

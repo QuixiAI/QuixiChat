@@ -31,7 +31,7 @@ import type { CanonicalSqlite, SqlValue } from "../canonical/repository.ts";
 import {
   SEARCH_SCHEMA,
   SEARCH_SCHEMA_CHECKSUM,
-  SEARCH_SCHEMA_LEGACY_CHECKSUM,
+  SEARCH_SCHEMA_LEGACY_CHECKSUMS,
   SEARCH_TRIGGERS,
   SEARCH_HEAD_STALE_INDEXES,
   LEGACY_VISIBLE_HEAD,
@@ -115,6 +115,8 @@ type Work = {
   decoder: TextDecoder;
   inputEnded: boolean;
   phase: "verifying" | "chunking";
+  /** Set once the run's head is written; a released unpublished run leaves orphans. */
+  published?: boolean;
 };
 export class SearchRepository {
   private active: Work | null = null;
@@ -232,12 +234,19 @@ export class SearchRepository {
       "INSERT INTO quixi_search_queue(epoch,scope,id,revision) VALUES(1,'global','*',0)",
     );
   }
+  /** Idempotent over the previous shapes: adds whatever head column or index
+   * is missing, replaces the triggers, computes `stale` once when the flag is
+   * new and `chunks` once when the count is new. */
   private upgradeHeadVisibility(): void {
     this.disableDerivedTriggers();
-    this.exec("ALTER TABLE quixi_search_heads ADD COLUMN stale INTEGER NOT NULL DEFAULT 0");
-    this.db.exec(SEARCH_HEAD_STALE_INDEXES);
+    const columns = new Set(this.rows("PRAGMA table_info(quixi_search_heads)").map((row) => String(row.name)));
+    if (!columns.has("stale")) this.exec("ALTER TABLE quixi_search_heads ADD COLUMN stale INTEGER NOT NULL DEFAULT 0");
+    if (!columns.has("chunks")) this.exec("ALTER TABLE quixi_search_heads ADD COLUMN chunks INTEGER NOT NULL DEFAULT 0");
+    this.exec("DROP INDEX IF EXISTS quixi_search_head_visible");
+    this.db.exec(SEARCH_HEAD_STALE_INDEXES.replaceAll("CREATE INDEX ", "CREATE INDEX IF NOT EXISTS "));
     this.db.exec(SEARCH_TRIGGERS);
-    this.exec(`UPDATE quixi_search_heads AS h SET stale=1 WHERE NOT (${LEGACY_VISIBLE_HEAD})`);
+    if (!columns.has("stale")) this.exec(`UPDATE quixi_search_heads AS h SET stale=1 WHERE NOT (${LEGACY_VISIBLE_HEAD})`);
+    if (!columns.has("chunks")) this.exec("UPDATE quixi_search_heads AS h SET chunks=(SELECT count(*) FROM quixi_search_chunks c WHERE c.epoch=h.epoch AND c.source_key=h.source_key AND c.run_id=h.run_id)");
     this.exec("UPDATE quixi_search_schema SET checksum=? WHERE version=1", [SEARCH_SCHEMA_CHECKSUM]);
   }
   private installQueueIndexes(): void {
@@ -290,7 +299,7 @@ export class SearchRepository {
       // The previous build's schema (no `stale` flag on heads) is upgraded in
       // place: triggers replaced, the column and its indexes added, and the
       // flag computed once from the scope revisions. No derived data is lost.
-      if (ledger.length && ledger[0]!.version === 1 && ledger[0]!.checksum === SEARCH_SCHEMA_LEGACY_CHECKSUM) {
+      if (ledger.length && ledger[0]!.version === 1 && SEARCH_SCHEMA_LEGACY_CHECKSUMS.includes(String(ledger[0]!.checksum))) {
         this.tx(() => this.upgradeHeadVisibility());
         ledger = this.rows("SELECT version,checksum FROM quixi_search_schema ORDER BY version");
       }
@@ -451,8 +460,10 @@ export class SearchRepository {
       "SELECT count(*) FROM quixi_search_queue WHERE failed=1",
     );
     const cleanup = this.obsolete() ? 1 : 0;
+    // Heads carry their chunk count, so this is an index walk over visible
+    // heads rather than a join over every chunk (13 ms at 30k chunks before).
     const indexed = this.scalar(
-      `SELECT count(*) FROM quixi_search_chunks c JOIN quixi_search_heads h ON h.epoch=c.epoch AND h.source_key=c.source_key AND h.run_id=c.run_id WHERE h.epoch=? AND ${this.visibleHead()}`,
+      `SELECT coalesce(sum(h.chunks),0) FROM quixi_search_heads h WHERE h.epoch=? AND ${this.visibleHead()}`,
       [Number(meta.active_epoch)],
     );
     const failure = this.rows(
@@ -765,7 +776,9 @@ export class SearchRepository {
     work.phase = result.complete ? "chunking" : "verifying";
   }
   private async release(work: Work) {
-    this.markMaybeObsolete();
+    // A published run's chunks belong to its head; only an unpublished run
+    // leaves orphans for the obsolete scan.
+    if (!work.published) this.markMaybeObsolete();
     try {
       if (work.reader) await this.outsideBatch(() => this.blobs.discard(work.reader!).catch(() => {}));
     } finally {
@@ -812,8 +825,11 @@ export class SearchRepository {
             canonicalJson({ ...ref.identity }),
           ],
         );
+      // Replacing a head orphans the previous run's chunks for the obsolete scan.
+      if (this.rows("SELECT 1 FROM quixi_search_heads WHERE epoch=? AND source_key=? AND run_id<>?", [work.epoch, work.key, work.runId]).length) this.markMaybeObsolete();
+      const chunkCount = this.scalar("SELECT count(*) FROM quixi_search_chunks WHERE epoch=? AND source_key=? AND run_id=?", [work.epoch, work.key, work.runId]);
       this.exec(
-        `INSERT INTO quixi_search_heads VALUES(${Array(22).fill("?").join(",")},0) ON CONFLICT(epoch,source_key) DO UPDATE SET stale=0,run_id=excluded.run_id,source_type=excluded.source_type,source_id=excluded.source_id,part_id=excluded.part_id,thread_id=excluded.thread_id,message_id=excluded.message_id,document_id=excluded.document_id,title=excluded.title,role=excluded.role,provider=excluded.provider,model=excluded.model,date=excluded.date,tags=excluded.tags,media_type=excluded.media_type,origin=excluded.origin,source_revision=excluded.source_revision,message_revision=excluded.message_revision,thread_revision=excluded.thread_revision,document_revision=excluded.document_revision,global_revision=excluded.global_revision`,
+        `INSERT INTO quixi_search_heads VALUES(${Array(22).fill("?").join(",")},0,?) ON CONFLICT(epoch,source_key) DO UPDATE SET stale=0,chunks=excluded.chunks,run_id=excluded.run_id,source_type=excluded.source_type,source_id=excluded.source_id,part_id=excluded.part_id,thread_id=excluded.thread_id,message_id=excluded.message_id,document_id=excluded.document_id,title=excluded.title,role=excluded.role,provider=excluded.provider,model=excluded.model,date=excluded.date,tags=excluded.tags,media_type=excluded.media_type,origin=excluded.origin,source_revision=excluded.source_revision,message_revision=excluded.message_revision,thread_revision=excluded.thread_revision,document_revision=excluded.document_revision,global_revision=excluded.global_revision`,
         [
           work.epoch,
           work.key,
@@ -833,6 +849,7 @@ export class SearchRepository {
           source.mediaType,
           source.origin,
           ...work.signature,
+          chunkCount,
         ],
       );
       this.exec(
@@ -841,6 +858,7 @@ export class SearchRepository {
       );
       this.exec("UPDATE quixi_search_meta SET revision=revision+1");
     });
+    work.published = true;
     return true;
   }
   /** Whether derived rows may have become obsolete since the last negative
@@ -1037,7 +1055,8 @@ export class SearchRepository {
               phase: source.blob ? "verifying" : "chunking",
             };
             this.active = work;
-            this.markMaybeObsolete();
+            // Only a replaced run can leave chunks behind; a first run cannot.
+            if (this.rows("SELECT 1 FROM quixi_search_builds WHERE epoch=? AND source_key=?", [epoch, key]).length) this.markMaybeObsolete();
             this.exec(
               "INSERT INTO quixi_search_builds VALUES(?,?,?) ON CONFLICT(epoch,source_key) DO UPDATE SET run_id=excluded.run_id",
               [epoch, key, work.runId],
@@ -1246,10 +1265,12 @@ export class SearchRepository {
   }
   /** Visible active-epoch chunks (`c`) with their heads (`h`). */
   private visibleChunks(): VisibleChunkSql {
+    const epoch = Number(this.meta().active_epoch);
     return {
       from: "FROM quixi_search_chunks c JOIN quixi_search_heads h ON h.epoch=c.epoch AND h.source_key=c.source_key AND h.run_id=c.run_id",
       where: `h.epoch=? AND ${this.visibleHead()}`,
-      bind: [Number(this.meta().active_epoch)],
+      bind: [epoch],
+      epoch,
     };
   }
   private semanticAvailability(): SearchIndexStatus["semantic"] {

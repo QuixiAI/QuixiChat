@@ -1193,7 +1193,7 @@ test("a derived namespace from the previous build (no stale flag) upgrades in pl
     assert.equal(query(search, "lanterns").items.length, 1);
     // Stage the previous build's shape: legacy triggers, no stale column or its indexes, legacy checksum.
     await search.close();
-    db.exec("DROP TRIGGER quixi_search_dirty_insert; DROP TRIGGER quixi_search_dirty_update; DROP TRIGGER quixi_search_dirty_delete; DROP INDEX quixi_search_head_message; DROP INDEX quixi_search_head_source; DROP INDEX quixi_search_head_visible; ALTER TABLE quixi_search_heads DROP COLUMN stale");
+    db.exec("DROP TRIGGER quixi_search_dirty_insert; DROP TRIGGER quixi_search_dirty_update; DROP TRIGGER quixi_search_dirty_delete; DROP INDEX quixi_search_head_message; DROP INDEX quixi_search_head_source; DROP INDEX quixi_search_head_visible; ALTER TABLE quixi_search_heads DROP COLUMN stale; ALTER TABLE quixi_search_heads DROP COLUMN chunks");
     db.exec(SEARCH_TRIGGERS_LEGACY);
     db.exec({ sql: "UPDATE quixi_search_schema SET checksum=? WHERE version=1", bind: [SEARCH_SCHEMA_LEGACY_CHECKSUM] });
     // A canonical change under the legacy triggers bumps the thread's scope revision only.
@@ -1204,6 +1204,7 @@ test("a derived namespace from the previous build (no stale flag) upgrades in pl
       assert.equal(db.selectValue("SELECT count(*) FROM quixi_search_heads WHERE stale=1"), 1, "the retitled thread's head is flagged from the scope revisions");
       assert.ok(String(db.selectValue("SELECT sql FROM sqlite_schema WHERE name='quixi_search_dirty_insert'")).includes("SET stale=1"), "triggers are this build's");
       assert.equal(query(upgraded, "lanterns").items.length, 1, "unchanged heads stay visible");
+      assert.equal(upgraded.status().indexedChunks, 1, "the per-head chunk count is backfilled at upgrade (one visible head)");
       assert.equal(query(upgraded, "anchors").items.length, 0, "the stale head is invisible until re-indexed");
       await drain(upgraded);
       assert.equal(query(upgraded, "anchors").items.length, 1, "re-indexed under the new title");

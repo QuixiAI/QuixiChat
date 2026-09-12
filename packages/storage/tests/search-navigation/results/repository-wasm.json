@@ -1,6 +1,6 @@
 {
-  "startedAt": "2026-09-12T14:24:03.999Z",
-  "completedAt": "2026-09-12T14:24:04.520Z",
+  "startedAt": "2026-09-12T15:55:08.418Z",
+  "completedAt": "2026-09-12T15:55:08.902Z",
   "node": "v22.23.1",
   "platform": "darwin",
   "arch": "arm64",
@@ -75,9 +75,9 @@
   "sourceHashes": {
     "packages/core/src/contracts/search.ts": "2fd0379ba81e5655cae4da50b39a32af3907a7c0f7652d2a678194a11a18c8ee",
     "packages/core/src/contracts/extraction.ts": "b05bcd2ef02bd60694bff7cc5d83fccbd10e2584f1ba9edf17505241c209b483",
-    "packages/storage/src/worker/search/index.ts": "1167f94079ab8bb219107ed22f493ee9bf70b6f06771994de66b8d5c82ebbfe6",
+    "packages/storage/src/worker/search/index.ts": "5da9e6f9e8ead423637ee2288a3080c284ca6b4f38bdbb3e0e61bb73082d9cbe",
     "packages/storage/src/worker/search/navigation.ts": "3dcd3f3e2061af65d03339a77e65ac6711eb8ee868c52dbc988db6600ac21494",
-    "packages/storage/src/worker/search/schema.ts": "2996d9c4f5bb2deb547649b8173f579a55cbbbf0e3cf060316f95573ed746edc",
+    "packages/storage/src/worker/search/schema.ts": "53134a87750d57f8dee7beaa5f93ef097b6358b4e4417c192a533d16eae62b3f",
     "packages/storage/src/worker/search/sources.ts": "c3b55d79b0196092fa9cbe2a5bfc97f10903974dede99bbef4419f5bcaa6aebf",
     "packages/storage/src/worker/search/extraction.ts": "ba85bc1954ce553a3268e1b924f8eeed879f0b1dad694108090de77301096033",
     "packages/search/src/chunker.ts": "8e82abb13c825132019055610dab2897909fb191be32f4813eb045285dd57ec4",
