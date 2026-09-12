@@ -2790,6 +2790,21 @@ try {
       await captureReviewLayout({ page, regionName: "Conversation library", role: "complementary", name, caseName: "library-narrow" });
       await captureReviewLayout({ page, regionName: "Conversation messages", name, caseName: "conversation-narrow" });
       evidence.checks.push("the conversation library and an open conversation with saved messages fit 320px at normal and 200% root text size without horizontal overflow");
+      // A long title (an unbroken 70-character token followed by prose, 160
+      // characters in all) must wrap in the library, the heading and the
+      // settings form at 320px and 200% text, then the original name returns.
+      const longTitle = `${"Unbrokenidentifier".repeat(4)}0123456789 followed by a long descriptive phrase about a comet observation notebook kept over several nights`;
+      await page.getByText("Conversation settings", { exact: true }).click();
+      await page.getByLabel("Title", { exact: true }).fill(longTitle);
+      await page.getByRole("button", { name: "Rename", exact: true }).click();
+      await expect(page.getByRole("heading", { name: longTitle, exact: true })).toBeVisible();
+      await captureReviewLayout({ page, regionName: "Conversation library", role: "complementary", name, caseName: "library-long-title" });
+      await captureReviewLayout({ page, regionName: "Conversation messages", name, caseName: "conversation-long-title" });
+      await page.getByLabel("Title", { exact: true }).fill("Comet notebook");
+      await page.getByRole("button", { name: "Rename", exact: true }).click();
+      await expect(page.getByRole("heading", { name: "Comet notebook", exact: true })).toBeVisible();
+      await page.getByText("Conversation settings", { exact: true }).click();
+      evidence.checks.push(`a ${longTitle.length}-character title with a 70-character unbroken token wraps in the library, the heading and the settings form at 320px and 200% text without overflow, and renaming back restores the original`);
       // The stopped attempt is still shown as partial after the restart.
       await verifyInteractionPreferencesRestart({ page, requests, countRequests, expected: evidence.interactionPreferences.persisted, name });
       evidence.checks.push("all four interaction preferences survive a fresh browser process with exact revision and send-key preserved; saved timestamps, hidden badges, compact composer and model list render without credentials or HTTP at 390px, then defaults are restored for subsequent checks");

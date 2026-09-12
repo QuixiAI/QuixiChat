@@ -110,8 +110,11 @@ attempt qualification remains open.
 
 ## Recorded checks
 
-Since 2026-09-12 the proof records 87 checks per engine. The newest is the
-six-theme scenario of [ADR 0039](../decisions/0039-appearance-themes.md)
+Since 2026-09-12 the proof records 88 checks per engine. The newest: a
+160-character conversation title with a 70-character unbroken token wraps
+in the library, the heading and the settings form at 320px and 200% root
+text without overflow, and renaming back restores the original. Before it,
+the six-theme scenario of [ADR 0039](../decisions/0039-appearance-themes.md)
 (see [interaction-preferences.md](interaction-preferences.md#themes--2026-09-12-adr-0039)). The two before it: a
 streamed two-part reply changes the polite generation status exactly twice
 (in progress, complete), observed with a MutationObserver on the status
