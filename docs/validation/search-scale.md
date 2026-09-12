@@ -45,7 +45,7 @@ stage (≥ 100,000 vectors) is therefore proven in storage tests and the
 `perf/retrieval/browser-knn` harness, not yet through the application at
 scale.
 
-## Result after the batched-slice fix (100 × 100 = 10,000 messages, retained record)
+## Result after the batched-slice fix (100 × 100 = 10,000 messages)
 
 | | Chromium | WebKit |
 | --- | --- | --- |
@@ -68,19 +68,25 @@ scale.
 The retained record holds the latest 10k run; earlier tables are kept from
 their runs' logs.
 
-## The 101,000-message run (Chromium, 2026-09-12, after ADR 0038 fixes 1–7)
+## The 101,000-message run (both engines, 2026-09-12, after ADR 0038 fix 8, retained record)
 
-| Phase | Chromium |
-| --- | --- |
-| seed 101,000 messages | 137 s |
-| lexical indexing (6,300 slices) | 661 s |
-| publish 101,000 vectors | stopped after 60 minutes, incomplete |
+| Phase (101,000 messages) | Chromium | WebKit |
+| --- | --- | --- |
+| seed (808 commits of ≤125 mutations) | 135 s | 100 s |
+| lexical indexing | 369 s (7954 slices) | 298 s (7954 slices) |
+| publish 101,000 vectors (1,579 claim→publish rounds) | 787 s | 721 s |
+| semantic query, coarse stage + rerank, median / max of 10 | 72 / 162 ms | 78 / 187 ms |
+| first coarse query (resident index load, 4.8 MB) | 162 ms | 187 ms |
+| Best / thread-filtered semantic | 74 / 70 ms | 74 / 73 ms |
+| cold reopen: first query / median after | 3820 ms / 73 ms | 3436 ms / 69 ms |
+| planted topics first (coarse / after reopen) | 10 / 10 of 10 | 10 / 10 of 10 |
+| resident sign-bit index | 4.6 MB | 4.6 MB |
 
-The run was stopped in its vector publication phase; the claim scan and the
-semantic status counts are O(n) per round (ADR 0038, "The 101,000-message
-run"). Its partial report was not retained because the harness saves phase
-timings only at completion; the numbers come from the run log. The retained
-record stays the 10k run above.
+Checks per engine: 2. At this size the queries take the resident
+sign-bit coarse stage with a float rerank (ADR 0036 amendment 2); the exact
+float path is measured by the 10k and 30k runs above. The planted vectors
+share a seeded ±1 sign pattern with their topic query plus 30% noise, so
+both stages must rank them first; uniform noise vectors fill the rest.
 
 ## Limits
 

@@ -63,9 +63,12 @@ try {
       expect(indexed.indexedChunks).toBe(total);
       console.log(`${name}: lexical index of ${indexed.indexedChunks} chunks in ${(indexed.indexMs / 1000).toFixed(1)} s`);
       await page.evaluate(() => window.appAcceptance.semanticScale.enroll());
-      const below = Math.min(total, COARSE_THRESHOLD - 1000);
-      const first = await page.evaluate((limit) => window.appAcceptance.semanticScale.publish({ limit }), below);
-      evidence.phases.publishBelowThreshold = { ms: Math.round(first.publishMs), published: first.published, rounds: first.rounds, projection: first.status.projection };
+      // Every vector is published; below the coarse threshold the queries take
+      // the exact float KNN, at or above it the resident sign-bit stage.
+      const first = await page.evaluate((limit) => window.appAcceptance.semanticScale.publish({ limit }), total);
+      evidence.phases.publish = { ms: Math.round(first.publishMs), published: first.published, rounds: first.rounds, projection: first.status.projection };
+      expect(first.status.vectors).toBe(total);
+      expect(first.status.projection.complete).toBe(true);
       console.log(`${name}: published ${first.published} vectors in ${(first.publishMs / 1000).toFixed(1)} s`);
       const filterThreads = seeded.threadIds.slice(0, 32);
       const measure = async (label) => {
@@ -83,27 +86,25 @@ try {
         set.semanticMedianMs = sorted[Math.floor(sorted.length / 2)]; set.semanticMaxMs = sorted[sorted.length - 1];
         return set;
       };
-      const exact = await measure(`${first.published} vectors, exact float KNN`);
-      evidence.queries.belowThreshold = exact;
-      expect(exact.correct).toBe(seeded.planted.length);
-      expect(exact.status.coarseRetrieval).toBe(false);
-      expect(exact.best.top[0]?.messageId).toBe(exact.best.expected);
-      expect(exact.best.top[0]?.explanation).toBe("Exact + semantic match");
-      expect(exact.filtered.top[0]?.messageId).toBe(seeded.planted[5].messageId);
-      expect(exact.semanticMaxMs).toBeLessThan(INTERACTIVE_BUDGET_MS);
-      evidence.checks.push(`${first.published} vectors below the coarse threshold: every planted topic is the top semantic hit (median ${exact.semanticMedianMs.toFixed(0)} ms, max ${exact.semanticMaxMs.toFixed(0)} ms), Best fuses the lexical and semantic hit, the thread filter keeps the planted hit`);
-      console.log(`${name}: exact path semantic median ${exact.semanticMedianMs.toFixed(0)} ms, best ${exact.best.ms.toFixed(0)} ms, exact ${exact.exact.ms.toFixed(0)} ms, filtered ${exact.filtered.ms.toFixed(0)} ms`);
-      if (total >= COARSE_THRESHOLD) {
-        const rest = await page.evaluate((limit) => window.appAcceptance.semanticScale.publish({ limit }), total);
-        evidence.phases.publishAboveThreshold = { ms: Math.round(rest.publishMs), published: rest.published, projection: rest.status.projection };
-        expect(rest.status.vectors).toBe(total);
-        expect(rest.status.projection.complete).toBe(true);
+      if (total < COARSE_THRESHOLD) {
+        const exact = await measure(`${first.published} vectors, exact float KNN`);
+        evidence.queries.belowThreshold = exact;
+        expect(exact.correct).toBe(seeded.planted.length);
+        expect(exact.status.coarseRetrieval).toBe(false);
+        expect(exact.best.top[0]?.messageId).toBe(exact.best.expected);
+        expect(exact.best.top[0]?.explanation).toBe("Exact + semantic match");
+        expect(exact.filtered.top[0]?.messageId).toBe(seeded.planted[5].messageId);
+        expect(exact.semanticMaxMs).toBeLessThan(INTERACTIVE_BUDGET_MS);
+        evidence.checks.push(`${first.published} vectors below the coarse threshold: every planted topic is the top semantic hit (median ${exact.semanticMedianMs.toFixed(0)} ms, max ${exact.semanticMaxMs.toFixed(0)} ms), Best fuses the lexical and semantic hit, the thread filter keeps the planted hit`);
+        console.log(`${name}: exact path semantic median ${exact.semanticMedianMs.toFixed(0)} ms, best ${exact.best.ms.toFixed(0)} ms, exact ${exact.exact.ms.toFixed(0)} ms, filtered ${exact.filtered.ms.toFixed(0)} ms`);
+      } else {
         const coarse = await measure(`${total} vectors, resident sign-bit coarse stage + float rerank`);
         evidence.queries.aboveThreshold = coarse;
         expect(coarse.correct).toBe(seeded.planted.length);
         expect(coarse.status.coarseRetrieval).toBe(true);
         expect(coarse.status.residentBytes).toBe(total * 48);
         expect(coarse.best.top[0]?.messageId).toBe(coarse.best.expected);
+        expect(coarse.best.top[0]?.explanation).toBe("Exact + semantic match");
         expect(coarse.filtered.top[0]?.messageId).toBe(seeded.planted[5].messageId);
         expect(coarse.semanticMaxMs).toBeLessThan(INTERACTIVE_BUDGET_MS);
         evidence.checks.push(`${total} vectors above the threshold: the coarse stage is active with ${(coarse.status.residentBytes / 1048576).toFixed(1)} MB resident, every planted topic is still the top hit (median ${coarse.semanticMedianMs.toFixed(0)} ms, max ${coarse.semanticMaxMs.toFixed(0)} ms), Best and the thread filter agree`);

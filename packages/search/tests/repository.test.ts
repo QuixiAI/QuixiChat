@@ -1193,7 +1193,7 @@ test("a derived namespace from the previous build (no stale flag) upgrades in pl
     assert.equal(query(search, "lanterns").items.length, 1);
     // Stage the previous build's shape: legacy triggers, no stale column or its indexes, legacy checksum.
     await search.close();
-    db.exec("DROP TRIGGER quixi_search_dirty_insert; DROP TRIGGER quixi_search_dirty_update; DROP TRIGGER quixi_search_dirty_delete; DROP INDEX quixi_search_head_message; DROP INDEX quixi_search_head_source; DROP INDEX quixi_search_head_visible; ALTER TABLE quixi_search_heads DROP COLUMN stale; ALTER TABLE quixi_search_heads DROP COLUMN chunks");
+    db.exec("DROP TRIGGER quixi_search_dirty_insert; DROP TRIGGER quixi_search_dirty_update; DROP TRIGGER quixi_search_dirty_delete; DROP INDEX quixi_search_head_message; DROP INDEX quixi_search_head_source; DROP INDEX quixi_search_head_visible; DROP INDEX quixi_search_head_pending; DROP INDEX quixi_search_chunk_id; ALTER TABLE quixi_search_heads DROP COLUMN stale; ALTER TABLE quixi_search_heads DROP COLUMN chunks; ALTER TABLE quixi_search_heads DROP COLUMN vectors; ALTER TABLE quixi_search_heads DROP COLUMN failed");
     db.exec(SEARCH_TRIGGERS_LEGACY);
     db.exec({ sql: "UPDATE quixi_search_schema SET checksum=? WHERE version=1", bind: [SEARCH_SCHEMA_LEGACY_CHECKSUM] });
     // A canonical change under the legacy triggers bumps the thread's scope revision only.

@@ -158,6 +158,19 @@ export class SemanticRepository {
   }
   /** Removals and generation changes rebuild the resident index lazily. */
   private dropResident(): void { this.resident = null; }
+  /** ADR 0038 fix 8: heads carry `vectors` and `failed` so status is a sum
+   * over visible heads and claims start from heads with pending chunks. A
+   * link change reaches every epoch's head for that chunk id. */
+  private bump(chunkId: string, column: "vectors" | "failed", delta: number): void {
+    if (!delta) return;
+    this.exec(`UPDATE quixi_search_heads SET ${column}=${column}+? WHERE (epoch,source_key,run_id) IN (SELECT epoch,source_key,run_id FROM quixi_search_chunks WHERE chunk_id=?)`, [delta, chunkId]);
+  }
+  /** Adjusts the counters for a link moving from its previous state to the next. */
+  private relink(chunkId: string, previous: { vector_id: SqlValue; failure: SqlValue } | undefined, next: { vector: boolean; failed: boolean }): void {
+    const hadVector = !!previous && previous.vector_id !== null, hadFailure = !!previous && previous.failure !== null;
+    this.bump(chunkId, "vectors", Number(next.vector) - Number(hadVector));
+    this.bump(chunkId, "failed", Number(next.failed) - Number(hadFailure));
+  }
   private rows(sql: string, bind: SqlValue[] = []) {
     return rows(this.db, sql, bind);
   }
@@ -281,8 +294,9 @@ export class SemanticRepository {
     if (this.unavailable) return { state: "disabled", model: null, generation: 0, indexedChunks: 0, pendingChunks: 0, vectors: 0, vectorBytes: 0, projection: emptyProjection };
     const meta = this.meta();
     const model = meta.model === null ? null : (JSON.parse(String(meta.model)) as EmbeddingModelIdentity);
-    const indexed = model ? this.scalar(`SELECT count(*) ${visible.from} JOIN quixi_semantic_links l ON l.chunk_id=c.chunk_id WHERE ${visible.where} AND l.vector_id IS NOT NULL`, visible.bind) : 0;
-    const pending = model ? this.scalar(`SELECT count(*) ${visible.from} LEFT JOIN quixi_semantic_links l ON l.chunk_id=c.chunk_id WHERE ${visible.where} AND (l.chunk_id IS NULL OR (l.vector_id IS NULL AND l.failure IS NULL))`, visible.bind) : 0;
+    // Sums over visible heads (ADR 0038 fix 8), not a walk over every chunk.
+    const counts = model ? this.rows(`SELECT coalesce(sum(h.vectors),0) AS indexed,coalesce(sum(h.chunks-h.vectors-h.failed),0) AS pending FROM quixi_search_heads h WHERE ${visible.where}`, visible.bind)[0] : undefined;
+    const indexed = Number(counts?.indexed ?? 0), pending = Number(counts?.pending ?? 0);
     const vectors = this.scalar("SELECT count(*) FROM quixi_semantic_vectors");
     const projected = this.scalar("SELECT count(*) FROM quixi_semantic_bits");
     const projection = { ...emptyProjection, projected, complete: projected === vectors, coarseRetrieval: this.coarse(vectors, projected), residentBytes: this.residentBytes() };
@@ -293,6 +307,7 @@ export class SemanticRepository {
     this.exec("DELETE FROM quixi_semantic_bits");
     this.exec("DELETE FROM quixi_semantic_vectors");
     this.exec("DELETE FROM quixi_semantic_links");
+    this.exec("UPDATE quixi_search_heads SET vectors=0,failed=0 WHERE vectors<>0 OR failed<>0");
     this.exec("UPDATE quixi_semantic_projection SET generation=?", [generation]);
     this.dropResident();
   }
@@ -357,8 +372,11 @@ export class SemanticRepository {
       const generation = Number(meta.generation);
       if (!model || meta.state !== "enrolled") return { generation, model, items: [], reused: 0 };
       const now = this.now();
+      // Newest heads with pending chunks first (expression index over
+      // heads), then their unlinked or lease-expired chunks; heads whose
+      // pending chunks are all leased are passed over by the join.
       const candidates = this.rows(
-        `SELECT c.chunk_id,c.payload ${visible.from} LEFT JOIN quixi_semantic_links l ON l.chunk_id=c.chunk_id WHERE ${visible.where} AND (l.chunk_id IS NULL OR (l.vector_id IS NULL AND l.failure IS NULL AND (l.claimed_at IS NULL OR l.claimed_at<?))) ORDER BY c.rowid DESC LIMIT ?`,
+        `SELECT c.chunk_id,c.payload ${visible.from} LEFT JOIN quixi_semantic_links l ON l.chunk_id=c.chunk_id WHERE ${visible.where} AND (h.chunks-h.vectors-h.failed>0)=1 AND (l.chunk_id IS NULL OR (l.vector_id IS NULL AND l.failure IS NULL AND (l.claimed_at IS NULL OR l.claimed_at<?))) ORDER BY h.rowid DESC,c.rowid DESC LIMIT ?`,
         [...visible.bind, now - SEMANTIC_CLAIM_LEASE_MS, args.maxChunks],
       );
       const items: SemanticClaim["items"] = [];
@@ -367,10 +385,12 @@ export class SemanticRepository {
         const payload = JSON.parse(String(row.payload)) as { text: string; contextPrefix: string };
         const chunkId = String(row.chunk_id);
         let input = semanticInput(payload.contextPrefix, payload.text);
+        const previous = this.rows("SELECT vector_id,failure FROM quixi_semantic_links WHERE chunk_id=?", [chunkId])[0] as { vector_id: SqlValue; failure: SqlValue } | undefined;
         if (inspect) {
           if (inspect(input, "document").overflow) input = payload.text;
           if (inspect(input, "document").overflow) {
-            this.exec("INSERT INTO quixi_semantic_links(chunk_id,digest,vector_id,generation,claimed_at,failure) VALUES(?,?,NULL,?,NULL,'oversized') ON CONFLICT(chunk_id) DO UPDATE SET digest=excluded.digest,generation=excluded.generation,claimed_at=NULL,failure='oversized'", [chunkId, semanticInputDigest(input), generation]);
+            this.exec("INSERT INTO quixi_semantic_links(chunk_id,digest,vector_id,generation,claimed_at,failure) VALUES(?,?,NULL,?,NULL,'oversized') ON CONFLICT(chunk_id) DO UPDATE SET digest=excluded.digest,vector_id=NULL,generation=excluded.generation,claimed_at=NULL,failure='oversized'", [chunkId, semanticInputDigest(input), generation]);
+            this.relink(chunkId, previous, { vector: false, failed: true });
             changed = true;
             continue;
           }
@@ -379,6 +399,7 @@ export class SemanticRepository {
         const existing = this.rows("SELECT id FROM quixi_semantic_vectors WHERE digest=?", [digest])[0];
         if (existing) {
           this.exec("INSERT INTO quixi_semantic_links(chunk_id,digest,vector_id,generation,claimed_at,failure) VALUES(?,?,?,?,NULL,NULL) ON CONFLICT(chunk_id) DO UPDATE SET digest=excluded.digest,vector_id=excluded.vector_id,generation=excluded.generation,claimed_at=NULL,failure=NULL", [chunkId, digest, Number(existing.id), generation]);
+          this.relink(chunkId, previous, { vector: true, failed: false });
           reused++;
           changed = true;
           continue;
@@ -387,6 +408,7 @@ export class SemanticRepository {
         if (items.length && bytes + length > args.maxBytes) break;
         bytes += length;
         this.exec("INSERT INTO quixi_semantic_links(chunk_id,digest,vector_id,generation,claimed_at,failure) VALUES(?,?,NULL,?,?,NULL) ON CONFLICT(chunk_id) DO UPDATE SET digest=excluded.digest,vector_id=NULL,generation=excluded.generation,claimed_at=excluded.claimed_at,failure=NULL", [chunkId, digest, generation, now]);
+        this.relink(chunkId, previous, { vector: false, failed: false });
         items.push({ chunkId, textDigest: digest, text: input });
       }
       if (changed) this.exec("UPDATE quixi_semantic_meta SET revision=revision+1");
@@ -424,6 +446,7 @@ export class SemanticRepository {
           if (this.resident?.generation === generation) this.appendResident(Number(vectorId), bits);
         }
         this.exec("UPDATE quixi_semantic_links SET vector_id=?,claimed_at=NULL WHERE chunk_id=?", [Number(vectorId), item.chunkId]);
+        this.bump(item.chunkId, "vectors", 1);
         accepted++;
       }
       if (accepted) this.exec("UPDATE quixi_semantic_meta SET revision=revision+1");

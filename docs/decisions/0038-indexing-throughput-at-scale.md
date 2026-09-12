@@ -161,13 +161,64 @@ Chromium before fix 5):
    (indexed and pending), and every publication returns that status; the
    application's indexer also reads it once per cycle for progress.
 
-Both are the next slice: per-head semantic counters (`vectors`, `failed`)
-maintained at link time with an index on `quixi_search_chunks(chunk_id)`,
-so the semantic status is a sum over visible heads like `indexedChunks`; a
-claim that starts from the oldest unlinked head (a cursor over heads with
-`chunks > vectors + failed`) instead of scanning; and `publishSemanticVectors`
-without a full status in its result, since the indexer reads status on its
-own cadence. Then the 101k run is re-attempted end to end.
+Both are addressed by fix 8 below; the publication keeps returning the
+status, which is now cheap.
+
+## Fix 8 (same day): per-head semantic counters and a head-driven claim
+
+`quixi_search_heads` gains `vectors` and `failed` (the run's chunks holding
+a vector, or recorded as oversized), maintained at every link change in the
+semantic repository — claim (new lease, reused vector, oversized failure),
+publication, generation clears — through an index on
+`quixi_search_chunks(chunk_id)` that reaches the chunk's head in every
+epoch; a published head starts from what its chunks' links already say
+(chunk ids are content-addressed, so a rebuilt run may inherit links). The
+semantic status is now `sum(vectors)` and `sum(chunks-vectors-failed)` over
+visible heads, and the claim starts from the newest heads with pending
+chunks through an expression index
+`(epoch, stale, (chunks-vectors-failed>0))`, passing over heads whose
+pending chunks are all leased, instead of scanning past every linked chunk.
+The upgrade at open is idempotent over the three previous head shapes (all
+three legacy checksums kept and verified against the committed builds) and
+backfills the counters from the links. Seven storage scenarios assert the
+counters equal the exact per-chunk facts after edits, rebuilds, failures,
+re-enrolment and deletion.
+
+Node, 30k vectors: a 64-vector claim→publish round 183 → 70 ms; the
+product semantic search stays at 17 ms. The browser scale proof's synthetic
+planted vectors had to change with this fix: a single coordinate plus noise
+has no sign structure for the coarse stage to see (its sign bits are random
+apart from one bit), so planted vectors now share a seeded ±1 sign pattern
+with their topic query plus 30% noise, the way similar texts share sign
+structure in real embeddings — the stage is designed for dense embeddings
+(ADR 0036 amendment 2's quality evidence is on real vectors).
+
+## The 101,000-message run end to end (after fix 8)
+
+[semantic-scale-browser.json](../../packages/app/tests/browser/results/semantic-scale-browser.json),
+both engines passing every check:
+
+| Phase (101,000 messages) | Chromium | WebKit |
+| --- | --- | --- |
+| seed (808 commits of ≤125 mutations) | 135 s | 100 s |
+| lexical indexing | 369 s (7954 slices) | 298 s (7954 slices) |
+| publish 101,000 vectors (1,579 claim→publish rounds) | 787 s | 721 s |
+| semantic query, coarse stage + rerank, median / max of 10 | 72 / 162 ms | 78 / 187 ms |
+| first coarse query (resident index load, 4.8 MB) | 162 ms | 187 ms |
+| Best / thread-filtered semantic | 74 / 70 ms | 74 / 73 ms |
+| cold reopen: first query / median after | 3820 ms / 73 ms | 3436 ms / 69 ms |
+| planted topics first (coarse / after reopen) | 10 / 10 of 10 | 10 / 10 of 10 |
+| resident sign-bit index | 4.6 MB | 4.6 MB |
+
+The resident sign-bit stage (ADR 0036 amendment 2) is therefore proven
+through the application's storage path at 101k vectors in both engines:
+every planted topic is the top hit, Best returns it as "Exact + semantic
+match", and the thread filter keeps it. Two costs remain worth a later
+slice, neither blocking: the first coarse query after a cold reopen loads
+the 101k sign-bit rows through the row reader (3.4–3.8 s, within the 5 s
+budget; a blob-at-a-time load would be faster), and a 64-vector publication
+round still costs about 0.5 s in the browser (four statements per vector
+plus the status sums).
 
 ## Measured after fixes 1–4 (browser scale proof, 30,000 messages)
 

@@ -242,11 +242,15 @@ export class SearchRepository {
     const columns = new Set(this.rows("PRAGMA table_info(quixi_search_heads)").map((row) => String(row.name)));
     if (!columns.has("stale")) this.exec("ALTER TABLE quixi_search_heads ADD COLUMN stale INTEGER NOT NULL DEFAULT 0");
     if (!columns.has("chunks")) this.exec("ALTER TABLE quixi_search_heads ADD COLUMN chunks INTEGER NOT NULL DEFAULT 0");
+    if (!columns.has("vectors")) { this.exec("ALTER TABLE quixi_search_heads ADD COLUMN vectors INTEGER NOT NULL DEFAULT 0"); this.exec("ALTER TABLE quixi_search_heads ADD COLUMN failed INTEGER NOT NULL DEFAULT 0"); }
     this.exec("DROP INDEX IF EXISTS quixi_search_head_visible");
     this.db.exec(SEARCH_HEAD_STALE_INDEXES.replaceAll("CREATE INDEX ", "CREATE INDEX IF NOT EXISTS "));
     this.db.exec(SEARCH_TRIGGERS);
     if (!columns.has("stale")) this.exec(`UPDATE quixi_search_heads AS h SET stale=1 WHERE NOT (${LEGACY_VISIBLE_HEAD})`);
     if (!columns.has("chunks")) this.exec("UPDATE quixi_search_heads AS h SET chunks=(SELECT count(*) FROM quixi_search_chunks c WHERE c.epoch=h.epoch AND c.source_key=h.source_key AND c.run_id=h.run_id)");
+    // Semantic counters from the links, when the semantic namespace exists.
+    if (!columns.has("vectors") && this.rows("SELECT 1 FROM sqlite_schema WHERE type='table' AND name='quixi_semantic_links'").length)
+      this.exec("UPDATE quixi_search_heads AS h SET vectors=(SELECT count(*) FROM quixi_search_chunks c JOIN quixi_semantic_links l ON l.chunk_id=c.chunk_id WHERE c.epoch=h.epoch AND c.source_key=h.source_key AND c.run_id=h.run_id AND l.vector_id IS NOT NULL),failed=(SELECT count(*) FROM quixi_search_chunks c JOIN quixi_semantic_links l ON l.chunk_id=c.chunk_id WHERE c.epoch=h.epoch AND c.source_key=h.source_key AND c.run_id=h.run_id AND l.failure IS NOT NULL)");
     this.exec("UPDATE quixi_search_schema SET checksum=? WHERE version=1", [SEARCH_SCHEMA_CHECKSUM]);
   }
   private installQueueIndexes(): void {
@@ -828,8 +832,11 @@ export class SearchRepository {
       // Replacing a head orphans the previous run's chunks for the obsolete scan.
       if (this.rows("SELECT 1 FROM quixi_search_heads WHERE epoch=? AND source_key=? AND run_id<>?", [work.epoch, work.key, work.runId]).length) this.markMaybeObsolete();
       const chunkCount = this.scalar("SELECT count(*) FROM quixi_search_chunks WHERE epoch=? AND source_key=? AND run_id=?", [work.epoch, work.key, work.runId]);
+      // Chunk ids are content-addressed, so a rebuilt run may already have
+      // links; the head's semantic counters start from what the links say.
+      const counters = this.rows("SELECT count(l.vector_id) AS vectors,count(l.failure) AS failed FROM quixi_search_chunks c LEFT JOIN quixi_semantic_links l ON l.chunk_id=c.chunk_id WHERE c.epoch=? AND c.source_key=? AND c.run_id=?", [work.epoch, work.key, work.runId])[0];
       this.exec(
-        `INSERT INTO quixi_search_heads VALUES(${Array(22).fill("?").join(",")},0,?) ON CONFLICT(epoch,source_key) DO UPDATE SET stale=0,chunks=excluded.chunks,run_id=excluded.run_id,source_type=excluded.source_type,source_id=excluded.source_id,part_id=excluded.part_id,thread_id=excluded.thread_id,message_id=excluded.message_id,document_id=excluded.document_id,title=excluded.title,role=excluded.role,provider=excluded.provider,model=excluded.model,date=excluded.date,tags=excluded.tags,media_type=excluded.media_type,origin=excluded.origin,source_revision=excluded.source_revision,message_revision=excluded.message_revision,thread_revision=excluded.thread_revision,document_revision=excluded.document_revision,global_revision=excluded.global_revision`,
+        `INSERT INTO quixi_search_heads VALUES(${Array(22).fill("?").join(",")},0,?,?,?) ON CONFLICT(epoch,source_key) DO UPDATE SET stale=0,chunks=excluded.chunks,vectors=excluded.vectors,failed=excluded.failed,run_id=excluded.run_id,source_type=excluded.source_type,source_id=excluded.source_id,part_id=excluded.part_id,thread_id=excluded.thread_id,message_id=excluded.message_id,document_id=excluded.document_id,title=excluded.title,role=excluded.role,provider=excluded.provider,model=excluded.model,date=excluded.date,tags=excluded.tags,media_type=excluded.media_type,origin=excluded.origin,source_revision=excluded.source_revision,message_revision=excluded.message_revision,thread_revision=excluded.thread_revision,document_revision=excluded.document_revision,global_revision=excluded.global_revision`,
         [
           work.epoch,
           work.key,
@@ -850,6 +857,8 @@ export class SearchRepository {
           source.origin,
           ...work.signature,
           chunkCount,
+          Number(counters?.vectors ?? 0),
+          Number(counters?.failed ?? 0),
         ],
       );
       this.exec(

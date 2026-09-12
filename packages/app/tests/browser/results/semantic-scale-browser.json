@@ -1,11 +1,11 @@
 {
   "status": "passed",
-  "startedAt": "2026-09-12T14:22:59.051Z",
+  "startedAt": "2026-09-12T16:50:34.166Z",
   "sizes": {
-    "threads": 100,
+    "threads": 1010,
     "perThread": 100,
     "planted": 10,
-    "messages": 10000
+    "messages": 101000
   },
   "coarseThreshold": 100000,
   "budgets": {
@@ -20,124 +20,215 @@
       "name": "chromium",
       "status": "passed",
       "checks": [
-        "10000 vectors below the coarse threshold: every planted topic is the top semantic hit (median 95 ms, max 123 ms), Best fuses the lexical and semantic hit, the thread filter keeps the planted hit"
+        "101000 vectors above the threshold: the coarse stage is active with 4.6 MB resident, every planted topic is still the top hit (median 72 ms, max 162 ms), Best and the thread filter agree",
+        "cold reopen: the first coarse query rebuilds the resident index (3821 ms) and later queries take a median of 73 ms"
       ],
       "phases": {
         "seed": {
-          "ms": 9820,
-          "batches": 85
+          "ms": 135028,
+          "batches": 859
         },
         "lexical": {
-          "ms": 57744,
-          "slices": 788,
-          "indexedChunks": 10000
+          "ms": 368916,
+          "slices": 7954,
+          "indexedChunks": 101000
         },
-        "publishBelowThreshold": {
-          "ms": 12670,
-          "published": 10000,
-          "rounds": 157,
+        "publish": {
+          "ms": 786908,
+          "published": 101000,
+          "rounds": 1579,
           "projection": {
             "representation": "sign-bit-v1",
             "bytesPerVector": 48,
             "candidates": 5000,
-            "projected": 10000,
+            "projected": 101000,
             "complete": true,
-            "coarseRetrieval": false,
+            "coarseRetrieval": true,
             "threshold": 100000,
             "residentBytes": 0
           }
         }
       },
       "queries": {
-        "belowThreshold": {
-          "label": "10000 vectors, exact float KNN",
+        "aboveThreshold": {
+          "label": "101000 vectors, resident sign-bit coarse stage + float rerank",
           "semantic": [
-            105.5,
-            99.69999998807907,
-            94.69999998807907,
-            122.5,
-            92.59999996423721,
-            91.60000002384186,
-            92.90000003576279,
-            95.19999998807907,
-            90.10000002384186,
-            94.19999998807907
+            162,
+            76.90000003576279,
+            74.89999997615814,
+            95.5,
+            72.39999997615814,
+            69.90000003576279,
+            71.39999997615814,
+            70.60000002384186,
+            68.89999997615814,
+            69.10000002384186
           ],
           "correct": 10,
           "best": {
-            "ms": 101.19999998807907,
+            "ms": 73.5,
             "count": 20,
             "top": [
               {
-                "messageId": "b6738fe7-db00-4500-9b80-c3edf9540198",
-                "threadId": "21afacb8-c361-45fa-ad06-44a62d4105ce",
+                "messageId": "2cc9f8ef-d9bd-4da2-9048-abe79a18b895",
+                "threadId": "0199227f-d77a-47d6-a481-8a8d662e7e4e",
                 "explanation": "Exact + semantic match"
               },
               {
-                "messageId": "b2784615-c332-4ac4-8410-e8e9233be745",
-                "threadId": "9ab53134-c1dc-4789-9571-d2693e410424",
+                "messageId": "9026c205-e34d-4a09-a72e-7a340dcc591f",
+                "threadId": "83f33545-d046-4ca2-821c-308ba65b105b",
                 "explanation": "Exact text match"
               },
               {
-                "messageId": "bee9c7ac-82d5-416f-8574-3e4d14f10b94",
-                "threadId": "e0dcf80b-7ca7-4ac2-b2fd-d40b6fd95eb8",
+                "messageId": "4f843e33-ef32-497e-8d5f-7bb184411d87",
+                "threadId": "15270d16-4652-41fe-b6a3-566db1ec4891",
                 "explanation": "Semantic match"
               }
             ],
             "bytes": 12517,
-            "expected": "b6738fe7-db00-4500-9b80-c3edf9540198"
+            "expected": "2cc9f8ef-d9bd-4da2-9048-abe79a18b895"
           },
           "exact": {
-            "ms": 6,
+            "ms": 16.100000023841858,
             "count": 2,
             "top": [
               {
-                "messageId": "b6738fe7-db00-4500-9b80-c3edf9540198",
-                "threadId": "21afacb8-c361-45fa-ad06-44a62d4105ce",
+                "messageId": "2cc9f8ef-d9bd-4da2-9048-abe79a18b895",
+                "threadId": "0199227f-d77a-47d6-a481-8a8d662e7e4e",
                 "explanation": "Exact text match"
               },
               {
-                "messageId": "b2784615-c332-4ac4-8410-e8e9233be745",
-                "threadId": "9ab53134-c1dc-4789-9571-d2693e410424",
+                "messageId": "9026c205-e34d-4a09-a72e-7a340dcc591f",
+                "threadId": "83f33545-d046-4ca2-821c-308ba65b105b",
                 "explanation": "Exact text match"
               }
             ],
             "bytes": 1397
           },
           "filtered": {
-            "ms": 104,
+            "ms": 69.5,
             "count": 20,
             "top": [
               {
-                "messageId": "9394b008-1c59-483a-b40e-aa5d19b640af",
-                "threadId": "f39ec51a-37ac-461e-afca-19ec575a7d51",
+                "messageId": "d6a669d9-bc7b-455c-aeb3-af9922b708b5",
+                "threadId": "5537302c-d079-478b-b359-07270e734fd2",
                 "explanation": "Semantic match"
               },
               {
-                "messageId": "49c22f85-56c4-41ce-8d8c-3a5d662c83c1",
-                "threadId": "d1f17df0-5e3e-42ab-a3f1-5e3c5a74eec9",
+                "messageId": "bce62bb4-6443-4adc-a7b3-9ef12b499e81",
+                "threadId": "e606fd00-7559-4203-a440-ac053e21cffa",
                 "explanation": "Semantic match"
               },
               {
-                "messageId": "b9038ac8-98cc-46fa-8311-f63796aef046",
-                "threadId": "21afacb8-c361-45fa-ad06-44a62d4105ce",
+                "messageId": "996e1add-4303-4419-8123-2e0648b7f95c",
+                "threadId": "8d16252f-7960-454c-8c32-239669ea52bf",
                 "explanation": "Semantic match"
               }
             ],
-            "bytes": 12320
+            "bytes": 12319
           },
           "status": {
             "representation": "sign-bit-v1",
             "bytesPerVector": 48,
             "candidates": 5000,
-            "projected": 10000,
+            "projected": 101000,
             "complete": true,
-            "coarseRetrieval": false,
+            "coarseRetrieval": true,
             "threshold": 100000,
-            "residentBytes": 0
+            "residentBytes": 4848000
           },
-          "semanticMedianMs": 94.69999998807907,
-          "semanticMaxMs": 122.5
+          "semanticMedianMs": 72.39999997615814,
+          "semanticMaxMs": 162
+        },
+        "coldReopen": {
+          "label": "101000 vectors after a cold reopen",
+          "semantic": [
+            3820.5,
+            119.10000002384186,
+            73.40000003576279,
+            72.90000003576279,
+            75.5,
+            72,
+            70.20000004768372,
+            69.89999997615814,
+            68.69999998807907,
+            72
+          ],
+          "correct": 10,
+          "best": {
+            "ms": 74.40000003576279,
+            "count": 20,
+            "top": [
+              {
+                "messageId": "2cc9f8ef-d9bd-4da2-9048-abe79a18b895",
+                "threadId": "0199227f-d77a-47d6-a481-8a8d662e7e4e",
+                "explanation": "Exact + semantic match"
+              },
+              {
+                "messageId": "9026c205-e34d-4a09-a72e-7a340dcc591f",
+                "threadId": "83f33545-d046-4ca2-821c-308ba65b105b",
+                "explanation": "Exact text match"
+              },
+              {
+                "messageId": "4f843e33-ef32-497e-8d5f-7bb184411d87",
+                "threadId": "15270d16-4652-41fe-b6a3-566db1ec4891",
+                "explanation": "Semantic match"
+              }
+            ],
+            "bytes": 12517,
+            "expected": "2cc9f8ef-d9bd-4da2-9048-abe79a18b895"
+          },
+          "exact": {
+            "ms": 19.100000023841858,
+            "count": 2,
+            "top": [
+              {
+                "messageId": "2cc9f8ef-d9bd-4da2-9048-abe79a18b895",
+                "threadId": "0199227f-d77a-47d6-a481-8a8d662e7e4e",
+                "explanation": "Exact text match"
+              },
+              {
+                "messageId": "9026c205-e34d-4a09-a72e-7a340dcc591f",
+                "threadId": "83f33545-d046-4ca2-821c-308ba65b105b",
+                "explanation": "Exact text match"
+              }
+            ],
+            "bytes": 1397
+          },
+          "filtered": {
+            "ms": 72.30000001192093,
+            "count": 20,
+            "top": [
+              {
+                "messageId": "d6a669d9-bc7b-455c-aeb3-af9922b708b5",
+                "threadId": "5537302c-d079-478b-b359-07270e734fd2",
+                "explanation": "Semantic match"
+              },
+              {
+                "messageId": "bce62bb4-6443-4adc-a7b3-9ef12b499e81",
+                "threadId": "e606fd00-7559-4203-a440-ac053e21cffa",
+                "explanation": "Semantic match"
+              },
+              {
+                "messageId": "996e1add-4303-4419-8123-2e0648b7f95c",
+                "threadId": "8d16252f-7960-454c-8c32-239669ea52bf",
+                "explanation": "Semantic match"
+              }
+            ],
+            "bytes": 12319
+          },
+          "status": {
+            "representation": "sign-bit-v1",
+            "bytesPerVector": 48,
+            "candidates": 5000,
+            "projected": 101000,
+            "complete": true,
+            "coarseRetrieval": true,
+            "threshold": 100000,
+            "residentBytes": 4848000
+          },
+          "semanticMedianMs": 72.90000003576279,
+          "semanticMaxMs": 3820.5
         }
       }
     },
@@ -145,134 +236,225 @@
       "name": "webkit",
       "status": "passed",
       "checks": [
-        "10000 vectors below the coarse threshold: every planted topic is the top semantic hit (median 85 ms, max 111 ms), Best fuses the lexical and semantic hit, the thread filter keeps the planted hit"
+        "101000 vectors above the threshold: the coarse stage is active with 4.6 MB resident, every planted topic is still the top hit (median 78 ms, max 187 ms), Best and the thread filter agree",
+        "cold reopen: the first coarse query rebuilds the resident index (3436 ms) and later queries take a median of 69 ms"
       ],
       "phases": {
         "seed": {
-          "ms": 6819,
-          "batches": 85
+          "ms": 99830,
+          "batches": 859
         },
         "lexical": {
-          "ms": 46582,
-          "slices": 788,
-          "indexedChunks": 10000
+          "ms": 298177,
+          "slices": 7954,
+          "indexedChunks": 101000
         },
-        "publishBelowThreshold": {
-          "ms": 10213,
-          "published": 10000,
-          "rounds": 157,
+        "publish": {
+          "ms": 720838,
+          "published": 101000,
+          "rounds": 1579,
           "projection": {
             "representation": "sign-bit-v1",
             "bytesPerVector": 48,
             "candidates": 5000,
-            "projected": 10000,
+            "projected": 101000,
             "complete": true,
-            "coarseRetrieval": false,
+            "coarseRetrieval": true,
             "threshold": 100000,
             "residentBytes": 0
           }
         }
       },
       "queries": {
-        "belowThreshold": {
-          "label": "10000 vectors, exact float KNN",
+        "aboveThreshold": {
+          "label": "101000 vectors, resident sign-bit coarse stage + float rerank",
           "semantic": [
-            92,
-            89,
-            82,
-            85,
-            111,
-            88,
-            85,
-            83,
-            82,
-            84
+            187,
+            79,
+            77,
+            91,
+            78,
+            68,
+            78,
+            69,
+            68,
+            80
           ],
           "correct": 10,
           "best": {
-            "ms": 86,
+            "ms": 74,
             "count": 20,
             "top": [
               {
-                "messageId": "c9cebdaa-09fa-44ff-8add-2478439d9fa7",
-                "threadId": "95cecd32-42d5-4a03-9bc2-eb6ae092a59f",
+                "messageId": "909aefad-6fd1-43a9-8f99-c87010574208",
+                "threadId": "cf7f390b-cbcb-4cba-819a-d004bc72faac",
                 "explanation": "Exact + semantic match"
               },
               {
-                "messageId": "d1cac09b-a712-4d3b-a68c-90137ad824f2",
-                "threadId": "a63e814d-ae9c-4c89-aeed-64de7495fede",
+                "messageId": "dd8bc8cc-1c67-43a0-9964-3b090cd6a98b",
+                "threadId": "3fb6827c-f200-4e63-8444-e0885c6a41ce",
                 "explanation": "Exact text match"
               },
               {
-                "messageId": "fd0eb3ac-f4db-4796-8b1f-259281ef3450",
-                "threadId": "ab70f45b-a0ce-43dd-83c6-a6d04294749b",
+                "messageId": "b8db0ac1-a72b-4166-8323-7f63ec6a26e6",
+                "threadId": "eb2bf95a-b63d-4342-8074-83606bb7a3f3",
                 "explanation": "Semantic match"
               }
             ],
             "bytes": 12517,
-            "expected": "c9cebdaa-09fa-44ff-8add-2478439d9fa7"
+            "expected": "909aefad-6fd1-43a9-8f99-c87010574208"
           },
           "exact": {
-            "ms": 7,
+            "ms": 27,
             "count": 2,
             "top": [
               {
-                "messageId": "c9cebdaa-09fa-44ff-8add-2478439d9fa7",
-                "threadId": "95cecd32-42d5-4a03-9bc2-eb6ae092a59f",
+                "messageId": "909aefad-6fd1-43a9-8f99-c87010574208",
+                "threadId": "cf7f390b-cbcb-4cba-819a-d004bc72faac",
                 "explanation": "Exact text match"
               },
               {
-                "messageId": "d1cac09b-a712-4d3b-a68c-90137ad824f2",
-                "threadId": "a63e814d-ae9c-4c89-aeed-64de7495fede",
+                "messageId": "dd8bc8cc-1c67-43a0-9964-3b090cd6a98b",
+                "threadId": "3fb6827c-f200-4e63-8444-e0885c6a41ce",
                 "explanation": "Exact text match"
               }
             ],
             "bytes": 1397
           },
           "filtered": {
-            "ms": 97,
+            "ms": 73,
             "count": 20,
             "top": [
               {
-                "messageId": "41815092-080e-4189-aaee-475509e40357",
-                "threadId": "a33a8d1a-438f-44df-bbe6-5e1ebd8c1324",
+                "messageId": "f66ea012-42fd-4870-9b48-d2e3dce5e658",
+                "threadId": "0f7e7547-b6ae-44a1-9411-7f973434dbde",
                 "explanation": "Semantic match"
               },
               {
-                "messageId": "3127c1d6-19b9-4693-b071-6bf34ad6013f",
-                "threadId": "3c864b04-e97d-4396-b480-b189756aef47",
+                "messageId": "e6ac50ab-fa3b-40e5-9cc9-628de9456cbf",
+                "threadId": "e3f3777e-f759-4dc3-94e3-32823669eacf",
                 "explanation": "Semantic match"
               },
               {
-                "messageId": "e6222564-473a-4bcb-8480-189693a0d450",
-                "threadId": "95cecd32-42d5-4a03-9bc2-eb6ae092a59f",
+                "messageId": "6f6090a7-c0d1-48d4-bcd0-1e83f130331e",
+                "threadId": "d4f94231-0516-4617-a413-222e6eba4750",
                 "explanation": "Semantic match"
               }
             ],
-            "bytes": 12320
+            "bytes": 12319
           },
           "status": {
             "representation": "sign-bit-v1",
             "bytesPerVector": 48,
             "candidates": 5000,
-            "projected": 10000,
+            "projected": 101000,
             "complete": true,
-            "coarseRetrieval": false,
+            "coarseRetrieval": true,
             "threshold": 100000,
-            "residentBytes": 0
+            "residentBytes": 4848000
           },
-          "semanticMedianMs": 85,
-          "semanticMaxMs": 111
+          "semanticMedianMs": 78,
+          "semanticMaxMs": 187
+        },
+        "coldReopen": {
+          "label": "101000 vectors after a cold reopen",
+          "semantic": [
+            3436,
+            87,
+            69,
+            69,
+            67,
+            69,
+            69,
+            68,
+            67,
+            68
+          ],
+          "correct": 10,
+          "best": {
+            "ms": 68,
+            "count": 20,
+            "top": [
+              {
+                "messageId": "909aefad-6fd1-43a9-8f99-c87010574208",
+                "threadId": "cf7f390b-cbcb-4cba-819a-d004bc72faac",
+                "explanation": "Exact + semantic match"
+              },
+              {
+                "messageId": "dd8bc8cc-1c67-43a0-9964-3b090cd6a98b",
+                "threadId": "3fb6827c-f200-4e63-8444-e0885c6a41ce",
+                "explanation": "Exact text match"
+              },
+              {
+                "messageId": "b8db0ac1-a72b-4166-8323-7f63ec6a26e6",
+                "threadId": "eb2bf95a-b63d-4342-8074-83606bb7a3f3",
+                "explanation": "Semantic match"
+              }
+            ],
+            "bytes": 12517,
+            "expected": "909aefad-6fd1-43a9-8f99-c87010574208"
+          },
+          "exact": {
+            "ms": 16,
+            "count": 2,
+            "top": [
+              {
+                "messageId": "909aefad-6fd1-43a9-8f99-c87010574208",
+                "threadId": "cf7f390b-cbcb-4cba-819a-d004bc72faac",
+                "explanation": "Exact text match"
+              },
+              {
+                "messageId": "dd8bc8cc-1c67-43a0-9964-3b090cd6a98b",
+                "threadId": "3fb6827c-f200-4e63-8444-e0885c6a41ce",
+                "explanation": "Exact text match"
+              }
+            ],
+            "bytes": 1397
+          },
+          "filtered": {
+            "ms": 68,
+            "count": 20,
+            "top": [
+              {
+                "messageId": "f66ea012-42fd-4870-9b48-d2e3dce5e658",
+                "threadId": "0f7e7547-b6ae-44a1-9411-7f973434dbde",
+                "explanation": "Semantic match"
+              },
+              {
+                "messageId": "e6ac50ab-fa3b-40e5-9cc9-628de9456cbf",
+                "threadId": "e3f3777e-f759-4dc3-94e3-32823669eacf",
+                "explanation": "Semantic match"
+              },
+              {
+                "messageId": "6f6090a7-c0d1-48d4-bcd0-1e83f130331e",
+                "threadId": "d4f94231-0516-4617-a413-222e6eba4750",
+                "explanation": "Semantic match"
+              }
+            ],
+            "bytes": 12319
+          },
+          "status": {
+            "representation": "sign-bit-v1",
+            "bytesPerVector": 48,
+            "candidates": 5000,
+            "projected": 101000,
+            "complete": true,
+            "coarseRetrieval": true,
+            "threshold": 100000,
+            "residentBytes": 4848000
+          },
+          "semanticMedianMs": 69,
+          "semanticMaxMs": 3436
         }
       }
     }
   ],
   "sourceSha256": {
-    "packages/storage/src/worker/search/semantic.ts": "e7b2ccef3d772f16dd834d235b76a4ef2fc911ed1eda7d52d2d101e3069fb32b",
-    "packages/storage/src/worker/search/index.ts": "1167f94079ab8bb219107ed22f493ee9bf70b6f06771994de66b8d5c82ebbfe6",
+    "packages/storage/src/worker/search/semantic.ts": "3634ca1ba4c903beaff8e4e34e05235ad0b0d21fdbdffc6b1cbde34cdb3ffaf7",
+    "packages/storage/src/worker/search/index.ts": "0b727270eb761e3b2accd561091264bcaf9a731ca71f61c908be5658c444e76f",
     "packages/core/src/contracts/search.ts": "2fd0379ba81e5655cae4da50b39a32af3907a7c0f7652d2a678194a11a18c8ee",
-    "packages/app/tests/browser/index.ts": "b6165c88eaee6d4d7fe49ef7a4a1427095b0eefe49f79ac18e5997ee3d3dc08f",
-    "packages/app/tests/browser/semantic-scale.mjs": "34c47831b972b1bff9ee74be9ba8acec0d1010f104b0f02c673516b823d9a23a"
+    "packages/app/tests/browser/index.ts": "b448c70fd7135ac2e0344d473385b4b6861fecf381c7fd8b79c5dfbe3555f2cb",
+    "packages/app/tests/browser/semantic-scale.mjs": "cafc0add039b0c7e8623a1ee3d382f44525c944ac50ae6b5f5ddc38ce18e8582"
   },
   "environment": {
     "platform": "darwin",
@@ -283,5 +465,5 @@
     "node": "v22.23.1"
   },
   "qualification": "Synthetic unit vectors (seeded per chunk digest; ten planted topic directions) published through the production claim→publish protocol; the real embedding worker is not used. Timings are single runs under development load on one machine.",
-  "finishedAt": "2026-09-12T14:25:27.880Z"
+  "finishedAt": "2026-09-12T17:30:59.486Z"
 }

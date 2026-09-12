@@ -92,6 +92,11 @@ async function indexAll(search: SearchRepository, topicFor: (text: string) => nu
   const publication = search.publishSemanticVectors({ generation: claim.generation, items: claim.items.map((item) => ({ chunkId: item.chunkId, textDigest: item.textDigest, vector: vectorFor(topicFor(item.text), item.text) })) });
   return { claim, publication };
 }
+/** The per-head semantic counters must always equal the exact per-chunk facts. */
+function assertCountersExact(db: { exec: CanonicalSqlite["exec"] }) {
+  const rows = db.exec({ sql: "SELECT h.epoch,h.source_key,h.chunks,h.vectors,h.failed,(SELECT count(*) FROM quixi_search_chunks c WHERE c.epoch=h.epoch AND c.source_key=h.source_key AND c.run_id=h.run_id) AS exact_chunks,(SELECT count(*) FROM quixi_search_chunks c JOIN quixi_semantic_links l ON l.chunk_id=c.chunk_id WHERE c.epoch=h.epoch AND c.source_key=h.source_key AND c.run_id=h.run_id AND l.vector_id IS NOT NULL) AS exact_vectors,(SELECT count(*) FROM quixi_search_chunks c JOIN quixi_semantic_links l ON l.chunk_id=c.chunk_id WHERE c.epoch=h.epoch AND c.source_key=h.source_key AND c.run_id=h.run_id AND l.failure IS NOT NULL) AS exact_failed FROM quixi_search_heads h", rowMode: "object", returnValue: "resultRows" }) as Record<string, number>[];
+  for (const row of rows) assert.deepEqual({ chunks: row.chunks, vectors: row.vectors, failed: row.failed }, { chunks: row.exact_chunks, vectors: row.exact_vectors, failed: row.exact_failed }, `head ${row.source_key} counters`);
+}
 const page = (search: SearchRepository, args: Partial<SearchOperations["searchArchive"]["args"]> & { mode: "exact" | "best" | "semantic" }, filters: SearchFilters = {}, cursor: string | null = null) =>
   search.search({ query: "", filters, page: { maxItems: 50, maxBytes: 200_000, cursor }, ...args });
 
@@ -213,6 +218,7 @@ test("enrolment, bounded claims, publication and hybrid RRF explanations with co
     assert.equal(replaced.vectors, 0);
     assert.equal(replaced.generation, 3);
     assert.equal(replaced.pendingChunks, 4);
+    assertCountersExact(db);
   } finally { await search.close(); db.close(); }
 });
 
@@ -245,6 +251,7 @@ test("stale generations, changed chunks, duplicates and malformed vectors are re
     assert.equal(deleted.vectors, 0);
     publication = search.publishSemanticVectors({ generation: claim.generation, items: [good(a)] });
     assert.deepEqual(publication.rejected, [{ chunkId: a.chunkId, reason: "stale_generation" }]);
+    assertCountersExact(db);
   } finally { await search.close(); db.close(); }
 });
 
@@ -277,6 +284,7 @@ test("pause refuses claims, resume and restart continue only missing chunks, and
     clock += SEMANTIC_CLAIM_LEASE_MS + 1;
     assert.equal(restarted.claimSemanticChunks({ maxChunks: 64, maxBytes: 1024 }).items.length, 1);
     await restarted.close();
+    assertCountersExact(db);
   } finally { await search.close(); db.close(); }
 });
 
@@ -310,6 +318,7 @@ test("lexical rebuilds relink vectors by exact input digest without inference; s
     assert.ok(refreshed.items.every((item) => item.text.startsWith("Renamed archive")));
     for (let i = 0; i < 10 && search.maintainSemantic(64).remaining; i++);
     assert.equal(search.semanticStatus().vectors, 0, "orphaned vectors are removed by bounded maintenance");
+    assertCountersExact(db);
   } finally { await search.close(); db.close(); }
 });
 
@@ -341,6 +350,7 @@ test("deleting or breaking the semantic index leaves canonical history and lexic
     assert.equal(broken.deleteSemanticIndex({ operationId: id() }).state, "disabled");
     assert.equal(broken.enrollSemantic({ operationId: id(), model: model(broken.version) }).pendingChunks, 1);
     await broken.close();
+    assertCountersExact(db);
   } finally { await search.close(); db.close(); }
 });
 
@@ -373,6 +383,7 @@ test("extracted document pages flow through the same claim pipeline; identical p
     assert.deepEqual(hits.items.map((hit) => hit.position.page).sort(), [1, 2]);
     assert.ok(hits.items.every((hit) => hit.documentId === pdfDocument && hit.explanation === "Semantic match"));
     assert.equal(page(search, { mode: "semantic", queryVector: queryVector(7) }, { sourceTypes: ["message"] }).items.length, 1);
+    assertCountersExact(db);
   } finally { await search.close(); db.close(); }
 });
 
@@ -460,6 +471,7 @@ test("the sign-bit projection (ADR 0036 amendment 2) stays complete, serves coar
     assert.equal(deleted.projection.projected, 0);
     assert.equal(page(replaced, { mode: "best", query: "kittens" }).items.length, 1);
     await upgraded.close(); await replaced.close();
+    assertCountersExact(db);
   } finally { await search.close(); db.close(); }
 });
 

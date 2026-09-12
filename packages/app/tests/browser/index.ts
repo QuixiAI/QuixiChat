@@ -178,6 +178,7 @@ const unmount = mountApp(document.getElementById("app")!, {
     },
   },
 });
+function topicPattern(topic: number): number[] { let seed = (0x9e3779b9 * (topic + 1)) >>> 0; const rand = () => { seed = (seed * 1664525 + 1013904223) >>> 0; return seed / 4294967296; }; const v = new Array<number>(384); for (let d = 0; d < 384; d++) v[d] = rand() < 0.5 ? -1 / Math.sqrt(384) : 1 / Math.sqrt(384); return v; }
 Object.assign(window, {
   appAcceptance: {
     advanceHealthClock: (milliseconds: number) => { if (!Number.isFinite(milliseconds) || Math.abs(milliseconds) > 3_600_000) throw new Error('Invalid fixture clock advance'); healthClockOffset += milliseconds; window.dispatchEvent(new Event('focus')); },
@@ -337,6 +338,8 @@ Object.assign(window, {
      * embedding worker is not involved); planted topic vectors make the
      * expected top hit of each query known. */
     semanticScale: {
+      /** The topic's seeded ±1 sign pattern, normalized (dense, like a real query embedding). */
+      topicVector: topicPattern,
       async seed(options: { threads: number; perThread: number; planted: number }) {
         const id = () => crypto.randomUUID();
         const { workspaceId } = await storage.request(id(), "archiveWorkspace", null);
@@ -389,7 +392,11 @@ Object.assign(window, {
         const index = await storage.request(crypto.randomUUID(), "searchStatus", null);
         return storage.request(crypto.randomUUID(), "enrollSemantic", { operationId: crypto.randomUUID(), model: { modelName: "synthetic-scale-vectors", modelVersion: "seeded-unit-vectors-v1", sourceHash: "0".repeat(64), dimensions: 384, tokenizerVersion: "none", preprocessingVersion: "none", chunkingVersion: index.version, storageRepresentation: "float32" } });
       },
-      /** Publishes up to `limit` vectors through claim→publish; planted texts get their topic direction. */
+      /** Publishes up to `limit` vectors through claim→publish. A planted text
+       * gets its topic's sign pattern (a seeded ±1 vector) plus small noise, the
+       * way similar texts share sign structure in real embeddings, so both the
+       * exact KNN and the sign-bit coarse stage must rank it first for the
+       * topic query; every other vector is uniform noise. */
       async publish(options: { limit: number }) {
         const started = performance.now();
         let published = 0, rounds = 0;
@@ -399,7 +406,7 @@ Object.assign(window, {
           let seed = parseInt(digest.slice(0, 8), 16) >>> 0;
           const rand = () => { seed = (seed * 1664525 + 1013904223) >>> 0; return seed / 4294967296; };
           for (let d = 0; d < 384; d++) v[d] = rand() - 0.5;
-          if (plant) { for (let d = 0; d < 384; d++) v[d] = v[d]! * 0.05; v[Number(plant[1])] = 1; }
+          if (plant) { const pattern = topicPattern(Number(plant[1])); for (let d = 0; d < 384; d++) v[d] = pattern[d]! + v[d]! * 0.3; }
           let n = 0; for (let d = 0; d < 384; d++) n += v[d]! * v[d]!;
           n = Math.sqrt(n);
           return Array.from(v, (x) => x / n);
@@ -413,7 +420,7 @@ Object.assign(window, {
         }
         return { publishMs: performance.now() - started, published, rounds, status: await storage.request(crypto.randomUUID(), "semanticStatus", null) };
       },
-      topicVector(topic: number) { const v = new Array<number>(384).fill(0); v[topic] = 1; return v; },
+
       async query(args: { mode: "exact" | "best" | "semantic"; query: string; queryVector?: number[]; filters: Record<string, unknown>; maxItems: number }) {
         const started = performance.now();
         const result = await storage.request(crypto.randomUUID(), "searchArchive", { mode: args.mode, query: args.query, ...(args.queryVector ? { queryVector: args.queryVector } : {}), filters: args.filters, page: { maxItems: args.maxItems, maxBytes: 900_000, cursor: null } } as never);
