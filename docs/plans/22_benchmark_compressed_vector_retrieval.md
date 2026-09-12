@@ -1,6 +1,6 @@
 # 22 — Benchmark and implement compressed vector retrieval
 
-**Status:** Planned
+**Status:** In progress — representation benchmark run at 100k/500k/1M and the decision recorded ([ADR 0036](../decisions/0036-compressed-vector-retrieval.md): int8 coarse with global scale + float32 rerank over 500 candidates; binary rejected as a sole coarse stage); storage implementation and browser-scale measurements remain
 
 **Workstream:** C7 — large-index semantic retrieval
 
@@ -28,11 +28,11 @@ Select and implement a measured compressed candidate-generation path that preser
 
 ## Tasks
 
-- [ ] Build reproducible 100k, 500k, and 1M-vector datasets from the benchmark corpus/generator, recording model, chunker, quantization, and representation identities.
-- [ ] Measure the float baseline and candidate-generation variants for binary and int8, including query conversion, filtering, storage reads, WASM overhead, and memory pressure.
-- [ ] Compare float and int8 reranking after compressed retrieval across generous candidate counts, starting with the spec’s 200–1000 range and widening only with evidence.
+- [x] Build reproducible 100k, 500k, and 1M-vector datasets from the benchmark corpus/generator, recording model, chunker, quantization, and representation identities. — `perf/retrieval/compressed.mjs` builds seeded pools (`real-mixture-v1`) around the 658 real production-chunker vectors and records model, chunker, generator and quantization identities in [compressed-report.json](../../perf/retrieval/compressed-report.json).
+- [ ] Measure the float baseline and candidate-generation variants for binary and int8, including query conversion, filtering, storage reads, WASM overhead, and memory pressure. — Float, int8 (per-vector and global scale) and binary coarse are measured for quality, candidate overlap, index bytes and single-thread JavaScript scan cost at all three sizes. Open: filtering, storage reads, WASM overhead and memory pressure in the browser (sqlite-vec int8 KNN in Chromium/WebKit).
+- [x] Compare float and int8 reranking after compressed retrieval across generous candidate counts, starting with the spec’s 200–1000 range and widening only with evidence. — 200/500/1000 measured for binary→float, binary→int8 and int8→float; int8 coarse + float rerank matches float at 200 already; int8 as final ranking loses Recall@10; 500 chosen as margin (ADR 0036).
 - [ ] Measure Recall@5/10, MRR, coarse Recall@100/500, full-query latency, disk/OPFS reads, index size, and browser stability under foreground and backfill load.
-- [ ] Write the representation decision from benchmark results. Do not assume Arctic XS tolerates binary quantization or impose a float full-scan production path at large scale.
+- [x] Write the representation decision from benchmark results. Do not assume Arctic XS tolerates binary quantization or impose a float full-scan production path at large scale. — [ADR 0036](../decisions/0036-compressed-vector-retrieval.md): binary overlap with exact neighbours falls to 0.22/0.14 (top-100/500) at 1M and loses judged recall at 200 candidates, so it is rejected as a sole coarse stage; int8 global-scale coarse + float32 rerank is selected.
 - [ ] Implement the selected storage representation, versioned index build/rebuild path, candidate generation, and accurate rerank inside the established storage/search boundaries.
 - [ ] Re-run the complete hybrid benchmark with RRF and source filters; investigate chunk-size effects using the candidate sizes from the spec.
 - [ ] Retain raw reports and rollback/rebuild guidance so a future representation change cannot silently mix vector formats.

@@ -141,3 +141,32 @@ about real archives. Corpus embedding took 31.9 s single-threaded on SIMD
 ```sh
 node --experimental-transform-types perf/retrieval/production-chunker.mjs
 ```
+
+## Compressed representation benchmark — 2026-09-12 (plan 22)
+
+[compressed.mjs](compressed.mjs) scales the real production vectors to 100k,
+500k and 1M pools with deterministic distractors from the real distribution
+and measures product §81's pipelines; [compressed-report.json](compressed-report.json)
+retains every number. Judged metrics use the same definitions as above;
+"candidate overlap" is agreement with the exact float top-k chunks.
+
+| Pipeline (1M pool) | Recall@5 | Recall@10 | MRR | Overlap @100 / @500 | Bytes |
+| --- | --- | --- | --- | --- | --- |
+| float32 full scan | 0.8426 | 0.8981 | 0.8611 | 1 / 1 | 1,465 MB |
+| int8 (global scale) coarse + float32 rerank, 200–1000 | 0.8426 | 0.8981 | 0.8611 | 0.975 / 0.992 | 366 MB |
+| int8 full scan as final ranking | 0.8426 | 0.8704 | 0.8611 | — | 366 MB |
+| sign-bit coarse alone | 0.7315 | 0.8148 | 0.8249 | 0.223 / 0.142 | 46 MB |
+| sign-bit coarse 200 + float32 rerank | 0.8148 | 0.8704 | 0.8611 | — | — |
+
+int8 coarse retrieval keeps 97–99% of the exact neighbours at every size and
+reproduces the float metrics after rerank; binary overlap falls from 0.38 to
+0.22 (top-100) between 100k and 1M. [ADR 0036](../../docs/decisions/0036-compressed-vector-retrieval.md)
+selects int8 coarse + float32 rerank over 500 candidates and rejects binary as
+a sole coarse stage. Single-thread JavaScript scans at 1M: float 504 ms, int8
+557 ms, binary 77 ms per query (Apple M5 Max); browser, WASM and sqlite-vec
+costs are unmeasured here.
+
+```sh
+node --experimental-transform-types perf/retrieval/compressed.mjs            # 100k, 500k, 1M
+node --experimental-transform-types perf/retrieval/compressed.mjs --sizes=100000
+```
