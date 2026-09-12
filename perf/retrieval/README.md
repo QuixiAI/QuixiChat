@@ -108,3 +108,36 @@ GPU dispatch/readback and allocation bytes separately. Include mixed lengths and
 all new dispatch boundaries, and identify cache hits separately. WASM SIMD,
 WebGPU FP32/FP16, browser readback/dispatch, and million-scale index measurements
 are **unmeasured**, not inferred from the offline CPU report.
+
+## Production chunking parity — 2026-09-12
+
+[production-chunker.mjs](production-chunker.mjs) reruns the exact-FP32 quality
+measurement with the production pieces exactly as storage and the app use them:
+`StructuralChunker` with the pinned Arctic offset tokenizer and the 256-token
+budget (`quixi-structural-utf16-v1:4096:64:arctic-xs-offsets-1.0.2:d15cd90acf9df739:256`,
+ADR 0034) and the WASM SIMD encoder from the versioned 1.0.2 distribution, in
+Node v22.23.1 on macOS 26.6.2. [production-chunker.json](production-chunker.json)
+records the run.
+
+| Metric | Reference chunker + PyTorch (baseline) | Production chunker + WASM SIMD |
+| --- | --- | --- |
+| Chunks | 659 | 658 |
+| Recall@5 | 0.842593 | 0.842593 |
+| Recall@10 | 0.898148 | 0.898148 |
+| MRR | 0.861111 | 0.861111 |
+| Judged Recall@100 | 0.981481 | 0.981481 |
+| Judged Recall@500 | 1.000000 | 1.000000 |
+
+Seven queries change their top-ten ordering; each change moves only the
+corpus's single multi-chunk document (`opfs-long`) among nonrelevant positions,
+because the structural chunker cuts it at paragraph and sentence boundaries
+without the reference 32-token overlap. Every judged relevant document keeps its
+baseline rank. This closes plan 21's production-chunking parity measurement on
+this corpus; it does not exercise the production context prefix (the corpus has
+no titles) and remains a synthetic-corpus regression result, not a quality claim
+about real archives. Corpus embedding took 31.9 s single-threaded on SIMD
+(about 20 chunks/s) on a loaded development host.
+
+```sh
+node --experimental-transform-types perf/retrieval/production-chunker.mjs
+```

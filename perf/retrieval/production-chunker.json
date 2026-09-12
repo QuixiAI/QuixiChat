@@ -1,0 +1,470 @@
+{
+  "version": 1,
+  "measuredAt": "2026-09-12T09:49:23.712Z",
+  "environment": {
+    "platform": "darwin",
+    "release": "25.6.0",
+    "arch": "arm64",
+    "osVersion": "26.6.2",
+    "node": "v22.23.1"
+  },
+  "model": {
+    "name": "snowflake-arctic-embed-xs",
+    "sourceRevision": "d8c86521100d3556476a063fc2342036d45c106f",
+    "artifactSha256": "e1ef345cd35088b06f70c199f5a4e0311bda5983716ad6a3e7d0a604202efffc",
+    "route": "wasm-simd-fp32",
+    "runtime": "1.0.2",
+    "tokenizerSha256": "d15cd90acf9df73913b5c7f8af9ddc7c2d8afee8e4777f6f71e6d1bb4875c8db"
+  },
+  "corpus": {
+    "manifest": {
+      "version": "quixi-synthetic-v1",
+      "license": "CC0-1.0",
+      "documents": 655,
+      "queries": 18,
+      "judgment_policy": "Authored before scoring; grades 1 and 2 both count as relevant.",
+      "limitations": [
+        "English-focused synthetic smoke corpus",
+        "Template distractors",
+        "Not sufficient to approve compression or claim general relevance"
+      ],
+      "files": {
+        "corpus.jsonl": "fe67f43c9a631fdb80b9a33f8c12ef7fd5b4dd2b2f8f3c3cd709ec938657613a",
+        "queries.json": "8cb5414f0f3b1545586ed5991de4f1ce75e9a27625a3008e00a428a9931294dc",
+        "qrels.json": "ebf9286f7f54ee3d0051ed844fa59fb0a79acaf17d996d4f0e4a53513a78e64a"
+      }
+    },
+    "documents": 655,
+    "queries": 18
+  },
+  "chunker": {
+    "id": "quixi-structural-utf16-v1:4096:64:arctic-xs-offsets-1.0.2:d15cd90acf9df739:256",
+    "policy": {
+      "maxCharacters": 4096,
+      "overlapCharacters": 64,
+      "maxTokens": 256
+    },
+    "contextPrefix": "none (corpus has no titles; storage adds 'Title > role' or 'Title > sections' in production)",
+    "coordinateUnit": "utf-16 code units"
+  },
+  "chunks": 658,
+  "chunkTokens": {
+    "min": 20,
+    "max": 257,
+    "mean": 46.59118541033435,
+    "multiChunkDocuments": 1
+  },
+  "exact_fp32": {
+    "mean": {
+      "recall@5": 0.8425925925925926,
+      "recall@10": 0.898148148148148,
+      "recall@100": 0.9814814814814814,
+      "recall@500": 1,
+      "mrr": 0.8611111111111112
+    },
+    "per_query": {
+      "opfs": {
+        "recall@5": 0.6666666666666666,
+        "recall@10": 0.6666666666666666,
+        "recall@100": 0.6666666666666666,
+        "recall@500": 1,
+        "mrr": 0.5
+      },
+      "desktop": {
+        "recall@5": 1,
+        "recall@10": 1,
+        "recall@100": 1,
+        "recall@500": 1,
+        "mrr": 0.5
+      },
+      "credentials": {
+        "recall@5": 1,
+        "recall@10": 1,
+        "recall@100": 1,
+        "recall@500": 1,
+        "mrr": 1
+      },
+      "oauth": {
+        "recall@5": 0.5,
+        "recall@10": 1,
+        "recall@100": 1,
+        "recall@500": 1,
+        "mrr": 0.5
+      },
+      "switch": {
+        "recall@5": 1,
+        "recall@10": 1,
+        "recall@100": 1,
+        "recall@500": 1,
+        "mrr": 1
+      },
+      "branch": {
+        "recall@5": 1,
+        "recall@10": 1,
+        "recall@100": 1,
+        "recall@500": 1,
+        "mrr": 1
+      },
+      "dedup": {
+        "recall@5": 1,
+        "recall@10": 1,
+        "recall@100": 1,
+        "recall@500": 1,
+        "mrr": 1
+      },
+      "archive": {
+        "recall@5": 1,
+        "recall@10": 1,
+        "recall@100": 1,
+        "recall@500": 1,
+        "mrr": 1
+      },
+      "fts": {
+        "recall@5": 0.5,
+        "recall@10": 0.5,
+        "recall@100": 1,
+        "recall@500": 1,
+        "mrr": 1
+      },
+      "pdf": {
+        "recall@5": 1,
+        "recall@10": 1,
+        "recall@100": 1,
+        "recall@500": 1,
+        "mrr": 0.5
+      },
+      "ocr": {
+        "recall@5": 1,
+        "recall@10": 1,
+        "recall@100": 1,
+        "recall@500": 1,
+        "mrr": 1
+      },
+      "sync": {
+        "recall@5": 0.5,
+        "recall@10": 0.5,
+        "recall@100": 1,
+        "recall@500": 1,
+        "mrr": 1
+      },
+      "recovery": {
+        "recall@5": 1,
+        "recall@10": 1,
+        "recall@100": 1,
+        "recall@500": 1,
+        "mrr": 1
+      },
+      "priority": {
+        "recall@5": 0.5,
+        "recall@10": 0.5,
+        "recall@100": 1,
+        "recall@500": 1,
+        "mrr": 1
+      },
+      "cache": {
+        "recall@5": 1,
+        "recall@10": 1,
+        "recall@100": 1,
+        "recall@500": 1,
+        "mrr": 1
+      },
+      "sql": {
+        "recall@5": 1,
+        "recall@10": 1,
+        "recall@100": 1,
+        "recall@500": 1,
+        "mrr": 0.5
+      },
+      "rrf": {
+        "recall@5": 0.5,
+        "recall@10": 1,
+        "recall@100": 1,
+        "recall@500": 1,
+        "mrr": 1
+      },
+      "accessibility": {
+        "recall@5": 1,
+        "recall@10": 1,
+        "recall@100": 1,
+        "recall@500": 1,
+        "mrr": 1
+      }
+    }
+  },
+  "baseline": {
+    "chunker": {
+      "id": "reference-wordpiece-window-v1",
+      "max_content_tokens": 256,
+      "overlap_tokens": 32,
+      "coordinate_unit": "python-unicode-codepoint",
+      "note": "Reference benchmark adapter; production shared SearchChunk parity is a later integration gate."
+    },
+    "chunks": 659,
+    "exact_fp32": {
+      "recall@5": 0.8425925925925926,
+      "recall@10": 0.8981481481481483,
+      "recall@100": 0.9814814814814815,
+      "recall@500": 1,
+      "mrr": 0.8611111111111112
+    }
+  },
+  "delta_vs_baseline": {
+    "recall@5": 0,
+    "recall@10": -2.220446049250313e-16,
+    "recall@100": -1.1102230246251565e-16,
+    "recall@500": 0,
+    "mrr": 0
+  },
+  "changed_top_ten_queries": [
+    "oauth",
+    "branch",
+    "archive",
+    "fts",
+    "sync",
+    "priority",
+    "sql"
+  ],
+  "top_ten": {
+    "opfs": [
+      "opfs-near",
+      "opfs-long",
+      "opfs-a",
+      "archive-a",
+      "distractor-0081",
+      "distractor-0033",
+      "distractor-0153",
+      "distractor-0501",
+      "distractor-0561",
+      "distractor-0177"
+    ],
+    "desktop": [
+      "desktop-near",
+      "desktop-a",
+      "desktop-b",
+      "opfs-long",
+      "distractor-0291",
+      "archive-near",
+      "distractor-0207",
+      "distractor-0441",
+      "distractor-0243",
+      "distractor-0423"
+    ],
+    "credentials": [
+      "credentials-a",
+      "credentials-b",
+      "credentials-near",
+      "cache-b",
+      "sync-a",
+      "switch-b",
+      "oauth-near",
+      "oauth-a",
+      "dedup-a",
+      "recovery-b"
+    ],
+    "oauth": [
+      "oauth-near",
+      "oauth-a",
+      "ocr-a",
+      "pdf-near",
+      "ocr-b",
+      "credentials-b",
+      "oauth-b",
+      "opfs-long",
+      "pdf-b",
+      "dedup-a"
+    ],
+    "switch": [
+      "switch-b",
+      "switch-a",
+      "opfs-long",
+      "branch-a",
+      "oauth-b",
+      "sync-b",
+      "credentials-a",
+      "dedup-b",
+      "sync-a",
+      "dedup-a"
+    ],
+    "branch": [
+      "branch-a",
+      "branch-near",
+      "branch-b",
+      "sync-b",
+      "switch-a",
+      "sql-b",
+      "switch-b",
+      "archive-near",
+      "sql-near",
+      "opfs-long"
+    ],
+    "dedup": [
+      "dedup-a",
+      "dedup-b",
+      "dedup-near",
+      "switch-b",
+      "switch-a",
+      "archive-near",
+      "sql-near",
+      "sync-b",
+      "cache-near",
+      "sql-b"
+    ],
+    "archive": [
+      "archive-b",
+      "archive-near",
+      "archive-a",
+      "opfs-a",
+      "opfs-long",
+      "switch-b",
+      "switch-a",
+      "credentials-a",
+      "branch-b",
+      "sync-near"
+    ],
+    "fts": [
+      "fts-a",
+      "fts-near",
+      "cache-b",
+      "ocr-b",
+      "ocr-a",
+      "priority-a",
+      "sync-near",
+      "credentials-near",
+      "opfs-b",
+      "accessibility-a"
+    ],
+    "pdf": [
+      "pdf-near",
+      "pdf-b",
+      "pdf-a",
+      "ocr-a",
+      "ocr-b",
+      "oauth-near",
+      "opfs-long",
+      "cache-b",
+      "archive-a",
+      "distractor-0000"
+    ],
+    "ocr": [
+      "ocr-a",
+      "ocr-b",
+      "ocr-near",
+      "opfs-long",
+      "opfs-near",
+      "opfs-a",
+      "priority-b",
+      "desktop-near",
+      "pdf-b",
+      "accessibility-b"
+    ],
+    "sync": [
+      "sync-b",
+      "branch-a",
+      "opfs-long",
+      "switch-b",
+      "opfs-a",
+      "sync-near",
+      "switch-a",
+      "branch-near",
+      "archive-near",
+      "branch-b"
+    ],
+    "recovery": [
+      "recovery-a",
+      "archive-a",
+      "recovery-b",
+      "recovery-near",
+      "credentials-a",
+      "cache-a",
+      "sync-a",
+      "opfs-long",
+      "archive-near",
+      "archive-b"
+    ],
+    "priority": [
+      "priority-a",
+      "fts-a",
+      "fts-near",
+      "accessibility-a",
+      "opfs-b",
+      "ocr-b",
+      "sync-near",
+      "ocr-a",
+      "opfs-long",
+      "fts-b"
+    ],
+    "cache": [
+      "cache-a",
+      "cache-near",
+      "sync-near",
+      "cache-b",
+      "dedup-a",
+      "fts-b",
+      "sync-a",
+      "credentials-near",
+      "rrf-b",
+      "sync-b"
+    ],
+    "sql": [
+      "sync-a",
+      "sql-a",
+      "sql-b",
+      "archive-a",
+      "sql-near",
+      "distractor-0380",
+      "opfs-long",
+      "distractor-0236",
+      "distractor-0140",
+      "distractor-0512"
+    ],
+    "rrf": [
+      "rrf-a",
+      "fts-b",
+      "fts-a",
+      "cache-b",
+      "dedup-near",
+      "cache-a",
+      "dedup-a",
+      "opfs-long",
+      "archive-b",
+      "rrf-b"
+    ],
+    "accessibility": [
+      "accessibility-a",
+      "accessibility-b",
+      "accessibility-near",
+      "opfs-long",
+      "pdf-a",
+      "ocr-a",
+      "switch-near",
+      "distractor-0108",
+      "archive-near",
+      "distractor-0480"
+    ]
+  },
+  "timing": {
+    "chunkingMs": 19.541916000000015,
+    "encoderLoadMs": 496.34954200000004,
+    "corpusEmbeddingMs": 31947.510374999998,
+    "queryEmbeddingMs": 401.85491699999693,
+    "note": "Single run on a development host; not a throughput claim."
+  },
+  "limitations": [
+    "Same synthetic corpus and judgments as the baseline; equal or better scores here do not establish quality on real archives.",
+    "Vectors come from the production WASM SIMD route rather than the PyTorch reference; both are numerically gated by the plan 16 comparator.",
+    "The context-prefix format used in production is not exercised because the corpus carries no titles."
+  ],
+  "changed_top_ten_investigation": {
+    "summary": "All seven changed top-ten orderings move only the corpus's single multi-chunk document (opfs-long) among nonrelevant positions; every judged relevant document keeps its baseline rank, so per-query recall and MRR are unchanged.",
+    "cause": "opfs-long is the only document longer than 256 tokens. The reference chunker cut it into fixed 256-token windows with 32-token overlap; the production structural chunker cuts at paragraph/sentence boundaries within the 256-token budget without overlap, so its chunk vectors differ slightly and its best-chunk rank shifts by one to four places within the distractor region.",
+    "queries": [
+      "oauth",
+      "branch",
+      "archive",
+      "fts",
+      "sync",
+      "priority",
+      "sql"
+    ]
+  }
+}
