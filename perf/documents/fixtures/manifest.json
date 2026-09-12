@@ -1,0 +1,20 @@
+{
+  "image-heavy.pdf": {
+    "bytes": 31115264,
+    "sha256": "3fec2fa189a9b2ac5f932ca2faf41594f5cdac49822f1f8def49fa894b32c54f",
+    "pages": 1,
+    "imagePixels": [
+      2880,
+      2880
+    ],
+    "seed": 20260909,
+    "generator": {
+      "reportlab": "5.0.1",
+      "pypdf": "6.18.0",
+      "pillow": "12.3.0",
+      "charset-normalizer": "3.4.7"
+    },
+    "license": "CC0-1.0 synthetic fixture",
+    "scope": "Source-size/range/hash stress. Text-only PDF.js extraction need not decode the embedded image."
+  }
+}

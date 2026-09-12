@@ -1,0 +1,7 @@
+{
+  "exitCode": 1,
+  "command": "node --experimental-transform-types --test <isolated baseline directory>/library-refresh.test.ts",
+  "baselineLibrarySha256": "295cbf1429b449be40bee2eb2e20b439d81890b98aa99cce7a800c559e22a742",
+  "regressionTestSha256": "dbe68d2e33f2513f5c3b3574c51628e604d9a93f8cbc75f846865f7452b8c7d5",
+  "method": "Copied the retained previous library and unchanged storage-error into an isolated temporary directory. Only the regression test import was redirected to that library. No worktree source was replaced."
+}

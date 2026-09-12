@@ -1,0 +1,15 @@
+{
+  "completedAt": "2026-09-10T07:32:00.535Z",
+  "status": "passed",
+  "backend": "pinned SQLite WASM in Node; metadata fixtures, no image decoding or OPFS claim",
+  "node": "v22.23.1",
+  "tests": 6,
+  "passed": 6,
+  "sourceHashes": {
+    "packages/storage/src/worker/search/index.ts": "c65bdb72396fe09bbb00067a9cd524bbbdf18bf394929db20b7e457c385e98ac",
+    "packages/storage/src/worker/search/sources.ts": "c3b55d79b0196092fa9cbe2a5bfc97f10903974dede99bbef4419f5bcaa6aebf",
+    "packages/storage/src/worker/search/schema.ts": "ac6a9bbca9ebb51be79afce94f25415ba79e7ec30753ac3433d2ab944cf0f09b",
+    "packages/storage/tests/image-search/repository.test.ts": "d2db3a06a46cbfb5a03906b4dd1c9393bfd3bc0b8e8fce2afa63af53db7bfbf3",
+    "packages/storage/tests/image-search/run.mjs": "c5f6e78652e741f80a049f1484a5df187abef9df4ea6cb6032c488532e7d6616"
+  }
+}

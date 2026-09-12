@@ -1,0 +1,245 @@
+{
+  "passed": true,
+  "status": "passed",
+  "startedAt": "2026-09-08T23:44:45.841360+00:00",
+  "skipProvision": false,
+  "full": false,
+  "commands": [
+    {
+      "command": [
+        "/Users/eric/QuixiChat/node_modules/.bin/tsc",
+        "-p",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tsconfig.gpu.json"
+      ],
+      "status": "passed",
+      "exitCode": 0,
+      "seconds": 0.1554632910010696
+    },
+    {
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests",
+        "-p",
+        "test_offset_ci.py"
+      ],
+      "status": "passed",
+      "exitCode": 0,
+      "seconds": 0.05380870800217963
+    },
+    {
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/Users/eric/QuixiChat/packages/quixi-embed/native/ci.py",
+        "--simd",
+        "--browsers"
+      ],
+      "status": "passed",
+      "exitCode": 0,
+      "seconds": 64.6843933750024
+    },
+    {
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/Users/eric/QuixiChat/packages/quixi-embed/native/build.py",
+        "--target",
+        "native"
+      ],
+      "status": "passed",
+      "exitCode": 0,
+      "seconds": 0.4218585000016901
+    },
+    {
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/Users/eric/QuixiChat/packages/quixi-embed/native/release.py"
+      ],
+      "status": "passed",
+      "exitCode": 0,
+      "seconds": 0.07569233300091582
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/generate_offset_fixtures.py",
+        "--verify"
+      ],
+      "status": "passed",
+      "exitCode": 0,
+      "seconds": 1.1377952499969979
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/generate_offset_fixtures.py",
+        "--exhaustive"
+      ],
+      "status": "passed",
+      "exitCode": 0,
+      "seconds": 2.1437394579988904
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/check_offsets_native.py"
+      ],
+      "status": "passed",
+      "exitCode": 0,
+      "seconds": 1.4618079169995326
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/check_offsets_native.py",
+        "--fixtures",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/token-offset-exhaustive.jsonl",
+        "--report",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/token-offset-native-exhaustive.json"
+      ],
+      "status": "passed",
+      "exitCode": 0,
+      "seconds": 1.2288459579976916
+    },
+    {
+      "command": [
+        "node",
+        "--experimental-strip-types",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/token-offsets.mjs"
+      ],
+      "status": "passed",
+      "exitCode": 0,
+      "seconds": 0.9067024590003712
+    },
+    {
+      "command": [
+        "node",
+        "--experimental-strip-types",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/token-offsets.mjs",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/token-offset-exhaustive.jsonl"
+      ],
+      "status": "passed",
+      "exitCode": 0,
+      "seconds": 0.8944865409976046
+    },
+    {
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/Users/eric/QuixiChat/packages/quixi-embed/native/check_offset_safety.py"
+      ],
+      "status": "passed",
+      "exitCode": 0,
+      "seconds": 1.5300649589989916
+    },
+    {
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/Users/eric/QuixiChat/packages/quixi-embed/native/check_offset_stack.py"
+      ],
+      "status": "passed",
+      "exitCode": 0,
+      "seconds": 1.140595958000631
+    },
+    {
+      "command": [
+        "node",
+        "--experimental-strip-types",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/token-preflight.mjs"
+      ],
+      "status": "passed",
+      "exitCode": 0,
+      "seconds": 1.2214860000021872
+    },
+    {
+      "command": [
+        "node",
+        "--experimental-strip-types",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/scalar-api.mjs",
+        "scalar"
+      ],
+      "status": "passed",
+      "exitCode": 0,
+      "seconds": 1.0154866659977415
+    },
+    {
+      "command": [
+        "node",
+        "--experimental-strip-types",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/scalar-api.mjs",
+        "simd"
+      ],
+      "status": "passed",
+      "exitCode": 0,
+      "seconds": 0.9081213749996095
+    },
+    {
+      "command": [
+        "node",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/offsets/run.mjs",
+        "chromium",
+        "scalar"
+      ],
+      "status": "passed",
+      "exitCode": 0,
+      "seconds": 0.5440769580018241
+    },
+    {
+      "command": [
+        "node",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/offsets/run.mjs",
+        "chromium",
+        "simd"
+      ],
+      "status": "passed",
+      "exitCode": 0,
+      "seconds": 0.5465708339979756
+    },
+    {
+      "command": [
+        "node",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/offsets/run.mjs",
+        "firefox",
+        "scalar"
+      ],
+      "status": "passed",
+      "exitCode": 0,
+      "seconds": 1.5524355419984204
+    },
+    {
+      "command": [
+        "node",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/offsets/run.mjs",
+        "firefox",
+        "simd"
+      ],
+      "status": "passed",
+      "exitCode": 0,
+      "seconds": 1.4765482500006328
+    },
+    {
+      "command": [
+        "node",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/offsets/run.mjs",
+        "webkit",
+        "scalar"
+      ],
+      "status": "passed",
+      "exitCode": 0,
+      "seconds": 0.9334031250000407
+    },
+    {
+      "command": [
+        "node",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/offsets/run.mjs",
+        "webkit",
+        "simd"
+      ],
+      "status": "passed",
+      "exitCode": 0,
+      "seconds": 0.9400735000017448
+    }
+  ],
+  "finishedAt": "2026-09-08T23:46:10.826943+00:00"
+}

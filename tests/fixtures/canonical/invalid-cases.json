@@ -1,0 +1,113 @@
+[
+  {
+    "name": "dangling parent",
+    "fixture": "native-branches.history.json",
+    "path": [
+      "messages",
+      1,
+      "parentId"
+    ],
+    "value": "00000000-0000-4000-8000-000000009999",
+    "code": "MISSING_REFERENCE"
+  },
+  {
+    "name": "cycle",
+    "fixture": "native-branches.history.json",
+    "path": [
+      "messages",
+      0,
+      "parentId"
+    ],
+    "value": "00000000-0000-4000-8000-000000000107",
+    "code": "CYCLE"
+  },
+  {
+    "name": "invalid active selection",
+    "fixture": "native-branches.history.json",
+    "path": [
+      "threadStates",
+      0,
+      "activeLeafMessageId"
+    ],
+    "value": "00000000-0000-4000-8000-000000009999",
+    "code": "MISSING_REFERENCE"
+  },
+  {
+    "name": "generation mismatch",
+    "fixture": "native-branches.history.json",
+    "path": [
+      "generations",
+      0,
+      "outputMessageId"
+    ],
+    "value": "00000000-0000-4000-8000-000000000102",
+    "code": "GENERATION_LINK"
+  },
+  {
+    "name": "part ownership mismatch",
+    "fixture": "native-branches.history.json",
+    "path": [
+      "parts",
+      0,
+      "messageId"
+    ],
+    "value": "00000000-0000-4000-8000-000000000101",
+    "code": "PART_OWNERSHIP"
+  },
+  {
+    "name": "missing bytes claimed available",
+    "fixture": "native-branches.history.json",
+    "path": [
+      "attachments",
+      0,
+      "availability"
+    ],
+    "value": "available",
+    "code": "ATTACHMENT_STATE"
+  },
+  {
+    "name": "edit rewrites parentage",
+    "fixture": "native-branches.history.json",
+    "path": [
+      "messages",
+      8,
+      "parentId"
+    ],
+    "value": "00000000-0000-4000-8000-000000000102",
+    "code": "EDIT_RELATIONSHIP"
+  },
+  {
+    "name": "tool result references a future text part",
+    "fixture": "native-branches.history.json",
+    "path": [
+      "parts",
+      6,
+      "data",
+      "callPartId"
+    ],
+    "value": "00000000-0000-4000-8000-000000001107",
+    "code": "TOOL_REFERENCE"
+  },
+  {
+    "name": "bad timestamp",
+    "fixture": "native-branches.history.json",
+    "path": [
+      "messages",
+      0,
+      "createdAt"
+    ],
+    "value": -1,
+    "code": "INVALID_VALUE"
+  },
+  {
+    "name": "unsealed finished generation",
+    "fixture": "native-branches.history.json",
+    "path": [
+      "messages",
+      1,
+      "sealed"
+    ],
+    "value": false,
+    "code": "SEALED_CONTENT"
+  }
+]

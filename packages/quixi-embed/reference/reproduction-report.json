@@ -1,0 +1,15 @@
+{
+  "route": "scalar-fp32",
+  "cases": 159,
+  "thresholds": {
+    "atol": 0.0001,
+    "rtol": 0.0001,
+    "vector_atol": 2e-05,
+    "min_cosine": 0.999999,
+    "norm_atol": 1e-05
+  },
+  "max_absolute_error": 0.0,
+  "minimum_cosine": 0.9999999999999998,
+  "passed": true,
+  "errors": []
+}

@@ -1,0 +1,149 @@
+{
+  "selectedEngines": [
+    "chromium",
+    "webkit"
+  ],
+  "status": "passed",
+  "startedAt": "2026-09-09T01:49:10.575Z",
+  "hosts": [
+    {
+      "name": "chromium",
+      "status": "passed",
+      "checks": [
+        "create, rename, tags and system prompt commit through the production worker",
+        "actual provider HTTP stream is visible before terminal; generation completes durably",
+        "second turn sends the exact selected ancestor path and prompt while retaining internal provenance locally",
+        "regenerate creates a distinct attempt and preserves both response branches",
+        "editing creates a new immutable sibling and keeps the original message and generated descendants",
+        "the selected branch continues through the second real provider adapter",
+        "model output limits gate invalid keyboard/button sends and persist exact settings independently for both providers and regenerated attempts",
+        "stop terminates controlled HTTP and retains the committed response prefix",
+        "long streamed text uses bounded mutable segments without splitting Unicode scalars or losing text",
+        "automatic derived indexing supplies lexical search across streamed deltas in the shared interface",
+        "portable and open exports download actual disk-backed TAR bytes; user-confirmed temporary cleanup preserves canonical history",
+        "a fresh browser process retains canonical branches and messages, loses session credentials, and fits a narrow viewport",
+        "saved ready export is discovered after process loss, downloaded without re-exporting and matches its original checksum",
+        "invalid operator relay configuration leaves local history, search and creation available while provider connections remain disabled"
+      ],
+      "exports": [
+        {
+          "format": "portable",
+          "byteLength": 1184256,
+          "sha256": "06e294bbacfaa264ca62686ba227914745d7c3c043856e11018bdc9d2c79cbb2"
+        },
+        {
+          "format": "open",
+          "byteLength": 446464,
+          "sha256": "af72eaaf07ee035c9332da4bcc7e87f8311710be695c7273f86618ce21122bb1"
+        }
+      ],
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36",
+      "unclaimedExport": {
+        "candidate": null,
+        "completedBytes": 1184256,
+        "completedRecords": 0,
+        "entryCount": 0,
+        "failure": null,
+        "format": "portable",
+        "jobId": "8c657457-7b0c-4d64-95c5-7dcd07611f6f",
+        "kind": "export",
+        "output": {
+          "name": "quixi-portable-8c657457-7b0c-4d64-95c5-7dcd07611f6f.tar",
+          "mediaType": "application/x-tar",
+          "byteLength": 1184256,
+          "sha256": "06e294bbacfaa264ca62686ba227914745d7c3c043856e11018bdc9d2c79cbb2"
+        },
+        "phase": "ready",
+        "state": "ready",
+        "totalBytes": 1184256,
+        "totalRecords": null
+      },
+      "savedMessages": 12
+    },
+    {
+      "name": "webkit",
+      "status": "passed",
+      "checks": [
+        "create, rename, tags and system prompt commit through the production worker",
+        "actual provider HTTP stream is visible before terminal; generation completes durably",
+        "second turn sends the exact selected ancestor path and prompt while retaining internal provenance locally",
+        "regenerate creates a distinct attempt and preserves both response branches",
+        "editing creates a new immutable sibling and keeps the original message and generated descendants",
+        "the selected branch continues through the second real provider adapter",
+        "model output limits gate invalid keyboard/button sends and persist exact settings independently for both providers and regenerated attempts",
+        "stop terminates controlled HTTP and retains the committed response prefix",
+        "long streamed text uses bounded mutable segments without splitting Unicode scalars or losing text",
+        "automatic derived indexing supplies lexical search across streamed deltas in the shared interface",
+        "portable and open exports download actual disk-backed TAR bytes; user-confirmed temporary cleanup preserves canonical history",
+        "a fresh browser process retains canonical branches and messages, loses session credentials, and fits a narrow viewport",
+        "saved ready export is discovered after process loss, downloaded without re-exporting and matches its original checksum",
+        "invalid operator relay configuration leaves local history, search and creation available while provider connections remain disabled"
+      ],
+      "exports": [
+        {
+          "format": "portable",
+          "byteLength": 1184256,
+          "sha256": "95ad1c15fd2bfbab2987a0fc2ab19eb0cf7cbcc30b2eeb6f7f5fa66cfd966aff"
+        },
+        {
+          "format": "open",
+          "byteLength": 446464,
+          "sha256": "5cd5917fcabd38feacd23eebcd9589e894320d55840995287aa1c44305a38286"
+        }
+      ],
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+      "unclaimedExport": {
+        "candidate": null,
+        "completedBytes": 1184256,
+        "completedRecords": 0,
+        "entryCount": 0,
+        "failure": null,
+        "format": "portable",
+        "jobId": "bdd73c17-3ae8-4806-a5e2-40635f6d7258",
+        "kind": "export",
+        "output": {
+          "name": "quixi-portable-bdd73c17-3ae8-4806-a5e2-40635f6d7258.tar",
+          "mediaType": "application/x-tar",
+          "byteLength": 1184256,
+          "sha256": "95ad1c15fd2bfbab2987a0fc2ab19eb0cf7cbcc30b2eeb6f7f5fa66cfd966aff"
+        },
+        "phase": "ready",
+        "state": "ready",
+        "totalBytes": 1184256,
+        "totalRecords": null
+      },
+      "savedMessages": 12
+    }
+  ],
+  "sourceSha256": {
+    "tooling/browser-engines.mjs": "136f16e63e905ae4c8305c7adedfce2411eff13b04f914054f8fb718155d0df1",
+    "packages/app/src/AppRoot.tsx": "eb95d89b3c13af526352a870f69aeae10c4d6f628957d575edeb2a7fd689ce7b",
+    "packages/app/src/index.ts": "ae10742cbe7e886e3ab05e42f9b991f1c462522168fc3a6c1ca3432a33def50f",
+    "packages/app/src/styles.css": "7f3703e3f1c7be5348656b4669a8de9ff47e241ce30f6ca906ba9ce774d047ca",
+    "packages/app/src/runtime/library.ts": "370b0a7d739f26d182e15848e0c674f9060197ba02d3968f096830a4204c7d04",
+    "packages/app/src/workflows/chat.ts": "b0856cb5f81289c7318cf60d772da87cb61303c753988961140e17a78ed6757e",
+    "packages/storage/src/worker/views.ts": "79e733521669f584b319be97c9b490e98faf146e3a9f6a11f620540cd29840d9",
+    "packages/core/src/contracts/views.ts": "90b038bdf6644c43bf5a6b02b74693ad75c235a711856ed29a084107493c8b3a",
+    "packages/app/src/features/content/Markdown.tsx": "527de2d9c047a22d127d827418b392ab8675d0430213b791d554572cb0a47c60",
+    "packages/app/src/features/content/ContentPartView.tsx": "1dace58783e51182d7dc9b24e28e536b86bbf00dbd59fe6a6b0f7c84e361553e",
+    "packages/app/src/features/content/access.ts": "0163d843213e9c72c434ea0348af3bdc9a8d44a2ef795d9ea48e7ad87d0192b8",
+    "packages/app/src/features/providers/controller.ts": "0d7d8e40f6827b053564d599029bc3cee5817bec55e8d5ca3630aa3db103090c",
+    "packages/storage/src/worker/archive-database.ts": "b047d733bcb790155282373b5b3e98bb92ed441e7e208955b2e825625857db47",
+    "packages/storage/migrations/views.ts": "49b3b6890c3711b2406db59c37979364a526bb99d7794d67ceeafb42838500aa",
+    "packages/storage/migrations/streaming-text.ts": "e027dc12cf7d301359d0dfea7ef5de20eb3c6d1279d8dc94859b277cc0c4bc86",
+    "packages/providers/src/generation.ts": "588ef0c696b0dd266834ff5a0ce085e46b183c913186f8116066c5925820046b",
+    "packages/core/src/model/provenance.ts": "191f723124ffe3b0f5957a90a1a60449406a1ba0cfbe258f9d401db0c62e8d26",
+    "apps/web/src/configuration.ts": "4bf0a495315142d50c9249423615279d25de0cbdaccc0fa60a900ec1e20d178e",
+    "packages/app/tests/browser/index.ts": "a4ec41273b11327ec0f594da786006d40ebb0ccee4fd42bf88d86ffa90e9384f",
+    "packages/app/tests/browser/run.mjs": "148c2755534b7631e4b6deee42da65a9354079723a3422d3c4dfda65469f32c5",
+    "package-lock.json": "14938dfb335480fccf15ef675167da13a3aac8832d29891e38ff67175920ad2c"
+  },
+  "environment": {
+    "platform": "darwin",
+    "release": "25.6.0",
+    "arch": "arm64",
+    "osVersion": "26.6.2",
+    "node": "v22.23.1"
+  },
+  "finishedAt": "2026-09-09T01:49:35.267Z"
+}

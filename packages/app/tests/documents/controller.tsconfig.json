@@ -1,0 +1,1 @@
+{"extends":"../../../../tsconfig.json","compilerOptions":{"types":["node","vite/client"]},"include":["controller.test.ts"],"exclude":[]}

@@ -1,0 +1,2819 @@
+{
+  "distribution": {
+    "version": "1.0.0",
+    "model_format_version": 1,
+    "model_sha256": "e1ef345cd35088b06f70c199f5a4e0311bda5983716ad6a3e7d0a604202efffc",
+    "kernels": {
+      "attention": "3f07b3c79ef2c0de2d741fea21c77e3183dc2cced788a7295338c025d374e44b",
+      "baseline": "6671b18619861d88c9cb46ffc7eb72464d975dc028478da18a47a8712d476a18",
+      "half": "54222a8a80b836ceb42a5827cccb23ae3b0bc7a802c78d23d422c11d570ae4c8",
+      "subgroups": "9b2b0937d7b3911dccfcbeb8d36d373a857a01c6011fe0ba187ba3197cb92151",
+      "tiled": "6d5ea4ab0951cc237a5e87802019b5e107bfdd81c822cf7e4971099e64a6e79d"
+    },
+    "runtime_sources": {
+      "encoder.ts": "1fb0ad10c2c614a83019cfc14243c4a9968a331f54ce1b13ffd9ce71e7d79e9b",
+      "model.ts": "21813bee5db6a46bb60d1b02a6edcfbeb92418ffcf9ccb8bb8d693b3f8127f32",
+      "tuning.ts": "4d1f0e09824cc27f4cd68b87061115e790ddb5ed2f994dacfe62586406dda7d5"
+    },
+    "runtime_sha256": "9f50b0f32bc0e005e342212189df3c3e210ddc1aa92d09d6108bb94a8955837a",
+    "experimental": [
+      "subgroups"
+    ],
+    "note": "WGSL source distribution; actual driver compilation and optional routes require hardware gates."
+  },
+  "separateReadbackObservation": true,
+  "status": "passed",
+  "passed": true,
+  "conditions": "Development host; timestamp instrumented separate passes, not production dispatch latency",
+  "shapes": [
+    {
+      "batch": 1,
+      "tokens": 32,
+      "warmups": 5,
+      "samples": [
+        {
+          "tokenizationMs": 0,
+          "inputUploadMs": 0,
+          "dispatchMs": 0.09999999962747097,
+          "completionReadbackMs": 2.5,
+          "totalMs": 2.599999999627471,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.065536,
+            "linear": 1.1796480000000003,
+            "scores": 0,
+            "softmax": 0.131072,
+            "context": 0.065536,
+            "add": 0,
+            "gelu": 0.065536,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 2.2999999998137355,
+              "mapAndCopyMs": 0
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0.10000000055879354,
+              "mapAndCopyMs": 0
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0,
+          "inputUploadMs": 0.09999999962747097,
+          "dispatchMs": 0.10000000055879354,
+          "completionReadbackMs": 2.5,
+          "totalMs": 2.7000000001862645,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.131072,
+            "linear": 1.1796480000000003,
+            "scores": 0.065536,
+            "softmax": 0.065536,
+            "context": 0,
+            "add": 0.065536,
+            "gelu": 0,
+            "pool": 0.065536
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 2.099999999627471,
+              "mapAndCopyMs": 0.10000000055879354
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0,
+              "mapAndCopyMs": 0.09999999962747097
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0.09999999962747097,
+          "inputUploadMs": 0,
+          "dispatchMs": 0.09999999962747097,
+          "completionReadbackMs": 2.5,
+          "totalMs": 2.699999999254942,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.065536,
+            "linear": 1.2451840000000003,
+            "scores": 0.065536,
+            "softmax": 0,
+            "context": 0,
+            "add": 0.065536,
+            "gelu": 0,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 2.1000000005587935,
+              "mapAndCopyMs": 0.09999999962747097
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0.10000000055879354,
+              "mapAndCopyMs": 0
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0,
+          "inputUploadMs": 0,
+          "dispatchMs": 0,
+          "completionReadbackMs": 3.2000000001862645,
+          "totalMs": 3.2000000001862645,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.065536,
+            "linear": 1.3107200000000003,
+            "scores": 0,
+            "softmax": 0.065536,
+            "context": 0,
+            "add": 0.065536,
+            "gelu": 0.065536,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 2.7999999998137355,
+              "mapAndCopyMs": 0.20000000018626451
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0,
+              "mapAndCopyMs": 0
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0.10000000055879354,
+          "inputUploadMs": 0,
+          "dispatchMs": 0.09999999962747097,
+          "completionReadbackMs": 3,
+          "totalMs": 3.2000000001862645,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.065536,
+            "linear": 1.5728640000000005,
+            "scores": 0,
+            "softmax": 0.065536,
+            "context": 0,
+            "add": 0,
+            "gelu": 0,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 2.7000000001862645,
+              "mapAndCopyMs": 0.09999999962747097
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0.10000000055879354,
+              "mapAndCopyMs": 0
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0,
+          "inputUploadMs": 0,
+          "dispatchMs": 0.09999999962747097,
+          "completionReadbackMs": 3.1000000005587935,
+          "totalMs": 3.2000000001862645,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0,
+            "linear": 1.5073280000000004,
+            "scores": 0.065536,
+            "softmax": 0.065536,
+            "context": 0,
+            "add": 0.065536,
+            "gelu": 0,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 2.800000000745058,
+              "mapAndCopyMs": 0
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0.09999999962747097,
+              "mapAndCopyMs": 0.09999999962747097
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0,
+          "inputUploadMs": 0,
+          "dispatchMs": 0,
+          "completionReadbackMs": 3.1000000005587935,
+          "totalMs": 3.1000000005587935,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.065536,
+            "linear": 1.3762560000000004,
+            "scores": 0.065536,
+            "softmax": 0,
+            "context": 0.065536,
+            "add": 0,
+            "gelu": 0,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 2.900000000372529,
+              "mapAndCopyMs": 0.09999999962747097
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0,
+              "mapAndCopyMs": 0
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0,
+          "inputUploadMs": 0.10000000055879354,
+          "dispatchMs": 0,
+          "completionReadbackMs": 3,
+          "totalMs": 3.1000000005587935,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.131072,
+            "linear": 1.3762560000000004,
+            "scores": 0,
+            "softmax": 0.131072,
+            "context": 0,
+            "add": 0.065536,
+            "gelu": 0,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 2.699999999254942,
+              "mapAndCopyMs": 0
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0.10000000055879354,
+              "mapAndCopyMs": 0.09999999962747097
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0,
+          "inputUploadMs": 0,
+          "dispatchMs": 0.09999999962747097,
+          "completionReadbackMs": 3.2000000001862645,
+          "totalMs": 3.2999999998137355,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0,
+            "linear": 1.5073280000000004,
+            "scores": 0,
+            "softmax": 0,
+            "context": 0.065536,
+            "add": 0.065536,
+            "gelu": 0,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 2.900000000372529,
+              "mapAndCopyMs": 0
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0.09999999962747097,
+              "mapAndCopyMs": 0
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0,
+          "inputUploadMs": 0.09999999962747097,
+          "dispatchMs": 0,
+          "completionReadbackMs": 3.1000000005587935,
+          "totalMs": 3.2000000001862645,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.131072,
+            "linear": 1.4417920000000004,
+            "scores": 0,
+            "softmax": 0.065536,
+            "context": 0,
+            "add": 0,
+            "gelu": 0.065536,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 2.800000000745058,
+              "mapAndCopyMs": 0.09999999962747097
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0,
+              "mapAndCopyMs": 0.09999999962747097
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0,
+          "inputUploadMs": 0.10000000055879354,
+          "dispatchMs": 0,
+          "completionReadbackMs": 3.2000000001862645,
+          "totalMs": 3.300000000745058,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.065536,
+            "linear": 1.5073280000000004,
+            "scores": 0,
+            "softmax": 0,
+            "context": 0,
+            "add": 0,
+            "gelu": 0.065536,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 2.7999999998137355,
+              "mapAndCopyMs": 0.20000000018626451
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0,
+              "mapAndCopyMs": 0.09999999962747097
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0,
+          "inputUploadMs": 0,
+          "dispatchMs": 0.09999999962747097,
+          "completionReadbackMs": 2.900000000372529,
+          "totalMs": 3,
+          "gpuKernelMs": {
+            "gather": 0.065536,
+            "norm": 0.131072,
+            "linear": 1.2451840000000003,
+            "scores": 0.065536,
+            "softmax": 0,
+            "context": 0.065536,
+            "add": 0.065536,
+            "gelu": 0.065536,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 2.7000000001862645,
+              "mapAndCopyMs": 0
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0.10000000055879354,
+              "mapAndCopyMs": 0.09999999962747097
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0,
+          "inputUploadMs": 0,
+          "dispatchMs": 0.09999999962747097,
+          "completionReadbackMs": 3,
+          "totalMs": 3.099999999627471,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.262144,
+            "linear": 1.2451840000000003,
+            "scores": 0.065536,
+            "softmax": 0.065536,
+            "context": 0,
+            "add": 0,
+            "gelu": 0.065536,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 2.800000000745058,
+              "mapAndCopyMs": 0
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0.09999999962747097,
+              "mapAndCopyMs": 0
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0,
+          "inputUploadMs": 0.09999999962747097,
+          "dispatchMs": 0,
+          "completionReadbackMs": 2.5,
+          "totalMs": 2.599999999627471,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.131072,
+            "linear": 1.1796480000000003,
+            "scores": 0.065536,
+            "softmax": 0,
+            "context": 0,
+            "add": 0,
+            "gelu": 0.065536,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 2.2000000001862645,
+              "mapAndCopyMs": 0
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0.09999999962747097,
+              "mapAndCopyMs": 0.10000000055879354
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0,
+          "inputUploadMs": 0.10000000055879354,
+          "dispatchMs": 0,
+          "completionReadbackMs": 2.5,
+          "totalMs": 2.6000000005587935,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.065536,
+            "linear": 1.3107200000000003,
+            "scores": 0,
+            "softmax": 0,
+            "context": 0.065536,
+            "add": 0.065536,
+            "gelu": 0,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 2.199999999254942,
+              "mapAndCopyMs": 0
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0.10000000055879354,
+              "mapAndCopyMs": 0.09999999962747097
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0,
+          "inputUploadMs": 0.09999999962747097,
+          "dispatchMs": 0.09999999962747097,
+          "completionReadbackMs": 3,
+          "totalMs": 3.199999999254942,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.196608,
+            "linear": 1.3107200000000003,
+            "scores": 0.131072,
+            "softmax": 0,
+            "context": 0.065536,
+            "add": 0,
+            "gelu": 0,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 2.7000000001862645,
+              "mapAndCopyMs": 0.10000000055879354
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0,
+              "mapAndCopyMs": 0.09999999962747097
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0,
+          "inputUploadMs": 0.09999999962747097,
+          "dispatchMs": 0,
+          "completionReadbackMs": 3.099999999627471,
+          "totalMs": 3.199999999254942,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.131072,
+            "linear": 1.4417920000000004,
+            "scores": 0.065536,
+            "softmax": 0,
+            "context": 0,
+            "add": 0,
+            "gelu": 0,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 2.900000000372529,
+              "mapAndCopyMs": 0.09999999962747097
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0.09999999962747097,
+              "mapAndCopyMs": 0
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0,
+          "inputUploadMs": 0,
+          "dispatchMs": 0,
+          "completionReadbackMs": 3.099999999627471,
+          "totalMs": 3.099999999627471,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.131072,
+            "linear": 1.3107200000000003,
+            "scores": 0,
+            "softmax": 0,
+            "context": 0.065536,
+            "add": 0,
+            "gelu": 0.065536,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 2.900000000372529,
+              "mapAndCopyMs": 0
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0,
+              "mapAndCopyMs": 0.09999999962747097
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0,
+          "inputUploadMs": 0,
+          "dispatchMs": 0,
+          "completionReadbackMs": 2.5,
+          "totalMs": 2.5,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.131072,
+            "linear": 1.1796480000000003,
+            "scores": 0,
+            "softmax": 0,
+            "context": 0.065536,
+            "add": 0,
+            "gelu": 0.065536,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 2.199999999254942,
+              "mapAndCopyMs": 0
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0.10000000055879354,
+              "mapAndCopyMs": 0.09999999962747097
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0,
+          "inputUploadMs": 0,
+          "dispatchMs": 0,
+          "completionReadbackMs": 2.3999999994412065,
+          "totalMs": 2.3999999994412065,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.065536,
+            "linear": 1.3762560000000004,
+            "scores": 0,
+            "softmax": 0,
+            "context": 0,
+            "add": 0.065536,
+            "gelu": 0,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 2.099999999627471,
+              "mapAndCopyMs": 0.10000000055879354
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0.09999999962747097,
+              "mapAndCopyMs": 0
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0,
+          "inputUploadMs": 0.09999999962747097,
+          "dispatchMs": 0,
+          "completionReadbackMs": 2.5,
+          "totalMs": 2.599999999627471,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0,
+            "linear": 1.3762560000000004,
+            "scores": 0,
+            "softmax": 0,
+            "context": 0.065536,
+            "add": 0.131072,
+            "gelu": 0,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 2.1000000005587935,
+              "mapAndCopyMs": 0.09999999962747097
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0.10000000055879354,
+              "mapAndCopyMs": 0.09999999962747097
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0,
+          "inputUploadMs": 0,
+          "dispatchMs": 0,
+          "completionReadbackMs": 2.400000000372529,
+          "totalMs": 2.400000000372529,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.131072,
+            "linear": 1.2451840000000003,
+            "scores": 0.065536,
+            "softmax": 0,
+            "context": 0,
+            "add": 0.065536,
+            "gelu": 0,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 2.2000000001862645,
+              "mapAndCopyMs": 0
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0.09999999962747097,
+              "mapAndCopyMs": 0.10000000055879354
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0.10000000055879354,
+          "inputUploadMs": 0,
+          "dispatchMs": 0,
+          "completionReadbackMs": 2.5,
+          "totalMs": 2.6000000005587935,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.065536,
+            "linear": 1.3762560000000004,
+            "scores": 0,
+            "softmax": 0.065536,
+            "context": 0,
+            "add": 0,
+            "gelu": 0.065536,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 2.2999999998137355,
+              "mapAndCopyMs": 0
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0,
+              "mapAndCopyMs": 0.20000000018626451
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0,
+          "inputUploadMs": 0,
+          "dispatchMs": 0,
+          "completionReadbackMs": 3.099999999627471,
+          "totalMs": 3.099999999627471,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.065536,
+            "linear": 1.3762560000000004,
+            "scores": 0,
+            "softmax": 0.065536,
+            "context": 0,
+            "add": 0.065536,
+            "gelu": 0,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 2.7999999998137355,
+              "mapAndCopyMs": 0
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0.09999999962747097,
+              "mapAndCopyMs": 0.10000000055879354
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0,
+          "inputUploadMs": 0,
+          "dispatchMs": 0.10000000055879354,
+          "completionReadbackMs": 3.2000000001862645,
+          "totalMs": 3.300000000745058,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.065536,
+            "linear": 1.3107200000000003,
+            "scores": 0.131072,
+            "softmax": 0,
+            "context": 0,
+            "add": 0,
+            "gelu": 0,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 2.7999999998137355,
+              "mapAndCopyMs": 0.09999999962747097
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0.10000000055879354,
+              "mapAndCopyMs": 0.09999999962747097
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0,
+          "inputUploadMs": 0,
+          "dispatchMs": 0,
+          "completionReadbackMs": 3.2999999998137355,
+          "totalMs": 3.2999999998137355,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.131072,
+            "linear": 1.2451840000000003,
+            "scores": 0,
+            "softmax": 0.131072,
+            "context": 0.065536,
+            "add": 0.131072,
+            "gelu": 0,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 2.8999999994412065,
+              "mapAndCopyMs": 0.20000000018626451
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0.10000000055879354,
+              "mapAndCopyMs": 0
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0,
+          "inputUploadMs": 0,
+          "dispatchMs": 0.09999999962747097,
+          "completionReadbackMs": 3.2999999998137355,
+          "totalMs": 3.3999999994412065,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.065536,
+            "linear": 1.5728640000000003,
+            "scores": 0.065536,
+            "softmax": 0.065536,
+            "context": 0,
+            "add": 0,
+            "gelu": 0.065536,
+            "pool": 0.065536
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 3,
+              "mapAndCopyMs": 0.09999999962747097
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0.10000000055879354,
+              "mapAndCopyMs": 0
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0,
+          "inputUploadMs": 0,
+          "dispatchMs": 0.09999999962747097,
+          "completionReadbackMs": 4.400000000372529,
+          "totalMs": 4.5,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.32767999999999997,
+            "linear": 2.4248320000000003,
+            "scores": 0,
+            "softmax": 0.131072,
+            "context": 0.131072,
+            "add": 0.32767999999999997,
+            "gelu": 0.065536,
+            "pool": 0.065536
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 4.1000000005587935,
+              "mapAndCopyMs": 0.19999999925494194
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0,
+              "mapAndCopyMs": 0.10000000055879354
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0.09999999962747097,
+          "inputUploadMs": 0,
+          "dispatchMs": 0,
+          "completionReadbackMs": 4.599999999627471,
+          "totalMs": 4.699999999254942,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.131072,
+            "linear": 2.62144,
+            "scores": 0.262144,
+            "softmax": 0,
+            "context": 0.262144,
+            "add": 0.065536,
+            "gelu": 0.131072,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 4.2000000001862645,
+              "mapAndCopyMs": 0.20000000018626451
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0,
+              "mapAndCopyMs": 0.09999999962747097
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0,
+          "inputUploadMs": 0,
+          "dispatchMs": 0.09999999962747097,
+          "completionReadbackMs": 5.2000000001862645,
+          "totalMs": 5.2999999998137355,
+          "gpuKernelMs": {
+            "gather": 0.065536,
+            "norm": 0.196608,
+            "linear": 1.5073280000000002,
+            "scores": 0.196608,
+            "softmax": 0.065536,
+            "context": 0.131072,
+            "add": 0.065536,
+            "gelu": 0.131072,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 4.900000000372529,
+              "mapAndCopyMs": 0
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0.09999999962747097,
+              "mapAndCopyMs": 0.09999999962747097
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "batch": 1,
+      "tokens": 128,
+      "warmups": 5,
+      "samples": [
+        {
+          "tokenizationMs": 0,
+          "inputUploadMs": 0.09999999962747097,
+          "dispatchMs": 0,
+          "completionReadbackMs": 6.1000000005587935,
+          "totalMs": 6.2000000001862645,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.065536,
+            "linear": 4.259839999999998,
+            "scores": 0.131072,
+            "softmax": 0.065536,
+            "context": 0.131072,
+            "add": 0.065536,
+            "gelu": 0.065536,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 5.7000000001862645,
+              "mapAndCopyMs": 0.10000000055879354
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0,
+              "mapAndCopyMs": 0.19999999925494194
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0.09999999962747097,
+          "inputUploadMs": 0,
+          "dispatchMs": 0.09999999962747097,
+          "completionReadbackMs": 5.7000000001862645,
+          "totalMs": 5.8999999994412065,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.131072,
+            "linear": 3.8666239999999985,
+            "scores": 0.196608,
+            "softmax": 0.065536,
+            "context": 0.065536,
+            "add": 0.065536,
+            "gelu": 0.131072,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 5.300000000745058,
+              "mapAndCopyMs": 0.09999999962747097
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0.09999999962747097,
+              "mapAndCopyMs": 0
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0.09999999962747097,
+          "inputUploadMs": 0,
+          "dispatchMs": 0.10000000055879354,
+          "completionReadbackMs": 6,
+          "totalMs": 6.2000000001862645,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.196608,
+            "linear": 4.063231999999998,
+            "scores": 0.131072,
+            "softmax": 0.065536,
+            "context": 0.131072,
+            "add": 0.065536,
+            "gelu": 0.065536,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 5.599999999627471,
+              "mapAndCopyMs": 0
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0,
+              "mapAndCopyMs": 0.10000000055879354
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0,
+          "inputUploadMs": 0,
+          "dispatchMs": 0,
+          "completionReadbackMs": 6.3999999994412065,
+          "totalMs": 6.3999999994412065,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.065536,
+            "linear": 4.128767999999998,
+            "scores": 0.131072,
+            "softmax": 0.131072,
+            "context": 0.131072,
+            "add": 0.065536,
+            "gelu": 0,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 6,
+              "mapAndCopyMs": 0.09999999962747097
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0.10000000055879354,
+              "mapAndCopyMs": 0
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0,
+          "inputUploadMs": 0,
+          "dispatchMs": 0,
+          "completionReadbackMs": 6.2999999998137355,
+          "totalMs": 6.2999999998137355,
+          "gpuKernelMs": {
+            "gather": 0.065536,
+            "norm": 0.065536,
+            "linear": 4.128767999999998,
+            "scores": 0.131072,
+            "softmax": 0.131072,
+            "context": 0.065536,
+            "add": 0,
+            "gelu": 0.065536,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 5.900000000372529,
+              "mapAndCopyMs": 0.09999999962747097
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0,
+              "mapAndCopyMs": 0.10000000055879354
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0,
+          "inputUploadMs": 0,
+          "dispatchMs": 0,
+          "completionReadbackMs": 6.2999999998137355,
+          "totalMs": 6.2999999998137355,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.196608,
+            "linear": 4.194303999999998,
+            "scores": 0.131072,
+            "softmax": 0.065536,
+            "context": 0.065536,
+            "add": 0,
+            "gelu": 0,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 5.900000000372529,
+              "mapAndCopyMs": 0.09999999962747097
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0,
+              "mapAndCopyMs": 0.09999999962747097
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0,
+          "inputUploadMs": 0,
+          "dispatchMs": 0.10000000055879354,
+          "completionReadbackMs": 5.8999999994412065,
+          "totalMs": 6,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.131072,
+            "linear": 4.194303999999999,
+            "scores": 0.196608,
+            "softmax": 0.131072,
+            "context": 0.065536,
+            "add": 0,
+            "gelu": 0.065536,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 5.599999999627471,
+              "mapAndCopyMs": 0
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0.09999999962747097,
+              "mapAndCopyMs": 0.10000000055879354
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0,
+          "inputUploadMs": 0,
+          "dispatchMs": 0.09999999962747097,
+          "completionReadbackMs": 5.7000000001862645,
+          "totalMs": 5.7999999998137355,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.065536,
+            "linear": 4.128767999999998,
+            "scores": 0.196608,
+            "softmax": 0.065536,
+            "context": 0.065536,
+            "add": 0,
+            "gelu": 0,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 5.400000000372529,
+              "mapAndCopyMs": 0.09999999962747097
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0,
+              "mapAndCopyMs": 0
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0,
+          "inputUploadMs": 0,
+          "dispatchMs": 0,
+          "completionReadbackMs": 6.1000000005587935,
+          "totalMs": 6.1000000005587935,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0,
+            "linear": 4.0632319999999975,
+            "scores": 0.131072,
+            "softmax": 0.065536,
+            "context": 0.131072,
+            "add": 0.131072,
+            "gelu": 0,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 5.7999999998137355,
+              "mapAndCopyMs": 0.10000000055879354
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0.09999999962747097,
+              "mapAndCopyMs": 0
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0,
+          "inputUploadMs": 0,
+          "dispatchMs": 0.09999999962747097,
+          "completionReadbackMs": 6,
+          "totalMs": 6.099999999627471,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.065536,
+            "linear": 4.194303999999998,
+            "scores": 0.131072,
+            "softmax": 0.065536,
+            "context": 0.131072,
+            "add": 0.065536,
+            "gelu": 0,
+            "pool": 0.065536
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 5.7000000001862645,
+              "mapAndCopyMs": 0.09999999962747097
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0,
+              "mapAndCopyMs": 0.10000000055879354
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0,
+          "inputUploadMs": 0,
+          "dispatchMs": 0.09999999962747097,
+          "completionReadbackMs": 6.1000000005587935,
+          "totalMs": 6.2999999998137355,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.196608,
+            "linear": 4.128767999999998,
+            "scores": 0.131072,
+            "softmax": 0.131072,
+            "context": 0.065536,
+            "add": 0,
+            "gelu": 0.065536,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 5.7999999998137355,
+              "mapAndCopyMs": 0.10000000055879354
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0,
+              "mapAndCopyMs": 0.09999999962747097
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0.09999999962747097,
+          "inputUploadMs": 0,
+          "dispatchMs": 0,
+          "completionReadbackMs": 5.7999999998137355,
+          "totalMs": 5.8999999994412065,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0,
+            "linear": 4.390911999999999,
+            "scores": 0,
+            "softmax": 0,
+            "context": 0.131072,
+            "add": 0.065536,
+            "gelu": 0.065536,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 5.5,
+              "mapAndCopyMs": 0.10000000055879354
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0.09999999962747097,
+              "mapAndCopyMs": 0
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0,
+          "inputUploadMs": 0.09999999962747097,
+          "dispatchMs": 0,
+          "completionReadbackMs": 6.2000000001862645,
+          "totalMs": 6.2999999998137355,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.131072,
+            "linear": 4.0632319999999975,
+            "scores": 0.131072,
+            "softmax": 0.065536,
+            "context": 0.131072,
+            "add": 0.065536,
+            "gelu": 0.065536,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 5.7999999998137355,
+              "mapAndCopyMs": 0.20000000018626451
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0,
+              "mapAndCopyMs": 0.10000000055879354
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0,
+          "inputUploadMs": 0.10000000055879354,
+          "dispatchMs": 0.09999999962747097,
+          "completionReadbackMs": 7.5,
+          "totalMs": 7.7000000001862645,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.196608,
+            "linear": 4.390911999999999,
+            "scores": 0.7864319999999999,
+            "softmax": 0.065536,
+            "context": 0.45875199999999994,
+            "add": 0.196608,
+            "gelu": 0.262144,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 7.1000000005587935,
+              "mapAndCopyMs": 0.19999999925494194
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0,
+              "mapAndCopyMs": 0
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0.09999999962747097,
+          "inputUploadMs": 0.10000000055879354,
+          "dispatchMs": 0,
+          "completionReadbackMs": 7,
+          "totalMs": 7.2000000001862645,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.131072,
+            "linear": 4.849663999999998,
+            "scores": 0.196608,
+            "softmax": 0.131072,
+            "context": 0.262144,
+            "add": 0.065536,
+            "gelu": 0.39321599999999995,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 6.699999999254942,
+              "mapAndCopyMs": 0.20000000018626451
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0,
+              "mapAndCopyMs": 0
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0,
+          "inputUploadMs": 0.10000000055879354,
+          "dispatchMs": 0,
+          "completionReadbackMs": 14.200000000186265,
+          "totalMs": 14.300000000745058,
+          "gpuKernelMs": {
+            "gather": 0.065536,
+            "norm": 0.262144,
+            "linear": 4.653055999999999,
+            "scores": 0.196608,
+            "softmax": 0.196608,
+            "context": 0.32767999999999997,
+            "add": 0.32767999999999997,
+            "gelu": 0.065536,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 13.899999999441206,
+              "mapAndCopyMs": 0.10000000055879354
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0.09999999962747097,
+              "mapAndCopyMs": 0
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0.09999999962747097,
+          "inputUploadMs": 0,
+          "dispatchMs": 0.10000000055879354,
+          "completionReadbackMs": 7.199999999254942,
+          "totalMs": 7.3999999994412065,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.131072,
+            "linear": 4.653055999999999,
+            "scores": 0.262144,
+            "softmax": 0.131072,
+            "context": 0.39321599999999995,
+            "add": 0.39321599999999995,
+            "gelu": 0.131072,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 7,
+              "mapAndCopyMs": 0
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0.09999999962747097,
+              "mapAndCopyMs": 0
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0,
+          "inputUploadMs": 0,
+          "dispatchMs": 0,
+          "completionReadbackMs": 7.2999999998137355,
+          "totalMs": 7.2999999998137355,
+          "gpuKernelMs": {
+            "gather": 0.065536,
+            "norm": 0.262144,
+            "linear": 4.58752,
+            "scores": 0.196608,
+            "softmax": 0.196608,
+            "context": 0.32767999999999997,
+            "add": 0.39321599999999995,
+            "gelu": 0.131072,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 7,
+              "mapAndCopyMs": 0.09999999962747097
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0,
+              "mapAndCopyMs": 0.10000000055879354
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0,
+          "inputUploadMs": 0.10000000055879354,
+          "dispatchMs": 0,
+          "completionReadbackMs": 6,
+          "totalMs": 6.1000000005587935,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.131072,
+            "linear": 4.325375999999998,
+            "scores": 0.262144,
+            "softmax": 0,
+            "context": 0.196608,
+            "add": 0,
+            "gelu": 0.065536,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 5.7999999998137355,
+              "mapAndCopyMs": 0
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0,
+              "mapAndCopyMs": 0.20000000018626451
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0,
+          "inputUploadMs": 0,
+          "dispatchMs": 0.09999999962747097,
+          "completionReadbackMs": 6.7000000001862645,
+          "totalMs": 6.7999999998137355,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.131072,
+            "linear": 4.653055999999999,
+            "scores": 0.262144,
+            "softmax": 0.131072,
+            "context": 0.131072,
+            "add": 0.065536,
+            "gelu": 0.262144,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 6.2999999998137355,
+              "mapAndCopyMs": 0.20000000018626451
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0,
+              "mapAndCopyMs": 0
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0.10000000055879354,
+          "inputUploadMs": 0,
+          "dispatchMs": 0,
+          "completionReadbackMs": 12.700000000186265,
+          "totalMs": 12.800000000745058,
+          "gpuKernelMs": {
+            "gather": 0.065536,
+            "norm": 0.196608,
+            "linear": 4.784127999999999,
+            "scores": 0.196608,
+            "softmax": 0.131072,
+            "context": 0.262144,
+            "add": 0,
+            "gelu": 0.262144,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 12.399999999441206,
+              "mapAndCopyMs": 0
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0.10000000055879354,
+              "mapAndCopyMs": 0.09999999962747097
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0,
+          "inputUploadMs": 0,
+          "dispatchMs": 0,
+          "completionReadbackMs": 7.2000000001862645,
+          "totalMs": 7.2000000001862645,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.065536,
+            "linear": 4.718591999999999,
+            "scores": 0.131072,
+            "softmax": 0.196608,
+            "context": 0.196608,
+            "add": 0.196608,
+            "gelu": 0.589824,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 6.900000000372529,
+              "mapAndCopyMs": 0.09999999962747097
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0,
+              "mapAndCopyMs": 0.09999999962747097
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0.10000000055879354,
+          "inputUploadMs": 0,
+          "dispatchMs": 0,
+          "completionReadbackMs": 7.099999999627471,
+          "totalMs": 7.2000000001862645,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.065536,
+            "linear": 4.718591999999999,
+            "scores": 0.131072,
+            "softmax": 0.196608,
+            "context": 0.196608,
+            "add": 0.131072,
+            "gelu": 0.589824,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 6.7999999998137355,
+              "mapAndCopyMs": 0.09999999962747097
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0,
+              "mapAndCopyMs": 0.10000000055879354
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0,
+          "inputUploadMs": 0,
+          "dispatchMs": 0,
+          "completionReadbackMs": 7.2999999998137355,
+          "totalMs": 7.2999999998137355,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.196608,
+            "linear": 5.046271999999999,
+            "scores": 0.131072,
+            "softmax": 0.262144,
+            "context": 0.131072,
+            "add": 0,
+            "gelu": 0.262144,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 7,
+              "mapAndCopyMs": 0
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0.09999999962747097,
+              "mapAndCopyMs": 0
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0,
+          "inputUploadMs": 0,
+          "dispatchMs": 0,
+          "completionReadbackMs": 7.2000000001862645,
+          "totalMs": 7.2000000001862645,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.262144,
+            "linear": 5.046271999999999,
+            "scores": 0.065536,
+            "softmax": 0.196608,
+            "context": 0.196608,
+            "add": 0.065536,
+            "gelu": 0.32767999999999997,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 7,
+              "mapAndCopyMs": 0
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0.10000000055879354,
+              "mapAndCopyMs": 0
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0.09999999962747097,
+          "inputUploadMs": 0,
+          "dispatchMs": 0,
+          "completionReadbackMs": 10.800000000745058,
+          "totalMs": 10.900000000372529,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.131072,
+            "linear": 4.718591999999998,
+            "scores": 0.196608,
+            "softmax": 0.065536,
+            "context": 0.196608,
+            "add": 0.196608,
+            "gelu": 0.39321599999999995,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 10.600000000558794,
+              "mapAndCopyMs": 0.09999999962747097
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0,
+              "mapAndCopyMs": 0.10000000055879354
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0,
+          "inputUploadMs": 0,
+          "dispatchMs": 0.09999999962747097,
+          "completionReadbackMs": 7,
+          "totalMs": 7.099999999627471,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.065536,
+            "linear": 4.718591999999999,
+            "scores": 0.262144,
+            "softmax": 0.131072,
+            "context": 0.262144,
+            "add": 0,
+            "gelu": 0.39321599999999995,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 6.7999999998137355,
+              "mapAndCopyMs": 0
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0.10000000055879354,
+              "mapAndCopyMs": 0
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0.10000000055879354,
+          "inputUploadMs": 0,
+          "dispatchMs": 0,
+          "completionReadbackMs": 6.099999999627471,
+          "totalMs": 6.2000000001862645,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.196608,
+            "linear": 3.9976959999999977,
+            "scores": 0.131072,
+            "softmax": 0.131072,
+            "context": 0.131072,
+            "add": 0.065536,
+            "gelu": 0,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 5.8999999994412065,
+              "mapAndCopyMs": 0.10000000055879354
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0,
+              "mapAndCopyMs": 0
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0,
+          "inputUploadMs": 0,
+          "dispatchMs": 0,
+          "completionReadbackMs": 7.2000000001862645,
+          "totalMs": 7.2000000001862645,
+          "gpuKernelMs": {
+            "gather": 0.065536,
+            "norm": 0.196608,
+            "linear": 4.784127999999999,
+            "scores": 0.131072,
+            "softmax": 0.065536,
+            "context": 0.065536,
+            "add": 0.32767999999999997,
+            "gelu": 0.196608,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 6.900000000372529,
+              "mapAndCopyMs": 0.09999999962747097
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0.10000000055879354,
+              "mapAndCopyMs": 0
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0,
+          "inputUploadMs": 0.10000000055879354,
+          "dispatchMs": 0,
+          "completionReadbackMs": 8.200000000186265,
+          "totalMs": 8.300000000745058,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.262144,
+            "linear": 5.439487999999998,
+            "scores": 0.196608,
+            "softmax": 0.262144,
+            "context": 0.32767999999999997,
+            "add": 0.196608,
+            "gelu": 0.32767999999999997,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 7.8999999994412065,
+              "mapAndCopyMs": 0.10000000055879354
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0,
+              "mapAndCopyMs": 0.09999999962747097
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "batch": 1,
+      "tokens": 512,
+      "warmups": 5,
+      "samples": [
+        {
+          "tokenizationMs": 0.10000000055879354,
+          "inputUploadMs": 0,
+          "dispatchMs": 0.09999999962747097,
+          "completionReadbackMs": 19.90000000037253,
+          "totalMs": 20.100000000558794,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0,
+            "linear": 15.073279999999993,
+            "scores": 1.6383999999999999,
+            "softmax": 0.39321599999999995,
+            "context": 1.4417919999999997,
+            "add": 0,
+            "gelu": 0.131072,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 19.5,
+              "mapAndCopyMs": 0.10000000055879354
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0.09999999962747097,
+              "mapAndCopyMs": 0.09999999962747097
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0,
+          "inputUploadMs": 0.09999999962747097,
+          "dispatchMs": 0,
+          "completionReadbackMs": 20.40000000037253,
+          "totalMs": 20.5,
+          "gpuKernelMs": {
+            "gather": 0.065536,
+            "norm": 0.131072,
+            "linear": 15.138815999999993,
+            "scores": 1.835008,
+            "softmax": 0.262144,
+            "context": 1.441792,
+            "add": 0,
+            "gelu": 0.131072,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 20,
+              "mapAndCopyMs": 0.10000000055879354
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0,
+              "mapAndCopyMs": 0.20000000018626451
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0,
+          "inputUploadMs": 0,
+          "dispatchMs": 0.09999999962747097,
+          "completionReadbackMs": 20.200000000186265,
+          "totalMs": 20.299999999813735,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0,
+            "linear": 15.138815999999991,
+            "scores": 1.6383999999999999,
+            "softmax": 0.39321599999999995,
+            "context": 1.5073279999999998,
+            "add": 0.131072,
+            "gelu": 0.065536,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 19.90000000037253,
+              "mapAndCopyMs": 0
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0.09999999962747097,
+              "mapAndCopyMs": 0.09999999962747097
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0,
+          "inputUploadMs": 0,
+          "dispatchMs": 0,
+          "completionReadbackMs": 20.399999999441206,
+          "totalMs": 20.399999999441206,
+          "gpuKernelMs": {
+            "gather": 0.065536,
+            "norm": 0.131072,
+            "linear": 15.138815999999991,
+            "scores": 1.5728639999999998,
+            "softmax": 0.39321599999999995,
+            "context": 1.5073279999999998,
+            "add": 0.065536,
+            "gelu": 0.065536,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 20.09999999962747,
+              "mapAndCopyMs": 0.10000000055879354
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0.09999999962747097,
+              "mapAndCopyMs": 0.09999999962747097
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0.20000000018626451,
+          "inputUploadMs": 0,
+          "dispatchMs": 0,
+          "completionReadbackMs": 20.700000000186265,
+          "totalMs": 20.90000000037253,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.131072,
+            "linear": 15.269887999999993,
+            "scores": 1.9660799999999998,
+            "softmax": 0.39321599999999995,
+            "context": 1.4417919999999997,
+            "add": 0.131072,
+            "gelu": 0.065536,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 20.40000000037253,
+              "mapAndCopyMs": 0.09999999962747097
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0.09999999962747097,
+              "mapAndCopyMs": 0
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0.09999999962747097,
+          "inputUploadMs": 0,
+          "dispatchMs": 0,
+          "completionReadbackMs": 24.700000000186265,
+          "totalMs": 24.799999999813735,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.131072,
+            "linear": 17.36704,
+            "scores": 2.818048,
+            "softmax": 0.851968,
+            "context": 1.835008,
+            "add": 0.39321599999999995,
+            "gelu": 0.065536,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 24.40000000037253,
+              "mapAndCopyMs": 0.09999999962747097
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0,
+              "mapAndCopyMs": 0.10000000055879354
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0,
+          "inputUploadMs": 0.10000000055879354,
+          "dispatchMs": 0,
+          "completionReadbackMs": 20.59999999962747,
+          "totalMs": 20.700000000186265,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.196608,
+            "linear": 15.335423999999993,
+            "scores": 1.835008,
+            "softmax": 0.32767999999999997,
+            "context": 1.3762559999999997,
+            "add": 0,
+            "gelu": 0,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 20.299999999813735,
+              "mapAndCopyMs": 0.09999999962747097
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0.10000000055879354,
+              "mapAndCopyMs": 0
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0.09999999962747097,
+          "inputUploadMs": 0,
+          "dispatchMs": 0,
+          "completionReadbackMs": 20.40000000037253,
+          "totalMs": 20.5,
+          "gpuKernelMs": {
+            "gather": 0.065536,
+            "norm": 0.065536,
+            "linear": 14.942207999999992,
+            "scores": 1.835008,
+            "softmax": 0.32767999999999997,
+            "context": 1.3762560000000001,
+            "add": 0.065536,
+            "gelu": 0.131072,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 20,
+              "mapAndCopyMs": 0.10000000055879354
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0.09999999962747097,
+              "mapAndCopyMs": 0.10000000055879354
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0.10000000055879354,
+          "inputUploadMs": 0,
+          "dispatchMs": 0.09999999962747097,
+          "completionReadbackMs": 20.40000000037253,
+          "totalMs": 20.600000000558794,
+          "gpuKernelMs": {
+            "gather": 0.065536,
+            "norm": 0,
+            "linear": 15.138815999999993,
+            "scores": 1.703936,
+            "softmax": 0.39321599999999995,
+            "context": 1.4417919999999997,
+            "add": 0,
+            "gelu": 0.196608,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 20,
+              "mapAndCopyMs": 0.10000000055879354
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0.09999999962747097,
+              "mapAndCopyMs": 0
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0,
+          "inputUploadMs": 0.10000000055879354,
+          "dispatchMs": 0.09999999962747097,
+          "completionReadbackMs": 20.5,
+          "totalMs": 20.700000000186265,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.131072,
+            "linear": 14.811135999999994,
+            "scores": 1.769472,
+            "softmax": 0.32767999999999997,
+            "context": 1.3762560000000001,
+            "add": 0.131072,
+            "gelu": 0.196608,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 19.5,
+              "mapAndCopyMs": 0.7999999998137355
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0,
+              "mapAndCopyMs": 0.10000000055879354
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0.09999999962747097,
+          "inputUploadMs": 0,
+          "dispatchMs": 0,
+          "completionReadbackMs": 20.200000000186265,
+          "totalMs": 20.299999999813735,
+          "gpuKernelMs": {
+            "gather": 0.065536,
+            "norm": 0,
+            "linear": 15.204351999999993,
+            "scores": 1.6383999999999999,
+            "softmax": 0.39321599999999995,
+            "context": 1.4417919999999997,
+            "add": 0.065536,
+            "gelu": 0.065536,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 20,
+              "mapAndCopyMs": 0
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0.09999999962747097,
+              "mapAndCopyMs": 0
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0,
+          "inputUploadMs": 0.09999999962747097,
+          "dispatchMs": 0,
+          "completionReadbackMs": 20.200000000186265,
+          "totalMs": 20.299999999813735,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.065536,
+            "linear": 15.204351999999993,
+            "scores": 1.6383999999999999,
+            "softmax": 0.39321599999999995,
+            "context": 1.5728639999999998,
+            "add": 0.065536,
+            "gelu": 0,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 19.90000000037253,
+              "mapAndCopyMs": 0.09999999962747097
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0.10000000055879354,
+              "mapAndCopyMs": 0
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0.09999999962747097,
+          "inputUploadMs": 0,
+          "dispatchMs": 0,
+          "completionReadbackMs": 20.40000000037253,
+          "totalMs": 20.5,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.131072,
+            "linear": 15.007743999999994,
+            "scores": 1.703936,
+            "softmax": 0.39321599999999995,
+            "context": 1.5073279999999998,
+            "add": 0,
+            "gelu": 0.131072,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 20.100000000558794,
+              "mapAndCopyMs": 0.09999999962747097
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0,
+              "mapAndCopyMs": 0.09999999962747097
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0,
+          "inputUploadMs": 0,
+          "dispatchMs": 0.10000000055879354,
+          "completionReadbackMs": 32.39999999944121,
+          "totalMs": 32.5,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.262144,
+            "linear": 17.956863999999996,
+            "scores": 2.097152,
+            "softmax": 0.39321599999999995,
+            "context": 2.031616,
+            "add": 0.196608,
+            "gelu": 0.524288,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 32.19999999925494,
+              "mapAndCopyMs": 0.10000000055879354
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0,
+              "mapAndCopyMs": 0
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0,
+          "inputUploadMs": 0,
+          "dispatchMs": 0.10000000055879354,
+          "completionReadbackMs": 20.399999999441206,
+          "totalMs": 20.5,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.065536,
+            "linear": 15.073279999999993,
+            "scores": 2.031616,
+            "softmax": 0.39321599999999995,
+            "context": 1.507328,
+            "add": 0.065536,
+            "gelu": 0.131072,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 20.299999999813735,
+              "mapAndCopyMs": 0
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0,
+              "mapAndCopyMs": 0.09999999962747097
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0.20000000018626451,
+          "inputUploadMs": 0,
+          "dispatchMs": 0,
+          "completionReadbackMs": 20.799999999813735,
+          "totalMs": 21,
+          "gpuKernelMs": {
+            "gather": 0.065536,
+            "norm": 0.065536,
+            "linear": 15.33542399999999,
+            "scores": 1.769472,
+            "softmax": 0.39321599999999995,
+            "context": 1.5728639999999998,
+            "add": 0.131072,
+            "gelu": 0.065536,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 20.5,
+              "mapAndCopyMs": 0.09999999962747097
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0.10000000055879354,
+              "mapAndCopyMs": 0
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0.09999999962747097,
+          "inputUploadMs": 0,
+          "dispatchMs": 0,
+          "completionReadbackMs": 20.40000000037253,
+          "totalMs": 20.5,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.196608,
+            "linear": 14.811135999999994,
+            "scores": 1.835008,
+            "softmax": 0.262144,
+            "context": 1.441792,
+            "add": 0.131072,
+            "gelu": 0.131072,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 20.09999999962747,
+              "mapAndCopyMs": 0.10000000055879354
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0,
+              "mapAndCopyMs": 0.09999999962747097
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0.09999999962747097,
+          "inputUploadMs": 0,
+          "dispatchMs": 0,
+          "completionReadbackMs": 20.40000000037253,
+          "totalMs": 20.5,
+          "gpuKernelMs": {
+            "gather": 0.065536,
+            "norm": 0.196608,
+            "linear": 15.204351999999993,
+            "scores": 1.6383999999999999,
+            "softmax": 0.39321599999999995,
+            "context": 1.5073279999999998,
+            "add": 0.065536,
+            "gelu": 0.196608,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 20.200000000186265,
+              "mapAndCopyMs": 0
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0.09999999962747097,
+              "mapAndCopyMs": 0.10000000055879354
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0,
+          "inputUploadMs": 0.09999999962747097,
+          "dispatchMs": 0,
+          "completionReadbackMs": 19.700000000186265,
+          "totalMs": 19.799999999813735,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.065536,
+            "linear": 15.007743999999994,
+            "scores": 1.6383999999999999,
+            "softmax": 0.39321599999999995,
+            "context": 1.5073279999999998,
+            "add": 0.065536,
+            "gelu": 0,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 19.5,
+              "mapAndCopyMs": 0.09999999962747097
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0,
+              "mapAndCopyMs": 0.10000000055879354
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0.09999999962747097,
+          "inputUploadMs": 0,
+          "dispatchMs": 0.10000000055879354,
+          "completionReadbackMs": 20.199999999254942,
+          "totalMs": 20.399999999441206,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.131072,
+            "linear": 15.007743999999994,
+            "scores": 1.769472,
+            "softmax": 0.32767999999999997,
+            "context": 1.4417919999999997,
+            "add": 0,
+            "gelu": 0.131072,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 19.899999999441206,
+              "mapAndCopyMs": 0.10000000055879354
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0,
+              "mapAndCopyMs": 0.09999999962747097
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0.09999999962747097,
+          "inputUploadMs": 0,
+          "dispatchMs": 0.09999999962747097,
+          "completionReadbackMs": 20.300000000745058,
+          "totalMs": 20.5,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.131072,
+            "linear": 15.269887999999991,
+            "scores": 1.6383999999999999,
+            "softmax": 0.45875199999999994,
+            "context": 1.441792,
+            "add": 0.131072,
+            "gelu": 0.065536,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 20.100000000558794,
+              "mapAndCopyMs": 0
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0.09999999962747097,
+              "mapAndCopyMs": 0
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0.09999999962747097,
+          "inputUploadMs": 0,
+          "dispatchMs": 0.10000000055879354,
+          "completionReadbackMs": 20.59999999962747,
+          "totalMs": 20.799999999813735,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.131072,
+            "linear": 15.204351999999991,
+            "scores": 1.6383999999999999,
+            "softmax": 0.39321599999999995,
+            "context": 1.3107199999999999,
+            "add": 0.131072,
+            "gelu": 0.131072,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 20.399999999441206,
+              "mapAndCopyMs": 0
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0.10000000055879354,
+              "mapAndCopyMs": 0.09999999962747097
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0,
+          "inputUploadMs": 0.10000000055879354,
+          "dispatchMs": 0.09999999962747097,
+          "completionReadbackMs": 20.799999999813735,
+          "totalMs": 21,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.32767999999999997,
+            "linear": 15.33542399999999,
+            "scores": 1.703936,
+            "softmax": 0.39321599999999995,
+            "context": 1.441792,
+            "add": 0.065536,
+            "gelu": 0.131072,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 20.5,
+              "mapAndCopyMs": 0.10000000055879354
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0.09999999962747097,
+              "mapAndCopyMs": 0
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0,
+          "inputUploadMs": 0,
+          "dispatchMs": 0.10000000055879354,
+          "completionReadbackMs": 21.59999999962747,
+          "totalMs": 21.700000000186265,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.065536,
+            "linear": 15.990783999999994,
+            "scores": 1.769472,
+            "softmax": 0.39321599999999995,
+            "context": 1.5728639999999998,
+            "add": 0.065536,
+            "gelu": 0.131072,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 21.299999999813735,
+              "mapAndCopyMs": 0.09999999962747097
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0,
+              "mapAndCopyMs": 0
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0.09999999962747097,
+          "inputUploadMs": 0,
+          "dispatchMs": 0.10000000055879354,
+          "completionReadbackMs": 30.700000000186265,
+          "totalMs": 30.90000000037253,
+          "gpuKernelMs": {
+            "gather": 0.065536,
+            "norm": 0.131072,
+            "linear": 16.31846399999999,
+            "scores": 2.2937600000000002,
+            "softmax": 0.917504,
+            "context": 2.031616,
+            "add": 0.131072,
+            "gelu": 0.065536,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 30.399999999441206,
+              "mapAndCopyMs": 0.10000000055879354
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0.09999999962747097,
+              "mapAndCopyMs": 0.10000000055879354
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0,
+          "inputUploadMs": 0.10000000055879354,
+          "dispatchMs": 0.09999999962747097,
+          "completionReadbackMs": 20.299999999813735,
+          "totalMs": 20.5,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0,
+            "linear": 15.073279999999993,
+            "scores": 1.835008,
+            "softmax": 0.32767999999999997,
+            "context": 1.3762560000000001,
+            "add": 0.065536,
+            "gelu": 0.196608,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 20,
+              "mapAndCopyMs": 0.09999999962747097
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0,
+              "mapAndCopyMs": 0.09999999962747097
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0,
+          "inputUploadMs": 0.09999999962747097,
+          "dispatchMs": 0,
+          "completionReadbackMs": 20.5,
+          "totalMs": 20.59999999962747,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.196608,
+            "linear": 15.269887999999993,
+            "scores": 1.6383999999999999,
+            "softmax": 0.39321599999999995,
+            "context": 1.5073279999999998,
+            "add": 0.065536,
+            "gelu": 0,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 20.200000000186265,
+              "mapAndCopyMs": 0
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0.09999999962747097,
+              "mapAndCopyMs": 0
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0.10000000055879354,
+          "inputUploadMs": 0,
+          "dispatchMs": 0,
+          "completionReadbackMs": 19.899999999441206,
+          "totalMs": 20,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.065536,
+            "linear": 15.073279999999993,
+            "scores": 1.6383999999999999,
+            "softmax": 0.32767999999999997,
+            "context": 1.4417919999999997,
+            "add": 0,
+            "gelu": 0.131072,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 19.59999999962747,
+              "mapAndCopyMs": 0.09999999962747097
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0,
+              "mapAndCopyMs": 0.10000000055879354
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0.09999999962747097,
+          "inputUploadMs": 0,
+          "dispatchMs": 0,
+          "completionReadbackMs": 20.300000000745058,
+          "totalMs": 20.40000000037253,
+          "gpuKernelMs": {
+            "gather": 0.065536,
+            "norm": 0.131072,
+            "linear": 14.942207999999992,
+            "scores": 1.6383999999999999,
+            "softmax": 0.39321599999999995,
+            "context": 1.5073279999999998,
+            "add": 0,
+            "gelu": 0.065536,
+            "pool": 0.065536
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 20.100000000558794,
+              "mapAndCopyMs": 0
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0,
+              "mapAndCopyMs": 0.20000000018626451
+            }
+          ]
+        },
+        {
+          "tokenizationMs": 0.09999999962747097,
+          "inputUploadMs": 0,
+          "dispatchMs": 0,
+          "completionReadbackMs": 20.40000000037253,
+          "totalMs": 20.5,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.065536,
+            "linear": 15.400959999999992,
+            "scores": 1.835008,
+            "softmax": 0.32767999999999997,
+            "context": 1.4417919999999997,
+            "add": 0,
+            "gelu": 0.131072,
+            "pool": 0
+          },
+          "transferObservation": [
+            {
+              "buffer": "Quixi readback",
+              "completionBeforeMapMs": 20.200000000186265,
+              "mapAndCopyMs": 0.09999999962747097
+            },
+            {
+              "buffer": "Quixi queryReadback",
+              "completionBeforeMapMs": 0,
+              "mapAndCopyMs": 0.10000000055879354
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "environment": {
+    "engine": "chromium",
+    "version": "153.0.8010.12",
+    "diagnostics": {
+      "backend": "webgpu-fp32",
+      "projection": "baseline",
+      "tuning": null,
+      "subgroups": false,
+      "attention": "baseline",
+      "modelSha256": "e1ef345cd35088b06f70c199f5a4e0311bda5983716ad6a3e7d0a604202efffc",
+      "kernelVersion": "1.0.0",
+      "adapter": {
+        "vendor": "apple",
+        "architecture": "metal-3",
+        "device": "",
+        "description": "",
+        "isFallbackAdapter": false
+      },
+      "features": [
+        "bgra8unorm-storage",
+        "clip-distances",
+        "core-features-and-limits",
+        "depth-clip-control",
+        "depth32float-stencil8",
+        "dual-source-blending",
+        "float32-blendable",
+        "float32-filterable",
+        "indirect-first-instance",
+        "primitive-index",
+        "rg11b10ufloat-renderable",
+        "shader-f16",
+        "subgroup-size-control",
+        "subgroups",
+        "texture-component-swizzle",
+        "texture-compression-astc",
+        "texture-compression-astc-sliced-3d",
+        "texture-compression-bc",
+        "texture-compression-bc-sliced-3d",
+        "texture-compression-etc2",
+        "texture-formats-tier1",
+        "texture-formats-tier2",
+        "timestamp-query"
+      ],
+      "enabledFeatures": [
+        "core-features-and-limits",
+        "timestamp-query"
+      ],
+      "limits": {
+        "maxBufferSize": 268435456,
+        "maxStorageBufferBindingSize": 134217728,
+        "maxComputeInvocationsPerWorkgroup": 256,
+        "maxComputeWorkgroupStorageSize": 16384,
+        "maxComputeWorkgroupsPerDimension": 65535,
+        "maxStorageBuffersPerShaderStage": 8
+      },
+      "capacity": {
+        "batch": 1,
+        "tokens": 512
+      },
+      "memory": {
+        "weightsBytes": 90261504,
+        "scratchBytes": 20491268,
+        "allocatedBytes": 110752772,
+        "bufferCount": 17
+      },
+      "state": "ready"
+    }
+  }
+}

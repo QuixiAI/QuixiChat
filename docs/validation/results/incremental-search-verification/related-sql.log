@@ -1,0 +1,435 @@
+TAP version 13
+# (node:85597) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: pinned WASM SQL retains provider branches/provenance/raw references across close/reopen
+ok 1 - pinned WASM SQL retains provider branches/provenance/raw references across close/reopen
+  ---
+  duration_ms: 159.387
+  type: 'test'
+  ...
+# Subtest: operation and transaction retries preserve results and reject payload conflicts before revisions
+ok 2 - operation and transaction retries preserve results and reject payload conflicts before revisions
+  ---
+  duration_ms: 24.241375
+  type: 'test'
+  ...
+# Subtest: injected precommit failure and a later invalid command roll back records, edges, operations and transaction result
+ok 3 - injected precommit failure and a later invalid command roll back records, edges, operations and transaction result
+  ---
+  duration_ms: 21.854667
+  type: 'test'
+  ...
+# Subtest: every canonical kind persists actual record effects and exactly one matching sync operation
+ok 4 - every canonical kind persists actual record effects and exactly one matching sync operation
+  ---
+  duration_ms: 45.555125
+  type: 'test'
+  ...
+# sqlite3_step() rc= 2067 SQLITE_CONSTRAINT_UNIQUE SQL = INSERT INTO quixi_records(collection,id,payload) VALUES(?,?,?)
+# Subtest: provider scoped identity uniqueness rejects overlapping imports without partial observations
+ok 5 - provider scoped identity uniqueness rejects overlapping imports without partial observations
+  ---
+  duration_ms: 11.453208
+  type: 'test'
+  ...
+# Subtest: ordered parts and keyset entity pages obey byte/item budgets and scope cursors
+ok 6 - ordered parts and keyset entity pages obey byte/item budgets and scope cursors
+  ---
+  duration_ms: 16.886333
+  type: 'test'
+  ...
+# sqlite3_step() rc= 275 SQLITE_CONSTRAINT_CHECK SQL = UPDATE quixi_blob_catalog SET availability='invalid'
+# Subtest: only confirmed lost producers recover as partial; ordinary reopen preserves live streaming
+ok 7 - only confirmed lost producers recover as partial; ordinary reopen preserves live streaming
+  ---
+  duration_ms: 17.710333
+  type: 'test'
+  ...
+# Subtest: migration upgrades and injected failures preserve the previous valid schema and data
+ok 8 - migration upgrades and injected failures preserve the previous valid schema and data
+  ---
+  duration_ms: 4.581041
+  type: 'test'
+  ...
+# sqlite3_step() rc= 1811 SQLITE_CONSTRAINT_TRIGGER SQL = UPDATE quixi_records SET payload=? WHERE collection='parts' AND id=?
+# sqlite3_step() rc= 1811 SQLITE_CONSTRAINT_TRIGGER SQL = UPDATE quixi_records SET payload=? WHERE collection='parts' AND id=?
+# sqlite3_step() rc= 1811 SQLITE_CONSTRAINT_TRIGGER SQL = UPDATE quixi_records SET payload=? WHERE collection='parts' AND id=?
+# sqlite3_step() rc= 1811 SQLITE_CONSTRAINT_TRIGGER SQL = UPDATE quixi_records SET payload=? WHERE collection='parts' AND id=?
+# sqlite3_step() rc= 1811 SQLITE_CONSTRAINT_TRIGGER SQL = UPDATE quixi_records SET payload=? WHERE collection='parts' AND id=?
+# sqlite3_step() rc= 1811 SQLITE_CONSTRAINT_TRIGGER SQL = UPDATE quixi_records SET payload=? WHERE collection='parts' AND id=?
+# sqlite3_step() rc= 1811 SQLITE_CONSTRAINT_TRIGGER SQL = UPDATE quixi_records SET payload=? WHERE collection='parts' AND id=?
+# Subtest: migration 8 preserves append prefixes across transport records and closes text at semantic barriers
+ok 9 - migration 8 preserves append prefixes across transport records and closes text at semantic barriers
+  ---
+  duration_ms: 39.638792
+  type: 'test'
+  ...
+# sqlite3_step() rc= 1811 SQLITE_CONSTRAINT_TRIGGER SQL = UPDATE quixi_records SET payload=?3 WHERE collection=?1 AND id=?2
+# Subtest: schema 7 upgrade retains canonical history and old migration identities before enabling streaming text
+ok 10 - schema 7 upgrade retains canonical history and old migration identities before enabling streaming text
+  ---
+  duration_ms: 16.056292
+  type: 'test'
+  ...
+# Subtest: long text references verified blobs and streaming grows ordered parts without growing a message manifest
+ok 11 - long text references verified blobs and streaming grows ordered parts without growing a message manifest
+  ---
+  duration_ms: 137.328291
+  type: 'test'
+  ...
+# Subtest: a 50,000-message thread has a bounded root tombstone and cannot grow after deletion
+ok 12 - a 50,000-message thread has a bounded root tombstone and cannot grow after deletion
+  ---
+  duration_ms: 8375.862041
+  type: 'test'
+  ...
+# Subtest: sync pages follow commit sequence, pin a high-water mark and resume later writes independently of UUID sorting
+ok 13 - sync pages follow commit sequence, pin a high-water mark and resume later writes independently of UUID sorting
+  ---
+  duration_ms: 15.274125
+  type: 'test'
+  ...
+# sqlite3_step() rc= 1811 SQLITE_CONSTRAINT_TRIGGER SQL = UPDATE quixi_records SET payload=json_set(payload,'$.parentId',NULL) WHERE collection='messages' AND id=?
+# sqlite3_step() rc= 1811 SQLITE_CONSTRAINT_TRIGGER SQL = UPDATE quixi_records SET payload=json_set(payload,'$.data.text','replaced') WHERE collection='parts' AND id=?
+# sqlite3_step() rc= 1811 SQLITE_CONSTRAINT_TRIGGER SQL = UPDATE quixi_records SET payload=json_set(payload,'$.status','failed') WHERE collection='generations' AND id=?
+# Subtest: SQL guards immutable message identity, sealed text, terminal attempts and committed operation coverage
+ok 14 - SQL guards immutable message identity, sealed text, terminal attempts and committed operation coverage
+  ---
+  duration_ms: 14.745458
+  type: 'test'
+  ...
+# Subtest: live raw capture requires verified bytes and sync coverage without inventing an import source
+ok 15 - live raw capture requires verified bytes and sync coverage without inventing an import source
+  ---
+  duration_ms: 3.624167
+  type: 'test'
+  ...
+# Subtest: schema 9 writer barrier commits only with its ledger and preserves all existing history
+ok 16 - schema 9 writer barrier commits only with its ledger and preserves all existing history
+  ---
+  duration_ms: 15.923
+  type: 'test'
+  ...
+# Subtest: attachment exclusions commit with their event, replay once, reject stale and invalid references, and survive reopen
+ok 17 - attachment exclusions commit with their event, replay once, reject stale and invalid references, and survive reopen
+  ---
+  duration_ms: 14.546583
+  type: 'test'
+  ...
+# Subtest: schema 10 and 11 upgrade without losing history and each older migration ceiling refuses schema 12
+ok 18 - schema 10 and 11 upgrade without losing history and each older migration ceiling refuses schema 12
+  ---
+  duration_ms: 25.158083
+  type: 'test'
+  ...
+# Subtest: summary attempt and immutable provenance commit together, apply/event replay exactly and survive reopen
+ok 19 - summary attempt and immutable provenance commit together, apply/event replay exactly and survive reopen
+  ---
+  duration_ms: 19.376167
+  type: 'test'
+  ...
+# sqlite3_step() rc= 2067 SQLITE_CONSTRAINT_UNIQUE SQL = INSERT INTO quixi_records(collection,id,payload) VALUES(?,?,?)
+# Subtest: summary registration rejects stale revision, mismatched fingerprint, wrong branch and duplicate provenance atomically
+ok 20 - summary registration rejects stale revision, mismatched fingerprint, wrong branch and duplicate provenance atomically
+  ---
+  duration_ms: 19.046125
+  type: 'test'
+  ...
+# Subtest: summary application rejects partial, stopped, streaming, empty, nontext, unknown artifacts and oversized UTF-8 output
+ok 21 - summary application rejects partial, stopped, streaming, empty, nontext, unknown artifacts and oversized UTF-8 output
+  ---
+  duration_ms: 102.186
+  type: 'test'
+  ...
+# Subtest: summary bad reviewed digest and stale source selection roll back audit event and context; proposals cannot be chat branches
+ok 22 - summary bad reviewed digest and stale source selection roll back audit event and context; proposals cannot be chat branches
+  ---
+  duration_ms: 14.825208
+  type: 'test'
+  ...
+# Subtest: successive summaries advance the boundary and fingerprint attachment changes even without a thread revision
+ok 23 - successive summaries advance the boundary and fingerprint attachment changes even without a thread revision
+  ---
+  duration_ms: 19.5655
+  type: 'test'
+  ...
+# Subtest: summary apply and clear require matching audit events and revision in the same atomic batch
+ok 24 - summary apply and clear require matching audit events and revision in the same atomic batch
+  ---
+  duration_ms: 23.66925
+  type: 'test'
+  ...
+# Subtest: summary outputs remain searchable with explicit proposal title and context labels
+ok 25 - summary outputs remain searchable with explicit proposal title and context labels
+  ---
+  duration_ms: 35.349459
+  type: 'test'
+  ...
+# Subtest: thread usage separates summary attempts and tokens/cost while inclusive totals retain ordinary attempts
+ok 26 - thread usage separates summary attempts and tokens/cost while inclusive totals retain ordinary attempts
+  ---
+  duration_ms: 24.361792
+  type: 'test'
+  ...
+# Subtest: fresh context branch atomically preserves source history, settings and exclusions across retry and reopen
+ok 27 - fresh context branch atomically preserves source history, settings and exclusions across retry and reopen
+  ---
+  duration_ms: 18.076542
+  type: 'test'
+  ...
+# Subtest: fresh branch rejects stale, unaudited, retargeted or destructive batches without any writes
+ok 28 - fresh branch rejects stale, unaudited, retargeted or destructive batches without any writes
+  ---
+  duration_ms: 16.8935
+  type: 'test'
+  ...
+# Subtest: fresh branch clears only applied summary with matching audit while preserving proposal and exclusions
+ok 29 - fresh branch clears only applied summary with matching audit while preserving proposal and exclusions
+  ---
+  duration_ms: 17.225708
+  type: 'test'
+  ...
+# Subtest: fresh branch cannot race a live generation on a different selected branch or a summary producer
+ok 30 - fresh branch cannot race a live generation on a different selected branch or a summary producer
+  ---
+  duration_ms: 25.923375
+  type: 'test'
+  ...
+# (node:85598) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# quixi-extraction-schema [{"version":1,"name":"canonical_records_and_atomic_operations","checksum":"16724a690f441af0162c0b49f3256bac152fb98a31f1a99c6ef40076d7dfd7d5"},{"version":2,"name":"source_and_generation_uniqueness","checksum":"bba4a045a82d42714d43d9ee709412eab759da65122b7abb244186b6a2d9b24f"},{"version":3,"name":"verified_blob_catalog_and_transfer_recovery","checksum":"705b844874dece6b5cc1881cb45ccc3b2907a2719036283fe165a0a07f6fe14e"},{"version":4,"name":"hidden_normalized_import_groups","checksum":"9988edddaf4483b380ab33f1017f141304484b1bc1662e74fb1c2de75ca2467e"},{"version":5,"name":"bounded_importer_work_and_uuid_checkpoints","checksum":"cd43d1aeb7f9fdf33c6efd0dcb3b87d00eef9169fe002c81ee6856750a49468b"},{"version":6,"name":"generation_producer_fences","checksum":"32e6035cd4ea8cabe3d327772c0d291de08a1ae24c2a23b360dc6661c6315c11"},{"version":7,"name":"local_workspace_and_message_recency","checksum":"da34a61082c74eae78301b25b83cc8525addfb6df1b5e450c33c2a63ec974151"},{"version":8,"name":"streaming_text_across_transport_provenance","checksum":"9c6a87fde402ff33d164ee7db92b34088ab05d458686670ee3d317dc24ca1263"},{"version":9,"name":"mandatory_archive_selection_protocol","checksum":"d124a56c86b6b42a8429114e253030b1cbc88e774ec8ff3e44cc9105dd5b6dab"},{"version":10,"name":"stable_local_operation_claims","checksum":"3f20f0a536ee783777602dda90a3f575cf17ddfe6bba277dc9cfa740e413770b"},{"version":11,"name":"reviewed_context_attachment_exclusions","checksum":"5dcdae7dd8c7a054cc3a1cbe4e2bd19f0890e7c213b90b30f3457c43667e75f3"},{"version":12,"name":"reviewed_summary_proposal_provenance","checksum":"231dc27fdff21cd5a8c48722f34af18df2b939978f17be62de19dcd24c0427e8"}]
+# Subtest: exact filename and description navigation preserve authoritative Unicode/NUL positions without writes
+ok 31 - exact filename and description navigation preserve authoritative Unicode/NUL positions without writes
+  ---
+  duration_ms: 99.988958
+  type: 'test'
+  ...
+# Subtest: equal-length filename rename rejects the old chunk before and after reindex
+ok 32 - equal-length filename rename rejects the old chunk before and after reindex
+  ---
+  duration_ms: 41.035166
+  type: 'test'
+  ...
+# Subtest: canonical source digest independently rejects rename when test-only dirty trigger suppression leaves a stale head
+ok 33 - canonical source digest independently rejects rename when test-only dirty trigger suppression leaves a stale head
+  ---
+  duration_ms: 28.055041
+  type: 'test'
+  ...
+# Subtest: ownership mismatch, malformed IDs, unsupported null-part and corrupted positions refuse
+ok 34 - ownership mismatch, malformed IDs, unsupported null-part and corrupted positions refuse
+  ---
+  duration_ms: 26.990667
+  type: 'test'
+  ...
+# Subtest: thread tombstone refuses navigation even with deliberately unfenced search heads
+ok 35 - thread tombstone refuses navigation even with deliberately unfenced search heads
+  ---
+  duration_ms: 22.635458
+  type: 'test'
+  ...
+# Subtest: rebuild preserves exact unchanged chunk identity; explicit clear refuses until republished; no extraction schema dependency
+ok 36 - rebuild preserves exact unchanged chunk identity; explicit clear refuses until republished; no extraction schema dependency
+  ---
+  duration_ms: 43.509583
+  type: 'test'
+  ...
+# Subtest: code-classified text and structured data retain exact source addressing
+ok 37 - code-classified text and structured data retain exact source addressing
+  ---
+  duration_ms: 31.948083
+  type: 'test'
+  ...
+# (node:85599) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# quixi-extraction-schema [{"version":1,"name":"canonical_records_and_atomic_operations","checksum":"16724a690f441af0162c0b49f3256bac152fb98a31f1a99c6ef40076d7dfd7d5"},{"version":2,"name":"source_and_generation_uniqueness","checksum":"bba4a045a82d42714d43d9ee709412eab759da65122b7abb244186b6a2d9b24f"},{"version":3,"name":"verified_blob_catalog_and_transfer_recovery","checksum":"705b844874dece6b5cc1881cb45ccc3b2907a2719036283fe165a0a07f6fe14e"},{"version":4,"name":"hidden_normalized_import_groups","checksum":"9988edddaf4483b380ab33f1017f141304484b1bc1662e74fb1c2de75ca2467e"},{"version":5,"name":"bounded_importer_work_and_uuid_checkpoints","checksum":"cd43d1aeb7f9fdf33c6efd0dcb3b87d00eef9169fe002c81ee6856750a49468b"},{"version":6,"name":"generation_producer_fences","checksum":"32e6035cd4ea8cabe3d327772c0d291de08a1ae24c2a23b360dc6661c6315c11"},{"version":7,"name":"local_workspace_and_message_recency","checksum":"da34a61082c74eae78301b25b83cc8525addfb6df1b5e450c33c2a63ec974151"},{"version":8,"name":"streaming_text_across_transport_provenance","checksum":"9c6a87fde402ff33d164ee7db92b34088ab05d458686670ee3d317dc24ca1263"},{"version":9,"name":"mandatory_archive_selection_protocol","checksum":"d124a56c86b6b42a8429114e253030b1cbc88e774ec8ff3e44cc9105dd5b6dab"},{"version":10,"name":"stable_local_operation_claims","checksum":"3f20f0a536ee783777602dda90a3f575cf17ddfe6bba277dc9cfa740e413770b"},{"version":11,"name":"reviewed_context_attachment_exclusions","checksum":"5dcdae7dd8c7a054cc3a1cbe4e2bd19f0890e7c213b90b30f3457c43667e75f3"},{"version":12,"name":"reviewed_summary_proposal_provenance","checksum":"231dc27fdff21cd5a8c48722f34af18df2b939978f17be62de19dcd24c0427e8"}]
+# sqlite3_step() rc= 13 SQLITE_FULL SQL = INSERT INTO proof_quota_pressure VALUES(zeroblob(1048576))
+# sqlite3_step() rc= 1 SQLITE_ERROR SQL = ROLLBACK
+# sqlite3_step() rc= 13 SQLITE_FULL SQL = INSERT INTO proof_quota_pressure VALUES(zeroblob(1048576))
+# sqlite3_step() rc= 1 SQLITE_ERROR SQL = ROLLBACK
+# Subtest: published pages use one continuous source; page 1 remains searchable while page 2 stages and publishes
+ok 38 - published pages use one continuous source; page 1 remains searchable while page 2 stages and publishes
+  ---
+  duration_ms: 114.931959
+  type: 'test'
+  ...
+# Subtest: a Unicode/NUL page above 65536 UTF-16 units indexes across all staging fragments with original offsets
+ok 39 - a Unicode/NUL page above 65536 UTF-16 units indexes across all staging fragments with original offsets
+  ---
+  duration_ms: 121.380167
+  type: 'test'
+  ...
+# Subtest: replacement, held sources and canonical attachment changes fence hits without draining outbox; rebuild keeps only current pages
+ok 40 - replacement, held sources and canonical attachment changes fence hits without draining outbox; rebuild keeps only current pages
+  ---
+  duration_ms: 70.578333
+  type: 'test'
+  ...
+# Subtest: publication ACK and source dirtiness commit together; failed ACK leaves both untouched and exact retry succeeds
+ok 41 - publication ACK and source dirtiness commit together; failed ACK leaves both untouched and exact retry succeeds
+  ---
+  duration_ms: 19.224958
+  type: 'test'
+  ...
+# Subtest: FTS repair retains extraction text/maps/checkpoints/receipts; corrupt extraction schema suppresses only extracted hits
+ok 42 - FTS repair retains extraction text/maps/checkpoints/receipts; corrupt extraction schema suppresses only extracted hits
+  ---
+  duration_ms: 38.461667
+  type: 'test'
+  ...
+# Subtest: forty published pages drain at most32 events and enumerate bounded pages across rebuild and actual SQLite reopen
+ok 43 - forty published pages drain at most32 events and enumerate bounded pages across rebuild and actual SQLite reopen
+  ---
+  duration_ms: 334.462542
+  type: 'test'
+  ...
+# Subtest: text corruption detected while rebuilding quarantines document extraction and leaves canonical conversation searchable
+ok 44 - text corruption detected while rebuilding quarantines document extraction and leaves canonical conversation searchable
+  ---
+  duration_ms: 27.44825
+  type: 'test'
+  ...
+# Subtest: real SQLite FULL during ACK rolls back dirty writes and outbox together, preserving the original capacity error
+ok 45 - real SQLite FULL during ACK rolls back dirty writes and outbox together, preserving the original capacity error
+  ---
+  duration_ms: 14.998208
+  type: 'test'
+  ...
+# Subtest: empty scanned page receives indexed credit only after its complete zero-chunk head; stale refs never receive credit
+ok 46 - empty scanned page receives indexed credit only after its complete zero-chunk head; stale refs never receive credit
+  ---
+  duration_ms: 12.507583
+  type: 'test'
+  ...
+# Subtest: a search cursor cannot cross extraction replacement before outbox drain changes search revision
+ok 47 - a search cursor cannot cross extraction replacement before outbox drain changes search revision
+  ---
+  duration_ms: 27.684625
+  type: 'test'
+  ...
+# (node:85600) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# quixi-extraction-schema [{"version":1,"name":"canonical_records_and_atomic_operations","checksum":"16724a690f441af0162c0b49f3256bac152fb98a31f1a99c6ef40076d7dfd7d5"},{"version":2,"name":"source_and_generation_uniqueness","checksum":"bba4a045a82d42714d43d9ee709412eab759da65122b7abb244186b6a2d9b24f"},{"version":3,"name":"verified_blob_catalog_and_transfer_recovery","checksum":"705b844874dece6b5cc1881cb45ccc3b2907a2719036283fe165a0a07f6fe14e"},{"version":4,"name":"hidden_normalized_import_groups","checksum":"9988edddaf4483b380ab33f1017f141304484b1bc1662e74fb1c2de75ca2467e"},{"version":5,"name":"bounded_importer_work_and_uuid_checkpoints","checksum":"cd43d1aeb7f9fdf33c6efd0dcb3b87d00eef9169fe002c81ee6856750a49468b"},{"version":6,"name":"generation_producer_fences","checksum":"32e6035cd4ea8cabe3d327772c0d291de08a1ae24c2a23b360dc6661c6315c11"},{"version":7,"name":"local_workspace_and_message_recency","checksum":"da34a61082c74eae78301b25b83cc8525addfb6df1b5e450c33c2a63ec974151"},{"version":8,"name":"streaming_text_across_transport_provenance","checksum":"9c6a87fde402ff33d164ee7db92b34088ab05d458686670ee3d317dc24ca1263"},{"version":9,"name":"mandatory_archive_selection_protocol","checksum":"d124a56c86b6b42a8429114e253030b1cbc88e774ec8ff3e44cc9105dd5b6dab"},{"version":10,"name":"stable_local_operation_claims","checksum":"3f20f0a536ee783777602dda90a3f575cf17ddfe6bba277dc9cfa740e413770b"},{"version":11,"name":"reviewed_context_attachment_exclusions","checksum":"5dcdae7dd8c7a054cc3a1cbe4e2bd19f0890e7c213b90b30f3457c43667e75f3"},{"version":12,"name":"reviewed_summary_proposal_provenance","checksum":"231dc27fdff21cd5a8c48722f34af18df2b939978f17be62de19dcd24c0427e8"}]
+# Subtest: filename-only missing image is searchable with exact filename offsets and media/thread filters
+ok 48 - filename-only missing image is searchable with exact filename offsets and media/thread filters
+  ---
+  duration_ms: 94.748
+  type: 'test'
+  ...
+# Subtest: filename is a separate source and never prefixes or shifts an existing description
+ok 49 - filename is a separate source and never prefixes or shifts an existing description
+  ---
+  duration_ms: 29.89475
+  type: 'test'
+  ...
+# Subtest: metadata-only filename changes fence old heads immediately and replay the unchanged caption identity
+ok 50 - metadata-only filename changes fence old heads immediately and replay the unchanged caption identity
+  ---
+  duration_ms: 51.795083
+  type: 'test'
+  ...
+# Subtest: null filename creates no invented text and later metadata becomes searchable
+ok 51 - null filename creates no invented text and later metadata becomes searchable
+  ---
+  duration_ms: 45.009333
+  type: 'test'
+  ...
+# Subtest: new Image parts and thread metadata changes discover filenames after the initial index is ready
+ok 52 - new Image parts and thread metadata changes discover filenames after the initial index is ready
+  ---
+  duration_ms: 44.191041
+  type: 'test'
+  ...
+# Subtest: a filename changed while its source is held cannot publish stale chunks
+ok 53 - a filename changed while its source is held cannot publish stale chunks
+  ---
+  duration_ms: 29.19375
+  type: 'test'
+  ...
+# (node:85601) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# quixi-extraction-schema [{"version":1,"name":"canonical_records_and_atomic_operations","checksum":"16724a690f441af0162c0b49f3256bac152fb98a31f1a99c6ef40076d7dfd7d5"},{"version":2,"name":"source_and_generation_uniqueness","checksum":"bba4a045a82d42714d43d9ee709412eab759da65122b7abb244186b6a2d9b24f"},{"version":3,"name":"verified_blob_catalog_and_transfer_recovery","checksum":"705b844874dece6b5cc1881cb45ccc3b2907a2719036283fe165a0a07f6fe14e"},{"version":4,"name":"hidden_normalized_import_groups","checksum":"9988edddaf4483b380ab33f1017f141304484b1bc1662e74fb1c2de75ca2467e"},{"version":5,"name":"bounded_importer_work_and_uuid_checkpoints","checksum":"cd43d1aeb7f9fdf33c6efd0dcb3b87d00eef9169fe002c81ee6856750a49468b"},{"version":6,"name":"generation_producer_fences","checksum":"32e6035cd4ea8cabe3d327772c0d291de08a1ae24c2a23b360dc6661c6315c11"},{"version":7,"name":"local_workspace_and_message_recency","checksum":"da34a61082c74eae78301b25b83cc8525addfb6df1b5e450c33c2a63ec974151"},{"version":8,"name":"streaming_text_across_transport_provenance","checksum":"9c6a87fde402ff33d164ee7db92b34088ab05d458686670ee3d317dc24ca1263"},{"version":9,"name":"mandatory_archive_selection_protocol","checksum":"d124a56c86b6b42a8429114e253030b1cbc88e774ec8ff3e44cc9105dd5b6dab"},{"version":10,"name":"stable_local_operation_claims","checksum":"3f20f0a536ee783777602dda90a3f575cf17ddfe6bba277dc9cfa740e413770b"},{"version":11,"name":"reviewed_context_attachment_exclusions","checksum":"5dcdae7dd8c7a054cc3a1cbe4e2bd19f0890e7c213b90b30f3457c43667e75f3"},{"version":12,"name":"reviewed_summary_proposal_provenance","checksum":"231dc27fdff21cd5a8c48722f34af18df2b939978f17be62de19dcd24c0427e8"}]
+# Subtest: exact published navigation preserves Unicode/NUL offsets and original ref without loading page text, maps or blob bytes
+ok 54 - exact published navigation preserves Unicode/NUL offsets and original ref without loading page text, maps or blob bytes
+  ---
+  duration_ms: 143.701958
+  type: 'test'
+  ...
+# Subtest: old hit never resolves a changed replacement page or cleared run even before outbox drain
+ok 55 - old hit never resolves a changed replacement page or cleared run even before outbox drain
+  ---
+  duration_ms: 42.314666
+  type: 'test'
+  ...
+# Subtest: same deterministic chunk legitimately resolves after rebuild; missing repair head refuses until rebuilt
+ok 56 - same deterministic chunk legitimately resolves after rebuild; missing repair head refuses until rebuilt
+  ---
+  duration_ms: 46.43625
+  type: 'test'
+  ...
+# Subtest: plain document and code hits open metadata overview; malformed IDs, wrong document and altered positions refuse
+ok 57 - plain document and code hits open metadata overview; malformed IDs, wrong document and altered positions refuse
+  ---
+  duration_ms: 21.663083
+  type: 'test'
+  ...
+# Subtest: source SHA changes are fenced independently of normal dirty triggers for extracted and plain hits
+ok 58 - source SHA changes are fenced independently of normal dirty triggers for extracted and plain hits
+  ---
+  duration_ms: 24.6085
+  type: 'test'
+  ...
+# Subtest: missing extraction schema excludes page navigation without joining absent tables; plain sources stay usable
+ok 59 - missing extraction schema excludes page navigation without joining absent tables; plain sources stay usable
+  ---
+  duration_ms: 29.495042
+  type: 'test'
+  ...
+# Subtest: legacy extracted x: hits cannot fabricate a durable published-page navigation reference
+ok 60 - legacy extracted x: hits cannot fabricate a durable published-page navigation reference
+  ---
+  duration_ms: 15.345708
+  type: 'test'
+  ...
+# (node:85602) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# quixi-extraction-schema [{"version":1,"name":"canonical_records_and_atomic_operations","checksum":"16724a690f441af0162c0b49f3256bac152fb98a31f1a99c6ef40076d7dfd7d5"},{"version":2,"name":"source_and_generation_uniqueness","checksum":"bba4a045a82d42714d43d9ee709412eab759da65122b7abb244186b6a2d9b24f"},{"version":3,"name":"verified_blob_catalog_and_transfer_recovery","checksum":"705b844874dece6b5cc1881cb45ccc3b2907a2719036283fe165a0a07f6fe14e"},{"version":4,"name":"hidden_normalized_import_groups","checksum":"9988edddaf4483b380ab33f1017f141304484b1bc1662e74fb1c2de75ca2467e"},{"version":5,"name":"bounded_importer_work_and_uuid_checkpoints","checksum":"cd43d1aeb7f9fdf33c6efd0dcb3b87d00eef9169fe002c81ee6856750a49468b"},{"version":6,"name":"generation_producer_fences","checksum":"32e6035cd4ea8cabe3d327772c0d291de08a1ae24c2a23b360dc6661c6315c11"},{"version":7,"name":"local_workspace_and_message_recency","checksum":"da34a61082c74eae78301b25b83cc8525addfb6df1b5e450c33c2a63ec974151"},{"version":8,"name":"streaming_text_across_transport_provenance","checksum":"9c6a87fde402ff33d164ee7db92b34088ab05d458686670ee3d317dc24ca1263"},{"version":9,"name":"mandatory_archive_selection_protocol","checksum":"d124a56c86b6b42a8429114e253030b1cbc88e774ec8ff3e44cc9105dd5b6dab"},{"version":10,"name":"stable_local_operation_claims","checksum":"3f20f0a536ee783777602dda90a3f575cf17ddfe6bba277dc9cfa740e413770b"},{"version":11,"name":"reviewed_context_attachment_exclusions","checksum":"5dcdae7dd8c7a054cc3a1cbe4e2bd19f0890e7c213b90b30f3457c43667e75f3"},{"version":12,"name":"reviewed_summary_proposal_provenance","checksum":"231dc27fdff21cd5a8c48722f34af18df2b939978f17be62de19dcd24c0427e8"}]
+# Subtest: growing page population has no page-credit global scan or summary; public status stays exact
+ok 61 - growing page population has no page-credit global scan or summary; public status stays exact
+  ---
+  duration_ms: 441.972709
+  type: 'test'
+  ...
+# Subtest: long and empty pages retain exact credit and the four-chunk write cap
+ok 62 - long and empty pages retain exact credit and the four-chunk write cap
+  ---
+  duration_ms: 53.47325
+  type: 'test'
+  ...
+# Subtest: dense page credit bounds redundant checks but revalidates a cleared source at the next admission
+ok 63 - dense page credit bounds redundant checks but revalidates a cleared source at the next admission
+  ---
+  duration_ms: 28.01975
+  type: 'test'
+  ...
+# Subtest: publication retains fresh source checks even after the synchronous page check was reused
+ok 64 - publication retains fresh source checks even after the synchronous page check was reused
+  ---
+  duration_ms: 9.811875
+  type: 'test'
+  ...
+# Subtest: replacement and held source fences survive deferred cleanup; ordinary maintenance reclaims stale chunks
+ok 65 - replacement and held source fences survive deferred cleanup; ordinary maintenance reclaims stale chunks
+  ---
+  duration_ms: 36.261416
+  type: 'test'
+  ...
+1..65
+# tests 65
+# suites 0
+# pass 65
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 9520.113167

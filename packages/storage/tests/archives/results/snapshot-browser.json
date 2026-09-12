@@ -1,0 +1,429 @@
+{
+  "selectedEngines": [
+    "chromium",
+    "webkit"
+  ],
+  "status": "passed",
+  "startedAt": "2026-09-10T19:01:18.016Z",
+  "finishedAt": "2026-09-10T19:01:43.564Z",
+  "environment": {
+    "platform": "darwin",
+    "release": "25.6.0",
+    "arch": "arm64",
+    "node": "v22.23.1"
+  },
+  "sourceSha256": {
+    "tooling/browser-engines.mjs": "136f16e63e905ae4c8305c7adedfce2411eff13b04f914054f8fb718155d0df1",
+    "packages/storage/tests/archives/browser-proof.ts": "d14ff24975f2f913c6cc08d2fb57fc9abcfa280fbb13ca127536313d6c2ef507",
+    "packages/storage/tests/archives/browser-worker.ts": "317b499c719f3679c3f216d23daedf60c968cec04727b44e3518486e58bc6235",
+    "packages/storage/tests/archives/browser-roundtrip.ts": "525aa456843aae1584d9db25638e0814a57698a0456e857681799147aa5d2d03",
+    "packages/storage/tests/archives/compaction-roundtrip.ts": "92c2cac03b6a71c429d769b5624fe98f24f4ca56e25b14891912525eb26beff8",
+    "packages/core/src/model/compaction.ts": "33e724d0610024ebe5b9247196beea0971d72afe77e53f8ccebacfada2c54d28",
+    "packages/core/src/model/validation.ts": "fccb9eb2d56a44697ac8b89fa97bb3418b9f4ee45a199f53fc5d68cf622a5756",
+    "packages/storage/migrations/context-compaction.ts": "9f6457d0cbf08c9134279f5fb305b0af907478e9083294e06883422c1176d29b",
+    "packages/storage/migrations/summary-proposals.ts": "a3500ade690d146e49e49e85895398866aaf6472254f2e20e0420a2baa485948",
+    "packages/core/src/model/summaries.ts": "ebb396a3f6ec22c26d244845dbfef77a0de04dc9ddbc106263d81f3d8e4d7d86",
+    "packages/storage/src/worker/canonical/summary-source.ts": "5fc70e1137f9630fa5975b4a3ae3a31bd7eba82e224e8777620ef75d5b6b865c",
+    "packages/storage/src/worker/canonical/repository.ts": "d08f508c0a7b9a150690b9f8f42805354825785d28c05c4fdb967a7a926e159c",
+    "packages/storage/src/worker/archives/validation.ts": "a162b28d203503c632caf992aa6b6ff362c890d15393b37077f804b3da147cbf",
+    "packages/storage/tests/archives/schema-seven.ts": "30eb4e65288a691df00c9a3cc60c3eee099f2322b4e92588a3575db2d757d841",
+    "packages/storage/tests/archives/schema-eight.ts": "f3f1677c3fed9e00c1c2011e296aec266d142b712f8bf73ca31110a93b37b3eb",
+    "packages/storage/tests/archives/browser-client.ts": "145f9d0b703ad651f628e2d4e7b5a349697ca0d254f8519d219218c0d78a0829",
+    "packages/storage/tests/archives/browser-workflows.ts": "fa215372d79ad4dceab38388d5d0f2bed505ce45fa44076de70fa7fd9c8f151b",
+    "packages/storage/src/worker/archives/index.ts": "f3425fec39bb0d372c715f4ef89f63adef7f4a1728dc4ac3c3a6af99c52d74c2",
+    "packages/storage/src/worker/archives/clean-copy.ts": "404bedbbecb57fedd86d957b51427cca3b5304339ff4120d6091114650c3046c",
+    "packages/storage/src/worker/archives/schema-validation.ts": "ff3aecb064a430513890d9a66379b3904caa09de5f455580a98f299a74ebed22",
+    "packages/storage/migrations/index.ts": "463331ffb83ce77bd759505d3e3b39376a193c146bb5e68fd5178af4c63867fd",
+    "packages/storage/migrations/operation-claims.ts": "b317daf1fe39656d98d58bb3418ed1f5da3687afa83da82a7281365bf61fb466",
+    "packages/storage/sqlite/dist/sqlite3.wasm": "dd7c22431a3b8ad51ab5e6ed91065593574c34c5959d2efdef2f17484eedcb2c",
+    "package-lock.json": "aadb456e2a567a2b91cbb81a502650ebac93541f0a59d54035bdde2cacd97672"
+  },
+  "context": "fresh isolated persistent profiles",
+  "origin": "http://127.0.0.1:53953",
+  "hosts": [
+    {
+      "name": "chromium",
+      "status": "passed",
+      "result": {
+        "snapshot": {
+          "roundtrip": {
+            "compaction": {
+              "schemaVersion": 12,
+              "contextId": "75039e6c-790f-44da-a67a-f005b0a0fdbf",
+              "summaryContextId": "e517357e-ac09-4369-9f8f-0b9e11f1b560",
+              "summaryProposalId": "f1659fb2-4178-445e-b69f-52bd99b284e9",
+              "frozenInputSha256": "37ef61ad3eb3570a959b301946aceb3cfa1e78a4d086b314c0571c1e6c4b77a2",
+              "partId": "08fc93c5-d168-433e-8b73-fd911d7066db",
+              "freshBranchContextId": "8ca9cd65-6c51-4b7b-b36a-1ca176e95e9e",
+              "branchEventId": "aee53951-ff18-4346-b8f3-916978c7592f",
+              "emptySelectedBranch": true,
+              "routingProfile": {
+                "version": 5,
+                "alias": "Portable cost and region limits",
+                "primary": {
+                  "provider": "synthetic-primary",
+                  "model": "primary-model"
+                },
+                "candidates": [
+                  {
+                    "provider": "synthetic-fallback",
+                    "model": "fallback-model"
+                  }
+                ],
+                "requirements": {
+                  "maxRequestCost": "0.25",
+                  "maxEstimatedRequestCost": "0.5",
+                  "processingRegion": "us"
+                },
+                "allowPrivacyChange": false
+              },
+              "archiveBytes": 1395712,
+              "canonicalAndJournalExact": true
+            },
+            "jobSteps": 160,
+            "schemaSevenRejection": {
+              "sourceSchemaVersion": 7,
+              "targetSchemaVersion": 12,
+              "historicalSchemaObjectCount": 90,
+              "currentSchemaObjectCount": 102,
+              "rejectionKind": "schema_floor",
+              "archiveBytes": 669184,
+              "rejectedAt": "schema_validation",
+              "reason": "Error: Archive schema version 7 predates the earliest schema this Quixi version can upgrade (schema 8). Restore it with the Quixi version that last opened the archive.",
+              "activeHistoryUnchanged": true,
+              "candidateReady": false
+            },
+            "schemaEightUpgrade": {
+              "jobId": "26c2ce32-67a6-4bcf-9ce8-4e6709d638a2",
+              "candidateId": "bb4e6022-b6a2-4686-a3b8-dfdddca48998",
+              "sourceSchemaVersion": 8,
+              "targetSchemaVersion": 12,
+              "canonicalRecords": 23,
+              "syncOperations": 19,
+              "archiveBytes": 1294848,
+              "candidateReady": true
+            },
+            "schemaVersion": 12,
+            "migrations": [
+              {
+                "checksum": "16724a690f441af0162c0b49f3256bac152fb98a31f1a99c6ef40076d7dfd7d5",
+                "name": "canonical_records_and_atomic_operations",
+                "version": 1
+              },
+              {
+                "checksum": "bba4a045a82d42714d43d9ee709412eab759da65122b7abb244186b6a2d9b24f",
+                "name": "source_and_generation_uniqueness",
+                "version": 2
+              },
+              {
+                "checksum": "705b844874dece6b5cc1881cb45ccc3b2907a2719036283fe165a0a07f6fe14e",
+                "name": "verified_blob_catalog_and_transfer_recovery",
+                "version": 3
+              },
+              {
+                "checksum": "9988edddaf4483b380ab33f1017f141304484b1bc1662e74fb1c2de75ca2467e",
+                "name": "hidden_normalized_import_groups",
+                "version": 4
+              },
+              {
+                "checksum": "cd43d1aeb7f9fdf33c6efd0dcb3b87d00eef9169fe002c81ee6856750a49468b",
+                "name": "bounded_importer_work_and_uuid_checkpoints",
+                "version": 5
+              },
+              {
+                "checksum": "32e6035cd4ea8cabe3d327772c0d291de08a1ae24c2a23b360dc6661c6315c11",
+                "name": "generation_producer_fences",
+                "version": 6
+              },
+              {
+                "checksum": "da34a61082c74eae78301b25b83cc8525addfb6df1b5e450c33c2a63ec974151",
+                "name": "local_workspace_and_message_recency",
+                "version": 7
+              },
+              {
+                "checksum": "9c6a87fde402ff33d164ee7db92b34088ab05d458686670ee3d317dc24ca1263",
+                "name": "streaming_text_across_transport_provenance",
+                "version": 8
+              },
+              {
+                "checksum": "d124a56c86b6b42a8429114e253030b1cbc88e774ec8ff3e44cc9105dd5b6dab",
+                "name": "mandatory_archive_selection_protocol",
+                "version": 9
+              },
+              {
+                "checksum": "3f20f0a536ee783777602dda90a3f575cf17ddfe6bba277dc9cfa740e413770b",
+                "name": "stable_local_operation_claims",
+                "version": 10
+              },
+              {
+                "checksum": "5dcdae7dd8c7a054cc3a1cbe4e2bd19f0890e7c213b90b30f3457c43667e75f3",
+                "name": "reviewed_context_attachment_exclusions",
+                "version": 11
+              },
+              {
+                "checksum": "231dc27fdff21cd5a8c48722f34af18df2b939978f17be62de19dcd24c0427e8",
+                "name": "reviewed_summary_proposal_provenance",
+                "version": 12
+              }
+            ],
+            "archiveBytes": 1319936,
+            "openBytes": 1360896,
+            "canonicalRecords": 23,
+            "syncOperations": 19,
+            "blobBytes": 600013,
+            "peakTarChunk": 65536,
+            "copySteps": 55,
+            "validationSteps": 66,
+            "manifestEntries": 3,
+            "checks": [
+              "schema-12 reviewed summary proposal/frozen input/edited text, attachment exclusions and fresh branch empty selection/audit/source history survive an exact portable records/edges/journal/blobs roundtrip",
+              "schema-7 portable rejected before activation with active history unchanged",
+              "activation barrier target lock and fresh corruption rejection",
+              "serialized repository export/restore job lifecycle",
+              "candidate review current-revision fence and retention",
+              "owner-loss unfinished job fence",
+              "actual OPFS streamed portable export/receive",
+              "manifest inventory validation",
+              "canonical branches/provenance exact",
+              "operation journal exact",
+              "generation/tombstone and published import receipts exact",
+              "text append across reserved transport provenance preserves NUL/Unicode and full Markdown",
+              "raw/text blob SHA-256 exact",
+              "private staging excluded",
+              "Markdown includes full blob-backed tail"
+            ]
+          },
+          "origin": "http://127.0.0.1:53953",
+          "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36",
+          "copiedBytes": 5259264,
+          "peakBlock": 65536,
+          "blocks": 81,
+          "sourceDigest": "8fa959e88760225de724f4c8850b123f32f293cd91433cc85df97eba5e93d6de",
+          "snapshotDigest": "8fa959e88760225de724f4c8850b123f32f293cd91433cc85df97eba5e93d6de",
+          "snapshotRows": 1,
+          "sourceRows": 2,
+          "integrity": "ok",
+          "mechanism": "FILE_POINTER/xRead -> SAHPool.importDb(callback)",
+          "backend": "actual SQLite WASM OPFS SAH-pool"
+        },
+        "publicClient": {
+          "archiveBytes": 10141184,
+          "blobBytes": 9437201,
+          "peakTransferBytes": 65536,
+          "steps": 147,
+          "checks": [
+            "actual ArchiveStorageClient owner-worker job and transfer routes",
+            "9 MiB blob streamed without whole-archive array",
+            "stable operation replay and bidirectional identity fences",
+            "all eight foreground blob leases pause then resume export",
+            "ready restore survives owner restart and requires revalidation",
+            "canonical active archive unchanged",
+            "private query-only candidate reader verifies canonical counts and raw bytes without writable client activation"
+          ]
+        },
+        "workflows": {
+          "checks": [
+            "shared workflow lost successful begin reply reconciles by preallocated job identity",
+            "shared export streams into real browser disk staging",
+            "shared restore consumes actual disk File through programmatic file-selection fixture and produces isolated candidate",
+            "released jobs disappear from bounded outstanding-job list",
+            "ready open export stages again without a new archive job"
+          ]
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "webkit",
+      "status": "passed",
+      "result": {
+        "snapshot": {
+          "roundtrip": {
+            "compaction": {
+              "schemaVersion": 12,
+              "contextId": "29baf73d-1102-4d6b-a5d1-92ac1548da6a",
+              "summaryContextId": "5f166faf-8836-4022-b365-4cb6b39afc6d",
+              "summaryProposalId": "a5366d41-797a-4e2e-8861-ff5367501ef8",
+              "frozenInputSha256": "37ef61ad3eb3570a959b301946aceb3cfa1e78a4d086b314c0571c1e6c4b77a2",
+              "partId": "fb548646-c488-464e-ad50-9191bcbf24ad",
+              "freshBranchContextId": "ec9fa97b-c2ac-42fd-9756-80ecfbf3a894",
+              "branchEventId": "22239009-1bd8-4ec5-b77d-96983240d39f",
+              "emptySelectedBranch": true,
+              "routingProfile": {
+                "version": 5,
+                "alias": "Portable cost and region limits",
+                "primary": {
+                  "provider": "synthetic-primary",
+                  "model": "primary-model"
+                },
+                "candidates": [
+                  {
+                    "provider": "synthetic-fallback",
+                    "model": "fallback-model"
+                  }
+                ],
+                "requirements": {
+                  "maxRequestCost": "0.25",
+                  "maxEstimatedRequestCost": "0.5",
+                  "processingRegion": "us"
+                },
+                "allowPrivacyChange": false
+              },
+              "archiveBytes": 1395712,
+              "canonicalAndJournalExact": true
+            },
+            "jobSteps": 160,
+            "schemaSevenRejection": {
+              "sourceSchemaVersion": 7,
+              "targetSchemaVersion": 12,
+              "historicalSchemaObjectCount": 90,
+              "currentSchemaObjectCount": 102,
+              "rejectionKind": "schema_floor",
+              "archiveBytes": 669184,
+              "rejectedAt": "schema_validation",
+              "reason": "Error: Archive schema version 7 predates the earliest schema this Quixi version can upgrade (schema 8). Restore it with the Quixi version that last opened the archive.",
+              "activeHistoryUnchanged": true,
+              "candidateReady": false
+            },
+            "schemaEightUpgrade": {
+              "jobId": "be75e134-d39c-4f31-a5bf-e9af416dac4e",
+              "candidateId": "2e51a614-fe23-485e-87bd-7771376a76b9",
+              "sourceSchemaVersion": 8,
+              "targetSchemaVersion": 12,
+              "canonicalRecords": 23,
+              "syncOperations": 19,
+              "archiveBytes": 1294848,
+              "candidateReady": true
+            },
+            "schemaVersion": 12,
+            "migrations": [
+              {
+                "checksum": "16724a690f441af0162c0b49f3256bac152fb98a31f1a99c6ef40076d7dfd7d5",
+                "name": "canonical_records_and_atomic_operations",
+                "version": 1
+              },
+              {
+                "checksum": "bba4a045a82d42714d43d9ee709412eab759da65122b7abb244186b6a2d9b24f",
+                "name": "source_and_generation_uniqueness",
+                "version": 2
+              },
+              {
+                "checksum": "705b844874dece6b5cc1881cb45ccc3b2907a2719036283fe165a0a07f6fe14e",
+                "name": "verified_blob_catalog_and_transfer_recovery",
+                "version": 3
+              },
+              {
+                "checksum": "9988edddaf4483b380ab33f1017f141304484b1bc1662e74fb1c2de75ca2467e",
+                "name": "hidden_normalized_import_groups",
+                "version": 4
+              },
+              {
+                "checksum": "cd43d1aeb7f9fdf33c6efd0dcb3b87d00eef9169fe002c81ee6856750a49468b",
+                "name": "bounded_importer_work_and_uuid_checkpoints",
+                "version": 5
+              },
+              {
+                "checksum": "32e6035cd4ea8cabe3d327772c0d291de08a1ae24c2a23b360dc6661c6315c11",
+                "name": "generation_producer_fences",
+                "version": 6
+              },
+              {
+                "checksum": "da34a61082c74eae78301b25b83cc8525addfb6df1b5e450c33c2a63ec974151",
+                "name": "local_workspace_and_message_recency",
+                "version": 7
+              },
+              {
+                "checksum": "9c6a87fde402ff33d164ee7db92b34088ab05d458686670ee3d317dc24ca1263",
+                "name": "streaming_text_across_transport_provenance",
+                "version": 8
+              },
+              {
+                "checksum": "d124a56c86b6b42a8429114e253030b1cbc88e774ec8ff3e44cc9105dd5b6dab",
+                "name": "mandatory_archive_selection_protocol",
+                "version": 9
+              },
+              {
+                "checksum": "3f20f0a536ee783777602dda90a3f575cf17ddfe6bba277dc9cfa740e413770b",
+                "name": "stable_local_operation_claims",
+                "version": 10
+              },
+              {
+                "checksum": "5dcdae7dd8c7a054cc3a1cbe4e2bd19f0890e7c213b90b30f3457c43667e75f3",
+                "name": "reviewed_context_attachment_exclusions",
+                "version": 11
+              },
+              {
+                "checksum": "231dc27fdff21cd5a8c48722f34af18df2b939978f17be62de19dcd24c0427e8",
+                "name": "reviewed_summary_proposal_provenance",
+                "version": 12
+              }
+            ],
+            "archiveBytes": 1319936,
+            "openBytes": 1360896,
+            "canonicalRecords": 23,
+            "syncOperations": 19,
+            "blobBytes": 600013,
+            "peakTarChunk": 65536,
+            "copySteps": 55,
+            "validationSteps": 66,
+            "manifestEntries": 3,
+            "checks": [
+              "schema-12 reviewed summary proposal/frozen input/edited text, attachment exclusions and fresh branch empty selection/audit/source history survive an exact portable records/edges/journal/blobs roundtrip",
+              "schema-7 portable rejected before activation with active history unchanged",
+              "activation barrier target lock and fresh corruption rejection",
+              "serialized repository export/restore job lifecycle",
+              "candidate review current-revision fence and retention",
+              "owner-loss unfinished job fence",
+              "actual OPFS streamed portable export/receive",
+              "manifest inventory validation",
+              "canonical branches/provenance exact",
+              "operation journal exact",
+              "generation/tombstone and published import receipts exact",
+              "text append across reserved transport provenance preserves NUL/Unicode and full Markdown",
+              "raw/text blob SHA-256 exact",
+              "private staging excluded",
+              "Markdown includes full blob-backed tail"
+            ]
+          },
+          "origin": "http://127.0.0.1:53953",
+          "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+          "copiedBytes": 5259264,
+          "peakBlock": 65536,
+          "blocks": 81,
+          "sourceDigest": "8fa959e88760225de724f4c8850b123f32f293cd91433cc85df97eba5e93d6de",
+          "snapshotDigest": "8fa959e88760225de724f4c8850b123f32f293cd91433cc85df97eba5e93d6de",
+          "snapshotRows": 1,
+          "sourceRows": 2,
+          "integrity": "ok",
+          "mechanism": "FILE_POINTER/xRead -> SAHPool.importDb(callback)",
+          "backend": "actual SQLite WASM OPFS SAH-pool"
+        },
+        "publicClient": {
+          "archiveBytes": 10141184,
+          "blobBytes": 9437201,
+          "peakTransferBytes": 65536,
+          "steps": 147,
+          "checks": [
+            "actual ArchiveStorageClient owner-worker job and transfer routes",
+            "9 MiB blob streamed without whole-archive array",
+            "stable operation replay and bidirectional identity fences",
+            "all eight foreground blob leases pause then resume export",
+            "ready restore survives owner restart and requires revalidation",
+            "canonical active archive unchanged",
+            "private query-only candidate reader verifies canonical counts and raw bytes without writable client activation"
+          ]
+        },
+        "workflows": {
+          "checks": [
+            "shared workflow lost successful begin reply reconciles by preallocated job identity",
+            "shared export streams into real browser disk staging",
+            "shared restore consumes actual disk File through programmatic file-selection fixture and produces isolated candidate",
+            "released jobs disappear from bounded outstanding-job list",
+            "ready open export stages again without a new archive job"
+          ]
+        }
+      },
+      "error": null
+    }
+  ]
+}

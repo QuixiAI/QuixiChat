@@ -1,0 +1,16 @@
+.git
+.zvec-grep
+**/node_modules
+**/target
+**/dist
+**/gen
+**/build
+test-results
+playwright-report
+perf
+tests
+legacy
+**/*.gguf
+**/*.qxmodel
+.env
+.env.*

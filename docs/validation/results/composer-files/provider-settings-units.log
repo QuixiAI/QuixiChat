@@ -1,0 +1,112 @@
+
+> quixi@0.0.1 test:app:providers
+> node --experimental-transform-types --test packages/app/src/features/providers/tests/controller.test.mjs
+
+TAP version 13
+# (node:95191) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: opaque reopen, replacement, lost write outcome and byte cleanup survive controller restart
+ok 1 - opaque reopen, replacement, lost write outcome and byte cleanup survive controller restart
+  ---
+  duration_ms: 5.413583
+  type: 'test'
+  ...
+# Subtest: missing transport and unavailable credentials never produce an enabled adapter
+ok 2 - missing transport and unavailable credentials never produce an enabled adapter
+  ---
+  duration_ms: 0.256458
+  type: 'test'
+  ...
+# Subtest: unconfigured transport does not attempt credential reopen or report a false credential error
+ok 3 - unconfigured transport does not attempt credential reopen or report a false credential error
+  ---
+  duration_ms: 0.231125
+  type: 'test'
+  ...
+# Subtest: reviewed model facts remain separate from adapter subset and unknown discovered model stays gated
+ok 4 - reviewed model facts remain separate from adapter subset and unknown discovered model stays gated
+  ---
+  duration_ms: 1.484917
+  type: 'test'
+  ...
+# Subtest: connection checks use the published adapter, whose live health the controller exposes
+ok 5 - connection checks use the published adapter, whose live health the controller exposes
+  ---
+  duration_ms: 0.928334
+  type: 'test'
+  ...
+# Subtest: a connection check follows listing cursors up to the page bound and separates reviewed from unreviewed models
+ok 6 - a connection check follows listing cursors up to the page bound and separates reviewed from unreviewed models
+  ---
+  duration_ms: 0.594125
+  type: 'test'
+  ...
+# Subtest: connections identify direct, Quixi-relay and self-hosted transports from host capabilities alone
+ok 7 - connections identify direct, Quixi-relay and self-hosted transports from host capabilities alone
+  ---
+  duration_ms: 0.288959
+  type: 'test'
+  ...
+# Subtest: native regional credentials require explicit account eligibility; model discovery cannot grant it
+ok 8 - native regional credentials require explicit account eligibility; model discovery cannot grant it
+  ---
+  duration_ms: 1.709792
+  type: 'test'
+  ...
+# Subtest: image eligibility changes rotate regional adapters and invalidate retained prepare/count/stream references
+ok 9 - image eligibility changes rotate regional adapters and invalidate retained prepare/count/stream references
+  ---
+  duration_ms: 0.802125
+  type: 'test'
+  ...
+# Subtest: reopen, credential replacement, disconnect and controller restart cannot reuse regional confirmation
+ok 10 - reopen, credential replacement, disconnect and controller restart cannot reuse regional confirmation
+  ---
+  duration_ms: 1.019666
+  type: 'test'
+  ...
+# Subtest: missing or changed regional evidence refuses publication and invalidates previously confirmed adapters
+ok 11 - missing or changed regional evidence refuses publication and invalidates previously confirmed adapters
+  ---
+  duration_ms: 0.590416
+  type: 'test'
+  ...
+# Subtest: regional dispatch rechecks eligibility after prepared body staging has begun
+ok 12 - regional dispatch rechecks eligibility after prepared body staging has begun
+  ---
+  duration_ms: 6.376875
+  type: 'test'
+  ...
+# Subtest: regional evidence cannot authorize an unreviewed model or ambiguous host transport
+ok 13 - regional evidence cannot authorize an unreviewed model or ambiguous host transport
+  ---
+  duration_ms: 0.645167
+  type: 'test'
+  ...
+# Subtest: admitted regional relay routes require account confirmation and preserve operator and remote privacy
+ok 14 - admitted regional relay routes require account confirmation and preserve operator and remote privacy
+  ---
+  duration_ms: 4.563709
+  type: 'test'
+  ...
+# Subtest: regional eligibility is checked again across host preparation and the final caller guard await
+ok 15 - regional eligibility is checked again across host preparation and the final caller guard await
+  ---
+  duration_ms: 2.042125
+  type: 'test'
+  ...
+# Subtest: regional native and relay adapters refuse PDF before prepare/count/stream staging regardless of image confirmation
+ok 16 - regional native and relay adapters refuse PDF before prepare/count/stream staging regardless of image confirmation
+  ---
+  duration_ms: 3.178875
+  type: 'test'
+  ...
+1..16
+# tests 16
+# suites 0
+# pass 16
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 224.308417

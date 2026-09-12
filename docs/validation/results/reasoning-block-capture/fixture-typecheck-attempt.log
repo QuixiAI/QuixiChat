@@ -1,0 +1,43 @@
+
+> quixi@0.0.1 test:providers
+> npm test --workspace @quixi/providers
+
+
+> @quixi/providers@0.0.1 test
+> npm run typecheck && npm run typecheck:tests && node --experimental-transform-types --test tests/*.test.ts
+
+
+> @quixi/providers@0.0.1 typecheck
+> tsc --noEmit -p tsconfig.json
+
+
+> @quixi/providers@0.0.1 typecheck:tests
+> tsc --noEmit -p tsconfig.tests.json
+
+tests/browser.ts(119,11): error TS18047: 'part' is possibly 'null'.
+tests/browser.ts(119,16): error TS2339: Property 'kind' does not exist on type 'string | number | boolean | JsonValue[] | { [key: string]: JsonValue; }'.
+  Property 'kind' does not exist on type 'string'.
+tests/browser.ts(119,47): error TS18047: 'part' is possibly 'null'.
+tests/browser.ts(119,52): error TS2339: Property 'data' does not exist on type 'string | number | boolean | JsonValue[] | { [key: string]: JsonValue; }'.
+  Property 'data' does not exist on type 'string'.
+tests/browser.ts(120,92): error TS18047: 'part' is possibly 'null'.
+tests/browser.ts(120,97): error TS2339: Property 'data' does not exist on type 'string | number | boolean | JsonValue[] | { [key: string]: JsonValue; }'.
+  Property 'data' does not exist on type 'string'.
+tests/browser.ts(121,33): error TS2322: Type 'string | number | true | JsonValue[] | { [key: string]: JsonValue; }' is not assignable to type 'object'.
+  Type 'string' is not assignable to type 'object'.
+tests/browser.ts(122,81): error TS2345: Argument of type 'string | number | true | JsonValue[] | { [key: string]: JsonValue; }' is not assignable to parameter of type 'string'.
+  Type 'number' is not assignable to type 'string'.
+npm error Lifecycle script `typecheck:tests` failed with error:
+npm error code 1
+npm error path /Users/eric/QuixiChat/packages/providers
+npm error workspace @quixi/providers@0.0.1
+npm error location /Users/eric/QuixiChat/packages/providers
+npm error command failed
+npm error command sh -c tsc --noEmit -p tsconfig.tests.json
+npm error Lifecycle script `test` failed with error:
+npm error code 1
+npm error path /Users/eric/QuixiChat/packages/providers
+npm error workspace @quixi/providers@0.0.1
+npm error location /Users/eric/QuixiChat/packages/providers
+npm error command failed
+npm error command sh -c npm run typecheck && npm run typecheck:tests && node --experimental-transform-types --test tests/*.test.ts

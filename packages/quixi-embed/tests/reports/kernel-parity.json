@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "checks": 2400,
+  "kernels": [
+    "dot",
+    "weighted_value_accumulation"
+  ],
+  "widths": [
+    32,
+    384,
+    1536
+  ],
+  "unaligned_float_offsets": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "comparison": "Exact FP32 result identity"
+}

@@ -1,0 +1,6 @@
+node_modules/.bin/tsc --noEmit -p packages/storage/tests/search-navigation/tsconfig.json
+node_modules/.bin/tsc --noEmit -p packages/storage/tests/search-performance/tsconfig.json
+node_modules/.bin/tsc --noEmit -p packages/storage/tests/canonical/tsconfig.json
+node_modules/.bin/tsc --noEmit -p packages/storage/tests/extraction-search/tsconfig.json
+node_modules/.bin/tsc --noEmit -p packages/storage/tests/image-search/tsconfig.json
+node_modules/.bin/tsc --noEmit -p packages/storage/tests/conversation-search-navigation/tsconfig.json

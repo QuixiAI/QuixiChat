@@ -1,0 +1,10 @@
+*
+!Dockerfile
+!package.json
+!src/
+!src/**
+!tests/
+!tests/fixture.mjs
+!tests/relay.test.mjs
+!tests/tls.test.mjs
+!tests/tls-fixture.mjs

@@ -1,0 +1,18 @@
+{
+  "name": "@quixi/storage",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "description": "Universal Storage Worker and typed client.",
+  "exports": {
+    "./client": "./src/client/index.ts",
+    "./worker": "./src/worker/index.ts",
+    "./proof": "./src/proof/index.ts"
+  },
+  "dependencies": {
+    "@noble/hashes": "2.4.0",
+    "@quixi/core": "0.0.1",
+    "@quixi/quixi-embed": "0.0.1",
+    "@quixi/search": "0.0.1"
+  }
+}

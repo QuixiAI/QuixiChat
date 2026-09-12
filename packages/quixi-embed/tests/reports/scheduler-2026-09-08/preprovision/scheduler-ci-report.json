@@ -1,0 +1,240 @@
+{
+  "status": "passed",
+  "passed": true,
+  "started_at": "2026-09-08T22:48:05.018652+00:00",
+  "skip_provision": true,
+  "gpu": true,
+  "full": false,
+  "commands": [
+    {
+      "command": [
+        "node",
+        "--experimental-strip-types",
+        "--test",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/scheduler.mjs"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.3868961250009306
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/node_modules/.bin/tsc",
+        "-p",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tsconfig.gpu.json"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.18495049999910407
+    },
+    {
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests",
+        "-p",
+        "test_scheduler_ci.py"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.07286283299981733
+    },
+    {
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/Users/eric/QuixiChat/packages/quixi-embed/native/release.py"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.09465741599706234
+    },
+    {
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/Users/eric/QuixiChat/packages/quixi-embed/native/gpu_release.py"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.03533654200145975
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/generate_preflight_fixtures.py",
+        "--verify"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 1.5943717090012797
+    },
+    {
+      "command": [
+        "node",
+        "--experimental-strip-types",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/token-preflight.mjs"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 1.4432317500031786
+    },
+    {
+      "command": [
+        "node",
+        "--experimental-strip-types",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/scalar-api.mjs"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 1.209190582998417
+    },
+    {
+      "command": [
+        "node",
+        "--experimental-strip-types",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/scalar-api.mjs",
+        "simd"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 1.0697327500020037
+    },
+    {
+      "command": [
+        "node",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/scheduler/run.mjs",
+        "chromium",
+        "scalar"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 6.660681041998032
+    },
+    {
+      "command": [
+        "node",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/scheduler/run.mjs",
+        "chromium",
+        "simd"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 4.030909958000848
+    },
+    {
+      "command": [
+        "node",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/scheduler/run.mjs",
+        "firefox",
+        "scalar"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 8.518634457999724
+    },
+    {
+      "command": [
+        "node",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/scheduler/run.mjs",
+        "firefox",
+        "simd"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 5.310732207999536
+    },
+    {
+      "command": [
+        "node",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/scheduler/run.mjs",
+        "webkit",
+        "scalar"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 7.021785084001749
+    },
+    {
+      "command": [
+        "node",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/scheduler/run.mjs",
+        "webkit",
+        "simd"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 4.148953125000844
+    },
+    {
+      "command": [
+        "node",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/scheduler/run.mjs",
+        "chromium",
+        "gpu"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 1.2820794159997604
+    },
+    {
+      "command": [
+        "node",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/scheduler/run.mjs",
+        "chromium",
+        "half"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 1.002551166999183
+    },
+    {
+      "command": [
+        "node",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/scheduler/run.mjs",
+        "chromium",
+        "gpu",
+        "--loss"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 7.985420791999786
+    },
+    {
+      "command": [
+        "node",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/scheduler/run.mjs",
+        "webkit",
+        "gpu"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 1.4731832500001474
+    },
+    {
+      "command": [
+        "node",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/scheduler/run.mjs",
+        "webkit",
+        "half"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 1.2984515829994052
+    },
+    {
+      "command": [
+        "node",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/scheduler/run.mjs",
+        "webkit",
+        "gpu",
+        "--loss"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 8.196722749999026
+    }
+  ],
+  "finished_at": "2026-09-08T22:49:08.060963+00:00"
+}

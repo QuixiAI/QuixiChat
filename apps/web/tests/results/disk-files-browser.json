@@ -1,0 +1,28 @@
+{
+  "recordedAt": "2026-09-10T03:41:50.150Z",
+  "context": "fresh persistent browser contexts with distinct UUID OPFS staging namespaces",
+  "claims": {
+    "largeFileBytes": 33554449,
+    "maxWriteChunkBytes": 65536,
+    "maxInFlight": 4,
+    "maxRetainedDownloads": 4,
+    "nativePicker": "injected picker mechanics with real OPFS writable destination; not OS dialog automation",
+    "download": "actual browser download bytes verified by independent Node SHA-256 stream",
+    "memory": "bounded application buffers; total browser process memory not measured"
+  },
+  "stats": {
+    "startTime": "2026-09-10T03:39:16.085Z",
+    "duration": 26854.865,
+    "expected": 30,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "tests": 26,
+  "sources": {
+    "apps/web/src/host/disk-stages.ts": "db313149f8838160928fd41637bb8b04b58b94b72bad4cc4580def6b61370eac",
+    "apps/web/src/host/transfers.ts": "5718b2743caeffb00f4e736393ddff691b94fd896453aafbd696ac50d2e618f1",
+    "apps/web/src/host/index.ts": "af07620c4bf5ca38bda08dc037b93c74fecdca9a627e9a27e53e07d827e82e12",
+    "apps/web/tests/host.spec.ts": "ec3b8bf588b307c642c5c98a19d1e67ba4c98167081b4360a1550f83452bdc4b"
+  }
+}

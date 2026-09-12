@@ -1,0 +1,92 @@
+TAP version 13
+# (node:4467) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: pinned WASM file-pointer copy uses <=64 KiB blocks and matches independent SQLite export
+ok 1 - pinned WASM file-pointer copy uses <=64 KiB blocks and matches independent SQLite export
+  ---
+  duration_ms: 25.389625
+  type: 'test'
+  ...
+# Subtest: cancelled bounded copy releases its read transaction and invalidates retained readers
+ok 2 - cancelled bounded copy releases its read transaction and invalidates retained readers
+  ---
+  duration_ms: 1.569625
+  type: 'test'
+  ...
+# Subtest: bounded fresh-schema copy retains canonical bytes and omits residual private staging pages
+ok 3 - bounded fresh-schema copy retains canonical bytes and omits residual private staging pages
+  ---
+  duration_ms: 99.386041
+  type: 'test'
+  ...
+# Subtest: snapshot admission and mid-copy failures preserve source and unlink only private output
+ok 4 - snapshot admission and mid-copy failures preserve source and unlink only private output
+  ---
+  duration_ms: 11.296042
+  type: 'test'
+  ...
+# Subtest: restore rejects unexpected executable schema before any canonical validation
+ok 5 - restore rejects unexpected executable schema before any canonical validation
+  ---
+  duration_ms: 8.599333
+  type: 'test'
+  ...
+# Subtest: bounded restore validation rejects cycle without modifying candidate
+ok 6 - bounded restore validation rejects cycle without modifying candidate
+  ---
+  duration_ms: 22.87125
+  type: 'test'
+  ...
+# Subtest: bounded restore validation rejects edge without modifying candidate
+ok 7 - bounded restore validation rejects edge without modifying candidate
+  ---
+  duration_ms: 9.248959
+  type: 'test'
+  ...
+# Subtest: bounded restore validation rejects journal digest without modifying candidate
+ok 8 - bounded restore validation rejects journal digest without modifying candidate
+  ---
+  duration_ms: 12.405458
+  type: 'test'
+  ...
+# Subtest: bounded restore validation rejects journal coverage without modifying candidate
+ok 9 - bounded restore validation rejects journal coverage without modifying candidate
+  ---
+  duration_ms: 11.500334
+  type: 'test'
+  ...
+# Subtest: bounded restore validation rejects orphan published import without modifying candidate
+ok 10 - bounded restore validation rejects orphan published import without modifying candidate
+  ---
+  duration_ms: 14.672042
+  type: 'test'
+  ...
+# (node:4468) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: ordinary system tar extracts the streamed container; fragmented decode preserves bytes
+ok 11 - ordinary system tar extracts the streamed container; fragmented decode preserves bytes
+  ---
+  duration_ms: 42.68375
+  type: 'test'
+  ...
+# Subtest: truncation, checksum damage, links, traversal, duplicate sink rejection and trailing data fail
+ok 12 - truncation, checksum damage, links, traversal, duplicate sink rejection and trailing data fail
+  ---
+  duration_ms: 1.008333
+  type: 'test'
+  ...
+# Subtest: large PAX entry headers are emitted without allocating the declared body
+ok 13 - large PAX entry headers are emitted without allocating the declared body
+  ---
+  duration_ms: 0.131375
+  type: 'test'
+  ...
+1..13
+# tests 13
+# suites 0
+# pass 13
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 400.584417

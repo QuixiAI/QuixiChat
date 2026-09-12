@@ -1,0 +1,1 @@
+export const SUMMARY_PROPOSALS_MIGRATION = {version:12,name:'reviewed_summary_proposal_provenance',sql:"CREATE UNIQUE INDEX quixi_summary_generation ON quixi_records(generation_id) WHERE collection='summaryProposals';\n"} as const;

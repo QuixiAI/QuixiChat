@@ -1,0 +1,85 @@
+import { readFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
+
+// Test-only local CDP connection. Uses documented flattened target sessions, never
+// pauses targets or forces GC. A sample is not a peak or a hard live-heap bound.
+export async function startHeapSampler(profile, origin) {
+  const [port, path] = (await readFile(resolve(profile, 'DevToolsActivePort'), 'utf8')).trim().split('\n');
+  if (!/^\d+$/.test(port) || !path.startsWith('/devtools/browser/')) throw new Error('Invalid local CDP endpoint');
+  const socket = new WebSocket(`ws://127.0.0.1:${port}${path}`);
+  await new Promise((resolve, reject) => { socket.addEventListener('open', resolve, {once:true}); socket.addEventListener('error', reject, {once:true}); });
+  let sequence = 0, stopped = false, busy = false, tickTask = Promise.resolve();
+  const pending = new Map(), targets = new Map(), attachTasks = new Set();
+  const started = performance.now();
+  const data = {available:true, intervalMs:500, forcedGC:false, startedAt:new Date().toISOString(), protocol:null, targets:[], errors:[], skippedTicks:0};
+  const error = value => { if (data.errors.length < 32) data.errors.push(String(value)); };
+  function send(method, params = {}, sessionId) {
+    return new Promise((resolve, reject) => {
+      const id = ++sequence;
+      const timer = setTimeout(() => { pending.delete(id); reject(new Error(`${method}: CDP 2-second deadline`)); }, 2000);
+      pending.set(id, {resolve, reject, timer});
+      socket.send(JSON.stringify({id, method, params, ...(sessionId ? {sessionId} : {})}));
+    });
+  }
+  async function attach(info) {
+    if (stopped || targets.has(info.targetId) || targets.size >= 16 || !['page','worker','shared_worker'].includes(info.type) || !info.url.startsWith(origin + '/')) return;
+    const row = {targetId:info.targetId, type:info.type, url:info.url, title:info.title, workerName:null, isolateId:null, role:'unidentified', samples:[], droppedSamples:0, peakUsedSize:null, peakBackingStorageSize:null, detachedAtMs:null, errors:[]};
+    const entry = {row, sessionId:null, live:true}; targets.set(info.targetId, entry); data.targets.push(row);
+    try {
+      entry.sessionId = (await send('Target.attachToTarget', {targetId:info.targetId, flatten:true})).sessionId;
+      // Worker target titles carry the WorkerOptions name. Do not evaluate JS
+      // during module-worker startup: the retained initial observer crash shows
+      // that startup inspection is not transparent on the tested Chromium build.
+      row.workerName = info.type === 'worker' ? info.title : null;
+      row.role = info.type === 'page' ? 'page' : info.title === 'quixi-pdf-parser' ? 'pdfjs-parser' : info.title === 'quixi-document-extractor' ? 'document-extractor' : /\/archive-[^/]+\.js$/.test(info.url) ? 'archive-storage-worker' : 'other-worker';
+      await new Promise(resolve => setTimeout(resolve, 100));
+      if (!entry.live) return;
+      row.isolateId = (await send('Runtime.getIsolateId', {}, entry.sessionId)).id;
+      await sample(entry);
+    } catch (e) { row.errors.push(String(e)); }
+  }
+  async function sample(entry) {
+    if (!entry.sessionId || !entry.live) return;
+    const at = performance.now();
+    try {
+      const usage = await send('Runtime.getHeapUsage', {}, entry.sessionId);
+      if (!Number.isFinite(usage.usedSize) || !Number.isFinite(usage.totalSize)) throw new Error('Invalid CDP heap usage');
+      const row = entry.row;
+      row.peakUsedSize = Math.max(row.peakUsedSize ?? 0, usage.usedSize);
+      if (Number.isFinite(usage.backingStorageSize)) row.peakBackingStorageSize = Math.max(row.peakBackingStorageSize ?? 0, usage.backingStorageSize);
+      let progress = null;
+      if (row.role === 'page') {
+        const result = await send('Runtime.evaluate', {expression:'globalThis.documentPerf?.progress?.()??null',returnByValue:true}, entry.sessionId);
+        progress = result.result.value ?? null;
+      }
+      if (row.samples.length < 2400) row.samples.push({elapsedMs:at-started, replyLatencyMs:performance.now()-at, ...usage, ...(progress ? {progress} : {})}); else row.droppedSamples++;
+    } catch (e) { if (entry.live && entry.row.errors.length < 8) entry.row.errors.push(String(e)); }
+  }
+  socket.addEventListener('message', event => {
+    const message = JSON.parse(event.data);
+    if (message.id) {
+      const item = pending.get(message.id); if (!item) return;
+      pending.delete(message.id); clearTimeout(item.timer);
+      if (message.error) item.reject(new Error(JSON.stringify(message.error))); else item.resolve(message.result);
+    } else if (message.method === 'Target.targetCreated' || message.method === 'Target.targetInfoChanged') {
+      const task = attach(message.params.targetInfo).catch(error); attachTasks.add(task); task.finally(()=>attachTasks.delete(task));
+    } else if (message.method === 'Target.targetDestroyed') {
+      const entry = targets.get(message.params.targetId);
+      if (entry) { entry.live=false; entry.row.detachedAtMs=performance.now()-started; }
+    }
+  });
+  data.protocol = await send('Browser.getVersion');
+  await send('Target.setDiscoverTargets', {discover:true});
+  for (const info of (await send('Target.getTargets')).targetInfos) await attach(info);
+  const timer = setInterval(() => {
+    if (busy) { data.skippedTicks++; return; }
+    busy=true;
+    tickTask=Promise.all([...targets.values()].map(sample)).catch(error).finally(()=>{busy=false;});
+  }, 500);
+  return { async stop() {
+    stopped=true; clearInterval(timer); await tickTask; await Promise.all([...attachTasks]);
+    await Promise.all([...targets.values()].map(sample));
+    for (const entry of targets.values()) if (entry.live && entry.sessionId) await send('Target.detachFromTarget', {sessionId:entry.sessionId}).catch(error);
+    socket.close(); data.finishedAt=new Date().toISOString(); return data;
+  }};
+}

@@ -1,0 +1,43 @@
+{
+  "target": "native",
+  "diagnostic": false,
+  "profile": false,
+  "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+  "command": [
+    "clang",
+    "-std=c11",
+    "-O2",
+    "-ffp-contract=off",
+    "-fno-vectorize",
+    "-fno-slp-vectorize",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-shared",
+    "-fPIC",
+    "/Users/eric/QuixiChat/packages/quixi-embed/native/model.c",
+    "/Users/eric/QuixiChat/packages/quixi-embed/native/tokenizer.c",
+    "/Users/eric/QuixiChat/packages/quixi-embed/native/encoder.c",
+    "/Users/eric/QuixiChat/packages/quixi-embed/native/sha256.c",
+    "-lm",
+    "-o",
+    "/Users/eric/QuixiChat/packages/quixi-embed/build/libquixi_embed_production.dylib"
+  ],
+  "output": "libquixi_embed_production.dylib",
+  "bytes": 52352,
+  "sha256": "a8c16c71b7e77e69959c8381834628ef12f3fa3d68b25935f6517adf6ba7ab79",
+  "sources": {
+    "model.c": "7c29c9a8af9186be3ffadd60f106f686ab626d9585e24c7bbdc2cf300c4102de",
+    "tokenizer.c": "a17e49ff05df55fdb202f2b0a5594f8a01224b1fca15acbdc4675ac3b04ca85f",
+    "encoder.c": "5fca9c2f52fcd1baccee78ac6cf6e065b54e07a38117674d3d2b66ee8b03388e",
+    "sha256.c": "cdb83cc565e92869be60deaf07f028e4d8b45b07236927b7170ff9148c616e4d",
+    "kernels.h": "68d40f577de5607b1ddc249181a8ac0a0a8c5b33db30a65481ae33ec27f2cc55",
+    "internal.h": "7d802a00a4b7374d2bf98cb578a8f92d5e39aa1eaec929771dfa1edab430f767",
+    "model_contract.h": "362a413a843150d48b7431230a1cec78407dcf6feb3b0d648bb4ce3c16d700c7",
+    "quixi_embed.h": "d6bc1b60d1b10bf7bcdb72665a5141a706e05e6193654b7e67cd527e9f80c302"
+  },
+  "artifact_version": "1.0.2",
+  "model_format_version": 1,
+  "simd_enabled": false,
+  "generic_runtime": false
+}

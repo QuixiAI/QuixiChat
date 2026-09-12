@@ -1,0 +1,140 @@
+{
+  "status": "passed",
+  "passed": true,
+  "mode": "smoke",
+  "browsers": false,
+  "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+  "started_at": "2026-09-08T08:19:09.722352+00:00",
+  "commands": [
+    {
+      "command": [
+        "uv",
+        "pip",
+        "sync",
+        "--python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "--require-hashes",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/requirements.lock"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.70638000004692
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/fetch.py"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.09183737495914102
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/compiler/compile_model.py"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 2.307355666998774
+    },
+    {
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/Users/eric/QuixiChat/packages/quixi-embed/native/build.py",
+        "--target",
+        "native"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.48272862494923174
+    },
+    {
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/Users/eric/QuixiChat/packages/quixi-embed/native/build.py",
+        "--target",
+        "wasm"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 4.409180667018518
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference",
+        "-p",
+        "test_*.py"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 1.2621112079941668
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests",
+        "-p",
+        "test_*.py"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 1.3359357080189511
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "/Users/eric/QuixiChat/perf/retrieval",
+        "-p",
+        "test_*.py"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.024063084041699767
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/check_unicode.py"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 8.47531337494729
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/generate_browser_fixtures.py",
+        "--verify"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.06534570903750136
+    },
+    {
+      "command": [
+        "node",
+        "--experimental-strip-types",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/scalar-api.mjs"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 1.0480699160252698
+    }
+  ],
+  "requirements": "requirements.lock",
+  "finished_at": "2026-09-08T08:19:29.946561+00:00"
+}

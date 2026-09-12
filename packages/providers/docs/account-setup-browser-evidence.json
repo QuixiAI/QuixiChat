@@ -1,0 +1,42 @@
+{
+  "selectedEngines": [
+    "chromium",
+    "webkit"
+  ],
+  "status": "passed",
+  "startedAt": "2026-09-09T21:05:43.570Z",
+  "hosts": [
+    {
+      "name": "chromium",
+      "status": "passed",
+      "checks": [
+        "shared React settings connects both opaque session credentials and clears password inputs",
+        "actual production HostClient model probes and streams use the configured adapter instances",
+        "a connection check follows the Anthropic listing cursor to a second page and reports reviewed versus unreviewed models for both providers",
+        "credential replacement rotates the handle; disconnect revokes its host association",
+        "actual reload loses all browser credentials and configured adapters"
+      ],
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36"
+    },
+    {
+      "name": "webkit",
+      "status": "passed",
+      "checks": [
+        "shared React settings connects both opaque session credentials and clears password inputs",
+        "actual production HostClient model probes and streams use the configured adapter instances",
+        "a connection check follows the Anthropic listing cursor to a second page and reports reviewed versus unreviewed models for both providers",
+        "credential replacement rotates the handle; disconnect revokes its host association",
+        "actual reload loses all browser credentials and configured adapters"
+      ],
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15"
+    }
+  ],
+  "sourceSha256": {
+    "tooling/browser-engines.mjs": "136f16e63e905ae4c8305c7adedfce2411eff13b04f914054f8fb718155d0df1",
+    "packages/app/src/features/providers/controller.ts": "2500b0e3399989385c776d20ec0743aa755adf19095e80638d4d13c04095dd4d",
+    "packages/app/src/features/providers/ProviderSettingsPanel.tsx": "32c705d18cedd85ee11b1ed91c383e38db8aeb5bff1ee57d670f44917b373ad9",
+    "packages/providers/src/catalog.ts": "2b01453c195c454b875c81740e35943950752c0257f1d2506b62cb8f23f87edd",
+    "apps/web/src/host/index.ts": "d1a59909198954124419dad0bd5176c70915146e24f480906a9c15015426ccd9"
+  },
+  "finishedAt": "2026-09-09T21:05:45.268Z"
+}

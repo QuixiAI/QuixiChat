@@ -1,0 +1,239 @@
+{
+  "version": 1,
+  "authority": "Hand-specified original scalar contributors and their half-open bounding spans; frozen HF IDs/normalization remain independently checked.",
+  "cases": [
+    {
+      "text": "a\u0301\u1b44",
+      "normalized": "a\u1b44",
+      "contributorsCodepoints": [
+        0,
+        2
+      ],
+      "sourceSpansCodepoints": [
+        [
+          0,
+          3
+        ]
+      ],
+      "contentIds": [
+        100
+      ]
+    },
+    {
+      "text": "\u0301\u1b44",
+      "normalized": "\u1b44",
+      "contributorsCodepoints": [
+        1
+      ],
+      "sourceSpansCodepoints": [
+        [
+          1,
+          2
+        ]
+      ],
+      "contentIds": [
+        100
+      ]
+    },
+    {
+      "text": "a\u1dce\u1b44",
+      "normalized": "a\u1b44",
+      "contributorsCodepoints": [
+        0,
+        2
+      ],
+      "sourceSpansCodepoints": [
+        [
+          0,
+          3
+        ]
+      ],
+      "contentIds": [
+        100
+      ]
+    },
+    {
+      "text": "\u1dce\u1b44",
+      "normalized": "\u1b44",
+      "contributorsCodepoints": [
+        1
+      ],
+      "sourceSpansCodepoints": [
+        [
+          1,
+          2
+        ]
+      ],
+      "contentIds": [
+        100
+      ]
+    },
+    {
+      "text": "a\u0301\u0300\u1b44",
+      "normalized": "a\u1b44",
+      "contributorsCodepoints": [
+        0,
+        3
+      ],
+      "sourceSpansCodepoints": [
+        [
+          0,
+          4
+        ]
+      ],
+      "contentIds": [
+        100
+      ]
+    },
+    {
+      "text": "\u0301\u0300\u1b44",
+      "normalized": "\u1b44",
+      "contributorsCodepoints": [
+        2
+      ],
+      "sourceSpansCodepoints": [
+        [
+          2,
+          3
+        ]
+      ],
+      "contentIds": [
+        100
+      ]
+    },
+    {
+      "text": "a\u0301\u1715",
+      "normalized": "a\u1715",
+      "contributorsCodepoints": [
+        0,
+        2
+      ],
+      "sourceSpansCodepoints": [
+        [
+          0,
+          3
+        ]
+      ],
+      "contentIds": [
+        100
+      ]
+    },
+    {
+      "text": "\u0301\u1715",
+      "normalized": "\u1715",
+      "contributorsCodepoints": [
+        1
+      ],
+      "sourceSpansCodepoints": [
+        [
+          1,
+          2
+        ]
+      ],
+      "contentIds": [
+        100
+      ]
+    },
+    {
+      "text": "a\u1b44\u0301",
+      "normalized": "a\u1b44",
+      "contributorsCodepoints": [
+        0,
+        1
+      ],
+      "sourceSpansCodepoints": [
+        [
+          0,
+          2
+        ]
+      ],
+      "contentIds": [
+        100
+      ]
+    },
+    {
+      "text": "a\u0301x\u1b44",
+      "normalized": "ax\u1b44",
+      "contributorsCodepoints": [
+        0,
+        2,
+        3
+      ],
+      "sourceSpansCodepoints": [
+        [
+          0,
+          4
+        ]
+      ],
+      "contentIds": [
+        100
+      ]
+    },
+    {
+      "text": "a\u0301\ud834\udd65",
+      "normalized": "a\ud834\udd65",
+      "contributorsCodepoints": [
+        0,
+        2
+      ],
+      "sourceSpansCodepoints": [
+        [
+          0,
+          3
+        ]
+      ],
+      "contentIds": [
+        100
+      ]
+    },
+    {
+      "text": "\u0301\ud834\udd65",
+      "normalized": "\ud834\udd65",
+      "contributorsCodepoints": [
+        1
+      ],
+      "sourceSpansCodepoints": [
+        [
+          1,
+          2
+        ]
+      ],
+      "contentIds": [
+        100
+      ]
+    },
+    {
+      "text": "a\u0301\u0c3c",
+      "normalized": "a\u0c3c",
+      "contributorsCodepoints": [
+        0,
+        2
+      ],
+      "sourceSpansCodepoints": [
+        [
+          0,
+          3
+        ]
+      ],
+      "contentIds": [
+        100
+      ]
+    },
+    {
+      "text": "\u0301\u0c3c",
+      "normalized": "\u0c3c",
+      "contributorsCodepoints": [
+        1
+      ],
+      "sourceSpansCodepoints": [
+        [
+          1,
+          2
+        ]
+      ],
+      "contentIds": [
+        100
+      ]
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "route": "scalar-fp32",
+  "cases": 159,
+  "reference_manifest_sha256": "f35fd454d81b7593c88624228fcba21371f120fc6133a6f3684b1ecfd519119b",
+  "candidate_manifest_sha256": "26f51af90fb38500d50ed8cdc027586aba4b753d9cdba6957a9c6201b0122d8e",
+  "candidate_backend": {
+    "route": "native-c-scalar-fp32",
+    "library_sha256": "7ba7e97cc512a239d4a3c1b9e26bfc4a2675c0ce77daa4e46834505c667582f0",
+    "model_sha256": "e1ef345cd35088b06f70c199f5a4e0311bda5983716ad6a3e7d0a604202efffc"
+  },
+  "thresholds": {
+    "atol": 0.0001,
+    "rtol": 0.0001,
+    "vector_atol": 2e-05,
+    "min_cosine": 0.999999,
+    "norm_atol": 1e-05
+  },
+  "max_absolute_error": 8.58306884765625e-06,
+  "minimum_cosine": 0.9999999999996163,
+  "passed": true,
+  "errors": []
+}

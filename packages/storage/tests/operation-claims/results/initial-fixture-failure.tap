@@ -1,0 +1,149 @@
+TAP version 13
+# (node:85524) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# sqlite3_step() rc= 1811 SQLITE_CONSTRAINT_TRIGGER SQL = INSERT INTO quixi_local_operation_claims VALUES(?,?,?,?)
+# sqlite3_step() rc= 1811 SQLITE_CONSTRAINT_TRIGGER SQL = INSERT INTO quixi_local_operation_claims VALUES(?,?,?,?)
+# sqlite3_step() rc= 1811 SQLITE_CONSTRAINT_TRIGGER SQL = INSERT INTO quixi_sync_ops(operation_id,kind,recorded_at,identity,payload,affects,result) VALUES(?,'SetTitle',1,?,'{}','[]','{}')
+# sqlite3_step() rc= 1811 SQLITE_CONSTRAINT_TRIGGER SQL = INSERT INTO quixi_local_operation_claims VALUES(?,?,?,?)
+# sqlite3_step() rc= 1811 SQLITE_CONSTRAINT_TRIGGER SQL = INSERT INTO quixi_local_operation_claims VALUES(?,?,?,?)
+# sqlite3_step() rc= 1811 SQLITE_CONSTRAINT_TRIGGER SQL = INSERT INTO quixi_import_operations VALUES(?,?,?,'{}')
+# sqlite3_step() rc= 1811 SQLITE_CONSTRAINT_TRIGGER SQL = INSERT INTO quixi_local_operation_claims VALUES(?,?,?,?)
+# sqlite3_step() rc= 1811 SQLITE_CONSTRAINT_TRIGGER SQL = INSERT INTO quixi_local_operation_claims VALUES(?,?,?,?)
+# sqlite3_step() rc= 1811 SQLITE_CONSTRAINT_TRIGGER SQL = INSERT INTO quixi_import_record_identities VALUES(?,?,?)
+# sqlite3_step() rc= 1811 SQLITE_CONSTRAINT_TRIGGER SQL = INSERT INTO quixi_local_operation_claims VALUES(?,?,?,?)
+# sqlite3_step() rc= 1811 SQLITE_CONSTRAINT_TRIGGER SQL = INSERT INTO quixi_local_operation_claims VALUES(?,?,?,?)
+# sqlite3_step() rc= 1811 SQLITE_CONSTRAINT_TRIGGER SQL = INSERT INTO quixi_blob_operations VALUES(?,?,'{}')
+# sqlite3_step() rc= 1811 SQLITE_CONSTRAINT_TRIGGER SQL = INSERT INTO quixi_local_operation_claims VALUES(?,?,?,?)
+# sqlite3_step() rc= 1811 SQLITE_CONSTRAINT_TRIGGER SQL = INSERT INTO quixi_local_operation_claims VALUES(?,?,?,?)
+# sqlite3_step() rc= 1811 SQLITE_CONSTRAINT_TRIGGER SQL = INSERT INTO quixi_import_work_operations VALUES(?,?,?,'{}')
+# sqlite3_step() rc= 1811 SQLITE_CONSTRAINT_TRIGGER SQL = INSERT INTO quixi_local_operation_claims VALUES(?,?,?,?)
+# sqlite3_step() rc= 1811 SQLITE_CONSTRAINT_TRIGGER SQL = INSERT INTO quixi_local_operation_claims VALUES(?,?,?,?)
+# sqlite3_step() rc= 1811 SQLITE_CONSTRAINT_TRIGGER SQL = INSERT INTO quixi_archive_operations VALUES(?,?,'{}')
+# sqlite3_step() rc= 1811 SQLITE_CONSTRAINT_TRIGGER SQL = UPDATE quixi_local_operation_claims SET domain='changed'
+# sqlite3_step() rc= 1811 SQLITE_CONSTRAINT_TRIGGER SQL = DELETE FROM quixi_local_operation_claims
+# sqlite3_step() rc= 1811 SQLITE_CONSTRAINT_TRIGGER SQL = INSERT OR REPLACE INTO quixi_local_operation_claims SELECT * FROM quixi_local_operation_claims
+# sqlite3_step() rc= 1811 SQLITE_CONSTRAINT_TRIGGER SQL = INSERT OR IGNORE INTO quixi_local_operation_claims SELECT * FROM quixi_local_operation_claims
+# sqlite3_step() rc= 1811 SQLITE_CONSTRAINT_TRIGGER SQL = INSERT INTO quixi_local_operation_claims SELECT * FROM quixi_local_operation_claims WHERE true ON CONFLICT(operation_id) DO UPDATE SET domain='changed'
+# sqlite3_step() rc= 13 SQLITE_FULL SQL = INSERT INTO quixi_extract_text_batches VALUES(?,?,?,?,?)
+# sqlite3_step() rc= 1 SQLITE_ERROR SQL = ROLLBACK
+# Subtest: versioned full claim identity is deterministic and domain/payload sensitive
+ok 1 - versioned full claim identity is deterministic and domain/payload sensitive
+  ---
+  duration_ms: 1.771583
+  type: 'test'
+  ...
+# claims-migration {"version":10,"name":"stable_local_operation_claims","sqlSha256":"48a9b27106bb7bf3c52726a8dad9c3f91fdd05abd191247e8eb48973c3dc8a8b","registeredInRoot":true}
+# Subtest: missing registry/guards and absent active transaction fail without lazy schema creation
+ok 2 - missing registry/guards and absent active transaction fail without lazy schema creation
+  ---
+  duration_ms: 40.557542
+  type: 'test'
+  ...
+# Subtest: same claim without derived receipt requires recovery; domain/payload changes conflict
+ok 3 - same claim without derived receipt requires recovery; domain/payload changes conflict
+  ---
+  duration_ms: 10.417334
+  type: 'test'
+  ...
+# Subtest: read-only lookup verifies stored identity without a writer transaction or schema changes
+ok 4 - read-only lookup verifies stored identity without a writer transaction or schema changes
+  ---
+  duration_ms: 13.958375
+  type: 'test'
+  ...
+# Subtest: canonical-sync collisions are fenced in both insertion orders, including direct SQL claims
+ok 5 - canonical-sync collisions are fenced in both insertion orders, including direct SQL claims
+  ---
+  duration_ms: 11.887042
+  type: 'test'
+  ...
+# Subtest: import-control collisions are fenced in both insertion orders, including direct SQL claims
+ok 6 - import-control collisions are fenced in both insertion orders, including direct SQL claims
+  ---
+  duration_ms: 10.947125
+  type: 'test'
+  ...
+# Subtest: import-record collisions are fenced in both insertion orders, including direct SQL claims
+ok 7 - import-record collisions are fenced in both insertion orders, including direct SQL claims
+  ---
+  duration_ms: 9.183542
+  type: 'test'
+  ...
+# Subtest: blob collisions are fenced in both insertion orders, including direct SQL claims
+ok 8 - blob collisions are fenced in both insertion orders, including direct SQL claims
+  ---
+  duration_ms: 7.774333
+  type: 'test'
+  ...
+# Subtest: import-work collisions are fenced in both insertion orders, including direct SQL claims
+ok 9 - import-work collisions are fenced in both insertion orders, including direct SQL claims
+  ---
+  duration_ms: 8.648666
+  type: 'test'
+  ...
+# Subtest: archive collisions are fenced in both insertion orders, including direct SQL claims
+ok 10 - archive collisions are fenced in both insertion orders, including direct SQL claims
+  ---
+  duration_ms: 9.476541
+  type: 'test'
+  ...
+# Subtest: claim rows cannot UPDATE, DELETE, REPLACE, IGNORE or UPSERT over an existing identity
+ok 11 - claim rows cannot UPDATE, DELETE, REPLACE, IGNORE or UPSERT over an existing identity
+  ---
+  duration_ms: 8.528958
+  type: 'test'
+  ...
+# Subtest: real extraction receipt/effect and stable claim roll back together and exact receipt replay returns before claim
+not ok 12 - real extraction receipt/effect and stable claim roll back together and exact receipt replay returns before claim
+  ---
+  duration_ms: 7.802709
+  type: 'test'
+  location: '/Users/eric/QuixiChat/packages/storage/tests/operation-claims/registry.test.ts:181:1'
+  failureType: 'testCodeFailure'
+  error: 'precommit rollback fixture'
+  code: 'ERR_TEST_FAILURE'
+  stack: |-
+    Object.beforeCommit (/Users/eric/QuixiChat/packages/storage/tests/operation-claims/registry.test.ts:183:52)
+    ExtractionRepository.tx (/Users/eric/QuixiChat/packages/storage/src/worker/extraction/index.ts:151:32)
+    ExtractionRepository.initialize (/Users/eric/QuixiChat/packages/storage/src/worker/extraction/index.ts:174:12)
+    make (/Users/eric/QuixiChat/packages/storage/tests/operation-claims/registry.test.ts:73:10)
+    extraction (/Users/eric/QuixiChat/packages/storage/tests/operation-claims/registry.test.ts:75:34)
+    TestContext.<anonymous> (/Users/eric/QuixiChat/packages/storage/tests/operation-claims/registry.test.ts:183:13)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+  ...
+# Subtest: missing extraction receipts and full derived repair preserve claims; canonical writes never depend on derived tables
+ok 13 - missing extraction receipts and full derived repair preserve claims; canonical writes never depend on derived tables
+  ---
+  duration_ms: 20.072917
+  type: 'test'
+  ...
+# Subtest: actual SQLite FULL rolls back the new stable claim together with extraction text/receipt
+ok 14 - actual SQLite FULL rolls back the new stable claim together with extraction text/receipt
+  ---
+  duration_ms: 14.16025
+  type: 'test'
+  ...
+# Subtest: SQLite close/reopen keeps stable claims and refuses same-ID redo
+ok 15 - SQLite close/reopen keeps stable claims and refuses same-ID redo
+  ---
+  duration_ms: 8.35175
+  type: 'test'
+  ...
+# Subtest: clean-copy whitelist excludes claim rows while staged fresh schema keeps an empty stable table
+ok 16 - clean-copy whitelist excludes claim rows while staged fresh schema keeps an empty stable table
+  ---
+  duration_ms: 17.136166
+  type: 'test'
+  ...
+1..16
+# tests 16
+# suites 0
+# pass 15
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 438.667542

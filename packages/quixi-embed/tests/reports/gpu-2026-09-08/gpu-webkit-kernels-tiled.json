@@ -1,0 +1,517 @@
+{
+  "engine": "webkit",
+  "version": "26.6",
+  "passed": true,
+  "variants": {
+    "tiled": true,
+    "half": false,
+    "subgroups": false
+  },
+  "fixtureManifestSha256": "f0040a42da2113fee030b1b060d626388f8329b081669f239fac89c9c1f274e6",
+  "shaderSha256": "2200a62919bcdde12b886f95120b023e14cdddae5b05698e06aa6abe6439175c",
+  "adapter": {
+    "vendor": "apple",
+    "architecture": "apple",
+    "isFallbackAdapter": false
+  },
+  "results": [
+    {
+      "name": "linear-1-384-384",
+      "kernel": "linear_tiled",
+      "elements": 384,
+      "maxError": 0.0000010728836059570312
+    },
+    {
+      "name": "linear-1-384-1536",
+      "kernel": "linear_tiled",
+      "elements": 1536,
+      "maxError": 0.0000016689300537109375
+    },
+    {
+      "name": "linear-1-1536-384",
+      "kernel": "linear_tiled",
+      "elements": 384,
+      "maxError": 0.0000050067901611328125
+    },
+    {
+      "name": "linear-15-384-384",
+      "kernel": "linear_tiled",
+      "elements": 5760,
+      "maxError": 0.0000016689300537109375
+    },
+    {
+      "name": "linear-15-384-1536",
+      "kernel": "linear_tiled",
+      "elements": 23040,
+      "maxError": 0.0000021457672119140625
+    },
+    {
+      "name": "linear-15-1536-384",
+      "kernel": "linear_tiled",
+      "elements": 5760,
+      "maxError": 0.000009059906005859375
+    },
+    {
+      "name": "linear-16-384-384",
+      "kernel": "linear_tiled",
+      "elements": 6144,
+      "maxError": 0.0000021457672119140625
+    },
+    {
+      "name": "linear-16-384-1536",
+      "kernel": "linear_tiled",
+      "elements": 24576,
+      "maxError": 0.0000022649765014648438
+    },
+    {
+      "name": "linear-16-1536-384",
+      "kernel": "linear_tiled",
+      "elements": 6144,
+      "maxError": 0.000008344650268554688
+    },
+    {
+      "name": "linear-17-384-384",
+      "kernel": "linear_tiled",
+      "elements": 6528,
+      "maxError": 0.0000019073486328125
+    },
+    {
+      "name": "linear-17-384-1536",
+      "kernel": "linear_tiled",
+      "elements": 26112,
+      "maxError": 0.000002384185791015625
+    },
+    {
+      "name": "linear-17-1536-384",
+      "kernel": "linear_tiled",
+      "elements": 6528,
+      "maxError": 0.000009059906005859375
+    },
+    {
+      "name": "linear-33-384-384",
+      "kernel": "linear_tiled",
+      "elements": 12672,
+      "maxError": 0.000002384185791015625
+    },
+    {
+      "name": "linear-33-384-1536",
+      "kernel": "linear_tiled",
+      "elements": 50688,
+      "maxError": 0.0000021457672119140625
+    },
+    {
+      "name": "linear-33-1536-384",
+      "kernel": "linear_tiled",
+      "elements": 12672,
+      "maxError": 0.0000095367431640625
+    },
+    {
+      "name": "norm-15",
+      "kernel": "norm",
+      "elements": 384,
+      "maxError": 1.1920928955078125e-7
+    },
+    {
+      "name": "add-16",
+      "kernel": "add",
+      "elements": 384,
+      "maxError": 0
+    },
+    {
+      "name": "norm-17",
+      "kernel": "norm",
+      "elements": 1152,
+      "maxError": 1.1920928955078125e-7
+    },
+    {
+      "name": "add-18",
+      "kernel": "add",
+      "elements": 1152,
+      "maxError": 0
+    },
+    {
+      "name": "norm-19",
+      "kernel": "norm",
+      "elements": 6528,
+      "maxError": 1.1920928955078125e-7
+    },
+    {
+      "name": "add-20",
+      "kernel": "add",
+      "elements": 6528,
+      "maxError": 0
+    },
+    {
+      "name": "scores-21",
+      "kernel": "scores",
+      "elements": 96,
+      "maxError": 7.450580596923828e-9
+    },
+    {
+      "name": "softmax-22",
+      "kernel": "softmax",
+      "elements": 96,
+      "maxError": 5.960464477539063e-8
+    },
+    {
+      "name": "context-23",
+      "kernel": "context",
+      "elements": 1536,
+      "maxError": 2.9802322387695312e-8
+    },
+    {
+      "name": "attention_fused-24",
+      "kernel": "attention_fused",
+      "elements": 1536,
+      "maxError": 5.960464477539063e-8
+    },
+    {
+      "name": "pool-25",
+      "kernel": "pool",
+      "elements": 768,
+      "maxError": 7.450580596923828e-9
+    },
+    {
+      "name": "scores-26",
+      "kernel": "scores",
+      "elements": 5400,
+      "maxError": 2.9802322387695312e-8
+    },
+    {
+      "name": "softmax-27",
+      "kernel": "softmax",
+      "elements": 5400,
+      "maxError": 2.9802322387695312e-8
+    },
+    {
+      "name": "context-28",
+      "kernel": "context",
+      "elements": 11520,
+      "maxError": 2.9802322387695312e-8
+    },
+    {
+      "name": "attention_fused-29",
+      "kernel": "attention_fused",
+      "elements": 11520,
+      "maxError": 2.9802322387695312e-8
+    },
+    {
+      "name": "pool-30",
+      "kernel": "pool",
+      "elements": 768,
+      "maxError": 1.4901161193847656e-8
+    },
+    {
+      "name": "scores-31",
+      "kernel": "scores",
+      "elements": 6144,
+      "maxError": 1.4901161193847656e-8
+    },
+    {
+      "name": "softmax-32",
+      "kernel": "softmax",
+      "elements": 6144,
+      "maxError": 2.2351741790771484e-8
+    },
+    {
+      "name": "context-33",
+      "kernel": "context",
+      "elements": 12288,
+      "maxError": 2.9802322387695312e-8
+    },
+    {
+      "name": "attention_fused-34",
+      "kernel": "attention_fused",
+      "elements": 12288,
+      "maxError": 4.470348358154297e-8
+    },
+    {
+      "name": "pool-35",
+      "kernel": "pool",
+      "elements": 768,
+      "maxError": 1.4901161193847656e-8
+    },
+    {
+      "name": "scores-36",
+      "kernel": "scores",
+      "elements": 6936,
+      "maxError": 1.4901161193847656e-8
+    },
+    {
+      "name": "softmax-37",
+      "kernel": "softmax",
+      "elements": 6936,
+      "maxError": 2.9802322387695312e-8
+    },
+    {
+      "name": "context-38",
+      "kernel": "context",
+      "elements": 13056,
+      "maxError": 2.9802322387695312e-8
+    },
+    {
+      "name": "attention_fused-39",
+      "kernel": "attention_fused",
+      "elements": 13056,
+      "maxError": 2.9802322387695312e-8
+    },
+    {
+      "name": "pool-40",
+      "kernel": "pool",
+      "elements": 768,
+      "maxError": 1.4901161193847656e-8
+    },
+    {
+      "name": "scores-41",
+      "kernel": "scores",
+      "elements": 23064,
+      "maxError": 1.4901161193847656e-8
+    },
+    {
+      "name": "softmax-42",
+      "kernel": "softmax",
+      "elements": 23064,
+      "maxError": 1.4901161193847656e-8
+    },
+    {
+      "name": "context-43",
+      "kernel": "context",
+      "elements": 23808,
+      "maxError": 3.725290298461914e-8
+    },
+    {
+      "name": "attention_fused-44",
+      "kernel": "attention_fused",
+      "elements": 23808,
+      "maxError": 3.725290298461914e-8
+    },
+    {
+      "name": "pool-45",
+      "kernel": "pool",
+      "elements": 768,
+      "maxError": 1.4901161193847656e-8
+    },
+    {
+      "name": "scores-46",
+      "kernel": "scores",
+      "elements": 24576,
+      "maxError": 1.4901161193847656e-8
+    },
+    {
+      "name": "softmax-47",
+      "kernel": "softmax",
+      "elements": 24576,
+      "maxError": 1.4901161193847656e-8
+    },
+    {
+      "name": "context-48",
+      "kernel": "context",
+      "elements": 24576,
+      "maxError": 2.9802322387695312e-8
+    },
+    {
+      "name": "attention_fused-49",
+      "kernel": "attention_fused",
+      "elements": 24576,
+      "maxError": 3.725290298461914e-8
+    },
+    {
+      "name": "pool-50",
+      "kernel": "pool",
+      "elements": 768,
+      "maxError": 1.4901161193847656e-8
+    },
+    {
+      "name": "scores-51",
+      "kernel": "scores",
+      "elements": 26136,
+      "maxError": 2.9802322387695312e-8
+    },
+    {
+      "name": "softmax-52",
+      "kernel": "softmax",
+      "elements": 26136,
+      "maxError": 1.4901161193847656e-8
+    },
+    {
+      "name": "context-53",
+      "kernel": "context",
+      "elements": 25344,
+      "maxError": 2.9802322387695312e-8
+    },
+    {
+      "name": "attention_fused-54",
+      "kernel": "attention_fused",
+      "elements": 25344,
+      "maxError": 2.9802322387695312e-8
+    },
+    {
+      "name": "pool-55",
+      "kernel": "pool",
+      "elements": 768,
+      "maxError": 1.4901161193847656e-8
+    },
+    {
+      "name": "scores-56",
+      "kernel": "scores",
+      "elements": 387096,
+      "maxError": 2.9802322387695312e-8
+    },
+    {
+      "name": "softmax-57",
+      "kernel": "softmax",
+      "elements": 387096,
+      "maxError": 3.725290298461914e-9
+    },
+    {
+      "name": "context-58",
+      "kernel": "context",
+      "elements": 97536,
+      "maxError": 3.725290298461914e-8
+    },
+    {
+      "name": "attention_fused-59",
+      "kernel": "attention_fused",
+      "elements": 97536,
+      "maxError": 3.725290298461914e-8
+    },
+    {
+      "name": "pool-60",
+      "kernel": "pool",
+      "elements": 768,
+      "maxError": 1.4901161193847656e-8
+    },
+    {
+      "name": "scores-61",
+      "kernel": "scores",
+      "elements": 393216,
+      "maxError": 2.9802322387695312e-8
+    },
+    {
+      "name": "softmax-62",
+      "kernel": "softmax",
+      "elements": 393216,
+      "maxError": 3.725290298461914e-9
+    },
+    {
+      "name": "context-63",
+      "kernel": "context",
+      "elements": 98304,
+      "maxError": 2.9802322387695312e-8
+    },
+    {
+      "name": "attention_fused-64",
+      "kernel": "attention_fused",
+      "elements": 98304,
+      "maxError": 3.725290298461914e-8
+    },
+    {
+      "name": "pool-65",
+      "kernel": "pool",
+      "elements": 768,
+      "maxError": 1.4901161193847656e-8
+    },
+    {
+      "name": "scores-66",
+      "kernel": "scores",
+      "elements": 399384,
+      "maxError": 2.9802322387695312e-8
+    },
+    {
+      "name": "softmax-67",
+      "kernel": "softmax",
+      "elements": 399384,
+      "maxError": 3.725290298461914e-9
+    },
+    {
+      "name": "context-68",
+      "kernel": "context",
+      "elements": 99072,
+      "maxError": 3.725290298461914e-8
+    },
+    {
+      "name": "attention_fused-69",
+      "kernel": "attention_fused",
+      "elements": 99072,
+      "maxError": 3.725290298461914e-8
+    },
+    {
+      "name": "pool-70",
+      "kernel": "pool",
+      "elements": 768,
+      "maxError": 2.9802322387695312e-8
+    },
+    {
+      "name": "scores-71",
+      "kernel": "scores",
+      "elements": 6266904,
+      "maxError": 2.9802322387695312e-8
+    },
+    {
+      "name": "softmax-72",
+      "kernel": "softmax",
+      "elements": 6266904,
+      "maxError": 9.313225746154785e-10
+    },
+    {
+      "name": "context-73",
+      "kernel": "context",
+      "elements": 392448,
+      "maxError": 4.284083843231201e-8
+    },
+    {
+      "name": "attention_fused-74",
+      "kernel": "attention_fused",
+      "elements": 392448,
+      "maxError": 3.91155481338501e-8
+    },
+    {
+      "name": "pool-75",
+      "kernel": "pool",
+      "elements": 768,
+      "maxError": 2.9802322387695312e-8
+    },
+    {
+      "name": "scores-76",
+      "kernel": "scores",
+      "elements": 6291456,
+      "maxError": 4.470348358154297e-8
+    },
+    {
+      "name": "softmax-77",
+      "kernel": "softmax",
+      "elements": 6291456,
+      "maxError": 9.313225746154785e-10
+    },
+    {
+      "name": "context-78",
+      "kernel": "context",
+      "elements": 393216,
+      "maxError": 3.725290298461914e-8
+    },
+    {
+      "name": "attention_fused-79",
+      "kernel": "attention_fused",
+      "elements": 393216,
+      "maxError": 3.725290298461914e-8
+    },
+    {
+      "name": "pool-80",
+      "kernel": "pool",
+      "elements": 768,
+      "maxError": 1.4901161193847656e-8
+    },
+    {
+      "name": "gelu-81",
+      "kernel": "gelu",
+      "elements": 1536,
+      "maxError": 4.76837158203125e-7
+    },
+    {
+      "name": "gather-82",
+      "kernel": "gather",
+      "elements": 13056,
+      "maxError": 0
+    }
+  ]
+}

@@ -1,0 +1,472 @@
+{
+  "createdAt": "2026-09-09T10:54:09.939Z",
+  "selectedEngines": [
+    "chromium",
+    "webkit"
+  ],
+  "platform": "darwin",
+  "arch": "arm64",
+  "memoryMeasurement": "200 ms darwin ps RSS samples of the browser-server process tree. Includes shared pages and excludes reparented or OS-managed processes; not an isolated parser heap measurement. Unavailable measurements are null with an explicit reason.",
+  "pdfjs": "6.3.289",
+  "parserSha256": "5de8099723be073084ade9e371597083efa230d74e199c7f5fc1fdd675cf2671",
+  "fixtures": {
+    "actions.pdf": {
+      "bytes": 1653,
+      "sha256": "f168dc249e241fce65ca370903efc01c06a935586cacde5c002411b2c732c2b4"
+    },
+    "dense-page.pdf": {
+      "bytes": 1441,
+      "sha256": "e490d8ad42c12dfe46239560a13df19399b7197b21313bdb31ec028835d6094a"
+    },
+    "encrypted.pdf": {
+      "bytes": 1716,
+      "sha256": "78d30ad5f48db24af4de2151eea31992682f1ef7bdf6883d6f2478c39c382bf6"
+    },
+    "invalid-utf8.txt": {
+      "bytes": 13,
+      "sha256": "fa7eba864bb1e210df65346de0cba6f3f99efe742d0189a0844ab28321c25cf6"
+    },
+    "layout-columns.pdf": {
+      "bytes": 2935,
+      "sha256": "921c29f9f711df836fc54cff22f0618434a08d877926c8745187cce8f100bbf1"
+    },
+    "layout-table-code.pdf": {
+      "bytes": 3308,
+      "sha256": "0fde3131ad068f49871c38b6fff4ccc6213e2ab1af61b054ab430dc549666fe5"
+    },
+    "layout-unsupported.pdf": {
+      "bytes": 1979,
+      "sha256": "72aa2ad6d0b494c8f9f30845dcdd407e549c91cebc45088506b8b491182c7f3d"
+    },
+    "low-text.pdf": {
+      "bytes": 3040,
+      "sha256": "6ff362bea702761b54de6c4d6e0ac19e6b25d001ebabcba4fb30f5ac76d61bbc"
+    },
+    "malformed.pdf": {
+      "bytes": 49,
+      "sha256": "c8c79d4dea82452d6fe830674112fbb1de28716a0c9828559457d0661479b05a"
+    },
+    "pages-1.pdf": {
+      "bytes": 1683,
+      "sha256": "3e318e5196a931424d1801943726943d492e5a020f764a9e8aaaf5924f5be846"
+    },
+    "pages-100.pdf": {
+      "bytes": 65679,
+      "sha256": "6f70ed0674549f75fcaf6577c88d8c19539b168f1e0a05180b048c50878a2785"
+    },
+    "pages-1000.pdf": {
+      "bytes": 652935,
+      "sha256": "79e522013b1322a16d23beb8b4e4e9db58773c92c819e3860770e6344ed5402a"
+    },
+    "pages-1001.pdf": {
+      "bytes": 653593,
+      "sha256": "092fc4ff0d5c6b97a7277cacb9369e09fb5b674aa1d576e6b53ed2996a7a6d58"
+    },
+    "scanned.pdf": {
+      "bytes": 3000,
+      "sha256": "a34165cd25f4910b61782bfc6fd838012bd73139fa369fece78e3303ba385e91"
+    },
+    "unicode.txt": {
+      "bytes": 65563,
+      "sha256": "fdece3175c92479f43402d8df4494a4f6bee9f4c4c6fe0e0f429033c32e4a2fa"
+    }
+  },
+  "results": [
+    {
+      "engine": "chromium",
+      "checks": [
+        {
+          "name": "pages-1.pdf",
+          "processMemory": {
+            "name": "pages-1.pdf",
+            "baselineRssKiB": 272576,
+            "peakRssKiB": 313072
+          },
+          "pages": 1,
+          "batches": 12,
+          "maxBatch": 37,
+          "totalUnits": 160,
+          "maxPageItems": 9,
+          "possibleScanned": false,
+          "parserSourceBufferBytes": 1683,
+          "elapsedMs": 123
+        },
+        {
+          "name": "pages-100.pdf",
+          "processMemory": {
+            "name": "pages-100.pdf",
+            "baselineRssKiB": 313072,
+            "peakRssKiB": 433344
+          },
+          "pages": 100,
+          "batches": 1200,
+          "maxBatch": 37,
+          "totalUnits": 16092,
+          "maxPageItems": 9,
+          "possibleScanned": false,
+          "parserSourceBufferBytes": 65679,
+          "elapsedMs": 820
+        },
+        {
+          "name": "pages-1000.pdf",
+          "processMemory": {
+            "name": "pages-1000.pdf",
+            "baselineRssKiB": 433360,
+            "peakRssKiB": 777216
+          },
+          "pages": 1000,
+          "batches": 12000,
+          "maxBatch": 37,
+          "totalUnits": 161893,
+          "maxPageItems": 9,
+          "possibleScanned": false,
+          "parserSourceBufferBytes": 652935,
+          "elapsedMs": 6299
+        },
+        {
+          "name": "scanned.pdf",
+          "processMemory": {
+            "name": "scanned.pdf",
+            "baselineRssKiB": 760224,
+            "peakRssKiB": 766656
+          },
+          "pages": 1,
+          "batches": 0,
+          "maxBatch": 0,
+          "totalUnits": 0,
+          "maxPageItems": 0,
+          "possibleScanned": true,
+          "parserSourceBufferBytes": 3000,
+          "elapsedMs": 105
+        },
+        {
+          "name": "actions.pdf",
+          "processMemory": {
+            "name": "actions.pdf",
+            "baselineRssKiB": 760608,
+            "peakRssKiB": 760928
+          },
+          "pages": 1,
+          "batches": 12,
+          "maxBatch": 37,
+          "totalUnits": 160,
+          "maxPageItems": 9,
+          "possibleScanned": false,
+          "parserSourceBufferBytes": 1653,
+          "elapsedMs": 140
+        },
+        {
+          "name": "unicode.txt",
+          "processMemory": {
+            "name": "unicode.txt",
+            "baselineRssKiB": 760928,
+            "peakRssKiB": 767360
+          },
+          "pages": 1,
+          "batches": 17,
+          "maxBatch": 4096,
+          "totalUnits": 65556,
+          "maxPageItems": 17,
+          "possibleScanned": false,
+          "parserSourceBufferBytes": 0,
+          "elapsedMs": 72
+        },
+        {
+          "name": "encrypted.pdf",
+          "code": "PASSWORD_REQUIRED"
+        },
+        {
+          "name": "malformed.pdf",
+          "code": "PARSE_FAILED"
+        },
+        {
+          "name": "pages-1001.pdf",
+          "code": "CAPACITY"
+        },
+        {
+          "name": "dense-page.pdf",
+          "code": "CAPACITY"
+        },
+        {
+          "name": "invalid-utf8.txt",
+          "code": "PARSE_FAILED"
+        },
+        {
+          "name": "cancel",
+          "code": "CANCELLED",
+          "completedPages": 2
+        },
+        {
+          "name": "resume",
+          "pages": 3
+        },
+        {
+          "name": "job-admission",
+          "code": "CAPACITY"
+        },
+        {
+          "name": "backpressure",
+          "additionalReads": 0
+        },
+        {
+          "name": "source-cap",
+          "code": "CAPACITY"
+        },
+        {
+          "name": "source-integrity",
+          "code": "INTEGRITY"
+        },
+        {
+          "name": "watchdog",
+          "code": "TIMEOUT"
+        },
+        {
+          "name": "worker-watchdog",
+          "code": "TIMEOUT",
+          "terminatedWorkers": 2
+        },
+        {
+          "name": "source-cancel",
+          "code": "CANCELLED"
+        },
+        {
+          "name": "descriptor-snapshot",
+          "pages": 1
+        },
+        {
+          "name": "callback-rejection",
+          "code": "SOURCE_FAILED"
+        },
+        {
+          "name": "unbounded-id",
+          "code": "INTEGRITY"
+        },
+        {
+          "name": "non-bytes",
+          "code": "SOURCE_FAILED"
+        }
+      ],
+      "activeWorkers": 0,
+      "terminatedWorkers": 34,
+      "ranges": 100,
+      "maxRange": 65536,
+      "maxInFlight": 2,
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36",
+      "limits": {
+        "sourceBytes": 33554432,
+        "rangeBytes": 65536,
+        "pdfRangeBytes": 1048576,
+        "pages": 1000,
+        "pageItems": 10000,
+        "pageUTF16": 262144,
+        "batchUTF16": 4096,
+        "pendingRanges": 4,
+        "watchdogMs": 30000
+      },
+      "externalAction": false,
+      "baselineRssKiB": 246880,
+      "peakRssKiB": 789632,
+      "memoryUnavailable": null,
+      "externalRequests": [],
+      "consoleErrors": []
+    },
+    {
+      "engine": "webkit",
+      "checks": [
+        {
+          "name": "pages-1.pdf",
+          "processMemory": {
+            "name": "pages-1.pdf",
+            "baselineRssKiB": 111488,
+            "peakRssKiB": 113696
+          },
+          "pages": 1,
+          "batches": 12,
+          "maxBatch": 37,
+          "totalUnits": 160,
+          "maxPageItems": 9,
+          "possibleScanned": false,
+          "parserSourceBufferBytes": 1683,
+          "elapsedMs": 103
+        },
+        {
+          "name": "pages-100.pdf",
+          "processMemory": {
+            "name": "pages-100.pdf",
+            "baselineRssKiB": 113696,
+            "peakRssKiB": 114416
+          },
+          "pages": 100,
+          "batches": 1200,
+          "maxBatch": 37,
+          "totalUnits": 16092,
+          "maxPageItems": 9,
+          "possibleScanned": false,
+          "parserSourceBufferBytes": 65679,
+          "elapsedMs": 1445
+        },
+        {
+          "name": "pages-1000.pdf",
+          "processMemory": {
+            "name": "pages-1000.pdf",
+            "baselineRssKiB": 114416,
+            "peakRssKiB": 114848
+          },
+          "pages": 1000,
+          "batches": 12000,
+          "maxBatch": 37,
+          "totalUnits": 161893,
+          "maxPageItems": 9,
+          "possibleScanned": false,
+          "parserSourceBufferBytes": 652935,
+          "elapsedMs": 10440
+        },
+        {
+          "name": "scanned.pdf",
+          "processMemory": {
+            "name": "scanned.pdf",
+            "baselineRssKiB": 114768,
+            "peakRssKiB": 114768
+          },
+          "pages": 1,
+          "batches": 0,
+          "maxBatch": 0,
+          "totalUnits": 0,
+          "maxPageItems": 0,
+          "possibleScanned": true,
+          "parserSourceBufferBytes": 3000,
+          "elapsedMs": 79
+        },
+        {
+          "name": "actions.pdf",
+          "processMemory": {
+            "name": "actions.pdf",
+            "baselineRssKiB": 114768,
+            "peakRssKiB": 114768
+          },
+          "pages": 1,
+          "batches": 12,
+          "maxBatch": 37,
+          "totalUnits": 160,
+          "maxPageItems": 9,
+          "possibleScanned": false,
+          "parserSourceBufferBytes": 1653,
+          "elapsedMs": 95
+        },
+        {
+          "name": "unicode.txt",
+          "processMemory": {
+            "name": "unicode.txt",
+            "baselineRssKiB": 114768,
+            "peakRssKiB": 114768
+          },
+          "pages": 1,
+          "batches": 17,
+          "maxBatch": 4096,
+          "totalUnits": 65556,
+          "maxPageItems": 17,
+          "possibleScanned": false,
+          "parserSourceBufferBytes": 0,
+          "elapsedMs": 54
+        },
+        {
+          "name": "encrypted.pdf",
+          "code": "PASSWORD_REQUIRED"
+        },
+        {
+          "name": "malformed.pdf",
+          "code": "PARSE_FAILED"
+        },
+        {
+          "name": "pages-1001.pdf",
+          "code": "CAPACITY"
+        },
+        {
+          "name": "dense-page.pdf",
+          "code": "CAPACITY"
+        },
+        {
+          "name": "invalid-utf8.txt",
+          "code": "PARSE_FAILED"
+        },
+        {
+          "name": "cancel",
+          "code": "CANCELLED",
+          "completedPages": 2
+        },
+        {
+          "name": "resume",
+          "pages": 3
+        },
+        {
+          "name": "job-admission",
+          "code": "CAPACITY"
+        },
+        {
+          "name": "backpressure",
+          "additionalReads": 0
+        },
+        {
+          "name": "source-cap",
+          "code": "CAPACITY"
+        },
+        {
+          "name": "source-integrity",
+          "code": "INTEGRITY"
+        },
+        {
+          "name": "watchdog",
+          "code": "TIMEOUT"
+        },
+        {
+          "name": "worker-watchdog",
+          "code": "TIMEOUT",
+          "terminatedWorkers": 2
+        },
+        {
+          "name": "source-cancel",
+          "code": "CANCELLED"
+        },
+        {
+          "name": "descriptor-snapshot",
+          "pages": 1
+        },
+        {
+          "name": "callback-rejection",
+          "code": "SOURCE_FAILED"
+        },
+        {
+          "name": "unbounded-id",
+          "code": "INTEGRITY"
+        },
+        {
+          "name": "non-bytes",
+          "code": "SOURCE_FAILED"
+        }
+      ],
+      "activeWorkers": 0,
+      "terminatedWorkers": 34,
+      "ranges": 100,
+      "maxRange": 65536,
+      "maxInFlight": 2,
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+      "limits": {
+        "sourceBytes": 33554432,
+        "rangeBytes": 65536,
+        "pdfRangeBytes": 1048576,
+        "pages": 1000,
+        "pageItems": 10000,
+        "pageUTF16": 262144,
+        "batchUTF16": 4096,
+        "pendingRanges": 4,
+        "watchdogMs": 30000
+      },
+      "externalAction": false,
+      "baselineRssKiB": 106656,
+      "peakRssKiB": 114848,
+      "memoryUnavailable": null,
+      "externalRequests": [],
+      "consoleErrors": []
+    }
+  ]
+}

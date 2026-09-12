@@ -1,0 +1,1421 @@
+{
+  "status": "passed",
+  "startedAt": "2026-09-10T16:05:59.104Z",
+  "environment": {
+    "platform": "darwin",
+    "release": "25.6.0",
+    "arch": "arm64",
+    "node": "v22.23.1"
+  },
+  "selectedEngines": [
+    "chromium",
+    "webkit"
+  ],
+  "sourceSha256": {
+    "packages/storage/src/client/reconcile-extraction.ts": "fd79b561b86cfba75b4665ec32670c3e1626865cf0ade383818cfe6401285b73",
+    "packages/storage/src/client/retained-archive.ts": "8a2cb708dab495caa9a09585f1611f26856cba4d0ebeb83769ffd5a0f5fc26b2",
+    "packages/storage/src/client/index.ts": "14f5bc96d0a78c8de38a9ec64df1b8c6a11f5c7c3226f469dad0a11a4a3f9dda",
+    "packages/storage/src/worker/retained-archive.ts": "79e87d48a4e5559bfb28c8504ac9bc2d854471d59e8988b8eea170cebe290ebd",
+    "packages/storage/src/worker/operation-claims.ts": "b90a22768dd7797058221fd509b1f02bd34e4e54a7aa77c15304e7cb19b0725b",
+    "packages/storage/src/worker/sqlite-module.ts": "fb5889c277872ef8623cb0bb21b8afa58d0b08a8fddabc2caa7b96981f92ddbc",
+    "packages/storage/src/worker/archives/schema-validation.ts": "ff3aecb064a430513890d9a66379b3904caa09de5f455580a98f299a74ebed22",
+    "packages/storage/src/worker/extraction/index.ts": "e0175db4d0a20b182d7c31bda46e95dd5eb15e82c60e67cf09ad6c4d5779b92d",
+    "packages/storage/src/worker/archive-database.ts": "fbd9436598bfbd0cc75e39482e57d27099b0bcdfcb1526cfe8a8c7e2236e6e73",
+    "packages/storage/src/worker/archive-runtime.ts": "647e0c309c8defd42bb6e0f2a902e98d0a356bde1f75521a512fb23dd1453a2e",
+    "packages/storage/src/worker/canonical/repository.ts": "221ff3ac3e7e4c663d3bebbd2de6435a7ef314ef612137c8fc4ea56ee4ea79b8",
+    "packages/storage/migrations/index.ts": "463331ffb83ce77bd759505d3e3b39376a193c146bb5e68fd5178af4c63867fd",
+    "packages/storage/migrations/operation-claims.ts": "b317daf1fe39656d98d58bb3418ed1f5da3687afa83da82a7281365bf61fb466",
+    "packages/storage/sqlite/dist/sqlite3.mjs": "127c4f37a4ce3449d464b976ac4979fc6b016ae974c0aea9ba8afef85d3b4d5d",
+    "packages/storage/sqlite/dist/sqlite3.wasm": "dd7c22431a3b8ad51ab5e6ed91065593574c34c5959d2efdef2f17484eedcb2c",
+    "packages/storage/tests/retained/fixture-worker.mjs": "87e89a752fc4909b8629600ecbb7a9b92d127ad12a0570f5d867e1713e04c48b",
+    "packages/storage/tests/retained-extraction/index.mjs": "d5da381aace6362c28411cd124abd219fe52b4d5ee1c0f68cf68e3ed0947a830",
+    "packages/storage/tests/retained-extraction/fixture-worker.mjs": "111586ce09020a0c539ccb600e54b07ffaa647e7a46d93b4cee8f56d6d03e119",
+    "packages/storage/tests/retained-extraction/run.mjs": "155f53f2cc54951c1fe9bceab170d28ed777678af9306ea4e73ff1a6d447f791"
+  },
+  "hosts": [
+    {
+      "name": "chromium",
+      "status": "passed",
+      "checks": [
+        "Same selected archive is refused before closing the actual managed client; client diagnostics remain usable",
+        "Public upload/canonical document/extraction receipt survive real export, restore and managed activation; helper closes original client and checks its exact retained digest/result without retargeting",
+        "Expected-digest mismatch remains unknown; absent identity is not committed; wrong journal and writes are rejected; selected clean candidate has no old local receipt; every source file hash is unchanged",
+        "Actual cloned SQLite variants preserve unknown outcomes for lost tables/receipts, mismatched digests, invalid/oversized JSON, orphan receipts and unfenced pre10 receipts; other domains conflict; genuine schema8/9 archives remain unmigrated and absent",
+        "Read/recovery variants preserve the literal original namespace, current selection and all source bytes"
+      ],
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36",
+      "fixture": {
+        "operationId": "7f4e7f47-f0b4-4efe-b4e4-00214898154c",
+        "requestDigest": "10cc6349c929e7a670991323f2c2b8b85379279932a6d76e330a8d730aa3a4a6",
+        "canonicalId": "e62a87af-e85a-4cc3-a7a1-289a274237f2",
+        "documentId": "54aca361-3539-475d-8a3e-701da5d5078b",
+        "result": {
+          "runId": "7f4e7f47-f0b4-4efe-b4e4-00214898154c",
+          "identity": {
+            "attachmentByteLength": 34,
+            "attachmentId": "55087f13-0b49-4a05-9f17-77ac507a3e88",
+            "attachmentSha256": "02a44c9fa7146749df1b7a0c2d7f990ea96b118c0efb7a87433c1464087f6523",
+            "documentId": "54aca361-3539-475d-8a3e-701da5d5078b",
+            "extractorVersion": "quixi-extract-1/pdfjs-6.3.289",
+            "normalizerVersion": "quixi-layout-2"
+          },
+          "state": "working",
+          "writerEpoch": 1,
+          "pageCount": null,
+          "completedPage": 0,
+          "currentPage": null,
+          "visibleRunId": null,
+          "documentRevision": 1,
+          "retainedBytes": 2375,
+          "failure": null
+        },
+        "selection": {
+          "archiveId": "default",
+          "selectionRevision": 0
+        }
+      },
+      "activation": {
+        "operationId": "aad9c185-c40e-4221-a985-c6367628d8d8",
+        "payloadSha256": "5ed6ae0449c2db62dbc53d4a95107d41b3af765b4e59b4ecc7dbbe183586f842",
+        "previous": {
+          "archiveId": "default",
+          "selectionRevision": 0
+        },
+        "selected": {
+          "archiveId": "ddf4f8b7-b6c0-4636-b190-f3897fa61a8a",
+          "selectionRevision": 1
+        },
+        "review": {
+          "candidate": {
+            "archiveId": "ddf4f8b7-b6c0-4636-b190-f3897fa61a8a",
+            "blobBytes": 34,
+            "blobCount": 1,
+            "canonicalRecords": 2,
+            "defaultWorkspaceId": "ebf00ea3-08a9-46b2-b205-aef887c9f1b1",
+            "manifestSha256": "26c9e5df8b0cf06e68cbb689f7f9d4da77595b247f07cd09cb9ebd77e71aeb67",
+            "schemaVersion": 12,
+            "streamingGenerations": 0,
+            "syncOperations": 2
+          },
+          "expectedActiveArchiveId": "default",
+          "expectedRevision": 2,
+          "jobId": "5193226e-ebb5-47e8-880e-4b441be1a1c0",
+          "token": "c40bbe14-2ad2-46cf-8988-2202a6c8a6b7"
+        }
+      },
+      "variants": [
+        {
+          "command": "delete-receipt",
+          "archiveId": "821fb8ae-67c1-4ced-85a5-9b801868e4b9",
+          "state": {
+            "integrity": "ok",
+            "schema": 12
+          },
+          "result": {
+            "ok": false,
+            "code": "UNKNOWN_OUTCOME",
+            "message": "Stable extraction claim has no matching bounded receipt; preserve the original operation for recovery"
+          },
+          "files": [
+            {
+              "path": "blobs/02/02a44c9fa7146749df1b7a0c2d7f990ea96b118c0efb7a87433c1464087f6523",
+              "bytes": 34,
+              "sha256": "02a44c9fa7146749df1b7a0c2d7f990ea96b118c0efb7a87433c1464087f6523"
+            },
+            {
+              "path": "database/.opaque/5olajz6aj7i",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/atjpl80q6j7",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/bslwwa6f4ek",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/fy88mgohmhe",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/h4diozd90aa",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/hdoeaal8l9b",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/hjoh8vv3gik",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/jwcteoc44ij",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/shtbihiy7ym",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/xvesou0jma",
+              "bytes": 1241088,
+              "sha256": "fbd0132bcb43325ecbc5bf9e541bd9985aa7573f4915b3d117c4c455d4a3b847"
+            }
+          ]
+        },
+        {
+          "command": "drop-receipts",
+          "archiveId": "b1f14f4d-02b1-407b-bb9b-eb65b3035ff8",
+          "state": {
+            "integrity": "ok",
+            "schema": 12
+          },
+          "result": {
+            "ok": false,
+            "code": "UNKNOWN_OUTCOME",
+            "message": "Stable extraction claim has no matching bounded receipt; preserve the original operation for recovery"
+          },
+          "files": [
+            {
+              "path": "blobs/02/02a44c9fa7146749df1b7a0c2d7f990ea96b118c0efb7a87433c1464087f6523",
+              "bytes": 34,
+              "sha256": "02a44c9fa7146749df1b7a0c2d7f990ea96b118c0efb7a87433c1464087f6523"
+            },
+            {
+              "path": "database/.opaque/5olajz6aj7i",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/atjpl80q6j7",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/bslwwa6f4ek",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/fy88mgohmhe",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/h4diozd90aa",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/hdoeaal8l9b",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/hjoh8vv3gik",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/jwcteoc44ij",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/shtbihiy7ym",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/xvesou0jma",
+              "bytes": 1241088,
+              "sha256": "4d30ab3de856847958ff6cf499a868de5b7f558aa970be26b24df2899d30d69f"
+            }
+          ]
+        },
+        {
+          "command": "bad-digest",
+          "archiveId": "86cf6cd1-a18f-4061-a4bc-180ff239375b",
+          "state": {
+            "integrity": "ok",
+            "schema": 12
+          },
+          "result": {
+            "ok": false,
+            "code": "UNKNOWN_OUTCOME",
+            "message": "Stable extraction claim has no matching bounded receipt; preserve the original operation for recovery"
+          },
+          "files": [
+            {
+              "path": "blobs/02/02a44c9fa7146749df1b7a0c2d7f990ea96b118c0efb7a87433c1464087f6523",
+              "bytes": 34,
+              "sha256": "02a44c9fa7146749df1b7a0c2d7f990ea96b118c0efb7a87433c1464087f6523"
+            },
+            {
+              "path": "database/.opaque/5olajz6aj7i",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/atjpl80q6j7",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/bslwwa6f4ek",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/fy88mgohmhe",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/h4diozd90aa",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/hdoeaal8l9b",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/hjoh8vv3gik",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/jwcteoc44ij",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/shtbihiy7ym",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/xvesou0jma",
+              "bytes": 1241088,
+              "sha256": "f427ca3058622cbb3788ddac5c4369a29b37f1f05ecd1bbaaaa49c9cece5af11"
+            }
+          ]
+        },
+        {
+          "command": "bad-result",
+          "archiveId": "078470f3-8149-4bc2-8ccb-bc4d3a7bc5ea",
+          "state": {
+            "integrity": "ok",
+            "schema": 12
+          },
+          "result": {
+            "ok": false,
+            "code": "UNKNOWN_OUTCOME",
+            "message": "Retained extraction receipt is invalid; preserve its stable claim for recovery"
+          },
+          "files": [
+            {
+              "path": "blobs/02/02a44c9fa7146749df1b7a0c2d7f990ea96b118c0efb7a87433c1464087f6523",
+              "bytes": 34,
+              "sha256": "02a44c9fa7146749df1b7a0c2d7f990ea96b118c0efb7a87433c1464087f6523"
+            },
+            {
+              "path": "database/.opaque/5olajz6aj7i",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/atjpl80q6j7",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/bslwwa6f4ek",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/fy88mgohmhe",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/h4diozd90aa",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/hdoeaal8l9b",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/hjoh8vv3gik",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/jwcteoc44ij",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/shtbihiy7ym",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/xvesou0jma",
+              "bytes": 1241088,
+              "sha256": "34fc7a9fda73fbc3cd8169e6e8d22ad64078a030f9dccab1662bf30239059748"
+            }
+          ]
+        },
+        {
+          "command": "large-result",
+          "archiveId": "582f55e4-860f-46d4-b839-fbbc2a1eb5f6",
+          "state": {
+            "integrity": "ok",
+            "schema": 12
+          },
+          "result": {
+            "ok": false,
+            "code": "UNKNOWN_OUTCOME",
+            "message": "Stable extraction claim has no matching bounded receipt; preserve the original operation for recovery"
+          },
+          "files": [
+            {
+              "path": "blobs/02/02a44c9fa7146749df1b7a0c2d7f990ea96b118c0efb7a87433c1464087f6523",
+              "bytes": 34,
+              "sha256": "02a44c9fa7146749df1b7a0c2d7f990ea96b118c0efb7a87433c1464087f6523"
+            },
+            {
+              "path": "database/.opaque/5olajz6aj7i",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/atjpl80q6j7",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/bslwwa6f4ek",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/fy88mgohmhe",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/h4diozd90aa",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/hdoeaal8l9b",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/hjoh8vv3gik",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/jwcteoc44ij",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/shtbihiy7ym",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/xvesou0jma",
+              "bytes": 1257472,
+              "sha256": "f174d2c068f65c842edd1056626f94a7a3577ef0cbe5082c3d3a37d53f54b007"
+            }
+          ]
+        },
+        {
+          "command": "orphan-receipt",
+          "archiveId": "b5186b29-3951-4f3f-8681-106969fd3fc4",
+          "state": {
+            "integrity": "ok",
+            "schema": 12
+          },
+          "result": {
+            "ok": false,
+            "code": "UNKNOWN_OUTCOME",
+            "message": "Extraction receipt has no stable matching operation claim; preserve the original operation for recovery"
+          },
+          "files": [
+            {
+              "path": "blobs/02/02a44c9fa7146749df1b7a0c2d7f990ea96b118c0efb7a87433c1464087f6523",
+              "bytes": 34,
+              "sha256": "02a44c9fa7146749df1b7a0c2d7f990ea96b118c0efb7a87433c1464087f6523"
+            },
+            {
+              "path": "database/.opaque/5olajz6aj7i",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/atjpl80q6j7",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/bslwwa6f4ek",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/fy88mgohmhe",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/h4diozd90aa",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/hdoeaal8l9b",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/hjoh8vv3gik",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/jwcteoc44ij",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/shtbihiy7ym",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/xvesou0jma",
+              "bytes": 1241088,
+              "sha256": "23870057fad4798a58165e28626a008d3fa4276b2100047d15ef8f4978694c59"
+            }
+          ]
+        },
+        {
+          "command": "other-domain",
+          "archiveId": "1a436d05-67ee-4b28-ba9b-5e80a79180a0",
+          "state": {
+            "integrity": "ok",
+            "schema": 12
+          },
+          "result": {
+            "ok": false,
+            "code": "CONFLICT",
+            "message": "Retained operation identity belongs to a different local domain"
+          },
+          "files": [
+            {
+              "path": "blobs/02/02a44c9fa7146749df1b7a0c2d7f990ea96b118c0efb7a87433c1464087f6523",
+              "bytes": 34,
+              "sha256": "02a44c9fa7146749df1b7a0c2d7f990ea96b118c0efb7a87433c1464087f6523"
+            },
+            {
+              "path": "database/.opaque/5olajz6aj7i",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/atjpl80q6j7",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/bslwwa6f4ek",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/fy88mgohmhe",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/h4diozd90aa",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/hdoeaal8l9b",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/hjoh8vv3gik",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/jwcteoc44ij",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/shtbihiy7ym",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/xvesou0jma",
+              "bytes": 1241088,
+              "sha256": "7e887e36826b2b53fda7995400feaf68c52ec8a1ec7c5edab72205aade256966"
+            }
+          ]
+        },
+        {
+          "command": "pre10-receipt",
+          "archiveId": "7e5b9dc2-2f78-4b4a-9431-8c0ce6cdab30",
+          "state": {
+            "integrity": "ok",
+            "schema": 9
+          },
+          "result": {
+            "ok": false,
+            "code": "UNKNOWN_OUTCOME",
+            "message": "Extraction receipt has no stable matching operation claim; preserve the original operation for recovery"
+          },
+          "files": [
+            {
+              "path": "blobs/02/02a44c9fa7146749df1b7a0c2d7f990ea96b118c0efb7a87433c1464087f6523",
+              "bytes": 34,
+              "sha256": "02a44c9fa7146749df1b7a0c2d7f990ea96b118c0efb7a87433c1464087f6523"
+            },
+            {
+              "path": "database/.opaque/5olajz6aj7i",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/atjpl80q6j7",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/bslwwa6f4ek",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/fy88mgohmhe",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/h4diozd90aa",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/hdoeaal8l9b",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/hjoh8vv3gik",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/jwcteoc44ij",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/shtbihiy7ym",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/xvesou0jma",
+              "bytes": 1241088,
+              "sha256": "dbe4ade3b193c4c7dea01b7a4e7cb45537da8cd1ac518ff5253d4d3762226c5a"
+            }
+          ]
+        },
+        {
+          "command": "legacy8",
+          "archiveId": "999232fa-a7ab-4be1-9f4b-1b7cc67df02a",
+          "state": {
+            "integrity": "ok",
+            "schema": 8
+          },
+          "result": {
+            "ok": true,
+            "result": {
+              "status": "not_found"
+            }
+          },
+          "files": [
+            {
+              "path": "database/.opaque/daaitprauo",
+              "bytes": 675840,
+              "sha256": "c41c801f35d44e9117f17a9967761a504f1d8c9b9a49d4b57cc13332e709b095"
+            },
+            {
+              "path": "database/.opaque/x4frxzsuyn",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            }
+          ]
+        },
+        {
+          "command": "legacy9",
+          "archiveId": "c6344bdb-d9f8-4307-bbde-c0ef131efd42",
+          "state": {
+            "integrity": "ok",
+            "schema": 9
+          },
+          "result": {
+            "ok": true,
+            "result": {
+              "status": "not_found"
+            }
+          },
+          "files": [
+            {
+              "path": "database/.opaque/3mw9nc8ly6o",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/c613uagfd0i",
+              "bytes": 675840,
+              "sha256": "b1a8afc82a21d4efe7358914b07a2832decb8ac548485449181ad62774d8972f"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "webkit",
+      "status": "passed",
+      "checks": [
+        "Same selected archive is refused before closing the actual managed client; client diagnostics remain usable",
+        "Public upload/canonical document/extraction receipt survive real export, restore and managed activation; helper closes original client and checks its exact retained digest/result without retargeting",
+        "Expected-digest mismatch remains unknown; absent identity is not committed; wrong journal and writes are rejected; selected clean candidate has no old local receipt; every source file hash is unchanged",
+        "Actual cloned SQLite variants preserve unknown outcomes for lost tables/receipts, mismatched digests, invalid/oversized JSON, orphan receipts and unfenced pre10 receipts; other domains conflict; genuine schema8/9 archives remain unmigrated and absent",
+        "Read/recovery variants preserve the literal original namespace, current selection and all source bytes"
+      ],
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+      "fixture": {
+        "operationId": "b7a8a701-d055-4f8b-aae3-a481898206cc",
+        "requestDigest": "d0b0f51a7d96ac99741753253bb941aa8b208ff680b9576e2976c205994be0ec",
+        "canonicalId": "e3fba0d5-a705-4b83-b224-9aa4b689ef66",
+        "documentId": "3affd852-083c-439e-984f-8eab3829796f",
+        "result": {
+          "runId": "b7a8a701-d055-4f8b-aae3-a481898206cc",
+          "identity": {
+            "attachmentByteLength": 34,
+            "attachmentId": "1747f1d6-d88f-42e3-aa96-73a3a93a94d5",
+            "attachmentSha256": "02a44c9fa7146749df1b7a0c2d7f990ea96b118c0efb7a87433c1464087f6523",
+            "documentId": "3affd852-083c-439e-984f-8eab3829796f",
+            "extractorVersion": "quixi-extract-1/pdfjs-6.3.289",
+            "normalizerVersion": "quixi-layout-2"
+          },
+          "state": "working",
+          "writerEpoch": 1,
+          "pageCount": null,
+          "completedPage": 0,
+          "currentPage": null,
+          "visibleRunId": null,
+          "documentRevision": 1,
+          "retainedBytes": 2375,
+          "failure": null
+        },
+        "selection": {
+          "archiveId": "default",
+          "selectionRevision": 0
+        }
+      },
+      "activation": {
+        "operationId": "388129bc-71d6-4336-9032-c7469fc9e7c0",
+        "payloadSha256": "9bcd5fce0017a0eba22323a0538f7a107412f89943b20086ffb6f96cc433368c",
+        "previous": {
+          "archiveId": "default",
+          "selectionRevision": 0
+        },
+        "selected": {
+          "archiveId": "eaf72e61-2259-4827-a46a-0f112cd602bf",
+          "selectionRevision": 1
+        },
+        "review": {
+          "candidate": {
+            "archiveId": "eaf72e61-2259-4827-a46a-0f112cd602bf",
+            "blobBytes": 34,
+            "blobCount": 1,
+            "canonicalRecords": 2,
+            "defaultWorkspaceId": "cdc6b2f5-2eec-492d-a18d-6b5fd5bf9ebc",
+            "manifestSha256": "fbe674a79644fc41723f5ab96240841b49570d49cf0a56e39f61534c5cc5a291",
+            "schemaVersion": 12,
+            "streamingGenerations": 0,
+            "syncOperations": 2
+          },
+          "expectedActiveArchiveId": "default",
+          "expectedRevision": 2,
+          "jobId": "d95579b7-5a5a-4b3c-a5d2-30a4a4b5ee5c",
+          "token": "6e003f68-44ef-4afa-a4db-9faedeab3937"
+        }
+      },
+      "variants": [
+        {
+          "command": "delete-receipt",
+          "archiveId": "10807b9a-581c-4ee7-ac06-2c1f3fb52e1c",
+          "state": {
+            "integrity": "ok",
+            "schema": 12
+          },
+          "result": {
+            "ok": false,
+            "code": "UNKNOWN_OUTCOME",
+            "message": "Stable extraction claim has no matching bounded receipt; preserve the original operation for recovery"
+          },
+          "files": [
+            {
+              "path": "blobs/02/02a44c9fa7146749df1b7a0c2d7f990ea96b118c0efb7a87433c1464087f6523",
+              "bytes": 34,
+              "sha256": "02a44c9fa7146749df1b7a0c2d7f990ea96b118c0efb7a87433c1464087f6523"
+            },
+            {
+              "path": "database/.opaque/10qanny0vqzb",
+              "bytes": 1241088,
+              "sha256": "9eecbe5091175b5102cdf29c81a184ac25796e6152d8dc39c59fc108132fbd8c"
+            },
+            {
+              "path": "database/.opaque/agl1j05c4hg",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/dkmahh1m8yk",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/dtrzh76usp9",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/giodk28nayn",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/i40ke4i140h",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/p2od79z8ae",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/uave0unswd9",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/uzs1dhrz5yn",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/yiyejhwlxx7",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            }
+          ]
+        },
+        {
+          "command": "drop-receipts",
+          "archiveId": "e3913011-7b4b-4447-88a6-5a113b331c8b",
+          "state": {
+            "integrity": "ok",
+            "schema": 12
+          },
+          "result": {
+            "ok": false,
+            "code": "UNKNOWN_OUTCOME",
+            "message": "Stable extraction claim has no matching bounded receipt; preserve the original operation for recovery"
+          },
+          "files": [
+            {
+              "path": "blobs/02/02a44c9fa7146749df1b7a0c2d7f990ea96b118c0efb7a87433c1464087f6523",
+              "bytes": 34,
+              "sha256": "02a44c9fa7146749df1b7a0c2d7f990ea96b118c0efb7a87433c1464087f6523"
+            },
+            {
+              "path": "database/.opaque/10qanny0vqzb",
+              "bytes": 1241088,
+              "sha256": "e901b90e1cf85ee8ab3e70303393b73551625f21214607d200f67e61da258cb9"
+            },
+            {
+              "path": "database/.opaque/agl1j05c4hg",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/dkmahh1m8yk",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/dtrzh76usp9",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/giodk28nayn",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/i40ke4i140h",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/p2od79z8ae",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/uave0unswd9",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/uzs1dhrz5yn",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/yiyejhwlxx7",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            }
+          ]
+        },
+        {
+          "command": "bad-digest",
+          "archiveId": "8520103a-200e-449a-8a10-ee98d06608db",
+          "state": {
+            "integrity": "ok",
+            "schema": 12
+          },
+          "result": {
+            "ok": false,
+            "code": "UNKNOWN_OUTCOME",
+            "message": "Stable extraction claim has no matching bounded receipt; preserve the original operation for recovery"
+          },
+          "files": [
+            {
+              "path": "blobs/02/02a44c9fa7146749df1b7a0c2d7f990ea96b118c0efb7a87433c1464087f6523",
+              "bytes": 34,
+              "sha256": "02a44c9fa7146749df1b7a0c2d7f990ea96b118c0efb7a87433c1464087f6523"
+            },
+            {
+              "path": "database/.opaque/10qanny0vqzb",
+              "bytes": 1241088,
+              "sha256": "cb154156ee022ef5921ab7288a9b618fe3dfbdd358ae109b4e0f4433f1a1677b"
+            },
+            {
+              "path": "database/.opaque/agl1j05c4hg",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/dkmahh1m8yk",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/dtrzh76usp9",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/giodk28nayn",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/i40ke4i140h",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/p2od79z8ae",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/uave0unswd9",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/uzs1dhrz5yn",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/yiyejhwlxx7",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            }
+          ]
+        },
+        {
+          "command": "bad-result",
+          "archiveId": "926af1bb-068c-4257-a783-f8293f9d98c0",
+          "state": {
+            "integrity": "ok",
+            "schema": 12
+          },
+          "result": {
+            "ok": false,
+            "code": "UNKNOWN_OUTCOME",
+            "message": "Retained extraction receipt is invalid; preserve its stable claim for recovery"
+          },
+          "files": [
+            {
+              "path": "blobs/02/02a44c9fa7146749df1b7a0c2d7f990ea96b118c0efb7a87433c1464087f6523",
+              "bytes": 34,
+              "sha256": "02a44c9fa7146749df1b7a0c2d7f990ea96b118c0efb7a87433c1464087f6523"
+            },
+            {
+              "path": "database/.opaque/10qanny0vqzb",
+              "bytes": 1241088,
+              "sha256": "8dac1bbad00c6c85835b8730cfa5fb06f32e0db1488fef44faa85c79cd4c36a1"
+            },
+            {
+              "path": "database/.opaque/agl1j05c4hg",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/dkmahh1m8yk",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/dtrzh76usp9",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/giodk28nayn",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/i40ke4i140h",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/p2od79z8ae",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/uave0unswd9",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/uzs1dhrz5yn",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/yiyejhwlxx7",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            }
+          ]
+        },
+        {
+          "command": "large-result",
+          "archiveId": "29c49376-5438-4020-be57-8f998a378842",
+          "state": {
+            "integrity": "ok",
+            "schema": 12
+          },
+          "result": {
+            "ok": false,
+            "code": "UNKNOWN_OUTCOME",
+            "message": "Stable extraction claim has no matching bounded receipt; preserve the original operation for recovery"
+          },
+          "files": [
+            {
+              "path": "blobs/02/02a44c9fa7146749df1b7a0c2d7f990ea96b118c0efb7a87433c1464087f6523",
+              "bytes": 34,
+              "sha256": "02a44c9fa7146749df1b7a0c2d7f990ea96b118c0efb7a87433c1464087f6523"
+            },
+            {
+              "path": "database/.opaque/10qanny0vqzb",
+              "bytes": 1257472,
+              "sha256": "fd88b130407285ab30c88c099cb5128402e798551a04f89860c6576f64982663"
+            },
+            {
+              "path": "database/.opaque/agl1j05c4hg",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/dkmahh1m8yk",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/dtrzh76usp9",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/giodk28nayn",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/i40ke4i140h",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/p2od79z8ae",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/uave0unswd9",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/uzs1dhrz5yn",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/yiyejhwlxx7",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            }
+          ]
+        },
+        {
+          "command": "orphan-receipt",
+          "archiveId": "75b490b7-fbca-476a-b6c9-61c730128d51",
+          "state": {
+            "integrity": "ok",
+            "schema": 12
+          },
+          "result": {
+            "ok": false,
+            "code": "UNKNOWN_OUTCOME",
+            "message": "Extraction receipt has no stable matching operation claim; preserve the original operation for recovery"
+          },
+          "files": [
+            {
+              "path": "blobs/02/02a44c9fa7146749df1b7a0c2d7f990ea96b118c0efb7a87433c1464087f6523",
+              "bytes": 34,
+              "sha256": "02a44c9fa7146749df1b7a0c2d7f990ea96b118c0efb7a87433c1464087f6523"
+            },
+            {
+              "path": "database/.opaque/10qanny0vqzb",
+              "bytes": 1241088,
+              "sha256": "7e3aa6ee9a8e0ab1bd24504e11d53e6354ec7d70b977d736ce06b80a8bd435cb"
+            },
+            {
+              "path": "database/.opaque/agl1j05c4hg",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/dkmahh1m8yk",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/dtrzh76usp9",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/giodk28nayn",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/i40ke4i140h",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/p2od79z8ae",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/uave0unswd9",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/uzs1dhrz5yn",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/yiyejhwlxx7",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            }
+          ]
+        },
+        {
+          "command": "other-domain",
+          "archiveId": "b7e0c23d-63ba-4285-98fc-62d280614bda",
+          "state": {
+            "integrity": "ok",
+            "schema": 12
+          },
+          "result": {
+            "ok": false,
+            "code": "CONFLICT",
+            "message": "Retained operation identity belongs to a different local domain"
+          },
+          "files": [
+            {
+              "path": "blobs/02/02a44c9fa7146749df1b7a0c2d7f990ea96b118c0efb7a87433c1464087f6523",
+              "bytes": 34,
+              "sha256": "02a44c9fa7146749df1b7a0c2d7f990ea96b118c0efb7a87433c1464087f6523"
+            },
+            {
+              "path": "database/.opaque/10qanny0vqzb",
+              "bytes": 1241088,
+              "sha256": "6624ce79a06ed480e39339bb7636d1ddf8f65849061703cc8d6679a852b76fe0"
+            },
+            {
+              "path": "database/.opaque/agl1j05c4hg",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/dkmahh1m8yk",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/dtrzh76usp9",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/giodk28nayn",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/i40ke4i140h",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/p2od79z8ae",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/uave0unswd9",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/uzs1dhrz5yn",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/yiyejhwlxx7",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            }
+          ]
+        },
+        {
+          "command": "pre10-receipt",
+          "archiveId": "d6f556e2-d8b6-4185-914f-91c0fc7daa5c",
+          "state": {
+            "integrity": "ok",
+            "schema": 9
+          },
+          "result": {
+            "ok": false,
+            "code": "UNKNOWN_OUTCOME",
+            "message": "Extraction receipt has no stable matching operation claim; preserve the original operation for recovery"
+          },
+          "files": [
+            {
+              "path": "blobs/02/02a44c9fa7146749df1b7a0c2d7f990ea96b118c0efb7a87433c1464087f6523",
+              "bytes": 34,
+              "sha256": "02a44c9fa7146749df1b7a0c2d7f990ea96b118c0efb7a87433c1464087f6523"
+            },
+            {
+              "path": "database/.opaque/10qanny0vqzb",
+              "bytes": 1241088,
+              "sha256": "0425a96cc22030d86dd0810d1c72eae961f75087d29c2a4d1e70cab3d2af3384"
+            },
+            {
+              "path": "database/.opaque/agl1j05c4hg",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/dkmahh1m8yk",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/dtrzh76usp9",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/giodk28nayn",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/i40ke4i140h",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/p2od79z8ae",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/uave0unswd9",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/uzs1dhrz5yn",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/yiyejhwlxx7",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            }
+          ]
+        },
+        {
+          "command": "legacy8",
+          "archiveId": "e63d0a7f-f1c6-458b-a9b1-ddfbbbf27a21",
+          "state": {
+            "integrity": "ok",
+            "schema": 8
+          },
+          "result": {
+            "ok": true,
+            "result": {
+              "status": "not_found"
+            }
+          },
+          "files": [
+            {
+              "path": "database/.opaque/8mo5a9gkrk7",
+              "bytes": 675840,
+              "sha256": "c41c801f35d44e9117f17a9967761a504f1d8c9b9a49d4b57cc13332e709b095"
+            },
+            {
+              "path": "database/.opaque/l7x0jezupn",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            }
+          ]
+        },
+        {
+          "command": "legacy9",
+          "archiveId": "11330ad1-b45a-42c8-b0eb-608750ca836c",
+          "state": {
+            "integrity": "ok",
+            "schema": 9
+          },
+          "result": {
+            "ok": true,
+            "result": {
+              "status": "not_found"
+            }
+          },
+          "files": [
+            {
+              "path": "database/.opaque/4ybogu2tcn",
+              "bytes": 4096,
+              "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+            },
+            {
+              "path": "database/.opaque/6y14faab3bi",
+              "bytes": 675840,
+              "sha256": "b1a8afc82a21d4efe7358914b07a2832decb8ac548485449181ad62774d8972f"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "builtArtifacts": {
+    "index.html": "0a5262e3b0e1bf918dc229847cc68e14d0637de6fff204e89db1e096eeb4f5ce",
+    "assets/archive-D9cQ_OKB.js": "2d627d8d5d6544642c09aadef73ce2e7ccfeed7b4eda8b0933ce4f74fd0ce6df",
+    "assets/fixture-worker-BqqWq-_t.js": "783710aaa823bb2e6d71a779ec70335e6aa8c9925b3800832bfd5aa08c8af216",
+    "assets/fixture-worker-s0kJGXcT.js": "c378aef0201652b8c10983d4491245e41af0c90e279330321a7e26571490fc55",
+    "assets/index-DOXlbdQe.js": "1cd265bce19e55dd989a6cb50b92b9948d721a3cf5bbec10e0f069dc71a0f8cf",
+    "assets/index-ZO9d-MV2.js": "80a3a3e5b60bc94f0735da318080e94a3fb8bac6be49361b106f8f3d2b024c46",
+    "assets/rescue-export-nB1hUzO-.js": "3f24f542f485c385acffd1e78dad301f8f0971c780fde80b21e361b29f21025a",
+    "assets/retained-archive-D5RS2Mha.js": "25ea59c9ed67f2f0007977b298675073854082627e939424afa545591e367a99",
+    "assets/selection-B0nEbn4v.js": "e7e3fbcf3b969389324319955de7ee4ae8d777b09f102b87da9138d22c11fb51",
+    "assets/sqlite3-BzAlo58v.wasm": "dd7c22431a3b8ad51ab5e6ed91065593574c34c5959d2efdef2f17484eedcb2c"
+  },
+  "origin": "http://127.0.0.1:51737",
+  "completedAt": "2026-09-10T16:06:07.931Z"
+}

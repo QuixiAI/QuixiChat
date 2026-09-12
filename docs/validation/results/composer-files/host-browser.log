@@ -1,0 +1,45 @@
+
+> quixi@0.0.1 test:host:web
+> tsc --noEmit -p apps/web/tests/tsconfig.json && playwright test --config apps/web/tests/playwright.config.ts
+
+[WebServer] (node:92656) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 30 tests using 1 worker
+
+(node:92657) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [chromium] › apps/web/tests/host.spec.ts:118:1 › session credentials bind account/destination, delete and disappear with the session (671ms)
+  ✓   2 [chromium] › apps/web/tests/host.spec.ts:178:1 › clipboard writes come from a user action, stay bounded and are readable back where the engine permits (481ms)
+  ✓   3 [chromium] › apps/web/tests/host.spec.ts:208:1 › verified request staging preserves bytes and rejects corrupted, oversized and released transfers (295ms)
+  ✓   4 [chromium] › apps/web/tests/host.spec.ts:295:1 › real streamed response enforces acknowledgement window and cancellation releases upstream (350ms)
+  ✓   5 [chromium] › apps/web/tests/host.spec.ts:350:1 › HTTP errors, redirect rejection, pre-header cancellation and idle deadlines are typed (370ms)
+  ✓   6 [chromium] › apps/web/tests/host.spec.ts:391:1 › actual browser file selection streams fixture bytes and releases file handles (371ms)
+  ✓   7 [chromium] › apps/web/tests/host.spec.ts:436:1 › registered query names are encoded onto the path and other names are refused before dispatch (293ms)
+  ✓   8 [chromium] › apps/web/tests/host.spec.ts:475:1 › adopted dropped files stream through the selected-file handle path and release (343ms)
+  ✓   9 [chromium] › apps/web/tests/host.spec.ts:519:1 › configured relay separates authorization credentials and fixes the forwarding route (391ms)
+  ✓  10 [chromium] › apps/web/tests/host.spec.ts:573:1 › bounded fallback export downloads verified bytes in the actual browser (515ms)
+  ✓  11 [chromium] › apps/web/tests/host.spec.ts:630:1 › concurrency limits and disposal close active streams without leaking credentials (366ms)
+  ✓  12 [chromium] › apps/web/tests/host.spec.ts:656:1 › aggregate staging limit recovers after release and verification overload (290ms)
+  ✓  13 [chromium] › apps/web/tests/host.spec.ts:707:1 › 32 MiB disk-backed download survives immediate transfer release and reload until explicit cleanup (1.7s)
+  ✓  14 [chromium] › apps/web/tests/host.spec.ts:797:1 › disk save streams to an injected picker destination with 64 KiB writes and cancellation leaves original intact (330ms)
+  ✓  15 [chromium] › apps/web/tests/host.spec.ts:877:1 › retained download admission stays capped across host disposal and explicit cleanup frees a slot (301ms)
+(node:92761) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  16 [webkit] › apps/web/tests/host.spec.ts:118:1 › session credentials bind account/destination, delete and disappear with the session (1.4s)
+  ✓  17 [webkit] › apps/web/tests/host.spec.ts:178:1 › clipboard writes come from a user action, stay bounded and are readable back where the engine permits (867ms)
+  ✓  18 [webkit] › apps/web/tests/host.spec.ts:208:1 › verified request staging preserves bytes and rejects corrupted, oversized and released transfers (878ms)
+  ✓  19 [webkit] › apps/web/tests/host.spec.ts:295:1 › real streamed response enforces acknowledgement window and cancellation releases upstream (956ms)
+  ✓  20 [webkit] › apps/web/tests/host.spec.ts:350:1 › HTTP errors, redirect rejection, pre-header cancellation and idle deadlines are typed (986ms)
+  ✓  21 [webkit] › apps/web/tests/host.spec.ts:391:1 › actual browser file selection streams fixture bytes and releases file handles (988ms)
+  ✓  22 [webkit] › apps/web/tests/host.spec.ts:436:1 › registered query names are encoded onto the path and other names are refused before dispatch (1.3s)
+  ✓  23 [webkit] › apps/web/tests/host.spec.ts:475:1 › adopted dropped files stream through the selected-file handle path and release (866ms)
+  ✓  24 [webkit] › apps/web/tests/host.spec.ts:519:1 › configured relay separates authorization credentials and fixes the forwarding route (855ms)
+  ✓  25 [webkit] › apps/web/tests/host.spec.ts:573:1 › bounded fallback export downloads verified bytes in the actual browser (1.5s)
+  ✓  26 [webkit] › apps/web/tests/host.spec.ts:630:1 › concurrency limits and disposal close active streams without leaking credentials (880ms)
+  ✓  27 [webkit] › apps/web/tests/host.spec.ts:656:1 › aggregate staging limit recovers after release and verification overload (866ms)
+  ✓  28 [webkit] › apps/web/tests/host.spec.ts:707:1 › 32 MiB disk-backed download survives immediate transfer release and reload until explicit cleanup (1.8s)
+  ✓  29 [webkit] › apps/web/tests/host.spec.ts:797:1 › disk save streams to an injected picker destination with 64 KiB writes and cancellation leaves original intact (1.1s)
+  ✓  30 [webkit] › apps/web/tests/host.spec.ts:877:1 › retained download admission stays capped across host disposal and explicit cleanup frees a slot (1.0s)
+
+  30 passed (24.3s)

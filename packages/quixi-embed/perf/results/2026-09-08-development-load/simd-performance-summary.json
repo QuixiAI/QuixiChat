@@ -1,0 +1,118 @@
+{
+  "passed": true,
+  "full_matrix_exercised": true,
+  "hosts": [
+    {
+      "report": "simd-performance-chromium.json",
+      "sha256": "c3f58221fc7d5716efea5986ebdcd7d73b56e46f5d1b085045ec8f202dc0710e",
+      "host": {
+        "os": "darwin",
+        "release": "25.5.0",
+        "architecture": "arm64",
+        "cpu": "Apple M5 Max",
+        "browser": "chromium",
+        "browser_version": "153.0.8010.12"
+      },
+      "full_matrix": true,
+      "shapes": 15,
+      "minimum_speedup": 1.8660153522938998,
+      "maximum_speedup": 2.0410728726771357,
+      "load_ms": [
+        516.6000000238419,
+        515.5
+      ],
+      "memory": [
+        {
+          "modelBytes": 91231307,
+          "workspaceBytes": 7866420,
+          "linearMemoryBytes": 183107584
+        },
+        {
+          "modelBytes": 91231307,
+          "workspaceBytes": 7866420,
+          "linearMemoryBytes": 183107584
+        }
+      ],
+      "assets": {
+        "scalar_sha256": "7475f90c777ab324ef2de5ae9f7f03df14c07177c5e4788358f52c3603a04fb1",
+        "simd_sha256": "85cf1fd1fc4b7609d9ac997d684afbef90ad7793e6a66358f1b6681288c6b547",
+        "model_sha256": "e1ef345cd35088b06f70c199f5a4e0311bda5983716ad6a3e7d0a604202efffc"
+      }
+    },
+    {
+      "report": "simd-performance-firefox-short.json",
+      "sha256": "57c0e62296edf24c6d575091ed3f69157601684d2f3b32e648c5b26309e23113",
+      "host": {
+        "os": "darwin",
+        "release": "25.5.0",
+        "architecture": "arm64",
+        "cpu": "Apple M5 Max",
+        "browser": "firefox",
+        "browser_version": "155.0"
+      },
+      "full_matrix": false,
+      "shapes": 5,
+      "minimum_speedup": 2.078767123287671,
+      "maximum_speedup": 2.111111111111111,
+      "load_ms": [
+        583,
+        571
+      ],
+      "memory": [
+        {
+          "modelBytes": 91231307,
+          "workspaceBytes": 7866420,
+          "linearMemoryBytes": 183107584
+        },
+        {
+          "modelBytes": 91231307,
+          "workspaceBytes": 7866420,
+          "linearMemoryBytes": 183107584
+        }
+      ],
+      "assets": {
+        "scalar_sha256": "7475f90c777ab324ef2de5ae9f7f03df14c07177c5e4788358f52c3603a04fb1",
+        "simd_sha256": "85cf1fd1fc4b7609d9ac997d684afbef90ad7793e6a66358f1b6681288c6b547",
+        "model_sha256": "e1ef345cd35088b06f70c199f5a4e0311bda5983716ad6a3e7d0a604202efffc"
+      }
+    },
+    {
+      "report": "simd-performance-webkit-short.json",
+      "sha256": "0901ffa2b7798dfd90652472b7d6ffb23283310c25e35ecb58240e5c6b5c8e9c",
+      "host": {
+        "os": "darwin",
+        "release": "25.5.0",
+        "architecture": "arm64",
+        "cpu": "Apple M5 Max",
+        "browser": "webkit",
+        "browser_version": "26.6"
+      },
+      "full_matrix": false,
+      "shapes": 5,
+      "minimum_speedup": 2.02262443438914,
+      "maximum_speedup": 2.036764705882353,
+      "load_ms": [
+        510,
+        494
+      ],
+      "memory": [
+        {
+          "modelBytes": 91231307,
+          "workspaceBytes": 7866420,
+          "linearMemoryBytes": 183107584
+        },
+        {
+          "modelBytes": 91231307,
+          "workspaceBytes": 7866420,
+          "linearMemoryBytes": 183107584
+        }
+      ],
+      "assets": {
+        "scalar_sha256": "7475f90c777ab324ef2de5ae9f7f03df14c07177c5e4788358f52c3603a04fb1",
+        "simd_sha256": "85cf1fd1fc4b7609d9ac997d684afbef90ad7793e6a66358f1b6681288c6b547",
+        "model_sha256": "e1ef345cd35088b06f70c199f5a4e0311bda5983716ad6a3e7d0a604202efffc"
+      }
+    }
+  ],
+  "limitations": "Measurements apply to named hardware/runtimes and ambient conditions; do not infer unmeasured OS/device results."
+}

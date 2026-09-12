@@ -1,0 +1,354 @@
+{
+  "threads": [
+    {
+      "id": "00000000-0000-4000-8000-000000000020",
+      "workspaceId": "00000000-0000-4000-8000-000000000001",
+      "createdAt": 1788868800000,
+      "recordedAt": 1788868920000,
+      "systemPrompt": null,
+      "preferredRoute": null,
+      "importSourceId": "00000000-0000-4000-8000-000000000520"
+    }
+  ],
+  "threadStates": [
+    {
+      "threadId": "00000000-0000-4000-8000-000000000020",
+      "title": "Synthetic archive example",
+      "tags": [
+        "fixture"
+      ],
+      "pinned": false,
+      "archived": false,
+      "activeLeafMessageId": "00000000-0000-4000-8000-000000000121",
+      "contextSnapshotId": "00000000-0000-4000-8000-000000000021",
+      "routingProfile": null,
+      "revision": 0
+    }
+  ],
+  "contexts": [
+    {
+      "id": "00000000-0000-4000-8000-000000000021",
+      "threadId": "00000000-0000-4000-8000-000000000020",
+      "previousId": null,
+      "version": 1,
+      "systemPrompt": null,
+      "preferredRoute": null,
+      "recordedAt": 1788868920000
+    }
+  ],
+  "messages": [
+    {
+      "id": "00000000-0000-4000-8000-000000000120",
+      "threadId": "00000000-0000-4000-8000-000000000020",
+      "parentId": null,
+      "role": "user",
+      "createdAt": 1788868800000,
+      "recordedAt": 1788868920000,
+      "generationId": null,
+      "editedFromMessageId": null,
+      "sealed": true,
+      "partCount": 2
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000121",
+      "threadId": "00000000-0000-4000-8000-000000000020",
+      "parentId": "00000000-0000-4000-8000-000000000120",
+      "role": "assistant",
+      "createdAt": 1788868860000,
+      "recordedAt": 1788868920000,
+      "generationId": null,
+      "editedFromMessageId": null,
+      "sealed": true,
+      "partCount": 6
+    }
+  ],
+  "generations": [],
+  "parts": [
+    {
+      "id": "00000000-0000-4000-8000-000000001120",
+      "messageId": "00000000-0000-4000-8000-000000000120",
+      "order": 0,
+      "kind": "Text",
+      "data": {
+        "text": "Summarize the missing synthetic file."
+      }
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000001121",
+      "messageId": "00000000-0000-4000-8000-000000000121",
+      "order": 0,
+      "kind": "ToolCall",
+      "data": {
+        "name": "inspect_file",
+        "input": {
+          "filename": "example.pdf"
+        },
+        "providerCallId": "toolu_fixture"
+      }
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000001221",
+      "messageId": "00000000-0000-4000-8000-000000000121",
+      "order": 1,
+      "kind": "ToolResult",
+      "data": {
+        "callPartId": "00000000-0000-4000-8000-000000001121",
+        "unresolvedProviderCallId": null,
+        "content": [
+          {
+            "type": "text",
+            "text": "File bytes were not included."
+          }
+        ],
+        "isError": true
+      }
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000001321",
+      "messageId": "00000000-0000-4000-8000-000000000121",
+      "order": 2,
+      "kind": "Text",
+      "data": {
+        "text": "I retained the file reference."
+      }
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000001421",
+      "messageId": "00000000-0000-4000-8000-000000000121",
+      "order": 3,
+      "kind": "ReasoningMetadata",
+      "data": {
+        "redacted": true,
+        "summary": null
+      }
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000001521",
+      "messageId": "00000000-0000-4000-8000-000000000121",
+      "order": 4,
+      "kind": "ProviderArtifact",
+      "data": {
+        "providerKind": "quixi_fixture_unknown",
+        "rawObjectId": "00000000-0000-4000-8000-000000000521",
+        "locator": "/chat_messages/1/content/3"
+      }
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000001621",
+      "messageId": "00000000-0000-4000-8000-000000000121",
+      "order": 5,
+      "kind": "ProviderArtifact",
+      "data": {
+        "providerKind": "application/vnd.ant.code",
+        "rawObjectId": "00000000-0000-4000-8000-000000000521",
+        "locator": "/chat_messages/1/artifacts/0"
+      }
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000001220",
+      "messageId": "00000000-0000-4000-8000-000000000120",
+      "order": 1,
+      "kind": "File",
+      "data": {
+        "attachmentId": "00000000-0000-4000-8000-000000000420",
+        "description": null
+      }
+    }
+  ],
+  "events": [
+    {
+      "id": "00000000-0000-4000-8000-000000000320",
+      "threadId": "00000000-0000-4000-8000-000000000020",
+      "type": "ImportWarning",
+      "createdAt": 1788868800320,
+      "recordedAt": 1788868920000,
+      "messageId": "00000000-0000-4000-8000-000000000120",
+      "generationId": null,
+      "details": {
+        "code": "missing_attachment",
+        "sourceFileId": "claude_file_fixture"
+      }
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000321",
+      "threadId": "00000000-0000-4000-8000-000000000020",
+      "type": "ImportWarning",
+      "createdAt": 1788868800321,
+      "recordedAt": 1788868920000,
+      "messageId": "00000000-0000-4000-8000-000000000121",
+      "generationId": null,
+      "details": {
+        "code": "unsupported_part",
+        "sourceKind": "quixi_fixture_unknown"
+      }
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000322",
+      "threadId": "00000000-0000-4000-8000-000000000020",
+      "type": "ImportWarning",
+      "createdAt": 1788868800322,
+      "recordedAt": 1788868920000,
+      "messageId": "00000000-0000-4000-8000-000000000121",
+      "generationId": null,
+      "details": {
+        "code": "inferred_linear_parentage",
+        "reason": "Source response orders messages but does not expose branch parents"
+      }
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000323",
+      "threadId": "00000000-0000-4000-8000-000000000020",
+      "type": "ImportWarning",
+      "createdAt": 1788868800323,
+      "recordedAt": 1788868920000,
+      "messageId": "00000000-0000-4000-8000-000000000121",
+      "generationId": null,
+      "details": {
+        "code": "unknown_generation_metadata",
+        "reason": "No per-message attempt status or model supplied"
+      }
+    }
+  ],
+  "attachments": [
+    {
+      "id": "00000000-0000-4000-8000-000000000420",
+      "availability": "missing",
+      "filename": "example.pdf",
+      "mimeType": "application/pdf",
+      "sizeBytes": 1234,
+      "blobSha256": null,
+      "rawObjectId": null
+    }
+  ],
+  "rawObjects": [
+    {
+      "id": "00000000-0000-4000-8000-000000000521",
+      "availability": "available",
+      "mediaType": "application/json",
+      "storageRef": "claude-compliance.synthetic.json",
+      "sha256": "d96bc95209346d1975e5a6bb79940837315dacbb88d09d0fa6e7614f4a444256",
+      "byteLength": 2690
+    }
+  ],
+  "importSources": [
+    {
+      "id": "00000000-0000-4000-8000-000000000520",
+      "provider": "anthropic",
+      "method": "provider_api",
+      "sourceThreadId": "claude_chat_fixture",
+      "sourceUrl": "https://claude.ai/chat/00000000-0000-4000-8000-000000009999",
+      "importerName": "quixi-fixture-normalizer",
+      "importerVersion": "proposal-1",
+      "sourceFormatVersion": null,
+      "sourceFingerprint": "d96bc95209346d1975e5a6bb79940837315dacbb88d09d0fa6e7614f4a444256",
+      "importedAt": 1788868920000
+    }
+  ],
+  "sourceIdentities": [
+    {
+      "id": "00000000-0000-4000-8000-000000000620",
+      "provider": "anthropic",
+      "accountScope": "synthetic-org-scope",
+      "sourceThreadId": "claude_chat_fixture",
+      "entityKind": "thread",
+      "nativeId": "claude_chat_fixture",
+      "quixiId": "00000000-0000-4000-8000-000000000020",
+      "sourceContainerKey": "claude_chat_fixture"
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000621",
+      "provider": "anthropic",
+      "accountScope": "synthetic-org-scope",
+      "sourceThreadId": "claude_chat_fixture",
+      "entityKind": "message",
+      "nativeId": "claude_chat_msg_fixture_user",
+      "quixiId": "00000000-0000-4000-8000-000000000120",
+      "sourceContainerKey": "claude_chat_fixture"
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000623",
+      "provider": "anthropic",
+      "accountScope": "synthetic-org-scope",
+      "sourceThreadId": "claude_chat_fixture",
+      "entityKind": "message",
+      "nativeId": "claude_chat_msg_fixture_assistant",
+      "quixiId": "00000000-0000-4000-8000-000000000121",
+      "sourceContainerKey": "claude_chat_fixture"
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000622",
+      "provider": "anthropic",
+      "accountScope": "synthetic-org-scope",
+      "sourceThreadId": "claude_chat_fixture",
+      "entityKind": "attachment",
+      "nativeId": "claude_file_fixture",
+      "quixiId": "00000000-0000-4000-8000-000000000420",
+      "sourceContainerKey": "claude_chat_fixture"
+    }
+  ],
+  "provenance": [
+    {
+      "id": "00000000-0000-4000-8000-000000000720",
+      "entityKind": "thread",
+      "entityId": "00000000-0000-4000-8000-000000000020",
+      "importSourceId": "00000000-0000-4000-8000-000000000520",
+      "rawObjectId": "00000000-0000-4000-8000-000000000521",
+      "locator": "",
+      "sourceCreatedAtText": null,
+      "compatibility": [
+        "synthetic_fixture"
+      ]
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000721",
+      "entityKind": "message",
+      "entityId": "00000000-0000-4000-8000-000000000120",
+      "importSourceId": "00000000-0000-4000-8000-000000000520",
+      "rawObjectId": "00000000-0000-4000-8000-000000000521",
+      "locator": "/chat_messages/0",
+      "sourceCreatedAtText": null,
+      "compatibility": [
+        "synthetic_fixture"
+      ]
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000722",
+      "entityKind": "message",
+      "entityId": "00000000-0000-4000-8000-000000000121",
+      "importSourceId": "00000000-0000-4000-8000-000000000520",
+      "rawObjectId": "00000000-0000-4000-8000-000000000521",
+      "locator": "/chat_messages/1",
+      "sourceCreatedAtText": null,
+      "compatibility": [
+        "synthetic_fixture"
+      ]
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000723",
+      "entityKind": "attachment",
+      "entityId": "00000000-0000-4000-8000-000000000420",
+      "importSourceId": "00000000-0000-4000-8000-000000000520",
+      "rawObjectId": "00000000-0000-4000-8000-000000000521",
+      "locator": "/chat_messages/0/files/0",
+      "sourceCreatedAtText": null,
+      "compatibility": [
+        "synthetic_fixture"
+      ]
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000724",
+      "entityKind": "part",
+      "entityId": "00000000-0000-4000-8000-000000001521",
+      "importSourceId": "00000000-0000-4000-8000-000000000520",
+      "rawObjectId": "00000000-0000-4000-8000-000000000521",
+      "locator": "/chat_messages/1/content/3",
+      "sourceCreatedAtText": null,
+      "compatibility": [
+        "synthetic_fixture"
+      ]
+    }
+  ],
+  "tombstones": [],
+  "version": 1,
+  "documents": []
+}

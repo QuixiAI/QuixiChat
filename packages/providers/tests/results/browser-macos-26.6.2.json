@@ -1,0 +1,267 @@
+{
+  "selectedEngines": [
+    "chromium",
+    "webkit"
+  ],
+  "status": "passed",
+  "startedAt": "2026-09-09T21:05:45.741Z",
+  "hosts": [
+    {
+      "name": "chromium",
+      "status": "passed",
+      "checks": [
+        "openai-compatible: model discovery uses registered credential header and leaves unknown capability unknown",
+        "openai-compatible: synthetic-model preserves raw bytes and bounded output with complete outcome",
+        "openai-compatible: malformed preserves raw bytes and bounded output with partial outcome",
+        "openai-compatible: truncated preserves raw bytes and bounded output with partial outcome",
+        "openai-compatible: slow preserves raw bytes and bounded output with cancelled outcome",
+        "openai-compatible: rate preserves raw bytes and bounded output with failed outcome",
+        "anthropic: model discovery uses registered credential header and leaves unknown capability unknown",
+        "anthropic: synthetic-model preserves raw bytes and bounded output with complete outcome",
+        "anthropic: malformed preserves raw bytes and bounded output with partial outcome",
+        "anthropic: truncated preserves raw bytes and bounded output with partial outcome",
+        "anthropic: slow preserves raw bytes and bounded output with cancelled outcome",
+        "anthropic: rate preserves raw bytes and bounded output with failed outcome",
+        "openai-compatible/synthetic-model: public SQLite/OPFS checkpoints, source bytes, terminal manifest and replay identity survive reopen",
+        "openai-compatible/malformed: public SQLite/OPFS checkpoints, source bytes, terminal manifest and replay identity survive reopen",
+        "openai-compatible/slow: public SQLite/OPFS checkpoints, source bytes, terminal manifest and replay identity survive reopen",
+        "anthropic/synthetic-model: public SQLite/OPFS checkpoints, source bytes, terminal manifest and replay identity survive reopen",
+        "anthropic/malformed: public SQLite/OPFS checkpoints, source bytes, terminal manifest and replay identity survive reopen",
+        "anthropic/slow: public SQLite/OPFS checkpoints, source bytes, terminal manifest and replay identity survive reopen",
+        "awaited durable-creation hook reject prevents provider dispatch and commits its terminal outcome",
+        "awaited durable-creation hook cancel prevents provider dispatch and commits its terminal outcome",
+        "storage quota failure cancels transport; after the producer releases its independent lease, recovery seals the committed prefix as partial",
+        "terminating the storage owner tab preserves one live provider request and complete output through takeover",
+        "provider generation, raw response and terminal manifest survive browser process restart"
+      ],
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36",
+      "transport": {
+        "checks": [
+          "openai-compatible: model discovery uses registered credential header and leaves unknown capability unknown",
+          "openai-compatible: synthetic-model preserves raw bytes and bounded output with complete outcome",
+          "openai-compatible: malformed preserves raw bytes and bounded output with partial outcome",
+          "openai-compatible: truncated preserves raw bytes and bounded output with partial outcome",
+          "openai-compatible: slow preserves raw bytes and bounded output with cancelled outcome",
+          "openai-compatible: rate preserves raw bytes and bounded output with failed outcome",
+          "anthropic: model discovery uses registered credential header and leaves unknown capability unknown",
+          "anthropic: synthetic-model preserves raw bytes and bounded output with complete outcome",
+          "anthropic: malformed preserves raw bytes and bounded output with partial outcome",
+          "anthropic: truncated preserves raw bytes and bounded output with partial outcome",
+          "anthropic: slow preserves raw bytes and bounded output with cancelled outcome",
+          "anthropic: rate preserves raw bytes and bounded output with failed outcome"
+        ],
+        "results": [
+          {
+            "protocol": "openai-compatible",
+            "mode": "synthetic-model",
+            "status": "complete",
+            "rawBytes": 1112,
+            "textChars": 13
+          },
+          {
+            "protocol": "openai-compatible",
+            "mode": "malformed",
+            "status": "partial",
+            "rawBytes": 178,
+            "textChars": 9
+          },
+          {
+            "protocol": "openai-compatible",
+            "mode": "truncated",
+            "status": "partial",
+            "rawBytes": 161,
+            "textChars": 9
+          },
+          {
+            "protocol": "openai-compatible",
+            "mode": "slow",
+            "status": "cancelled",
+            "rawBytes": 161,
+            "textChars": 9
+          },
+          {
+            "protocol": "openai-compatible",
+            "mode": "rate",
+            "status": "failed",
+            "rawBytes": 70,
+            "textChars": 0
+          },
+          {
+            "protocol": "anthropic",
+            "mode": "synthetic-model",
+            "status": "complete",
+            "rawBytes": 2195,
+            "textChars": 9
+          },
+          {
+            "protocol": "anthropic",
+            "mode": "malformed",
+            "status": "partial",
+            "rawBytes": 515,
+            "textChars": 9
+          },
+          {
+            "protocol": "anthropic",
+            "mode": "truncated",
+            "status": "partial",
+            "rawBytes": 470,
+            "textChars": 9
+          },
+          {
+            "protocol": "anthropic",
+            "mode": "slow",
+            "status": "cancelled",
+            "rawBytes": 470,
+            "textChars": 9
+          },
+          {
+            "protocol": "anthropic",
+            "mode": "rate",
+            "status": "failed",
+            "rawBytes": 70,
+            "textChars": 0
+          }
+        ]
+      }
+    },
+    {
+      "name": "webkit",
+      "status": "passed",
+      "checks": [
+        "openai-compatible: model discovery uses registered credential header and leaves unknown capability unknown",
+        "openai-compatible: synthetic-model preserves raw bytes and bounded output with complete outcome",
+        "openai-compatible: malformed preserves raw bytes and bounded output with partial outcome",
+        "openai-compatible: truncated preserves raw bytes and bounded output with partial outcome",
+        "openai-compatible: slow preserves raw bytes and bounded output with cancelled outcome",
+        "openai-compatible: rate preserves raw bytes and bounded output with failed outcome",
+        "anthropic: model discovery uses registered credential header and leaves unknown capability unknown",
+        "anthropic: synthetic-model preserves raw bytes and bounded output with complete outcome",
+        "anthropic: malformed preserves raw bytes and bounded output with partial outcome",
+        "anthropic: truncated preserves raw bytes and bounded output with partial outcome",
+        "anthropic: slow preserves raw bytes and bounded output with cancelled outcome",
+        "anthropic: rate preserves raw bytes and bounded output with failed outcome",
+        "openai-compatible/synthetic-model: public SQLite/OPFS checkpoints, source bytes, terminal manifest and replay identity survive reopen",
+        "openai-compatible/malformed: public SQLite/OPFS checkpoints, source bytes, terminal manifest and replay identity survive reopen",
+        "openai-compatible/slow: public SQLite/OPFS checkpoints, source bytes, terminal manifest and replay identity survive reopen",
+        "anthropic/synthetic-model: public SQLite/OPFS checkpoints, source bytes, terminal manifest and replay identity survive reopen",
+        "anthropic/malformed: public SQLite/OPFS checkpoints, source bytes, terminal manifest and replay identity survive reopen",
+        "anthropic/slow: public SQLite/OPFS checkpoints, source bytes, terminal manifest and replay identity survive reopen",
+        "awaited durable-creation hook reject prevents provider dispatch and commits its terminal outcome",
+        "awaited durable-creation hook cancel prevents provider dispatch and commits its terminal outcome",
+        "storage quota failure cancels transport; after the producer releases its independent lease, recovery seals the committed prefix as partial",
+        "terminating the storage owner tab preserves one live provider request and complete output through takeover",
+        "provider generation, raw response and terminal manifest survive browser process restart"
+      ],
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+      "transport": {
+        "checks": [
+          "openai-compatible: model discovery uses registered credential header and leaves unknown capability unknown",
+          "openai-compatible: synthetic-model preserves raw bytes and bounded output with complete outcome",
+          "openai-compatible: malformed preserves raw bytes and bounded output with partial outcome",
+          "openai-compatible: truncated preserves raw bytes and bounded output with partial outcome",
+          "openai-compatible: slow preserves raw bytes and bounded output with cancelled outcome",
+          "openai-compatible: rate preserves raw bytes and bounded output with failed outcome",
+          "anthropic: model discovery uses registered credential header and leaves unknown capability unknown",
+          "anthropic: synthetic-model preserves raw bytes and bounded output with complete outcome",
+          "anthropic: malformed preserves raw bytes and bounded output with partial outcome",
+          "anthropic: truncated preserves raw bytes and bounded output with partial outcome",
+          "anthropic: slow preserves raw bytes and bounded output with cancelled outcome",
+          "anthropic: rate preserves raw bytes and bounded output with failed outcome"
+        ],
+        "results": [
+          {
+            "protocol": "openai-compatible",
+            "mode": "synthetic-model",
+            "status": "complete",
+            "rawBytes": 1112,
+            "textChars": 13
+          },
+          {
+            "protocol": "openai-compatible",
+            "mode": "malformed",
+            "status": "partial",
+            "rawBytes": 178,
+            "textChars": 9
+          },
+          {
+            "protocol": "openai-compatible",
+            "mode": "truncated",
+            "status": "partial",
+            "rawBytes": 161,
+            "textChars": 9
+          },
+          {
+            "protocol": "openai-compatible",
+            "mode": "slow",
+            "status": "cancelled",
+            "rawBytes": 161,
+            "textChars": 9
+          },
+          {
+            "protocol": "openai-compatible",
+            "mode": "rate",
+            "status": "failed",
+            "rawBytes": 70,
+            "textChars": 0
+          },
+          {
+            "protocol": "anthropic",
+            "mode": "synthetic-model",
+            "status": "complete",
+            "rawBytes": 2195,
+            "textChars": 9
+          },
+          {
+            "protocol": "anthropic",
+            "mode": "malformed",
+            "status": "partial",
+            "rawBytes": 515,
+            "textChars": 9
+          },
+          {
+            "protocol": "anthropic",
+            "mode": "truncated",
+            "status": "partial",
+            "rawBytes": 470,
+            "textChars": 9
+          },
+          {
+            "protocol": "anthropic",
+            "mode": "slow",
+            "status": "cancelled",
+            "rawBytes": 470,
+            "textChars": 9
+          },
+          {
+            "protocol": "anthropic",
+            "mode": "rate",
+            "status": "failed",
+            "rawBytes": 70,
+            "textChars": 0
+          }
+        ]
+      }
+    }
+  ],
+  "fixtureStats": {
+    "requests": 40,
+    "disconnected": 10
+  },
+  "sourceSha256": {
+    "../../tooling/browser-engines.mjs": "136f16e63e905ae4c8305c7adedfce2411eff13b04f914054f8fb718155d0df1",
+    "src/adapter.ts": "a51ee5211f969a59e0df34aadc7b32d019acd653de71b1a9b184be38807d8d10",
+    "src/normalize.ts": "83565676e6ac78862e95d754d3164ec0a49e2853a7f0b219fd9326312beb4a91",
+    "src/sse.ts": "8752a278f766e53925aa413750b80350391a9eaa4334f7dd16c9ad501e506dce",
+    "src/request.ts": "aca4eef3221e0ebc2bb897271c84841575514cc8837bba32cb2000e8f48e4a8d",
+    "src/generation.ts": "588ef0c696b0dd266834ff5a0ce085e46b183c913186f8116066c5925820046b",
+    "../app/src/workflows/generation.ts": "006d69b43a41f6f2d1f880a53c64a4cd5cfe0f97bc91e5e23558ab2d1b90e39b",
+    "../storage/src/client/producer.ts": "988b6b370998f14e3a059d118f229451ea98ca4a104e8e018ac18cd5832c3cbb",
+    "../storage/src/worker/producers.ts": "0eb2b0a9646ddb404338c51a03e05e38a224b80890c994e6a7fd779530a794da",
+    "../storage/src/worker/archive.ts": "f84c9ad0e41390d7230b232210ede2577d900d9a7f8f8deb9fc7e7f79aa9153c",
+    "../storage/src/worker/archive-database.ts": "c0ee0ac2aa0003ba630c0c91b38269df903fb4e096f164210c07e002af2bbf6a",
+    "tests/browser.ts": "44bf07122af9e403b2066efe92fb58503cce51e724d725fcad1e65ae1fa9577c",
+    "tests/host-proof.ts": "510a44b93b87ca9c3a7053c84ef1baaf59bd234cdc418ea9eb9d11e7f1ad5b6a",
+    "tests/fixture-server.ts": "b4b19689ffc0944e3dac1995b648438834ef7335f46419775366f69305c4685d"
+  },
+  "finishedAt": "2026-09-09T21:05:58.206Z"
+}

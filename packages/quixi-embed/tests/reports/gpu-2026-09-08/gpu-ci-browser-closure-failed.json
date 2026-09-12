@@ -1,0 +1,173 @@
+{
+  "status": "failed",
+  "passed": false,
+  "started_at": "2026-09-08T12:20:13.060203+00:00",
+  "engines": [
+    "chromium",
+    "webkit"
+  ],
+  "full": true,
+  "skip_provision": true,
+  "commands": [
+    {
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/Users/eric/QuixiChat/packages/quixi-embed/native/gpu_release.py"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.029006582975853235
+    },
+    {
+      "command": [
+        "node",
+        "--experimental-strip-types",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/gpu-tuning.mjs"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.11699629103532061
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/node_modules/.bin/tsc",
+        "-p",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tsconfig.gpu.json"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.16349666600581259
+    },
+    {
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests",
+        "-p",
+        "test_gpu_*.py"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.05971604195656255
+    },
+    {
+      "command": [
+        "node",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/gpu/probe.mjs",
+        "chromium"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.3939223329653032
+    },
+    {
+      "command": [
+        "node",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/gpu/probe.mjs",
+        "webkit"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.7027123750303872
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/generate_gpu_kernel_fixtures.py"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.9934004999813624
+    },
+    {
+      "command": [
+        "node",
+        "--experimental-strip-types",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/scalar-api.mjs",
+        "simd"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.9404853750020266
+    },
+    {
+      "command": [
+        "node",
+        "--experimental-strip-types",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/scalar-api.mjs"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.9845897499471903
+    },
+    {
+      "command": [
+        "node",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/gpu/run.mjs",
+        "chromium",
+        "--kernels"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 1.7026679580449127
+    },
+    {
+      "command": [
+        "node",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/gpu/run.mjs",
+        "chromium",
+        "--kernels",
+        "--tiled"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 1.6444875829620287
+    },
+    {
+      "command": [
+        "node",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/gpu/run.mjs",
+        "chromium",
+        "--kernels",
+        "--half"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 1.6823247079737484
+    },
+    {
+      "command": [
+        "node",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/gpu/run.mjs",
+        "chromium",
+        "--lifecycle"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 2.4610284590162337
+    },
+    {
+      "command": [
+        "node",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/generate_gpu.mjs",
+        "chromium",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-baseline-raw"
+      ],
+      "status": "failed",
+      "exit_code": 1,
+      "seconds": 9.88804433302721,
+      "error": "Command '['node', '/Users/eric/QuixiChat/packages/quixi-embed/reference/generate_gpu.mjs', 'chromium', '/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-baseline-raw']' returned non-zero exit status 1."
+    }
+  ],
+  "failed_command": [
+    "node",
+    "/Users/eric/QuixiChat/packages/quixi-embed/reference/generate_gpu.mjs",
+    "chromium",
+    "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-baseline-raw"
+  ],
+  "error": "Command '['node', '/Users/eric/QuixiChat/packages/quixi-embed/reference/generate_gpu.mjs', 'chromium', '/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-baseline-raw']' returned non-zero exit status 1.",
+  "finished_at": "2026-09-08T12:20:34.846431+00:00"
+}

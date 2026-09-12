@@ -1,0 +1,22 @@
+{
+  "fixture-migration/app-browser.json": "6a42faecade05628b58b0c8180029b32858d2b032dc7ae1290a4ab3bd84a976b",
+  "fixture-migration/archive-client-browser.json": "dccb9e70c1c9aa259569abaa0c5aa339f9bee42c5302d95dec4271ce6cb45537",
+  "fixture-migration/content-browser.json": "2543f522c9f19e79f824a92128a84db5207e8f7812b9caac9b8f8c119cc2e98c",
+  "fixture-migration/fixture-inputs.json": "34256c34e1bbecc3c247ddfdd418c3cacca5a2a4aa5c6975d12b84f21f8a1370",
+  "fixture-migration/import-panel-browser.json": "850a1e32289134ee09b6e34b114a28c409aa0b3c6face07e930ec66a6627f745",
+  "fixture-migration/provider-import-browser.json": "8c2b9981595601b3de25c684f9812359a521ac2f0251d17b3cbdd1f0a17cba62",
+  "fixture-migration/providers-browser-before-report-path-fix.json": "ee88d57bad53b7bea594b66a7287ebaf9647bcd23079d5f654d59149708752d6",
+  "fixture-migration/providers-browser.json": "f320be21638ea94a94fbe5934b3eefd24ae88313dfbbf744b77a2ffa93d58fe9",
+  "fixture-migration/snapshot-browser.json": "bab9b26642a0a3f2dec0247433af979e5122142cb55fe17a95733fac8e0e52a9",
+  "managed-schema9/browser-evidence-before-final-runtime.json": "f5de50682adec7f93efdf830e21020ec094b9544cfe56571a5d2d5fb55e1b555",
+  "managed-schema9/browser-evidence.json": "01782339ca019435927bdf51e034d33ec5b1478104a03eee2645b42062ce968c",
+  "managed-schema9/index.html": "1103663a708b626aad696ab1607c083fd5ff4ebc646ee454016bafdc3d0e7944",
+  "managed-schema9/index.mjs": "186d4ee74f06ea7debacb498b8db6c0f345df9ff0034f31644b3436ff0d0468a",
+  "managed-schema9/run.mjs": "d85d59819145a54ba03848bef4636ad2eb1e65814de6c29a7f615c659fb0747d",
+  "protocol2-baseline/browser-evidence.json": "a7362de8507e21248701eb80a8800410da841dd2de94f2f93eed2833450fe9b5",
+  "protocol2-baseline/checksums.json": "07057de53156b04e4431bef4afc6e1147301c16df06c54b2e20eb71aebee0872",
+  "protocol2-baseline/index.html": "1103663a708b626aad696ab1607c083fd5ff4ebc646ee454016bafdc3d0e7944",
+  "protocol2-baseline/index.mjs": "1d6dbadc2fe7f7af5d09a69e819f64da9aefdf622c545b0fd211516da5ee4f1e",
+  "protocol2-baseline/run.mjs": "090d9ba4bbf98606b5c49ca88c5d7af8fab43fb19a6283760722f54120b5e601",
+  "protocol9-before-origin-isolation/browser-evidence.json": "deae7240a1163b704936b5e0d8a422d67f0b00cad9aefccfffb4033bab42a2ec"
+}

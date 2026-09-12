@@ -1,0 +1,297 @@
+{
+  "mode": "assert",
+  "name": "webkit",
+  "caseName": "summary-review",
+  "scope": "Computed CSS reflow and enabled control-border contrast; no screen-reader or native-control pixel-rendering qualification.",
+  "samples": [
+    {
+      "size": "normal",
+      "viewportWidth": 320,
+      "documentWidth": 320,
+      "region": {
+        "left": 37.78,
+        "right": 282.22,
+        "width": 244.44,
+        "height": 606.44
+      },
+      "rootFontSize": "16px",
+      "focused": {
+        "tag": "BUTTON",
+        "id": "",
+        "label": "Review conversation summaries",
+        "insideRegion": true
+      },
+      "controlCount": 4,
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "label": "Review conversation summaries",
+          "bounds": {
+            "left": 37.78,
+            "right": 282.22,
+            "width": 244.44,
+            "height": 60.53
+          },
+          "containerBounds": {
+            "left": 19.19,
+            "right": 300.81,
+            "width": 281.63,
+            "height": 3680.97
+          },
+          "disabled": false,
+          "overflow": false
+        },
+        {
+          "tag": "SELECT",
+          "label": "Summarize through message",
+          "bounds": {
+            "left": 37.78,
+            "right": 282.22,
+            "width": 244.44,
+            "height": 23
+          },
+          "containerBounds": {
+            "left": 19.19,
+            "right": 300.81,
+            "width": 281.63,
+            "height": 3680.97
+          },
+          "disabled": false,
+          "overflow": false
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Prepare summary request",
+          "bounds": {
+            "left": 37.78,
+            "right": 250.94,
+            "width": 213.16,
+            "height": 38.94
+          },
+          "containerBounds": {
+            "left": 19.19,
+            "right": 300.81,
+            "width": 281.63,
+            "height": 3680.97
+          },
+          "disabled": false,
+          "overflow": false
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Close summary review",
+          "bounds": {
+            "left": 37.78,
+            "right": 227.25,
+            "width": 189.47,
+            "height": 38.94
+          },
+          "containerBounds": {
+            "left": 19.19,
+            "right": 300.81,
+            "width": 281.63,
+            "height": 3680.97
+          },
+          "disabled": false,
+          "overflow": false
+        }
+      ],
+      "borders": [
+        {
+          "label": "Summarize through message",
+          "fill": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            255
+          ],
+          "sides": [
+            {
+              "side": "Top",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 4.114544191782779
+            },
+            {
+              "side": "Right",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 4.114544191782779
+            },
+            {
+              "side": "Bottom",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 4.114544191782779
+            },
+            {
+              "side": "Left",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 4.114544191782779
+            }
+          ]
+        }
+      ],
+      "documentOverflow": [],
+      "violations": []
+    },
+    {
+      "size": "enlarged",
+      "viewportWidth": 320,
+      "documentWidth": 320,
+      "region": {
+        "left": 74.58,
+        "right": 245.42,
+        "width": 170.84,
+        "height": 2639.64
+      },
+      "rootFontSize": "32px",
+      "focused": {
+        "tag": "BUTTON",
+        "id": "",
+        "label": "Review conversation summaries",
+        "insideRegion": true
+      },
+      "controlCount": 4,
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "label": "Review conversation summaries",
+          "bounds": {
+            "left": 74.58,
+            "right": 245.42,
+            "width": 170.84,
+            "height": 248.66
+          },
+          "containerBounds": {
+            "left": 38.39,
+            "right": 281.61,
+            "width": 243.22,
+            "height": 14837.47
+          },
+          "disabled": false,
+          "overflow": false
+        },
+        {
+          "tag": "SELECT",
+          "label": "Summarize through message",
+          "bounds": {
+            "left": 74.58,
+            "right": 245.42,
+            "width": 170.84,
+            "height": 43
+          },
+          "containerBounds": {
+            "left": 38.39,
+            "right": 281.61,
+            "width": 243.22,
+            "height": 14837.47
+          },
+          "disabled": false,
+          "overflow": false
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Prepare summary request",
+          "bounds": {
+            "left": 74.58,
+            "right": 245.42,
+            "width": 170.84,
+            "height": 205.47
+          },
+          "containerBounds": {
+            "left": 38.39,
+            "right": 281.61,
+            "width": 243.22,
+            "height": 14837.47
+          },
+          "disabled": false,
+          "overflow": false
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Close summary review",
+          "bounds": {
+            "left": 74.58,
+            "right": 245.42,
+            "width": 170.84,
+            "height": 162.28
+          },
+          "containerBounds": {
+            "left": 38.39,
+            "right": 281.61,
+            "width": 243.22,
+            "height": 14837.47
+          },
+          "disabled": false,
+          "overflow": false
+        }
+      ],
+      "borders": [
+        {
+          "label": "Summarize through message",
+          "fill": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            255
+          ],
+          "sides": [
+            {
+              "side": "Top",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 4.114544191782779
+            },
+            {
+              "side": "Right",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 4.114544191782779
+            },
+            {
+              "side": "Bottom",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 4.114544191782779
+            },
+            {
+              "side": "Left",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 4.114544191782779
+            }
+          ]
+        }
+      ],
+      "documentOverflow": [],
+      "violations": []
+    }
+  ],
+  "status": "passed"
+}

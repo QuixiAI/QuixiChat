@@ -1,0 +1,148 @@
+{
+  "status": "passed",
+  "startedAt": "2026-09-09T20:19:04.052Z",
+  "selectedEngines": [
+    "chromium",
+    "webkit"
+  ],
+  "environment": {
+    "platform": "darwin",
+    "release": "25.6.0",
+    "arch": "arm64",
+    "node": "v22.23.1"
+  },
+  "sourceSha256": {
+    "package-lock.json": "aadb456e2a567a2b91cbb81a502650ebac93541f0a59d54035bdde2cacd97672",
+    "apps/web/src/main.ts": "8e108e74813fcbb49de4d229b7848f25578881c57f9742d3b38d4cb8bf03c71d",
+    "apps/web/src/host/index.ts": "d79ac9b1392e706bad0d28e975f05bfa0cf95d6d137e0f1e28cfdd82324e830d",
+    "packages/app/src/AppRoot.tsx": "8e4c59a24a1713e24551faa2041c64e25bc1e90727498fbc2c6299e2b005b554",
+    "packages/app/src/styles.css": "7f3703e3f1c7be5348656b4669a8de9ff47e241ce30f6ca906ba9ce774d047ca",
+    "apps/web/src/host/transfers.ts": "5718b2743caeffb00f4e736393ddff691b94fd896453aafbd696ac50d2e618f1",
+    "packages/core/src/contracts/transfer.ts": "73563a59e5d0964657a88c025a1b0935a1ae7eb77161e96404a4d37b375d6a6f",
+    "packages/app/src/runtime/library.ts": "48c2b3623186066e09ad935640418c66df4b654d91c89d0d85e6bd3cf7bda334",
+    "packages/app/src/features/archives/index.ts": "a470f9faf10c782b0b48a5b3124ff738d61b0f9faeb409165179b69eb5a74365",
+    "packages/app/src/features/archives/restore-controller.ts": "6a87260dfd2b61c8b9d8b80c7a24d9c8ea853a0a831e4a045088c394ae624a01",
+    "packages/app/src/features/archives/RestorePanel.tsx": "5d84700555b349be1c742e58dd2ccd8faf2545ac8b6f83e9137767c2fa54ce5e",
+    "packages/app/src/features/archives/ExportPanel.tsx": "541243ffbad78622b562e0ec810d3c6a5b2a53bce83ce105a9b9bf61f994877e",
+    "packages/app/src/features/archives/controller.ts": "b3a4f113f7767f84dcc7b18f382d6f56b5922867efaca3302ce6a0c2892870f6",
+    "packages/storage/src/client/selection.ts": "3be6215f42123384024fe65de83577a46f82fbc4408270d75c7c0e399a66c59b",
+    "packages/storage/src/worker/selection.ts": "281fd0f9088feec8906ce1923255eaff9fb998371e659c8f41d7cd7ed4b4d594",
+    "packages/storage/src/worker/archive-database.ts": "c0ee0ac2aa0003ba630c0c91b38269df903fb4e096f164210c07e002af2bbf6a",
+    "packages/app/src/features/archives/tests/browser/index.ts": "f34e5a45563c5b5b10ba11029fa7d5dbe5319c494820c3c386ec8a4c3698723d",
+    "packages/app/src/features/archives/tests/browser/run.mjs": "475151e13acf43e788b32e9b4a87e38ac307ed01d99f70b50c313ec6d761c202"
+  },
+  "hosts": [
+    {
+      "name": "chromium",
+      "status": "passed",
+      "checks": [
+        "Real shared export UI downloads a portable TAR with original synthetic bytes; explicit temporary cleanup leaves source canonical history unchanged",
+        "Reload discovers the same ready restore job; Review saved restore resumes its validated candidate and requires a fresh explicit review without implicit activation or canonical changes",
+        "Actual file picker stages and validates isolated candidate without activation; draft blocks both preparation of review and replacement while preserving its exact text",
+        "Explicit reviewed replacement commits a new selection but does not remount; another tab receives a selection hint and retains its visible draft with opening disabled",
+        "Separate Open restored archive remount shows exported history and original workspace with exact canonical and sync contents; old archive retains later edits and original blob bytes verify through bounded production transfers",
+        "Fresh browser process reopens the committed selection; new conversation uses the restored default workspace without altering prior history",
+        "Production application stays within the local fixture origin; review and restored conversation fit the narrow viewport"
+      ],
+      "externalRequests": [],
+      "pageErrors": [],
+      "raw": {
+        "rawId": "34476068-790c-4062-b996-ea170cbc2ede",
+        "digest": "b057f26faa652e9916aa08eed7e50906151f83de0e878173e9d06e359c0dd75e",
+        "byteLength": 2097169,
+        "messageId": "c54ebf1d-c838-4bf3-aed7-4618eedaf120",
+        "text": "Saved archive message 🧪\nSecond preserved line."
+      },
+      "originalSelection": {
+        "archiveId": "default",
+        "selectionRevision": 0
+      },
+      "sourceCounts": {
+        "threads": 1,
+        "messages": 1,
+        "parts": 1,
+        "rawObjects": 1,
+        "syncOperations": 5
+      },
+      "schemaVersion": 10,
+      "export": {
+        "name": "quixi-portable-c68e11fb-afae-4b1f-9e2a-82a7aaddb808.tar",
+        "byteLength": 2792448,
+        "sha256": "36fe5df6c767e281ba6b6b4f12988f38777a07f3d7ae6b850075e3063a5fd08a"
+      },
+      "resumedJob": {
+        "jobId": "477cb6ee-856d-4bdd-b6c0-e170b1a7bbac",
+        "candidateArchiveId": "0bd8cc5e-d0de-4919-a147-bfa32c531169"
+      },
+      "selected": {
+        "archiveId": "0bd8cc5e-d0de-4919-a147-bfa32c531169",
+        "selectionRevision": 1
+      },
+      "verifiedRaw": {
+        "sha256": "b057f26faa652e9916aa08eed7e50906151f83de0e878173e9d06e359c0dd75e",
+        "byteLength": 2097169,
+        "peakChunkBytes": 1048576,
+        "contractMaxChunkBytes": 1048576
+      },
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36"
+    },
+    {
+      "name": "webkit",
+      "status": "passed",
+      "checks": [
+        "Real shared export UI downloads a portable TAR with original synthetic bytes; explicit temporary cleanup leaves source canonical history unchanged",
+        "Reload discovers the same ready restore job; Review saved restore resumes its validated candidate and requires a fresh explicit review without implicit activation or canonical changes",
+        "Actual file picker stages and validates isolated candidate without activation; draft blocks both preparation of review and replacement while preserving its exact text",
+        "Explicit reviewed replacement commits a new selection but does not remount; another tab receives a selection hint and retains its visible draft with opening disabled",
+        "Separate Open restored archive remount shows exported history and original workspace with exact canonical and sync contents; old archive retains later edits and original blob bytes verify through bounded production transfers",
+        "Fresh browser process reopens the committed selection; new conversation uses the restored default workspace without altering prior history",
+        "Production application stays within the local fixture origin; review and restored conversation fit the narrow viewport"
+      ],
+      "externalRequests": [],
+      "pageErrors": [],
+      "raw": {
+        "rawId": "3f8eaa3e-e7b3-4c8b-a481-948a55b38e53",
+        "digest": "b057f26faa652e9916aa08eed7e50906151f83de0e878173e9d06e359c0dd75e",
+        "byteLength": 2097169,
+        "messageId": "c69f0bcf-72ac-4160-9726-353d92980ac9",
+        "text": "Saved archive message 🧪\nSecond preserved line."
+      },
+      "originalSelection": {
+        "archiveId": "default",
+        "selectionRevision": 0
+      },
+      "sourceCounts": {
+        "threads": 1,
+        "messages": 1,
+        "parts": 1,
+        "rawObjects": 1,
+        "syncOperations": 5
+      },
+      "schemaVersion": 10,
+      "export": {
+        "name": "quixi-portable-7838ab3c-f922-4d69-91ea-f6ddbd16831c.tar",
+        "byteLength": 2792448,
+        "sha256": "1d16fcddb43964c1a75098074b37bbcee0793f755ab67ca85b4011adf305a268"
+      },
+      "resumedJob": {
+        "jobId": "e21a16ee-072a-4df4-941e-967bda96a29e",
+        "candidateArchiveId": "f3882743-faa9-4fe6-a507-1a69fe0ae25f"
+      },
+      "selected": {
+        "archiveId": "f3882743-faa9-4fe6-a507-1a69fe0ae25f",
+        "selectionRevision": 1
+      },
+      "verifiedRaw": {
+        "sha256": "b057f26faa652e9916aa08eed7e50906151f83de0e878173e9d06e359c0dd75e",
+        "byteLength": 2097169,
+        "peakChunkBytes": 1048576,
+        "contractMaxChunkBytes": 1048576
+      },
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15"
+    }
+  ],
+  "qualification": "Actual production web main/shared UI, managed selection client and OPFS; optional showSaveFilePicker disabled to select the production browser-download path. No provider requests.",
+  "origin": "http://127.0.0.1:51604/",
+  "sourceStable": true,
+  "finishedAt": "2026-09-09T20:19:24.649Z"
+}

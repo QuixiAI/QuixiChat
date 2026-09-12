@@ -1,0 +1,1953 @@
+{
+  "analysisToolSha256": "c7fc0c68b20b23d6b44e941fd9ea27d04f8b94f4750228096f2aca2dcce26720",
+  "method": "Single captures; sampled isolate highs are separate, unsynchronized, may contain unreachable objects awaiting GC, and are not peak/live/hard bounds. No summing per-isolate peaks. Source-size and output-size both vary. CDP observer overhead is included.",
+  "reports": [
+    {
+      "name": "dense-small",
+      "status": "failed",
+      "sha256": "76a421cdbcd0de4c2d7dd3e76389b968ec6679af2ae9092fb90ed4925c314026",
+      "sourceStable": null
+    },
+    {
+      "name": "dense-control",
+      "status": "passed",
+      "sha256": "6ed22bfd87e0f26c91513f8be8e5c06624c69d9be0ccd4e3486daa9e7bcb889b",
+      "sourceStable": true
+    },
+    {
+      "name": "dense-heap-retry",
+      "status": "passed",
+      "sha256": "4a5171587fc6752889ad1e97f6558637185155769dcd5ec3c1bea287ccd94cc4",
+      "sourceStable": true
+    },
+    {
+      "name": "dense-production",
+      "status": "passed",
+      "sha256": "688cc02e4ddb48860742f04d03964c4ade3e5e330d801e292d47b64344f3b585",
+      "sourceStable": true
+    }
+  ],
+  "cases": [
+    {
+      "report": "dense-small",
+      "engine": "chromium",
+      "fixture": "dense-1",
+      "status": "failed",
+      "sourceBytes": 9801,
+      "outputUTF16": null,
+      "maxPageUTF16": null,
+      "storedPages": null,
+      "totalMs": null,
+      "firstIndexedPageMs": null,
+      "stageMs": null,
+      "finalizeMs": null,
+      "creditMs": null,
+      "foreground": null,
+      "postExtraction": null,
+      "cancelDrainMs": null,
+      "rssBaselineKiB": 448832,
+      "rssSampledHighKiB": 448832,
+      "heapAvailable": true,
+      "isolates": [
+        {
+          "role": "other-worker",
+          "isolateId": "f6bb38a18d7a834a",
+          "url": "http://127.0.0.1:51858/assets/archive-BNPe4Zrx.js",
+          "name": "",
+          "sampleCount": 1,
+          "usedSampledHighBytes": 4097028,
+          "backingSampledHighBytes": 778725,
+          "first": {
+            "elapsedMs": 3.828125,
+            "replyLatencyMs": 0.7416670000002341,
+            "usedSize": 4097028,
+            "totalSize": 6815744,
+            "embedderHeapUsedSize": 1015352,
+            "backingStorageSize": 778725
+          },
+          "last": {
+            "elapsedMs": 3.828125,
+            "replyLatencyMs": 0.7416670000002341,
+            "usedSize": 4097028,
+            "totalSize": 6815744,
+            "embedderHeapUsedSize": 1015352,
+            "backingStorageSize": 778725
+          },
+          "errors": []
+        },
+        {
+          "role": "page",
+          "isolateId": "15abd95c49ab3037",
+          "url": "http://127.0.0.1:51858/",
+          "name": "",
+          "sampleCount": 1,
+          "usedSampledHighBytes": 2132584,
+          "backingSampledHighBytes": 98701,
+          "first": {
+            "elapsedMs": 4.612499999999272,
+            "replyLatencyMs": 0.6304170000003069,
+            "usedSize": 2132584,
+            "totalSize": 4521984,
+            "embedderHeapUsedSize": 1507160,
+            "backingStorageSize": 98701,
+            "progress": {
+              "page": 0,
+              "totalTextUTF16": 0,
+              "currentPageUTF16": 0,
+              "indexedThroughPage": 0,
+              "phase": "setup"
+            }
+          },
+          "last": {
+            "elapsedMs": 4.612499999999272,
+            "replyLatencyMs": 0.6304170000003069,
+            "usedSize": 2132584,
+            "totalSize": 4521984,
+            "embedderHeapUsedSize": 1507160,
+            "backingStorageSize": 98701,
+            "progress": {
+              "page": 0,
+              "totalTextUTF16": 0,
+              "currentPageUTF16": 0,
+              "indexedThroughPage": 0,
+              "phase": "setup"
+            }
+          },
+          "errors": [
+            "Error: Runtime.getHeapUsage: CDP 2-second deadline"
+          ]
+        },
+        {
+          "role": "unidentified",
+          "isolateId": null,
+          "url": "http://127.0.0.1:51858/assets/index--bv4loJe.js",
+          "name": null,
+          "sampleCount": 0,
+          "usedSampledHighBytes": null,
+          "backingSampledHighBytes": null,
+          "first": null,
+          "last": null,
+          "errors": [
+            "Error: Runtime.evaluate: CDP 2-second deadline"
+          ]
+        },
+        {
+          "role": "unidentified",
+          "isolateId": null,
+          "url": "http://127.0.0.1:51858/assets/parser-DzIC7VDj.js",
+          "name": null,
+          "sampleCount": 0,
+          "usedSampledHighBytes": null,
+          "backingSampledHighBytes": null,
+          "first": null,
+          "last": null,
+          "errors": [
+            "Error: Runtime.evaluate: CDP 2-second deadline"
+          ]
+        }
+      ],
+      "error": "page.evaluate: Target crashed \n    at /Users/eric/QuixiChat/perf/documents/run.mjs:381:18"
+    },
+    {
+      "report": "dense-control",
+      "engine": "chromium",
+      "fixture": "dense-1",
+      "status": "passed",
+      "sourceBytes": 9801,
+      "outputUTF16": 151000,
+      "maxPageUTF16": 151000,
+      "storedPages": 1,
+      "totalMs": 848.5,
+      "firstIndexedPageMs": 837.1999999955297,
+      "stageMs": {
+        "count": 38,
+        "totalMs": 341.79999999701977,
+        "minMs": 5.5,
+        "p50Ms": 6.300000004470348,
+        "p95Ms": 30.799999997019768,
+        "maxMs": 31.5
+      },
+      "finalizeMs": {
+        "count": 1,
+        "totalMs": 18.899999998509884,
+        "minMs": 18.899999998509884,
+        "p50Ms": 18.899999998509884,
+        "p95Ms": 18.899999998509884,
+        "maxMs": 18.899999998509884
+      },
+      "creditMs": {
+        "count": 4,
+        "totalMs": 92.99999999254942,
+        "minMs": 14.199999995529652,
+        "p50Ms": 29.200000002980232,
+        "p95Ms": 32.19999999552965,
+        "maxMs": 32.19999999552965
+      },
+      "foreground": {
+        "count": 1,
+        "totalMs": 21.19999999552965,
+        "minMs": 21.19999999552965,
+        "p50Ms": 21.19999999552965,
+        "p95Ms": 21.19999999552965,
+        "maxMs": 21.19999999552965
+      },
+      "postExtraction": {
+        "durationMs": 1090.6999999955297,
+        "foreground": {
+          "count": 10,
+          "totalMs": 58.900000005960464,
+          "minMs": 3.100000001490116,
+          "p50Ms": 6.5,
+          "p95Ms": 11.899999998509884,
+          "maxMs": 11.899999998509884
+        },
+        "foregroundSamples": [
+          {
+            "elapsedMs": 106.59999999403954,
+            "latencyMs": 3.5
+          },
+          {
+            "elapsedMs": 211.09999999403954,
+            "latencyMs": 3.100000001490116
+          },
+          {
+            "elapsedMs": 315.29999999701977,
+            "latencyMs": 3.100000001490116
+          },
+          {
+            "elapsedMs": 419.3999999985099,
+            "latencyMs": 3.5
+          },
+          {
+            "elapsedMs": 524,
+            "latencyMs": 11.899999998509884
+          },
+          {
+            "elapsedMs": 637.0999999940395,
+            "latencyMs": 8.200000002980232
+          },
+          {
+            "elapsedMs": 746.2999999970198,
+            "latencyMs": 7.799999997019768
+          },
+          {
+            "elapsedMs": 855.0999999940395,
+            "latencyMs": 3.100000001490116
+          },
+          {
+            "elapsedMs": 959.2999999970198,
+            "latencyMs": 6.5
+          },
+          {
+            "elapsedMs": 1066.7999999970198,
+            "latencyMs": 8.200000002980232
+          }
+        ],
+        "searchStatusReads": [
+          {
+            "elapsedMs": 0,
+            "latencyMs": 5.5999999940395355,
+            "state": "ready",
+            "indexedChunks": 38,
+            "pendingSources": 0
+          },
+          {
+            "elapsedMs": 1075,
+            "latencyMs": 15.699999995529652,
+            "state": "ready",
+            "indexedChunks": 38,
+            "pendingSources": 0
+          }
+        ],
+        "searchNotifications": 0
+      },
+      "cancelDrainMs": null,
+      "rssBaselineKiB": 448768,
+      "rssSampledHighKiB": 551456,
+      "heapAvailable": false,
+      "isolates": [],
+      "error": null
+    },
+    {
+      "report": "dense-heap-retry",
+      "engine": "chromium",
+      "fixture": "dense-1",
+      "status": "passed",
+      "sourceBytes": 9801,
+      "outputUTF16": 151000,
+      "maxPageUTF16": 151000,
+      "storedPages": 1,
+      "totalMs": 816.6000000014901,
+      "firstIndexedPageMs": 805,
+      "stageMs": {
+        "count": 38,
+        "totalMs": 330.30000001192093,
+        "minMs": 5.299999997019768,
+        "p50Ms": 6.100000001490116,
+        "p95Ms": 28.30000000447035,
+        "maxMs": 28.69999999552965
+      },
+      "finalizeMs": {
+        "count": 1,
+        "totalMs": 18,
+        "minMs": 18,
+        "p50Ms": 18,
+        "p95Ms": 18,
+        "maxMs": 18
+      },
+      "creditMs": {
+        "count": 4,
+        "totalMs": 90.60000000149012,
+        "minMs": 14.599999994039536,
+        "p50Ms": 22.600000001490116,
+        "p95Ms": 31.5,
+        "maxMs": 31.5
+      },
+      "foreground": {
+        "count": 1,
+        "totalMs": 20.299999997019768,
+        "minMs": 20.299999997019768,
+        "p50Ms": 20.299999997019768,
+        "p95Ms": 20.299999997019768,
+        "maxMs": 20.299999997019768
+      },
+      "postExtraction": {
+        "durationMs": 1084.5,
+        "foreground": {
+          "count": 10,
+          "totalMs": 55.100000001490116,
+          "minMs": 3,
+          "p50Ms": 5.5,
+          "p95Ms": 10.200000002980232,
+          "maxMs": 10.200000002980232
+        },
+        "foregroundSamples": [
+          {
+            "elapsedMs": 105.5,
+            "latencyMs": 3.0999999940395355
+          },
+          {
+            "elapsedMs": 209.09999999403954,
+            "latencyMs": 3.100000001490116
+          },
+          {
+            "elapsedMs": 312.79999999701977,
+            "latencyMs": 3
+          },
+          {
+            "elapsedMs": 416.69999999552965,
+            "latencyMs": 3.5
+          },
+          {
+            "elapsedMs": 521.2999999970198,
+            "latencyMs": 3.100000001490116
+          },
+          {
+            "elapsedMs": 625.5,
+            "latencyMs": 5.5
+          },
+          {
+            "elapsedMs": 732.3999999985099,
+            "latencyMs": 6
+          },
+          {
+            "elapsedMs": 839.3999999985099,
+            "latencyMs": 8.899999998509884
+          },
+          {
+            "elapsedMs": 949.2999999970198,
+            "latencyMs": 8.700000002980232
+          },
+          {
+            "elapsedMs": 1058.5999999940395,
+            "latencyMs": 10.200000002980232
+          }
+        ],
+        "searchStatusReads": [
+          {
+            "elapsedMs": 0,
+            "latencyMs": 5.0999999940395355,
+            "state": "ready",
+            "indexedChunks": 38,
+            "pendingSources": 0
+          },
+          {
+            "elapsedMs": 1068.7999999970198,
+            "latencyMs": 15.700000002980232,
+            "state": "ready",
+            "indexedChunks": 38,
+            "pendingSources": 0
+          }
+        ],
+        "searchNotifications": 0
+      },
+      "cancelDrainMs": null,
+      "rssBaselineKiB": 450128,
+      "rssSampledHighKiB": 552928,
+      "heapAvailable": true,
+      "isolates": [
+        {
+          "role": "page",
+          "isolateId": "b17cde781a8d33f9",
+          "url": "http://127.0.0.1:51933/",
+          "name": null,
+          "sampleCount": 5,
+          "usedSampledHighBytes": 7083944,
+          "backingSampledHighBytes": 850071,
+          "first": {
+            "elapsedMs": 103.296875,
+            "replyLatencyMs": 2.817417000000205,
+            "usedSize": 2177664,
+            "totalSize": 5832704,
+            "embedderHeapUsedSize": 1507160,
+            "backingStorageSize": 129615,
+            "progress": {
+              "page": 0,
+              "totalTextUTF16": 0,
+              "currentPageUTF16": 0,
+              "indexedThroughPage": 0,
+              "phase": "opening"
+            }
+          },
+          "last": {
+            "elapsedMs": 1968.1615419999998,
+            "replyLatencyMs": 0.6563329999989946,
+            "usedSize": 7083944,
+            "totalSize": 12648448,
+            "embedderHeapUsedSize": 3461720,
+            "backingStorageSize": 850071,
+            "progress": {
+              "page": 1,
+              "totalTextUTF16": 151000,
+              "currentPageUTF16": 151000,
+              "indexedThroughPage": 1,
+              "phase": "completed"
+            }
+          },
+          "errors": []
+        },
+        {
+          "role": "archive-storage-worker",
+          "isolateId": "966bbf96492ba016",
+          "url": "http://127.0.0.1:51933/assets/archive-BNPe4Zrx.js",
+          "name": "http://127.0.0.1:51933/assets/archive-BNPe4Zrx.js",
+          "sampleCount": 5,
+          "usedSampledHighBytes": 13753836,
+          "backingSampledHighBytes": 6368597,
+          "first": {
+            "elapsedMs": 103.51012499999888,
+            "replyLatencyMs": 2.234167000000525,
+            "usedSize": 4755956,
+            "totalSize": 8126464,
+            "embedderHeapUsedSize": 1761816,
+            "backingStorageSize": 826318
+          },
+          "last": {
+            "elapsedMs": 1968.2314999999999,
+            "replyLatencyMs": 1.2020419999989826,
+            "usedSize": 13753836,
+            "totalSize": 23396352,
+            "embedderHeapUsedSize": 7537360,
+            "backingStorageSize": 6368597
+          },
+          "errors": []
+        },
+        {
+          "role": "document-extractor",
+          "isolateId": "629cc592ecb33bd1",
+          "url": "http://127.0.0.1:51933/assets/index--bv4loJe.js",
+          "name": "quixi-document-extractor",
+          "sampleCount": 2,
+          "usedSampledHighBytes": 2561176,
+          "backingSampledHighBytes": 601427,
+          "first": {
+            "elapsedMs": 192.7833329999994,
+            "replyLatencyMs": 0.21633400000064285,
+            "usedSize": 2378652,
+            "totalSize": 4980736,
+            "embedderHeapUsedSize": 768304,
+            "backingStorageSize": 601427
+          },
+          "last": {
+            "elapsedMs": 510.8030829999989,
+            "replyLatencyMs": 0.5512090000011085,
+            "usedSize": 2561176,
+            "totalSize": 6291456,
+            "embedderHeapUsedSize": 1213256,
+            "backingStorageSize": 601427
+          },
+          "errors": []
+        },
+        {
+          "role": "pdfjs-parser",
+          "isolateId": "773f43b1168ee502",
+          "url": "http://127.0.0.1:51933/assets/parser-DzIC7VDj.js",
+          "name": "quixi-pdf-parser",
+          "sampleCount": 2,
+          "usedSampledHighBytes": 4526948,
+          "backingSampledHighBytes": 2130702,
+          "first": {
+            "elapsedMs": 192.86904200000026,
+            "replyLatencyMs": 0.21258299999863084,
+            "usedSize": 4526948,
+            "totalSize": 14155776,
+            "embedderHeapUsedSize": 773712,
+            "backingStorageSize": 2130702
+          },
+          "last": {
+            "elapsedMs": 510.8167919999996,
+            "replyLatencyMs": 0.8405000000002474,
+            "usedSize": 4526948,
+            "totalSize": 14155776,
+            "embedderHeapUsedSize": 773712,
+            "backingStorageSize": 2130702
+          },
+          "errors": []
+        }
+      ],
+      "error": null
+    },
+    {
+      "report": "dense-production",
+      "engine": "chromium",
+      "fixture": "dense-1",
+      "status": "passed",
+      "sourceBytes": 9801,
+      "outputUTF16": 151000,
+      "maxPageUTF16": 151000,
+      "storedPages": 1,
+      "totalMs": 823.5,
+      "firstIndexedPageMs": 812.8000000044703,
+      "stageMs": {
+        "count": 38,
+        "totalMs": 347.3000000193715,
+        "minMs": 5.700000002980232,
+        "p50Ms": 6.300000004470348,
+        "p95Ms": 26.600000001490116,
+        "maxMs": 29.399999998509884
+      },
+      "finalizeMs": {
+        "count": 1,
+        "totalMs": 17.399999998509884,
+        "minMs": 17.399999998509884,
+        "p50Ms": 17.399999998509884,
+        "p95Ms": 17.399999998509884,
+        "maxMs": 17.399999998509884
+      },
+      "creditMs": {
+        "count": 4,
+        "totalMs": 76.70000001043081,
+        "minMs": 12.700000002980232,
+        "p50Ms": 19,
+        "p95Ms": 31.100000001490116,
+        "maxMs": 31.100000001490116
+      },
+      "foreground": {
+        "count": 1,
+        "totalMs": 19.69999999552965,
+        "minMs": 19.69999999552965,
+        "p50Ms": 19.69999999552965,
+        "p95Ms": 19.69999999552965,
+        "maxMs": 19.69999999552965
+      },
+      "postExtraction": {
+        "durationMs": 1052.9000000059605,
+        "foreground": {
+          "count": 10,
+          "totalMs": 31.99999999254942,
+          "minMs": 2.6999999955296516,
+          "p50Ms": 3.1999999955296516,
+          "p95Ms": 3.7999999970197678,
+          "maxMs": 3.7999999970197678
+        },
+        "foregroundSamples": [
+          {
+            "elapsedMs": 105.70000000298023,
+            "latencyMs": 3.7000000029802322
+          },
+          {
+            "elapsedMs": 211.5,
+            "latencyMs": 3.4000000059604645
+          },
+          {
+            "elapsedMs": 315.90000000596046,
+            "latencyMs": 2.7999999970197678
+          },
+          {
+            "elapsedMs": 419.90000000596046,
+            "latencyMs": 3.1999999955296516
+          },
+          {
+            "elapsedMs": 524.3000000044703,
+            "latencyMs": 2.6999999955296516
+          },
+          {
+            "elapsedMs": 627.6000000014901,
+            "latencyMs": 3.100000001490116
+          },
+          {
+            "elapsedMs": 731.7000000029802,
+            "latencyMs": 3.7999999970197678
+          },
+          {
+            "elapsedMs": 836.5,
+            "latencyMs": 3.100000001490116
+          },
+          {
+            "elapsedMs": 940.7000000029802,
+            "latencyMs": 3.5
+          },
+          {
+            "elapsedMs": 1045.3000000044703,
+            "latencyMs": 2.6999999955296516
+          }
+        ],
+        "searchStatusReads": [
+          {
+            "elapsedMs": 0,
+            "latencyMs": 4.600000001490116,
+            "state": "ready",
+            "indexedChunks": 38,
+            "pendingSources": 0
+          },
+          {
+            "elapsedMs": 1048.1000000014901,
+            "latencyMs": 4.800000004470348,
+            "state": "ready",
+            "indexedChunks": 38,
+            "pendingSources": 0
+          }
+        ],
+        "searchNotifications": 0
+      },
+      "cancelDrainMs": null,
+      "rssBaselineKiB": 451200,
+      "rssSampledHighKiB": 553744,
+      "heapAvailable": true,
+      "isolates": [
+        {
+          "role": "archive-storage-worker",
+          "isolateId": "a7e237b7210cbbfe",
+          "url": "http://127.0.0.1:52203/assets/archive-BNPe4Zrx.js",
+          "name": null,
+          "sampleCount": 5,
+          "usedSampledHighBytes": 14029308,
+          "backingSampledHighBytes": 6369545,
+          "first": {
+            "elapsedMs": 101.44950000000063,
+            "replyLatencyMs": 0.1926659999990079,
+            "usedSize": 3463368,
+            "totalSize": 8388608,
+            "embedderHeapUsedSize": 1761776,
+            "backingStorageSize": 826316
+          },
+          "last": {
+            "elapsedMs": 1941.841790999999,
+            "replyLatencyMs": 0.3632500000003347,
+            "usedSize": 14029308,
+            "totalSize": 24182784,
+            "embedderHeapUsedSize": 7537176,
+            "backingStorageSize": 6369545
+          },
+          "errors": []
+        },
+        {
+          "role": "page",
+          "isolateId": "394fc109df228e6f",
+          "url": "http://127.0.0.1:52203/",
+          "name": null,
+          "sampleCount": 5,
+          "usedSampledHighBytes": 7021148,
+          "backingSampledHighBytes": 850290,
+          "first": {
+            "elapsedMs": 102.49970799999937,
+            "replyLatencyMs": 0.4706669999995938,
+            "usedSize": 2280108,
+            "totalSize": 5832704,
+            "embedderHeapUsedSize": 1507160,
+            "backingStorageSize": 119969,
+            "progress": {
+              "page": 0,
+              "totalTextUTF16": 0,
+              "currentPageUTF16": 0,
+              "indexedThroughPage": 0,
+              "phase": "opening"
+            }
+          },
+          "last": {
+            "elapsedMs": 1941.9073329999992,
+            "replyLatencyMs": 0.6274580000008427,
+            "usedSize": 7021148,
+            "totalSize": 12910592,
+            "embedderHeapUsedSize": 3461720,
+            "backingStorageSize": 850290,
+            "progress": {
+              "page": 1,
+              "totalTextUTF16": 151000,
+              "currentPageUTF16": 151000,
+              "indexedThroughPage": 1,
+              "phase": "completed"
+            }
+          },
+          "errors": []
+        },
+        {
+          "role": "document-extractor",
+          "isolateId": "33a57d1f0c651158",
+          "url": "http://127.0.0.1:52203/assets/index--bv4loJe.js",
+          "name": "quixi-document-extractor",
+          "sampleCount": 2,
+          "usedSampledHighBytes": 2392160,
+          "backingSampledHighBytes": 601427,
+          "first": {
+            "elapsedMs": 193.54070800000045,
+            "replyLatencyMs": 0.3236669999987498,
+            "usedSize": 2364252,
+            "totalSize": 4980736,
+            "embedderHeapUsedSize": 768304,
+            "backingStorageSize": 601427
+          },
+          "last": {
+            "elapsedMs": 512.5897079999995,
+            "replyLatencyMs": 0.4226250000010623,
+            "usedSize": 2392160,
+            "totalSize": 6291456,
+            "embedderHeapUsedSize": 1213256,
+            "backingStorageSize": 601427
+          },
+          "errors": []
+        },
+        {
+          "role": "pdfjs-parser",
+          "isolateId": "91f95a6c85669923",
+          "url": "http://127.0.0.1:52203/assets/parser-DzIC7VDj.js",
+          "name": "quixi-pdf-parser",
+          "sampleCount": 2,
+          "usedSampledHighBytes": 4494744,
+          "backingSampledHighBytes": 2130702,
+          "first": {
+            "elapsedMs": 193.68529099999978,
+            "replyLatencyMs": 0.265625,
+            "usedSize": 4494744,
+            "totalSize": 14417920,
+            "embedderHeapUsedSize": 773712,
+            "backingStorageSize": 2130702
+          },
+          "last": {
+            "elapsedMs": 512.6111660000006,
+            "replyLatencyMs": 0.5773339999996097,
+            "usedSize": 4494744,
+            "totalSize": 14417920,
+            "embedderHeapUsedSize": 773712,
+            "backingStorageSize": 2130702
+          },
+          "errors": []
+        }
+      ],
+      "error": null
+    },
+    {
+      "report": "dense-production",
+      "engine": "chromium",
+      "fixture": "dense-10",
+      "status": "passed",
+      "sourceBytes": 89848,
+      "outputUTF16": 1510000,
+      "maxPageUTF16": 151000,
+      "storedPages": 10,
+      "totalMs": 8903.19999999553,
+      "firstIndexedPageMs": 1297.1999999955297,
+      "stageMs": {
+        "count": 380,
+        "totalMs": 4088.4000000432134,
+        "minMs": 5.399999998509884,
+        "p50Ms": 6.399999998509884,
+        "p95Ms": 35.19999999552965,
+        "maxMs": 56
+      },
+      "finalizeMs": {
+        "count": 10,
+        "totalMs": 224.09999998658895,
+        "minMs": 16.299999997019768,
+        "p50Ms": 17.100000001490116,
+        "p95Ms": 46.69999999552965,
+        "maxMs": 46.69999999552965
+      },
+      "creditMs": {
+        "count": 40,
+        "totalMs": 1622.6000000238419,
+        "minMs": 12.399999998509884,
+        "p50Ms": 25.899999998509884,
+        "p95Ms": 186.39999999850988,
+        "maxMs": 196.10000000149012
+      },
+      "foreground": {
+        "count": 2,
+        "totalMs": 43.70000000298023,
+        "minMs": 19.700000002980232,
+        "p50Ms": 24,
+        "p95Ms": 24,
+        "maxMs": 24
+      },
+      "postExtraction": {
+        "durationMs": 1097.3999999985099,
+        "foreground": {
+          "count": 10,
+          "totalMs": 64.10000000149012,
+          "minMs": 2.899999998509884,
+          "p50Ms": 6.5,
+          "p95Ms": 11.100000001490116,
+          "maxMs": 11.100000001490116
+        },
+        "foregroundSamples": [
+          {
+            "elapsedMs": 107.5,
+            "latencyMs": 2.899999998509884
+          },
+          {
+            "elapsedMs": 211.5,
+            "latencyMs": 3.2000000029802322
+          },
+          {
+            "elapsedMs": 316.6000000014901,
+            "latencyMs": 3.5
+          },
+          {
+            "elapsedMs": 421.5,
+            "latencyMs": 6.100000001490116
+          },
+          {
+            "elapsedMs": 528.7000000029802,
+            "latencyMs": 7.199999995529652
+          },
+          {
+            "elapsedMs": 636.1000000014901,
+            "latencyMs": 5.100000001490116
+          },
+          {
+            "elapsedMs": 742.2000000029802,
+            "latencyMs": 10
+          },
+          {
+            "elapsedMs": 853.2999999970198,
+            "latencyMs": 11.100000001490116
+          },
+          {
+            "elapsedMs": 965.3999999985099,
+            "latencyMs": 6.5
+          },
+          {
+            "elapsedMs": 1072.8999999985099,
+            "latencyMs": 8.5
+          }
+        ],
+        "searchStatusReads": [
+          {
+            "elapsedMs": 0,
+            "latencyMs": 6.299999997019768,
+            "state": "ready",
+            "indexedChunks": 380,
+            "pendingSources": 0
+          },
+          {
+            "elapsedMs": 1081.3999999985099,
+            "latencyMs": 16,
+            "state": "ready",
+            "indexedChunks": 380,
+            "pendingSources": 0
+          }
+        ],
+        "searchNotifications": 0
+      },
+      "cancelDrainMs": null,
+      "rssBaselineKiB": 452592,
+      "rssSampledHighKiB": 811744,
+      "heapAvailable": true,
+      "isolates": [
+        {
+          "role": "archive-storage-worker",
+          "isolateId": "c5bc0d7954561058",
+          "url": "http://127.0.0.1:52209/assets/archive-BNPe4Zrx.js",
+          "name": null,
+          "sampleCount": 22,
+          "usedSampledHighBytes": 29037664,
+          "backingSampledHighBytes": 12798398,
+          "first": {
+            "elapsedMs": 102.949290999999,
+            "replyLatencyMs": 0.4850000000005821,
+            "usedSize": 3853468,
+            "totalSize": 7602176,
+            "embedderHeapUsedSize": 1134192,
+            "backingStorageSize": 1263222
+          },
+          "last": {
+            "elapsedMs": 10235.473041,
+            "replyLatencyMs": 0.5800420000014128,
+            "usedSize": 23557652,
+            "totalSize": 63864832,
+            "embedderHeapUsedSize": 3164104,
+            "backingStorageSize": 3093053
+          },
+          "errors": []
+        },
+        {
+          "role": "page",
+          "isolateId": "e80ddee3e59412e6",
+          "url": "http://127.0.0.1:52209/",
+          "name": null,
+          "sampleCount": 22,
+          "usedSampledHighBytes": 28354284,
+          "backingSampledHighBytes": 6392268,
+          "first": {
+            "elapsedMs": 103.13604099999975,
+            "replyLatencyMs": 0.8108749999992142,
+            "usedSize": 2403308,
+            "totalSize": 4784128,
+            "embedderHeapUsedSize": 1593528,
+            "backingStorageSize": 259109,
+            "progress": {
+              "page": 0,
+              "totalTextUTF16": 0,
+              "currentPageUTF16": 0,
+              "indexedThroughPage": 0,
+              "phase": "setup"
+            }
+          },
+          "last": {
+            "elapsedMs": 10235.574916,
+            "replyLatencyMs": 1.0024169999996957,
+            "usedSize": 22045188,
+            "totalSize": 52232192,
+            "embedderHeapUsedSize": 1706064,
+            "backingStorageSize": 521725,
+            "progress": {
+              "page": 10,
+              "totalTextUTF16": 1510000,
+              "currentPageUTF16": 151000,
+              "indexedThroughPage": 10,
+              "phase": "completed"
+            }
+          },
+          "errors": []
+        },
+        {
+          "role": "document-extractor",
+          "isolateId": "312b718c19389c28",
+          "url": "http://127.0.0.1:52209/assets/index--bv4loJe.js",
+          "name": "quixi-document-extractor",
+          "sampleCount": 19,
+          "usedSampledHighBytes": 12523980,
+          "backingSampledHighBytes": 681730,
+          "first": {
+            "elapsedMs": 514.147415999998,
+            "replyLatencyMs": 0.27549999999973807,
+            "usedSize": 1116820,
+            "totalSize": 1572864,
+            "embedderHeapUsedSize": 773712,
+            "backingStorageSize": 517312
+          },
+          "last": {
+            "elapsedMs": 9031.010249999998,
+            "replyLatencyMs": 0.439250000003085,
+            "usedSize": 12523980,
+            "totalSize": 22806528,
+            "embedderHeapUsedSize": 10358784,
+            "backingStorageSize": 681474
+          },
+          "errors": []
+        },
+        {
+          "role": "pdfjs-parser",
+          "isolateId": "18e87fe691e59a6b",
+          "url": "http://127.0.0.1:52209/assets/parser-DzIC7VDj.js",
+          "name": "quixi-pdf-parser",
+          "sampleCount": 19,
+          "usedSampledHighBytes": 22729052,
+          "backingSampledHighBytes": 5677604,
+          "first": {
+            "elapsedMs": 514.1617499999975,
+            "replyLatencyMs": 0.3100830000003043,
+            "usedSize": 2237620,
+            "totalSize": 3670016,
+            "embedderHeapUsedSize": 773712,
+            "backingStorageSize": 1549209
+          },
+          "last": {
+            "elapsedMs": 9031.022583,
+            "replyLatencyMs": 0.4836670000004233,
+            "usedSize": 22729052,
+            "totalSize": 47169536,
+            "embedderHeapUsedSize": 773712,
+            "backingStorageSize": 5677604
+          },
+          "errors": []
+        }
+      ],
+      "error": null
+    },
+    {
+      "report": "dense-production",
+      "engine": "chromium",
+      "fixture": "dense-100",
+      "status": "passed",
+      "sourceBytes": 890653,
+      "outputUTF16": 15100000,
+      "maxPageUTF16": 151000,
+      "storedPages": 100,
+      "totalMs": 100485.70000000298,
+      "firstIndexedPageMs": 1033.1000000014901,
+      "stageMs": {
+        "count": 3800,
+        "totalMs": 53964.69999977201,
+        "minMs": 5.399999998509884,
+        "p50Ms": 14.5,
+        "p95Ms": 22,
+        "maxMs": 61.20000000298023
+      },
+      "finalizeMs": {
+        "count": 100,
+        "totalMs": 1841.4000000283122,
+        "minMs": 15.599999994039536,
+        "p50Ms": 17.399999998509884,
+        "p95Ms": 22.700000002980232,
+        "maxMs": 52.100000001490116
+      },
+      "creditMs": {
+        "count": 400,
+        "totalMs": 18703.600000031292,
+        "minMs": 13.899999998509884,
+        "p50Ms": 40.5,
+        "p95Ms": 75.40000000596046,
+        "maxMs": 234.39999999850988
+      },
+      "foreground": {
+        "count": 11,
+        "totalMs": 243.79999999701977,
+        "minMs": 18.899999998509884,
+        "p50Ms": 21.399999998509884,
+        "p95Ms": 26.69999999552965,
+        "maxMs": 26.69999999552965
+      },
+      "postExtraction": {
+        "durationMs": 1096.5,
+        "foreground": {
+          "count": 10,
+          "totalMs": 35.100000001490116,
+          "minMs": 3,
+          "p50Ms": 3.5,
+          "p95Ms": 4.300000004470348,
+          "maxMs": 4.300000004470348
+        },
+        "foregroundSamples": [
+          {
+            "elapsedMs": 125.20000000298023,
+            "latencyMs": 3.5
+          },
+          {
+            "elapsedMs": 229.70000000298023,
+            "latencyMs": 3.5
+          },
+          {
+            "elapsedMs": 334.20000000298023,
+            "latencyMs": 3
+          },
+          {
+            "elapsedMs": 438.20000000298023,
+            "latencyMs": 3
+          },
+          {
+            "elapsedMs": 542.2000000029802,
+            "latencyMs": 3.7999999970197678
+          },
+          {
+            "elapsedMs": 648,
+            "latencyMs": 4
+          },
+          {
+            "elapsedMs": 752.6000000014901,
+            "latencyMs": 3
+          },
+          {
+            "elapsedMs": 856.7000000029802,
+            "latencyMs": 3.600000001490116
+          },
+          {
+            "elapsedMs": 961.5,
+            "latencyMs": 4.300000004470348
+          },
+          {
+            "elapsedMs": 1066.9000000059605,
+            "latencyMs": 3.399999998509884
+          }
+        ],
+        "searchStatusReads": [
+          {
+            "elapsedMs": 0,
+            "latencyMs": 24,
+            "state": "ready",
+            "indexedChunks": 3800,
+            "pendingSources": 0
+          },
+          {
+            "elapsedMs": 1070.3000000044703,
+            "latencyMs": 26.100000001490116,
+            "state": "ready",
+            "indexedChunks": 3800,
+            "pendingSources": 0
+          }
+        ],
+        "searchNotifications": 0
+      },
+      "cancelDrainMs": null,
+      "rssBaselineKiB": 463232,
+      "rssSampledHighKiB": 1047184,
+      "heapAvailable": true,
+      "isolates": [
+        {
+          "role": "archive-storage-worker",
+          "isolateId": "104e6dc8de00e0bd",
+          "url": "http://127.0.0.1:52217/assets/archive-BNPe4Zrx.js",
+          "name": null,
+          "sampleCount": 205,
+          "usedSampledHighBytes": 31547400,
+          "backingSampledHighBytes": 15541862,
+          "first": {
+            "elapsedMs": 102.66633400000137,
+            "replyLatencyMs": 0.22520799999983865,
+            "usedSize": 4758152,
+            "totalSize": 8650752,
+            "embedderHeapUsedSize": 2436472,
+            "backingStorageSize": 7005293
+          },
+          "last": {
+            "elapsedMs": 101760.374792,
+            "replyLatencyMs": 0.40145800000755116,
+            "usedSize": 10106988,
+            "totalSize": 66584576,
+            "embedderHeapUsedSize": 5182616,
+            "backingStorageSize": 719404
+          },
+          "errors": []
+        },
+        {
+          "role": "page",
+          "isolateId": "96df3fd85e92fbdc",
+          "url": "http://127.0.0.1:52217/",
+          "name": null,
+          "sampleCount": 205,
+          "usedSampledHighBytes": 30189648,
+          "backingSampledHighBytes": 7947619,
+          "first": {
+            "elapsedMs": 102.7378749999989,
+            "replyLatencyMs": 0.4877090000009048,
+            "usedSize": 2276604,
+            "totalSize": 5308416,
+            "embedderHeapUsedSize": 2393992,
+            "backingStorageSize": 1299494,
+            "progress": {
+              "page": 0,
+              "totalTextUTF16": 0,
+              "currentPageUTF16": 0,
+              "indexedThroughPage": 0,
+              "phase": "opening"
+            }
+          },
+          "last": {
+            "elapsedMs": 101760.43129200001,
+            "replyLatencyMs": 0.6841249999997672,
+            "usedSize": 28269128,
+            "totalSize": 60358656,
+            "embedderHeapUsedSize": 2388008,
+            "backingStorageSize": 793647,
+            "progress": {
+              "page": 100,
+              "totalTextUTF16": 15100000,
+              "currentPageUTF16": 151000,
+              "indexedThroughPage": 100,
+              "phase": "completed"
+            }
+          },
+          "errors": []
+        },
+        {
+          "role": "document-extractor",
+          "isolateId": "daa857254eb14608",
+          "url": "http://127.0.0.1:52217/assets/index--bv4loJe.js",
+          "name": "quixi-document-extractor",
+          "sampleCount": 201,
+          "usedSampledHighBytes": 25727032,
+          "backingSampledHighBytes": 893223,
+          "first": {
+            "elapsedMs": 396.828125,
+            "replyLatencyMs": 0.24833399999988615,
+            "usedSize": 1368816,
+            "totalSize": 2621440,
+            "embedderHeapUsedSize": 768256,
+            "backingStorageSize": 835107
+          },
+          "last": {
+            "elapsedMs": 100206.693209,
+            "replyLatencyMs": 0.4117499999993015,
+            "usedSize": 6959064,
+            "totalSize": 25952256,
+            "embedderHeapUsedSize": 5218736,
+            "backingStorageSize": 452099
+          },
+          "errors": []
+        },
+        {
+          "role": "pdfjs-parser",
+          "isolateId": "134fe51d8a71da6f",
+          "url": "http://127.0.0.1:52217/assets/parser-DzIC7VDj.js",
+          "name": "quixi-pdf-parser",
+          "sampleCount": 201,
+          "usedSampledHighBytes": 140187808,
+          "backingSampledHighBytes": 6934606,
+          "first": {
+            "elapsedMs": 396.87737500000003,
+            "replyLatencyMs": 0.26395899999988615,
+            "usedSize": 5152232,
+            "totalSize": 9437184,
+            "embedderHeapUsedSize": 773712,
+            "backingStorageSize": 3105974
+          },
+          "last": {
+            "elapsedMs": 100206.69875000001,
+            "replyLatencyMs": 0.4449170000007143,
+            "usedSize": 129629260,
+            "totalSize": 178798592,
+            "embedderHeapUsedSize": 474288,
+            "backingStorageSize": 4760185
+          },
+          "errors": []
+        }
+      ],
+      "error": null
+    },
+    {
+      "report": "dense-production",
+      "engine": "chromium",
+      "fixture": "cancel-dense-100",
+      "status": "passed",
+      "sourceBytes": 890653,
+      "outputUTF16": 151000,
+      "maxPageUTF16": 151000,
+      "storedPages": 1,
+      "totalMs": 1033.3999999985099,
+      "firstIndexedPageMs": 1022,
+      "stageMs": {
+        "count": 38,
+        "totalMs": 270.4999999925494,
+        "minMs": 5.700000002980232,
+        "p50Ms": 7,
+        "p95Ms": 8.100000001490116,
+        "maxMs": 15.799999997019768
+      },
+      "finalizeMs": {
+        "count": 1,
+        "totalMs": 18.30000000447035,
+        "minMs": 18.30000000447035,
+        "p50Ms": 18.30000000447035,
+        "p95Ms": 18.30000000447035,
+        "maxMs": 18.30000000447035
+      },
+      "creditMs": {
+        "count": 4,
+        "totalMs": 106.39999999850988,
+        "minMs": 19.799999997019768,
+        "p50Ms": 25.69999999552965,
+        "p95Ms": 35.600000001490116,
+        "maxMs": 35.600000001490116
+      },
+      "foreground": {
+        "count": 1,
+        "totalMs": 20.600000001490116,
+        "minMs": 20.600000001490116,
+        "p50Ms": 20.600000001490116,
+        "p95Ms": 20.600000001490116,
+        "maxMs": 20.600000001490116
+      },
+      "postExtraction": {
+        "durationMs": 1054.6000000014901,
+        "foreground": {
+          "count": 10,
+          "totalMs": 33.79999998956919,
+          "minMs": 3.0999999940395355,
+          "p50Ms": 3.3000000044703484,
+          "p95Ms": 3.6999999955296516,
+          "maxMs": 3.6999999955296516
+        },
+        "foregroundSamples": [
+          {
+            "elapsedMs": 106.29999999701977,
+            "latencyMs": 3.5
+          },
+          {
+            "elapsedMs": 211,
+            "latencyMs": 3.6999999955296516
+          },
+          {
+            "elapsedMs": 315.79999999701977,
+            "latencyMs": 3.3000000044703484
+          },
+          {
+            "elapsedMs": 419.6000000014901,
+            "latencyMs": 3.2999999970197678
+          },
+          {
+            "elapsedMs": 524,
+            "latencyMs": 3.100000001490116
+          },
+          {
+            "elapsedMs": 628.1000000014901,
+            "latencyMs": 3.0999999940395355
+          },
+          {
+            "elapsedMs": 732.2999999970198,
+            "latencyMs": 3.2000000029802322
+          },
+          {
+            "elapsedMs": 836.5,
+            "latencyMs": 3.6999999955296516
+          },
+          {
+            "elapsedMs": 941.7999999970198,
+            "latencyMs": 3.600000001490116
+          },
+          {
+            "elapsedMs": 1046.3999999985099,
+            "latencyMs": 3.2999999970197678
+          }
+        ],
+        "searchStatusReads": [
+          {
+            "elapsedMs": 0,
+            "latencyMs": 5.299999997019768,
+            "state": "ready",
+            "indexedChunks": 38,
+            "pendingSources": 0
+          },
+          {
+            "elapsedMs": 1049.6999999955297,
+            "latencyMs": 4.9000000059604645,
+            "state": "ready",
+            "indexedChunks": 38,
+            "pendingSources": 0
+          }
+        ],
+        "searchNotifications": 0
+      },
+      "cancelDrainMs": 11.399999998509884,
+      "rssBaselineKiB": 463600,
+      "rssSampledHighKiB": 591056,
+      "heapAvailable": true,
+      "isolates": [
+        {
+          "role": "page",
+          "isolateId": "cb3e5b42f56fb78b",
+          "url": "http://127.0.0.1:52259/",
+          "name": null,
+          "sampleCount": 6,
+          "usedSampledHighBytes": 7512556,
+          "backingSampledHighBytes": 2708997,
+          "first": {
+            "elapsedMs": 102.51533300000301,
+            "replyLatencyMs": 0.5047090000007302,
+            "usedSize": 2235356,
+            "totalSize": 6094848,
+            "embedderHeapUsedSize": 2394672,
+            "backingStorageSize": 1233858,
+            "progress": {
+              "page": 0,
+              "totalTextUTF16": 0,
+              "currentPageUTF16": 0,
+              "indexedThroughPage": 0,
+              "phase": "opening"
+            }
+          },
+          "last": {
+            "elapsedMs": 2152.639208000008,
+            "replyLatencyMs": 0.6397920000017621,
+            "usedSize": 5050156,
+            "totalSize": 12910592,
+            "embedderHeapUsedSize": 3470096,
+            "backingStorageSize": 2708997,
+            "progress": {
+              "page": 1,
+              "totalTextUTF16": 151000,
+              "currentPageUTF16": 151000,
+              "indexedThroughPage": 1,
+              "phase": "interrupted"
+            }
+          },
+          "errors": []
+        },
+        {
+          "role": "archive-storage-worker",
+          "isolateId": "16cc584d7faf0bcb",
+          "url": "http://127.0.0.1:52259/assets/archive-BNPe4Zrx.js",
+          "name": null,
+          "sampleCount": 6,
+          "usedSampledHighBytes": 13477612,
+          "backingSampledHighBytes": 12669214,
+          "first": {
+            "elapsedMs": 102.58904199999233,
+            "replyLatencyMs": 0.2455410000111442,
+            "usedSize": 4680928,
+            "totalSize": 8388608,
+            "embedderHeapUsedSize": 2436472,
+            "backingStorageSize": 7070777
+          },
+          "last": {
+            "elapsedMs": 2152.7113329999847,
+            "replyLatencyMs": 0.272292000008747,
+            "usedSize": 13477612,
+            "totalSize": 26804224,
+            "embedderHeapUsedSize": 10113352,
+            "backingStorageSize": 12669214
+          },
+          "errors": []
+        },
+        {
+          "role": "document-extractor",
+          "isolateId": "3472228c775b4017",
+          "url": "http://127.0.0.1:52259/assets/index--bv4loJe.js",
+          "name": "quixi-document-extractor",
+          "sampleCount": 3,
+          "usedSampledHighBytes": 2975996,
+          "backingSampledHighBytes": 695847,
+          "first": {
+            "elapsedMs": 419.9050830000051,
+            "replyLatencyMs": 0.22562499999185093,
+            "usedSize": 1162064,
+            "totalSize": 1572864,
+            "embedderHeapUsedSize": 773712,
+            "backingStorageSize": 556059
+          },
+          "last": {
+            "elapsedMs": 1014.244458000001,
+            "replyLatencyMs": 0.37916699999186676,
+            "usedSize": 2975996,
+            "totalSize": 6553600,
+            "embedderHeapUsedSize": 1470856,
+            "backingStorageSize": 695847
+          },
+          "errors": []
+        },
+        {
+          "role": "pdfjs-parser",
+          "isolateId": "4aabdf0824aa4486",
+          "url": "http://127.0.0.1:52259/assets/parser-DzIC7VDj.js",
+          "name": "quixi-pdf-parser",
+          "sampleCount": 3,
+          "usedSampledHighBytes": 4770596,
+          "backingSampledHighBytes": 3105974,
+          "first": {
+            "elapsedMs": 420.01437499999884,
+            "replyLatencyMs": 0.1990420000074664,
+            "usedSize": 2532648,
+            "totalSize": 6029312,
+            "embedderHeapUsedSize": 773712,
+            "backingStorageSize": 2704622
+          },
+          "last": {
+            "elapsedMs": 1014.2562920000055,
+            "replyLatencyMs": 0.3163749999948777,
+            "usedSize": 4770596,
+            "totalSize": 14680064,
+            "embedderHeapUsedSize": 773712,
+            "backingStorageSize": 3105974
+          },
+          "errors": []
+        }
+      ],
+      "error": {
+        "code": "CANCELLED",
+        "message": "ExtractionError: Document extraction cancelled; published pages remain available."
+      }
+    },
+    {
+      "report": "dense-production",
+      "engine": "webkit",
+      "fixture": "dense-1",
+      "status": "passed",
+      "sourceBytes": 9801,
+      "outputUTF16": 151000,
+      "maxPageUTF16": 151000,
+      "storedPages": 1,
+      "totalMs": 752,
+      "firstIndexedPageMs": 741,
+      "stageMs": {
+        "count": 38,
+        "totalMs": 203,
+        "minMs": 4,
+        "p50Ms": 5,
+        "p95Ms": 6,
+        "maxMs": 7
+      },
+      "finalizeMs": {
+        "count": 1,
+        "totalMs": 16,
+        "minMs": 16,
+        "p50Ms": 16,
+        "p95Ms": 16,
+        "maxMs": 16
+      },
+      "creditMs": {
+        "count": 4,
+        "totalMs": 55,
+        "minMs": 10,
+        "p50Ms": 12,
+        "p95Ms": 21,
+        "maxMs": 21
+      },
+      "foreground": {
+        "count": 1,
+        "totalMs": 19,
+        "minMs": 19,
+        "p50Ms": 19,
+        "p95Ms": 19,
+        "maxMs": 19
+      },
+      "postExtraction": {
+        "durationMs": 1043,
+        "foreground": {
+          "count": 10,
+          "totalMs": 21,
+          "minMs": 2,
+          "p50Ms": 2,
+          "p95Ms": 3,
+          "maxMs": 3
+        },
+        "foregroundSamples": [
+          {
+            "elapsedMs": 108,
+            "latencyMs": 2
+          },
+          {
+            "elapsedMs": 211,
+            "latencyMs": 2
+          },
+          {
+            "elapsedMs": 314,
+            "latencyMs": 2
+          },
+          {
+            "elapsedMs": 418,
+            "latencyMs": 2
+          },
+          {
+            "elapsedMs": 521,
+            "latencyMs": 3
+          },
+          {
+            "elapsedMs": 625,
+            "latencyMs": 2
+          },
+          {
+            "elapsedMs": 728,
+            "latencyMs": 2
+          },
+          {
+            "elapsedMs": 831,
+            "latencyMs": 2
+          },
+          {
+            "elapsedMs": 934,
+            "latencyMs": 2
+          },
+          {
+            "elapsedMs": 1037,
+            "latencyMs": 2
+          }
+        ],
+        "searchStatusReads": [
+          {
+            "elapsedMs": 0,
+            "latencyMs": 7,
+            "state": "ready",
+            "indexedChunks": 38,
+            "pendingSources": 0
+          },
+          {
+            "elapsedMs": 1039,
+            "latencyMs": 4,
+            "state": "ready",
+            "indexedChunks": 38,
+            "pendingSources": 0
+          }
+        ],
+        "searchNotifications": 0
+      },
+      "cancelDrainMs": null,
+      "rssBaselineKiB": 115616,
+      "rssSampledHighKiB": 115872,
+      "heapAvailable": false,
+      "isolates": [],
+      "error": null
+    },
+    {
+      "report": "dense-production",
+      "engine": "webkit",
+      "fixture": "dense-10",
+      "status": "passed",
+      "sourceBytes": 89848,
+      "outputUTF16": 1510000,
+      "maxPageUTF16": 151000,
+      "storedPages": 10,
+      "totalMs": 5901,
+      "firstIndexedPageMs": 765,
+      "stageMs": {
+        "count": 380,
+        "totalMs": 1813,
+        "minMs": 3,
+        "p50Ms": 5,
+        "p95Ms": 6,
+        "maxMs": 9
+      },
+      "finalizeMs": {
+        "count": 10,
+        "totalMs": 128,
+        "minMs": 11,
+        "p50Ms": 13,
+        "p95Ms": 15,
+        "maxMs": 15
+      },
+      "creditMs": {
+        "count": 40,
+        "totalMs": 458,
+        "minMs": 7,
+        "p50Ms": 10,
+        "p95Ms": 19,
+        "maxMs": 21
+      },
+      "foreground": {
+        "count": 2,
+        "totalMs": 33,
+        "minMs": 15,
+        "p50Ms": 18,
+        "p95Ms": 18,
+        "maxMs": 18
+      },
+      "postExtraction": {
+        "durationMs": 1042,
+        "foreground": {
+          "count": 10,
+          "totalMs": 24,
+          "minMs": 2,
+          "p50Ms": 2,
+          "p95Ms": 4,
+          "maxMs": 4
+        },
+        "foregroundSamples": [
+          {
+            "elapsedMs": 107,
+            "latencyMs": 3
+          },
+          {
+            "elapsedMs": 211,
+            "latencyMs": 4
+          },
+          {
+            "elapsedMs": 315,
+            "latencyMs": 2
+          },
+          {
+            "elapsedMs": 418,
+            "latencyMs": 2
+          },
+          {
+            "elapsedMs": 520,
+            "latencyMs": 3
+          },
+          {
+            "elapsedMs": 624,
+            "latencyMs": 2
+          },
+          {
+            "elapsedMs": 727,
+            "latencyMs": 2
+          },
+          {
+            "elapsedMs": 830,
+            "latencyMs": 2
+          },
+          {
+            "elapsedMs": 933,
+            "latencyMs": 2
+          },
+          {
+            "elapsedMs": 1035,
+            "latencyMs": 2
+          }
+        ],
+        "searchStatusReads": [
+          {
+            "elapsedMs": 0,
+            "latencyMs": 7,
+            "state": "ready",
+            "indexedChunks": 380,
+            "pendingSources": 0
+          },
+          {
+            "elapsedMs": 1037,
+            "latencyMs": 5,
+            "state": "ready",
+            "indexedChunks": 380,
+            "pendingSources": 0
+          }
+        ],
+        "searchNotifications": 0
+      },
+      "cancelDrainMs": null,
+      "rssBaselineKiB": 114176,
+      "rssSampledHighKiB": 114368,
+      "heapAvailable": false,
+      "isolates": [],
+      "error": null
+    },
+    {
+      "report": "dense-production",
+      "engine": "webkit",
+      "fixture": "dense-100",
+      "status": "passed",
+      "sourceBytes": 890653,
+      "outputUTF16": 15100000,
+      "maxPageUTF16": 151000,
+      "storedPages": 100,
+      "totalMs": 74448,
+      "firstIndexedPageMs": 1042,
+      "stageMs": {
+        "count": 3800,
+        "totalMs": 35600,
+        "minMs": 3,
+        "p50Ms": 9,
+        "p95Ms": 16,
+        "maxMs": 38
+      },
+      "finalizeMs": {
+        "count": 100,
+        "totalMs": 1111,
+        "minMs": 9,
+        "p50Ms": 10,
+        "p95Ms": 16,
+        "maxMs": 22
+      },
+      "creditMs": {
+        "count": 400,
+        "totalMs": 8291,
+        "minMs": 6,
+        "p50Ms": 16,
+        "p95Ms": 41,
+        "maxMs": 186
+      },
+      "foreground": {
+        "count": 11,
+        "totalMs": 145,
+        "minMs": 11,
+        "p50Ms": 12,
+        "p95Ms": 19,
+        "maxMs": 19
+      },
+      "postExtraction": {
+        "durationMs": 1075,
+        "foreground": {
+          "count": 10,
+          "totalMs": 26,
+          "minMs": 2,
+          "p50Ms": 3,
+          "p95Ms": 4,
+          "maxMs": 4
+        },
+        "foregroundSamples": [
+          {
+            "elapsedMs": 122,
+            "latencyMs": 2
+          },
+          {
+            "elapsedMs": 225,
+            "latencyMs": 2
+          },
+          {
+            "elapsedMs": 329,
+            "latencyMs": 2
+          },
+          {
+            "elapsedMs": 431,
+            "latencyMs": 3
+          },
+          {
+            "elapsedMs": 535,
+            "latencyMs": 2
+          },
+          {
+            "elapsedMs": 638,
+            "latencyMs": 4
+          },
+          {
+            "elapsedMs": 742,
+            "latencyMs": 3
+          },
+          {
+            "elapsedMs": 846,
+            "latencyMs": 3
+          },
+          {
+            "elapsedMs": 950,
+            "latencyMs": 2
+          },
+          {
+            "elapsedMs": 1053,
+            "latencyMs": 3
+          }
+        ],
+        "searchStatusReads": [
+          {
+            "elapsedMs": 0,
+            "latencyMs": 21,
+            "state": "ready",
+            "indexedChunks": 3800,
+            "pendingSources": 0
+          },
+          {
+            "elapsedMs": 1056,
+            "latencyMs": 18,
+            "state": "ready",
+            "indexedChunks": 3800,
+            "pendingSources": 0
+          }
+        ],
+        "searchNotifications": 0
+      },
+      "cancelDrainMs": null,
+      "rssBaselineKiB": 114544,
+      "rssSampledHighKiB": 114816,
+      "heapAvailable": false,
+      "isolates": [],
+      "error": null
+    },
+    {
+      "report": "dense-production",
+      "engine": "webkit",
+      "fixture": "cancel-dense-100",
+      "status": "passed",
+      "sourceBytes": 890653,
+      "outputUTF16": 151000,
+      "maxPageUTF16": 151000,
+      "storedPages": 1,
+      "totalMs": 925,
+      "firstIndexedPageMs": 917,
+      "stageMs": {
+        "count": 38,
+        "totalMs": 227,
+        "minMs": 4,
+        "p50Ms": 5,
+        "p95Ms": 19,
+        "maxMs": 23
+      },
+      "finalizeMs": {
+        "count": 1,
+        "totalMs": 14,
+        "minMs": 14,
+        "p50Ms": 14,
+        "p95Ms": 14,
+        "maxMs": 14
+      },
+      "creditMs": {
+        "count": 4,
+        "totalMs": 44,
+        "minMs": 8,
+        "p50Ms": 10,
+        "p95Ms": 17,
+        "maxMs": 17
+      },
+      "foreground": {
+        "count": 1,
+        "totalMs": 16,
+        "minMs": 16,
+        "p50Ms": 16,
+        "p95Ms": 16,
+        "maxMs": 16
+      },
+      "postExtraction": {
+        "durationMs": 1046,
+        "foreground": {
+          "count": 10,
+          "totalMs": 27,
+          "minMs": 2,
+          "p50Ms": 3,
+          "p95Ms": 3,
+          "maxMs": 3
+        },
+        "foregroundSamples": [
+          {
+            "elapsedMs": 106,
+            "latencyMs": 3
+          },
+          {
+            "elapsedMs": 209,
+            "latencyMs": 3
+          },
+          {
+            "elapsedMs": 313,
+            "latencyMs": 3
+          },
+          {
+            "elapsedMs": 417,
+            "latencyMs": 2
+          },
+          {
+            "elapsedMs": 520,
+            "latencyMs": 3
+          },
+          {
+            "elapsedMs": 624,
+            "latencyMs": 2
+          },
+          {
+            "elapsedMs": 727,
+            "latencyMs": 3
+          },
+          {
+            "elapsedMs": 831,
+            "latencyMs": 2
+          },
+          {
+            "elapsedMs": 934,
+            "latencyMs": 3
+          },
+          {
+            "elapsedMs": 1038,
+            "latencyMs": 3
+          }
+        ],
+        "searchStatusReads": [
+          {
+            "elapsedMs": 0,
+            "latencyMs": 5,
+            "state": "ready",
+            "indexedChunks": 38,
+            "pendingSources": 0
+          },
+          {
+            "elapsedMs": 1041,
+            "latencyMs": 5,
+            "state": "ready",
+            "indexedChunks": 38,
+            "pendingSources": 0
+          }
+        ],
+        "searchNotifications": 0
+      },
+      "cancelDrainMs": 8,
+      "rssBaselineKiB": 115072,
+      "rssSampledHighKiB": 115184,
+      "heapAvailable": false,
+      "isolates": [],
+      "error": {
+        "code": "CANCELLED",
+        "message": "ExtractionError: Document extraction cancelled; published pages remain available."
+      }
+    }
+  ]
+}

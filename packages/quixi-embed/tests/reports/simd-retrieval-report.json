@@ -1,0 +1,294 @@
+{
+  "passed": true,
+  "route": "wasm-simd-fp32",
+  "chunks": 659,
+  "queries": 18,
+  "chunker": {
+    "id": "reference-wordpiece-window-v1",
+    "max_content_tokens": 256,
+    "overlap_tokens": 32,
+    "coordinate_unit": "python-unicode-codepoint",
+    "note": "Reference benchmark adapter; production shared SearchChunk parity is a later integration gate."
+  },
+  "model_sha256": "e1ef345cd35088b06f70c199f5a4e0311bda5983716ad6a3e7d0a604202efffc",
+  "library_sha256": "85cf1fd1fc4b7609d9ac997d684afbef90ad7793e6a66358f1b6681288c6b547",
+  "baseline_sha256": "77606cac1fc3cb35a8f87778d0425a3af3096c800e7df76a5c939120655c12e6",
+  "maximum_vector_absolute_error": 1.7881393432617188e-07,
+  "changed_top_ten_queries": [],
+  "native": {
+    "mean": {
+      "recall@5": 0.8425925925925926,
+      "recall@10": 0.8981481481481483,
+      "recall@100": 0.9814814814814815,
+      "recall@500": 1.0,
+      "mrr": 0.8611111111111112
+    },
+    "per_query": {
+      "opfs": {
+        "recall@5": 0.6666666666666666,
+        "recall@10": 0.6666666666666666,
+        "recall@100": 0.6666666666666666,
+        "recall@500": 1.0,
+        "mrr": 0.5
+      },
+      "desktop": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 0.5
+      },
+      "credentials": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 1.0
+      },
+      "oauth": {
+        "recall@5": 0.5,
+        "recall@10": 1.0,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 0.5
+      },
+      "switch": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 1.0
+      },
+      "branch": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 1.0
+      },
+      "dedup": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 1.0
+      },
+      "archive": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 1.0
+      },
+      "fts": {
+        "recall@5": 0.5,
+        "recall@10": 0.5,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 1.0
+      },
+      "pdf": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 0.5
+      },
+      "ocr": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 1.0
+      },
+      "sync": {
+        "recall@5": 0.5,
+        "recall@10": 0.5,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 1.0
+      },
+      "recovery": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 1.0
+      },
+      "priority": {
+        "recall@5": 0.5,
+        "recall@10": 0.5,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 1.0
+      },
+      "cache": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 1.0
+      },
+      "sql": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 0.5
+      },
+      "rrf": {
+        "recall@5": 0.5,
+        "recall@10": 1.0,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 1.0
+      },
+      "accessibility": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 1.0
+      }
+    }
+  },
+  "reference": {
+    "mean": {
+      "recall@5": 0.8425925925925926,
+      "recall@10": 0.8981481481481483,
+      "recall@100": 0.9814814814814815,
+      "recall@500": 1.0,
+      "mrr": 0.8611111111111112
+    },
+    "per_query": {
+      "opfs": {
+        "recall@5": 0.6666666666666666,
+        "recall@10": 0.6666666666666666,
+        "recall@100": 0.6666666666666666,
+        "recall@500": 1.0,
+        "mrr": 0.5
+      },
+      "desktop": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 0.5
+      },
+      "credentials": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 1.0
+      },
+      "oauth": {
+        "recall@5": 0.5,
+        "recall@10": 1.0,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 0.5
+      },
+      "switch": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 1.0
+      },
+      "branch": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 1.0
+      },
+      "dedup": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 1.0
+      },
+      "archive": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 1.0
+      },
+      "fts": {
+        "recall@5": 0.5,
+        "recall@10": 0.5,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 1.0
+      },
+      "pdf": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 0.5
+      },
+      "ocr": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 1.0
+      },
+      "sync": {
+        "recall@5": 0.5,
+        "recall@10": 0.5,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 1.0
+      },
+      "recovery": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 1.0
+      },
+      "priority": {
+        "recall@5": 0.5,
+        "recall@10": 0.5,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 1.0
+      },
+      "cache": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 1.0
+      },
+      "sql": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 0.5
+      },
+      "rrf": {
+        "recall@5": 0.5,
+        "recall@10": 1.0,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 1.0
+      },
+      "accessibility": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 1.0
+      }
+    }
+  },
+  "native_seconds": 35.91895666701021,
+  "limitations": "Small synthetic relevance corpus; no production compression or scale approval."
+}

@@ -1,0 +1,432 @@
+
+> quixi@0.0.1 test:core
+> npm run typecheck --workspace @quixi/core && npm run typecheck:tests --workspace @quixi/core && npm test --workspace @quixi/core
+
+
+> @quixi/core@0.0.1 typecheck
+> tsc --noEmit -p tsconfig.json
+
+
+> @quixi/core@0.0.1 typecheck:tests
+> tsc --noEmit -p tsconfig.tests.json
+
+
+> @quixi/core@0.0.1 test
+> node --experimental-transform-types --test tests/*.test.ts
+
+TAP version 13
+# (node:4500) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: inventory commands require a closed scan identity and expose no deletion arguments
+ok 1 - inventory commands require a closed scan identity and expose no deletion arguments
+  ---
+  duration_ms: 0.699042
+  type: 'test'
+  ...
+# Subtest: inventory work is bounded independently of caller input size
+ok 2 - inventory work is bounded independently of caller input size
+  ---
+  duration_ms: 0.176583
+  type: 'test'
+  ...
+# Subtest: inventory findings have bounded pages and opaque bounded cursors
+ok 3 - inventory findings have bounded pages and opaque bounded cursors
+  ---
+  duration_ms: 0.119875
+  type: 'test'
+  ...
+# Subtest: public storage envelopes route inventory through the same strict validation
+ok 4 - public storage envelopes route inventory through the same strict validation
+  ---
+  duration_ms: 1.736917
+  type: 'test'
+  ...
+# (node:4501) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: every canonical mutation has validated, explicit sync-op coverage
+ok 5 - every canonical mutation has validated, explicit sync-op coverage
+  ---
+  duration_ms: 39.083
+  type: 'test'
+  ...
+# Subtest: operation identity survives retries and rejects changed payloads
+ok 6 - operation identity survives retries and rejects changed payloads
+  ---
+  duration_ms: 1.693833
+  type: 'test'
+  ...
+# Subtest: attachment resolution never rewrites sealed content and new parts require an edit
+ok 7 - attachment resolution never rewrites sealed content and new parts require an edit
+  ---
+  duration_ms: 1.190166
+  type: 'test'
+  ...
+# Subtest: new context snapshots preserve prior attempt prompts and workspace identity
+ok 8 - new context snapshots preserve prior attempt prompts and workspace identity
+  ---
+  duration_ms: 0.77525
+  type: 'test'
+  ...
+# Subtest: a batch validates atomically in memory and stale revisions cannot silently overwrite
+ok 9 - a batch validates atomically in memory and stale revisions cannot silently overwrite
+  ---
+  duration_ms: 1.323666
+  type: 'test'
+  ...
+# Subtest: storage request identity, bounded pages, blob staging and cancellation metadata are serializable
+ok 10 - storage request identity, bounded pages, blob staging and cancellation metadata are serializable
+  ---
+  duration_ms: 0.775875
+  type: 'test'
+  ...
+# Subtest: bounded JSON preflight counts UTF-8/escapes and rejects before visiting later payload fields
+ok 11 - bounded JSON preflight counts UTF-8/escapes and rejects before visiting later payload fields
+  ---
+  duration_ms: 7.9075
+  type: 'test'
+  ...
+# Subtest: byte transfers apply backpressure and validate ordering, bounds and acknowledgements
+ok 12 - byte transfers apply backpressure and validate ordering, bounds and acknowledgements
+  ---
+  duration_ms: 0.229416
+  type: 'test'
+  ...
+# Subtest: provider-native import manifests retain explicit missing entries and cannot bypass byte bounds
+ok 13 - provider-native import manifests retain explicit missing entries and cannot bypass byte bounds
+  ---
+  duration_ms: 8.639875
+  type: 'test'
+  ...
+# Subtest: reply correlation, page bytes, and structured failures obey the worker boundary
+ok 14 - reply correlation, page bytes, and structured failures obey the worker boundary
+  ---
+  duration_ms: 7.478958
+  type: 'test'
+  ...
+# Subtest: batch staging identities and optimistic revision keys must be unique
+ok 15 - batch staging identities and optimistic revision keys must be unique
+  ---
+  duration_ms: 1.677792
+  type: 'test'
+  ...
+# Subtest: sync inspection uses monotonic local sequence and canonical text declares a verified UTF-8 transfer purpose
+ok 16 - sync inspection uses monotonic local sequence and canonical text declares a verified UTF-8 transfer purpose
+  ---
+  duration_ms: 0.103792
+  type: 'test'
+  ...
+# Subtest: normalized imports use bounded independent controls, stable publication manifests and null diagnostics
+ok 17 - normalized imports use bounded independent controls, stable publication manifests and null diagnostics
+  ---
+  duration_ms: 1.999
+  type: 'test'
+  ...
+# Subtest: import work UUID/checkpoint controls and pinned blob slices enforce bounded serializable arguments
+ok 18 - import work UUID/checkpoint controls and pinned blob slices enforce bounded serializable arguments
+  ---
+  duration_ms: 1.529375
+  type: 'test'
+  ...
+# (node:4502) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: public extraction admission binds original identity, versions and bounded source size
+ok 19 - public extraction admission binds original identity, versions and bounded source size
+  ---
+  duration_ms: 3.585292
+  type: 'test'
+  ...
+# Subtest: public page staging preserves NUL/UTF-16 coverage and rejects split surrogate maps
+ok 20 - public page staging preserves NUL/UTF-16 coverage and rejects split surrogate maps
+  ---
+  duration_ms: 0.371083
+  type: 'test'
+  ...
+# Subtest: index credit and restart lookup require exact bounded published page references
+ok 21 - index credit and restart lookup require exact bounded published page references
+  ---
+  duration_ms: 0.604667
+  type: 'test'
+  ...
+# Subtest: map paging binds a finite range, response bytes and cursor while mutation metadata is rejected
+ok 22 - map paging binds a finite range, response bytes and cursor while mutation metadata is rejected
+  ---
+  duration_ms: 0.798917
+  type: 'test'
+  ...
+# (node:4503) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: native-branches: canonical graph and exact raw bytes survive JSON round trip
+ok 23 - native-branches: canonical graph and exact raw bytes survive JSON round trip
+  ---
+  duration_ms: 7.287834
+  type: 'test'
+  ...
+# Subtest: claude-compliance: canonical graph and exact raw bytes survive JSON round trip
+ok 24 - claude-compliance: canonical graph and exact raw bytes survive JSON round trip
+  ---
+  duration_ms: 6.174375
+  type: 'test'
+  ...
+# Subtest: chatgpt-conversations: canonical graph and exact raw bytes survive JSON round trip
+ok 25 - chatgpt-conversations: canonical graph and exact raw bytes survive JSON round trip
+  ---
+  duration_ms: 2.338625
+  type: 'test'
+  ...
+# Subtest: multiple providers, candidates, tool turns and active path retain sibling history
+ok 26 - multiple providers, candidates, tool turns and active path retain sibling history
+  ---
+  duration_ms: 8.601958
+  type: 'test'
+  ...
+# Subtest: editing generated output creates a new sibling and does not rewrite its descendants
+ok 27 - editing generated output creates a new sibling and does not rewrite its descendants
+  ---
+  duration_ms: 1.250083
+  type: 'test'
+  ...
+# Subtest: stream checkpoints append monotonically and terminal statuses seal retained prefixes
+ok 28 - stream checkpoints append monotonically and terminal statuses seal retained prefixes
+  ---
+  duration_ms: 4.826542
+  type: 'test'
+  ...
+# Subtest: transport provenance leaves the latest text appendable but semantic parts close it
+ok 29 - transport provenance leaves the latest text appendable but semantic parts close it
+  ---
+  duration_ms: 2.537
+  type: 'test'
+  ...
+# Subtest: unknown generation status and terminal-to-terminal transitions are rejected
+ok 30 - unknown generation status and terminal-to-terminal transitions are rejected
+  ---
+  duration_ms: 0.091458
+  type: 'test'
+  ...
+# Subtest: branch tombstones cover descendants and choose closest retained active ancestor
+ok 31 - branch tombstones cover descendants and choose closest retained active ancestor
+  ---
+  duration_ms: 2.246333
+  type: 'test'
+  ...
+# Subtest: import retains unsupported parts, missing attachments, provenance, and unknown generation facts
+ok 32 - import retains unsupported parts, missing attachments, provenance, and unknown generation facts
+  ---
+  duration_ms: 1.184
+  type: 'test'
+  ...
+# Subtest: invalid fixture: dangling parent
+ok 33 - invalid fixture: dangling parent
+  ---
+  duration_ms: 0.716208
+  type: 'test'
+  ...
+# Subtest: invalid fixture: cycle
+ok 34 - invalid fixture: cycle
+  ---
+  duration_ms: 0.550458
+  type: 'test'
+  ...
+# Subtest: invalid fixture: invalid active selection
+ok 35 - invalid fixture: invalid active selection
+  ---
+  duration_ms: 0.538209
+  type: 'test'
+  ...
+# Subtest: invalid fixture: generation mismatch
+ok 36 - invalid fixture: generation mismatch
+  ---
+  duration_ms: 0.794125
+  type: 'test'
+  ...
+# Subtest: invalid fixture: part ownership mismatch
+ok 37 - invalid fixture: part ownership mismatch
+  ---
+  duration_ms: 0.689084
+  type: 'test'
+  ...
+# Subtest: invalid fixture: missing bytes claimed available
+ok 38 - invalid fixture: missing bytes claimed available
+  ---
+  duration_ms: 0.53175
+  type: 'test'
+  ...
+# Subtest: invalid fixture: edit rewrites parentage
+ok 39 - invalid fixture: edit rewrites parentage
+  ---
+  duration_ms: 0.601541
+  type: 'test'
+  ...
+# Subtest: invalid fixture: tool result references a future text part
+ok 40 - invalid fixture: tool result references a future text part
+  ---
+  duration_ms: 0.632875
+  type: 'test'
+  ...
+# Subtest: invalid fixture: bad timestamp
+ok 41 - invalid fixture: bad timestamp
+  ---
+  duration_ms: 0.676792
+  type: 'test'
+  ...
+# Subtest: invalid fixture: unsealed finished generation
+ok 42 - invalid fixture: unsealed finished generation
+  ---
+  duration_ms: 0.478916
+  type: 'test'
+  ...
+# Subtest: cross-thread references and scoped source identity collisions fail explicitly
+ok 43 - cross-thread references and scoped source identity collisions fail explicitly
+  ---
+  duration_ms: 1.335167
+  type: 'test'
+  ...
+# Subtest: a deep imported chain validates without recursive parent traversal
+ok 44 - a deep imported chain validates without recursive parent traversal
+  ---
+  duration_ms: 29.518458
+  type: 'test'
+  ...
+# Subtest: derived chunks have source/version identity and do not require an embedding model
+ok 45 - derived chunks have source/version identity and do not require an embedding model
+  ---
+  duration_ms: 0.306875
+  type: 'test'
+  ...
+# Subtest: initial route equality ignores object order, IDs use canonical case, and edit cycles fail
+ok 46 - initial route equality ignores object order, IDs use canonical case, and edit cycles fail
+  ---
+  duration_ms: 1.157917
+  type: 'test'
+  ...
+# Subtest: bounded entity shape validation reuses canonical fields without requiring a whole thread
+ok 47 - bounded entity shape validation reuses canonical fields without requiring a whole thread
+  ---
+  duration_ms: 1.551708
+  type: 'test'
+  ...
+# Subtest: long text uses bounded ordered segments or one UTF-8 blob reference without an inline manifest
+ok 48 - long text uses bounded ordered segments or one UTF-8 blob reference without an inline manifest
+  ---
+  duration_ms: 0.78425
+  type: 'test'
+  ...
+# Subtest: reviewed exclusions validate exact occurrence references and retain source history
+ok 49 - reviewed exclusions validate exact occurrence references and retain source history
+  ---
+  duration_ms: 1.09025
+  type: 'test'
+  ...
+# (node:4504) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: closed v1 preferences normalize to v2 without mutating input or shared defaults
+ok 50 - closed v1 preferences normalize to v2 without mutating input or shared defaults
+  ---
+  duration_ms: 1.298917
+  type: 'test'
+  ...
+# Subtest: v2 preferences are closed and copied, and an old closed v1 reader refuses expanded results
+ok 51 - v2 preferences are closed and copied, and an old closed v1 reader refuses expanded results
+  ---
+  duration_ms: 0.2525
+  type: 'test'
+  ...
+# Subtest: interaction preferences reject omissions, extra keys and wrong scalar types
+ok 52 - interaction preferences reject omissions, extra keys and wrong scalar types
+  ---
+  duration_ms: 0.19575
+  type: 'test'
+  ...
+# Subtest: interaction writes validate the full closed payload at the storage boundary
+ok 53 - interaction writes validate the full closed payload at the storage boundary
+  ---
+  duration_ms: 2.319167
+  type: 'test'
+  ...
+# (node:4505) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: alias validation refuses unknown fields, missing targets, duplicate targets and invalid constraints
+ok 54 - alias validation refuses unknown fields, missing targets, duplicate targets and invalid constraints
+  ---
+  duration_ms: 4.92275
+  type: 'test'
+  ...
+# Subtest: registry bounds enforce unique names, ids, version, count and actual serialized bytes
+ok 55 - registry bounds enforce unique names, ids, version, count and actual serialized bytes
+  ---
+  duration_ms: 2.537459
+  type: 'test'
+  ...
+# Subtest: operation arguments refuse arbitrary keys, missing ids and unsafe revisions
+ok 56 - operation arguments refuse arbitrary keys, missing ids and unsafe revisions
+  ---
+  duration_ms: 0.192458
+  type: 'test'
+  ...
+# Subtest: canonical alias snapshot deep-copies every route field and source attribution
+ok 57 - canonical alias snapshot deep-copies every route field and source attribution
+  ---
+  duration_ms: 0.739458
+  type: 'test'
+  ...
+# Subtest: input and per-attempt request cost constraints accept only bounded USD decimals independently
+ok 58 - input and per-attempt request cost constraints accept only bounded USD decimals independently
+  ---
+  duration_ms: 0.295959
+  type: 'test'
+  ...
+# Subtest: only aliases with a total request cost constraint produce version 4 immutable snapshots
+ok 59 - only aliases with a total request cost constraint produce version 4 immutable snapshots
+  ---
+  duration_ms: 0.48225
+  type: 'test'
+  ...
+# Subtest: processing regions are closed US/EU constraints and produce immutable version 5 snapshots
+ok 60 - processing regions are closed US/EU constraints and produce immutable version 5 snapshots
+  ---
+  duration_ms: 2.187042
+  type: 'test'
+  ...
+# (node:4506) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: selection revisions distinguish returned archive identities without conflating history high water
+ok 61 - selection revisions distinguish returned archive identities without conflating history high water
+  ---
+  duration_ms: 2.623167
+  type: 'test'
+  ...
+# Subtest: activation requires every source and candidate field and rejects ignored control metadata
+ok 62 - activation requires every source and candidate field and rejects ignored control metadata
+  ---
+  duration_ms: 1.799834
+  type: 'test'
+  ...
+# Subtest: complete normalized activation identity includes counts and review high water
+ok 63 - complete normalized activation identity includes counts and review high water
+  ---
+  duration_ms: 0.725583
+  type: 'test'
+  ...
+# (node:4507) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: summary source preserves contiguous immutable evidence and rejects branch gaps, unsealed content and split tools
+ok 64 - summary source preserves contiguous immutable evidence and rejects branch gaps, unsealed content and split tools
+  ---
+  duration_ms: 1.765417
+  type: 'test'
+  ...
+# Subtest: summary output review eligibility uses UTF-8 bytes, exact part projection and visible text only
+ok 65 - summary output review eligibility uses UTF-8 bytes, exact part projection and visible text only
+  ---
+  duration_ms: 1.830667
+  type: 'test'
+  ...
+1..65
+# tests 65
+# suites 0
+# pass 65
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 277.061625

@@ -1,0 +1,193 @@
+{
+  "engine": "webkit",
+  "version": "26.6",
+  "passed": true,
+  "scope": "Real GPU buffers and device.destroy loss; bounded allocation failure is injected. Scheduler requeue is separate.",
+  "initial": {
+    "backend": "webgpu-fp32",
+    "projection": "auto",
+    "tuning": {
+      "record": {
+        "schema": 1,
+        "key": "quixi-gpu-tune-v1:c3eb5406fdca87c4692d4eae96507e376d39b7ac7d9d5e21e299c75618a91f76",
+        "createdAt": "2026-09-08T14:51:49.387Z",
+        "status": "complete",
+        "selections": {
+          "small": "baseline",
+          "medium": "baseline",
+          "large": "tiled"
+        },
+        "samples": {
+          "small": {
+            "baseline": [
+              5,
+              3,
+              3
+            ],
+            "tiled": [
+              8,
+              6,
+              5
+            ]
+          },
+          "medium": {
+            "baseline": [
+              5,
+              5,
+              5
+            ],
+            "tiled": [
+              5,
+              5,
+              5
+            ]
+          },
+          "large": {
+            "baseline": [
+              20,
+              20,
+              20
+            ],
+            "tiled": [
+              11,
+              12,
+              12
+            ]
+          }
+        },
+        "probes": 24,
+        "elapsedMs": 220
+      },
+      "cacheHit": false
+    },
+    "subgroups": false,
+    "attention": "fused",
+    "modelSha256": "e1ef345cd35088b06f70c199f5a4e0311bda5983716ad6a3e7d0a604202efffc",
+    "kernelVersion": "1.0.0",
+    "adapter": {
+      "vendor": "apple",
+      "architecture": "apple",
+      "device": "apple",
+      "description": "apple",
+      "isFallbackAdapter": false
+    },
+    "features": [
+      "bgra8unorm-storage",
+      "clip-distances",
+      "core-features-and-limits",
+      "depth-clip-control",
+      "depth32float-stencil8",
+      "float16-renderable",
+      "float32-blendable",
+      "float32-filterable",
+      "float32-renderable",
+      "indirect-first-instance",
+      "primitive-index",
+      "rg11b10ufloat-renderable",
+      "shader-f16",
+      "subgroups",
+      "texture-compression-astc",
+      "texture-compression-astc-sliced-3d",
+      "texture-compression-bc",
+      "texture-compression-bc-sliced-3d",
+      "texture-compression-etc2",
+      "texture-formats-tier1",
+      "texture-formats-tier2",
+      "timestamp-query"
+    ],
+    "enabledFeatures": [
+      "core-features-and-limits"
+    ],
+    "limits": {
+      "maxBufferSize": 268435456,
+      "maxStorageBufferBindingSize": 134217728,
+      "maxComputeInvocationsPerWorkgroup": 256,
+      "maxComputeWorkgroupStorageSize": 16384,
+      "maxComputeWorkgroupsPerDimension": 65535,
+      "maxStorageBuffersPerShaderStage": 8
+    },
+    "capacity": {
+      "batch": 4,
+      "tokens": 512
+    },
+    "memory": {
+      "weightsBytes": 90261504,
+      "scratchBytes": 31518736,
+      "allocatedBytes": 121780240,
+      "bufferCount": 17
+    },
+    "state": "ready"
+  },
+  "cachedTuning": {
+    "record": {
+      "schema": 1,
+      "key": "quixi-gpu-tune-v1:c3eb5406fdca87c4692d4eae96507e376d39b7ac7d9d5e21e299c75618a91f76",
+      "createdAt": "2026-09-08T14:51:49.387Z",
+      "status": "complete",
+      "selections": {
+        "small": "baseline",
+        "medium": "baseline",
+        "large": "tiled"
+      },
+      "samples": {
+        "small": {
+          "baseline": [
+            5,
+            3,
+            3
+          ],
+          "tiled": [
+            8,
+            6,
+            5
+          ]
+        },
+        "medium": {
+          "baseline": [
+            5,
+            5,
+            5
+          ],
+          "tiled": [
+            5,
+            5,
+            5
+          ]
+        },
+        "large": {
+          "baseline": [
+            20,
+            20,
+            20
+          ],
+          "tiled": [
+            11,
+            12,
+            12
+          ]
+        }
+      },
+      "probes": 24,
+      "elapsedMs": 220
+    },
+    "cacheHit": true
+  },
+  "completedJobs": 500,
+  "observed": {
+    "created": 17,
+    "destroyed": 17,
+    "peakBytes": 121780240,
+    "liveBytes": 0
+  },
+  "notifications": 1,
+  "adapterRejectionTyped": true,
+  "unapprovedSubgroupsRejected": true,
+  "missingHalfFeatureRejected": true,
+  "unavailableAndSoftwareRejected": true,
+  "allocationFailureCleaned": true,
+  "corruptShaderRejected": true,
+  "busyRejected": true,
+  "pendingLossRejected": true,
+  "pendingDisposalRejected": true,
+  "simdFallbackVerified": true
+}

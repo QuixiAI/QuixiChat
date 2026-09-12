@@ -1,0 +1,6 @@
+{
+  "browser-evidence.json": "9d02dde5335ab317329acc9b092924989bd90721e23fe31d976bab3c3893b898",
+  "runner-at-capture.mjs": "25894fd8e6d01b6bf7b6d7c5400bc5f29880888e6adfe2a66c8f7bf7fcdab6f2",
+  "page-at-capture.mjs": "065f9b56a7e6028bf4991f9e04c8e707cf83e0c9e6d19027dcbf20db82e43fe0",
+  "fixture-worker-at-capture.mjs": "87e89a752fc4909b8629600ecbb7a9b92d127ad12a0570f5d867e1713e04c48b"
+}

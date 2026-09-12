@@ -1,0 +1,14 @@
+{
+  "run.mjs": {
+    "artifact": "storage-replay-current-run.mjs.txt",
+    "sha256": "0dadb21b93a9114d8a544e4695f9c550f288dc60be2e398e4d3b74eb5b5b744e"
+  },
+  "index.ts": {
+    "artifact": "storage-replay-current-index.ts.txt",
+    "sha256": "11b33a9f314f70c0fc07188698656de734005882574641fbe2c5b3e647cb4522"
+  },
+  "heap-sampler.mjs": {
+    "artifact": "storage-replay-current-heap-sampler.mjs.txt",
+    "sha256": "dbaf6af375d868a9b4bf445cde9f9b47e0e33a4e7a45041a20e4c8937b661652"
+  }
+}

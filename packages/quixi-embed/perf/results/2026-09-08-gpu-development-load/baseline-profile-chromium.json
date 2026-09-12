@@ -1,0 +1,1622 @@
+{
+  "status": "passed",
+  "passed": true,
+  "conditions": "Development host; timestamp instrumented separate passes, not production dispatch latency",
+  "shapes": [
+    {
+      "batch": 1,
+      "tokens": 32,
+      "warmups": 5,
+      "samples": [
+        {
+          "inputUploadMs": 0,
+          "dispatchMs": 0,
+          "completionReadbackMs": 8.399999976158142,
+          "totalMs": 8.399999976158142,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.524288,
+            "linear": 5.636095999999998,
+            "scores": 0,
+            "softmax": 0.131072,
+            "context": 0.262144,
+            "add": 0.131072,
+            "gelu": 0,
+            "pool": 0.065536
+          }
+        },
+        {
+          "inputUploadMs": 0.20000004768371582,
+          "dispatchMs": 0,
+          "completionReadbackMs": 8.199999988079071,
+          "totalMs": 8.400000035762787,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.262144,
+            "linear": 5.636095999999998,
+            "scores": 0.065536,
+            "softmax": 0.262144,
+            "context": 0.065536,
+            "add": 0.32767999999999997,
+            "gelu": 0.065536,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0.10000002384185791,
+          "dispatchMs": 0,
+          "completionReadbackMs": 8.5,
+          "totalMs": 8.600000023841858,
+          "gpuKernelMs": {
+            "gather": 0.065536,
+            "norm": 0.39321599999999995,
+            "linear": 5.505023999999998,
+            "scores": 0,
+            "softmax": 0.32767999999999997,
+            "context": 0.065536,
+            "add": 0.32767999999999997,
+            "gelu": 0,
+            "pool": 0.065536
+          }
+        },
+        {
+          "inputUploadMs": 0.10000002384185791,
+          "dispatchMs": 0,
+          "completionReadbackMs": 8.300000011920929,
+          "totalMs": 8.400000035762787,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.196608,
+            "linear": 6.094847999999998,
+            "scores": 0.32767999999999997,
+            "softmax": 0,
+            "context": 0.065536,
+            "add": 0,
+            "gelu": 0,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0.10000002384185791,
+          "dispatchMs": 0.10000002384185791,
+          "completionReadbackMs": 8.099999964237213,
+          "totalMs": 8.300000011920929,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.065536,
+            "linear": 5.898239999999999,
+            "scores": 0.131072,
+            "softmax": 0.262144,
+            "context": 0,
+            "add": 0.065536,
+            "gelu": 0.131072,
+            "pool": 0.065536
+          }
+        },
+        {
+          "inputUploadMs": 0.10000002384185791,
+          "dispatchMs": 0,
+          "completionReadbackMs": 8.199999988079071,
+          "totalMs": 8.399999976158142,
+          "gpuKernelMs": {
+            "gather": 0.065536,
+            "norm": 0.524288,
+            "linear": 5.701631999999998,
+            "scores": 0,
+            "softmax": 0.065536,
+            "context": 0.32767999999999997,
+            "add": 0.065536,
+            "gelu": 0,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0,
+          "dispatchMs": 0.09999996423721313,
+          "completionReadbackMs": 7.900000035762787,
+          "totalMs": 8,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0,
+            "linear": 6.225919999999997,
+            "scores": 0.065536,
+            "softmax": 0.196608,
+            "context": 0.131072,
+            "add": 0.131072,
+            "gelu": 0,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0,
+          "dispatchMs": 0.09999996423721313,
+          "completionReadbackMs": 3.800000011920929,
+          "totalMs": 3.899999976158142,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.065536,
+            "linear": 2.3592960000000005,
+            "scores": 0,
+            "softmax": 0.196608,
+            "context": 0,
+            "add": 0,
+            "gelu": 0.065536,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0,
+          "dispatchMs": 0.10000002384185791,
+          "completionReadbackMs": 3.599999964237213,
+          "totalMs": 3.699999988079071,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.065536,
+            "linear": 1.9660800000000005,
+            "scores": 0.131072,
+            "softmax": 0,
+            "context": 0.131072,
+            "add": 0.196608,
+            "gelu": 0.131072,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0,
+          "dispatchMs": 0.09999996423721313,
+          "completionReadbackMs": 3.800000011920929,
+          "totalMs": 3.899999976158142,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.196608,
+            "linear": 1.9005440000000007,
+            "scores": 0.196608,
+            "softmax": 0.065536,
+            "context": 0,
+            "add": 0.196608,
+            "gelu": 0.196608,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0,
+          "dispatchMs": 0.09999996423721313,
+          "completionReadbackMs": 3.699999988079071,
+          "totalMs": 3.799999952316284,
+          "gpuKernelMs": {
+            "gather": 0.065536,
+            "norm": 0.196608,
+            "linear": 1.9005440000000005,
+            "scores": 0.131072,
+            "softmax": 0.065536,
+            "context": 0.131072,
+            "add": 0.065536,
+            "gelu": 0.131072,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0.20000004768371582,
+          "dispatchMs": 0,
+          "completionReadbackMs": 2.799999952316284,
+          "totalMs": 3,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.196608,
+            "linear": 1.5728640000000005,
+            "scores": 0,
+            "softmax": 0.065536,
+            "context": 0.065536,
+            "add": 0,
+            "gelu": 0,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0,
+          "dispatchMs": 0.10000002384185791,
+          "completionReadbackMs": 3,
+          "totalMs": 3.100000023841858,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0,
+            "linear": 1.7039360000000006,
+            "scores": 0.065536,
+            "softmax": 0,
+            "context": 0.196608,
+            "add": 0.065536,
+            "gelu": 0,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0.19999998807907104,
+          "dispatchMs": 0,
+          "completionReadbackMs": 2.599999964237213,
+          "totalMs": 2.799999952316284,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.065536,
+            "linear": 1.2451840000000003,
+            "scores": 0,
+            "softmax": 0,
+            "context": 0,
+            "add": 0,
+            "gelu": 0,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0.10000002384185791,
+          "dispatchMs": 0,
+          "completionReadbackMs": 3,
+          "totalMs": 3.100000023841858,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.131072,
+            "linear": 1.4417920000000004,
+            "scores": 0.065536,
+            "softmax": 0,
+            "context": 0.065536,
+            "add": 0,
+            "gelu": 0,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0.20000004768371582,
+          "dispatchMs": 0,
+          "completionReadbackMs": 2.599999964237213,
+          "totalMs": 2.800000011920929,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0,
+            "linear": 1.3107200000000003,
+            "scores": 0,
+            "softmax": 0.065536,
+            "context": 0,
+            "add": 0.065536,
+            "gelu": 0,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0,
+          "dispatchMs": 0,
+          "completionReadbackMs": 3.100000023841858,
+          "totalMs": 3.100000023841858,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.065536,
+            "linear": 1.4417920000000004,
+            "scores": 0.065536,
+            "softmax": 0,
+            "context": 0,
+            "add": 0.065536,
+            "gelu": 0,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0,
+          "dispatchMs": 0.10000002384185791,
+          "completionReadbackMs": 3.300000011920929,
+          "totalMs": 3.400000035762787,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.131072,
+            "linear": 1.4417920000000004,
+            "scores": 0,
+            "softmax": 0.065536,
+            "context": 0,
+            "add": 0,
+            "gelu": 0,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0,
+          "dispatchMs": 0,
+          "completionReadbackMs": 3.100000023841858,
+          "totalMs": 3.100000023841858,
+          "gpuKernelMs": {
+            "gather": 0.065536,
+            "norm": 0.131072,
+            "linear": 1.2451840000000003,
+            "scores": 0,
+            "softmax": 0.065536,
+            "context": 0.131072,
+            "add": 0.065536,
+            "gelu": 0.065536,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0,
+          "dispatchMs": 0.10000002384185791,
+          "completionReadbackMs": 2.399999976158142,
+          "totalMs": 2.5,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.065536,
+            "linear": 1.3762560000000004,
+            "scores": 0,
+            "softmax": 0,
+            "context": 0,
+            "add": 0.065536,
+            "gelu": 0,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0,
+          "dispatchMs": 0.10000002384185791,
+          "completionReadbackMs": 2.399999976158142,
+          "totalMs": 2.5,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.065536,
+            "linear": 1.1796480000000003,
+            "scores": 0,
+            "softmax": 0,
+            "context": 0,
+            "add": 0.065536,
+            "gelu": 0.065536,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0.10000002384185791,
+          "dispatchMs": 0,
+          "completionReadbackMs": 2.899999976158142,
+          "totalMs": 3,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0,
+            "linear": 1.5728640000000005,
+            "scores": 0,
+            "softmax": 0.065536,
+            "context": 0,
+            "add": 0,
+            "gelu": 0,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0,
+          "dispatchMs": 0,
+          "completionReadbackMs": 3.100000023841858,
+          "totalMs": 3.100000023841858,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.131072,
+            "linear": 1.3107200000000003,
+            "scores": 0,
+            "softmax": 0.065536,
+            "context": 0,
+            "add": 0,
+            "gelu": 0.065536,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0,
+          "dispatchMs": 0,
+          "completionReadbackMs": 3,
+          "totalMs": 3,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.131072,
+            "linear": 1.3107200000000003,
+            "scores": 0,
+            "softmax": 0.065536,
+            "context": 0,
+            "add": 0.065536,
+            "gelu": 0,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0,
+          "dispatchMs": 0.09999996423721313,
+          "completionReadbackMs": 2.600000023841858,
+          "totalMs": 2.699999988079071,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0,
+            "linear": 1.3762560000000004,
+            "scores": 0,
+            "softmax": 0,
+            "context": 0.065536,
+            "add": 0.065536,
+            "gelu": 0,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0,
+          "dispatchMs": 0.09999996423721313,
+          "completionReadbackMs": 2.400000035762787,
+          "totalMs": 2.5,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0,
+            "linear": 1.3107200000000003,
+            "scores": 0,
+            "softmax": 0.065536,
+            "context": 0.065536,
+            "add": 0,
+            "gelu": 0,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0,
+          "dispatchMs": 0.10000002384185791,
+          "completionReadbackMs": 3,
+          "totalMs": 3.100000023841858,
+          "gpuKernelMs": {
+            "gather": 0.065536,
+            "norm": 0,
+            "linear": 1.3762560000000004,
+            "scores": 0,
+            "softmax": 0.065536,
+            "context": 0.065536,
+            "add": 0.065536,
+            "gelu": 0,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0.10000002384185791,
+          "dispatchMs": 0,
+          "completionReadbackMs": 2.5,
+          "totalMs": 2.600000023841858,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.065536,
+            "linear": 1.2451840000000003,
+            "scores": 0,
+            "softmax": 0.065536,
+            "context": 0,
+            "add": 0,
+            "gelu": 0,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0,
+          "dispatchMs": 0.09999996423721313,
+          "completionReadbackMs": 3,
+          "totalMs": 3.099999964237213,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.065536,
+            "linear": 1.3762560000000004,
+            "scores": 0,
+            "softmax": 0.065536,
+            "context": 0,
+            "add": 0.065536,
+            "gelu": 0,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0,
+          "dispatchMs": 0,
+          "completionReadbackMs": 3.100000023841858,
+          "totalMs": 3.100000023841858,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.065536,
+            "linear": 1.3762560000000004,
+            "scores": 0,
+            "softmax": 0,
+            "context": 0.065536,
+            "add": 0,
+            "gelu": 0.065536,
+            "pool": 0
+          }
+        }
+      ]
+    },
+    {
+      "batch": 1,
+      "tokens": 128,
+      "warmups": 5,
+      "samples": [
+        {
+          "inputUploadMs": 0,
+          "dispatchMs": 0,
+          "completionReadbackMs": 5.699999988079071,
+          "totalMs": 5.699999988079071,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.065536,
+            "linear": 3.9321599999999988,
+            "scores": 0.131072,
+            "softmax": 0.131072,
+            "context": 0.131072,
+            "add": 0,
+            "gelu": 0.065536,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0,
+          "dispatchMs": 0,
+          "completionReadbackMs": 6.399999976158142,
+          "totalMs": 6.399999976158142,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.065536,
+            "linear": 4.128767999999998,
+            "scores": 0.131072,
+            "softmax": 0.065536,
+            "context": 0.196608,
+            "add": 0,
+            "gelu": 0,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0,
+          "dispatchMs": 0.10000002384185791,
+          "completionReadbackMs": 6.399999976158142,
+          "totalMs": 6.5,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.065536,
+            "linear": 4.128767999999998,
+            "scores": 0.131072,
+            "softmax": 0.065536,
+            "context": 0.131072,
+            "add": 0.065536,
+            "gelu": 0.065536,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0.19999998807907104,
+          "dispatchMs": 0,
+          "completionReadbackMs": 6,
+          "totalMs": 6.199999988079071,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0,
+            "linear": 4.259839999999998,
+            "scores": 0.196608,
+            "softmax": 0.065536,
+            "context": 0.065536,
+            "add": 0.065536,
+            "gelu": 0,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0.09999996423721313,
+          "dispatchMs": 0.10000002384185791,
+          "completionReadbackMs": 5.899999976158142,
+          "totalMs": 6.099999964237213,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.065536,
+            "linear": 4.128767999999997,
+            "scores": 0.131072,
+            "softmax": 0.065536,
+            "context": 0.131072,
+            "add": 0.065536,
+            "gelu": 0,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0,
+          "dispatchMs": 0.10000002384185791,
+          "completionReadbackMs": 5.899999976158142,
+          "totalMs": 6,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.065536,
+            "linear": 4.128767999999997,
+            "scores": 0.131072,
+            "softmax": 0.131072,
+            "context": 0.065536,
+            "add": 0.065536,
+            "gelu": 0,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0.10000002384185791,
+          "dispatchMs": 0,
+          "completionReadbackMs": 6,
+          "totalMs": 6.100000023841858,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.065536,
+            "linear": 4.194303999999998,
+            "scores": 0.196608,
+            "softmax": 0.065536,
+            "context": 0.065536,
+            "add": 0,
+            "gelu": 0.065536,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0.09999996423721313,
+          "dispatchMs": 0,
+          "completionReadbackMs": 6,
+          "totalMs": 6.099999964237213,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0,
+            "linear": 4.259839999999998,
+            "scores": 0.065536,
+            "softmax": 0.131072,
+            "context": 0.131072,
+            "add": 0,
+            "gelu": 0.065536,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0,
+          "dispatchMs": 0,
+          "completionReadbackMs": 6.200000047683716,
+          "totalMs": 6.200000047683716,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.065536,
+            "linear": 4.128767999999998,
+            "scores": 0.131072,
+            "softmax": 0.065536,
+            "context": 0.131072,
+            "add": 0,
+            "gelu": 0,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0.09999996423721313,
+          "dispatchMs": 0,
+          "completionReadbackMs": 6.100000023841858,
+          "totalMs": 6.199999988079071,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.196608,
+            "linear": 4.063231999999998,
+            "scores": 0.065536,
+            "softmax": 0.131072,
+            "context": 0.131072,
+            "add": 0,
+            "gelu": 0.065536,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0.09999996423721313,
+          "dispatchMs": 0,
+          "completionReadbackMs": 6.100000023841858,
+          "totalMs": 6.199999988079071,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.065536,
+            "linear": 4.194303999999998,
+            "scores": 0.065536,
+            "softmax": 0.131072,
+            "context": 0.065536,
+            "add": 0,
+            "gelu": 0.065536,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0,
+          "dispatchMs": 0,
+          "completionReadbackMs": 5.899999976158142,
+          "totalMs": 5.899999976158142,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.196608,
+            "linear": 3.997695999999998,
+            "scores": 0.196608,
+            "softmax": 0.065536,
+            "context": 0.131072,
+            "add": 0,
+            "gelu": 0.065536,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0.10000002384185791,
+          "dispatchMs": 0,
+          "completionReadbackMs": 6,
+          "totalMs": 6.100000023841858,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.065536,
+            "linear": 4.259839999999999,
+            "scores": 0.131072,
+            "softmax": 0.065536,
+            "context": 0.065536,
+            "add": 0,
+            "gelu": 0,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0,
+          "dispatchMs": 0.10000002384185791,
+          "completionReadbackMs": 5.899999976158142,
+          "totalMs": 6,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.065536,
+            "linear": 4.194303999999998,
+            "scores": 0.131072,
+            "softmax": 0.065536,
+            "context": 0.065536,
+            "add": 0,
+            "gelu": 0.065536,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0,
+          "dispatchMs": 0.09999996423721313,
+          "completionReadbackMs": 6,
+          "totalMs": 6.099999964237213,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.065536,
+            "linear": 4.194303999999998,
+            "scores": 0.131072,
+            "softmax": 0.065536,
+            "context": 0.131072,
+            "add": 0.065536,
+            "gelu": 0,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0.09999996423721313,
+          "dispatchMs": 0,
+          "completionReadbackMs": 5.900000035762787,
+          "totalMs": 6,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.131072,
+            "linear": 4.128767999999998,
+            "scores": 0.196608,
+            "softmax": 0,
+            "context": 0.131072,
+            "add": 0.065536,
+            "gelu": 0,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0.10000002384185791,
+          "dispatchMs": 0,
+          "completionReadbackMs": 5.599999964237213,
+          "totalMs": 5.699999988079071,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.065536,
+            "linear": 3.8010879999999987,
+            "scores": 0.196608,
+            "softmax": 0.065536,
+            "context": 0.131072,
+            "add": 0.131072,
+            "gelu": 0.065536,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0,
+          "dispatchMs": 0,
+          "completionReadbackMs": 5.5,
+          "totalMs": 5.5,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.065536,
+            "linear": 3.866623999999998,
+            "scores": 0.131072,
+            "softmax": 0.131072,
+            "context": 0.131072,
+            "add": 0.065536,
+            "gelu": 0.065536,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0.09999996423721313,
+          "dispatchMs": 0,
+          "completionReadbackMs": 6.100000023841858,
+          "totalMs": 6.199999988079071,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0,
+            "linear": 4.194303999999998,
+            "scores": 0.131072,
+            "softmax": 0,
+            "context": 0.196608,
+            "add": 0.065536,
+            "gelu": 0,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0.10000002384185791,
+          "dispatchMs": 0.09999996423721313,
+          "completionReadbackMs": 5.5,
+          "totalMs": 5.699999988079071,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.065536,
+            "linear": 3.997695999999998,
+            "scores": 0.131072,
+            "softmax": 0.131072,
+            "context": 0.065536,
+            "add": 0,
+            "gelu": 0.065536,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0,
+          "dispatchMs": 0,
+          "completionReadbackMs": 5.599999964237213,
+          "totalMs": 5.599999964237213,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.065536,
+            "linear": 4.063231999999998,
+            "scores": 0.131072,
+            "softmax": 0.065536,
+            "context": 0.065536,
+            "add": 0.065536,
+            "gelu": 0,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0,
+          "dispatchMs": 0.10000002384185791,
+          "completionReadbackMs": 5.5,
+          "totalMs": 5.600000023841858,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0,
+            "linear": 3.997695999999998,
+            "scores": 0.131072,
+            "softmax": 0.065536,
+            "context": 0.131072,
+            "add": 0.065536,
+            "gelu": 0.065536,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0.10000002384185791,
+          "dispatchMs": 0,
+          "completionReadbackMs": 5.5,
+          "totalMs": 5.600000023841858,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.065536,
+            "linear": 3.997695999999998,
+            "scores": 0.131072,
+            "softmax": 0.065536,
+            "context": 0.065536,
+            "add": 0.065536,
+            "gelu": 0,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0,
+          "dispatchMs": 0.09999996423721313,
+          "completionReadbackMs": 5.5,
+          "totalMs": 5.599999964237213,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.131072,
+            "linear": 4.128767999999998,
+            "scores": 0.131072,
+            "softmax": 0,
+            "context": 0.131072,
+            "add": 0,
+            "gelu": 0,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0.10000002384185791,
+          "dispatchMs": 0,
+          "completionReadbackMs": 5.599999964237213,
+          "totalMs": 5.699999988079071,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.065536,
+            "linear": 3.997695999999998,
+            "scores": 0.131072,
+            "softmax": 0.131072,
+            "context": 0.065536,
+            "add": 0,
+            "gelu": 0.065536,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0.10000002384185791,
+          "dispatchMs": 0,
+          "completionReadbackMs": 5.599999964237213,
+          "totalMs": 5.699999988079071,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0,
+            "linear": 3.997695999999998,
+            "scores": 0.131072,
+            "softmax": 0.131072,
+            "context": 0.065536,
+            "add": 0.065536,
+            "gelu": 0.065536,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0,
+          "dispatchMs": 0.10000002384185791,
+          "completionReadbackMs": 6,
+          "totalMs": 6.100000023841858,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.065536,
+            "linear": 4.128767999999998,
+            "scores": 0.196608,
+            "softmax": 0.065536,
+            "context": 0.065536,
+            "add": 0.065536,
+            "gelu": 0,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0,
+          "dispatchMs": 0,
+          "completionReadbackMs": 6.399999976158142,
+          "totalMs": 6.399999976158142,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.065536,
+            "linear": 4.063231999999998,
+            "scores": 0.131072,
+            "softmax": 0,
+            "context": 0.065536,
+            "add": 0.065536,
+            "gelu": 0,
+            "pool": 0.065536
+          }
+        },
+        {
+          "inputUploadMs": 0,
+          "dispatchMs": 0,
+          "completionReadbackMs": 5.799999952316284,
+          "totalMs": 5.799999952316284,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.065536,
+            "linear": 3.932159999999998,
+            "scores": 0.131072,
+            "softmax": 0.131072,
+            "context": 0.131072,
+            "add": 0.196608,
+            "gelu": 0.065536,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0.10000002384185791,
+          "dispatchMs": 0.10000002384185791,
+          "completionReadbackMs": 5.899999976158142,
+          "totalMs": 6.100000023841858,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.131072,
+            "linear": 3.9976959999999977,
+            "scores": 0.131072,
+            "softmax": 0.065536,
+            "context": 0.065536,
+            "add": 0.065536,
+            "gelu": 0.131072,
+            "pool": 0
+          }
+        }
+      ]
+    },
+    {
+      "batch": 1,
+      "tokens": 512,
+      "warmups": 5,
+      "samples": [
+        {
+          "inputUploadMs": 0.10000002384185791,
+          "dispatchMs": 0,
+          "completionReadbackMs": 20.5,
+          "totalMs": 20.600000023841858,
+          "gpuKernelMs": {
+            "gather": 0.065536,
+            "norm": 0.065536,
+            "linear": 15.073279999999993,
+            "scores": 1.703936,
+            "softmax": 0.32767999999999997,
+            "context": 1.3107199999999999,
+            "add": 0.065536,
+            "gelu": 0.131072,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0,
+          "dispatchMs": 0,
+          "completionReadbackMs": 20.69999998807907,
+          "totalMs": 20.69999998807907,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.065536,
+            "linear": 15.204351999999991,
+            "scores": 1.6383999999999999,
+            "softmax": 0.32767999999999997,
+            "context": 1.4417919999999997,
+            "add": 0.065536,
+            "gelu": 0.131072,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0,
+          "dispatchMs": 0.10000002384185791,
+          "completionReadbackMs": 19.899999976158142,
+          "totalMs": 20,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.131072,
+            "linear": 14.548991999999995,
+            "scores": 1.835008,
+            "softmax": 0.32767999999999997,
+            "context": 1.3762560000000001,
+            "add": 0.196608,
+            "gelu": 0.196608,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0.09999996423721313,
+          "dispatchMs": 0,
+          "completionReadbackMs": 20.30000001192093,
+          "totalMs": 20.399999976158142,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.131072,
+            "linear": 15.335423999999993,
+            "scores": 1.6383999999999999,
+            "softmax": 0.32767999999999997,
+            "context": 1.3762559999999997,
+            "add": 0,
+            "gelu": 0.065536,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0.10000002384185791,
+          "dispatchMs": 0,
+          "completionReadbackMs": 20.30000001192093,
+          "totalMs": 20.400000035762787,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.196608,
+            "linear": 15.073279999999993,
+            "scores": 1.6383999999999999,
+            "softmax": 0.32767999999999997,
+            "context": 1.507328,
+            "add": 0,
+            "gelu": 0.131072,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0,
+          "dispatchMs": 0,
+          "completionReadbackMs": 19.799999952316284,
+          "totalMs": 19.799999952316284,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.065536,
+            "linear": 15.007743999999992,
+            "scores": 1.703936,
+            "softmax": 0.262144,
+            "context": 1.5073279999999998,
+            "add": 0,
+            "gelu": 0.065536,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0,
+          "dispatchMs": 0.09999996423721313,
+          "completionReadbackMs": 19.900000035762787,
+          "totalMs": 20,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.131072,
+            "linear": 14.942207999999992,
+            "scores": 1.769472,
+            "softmax": 0.262144,
+            "context": 1.5073279999999998,
+            "add": 0,
+            "gelu": 0.065536,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0.10000002384185791,
+          "dispatchMs": 0,
+          "completionReadbackMs": 19.899999976158142,
+          "totalMs": 20,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0,
+            "linear": 15.073279999999993,
+            "scores": 1.6383999999999999,
+            "softmax": 0.39321599999999995,
+            "context": 1.3762559999999997,
+            "add": 0,
+            "gelu": 0.131072,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0.09999996423721313,
+          "dispatchMs": 0,
+          "completionReadbackMs": 20.5,
+          "totalMs": 20.599999964237213,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0,
+            "linear": 15.138815999999993,
+            "scores": 1.6383999999999999,
+            "softmax": 0.39321599999999995,
+            "context": 1.5073279999999998,
+            "add": 0.065536,
+            "gelu": 0,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0.10000002384185791,
+          "dispatchMs": 0.09999996423721313,
+          "completionReadbackMs": 19.900000035762787,
+          "totalMs": 20.100000023841858,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.131072,
+            "linear": 14.942207999999994,
+            "scores": 1.769472,
+            "softmax": 0.32767999999999997,
+            "context": 1.3762560000000001,
+            "add": 0,
+            "gelu": 0.131072,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0.09999996423721313,
+          "dispatchMs": 0.10000002384185791,
+          "completionReadbackMs": 19.80000001192093,
+          "totalMs": 20,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.065536,
+            "linear": 15.073279999999993,
+            "scores": 1.6383999999999999,
+            "softmax": 0.32767999999999997,
+            "context": 1.5073279999999998,
+            "add": 0,
+            "gelu": 0.065536,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0.10000002384185791,
+          "dispatchMs": 0,
+          "completionReadbackMs": 19.899999976158142,
+          "totalMs": 20,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.065536,
+            "linear": 15.007743999999994,
+            "scores": 1.6383999999999999,
+            "softmax": 0.39321599999999995,
+            "context": 1.4417919999999997,
+            "add": 0.065536,
+            "gelu": 0.065536,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0.09999996423721313,
+          "dispatchMs": 0,
+          "completionReadbackMs": 20.600000023841858,
+          "totalMs": 20.69999998807907,
+          "gpuKernelMs": {
+            "gather": 0.065536,
+            "norm": 0.065536,
+            "linear": 15.204351999999993,
+            "scores": 1.703936,
+            "softmax": 0.32767999999999997,
+            "context": 1.3762560000000001,
+            "add": 0.065536,
+            "gelu": 0.131072,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0.10000002384185791,
+          "dispatchMs": 0,
+          "completionReadbackMs": 19.899999976158142,
+          "totalMs": 20,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0,
+            "linear": 15.138815999999993,
+            "scores": 1.5728639999999998,
+            "softmax": 0.39321599999999995,
+            "context": 1.4417919999999997,
+            "add": 0,
+            "gelu": 0.131072,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0.19999998807907104,
+          "dispatchMs": 0,
+          "completionReadbackMs": 19.80000001192093,
+          "totalMs": 20,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.065536,
+            "linear": 14.942207999999994,
+            "scores": 1.703936,
+            "softmax": 0.39321599999999995,
+            "context": 1.245184,
+            "add": 0.131072,
+            "gelu": 0.196608,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0.09999996423721313,
+          "dispatchMs": 0,
+          "completionReadbackMs": 19.69999998807907,
+          "totalMs": 19.799999952316284,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.065536,
+            "linear": 14.876671999999994,
+            "scores": 1.769472,
+            "softmax": 0.32767999999999997,
+            "context": 1.3762560000000001,
+            "add": 0.065536,
+            "gelu": 0.131072,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0.10000002384185791,
+          "dispatchMs": 0,
+          "completionReadbackMs": 19.80000001192093,
+          "totalMs": 19.900000035762787,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.196608,
+            "linear": 14.876671999999994,
+            "scores": 1.835008,
+            "softmax": 0.262144,
+            "context": 1.3762560000000001,
+            "add": 0,
+            "gelu": 0.131072,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0,
+          "dispatchMs": 0.09999996423721313,
+          "completionReadbackMs": 19.900000035762787,
+          "totalMs": 20,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.065536,
+            "linear": 15.073279999999992,
+            "scores": 1.703936,
+            "softmax": 0.262144,
+            "context": 1.5073279999999998,
+            "add": 0,
+            "gelu": 0.065536,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0.09999996423721313,
+          "dispatchMs": 0,
+          "completionReadbackMs": 19.700000047683716,
+          "totalMs": 19.80000001192093,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.131072,
+            "linear": 14.942207999999994,
+            "scores": 1.769472,
+            "softmax": 0.32767999999999997,
+            "context": 1.3762560000000001,
+            "add": 0.065536,
+            "gelu": 0.131072,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0.09999996423721313,
+          "dispatchMs": 0,
+          "completionReadbackMs": 19.80000001192093,
+          "totalMs": 19.899999976158142,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.065536,
+            "linear": 15.073279999999993,
+            "scores": 1.703936,
+            "softmax": 0.39321599999999995,
+            "context": 1.245184,
+            "add": 0.065536,
+            "gelu": 0.065536,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0,
+          "dispatchMs": 0.10000002384185791,
+          "completionReadbackMs": 19.69999998807907,
+          "totalMs": 19.80000001192093,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0,
+            "linear": 14.942207999999994,
+            "scores": 1.703936,
+            "softmax": 0.32767999999999997,
+            "context": 1.4417919999999997,
+            "add": 0.065536,
+            "gelu": 0.196608,
+            "pool": 0.065536
+          }
+        },
+        {
+          "inputUploadMs": 0.10000002384185791,
+          "dispatchMs": 0.10000002384185791,
+          "completionReadbackMs": 19.599999964237213,
+          "totalMs": 19.80000001192093,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.065536,
+            "linear": 15.007743999999992,
+            "scores": 1.703936,
+            "softmax": 0.32767999999999997,
+            "context": 1.5073279999999998,
+            "add": 0,
+            "gelu": 0.065536,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0.10000002384185791,
+          "dispatchMs": 0.10000002384185791,
+          "completionReadbackMs": 19.799999952316284,
+          "totalMs": 20,
+          "gpuKernelMs": {
+            "gather": 0.065536,
+            "norm": 0.065536,
+            "linear": 15.007743999999994,
+            "scores": 1.6383999999999999,
+            "softmax": 0.32767999999999997,
+            "context": 1.4417919999999997,
+            "add": 0,
+            "gelu": 0.196608,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0.10000002384185791,
+          "dispatchMs": 0,
+          "completionReadbackMs": 19.69999998807907,
+          "totalMs": 19.80000001192093,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.131072,
+            "linear": 14.811135999999994,
+            "scores": 1.6383999999999999,
+            "softmax": 0.32767999999999997,
+            "context": 1.507328,
+            "add": 0.065536,
+            "gelu": 0.131072,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0.19999998807907104,
+          "dispatchMs": 0,
+          "completionReadbackMs": 19.700000047683716,
+          "totalMs": 19.900000035762787,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.131072,
+            "linear": 14.876671999999994,
+            "scores": 1.6383999999999999,
+            "softmax": 0.39321599999999995,
+            "context": 1.5073279999999998,
+            "add": 0.065536,
+            "gelu": 0.065536,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0.10000002384185791,
+          "dispatchMs": 0,
+          "completionReadbackMs": 19.69999998807907,
+          "totalMs": 19.80000001192093,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0,
+            "linear": 15.007743999999992,
+            "scores": 1.6383999999999999,
+            "softmax": 0.39321599999999995,
+            "context": 1.5073279999999998,
+            "add": 0.065536,
+            "gelu": 0.065536,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0.09999996423721313,
+          "dispatchMs": 0,
+          "completionReadbackMs": 19.600000023841858,
+          "totalMs": 19.69999998807907,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.131072,
+            "linear": 14.876671999999994,
+            "scores": 1.703936,
+            "softmax": 0.32767999999999997,
+            "context": 1.4417919999999997,
+            "add": 0,
+            "gelu": 0.196608,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0,
+          "dispatchMs": 0,
+          "completionReadbackMs": 19.900000035762787,
+          "totalMs": 19.900000035762787,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.262144,
+            "linear": 14.811135999999994,
+            "scores": 1.769472,
+            "softmax": 0.262144,
+            "context": 1.5073279999999998,
+            "add": 0.131072,
+            "gelu": 0,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0.10000002384185791,
+          "dispatchMs": 0,
+          "completionReadbackMs": 20.5,
+          "totalMs": 20.600000023841858,
+          "gpuKernelMs": {
+            "gather": 0.065536,
+            "norm": 0,
+            "linear": 15.007743999999994,
+            "scores": 1.703936,
+            "softmax": 0.39321599999999995,
+            "context": 1.376256,
+            "add": 0.065536,
+            "gelu": 0.196608,
+            "pool": 0
+          }
+        },
+        {
+          "inputUploadMs": 0.10000002384185791,
+          "dispatchMs": 0,
+          "completionReadbackMs": 20.399999976158142,
+          "totalMs": 20.5,
+          "gpuKernelMs": {
+            "gather": 0,
+            "norm": 0.131072,
+            "linear": 15.204351999999993,
+            "scores": 1.5728639999999998,
+            "softmax": 0.39321599999999995,
+            "context": 1.4417919999999997,
+            "add": 0,
+            "gelu": 0.131072,
+            "pool": 0
+          }
+        }
+      ]
+    }
+  ],
+  "environment": {
+    "engine": "chromium",
+    "version": "153.0.8010.12",
+    "diagnostics": {
+      "backend": "webgpu-fp32",
+      "modelSha256": "e1ef345cd35088b06f70c199f5a4e0311bda5983716ad6a3e7d0a604202efffc",
+      "kernelVersion": "1.0.0",
+      "adapter": {
+        "vendor": "apple",
+        "architecture": "metal-3",
+        "device": "",
+        "description": "",
+        "isFallbackAdapter": false
+      },
+      "features": [
+        "bgra8unorm-storage",
+        "clip-distances",
+        "core-features-and-limits",
+        "depth-clip-control",
+        "depth32float-stencil8",
+        "dual-source-blending",
+        "float32-blendable",
+        "float32-filterable",
+        "indirect-first-instance",
+        "primitive-index",
+        "rg11b10ufloat-renderable",
+        "shader-f16",
+        "subgroup-size-control",
+        "subgroups",
+        "texture-component-swizzle",
+        "texture-compression-astc",
+        "texture-compression-astc-sliced-3d",
+        "texture-compression-bc",
+        "texture-compression-bc-sliced-3d",
+        "texture-compression-etc2",
+        "texture-formats-tier1",
+        "texture-formats-tier2",
+        "timestamp-query"
+      ],
+      "enabledFeatures": [
+        "core-features-and-limits",
+        "timestamp-query"
+      ],
+      "limits": {
+        "maxBufferSize": 268435456,
+        "maxStorageBufferBindingSize": 134217728,
+        "maxComputeInvocationsPerWorkgroup": 256,
+        "maxComputeWorkgroupStorageSize": 16384,
+        "maxComputeWorkgroupsPerDimension": 65535,
+        "maxStorageBuffersPerShaderStage": 8
+      },
+      "capacity": {
+        "batch": 1,
+        "tokens": 512
+      },
+      "memory": {
+        "weightsBytes": 90261504,
+        "scratchBytes": 20491268,
+        "allocatedBytes": 110752772,
+        "bufferCount": 17
+      },
+      "state": "ready"
+    }
+  }
+}

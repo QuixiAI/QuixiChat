@@ -1,0 +1,201 @@
+{
+  "mode": "assert",
+  "name": "chromium",
+  "caseName": "attachment-review",
+  "scope": "Computed CSS reflow and enabled control-border contrast; no screen-reader or native-control pixel-rendering qualification.",
+  "samples": [
+    {
+      "size": "normal",
+      "viewportWidth": 320,
+      "documentWidth": 320,
+      "region": {
+        "left": 37.78,
+        "right": 282.22,
+        "width": 244.44,
+        "height": 655.03
+      },
+      "rootFontSize": "16px",
+      "focused": {
+        "tag": "INPUT",
+        "id": "",
+        "label": "I reviewed these attachment exclusions",
+        "insideRegion": true
+      },
+      "controlCount": 4,
+      "controls": [
+        {
+          "tag": "INPUT",
+          "label": "seed.png · Image · message 3ffa1304",
+          "bounds": {
+            "left": 41.78,
+            "right": 286.22,
+            "width": 244.44,
+            "height": 13
+          },
+          "containerBounds": {
+            "left": 19.19,
+            "right": 300.81,
+            "width": 281.63,
+            "height": 3371.25
+          },
+          "disabled": false,
+          "overflow": false
+        },
+        {
+          "tag": "INPUT",
+          "label": "I reviewed these attachment exclusions",
+          "bounds": {
+            "left": 41.78,
+            "right": 286.22,
+            "width": 244.44,
+            "height": 13
+          },
+          "containerBounds": {
+            "left": 19.19,
+            "right": 300.81,
+            "width": 281.63,
+            "height": 3371.25
+          },
+          "disabled": false,
+          "overflow": false
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Apply attachment exclusions",
+          "bounds": {
+            "left": 37.78,
+            "right": 271.91,
+            "width": 234.13,
+            "height": 38.94
+          },
+          "containerBounds": {
+            "left": 19.19,
+            "right": 300.81,
+            "width": 281.63,
+            "height": 3371.25
+          },
+          "disabled": false,
+          "overflow": false
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Cancel attachment review",
+          "bounds": {
+            "left": 37.78,
+            "right": 251.91,
+            "width": 214.13,
+            "height": 38.94
+          },
+          "containerBounds": {
+            "left": 19.19,
+            "right": 300.81,
+            "width": 281.63,
+            "height": 3371.25
+          },
+          "disabled": false,
+          "overflow": false
+        }
+      ],
+      "borders": [],
+      "documentOverflow": [],
+      "violations": []
+    },
+    {
+      "size": "enlarged",
+      "viewportWidth": 320,
+      "documentWidth": 320,
+      "region": {
+        "left": 74.58,
+        "right": 245.42,
+        "width": 170.84,
+        "height": 3033.52
+      },
+      "rootFontSize": "32px",
+      "focused": {
+        "tag": "INPUT",
+        "id": "",
+        "label": "I reviewed these attachment exclusions",
+        "insideRegion": true
+      },
+      "controlCount": 4,
+      "controls": [
+        {
+          "tag": "INPUT",
+          "label": "seed.png · Image · message 3ffa1304",
+          "bounds": {
+            "left": 78.58,
+            "right": 249.42,
+            "width": 170.84,
+            "height": 13
+          },
+          "containerBounds": {
+            "left": 38.39,
+            "right": 281.61,
+            "width": 243.22,
+            "height": 12254.3
+          },
+          "disabled": false,
+          "overflow": false
+        },
+        {
+          "tag": "INPUT",
+          "label": "I reviewed these attachment exclusions",
+          "bounds": {
+            "left": 78.58,
+            "right": 249.42,
+            "width": 170.84,
+            "height": 13
+          },
+          "containerBounds": {
+            "left": 38.39,
+            "right": 281.61,
+            "width": 243.22,
+            "height": 12254.3
+          },
+          "disabled": false,
+          "overflow": false
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Apply attachment exclusions",
+          "bounds": {
+            "left": 74.58,
+            "right": 245.42,
+            "width": 170.84,
+            "height": 248.66
+          },
+          "containerBounds": {
+            "left": 38.39,
+            "right": 281.61,
+            "width": 243.22,
+            "height": 12254.3
+          },
+          "disabled": false,
+          "overflow": false
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Cancel attachment review",
+          "bounds": {
+            "left": 74.58,
+            "right": 245.42,
+            "width": 170.84,
+            "height": 205.47
+          },
+          "containerBounds": {
+            "left": 38.39,
+            "right": 281.61,
+            "width": 243.22,
+            "height": 12254.3
+          },
+          "disabled": false,
+          "overflow": false
+        }
+      ],
+      "borders": [],
+      "documentOverflow": [],
+      "violations": []
+    }
+  ],
+  "status": "passed"
+}

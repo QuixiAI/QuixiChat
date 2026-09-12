@@ -1,0 +1,206 @@
+
+> quixi@0.0.1 test:app:summaries
+> tsc --noEmit -p packages/app/tsconfig.tests.json && node --experimental-transform-types --test packages/app/tests/compaction/*.test.ts
+
+TAP version 13
+# (node:79792) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: fresh branch retains its context choices, clears applied summary atomically, and reads no historical parts
+ok 1 - fresh branch retains its context choices, clears applied summary atomically, and reads no historical parts
+  ---
+  duration_ms: 10.322584
+  type: 'test'
+  ...
+# Subtest: lost branch reply replays the exact batch and reloads its null selection instead of the stale displayed leaf
+ok 2 - lost branch reply replays the exact batch and reloads its null selection instead of the stale displayed leaf
+  ---
+  duration_ms: 0.576958
+  type: 'test'
+  ...
+# Subtest: stale review, empty or unselected leaf, busy work, and archive changes refuse branch writes
+ok 3 - stale review, empty or unselected leaf, busy work, and archive changes refuse branch writes
+  ---
+  duration_ms: 0.82075
+  type: 'test'
+  ...
+# (node:79793) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: preparing only constructs a request; explicit request review is required for count and generation
+ok 4 - preparing only constructs a request; explicit request review is required for count and generation
+  ---
+  duration_ms: 6.560334
+  type: 'test'
+  ...
+# Subtest: cancelled discovery cancels its pending read and publishes no late candidates
+ok 5 - cancelled discovery cancels its pending read and publishes no late candidates
+  ---
+  duration_ms: 0.187833
+  type: 'test'
+  ...
+# Subtest: target invalidation during prepare cannot publish an old target request
+ok 6 - target invalidation during prepare cannot publish an old target request
+  ---
+  duration_ms: 0.319292
+  type: 'test'
+  ...
+# Subtest: a stale selected revision refuses count and apply before provider calls or writes
+ok 7 - a stale selected revision refuses count and apply before provider calls or writes
+  ---
+  duration_ms: 0.901
+  type: 'test'
+  ...
+# Subtest: late token counts are discarded when the selected revision changes during the provider request
+ok 8 - late token counts are discarded when the selected revision changes during the provider request
+  ---
+  duration_ms: 0.48125
+  type: 'test'
+  ...
+# Subtest: summary request cost blocks before freezing or writes, then explicit scoped counting unlocks the estimate
+ok 9 - summary request cost blocks before freezing or writes, then explicit scoped counting unlocks the estimate
+  ---
+  duration_ms: 1.205708
+  type: 'test'
+  ...
+# Subtest: summary checks retain the legacy input cap alongside the total cap and reject unknown pricing
+ok 10 - summary checks retain the legacy input cap alongside the total cap and reject unknown pricing
+  ---
+  duration_ms: 1.069875
+  type: 'test'
+  ...
+# Subtest: summary cost decisions refuse unknown routing and stale scopes, while absent caps preserve uncounted generation
+ok 11 - summary cost decisions refuse unknown routing and stale scopes, while absent caps preserve uncounted generation
+  ---
+  duration_ms: 1.551167
+  type: 'test'
+  ...
+# Subtest: edited text invalidates review and UTF-8 bytes enforce the 16 KiB apply bound
+ok 12 - edited text invalidates review and UTF-8 bytes enforce the 16 KiB apply bound
+  ---
+  duration_ms: 0.752708
+  type: 'test'
+  ...
+# Subtest: partial, stopped and non-text outputs remain inspectable but cannot be applied
+ok 13 - partial, stopped and non-text outputs remain inspectable but cannot be applied
+  ---
+  duration_ms: 0.460917
+  type: 'test'
+  ...
+# Subtest: apply detects changed source evidence despite unchanged thread revision
+ok 14 - apply detects changed source evidence despite unchanged thread revision
+  ---
+  duration_ms: 0.131458
+  type: 'test'
+  ...
+# Subtest: boundary discovery for a repeated summary stops at its prior cutoff before paging covered history
+ok 15 - boundary discovery for a repeated summary stops at its prior cutoff before paging covered history
+  ---
+  duration_ms: 0.110625
+  type: 'test'
+  ...
+# Subtest: an unknown apply outcome exposes the pending change globally and reconciles the exact batch without a new apply
+ok 16 - an unknown apply outcome exposes the pending change globally and reconciles the exact batch without a new apply
+  ---
+  duration_ms: 1.334542
+  type: 'test'
+  ...
+# Subtest: the transcript loader refuses summary-purpose output and preserves the currently displayed conversation
+ok 17 - the transcript loader refuses summary-purpose output and preserves the currently displayed conversation
+  ---
+  duration_ms: 0.28675
+  type: 'test'
+  ...
+# Subtest: archive selection change discards late preparation or counting and unsubscribes when disposed
+ok 18 - archive selection change discards late preparation or counting and unsubscribes when disposed
+  ---
+  duration_ms: 0.759084
+  type: 'test'
+  ...
+# Subtest: unknown or mismatched summary region blocks counting and staging independently of cost eligibility
+ok 19 - unknown or mismatched summary region blocks counting and staging independently of cost eligibility
+  ---
+  duration_ms: 0.870709
+  type: 'test'
+  ...
+# Subtest: reviewed regional binding allows explicit summary count while an independent cost cap blocks generation
+ok 20 - reviewed regional binding allows explicit summary count while an independent cost cap blocks generation
+  ---
+  duration_ms: 1.478167
+  type: 'test'
+  ...
+# Subtest: regional evidence and routing profile changes during summary count cannot publish an old count
+ok 21 - regional evidence and routing profile changes during summary count cannot publish an old count
+  ---
+  duration_ms: 1.115875
+  type: 'test'
+  ...
+# Subtest: evidence changed during local summary preparation never becomes a reviewed destination
+ok 22 - evidence changed during local summary preparation never becomes a reviewed destination
+  ---
+  duration_ms: 0.333917
+  type: 'test'
+  ...
+# Subtest: summary count rechecks current adapter eligibility and exact prepared body after awaiting the provider
+ok 23 - summary count rechecks current adapter eligibility and exact prepared body after awaiting the provider
+  ---
+  duration_ms: 0.971458
+  type: 'test'
+  ...
+# Subtest: region or eligibility changes while staging prevent canonical publication and discard unused summary input
+ok 24 - region or eligibility changes while staging prevent canonical publication and discard unused summary input
+  ---
+  duration_ms: 1.266833
+  type: 'test'
+  ...
+# Subtest: summary count dispatch callback refuses a concurrently changed canonical policy before provider HTTP
+ok 25 - summary count dispatch callback refuses a concurrently changed canonical policy before provider HTTP
+  ---
+  duration_ms: 0.803167
+  type: 'test'
+  ...
+# (node:79794) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: paged collection produces the exact canonical source descriptor and SHA-256 without reading blobs
+ok 26 - paged collection produces the exact canonical source descriptor and SHA-256 without reading blobs
+  ---
+  duration_ms: 4.6965
+  type: 'test'
+  ...
+# Subtest: repeated summary includes prior reviewed text and never loads covered prefix parts
+ok 27 - repeated summary includes prior reviewed text and never loads covered prefix parts
+  ---
+  duration_ms: 0.455792
+  type: 'test'
+  ...
+# Subtest: excluded image, file and audio occurrences become markers before any attachment byte read
+ok 28 - excluded image, file and audio occurrences become markers before any attachment byte read
+  ---
+  duration_ms: 0.288792
+  type: 'test'
+  ...
+# Subtest: image bytes are digest-verified, deduplicated and passed as images alongside quoted source labels
+ok 29 - image bytes are digest-verified, deduplicated and passed as images alongside quoted source labels
+  ---
+  duration_ms: 1.035208
+  type: 'test'
+  ...
+# Subtest: byte bounds refuse before opening a transfer; corrupt, misordered and stale transfers are always discarded
+ok 30 - byte bounds refuse before opening a transfer; corrupt, misordered and stale transfers are always discarded
+  ---
+  duration_ms: 0.632458
+  type: 'test'
+  ...
+# Subtest: hidden reasoning and recognized transport records are omitted while unknown artifacts are refused
+ok 31 - hidden reasoning and recognized transport records are omitted while unknown artifacts are refused
+  ---
+  duration_ms: 0.151291
+  type: 'test'
+  ...
+1..31
+# tests 31
+# suites 0
+# pass 31
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 189.111

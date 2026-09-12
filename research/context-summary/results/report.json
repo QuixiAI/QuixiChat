@@ -1,0 +1,277 @@
+{
+  "status": "passed",
+  "startedAt": "2026-09-10T16:00:42.116Z",
+  "environment": {
+    "platform": "darwin",
+    "release": "25.6.0",
+    "arch": "arm64",
+    "node": "v22.23.1"
+  },
+  "selectedEngines": [
+    "chromium",
+    "webkit"
+  ],
+  "scope": "Design model and real provider request mappers; no product summary implementation, storage mutations or model inference.",
+  "modelRuns": 0,
+  "sourceSha256": {
+    "research/context-summary/browser.ts": "6b7fe44af8784ae3baf742cb1994fab6f76fda687b0eb42205071e52b5741bd3",
+    "research/context-summary/cases.ts": "37806e7934faddbea0f28530cad6de4aa58b98b792fc83ca522ac12db4d2b091",
+    "research/context-summary/contract-model.ts": "ceddcda96c395ae3c88106f11fd90220adb8c81efbe9a9645597e99976893f8d",
+    "research/context-summary/index.html": "252a0053bc4644dde607a27f647dec153b83c61a986d1c4905060d90737b9eaf",
+    "research/context-summary/node.test.ts": "536264e962ca51fcded2de909e5ca31caf57bef14f3b08dffb2bdf8210c1d63a",
+    "research/context-summary/quality-fixtures.json": "7a57a76b73976f94ba7dcc613e1941355683b86e49cbc4b36dcd9011f730a4b1",
+    "research/context-summary/quality.ts": "f9438f8147364387659e5ca9fef7b7c32c960e6fe2c2e1055f14c0c2d87229b1",
+    "research/context-summary/run.mjs": "e32597ab820a6deea483ca82e14bdfa5e62cb9b62e603f26820b41c22fe1bff8",
+    "research/context-summary/tsconfig.json": "f608ffa77ac1bdc415803426bb7aa1e02a20567837b4f44f309bddfb93f2d31e",
+    "tooling/browser-engines.mjs": "136f16e63e905ae4c8305c7adedfce2411eff13b04f914054f8fb718155d0df1",
+    "packages/providers/src/request.ts": "21e1b77be73cfc669c6c04b8caab27ea94930229e87fa4aaa82ab294342b58e3",
+    "packages/providers/src/types.ts": "448247ad278bdb972919ac498f8ad162b11db2c801a0e5d515cffe7fe78a5816",
+    "packages/providers/tests/fixtures.ts": "cd61c56d13c5d10b981f757161d9798d863ea16cff41977ee8b1c4f342ac0e60",
+    "packages/core/src/contracts/storage.ts": "9848e0fe5ae04cc262512dfbe6fa102bb957ef96790139f4c643181cd10cda47",
+    "packages/core/src/model/compaction.ts": "33e724d0610024ebe5b9247196beea0971d72afe77e53f8ccebacfada2c54d28",
+    "packages/core/src/model/types.ts": "e9fa9d9292d8b93c04c3eb0828798dd0414264bd047e904b013c5084eeec6b1c",
+    "packages/core/src/model/provenance.ts": "191f723124ffe3b0f5957a90a1a60449406a1ba0cfbe258f9d401db0c62e8d26",
+    "research/context-summary/README.md": "cb7d864e65eb17f9e17cd87c91e76ef1f7438654bbc46145877b737122ca85ff",
+    "docs/decisions/0020-reviewed-summary-proposals.md": "56d10f01c9ab8341d1002c169755b049c7bb23576a7076a5f9bcb32ed7b43f35"
+  },
+  "builtSha256": {
+    "index.html": "e7d653c30d962902842b3ceebc6ced581dea5793fffa3841badd0588d310f93d",
+    "assets/index-C9nBDTkX.js": "8d16dd24d5b3b5a73832980ad52374bde5b00587f64fb89f943d1ded648fefcb"
+  },
+  "checks": [
+    {
+      "command": "npm exec -- tsc --noEmit -p research/context-summary/tsconfig.json",
+      "exitCode": 0,
+      "output": ""
+    },
+    {
+      "command": "node --experimental-transform-types --test research/context-summary/node.test.ts",
+      "exitCode": 0,
+      "output": "TAP version 13\n# (node:43429) ExperimentalWarning: Transform Types is an experimental feature and might change at any time\n# (Use `node --trace-warnings ...` to show where the warning was created)\n# Subtest: existing attachment exclusions also apply to the retained tail after prefix replacement\nok 1 - existing attachment exclusions also apply to the retained tail after prefix replacement\n  ---\n  duration_ms: 5.267125\n  type: 'test'\n  ...\n# Subtest: unknown provider artifacts refuse while visible reasoning summaries remain source evidence\nok 2 - unknown provider artifacts refuse while visible reasoning summaries remain source evidence\n  ---\n  duration_ms: 1.985166\n  type: 'test'\n  ...\n# Subtest: source part count has an independent hard bound\nok 3 - source part count has an independent hard bound\n  ---\n  duration_ms: 1.53525\n  type: 'test'\n  ...\n# Subtest: prefix identity binds scope, source messages and exact immutable content\nok 4 - prefix identity binds scope, source messages and exact immutable content\n  ---\n  duration_ms: 0.431791\n  type: 'test'\n  ...\n# Subtest: the cutoff must be on this branch and retain a following user turn\nok 5 - the cutoff must be on this branch and retain a following user turn\n  ---\n  duration_ms: 0.182417\n  type: 'test'\n  ...\n# Subtest: cross-thread, discontinuous, duplicate and stale-leaf metadata are refused\nok 6 - cross-thread, discontinuous, duplicate and stale-leaf metadata are refused\n  ---\n  duration_ms: 0.145667\n  type: 'test'\n  ...\n# Subtest: streaming messages and foreign or duplicate parts never become summary evidence\nok 7 - streaming messages and foreign or duplicate parts never become summary evidence\n  ---\n  duration_ms: 0.115209\n  type: 'test'\n  ...\n# Subtest: resolved tool exchanges survive wholly inside the prefix and crossing cuts refuse\nok 8 - resolved tool exchanges survive wholly inside the prefix and crossing cuts refuse\n  ---\n  duration_ms: 0.505875\n  type: 'test'\n  ...\n# Subtest: provider-only tool links resolve uniquely; concurrent reuse and orphan results refuse\nok 9 - provider-only tool links resolve uniquely; concurrent reuse and orphan results refuse\n  ---\n  duration_ms: 0.444667\n  type: 'test'\n  ...\n# Subtest: an unfinished tool exchange blocks summary proposal even when outside the prefix\nok 10 - an unfinished tool exchange blocks summary proposal even when outside the prefix\n  ---\n  duration_ms: 0.2385\n  type: 'test'\n  ...\n# Subtest: attachment exclusions precede evidence serialization and never reveal their metadata\nok 11 - attachment exclusions precede evidence serialization and never reveal their metadata\n  ---\n  duration_ms: 0.573083\n  type: 'test'\n  ...\n# Subtest: hidden reasoning and raw provider artifacts remain explicitly omitted\nok 12 - hidden reasoning and raw provider artifacts remain explicitly omitted\n  ---\n  duration_ms: 0.254458\n  type: 'test'\n  ...\n# Subtest: blob-backed text requires verified reads rather than treating its digest as content\nok 13 - blob-backed text requires verified reads rather than treating its digest as content\n  ---\n  duration_ms: 0.073375\n  type: 'test'\n  ...\n# Subtest: source UTF-8 and metadata counts have hard refusal limits without clipping\nok 14 - source UTF-8 and metadata counts have hard refusal limits without clipping\n  ---\n  duration_ms: 1.34975\n  type: 'test'\n  ...\n# Subtest: complete proposals require explicit review; every other terminal state is ineligible\nok 15 - complete proposals require explicit review; every other terminal state is ineligible\n  ---\n  duration_ms: 0.566625\n  type: 'test'\n  ...\n# Subtest: review binds generation provenance, text edits and all six selection scope fields\nok 16 - review binds generation provenance, text edits and all six selection scope fields\n  ---\n  duration_ms: 0.552917\n  type: 'test'\n  ...\n# Subtest: wrong generation parent or source digest cannot be reviewed\nok 17 - wrong generation parent or source digest cannot be reviewed\n  ---\n  duration_ms: 0.198458\n  type: 'test'\n  ...\n# Subtest: summary bounds count UTF-8 bytes and preserve exact NUL/Unicode text\nok 18 - summary bounds count UTF-8 bytes and preserve exact NUL/Unicode text\n  ---\n  duration_ms: 0.424292\n  type: 'test'\n  ...\n# Subtest: extending a summary binds the previous reviewed text and only newly covered messages\nok 19 - extending a summary binds the previous reviewed text and only newly covered messages\n  ---\n  duration_ms: 0.285542\n  type: 'test'\n  ...\n# Subtest: request suffix traversal stops before any source-prefix read\nok 20 - request suffix traversal stops before any source-prefix read\n  ---\n  duration_ms: 0.083458\n  type: 'test'\n  ...\n# Subtest: branch divergence, deletion, cycles and excessive tail never fall back to full history\nok 21 - branch divergence, deletion, cycles and excessive tail never fall back to full history\n  ---\n  duration_ms: 2.859166\n  type: 'test'\n  ...\n# Subtest: both actual provider mappers carry the same reviewed summary as user content, with the system unchanged\nok 22 - both actual provider mappers carry the same reviewed summary as user content, with the system unchanged\n  ---\n  duration_ms: 0.9935\n  type: 'test'\n  ...\n# Subtest: summary generation sends history as quoted evidence with a distinct instruction and no tools\nok 23 - summary generation sends history as quoted evidence with a distinct instruction and no tools\n  ---\n  duration_ms: 0.295583\n  type: 'test'\n  ...\n# Subtest: quality corpus evidence and negative-control annotations are well formed\nok 24 - quality corpus evidence and negative-control annotations are well formed\n  ---\n  duration_ms: 0.294333\n  type: 'test'\n  ...\n1..24\n# tests 24\n# suites 0\n# pass 24\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 134.841291\n"
+    }
+  ],
+  "hosts": [
+    {
+      "name": "chromium",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "existing attachment exclusions also apply to the retained tail after prefix replacement",
+          "elapsedMs": 1.0999999940395355
+        },
+        {
+          "name": "unknown provider artifacts refuse while visible reasoning summaries remain source evidence",
+          "elapsedMs": 0.29999999701976776
+        },
+        {
+          "name": "source part count has an independent hard bound",
+          "elapsedMs": 2
+        },
+        {
+          "name": "prefix identity binds scope, source messages and exact immutable content",
+          "elapsedMs": 0.10000000894069672
+        },
+        {
+          "name": "the cutoff must be on this branch and retain a following user turn",
+          "elapsedMs": 0.19999998807907104
+        },
+        {
+          "name": "cross-thread, discontinuous, duplicate and stale-leaf metadata are refused",
+          "elapsedMs": 0
+        },
+        {
+          "name": "streaming messages and foreign or duplicate parts never become summary evidence",
+          "elapsedMs": 0
+        },
+        {
+          "name": "resolved tool exchanges survive wholly inside the prefix and crossing cuts refuse",
+          "elapsedMs": 0.10000000894069672
+        },
+        {
+          "name": "provider-only tool links resolve uniquely; concurrent reuse and orphan results refuse",
+          "elapsedMs": 0.20000000298023224
+        },
+        {
+          "name": "an unfinished tool exchange blocks summary proposal even when outside the prefix",
+          "elapsedMs": 0.09999999403953552
+        },
+        {
+          "name": "attachment exclusions precede evidence serialization and never reveal their metadata",
+          "elapsedMs": 0
+        },
+        {
+          "name": "hidden reasoning and raw provider artifacts remain explicitly omitted",
+          "elapsedMs": 0
+        },
+        {
+          "name": "blob-backed text requires verified reads rather than treating its digest as content",
+          "elapsedMs": 0
+        },
+        {
+          "name": "source UTF-8 and metadata counts have hard refusal limits without clipping",
+          "elapsedMs": 1.2000000029802322
+        },
+        {
+          "name": "complete proposals require explicit review; every other terminal state is ineligible",
+          "elapsedMs": 0.20000000298023224
+        },
+        {
+          "name": "review binds generation provenance, text edits and all six selection scope fields",
+          "elapsedMs": 0.19999998807907104
+        },
+        {
+          "name": "wrong generation parent or source digest cannot be reviewed",
+          "elapsedMs": 0
+        },
+        {
+          "name": "summary bounds count UTF-8 bytes and preserve exact NUL/Unicode text",
+          "elapsedMs": 0.10000000894069672
+        },
+        {
+          "name": "extending a summary binds the previous reviewed text and only newly covered messages",
+          "elapsedMs": 0.20000000298023224
+        },
+        {
+          "name": "request suffix traversal stops before any source-prefix read",
+          "elapsedMs": 0
+        },
+        {
+          "name": "branch divergence, deletion, cycles and excessive tail never fall back to full history",
+          "elapsedMs": 0.5999999940395355
+        },
+        {
+          "name": "both actual provider mappers carry the same reviewed summary as user content, with the system unchanged",
+          "elapsedMs": 0.20000000298023224
+        },
+        {
+          "name": "summary generation sends history as quoted evidence with a distinct instruction and no tools",
+          "elapsedMs": 0.09999999403953552
+        },
+        {
+          "name": "quality corpus evidence and negative-control annotations are well formed",
+          "elapsedMs": 0
+        }
+      ],
+      "quality": {
+        "fixtures": 10,
+        "claims": 19,
+        "negativeControls": 10,
+        "modelRuns": 0,
+        "modelQuality": "not evaluated"
+      }
+    },
+    {
+      "name": "webkit",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "existing attachment exclusions also apply to the retained tail after prefix replacement",
+          "elapsedMs": 1
+        },
+        {
+          "name": "unknown provider artifacts refuse while visible reasoning summaries remain source evidence",
+          "elapsedMs": 1
+        },
+        {
+          "name": "source part count has an independent hard bound",
+          "elapsedMs": 0
+        },
+        {
+          "name": "prefix identity binds scope, source messages and exact immutable content",
+          "elapsedMs": 1
+        },
+        {
+          "name": "the cutoff must be on this branch and retain a following user turn",
+          "elapsedMs": 0
+        },
+        {
+          "name": "cross-thread, discontinuous, duplicate and stale-leaf metadata are refused",
+          "elapsedMs": 0
+        },
+        {
+          "name": "streaming messages and foreign or duplicate parts never become summary evidence",
+          "elapsedMs": 0
+        },
+        {
+          "name": "resolved tool exchanges survive wholly inside the prefix and crossing cuts refuse",
+          "elapsedMs": 0
+        },
+        {
+          "name": "provider-only tool links resolve uniquely; concurrent reuse and orphan results refuse",
+          "elapsedMs": 1
+        },
+        {
+          "name": "an unfinished tool exchange blocks summary proposal even when outside the prefix",
+          "elapsedMs": 0
+        },
+        {
+          "name": "attachment exclusions precede evidence serialization and never reveal their metadata",
+          "elapsedMs": 0
+        },
+        {
+          "name": "hidden reasoning and raw provider artifacts remain explicitly omitted",
+          "elapsedMs": 0
+        },
+        {
+          "name": "blob-backed text requires verified reads rather than treating its digest as content",
+          "elapsedMs": 0
+        },
+        {
+          "name": "source UTF-8 and metadata counts have hard refusal limits without clipping",
+          "elapsedMs": 1
+        },
+        {
+          "name": "complete proposals require explicit review; every other terminal state is ineligible",
+          "elapsedMs": 4
+        },
+        {
+          "name": "review binds generation provenance, text edits and all six selection scope fields",
+          "elapsedMs": 1
+        },
+        {
+          "name": "wrong generation parent or source digest cannot be reviewed",
+          "elapsedMs": 0
+        },
+        {
+          "name": "summary bounds count UTF-8 bytes and preserve exact NUL/Unicode text",
+          "elapsedMs": 1
+        },
+        {
+          "name": "extending a summary binds the previous reviewed text and only newly covered messages",
+          "elapsedMs": 0
+        },
+        {
+          "name": "request suffix traversal stops before any source-prefix read",
+          "elapsedMs": 0
+        },
+        {
+          "name": "branch divergence, deletion, cycles and excessive tail never fall back to full history",
+          "elapsedMs": 1
+        },
+        {
+          "name": "both actual provider mappers carry the same reviewed summary as user content, with the system unchanged",
+          "elapsedMs": 0
+        },
+        {
+          "name": "summary generation sends history as quoted evidence with a distinct instruction and no tools",
+          "elapsedMs": 0
+        },
+        {
+          "name": "quality corpus evidence and negative-control annotations are well formed",
+          "elapsedMs": 0
+        }
+      ],
+      "quality": {
+        "fixtures": 10,
+        "claims": 19,
+        "negativeControls": 10,
+        "modelRuns": 0,
+        "modelQuality": "not evaluated"
+      }
+    }
+  ],
+  "origin": "http://127.0.0.1:51659",
+  "completedAt": "2026-09-10T16:00:43.095Z"
+}

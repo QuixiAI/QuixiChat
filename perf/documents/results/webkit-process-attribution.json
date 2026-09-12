@@ -1,0 +1,7 @@
+{
+  "createdAt": "2026-09-09T08:59:53.360Z",
+  "activeCase": "cancel-1000",
+  "report": "continuation-webkit.json",
+  "rows": [],
+  "interpretation": "Read-only point observation of processes using the installed Playwright WebKit build. WebContent/Networking/GPU are reparented to PID1 and cannot be attributed by the measured browser descendant tree. These candidates are not summed as measured extraction memory; presence alone does not establish process ownership. Parser-inclusive WebKit RSS remains unavailable."
+}

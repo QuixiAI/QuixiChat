@@ -1,0 +1,232 @@
+name: Check
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  embedding:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - uses: astral-sh/setup-uv@20cfd1bf945f4377ade1205e4dbc17946fc9a30d # v10.0.1
+        with:
+          version: "0.11.16"
+          enable-cache: true
+          cache-dependency-glob: packages/quixi-embed/reference/requirements*.lock
+      - run: npm ci
+      - run: npx playwright install-deps chromium firefox webkit
+      - name: Provision and validate independent scalar runtime
+        if: github.event_name != 'workflow_dispatch'
+        run: python3 packages/quixi-embed/native/ci.py --browsers
+      - name: Full scalar numerical and retrieval gates
+        if: github.event_name == 'workflow_dispatch'
+        run: python3 packages/quixi-embed/native/ci.py --full --browsers
+      - name: SIMD numerical and browser gates
+        if: github.event_name != 'workflow_dispatch'
+        run: python3 packages/quixi-embed/native/ci.py --simd --browsers
+      - name: Full SIMD numerical and retrieval gates
+        if: github.event_name == 'workflow_dispatch'
+        run: python3 packages/quixi-embed/native/ci.py --simd --full --browsers
+      - name: Bounded scheduler and CPU browser service gates
+        run: python3 packages/quixi-embed/native/scheduler_ci.py --skip-provision
+      - name: Original-source tokenizer offset gates
+        run: python3 packages/quixi-embed/native/offset_ci.py --skip-provision
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: embedding-evidence
+          path: |
+            packages/quixi-embed/build/*report*.json
+            packages/quixi-embed/build/token-offset-*.json
+            packages/quixi-embed/build/offset-*-parity.json
+            packages/quixi-embed/build/tokenizer-offset-stack.su
+            packages/quixi-embed/build/quixi-*.wasm.json
+            packages/quixi-embed/artifacts/1.0.2/manifest.json
+
+  sqlite:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: npm run sqlite:build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sqlite-wasm
+          path: packages/storage/sqlite/dist/
+          if-no-files-found: error
+
+  frontend:
+    needs: sqlite
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-24.04
+            browser: chromium
+          - os: macos-26
+            browser: webkit
+    runs-on: ${{ matrix.os }}
+    env:
+      QUIXI_TEST_BROWSERS: ${{ matrix.browser }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci
+      - uses: actions/download-artifact@v4
+        with:
+          name: sqlite-wasm
+          path: packages/storage/sqlite/dist/
+      - run: npm run check
+      - run: node --test tooling/browser-engines.test.mjs
+      - name: Core and service tests
+        if: matrix.browser == 'chromium'
+        run: |
+          npm run test:core
+          npm run test:storage:canonical
+          npm run test:search
+          npm run test:providers
+          npm run test:app:providers
+          npm run test:app:startup
+          npm run test:app:attachments
+          npm run test:app:switching
+          npm run test:host:regional
+          npm run test:app:health
+          npm run test:app:content
+          npm run test:app:search-navigation
+          npm run test:app:archives
+          npm run test:storage:extraction
+          npm run test:storage:extraction-layout
+          npm run test:storage:extraction-digests
+          npm run test:storage:operation-claims
+          npm run test:storage:extraction-search
+          npm run test:documents:storage
+          npm run test:documents:mutation
+          npm run test:documents:clear
+          npm run test:documents:layout
+          npm run test:storage:search-navigation
+          npx tsc --noEmit -p packages/storage/tests/search-performance/tsconfig.json
+          node --experimental-transform-types --test packages/storage/tests/search-performance/page-credit.test.ts
+          npx tsc --noEmit -p packages/storage/tests/image-search/tsconfig.json
+          node packages/storage/tests/image-search/run.mjs
+          npx tsc --noEmit -p packages/storage/tests/conversation-search-navigation/tsconfig.json
+          node packages/storage/tests/conversation-search-navigation/run.mjs
+          npm run test:app:documents
+          npm run test:importers
+          npm run test:relay
+      - run: npx playwright install --with-deps ${{ matrix.browser }}
+      - run: npm run test:storage:blobs
+      - run: npm run test:storage:client
+      - run: npm run test:storage:blob-inventory
+      - run: npm run test:app:storage-health
+      - run: npm run test:app:storage-health:browser
+      - run: npm run test:providers:browser
+      - run: npm run test:importers:browser
+      - run: npm run test:app:imports:browser
+      - run: npm run test:app:providers:browser
+      - run: npm run test:app:browser
+      - run: npm run test:app:relay:browser
+      - run: QUIXI_SCALE_THREADS=400 QUIXI_SCALE_MESSAGES=400 npm run test:app:scale:browser
+      - run: npm run test:app:content:browser
+      - run: npm run test:app:search-navigation:browser
+      - run: npm run test:storage:archives
+      - run: npm run test:storage:selection
+      - run: npm run test:storage:schema8
+      - run: npm run test:storage:protocol
+      - run: npm run test:storage:managed-selection
+      - run: npm run test:storage:activation
+      - run: npm run test:storage:reconcile-retained
+      - run: npm run test:storage:retained
+      - run: npm run test:storage:retained-extraction
+      - run: npm run test:app:archives:browser
+      - run: npm run test:documents
+      - run: npm run test:documents:layout:browser
+      - run: npm run test:storage:extraction:browser
+      - run: npm run test:documents:persistence:browser
+      - run: npm run test:app:documents:browser
+      - uses: astral-sh/setup-uv@20cfd1bf945f4377ade1205e4dbc17946fc9a30d # v10.0.1
+        if: github.event_name == 'workflow_dispatch'
+        with:
+          version: "0.11.16"
+      - name: Record production PDF memory and foreground latency
+        if: github.event_name == 'workflow_dispatch'
+        run: npm run perf:documents
+      - run: npm run test:host:web
+      - run: npm run test:host:oauth:web
+      - run: npm run test:relay:browser
+      - run: npm run test:e2e
+        env:
+          QUIXI_TEST_OUTPUT_DIR: test-results/storage-proof
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: browser-results-${{ matrix.os }}-${{ matrix.browser }}
+          path: |
+            test-results/
+            apps/web/tests/test-results/
+            packages/storage/tests/archives/results/
+            packages/storage/tests/selection/browser-evidence.json
+            packages/storage/tests/selection/schema8/browser-evidence.json
+            packages/storage/tests/selection/managed/browser-evidence.json
+            packages/storage/tests/selection/integration/browser-evidence.json
+            packages/storage/tests/selection/integration/reconcile-browser-evidence.json
+            packages/storage/tests/extraction/results/
+            packages/storage/tests/extraction-layout/results/
+            packages/storage/tests/extraction-performance/results/
+            packages/storage/tests/operation-claims/results/
+            packages/storage/tests/extraction-search/results/
+            packages/storage/tests/search-navigation/results/
+            packages/storage/tests/search-performance/results/
+            packages/storage/tests/image-search/results/
+            packages/storage/tests/conversation-search-navigation/results/
+            packages/storage/tests/retained-extraction/evidence/
+            packages/storage/tests/extraction-browser/browser-evidence.json
+            packages/documents/tests/persistence-browser/browser-evidence.json
+            packages/app/src/features/archives/tests/browser/results/
+            packages/app/src/features/documents/tests/browser/results/
+            packages/app/src/features/content/docs/browser-evidence.json
+            packages/app/src/features/content/tests/search-browser/results/
+            packages/documents/tests/results/
+            packages/documents/tests/layout-browser/evidence/
+            perf/documents/results/
+
+  desktop:
+    needs: sqlite
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - uses: dtolnay/rust-toolchain@stable
+      - run: npm ci
+      - uses: actions/download-artifact@v4
+        with:
+          name: sqlite-wasm
+          path: packages/storage/sqlite/dist/
+      - run: npm run check:desktop
+      - run: python3 tests/hosts/run_tauri_storage_proof.py
+      - run: python3 tests/hosts/document-proof/run.py
+      - run: npm run test:app:regional:native
+      - run: npm run test:host:oauth:native
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: tauri-storage-proof
+          path: |
+            test-results/tauri-storage-proof.json
+            tests/hosts/document-proof/evidence/
+            tests/hosts/regional-app-proof/evidence/
+            tests/hosts/oauth-proof/evidence/

@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "status": "passed",
+  "cases": 870,
+  "manualContributorCases": 28,
+  "upstreamOffsetDivergences": 16,
+  "fixtureSha256": "76b78540f4ba78a7feaa3c0851809f79dcb9602498f014b00087f9d0cc1de0a3",
+  "librarySha256": "a8c16c71b7e77e69959c8381834628ef12f3fa3d68b25935f6517adf6ba7ab79",
+  "coverage": {
+    "focusedAndSeeded": true
+  },
+  "exactRequiredCountOnRejection": true,
+  "outputCanariesPreserved": true
+}

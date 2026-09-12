@@ -1,0 +1,37 @@
+{
+  "name": "@quixi/app",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "description": "Shared interface and application workflows.",
+  "exports": {
+    ".": "./src/index.ts",
+    "./workflows/generation": "./src/workflows/generation.ts",
+    "./features/imports": "./src/features/imports/index.ts",
+    "./features/providers": "./src/features/providers/index.ts",
+    "./features/content": "./src/features/content/index.ts",
+    "./features/archives": "./src/features/archives/index.ts"
+  },
+  "dependencies": {
+    "@noble/hashes": "2.4.0",
+    "@quixi/core": "0.0.1",
+    "@quixi/documents": "0.0.1",
+    "@quixi/importers": "0.0.1",
+    "@quixi/providers": "0.0.1",
+    "@quixi/quixi-embed": "0.0.1",
+    "@quixi/search": "0.0.1",
+    "@quixi/storage": "0.0.1",
+    "katex": "0.16.47",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "react-markdown": "10.1.0",
+    "rehype-katex": "7.0.1",
+    "rehype-sanitize": "6.0.0",
+    "remark-gfm": "4.0.1",
+    "remark-math": "6.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "19.2.18",
+    "@types/react-dom": "19.2.7"
+  }
+}

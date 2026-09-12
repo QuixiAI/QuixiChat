@@ -1,0 +1,435 @@
+{
+  "capturedAt": "2026-09-09T09:34:42.475Z",
+  "schemaVersion": 1,
+  "objects": [
+    {
+      "type": "index",
+      "name": "quixi_extract_map_range",
+      "sql": "CREATE INDEX quixi_extract_map_range ON quixi_extract_map_batches(page_id,end_utf16,sequence)"
+    },
+    {
+      "type": "index",
+      "name": "quixi_extract_page_cursor",
+      "sql": "CREATE INDEX quixi_extract_page_cursor ON quixi_extract_pages(run_id,id)"
+    },
+    {
+      "type": "index",
+      "name": "quixi_extract_page_run",
+      "sql": "CREATE INDEX quixi_extract_page_run ON quixi_extract_pages(run_id,page,id)"
+    },
+    {
+      "type": "index",
+      "name": "quixi_extract_published_page",
+      "sql": "CREATE UNIQUE INDEX quixi_extract_published_page ON quixi_extract_pages(run_id,page) WHERE state='published'"
+    },
+    {
+      "type": "index",
+      "name": "quixi_extract_run_document",
+      "sql": "CREATE INDEX quixi_extract_run_document ON quixi_extract_runs(document_id,id)"
+    },
+    {
+      "type": "index",
+      "name": "quixi_extract_run_state",
+      "sql": "CREATE INDEX quixi_extract_run_state ON quixi_extract_runs(state,id)"
+    },
+    {
+      "type": "table",
+      "name": "quixi_extract_cleanup_pages",
+      "sql": "CREATE TABLE quixi_extract_cleanup_pages(page_id TEXT PRIMARY KEY) STRICT"
+    },
+    {
+      "type": "table",
+      "name": "quixi_extract_cleanup_runs",
+      "sql": "CREATE TABLE quixi_extract_cleanup_runs(run_id TEXT PRIMARY KEY,after_id TEXT NOT NULL) STRICT"
+    },
+    {
+      "type": "table",
+      "name": "quixi_extract_documents",
+      "sql": "CREATE TABLE quixi_extract_documents(document_id TEXT PRIMARY KEY,latest_run TEXT NOT NULL,visible_run TEXT,revision INTEGER NOT NULL) STRICT"
+    },
+    {
+      "type": "table",
+      "name": "quixi_extract_map_batches",
+      "sql": "CREATE TABLE quixi_extract_map_batches(page_id TEXT NOT NULL,sequence INTEGER NOT NULL,start_utf16 INTEGER NOT NULL,end_utf16 INTEGER NOT NULL,maps TEXT NOT NULL,map_digest TEXT NOT NULL,bytes INTEGER NOT NULL,PRIMARY KEY(page_id,sequence)) STRICT"
+    },
+    {
+      "type": "table",
+      "name": "quixi_extract_meta",
+      "sql": "CREATE TABLE quixi_extract_meta(singleton INTEGER PRIMARY KEY CHECK(singleton=1),revision INTEGER NOT NULL,used_bytes INTEGER NOT NULL CHECK(used_bytes>=0)) STRICT"
+    },
+    {
+      "type": "table",
+      "name": "quixi_extract_operations",
+      "sql": "CREATE TABLE quixi_extract_operations(id TEXT PRIMARY KEY,kind TEXT NOT NULL,digest TEXT NOT NULL,run_id TEXT,result TEXT NOT NULL,bytes INTEGER NOT NULL) STRICT"
+    },
+    {
+      "type": "table",
+      "name": "quixi_extract_pages",
+      "sql": "CREATE TABLE quixi_extract_pages(id TEXT PRIMARY KEY,run_id TEXT NOT NULL,page INTEGER NOT NULL,state TEXT NOT NULL,next_sequence INTEGER NOT NULL,utf16 INTEGER NOT NULL,map_count INTEGER NOT NULL,map_bytes INTEGER NOT NULL,max_item INTEGER NOT NULL,text TEXT,text_sha TEXT,map_sha TEXT,source_digest TEXT,publication_revision INTEGER,classification TEXT,published_bytes INTEGER NOT NULL DEFAULT 0) STRICT"
+    },
+    {
+      "type": "table",
+      "name": "quixi_extract_publications",
+      "sql": "CREATE TABLE quixi_extract_publications(revision INTEGER PRIMARY KEY,document_id TEXT NOT NULL,run_id TEXT NOT NULL,page_id TEXT,kind TEXT NOT NULL) STRICT"
+    },
+    {
+      "type": "table",
+      "name": "quixi_extract_runs",
+      "sql": "CREATE TABLE quixi_extract_runs(id TEXT PRIMARY KEY,document_id TEXT NOT NULL,identity TEXT NOT NULL,state TEXT NOT NULL,writer_epoch INTEGER NOT NULL,page_count INTEGER,completed_page INTEGER NOT NULL,current_page TEXT,used_bytes INTEGER NOT NULL CHECK(used_bytes>=0),failure TEXT) STRICT"
+    },
+    {
+      "type": "table",
+      "name": "quixi_extract_schema",
+      "sql": "CREATE TABLE quixi_extract_schema(version INTEGER PRIMARY KEY,checksum TEXT NOT NULL) STRICT"
+    },
+    {
+      "type": "table",
+      "name": "quixi_extract_text_batches",
+      "sql": "CREATE TABLE quixi_extract_text_batches(page_id TEXT NOT NULL,sequence INTEGER NOT NULL,start_utf16 INTEGER NOT NULL,text TEXT NOT NULL,bytes INTEGER NOT NULL,PRIMARY KEY(page_id,sequence)) STRICT"
+    }
+  ],
+  "records": {
+    "quixi_extract_cleanup_pages": [
+      {
+        "page_id": "00000000-0000-4000-8000-000000001006"
+      }
+    ],
+    "quixi_extract_cleanup_runs": [],
+    "quixi_extract_documents": [
+      {
+        "document_id": "00000000-0000-4000-8000-000000000002",
+        "latest_run": "00000000-0000-4000-8000-000000001005",
+        "visible_run": "00000000-0000-4000-8000-000000001005",
+        "revision": 2
+      }
+    ],
+    "quixi_extract_map_batches": [
+      {
+        "page_id": "00000000-0000-4000-8000-000000001006",
+        "sequence": 0,
+        "start_utf16": 0,
+        "end_utf16": 39,
+        "maps": "[{\"end\":39,\"source\":{\"direction\":\"ltr\",\"height\":12,\"itemEnd\":39,\"itemIndex\":0,\"itemStart\":0,\"transform\":[1,0,0,1,40,750],\"width\":200},\"start\":0}]",
+        "map_digest": "f289e3df9cacb353ea06080411bc0be8c54c40a9eec2e2ad59b339d3f49d0c37",
+        "bytes": 273
+      },
+      {
+        "page_id": "00000000-0000-4000-8000-000000001009",
+        "sequence": 0,
+        "start_utf16": 0,
+        "end_utf16": 35,
+        "maps": "[{\"end\":35,\"source\":{\"direction\":\"ltr\",\"height\":12,\"itemEnd\":35,\"itemIndex\":0,\"itemStart\":0,\"transform\":[1,0,0,1,40,750],\"width\":200},\"start\":0}]",
+        "map_digest": "956e8a29c19b92b21ab14c554bc293f3c81ab4a1ea1b6996325e0a1b4e0e93e2",
+        "bytes": 273
+      }
+    ],
+    "quixi_extract_meta": [
+      {
+        "singleton": 1,
+        "revision": 1,
+        "used_bytes": 8150
+      }
+    ],
+    "quixi_extract_operations": [
+      {
+        "id": "00000000-0000-4000-8000-000000001005",
+        "kind": "beginDocumentExtraction",
+        "digest": "220fc38f4654d611c623e7be7ea45d72db3e6b3e648254ca57bb95926d103fed",
+        "run_id": "00000000-0000-4000-8000-000000001005",
+        "result": "{\"completedPage\":0,\"currentPage\":null,\"documentRevision\":1,\"failure\":null,\"identity\":{\"attachmentByteLength\":1683,\"attachmentId\":\"00000000-0000-4000-8000-000000000001\",\"attachmentSha256\":\"3e318e5196a931424d1801943726943d492e5a020f764a9e8aaaf5924f5be846\",\"documentId\":\"00000000-0000-4000-8000-000000000002\",\"extractorVersion\":\"quixi-extract-1/pdfjs-6.3.289\",\"normalizerVersion\":\"identity-v1\"},\"pageCount\":null,\"retainedBytes\":2373,\"runId\":\"00000000-0000-4000-8000-000000001005\",\"state\":\"working\",\"visibleRunId\":null,\"writerEpoch\":1}",
+        "bytes": 1043
+      },
+      {
+        "id": "00000000-0000-4000-8000-000000001006",
+        "kind": "beginExtractionPage",
+        "digest": "010beed1a01ccbe7c758bed39861bb1a148d4e8f85fc5d6290215043fa429906",
+        "run_id": "00000000-0000-4000-8000-000000001005",
+        "result": "{\"mapCount\":0,\"nextSequence\":0,\"page\":1,\"pageAttemptId\":\"00000000-0000-4000-8000-000000001006\",\"utf16\":0}",
+        "bytes": 617
+      },
+      {
+        "id": "00000000-0000-4000-8000-000000001007",
+        "kind": "stagePageText",
+        "digest": "3a8c6aadc683829489ddbeee3952e75a50386726f08cc080c5571a059febb47d",
+        "run_id": "00000000-0000-4000-8000-000000001005",
+        "result": "{\"committedMapCount\":1,\"committedUTF16Offset\":39,\"pageAttemptId\":\"00000000-0000-4000-8000-000000001006\",\"sequence\":0}",
+        "bytes": 629
+      },
+      {
+        "id": "00000000-0000-4000-8000-000000001008",
+        "kind": "publishExtractionPage",
+        "digest": "6160b115267190339f2b468e05080de030f4f20e9ea5919391989fa69ffd49b6",
+        "run_id": "00000000-0000-4000-8000-000000001005",
+        "result": "{\"completedPage\":1,\"pageRef\":{\"identity\":{\"attachmentByteLength\":1683,\"attachmentId\":\"00000000-0000-4000-8000-000000000001\",\"attachmentSha256\":\"3e318e5196a931424d1801943726943d492e5a020f764a9e8aaaf5924f5be846\",\"documentId\":\"00000000-0000-4000-8000-000000000002\",\"extractorVersion\":\"quixi-extract-1/pdfjs-6.3.289\",\"normalizerVersion\":\"identity-v1\"},\"page\":1,\"pageAttemptId\":\"00000000-0000-4000-8000-000000001006\",\"publicationRevision\":1,\"runId\":\"00000000-0000-4000-8000-000000001005\",\"sourceDigest\":\"9f4b1611ef76b0dd76acb72311c7489b9e2488ed461c132afb4a79e5f6b4b853\"}}",
+        "bytes": 1078
+      },
+      {
+        "id": "00000000-0000-4000-8000-000000001009",
+        "kind": "beginExtractionPage",
+        "digest": "66ea794a77b1e6fabd1e736f744207b0b36b85b6deb33a4b6bd7c1b3f4d91d14",
+        "run_id": "00000000-0000-4000-8000-000000001005",
+        "result": "{\"mapCount\":0,\"nextSequence\":0,\"page\":2,\"pageAttemptId\":\"00000000-0000-4000-8000-000000001009\",\"utf16\":0}",
+        "bytes": 617
+      },
+      {
+        "id": "00000000-0000-4000-8000-000000001010",
+        "kind": "stagePageText",
+        "digest": "bd3a433ae984f8f65da230c07d83687c8a0f10c44814af9b5edcfc76dbd345c3",
+        "run_id": "00000000-0000-4000-8000-000000001005",
+        "result": "{\"committedMapCount\":1,\"committedUTF16Offset\":35,\"pageAttemptId\":\"00000000-0000-4000-8000-000000001009\",\"sequence\":0}",
+        "bytes": 629
+      }
+    ],
+    "quixi_extract_pages": [
+      {
+        "id": "00000000-0000-4000-8000-000000001006",
+        "run_id": "00000000-0000-4000-8000-000000001005",
+        "page": 1,
+        "state": "published",
+        "next_sequence": 1,
+        "utf16": 39,
+        "map_count": 1,
+        "map_bytes": 145,
+        "max_item": 0,
+        "text": "Legacy page 日本語 preserved source order.",
+        "text_sha": "7f775a1c3e95669009c5758f1c2e3e70f05a9c1fa30cb8ba5080847f47128399",
+        "map_sha": "45f3ad315ee92cb379c4f0c1e3410d2560ae4b4f2fa45ad8c87a3e97bda98e8f",
+        "source_digest": "9f4b1611ef76b0dd76acb72311c7489b9e2488ed461c132afb4a79e5f6b4b853",
+        "publication_revision": 1,
+        "classification": "text",
+        "published_bytes": 45
+      },
+      {
+        "id": "00000000-0000-4000-8000-000000001009",
+        "run_id": "00000000-0000-4000-8000-000000001005",
+        "page": 2,
+        "state": "staging",
+        "next_sequence": 1,
+        "utf16": 35,
+        "map_count": 1,
+        "map_bytes": 145,
+        "max_item": 0,
+        "text": null,
+        "text_sha": null,
+        "map_sha": null,
+        "source_digest": null,
+        "publication_revision": null,
+        "classification": null,
+        "published_bytes": 0
+      }
+    ],
+    "quixi_extract_publications": [
+      {
+        "revision": 1,
+        "document_id": "00000000-0000-4000-8000-000000000002",
+        "run_id": "00000000-0000-4000-8000-000000001005",
+        "page_id": "00000000-0000-4000-8000-000000001006",
+        "kind": "replace"
+      }
+    ],
+    "quixi_extract_runs": [
+      {
+        "id": "00000000-0000-4000-8000-000000001005",
+        "document_id": "00000000-0000-4000-8000-000000000002",
+        "identity": "{\"attachmentByteLength\":1683,\"attachmentId\":\"00000000-0000-4000-8000-000000000001\",\"attachmentSha256\":\"3e318e5196a931424d1801943726943d492e5a020f764a9e8aaaf5924f5be846\",\"documentId\":\"00000000-0000-4000-8000-000000000002\",\"extractorVersion\":\"quixi-extract-1/pdfjs-6.3.289\",\"normalizerVersion\":\"identity-v1\"}",
+        "state": "working",
+        "writer_epoch": 1,
+        "page_count": 2,
+        "completed_page": 1,
+        "current_page": "00000000-0000-4000-8000-000000001009",
+        "used_bytes": 8150,
+        "failure": null
+      }
+    ],
+    "quixi_extract_schema": [
+      {
+        "version": 1,
+        "checksum": "2e5b4bff42821f21c6b58ff1f1a70a5433afdeeb95e6fde6d3fac25c1b47aff4"
+      }
+    ],
+    "quixi_extract_text_batches": [
+      {
+        "page_id": "00000000-0000-4000-8000-000000001006",
+        "sequence": 0,
+        "start_utf16": 0,
+        "text": "Legacy page 日本語 preserved source order.",
+        "bytes": 173
+      },
+      {
+        "page_id": "00000000-0000-4000-8000-000000001009",
+        "sequence": 0,
+        "start_utf16": 0,
+        "text": "Interrupted second page checkpoint.",
+        "bytes": 163
+      }
+    ]
+  },
+  "claims": [
+    {
+      "id": "00000000-0000-4000-8000-000000001005",
+      "domain": "extraction",
+      "digest": "220fc38f4654d611c623e7be7ea45d72db3e6b3e648254ca57bb95926d103fed"
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000001006",
+      "domain": "extraction",
+      "digest": "010beed1a01ccbe7c758bed39861bb1a148d4e8f85fc5d6290215043fa429906"
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000001007",
+      "domain": "extraction",
+      "digest": "3a8c6aadc683829489ddbeee3952e75a50386726f08cc080c5571a059febb47d"
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000001008",
+      "domain": "extraction",
+      "digest": "6160b115267190339f2b468e05080de030f4f20e9ea5919391989fa69ffd49b6"
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000001009",
+      "domain": "extraction",
+      "digest": "66ea794a77b1e6fabd1e736f744207b0b36b85b6deb33a4b6bd7c1b3f4d91d14"
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000001010",
+      "domain": "extraction",
+      "digest": "bd3a433ae984f8f65da230c07d83687c8a0f10c44814af9b5edcfc76dbd345c3"
+    }
+  ],
+  "run": {
+    "runId": "00000000-0000-4000-8000-000000001005",
+    "identity": {
+      "attachmentByteLength": 1683,
+      "attachmentId": "00000000-0000-4000-8000-000000000001",
+      "attachmentSha256": "3e318e5196a931424d1801943726943d492e5a020f764a9e8aaaf5924f5be846",
+      "documentId": "00000000-0000-4000-8000-000000000002",
+      "extractorVersion": "quixi-extract-1/pdfjs-6.3.289",
+      "normalizerVersion": "identity-v1"
+    },
+    "state": "working",
+    "writerEpoch": 1,
+    "pageCount": null,
+    "completedPage": 0,
+    "currentPage": null,
+    "visibleRunId": null,
+    "documentRevision": 1,
+    "retainedBytes": 2373,
+    "failure": null
+  },
+  "text": "Legacy page 日本語 preserved source order.",
+  "staged": {
+    "args": {
+      "runId": "00000000-0000-4000-8000-000000001005",
+      "writerEpoch": 1,
+      "pageAttemptId": "00000000-0000-4000-8000-000000001006",
+      "operationId": "00000000-0000-4000-8000-000000001007",
+      "sequence": 0,
+      "expectedUTF16Offset": 0,
+      "text": "Legacy page 日本語 preserved source order.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 39,
+          "source": {
+            "itemIndex": 0,
+            "itemStart": 0,
+            "itemEnd": 39,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              40,
+              750
+            ],
+            "width": 200,
+            "height": 12,
+            "direction": "ltr"
+          }
+        }
+      ]
+    },
+    "receipt": {
+      "pageAttemptId": "00000000-0000-4000-8000-000000001006",
+      "sequence": 0,
+      "committedUTF16Offset": 39,
+      "committedMapCount": 1
+    }
+  },
+  "published": {
+    "args": {
+      "runId": "00000000-0000-4000-8000-000000001005",
+      "writerEpoch": 1,
+      "pageAttemptId": "00000000-0000-4000-8000-000000001006",
+      "operationId": "00000000-0000-4000-8000-000000001008",
+      "lastSequence": 0,
+      "expectedUTF16Length": 39,
+      "expectedTextSha256": "7f775a1c3e95669009c5758f1c2e3e70f05a9c1fa30cb8ba5080847f47128399",
+      "expectedMapSha256": "45f3ad315ee92cb379c4f0c1e3410d2560ae4b4f2fa45ad8c87a3e97bda98e8f",
+      "itemCount": 1,
+      "classification": "text"
+    },
+    "receipt": {
+      "pageRef": {
+        "pageAttemptId": "00000000-0000-4000-8000-000000001006",
+        "runId": "00000000-0000-4000-8000-000000001005",
+        "page": 1,
+        "identity": {
+          "attachmentByteLength": 1683,
+          "attachmentId": "00000000-0000-4000-8000-000000000001",
+          "attachmentSha256": "3e318e5196a931424d1801943726943d492e5a020f764a9e8aaaf5924f5be846",
+          "documentId": "00000000-0000-4000-8000-000000000002",
+          "extractorVersion": "quixi-extract-1/pdfjs-6.3.289",
+          "normalizerVersion": "identity-v1"
+        },
+        "sourceDigest": "9f4b1611ef76b0dd76acb72311c7489b9e2488ed461c132afb4a79e5f6b4b853",
+        "publicationRevision": 1
+      },
+      "completedPage": 1
+    }
+  },
+  "second": {
+    "runId": "00000000-0000-4000-8000-000000001005",
+    "writerEpoch": 1,
+    "pageAttemptId": "00000000-0000-4000-8000-000000001009"
+  },
+  "pending": {
+    "args": {
+      "runId": "00000000-0000-4000-8000-000000001005",
+      "writerEpoch": 1,
+      "pageAttemptId": "00000000-0000-4000-8000-000000001009",
+      "operationId": "00000000-0000-4000-8000-000000001010",
+      "sequence": 0,
+      "expectedUTF16Offset": 0,
+      "text": "Interrupted second page checkpoint.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 35,
+          "source": {
+            "itemIndex": 0,
+            "itemStart": 0,
+            "itemEnd": 35,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              40,
+              750
+            ],
+            "width": 200,
+            "height": 12,
+            "direction": "ltr"
+          }
+        }
+      ]
+    },
+    "receipt": {
+      "pageAttemptId": "00000000-0000-4000-8000-000000001009",
+      "sequence": 0,
+      "committedUTF16Offset": 35,
+      "committedMapCount": 1
+    }
+  }
+}

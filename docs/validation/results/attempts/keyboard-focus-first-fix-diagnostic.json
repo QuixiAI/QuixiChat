@@ -1,0 +1,18 @@
+{
+  "error": "Error: expect(locator).toBeFocused() failed\n\nLocator:  getByLabel('Send key', { exact: true })\nExpected: focused\nReceived: inactive\nTimeout:  5000ms\n\nCall log:\n  - Expect \"toBeFocused\" getByLabel('Send key', { exact: true }) with timeout 5000ms\n  - waiting for getByLabel('Send key', { exact: true })\n    14 × locator resolved to <select id=\"send-key-preference\">…</select>\n       - unexpected value \"inactive\"\n",
+  "active": {
+    "tag": "BUTTON",
+    "id": "",
+    "role": null,
+    "label": null,
+    "html": "<button aria-current=\"page\">Preferences</button>"
+  },
+  "control": "<select id=\"send-key-preference\"><option value=\"mod-enter\">⌘ / Ctrl + Enter</option><option value=\"enter\">Enter (Shift + Enter for a new line)</option></select>",
+  "headings": [
+    "Preferences",
+    "Routing aliases"
+  ],
+  "status": [
+    "Preferences are saved on this device."
+  ]
+}

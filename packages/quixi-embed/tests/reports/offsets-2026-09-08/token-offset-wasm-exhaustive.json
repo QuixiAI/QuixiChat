@@ -1,0 +1,41 @@
+{
+  "passed": true,
+  "status": "passed",
+  "fixtureSha256": "1f1f5ed3c9589f794707aba3eea4aede7d0e6239f0af707e0c36004b69660376",
+  "routes": [
+    {
+      "route": "scalar",
+      "cases": 2412,
+      "manualContributorCases": 0,
+      "upstreamOffsetDivergences": 0,
+      "wasmSha256": "e477d3e35b6e83c39e206e76079a4d5136a227711a0124b64bf885f3165cee65",
+      "memory": {
+        "tokenizerBytes": 959947,
+        "linearMemoryBytes": 16777216,
+        "offsetScratchBytes": 0,
+        "peakOffsetScratchBytes": 15600
+      }
+    },
+    {
+      "route": "simd",
+      "cases": 2412,
+      "manualContributorCases": 0,
+      "upstreamOffsetDivergences": 0,
+      "wasmSha256": "d07bbc26c3f35731d7e2c6885405205a64852f40f9d7c5878c6efe77e8f9b198",
+      "memory": {
+        "tokenizerBytes": 959947,
+        "linearMemoryBytes": 16777216,
+        "offsetScratchBytes": 0,
+        "peakOffsetScratchBytes": 15600
+      }
+    }
+  ],
+  "coverage": {
+    "deletedScalars": 139248,
+    "normalizationMappings": 14286,
+    "punctuationScalars": 726,
+    "cjkBoundaryScalars": 44,
+    "uniqueScalars": 154295,
+    "occurrencesPerRole": 2
+  }
+}

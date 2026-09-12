@@ -1,0 +1,3513 @@
+{
+  "version": 1,
+  "source": {
+    "repository": "Snowflake/snowflake-arctic-embed-xs",
+    "revision": "d8c86521100d3556476a063fc2342036d45c106f",
+    "license": "Apache-2.0",
+    "files": {
+      "config.json": {
+        "bytes": 737,
+        "sha256": "d7d071046ab952af96b7abad788db7ab3fc997b465e1b9914ff39707092254ec"
+      },
+      "config_sentence_transformers.json": {
+        "bytes": 252,
+        "sha256": "26a4caecbc808973e5b3b3a04484db1389078b0458254e4dd617ff361e2f378a"
+      },
+      "modules.json": {
+        "bytes": 349,
+        "sha256": "84e40c8e006c9b1d6c122e02cba9b02458120b5fb0c87b746c41e0207cf642cf"
+      },
+      "sentence_bert_config.json": {
+        "bytes": 107,
+        "sha256": "4dfc17a899f3ea25b5c8e9034a1d0d9ebd96eca0868b015a89d1d748c38e4b2f"
+      },
+      "special_tokens_map.json": {
+        "bytes": 695,
+        "sha256": "5d5b662e421ea9fac075174bb0688ee0d9431699900b90662acd44b2a350503a"
+      },
+      "tokenizer.json": {
+        "bytes": 711649,
+        "sha256": "91f1def9b9391fdabe028cd3f3fcc4efd34e5d1f08c3bf2de513ebb5911a1854"
+      },
+      "tokenizer_config.json": {
+        "bytes": 1433,
+        "sha256": "9ca59277519f6e3692c8685e26b94d4afca2d5438deff66483db495e48735810"
+      },
+      "vocab.txt": {
+        "bytes": 231508,
+        "sha256": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3"
+      },
+      "1_Pooling/config.json": {
+        "bytes": 296,
+        "sha256": "83eeb6d0c128b377a452f121f8c5a19bbbf9322092a87b856ef782f4ad2326b9"
+      },
+      "model.safetensors": {
+        "bytes": 90272656,
+        "sha256": "ee789e0b1d6ecbbd5ce37b474af556cc1a1319cee4417d9e3b11f82e90300706"
+      },
+      "README.md": {
+        "bytes": 85189,
+        "sha256": "6bfaf51250f5360e505272dde4a9ffcdc41bf66b090d68e8f9ecc4807ab80507"
+      }
+    }
+  },
+  "environment": {
+    "python": "3.11.15",
+    "platform": "macOS-26.5.2-arm64-arm-64bit",
+    "machine": "arm64",
+    "processor": "arm",
+    "packages": {
+      "torch": "2.6.0",
+      "transformers": "4.49.0",
+      "tokenizers": "0.21.0",
+      "safetensors": "0.5.3",
+      "numpy": "2.2.3"
+    },
+    "threads": 1,
+    "backend": "torch-cpu-eager-fp32",
+    "requirements_sha256": "e2cbe2d8b315d7a9dd08fe51756b3ed06a7e7d1be05561919f1b9389ab05c737"
+  },
+  "coverage": {
+    "reason": "16-row GPU projection tile boundary",
+    "batches": [
+      1,
+      4,
+      8,
+      16,
+      32
+    ],
+    "lengths": [
+      15,
+      16,
+      17
+    ]
+  },
+  "cases": [
+    {
+      "id": "gpu-tile-document-b1-t15",
+      "role": "document",
+      "texts": [
+        "token token token token token token token token token token token token token"
+      ],
+      "stages": true,
+      "file": "gpu-tile-document-b1-t15.npz",
+      "sha256": "b178dacf8142c988dbb6f77447d7d0485d8c80d21a9b6c945c1f68d59ea4099b",
+      "arrays": {
+        "input_ids": {
+          "shape": [
+            1,
+            15
+          ],
+          "dtype": "int64"
+        },
+        "token_type_ids": {
+          "shape": [
+            1,
+            15
+          ],
+          "dtype": "int64"
+        },
+        "attention_mask": {
+          "shape": [
+            1,
+            15
+          ],
+          "dtype": "int64"
+        },
+        "pooled": {
+          "shape": [
+            1,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "vectors": {
+          "shape": [
+            1,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_0": {
+          "shape": [
+            1,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_1": {
+          "shape": [
+            1,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_2": {
+          "shape": [
+            1,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_3": {
+          "shape": [
+            1,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_4": {
+          "shape": [
+            1,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_5": {
+          "shape": [
+            1,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_6": {
+          "shape": [
+            1,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        }
+      }
+    },
+    {
+      "id": "gpu-tile-document-b4-t15",
+      "role": "document",
+      "texts": [
+        "token token token token token token token token token token token token token",
+        "hello hello hello hello hello hello hello hello hello hello hello hello",
+        "world world world world world world world world world world world",
+        "model model model model model model model model model model model model model"
+      ],
+      "stages": true,
+      "file": "gpu-tile-document-b4-t15.npz",
+      "sha256": "87626c1efccabe3745ad60ed314742a69bf9429e684a8e1513b09c43ba3feeed",
+      "arrays": {
+        "input_ids": {
+          "shape": [
+            4,
+            15
+          ],
+          "dtype": "int64"
+        },
+        "token_type_ids": {
+          "shape": [
+            4,
+            15
+          ],
+          "dtype": "int64"
+        },
+        "attention_mask": {
+          "shape": [
+            4,
+            15
+          ],
+          "dtype": "int64"
+        },
+        "pooled": {
+          "shape": [
+            4,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "vectors": {
+          "shape": [
+            4,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_0": {
+          "shape": [
+            4,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_1": {
+          "shape": [
+            4,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_2": {
+          "shape": [
+            4,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_3": {
+          "shape": [
+            4,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_4": {
+          "shape": [
+            4,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_5": {
+          "shape": [
+            4,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_6": {
+          "shape": [
+            4,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        }
+      }
+    },
+    {
+      "id": "gpu-tile-document-b8-t15",
+      "role": "document",
+      "texts": [
+        "token token token token token token token token token token token token token",
+        "hello hello hello hello hello hello hello hello hello hello hello hello",
+        "world world world world world world world world world world world",
+        "model model model model model model model model model model model model model",
+        "token token token token token token token token token token token token",
+        "hello hello hello hello hello hello hello hello hello hello hello",
+        "world world world world world world world world world world world world world",
+        "model model model model model model model model model model model model"
+      ],
+      "stages": true,
+      "file": "gpu-tile-document-b8-t15.npz",
+      "sha256": "5c43391f3475bcc7338cd31103fc0a40d23fb1a97bf24ac35a016eb8baefc8cd",
+      "arrays": {
+        "input_ids": {
+          "shape": [
+            8,
+            15
+          ],
+          "dtype": "int64"
+        },
+        "token_type_ids": {
+          "shape": [
+            8,
+            15
+          ],
+          "dtype": "int64"
+        },
+        "attention_mask": {
+          "shape": [
+            8,
+            15
+          ],
+          "dtype": "int64"
+        },
+        "pooled": {
+          "shape": [
+            8,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "vectors": {
+          "shape": [
+            8,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_0": {
+          "shape": [
+            8,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_1": {
+          "shape": [
+            8,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_2": {
+          "shape": [
+            8,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_3": {
+          "shape": [
+            8,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_4": {
+          "shape": [
+            8,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_5": {
+          "shape": [
+            8,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_6": {
+          "shape": [
+            8,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        }
+      }
+    },
+    {
+      "id": "gpu-tile-document-b16-t15",
+      "role": "document",
+      "texts": [
+        "token token token token token token token token token token token token token",
+        "hello hello hello hello hello hello hello hello hello hello hello hello",
+        "world world world world world world world world world world world",
+        "model model model model model model model model model model model model model",
+        "token token token token token token token token token token token token",
+        "hello hello hello hello hello hello hello hello hello hello hello",
+        "world world world world world world world world world world world world world",
+        "model model model model model model model model model model model model",
+        "token token token token token token token token token token token",
+        "hello hello hello hello hello hello hello hello hello hello hello hello hello",
+        "world world world world world world world world world world world world",
+        "model model model model model model model model model model model",
+        "token token token token token token token token token token token token token",
+        "hello hello hello hello hello hello hello hello hello hello hello hello",
+        "world world world world world world world world world world world",
+        "model model model model model model model model model model model model model"
+      ],
+      "stages": true,
+      "file": "gpu-tile-document-b16-t15.npz",
+      "sha256": "4e5854732a8b03929da7a2e7594110601e14b7796647c44086bad288408dbc96",
+      "arrays": {
+        "input_ids": {
+          "shape": [
+            16,
+            15
+          ],
+          "dtype": "int64"
+        },
+        "token_type_ids": {
+          "shape": [
+            16,
+            15
+          ],
+          "dtype": "int64"
+        },
+        "attention_mask": {
+          "shape": [
+            16,
+            15
+          ],
+          "dtype": "int64"
+        },
+        "pooled": {
+          "shape": [
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "vectors": {
+          "shape": [
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_0": {
+          "shape": [
+            16,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_1": {
+          "shape": [
+            16,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_2": {
+          "shape": [
+            16,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_3": {
+          "shape": [
+            16,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_4": {
+          "shape": [
+            16,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_5": {
+          "shape": [
+            16,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_6": {
+          "shape": [
+            16,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        }
+      }
+    },
+    {
+      "id": "gpu-tile-document-b32-t15",
+      "role": "document",
+      "texts": [
+        "token token token token token token token token token token token token token",
+        "hello hello hello hello hello hello hello hello hello hello hello hello",
+        "world world world world world world world world world world world",
+        "model model model model model model model model model model model model model",
+        "token token token token token token token token token token token token",
+        "hello hello hello hello hello hello hello hello hello hello hello",
+        "world world world world world world world world world world world world world",
+        "model model model model model model model model model model model model",
+        "token token token token token token token token token token token",
+        "hello hello hello hello hello hello hello hello hello hello hello hello hello",
+        "world world world world world world world world world world world world",
+        "model model model model model model model model model model model",
+        "token token token token token token token token token token token token token",
+        "hello hello hello hello hello hello hello hello hello hello hello hello",
+        "world world world world world world world world world world world",
+        "model model model model model model model model model model model model model",
+        "token token token token token token token token token token token token",
+        "hello hello hello hello hello hello hello hello hello hello hello",
+        "world world world world world world world world world world world world world",
+        "model model model model model model model model model model model model",
+        "token token token token token token token token token token token",
+        "hello hello hello hello hello hello hello hello hello hello hello hello hello",
+        "world world world world world world world world world world world world",
+        "model model model model model model model model model model model",
+        "token token token token token token token token token token token token token",
+        "hello hello hello hello hello hello hello hello hello hello hello hello",
+        "world world world world world world world world world world world",
+        "model model model model model model model model model model model model model",
+        "token token token token token token token token token token token token",
+        "hello hello hello hello hello hello hello hello hello hello hello",
+        "world world world world world world world world world world world world world",
+        "model model model model model model model model model model model model"
+      ],
+      "stages": true,
+      "file": "gpu-tile-document-b32-t15.npz",
+      "sha256": "151e2f3948df974e0dccc797929cc7bff800a6c3df70b6dd53586950eab2882d",
+      "arrays": {
+        "input_ids": {
+          "shape": [
+            32,
+            15
+          ],
+          "dtype": "int64"
+        },
+        "token_type_ids": {
+          "shape": [
+            32,
+            15
+          ],
+          "dtype": "int64"
+        },
+        "attention_mask": {
+          "shape": [
+            32,
+            15
+          ],
+          "dtype": "int64"
+        },
+        "pooled": {
+          "shape": [
+            32,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "vectors": {
+          "shape": [
+            32,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_0": {
+          "shape": [
+            32,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_1": {
+          "shape": [
+            32,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_2": {
+          "shape": [
+            32,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_3": {
+          "shape": [
+            32,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_4": {
+          "shape": [
+            32,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_5": {
+          "shape": [
+            32,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_6": {
+          "shape": [
+            32,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        }
+      }
+    },
+    {
+      "id": "gpu-tile-document-b1-t16",
+      "role": "document",
+      "texts": [
+        "token token token token token token token token token token token token token token"
+      ],
+      "stages": true,
+      "file": "gpu-tile-document-b1-t16.npz",
+      "sha256": "86df7d40168d180294bd0db6096017f5cff2f832e30b8652e0134fd1a70aeead",
+      "arrays": {
+        "input_ids": {
+          "shape": [
+            1,
+            16
+          ],
+          "dtype": "int64"
+        },
+        "token_type_ids": {
+          "shape": [
+            1,
+            16
+          ],
+          "dtype": "int64"
+        },
+        "attention_mask": {
+          "shape": [
+            1,
+            16
+          ],
+          "dtype": "int64"
+        },
+        "pooled": {
+          "shape": [
+            1,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "vectors": {
+          "shape": [
+            1,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_0": {
+          "shape": [
+            1,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_1": {
+          "shape": [
+            1,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_2": {
+          "shape": [
+            1,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_3": {
+          "shape": [
+            1,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_4": {
+          "shape": [
+            1,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_5": {
+          "shape": [
+            1,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_6": {
+          "shape": [
+            1,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        }
+      }
+    },
+    {
+      "id": "gpu-tile-document-b4-t16",
+      "role": "document",
+      "texts": [
+        "token token token token token token token token token token token token token token",
+        "hello hello hello hello hello hello hello hello hello hello hello hello hello",
+        "world world world world world world world world world world world world",
+        "model model model model model model model model model model model model model model"
+      ],
+      "stages": true,
+      "file": "gpu-tile-document-b4-t16.npz",
+      "sha256": "d0ed38461843ee53a4cc6d202c2b92d0509c59427d74ed43d1b970b8c3bc2784",
+      "arrays": {
+        "input_ids": {
+          "shape": [
+            4,
+            16
+          ],
+          "dtype": "int64"
+        },
+        "token_type_ids": {
+          "shape": [
+            4,
+            16
+          ],
+          "dtype": "int64"
+        },
+        "attention_mask": {
+          "shape": [
+            4,
+            16
+          ],
+          "dtype": "int64"
+        },
+        "pooled": {
+          "shape": [
+            4,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "vectors": {
+          "shape": [
+            4,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_0": {
+          "shape": [
+            4,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_1": {
+          "shape": [
+            4,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_2": {
+          "shape": [
+            4,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_3": {
+          "shape": [
+            4,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_4": {
+          "shape": [
+            4,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_5": {
+          "shape": [
+            4,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_6": {
+          "shape": [
+            4,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        }
+      }
+    },
+    {
+      "id": "gpu-tile-document-b8-t16",
+      "role": "document",
+      "texts": [
+        "token token token token token token token token token token token token token token",
+        "hello hello hello hello hello hello hello hello hello hello hello hello hello",
+        "world world world world world world world world world world world world",
+        "model model model model model model model model model model model model model model",
+        "token token token token token token token token token token token token token",
+        "hello hello hello hello hello hello hello hello hello hello hello hello",
+        "world world world world world world world world world world world world world world",
+        "model model model model model model model model model model model model model"
+      ],
+      "stages": true,
+      "file": "gpu-tile-document-b8-t16.npz",
+      "sha256": "148244e6cf80da63014f0de6b7bc3385aaeea5241bb816c716a128e521ed99c2",
+      "arrays": {
+        "input_ids": {
+          "shape": [
+            8,
+            16
+          ],
+          "dtype": "int64"
+        },
+        "token_type_ids": {
+          "shape": [
+            8,
+            16
+          ],
+          "dtype": "int64"
+        },
+        "attention_mask": {
+          "shape": [
+            8,
+            16
+          ],
+          "dtype": "int64"
+        },
+        "pooled": {
+          "shape": [
+            8,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "vectors": {
+          "shape": [
+            8,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_0": {
+          "shape": [
+            8,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_1": {
+          "shape": [
+            8,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_2": {
+          "shape": [
+            8,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_3": {
+          "shape": [
+            8,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_4": {
+          "shape": [
+            8,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_5": {
+          "shape": [
+            8,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_6": {
+          "shape": [
+            8,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        }
+      }
+    },
+    {
+      "id": "gpu-tile-document-b16-t16",
+      "role": "document",
+      "texts": [
+        "token token token token token token token token token token token token token token",
+        "hello hello hello hello hello hello hello hello hello hello hello hello hello",
+        "world world world world world world world world world world world world",
+        "model model model model model model model model model model model model model model",
+        "token token token token token token token token token token token token token",
+        "hello hello hello hello hello hello hello hello hello hello hello hello",
+        "world world world world world world world world world world world world world world",
+        "model model model model model model model model model model model model model",
+        "token token token token token token token token token token token token",
+        "hello hello hello hello hello hello hello hello hello hello hello hello hello hello",
+        "world world world world world world world world world world world world world",
+        "model model model model model model model model model model model model",
+        "token token token token token token token token token token token token token token",
+        "hello hello hello hello hello hello hello hello hello hello hello hello hello",
+        "world world world world world world world world world world world world",
+        "model model model model model model model model model model model model model model"
+      ],
+      "stages": true,
+      "file": "gpu-tile-document-b16-t16.npz",
+      "sha256": "d526818536654f00de901e4227c8fe4b3d7d3b1091e6b2251f0d4c44517faa79",
+      "arrays": {
+        "input_ids": {
+          "shape": [
+            16,
+            16
+          ],
+          "dtype": "int64"
+        },
+        "token_type_ids": {
+          "shape": [
+            16,
+            16
+          ],
+          "dtype": "int64"
+        },
+        "attention_mask": {
+          "shape": [
+            16,
+            16
+          ],
+          "dtype": "int64"
+        },
+        "pooled": {
+          "shape": [
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "vectors": {
+          "shape": [
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_0": {
+          "shape": [
+            16,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_1": {
+          "shape": [
+            16,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_2": {
+          "shape": [
+            16,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_3": {
+          "shape": [
+            16,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_4": {
+          "shape": [
+            16,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_5": {
+          "shape": [
+            16,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_6": {
+          "shape": [
+            16,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        }
+      }
+    },
+    {
+      "id": "gpu-tile-document-b32-t16",
+      "role": "document",
+      "texts": [
+        "token token token token token token token token token token token token token token",
+        "hello hello hello hello hello hello hello hello hello hello hello hello hello",
+        "world world world world world world world world world world world world",
+        "model model model model model model model model model model model model model model",
+        "token token token token token token token token token token token token token",
+        "hello hello hello hello hello hello hello hello hello hello hello hello",
+        "world world world world world world world world world world world world world world",
+        "model model model model model model model model model model model model model",
+        "token token token token token token token token token token token token",
+        "hello hello hello hello hello hello hello hello hello hello hello hello hello hello",
+        "world world world world world world world world world world world world world",
+        "model model model model model model model model model model model model",
+        "token token token token token token token token token token token token token token",
+        "hello hello hello hello hello hello hello hello hello hello hello hello hello",
+        "world world world world world world world world world world world world",
+        "model model model model model model model model model model model model model model",
+        "token token token token token token token token token token token token token",
+        "hello hello hello hello hello hello hello hello hello hello hello hello",
+        "world world world world world world world world world world world world world world",
+        "model model model model model model model model model model model model model",
+        "token token token token token token token token token token token token",
+        "hello hello hello hello hello hello hello hello hello hello hello hello hello hello",
+        "world world world world world world world world world world world world world",
+        "model model model model model model model model model model model model",
+        "token token token token token token token token token token token token token token",
+        "hello hello hello hello hello hello hello hello hello hello hello hello hello",
+        "world world world world world world world world world world world world",
+        "model model model model model model model model model model model model model model",
+        "token token token token token token token token token token token token token",
+        "hello hello hello hello hello hello hello hello hello hello hello hello",
+        "world world world world world world world world world world world world world world",
+        "model model model model model model model model model model model model model"
+      ],
+      "stages": true,
+      "file": "gpu-tile-document-b32-t16.npz",
+      "sha256": "cc459c2d28702ece5fb308bfd4b1efd416869a9f73343edeab398e9404d472e2",
+      "arrays": {
+        "input_ids": {
+          "shape": [
+            32,
+            16
+          ],
+          "dtype": "int64"
+        },
+        "token_type_ids": {
+          "shape": [
+            32,
+            16
+          ],
+          "dtype": "int64"
+        },
+        "attention_mask": {
+          "shape": [
+            32,
+            16
+          ],
+          "dtype": "int64"
+        },
+        "pooled": {
+          "shape": [
+            32,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "vectors": {
+          "shape": [
+            32,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_0": {
+          "shape": [
+            32,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_1": {
+          "shape": [
+            32,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_2": {
+          "shape": [
+            32,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_3": {
+          "shape": [
+            32,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_4": {
+          "shape": [
+            32,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_5": {
+          "shape": [
+            32,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_6": {
+          "shape": [
+            32,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        }
+      }
+    },
+    {
+      "id": "gpu-tile-document-b1-t17",
+      "role": "document",
+      "texts": [
+        "token token token token token token token token token token token token token token token"
+      ],
+      "stages": true,
+      "file": "gpu-tile-document-b1-t17.npz",
+      "sha256": "edeea6054ea8a89daab3e5723bd6b517cabef62cedef0dad80b3b3f0d7ee9b40",
+      "arrays": {
+        "input_ids": {
+          "shape": [
+            1,
+            17
+          ],
+          "dtype": "int64"
+        },
+        "token_type_ids": {
+          "shape": [
+            1,
+            17
+          ],
+          "dtype": "int64"
+        },
+        "attention_mask": {
+          "shape": [
+            1,
+            17
+          ],
+          "dtype": "int64"
+        },
+        "pooled": {
+          "shape": [
+            1,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "vectors": {
+          "shape": [
+            1,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_0": {
+          "shape": [
+            1,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_1": {
+          "shape": [
+            1,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_2": {
+          "shape": [
+            1,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_3": {
+          "shape": [
+            1,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_4": {
+          "shape": [
+            1,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_5": {
+          "shape": [
+            1,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_6": {
+          "shape": [
+            1,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        }
+      }
+    },
+    {
+      "id": "gpu-tile-document-b4-t17",
+      "role": "document",
+      "texts": [
+        "token token token token token token token token token token token token token token token",
+        "hello hello hello hello hello hello hello hello hello hello hello hello hello hello",
+        "world world world world world world world world world world world world world",
+        "model model model model model model model model model model model model model model model"
+      ],
+      "stages": true,
+      "file": "gpu-tile-document-b4-t17.npz",
+      "sha256": "abe6649b4f7f815ea7086e086a491c187da33a903c821c8e729d8a11bcbb42f3",
+      "arrays": {
+        "input_ids": {
+          "shape": [
+            4,
+            17
+          ],
+          "dtype": "int64"
+        },
+        "token_type_ids": {
+          "shape": [
+            4,
+            17
+          ],
+          "dtype": "int64"
+        },
+        "attention_mask": {
+          "shape": [
+            4,
+            17
+          ],
+          "dtype": "int64"
+        },
+        "pooled": {
+          "shape": [
+            4,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "vectors": {
+          "shape": [
+            4,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_0": {
+          "shape": [
+            4,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_1": {
+          "shape": [
+            4,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_2": {
+          "shape": [
+            4,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_3": {
+          "shape": [
+            4,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_4": {
+          "shape": [
+            4,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_5": {
+          "shape": [
+            4,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_6": {
+          "shape": [
+            4,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        }
+      }
+    },
+    {
+      "id": "gpu-tile-document-b8-t17",
+      "role": "document",
+      "texts": [
+        "token token token token token token token token token token token token token token token",
+        "hello hello hello hello hello hello hello hello hello hello hello hello hello hello",
+        "world world world world world world world world world world world world world",
+        "model model model model model model model model model model model model model model model",
+        "token token token token token token token token token token token token token token",
+        "hello hello hello hello hello hello hello hello hello hello hello hello hello",
+        "world world world world world world world world world world world world world world world",
+        "model model model model model model model model model model model model model model"
+      ],
+      "stages": true,
+      "file": "gpu-tile-document-b8-t17.npz",
+      "sha256": "ab8c208ac4f5f314fc5401c8857f0bb6231914c6cad8da7a89019426753257c6",
+      "arrays": {
+        "input_ids": {
+          "shape": [
+            8,
+            17
+          ],
+          "dtype": "int64"
+        },
+        "token_type_ids": {
+          "shape": [
+            8,
+            17
+          ],
+          "dtype": "int64"
+        },
+        "attention_mask": {
+          "shape": [
+            8,
+            17
+          ],
+          "dtype": "int64"
+        },
+        "pooled": {
+          "shape": [
+            8,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "vectors": {
+          "shape": [
+            8,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_0": {
+          "shape": [
+            8,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_1": {
+          "shape": [
+            8,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_2": {
+          "shape": [
+            8,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_3": {
+          "shape": [
+            8,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_4": {
+          "shape": [
+            8,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_5": {
+          "shape": [
+            8,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_6": {
+          "shape": [
+            8,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        }
+      }
+    },
+    {
+      "id": "gpu-tile-document-b16-t17",
+      "role": "document",
+      "texts": [
+        "token token token token token token token token token token token token token token token",
+        "hello hello hello hello hello hello hello hello hello hello hello hello hello hello",
+        "world world world world world world world world world world world world world",
+        "model model model model model model model model model model model model model model model",
+        "token token token token token token token token token token token token token token",
+        "hello hello hello hello hello hello hello hello hello hello hello hello hello",
+        "world world world world world world world world world world world world world world world",
+        "model model model model model model model model model model model model model model",
+        "token token token token token token token token token token token token token",
+        "hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello",
+        "world world world world world world world world world world world world world world",
+        "model model model model model model model model model model model model model",
+        "token token token token token token token token token token token token token token token",
+        "hello hello hello hello hello hello hello hello hello hello hello hello hello hello",
+        "world world world world world world world world world world world world world",
+        "model model model model model model model model model model model model model model model"
+      ],
+      "stages": true,
+      "file": "gpu-tile-document-b16-t17.npz",
+      "sha256": "23533ff94f61c37e6034530e4268a5301239706b8a15f5b74fe193e5eb63e0a7",
+      "arrays": {
+        "input_ids": {
+          "shape": [
+            16,
+            17
+          ],
+          "dtype": "int64"
+        },
+        "token_type_ids": {
+          "shape": [
+            16,
+            17
+          ],
+          "dtype": "int64"
+        },
+        "attention_mask": {
+          "shape": [
+            16,
+            17
+          ],
+          "dtype": "int64"
+        },
+        "pooled": {
+          "shape": [
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "vectors": {
+          "shape": [
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_0": {
+          "shape": [
+            16,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_1": {
+          "shape": [
+            16,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_2": {
+          "shape": [
+            16,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_3": {
+          "shape": [
+            16,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_4": {
+          "shape": [
+            16,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_5": {
+          "shape": [
+            16,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_6": {
+          "shape": [
+            16,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        }
+      }
+    },
+    {
+      "id": "gpu-tile-document-b32-t17",
+      "role": "document",
+      "texts": [
+        "token token token token token token token token token token token token token token token",
+        "hello hello hello hello hello hello hello hello hello hello hello hello hello hello",
+        "world world world world world world world world world world world world world",
+        "model model model model model model model model model model model model model model model",
+        "token token token token token token token token token token token token token token",
+        "hello hello hello hello hello hello hello hello hello hello hello hello hello",
+        "world world world world world world world world world world world world world world world",
+        "model model model model model model model model model model model model model model",
+        "token token token token token token token token token token token token token",
+        "hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello",
+        "world world world world world world world world world world world world world world",
+        "model model model model model model model model model model model model model",
+        "token token token token token token token token token token token token token token token",
+        "hello hello hello hello hello hello hello hello hello hello hello hello hello hello",
+        "world world world world world world world world world world world world world",
+        "model model model model model model model model model model model model model model model",
+        "token token token token token token token token token token token token token token",
+        "hello hello hello hello hello hello hello hello hello hello hello hello hello",
+        "world world world world world world world world world world world world world world world",
+        "model model model model model model model model model model model model model model",
+        "token token token token token token token token token token token token token",
+        "hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello",
+        "world world world world world world world world world world world world world world",
+        "model model model model model model model model model model model model model",
+        "token token token token token token token token token token token token token token token",
+        "hello hello hello hello hello hello hello hello hello hello hello hello hello hello",
+        "world world world world world world world world world world world world world",
+        "model model model model model model model model model model model model model model model",
+        "token token token token token token token token token token token token token token",
+        "hello hello hello hello hello hello hello hello hello hello hello hello hello",
+        "world world world world world world world world world world world world world world world",
+        "model model model model model model model model model model model model model model"
+      ],
+      "stages": true,
+      "file": "gpu-tile-document-b32-t17.npz",
+      "sha256": "c81c911271db6d1aec2178ec9428413d02ada73be29e7d0ebe567ec98c59f210",
+      "arrays": {
+        "input_ids": {
+          "shape": [
+            32,
+            17
+          ],
+          "dtype": "int64"
+        },
+        "token_type_ids": {
+          "shape": [
+            32,
+            17
+          ],
+          "dtype": "int64"
+        },
+        "attention_mask": {
+          "shape": [
+            32,
+            17
+          ],
+          "dtype": "int64"
+        },
+        "pooled": {
+          "shape": [
+            32,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "vectors": {
+          "shape": [
+            32,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_0": {
+          "shape": [
+            32,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_1": {
+          "shape": [
+            32,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_2": {
+          "shape": [
+            32,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_3": {
+          "shape": [
+            32,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_4": {
+          "shape": [
+            32,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_5": {
+          "shape": [
+            32,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_6": {
+          "shape": [
+            32,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        }
+      }
+    },
+    {
+      "id": "gpu-tile-query-b1-t15",
+      "role": "query",
+      "texts": [
+        "token token token token token"
+      ],
+      "stages": true,
+      "file": "gpu-tile-query-b1-t15.npz",
+      "sha256": "f8618533fb6dea2453f02fe06f377621508f8af17ad985208eefa1fc94db8c76",
+      "arrays": {
+        "input_ids": {
+          "shape": [
+            1,
+            15
+          ],
+          "dtype": "int64"
+        },
+        "token_type_ids": {
+          "shape": [
+            1,
+            15
+          ],
+          "dtype": "int64"
+        },
+        "attention_mask": {
+          "shape": [
+            1,
+            15
+          ],
+          "dtype": "int64"
+        },
+        "pooled": {
+          "shape": [
+            1,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "vectors": {
+          "shape": [
+            1,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_0": {
+          "shape": [
+            1,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_1": {
+          "shape": [
+            1,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_2": {
+          "shape": [
+            1,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_3": {
+          "shape": [
+            1,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_4": {
+          "shape": [
+            1,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_5": {
+          "shape": [
+            1,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_6": {
+          "shape": [
+            1,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        }
+      }
+    },
+    {
+      "id": "gpu-tile-query-b4-t15",
+      "role": "query",
+      "texts": [
+        "token token token token token",
+        "hello hello hello hello",
+        "world world world",
+        "model model model model model"
+      ],
+      "stages": true,
+      "file": "gpu-tile-query-b4-t15.npz",
+      "sha256": "50ed7dc39911e53a38bea3262eb68209ac54aa22cf168267b1a9eda7c5402896",
+      "arrays": {
+        "input_ids": {
+          "shape": [
+            4,
+            15
+          ],
+          "dtype": "int64"
+        },
+        "token_type_ids": {
+          "shape": [
+            4,
+            15
+          ],
+          "dtype": "int64"
+        },
+        "attention_mask": {
+          "shape": [
+            4,
+            15
+          ],
+          "dtype": "int64"
+        },
+        "pooled": {
+          "shape": [
+            4,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "vectors": {
+          "shape": [
+            4,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_0": {
+          "shape": [
+            4,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_1": {
+          "shape": [
+            4,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_2": {
+          "shape": [
+            4,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_3": {
+          "shape": [
+            4,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_4": {
+          "shape": [
+            4,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_5": {
+          "shape": [
+            4,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_6": {
+          "shape": [
+            4,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        }
+      }
+    },
+    {
+      "id": "gpu-tile-query-b8-t15",
+      "role": "query",
+      "texts": [
+        "token token token token token",
+        "hello hello hello hello",
+        "world world world",
+        "model model model model model",
+        "token token token token",
+        "hello hello hello",
+        "world world world world world",
+        "model model model model"
+      ],
+      "stages": true,
+      "file": "gpu-tile-query-b8-t15.npz",
+      "sha256": "84bc67c0c8844e1cb36cc24059195b580e86a858c35d825edd75b37356178bb5",
+      "arrays": {
+        "input_ids": {
+          "shape": [
+            8,
+            15
+          ],
+          "dtype": "int64"
+        },
+        "token_type_ids": {
+          "shape": [
+            8,
+            15
+          ],
+          "dtype": "int64"
+        },
+        "attention_mask": {
+          "shape": [
+            8,
+            15
+          ],
+          "dtype": "int64"
+        },
+        "pooled": {
+          "shape": [
+            8,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "vectors": {
+          "shape": [
+            8,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_0": {
+          "shape": [
+            8,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_1": {
+          "shape": [
+            8,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_2": {
+          "shape": [
+            8,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_3": {
+          "shape": [
+            8,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_4": {
+          "shape": [
+            8,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_5": {
+          "shape": [
+            8,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_6": {
+          "shape": [
+            8,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        }
+      }
+    },
+    {
+      "id": "gpu-tile-query-b16-t15",
+      "role": "query",
+      "texts": [
+        "token token token token token",
+        "hello hello hello hello",
+        "world world world",
+        "model model model model model",
+        "token token token token",
+        "hello hello hello",
+        "world world world world world",
+        "model model model model",
+        "token token token",
+        "hello hello hello hello hello",
+        "world world world world",
+        "model model model",
+        "token token token token token",
+        "hello hello hello hello",
+        "world world world",
+        "model model model model model"
+      ],
+      "stages": true,
+      "file": "gpu-tile-query-b16-t15.npz",
+      "sha256": "0d2ea7217b4611c76205d5fca8616c530e713e0ff22fe7349f6b76e5627f095f",
+      "arrays": {
+        "input_ids": {
+          "shape": [
+            16,
+            15
+          ],
+          "dtype": "int64"
+        },
+        "token_type_ids": {
+          "shape": [
+            16,
+            15
+          ],
+          "dtype": "int64"
+        },
+        "attention_mask": {
+          "shape": [
+            16,
+            15
+          ],
+          "dtype": "int64"
+        },
+        "pooled": {
+          "shape": [
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "vectors": {
+          "shape": [
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_0": {
+          "shape": [
+            16,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_1": {
+          "shape": [
+            16,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_2": {
+          "shape": [
+            16,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_3": {
+          "shape": [
+            16,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_4": {
+          "shape": [
+            16,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_5": {
+          "shape": [
+            16,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_6": {
+          "shape": [
+            16,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        }
+      }
+    },
+    {
+      "id": "gpu-tile-query-b32-t15",
+      "role": "query",
+      "texts": [
+        "token token token token token",
+        "hello hello hello hello",
+        "world world world",
+        "model model model model model",
+        "token token token token",
+        "hello hello hello",
+        "world world world world world",
+        "model model model model",
+        "token token token",
+        "hello hello hello hello hello",
+        "world world world world",
+        "model model model",
+        "token token token token token",
+        "hello hello hello hello",
+        "world world world",
+        "model model model model model",
+        "token token token token",
+        "hello hello hello",
+        "world world world world world",
+        "model model model model",
+        "token token token",
+        "hello hello hello hello hello",
+        "world world world world",
+        "model model model",
+        "token token token token token",
+        "hello hello hello hello",
+        "world world world",
+        "model model model model model",
+        "token token token token",
+        "hello hello hello",
+        "world world world world world",
+        "model model model model"
+      ],
+      "stages": true,
+      "file": "gpu-tile-query-b32-t15.npz",
+      "sha256": "c44fa8f62d2030cd47650182cc90e78a07c804e311fce947c65ef01b4958f90e",
+      "arrays": {
+        "input_ids": {
+          "shape": [
+            32,
+            15
+          ],
+          "dtype": "int64"
+        },
+        "token_type_ids": {
+          "shape": [
+            32,
+            15
+          ],
+          "dtype": "int64"
+        },
+        "attention_mask": {
+          "shape": [
+            32,
+            15
+          ],
+          "dtype": "int64"
+        },
+        "pooled": {
+          "shape": [
+            32,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "vectors": {
+          "shape": [
+            32,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_0": {
+          "shape": [
+            32,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_1": {
+          "shape": [
+            32,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_2": {
+          "shape": [
+            32,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_3": {
+          "shape": [
+            32,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_4": {
+          "shape": [
+            32,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_5": {
+          "shape": [
+            32,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_6": {
+          "shape": [
+            32,
+            15,
+            384
+          ],
+          "dtype": "float32"
+        }
+      }
+    },
+    {
+      "id": "gpu-tile-query-b1-t16",
+      "role": "query",
+      "texts": [
+        "token token token token token token"
+      ],
+      "stages": true,
+      "file": "gpu-tile-query-b1-t16.npz",
+      "sha256": "87ddf3b0166f6ebbf26b652a360d40f699384e054d66e57f9b51409900e694bd",
+      "arrays": {
+        "input_ids": {
+          "shape": [
+            1,
+            16
+          ],
+          "dtype": "int64"
+        },
+        "token_type_ids": {
+          "shape": [
+            1,
+            16
+          ],
+          "dtype": "int64"
+        },
+        "attention_mask": {
+          "shape": [
+            1,
+            16
+          ],
+          "dtype": "int64"
+        },
+        "pooled": {
+          "shape": [
+            1,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "vectors": {
+          "shape": [
+            1,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_0": {
+          "shape": [
+            1,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_1": {
+          "shape": [
+            1,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_2": {
+          "shape": [
+            1,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_3": {
+          "shape": [
+            1,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_4": {
+          "shape": [
+            1,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_5": {
+          "shape": [
+            1,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_6": {
+          "shape": [
+            1,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        }
+      }
+    },
+    {
+      "id": "gpu-tile-query-b4-t16",
+      "role": "query",
+      "texts": [
+        "token token token token token token",
+        "hello hello hello hello hello",
+        "world world world world",
+        "model model model model model model"
+      ],
+      "stages": true,
+      "file": "gpu-tile-query-b4-t16.npz",
+      "sha256": "7b527ae2ac27e39427660d3b6913094976e99e28c07564263086f2449082ac85",
+      "arrays": {
+        "input_ids": {
+          "shape": [
+            4,
+            16
+          ],
+          "dtype": "int64"
+        },
+        "token_type_ids": {
+          "shape": [
+            4,
+            16
+          ],
+          "dtype": "int64"
+        },
+        "attention_mask": {
+          "shape": [
+            4,
+            16
+          ],
+          "dtype": "int64"
+        },
+        "pooled": {
+          "shape": [
+            4,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "vectors": {
+          "shape": [
+            4,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_0": {
+          "shape": [
+            4,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_1": {
+          "shape": [
+            4,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_2": {
+          "shape": [
+            4,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_3": {
+          "shape": [
+            4,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_4": {
+          "shape": [
+            4,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_5": {
+          "shape": [
+            4,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_6": {
+          "shape": [
+            4,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        }
+      }
+    },
+    {
+      "id": "gpu-tile-query-b8-t16",
+      "role": "query",
+      "texts": [
+        "token token token token token token",
+        "hello hello hello hello hello",
+        "world world world world",
+        "model model model model model model",
+        "token token token token token",
+        "hello hello hello hello",
+        "world world world world world world",
+        "model model model model model"
+      ],
+      "stages": true,
+      "file": "gpu-tile-query-b8-t16.npz",
+      "sha256": "cc62d18b0b55083245d1ffa6c60a275e1cb0d8b25b5214cf79d6b722f000f5a3",
+      "arrays": {
+        "input_ids": {
+          "shape": [
+            8,
+            16
+          ],
+          "dtype": "int64"
+        },
+        "token_type_ids": {
+          "shape": [
+            8,
+            16
+          ],
+          "dtype": "int64"
+        },
+        "attention_mask": {
+          "shape": [
+            8,
+            16
+          ],
+          "dtype": "int64"
+        },
+        "pooled": {
+          "shape": [
+            8,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "vectors": {
+          "shape": [
+            8,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_0": {
+          "shape": [
+            8,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_1": {
+          "shape": [
+            8,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_2": {
+          "shape": [
+            8,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_3": {
+          "shape": [
+            8,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_4": {
+          "shape": [
+            8,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_5": {
+          "shape": [
+            8,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_6": {
+          "shape": [
+            8,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        }
+      }
+    },
+    {
+      "id": "gpu-tile-query-b16-t16",
+      "role": "query",
+      "texts": [
+        "token token token token token token",
+        "hello hello hello hello hello",
+        "world world world world",
+        "model model model model model model",
+        "token token token token token",
+        "hello hello hello hello",
+        "world world world world world world",
+        "model model model model model",
+        "token token token token",
+        "hello hello hello hello hello hello",
+        "world world world world world",
+        "model model model model",
+        "token token token token token token",
+        "hello hello hello hello hello",
+        "world world world world",
+        "model model model model model model"
+      ],
+      "stages": true,
+      "file": "gpu-tile-query-b16-t16.npz",
+      "sha256": "6e02376a87df6d53fec8238e192108f8814952f4f3818bbb62b467c9710ef945",
+      "arrays": {
+        "input_ids": {
+          "shape": [
+            16,
+            16
+          ],
+          "dtype": "int64"
+        },
+        "token_type_ids": {
+          "shape": [
+            16,
+            16
+          ],
+          "dtype": "int64"
+        },
+        "attention_mask": {
+          "shape": [
+            16,
+            16
+          ],
+          "dtype": "int64"
+        },
+        "pooled": {
+          "shape": [
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "vectors": {
+          "shape": [
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_0": {
+          "shape": [
+            16,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_1": {
+          "shape": [
+            16,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_2": {
+          "shape": [
+            16,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_3": {
+          "shape": [
+            16,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_4": {
+          "shape": [
+            16,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_5": {
+          "shape": [
+            16,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_6": {
+          "shape": [
+            16,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        }
+      }
+    },
+    {
+      "id": "gpu-tile-query-b32-t16",
+      "role": "query",
+      "texts": [
+        "token token token token token token",
+        "hello hello hello hello hello",
+        "world world world world",
+        "model model model model model model",
+        "token token token token token",
+        "hello hello hello hello",
+        "world world world world world world",
+        "model model model model model",
+        "token token token token",
+        "hello hello hello hello hello hello",
+        "world world world world world",
+        "model model model model",
+        "token token token token token token",
+        "hello hello hello hello hello",
+        "world world world world",
+        "model model model model model model",
+        "token token token token token",
+        "hello hello hello hello",
+        "world world world world world world",
+        "model model model model model",
+        "token token token token",
+        "hello hello hello hello hello hello",
+        "world world world world world",
+        "model model model model",
+        "token token token token token token",
+        "hello hello hello hello hello",
+        "world world world world",
+        "model model model model model model",
+        "token token token token token",
+        "hello hello hello hello",
+        "world world world world world world",
+        "model model model model model"
+      ],
+      "stages": true,
+      "file": "gpu-tile-query-b32-t16.npz",
+      "sha256": "fe59087b3bd98ce47a4da8aaf64285136311279b2298d54890b16ec19961a386",
+      "arrays": {
+        "input_ids": {
+          "shape": [
+            32,
+            16
+          ],
+          "dtype": "int64"
+        },
+        "token_type_ids": {
+          "shape": [
+            32,
+            16
+          ],
+          "dtype": "int64"
+        },
+        "attention_mask": {
+          "shape": [
+            32,
+            16
+          ],
+          "dtype": "int64"
+        },
+        "pooled": {
+          "shape": [
+            32,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "vectors": {
+          "shape": [
+            32,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_0": {
+          "shape": [
+            32,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_1": {
+          "shape": [
+            32,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_2": {
+          "shape": [
+            32,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_3": {
+          "shape": [
+            32,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_4": {
+          "shape": [
+            32,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_5": {
+          "shape": [
+            32,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_6": {
+          "shape": [
+            32,
+            16,
+            384
+          ],
+          "dtype": "float32"
+        }
+      }
+    },
+    {
+      "id": "gpu-tile-query-b1-t17",
+      "role": "query",
+      "texts": [
+        "token token token token token token token"
+      ],
+      "stages": true,
+      "file": "gpu-tile-query-b1-t17.npz",
+      "sha256": "fcced6d56cbc3a1d758fcbab9e21df1341e4191bf06b41f0b093c350b809ad76",
+      "arrays": {
+        "input_ids": {
+          "shape": [
+            1,
+            17
+          ],
+          "dtype": "int64"
+        },
+        "token_type_ids": {
+          "shape": [
+            1,
+            17
+          ],
+          "dtype": "int64"
+        },
+        "attention_mask": {
+          "shape": [
+            1,
+            17
+          ],
+          "dtype": "int64"
+        },
+        "pooled": {
+          "shape": [
+            1,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "vectors": {
+          "shape": [
+            1,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_0": {
+          "shape": [
+            1,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_1": {
+          "shape": [
+            1,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_2": {
+          "shape": [
+            1,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_3": {
+          "shape": [
+            1,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_4": {
+          "shape": [
+            1,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_5": {
+          "shape": [
+            1,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_6": {
+          "shape": [
+            1,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        }
+      }
+    },
+    {
+      "id": "gpu-tile-query-b4-t17",
+      "role": "query",
+      "texts": [
+        "token token token token token token token",
+        "hello hello hello hello hello hello",
+        "world world world world world",
+        "model model model model model model model"
+      ],
+      "stages": true,
+      "file": "gpu-tile-query-b4-t17.npz",
+      "sha256": "1c3721c5eda88ea3f199068567bed5d08e4d9ee09650335ee4b44a01cfe2afc8",
+      "arrays": {
+        "input_ids": {
+          "shape": [
+            4,
+            17
+          ],
+          "dtype": "int64"
+        },
+        "token_type_ids": {
+          "shape": [
+            4,
+            17
+          ],
+          "dtype": "int64"
+        },
+        "attention_mask": {
+          "shape": [
+            4,
+            17
+          ],
+          "dtype": "int64"
+        },
+        "pooled": {
+          "shape": [
+            4,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "vectors": {
+          "shape": [
+            4,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_0": {
+          "shape": [
+            4,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_1": {
+          "shape": [
+            4,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_2": {
+          "shape": [
+            4,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_3": {
+          "shape": [
+            4,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_4": {
+          "shape": [
+            4,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_5": {
+          "shape": [
+            4,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_6": {
+          "shape": [
+            4,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        }
+      }
+    },
+    {
+      "id": "gpu-tile-query-b8-t17",
+      "role": "query",
+      "texts": [
+        "token token token token token token token",
+        "hello hello hello hello hello hello",
+        "world world world world world",
+        "model model model model model model model",
+        "token token token token token token",
+        "hello hello hello hello hello",
+        "world world world world world world world",
+        "model model model model model model"
+      ],
+      "stages": true,
+      "file": "gpu-tile-query-b8-t17.npz",
+      "sha256": "63a9c3832ba6b967a3a788c9a0da8d774a8acbd940fb4524c822defb24160c1f",
+      "arrays": {
+        "input_ids": {
+          "shape": [
+            8,
+            17
+          ],
+          "dtype": "int64"
+        },
+        "token_type_ids": {
+          "shape": [
+            8,
+            17
+          ],
+          "dtype": "int64"
+        },
+        "attention_mask": {
+          "shape": [
+            8,
+            17
+          ],
+          "dtype": "int64"
+        },
+        "pooled": {
+          "shape": [
+            8,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "vectors": {
+          "shape": [
+            8,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_0": {
+          "shape": [
+            8,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_1": {
+          "shape": [
+            8,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_2": {
+          "shape": [
+            8,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_3": {
+          "shape": [
+            8,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_4": {
+          "shape": [
+            8,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_5": {
+          "shape": [
+            8,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_6": {
+          "shape": [
+            8,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        }
+      }
+    },
+    {
+      "id": "gpu-tile-query-b16-t17",
+      "role": "query",
+      "texts": [
+        "token token token token token token token",
+        "hello hello hello hello hello hello",
+        "world world world world world",
+        "model model model model model model model",
+        "token token token token token token",
+        "hello hello hello hello hello",
+        "world world world world world world world",
+        "model model model model model model",
+        "token token token token token",
+        "hello hello hello hello hello hello hello",
+        "world world world world world world",
+        "model model model model model",
+        "token token token token token token token",
+        "hello hello hello hello hello hello",
+        "world world world world world",
+        "model model model model model model model"
+      ],
+      "stages": true,
+      "file": "gpu-tile-query-b16-t17.npz",
+      "sha256": "decf16828d9956d1132800f9e7d660b7e99388cd3eb5bbed17ceaaee560331a0",
+      "arrays": {
+        "input_ids": {
+          "shape": [
+            16,
+            17
+          ],
+          "dtype": "int64"
+        },
+        "token_type_ids": {
+          "shape": [
+            16,
+            17
+          ],
+          "dtype": "int64"
+        },
+        "attention_mask": {
+          "shape": [
+            16,
+            17
+          ],
+          "dtype": "int64"
+        },
+        "pooled": {
+          "shape": [
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "vectors": {
+          "shape": [
+            16,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_0": {
+          "shape": [
+            16,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_1": {
+          "shape": [
+            16,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_2": {
+          "shape": [
+            16,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_3": {
+          "shape": [
+            16,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_4": {
+          "shape": [
+            16,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_5": {
+          "shape": [
+            16,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_6": {
+          "shape": [
+            16,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        }
+      }
+    },
+    {
+      "id": "gpu-tile-query-b32-t17",
+      "role": "query",
+      "texts": [
+        "token token token token token token token",
+        "hello hello hello hello hello hello",
+        "world world world world world",
+        "model model model model model model model",
+        "token token token token token token",
+        "hello hello hello hello hello",
+        "world world world world world world world",
+        "model model model model model model",
+        "token token token token token",
+        "hello hello hello hello hello hello hello",
+        "world world world world world world",
+        "model model model model model",
+        "token token token token token token token",
+        "hello hello hello hello hello hello",
+        "world world world world world",
+        "model model model model model model model",
+        "token token token token token token",
+        "hello hello hello hello hello",
+        "world world world world world world world",
+        "model model model model model model",
+        "token token token token token",
+        "hello hello hello hello hello hello hello",
+        "world world world world world world",
+        "model model model model model",
+        "token token token token token token token",
+        "hello hello hello hello hello hello",
+        "world world world world world",
+        "model model model model model model model",
+        "token token token token token token",
+        "hello hello hello hello hello",
+        "world world world world world world world",
+        "model model model model model model"
+      ],
+      "stages": true,
+      "file": "gpu-tile-query-b32-t17.npz",
+      "sha256": "8671a1adaf2e82d3853f8f7f712a3f1f786e4422b643ee7080f8527a4ff04f5f",
+      "arrays": {
+        "input_ids": {
+          "shape": [
+            32,
+            17
+          ],
+          "dtype": "int64"
+        },
+        "token_type_ids": {
+          "shape": [
+            32,
+            17
+          ],
+          "dtype": "int64"
+        },
+        "attention_mask": {
+          "shape": [
+            32,
+            17
+          ],
+          "dtype": "int64"
+        },
+        "pooled": {
+          "shape": [
+            32,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "vectors": {
+          "shape": [
+            32,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_0": {
+          "shape": [
+            32,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_1": {
+          "shape": [
+            32,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_2": {
+          "shape": [
+            32,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_3": {
+          "shape": [
+            32,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_4": {
+          "shape": [
+            32,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_5": {
+          "shape": [
+            32,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        },
+        "stage_6": {
+          "shape": [
+            32,
+            17,
+            384
+          ],
+          "dtype": "float32"
+        }
+      }
+    }
+  ]
+}

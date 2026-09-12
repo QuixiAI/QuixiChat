@@ -1,0 +1,18 @@
+{
+  "name": "@quixi/search",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "description": "Shared chunking and retrieval orchestration.",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@noble/hashes": "2.4.0",
+    "@quixi/core": "0.0.1"
+  },
+  "scripts": {
+    "test": "node --experimental-transform-types --test tests/*.test.ts",
+    "typecheck:tests": "tsc --noEmit -p tsconfig.tests.json"
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "extends": "../../../../tsconfig.json",
+  "compilerOptions": { "types": ["node"] },
+  "include": ["./repository.test.ts", "./fixtures/*.d.mts"]
+}

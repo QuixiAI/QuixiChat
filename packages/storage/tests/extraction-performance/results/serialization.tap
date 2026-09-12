@@ -1,0 +1,37 @@
+TAP version 13
+# (node:82163) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# quixi-extraction-schema [{"version":1,"name":"canonical_records_and_atomic_operations","checksum":"16724a690f441af0162c0b49f3256bac152fb98a31f1a99c6ef40076d7dfd7d5"},{"version":2,"name":"source_and_generation_uniqueness","checksum":"bba4a045a82d42714d43d9ee709412eab759da65122b7abb244186b6a2d9b24f"},{"version":3,"name":"verified_blob_catalog_and_transfer_recovery","checksum":"705b844874dece6b5cc1881cb45ccc3b2907a2719036283fe165a0a07f6fe14e"},{"version":4,"name":"hidden_normalized_import_groups","checksum":"9988edddaf4483b380ab33f1017f141304484b1bc1662e74fb1c2de75ca2467e"},{"version":5,"name":"bounded_importer_work_and_uuid_checkpoints","checksum":"cd43d1aeb7f9fdf33c6efd0dcb3b87d00eef9169fe002c81ee6856750a49468b"},{"version":6,"name":"generation_producer_fences","checksum":"32e6035cd4ea8cabe3d327772c0d291de08a1ae24c2a23b360dc6661c6315c11"},{"version":7,"name":"local_workspace_and_message_recency","checksum":"da34a61082c74eae78301b25b83cc8525addfb6df1b5e450c33c2a63ec974151"},{"version":8,"name":"streaming_text_across_transport_provenance","checksum":"9c6a87fde402ff33d164ee7db92b34088ab05d458686670ee3d317dc24ca1263"},{"version":9,"name":"mandatory_archive_selection_protocol","checksum":"d124a56c86b6b42a8429114e253030b1cbc88e774ec8ff3e44cc9105dd5b6dab"},{"version":10,"name":"stable_local_operation_claims","checksum":"3f20f0a536ee783777602dda90a3f575cf17ddfe6bba277dc9cfa740e413770b"}]
+# Subtest: all eight write operations retain prior digests, current receipts and key-order-independent replay
+ok 1 - all eight write operations retain prior digests, current receipts and key-order-independent replay
+  ---
+  duration_ms: 79.87225
+  type: 'test'
+  ...
+# Subtest: frozen actual v1 stage and publication receipts remain exact through the optimized digest path
+ok 2 - frozen actual v1 stage and publication receipts remain exact through the optimized digest path
+  ---
+  duration_ms: 17.668667
+  type: 'test'
+  ...
+# Subtest: caller mutation after cloning cannot change nested text/maps, persisted digest or replay identity
+ok 3 - caller mutation after cloning cannot change nested text/maps, persisted digest or replay identity
+  ---
+  duration_ms: 15.379792
+  type: 'test'
+  ...
+# Subtest: non-finite values, unknown keys and oversized control data still fail before claiming or writing
+ok 4 - non-finite values, unknown keys and oversized control data still fail before claiming or writing
+  ---
+  duration_ms: 13.417667
+  type: 'test'
+  ...
+1..4
+# tests 4
+# suites 0
+# pass 4
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 361.084959

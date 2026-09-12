@@ -1,0 +1,193 @@
+{
+  "scope": "Actual durable lost-summary reply, dedicated recovery across error dismissal, thread navigation and lexical search; one precommit refusal and one held idempotent retry; no extra canonical writes or provider requests.",
+  "status": "passed",
+  "before": {
+    "threadStates": [
+      {
+        "activeLeafMessageId": "b2209a67-8fa0-423d-a523-92d5516179c7",
+        "archived": false,
+        "contextSnapshotId": "8395367f-6e1a-4688-ba65-f3c20e316093",
+        "pinned": false,
+        "revision": 53,
+        "routingProfile": {
+          "alias": null,
+          "allowPrivacyChange": false,
+          "candidates": [
+            {
+              "model": "gpt-4.1-mini-2025-04-14",
+              "provider": "openai"
+            }
+          ],
+          "requirements": {},
+          "version": 2
+        },
+        "tags": [
+          "space",
+          "ideas"
+        ],
+        "threadId": "1af178c1-c573-4b8a-abd2-945d15b0c0c4",
+        "title": "Comet notebook"
+      },
+      {
+        "activeLeafMessageId": "0eaf25ad-b9cc-4cc2-bbfe-430010a7b631",
+        "archived": false,
+        "contextSnapshotId": "e2ae3911-59b7-4f3e-8a90-cad55430321b",
+        "pinned": false,
+        "revision": 7,
+        "routingProfile": {
+          "alias": null,
+          "allowPrivacyChange": false,
+          "candidates": [
+            {
+              "model": "gpt-4.1-mini-2025-04-14",
+              "provider": "openai"
+            }
+          ],
+          "requirements": {},
+          "version": 2
+        },
+        "tags": [],
+        "threadId": "af625c54-9e3c-4d91-a0c6-a57055cb512b",
+        "title": "Summary notebook"
+      }
+    ],
+    "collections": {
+      "threadStates": {
+        "count": 6,
+        "sha256": "e5c022639b37f09f1b7f37ed2cc565198dc7304705946a55f34dcf4483843081"
+      },
+      "messages": {
+        "count": 64,
+        "sha256": "d8de419cd233c5bc02fdfbac7cf88743c9cebb3cdc09cf262d5f61ed4c4a9a15"
+      },
+      "parts": {
+        "count": 331,
+        "sha256": "738e353dc3e916d9ef7cd468b8ed4b3bf4f08eed3a66b403628f8a0f86d60476"
+      },
+      "events": {
+        "count": 26,
+        "sha256": "5540cd6e06d75f95e6bc15ad254a6c2e090c537a4fe65b699a144da841c23ca7"
+      },
+      "contexts": {
+        "count": 13,
+        "sha256": "dad77ec58c888b141d1cf1f697b1852be35193cc0fd91a2741530c66acc0a16c"
+      },
+      "generations": {
+        "count": 32,
+        "sha256": "f6a586b0e8710a059a2c2d04ae434b802c3f5ea238dcddc047d878086b469f1f"
+      },
+      "summaryProposals": {
+        "count": 1,
+        "sha256": "3796027b32ee21101a28cb1ff0ee63e197b20d4ff0ac0ca86e0b38d3b4e9b63e"
+      }
+    },
+    "syncSha256": "f4b7155791ac6e2729b554ec1d6311275b218560ac24a2d0bb55b1efc965e4af",
+    "highWaterSequence": 1001,
+    "providerDispatchCount": 38,
+    "providerDispatchSha256": "6f651213f0fb3c15ef0f3ad678ed62e3a9aedb9d284da43f85d24a597a6c5cce"
+  },
+  "stages": [
+    "initial-unknown-outcome",
+    "ordinary-error-dismissed",
+    "other-thread-selected",
+    "lexical-search-completed",
+    "retry-refused-before-commit",
+    "newer-navigation-while-retry-held",
+    "retry-completed-without-selection-or-focus-theft"
+  ],
+  "after": {
+    "threadStates": [
+      {
+        "activeLeafMessageId": "b2209a67-8fa0-423d-a523-92d5516179c7",
+        "archived": false,
+        "contextSnapshotId": "8395367f-6e1a-4688-ba65-f3c20e316093",
+        "pinned": false,
+        "revision": 53,
+        "routingProfile": {
+          "alias": null,
+          "allowPrivacyChange": false,
+          "candidates": [
+            {
+              "model": "gpt-4.1-mini-2025-04-14",
+              "provider": "openai"
+            }
+          ],
+          "requirements": {},
+          "version": 2
+        },
+        "tags": [
+          "space",
+          "ideas"
+        ],
+        "threadId": "1af178c1-c573-4b8a-abd2-945d15b0c0c4",
+        "title": "Comet notebook"
+      },
+      {
+        "activeLeafMessageId": "0eaf25ad-b9cc-4cc2-bbfe-430010a7b631",
+        "archived": false,
+        "contextSnapshotId": "e2ae3911-59b7-4f3e-8a90-cad55430321b",
+        "pinned": false,
+        "revision": 7,
+        "routingProfile": {
+          "alias": null,
+          "allowPrivacyChange": false,
+          "candidates": [
+            {
+              "model": "gpt-4.1-mini-2025-04-14",
+              "provider": "openai"
+            }
+          ],
+          "requirements": {},
+          "version": 2
+        },
+        "tags": [],
+        "threadId": "af625c54-9e3c-4d91-a0c6-a57055cb512b",
+        "title": "Summary notebook"
+      }
+    ],
+    "collections": {
+      "threadStates": {
+        "count": 6,
+        "sha256": "e5c022639b37f09f1b7f37ed2cc565198dc7304705946a55f34dcf4483843081"
+      },
+      "messages": {
+        "count": 64,
+        "sha256": "d8de419cd233c5bc02fdfbac7cf88743c9cebb3cdc09cf262d5f61ed4c4a9a15"
+      },
+      "parts": {
+        "count": 331,
+        "sha256": "738e353dc3e916d9ef7cd468b8ed4b3bf4f08eed3a66b403628f8a0f86d60476"
+      },
+      "events": {
+        "count": 26,
+        "sha256": "5540cd6e06d75f95e6bc15ad254a6c2e090c537a4fe65b699a144da841c23ca7"
+      },
+      "contexts": {
+        "count": 13,
+        "sha256": "dad77ec58c888b141d1cf1f697b1852be35193cc0fd91a2741530c66acc0a16c"
+      },
+      "generations": {
+        "count": 32,
+        "sha256": "f6a586b0e8710a059a2c2d04ae434b802c3f5ea238dcddc047d878086b469f1f"
+      },
+      "summaryProposals": {
+        "count": 1,
+        "sha256": "3796027b32ee21101a28cb1ff0ee63e197b20d4ff0ac0ca86e0b38d3b4e9b63e"
+      }
+    },
+    "syncSha256": "f4b7155791ac6e2729b554ec1d6311275b218560ac24a2d0bb55b1efc965e4af",
+    "highWaterSequence": 1001,
+    "providerDispatchCount": 38,
+    "providerDispatchSha256": "6f651213f0fb3c15ef0f3ad678ed62e3a9aedb9d284da43f85d24a597a6c5cce"
+  },
+  "destination": {
+    "title": "Comet notebook",
+    "tag": "BUTTON",
+    "focused": true
+  },
+  "searchRestored": {
+    "value": "served by messages api",
+    "resultsVisible": false
+  },
+  "returnedToOrigin": true
+}

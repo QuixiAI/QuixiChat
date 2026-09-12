@@ -1,0 +1,2313 @@
+{
+  "status": "passed",
+  "startedAt": "2026-09-10T21:56:33.873033+00:00",
+  "profile": "71c4c668-853f-4804-84ac-963221814980",
+  "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+  "macos": "26.6.2",
+  "systemWebKitVersion": "21624.5.1.11.3",
+  "scope": "Actual isolated Tauri/WKWebView application workflows and unchanged production regional registrations, with feature-only DNS resolution to controlled HTTPS. Ephemeral CA and original US/EU TLS hostnames are validated. Synthetic credentials/content only; no physical-geography, live account eligibility, external provider or other native-platform claim.",
+  "commands": [
+    {
+      "argv": [
+        "node_modules/.bin/tsc",
+        "--noEmit",
+        "-p",
+        "tests/hosts/regional-app-proof/tsconfig.json"
+      ],
+      "startedAt": "2026-09-10T21:56:33.892445+00:00",
+      "completedAt": "2026-09-10T21:56:34.113302+00:00",
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "tests/hosts/regional-app-proof/build.mjs"
+      ],
+      "startedAt": "2026-09-10T21:56:34.113623+00:00",
+      "completedAt": "2026-09-10T21:56:34.867635+00:00",
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "[plugin builtin:vite-reporter] \n(!) Some chunks are larger than 500 kB after minification. Consider:\n- Using dynamic import() to code-split the application\n- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting\n- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.\n"
+    },
+    {
+      "argv": [
+        "cargo",
+        "build",
+        "--locked",
+        "-p",
+        "quixi-desktop",
+        "--bin",
+        "quixi-regional-app-proof",
+        "--features",
+        "regional-app-proof"
+      ],
+      "startedAt": "2026-09-10T21:56:34.867982+00:00",
+      "completedAt": "2026-09-10T21:56:36.927179+00:00",
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "   Compiling quixi-desktop v0.0.1 (/Users/eric/QuixiChat/apps/desktop/src-tauri)\nwarning: method `with_oauth_configurations` is never used\n   --> apps/desktop/src-tauri/../../../tests/hosts/regional-app-proof/../../../apps/desktop/src-tauri/src/host/mod.rs:213:12\n    |\n139 | impl NativeHost {\n    | --------------- method in this implementation\n...\n213 |     pub fn with_oauth_configurations(mut self, configurations: Vec<OAuthConfiguration>) -> std::result::Result<Self, String> {\n    |            ^^^^^^^^^^^^^^^^^^^^^^^^^\n    |\n    = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default\n\nwarning: methods `put` and `delete` are never used\n   --> apps/desktop/src-tauri/../../../tests/hosts/regional-app-proof/../../../apps/desktop/src-tauri/src/host/secrets.rs:168:12\n    |\n 26 | impl Secrets {\n    | ------------ methods in this implementation\n...\n168 |     pub fn put(\n    |            ^^^\n...\n275 |     pub fn delete(&self, handle: &SecretHandle, request: &str) -> Result<()> {\n    |            ^^^^^^\n\nwarning: `quixi-desktop` (bin \"quixi-regional-app-proof\") generated 2 warnings\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 2.02s\n"
+    }
+  ],
+  "phases": [
+    {
+      "phase": "tls-untrusted-ca",
+      "startedAt": "2026-09-10T21:56:37.218427+00:00",
+      "exitCode": 0,
+      "stderr": "",
+      "checkpoints": [
+        "tls-untrusted-ca"
+      ],
+      "native": {
+        "configuredCsp": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' asset: http://asset.localhost data:; connect-src 'self' ipc: http://ipc.localhost",
+        "keychainService": "ai.quixi.chat.regional-app-proof.71c4c668-853f-4804-84ac-963221814980",
+        "phase": "tls-untrusted-ca",
+        "profile": "71c4c668-853f-4804-84ac-963221814980",
+        "resources": [
+          {
+            "bytes": 495,
+            "csp": "worker-src 'self'; img-src 'self' asset: http://asset.localhost data:; connect-src 'self' ipc: http://ipc.localhost; default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'wasm-unsafe-eval' 'sha256-RO9kSPJYUzpqbNhz/ihCzkPkXozo/ZKa11ZxJJKefwQ=' 'sha256-DMGx8hoooF85fz3US3OdaGh3l7ETAvOKmd88jIUpaw0=' 'sha256-jEXklXilpr1gZVhEsqBVL8IywdEEzkoSztPY63FHweo=' 'sha256-Ipy1ykBtDbJih+900m9WgPi6MAUn8sn39PHgeEs4zV4=' 'sha256-QI+8WsWxaZ1rT5rj9QMncMs0iUkmY5c7EZd5XFXVadI=' 'sha256-q1LY7FPBe7IHcpFDyQtQ+V/Xh7Gntzj9lILf59yPEco=' 'sha256-GmzrUnC2bzaOHG+XdZmuPn9PLm1zDElJIVWIDTZP96Y=' 'sha256-cHsWTJ8PeCqN7ow3VPZenzuroQBRAA/fhHmrETHVVXc=' 'sha256-WletefcI1uYm4wPhN8uJz6PetuvhX7qQkU2JTMyjHCk=' 'sha256-alhQxYcUuRPgpK4kMpMsdBf/unSVq0yF/QYPpBxEn7s=' 'sha256-mPKPqQPhtirtGSqkRcooIJqmHujEQiZi53Y+i8vacZc='",
+            "status": 200,
+            "url": "tauri://localhost/"
+          },
+          {
+            "bytes": 38993,
+            "csp": null,
+            "status": 200,
+            "url": "tauri://localhost/assets/index-Bvnw_P4y.css"
+          },
+          {
+            "bytes": 52856,
+            "csp": null,
+            "status": 200,
+            "url": "tauri://localhost/assets/sha2-DHqbhyfR.js"
+          },
+          {
+            "bytes": 1052058,
+            "csp": null,
+            "status": 200,
+            "url": "tauri://localhost/assets/index-5AtG6_wW.js"
+          }
+        ],
+        "tlsFixture": {
+          "address": "127.0.0.1:59973",
+          "hostnameValidation": true,
+          "hosts": [
+            "us.api.openai.com",
+            "eu.api.openai.com"
+          ]
+        },
+        "webview": {
+          "archiveId": "test-regional-71c4c668-853f-4804-84ac-963221814980",
+          "checks": [
+            "Actual macOS Keychain backend is available for the isolated proof service",
+            "us production native capability exactly matches the registered origin, model, route and reviewed evidence",
+            "eu production native capability exactly matches the registered origin, model, route and reviewed evidence",
+            "tls-untrusted-ca refuses the exact registered native US HTTPS route before HTTP",
+            "TLS negative removes its synthetic Keychain credential"
+          ],
+          "cspViolations": [],
+          "expectedWireCounts": {
+            "eu": {
+              "content": 0,
+              "models": 0
+            },
+            "global": {
+              "content": 0,
+              "models": 0
+            },
+            "us": {
+              "content": 0,
+              "models": 0
+            }
+          },
+          "hostCapabilities": {
+            "clipboard": {
+              "available": true,
+              "permission": "prompt",
+              "reason": null
+            },
+            "host": "desktop",
+            "nativeFiles": {
+              "available": true,
+              "permission": "prompt",
+              "reason": null
+            },
+            "notifications": {
+              "available": false,
+              "permission": "not_required",
+              "reason": "Native notifications are not implemented."
+            },
+            "oauth": {
+              "available": false,
+              "permission": "not_required",
+              "reason": "Native OAuth requires a registered provider configuration and an available macOS keychain."
+            },
+            "providerTransports": [
+              {
+                "capability": {
+                  "available": true,
+                  "permission": "not_required",
+                  "reason": null
+                },
+                "endpointOrigin": "https://api.openai.com",
+                "id": "quixi-openai-native-v1",
+                "kind": "native_direct",
+                "privacy": "direct_provider",
+                "relayIdentity": null
+              },
+              {
+                "capability": {
+                  "available": true,
+                  "permission": "not_required",
+                  "reason": null
+                },
+                "endpointOrigin": "https://api.anthropic.com",
+                "id": "quixi-anthropic-native-v1",
+                "kind": "native_direct",
+                "privacy": "direct_provider",
+                "relayIdentity": null
+              },
+              {
+                "capability": {
+                  "available": true,
+                  "permission": "not_required",
+                  "reason": null
+                },
+                "endpointOrigin": "https://us.api.openai.com",
+                "id": "quixi-openai-us-native-v1",
+                "kind": "native_direct",
+                "privacy": "direct_provider",
+                "regionalProcessing": {
+                  "binding": {
+                    "accountId": "primary",
+                    "destinationId": "quixi-openai-us-api-v1",
+                    "providerId": "openai",
+                    "transportId": "quixi-openai-us-native-v1"
+                  },
+                  "configurationId": "openai-us-gpt41-mini-2026-09-10",
+                  "endpoints": [
+                    "/v1/chat/completions"
+                  ],
+                  "inputModalities": [
+                    "text",
+                    "image"
+                  ],
+                  "modelIds": [
+                    "gpt-4.1-mini-2025-04-14"
+                  ],
+                  "region": "us",
+                  "reviewedAt": 1788998400000,
+                  "sourceUrl": "https://developers.openai.com/api/docs/guides/your-data",
+                  "upstreamOrigin": "https://us.api.openai.com",
+                  "version": 1
+                },
+                "relayIdentity": null
+              },
+              {
+                "capability": {
+                  "available": true,
+                  "permission": "not_required",
+                  "reason": null
+                },
+                "endpointOrigin": "https://eu.api.openai.com",
+                "id": "quixi-openai-eu-native-v1",
+                "kind": "native_direct",
+                "privacy": "direct_provider",
+                "regionalProcessing": {
+                  "binding": {
+                    "accountId": "primary",
+                    "destinationId": "quixi-openai-eu-api-v1",
+                    "providerId": "openai",
+                    "transportId": "quixi-openai-eu-native-v1"
+                  },
+                  "configurationId": "openai-eu-gpt41-mini-2026-09-10",
+                  "endpoints": [
+                    "/v1/chat/completions"
+                  ],
+                  "inputModalities": [
+                    "text",
+                    "image"
+                  ],
+                  "modelIds": [
+                    "gpt-4.1-mini-2025-04-14"
+                  ],
+                  "region": "eu",
+                  "reviewedAt": 1788998400000,
+                  "sourceUrl": "https://developers.openai.com/api/docs/guides/your-data",
+                  "upstreamOrigin": "https://eu.api.openai.com",
+                  "version": 1
+                },
+                "relayIdentity": null
+              }
+            ],
+            "secretPersistence": "native"
+          },
+          "phase": "tls-untrusted-ca",
+          "profile": "71c4c668-853f-4804-84ac-963221814980",
+          "provenanceChecks": [],
+          "scope": "Actual production AppRoot, desktop connection settings, native HostClient, canonical worker and OS Keychain in an isolated synthetic profile. The controlled TLS fixture verifies registered US/EU destination routing, not physical geography or provider account eligibility.",
+          "secureContext": true,
+          "stage": "tls-untrusted-ca",
+          "status": "passed",
+          "success": true,
+          "tlsNegative": {
+            "case": "tls-untrusted-ca",
+            "errorCode": "IO_ERROR",
+            "providerContentBytes": 0
+          },
+          "url": "tauri://localhost",
+          "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko)",
+          "wireCheckpoints": [
+            {
+              "expectedWireCounts": {
+                "eu": {
+                  "content": 0,
+                  "models": 0
+                },
+                "global": {
+                  "content": 0,
+                  "models": 0
+                },
+                "us": {
+                  "content": 0,
+                  "models": 0
+                }
+              },
+              "stage": "tls-untrusted-ca"
+            }
+          ]
+        }
+      },
+      "success": true,
+      "tlsRequests": [],
+      "tlsHandshakes": [
+        {
+          "phase": "tls-untrusted-ca",
+          "sni": "us.api.openai.com"
+        }
+      ],
+      "observedWireCounts": {
+        "us": {
+          "models": 0,
+          "content": 0
+        },
+        "eu": {
+          "models": 0,
+          "content": 0
+        },
+        "global": {
+          "models": 0,
+          "content": 0
+        }
+      },
+      "completedAt": "2026-09-10T21:56:38.519992+00:00"
+    },
+    {
+      "phase": "tls-wrong-hostname",
+      "startedAt": "2026-09-10T21:56:38.520497+00:00",
+      "exitCode": 0,
+      "stderr": "",
+      "checkpoints": [
+        "tls-wrong-hostname"
+      ],
+      "native": {
+        "configuredCsp": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' asset: http://asset.localhost data:; connect-src 'self' ipc: http://ipc.localhost",
+        "keychainService": "ai.quixi.chat.regional-app-proof.71c4c668-853f-4804-84ac-963221814980",
+        "phase": "tls-wrong-hostname",
+        "profile": "71c4c668-853f-4804-84ac-963221814980",
+        "resources": [
+          {
+            "bytes": 495,
+            "csp": "script-src 'self' 'wasm-unsafe-eval' 'sha256-RO9kSPJYUzpqbNhz/ihCzkPkXozo/ZKa11ZxJJKefwQ=' 'sha256-DMGx8hoooF85fz3US3OdaGh3l7ETAvOKmd88jIUpaw0=' 'sha256-jEXklXilpr1gZVhEsqBVL8IywdEEzkoSztPY63FHweo=' 'sha256-Ipy1ykBtDbJih+900m9WgPi6MAUn8sn39PHgeEs4zV4=' 'sha256-QI+8WsWxaZ1rT5rj9QMncMs0iUkmY5c7EZd5XFXVadI=' 'sha256-q1LY7FPBe7IHcpFDyQtQ+V/Xh7Gntzj9lILf59yPEco=' 'sha256-GmzrUnC2bzaOHG+XdZmuPn9PLm1zDElJIVWIDTZP96Y=' 'sha256-cHsWTJ8PeCqN7ow3VPZenzuroQBRAA/fhHmrETHVVXc=' 'sha256-WletefcI1uYm4wPhN8uJz6PetuvhX7qQkU2JTMyjHCk=' 'sha256-alhQxYcUuRPgpK4kMpMsdBf/unSVq0yF/QYPpBxEn7s=' 'sha256-mPKPqQPhtirtGSqkRcooIJqmHujEQiZi53Y+i8vacZc='; style-src 'self' 'unsafe-inline'; img-src 'self' asset: http://asset.localhost data:; connect-src 'self' ipc: http://ipc.localhost; default-src 'self'; worker-src 'self'",
+            "status": 200,
+            "url": "tauri://localhost/"
+          },
+          {
+            "bytes": 38993,
+            "csp": null,
+            "status": 200,
+            "url": "tauri://localhost/assets/index-Bvnw_P4y.css"
+          },
+          {
+            "bytes": 52856,
+            "csp": null,
+            "status": 200,
+            "url": "tauri://localhost/assets/sha2-DHqbhyfR.js"
+          },
+          {
+            "bytes": 1052058,
+            "csp": null,
+            "status": 200,
+            "url": "tauri://localhost/assets/index-5AtG6_wW.js"
+          }
+        ],
+        "tlsFixture": {
+          "address": "127.0.0.1:59978",
+          "hostnameValidation": true,
+          "hosts": [
+            "us.api.openai.com",
+            "eu.api.openai.com"
+          ]
+        },
+        "webview": {
+          "archiveId": "test-regional-71c4c668-853f-4804-84ac-963221814980",
+          "checks": [
+            "Actual macOS Keychain backend is available for the isolated proof service",
+            "us production native capability exactly matches the registered origin, model, route and reviewed evidence",
+            "eu production native capability exactly matches the registered origin, model, route and reviewed evidence",
+            "tls-wrong-hostname refuses the exact registered native US HTTPS route before HTTP",
+            "TLS negative removes its synthetic Keychain credential"
+          ],
+          "cspViolations": [],
+          "expectedWireCounts": {
+            "eu": {
+              "content": 0,
+              "models": 0
+            },
+            "global": {
+              "content": 0,
+              "models": 0
+            },
+            "us": {
+              "content": 0,
+              "models": 0
+            }
+          },
+          "hostCapabilities": {
+            "clipboard": {
+              "available": true,
+              "permission": "prompt",
+              "reason": null
+            },
+            "host": "desktop",
+            "nativeFiles": {
+              "available": true,
+              "permission": "prompt",
+              "reason": null
+            },
+            "notifications": {
+              "available": false,
+              "permission": "not_required",
+              "reason": "Native notifications are not implemented."
+            },
+            "oauth": {
+              "available": false,
+              "permission": "not_required",
+              "reason": "Native OAuth requires a registered provider configuration and an available macOS keychain."
+            },
+            "providerTransports": [
+              {
+                "capability": {
+                  "available": true,
+                  "permission": "not_required",
+                  "reason": null
+                },
+                "endpointOrigin": "https://api.openai.com",
+                "id": "quixi-openai-native-v1",
+                "kind": "native_direct",
+                "privacy": "direct_provider",
+                "relayIdentity": null
+              },
+              {
+                "capability": {
+                  "available": true,
+                  "permission": "not_required",
+                  "reason": null
+                },
+                "endpointOrigin": "https://api.anthropic.com",
+                "id": "quixi-anthropic-native-v1",
+                "kind": "native_direct",
+                "privacy": "direct_provider",
+                "relayIdentity": null
+              },
+              {
+                "capability": {
+                  "available": true,
+                  "permission": "not_required",
+                  "reason": null
+                },
+                "endpointOrigin": "https://us.api.openai.com",
+                "id": "quixi-openai-us-native-v1",
+                "kind": "native_direct",
+                "privacy": "direct_provider",
+                "regionalProcessing": {
+                  "binding": {
+                    "accountId": "primary",
+                    "destinationId": "quixi-openai-us-api-v1",
+                    "providerId": "openai",
+                    "transportId": "quixi-openai-us-native-v1"
+                  },
+                  "configurationId": "openai-us-gpt41-mini-2026-09-10",
+                  "endpoints": [
+                    "/v1/chat/completions"
+                  ],
+                  "inputModalities": [
+                    "text",
+                    "image"
+                  ],
+                  "modelIds": [
+                    "gpt-4.1-mini-2025-04-14"
+                  ],
+                  "region": "us",
+                  "reviewedAt": 1788998400000,
+                  "sourceUrl": "https://developers.openai.com/api/docs/guides/your-data",
+                  "upstreamOrigin": "https://us.api.openai.com",
+                  "version": 1
+                },
+                "relayIdentity": null
+              },
+              {
+                "capability": {
+                  "available": true,
+                  "permission": "not_required",
+                  "reason": null
+                },
+                "endpointOrigin": "https://eu.api.openai.com",
+                "id": "quixi-openai-eu-native-v1",
+                "kind": "native_direct",
+                "privacy": "direct_provider",
+                "regionalProcessing": {
+                  "binding": {
+                    "accountId": "primary",
+                    "destinationId": "quixi-openai-eu-api-v1",
+                    "providerId": "openai",
+                    "transportId": "quixi-openai-eu-native-v1"
+                  },
+                  "configurationId": "openai-eu-gpt41-mini-2026-09-10",
+                  "endpoints": [
+                    "/v1/chat/completions"
+                  ],
+                  "inputModalities": [
+                    "text",
+                    "image"
+                  ],
+                  "modelIds": [
+                    "gpt-4.1-mini-2025-04-14"
+                  ],
+                  "region": "eu",
+                  "reviewedAt": 1788998400000,
+                  "sourceUrl": "https://developers.openai.com/api/docs/guides/your-data",
+                  "upstreamOrigin": "https://eu.api.openai.com",
+                  "version": 1
+                },
+                "relayIdentity": null
+              }
+            ],
+            "secretPersistence": "native"
+          },
+          "phase": "tls-wrong-hostname",
+          "profile": "71c4c668-853f-4804-84ac-963221814980",
+          "provenanceChecks": [],
+          "scope": "Actual production AppRoot, desktop connection settings, native HostClient, canonical worker and OS Keychain in an isolated synthetic profile. The controlled TLS fixture verifies registered US/EU destination routing, not physical geography or provider account eligibility.",
+          "secureContext": true,
+          "stage": "tls-wrong-hostname",
+          "status": "passed",
+          "success": true,
+          "tlsNegative": {
+            "case": "tls-wrong-hostname",
+            "errorCode": "IO_ERROR",
+            "providerContentBytes": 0
+          },
+          "url": "tauri://localhost",
+          "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko)",
+          "wireCheckpoints": [
+            {
+              "expectedWireCounts": {
+                "eu": {
+                  "content": 0,
+                  "models": 0
+                },
+                "global": {
+                  "content": 0,
+                  "models": 0
+                },
+                "us": {
+                  "content": 0,
+                  "models": 0
+                }
+              },
+              "stage": "tls-wrong-hostname"
+            }
+          ]
+        }
+      },
+      "success": true,
+      "tlsRequests": [],
+      "tlsHandshakes": [
+        {
+          "phase": "tls-wrong-hostname",
+          "sni": "us.api.openai.com"
+        }
+      ],
+      "observedWireCounts": {
+        "us": {
+          "models": 0,
+          "content": 0
+        },
+        "eu": {
+          "models": 0,
+          "content": 0
+        },
+        "global": {
+          "models": 0,
+          "content": 0
+        }
+      },
+      "completedAt": "2026-09-10T21:56:38.885804+00:00"
+    },
+    {
+      "phase": "write",
+      "startedAt": "2026-09-10T21:56:38.886623+00:00",
+      "exitCode": 0,
+      "stderr": "",
+      "checkpoints": [
+        "connected-and-explicitly-confirmed",
+        "unknown-primary-and-wrong-fallback-refused",
+        "wrong-primary-refused",
+        "two-us-generations-complete",
+        "summary-frozen-input-retained",
+        "us-regeneration-complete",
+        "failed-us-primary-skips-eu-and-global",
+        "late-canonical-policy-refused-before-native-http",
+        "revoked-us-eligibility-refused",
+        "eu-generation-complete",
+        "write-canonical-checkpoint"
+      ],
+      "native": {
+        "configuredCsp": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' asset: http://asset.localhost data:; connect-src 'self' ipc: http://ipc.localhost",
+        "keychainService": "ai.quixi.chat.regional-app-proof.71c4c668-853f-4804-84ac-963221814980",
+        "phase": "write",
+        "profile": "71c4c668-853f-4804-84ac-963221814980",
+        "resources": [
+          {
+            "bytes": 495,
+            "csp": "img-src 'self' asset: http://asset.localhost data:; script-src 'self' 'wasm-unsafe-eval' 'sha256-RO9kSPJYUzpqbNhz/ihCzkPkXozo/ZKa11ZxJJKefwQ=' 'sha256-DMGx8hoooF85fz3US3OdaGh3l7ETAvOKmd88jIUpaw0=' 'sha256-jEXklXilpr1gZVhEsqBVL8IywdEEzkoSztPY63FHweo=' 'sha256-Ipy1ykBtDbJih+900m9WgPi6MAUn8sn39PHgeEs4zV4=' 'sha256-QI+8WsWxaZ1rT5rj9QMncMs0iUkmY5c7EZd5XFXVadI=' 'sha256-q1LY7FPBe7IHcpFDyQtQ+V/Xh7Gntzj9lILf59yPEco=' 'sha256-GmzrUnC2bzaOHG+XdZmuPn9PLm1zDElJIVWIDTZP96Y=' 'sha256-cHsWTJ8PeCqN7ow3VPZenzuroQBRAA/fhHmrETHVVXc=' 'sha256-WletefcI1uYm4wPhN8uJz6PetuvhX7qQkU2JTMyjHCk=' 'sha256-alhQxYcUuRPgpK4kMpMsdBf/unSVq0yF/QYPpBxEn7s=' 'sha256-mPKPqQPhtirtGSqkRcooIJqmHujEQiZi53Y+i8vacZc='; connect-src 'self' ipc: http://ipc.localhost; worker-src 'self'; style-src 'self' 'unsafe-inline'; default-src 'self'",
+            "status": 200,
+            "url": "tauri://localhost/"
+          },
+          {
+            "bytes": 38993,
+            "csp": null,
+            "status": 200,
+            "url": "tauri://localhost/assets/index-Bvnw_P4y.css"
+          },
+          {
+            "bytes": 52856,
+            "csp": null,
+            "status": 200,
+            "url": "tauri://localhost/assets/sha2-DHqbhyfR.js"
+          },
+          {
+            "bytes": 1052058,
+            "csp": null,
+            "status": 200,
+            "url": "tauri://localhost/assets/index-5AtG6_wW.js"
+          },
+          {
+            "bytes": 614183,
+            "csp": null,
+            "status": 200,
+            "url": "tauri://localhost/assets/isolated-worker-DSru7mxn.js"
+          },
+          {
+            "bytes": 1599767,
+            "csp": null,
+            "status": 200,
+            "url": "tauri://localhost/assets/sqlite3-BzAlo58v.wasm"
+          }
+        ],
+        "tlsFixture": {
+          "address": "127.0.0.1:59973",
+          "hostnameValidation": true,
+          "hosts": [
+            "us.api.openai.com",
+            "eu.api.openai.com"
+          ]
+        },
+        "webview": {
+          "archiveId": "test-regional-71c4c668-853f-4804-84ac-963221814980",
+          "canonical": {
+            "canonicalSha256": "05e2fa7056374caf4fb71f0b47d5778b430e154612b585e9639b7759009d7f40",
+            "generationIds": [
+              "461e0998-708c-4ff7-8bea-a6ebfd25eb98",
+              "5db68203-b9b3-4dcf-9bd9-59643558dd9c",
+              "05e2db35-d14b-4226-a704-5decdfd59d51",
+              "fe2c03a1-de59-42c9-9e1d-f20c7832529c",
+              "e15dd0a3-4e57-42d0-851b-3ead7db8e33c",
+              "33c9ba7c-629a-49e8-923f-37c80ff35dec",
+              "ae3d0e06-b378-4805-a4eb-c5d9851ff448"
+            ],
+            "summary": {
+              "generationId": "05e2db35-d14b-4226-a704-5decdfd59d51",
+              "id": "f9aa8f27-534f-428a-b73b-8b19653df086",
+              "inputByteLength": 1254,
+              "inputSha256": "fa2ed5378d77b4e02845eeab5dbda2f05012187792779ae548975c249a08e279",
+              "verifiedSavedInputSha256": "fa2ed5378d77b4e02845eeab5dbda2f05012187792779ae548975c249a08e279"
+            },
+            "threadIds": {
+              "eu": "c2979014-8686-455f-918d-95b37ce715ab",
+              "us": "baac5d2c-7098-4d86-9a72-e9e353c82a10"
+            }
+          },
+          "canonicalFingerprint": "05e2fa7056374caf4fb71f0b47d5778b430e154612b585e9639b7759009d7f40",
+          "checks": [
+            "Actual macOS Keychain backend is available for the isolated proof service",
+            "us production native capability exactly matches the registered origin, model, route and reviewed evidence",
+            "eu production native capability exactly matches the registered origin, model, route and reviewed evidence",
+            "Native bundled context provides secure OPFS and Web Locks",
+            "Explicit test archive starts without conversations or attempts",
+            "us credential storage does not confirm eligibility",
+            "us real model discovery does not confirm eligibility",
+            "us text confirmation does not grant image eligibility",
+            "eu credential storage does not confirm eligibility",
+            "eu real model discovery does not confirm eligibility",
+            "eu text confirmation does not grant image eligibility",
+            "Initial route refuses Processing region is unknown",
+            "Refused keyboard send and token count create no canonical attempt",
+            "Refused initial route preserves canonical message history",
+            "Refused route retains the required US policy",
+            "Initial route refuses does not match required United States",
+            "Refused keyboard send and token count create no canonical attempt",
+            "Refused initial route preserves canonical message history",
+            "Refused route retains the required US policy",
+            "Text-only account confirmation keeps native regional image attachment disabled",
+            "Summary request review names the actual native US processing basis",
+            "Canonical summary input hash and length match the verified frozen request bytes",
+            "Frozen summary input names the reviewed model and bounded output limit",
+            "Complete summary attempt records separate purpose and native regional basis",
+            "Generating a summary preserves every original message and content part byte for byte",
+            "Summary output does not become the ordinary transcript branch",
+            "Failed US primary creates one attempt while wrong-region and global fallbacks are skipped",
+            "Changing canonical policy after body staging causes exactly one failed attempt before native HTTP",
+            "Revoking eligibility refuses subsequent keyboard send without a new native attempt",
+            "Revocation keeps the stored US processing requirement and refuses a global substitute",
+            "Canonical archive retains five complete attempts and two failed attempts across US/EU threads, including the pre-HTTP policy refusal",
+            "No main-document CSP violation occurred under the unchanged production policy"
+          ],
+          "cspViolations": [],
+          "expectedWireCounts": {
+            "eu": {
+              "content": 1,
+              "models": 1
+            },
+            "global": {
+              "content": 0,
+              "models": 0
+            },
+            "us": {
+              "content": 5,
+              "models": 1
+            }
+          },
+          "hostCapabilities": {
+            "clipboard": {
+              "available": true,
+              "permission": "prompt",
+              "reason": null
+            },
+            "host": "desktop",
+            "nativeFiles": {
+              "available": true,
+              "permission": "prompt",
+              "reason": null
+            },
+            "notifications": {
+              "available": false,
+              "permission": "not_required",
+              "reason": "Native notifications are not implemented."
+            },
+            "oauth": {
+              "available": false,
+              "permission": "not_required",
+              "reason": "Native OAuth requires a registered provider configuration and an available macOS keychain."
+            },
+            "providerTransports": [
+              {
+                "capability": {
+                  "available": true,
+                  "permission": "not_required",
+                  "reason": null
+                },
+                "endpointOrigin": "https://api.openai.com",
+                "id": "quixi-openai-native-v1",
+                "kind": "native_direct",
+                "privacy": "direct_provider",
+                "relayIdentity": null
+              },
+              {
+                "capability": {
+                  "available": true,
+                  "permission": "not_required",
+                  "reason": null
+                },
+                "endpointOrigin": "https://api.anthropic.com",
+                "id": "quixi-anthropic-native-v1",
+                "kind": "native_direct",
+                "privacy": "direct_provider",
+                "relayIdentity": null
+              },
+              {
+                "capability": {
+                  "available": true,
+                  "permission": "not_required",
+                  "reason": null
+                },
+                "endpointOrigin": "https://us.api.openai.com",
+                "id": "quixi-openai-us-native-v1",
+                "kind": "native_direct",
+                "privacy": "direct_provider",
+                "regionalProcessing": {
+                  "binding": {
+                    "accountId": "primary",
+                    "destinationId": "quixi-openai-us-api-v1",
+                    "providerId": "openai",
+                    "transportId": "quixi-openai-us-native-v1"
+                  },
+                  "configurationId": "openai-us-gpt41-mini-2026-09-10",
+                  "endpoints": [
+                    "/v1/chat/completions"
+                  ],
+                  "inputModalities": [
+                    "text",
+                    "image"
+                  ],
+                  "modelIds": [
+                    "gpt-4.1-mini-2025-04-14"
+                  ],
+                  "region": "us",
+                  "reviewedAt": 1788998400000,
+                  "sourceUrl": "https://developers.openai.com/api/docs/guides/your-data",
+                  "upstreamOrigin": "https://us.api.openai.com",
+                  "version": 1
+                },
+                "relayIdentity": null
+              },
+              {
+                "capability": {
+                  "available": true,
+                  "permission": "not_required",
+                  "reason": null
+                },
+                "endpointOrigin": "https://eu.api.openai.com",
+                "id": "quixi-openai-eu-native-v1",
+                "kind": "native_direct",
+                "privacy": "direct_provider",
+                "regionalProcessing": {
+                  "binding": {
+                    "accountId": "primary",
+                    "destinationId": "quixi-openai-eu-api-v1",
+                    "providerId": "openai",
+                    "transportId": "quixi-openai-eu-native-v1"
+                  },
+                  "configurationId": "openai-eu-gpt41-mini-2026-09-10",
+                  "endpoints": [
+                    "/v1/chat/completions"
+                  ],
+                  "inputModalities": [
+                    "text",
+                    "image"
+                  ],
+                  "modelIds": [
+                    "gpt-4.1-mini-2025-04-14"
+                  ],
+                  "region": "eu",
+                  "reviewedAt": 1788998400000,
+                  "sourceUrl": "https://developers.openai.com/api/docs/guides/your-data",
+                  "upstreamOrigin": "https://eu.api.openai.com",
+                  "version": 1
+                },
+                "relayIdentity": null
+              }
+            ],
+            "secretPersistence": "native"
+          },
+          "latePolicyProof": {
+            "changedRegion": "eu",
+            "expectedAdditionalWireRequests": 0,
+            "generationId": "33c9ba7c-629a-49e8-923f-37c80ff35dec",
+            "hook": "Negative-only scheduling wrapper commits current canonical policy immediately before calling the unchanged native HostClient with its original beforeDispatch callback.",
+            "originalRegion": "us"
+          },
+          "phase": "write",
+          "profile": "71c4c668-853f-4804-84ac-963221814980",
+          "provenanceChecks": [
+            "Original canonical message and part records retained exactly",
+            "Saved summary input verified through the production UI blob reader, then independently SHA-256 hashed",
+            "Every complete, failed, regenerated and summary attempt retains its matching native regional review basis"
+          ],
+          "scope": "Actual production AppRoot, desktop connection settings, native HostClient, canonical worker and OS Keychain in an isolated synthetic profile. The controlled TLS fixture verifies registered US/EU destination routing, not physical geography or provider account eligibility.",
+          "secureContext": true,
+          "stage": "write-canonical-checkpoint",
+          "status": "passed",
+          "success": true,
+          "url": "tauri://localhost",
+          "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko)",
+          "verifiedSavedInputSha256": "fa2ed5378d77b4e02845eeab5dbda2f05012187792779ae548975c249a08e279",
+          "wireCheckpoints": [
+            {
+              "expectedWireCounts": {
+                "eu": {
+                  "content": 0,
+                  "models": 1
+                },
+                "global": {
+                  "content": 0,
+                  "models": 0
+                },
+                "us": {
+                  "content": 0,
+                  "models": 1
+                }
+              },
+              "stage": "connected-and-explicitly-confirmed"
+            },
+            {
+              "expectedWireCounts": {
+                "eu": {
+                  "content": 0,
+                  "models": 1
+                },
+                "global": {
+                  "content": 0,
+                  "models": 0
+                },
+                "us": {
+                  "content": 0,
+                  "models": 1
+                }
+              },
+              "stage": "unknown-primary-and-wrong-fallback-refused"
+            },
+            {
+              "expectedWireCounts": {
+                "eu": {
+                  "content": 0,
+                  "models": 1
+                },
+                "global": {
+                  "content": 0,
+                  "models": 0
+                },
+                "us": {
+                  "content": 0,
+                  "models": 1
+                }
+              },
+              "stage": "wrong-primary-refused"
+            },
+            {
+              "expectedWireCounts": {
+                "eu": {
+                  "content": 0,
+                  "models": 1
+                },
+                "global": {
+                  "content": 0,
+                  "models": 0
+                },
+                "us": {
+                  "content": 2,
+                  "models": 1
+                }
+              },
+              "stage": "two-us-generations-complete"
+            },
+            {
+              "expectedWireCounts": {
+                "eu": {
+                  "content": 0,
+                  "models": 1
+                },
+                "global": {
+                  "content": 0,
+                  "models": 0
+                },
+                "us": {
+                  "content": 3,
+                  "models": 1
+                }
+              },
+              "stage": "summary-frozen-input-retained"
+            },
+            {
+              "expectedWireCounts": {
+                "eu": {
+                  "content": 0,
+                  "models": 1
+                },
+                "global": {
+                  "content": 0,
+                  "models": 0
+                },
+                "us": {
+                  "content": 4,
+                  "models": 1
+                }
+              },
+              "stage": "us-regeneration-complete"
+            },
+            {
+              "expectedWireCounts": {
+                "eu": {
+                  "content": 0,
+                  "models": 1
+                },
+                "global": {
+                  "content": 0,
+                  "models": 0
+                },
+                "us": {
+                  "content": 5,
+                  "models": 1
+                }
+              },
+              "stage": "failed-us-primary-skips-eu-and-global"
+            },
+            {
+              "expectedWireCounts": {
+                "eu": {
+                  "content": 0,
+                  "models": 1
+                },
+                "global": {
+                  "content": 0,
+                  "models": 0
+                },
+                "us": {
+                  "content": 5,
+                  "models": 1
+                }
+              },
+              "stage": "late-canonical-policy-refused-before-native-http"
+            },
+            {
+              "expectedWireCounts": {
+                "eu": {
+                  "content": 0,
+                  "models": 1
+                },
+                "global": {
+                  "content": 0,
+                  "models": 0
+                },
+                "us": {
+                  "content": 5,
+                  "models": 1
+                }
+              },
+              "stage": "revoked-us-eligibility-refused"
+            },
+            {
+              "expectedWireCounts": {
+                "eu": {
+                  "content": 1,
+                  "models": 1
+                },
+                "global": {
+                  "content": 0,
+                  "models": 0
+                },
+                "us": {
+                  "content": 5,
+                  "models": 1
+                }
+              },
+              "stage": "eu-generation-complete"
+            },
+            {
+              "expectedWireCounts": {
+                "eu": {
+                  "content": 1,
+                  "models": 1
+                },
+                "global": {
+                  "content": 0,
+                  "models": 0
+                },
+                "us": {
+                  "content": 5,
+                  "models": 1
+                }
+              },
+              "stage": "write-canonical-checkpoint"
+            }
+          ]
+        }
+      },
+      "success": true,
+      "tlsRequests": [
+        {
+          "phase": "write",
+          "sequence": 0,
+          "method": "GET",
+          "path": "/v1/models",
+          "sni": "us.api.openai.com",
+          "host": "us.api.openai.com",
+          "region": "us",
+          "bodyBytes": 0,
+          "bodySha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "model": null,
+          "authorizationPresent": true,
+          "bearerAuthorization": true,
+          "credentialMatchesExpected": true,
+          "relayHeadersPresent": false,
+          "forcedFailure": false,
+          "status": 200
+        },
+        {
+          "phase": "write",
+          "sequence": 1,
+          "method": "GET",
+          "path": "/v1/models",
+          "sni": "eu.api.openai.com",
+          "host": "eu.api.openai.com",
+          "region": "eu",
+          "bodyBytes": 0,
+          "bodySha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "model": null,
+          "authorizationPresent": true,
+          "bearerAuthorization": true,
+          "credentialMatchesExpected": true,
+          "relayHeadersPresent": false,
+          "forcedFailure": false,
+          "status": 200
+        },
+        {
+          "phase": "write",
+          "sequence": 2,
+          "method": "POST",
+          "path": "/v1/chat/completions",
+          "sni": "us.api.openai.com",
+          "host": "us.api.openai.com",
+          "region": "us",
+          "bodyBytes": 217,
+          "bodySha256": "7dd1ea576037446cd58e670e47c6c551e35c96e119d659c325d5abaaec96e34a",
+          "model": "gpt-4.1-mini-2025-04-14",
+          "authorizationPresent": true,
+          "bearerAuthorization": true,
+          "credentialMatchesExpected": true,
+          "relayHeadersPresent": false,
+          "forcedFailure": false,
+          "status": 200
+        },
+        {
+          "phase": "write",
+          "sequence": 3,
+          "method": "POST",
+          "path": "/v1/chat/completions",
+          "sni": "us.api.openai.com",
+          "host": "us.api.openai.com",
+          "region": "us",
+          "bodyBytes": 418,
+          "bodySha256": "51353e9cdf5819ab6bc7eda03018d5d3c856bc39c1a0cf541ea1cef5a97a0f41",
+          "model": "gpt-4.1-mini-2025-04-14",
+          "authorizationPresent": true,
+          "bearerAuthorization": true,
+          "credentialMatchesExpected": true,
+          "relayHeadersPresent": false,
+          "forcedFailure": false,
+          "status": 200
+        },
+        {
+          "phase": "write",
+          "sequence": 4,
+          "method": "POST",
+          "path": "/v1/chat/completions",
+          "sni": "us.api.openai.com",
+          "host": "us.api.openai.com",
+          "region": "us",
+          "bodyBytes": 1254,
+          "bodySha256": "fa2ed5378d77b4e02845eeab5dbda2f05012187792779ae548975c249a08e279",
+          "model": "gpt-4.1-mini-2025-04-14",
+          "authorizationPresent": true,
+          "bearerAuthorization": true,
+          "credentialMatchesExpected": true,
+          "relayHeadersPresent": false,
+          "forcedFailure": false,
+          "status": 200
+        },
+        {
+          "phase": "write",
+          "sequence": 5,
+          "method": "POST",
+          "path": "/v1/chat/completions",
+          "sni": "us.api.openai.com",
+          "host": "us.api.openai.com",
+          "region": "us",
+          "bodyBytes": 217,
+          "bodySha256": "7dd1ea576037446cd58e670e47c6c551e35c96e119d659c325d5abaaec96e34a",
+          "model": "gpt-4.1-mini-2025-04-14",
+          "authorizationPresent": true,
+          "bearerAuthorization": true,
+          "credentialMatchesExpected": true,
+          "relayHeadersPresent": false,
+          "forcedFailure": false,
+          "status": 200
+        },
+        {
+          "phase": "write",
+          "sequence": 6,
+          "method": "POST",
+          "path": "/v1/chat/completions",
+          "sni": "us.api.openai.com",
+          "host": "us.api.openai.com",
+          "region": "us",
+          "bodyBytes": 449,
+          "bodySha256": "769c634768ca949a93cfef544ce3c1a22051e6f2487870145944e8cd8a46fa24",
+          "model": "gpt-4.1-mini-2025-04-14",
+          "authorizationPresent": true,
+          "bearerAuthorization": true,
+          "credentialMatchesExpected": true,
+          "relayHeadersPresent": false,
+          "forcedFailure": true,
+          "status": 503
+        },
+        {
+          "phase": "write",
+          "sequence": 7,
+          "method": "POST",
+          "path": "/v1/chat/completions",
+          "sni": "eu.api.openai.com",
+          "host": "eu.api.openai.com",
+          "region": "eu",
+          "bodyBytes": 211,
+          "bodySha256": "890cf2d9863456fb6c366996dd956a3a187013035b5a1b3c5bf965404367da9e",
+          "model": "gpt-4.1-mini-2025-04-14",
+          "authorizationPresent": true,
+          "bearerAuthorization": true,
+          "credentialMatchesExpected": true,
+          "relayHeadersPresent": false,
+          "forcedFailure": false,
+          "status": 200
+        }
+      ],
+      "tlsHandshakes": [
+        {
+          "phase": "write",
+          "sni": "us.api.openai.com"
+        },
+        {
+          "phase": "write",
+          "sni": "eu.api.openai.com"
+        },
+        {
+          "phase": "write",
+          "sni": "us.api.openai.com"
+        },
+        {
+          "phase": "write",
+          "sni": "us.api.openai.com"
+        },
+        {
+          "phase": "write",
+          "sni": "us.api.openai.com"
+        },
+        {
+          "phase": "write",
+          "sni": "us.api.openai.com"
+        },
+        {
+          "phase": "write",
+          "sni": "us.api.openai.com"
+        },
+        {
+          "phase": "write",
+          "sni": "eu.api.openai.com"
+        }
+      ],
+      "observedWireCounts": {
+        "us": {
+          "models": 1,
+          "content": 5
+        },
+        "eu": {
+          "models": 1,
+          "content": 1
+        },
+        "global": {
+          "models": 0,
+          "content": 0
+        }
+      },
+      "completedAt": "2026-09-10T21:56:42.627186+00:00"
+    },
+    {
+      "phase": "restart",
+      "startedAt": "2026-09-10T21:56:42.627838+00:00",
+      "exitCode": 0,
+      "stderr": "",
+      "checkpoints": [
+        "restart-history-retained-and-unconfirmed"
+      ],
+      "native": {
+        "configuredCsp": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' asset: http://asset.localhost data:; connect-src 'self' ipc: http://ipc.localhost",
+        "keychainService": "ai.quixi.chat.regional-app-proof.71c4c668-853f-4804-84ac-963221814980",
+        "phase": "restart",
+        "profile": "71c4c668-853f-4804-84ac-963221814980",
+        "resources": [
+          {
+            "bytes": 495,
+            "csp": "connect-src 'self' ipc: http://ipc.localhost; img-src 'self' asset: http://asset.localhost data:; script-src 'self' 'wasm-unsafe-eval' 'sha256-RO9kSPJYUzpqbNhz/ihCzkPkXozo/ZKa11ZxJJKefwQ=' 'sha256-DMGx8hoooF85fz3US3OdaGh3l7ETAvOKmd88jIUpaw0=' 'sha256-jEXklXilpr1gZVhEsqBVL8IywdEEzkoSztPY63FHweo=' 'sha256-Ipy1ykBtDbJih+900m9WgPi6MAUn8sn39PHgeEs4zV4=' 'sha256-QI+8WsWxaZ1rT5rj9QMncMs0iUkmY5c7EZd5XFXVadI=' 'sha256-q1LY7FPBe7IHcpFDyQtQ+V/Xh7Gntzj9lILf59yPEco=' 'sha256-GmzrUnC2bzaOHG+XdZmuPn9PLm1zDElJIVWIDTZP96Y=' 'sha256-cHsWTJ8PeCqN7ow3VPZenzuroQBRAA/fhHmrETHVVXc=' 'sha256-WletefcI1uYm4wPhN8uJz6PetuvhX7qQkU2JTMyjHCk=' 'sha256-alhQxYcUuRPgpK4kMpMsdBf/unSVq0yF/QYPpBxEn7s=' 'sha256-mPKPqQPhtirtGSqkRcooIJqmHujEQiZi53Y+i8vacZc='; default-src 'self'; worker-src 'self'; style-src 'self' 'unsafe-inline'",
+            "status": 200,
+            "url": "tauri://localhost/"
+          },
+          {
+            "bytes": 38993,
+            "csp": null,
+            "status": 200,
+            "url": "tauri://localhost/assets/index-Bvnw_P4y.css"
+          },
+          {
+            "bytes": 52856,
+            "csp": null,
+            "status": 200,
+            "url": "tauri://localhost/assets/sha2-DHqbhyfR.js"
+          },
+          {
+            "bytes": 1052058,
+            "csp": null,
+            "status": 200,
+            "url": "tauri://localhost/assets/index-5AtG6_wW.js"
+          },
+          {
+            "bytes": 614183,
+            "csp": null,
+            "status": 200,
+            "url": "tauri://localhost/assets/isolated-worker-DSru7mxn.js"
+          },
+          {
+            "bytes": 1599767,
+            "csp": null,
+            "status": 200,
+            "url": "tauri://localhost/assets/sqlite3-BzAlo58v.wasm"
+          }
+        ],
+        "tlsFixture": {
+          "address": "127.0.0.1:59973",
+          "hostnameValidation": true,
+          "hosts": [
+            "us.api.openai.com",
+            "eu.api.openai.com"
+          ]
+        },
+        "webview": {
+          "archiveId": "test-regional-71c4c668-853f-4804-84ac-963221814980",
+          "canonical": {
+            "canonicalSha256": "05e2fa7056374caf4fb71f0b47d5778b430e154612b585e9639b7759009d7f40",
+            "generationIds": [
+              "461e0998-708c-4ff7-8bea-a6ebfd25eb98",
+              "5db68203-b9b3-4dcf-9bd9-59643558dd9c",
+              "05e2db35-d14b-4226-a704-5decdfd59d51",
+              "fe2c03a1-de59-42c9-9e1d-f20c7832529c",
+              "e15dd0a3-4e57-42d0-851b-3ead7db8e33c",
+              "33c9ba7c-629a-49e8-923f-37c80ff35dec",
+              "ae3d0e06-b378-4805-a4eb-c5d9851ff448"
+            ],
+            "summary": {
+              "generationId": "05e2db35-d14b-4226-a704-5decdfd59d51",
+              "id": "f9aa8f27-534f-428a-b73b-8b19653df086",
+              "inputByteLength": 1254,
+              "inputSha256": "fa2ed5378d77b4e02845eeab5dbda2f05012187792779ae548975c249a08e279",
+              "verifiedSavedInputSha256": "fa2ed5378d77b4e02845eeab5dbda2f05012187792779ae548975c249a08e279"
+            },
+            "threadIds": {
+              "eu": "c2979014-8686-455f-918d-95b37ce715ab",
+              "us": "baac5d2c-7098-4d86-9a72-e9e353c82a10"
+            }
+          },
+          "canonicalFingerprint": "05e2fa7056374caf4fb71f0b47d5778b430e154612b585e9639b7759009d7f40",
+          "checks": [
+            "Actual macOS Keychain backend is available for the isolated proof service",
+            "us production native capability exactly matches the registered origin, model, route and reviewed evidence",
+            "eu production native capability exactly matches the registered origin, model, route and reviewed evidence",
+            "Native bundled context provides secure OPFS and Web Locks",
+            "Full native process restart preserves exact canonical policy, contexts, attempts, original history, events and summary provenance",
+            "us Keychain reopen does not restore text or image eligibility",
+            "eu Keychain reopen does not restore text or image eligibility",
+            "us restart requires eligibility confirmation before sending",
+            "us unconfirmed restart creates no new attempt",
+            "eu restart requires eligibility confirmation before sending",
+            "eu unconfirmed restart creates no new attempt",
+            "Refused restart sends preserve the complete canonical checkpoint",
+            "No main-document CSP violation occurred under the unchanged production policy"
+          ],
+          "cspViolations": [],
+          "expectedWireCounts": {
+            "eu": {
+              "content": 0,
+              "models": 0
+            },
+            "global": {
+              "content": 0,
+              "models": 0
+            },
+            "us": {
+              "content": 0,
+              "models": 0
+            }
+          },
+          "hostCapabilities": {
+            "clipboard": {
+              "available": true,
+              "permission": "prompt",
+              "reason": null
+            },
+            "host": "desktop",
+            "nativeFiles": {
+              "available": true,
+              "permission": "prompt",
+              "reason": null
+            },
+            "notifications": {
+              "available": false,
+              "permission": "not_required",
+              "reason": "Native notifications are not implemented."
+            },
+            "oauth": {
+              "available": false,
+              "permission": "not_required",
+              "reason": "Native OAuth requires a registered provider configuration and an available macOS keychain."
+            },
+            "providerTransports": [
+              {
+                "capability": {
+                  "available": true,
+                  "permission": "not_required",
+                  "reason": null
+                },
+                "endpointOrigin": "https://api.openai.com",
+                "id": "quixi-openai-native-v1",
+                "kind": "native_direct",
+                "privacy": "direct_provider",
+                "relayIdentity": null
+              },
+              {
+                "capability": {
+                  "available": true,
+                  "permission": "not_required",
+                  "reason": null
+                },
+                "endpointOrigin": "https://api.anthropic.com",
+                "id": "quixi-anthropic-native-v1",
+                "kind": "native_direct",
+                "privacy": "direct_provider",
+                "relayIdentity": null
+              },
+              {
+                "capability": {
+                  "available": true,
+                  "permission": "not_required",
+                  "reason": null
+                },
+                "endpointOrigin": "https://us.api.openai.com",
+                "id": "quixi-openai-us-native-v1",
+                "kind": "native_direct",
+                "privacy": "direct_provider",
+                "regionalProcessing": {
+                  "binding": {
+                    "accountId": "primary",
+                    "destinationId": "quixi-openai-us-api-v1",
+                    "providerId": "openai",
+                    "transportId": "quixi-openai-us-native-v1"
+                  },
+                  "configurationId": "openai-us-gpt41-mini-2026-09-10",
+                  "endpoints": [
+                    "/v1/chat/completions"
+                  ],
+                  "inputModalities": [
+                    "text",
+                    "image"
+                  ],
+                  "modelIds": [
+                    "gpt-4.1-mini-2025-04-14"
+                  ],
+                  "region": "us",
+                  "reviewedAt": 1788998400000,
+                  "sourceUrl": "https://developers.openai.com/api/docs/guides/your-data",
+                  "upstreamOrigin": "https://us.api.openai.com",
+                  "version": 1
+                },
+                "relayIdentity": null
+              },
+              {
+                "capability": {
+                  "available": true,
+                  "permission": "not_required",
+                  "reason": null
+                },
+                "endpointOrigin": "https://eu.api.openai.com",
+                "id": "quixi-openai-eu-native-v1",
+                "kind": "native_direct",
+                "privacy": "direct_provider",
+                "regionalProcessing": {
+                  "binding": {
+                    "accountId": "primary",
+                    "destinationId": "quixi-openai-eu-api-v1",
+                    "providerId": "openai",
+                    "transportId": "quixi-openai-eu-native-v1"
+                  },
+                  "configurationId": "openai-eu-gpt41-mini-2026-09-10",
+                  "endpoints": [
+                    "/v1/chat/completions"
+                  ],
+                  "inputModalities": [
+                    "text",
+                    "image"
+                  ],
+                  "modelIds": [
+                    "gpt-4.1-mini-2025-04-14"
+                  ],
+                  "region": "eu",
+                  "reviewedAt": 1788998400000,
+                  "sourceUrl": "https://developers.openai.com/api/docs/guides/your-data",
+                  "upstreamOrigin": "https://eu.api.openai.com",
+                  "version": 1
+                },
+                "relayIdentity": null
+              }
+            ],
+            "secretPersistence": "native"
+          },
+          "phase": "restart",
+          "profile": "71c4c668-853f-4804-84ac-963221814980",
+          "provenanceChecks": [],
+          "scope": "Actual production AppRoot, desktop connection settings, native HostClient, canonical worker and OS Keychain in an isolated synthetic profile. The controlled TLS fixture verifies registered US/EU destination routing, not physical geography or provider account eligibility.",
+          "secureContext": true,
+          "stage": "restart-history-retained-and-unconfirmed",
+          "status": "passed",
+          "success": true,
+          "url": "tauri://localhost",
+          "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko)",
+          "wireCheckpoints": [
+            {
+              "expectedWireCounts": {
+                "eu": {
+                  "content": 0,
+                  "models": 0
+                },
+                "global": {
+                  "content": 0,
+                  "models": 0
+                },
+                "us": {
+                  "content": 0,
+                  "models": 0
+                }
+              },
+              "stage": "restart-history-retained-and-unconfirmed"
+            }
+          ]
+        }
+      },
+      "success": true,
+      "tlsRequests": [],
+      "tlsHandshakes": [],
+      "observedWireCounts": {
+        "us": {
+          "models": 0,
+          "content": 0
+        },
+        "eu": {
+          "models": 0,
+          "content": 0
+        },
+        "global": {
+          "models": 0,
+          "content": 0
+        }
+      },
+      "completedAt": "2026-09-10T21:56:43.593608+00:00"
+    },
+    {
+      "phase": "cleanup",
+      "startedAt": "2026-09-10T21:56:43.594231+00:00",
+      "exitCode": 0,
+      "stderr": "",
+      "checkpoints": [
+        "cleanup-complete"
+      ],
+      "native": {
+        "configuredCsp": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' asset: http://asset.localhost data:; connect-src 'self' ipc: http://ipc.localhost",
+        "keychainService": "ai.quixi.chat.regional-app-proof.71c4c668-853f-4804-84ac-963221814980",
+        "phase": "cleanup",
+        "profile": "71c4c668-853f-4804-84ac-963221814980",
+        "resources": [
+          {
+            "bytes": 495,
+            "csp": "style-src 'self' 'unsafe-inline'; img-src 'self' asset: http://asset.localhost data:; script-src 'self' 'wasm-unsafe-eval' 'sha256-RO9kSPJYUzpqbNhz/ihCzkPkXozo/ZKa11ZxJJKefwQ=' 'sha256-DMGx8hoooF85fz3US3OdaGh3l7ETAvOKmd88jIUpaw0=' 'sha256-jEXklXilpr1gZVhEsqBVL8IywdEEzkoSztPY63FHweo=' 'sha256-Ipy1ykBtDbJih+900m9WgPi6MAUn8sn39PHgeEs4zV4=' 'sha256-QI+8WsWxaZ1rT5rj9QMncMs0iUkmY5c7EZd5XFXVadI=' 'sha256-q1LY7FPBe7IHcpFDyQtQ+V/Xh7Gntzj9lILf59yPEco=' 'sha256-GmzrUnC2bzaOHG+XdZmuPn9PLm1zDElJIVWIDTZP96Y=' 'sha256-cHsWTJ8PeCqN7ow3VPZenzuroQBRAA/fhHmrETHVVXc=' 'sha256-WletefcI1uYm4wPhN8uJz6PetuvhX7qQkU2JTMyjHCk=' 'sha256-alhQxYcUuRPgpK4kMpMsdBf/unSVq0yF/QYPpBxEn7s=' 'sha256-mPKPqQPhtirtGSqkRcooIJqmHujEQiZi53Y+i8vacZc='; connect-src 'self' ipc: http://ipc.localhost; worker-src 'self'; default-src 'self'",
+            "status": 200,
+            "url": "tauri://localhost/"
+          },
+          {
+            "bytes": 38993,
+            "csp": null,
+            "status": 200,
+            "url": "tauri://localhost/assets/index-Bvnw_P4y.css"
+          },
+          {
+            "bytes": 52856,
+            "csp": null,
+            "status": 200,
+            "url": "tauri://localhost/assets/sha2-DHqbhyfR.js"
+          },
+          {
+            "bytes": 1052058,
+            "csp": null,
+            "status": 200,
+            "url": "tauri://localhost/assets/index-5AtG6_wW.js"
+          }
+        ],
+        "tlsFixture": {
+          "address": "127.0.0.1:59973",
+          "hostnameValidation": true,
+          "hosts": [
+            "us.api.openai.com",
+            "eu.api.openai.com"
+          ]
+        },
+        "webview": {
+          "archiveId": "test-regional-71c4c668-853f-4804-84ac-963221814980",
+          "checks": [
+            "Actual macOS Keychain backend is available for the isolated proof service",
+            "us production native capability exactly matches the registered origin, model, route and reviewed evidence",
+            "eu production native capability exactly matches the registered origin, model, route and reviewed evidence",
+            "openai synthetic Keychain binding is absent after cleanup",
+            "anthropic synthetic Keychain binding is absent after cleanup",
+            "openai-us synthetic Keychain binding is absent after cleanup",
+            "openai-eu synthetic Keychain binding is absent after cleanup",
+            "Cleanup removes only this explicit test archive and synthetic profile checkpoint"
+          ],
+          "cspViolations": [],
+          "deletedConnections": [
+            "openai",
+            "openai-us",
+            "openai-eu"
+          ],
+          "expectedWireCounts": {
+            "eu": {
+              "content": 0,
+              "models": 0
+            },
+            "global": {
+              "content": 0,
+              "models": 0
+            },
+            "us": {
+              "content": 0,
+              "models": 0
+            }
+          },
+          "hostCapabilities": {
+            "clipboard": {
+              "available": true,
+              "permission": "prompt",
+              "reason": null
+            },
+            "host": "desktop",
+            "nativeFiles": {
+              "available": true,
+              "permission": "prompt",
+              "reason": null
+            },
+            "notifications": {
+              "available": false,
+              "permission": "not_required",
+              "reason": "Native notifications are not implemented."
+            },
+            "oauth": {
+              "available": false,
+              "permission": "not_required",
+              "reason": "Native OAuth requires a registered provider configuration and an available macOS keychain."
+            },
+            "providerTransports": [
+              {
+                "capability": {
+                  "available": true,
+                  "permission": "not_required",
+                  "reason": null
+                },
+                "endpointOrigin": "https://api.openai.com",
+                "id": "quixi-openai-native-v1",
+                "kind": "native_direct",
+                "privacy": "direct_provider",
+                "relayIdentity": null
+              },
+              {
+                "capability": {
+                  "available": true,
+                  "permission": "not_required",
+                  "reason": null
+                },
+                "endpointOrigin": "https://api.anthropic.com",
+                "id": "quixi-anthropic-native-v1",
+                "kind": "native_direct",
+                "privacy": "direct_provider",
+                "relayIdentity": null
+              },
+              {
+                "capability": {
+                  "available": true,
+                  "permission": "not_required",
+                  "reason": null
+                },
+                "endpointOrigin": "https://us.api.openai.com",
+                "id": "quixi-openai-us-native-v1",
+                "kind": "native_direct",
+                "privacy": "direct_provider",
+                "regionalProcessing": {
+                  "binding": {
+                    "accountId": "primary",
+                    "destinationId": "quixi-openai-us-api-v1",
+                    "providerId": "openai",
+                    "transportId": "quixi-openai-us-native-v1"
+                  },
+                  "configurationId": "openai-us-gpt41-mini-2026-09-10",
+                  "endpoints": [
+                    "/v1/chat/completions"
+                  ],
+                  "inputModalities": [
+                    "text",
+                    "image"
+                  ],
+                  "modelIds": [
+                    "gpt-4.1-mini-2025-04-14"
+                  ],
+                  "region": "us",
+                  "reviewedAt": 1788998400000,
+                  "sourceUrl": "https://developers.openai.com/api/docs/guides/your-data",
+                  "upstreamOrigin": "https://us.api.openai.com",
+                  "version": 1
+                },
+                "relayIdentity": null
+              },
+              {
+                "capability": {
+                  "available": true,
+                  "permission": "not_required",
+                  "reason": null
+                },
+                "endpointOrigin": "https://eu.api.openai.com",
+                "id": "quixi-openai-eu-native-v1",
+                "kind": "native_direct",
+                "privacy": "direct_provider",
+                "regionalProcessing": {
+                  "binding": {
+                    "accountId": "primary",
+                    "destinationId": "quixi-openai-eu-api-v1",
+                    "providerId": "openai",
+                    "transportId": "quixi-openai-eu-native-v1"
+                  },
+                  "configurationId": "openai-eu-gpt41-mini-2026-09-10",
+                  "endpoints": [
+                    "/v1/chat/completions"
+                  ],
+                  "inputModalities": [
+                    "text",
+                    "image"
+                  ],
+                  "modelIds": [
+                    "gpt-4.1-mini-2025-04-14"
+                  ],
+                  "region": "eu",
+                  "reviewedAt": 1788998400000,
+                  "sourceUrl": "https://developers.openai.com/api/docs/guides/your-data",
+                  "upstreamOrigin": "https://eu.api.openai.com",
+                  "version": 1
+                },
+                "relayIdentity": null
+              }
+            ],
+            "secretPersistence": "native"
+          },
+          "phase": "cleanup",
+          "profile": "71c4c668-853f-4804-84ac-963221814980",
+          "provenanceChecks": [],
+          "scope": "Actual production AppRoot, desktop connection settings, native HostClient, canonical worker and OS Keychain in an isolated synthetic profile. The controlled TLS fixture verifies registered US/EU destination routing, not physical geography or provider account eligibility.",
+          "secureContext": true,
+          "stage": "cleanup-complete",
+          "status": "passed",
+          "success": true,
+          "url": "tauri://localhost",
+          "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko)",
+          "wireCheckpoints": [
+            {
+              "expectedWireCounts": {
+                "eu": {
+                  "content": 0,
+                  "models": 0
+                },
+                "global": {
+                  "content": 0,
+                  "models": 0
+                },
+                "us": {
+                  "content": 0,
+                  "models": 0
+                }
+              },
+              "stage": "cleanup-complete"
+            }
+          ]
+        }
+      },
+      "success": true,
+      "tlsRequests": [],
+      "tlsHandshakes": [],
+      "observedWireCounts": {
+        "us": {
+          "models": 0,
+          "content": 0
+        },
+        "eu": {
+          "models": 0,
+          "content": 0
+        },
+        "global": {
+          "models": 0,
+          "content": 0
+        }
+      },
+      "completedAt": "2026-09-10T21:56:43.960826+00:00"
+    }
+  ],
+  "sourceSha256": {
+    "Cargo.lock": "40cbf40648d9eb5358842d9047c4d251744fe8f3b91d83d3457f994818fc9e9d",
+    "package.json": "4a966ce5f2460058926d1f90c6e47b177529796ddf1f7a70bf79bab3f749ec81",
+    "package-lock.json": "aadb456e2a567a2b91cbb81a502650ebac93541f0a59d54035bdde2cacd97672",
+    ".github/workflows/check.yml": "98d864e3c11ece8838ba1b4c6b8519b34ba7fcbdc9d79a70d519d9c65adc4d0c",
+    "apps/desktop/src-tauri/Cargo.toml": "7ece182f473d9df26d1949080a59f754280be8742636c327f37e6d8c4fe191db",
+    "apps/desktop/src-tauri/tauri.conf.json": "9f37f19b5318efd5c21213eee07fa901d7836cb4caa104d4aff5ba790c6f2a86",
+    "apps/desktop/src/host/index.ts": "6a7d0dcb1093296a830aa8044a220d4998fde75679daadb71a589cfe17e78160",
+    "apps/desktop/src/host/provider-connections.ts": "5c4f421637ee0c25c394b69f5014add2b86d3b026ddc5c8b41ad6ffc0cfc30d2",
+    "packages/core/src/contracts/host.ts": "0bc21aef853666a0a41deca4ee2c572d0d4482d6ab04608286fd38263d5b08f2",
+    "packages/core/src/contracts/routing-aliases.ts": "f43cd67e4e00cff69cbfdd51306b24a2dd234a729ca287b775f81bad74f47d42",
+    "packages/core/src/contracts/storage.ts": "6f407bf21cb03f1fbe306b56bf87f990e93d029286cf0d2acec7984d313b4416",
+    "packages/core/src/contracts/blob-inventory.ts": "ca8fde78ea5dcc13d36264f806e22f5437cf2545dd5ca51f1273e1aefac3a886",
+    "packages/providers/src/adapter.ts": "d1f57c6b87c6328cabc84e0e2f90daec04d37f8c308cdf2b57ae91cfa3911d83",
+    "packages/providers/src/request.ts": "21e1b77be73cfc669c6c04b8caab27ea94930229e87fa4aaa82ab294342b58e3",
+    "packages/providers/src/generation.ts": "db4deb23f8269827e0b444b536333d73230d7d0ba18529783722ca54ab788dde",
+    "packages/providers/src/regional.ts": "1f09a2bf83e16d41aa4ca220c81b14c10b1ab719f5493e952d9371beefe835ca",
+    "packages/providers/src/catalog.ts": "598f789b9ea3bcd9a23d4e312e4425ed2e54a1d2e36bf30c2a7e70fa972c8d53",
+    "packages/providers/src/types.ts": "e1008b350f27745445df414149c9514e4a7c27bd05676657ac319e7022b136aa",
+    "packages/app/src/AppRoot.tsx": "e60257f2c10c1a3fa54530b4f0ff2def6478fff669954f650c81ff05b48671f0",
+    "packages/app/src/styles.css": "738c3bb4919c034fc3115feec8a4bd172480e1e3fe9504c4634818710e8788ab",
+    "packages/app/src/index.ts": "0b1dd20ef2723bead5e1aceae4faac783abf717a37fef4be1edcd333608c8302",
+    "packages/app/src/workflows/chat.ts": "f5370cdc93ac025f368bd17c7836dfbecd9caa5cf141c7c6dc7e767917004d22",
+    "packages/app/src/runtime/library.ts": "295cbf1429b449be40bee2eb2e20b439d81890b98aa99cce7a800c559e22a742",
+    "packages/app/src/runtime/routing.ts": "c603127b9ef84049f2cfc74a40dd759d7bbd6ed173e99cb4d4613e61125af2ad",
+    "packages/app/src/runtime/processing-region.ts": "99099c37608edc288b082b03da24522a20f9a815366abe533d218e6932589aa5",
+    "packages/app/src/runtime/request-cost.ts": "9b9692596f5231bd85af8edfcc017ebb5ebc7269f195e11068c532d06a31e86d",
+    "packages/app/src/features/providers/controller.ts": "2e837dc4ad28c21907502245e6a5e867c83bccb8f57d08bc253f33686c384242",
+    "packages/app/src/features/providers/types.ts": "e6c24beaa93be6ba0a8410d5c1df1eaeb163d3bea07b8ae5ef49aa15feec03c5",
+    "packages/app/src/features/providers/ProviderSettingsPanel.tsx": "afa98a7e880ad54114fd06fd259245f906ee3a7efe1d98a481b90309795f42c8",
+    "packages/app/src/features/providers/providers.css": "5dc4f265b7e4c650c09b6617ec1b533c78cfd0d662c098bfe31821827f77845d",
+    "packages/app/src/features/compaction/summaries.ts": "a0dcb41e1a0320be9446cf71b2c73216daea6eabae16f8526e04a4007c83df8e",
+    "packages/app/src/features/compaction/SummaryCompaction.tsx": "4eec0ccbcb16c4d5b5469f09c15a6653159e60b45970da838e72f45f99f33f4b",
+    "packages/app/src/features/diagnostics/StorageHealthPanel.tsx": "25252c7c0c105425bef82ee99f5592fda31319138bab5d4cb2d84452baf26509",
+    "packages/app/src/features/diagnostics/controller.ts": "b1e1e57b6f21b2c1f533df584c72b6e858a8f7d5319eab65fc09a679a7154165",
+    "packages/app/src/features/diagnostics/diagnostics.css": "ab06e394a92c8f4aa469802ff9dc0c090f34634025611edc1d9d34e1a68c8cba",
+    "packages/storage/src/worker/blob-inventory.ts": "525c798ec8ee0fd38c68ead55c321897cb23e9343f53aa1c1cb91bfd30f1d418",
+    "packages/storage/src/worker/blobs.ts": "6cbd433df3837b7881cddb3975fcc649891a3c20d1a204e91080e660f104631d",
+    "packages/storage/src/worker/canonical/repository.ts": "d08f508c0a7b9a150690b9f8f42805354825785d28c05c4fdb967a7a926e159c",
+    "packages/storage/src/worker/archive-database.ts": "ff01dd410e9de32b941a10f31c92738d22d4cb2bdcb9587bbb47eb85af411dbb",
+    "packages/storage/src/worker/archive-runtime.ts": "647e0c309c8defd42bb6e0f2a902e98d0a356bde1f75521a512fb23dd1453a2e",
+    "packages/storage/tests/isolated-client.ts": "72b2ace2196bfc8f662b8108d30972da9fe4cf4cf5b4f18714449f08746a4776",
+    "packages/storage/tests/isolated-worker.ts": "d05ffe2db78e7808bf7a99884477d11c36b762ff9ec1a4cdf80ed6bf491308bd",
+    "packages/storage/sqlite/dist/sqlite3.wasm": "dd7c22431a3b8ad51ab5e6ed91065593574c34c5959d2efdef2f17484eedcb2c",
+    "packages/storage/sqlite/dist/sqlite3.mjs": "127c4f37a4ce3449d464b976ac4979fc6b016ae974c0aea9ba8afef85d3b4d5d",
+    "apps/desktop/src-tauri/src/host/files.rs": "a9ee9a5e18846f795d3d54f4d9819e498d9b43c96d5d48ce436e51753dda59c9",
+    "apps/desktop/src-tauri/src/host/mod.rs": "324690f687b0a72070fb29dbd0613472a0538b7e43347c514bd2a1594fc0ef9d",
+    "apps/desktop/src-tauri/src/host/models.rs": "031cb4bd8d4b1470ca81ab904a6514d679d90e944e030f58a5956cf6915f9708",
+    "apps/desktop/src-tauri/src/host/oauth/tests.rs": "3ca9963a2d8d98d969e4126b73e747ca8cfe9fa9e3e48d2858b7ea9f827bb17e",
+    "apps/desktop/src-tauri/src/host/oauth.rs": "bcd3140af63c1d1556da48009c5d2c8c0b09f309cca770336f03599ff69da448",
+    "apps/desktop/src-tauri/src/host/secrets.rs": "df0fb5a6713c2c53b6be9f0f2c3b245faa936426221814bbddb9d36312df0b16",
+    "apps/desktop/src-tauri/src/host_proof.rs": "f44ea9482f6842268da08a3e2e05b1507908f1396018ac842a46e214634455a7",
+    "apps/desktop/src-tauri/src/main.rs": "b17f69c3cc6a80bf86a21dc56da35de031bd528e2e4e09bdfbe5e9b6894ebaa4",
+    "apps/desktop/src-tauri/src/registered_destinations.rs": "54f5c90e441d6342f5c870cb4d57b9368ed6364578804468f1270a37ab945ca5",
+    "apps/desktop/src-tauri/src/storage_proof.rs": "2739d68b1b390f5e15e6f1433249b4fe5863f485045d6434e5bf56caa234d154",
+    "tests/hosts/regional-app-proof/build.mjs": "c9cdf876e61aafcd8ef8d8f46c801187ddb5df0bbaa807a3bdd6387fe8c9b687",
+    "tests/hosts/regional-app-proof/index.html": "5edb1a4c32364d62687b1d9134e810f0af383d1135f6049ba1d3a6b0af6d44ad",
+    "tests/hosts/regional-app-proof/index.ts": "37c08209cee8f335de5f8e3d4322997627782aea82da2fb174edfd45cd4b7e31",
+    "tests/hosts/regional-app-proof/native.rs": "f2de99063e3ff4b7cf778cbef5843e7af41e83d2acadaceeb9b9f75bb8f3d56e",
+    "tests/hosts/regional-app-proof/run.py": "80eacbbbe0acd1d11abe7136912aec0bf690d442b9591a017b189b102ba0c5ab",
+    "tests/hosts/regional-app-proof/tsconfig.json": "fd191fbbf4bd6942bfdd51c6dd765bc11b9790250a4881639ca236805f5a03b7"
+  },
+  "binarySha256": "b72f364fa6e2437436431ceec03ab1394967634a6d6d54f894bb0547899af15b",
+  "configuredCsp": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' asset: http://asset.localhost data:; connect-src 'self' ipc: http://ipc.localhost",
+  "appIdentifier": "ai.quixi.chat.regional-app-proof",
+  "bundledSha256": {
+    "assets/78-EUC-H-Uf9aYsyl.bcmap": "d92a261336dc18b8c03a46eb4d462382d33f4338fa195d303256b2031434c874",
+    "assets/78-EUC-V-ChJxef36.bcmap": "61670bebc4e4827b67230c054fd0d820d6e30c3584d02e386804e62bbedc032a",
+    "assets/78-H-CSvm1opZ.bcmap": "ece6415b853d61e1b2560165151407d35cf16e6556932b85a13ea75276b77402",
+    "assets/78-RKSJ-H-34XPL1-s.bcmap": "696b1f973c97623496703809eaaa5f9b40696c77540057413f4b826a08edfa7b",
+    "assets/78-RKSJ-V-CyaguwXf.bcmap": "53cb6d560ab377da48cf65d6dcacb0bdb31f13fab7066c580de38c12a73a7ff9",
+    "assets/78-V-CJGcNX1t.bcmap": "289000f02fd34872b6975503217f33abae6bee676e7d28f640473a67c8db1712",
+    "assets/78ms-RKSJ-H-BuwLY695.bcmap": "a2442595218f5f8bd8e1b42188e368587d876cfe0cc4cd87196f077c878f72e2",
+    "assets/78ms-RKSJ-V-4hl06FMz.bcmap": "f8ddceba96bfd9d3740bd1789ee30d1f47c78371520a8084f71f7df58f19be0b",
+    "assets/83pv-RKSJ-H-DNQtuaxs.bcmap": "44040051ec818fe09b9703472bea72efd2759d5eeb5ff0d77c718d6bb5e6d1df",
+    "assets/90ms-RKSJ-H-Bhsfh4Ys.bcmap": "c13e043e85ff715b75bb03801e8fd0fb8f3a75e4a48496faa6baaf92b5b48ba1",
+    "assets/90ms-RKSJ-V-BbstlayK.bcmap": "499bb916ce1adbe4289b6e5811f4dc20eb238cdc2ffad20cf26ae56716885bab",
+    "assets/90msp-RKSJ-H-GTsoumJQ.bcmap": "7b8b3b8bbf821702e9a4df9f3596ce292380c8c1b0925dedadbb4e4b2d80498b",
+    "assets/90msp-RKSJ-V-BWep_0YK.bcmap": "6296c2b5c07dca8128e96d5296d621a3268803d4fa0e5812a21e52fe2802aacb",
+    "assets/90pv-RKSJ-H-DOcWKG7K.bcmap": "fb5103f03d3a34547e18d316e52b6d9b26e485c662999222f84d2ba54c2e4fa8",
+    "assets/90pv-RKSJ-V-BuoQaCHG.bcmap": "7bcb5ad2ba55b9662ce379e16c2d9cc2b82d621a579807353741172e4af615c2",
+    "assets/Add-H-1H-FQZVX.bcmap": "a2ffab28b990998181bcca9b0e914bb2207820f100ae31d5c469444892e5ad8e",
+    "assets/Add-RKSJ-H-BpPRzomz.bcmap": "b29f4b52e2465d0485856d5e69f1ba69927deb2848d8fd328c8035583b35bb7e",
+    "assets/Add-RKSJ-V-C7YDsPzV.bcmap": "2aa2232c283a3f5d0997c2834a36cead0b79ce2657944cfeed08140c293460ff",
+    "assets/Add-V-CzFvKnCs.bcmap": "25125d3b1be64e86b2df5b3344170b45a42bcaa0b46e43a34314ef73c166e542",
+    "assets/Adobe-CNS1-0-CfVBOElR.bcmap": "8c65be9d51a9f269a547dc12460707aaf4031ab67ebe8a2900f4b4cc6b3e450e",
+    "assets/Adobe-CNS1-1-Cs9TI-Yv.bcmap": "73152bc1a59cc594b414ac6068be48e5512b96ae85920c40e32a99269fdb0c04",
+    "assets/Adobe-CNS1-2-D3SWzMKj.bcmap": "a1b8d353bdef9584c820464e8f1c9e2013d64ebf433cba0aa831dddf515818c2",
+    "assets/Adobe-CNS1-3-BNxX-hNa.bcmap": "2ffc0c75c79fafde506163d3c08c390d183251009f3fbf6ae50d1167d14b9570",
+    "assets/Adobe-CNS1-4-uApBOf1n.bcmap": "98a1f470c878c6b9691a4d7aef776af8ac9b55f5587c9fafa00547f3bf655716",
+    "assets/Adobe-CNS1-5-BWUfkzOP.bcmap": "ddd6e29955eb8cb545f2ebd09c628c3bbda5023256eda1b728f743c75fb77829",
+    "assets/Adobe-CNS1-6-DfjBny4_.bcmap": "317bb2db71e0e5b7b0c47b75de1da915c2e22f65f0c0861507f9ca7ba238f8a2",
+    "assets/Adobe-CNS1-UCS2-fO900upv.bcmap": "e665837f2197c6bd08cd8955ad4d6932cee2398e2e328b25b00e6bfb3bd72af9",
+    "assets/Adobe-GB1-0-DCLN2jmY.bcmap": "8b81cce8a11d510e505704953cfa4e4ab080c1a0cab991145a3512ee433946b9",
+    "assets/Adobe-GB1-1-C_oGAEc2.bcmap": "0426983081788ec7202703e71f1efa4b860f75b936994236010b39d89251a81e",
+    "assets/Adobe-GB1-2-BT5g0uLo.bcmap": "e67b37a83b160ab3831306a71a605893b24454ee81ac9b6123bf2d3984d268d5",
+    "assets/Adobe-GB1-3-BWe_tZZF.bcmap": "aa299afc3e12a28726147305f191be28c7498078c8b182ece7886ac79cd99078",
+    "assets/Adobe-GB1-4-CYF1KDey.bcmap": "8fbd7d74c2ddb1350c1cecce54a73fde3f5453093d4bed445283ec0033d2097f",
+    "assets/Adobe-GB1-5-B89PBerI.bcmap": "c22cb2fcff24112fa31dab2111bdc51957006576d31aad5a25e67793ac01428c",
+    "assets/Adobe-GB1-UCS2-BA083yIo.bcmap": "20507620260c0c935c35afc1e70e5888aa7125d5ec7ffc03cef1959feb2c1641",
+    "assets/Adobe-Japan1-0-7ueYY-cc.bcmap": "464f08905236f5703b1f5cf8358767c8b18e6bcc808840d081f1de2c7ab38134",
+    "assets/Adobe-Japan1-1-DymoVrld.bcmap": "4c823848722187d1ffe75ae3f5f9126ccd2d7895a05fad14c919fb119e037008",
+    "assets/Adobe-Japan1-2-WYxwCoVU.bcmap": "7810fb808e367e70429e90a9478fe6a3fdc3e214f25c7582ce9c2da6a242315c",
+    "assets/Adobe-Japan1-3-DU7EG9_k.bcmap": "84deb1828711ad3d390c9899c38abce1bf619d65ff7bf1a326ec95acc45f08f8",
+    "assets/Adobe-Japan1-4-CPqEnWe7.bcmap": "3f8a4f974919c2b8bae5d10175ffa2673be140481e00840542c85d48ef184067",
+    "assets/Adobe-Japan1-5-CyFviWdc.bcmap": "1d3ce4ff28d977f8cf37a912ae4ec811f4175c3167b1ec0b2567feec3e79e1db",
+    "assets/Adobe-Japan1-6-8p9YIft8.bcmap": "5609797b9401b30be72ef9645da62a87829f058c3be4b5c623383119f584b1d9",
+    "assets/Adobe-Japan1-UCS2-BL-4M2vS.bcmap": "66c5d0dc4964f4093e77b194023f3a0f689324028ec8330e1e1d0570bcba7c2f",
+    "assets/Adobe-Korea1-0-A0Ew6GJu.bcmap": "dfb8c3874f0e5a8c3acf597d2c12d2b63e90bc5e4f0fce990ec4c56077d80b32",
+    "assets/Adobe-Korea1-1-DFSgDZ4w.bcmap": "62f277b7b1c441c007797ae707d5c37258d029ce4661a2b911e2e1ee35e6adc1",
+    "assets/Adobe-Korea1-2-LZ89XEQ6.bcmap": "1d77068af462f96d7ad28ad7e7d43eef6423c685b479d7dc25ff5df38db0380d",
+    "assets/Adobe-Korea1-UCS2-BEQZuOdo.bcmap": "857b723088be97255053562bfa41bd1075a7f7910d3bab59a0645c8bbc7060ff",
+    "assets/B5-H-Cw4_8on0.bcmap": "718ad0ffbef4c34f8f3f31292c462e519cd567a5511fc8b346c60010d64f4ef9",
+    "assets/B5-V-3ShXAXP7.bcmap": "b5c37383517477620ced927b6b4ffd4f4cc6230d8051b5b46a21d6768e07f7d8",
+    "assets/B5pc-H-BLVOWhvh.bcmap": "bab6028aead1d6149400e904ab10cfd319082d826473ed4c582c8eeed920f17e",
+    "assets/B5pc-V-1X0fY8mT.bcmap": "41543142b9767f3b76133899fc8453282b01ad3c653acaeea42d78c5a7d08c63",
+    "assets/CNS-EUC-H-C1HifF4e.bcmap": "e8f89cd61e6486b948205da46499d659ed0aed949b7095fd3c8e95ffe2b0e7a9",
+    "assets/CNS-EUC-V-DYWNmJNX.bcmap": "cae422bec2ac6dbe86bf921cec942bacd2d0b733ffcca5f91b3ba14e917025a0",
+    "assets/CNS1-H-DAbVz1sI.bcmap": "e8487971ab20cd16f3de3e8ac56ec994b72b658ad113f2818239dfd5108f501a",
+    "assets/CNS1-V-BUvSsmpl.bcmap": "42df8076aaa7574505e7304af83a3323ec032c4177d64b1309db8c043d594a8a",
+    "assets/CNS2-H-COHfjmw4.bcmap": "bc6024d274d440f0625c69e25f37036ef6cb6689432ceaa160d3432a2a716ca7",
+    "assets/CNS2-V-DgHqi_gL.bcmap": "2e4f70a8afd23a121030fc2e5b5f3816e903b11e7ba8b8c09654b31c80399c38",
+    "assets/ETHK-B5-H-1MLb5v9x.bcmap": "d2f10fa519336bc4efcc7b6deb9604b75429946b40d82e311cb3a97a1994c89a",
+    "assets/ETHK-B5-V-DmzBBgI2.bcmap": "1fea3fd0d9f0f679f80505800851ef2e4131d81127e18c006938ffa2f4c8b247",
+    "assets/ETen-B5-H-BUa4x82H.bcmap": "87ee6b3f5bfda5fe26fa35431264c7d73070d10dbbf398a75185d63ae322c18d",
+    "assets/ETen-B5-V-CyIout1L.bcmap": "47dc0d2c21e3bde317947aec1675ceabc1d5460a60bf9c24334b8c407a17172c",
+    "assets/ETenms-B5-H-DbS1LlRr.bcmap": "d5f5a73da4173b7da9a3a20e16f26f9cd5d12deb1553409919e0cec6fd37fdee",
+    "assets/ETenms-B5-V-DsL3AkeM.bcmap": "18252fca90f472f479af1bddd60d6ab51c8e1b55dcf6845951426504934543e0",
+    "assets/EUC-H-D0J4HUB1.bcmap": "f9939cd57fccdc65c5d9f4c205fd497ebdbd283643308da5663801a8c1d9c595",
+    "assets/EUC-V-BQ9CW2K_.bcmap": "1283a50a706507c4436da83ede9ad7a4440be25378f2e96f6c81a430081426a3",
+    "assets/Ext-H-BSOXjlXj.bcmap": "4000ed4e61a1c668ef453bbd0603cfa383defa793abd46a57ed870d7f527350b",
+    "assets/Ext-RKSJ-H-DGTwwnmY.bcmap": "e0d2f0df337660e73813238dd4a725f11f0621b90f3273857db253d0e7694caa",
+    "assets/Ext-RKSJ-V-gySMsgy2.bcmap": "f617a22b6d67febb187990952006c91a9f5a4db21155d268c656252d0c21985d",
+    "assets/Ext-V-ByyLJMVu.bcmap": "c2087fb845a9e3acea0c2922cd40e6af67e11957bec74dcd597f1285edd490ce",
+    "assets/FoxitDingbats-BaQLufoW.pfb": "845c752392b6c914fb989c75a08b7792b88f542d2499042ef2889f8c814a16ed",
+    "assets/FoxitFixed-Dyd5Nipw.pfb": "b6c8fe53f134b8b6d4578cd2d544df4cee9624c4efa8d51a560fb40ea296101b",
+    "assets/FoxitFixedBold-D5TuYRwj.pfb": "f1b7159702973f54fc86254ea38bcf3712b2a736eb3a0995751e9f4bb45ad603",
+    "assets/FoxitFixedBoldItalic-BqlXQ_Yv.pfb": "8a000945843bd31add06aee63bf9fd41b7578b4f3242a4b7cd46349ad9d24d4d",
+    "assets/FoxitFixedItalic-DqjQkmbS.pfb": "5007faf8320fa1fcc08b8894b356ad976f60b992ba29ee5272578bbdebaf3876",
+    "assets/FoxitSerif-qbgiDIe-.pfb": "4f57d2b9d884af8f907bf22df6019b52d86cbf6214fdbd02b1ae05472a543f35",
+    "assets/FoxitSerifBold-DZZ4CclT.pfb": "0bdf4b04e964139818d51eda03d566ba999fc3ba2421b1c6c51f9dc969022e80",
+    "assets/FoxitSerifBoldItalic-DSQtwd_X.pfb": "a406cac82583bf98175cb62c87ed5e95c45fbb34eece63a10b0a13e793cb2e10",
+    "assets/FoxitSerifItalic-CQs5lx9Y.pfb": "610ae0687198045c4db5d1a6650fd5e92536631706382eb8b72e38df578d0ae9",
+    "assets/FoxitSymbol-BVtbc20u.pfb": "47967d055530e7357088a08403115425643ec2cdfd6201ba8af0fbd7116c1539",
+    "assets/GB-EUC-H-OgfW-rVY.bcmap": "928bad06fd84a48f5ba7150d7716609119fb660f2aaa73eccad81ddab9b9d203",
+    "assets/GB-EUC-V-DUJE8ZfE.bcmap": "a9ad88ac2479da529b16dc48abc5952332e27bc355335f91df5729a587533324",
+    "assets/GB-H-CjAQlF1j.bcmap": "1018c777a8910b5bb46d7d54a4aee9d51ca5cff8addb2b41c969d9101cb3fd1c",
+    "assets/GB-V-DQcXdwec.bcmap": "0b96789143c0bbf9f1641ae7165b3456dccd14dabffcbb0bd654d5bf6f94f863",
+    "assets/GBK-EUC-H-CAORqCkf.bcmap": "2103fed28650ede096a2281104a1a8a4304dae0db414342c636867522307123b",
+    "assets/GBK-EUC-V-bmo5E_xa.bcmap": "a7fd35dd14d9dbdb955f34e6c0630618b6620dfd09d4283b2f65a65ce77fcaea",
+    "assets/GBK2K-H-Cv55KPk8.bcmap": "3d919ae72af16c5cc6846ec87a4326a9f125e493c59d3628429d35c2c95fe8c4",
+    "assets/GBK2K-V-VEqjiYVJ.bcmap": "b927fdfd595c07ce9158bf2ec13f4641b2e83b01c70989dadfabd6ed7c6ac2dc",
+    "assets/GBKp-EUC-H-CElrnV5g.bcmap": "d15ebd8e81fb4fe8a244f1b1e877922e03500ac69eddf5001093e502430451d2",
+    "assets/GBKp-EUC-V-FKuJrjD8.bcmap": "fdc736d46e642625dccc8ad8c59f2c69fc7db7a13f2e799c6c6b779e707bb97a",
+    "assets/GBT-EUC-H-BTsQIL1M.bcmap": "dc5f44e48a39f3367ae28665027d8ab1d8cedb5a9dcc5068a900acd6709f60f9",
+    "assets/GBT-EUC-V-CCaONgYB.bcmap": "a1ad24e63653b8aa388c18fa5e498f007564e43dde699a9f91ccb4645c999be8",
+    "assets/GBT-H-DL9h-WkS.bcmap": "8afda745a505763f3ff54c8126eeb48ef376ea9ed07d9f42ff9a22c5c547ec57",
+    "assets/GBT-V-DVsZ47Yj.bcmap": "cdc2ec5c3c7c7033290c9a8894878202f08674eb9b1ae7d36218430326768771",
+    "assets/GBTpc-EUC-H-DnIh5WJ3.bcmap": "7b23e2f7bfdb6c918f567b7324bf858f398bd8cd5f268d74ece19a3c91bf4f32",
+    "assets/GBTpc-EUC-V-D_dpKF5g.bcmap": "d7a1b13ead9ab511cf2cd01de6ce8b02aa8e8767e84895337d7a3b67f039f93b",
+    "assets/GBpc-EUC-H-4mXfmDQd.bcmap": "3c4a4eb82f05abe51f6650985c630e180438bfdd491318f5d20d2ec29236e1c3",
+    "assets/GBpc-EUC-V-BNBtOgzw.bcmap": "215bdfa2842705624b4cf4cd29b8e3c720f1e192365e0305c11030a424c84d7c",
+    "assets/H-BJYV6_el.bcmap": "a0233e21047ec00b852125b243cbcf30abee511155b6d8159c24f944384bc9ee",
+    "assets/HKdla-B5-H-Bg4tZIUs.bcmap": "5242bce18fb13ab4cc59b146a03eba36e4ce42667eeff09e10981a9d2aa4996b",
+    "assets/HKdla-B5-V-CHovDFKh.bcmap": "2e0537f786c0791d41a925f72bad2d4e7268aa6cbf15a1400a722672cec38e2c",
+    "assets/HKdlb-B5-H-Bf7o2mkD.bcmap": "fdc8159984bf5dbe475c0d5dfcb621ecee4dea07c38c668bd77f4c679e23b9b3",
+    "assets/HKdlb-B5-V-CDfiFKye.bcmap": "b249eb9dcb915ab45057c5d4d7aa55ef88d0efbb092af6bae0b2d4705d139abf",
+    "assets/HKgccs-B5-H-BSg_4Hb2.bcmap": "ab64c7fc5e9b2e97750cc4f269b0da14fd8649e49151b7598c8df86599bac591",
+    "assets/HKgccs-B5-V-Bb0FD7uo.bcmap": "02ebdf7cdffb5395fb21091cd58a013a18ae5388922822f9dc6292ef16b98956",
+    "assets/HKm314-B5-H-CUeI2x46.bcmap": "bfd8bbde6b36a9da4c1c902c74121a30d9807a7079a00eeea218be6adc223cef",
+    "assets/HKm314-B5-V-BrK5Z_J-.bcmap": "2a64a815cfb6fdd480674a868762e3d161fda17543b20c9209978559f0667164",
+    "assets/HKm471-B5-H-B_3IWC_G.bcmap": "49d7c037758826b5b6c0fa329c35bbf25d3943197754e72ecd30c6fb04d745e6",
+    "assets/HKm471-B5-V-B7Ks-vkf.bcmap": "be24c109e78aa4fe3c1f27d30aab3ed0741e783fa1b6b6c2719741072b54b132",
+    "assets/HKscs-B5-H-CXbBbq6g.bcmap": "08599378f41d96b40537adef6e6edcc4a787bc63f5accf47c026df4905a13914",
+    "assets/HKscs-B5-V-CrljkNDo.bcmap": "d073542b7dad1c4cbf01c1af5f0cd13218d1281a491956e310c55702fc8705c4",
+    "assets/Hankaku-SMDjWZXJ.bcmap": "b454701f7aecd7856769016dfd04ca64280a060f2c67a2466d50b4395d24974e",
+    "assets/Hiragana-Dy6yEHKG.bcmap": "2ed669394756dd9458651cd9995ab29ab691ecb7686659003306cdf22767a414",
+    "assets/KSC-EUC-H-CYoqfsaA.bcmap": "6784e16dbc5861c036c23d3e55f0d4ba0975a3e464da0ee8e49bcfff0be070c4",
+    "assets/KSC-EUC-V-C8-Y2jkl.bcmap": "fdb36bad85e9924823d49db374067988e024cf80fc894711f2c9178951cbbe95",
+    "assets/KSC-H-CUtFgdXl.bcmap": "c1f6d61f1d3304fd539a65ae72624fa567ecc3853bf52e283958a7a2515b3eee",
+    "assets/KSC-Johab-H-CGtV3MPT.bcmap": "939993d213f68db763bf156217c217ae23af082b91a0eacecf3d11eb4ff8ef8c",
+    "assets/KSC-Johab-V-CWzqnmVV.bcmap": "5d61967aac0e666def721e8b8d0fed8f95a879a14f2e76ce516c3d11c621e519",
+    "assets/KSC-V-CDXb0xyy.bcmap": "d7da5afd9f1fe74816d79c9325f0139a4efb6438664ebfdf9a7aa92f3034360f",
+    "assets/KSCms-UHC-H-i6eA63f9.bcmap": "5b70d8f6a4fa9e2283dc649f0ff95d906d56efbee50a20e8d2faec3a8fed078e",
+    "assets/KSCms-UHC-HW-H-lQjjyo98.bcmap": "a5e6ba22aceb02fdedee11bfb9ed138463d89e85b87810b9f075b469d936f8ec",
+    "assets/KSCms-UHC-HW-V-DKemUgQi.bcmap": "890332a6a26880d463a12f2a6ff048bf9cf7e45077cfb1ca8815b89baa7bf411",
+    "assets/KSCms-UHC-V-DaEePsjg.bcmap": "1631b531c9a40c8cbe24c2317dba107362e49fa6e18af620414d627c111d570c",
+    "assets/KSCpc-EUC-H-BxNLD7US.bcmap": "709480682c55cedbb0124b9960d78e28febeee0df2e34607d61aac6601647ec7",
+    "assets/KSCpc-EUC-V-Bd6pD5ID.bcmap": "031707887d6fc2378a36cdb6775334fd7a236c3f95048d8436abf43fe26fc49d",
+    "assets/KaTeX_AMS-Regular-BQhdFMY1.woff2": "0cdd387c9590a1a9f9794560022dbb59654a7d86f187aa0c81495ad42d3a7308",
+    "assets/KaTeX_AMS-Regular-DMm9YOAa.woff": "30da91e84c893f875e252689faebdc590b2871145e8adc7f9a9d4dbd8ce0b251",
+    "assets/KaTeX_AMS-Regular-DRggAlZN.ttf": "68534840bcfdd2bffb6f0e8deb48684dd01e7f04ea2813267577afb906de1d13",
+    "assets/KaTeX_Caligraphic-Bold-ATXxdsX0.ttf": "07d8e303ce4fc12b4bb54f1004170dd190a1f3db45d400fe68060df3e0897268",
+    "assets/KaTeX_Caligraphic-Bold-BEiXGLvX.woff": "1ae6bd7475590e97e7f145a89e09ccde322f7a6bc0b91607b1c8b8ee28290fed",
+    "assets/KaTeX_Caligraphic-Bold-Dq_IR9rO.woff2": "de7701e42cf1f4cf0b766c03fb27977207eee2f4fd5d76fa82188406da43ea4c",
+    "assets/KaTeX_Caligraphic-Regular-CTRA-rTL.woff": "3398dd02302557a793f2863f88e02d96ce10df2abffa07c8e9fa90775116e65c",
+    "assets/KaTeX_Caligraphic-Regular-Di6jR-x-.woff2": "5d53e70ad607c2352162dec9e0923fb54ecdafaccbf604cd8dcf7d00facb989b",
+    "assets/KaTeX_Caligraphic-Regular-wX97UBjC.ttf": "ed0b74372feefcbb9c0666b2e210da37b7e49fa7fbbf3eeb11db5f693dacfbb7",
+    "assets/KaTeX_Fraktur-Bold-BdnERNNW.ttf": "9163df9c7122432e6495b4229fa9071cf9ae86a758ae5efc4924ec2e1a6dbce1",
+    "assets/KaTeX_Fraktur-Bold-BsDP51OF.woff": "9be7ceb88004ab8ad124082246fbfcca4091e36385d4ec6ed1df67375dad50fb",
+    "assets/KaTeX_Fraktur-Bold-CL6g_b3V.woff2": "74444efd593c005e3f4573b44524704c0af0a937fe911cca9e94068d0d140d3f",
+    "assets/KaTeX_Fraktur-Regular-CB_wures.ttf": "1e6f9579e90e2cac37f8f60a597c436e075c114385652b7cbeb0dec0421291b3",
+    "assets/KaTeX_Fraktur-Regular-CTYiF6lA.woff2": "51814d270d06ff0255dba0799994fa4d8c84d11f09951d47595f4abb1f3602dc",
+    "assets/KaTeX_Fraktur-Regular-Dxdc4cR9.woff": "5e28753be717dac97f559f49bc10be9cf3c124ddcabda6659d11cb68febc6463",
+    "assets/KaTeX_Main-Bold-Cx986IdX.woff2": "0f60d1b897938ec918c8ce073092411baf9438f6739465693ff18b0f9d20b021",
+    "assets/KaTeX_Main-Bold-Jm3AIy58.woff": "c76c5d696297d51b9cb1639c7da4334f0e7dec81b42b11213b5e25ef671bb822",
+    "assets/KaTeX_Main-Bold-waoOVXN0.ttf": "138ac28d1663b3037e9c5f52371fa5c63d8324f4a38d22cd573e6ea3a3fd0cf8",
+    "assets/KaTeX_Main-BoldItalic-DxDJ3AOS.woff2": "99cd42a3c072d918f2f44984a807cf7aa16e13545fd0875fc07c6c65f99e715b",
+    "assets/KaTeX_Main-BoldItalic-DzxPMmG6.ttf": "70ee1f64a20f2048c21940ef46d0144fd215baa953ca69afd1e31e98544f708f",
+    "assets/KaTeX_Main-BoldItalic-SpSLRI95.woff": "a6f7ec0d846ac7ad975adb8959c37ed49b94acbc4ae436db9ce9e20287e4a64c",
+    "assets/KaTeX_Main-Italic-3WenGoN9.ttf": "0d85ae7cc30f23790a7f1a58c4a112fdca8aae769b6ba11429af1d98b1b6cb3a",
+    "assets/KaTeX_Main-Italic-BMLOBm91.woff": "f1d6ef86f3b11a528bd5185199bd2443ecb2b0dead96d88674b5a2c12be24bdf",
+    "assets/KaTeX_Main-Italic-NWA7e6Wa.woff2": "97479ca6cce906abc961ecac96faa5f9ca2e61b8e7670d475826bcdee9a7c267",
+    "assets/KaTeX_Main-Regular-B22Nviop.woff2": "c2342cd8b869e01752a9321dc17213fc40d4d04c79688c1d43f2cf316abd7866",
+    "assets/KaTeX_Main-Regular-Dr94JaBh.woff": "c6368d87e8a1a3a5d337623d83d8dc4b868f242a9ad476237d6f8d1e0f168cdc",
+    "assets/KaTeX_Main-Regular-ypZvNtVU.ttf": "d0332f52868370fd83ae7fa46470f90c8f2eab2fcf12bc4f88080b340c95a830",
+    "assets/KaTeX_Math-BoldItalic-B3XSjfu4.ttf": "f9377ab0271cda59af24bcffbd46a4d0c8a3572ffafdbb38de2ad5ea7b0d5ee5",
+    "assets/KaTeX_Math-BoldItalic-CZnvNsCZ.woff2": "dc47344dbb6cb5b655c8460d561f4df5f501b90c804ad3c6cec65fe322351ab1",
+    "assets/KaTeX_Math-BoldItalic-iY-2wyZ7.woff": "850c0af5c2238497febaf5e461d880bf458c341f42f4f330f1b1ab5698b1998e",
+    "assets/KaTeX_Math-Italic-DA0__PXp.woff": "8a8d244581371912b8f3f5a23e2437cb2a59cd9bcaebb0346e722c05737a2571",
+    "assets/KaTeX_Math-Italic-flOr_0UB.ttf": "08ce98e51b04d58945a301e639e02b6998af29fdfd61a7b8afdd07bbfc479d4a",
+    "assets/KaTeX_Math-Italic-t53AETM-.woff2": "7af58c5ec8f132a2ddde9027c6d7814decce4d3b822a11192a42a20e2e973264",
+    "assets/KaTeX_SansSerif-Bold-CFMepnvq.ttf": "1ece03f79f95277d57dc7f6b435a74e1379b0d46104a8530286b60ff49369ea0",
+    "assets/KaTeX_SansSerif-Bold-D1sUS0GD.woff2": "e99ae51144bf1232efcc1bfe5add36262c6866b0faab24fa75740e1b98577a62",
+    "assets/KaTeX_SansSerif-Bold-DbIhKOiC.woff": "ece03cfd83e22c212cdef66feb8442d25a083beb988db3f1883f3f9738d750ba",
+    "assets/KaTeX_SansSerif-Italic-C3H0VqGB.woff2": "00b26ac825e2095056396e0553b8ac26d3f8ad158c3826e28b4c45b385c4714a",
+    "assets/KaTeX_SansSerif-Italic-DN2j7dab.woff": "91ee67500cc0129aa0ace3ac5c61ff1692102f0f31d02b69347fba35dcb75bf2",
+    "assets/KaTeX_SansSerif-Italic-YYjJ1zSn.ttf": "3931dd81faed86ba021bb2bbdc36f5bed9a38d6b4f4077aca59b265aa1b02083",
+    "assets/KaTeX_SansSerif-Regular-BNo7hRIc.ttf": "f36ea897e19f4a2e571d1e900e4e3710e438deb05a842486045ba0a3e616a4ad",
+    "assets/KaTeX_SansSerif-Regular-CS6fqUqJ.woff": "11e4dc8a6471ff6d6ee561d53d10fde8f7489e798257ff449c5d37c197435605",
+    "assets/KaTeX_SansSerif-Regular-DDBCnlJ7.woff2": "68e8c73ef42afd3ccec58bf0fba302cce448938e7fc020a5e31f8a952eee1342",
+    "assets/KaTeX_Script-Regular-C5JkGWo-.ttf": "1c67f068fea8bb09bf099c088b1cf64bd27516a6e07f4684344873564bb66a67",
+    "assets/KaTeX_Script-Regular-D3wIWfF6.woff2": "036d4e95149b69ff9bcc0cd55771efeb25ffa3947293e69acd78d5ac328c684b",
+    "assets/KaTeX_Script-Regular-D5yQViql.woff": "d96cdf2b3bdd4d64a8fd5f74a4c467f123a8a73931cd435889f08ffaf9bf947a",
+    "assets/KaTeX_Size1-Regular-C195tn64.woff": "c943cc986384f59e86bea5fd7dc50a9c4dfe567a7c05eb40d6790720dead97c9",
+    "assets/KaTeX_Size1-Regular-Dbsnue_I.ttf": "95b6d2f1a50173bfedb8c63e1d1c99b10427d0a4df4201cb44513b226951a22b",
+    "assets/KaTeX_Size1-Regular-mCD8mA8B.woff2": "6b47c40166b6dbe21a5dfca7718413f2147fd2399be1ba605d8ad39cedf25dfe",
+    "assets/KaTeX_Size2-Regular-B7gKUWhC.ttf": "a6b2099fb555c60e3a0db3a08842ebf1d732c6eb4e4bf44913613bed4fc4e39b",
+    "assets/KaTeX_Size2-Regular-Dy4dx90m.woff2": "d04c54219f9eaec6d4d4fd42dfb28785975a4794d6b2fc71e566b9cd6db842dd",
+    "assets/KaTeX_Size2-Regular-oD1tc_U0.woff": "2014c523c3210bcc166648c4d4cc57f05b747df07a24277bf71c51e67dc79e3d",
+    "assets/KaTeX_Size3-Regular-CTq5MqoE.woff": "6ab6b62e9b62dae2c00dd90f791bd10950be0ecc3490d7d6045f51c2e8fe0949",
+    "assets/KaTeX_Size3-Regular-DgpXs0kz.ttf": "500e04d54f0d51666332c9d2089aa803be22aa878eca539e59fa53c6e522b082",
+    "assets/KaTeX_Size3-Regular-gV2CO0n9.woff2": "73d591271b1604960cb10bb90fee021670af7297017e0e98480b332d11f51995",
+    "assets/KaTeX_Size4-Regular-BF-4gkZK.woff": "99f9c6750b489c9462bf04900bd3f939df9b829339daaaaa99ef5495cdddea58",
+    "assets/KaTeX_Size4-Regular-DWFBv043.ttf": "c647367d1dd4e162468717d020e1fc0f1dc5c26ebfdffbe55261713bf88c5877",
+    "assets/KaTeX_Size4-Regular-Dl5lxZxV.woff2": "a4af7d414440a1c1790825cfb700cf9cf43b0f2c4b04f0ebc523011ad9853ec0",
+    "assets/KaTeX_Typewriter-Regular-C0xS9mPB.woff": "e14fed02b1aba7ce9f5afd5844b5d0321b22351febc720e0de8b8723527609f7",
+    "assets/KaTeX_Typewriter-Regular-CO6r4hn1.woff2": "71d517d67827787cfabdf186914cc3358eda539e37931941f2b2fd4a21f68c0b",
+    "assets/KaTeX_Typewriter-Regular-D3Ib7_Hf.ttf": "f01f3e87d9c6a61c0c081ceb577abd864eb00a612f7ac1620dd6915fad2ef5aa",
+    "assets/Katakana-DueN_6wN.bcmap": "3b6ca6642fbf8822da00d5e58a8aa275216d5c32dbf2bd73e934197fc9fc5c53",
+    "assets/LiberationSans-Bold-BPt4bU5Z.ttf": "361c61b82d575c5c35fd9157fda8b0194bcfcd0d88ea8521a4fb5dd53d33dddc",
+    "assets/LiberationSans-BoldItalic-Bj53-jFw.ttf": "a224075ac17495ad0a3af3bc0a419ac0704a8b3fd1095456201fb9b095fc281d",
+    "assets/LiberationSans-Italic-5QhGB3P9.ttf": "832b4406dbef23628800d3aaad21048534ac84d7e3ad955be83b8172ed8ef512",
+    "assets/LiberationSans-Regular-cbskN6YR.ttf": "f8ace1f892b2bd9dc1792ba7f097fa7588f84fed48321480e04de5390828221f",
+    "assets/NWP-H-BSh0nlh5.bcmap": "286c6c9e335da330928a01edc3c97a3a623f1f7f3c42762b0a7dc2f651b1a78f",
+    "assets/NWP-V-DvbaGBQ0.bcmap": "3a75fb7b59adfb172710758c425d8ac6c93fd5360a64dd4afd5dd04e60ab4b4d",
+    "assets/RKSJ-H-CotmKIAY.bcmap": "a70de61a22a898f693f02cc011c3e3cff2e10aaa7cddb4661e456a21ae859f78",
+    "assets/RKSJ-V-CVQ5ujKs.bcmap": "68c1a64506471a524ea5cfc3b3a9f8f70031989a6bd95427b1351f33ccf50b06",
+    "assets/Roman-CGyUGrKi.bcmap": "1c6b3ef9d9e5cb1aa329142ce9414b90f9b6d7f9182a2a9e927378dab8f0d43f",
+    "assets/UniCNS-UCS2-H-DWzv8UhH.bcmap": "779428116752f34e2490a1941d24e4634c71e3c22d053b811d2090ae2fb3c704",
+    "assets/UniCNS-UCS2-V-CbsnO1ia.bcmap": "1e5cc184b850ea44abc2df8ae5674279df668e8edf5e2a1a2ea2bd77adbd280f",
+    "assets/UniCNS-UTF16-H-Bw0JKgCq.bcmap": "32ff139b3c7b91d6ad25f994701f3ce7b242906022c418fd73e6493fc228bfe5",
+    "assets/UniCNS-UTF16-V-DoPO_42D.bcmap": "278eb1e68d1a236c60ef59472cf0176ee0d45f364285e76ca12419a08d46fb9a",
+    "assets/UniCNS-UTF32-H-IE_GrH2i.bcmap": "bf26eb67fe19ee5ba915799e80ca72408400aa8342fdf6a244a4f44de8f97336",
+    "assets/UniCNS-UTF32-V-DpuHKqNE.bcmap": "f7da3caf83ceb1cb37936fa10700d9ba6e9c3f72c5bc9724e3ac79bff0c0179e",
+    "assets/UniCNS-UTF8-H-BbLcFh6Q.bcmap": "2f2a742bcd1a84a148a4a518b9eed51a8f9c6ca5ed3bc5e2e41fff97de5dc2d8",
+    "assets/UniCNS-UTF8-V-BD4cmnNX.bcmap": "b7c3f10780a8c62dd1c8ff6c30dc1e4e23b6cdc87c3a96fcd514cc98ffd3af9d",
+    "assets/UniGB-UCS2-H-D7xzRvZN.bcmap": "9201569b402e81ad8860650bd86350c4fa28e5dd5971f05fcacaf40f51de18ed",
+    "assets/UniGB-UCS2-V-COOBrDBb.bcmap": "f10282335e4d64203bc2a653a3a47d745ec76c8ae04549f4d50180c1899be216",
+    "assets/UniGB-UTF16-H-DKjbEwc0.bcmap": "386fd39581245c034da016a92d23f3df1117d169f996100050b264fc09a84e35",
+    "assets/UniGB-UTF16-V-E1RoE6KW.bcmap": "0473cfbba612b92dd9918f0ff8aee9112897c48e0ffdc0eb82da3144ed8ea84a",
+    "assets/UniGB-UTF32-H-Behfouj5.bcmap": "f48a145dc4e3ed1dca1dde7111716a72306a2a4191ab05c6bae3a5c3a961cd2f",
+    "assets/UniGB-UTF32-V-BFm4myiz.bcmap": "106acc49b7118bdef944e32107b4f348238f3929a0a15d3b7aab7b9101535993",
+    "assets/UniGB-UTF8-H-EROft1ro.bcmap": "f217b439c80ee5fa1bc2cf6d1defcc319f8d84483d166a00ee199e05a68588df",
+    "assets/UniGB-UTF8-V-C8SGUjFI.bcmap": "a64df947632878eacc532fa193c735c92a383b7d66e6f8374ac193af7c64fc63",
+    "assets/UniJIS-UCS2-H-2DbZ0MaQ.bcmap": "ad2352f40870880fbf7f8ee5abadff743fbd025fbf9830b8ada472d1c5e4da0b",
+    "assets/UniJIS-UCS2-HW-H-BfJ3t__Z.bcmap": "16e87edca954177c0881c874859d6783220925d821b5cdfb8755b61ebd93f9ce",
+    "assets/UniJIS-UCS2-HW-V-BZyQaeYZ.bcmap": "1973457e2c0192819947e56068625b34fb9a72ecc8a476ce6d7eaae5f73e2e5c",
+    "assets/UniJIS-UCS2-V-Cr3xs5m4.bcmap": "42a133d8e2ce9dd6d2288018e01592d2bf2435b326d39b94ea0b6e6a44ac33d3",
+    "assets/UniJIS-UTF16-H-BlDDPdCK.bcmap": "f6a89c5688978548c83fcee990e205bc63c74274d5c69b49032a3bd4c49a05ee",
+    "assets/UniJIS-UTF16-V-DfK_Aqy1.bcmap": "c67126fc7c73850855186bb0d6482ac0a365057e0b58778c4ab9f234683fef53",
+    "assets/UniJIS-UTF32-H-BIQPWkjv.bcmap": "96195950ce0fe24443d8eb426fa6b88534ec421d7bef9046f0b2362809cfba73",
+    "assets/UniJIS-UTF32-V-0rh54ED3.bcmap": "ed4dafda402bdd19c4d5d8bf2ab41473c0f86f384552b4c7b963d6627daedeb1",
+    "assets/UniJIS-UTF8-H-CGusholx.bcmap": "798fb0bf06ab0788d1f6a91c2db7de581612eef03c628f10e8f7ecd8f70ab448",
+    "assets/UniJIS-UTF8-V-BGWFHinB.bcmap": "1021611424f913b2df0bfdbe94bd327c04e224ec89d8e821c6501ea3d21f4265",
+    "assets/UniJIS2004-UTF16-H-KXixH-HI.bcmap": "710a32d7cb43fd6bd9dbf30da5971f8c941590f74441e208d852c2be0e74cc97",
+    "assets/UniJIS2004-UTF16-V-BSHgoaRy.bcmap": "3b149aff5c5707b57fb3215d1775852c8b1f413ec0f679ea628f25cf87fe098d",
+    "assets/UniJIS2004-UTF32-H-CXrD-9YE.bcmap": "8d2658e18741af7937d586a57c89729a6fec0d86121197c1f8518aa58b29cdfb",
+    "assets/UniJIS2004-UTF32-V-CH3k_ouF.bcmap": "6dd475782f2897648a683c48b2fa015a15b8f06856760bddc8a17a63f418bacb",
+    "assets/UniJIS2004-UTF8-H-BkOctZjn.bcmap": "691c614ce432b3e62486efb54e5c84c6da5afe9b51b21253bde4758feb484183",
+    "assets/UniJIS2004-UTF8-V-D8AJhywu.bcmap": "40a8c7ea2d46711c5f78fc9a878a7db68b1543ba5cd60ecf14f519a2deb829b7",
+    "assets/UniJISPro-UCS2-HW-V-DLNkNO1x.bcmap": "6826f94d789d7bf1960668c1c5819c34c9585c1b23152fbc19ee81c7df08524b",
+    "assets/UniJISPro-UCS2-V-BpvX7JBA.bcmap": "493de9fd1a08f7946065d8ab58f0c3c9fe489f5a0f109f2d05a3169b4bd5789f",
+    "assets/UniJISPro-UTF8-V-Db5K6XXE.bcmap": "6181d382cf736c5e09492e8be9f26f31fa25b7462253f23ab16646af432cad81",
+    "assets/UniJISX0213-UTF32-H-BavAhZjb.bcmap": "692044e1fb33445668632bc9fe7386805c624864be1ddeb29d65bb0c99fc630c",
+    "assets/UniJISX0213-UTF32-V-Cz7JBDr9.bcmap": "dd54e16ca7bffb3a886242549b2bf7d78a277087f7c60d2636f118c21a5b0646",
+    "assets/UniJISX02132004-UTF32-H-DAH-AgUq.bcmap": "f80ea5a989be30ccda5a8804baef6d3b4b044d2b339bf8b31c671b2466171cf6",
+    "assets/UniJISX02132004-UTF32-V-BqqDIAe5.bcmap": "94c22bd99e771c5fbe0dd8dc39850570d4db0075074aca13e272813edd7cc57f",
+    "assets/UniKS-UCS2-H-YeUc7k1L.bcmap": "a1081396ab4adb6f4a5b6c15f896963c244c1c9bcb65ce5616d06096a1b9811c",
+    "assets/UniKS-UCS2-V-ahlksFWQ.bcmap": "6cab547431958fbdc1d401d06ebd4dd61a73f5509a10f974df32bcbca11a2e43",
+    "assets/UniKS-UTF16-H-B0dvB-Td.bcmap": "42d35b396286499dfae1737a07adb3a64500df37b426580bfb1d3ea872938519",
+    "assets/UniKS-UTF16-V-EgvK-6IG.bcmap": "5bdb7390c80dcc136cb47d41dc7460082560969c17322ee739fe3020fb642410",
+    "assets/UniKS-UTF32-H-olR_LtmR.bcmap": "3a01ec51ed1b828101351e337ffb8250abe11880032e5210f881170fed2588de",
+    "assets/UniKS-UTF32-V-CnOTbPsn.bcmap": "dfda895eceaed081af030dbbb962b49629eea817fc3c02bae15db93d0c68acd7",
+    "assets/UniKS-UTF8-H-CbpebD-y.bcmap": "3fac9c65145f72d7d42157a3b9c5ed6904632184e6a0888f2b828699afd2002f",
+    "assets/UniKS-UTF8-V-BIFFPWWm.bcmap": "9ecc6cf30dd354b9778ddba163b6cc7302b087ce9f39d1ba73472d2b75ed13ca",
+    "assets/V-BJkwLeFB.bcmap": "b9ad1c0c09ff14bca52f9a28a9767eb857ad0e8946e64ba14c7387a7eb69866a",
+    "assets/WP-Symbol-C3zzKJnO.bcmap": "543923bead225732aba30976690ee89095a19628277b5863efecc2c728d5d7bf",
+    "assets/archive-BjJu78UZ.js": "0cc1b1f21a28a05f397f3dd44b739d68687797b11302f38a99df3c8c85296b0d",
+    "assets/index-5AtG6_wW.js": "44ef6448f258533a6a6cd873fe2842ce43e45e8ce8fd929ad7567124929e7f04",
+    "assets/index-B5BloBmr.js": "229cb5ca406d0db26287ef74d26f5680f8ba300527f2c9f7f4f1e0784b38cd5e",
+    "assets/index-Bnzvuw8w.js": "5a57ad79f708d6e626e303e137cb89cfa3deb6ebe15fba90914d894ccca31c29",
+    "assets/index-Bvnw_P4y.css": "b55ff15506c979cd7dd0d5f05301036e2dcdfadfac8fa977ca278cad5dc7cc61",
+    "assets/isolated-worker-DSru7mxn.js": "6a5850c58714b913e0a4ae2432932c7417ffba7495ab4c85fd060fa41c449fbb",
+    "assets/parser-DzIC7VDj.js": "8c45e49578a5a6bd60655844b2a0552fc232c1d104ce4a12ced3d8eb7147c1ea",
+    "assets/rescue-export-CRCXNoa5.js": "1a6ceb5270b66f368e1c6f977599ae3e7f4f2e6d730c49492155880d364ff7a6",
+    "assets/retained-archive-CNkmI9mp.js": "98f28fa903e1b62aed192aa445ca28209aa61ee8c4422662e7763e8bcbda7197",
+    "assets/selection-D6u7GEeB.js": "ab52d8ec53c17bb207729143c90b50f95fd787b1a7b738fd9482dfe7dc8f11ca",
+    "assets/sha2-DHqbhyfR.js": "707b164c9f0f782a8dee8c3754f65e9f3baba10051000fdf8479ab1131d55577",
+    "assets/sqlite3-BzAlo58v.wasm": "dd7c22431a3b8ad51ab5e6ed91065593574c34c5959d2efdef2f17484eedcb2c",
+    "assets/storage-Cn9FzPhb.js": "408fbc5ac5b1699d6b4f9ae3f5032770cb3489492663973b1197795c55d569d2",
+    "index.html": "929d000eab87c12b3316a91c0b372bdc7afb77b0c5443f2e394f33a561a9c687",
+    "third-party/CHARSET-NORMALIZER-LICENSE": "6d0d41bfe170ac6c7dc248c9a63e254d0fb45a60d50a8257d0af92c6e249b887",
+    "third-party/CMAPS-LICENSE": "aa92ab5a472974865a96fd4a4e9c13bb41bf6fe1b309cb6b8da48bc9e19839a2",
+    "third-party/FOXIT-LICENSE": "b578cdd2345840ada550bd12519533812320d5f1d21cf4c1c7e1b1b0a31c98b7",
+    "third-party/LIBERATION-LICENSE": "d2c4d5b3e115a519cb58eb691aa64538397e2611f9ebe801392cf9667997e7dc",
+    "third-party/PDFJS-LICENSE": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594",
+    "third-party/PILLOW-LICENSE": "dda12a98c1979cf3d94df1cff45d27a4cb3f04a60c76f76902ac54cac03ec0ce",
+    "third-party/PYPDF-LICENSE": "a97ac230e5f33ef10a5367a850eb01f91f1a0b064e34742c7794d2294557f524",
+    "third-party/REPORTLAB-LICENSE": "ef831761646313921375fc2cb888e8eeaf7da213d0b92852c10c42f3a0b4d138",
+    "third-party/manifest.json": "7967b74271226a8139740b7ad70d1612f6f81231fc4575c7b10e6b90e5973246"
+  },
+  "tlsFixture": {
+    "listenAddress": "127.0.0.1",
+    "port": 59973,
+    "certificateSha256": "b2c53c7811651446afb6f8f2567d9ff5adb50c3041a204bee88346f9a6a10a68",
+    "hostnameChecks": [
+      {
+        "hostname": "us.api.openai.com",
+        "accepted": true
+      },
+      {
+        "hostname": "eu.api.openai.com",
+        "accepted": true
+      },
+      {
+        "hostname": "api.openai.com",
+        "accepted": false
+      },
+      {
+        "hostname": "127.0.0.1",
+        "accepted": false
+      }
+    ]
+  },
+  "negativeTlsFixture": {
+    "listenAddress": "127.0.0.1",
+    "port": 59978,
+    "certificateSha256": "eab9e7ed94c25b6296312afa492135f993a19538c9d69965e7f62c274a20953b",
+    "hostnameChecks": [
+      {
+        "hostname": "us.api.openai.com",
+        "accepted": false
+      },
+      {
+        "hostname": "eu.api.openai.com",
+        "accepted": false
+      },
+      {
+        "hostname": "api.openai.com",
+        "accepted": false
+      },
+      {
+        "hostname": "127.0.0.1",
+        "accepted": false
+      },
+      {
+        "hostname": "unrelated.invalid",
+        "accepted": true
+      }
+    ]
+  },
+  "tlsRequests": [
+    {
+      "phase": "write",
+      "sequence": 0,
+      "method": "GET",
+      "path": "/v1/models",
+      "sni": "us.api.openai.com",
+      "host": "us.api.openai.com",
+      "region": "us",
+      "bodyBytes": 0,
+      "bodySha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "model": null,
+      "authorizationPresent": true,
+      "bearerAuthorization": true,
+      "credentialMatchesExpected": true,
+      "relayHeadersPresent": false,
+      "forcedFailure": false,
+      "status": 200
+    },
+    {
+      "phase": "write",
+      "sequence": 1,
+      "method": "GET",
+      "path": "/v1/models",
+      "sni": "eu.api.openai.com",
+      "host": "eu.api.openai.com",
+      "region": "eu",
+      "bodyBytes": 0,
+      "bodySha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "model": null,
+      "authorizationPresent": true,
+      "bearerAuthorization": true,
+      "credentialMatchesExpected": true,
+      "relayHeadersPresent": false,
+      "forcedFailure": false,
+      "status": 200
+    },
+    {
+      "phase": "write",
+      "sequence": 2,
+      "method": "POST",
+      "path": "/v1/chat/completions",
+      "sni": "us.api.openai.com",
+      "host": "us.api.openai.com",
+      "region": "us",
+      "bodyBytes": 217,
+      "bodySha256": "7dd1ea576037446cd58e670e47c6c551e35c96e119d659c325d5abaaec96e34a",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "authorizationPresent": true,
+      "bearerAuthorization": true,
+      "credentialMatchesExpected": true,
+      "relayHeadersPresent": false,
+      "forcedFailure": false,
+      "status": 200
+    },
+    {
+      "phase": "write",
+      "sequence": 3,
+      "method": "POST",
+      "path": "/v1/chat/completions",
+      "sni": "us.api.openai.com",
+      "host": "us.api.openai.com",
+      "region": "us",
+      "bodyBytes": 418,
+      "bodySha256": "51353e9cdf5819ab6bc7eda03018d5d3c856bc39c1a0cf541ea1cef5a97a0f41",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "authorizationPresent": true,
+      "bearerAuthorization": true,
+      "credentialMatchesExpected": true,
+      "relayHeadersPresent": false,
+      "forcedFailure": false,
+      "status": 200
+    },
+    {
+      "phase": "write",
+      "sequence": 4,
+      "method": "POST",
+      "path": "/v1/chat/completions",
+      "sni": "us.api.openai.com",
+      "host": "us.api.openai.com",
+      "region": "us",
+      "bodyBytes": 1254,
+      "bodySha256": "fa2ed5378d77b4e02845eeab5dbda2f05012187792779ae548975c249a08e279",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "authorizationPresent": true,
+      "bearerAuthorization": true,
+      "credentialMatchesExpected": true,
+      "relayHeadersPresent": false,
+      "forcedFailure": false,
+      "status": 200
+    },
+    {
+      "phase": "write",
+      "sequence": 5,
+      "method": "POST",
+      "path": "/v1/chat/completions",
+      "sni": "us.api.openai.com",
+      "host": "us.api.openai.com",
+      "region": "us",
+      "bodyBytes": 217,
+      "bodySha256": "7dd1ea576037446cd58e670e47c6c551e35c96e119d659c325d5abaaec96e34a",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "authorizationPresent": true,
+      "bearerAuthorization": true,
+      "credentialMatchesExpected": true,
+      "relayHeadersPresent": false,
+      "forcedFailure": false,
+      "status": 200
+    },
+    {
+      "phase": "write",
+      "sequence": 6,
+      "method": "POST",
+      "path": "/v1/chat/completions",
+      "sni": "us.api.openai.com",
+      "host": "us.api.openai.com",
+      "region": "us",
+      "bodyBytes": 449,
+      "bodySha256": "769c634768ca949a93cfef544ce3c1a22051e6f2487870145944e8cd8a46fa24",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "authorizationPresent": true,
+      "bearerAuthorization": true,
+      "credentialMatchesExpected": true,
+      "relayHeadersPresent": false,
+      "forcedFailure": true,
+      "status": 503
+    },
+    {
+      "phase": "write",
+      "sequence": 7,
+      "method": "POST",
+      "path": "/v1/chat/completions",
+      "sni": "eu.api.openai.com",
+      "host": "eu.api.openai.com",
+      "region": "eu",
+      "bodyBytes": 211,
+      "bodySha256": "890cf2d9863456fb6c366996dd956a3a187013035b5a1b3c5bf965404367da9e",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "authorizationPresent": true,
+      "bearerAuthorization": true,
+      "credentialMatchesExpected": true,
+      "relayHeadersPresent": false,
+      "forcedFailure": false,
+      "status": 200
+    }
+  ],
+  "negativeTlsRequests": [],
+  "fixtureErrors": [],
+  "canonicalRestartExact": true,
+  "summaryWireExact": {
+    "inputSha256": "fa2ed5378d77b4e02845eeab5dbda2f05012187792779ae548975c249a08e279",
+    "requestSequence": 4
+  },
+  "changedSources": [],
+  "sourceStable": true,
+  "completedAt": "2026-09-10T21:56:44.488801+00:00"
+}

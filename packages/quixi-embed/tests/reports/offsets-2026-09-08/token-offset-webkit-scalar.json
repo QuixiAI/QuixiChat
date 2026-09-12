@@ -1,0 +1,99 @@
+{
+  "passed": true,
+  "route": "scalar",
+  "cases": 870,
+  "manualContributorCases": 28,
+  "upstreamOffsetDivergences": 16,
+  "maxCapacityRepeats": 32,
+  "resultBytes": 1376256,
+  "before": {
+    "tokenizerBytes": 959947,
+    "linearMemoryBytes": 16777216,
+    "offsetScratchBytes": 0,
+    "peakOffsetScratchBytes": 0
+  },
+  "after": {
+    "tokenizerBytes": 959947,
+    "linearMemoryBytes": 16777216,
+    "offsetScratchBytes": 0,
+    "peakOffsetScratchBytes": 1572864
+  },
+  "exactMillionTokenRejection": true,
+  "originalUtf8AndUtf16Parity": true,
+  "overlappingSpansIncluded": true,
+  "modelWeightsRequired": false,
+  "rendererHeartbeat": {
+    "samples": 16,
+    "maxGapMs": 16
+  },
+  "engine": "webkit",
+  "version": "26.6",
+  "host": {
+    "platform": "darwin",
+    "release": "25.6.0",
+    "cpu": "Apple M5 Max"
+  },
+  "build": {
+    "target": "wasm",
+    "diagnostic": false,
+    "profile": false,
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "command": [
+      "docker",
+      "run",
+      "--rm",
+      "--platform",
+      "linux/amd64",
+      "--mount",
+      "type=bind,source=/Users/eric/QuixiChat/packages/quixi-embed,target=/src",
+      "emscripten/emsdk@sha256:90b757eb11fa9a0e3ce4d2d9f76d932a56018e4accc37b5a28b2783751e60eb7",
+      "emcc",
+      "-std=c11",
+      "-O2",
+      "-ffp-contract=off",
+      "-fno-vectorize",
+      "-fno-slp-vectorize",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "/src/native/model.c",
+      "/src/native/tokenizer.c",
+      "/src/native/encoder.c",
+      "/src/native/sha256.c",
+      "-lm",
+      "--no-entry",
+      "-sSTANDALONE_WASM",
+      "-sALLOW_MEMORY_GROWTH=1",
+      "-sMAXIMUM_MEMORY=536870912",
+      "-sINITIAL_MEMORY=16777216",
+      "-sSTACK_SIZE=1048576",
+      "-sEXPORTED_FUNCTIONS=[\"_qx_sha256\", \"_qx_backend\", \"_qx_inspect_tokens\", \"_qx_tokenizer_inspect\", \"_qx_tokenize_offsets\", \"_qx_tokenizer_encode_offsets\", \"_qx_tokenizer_load\", \"_qx_tokenizer_free\", \"_qx_tokenizer_bytes\", \"_qx_tokenizer_encode\", \"_malloc\", \"_free\", \"_qx_model_load\", \"_qx_model_free\", \"_qx_model_bytes\", \"_qx_workspace_create\", \"_qx_workspace_free\", \"_qx_workspace_bytes\", \"_qx_tokenize\", \"_qx_embed_tokens\", \"_qx_embed_document\", \"_qx_embed_query\", \"_qx_status_message\"]",
+      "-o",
+      "/src/build/quixi-scalar.wasm"
+    ],
+    "output": "quixi-scalar.wasm",
+    "bytes": 44805,
+    "sha256": "e477d3e35b6e83c39e206e76079a4d5136a227711a0124b64bf885f3165cee65",
+    "sources": {
+      "model.c": "7c29c9a8af9186be3ffadd60f106f686ab626d9585e24c7bbdc2cf300c4102de",
+      "tokenizer.c": "a17e49ff05df55fdb202f2b0a5594f8a01224b1fca15acbdc4675ac3b04ca85f",
+      "encoder.c": "5fca9c2f52fcd1baccee78ac6cf6e065b54e07a38117674d3d2b66ee8b03388e",
+      "sha256.c": "cdb83cc565e92869be60deaf07f028e4d8b45b07236927b7170ff9148c616e4d",
+      "kernels.h": "68d40f577de5607b1ddc249181a8ac0a0a8c5b33db30a65481ae33ec27f2cc55",
+      "internal.h": "7d802a00a4b7374d2bf98cb578a8f92d5e39aa1eaec929771dfa1edab430f767",
+      "model_contract.h": "362a413a843150d48b7431230a1cec78407dcf6feb3b0d648bb4ce3c16d700c7",
+      "quixi_embed.h": "d6bc1b60d1b10bf7bcdb72665a5141a706e05e6193654b7e67cd527e9f80c302"
+    },
+    "artifact_version": "1.0.2",
+    "model_format_version": 1,
+    "simd_enabled": false,
+    "generic_runtime": false
+  },
+  "assetRequests": [
+    "/build/quixi-scalar.wasm",
+    "/build/arctic-xs.qxtokenizer",
+    "/tests/token-offset-fixtures.jsonl"
+  ],
+  "fixtureSha256": "76b78540f4ba78a7feaa3c0851809f79dcb9602498f014b00087f9d0cc1de0a3",
+  "status": "passed"
+}

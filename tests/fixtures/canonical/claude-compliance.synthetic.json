@@ -1,0 +1,98 @@
+{
+  "id": "claude_chat_fixture",
+  "name": "Synthetic archive example",
+  "created_at": "2026-09-08T12:00:00Z",
+  "updated_at": "2026-09-08T12:01:00Z",
+  "deleted_at": null,
+  "organization_uuid": "11111111-1111-4111-8111-111111111111",
+  "project_id": null,
+  "model": null,
+  "user": {
+    "id": "fixture-user",
+    "email_address": "fixture@example.invalid"
+  },
+  "href": "https://claude.ai/chat/00000000-0000-4000-8000-000000009999",
+  "chat_messages": [
+    {
+      "id": "claude_chat_msg_fixture_user",
+      "role": "user",
+      "created_at": "2026-09-08T12:00:00Z",
+      "content": [
+        {
+          "type": "text",
+          "text": "Summarize the missing synthetic file.",
+          "truncated": false,
+          "thinking_redacted": false
+        }
+      ],
+      "files": [
+        {
+          "id": "claude_file_fixture",
+          "filename": "example.pdf",
+          "mime_type": "application/pdf",
+          "size_bytes": 1234,
+          "md5": null,
+          "created_at": "2026-09-08T12:00:00Z"
+        }
+      ],
+      "artifacts": null,
+      "generated_files": null
+    },
+    {
+      "id": "claude_chat_msg_fixture_assistant",
+      "role": "assistant",
+      "created_at": "2026-09-08T12:01:00Z",
+      "content": [
+        {
+          "type": "tool_use",
+          "id": "toolu_fixture",
+          "name": "inspect_file",
+          "input": "{\"filename\":\"example.pdf\"}",
+          "truncated": false,
+          "integration_name": null,
+          "mcp_server_url": null
+        },
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_fixture",
+          "name": "inspect_file",
+          "content": [
+            {
+              "type": "text",
+              "text": "File bytes were not included."
+            }
+          ],
+          "is_error": true,
+          "truncated": false,
+          "integration_name": null,
+          "mcp_server_url": null
+        },
+        {
+          "type": "text",
+          "text": "I retained the file reference.",
+          "thinking_redacted": true,
+          "truncated": false
+        },
+        {
+          "type": "quixi_fixture_unknown",
+          "payload": {
+            "label": "Intentionally unsupported synthetic block"
+          }
+        }
+      ],
+      "files": null,
+      "generated_files": null,
+      "artifacts": [
+        {
+          "id": "claude_artifact_fixture",
+          "version_id": "claude_artifact_version_fixture",
+          "title": "Synthetic unavailable artifact",
+          "artifact_type": "application/vnd.ant.code"
+        }
+      ]
+    }
+  ],
+  "has_more": false,
+  "first_id": "opaque-first-fixture-cursor",
+  "last_id": "opaque-last-fixture-cursor"
+}

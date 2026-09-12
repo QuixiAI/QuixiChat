@@ -1,0 +1,16 @@
+import { spawnSync } from 'node:child_process';
+import { readFile, writeFile, mkdir } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
+import { fileURLToPath } from 'node:url';
+const root = fileURLToPath(new URL('../../../../', import.meta.url));
+const sources = ['packages/storage/src/worker/search/index.ts', 'packages/storage/src/worker/search/sources.ts', 'packages/storage/src/worker/search/schema.ts', 'packages/storage/tests/image-search/repository.test.ts', 'packages/storage/tests/image-search/run.mjs'];
+const sourceHashes = {};
+for (const source of sources) sourceHashes[source] = createHash('sha256').update(await readFile(new URL(source, new URL('../../../../', import.meta.url)))).digest('hex');
+const result = spawnSync(process.execPath, ['--experimental-transform-types', '--test', 'packages/storage/tests/image-search/repository.test.ts'], { cwd: root, encoding: 'utf8', maxBuffer: 4 * 1024 * 1024 });
+const output = (result.stdout ?? '') + (result.stderr ?? '');
+const failed = result.status !== 0 || result.error;
+await mkdir(new URL('./results/', import.meta.url), { recursive: true });
+await writeFile(new URL('./results/repository.tap', import.meta.url), output);
+await writeFile(new URL('./results/repository-wasm.json', import.meta.url), JSON.stringify({ completedAt: new Date().toISOString(), status: failed ? 'failed' : 'passed', backend: 'pinned SQLite WASM in Node; metadata fixtures, no image decoding or OPFS claim', node: process.version, tests: Number(output.match(/^# tests (\d+)/m)?.[1] ?? 0), passed: Number(output.match(/^# pass (\d+)/m)?.[1] ?? 0), sourceHashes }, null, 2) + '\n');
+process.stdout.write(output);
+if (failed) process.exitCode = 1;

@@ -1,0 +1,6 @@
+
+> quixi@0.0.1 test:storage:client
+> tsc --noEmit -p packages/storage/tsconfig.tests.json && node packages/storage/tests/browser/run-archive.mjs
+
+chromium: production archive client acceptance passed
+webkit: production archive client acceptance passed

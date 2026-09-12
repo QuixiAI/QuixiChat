@@ -1,0 +1,156 @@
+
+> quixi@0.0.1 test:app:archives
+> node --experimental-transform-types --test packages/app/src/features/archives/tests/*-controller.test.mjs
+
+TAP version 13
+# (node:13132) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: initialization stays busy through both reads, rejects competing work, and permits an explicit later prepare
+ok 1 - initialization stays busy through both reads, rejects competing work, and permits an explicit later prepare
+  ---
+  duration_ms: 4.318917
+  type: 'test'
+  ...
+# Subtest: failed initialization returns idle with an error and an explicit refresh recovers
+ok 2 - failed initialization returns idle with an error and an explicit refresh recovers
+  ---
+  duration_ms: 0.252417
+  type: 'test'
+  ...
+# Subtest: idle publication admits the next action and busy publication cannot reenter initialization
+ok 3 - idle publication admits the next action and busy publication cannot reenter initialization
+  ---
+  duration_ms: 0.14375
+  type: 'test'
+  ...
+# Subtest: prepare advertises cancellation only during preparation and clears it after cancellation cleanup
+ok 4 - prepare advertises cancellation only during preparation and clears it after cancellation cleanup
+  ---
+  duration_ms: 0.169167
+  type: 'test'
+  ...
+# Subtest: resume advertises cancellation only during preparation and clears it after cancellation cleanup
+ok 5 - resume advertises cancellation only during preparation and clears it after cancellation cleanup
+  ---
+  duration_ms: 0.959833
+  type: 'test'
+  ...
+# Subtest: prepare followed by immediate dispose dispatches no storage request
+ok 6 - prepare followed by immediate dispose dispatches no storage request
+  ---
+  duration_ms: 0.19875
+  type: 'test'
+  ...
+# Subtest: dispose from the busy subscriber dispatches no storage request
+ok 7 - dispose from the busy subscriber dispatches no storage request
+  ---
+  duration_ms: 0.185
+  type: 'test'
+  ...
+# (node:13133) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: selected file runs genuine bounded staging, releases handles and never implicitly activates
+ok 8 - selected file runs genuine bounded staging, releases handles and never implicitly activates
+  ---
+  duration_ms: 6.006416
+  type: 'test'
+  ...
+# Subtest: review is explicit, receipt and args retained before dispatch, open is outside controller
+ok 9 - review is explicit, receipt and args retained before dispatch, open is outside controller
+  ---
+  duration_ms: 1.089
+  type: 'test'
+  ...
+# Subtest: new history invalidates review and requires a new explicit review
+ok 10 - new history invalidates review and requires a new explicit review
+  ---
+  duration_ms: 1.364167
+  type: 'test'
+  ...
+# Subtest: selection remains fixed even if caller mutates options or live selection changes
+ok 11 - selection remains fixed even if caller mutates options or live selection changes
+  ---
+  duration_ms: 1.8985
+  type: 'test'
+  ...
+# Subtest: unsent draft or live work prevents both review and activation
+ok 12 - unsent draft or live work prevents both review and activation
+  ---
+  duration_ms: 2.4175
+  type: 'test'
+  ...
+# Subtest: lost reply resolves committed receipt through global status using exact retained identity
+ok 13 - lost reply resolves committed receipt through global status using exact retained identity
+  ---
+  duration_ms: 1.029542
+  type: 'test'
+  ...
+# Subtest: unresolved and unavailable global status retain full args; checking never replays activation
+ok 14 - unresolved and unavailable global status retain full args; checking never replays activation
+  ---
+  duration_ms: 0.932917
+  type: 'test'
+  ...
+# Subtest: a mismatched receipt is never exposed as a committed replacement
+ok 15 - a mismatched receipt is never exposed as a committed replacement
+  ---
+  duration_ms: 2.053625
+  type: 'test'
+  ...
+# Subtest: cancelling an in-flight source read releases staging with no activation
+ok 16 - cancelling an in-flight source read releases staging with no activation
+  ---
+  duration_ms: 2.864583
+  type: 'test'
+  ...
+# Subtest: same release identity resolves an unknown cleanup reply with one bounded retry
+ok 17 - same release identity resolves an unknown cleanup reply with one bounded retry
+  ---
+  duration_ms: 2.416375
+  type: 'test'
+  ...
+# Subtest: live work appearing during activation context lookup still prevents dispatch
+ok 18 - live work appearing during activation context lookup still prevents dispatch
+  ---
+  duration_ms: 3.697125
+  type: 'test'
+  ...
+# Subtest: cancelling the picker releases a subsequently returned file before any restore begins
+ok 19 - cancelling the picker releases a subsequently returned file before any restore begins
+  ---
+  duration_ms: 0.196542
+  type: 'test'
+  ...
+# Subtest: concurrent replacement actions send one request and never invoke a remount callback
+ok 20 - concurrent replacement actions send one request and never invoke a remount callback
+  ---
+  duration_ms: 3.744625
+  type: 'test'
+  ...
+# Subtest: saved ready candidate revalidates in bounded slices before fresh explicit review
+ok 21 - saved ready candidate revalidates in bounded slices before fresh explicit review
+  ---
+  duration_ms: 3.228542
+  type: 'test'
+  ...
+# Subtest: cancelling saved-candidate revalidation cancels pending slice and releases work without activation
+ok 22 - cancelling saved-candidate revalidation cancels pending slice and releases work without activation
+  ---
+  duration_ms: 1.929875
+  type: 'test'
+  ...
+# Subtest: changed saved candidate cannot silently replace the originally resumed review
+ok 23 - changed saved candidate cannot silently replace the originally resumed review
+  ---
+  duration_ms: 1.74375
+  type: 'test'
+  ...
+1..23
+# tests 23
+# suites 0
+# pass 23
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 243.514291

@@ -1,0 +1,6 @@
+
+> quixi@0.0.1 test:storage:blobs
+> tsc --noEmit -p packages/storage/tsconfig.tests.json && node packages/storage/tests/browser/run.mjs
+
+chromium: blob integrity, backpressure, restart and failure checks passed
+webkit: blob integrity, backpressure, restart and failure checks passed

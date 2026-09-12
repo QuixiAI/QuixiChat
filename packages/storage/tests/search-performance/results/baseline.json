@@ -1,0 +1,778 @@
+{
+  "completedAt": "2026-09-09T08:55:54.025Z",
+  "backend": "pinned SQLite WASM in Node fixture; no OPFS/browser timing claim",
+  "pages": 1000,
+  "admissions": 1000,
+  "totalAdvanceMs": 28958.196710000033,
+  "total": {
+    "other": {
+      "calls": 107051,
+      "ms": 1485.9100650000814,
+      "sql": "PRAGMA schema_version"
+    },
+    "obsolete_page_refs": {
+      "calls": 6005,
+      "ms": 15758.376854999919,
+      "sql": "SELECT EXISTS(SELECT 1 FROM quixi_search_page_refs er LEFT JOIN quixi_search_heads h ON h.epoch=er.epoch AND h.source_key=er.source_key AND h.run_id=er.run_id WHERE h.source_key IS NULL OR NOT (h.source_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='source' AND id=h.source_key),0)\nAND h.message_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='message' AND id=h.message_id),0)\nAND h.thread_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='thread' AND id=h.thread_id),0)\nAND h.document_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='document' AND id=h.document_id),0)\nAND h.global_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='global' AND id='*'),0) AND (substr(h.source_key,1,2)<>'e:' OR (NOT EXISTS(SELECT 1 FROM quixi_search_scopes WHERE scope='extraction_failed' AND id=h.document_id) AND EXISTS(\nSELECT 1 FROM quixi_search_page_refs er\nJOIN quixi_extract_pages ep ON ep.id=er.page_id AND ep.state='published' AND ep.run_id=er.extraction_run_id AND ep.page=er.page AND ep.source_digest=er.source_digest AND ep.publication_revision=er.publication_revision\nJOIN quixi_extract_runs ex ON ex.id=ep.run_id AND ex.document_id=er.document_id AND ex.identity=er.identity\nJOIN quixi_extract_documents ed ON ed.document_id=ex.document_id AND ed.visible_run=ex.id\nJOIN quixi_records doc ON doc.collection='documents' AND doc.id=er.document_id AND json_extract(doc.payload,'$.attachmentId')=er.attachment_id\nJOIN quixi_records att ON att.collection='attachments' AND att.id=er.attachment_id AND json_extract(att.payload,'$.availability')='available' AND json_extract(att.payload,'$.blobSha256')=er.attachment_sha256 AND json_extract(att.payload,'$.sizeBytes')=er.attachment_bytes AND lower(trim(CASE WHEN instr(json_extract(att.payload,'$.mimeType'),';')>0 THEN substr(json_extract(att.payload,'$.mimeType'),1,instr(json_extract(att.payload,'$.mimeType'),';')-1) ELSE json_extract(att.payload,'$.mimeType') END))='application/pdf'\nWHERE er.epoch=h.epoch AND er.source_key=h.source_key AND er.run_id=h.run_id)))))"
+    },
+    "obsolete_chunks": {
+      "calls": 6005,
+      "ms": 2446.7141870000114,
+      "sql": "SELECT EXISTS(SELECT 1 FROM quixi_search_chunks c WHERE NOT EXISTS(SELECT 1 FROM quixi_search_builds b WHERE b.epoch=c.epoch AND b.source_key=c.source_key AND b.run_id=c.run_id) AND (c.epoch NOT IN(SELECT active_epoch FROM quixi_search_meta UNION SELECT rebuilding_epoch FROM quixi_search_meta WHERE rebuilding_epoch IS NOT NULL) OR NOT EXISTS(SELECT 1 FROM quixi_search_heads h WHERE h.epoch=c.epoch AND h.source_key=c.source_key AND h.run_id=c.run_id))) OR EXISTS(SELECT 1 FROM quixi_search_heads WHERE epoch NOT IN(SELECT active_epoch FROM quixi_search_meta UNION SELECT rebuilding_epoch FROM quixi_search_meta WHERE rebuilding_epoch IS NOT NULL)) OR EXISTS(SELECT 1 FROM quixi_search_queue WHERE epoch NOT IN(SELECT active_epoch FROM quixi_search_meta UNION SELECT rebuilding_epoch FROM quixi_search_meta WHERE rebuilding_epoch IS NOT NULL))"
+    },
+    "queue_pick": {
+      "calls": 2005,
+      "ms": 58.46097099998826,
+      "sql": "SELECT * FROM quixi_search_queue WHERE failed=0 ORDER BY CASE scope WHEN 'source' THEN 0 ELSE 1 END,epoch,scope,id LIMIT 1"
+    },
+    "queue_count": {
+      "calls": 6000,
+      "ms": 54.83044100014561,
+      "sql": "SELECT count(*) FROM quixi_search_queue WHERE failed=0"
+    },
+    "visible_chunk_count": {
+      "calls": 3000,
+      "ms": 7913.8131290000065,
+      "sql": "SELECT count(*) FROM quixi_search_chunks c JOIN quixi_search_heads h ON h.epoch=c.epoch AND h.source_key=c.source_key AND h.run_id=c.run_id WHERE h.epoch=? AND h.source_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='source' AND id=h.source_key),0)\nAND h.message_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='message' AND id=h.message_id),0)\nAND h.thread_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='thread' AND id=h.thread_id),0)\nAND h.document_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='document' AND id=h.document_id),0)\nAND h.global_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='global' AND id='*'),0) AND (substr(h.source_key,1,2)<>'e:' OR (NOT EXISTS(SELECT 1 FROM quixi_search_scopes WHERE scope='extraction_failed' AND id=h.document_id) AND EXISTS(\nSELECT 1 FROM quixi_search_page_refs er\nJOIN quixi_extract_pages ep ON ep.id=er.page_id AND ep.state='published' AND ep.run_id=er.extraction_run_id AND ep.page=er.page AND ep.source_digest=er.source_digest AND ep.publication_revision=er.publication_revision\nJOIN quixi_extract_runs ex ON ex.id=ep.run_id AND ex.document_id=er.document_id AND ex.identity=er.identity\nJOIN quixi_extract_documents ed ON ed.document_id=ex.document_id AND ed.visible_run=ex.id\nJOIN quixi_records doc ON doc.collection='documents' AND doc.id=er.document_id AND json_extract(doc.payload,'$.attachmentId')=er.attachment_id\nJOIN quixi_records att ON att.collection='attachments' AND att.id=er.attachment_id AND json_extract(att.payload,'$.availability')='available' AND json_extract(att.payload,'$.blobSha256')=er.attachment_sha256 AND json_extract(att.payload,'$.sizeBytes')=er.attachment_bytes AND lower(trim(CASE WHEN instr(json_extract(att.payload,'$.mimeType'),';')>0 THEN substr(json_extract(att.payload,'$.mimeType'),1,instr(json_extract(att.payload,'$.mimeType'),';')-1) ELSE json_extract(att.payload,'$.mimeType') END))='application/pdf'\nWHERE er.epoch=h.epoch AND er.source_key=h.source_key AND er.run_id=h.run_id)))"
+    }
+  },
+  "samples": [
+    {
+      "page": 1,
+      "slices": 0,
+      "advanceMs": 22.069541999999984,
+      "progressCalls": 2,
+      "stats": {
+        "other": {
+          "calls": 158,
+          "ms": 6.336868999999808,
+          "sql": "PRAGMA schema_version"
+        },
+        "obsolete_page_refs": {
+          "calls": 11,
+          "ms": 2.8349990000000105,
+          "sql": "SELECT EXISTS(SELECT 1 FROM quixi_search_page_refs er LEFT JOIN quixi_search_heads h ON h.epoch=er.epoch AND h.source_key=er.source_key AND h.run_id=er.run_id WHERE h.source_key IS NULL OR NOT (h.source_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='source' AND id=h.source_key),0)\nAND h.message_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='message' AND id=h.message_id),0)\nAND h.thread_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='thread' AND id=h.thread_id),0)\nAND h.document_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='document' AND id=h.document_id),0)\nAND h.global_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='global' AND id='*'),0) AND (substr(h.source_key,1,2)<>'e:' OR (NOT EXISTS(SELECT 1 FROM quixi_search_scopes WHERE scope='extraction_failed' AND id=h.document_id) AND EXISTS(\nSELECT 1 FROM quixi_search_page_refs er\nJOIN quixi_extract_pages ep ON ep.id=er.page_id AND ep.state='published' AND ep.run_id=er.extraction_run_id AND ep.page=er.page AND ep.source_digest=er.source_digest AND ep.publication_revision=er.publication_revision\nJOIN quixi_extract_runs ex ON ex.id=ep.run_id AND ex.document_id=er.document_id AND ex.identity=er.identity\nJOIN quixi_extract_documents ed ON ed.document_id=ex.document_id AND ed.visible_run=ex.id\nJOIN quixi_records doc ON doc.collection='documents' AND doc.id=er.document_id AND json_extract(doc.payload,'$.attachmentId')=er.attachment_id\nJOIN quixi_records att ON att.collection='attachments' AND att.id=er.attachment_id AND json_extract(att.payload,'$.availability')='available' AND json_extract(att.payload,'$.blobSha256')=er.attachment_sha256 AND json_extract(att.payload,'$.sizeBytes')=er.attachment_bytes AND lower(trim(CASE WHEN instr(json_extract(att.payload,'$.mimeType'),';')>0 THEN substr(json_extract(att.payload,'$.mimeType'),1,instr(json_extract(att.payload,'$.mimeType'),';')-1) ELSE json_extract(att.payload,'$.mimeType') END))='application/pdf'\nWHERE er.epoch=h.epoch AND er.source_key=h.source_key AND er.run_id=h.run_id)))))"
+        },
+        "obsolete_chunks": {
+          "calls": 11,
+          "ms": 1.4040819999999883,
+          "sql": "SELECT EXISTS(SELECT 1 FROM quixi_search_chunks c WHERE NOT EXISTS(SELECT 1 FROM quixi_search_builds b WHERE b.epoch=c.epoch AND b.source_key=c.source_key AND b.run_id=c.run_id) AND (c.epoch NOT IN(SELECT active_epoch FROM quixi_search_meta UNION SELECT rebuilding_epoch FROM quixi_search_meta WHERE rebuilding_epoch IS NOT NULL) OR NOT EXISTS(SELECT 1 FROM quixi_search_heads h WHERE h.epoch=c.epoch AND h.source_key=c.source_key AND h.run_id=c.run_id))) OR EXISTS(SELECT 1 FROM quixi_search_heads WHERE epoch NOT IN(SELECT active_epoch FROM quixi_search_meta UNION SELECT rebuilding_epoch FROM quixi_search_meta WHERE rebuilding_epoch IS NOT NULL)) OR EXISTS(SELECT 1 FROM quixi_search_queue WHERE epoch NOT IN(SELECT active_epoch FROM quixi_search_meta UNION SELECT rebuilding_epoch FROM quixi_search_meta WHERE rebuilding_epoch IS NOT NULL))"
+        },
+        "queue_pick": {
+          "calls": 7,
+          "ms": 0.4472499999999684,
+          "sql": "SELECT * FROM quixi_search_queue WHERE failed=0 ORDER BY CASE scope WHEN 'source' THEN 0 ELSE 1 END,epoch,scope,id LIMIT 1"
+        },
+        "queue_count": {
+          "calls": 6,
+          "ms": 0.13903999999996586,
+          "sql": "SELECT count(*) FROM quixi_search_queue WHERE failed=0"
+        },
+        "visible_chunk_count": {
+          "calls": 3,
+          "ms": 0.5315000000000225,
+          "sql": "SELECT count(*) FROM quixi_search_chunks c JOIN quixi_search_heads h ON h.epoch=c.epoch AND h.source_key=c.source_key AND h.run_id=c.run_id WHERE h.epoch=? AND h.source_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='source' AND id=h.source_key),0)\nAND h.message_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='message' AND id=h.message_id),0)\nAND h.thread_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='thread' AND id=h.thread_id),0)\nAND h.document_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='document' AND id=h.document_id),0)\nAND h.global_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='global' AND id='*'),0) AND (substr(h.source_key,1,2)<>'e:' OR (NOT EXISTS(SELECT 1 FROM quixi_search_scopes WHERE scope='extraction_failed' AND id=h.document_id) AND EXISTS(\nSELECT 1 FROM quixi_search_page_refs er\nJOIN quixi_extract_pages ep ON ep.id=er.page_id AND ep.state='published' AND ep.run_id=er.extraction_run_id AND ep.page=er.page AND ep.source_digest=er.source_digest AND ep.publication_revision=er.publication_revision\nJOIN quixi_extract_runs ex ON ex.id=ep.run_id AND ex.document_id=er.document_id AND ex.identity=er.identity\nJOIN quixi_extract_documents ed ON ed.document_id=ex.document_id AND ed.visible_run=ex.id\nJOIN quixi_records doc ON doc.collection='documents' AND doc.id=er.document_id AND json_extract(doc.payload,'$.attachmentId')=er.attachment_id\nJOIN quixi_records att ON att.collection='attachments' AND att.id=er.attachment_id AND json_extract(att.payload,'$.availability')='available' AND json_extract(att.payload,'$.blobSha256')=er.attachment_sha256 AND json_extract(att.payload,'$.sizeBytes')=er.attachment_bytes AND lower(trim(CASE WHEN instr(json_extract(att.payload,'$.mimeType'),';')>0 THEN substr(json_extract(att.payload,'$.mimeType'),1,instr(json_extract(att.payload,'$.mimeType'),';')-1) ELSE json_extract(att.payload,'$.mimeType') END))='application/pdf'\nWHERE er.epoch=h.epoch AND er.source_key=h.source_key AND er.run_id=h.run_id)))"
+        }
+      }
+    },
+    {
+      "page": 10,
+      "slices": 0,
+      "advanceMs": 6.434291999999971,
+      "progressCalls": 2,
+      "stats": {
+        "other": {
+          "calls": 107,
+          "ms": 2.1402109999994536,
+          "sql": "PRAGMA schema_version"
+        },
+        "obsolete_page_refs": {
+          "calls": 6,
+          "ms": 1.1164570000000822,
+          "sql": "SELECT EXISTS(SELECT 1 FROM quixi_search_page_refs er LEFT JOIN quixi_search_heads h ON h.epoch=er.epoch AND h.source_key=er.source_key AND h.run_id=er.run_id WHERE h.source_key IS NULL OR NOT (h.source_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='source' AND id=h.source_key),0)\nAND h.message_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='message' AND id=h.message_id),0)\nAND h.thread_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='thread' AND id=h.thread_id),0)\nAND h.document_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='document' AND id=h.document_id),0)\nAND h.global_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='global' AND id='*'),0) AND (substr(h.source_key,1,2)<>'e:' OR (NOT EXISTS(SELECT 1 FROM quixi_search_scopes WHERE scope='extraction_failed' AND id=h.document_id) AND EXISTS(\nSELECT 1 FROM quixi_search_page_refs er\nJOIN quixi_extract_pages ep ON ep.id=er.page_id AND ep.state='published' AND ep.run_id=er.extraction_run_id AND ep.page=er.page AND ep.source_digest=er.source_digest AND ep.publication_revision=er.publication_revision\nJOIN quixi_extract_runs ex ON ex.id=ep.run_id AND ex.document_id=er.document_id AND ex.identity=er.identity\nJOIN quixi_extract_documents ed ON ed.document_id=ex.document_id AND ed.visible_run=ex.id\nJOIN quixi_records doc ON doc.collection='documents' AND doc.id=er.document_id AND json_extract(doc.payload,'$.attachmentId')=er.attachment_id\nJOIN quixi_records att ON att.collection='attachments' AND att.id=er.attachment_id AND json_extract(att.payload,'$.availability')='available' AND json_extract(att.payload,'$.blobSha256')=er.attachment_sha256 AND json_extract(att.payload,'$.sizeBytes')=er.attachment_bytes AND lower(trim(CASE WHEN instr(json_extract(att.payload,'$.mimeType'),';')>0 THEN substr(json_extract(att.payload,'$.mimeType'),1,instr(json_extract(att.payload,'$.mimeType'),';')-1) ELSE json_extract(att.payload,'$.mimeType') END))='application/pdf'\nWHERE er.epoch=h.epoch AND er.source_key=h.source_key AND er.run_id=h.run_id)))))"
+        },
+        "obsolete_chunks": {
+          "calls": 6,
+          "ms": 0.42958399999992025,
+          "sql": "SELECT EXISTS(SELECT 1 FROM quixi_search_chunks c WHERE NOT EXISTS(SELECT 1 FROM quixi_search_builds b WHERE b.epoch=c.epoch AND b.source_key=c.source_key AND b.run_id=c.run_id) AND (c.epoch NOT IN(SELECT active_epoch FROM quixi_search_meta UNION SELECT rebuilding_epoch FROM quixi_search_meta WHERE rebuilding_epoch IS NOT NULL) OR NOT EXISTS(SELECT 1 FROM quixi_search_heads h WHERE h.epoch=c.epoch AND h.source_key=c.source_key AND h.run_id=c.run_id))) OR EXISTS(SELECT 1 FROM quixi_search_heads WHERE epoch NOT IN(SELECT active_epoch FROM quixi_search_meta UNION SELECT rebuilding_epoch FROM quixi_search_meta WHERE rebuilding_epoch IS NOT NULL)) OR EXISTS(SELECT 1 FROM quixi_search_queue WHERE epoch NOT IN(SELECT active_epoch FROM quixi_search_meta UNION SELECT rebuilding_epoch FROM quixi_search_meta WHERE rebuilding_epoch IS NOT NULL))"
+        },
+        "queue_pick": {
+          "calls": 2,
+          "ms": 0.04683400000004667,
+          "sql": "SELECT * FROM quixi_search_queue WHERE failed=0 ORDER BY CASE scope WHEN 'source' THEN 0 ELSE 1 END,epoch,scope,id LIMIT 1"
+        },
+        "queue_count": {
+          "calls": 6,
+          "ms": 0.07504299999999375,
+          "sql": "SELECT count(*) FROM quixi_search_queue WHERE failed=0"
+        },
+        "visible_chunk_count": {
+          "calls": 3,
+          "ms": 0.6455000000000268,
+          "sql": "SELECT count(*) FROM quixi_search_chunks c JOIN quixi_search_heads h ON h.epoch=c.epoch AND h.source_key=c.source_key AND h.run_id=c.run_id WHERE h.epoch=? AND h.source_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='source' AND id=h.source_key),0)\nAND h.message_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='message' AND id=h.message_id),0)\nAND h.thread_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='thread' AND id=h.thread_id),0)\nAND h.document_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='document' AND id=h.document_id),0)\nAND h.global_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='global' AND id='*'),0) AND (substr(h.source_key,1,2)<>'e:' OR (NOT EXISTS(SELECT 1 FROM quixi_search_scopes WHERE scope='extraction_failed' AND id=h.document_id) AND EXISTS(\nSELECT 1 FROM quixi_search_page_refs er\nJOIN quixi_extract_pages ep ON ep.id=er.page_id AND ep.state='published' AND ep.run_id=er.extraction_run_id AND ep.page=er.page AND ep.source_digest=er.source_digest AND ep.publication_revision=er.publication_revision\nJOIN quixi_extract_runs ex ON ex.id=ep.run_id AND ex.document_id=er.document_id AND ex.identity=er.identity\nJOIN quixi_extract_documents ed ON ed.document_id=ex.document_id AND ed.visible_run=ex.id\nJOIN quixi_records doc ON doc.collection='documents' AND doc.id=er.document_id AND json_extract(doc.payload,'$.attachmentId')=er.attachment_id\nJOIN quixi_records att ON att.collection='attachments' AND att.id=er.attachment_id AND json_extract(att.payload,'$.availability')='available' AND json_extract(att.payload,'$.blobSha256')=er.attachment_sha256 AND json_extract(att.payload,'$.sizeBytes')=er.attachment_bytes AND lower(trim(CASE WHEN instr(json_extract(att.payload,'$.mimeType'),';')>0 THEN substr(json_extract(att.payload,'$.mimeType'),1,instr(json_extract(att.payload,'$.mimeType'),';')-1) ELSE json_extract(att.payload,'$.mimeType') END))='application/pdf'\nWHERE er.epoch=h.epoch AND er.source_key=h.source_key AND er.run_id=h.run_id)))"
+        }
+      }
+    },
+    {
+      "page": 100,
+      "slices": 0,
+      "advanceMs": 8.503041000000053,
+      "progressCalls": 2,
+      "stats": {
+        "other": {
+          "calls": 107,
+          "ms": 1.381001000000083,
+          "sql": "PRAGMA schema_version"
+        },
+        "obsolete_page_refs": {
+          "calls": 6,
+          "ms": 3.5169579999999314,
+          "sql": "SELECT EXISTS(SELECT 1 FROM quixi_search_page_refs er LEFT JOIN quixi_search_heads h ON h.epoch=er.epoch AND h.source_key=er.source_key AND h.run_id=er.run_id WHERE h.source_key IS NULL OR NOT (h.source_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='source' AND id=h.source_key),0)\nAND h.message_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='message' AND id=h.message_id),0)\nAND h.thread_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='thread' AND id=h.thread_id),0)\nAND h.document_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='document' AND id=h.document_id),0)\nAND h.global_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='global' AND id='*'),0) AND (substr(h.source_key,1,2)<>'e:' OR (NOT EXISTS(SELECT 1 FROM quixi_search_scopes WHERE scope='extraction_failed' AND id=h.document_id) AND EXISTS(\nSELECT 1 FROM quixi_search_page_refs er\nJOIN quixi_extract_pages ep ON ep.id=er.page_id AND ep.state='published' AND ep.run_id=er.extraction_run_id AND ep.page=er.page AND ep.source_digest=er.source_digest AND ep.publication_revision=er.publication_revision\nJOIN quixi_extract_runs ex ON ex.id=ep.run_id AND ex.document_id=er.document_id AND ex.identity=er.identity\nJOIN quixi_extract_documents ed ON ed.document_id=ex.document_id AND ed.visible_run=ex.id\nJOIN quixi_records doc ON doc.collection='documents' AND doc.id=er.document_id AND json_extract(doc.payload,'$.attachmentId')=er.attachment_id\nJOIN quixi_records att ON att.collection='attachments' AND att.id=er.attachment_id AND json_extract(att.payload,'$.availability')='available' AND json_extract(att.payload,'$.blobSha256')=er.attachment_sha256 AND json_extract(att.payload,'$.sizeBytes')=er.attachment_bytes AND lower(trim(CASE WHEN instr(json_extract(att.payload,'$.mimeType'),';')>0 THEN substr(json_extract(att.payload,'$.mimeType'),1,instr(json_extract(att.payload,'$.mimeType'),';')-1) ELSE json_extract(att.payload,'$.mimeType') END))='application/pdf'\nWHERE er.epoch=h.epoch AND er.source_key=h.source_key AND er.run_id=h.run_id)))))"
+        },
+        "obsolete_chunks": {
+          "calls": 6,
+          "ms": 0.6677479999999605,
+          "sql": "SELECT EXISTS(SELECT 1 FROM quixi_search_chunks c WHERE NOT EXISTS(SELECT 1 FROM quixi_search_builds b WHERE b.epoch=c.epoch AND b.source_key=c.source_key AND b.run_id=c.run_id) AND (c.epoch NOT IN(SELECT active_epoch FROM quixi_search_meta UNION SELECT rebuilding_epoch FROM quixi_search_meta WHERE rebuilding_epoch IS NOT NULL) OR NOT EXISTS(SELECT 1 FROM quixi_search_heads h WHERE h.epoch=c.epoch AND h.source_key=c.source_key AND h.run_id=c.run_id))) OR EXISTS(SELECT 1 FROM quixi_search_heads WHERE epoch NOT IN(SELECT active_epoch FROM quixi_search_meta UNION SELECT rebuilding_epoch FROM quixi_search_meta WHERE rebuilding_epoch IS NOT NULL)) OR EXISTS(SELECT 1 FROM quixi_search_queue WHERE epoch NOT IN(SELECT active_epoch FROM quixi_search_meta UNION SELECT rebuilding_epoch FROM quixi_search_meta WHERE rebuilding_epoch IS NOT NULL))"
+        },
+        "queue_pick": {
+          "calls": 2,
+          "ms": 0.04724999999996271,
+          "sql": "SELECT * FROM quixi_search_queue WHERE failed=0 ORDER BY CASE scope WHEN 'source' THEN 0 ELSE 1 END,epoch,scope,id LIMIT 1"
+        },
+        "queue_count": {
+          "calls": 6,
+          "ms": 0.04750100000001112,
+          "sql": "SELECT count(*) FROM quixi_search_queue WHERE failed=0"
+        },
+        "visible_chunk_count": {
+          "calls": 3,
+          "ms": 1.6961659999999483,
+          "sql": "SELECT count(*) FROM quixi_search_chunks c JOIN quixi_search_heads h ON h.epoch=c.epoch AND h.source_key=c.source_key AND h.run_id=c.run_id WHERE h.epoch=? AND h.source_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='source' AND id=h.source_key),0)\nAND h.message_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='message' AND id=h.message_id),0)\nAND h.thread_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='thread' AND id=h.thread_id),0)\nAND h.document_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='document' AND id=h.document_id),0)\nAND h.global_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='global' AND id='*'),0) AND (substr(h.source_key,1,2)<>'e:' OR (NOT EXISTS(SELECT 1 FROM quixi_search_scopes WHERE scope='extraction_failed' AND id=h.document_id) AND EXISTS(\nSELECT 1 FROM quixi_search_page_refs er\nJOIN quixi_extract_pages ep ON ep.id=er.page_id AND ep.state='published' AND ep.run_id=er.extraction_run_id AND ep.page=er.page AND ep.source_digest=er.source_digest AND ep.publication_revision=er.publication_revision\nJOIN quixi_extract_runs ex ON ex.id=ep.run_id AND ex.document_id=er.document_id AND ex.identity=er.identity\nJOIN quixi_extract_documents ed ON ed.document_id=ex.document_id AND ed.visible_run=ex.id\nJOIN quixi_records doc ON doc.collection='documents' AND doc.id=er.document_id AND json_extract(doc.payload,'$.attachmentId')=er.attachment_id\nJOIN quixi_records att ON att.collection='attachments' AND att.id=er.attachment_id AND json_extract(att.payload,'$.availability')='available' AND json_extract(att.payload,'$.blobSha256')=er.attachment_sha256 AND json_extract(att.payload,'$.sizeBytes')=er.attachment_bytes AND lower(trim(CASE WHEN instr(json_extract(att.payload,'$.mimeType'),';')>0 THEN substr(json_extract(att.payload,'$.mimeType'),1,instr(json_extract(att.payload,'$.mimeType'),';')-1) ELSE json_extract(att.payload,'$.mimeType') END))='application/pdf'\nWHERE er.epoch=h.epoch AND er.source_key=h.source_key AND er.run_id=h.run_id)))"
+        }
+      }
+    },
+    {
+      "page": 500,
+      "slices": 0,
+      "advanceMs": 28.024625000000015,
+      "progressCalls": 2,
+      "stats": {
+        "other": {
+          "calls": 107,
+          "ms": 1.3688300000121671,
+          "sql": "PRAGMA schema_version"
+        },
+        "obsolete_page_refs": {
+          "calls": 6,
+          "ms": 15.440667000000758,
+          "sql": "SELECT EXISTS(SELECT 1 FROM quixi_search_page_refs er LEFT JOIN quixi_search_heads h ON h.epoch=er.epoch AND h.source_key=er.source_key AND h.run_id=er.run_id WHERE h.source_key IS NULL OR NOT (h.source_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='source' AND id=h.source_key),0)\nAND h.message_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='message' AND id=h.message_id),0)\nAND h.thread_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='thread' AND id=h.thread_id),0)\nAND h.document_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='document' AND id=h.document_id),0)\nAND h.global_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='global' AND id='*'),0) AND (substr(h.source_key,1,2)<>'e:' OR (NOT EXISTS(SELECT 1 FROM quixi_search_scopes WHERE scope='extraction_failed' AND id=h.document_id) AND EXISTS(\nSELECT 1 FROM quixi_search_page_refs er\nJOIN quixi_extract_pages ep ON ep.id=er.page_id AND ep.state='published' AND ep.run_id=er.extraction_run_id AND ep.page=er.page AND ep.source_digest=er.source_digest AND ep.publication_revision=er.publication_revision\nJOIN quixi_extract_runs ex ON ex.id=ep.run_id AND ex.document_id=er.document_id AND ex.identity=er.identity\nJOIN quixi_extract_documents ed ON ed.document_id=ex.document_id AND ed.visible_run=ex.id\nJOIN quixi_records doc ON doc.collection='documents' AND doc.id=er.document_id AND json_extract(doc.payload,'$.attachmentId')=er.attachment_id\nJOIN quixi_records att ON att.collection='attachments' AND att.id=er.attachment_id AND json_extract(att.payload,'$.availability')='available' AND json_extract(att.payload,'$.blobSha256')=er.attachment_sha256 AND json_extract(att.payload,'$.sizeBytes')=er.attachment_bytes AND lower(trim(CASE WHEN instr(json_extract(att.payload,'$.mimeType'),';')>0 THEN substr(json_extract(att.payload,'$.mimeType'),1,instr(json_extract(att.payload,'$.mimeType'),';')-1) ELSE json_extract(att.payload,'$.mimeType') END))='application/pdf'\nWHERE er.epoch=h.epoch AND er.source_key=h.source_key AND er.run_id=h.run_id)))))"
+        },
+        "obsolete_chunks": {
+          "calls": 6,
+          "ms": 2.383958000000348,
+          "sql": "SELECT EXISTS(SELECT 1 FROM quixi_search_chunks c WHERE NOT EXISTS(SELECT 1 FROM quixi_search_builds b WHERE b.epoch=c.epoch AND b.source_key=c.source_key AND b.run_id=c.run_id) AND (c.epoch NOT IN(SELECT active_epoch FROM quixi_search_meta UNION SELECT rebuilding_epoch FROM quixi_search_meta WHERE rebuilding_epoch IS NOT NULL) OR NOT EXISTS(SELECT 1 FROM quixi_search_heads h WHERE h.epoch=c.epoch AND h.source_key=c.source_key AND h.run_id=c.run_id))) OR EXISTS(SELECT 1 FROM quixi_search_heads WHERE epoch NOT IN(SELECT active_epoch FROM quixi_search_meta UNION SELECT rebuilding_epoch FROM quixi_search_meta WHERE rebuilding_epoch IS NOT NULL)) OR EXISTS(SELECT 1 FROM quixi_search_queue WHERE epoch NOT IN(SELECT active_epoch FROM quixi_search_meta UNION SELECT rebuilding_epoch FROM quixi_search_meta WHERE rebuilding_epoch IS NOT NULL))"
+        },
+        "queue_pick": {
+          "calls": 2,
+          "ms": 0.061792000000423286,
+          "sql": "SELECT * FROM quixi_search_queue WHERE failed=0 ORDER BY CASE scope WHEN 'source' THEN 0 ELSE 1 END,epoch,scope,id LIMIT 1"
+        },
+        "queue_count": {
+          "calls": 6,
+          "ms": 0.05349999999816646,
+          "sql": "SELECT count(*) FROM quixi_search_queue WHERE failed=0"
+        },
+        "visible_chunk_count": {
+          "calls": 3,
+          "ms": 7.53599899999972,
+          "sql": "SELECT count(*) FROM quixi_search_chunks c JOIN quixi_search_heads h ON h.epoch=c.epoch AND h.source_key=c.source_key AND h.run_id=c.run_id WHERE h.epoch=? AND h.source_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='source' AND id=h.source_key),0)\nAND h.message_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='message' AND id=h.message_id),0)\nAND h.thread_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='thread' AND id=h.thread_id),0)\nAND h.document_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='document' AND id=h.document_id),0)\nAND h.global_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='global' AND id='*'),0) AND (substr(h.source_key,1,2)<>'e:' OR (NOT EXISTS(SELECT 1 FROM quixi_search_scopes WHERE scope='extraction_failed' AND id=h.document_id) AND EXISTS(\nSELECT 1 FROM quixi_search_page_refs er\nJOIN quixi_extract_pages ep ON ep.id=er.page_id AND ep.state='published' AND ep.run_id=er.extraction_run_id AND ep.page=er.page AND ep.source_digest=er.source_digest AND ep.publication_revision=er.publication_revision\nJOIN quixi_extract_runs ex ON ex.id=ep.run_id AND ex.document_id=er.document_id AND ex.identity=er.identity\nJOIN quixi_extract_documents ed ON ed.document_id=ex.document_id AND ed.visible_run=ex.id\nJOIN quixi_records doc ON doc.collection='documents' AND doc.id=er.document_id AND json_extract(doc.payload,'$.attachmentId')=er.attachment_id\nJOIN quixi_records att ON att.collection='attachments' AND att.id=er.attachment_id AND json_extract(att.payload,'$.availability')='available' AND json_extract(att.payload,'$.blobSha256')=er.attachment_sha256 AND json_extract(att.payload,'$.sizeBytes')=er.attachment_bytes AND lower(trim(CASE WHEN instr(json_extract(att.payload,'$.mimeType'),';')>0 THEN substr(json_extract(att.payload,'$.mimeType'),1,instr(json_extract(att.payload,'$.mimeType'),';')-1) ELSE json_extract(att.payload,'$.mimeType') END))='application/pdf'\nWHERE er.epoch=h.epoch AND er.source_key=h.source_key AND er.run_id=h.run_id)))"
+        }
+      }
+    },
+    {
+      "page": 1000,
+      "slices": 0,
+      "advanceMs": 55.59875000000102,
+      "progressCalls": 2,
+      "stats": {
+        "other": {
+          "calls": 107,
+          "ms": 1.5639589999882446,
+          "sql": "PRAGMA schema_version"
+        },
+        "obsolete_page_refs": {
+          "calls": 6,
+          "ms": 30.163332999996783,
+          "sql": "SELECT EXISTS(SELECT 1 FROM quixi_search_page_refs er LEFT JOIN quixi_search_heads h ON h.epoch=er.epoch AND h.source_key=er.source_key AND h.run_id=er.run_id WHERE h.source_key IS NULL OR NOT (h.source_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='source' AND id=h.source_key),0)\nAND h.message_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='message' AND id=h.message_id),0)\nAND h.thread_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='thread' AND id=h.thread_id),0)\nAND h.document_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='document' AND id=h.document_id),0)\nAND h.global_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='global' AND id='*'),0) AND (substr(h.source_key,1,2)<>'e:' OR (NOT EXISTS(SELECT 1 FROM quixi_search_scopes WHERE scope='extraction_failed' AND id=h.document_id) AND EXISTS(\nSELECT 1 FROM quixi_search_page_refs er\nJOIN quixi_extract_pages ep ON ep.id=er.page_id AND ep.state='published' AND ep.run_id=er.extraction_run_id AND ep.page=er.page AND ep.source_digest=er.source_digest AND ep.publication_revision=er.publication_revision\nJOIN quixi_extract_runs ex ON ex.id=ep.run_id AND ex.document_id=er.document_id AND ex.identity=er.identity\nJOIN quixi_extract_documents ed ON ed.document_id=ex.document_id AND ed.visible_run=ex.id\nJOIN quixi_records doc ON doc.collection='documents' AND doc.id=er.document_id AND json_extract(doc.payload,'$.attachmentId')=er.attachment_id\nJOIN quixi_records att ON att.collection='attachments' AND att.id=er.attachment_id AND json_extract(att.payload,'$.availability')='available' AND json_extract(att.payload,'$.blobSha256')=er.attachment_sha256 AND json_extract(att.payload,'$.sizeBytes')=er.attachment_bytes AND lower(trim(CASE WHEN instr(json_extract(att.payload,'$.mimeType'),';')>0 THEN substr(json_extract(att.payload,'$.mimeType'),1,instr(json_extract(att.payload,'$.mimeType'),';')-1) ELSE json_extract(att.payload,'$.mimeType') END))='application/pdf'\nWHERE er.epoch=h.epoch AND er.source_key=h.source_key AND er.run_id=h.run_id)))))"
+        },
+        "obsolete_chunks": {
+          "calls": 6,
+          "ms": 4.7575010000036855,
+          "sql": "SELECT EXISTS(SELECT 1 FROM quixi_search_chunks c WHERE NOT EXISTS(SELECT 1 FROM quixi_search_builds b WHERE b.epoch=c.epoch AND b.source_key=c.source_key AND b.run_id=c.run_id) AND (c.epoch NOT IN(SELECT active_epoch FROM quixi_search_meta UNION SELECT rebuilding_epoch FROM quixi_search_meta WHERE rebuilding_epoch IS NOT NULL) OR NOT EXISTS(SELECT 1 FROM quixi_search_heads h WHERE h.epoch=c.epoch AND h.source_key=c.source_key AND h.run_id=c.run_id))) OR EXISTS(SELECT 1 FROM quixi_search_heads WHERE epoch NOT IN(SELECT active_epoch FROM quixi_search_meta UNION SELECT rebuilding_epoch FROM quixi_search_meta WHERE rebuilding_epoch IS NOT NULL)) OR EXISTS(SELECT 1 FROM quixi_search_queue WHERE epoch NOT IN(SELECT active_epoch FROM quixi_search_meta UNION SELECT rebuilding_epoch FROM quixi_search_meta WHERE rebuilding_epoch IS NOT NULL))"
+        },
+        "queue_pick": {
+          "calls": 2,
+          "ms": 0.05862499999784632,
+          "sql": "SELECT * FROM quixi_search_queue WHERE failed=0 ORDER BY CASE scope WHEN 'source' THEN 0 ELSE 1 END,epoch,scope,id LIMIT 1"
+        },
+        "queue_count": {
+          "calls": 6,
+          "ms": 0.051207000000431435,
+          "sql": "SELECT count(*) FROM quixi_search_queue WHERE failed=0"
+        },
+        "visible_chunk_count": {
+          "calls": 3,
+          "ms": 17.82837500000096,
+          "sql": "SELECT count(*) FROM quixi_search_chunks c JOIN quixi_search_heads h ON h.epoch=c.epoch AND h.source_key=c.source_key AND h.run_id=c.run_id WHERE h.epoch=? AND h.source_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='source' AND id=h.source_key),0)\nAND h.message_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='message' AND id=h.message_id),0)\nAND h.thread_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='thread' AND id=h.thread_id),0)\nAND h.document_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='document' AND id=h.document_id),0)\nAND h.global_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='global' AND id='*'),0) AND (substr(h.source_key,1,2)<>'e:' OR (NOT EXISTS(SELECT 1 FROM quixi_search_scopes WHERE scope='extraction_failed' AND id=h.document_id) AND EXISTS(\nSELECT 1 FROM quixi_search_page_refs er\nJOIN quixi_extract_pages ep ON ep.id=er.page_id AND ep.state='published' AND ep.run_id=er.extraction_run_id AND ep.page=er.page AND ep.source_digest=er.source_digest AND ep.publication_revision=er.publication_revision\nJOIN quixi_extract_runs ex ON ex.id=ep.run_id AND ex.document_id=er.document_id AND ex.identity=er.identity\nJOIN quixi_extract_documents ed ON ed.document_id=ex.document_id AND ed.visible_run=ex.id\nJOIN quixi_records doc ON doc.collection='documents' AND doc.id=er.document_id AND json_extract(doc.payload,'$.attachmentId')=er.attachment_id\nJOIN quixi_records att ON att.collection='attachments' AND att.id=er.attachment_id AND json_extract(att.payload,'$.availability')='available' AND json_extract(att.payload,'$.blobSha256')=er.attachment_sha256 AND json_extract(att.payload,'$.sizeBytes')=er.attachment_bytes AND lower(trim(CASE WHEN instr(json_extract(att.payload,'$.mimeType'),';')>0 THEN substr(json_extract(att.payload,'$.mimeType'),1,instr(json_extract(att.payload,'$.mimeType'),';')-1) ELSE json_extract(att.payload,'$.mimeType') END))='application/pdf'\nWHERE er.epoch=h.epoch AND er.source_key=h.source_key AND er.run_id=h.run_id)))"
+        }
+      }
+    }
+  ],
+  "queryPlans": {
+    "obsolete_page_refs": [
+      {
+        "id": 1,
+        "parent": 0,
+        "notused": 0,
+        "detail": "SCAN CONSTANT ROW"
+      },
+      {
+        "id": 4,
+        "parent": 0,
+        "notused": 0,
+        "detail": "SCALAR SUBQUERY 8"
+      },
+      {
+        "id": 10,
+        "parent": 4,
+        "notused": 216,
+        "detail": "SCAN er"
+      },
+      {
+        "id": 12,
+        "parent": 4,
+        "notused": 46,
+        "detail": "SEARCH h USING INDEX sqlite_autoindex_quixi_search_heads_1 (epoch=? AND source_key=?) LEFT-JOIN"
+      },
+      {
+        "id": 29,
+        "parent": 4,
+        "notused": 0,
+        "detail": "CORRELATED SCALAR SUBQUERY 1"
+      },
+      {
+        "id": 34,
+        "parent": 29,
+        "notused": 39,
+        "detail": "SEARCH quixi_search_scopes USING INDEX sqlite_autoindex_quixi_search_scopes_1 (scope=? AND id=?)"
+      },
+      {
+        "id": 51,
+        "parent": 4,
+        "notused": 0,
+        "detail": "CORRELATED SCALAR SUBQUERY 2"
+      },
+      {
+        "id": 56,
+        "parent": 51,
+        "notused": 39,
+        "detail": "SEARCH quixi_search_scopes USING INDEX sqlite_autoindex_quixi_search_scopes_1 (scope=? AND id=?)"
+      },
+      {
+        "id": 73,
+        "parent": 4,
+        "notused": 0,
+        "detail": "CORRELATED SCALAR SUBQUERY 3"
+      },
+      {
+        "id": 78,
+        "parent": 73,
+        "notused": 39,
+        "detail": "SEARCH quixi_search_scopes USING INDEX sqlite_autoindex_quixi_search_scopes_1 (scope=? AND id=?)"
+      },
+      {
+        "id": 95,
+        "parent": 4,
+        "notused": 0,
+        "detail": "CORRELATED SCALAR SUBQUERY 4"
+      },
+      {
+        "id": 100,
+        "parent": 95,
+        "notused": 39,
+        "detail": "SEARCH quixi_search_scopes USING INDEX sqlite_autoindex_quixi_search_scopes_1 (scope=? AND id=?)"
+      },
+      {
+        "id": 118,
+        "parent": 4,
+        "notused": 0,
+        "detail": "SCALAR SUBQUERY 5"
+      },
+      {
+        "id": 123,
+        "parent": 118,
+        "notused": 39,
+        "detail": "SEARCH quixi_search_scopes USING INDEX sqlite_autoindex_quixi_search_scopes_1 (scope=? AND id=?)"
+      },
+      {
+        "id": 140,
+        "parent": 4,
+        "notused": 0,
+        "detail": "CORRELATED SCALAR SUBQUERY 6"
+      },
+      {
+        "id": 144,
+        "parent": 140,
+        "notused": 39,
+        "detail": "SEARCH quixi_search_scopes USING COVERING INDEX sqlite_autoindex_quixi_search_scopes_1 (scope=? AND id=?)"
+      },
+      {
+        "id": 155,
+        "parent": 4,
+        "notused": 0,
+        "detail": "CORRELATED SCALAR SUBQUERY 7"
+      },
+      {
+        "id": 174,
+        "parent": 155,
+        "notused": 46,
+        "detail": "SEARCH er USING INDEX sqlite_autoindex_quixi_search_page_refs_1 (epoch=? AND source_key=?)"
+      },
+      {
+        "id": 186,
+        "parent": 155,
+        "notused": 45,
+        "detail": "SEARCH ep USING INDEX quixi_extract_page_run (run_id=? AND page=? AND id=?)"
+      },
+      {
+        "id": 202,
+        "parent": 155,
+        "notused": 47,
+        "detail": "SEARCH att USING INDEX sqlite_autoindex_quixi_records_1 (collection=? AND id=?)"
+      },
+      {
+        "id": 236,
+        "parent": 155,
+        "notused": 47,
+        "detail": "SEARCH doc USING INDEX sqlite_autoindex_quixi_records_1 (collection=? AND id=?)"
+      },
+      {
+        "id": 249,
+        "parent": 155,
+        "notused": 46,
+        "detail": "SEARCH ex USING INDEX sqlite_autoindex_quixi_extract_runs_1 (id=?)"
+      },
+      {
+        "id": 263,
+        "parent": 155,
+        "notused": 47,
+        "detail": "SEARCH ed USING INDEX sqlite_autoindex_quixi_extract_documents_1 (document_id=?)"
+      }
+    ],
+    "obsolete_chunks": [
+      {
+        "id": 1,
+        "parent": 0,
+        "notused": 0,
+        "detail": "SCAN CONSTANT ROW"
+      },
+      {
+        "id": 4,
+        "parent": 0,
+        "notused": 0,
+        "detail": "SCALAR SUBQUERY 5"
+      },
+      {
+        "id": 8,
+        "parent": 4,
+        "notused": 212,
+        "detail": "SCAN c USING COVERING INDEX quixi_search_chunk_source"
+      },
+      {
+        "id": 11,
+        "parent": 4,
+        "notused": 0,
+        "detail": "CORRELATED SCALAR SUBQUERY 1"
+      },
+      {
+        "id": 16,
+        "parent": 11,
+        "notused": 39,
+        "detail": "SEARCH b USING INDEX sqlite_autoindex_quixi_search_builds_1 (epoch=? AND source_key=?)"
+      },
+      {
+        "id": 33,
+        "parent": 4,
+        "notused": 0,
+        "detail": "LIST SUBQUERY 3"
+      },
+      {
+        "id": 36,
+        "parent": 33,
+        "notused": 0,
+        "detail": "MERGE (UNION)"
+      },
+      {
+        "id": 38,
+        "parent": 36,
+        "notused": 0,
+        "detail": "LEFT"
+      },
+      {
+        "id": 41,
+        "parent": 38,
+        "notused": 216,
+        "detail": "SCAN quixi_search_meta"
+      },
+      {
+        "id": 47,
+        "parent": 38,
+        "notused": 0,
+        "detail": "USE TEMP B-TREE FOR ORDER BY"
+      },
+      {
+        "id": 56,
+        "parent": 36,
+        "notused": 0,
+        "detail": "RIGHT"
+      },
+      {
+        "id": 59,
+        "parent": 56,
+        "notused": 216,
+        "detail": "SCAN quixi_search_meta"
+      },
+      {
+        "id": 67,
+        "parent": 56,
+        "notused": 0,
+        "detail": "USE TEMP B-TREE FOR ORDER BY"
+      },
+      {
+        "id": 83,
+        "parent": 36,
+        "notused": 0,
+        "detail": "CREATE BLOOM FILTER"
+      },
+      {
+        "id": 93,
+        "parent": 36,
+        "notused": 0,
+        "detail": "CREATE BLOOM FILTER"
+      },
+      {
+        "id": 125,
+        "parent": 4,
+        "notused": 0,
+        "detail": "CORRELATED SCALAR SUBQUERY 4"
+      },
+      {
+        "id": 130,
+        "parent": 125,
+        "notused": 39,
+        "detail": "SEARCH h USING INDEX sqlite_autoindex_quixi_search_heads_1 (epoch=? AND source_key=?)"
+      },
+      {
+        "id": 151,
+        "parent": 0,
+        "notused": 0,
+        "detail": "SCALAR SUBQUERY 8"
+      },
+      {
+        "id": 155,
+        "parent": 151,
+        "notused": 209,
+        "detail": "SCAN quixi_search_heads USING COVERING INDEX sqlite_autoindex_quixi_search_heads_1"
+      },
+      {
+        "id": 160,
+        "parent": 151,
+        "notused": 0,
+        "detail": "LIST SUBQUERY 7"
+      },
+      {
+        "id": 163,
+        "parent": 160,
+        "notused": 0,
+        "detail": "MERGE (UNION)"
+      },
+      {
+        "id": 165,
+        "parent": 163,
+        "notused": 0,
+        "detail": "LEFT"
+      },
+      {
+        "id": 168,
+        "parent": 165,
+        "notused": 216,
+        "detail": "SCAN quixi_search_meta"
+      },
+      {
+        "id": 174,
+        "parent": 165,
+        "notused": 0,
+        "detail": "USE TEMP B-TREE FOR ORDER BY"
+      },
+      {
+        "id": 183,
+        "parent": 163,
+        "notused": 0,
+        "detail": "RIGHT"
+      },
+      {
+        "id": 186,
+        "parent": 183,
+        "notused": 216,
+        "detail": "SCAN quixi_search_meta"
+      },
+      {
+        "id": 194,
+        "parent": 183,
+        "notused": 0,
+        "detail": "USE TEMP B-TREE FOR ORDER BY"
+      },
+      {
+        "id": 210,
+        "parent": 163,
+        "notused": 0,
+        "detail": "CREATE BLOOM FILTER"
+      },
+      {
+        "id": 220,
+        "parent": 163,
+        "notused": 0,
+        "detail": "CREATE BLOOM FILTER"
+      },
+      {
+        "id": 262,
+        "parent": 0,
+        "notused": 0,
+        "detail": "SCALAR SUBQUERY 11"
+      },
+      {
+        "id": 266,
+        "parent": 262,
+        "notused": 213,
+        "detail": "SCAN quixi_search_queue USING COVERING INDEX sqlite_autoindex_quixi_search_queue_1"
+      },
+      {
+        "id": 271,
+        "parent": 262,
+        "notused": 0,
+        "detail": "LIST SUBQUERY 10"
+      },
+      {
+        "id": 274,
+        "parent": 271,
+        "notused": 0,
+        "detail": "MERGE (UNION)"
+      },
+      {
+        "id": 276,
+        "parent": 274,
+        "notused": 0,
+        "detail": "LEFT"
+      },
+      {
+        "id": 279,
+        "parent": 276,
+        "notused": 216,
+        "detail": "SCAN quixi_search_meta"
+      },
+      {
+        "id": 285,
+        "parent": 276,
+        "notused": 0,
+        "detail": "USE TEMP B-TREE FOR ORDER BY"
+      },
+      {
+        "id": 294,
+        "parent": 274,
+        "notused": 0,
+        "detail": "RIGHT"
+      },
+      {
+        "id": 297,
+        "parent": 294,
+        "notused": 216,
+        "detail": "SCAN quixi_search_meta"
+      },
+      {
+        "id": 305,
+        "parent": 294,
+        "notused": 0,
+        "detail": "USE TEMP B-TREE FOR ORDER BY"
+      },
+      {
+        "id": 321,
+        "parent": 274,
+        "notused": 0,
+        "detail": "CREATE BLOOM FILTER"
+      },
+      {
+        "id": 331,
+        "parent": 274,
+        "notused": 0,
+        "detail": "CREATE BLOOM FILTER"
+      }
+    ],
+    "queue_pick": [
+      {
+        "id": 4,
+        "parent": 0,
+        "notused": 216,
+        "detail": "SCAN quixi_search_queue"
+      },
+      {
+        "id": 28,
+        "parent": 0,
+        "notused": 0,
+        "detail": "USE TEMP B-TREE FOR ORDER BY"
+      }
+    ],
+    "queue_count": [
+      {
+        "id": 3,
+        "parent": 0,
+        "notused": 216,
+        "detail": "SCAN quixi_search_queue"
+      }
+    ],
+    "visible_chunk_count": [
+      {
+        "id": 5,
+        "parent": 0,
+        "notused": 54,
+        "detail": "SEARCH c USING COVERING INDEX quixi_search_chunk_source (epoch=?)"
+      },
+      {
+        "id": 11,
+        "parent": 0,
+        "notused": 46,
+        "detail": "SEARCH h USING INDEX sqlite_autoindex_quixi_search_heads_1 (epoch=? AND source_key=?)"
+      },
+      {
+        "id": 23,
+        "parent": 0,
+        "notused": 0,
+        "detail": "SCALAR SUBQUERY 5"
+      },
+      {
+        "id": 28,
+        "parent": 23,
+        "notused": 39,
+        "detail": "SEARCH quixi_search_scopes USING INDEX sqlite_autoindex_quixi_search_scopes_1 (scope=? AND id=?)"
+      },
+      {
+        "id": 46,
+        "parent": 0,
+        "notused": 0,
+        "detail": "CORRELATED SCALAR SUBQUERY 1"
+      },
+      {
+        "id": 51,
+        "parent": 46,
+        "notused": 39,
+        "detail": "SEARCH quixi_search_scopes USING INDEX sqlite_autoindex_quixi_search_scopes_1 (scope=? AND id=?)"
+      },
+      {
+        "id": 66,
+        "parent": 0,
+        "notused": 0,
+        "detail": "CORRELATED SCALAR SUBQUERY 2"
+      },
+      {
+        "id": 71,
+        "parent": 66,
+        "notused": 39,
+        "detail": "SEARCH quixi_search_scopes USING INDEX sqlite_autoindex_quixi_search_scopes_1 (scope=? AND id=?)"
+      },
+      {
+        "id": 87,
+        "parent": 0,
+        "notused": 0,
+        "detail": "CORRELATED SCALAR SUBQUERY 3"
+      },
+      {
+        "id": 92,
+        "parent": 87,
+        "notused": 39,
+        "detail": "SEARCH quixi_search_scopes USING INDEX sqlite_autoindex_quixi_search_scopes_1 (scope=? AND id=?)"
+      },
+      {
+        "id": 108,
+        "parent": 0,
+        "notused": 0,
+        "detail": "CORRELATED SCALAR SUBQUERY 4"
+      },
+      {
+        "id": 113,
+        "parent": 108,
+        "notused": 39,
+        "detail": "SEARCH quixi_search_scopes USING INDEX sqlite_autoindex_quixi_search_scopes_1 (scope=? AND id=?)"
+      },
+      {
+        "id": 131,
+        "parent": 0,
+        "notused": 0,
+        "detail": "CORRELATED SCALAR SUBQUERY 6"
+      },
+      {
+        "id": 135,
+        "parent": 131,
+        "notused": 39,
+        "detail": "SEARCH quixi_search_scopes USING COVERING INDEX sqlite_autoindex_quixi_search_scopes_1 (scope=? AND id=?)"
+      },
+      {
+        "id": 146,
+        "parent": 0,
+        "notused": 0,
+        "detail": "CORRELATED SCALAR SUBQUERY 7"
+      },
+      {
+        "id": 165,
+        "parent": 146,
+        "notused": 46,
+        "detail": "SEARCH er USING INDEX sqlite_autoindex_quixi_search_page_refs_1 (epoch=? AND source_key=?)"
+      },
+      {
+        "id": 176,
+        "parent": 146,
+        "notused": 45,
+        "detail": "SEARCH ep USING INDEX quixi_extract_page_run (run_id=? AND page=? AND id=?)"
+      },
+      {
+        "id": 192,
+        "parent": 146,
+        "notused": 47,
+        "detail": "SEARCH att USING INDEX sqlite_autoindex_quixi_records_1 (collection=? AND id=?)"
+      },
+      {
+        "id": 226,
+        "parent": 146,
+        "notused": 47,
+        "detail": "SEARCH doc USING INDEX sqlite_autoindex_quixi_records_1 (collection=? AND id=?)"
+      },
+      {
+        "id": 239,
+        "parent": 146,
+        "notused": 46,
+        "detail": "SEARCH ex USING INDEX sqlite_autoindex_quixi_extract_runs_1 (id=?)"
+      },
+      {
+        "id": 253,
+        "parent": 146,
+        "notused": 47,
+        "detail": "SEARCH ed USING INDEX sqlite_autoindex_quixi_extract_documents_1 (document_id=?)"
+      }
+    ]
+  },
+  "sourceHashes": {
+    "packages/storage/src/worker/search/index.ts": "677c6d528c9e1248d3674a0ab6bb775163ac0c55585eeb396fd607b3b8b88d59",
+    "packages/storage/src/worker/search/schema.ts": "27f06f47227d4a0871724fdecba334229d3320909a6e4ace3c93f6e066c6a9ba",
+    "packages/storage/src/worker/search/extraction.ts": "ba85bc1954ce553a3268e1b924f8eeed879f0b1dad694108090de77301096033",
+    "packages/storage/src/worker/archive-database.ts": "ef3b2f9bb448307a16634d7c69cfd9bb2bc3d5ac525f4338ecdb3b1365d8b192",
+    "packages/storage/tests/search-performance/diagnose.ts": "10ab3cc12c20dab50d496399173594e274b85160917e80f1ed761c1414730cd3"
+  }
+}

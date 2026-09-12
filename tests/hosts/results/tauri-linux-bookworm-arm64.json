@@ -1,0 +1,353 @@
+{
+  "timestamp": "2026-09-08T08:11:35.104897+00:00",
+  "host": "linux-tauri-webkitgtk-container",
+  "platform": "Linux-7.0.12-linuxkit-aarch64-with-glibc2.36",
+  "osRelease": "PRETTY_NAME=\"Debian GNU/Linux 12 (bookworm)\"\nNAME=\"Debian GNU/Linux\"\nVERSION_ID=\"12\"\nVERSION=\"12 (bookworm)\"\nVERSION_CODENAME=bookworm\nID=debian\nHOME_URL=\"https://www.debian.org/\"\nSUPPORT_URL=\"https://www.debian.org/support\"\nBUG_REPORT_URL=\"https://bugs.debian.org/\"\n",
+  "webkitgtkVersion": "2.50.6",
+  "gtkVersion": "3.24.38",
+  "rustVersion": "rustc 1.97.1 (8bab26f4f 2026-07-14)",
+  "packages": "libgtk-3-0:arm64\t3.24.38-2~deb12u3\nlibwebkit2gtk-4.1-0:arm64\t2.50.6-1~deb12u2\nxvfb\t2:21.1.7-3+deb12u13",
+  "display": "Xvfb",
+  "softwareRendering": true,
+  "webkitSandboxDisabled": false,
+  "buildCommand": [
+    "cargo",
+    "build",
+    "--locked",
+    "-p",
+    "quixi-desktop",
+    "--features",
+    "storage-proof"
+  ],
+  "inputSha256": {
+    "Cargo.lock": "6ac1f1449436f7e84d7e99d0e7a7d6f4b13a63aaf24381209e963327ee7c25d1",
+    "Cargo.toml": "39a9f4b99b5e149295cc5796ad09330145687782740286f4bd9b068828517205",
+    "apps/desktop/dist/assets/index-BeN0bpsL.css": "42707415c237ac72e6de12b258a52d4703b458abe771430beff0b351a23c4a7e",
+    "apps/desktop/dist/assets/index-DOXlbdQe.js": "1cd265bce19e55dd989a6cb50b92b9948d721a3cf5bbec10e0f069dc71a0f8cf",
+    "apps/desktop/dist/assets/index-NHbjF1lb.js": "18140f919410c9bcf8330902546354373c3a89e46c226c1a5c2205f34dca3005",
+    "apps/desktop/dist/assets/sqlite3-BzAlo58v.wasm": "dd7c22431a3b8ad51ab5e6ed91065593574c34c5959d2efdef2f17484eedcb2c",
+    "apps/desktop/dist/index.html": "cd7ff04b3791fb20e93746bf787638b8c8d39cec4c8fad66ce1ac50b3f96d771",
+    "apps/desktop/src-tauri/Cargo.toml": "99ecae46286bdcad4112e601c62852439b0c40717e926342cfdb204ffae23beb",
+    "apps/desktop/src-tauri/build.rs": "6aeeab41bc35efde4e3c2b644a6248f7fc06d24ae30b75c0d33491cbb0c1fa31",
+    "apps/desktop/src-tauri/icons/128x128.png": "1f9720f349452aa629ddc37935804a2a638dbddb652a2e9133760c7a1b526266",
+    "apps/desktop/src-tauri/icons/128x128@2x.png": "4417613945bb28e2bb88c25f1652bbe480e12de379cef074e9fc436dff4c96cf",
+    "apps/desktop/src-tauri/icons/32x32.png": "517e151ad1d0286334b0d29c3ad9f865e81d306c567a0e61e3ccc55db71609ca",
+    "apps/desktop/src-tauri/icons/icon.png": "f64b76fb21a8fe9629cddbb977868b2befcd13b7c292092a7f6f78a5090706f6",
+    "apps/desktop/src-tauri/src/main.rs": "e130cdc481705d40699414e1f274a88f685b32f064b57234a595edfa90ae0374",
+    "apps/desktop/src-tauri/src/storage_proof.rs": "2739d68b1b390f5e15e6f1433249b4fe5863f485045d6434e5bf56caa234d154",
+    "apps/desktop/src-tauri/tauri.conf.json": "7b63f3589e4a3679f7c7b457f842696345382b61f1e62e5516f8afea196bf3cd",
+    "packages/storage/sqlite/dist/sqlite3.wasm": "dd7c22431a3b8ad51ab5e6ed91065593574c34c5959d2efdef2f17484eedcb2c",
+    "tests/hosts/linux/capabilities-worker.js": "854d83b610e9d27032fba49ea925a20ad7392b1f865b64737dce9b77273b5dc3",
+    "tests/hosts/linux/enable_storage_features.c": "25271b1f6bfe3329d05b6bb638e26a310aee078ca6082a132cd39cd46cf4ced7",
+    "tests/hosts/linux/features.c": "aa81bdb40f1cdcb35289755555c4e989b617a87dd968f07382f27060af4d12ae",
+    "tests/hosts/linux/inside.py": "11f3690d78e199a550fae055617aee56cbb7eb4382d1a44c1e13823cb7f355a4",
+    "tests/hosts/linux/origin_diagnostics.py": "e192933345f3d339664610756056ca239f7ad666c28eb1d7b82e86ea3588cbd8",
+    "tests/hosts/run_tauri_storage_proof.py": "7d378ba0417b6818ea2709c086eb9d453306efdc9d2dca55e097008fb9314edf",
+    "tests/hosts/tauri-storage-proof.js": "f4637ebab4403db8e104b1a6da7bbffafe2601a109971b6506aa3ceef8ae80c8"
+  },
+  "storageSupport": "failed-proof",
+  "success": false,
+  "installedFeatureSettings": [
+    {
+      "id": "AccessHandle",
+      "status": "mature",
+      "default": false,
+      "before": false,
+      "afterEnable": true
+    },
+    {
+      "id": "FileSystem",
+      "status": "mature",
+      "default": false,
+      "before": false,
+      "afterEnable": true
+    },
+    {
+      "id": "FileSystemWritableStream",
+      "status": "stable",
+      "default": false,
+      "before": false,
+      "afterEnable": true
+    },
+    {
+      "id": "LocalStorage",
+      "status": "mature",
+      "default": true,
+      "before": true,
+      "afterEnable": true
+    },
+    {
+      "id": "NeedsStorageAccessFromFileURLsQuirk",
+      "status": "embedder",
+      "default": true,
+      "before": true,
+      "afterEnable": true
+    },
+    {
+      "id": "StorageAPIEstimate",
+      "status": "stable",
+      "default": false,
+      "before": false,
+      "afterEnable": true
+    },
+    {
+      "id": "StorageAPI",
+      "status": "stable",
+      "default": false,
+      "before": false,
+      "afterEnable": true
+    },
+    {
+      "id": "RequestStorageAccessThrowsExceptionUntilReload",
+      "status": "unstable",
+      "default": false,
+      "before": false,
+      "afterEnable": true
+    }
+  ],
+  "testOnlyInstrumentation": "Container copy of Tauri proof includes an environment-gated readonly origin-capability callback; normal proof behavior is unchanged.",
+  "instrumentedNativeSourceSha256": "a5d33832c06ce05f97d8b9860cdd6bb6f6cbfddabcb10c653e0d13c43e57c957",
+  "buildExitCode": 0,
+  "executionExitCode": 1,
+  "executionStderr": "",
+  "proof": {
+    "host": "bundled-tauri-webview",
+    "platform": "Linux-7.0.12-linuxkit-aarch64-with-glibc2.36",
+    "timestamp": "2026-09-08T08:11:37.754561+00:00",
+    "buildProfile": "dev with custom-protocol",
+    "macos": "",
+    "namespace": "tauri-proof-7bee2c673b184e6ba7af4fb3cb79e331",
+    "sqliteWasmSha256": "dd7c22431a3b8ad51ab5e6ed91065593574c34c5959d2efdef2f17484eedcb2c",
+    "binarySha256": "cef9f28e7a2b75d7fca0839d041937cebfee3defa684895f379670238f608ca3",
+    "phases": [
+      {
+        "phase": "write",
+        "exitCode": 0,
+        "stderr": "\n(quixi-desktop:426): dbind-WARNING **: 08:11:37.824: AT-SPI: Error retrieving accessibility bus address: org.freedesktop.DBus.Error.ServiceUnknown: The name org.a11y.Bus was not provided by any .service files\n",
+        "webview": {
+          "phase": "write",
+          "url": "tauri://localhost/storage-proof?namespace=tauri-proof-7bee2c673b184e6ba7af4fb3cb79e331&phase=write",
+          "userAgent": "Mozilla/5.0 (X11; Linux aarch64) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/60.5 Safari/605.1.15",
+          "secureContext": true,
+          "crossOriginIsolated": false,
+          "capabilities": {
+            "storage": false,
+            "getDirectory": false,
+            "webLocks": true,
+            "worker": true,
+            "broadcastChannel": true
+          },
+          "checks": [],
+          "success": false,
+          "error": {
+            "stage": "shared proof startup",
+            "name": "Error",
+            "message": "Local storage requires a secure context, Web Locks, OPFS, and BroadcastChannel"
+          },
+          "body": "Local storage proof\n\nDeveloper checks for SQLite WASM, OPFS, FTS5, and sqlite-vec. These records are separate from chat history.\n\nLocal storage requires a secure context, Web Locks, OPFS, and BroadcastChannel\n\nRecord ID \nText\n\nSave record\nSearch text \nSearch\nRefresh diagnostics\nRequest persistent storage\nCheck transaction rollback\nCheck migration rollback\nCheck vector search\nCheck SQLite full recovery\nClose and reopen\nOpen this route in another tab to exercise shared ownership. SQLite-full is a database page-limit test; it does not prove browser quota exhaustion or eviction behavior.\n\n"
+        }
+      }
+    ],
+    "success": false
+  },
+  "originDiagnostics": [
+    {
+      "origin": "tauri",
+      "exitCode": 0,
+      "stderr": "\n(quixi-desktop:634): dbind-WARNING **: 08:11:38.344: AT-SPI: Error retrieving accessibility bus address: org.freedesktop.DBus.Error.ServiceUnknown: The name org.a11y.Bus was not provided by any .service files\n",
+      "capabilities": {
+        "crossOriginIsolated": false,
+        "fileSystemHandle": "undefined",
+        "fileSystemSyncAccessHandle": "undefined",
+        "storage": false,
+        "broadcastChannel": true,
+        "webLocks": true,
+        "storageManager": "undefined",
+        "userAgent": "Mozilla/5.0 (X11; Linux aarch64) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/60.5 Safari/605.1.15",
+        "worker": true,
+        "workerProbe": {
+          "createSyncAccessHandle": "undefined",
+          "getDirectory": false,
+          "storage": false,
+          "fileSystemFileHandle": "undefined",
+          "fileSystemDirectoryHandle": "undefined",
+          "fileSystemSyncAccessHandle": "undefined",
+          "fileSystemHandle": "undefined",
+          "error": {
+            "name": "TypeError",
+            "stage": "getDirectory",
+            "message": "undefined is not an object (evaluating 'navigator.storage.getDirectory')"
+          },
+          "secureContext": true,
+          "steps": []
+        },
+        "pending": false,
+        "getDirectory": false,
+        "secureContext": true,
+        "url": "tauri://localhost/storage-proof?namespace=linux-origin-diagnostic&phase=write"
+      }
+    },
+    {
+      "origin": "http",
+      "exitCode": 0,
+      "stderr": "\n(quixi-desktop:840): dbind-WARNING **: 08:11:43.549: AT-SPI: Error retrieving accessibility bus address: org.freedesktop.DBus.Error.ServiceUnknown: The name org.a11y.Bus was not provided by any .service files\n",
+      "capabilities": {
+        "storage": false,
+        "worker": true,
+        "broadcastChannel": true,
+        "workerProbe": {
+          "getDirectory": false,
+          "fileSystemHandle": "undefined",
+          "storage": false,
+          "fileSystemDirectoryHandle": "undefined",
+          "fileSystemFileHandle": "undefined",
+          "createSyncAccessHandle": "undefined",
+          "fileSystemSyncAccessHandle": "undefined",
+          "steps": [],
+          "secureContext": true,
+          "error": {
+            "message": "undefined is not an object (evaluating 'navigator.storage.getDirectory')",
+            "stage": "getDirectory",
+            "name": "TypeError"
+          }
+        },
+        "fileSystemSyncAccessHandle": "undefined",
+        "getDirectory": false,
+        "crossOriginIsolated": false,
+        "pending": false,
+        "url": "http://127.0.0.1:1437/index.html",
+        "webLocks": true,
+        "storageManager": "undefined",
+        "secureContext": true,
+        "fileSystemHandle": "undefined",
+        "userAgent": "Mozilla/5.0 (X11; Linux aarch64) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/60.5 Safari/605.1.15"
+      }
+    }
+  ],
+  "featureSettingsExperiment": {
+    "description": "Test-only interposition enables AccessHandle, FileSystem, FileSystemWritableStream, StorageAPI, StorageAPIEstimate via the public settings API in actual Tauri WebViews. No production host source is changed.",
+    "exitCode": 1,
+    "stderr": "",
+    "proof": {
+      "host": "bundled-tauri-webview",
+      "platform": "Linux-7.0.12-linuxkit-aarch64-with-glibc2.36",
+      "timestamp": "2026-09-08T08:11:49.108967+00:00",
+      "buildProfile": "dev with custom-protocol",
+      "macos": "",
+      "namespace": "tauri-proof-3649a9c16e80428ea7a486cd11fe0830",
+      "sqliteWasmSha256": "dd7c22431a3b8ad51ab5e6ed91065593574c34c5959d2efdef2f17484eedcb2c",
+      "binarySha256": "cef9f28e7a2b75d7fca0839d041937cebfee3defa684895f379670238f608ca3",
+      "phases": [
+        {
+          "phase": "write",
+          "exitCode": 0,
+          "stderr": "\n(quixi-desktop:1048): dbind-WARNING **: 08:11:49.180: AT-SPI: Error retrieving accessibility bus address: org.freedesktop.DBus.Error.ServiceUnknown: The name org.a11y.Bus was not provided by any .service files\nQUIXI_TEST_FEATURE_ENABLED=AccessHandle\nQUIXI_TEST_FEATURE_ENABLED=FileSystem\nQUIXI_TEST_FEATURE_ENABLED=FileSystemWritableStream\nQUIXI_TEST_FEATURE_ENABLED=StorageAPIEstimate\nQUIXI_TEST_FEATURE_ENABLED=StorageAPI\n",
+          "webview": {
+            "phase": "write",
+            "url": "tauri://localhost/storage-proof?namespace=tauri-proof-3649a9c16e80428ea7a486cd11fe0830&phase=write",
+            "userAgent": "Mozilla/5.0 (X11; Linux aarch64) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/60.5 Safari/605.1.15",
+            "secureContext": true,
+            "crossOriginIsolated": false,
+            "capabilities": {
+              "storage": true,
+              "getDirectory": true,
+              "webLocks": true,
+              "worker": true,
+              "broadcastChannel": true
+            },
+            "checks": [],
+            "success": false,
+            "error": {
+              "stage": "shared proof startup",
+              "name": "Error",
+              "message": "Backend does not support this operation"
+            },
+            "body": "Local storage proof\n\nDeveloper checks for SQLite WASM, OPFS, FTS5, and sqlite-vec. These records are separate from chat history.\n\nBackend does not support this operation\n\nRecord ID \nText\n\nSave record\nSearch text \nSearch\nRefresh diagnostics\nRequest persistent storage\nCheck transaction rollback\nCheck migration rollback\nCheck vector search\nCheck SQLite full recovery\nClose and reopen\nOpen this route in another tab to exercise shared ownership. SQLite-full is a database page-limit test; it does not prove browser quota exhaustion or eviction behavior.\n\n"
+          }
+        }
+      ],
+      "success": false
+    },
+    "originDiagnostics": [
+      {
+        "origin": "tauri",
+        "exitCode": 0,
+        "stderr": "\n(quixi-desktop:1298): dbind-WARNING **: 08:11:49.898: AT-SPI: Error retrieving accessibility bus address: org.freedesktop.DBus.Error.ServiceUnknown: The name org.a11y.Bus was not provided by any .service files\nQUIXI_TEST_FEATURE_ENABLED=AccessHandle\nQUIXI_TEST_FEATURE_ENABLED=FileSystem\nQUIXI_TEST_FEATURE_ENABLED=FileSystemWritableStream\nQUIXI_TEST_FEATURE_ENABLED=StorageAPIEstimate\nQUIXI_TEST_FEATURE_ENABLED=StorageAPI\n",
+        "capabilities": {
+          "crossOriginIsolated": false,
+          "fileSystemHandle": "function",
+          "fileSystemSyncAccessHandle": "undefined",
+          "storage": true,
+          "worker": true,
+          "webLocks": true,
+          "storageManager": "function",
+          "userAgent": "Mozilla/5.0 (X11; Linux aarch64) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/60.5 Safari/605.1.15",
+          "broadcastChannel": true,
+          "workerProbe": {
+            "steps": [
+              "getDirectory",
+              "getFileHandle"
+            ],
+            "fileSystemFileHandle": "function",
+            "fileSystemDirectoryHandle": "function",
+            "getDirectory": true,
+            "storage": true,
+            "fileSystemHandle": "function",
+            "createSyncAccessHandle": "function",
+            "error": {
+              "name": "NotSupportedError",
+              "stage": "createSyncAccessHandle",
+              "message": "Backend does not support this operation"
+            },
+            "fileSystemSyncAccessHandle": "function",
+            "secureContext": true
+          },
+          "pending": false,
+          "getDirectory": true,
+          "secureContext": true,
+          "url": "tauri://localhost/storage-proof?namespace=linux-origin-diagnostic&phase=write"
+        }
+      },
+      {
+        "origin": "http",
+        "exitCode": 0,
+        "stderr": "\n(quixi-desktop:1550): dbind-WARNING **: 08:11:55.488: AT-SPI: Error retrieving accessibility bus address: org.freedesktop.DBus.Error.ServiceUnknown: The name org.a11y.Bus was not provided by any .service files\nQUIXI_TEST_FEATURE_ENABLED=AccessHandle\nQUIXI_TEST_FEATURE_ENABLED=FileSystem\nQUIXI_TEST_FEATURE_ENABLED=FileSystemWritableStream\nQUIXI_TEST_FEATURE_ENABLED=StorageAPIEstimate\nQUIXI_TEST_FEATURE_ENABLED=StorageAPI\n",
+        "capabilities": {
+          "storage": true,
+          "webLocks": true,
+          "worker": true,
+          "broadcastChannel": true,
+          "workerProbe": {
+            "storage": true,
+            "getDirectory": true,
+            "secureContext": true,
+            "fileSystemHandle": "function",
+            "fileSystemDirectoryHandle": "function",
+            "fileSystemFileHandle": "function",
+            "createSyncAccessHandle": "function",
+            "steps": [
+              "getDirectory",
+              "getFileHandle"
+            ],
+            "fileSystemSyncAccessHandle": "function",
+            "error": {
+              "name": "NotSupportedError",
+              "stage": "createSyncAccessHandle",
+              "message": "Backend does not support this operation"
+            }
+          },
+          "fileSystemSyncAccessHandle": "undefined",
+          "getDirectory": true,
+          "crossOriginIsolated": false,
+          "pending": false,
+          "url": "http://127.0.0.1:1437/index.html",
+          "secureContext": true,
+          "storageManager": "function",
+          "fileSystemHandle": "function",
+          "userAgent": "Mozilla/5.0 (X11; Linux aarch64) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/60.5 Safari/605.1.15"
+        }
+      }
+    ]
+  },
+  "imageId": "sha256:7fd17cbb8db5205437c1e6139aaef2a88be3eab21758a563ab3a95958c9f33eb"
+}

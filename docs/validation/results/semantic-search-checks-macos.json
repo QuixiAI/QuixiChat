@@ -1,0 +1,117 @@
+{
+  "selectedEngines": [
+    "chromium",
+    "webkit"
+  ],
+  "status": "passed",
+  "startedAt": "2026-09-12T06:34:02.516Z",
+  "hosts": [
+    {
+      "name": "chromium",
+      "status": "passed",
+      "checks": [
+        "before enrolment Best is explicitly lexical-only with the storage reason and exact hits still navigate",
+        "enrolment verifies the pinned model, selects WASM SIMD · CPU and indexes every visible chunk with progress, backend, speed and size shown",
+        "Semantic mode embeds the query locally and ranks a paraphrase without shared terms first, explained as a semantic match",
+        "Best fuses lexical and semantic rankings by reciprocal rank: the dual-origin hit leads and every result explains its origin",
+        "Exact mode stays purely lexical",
+        "Pause keeps stored vectors searchable and refuses new claims; Resume indexes only the chunk added meanwhile",
+        "after a browser restart the enrolment, generation and vectors persist, the verified model loads from its OPFS copy and semantic queries work without re-indexing",
+        "Disable stops indexing and unloads the runtime while the stored index and enrolment survive",
+        "Delete semantic index removes every vector and the enrolment, keeps canonical messages and lexical search, and Semantic mode states that it is not enabled",
+        "an unprovisioned model is reported as an explicit asset failure; Best falls back to text matches with a visible reason and exact hits remain"
+      ],
+      "backend": "WASM SIMD · CPU",
+      "runtimeNote": "Local runtime ready on WASM SIMD · CPU. WebGPU was not used: No WebGPU adapter.",
+      "enableMs": 850,
+      "indexMs": 925,
+      "model": {
+        "chunkingVersion": "fts-v1:quixi-structural-utf16-v1:4096:64:arctic-xs-offsets-1.0.2:d15cd90acf9df739:256:code-v1:nul-space-v1",
+        "dimensions": 384,
+        "modelName": "snowflake-arctic-embed-xs",
+        "modelVersion": "d8c86521100d3556476a063fc2342036d45c106f",
+        "preprocessingVersion": "arctic-query-prefix-v1",
+        "sourceHash": "e1ef345cd35088b06f70c199f5a4e0311bda5983716ad6a3e7d0a604202efffc",
+        "storageRepresentation": "float32",
+        "tokenizerVersion": "arctic-xs-offsets-1.0.2:d15cd90acf9df739"
+      },
+      "restartMs": 814
+    },
+    {
+      "name": "webkit",
+      "status": "passed",
+      "checks": [
+        "before enrolment Best is explicitly lexical-only with the storage reason and exact hits still navigate",
+        "enrolment verifies the pinned model, selects WebGPU · FP32 and indexes every visible chunk with progress, backend, speed and size shown",
+        "Semantic mode embeds the query locally and ranks a paraphrase without shared terms first, explained as a semantic match",
+        "Best fuses lexical and semantic rankings by reciprocal rank: the dual-origin hit leads and every result explains its origin",
+        "Exact mode stays purely lexical",
+        "Pause keeps stored vectors searchable and refuses new claims; Resume indexes only the chunk added meanwhile",
+        "after a browser restart the enrolment, generation and vectors persist, the verified model loads from its OPFS copy and semantic queries work without re-indexing",
+        "Disable stops indexing and unloads the runtime while the stored index and enrolment survive",
+        "Delete semantic index removes every vector and the enrolment, keeps canonical messages and lexical search, and Semantic mode states that it is not enabled",
+        "an unprovisioned model is reported as an explicit asset failure; Best falls back to text matches with a visible reason and exact hits remain"
+      ],
+      "backend": "WebGPU · FP32",
+      "runtimeNote": "Local runtime ready on WebGPU · FP32 from the cached model.",
+      "enableMs": 857,
+      "indexMs": 861,
+      "model": {
+        "chunkingVersion": "fts-v1:quixi-structural-utf16-v1:4096:64:arctic-xs-offsets-1.0.2:d15cd90acf9df739:256:code-v1:nul-space-v1",
+        "dimensions": 384,
+        "modelName": "snowflake-arctic-embed-xs",
+        "modelVersion": "d8c86521100d3556476a063fc2342036d45c106f",
+        "preprocessingVersion": "arctic-query-prefix-v1",
+        "sourceHash": "e1ef345cd35088b06f70c199f5a4e0311bda5983716ad6a3e7d0a604202efffc",
+        "storageRepresentation": "float32",
+        "tokenizerVersion": "arctic-xs-offsets-1.0.2:d15cd90acf9df739"
+      },
+      "restartMs": 810
+    }
+  ],
+  "sourceSha256": {
+    "packages/app/src/features/semantic/controller.ts": "e1ecb0973669f63470d05a69b0f4d9f9a4e978bad42913c71abe5d50e3b552f4",
+    "packages/app/src/features/semantic/SemanticPanel.tsx": "d2be9a9a3115cc37de1e4dcb5bef762fa4b9853bef16ed212c5515ce2baf911b",
+    "packages/app/src/features/semantic/assets.ts": "c7104687766d9876b95105410289f100f650895c8728cc77919571b9ae040bd4",
+    "packages/app/src/AppRoot.tsx": "98794adf08ecf61a379ca40b3f3c7bfd8e21b345e0bcae0942f636d68d08797d",
+    "packages/app/src/runtime/library.ts": "34fd344d87475fc5e49706124081734173842f9f5057c0ec6763a10c089ba9ca",
+    "packages/app/tests/browser/index.ts": "6b7d41878e545e8bc33bb4ed5ea752ed7958040ef20fc73a8c1e94140243e97d",
+    "packages/app/tests/browser/semantic.mjs": "ce75c12e7fed386bf03ab3f15c7ca93a358f024248e7c0ba7fbe77715dee5eac",
+    "packages/app/tests/browser/semantic-run.mjs": "85365d1112875c0e6557389f96608495b2c4b494b3b1cced183c30fd69b9536b",
+    "packages/search/src/semantic/indexer.ts": "04c924d291e51d069801163e30ea98129e3562a63aa664ba16b1c854edd680cb",
+    "packages/search/src/fusion.ts": "b5a7935c62378f67009ce0b4269602ce91d87b604ccc0f5cc63427c4e76bc011",
+    "packages/search/src/chunker.ts": "8e82abb13c825132019055610dab2897909fb191be32f4813eb045285dd57ec4",
+    "packages/storage/src/worker/search/semantic.ts": "623e6f8948ea45f5795a37b83c4aa9dcb63a20eab76f97f8525cd3d5230d54a2",
+    "packages/storage/src/worker/search/index.ts": "ae5d113561d6373d7ad8070388c2afdf532579eaede4ddeae6388efed78e3334",
+    "packages/storage/src/worker/search/schema.ts": "85de7888960e84f98f107650e0975080099e1b7f55f748145aaaebdef3d188e7",
+    "packages/storage/src/worker/search/tokenizer.ts": "4815f88d5908ba59f21ef3c88250be9a451aed10e065b67a6635e722ff4cec7e",
+    "packages/storage/src/worker/chunk-tokenizer.ts": "9e206c6731b737591ddb5f38dde18ecd7da247536f074f2528a623db0b45eb97",
+    "packages/storage/src/worker/archive-database.ts": "e4909a52d30e8c57743be137845fa7af12286fd9ef5450238fbd65aecd9f25f1",
+    "packages/quixi-embed/src/chunking.ts": "725d24a3e5b2c14e36f55222241a4d8212f9785424ec9a5db070acdc6a836858",
+    "packages/quixi-embed/src/lock.ts": "a2c8d5d0a0b9bda00da451d55f2a2da9356b46006dc85f2ab3b9bdf2b9010b8b",
+    "packages/quixi-embed/src/service/worker.ts": "09d74af233b2cccf1d19ca2c4e588cf934799063b7594844e786ab7729768378",
+    "packages/quixi-embed/src/service/client.ts": "a5343ce0b597243a7addc336080b31403838ebeb52fbd136f62e817247e83fe7",
+    "packages/quixi-embed/src/service/assets.ts": "5829f23f3cf3e5ffddf1abd02f13003fecc02a40ebed3c764de94c04bc68c21a",
+    "packages/quixi-embed/src/service/protocol.ts": "499fcf7d55eb092d336f81156f665c684ec08f24cb92dc159e001b806c0ba2a4",
+    "packages/quixi-embed/artifacts/model/lock.json": "b62a93320b7a5f7db8422fe2951197dca74982036d2a21fc1c0287f81e228d61",
+    "packages/quixi-embed/artifacts/model/arctic-xs.qxtokenizer": "d15cd90acf9df73913b5c7f8af9ddc7c2d8afee8e4777f6f71e6d1bb4875c8db",
+    "packages/quixi-embed/artifacts/1.0.2/quixi-scalar.wasm": "e477d3e35b6e83c39e206e76079a4d5136a227711a0124b64bf885f3165cee65",
+    "packages/quixi-embed/artifacts/1.0.2/quixi-simd.wasm": "d07bbc26c3f35731d7e2c6885405205a64852f40f9d7c5878c6efe77e8f9b198",
+    "packages/core/src/contracts/search.ts": "8b496fb4fffcae02425f5c0fd7ca83a1f96468fb30a6e4b2461b285cd095b832",
+    "tooling/embedding-assets.ts": "8bfb50600a3f08e102854c97ee4350eb5f98aff1f13ee6cc082ec408bb202cfb",
+    "/Users/eric/QuixiChat/packages/quixi-embed/build/arctic-xs.qxmodel": "e1ef345cd35088b06f70c199f5a4e0311bda5983716ad6a3e7d0a604202efffc"
+  },
+  "environment": {
+    "platform": "darwin",
+    "release": "25.6.0",
+    "arch": "arm64",
+    "osVersion": "26.6.2",
+    "node": "v22.23.1"
+  },
+  "model": {
+    "source": "/Users/eric/QuixiChat/packages/quixi-embed/build/arctic-xs.qxmodel",
+    "provisioned": true
+  },
+  "sourceStable": true,
+  "finishedAt": "2026-09-12T06:34:18.628Z"
+}

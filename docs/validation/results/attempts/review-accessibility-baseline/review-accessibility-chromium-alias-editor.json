@@ -1,0 +1,1292 @@
+{
+  "mode": "capture",
+  "name": "chromium",
+  "caseName": "alias-editor",
+  "scope": "Computed CSS reflow and enabled control-border contrast; no screen-reader or native-control pixel-rendering qualification.",
+  "samples": [
+    {
+      "size": "normal",
+      "viewportWidth": 320,
+      "documentWidth": 320,
+      "region": {
+        "left": 19.19,
+        "right": 300.81,
+        "width": 281.63,
+        "height": 2273.39
+      },
+      "rootFontSize": "16px",
+      "focused": {
+        "tag": "BUTTON",
+        "id": "",
+        "label": "Cancel alias edit",
+        "insideRegion": true
+      },
+      "controlCount": 14,
+      "controls": [
+        {
+          "tag": "FIELDSET",
+          "label": "Alias profileAlias nameAlias primaryChoose a connection and modelAlias fallback candidateChoose a connection and modelAdd alias fallbackRequire alias tool suppo",
+          "bounds": {
+            "left": 95.27,
+            "right": 213.33,
+            "width": 118.06,
+            "height": 2273.39
+          },
+          "containerBounds": {
+            "left": 95.27,
+            "right": 213.33,
+            "width": 118.06,
+            "height": 2273.39
+          },
+          "disabled": false,
+          "overflow": false
+        },
+        {
+          "tag": "INPUT",
+          "label": "Alias name",
+          "bounds": {
+            "left": 109.27,
+            "right": 199.33,
+            "width": 90.06,
+            "height": 41.28
+          },
+          "containerBounds": {
+            "left": 95.27,
+            "right": 213.33,
+            "width": 118.06,
+            "height": 2273.39
+          },
+          "disabled": false,
+          "overflow": false
+        },
+        {
+          "tag": "SELECT",
+          "label": "Alias primary",
+          "bounds": {
+            "left": 109.27,
+            "right": 199.33,
+            "width": 90.06,
+            "height": 38.59
+          },
+          "containerBounds": {
+            "left": 95.27,
+            "right": 213.33,
+            "width": 118.06,
+            "height": 2273.39
+          },
+          "disabled": false,
+          "overflow": false
+        },
+        {
+          "tag": "SELECT",
+          "label": "Alias fallback candidate",
+          "bounds": {
+            "left": 109.27,
+            "right": 199.33,
+            "width": 90.06,
+            "height": 38.59
+          },
+          "containerBounds": {
+            "left": 95.27,
+            "right": 213.33,
+            "width": 118.06,
+            "height": 2273.39
+          },
+          "disabled": false,
+          "overflow": false
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Add alias fallback",
+          "bounds": {
+            "left": 109.27,
+            "right": 199.33,
+            "width": 90.06,
+            "height": 82.13
+          },
+          "containerBounds": {
+            "left": 95.27,
+            "right": 213.33,
+            "width": 118.06,
+            "height": 2273.39
+          },
+          "disabled": true,
+          "overflow": false
+        },
+        {
+          "tag": "INPUT",
+          "label": "Require alias tool support",
+          "bounds": {
+            "left": 113.27,
+            "right": 203.33,
+            "width": 90.06,
+            "height": 13
+          },
+          "containerBounds": {
+            "left": 95.27,
+            "right": 213.33,
+            "width": 118.06,
+            "height": 2273.39
+          },
+          "disabled": false,
+          "overflow": false
+        },
+        {
+          "tag": "INPUT",
+          "label": "Require alias image input",
+          "bounds": {
+            "left": 113.27,
+            "right": 203.33,
+            "width": 90.06,
+            "height": 13
+          },
+          "containerBounds": {
+            "left": 95.27,
+            "right": 213.33,
+            "width": 118.06,
+            "height": 2273.39
+          },
+          "disabled": false,
+          "overflow": false
+        },
+        {
+          "tag": "SELECT",
+          "label": "Alias required processing region",
+          "bounds": {
+            "left": 109.27,
+            "right": 199.33,
+            "width": 90.06,
+            "height": 38.59
+          },
+          "containerBounds": {
+            "left": 95.27,
+            "right": 213.33,
+            "width": 118.06,
+            "height": 2273.39
+          },
+          "disabled": false,
+          "overflow": false
+        },
+        {
+          "tag": "INPUT",
+          "label": "Alias minimum context",
+          "bounds": {
+            "left": 109.27,
+            "right": 199.33,
+            "width": 90.06,
+            "height": 41.28
+          },
+          "containerBounds": {
+            "left": 95.27,
+            "right": 213.33,
+            "width": 118.06,
+            "height": 2273.39
+          },
+          "disabled": false,
+          "overflow": false
+        },
+        {
+          "tag": "INPUT",
+          "label": "Alias maximum estimated input cost (USD)",
+          "bounds": {
+            "left": 109.27,
+            "right": 199.33,
+            "width": 90.06,
+            "height": 41.28
+          },
+          "containerBounds": {
+            "left": 95.27,
+            "right": 213.33,
+            "width": 118.06,
+            "height": 2273.39
+          },
+          "disabled": false,
+          "overflow": false
+        },
+        {
+          "tag": "INPUT",
+          "label": "Alias maximum estimated request cost per attempt (USD)",
+          "bounds": {
+            "left": 109.27,
+            "right": 199.33,
+            "width": 90.06,
+            "height": 41.28
+          },
+          "containerBounds": {
+            "left": 95.27,
+            "right": 213.33,
+            "width": 118.06,
+            "height": 2273.39
+          },
+          "disabled": false,
+          "overflow": false
+        },
+        {
+          "tag": "INPUT",
+          "label": "Allow alias fallback to change the privacy class",
+          "bounds": {
+            "left": 113.27,
+            "right": 203.33,
+            "width": 90.06,
+            "height": 13
+          },
+          "containerBounds": {
+            "left": 95.27,
+            "right": 213.33,
+            "width": 118.06,
+            "height": 2273.39
+          },
+          "disabled": false,
+          "overflow": false
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Save routing alias",
+          "bounds": {
+            "left": 109.27,
+            "right": 199.33,
+            "width": 90.06,
+            "height": 82.13
+          },
+          "containerBounds": {
+            "left": 95.27,
+            "right": 213.33,
+            "width": 118.06,
+            "height": 2273.39
+          },
+          "disabled": false,
+          "overflow": false
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Cancel alias edit",
+          "bounds": {
+            "left": 224.92,
+            "right": 300.81,
+            "width": 75.89,
+            "height": 82.13
+          },
+          "containerBounds": {
+            "left": 19.19,
+            "right": 300.81,
+            "width": 281.63,
+            "height": 2273.39
+          },
+          "disabled": false,
+          "overflow": false
+        }
+      ],
+      "borders": [
+        {
+          "label": "Alias name",
+          "fill": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            249,
+            250,
+            247
+          ],
+          "sides": [
+            {
+              "side": "Top",
+              "color": "rgb(186, 198, 189)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 1.76,
+              "outsideContrast": 1.68
+            },
+            {
+              "side": "Right",
+              "color": "rgb(186, 198, 189)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 1.76,
+              "outsideContrast": 1.68
+            },
+            {
+              "side": "Bottom",
+              "color": "rgb(186, 198, 189)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 1.76,
+              "outsideContrast": 1.68
+            },
+            {
+              "side": "Left",
+              "color": "rgb(186, 198, 189)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 1.76,
+              "outsideContrast": 1.68
+            }
+          ]
+        },
+        {
+          "label": "Alias primary",
+          "fill": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            249,
+            250,
+            247
+          ],
+          "sides": [
+            {
+              "side": "Top",
+              "color": "rgb(186, 198, 189)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 1.76,
+              "outsideContrast": 1.68
+            },
+            {
+              "side": "Right",
+              "color": "rgb(186, 198, 189)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 1.76,
+              "outsideContrast": 1.68
+            },
+            {
+              "side": "Bottom",
+              "color": "rgb(186, 198, 189)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 1.76,
+              "outsideContrast": 1.68
+            },
+            {
+              "side": "Left",
+              "color": "rgb(186, 198, 189)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 1.76,
+              "outsideContrast": 1.68
+            }
+          ]
+        },
+        {
+          "label": "Alias fallback candidate",
+          "fill": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            249,
+            250,
+            247
+          ],
+          "sides": [
+            {
+              "side": "Top",
+              "color": "rgb(186, 198, 189)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 1.76,
+              "outsideContrast": 1.68
+            },
+            {
+              "side": "Right",
+              "color": "rgb(186, 198, 189)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 1.76,
+              "outsideContrast": 1.68
+            },
+            {
+              "side": "Bottom",
+              "color": "rgb(186, 198, 189)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 1.76,
+              "outsideContrast": 1.68
+            },
+            {
+              "side": "Left",
+              "color": "rgb(186, 198, 189)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 1.76,
+              "outsideContrast": 1.68
+            }
+          ]
+        },
+        {
+          "label": "Alias required processing region",
+          "fill": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            249,
+            250,
+            247
+          ],
+          "sides": [
+            {
+              "side": "Top",
+              "color": "rgb(186, 198, 189)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 1.76,
+              "outsideContrast": 1.68
+            },
+            {
+              "side": "Right",
+              "color": "rgb(186, 198, 189)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 1.76,
+              "outsideContrast": 1.68
+            },
+            {
+              "side": "Bottom",
+              "color": "rgb(186, 198, 189)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 1.76,
+              "outsideContrast": 1.68
+            },
+            {
+              "side": "Left",
+              "color": "rgb(186, 198, 189)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 1.76,
+              "outsideContrast": 1.68
+            }
+          ]
+        },
+        {
+          "label": "Alias minimum context",
+          "fill": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            249,
+            250,
+            247
+          ],
+          "sides": [
+            {
+              "side": "Top",
+              "color": "rgb(186, 198, 189)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 1.76,
+              "outsideContrast": 1.68
+            },
+            {
+              "side": "Right",
+              "color": "rgb(186, 198, 189)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 1.76,
+              "outsideContrast": 1.68
+            },
+            {
+              "side": "Bottom",
+              "color": "rgb(186, 198, 189)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 1.76,
+              "outsideContrast": 1.68
+            },
+            {
+              "side": "Left",
+              "color": "rgb(186, 198, 189)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 1.76,
+              "outsideContrast": 1.68
+            }
+          ]
+        },
+        {
+          "label": "Alias maximum estimated input cost (USD)",
+          "fill": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            249,
+            250,
+            247
+          ],
+          "sides": [
+            {
+              "side": "Top",
+              "color": "rgb(186, 198, 189)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 1.76,
+              "outsideContrast": 1.68
+            },
+            {
+              "side": "Right",
+              "color": "rgb(186, 198, 189)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 1.76,
+              "outsideContrast": 1.68
+            },
+            {
+              "side": "Bottom",
+              "color": "rgb(186, 198, 189)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 1.76,
+              "outsideContrast": 1.68
+            },
+            {
+              "side": "Left",
+              "color": "rgb(186, 198, 189)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 1.76,
+              "outsideContrast": 1.68
+            }
+          ]
+        },
+        {
+          "label": "Alias maximum estimated request cost per attempt (USD)",
+          "fill": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            249,
+            250,
+            247
+          ],
+          "sides": [
+            {
+              "side": "Top",
+              "color": "rgb(186, 198, 189)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 1.76,
+              "outsideContrast": 1.68
+            },
+            {
+              "side": "Right",
+              "color": "rgb(186, 198, 189)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 1.76,
+              "outsideContrast": 1.68
+            },
+            {
+              "side": "Bottom",
+              "color": "rgb(186, 198, 189)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 1.76,
+              "outsideContrast": 1.68
+            },
+            {
+              "side": "Left",
+              "color": "rgb(186, 198, 189)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 1.76,
+              "outsideContrast": 1.68
+            }
+          ]
+        }
+      ],
+      "violations": [
+        "Control boundary below 3:1 or unmeasurable: Alias name (Top)",
+        "Control boundary below 3:1 or unmeasurable: Alias name (Right)",
+        "Control boundary below 3:1 or unmeasurable: Alias name (Bottom)",
+        "Control boundary below 3:1 or unmeasurable: Alias name (Left)",
+        "Control boundary below 3:1 or unmeasurable: Alias primary (Top)",
+        "Control boundary below 3:1 or unmeasurable: Alias primary (Right)",
+        "Control boundary below 3:1 or unmeasurable: Alias primary (Bottom)",
+        "Control boundary below 3:1 or unmeasurable: Alias primary (Left)",
+        "Control boundary below 3:1 or unmeasurable: Alias fallback candidate (Top)",
+        "Control boundary below 3:1 or unmeasurable: Alias fallback candidate (Right)",
+        "Control boundary below 3:1 or unmeasurable: Alias fallback candidate (Bottom)",
+        "Control boundary below 3:1 or unmeasurable: Alias fallback candidate (Left)",
+        "Control boundary below 3:1 or unmeasurable: Alias required processing region (Top)",
+        "Control boundary below 3:1 or unmeasurable: Alias required processing region (Right)",
+        "Control boundary below 3:1 or unmeasurable: Alias required processing region (Bottom)",
+        "Control boundary below 3:1 or unmeasurable: Alias required processing region (Left)",
+        "Control boundary below 3:1 or unmeasurable: Alias minimum context (Top)",
+        "Control boundary below 3:1 or unmeasurable: Alias minimum context (Right)",
+        "Control boundary below 3:1 or unmeasurable: Alias minimum context (Bottom)",
+        "Control boundary below 3:1 or unmeasurable: Alias minimum context (Left)",
+        "Control boundary below 3:1 or unmeasurable: Alias maximum estimated input cost (USD) (Top)",
+        "Control boundary below 3:1 or unmeasurable: Alias maximum estimated input cost (USD) (Right)",
+        "Control boundary below 3:1 or unmeasurable: Alias maximum estimated input cost (USD) (Bottom)",
+        "Control boundary below 3:1 or unmeasurable: Alias maximum estimated input cost (USD) (Left)",
+        "Control boundary below 3:1 or unmeasurable: Alias maximum estimated request cost per attempt (USD) (Top)",
+        "Control boundary below 3:1 or unmeasurable: Alias maximum estimated request cost per attempt (USD) (Right)",
+        "Control boundary below 3:1 or unmeasurable: Alias maximum estimated request cost per attempt (USD) (Bottom)",
+        "Control boundary below 3:1 or unmeasurable: Alias maximum estimated request cost per attempt (USD) (Left)"
+      ]
+    },
+    {
+      "size": "enlarged",
+      "viewportWidth": 320,
+      "documentWidth": 560,
+      "region": {
+        "left": 38.39,
+        "right": 281.61,
+        "width": 243.22,
+        "height": 4827.11
+      },
+      "rootFontSize": "32px",
+      "focused": {
+        "tag": "BUTTON",
+        "id": "",
+        "label": "Cancel alias edit",
+        "insideRegion": true
+      },
+      "controlCount": 14,
+      "controls": [
+        {
+          "tag": "FIELDSET",
+          "label": "Alias profileAlias nameAlias primaryChoose a connection and modelAlias fallback candidateChoose a connection and modelAdd alias fallbackRequire alias tool suppo",
+          "bounds": {
+            "left": 184.23,
+            "right": 392.88,
+            "width": 208.64,
+            "height": 4827.11
+          },
+          "containerBounds": {
+            "left": 184.23,
+            "right": 392.88,
+            "width": 208.64,
+            "height": 4827.11
+          },
+          "disabled": false,
+          "overflow": true
+        },
+        {
+          "tag": "INPUT",
+          "label": "Alias name",
+          "bounds": {
+            "left": 210.23,
+            "right": 366.88,
+            "width": 156.64,
+            "height": 80.58
+          },
+          "containerBounds": {
+            "left": 184.23,
+            "right": 392.88,
+            "width": 208.64,
+            "height": 4827.11
+          },
+          "disabled": false,
+          "overflow": true
+        },
+        {
+          "tag": "SELECT",
+          "label": "Alias primary",
+          "bounds": {
+            "left": 210.23,
+            "right": 366.88,
+            "width": 156.64,
+            "height": 72.19
+          },
+          "containerBounds": {
+            "left": 184.23,
+            "right": 392.88,
+            "width": 208.64,
+            "height": 4827.11
+          },
+          "disabled": false,
+          "overflow": true
+        },
+        {
+          "tag": "SELECT",
+          "label": "Alias fallback candidate",
+          "bounds": {
+            "left": 210.23,
+            "right": 366.88,
+            "width": 156.64,
+            "height": 72.19
+          },
+          "containerBounds": {
+            "left": 184.23,
+            "right": 392.88,
+            "width": 208.64,
+            "height": 4827.11
+          },
+          "disabled": false,
+          "overflow": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Add alias fallback",
+          "bounds": {
+            "left": 210.23,
+            "right": 366.88,
+            "width": 156.64,
+            "height": 162.28
+          },
+          "containerBounds": {
+            "left": 184.23,
+            "right": 392.88,
+            "width": 208.64,
+            "height": 4827.11
+          },
+          "disabled": true,
+          "overflow": true
+        },
+        {
+          "tag": "INPUT",
+          "label": "Require alias tool support",
+          "bounds": {
+            "left": 214.23,
+            "right": 370.88,
+            "width": 156.64,
+            "height": 13
+          },
+          "containerBounds": {
+            "left": 184.23,
+            "right": 392.88,
+            "width": 208.64,
+            "height": 4827.11
+          },
+          "disabled": false,
+          "overflow": true
+        },
+        {
+          "tag": "INPUT",
+          "label": "Require alias image input",
+          "bounds": {
+            "left": 214.23,
+            "right": 370.88,
+            "width": 156.64,
+            "height": 13
+          },
+          "containerBounds": {
+            "left": 184.23,
+            "right": 392.88,
+            "width": 208.64,
+            "height": 4827.11
+          },
+          "disabled": false,
+          "overflow": true
+        },
+        {
+          "tag": "SELECT",
+          "label": "Alias required processing region",
+          "bounds": {
+            "left": 210.23,
+            "right": 366.88,
+            "width": 156.64,
+            "height": 72.19
+          },
+          "containerBounds": {
+            "left": 184.23,
+            "right": 392.88,
+            "width": 208.64,
+            "height": 4827.11
+          },
+          "disabled": false,
+          "overflow": true
+        },
+        {
+          "tag": "INPUT",
+          "label": "Alias minimum context",
+          "bounds": {
+            "left": 210.23,
+            "right": 366.88,
+            "width": 156.64,
+            "height": 80.58
+          },
+          "containerBounds": {
+            "left": 184.23,
+            "right": 392.88,
+            "width": 208.64,
+            "height": 4827.11
+          },
+          "disabled": false,
+          "overflow": true
+        },
+        {
+          "tag": "INPUT",
+          "label": "Alias maximum estimated input cost (USD)",
+          "bounds": {
+            "left": 210.23,
+            "right": 366.88,
+            "width": 156.64,
+            "height": 80.58
+          },
+          "containerBounds": {
+            "left": 184.23,
+            "right": 392.88,
+            "width": 208.64,
+            "height": 4827.11
+          },
+          "disabled": false,
+          "overflow": true
+        },
+        {
+          "tag": "INPUT",
+          "label": "Alias maximum estimated request cost per attempt (USD)",
+          "bounds": {
+            "left": 210.23,
+            "right": 366.88,
+            "width": 156.64,
+            "height": 80.58
+          },
+          "containerBounds": {
+            "left": 184.23,
+            "right": 392.88,
+            "width": 208.64,
+            "height": 4827.11
+          },
+          "disabled": false,
+          "overflow": true
+        },
+        {
+          "tag": "INPUT",
+          "label": "Allow alias fallback to change the privacy class",
+          "bounds": {
+            "left": 214.23,
+            "right": 370.88,
+            "width": 156.64,
+            "height": 13
+          },
+          "containerBounds": {
+            "left": 184.23,
+            "right": 392.88,
+            "width": 208.64,
+            "height": 4827.11
+          },
+          "disabled": false,
+          "overflow": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Save routing alias",
+          "bounds": {
+            "left": 210.23,
+            "right": 366.88,
+            "width": 156.64,
+            "height": 162.28
+          },
+          "containerBounds": {
+            "left": 184.23,
+            "right": 392.88,
+            "width": 208.64,
+            "height": 4827.11
+          },
+          "disabled": false,
+          "overflow": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Cancel alias edit",
+          "bounds": {
+            "left": 414.06,
+            "right": 560.33,
+            "width": 146.27,
+            "height": 162.28
+          },
+          "containerBounds": {
+            "left": 38.39,
+            "right": 281.61,
+            "width": 243.22,
+            "height": 4827.11
+          },
+          "disabled": false,
+          "overflow": true
+        }
+      ],
+      "borders": [
+        {
+          "label": "Alias name",
+          "fill": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            249,
+            250,
+            247
+          ],
+          "sides": [
+            {
+              "side": "Top",
+              "color": "rgb(186, 198, 189)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 1.76,
+              "outsideContrast": 1.68
+            },
+            {
+              "side": "Right",
+              "color": "rgb(186, 198, 189)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 1.76,
+              "outsideContrast": 1.68
+            },
+            {
+              "side": "Bottom",
+              "color": "rgb(186, 198, 189)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 1.76,
+              "outsideContrast": 1.68
+            },
+            {
+              "side": "Left",
+              "color": "rgb(186, 198, 189)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 1.76,
+              "outsideContrast": 1.68
+            }
+          ]
+        },
+        {
+          "label": "Alias primary",
+          "fill": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            249,
+            250,
+            247
+          ],
+          "sides": [
+            {
+              "side": "Top",
+              "color": "rgb(186, 198, 189)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 1.76,
+              "outsideContrast": 1.68
+            },
+            {
+              "side": "Right",
+              "color": "rgb(186, 198, 189)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 1.76,
+              "outsideContrast": 1.68
+            },
+            {
+              "side": "Bottom",
+              "color": "rgb(186, 198, 189)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 1.76,
+              "outsideContrast": 1.68
+            },
+            {
+              "side": "Left",
+              "color": "rgb(186, 198, 189)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 1.76,
+              "outsideContrast": 1.68
+            }
+          ]
+        },
+        {
+          "label": "Alias fallback candidate",
+          "fill": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            249,
+            250,
+            247
+          ],
+          "sides": [
+            {
+              "side": "Top",
+              "color": "rgb(186, 198, 189)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 1.76,
+              "outsideContrast": 1.68
+            },
+            {
+              "side": "Right",
+              "color": "rgb(186, 198, 189)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 1.76,
+              "outsideContrast": 1.68
+            },
+            {
+              "side": "Bottom",
+              "color": "rgb(186, 198, 189)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 1.76,
+              "outsideContrast": 1.68
+            },
+            {
+              "side": "Left",
+              "color": "rgb(186, 198, 189)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 1.76,
+              "outsideContrast": 1.68
+            }
+          ]
+        },
+        {
+          "label": "Alias required processing region",
+          "fill": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            249,
+            250,
+            247
+          ],
+          "sides": [
+            {
+              "side": "Top",
+              "color": "rgb(186, 198, 189)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 1.76,
+              "outsideContrast": 1.68
+            },
+            {
+              "side": "Right",
+              "color": "rgb(186, 198, 189)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 1.76,
+              "outsideContrast": 1.68
+            },
+            {
+              "side": "Bottom",
+              "color": "rgb(186, 198, 189)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 1.76,
+              "outsideContrast": 1.68
+            },
+            {
+              "side": "Left",
+              "color": "rgb(186, 198, 189)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 1.76,
+              "outsideContrast": 1.68
+            }
+          ]
+        },
+        {
+          "label": "Alias minimum context",
+          "fill": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            249,
+            250,
+            247
+          ],
+          "sides": [
+            {
+              "side": "Top",
+              "color": "rgb(186, 198, 189)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 1.76,
+              "outsideContrast": 1.68
+            },
+            {
+              "side": "Right",
+              "color": "rgb(186, 198, 189)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 1.76,
+              "outsideContrast": 1.68
+            },
+            {
+              "side": "Bottom",
+              "color": "rgb(186, 198, 189)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 1.76,
+              "outsideContrast": 1.68
+            },
+            {
+              "side": "Left",
+              "color": "rgb(186, 198, 189)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 1.76,
+              "outsideContrast": 1.68
+            }
+          ]
+        },
+        {
+          "label": "Alias maximum estimated input cost (USD)",
+          "fill": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            249,
+            250,
+            247
+          ],
+          "sides": [
+            {
+              "side": "Top",
+              "color": "rgb(186, 198, 189)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 1.76,
+              "outsideContrast": 1.68
+            },
+            {
+              "side": "Right",
+              "color": "rgb(186, 198, 189)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 1.76,
+              "outsideContrast": 1.68
+            },
+            {
+              "side": "Bottom",
+              "color": "rgb(186, 198, 189)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 1.76,
+              "outsideContrast": 1.68
+            },
+            {
+              "side": "Left",
+              "color": "rgb(186, 198, 189)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 1.76,
+              "outsideContrast": 1.68
+            }
+          ]
+        },
+        {
+          "label": "Alias maximum estimated request cost per attempt (USD)",
+          "fill": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            249,
+            250,
+            247
+          ],
+          "sides": [
+            {
+              "side": "Top",
+              "color": "rgb(186, 198, 189)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 1.76,
+              "outsideContrast": 1.68
+            },
+            {
+              "side": "Right",
+              "color": "rgb(186, 198, 189)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 1.76,
+              "outsideContrast": 1.68
+            },
+            {
+              "side": "Bottom",
+              "color": "rgb(186, 198, 189)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 1.76,
+              "outsideContrast": 1.68
+            },
+            {
+              "side": "Left",
+              "color": "rgb(186, 198, 189)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 1.76,
+              "outsideContrast": 1.68
+            }
+          ]
+        }
+      ],
+      "violations": [
+        "Document overflows the viewport",
+        "Control overflows: Alias profileAlias nameAlias primaryChoose a connection and modelAlias fallback candidateChoose a connection and modelAdd alias fallbackRequire alias tool suppo",
+        "Control overflows: Alias name",
+        "Control overflows: Alias primary",
+        "Control overflows: Alias fallback candidate",
+        "Control overflows: Add alias fallback",
+        "Control overflows: Require alias tool support",
+        "Control overflows: Require alias image input",
+        "Control overflows: Alias required processing region",
+        "Control overflows: Alias minimum context",
+        "Control overflows: Alias maximum estimated input cost (USD)",
+        "Control overflows: Alias maximum estimated request cost per attempt (USD)",
+        "Control overflows: Allow alias fallback to change the privacy class",
+        "Control overflows: Save routing alias",
+        "Control overflows: Cancel alias edit",
+        "Control boundary below 3:1 or unmeasurable: Alias name (Top)",
+        "Control boundary below 3:1 or unmeasurable: Alias name (Right)",
+        "Control boundary below 3:1 or unmeasurable: Alias name (Bottom)",
+        "Control boundary below 3:1 or unmeasurable: Alias name (Left)",
+        "Control boundary below 3:1 or unmeasurable: Alias primary (Top)",
+        "Control boundary below 3:1 or unmeasurable: Alias primary (Right)",
+        "Control boundary below 3:1 or unmeasurable: Alias primary (Bottom)",
+        "Control boundary below 3:1 or unmeasurable: Alias primary (Left)",
+        "Control boundary below 3:1 or unmeasurable: Alias fallback candidate (Top)",
+        "Control boundary below 3:1 or unmeasurable: Alias fallback candidate (Right)",
+        "Control boundary below 3:1 or unmeasurable: Alias fallback candidate (Bottom)",
+        "Control boundary below 3:1 or unmeasurable: Alias fallback candidate (Left)",
+        "Control boundary below 3:1 or unmeasurable: Alias required processing region (Top)",
+        "Control boundary below 3:1 or unmeasurable: Alias required processing region (Right)",
+        "Control boundary below 3:1 or unmeasurable: Alias required processing region (Bottom)",
+        "Control boundary below 3:1 or unmeasurable: Alias required processing region (Left)",
+        "Control boundary below 3:1 or unmeasurable: Alias minimum context (Top)",
+        "Control boundary below 3:1 or unmeasurable: Alias minimum context (Right)",
+        "Control boundary below 3:1 or unmeasurable: Alias minimum context (Bottom)",
+        "Control boundary below 3:1 or unmeasurable: Alias minimum context (Left)",
+        "Control boundary below 3:1 or unmeasurable: Alias maximum estimated input cost (USD) (Top)",
+        "Control boundary below 3:1 or unmeasurable: Alias maximum estimated input cost (USD) (Right)",
+        "Control boundary below 3:1 or unmeasurable: Alias maximum estimated input cost (USD) (Bottom)",
+        "Control boundary below 3:1 or unmeasurable: Alias maximum estimated input cost (USD) (Left)",
+        "Control boundary below 3:1 or unmeasurable: Alias maximum estimated request cost per attempt (USD) (Top)",
+        "Control boundary below 3:1 or unmeasurable: Alias maximum estimated request cost per attempt (USD) (Right)",
+        "Control boundary below 3:1 or unmeasurable: Alias maximum estimated request cost per attempt (USD) (Bottom)",
+        "Control boundary below 3:1 or unmeasurable: Alias maximum estimated request cost per attempt (USD) (Left)"
+      ]
+    }
+  ],
+  "status": "failed"
+}

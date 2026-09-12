@@ -1,0 +1,16 @@
+<!doctype html><html><head><title>Quixi GPU numerical reference</title></head><body><script type="module">
+const worker=new Worker(new URL('./full-worker.ts',import.meta.url),{type:'module'});
+window.gpuRequest=async(data)=>new Promise((resolve,reject)=>{
+  worker.onerror=event=>reject(Error(event.message));
+  worker.onmessage=({data})=>{
+    if(data.error){reject(Error(data.error));return;}
+    if(data.bytes){
+      const bytes=new Uint8Array(data.bytes);let text='';
+      for(let i=0;i<bytes.length;i+=8192)text+=String.fromCharCode(...bytes.subarray(i,i+8192));
+      data.base64=btoa(text);delete data.bytes;
+    }
+    resolve(data);
+  };
+  worker.postMessage(data);
+});
+</script></body></html>

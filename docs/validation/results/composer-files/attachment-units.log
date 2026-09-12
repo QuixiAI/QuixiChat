@@ -1,0 +1,188 @@
+
+> quixi@0.0.1 test:app:attachments
+> tsc --noEmit -p packages/app/tsconfig.tests.json && node --experimental-transform-types --test packages/app/tests/attachments/*.test.ts
+
+TAP version 13
+# (node:98468) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: attachment review reads metadata only and retains exclusions outside the current branch
+ok 1 - attachment review reads metadata only and retains exclusions outside the current branch
+  ---
+  duration_ms: 1.992292
+  type: 'test'
+  ...
+# Subtest: cancelled discovery cancels the pending read and publishes no late choices
+ok 2 - cancelled discovery cancels the pending read and publishes no late choices
+  ---
+  duration_ms: 0.165083
+  type: 'test'
+  ...
+# Subtest: stale scope, too many occurrences and unknown policy versions never yield an applicable partial review
+ok 3 - stale scope, too many occurrences and unknown policy versions never yield an applicable partial review
+  ---
+  duration_ms: 0.980542
+  type: 'test'
+  ...
+# (node:98469) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: selection derives supported types, preserves PDF bytes and image previews, and releases all handles
+ok 4 - selection derives supported types, preserves PDF bytes and image previews, and releases all handles
+  ---
+  duration_ms: 2.72825
+  type: 'test'
+  ...
+# Subtest: legacy selection remains image-only and unsupported known files never open a transfer
+ok 5 - legacy selection remains image-only and unsupported known files never open a transfer
+  ---
+  duration_ms: 0.16675
+  type: 'test'
+  ...
+# Subtest: clear during a picker releases even late, unvisited handles and publishes no attachment
+ok 6 - clear during a picker releases even late, unvisited handles and publishes no attachment
+  ---
+  duration_ms: 0.201458
+  type: 'test'
+  ...
+# Subtest: dispose during a picker releases even late, unvisited handles and publishes no attachment
+ok 7 - dispose during a picker releases even late, unvisited handles and publishes no attachment
+  ---
+  duration_ms: 0.219584
+  type: 'test'
+  ...
+# Subtest: cancelPending during a picker releases even late, unvisited handles and publishes no attachment
+ok 8 - cancelPending during a picker releases even late, unvisited handles and publishes no attachment
+  ---
+  duration_ms: 0.117167
+  type: 'test'
+  ...
+# Subtest: clear during begin cleans a late stage receipt without resurrecting the draft
+ok 9 - clear during begin cleans a late stage receipt without resurrecting the draft
+  ---
+  duration_ms: 0.376791
+  type: 'test'
+  ...
+# Subtest: clear during finish cleans a late stage receipt without resurrecting the draft
+ok 10 - clear during finish cleans a late stage receipt without resurrecting the draft
+  ---
+  duration_ms: 0.782334
+  type: 'test'
+  ...
+# Subtest: clear during release cleans a late stage receipt without resurrecting the draft
+ok 11 - clear during release cleans a late stage receipt without resurrecting the draft
+  ---
+  duration_ms: 0.2405
+  type: 'test'
+  ...
+# Subtest: cancel releases a blocked source read and preserves an earlier completed attachment
+ok 12 - cancel releases a blocked source read and preserves an earlier completed attachment
+  ---
+  duration_ms: 0.512625
+  type: 'test'
+  ...
+# Subtest: a cancelled picker retains the single-operation memory bound until its cleanup completes
+ok 13 - a cancelled picker retains the single-operation memory bound until its cleanup completes
+  ---
+  duration_ms: 0.341208
+  type: 'test'
+  ...
+# Subtest: mixed images and PDFs share the aggregate byte limit before the next file opens
+ok 14 - mixed images and PDFs share the aggregate byte limit before the next file opens
+  ---
+  duration_ms: 9.599209
+  type: 'test'
+  ...
+# Subtest: attachment count is bounded and every excess selected handle is released
+ok 15 - attachment count is bounded and every excess selected handle is released
+  ---
+  duration_ms: 1.159583
+  type: 'test'
+  ...
+# Subtest: cancel queues stage disposal during an acknowledged storage write and rejects its late receipt
+ok 16 - cancel queues stage disposal during an acknowledged storage write and rejects its late receipt
+  ---
+  duration_ms: 0.139375
+  type: 'test'
+  ...
+# (node:98470) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: image signatures are detected from leading bytes only
+ok 17 - image signatures are detected from leading bytes only
+  ---
+  duration_ms: 0.63925
+  type: 'test'
+  ...
+# Subtest: a PNG streams from bounded host chunks into bounded storage chunks with the exact digest
+ok 18 - a PNG streams from bounded host chunks into bounded storage chunks with the exact digest
+  ---
+  duration_ms: 1.617084
+  type: 'test'
+  ...
+# Subtest: a media type the request profile cannot carry is refused before any transfer opens
+ok 19 - a media type the request profile cannot carry is refused before any transfer opens
+  ---
+  duration_ms: 0.291625
+  type: 'test'
+  ...
+# Subtest: non-image bytes and mislabeled images are refused before staging, releasing the host transfer
+ok 20 - non-image bytes and mislabeled images are refused before staging, releasing the host transfer
+  ---
+  duration_ms: 0.275875
+  type: 'test'
+  ...
+# Subtest: a file that ends before its declared size is not finalized
+ok 21 - a file that ends before its declared size is not finalized
+  ---
+  duration_ms: 0.132042
+  type: 'test'
+  ...
+# Subtest: an already cancelled attachment never opens a source or storage stage
+ok 22 - an already cancelled attachment never opens a source or storage stage
+  ---
+  duration_ms: 0.058792
+  type: 'test'
+  ...
+# Subtest: PDF signature detection is a prefix check, not a document parser
+ok 23 - PDF signature detection is a prefix check, not a document parser
+  ---
+  duration_ms: 0.078291
+  type: 'test'
+  ...
+# Subtest: PDF original bytes and filename are verified without creating a browser preview URL
+ok 24 - PDF original bytes and filename are verified without creating a browser preview URL
+  ---
+  duration_ms: 0.599
+  type: 'test'
+  ...
+# Subtest: every supported image signature can span one-byte host chunks
+ok 25 - every supported image signature can span one-byte host chunks
+  ---
+  duration_ms: 1.244583
+  type: 'test'
+  ...
+# Subtest: known unsupported MIME, missing capability, invalid PDF name and oversize metadata are refused before opening
+ok 26 - known unsupported MIME, missing capability, invalid PDF name and oversize metadata are refused before opening
+  ---
+  duration_ms: 0.469833
+  type: 'test'
+  ...
+# Subtest: fragmented PDFs require matching MIME and the current allowed format
+ok 27 - fragmented PDFs require matching MIME and the current allowed format
+  ---
+  duration_ms: 0.258625
+  type: 'test'
+  ...
+# Subtest: malformed host offsets and failed worker verification cannot produce staged attachments
+ok 28 - malformed host offsets and failed worker verification cannot produce staged attachments
+  ---
+  duration_ms: 0.189041
+  type: 'test'
+  ...
+1..28
+# tests 28
+# suites 0
+# pass 28
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 162.281959

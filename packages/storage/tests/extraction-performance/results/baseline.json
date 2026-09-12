@@ -1,0 +1,612 @@
+{
+  "completedAt": "2026-09-09T10:48:54.146Z",
+  "backend": "pinned SQLite WASM Node memory VFS; no PDF.js, worker messaging, OPFS or browser timing claim",
+  "node": "v22.23.1",
+  "platform": "darwin",
+  "arch": "arm64",
+  "cpu": "Apple M5 Max",
+  "loadAverage": [
+    3.9384765625,
+    4.6025390625,
+    4.7685546875
+  ],
+  "pages": 100,
+  "source": {
+    "fixtureName": "dense-100.pdf",
+    "byteLength": 890653,
+    "sha256": "1e7910141d121ee3598acf229cbc8c145720cecb971c8e016367e101da5f6918"
+  },
+  "stages": 3800,
+  "perPage": {
+    "utf16": 151000,
+    "spans": 2000,
+    "batches": 38
+  },
+  "stageTotalMs": 2859.2499139999836,
+  "publishTotalMs": 1080.9956199999979,
+  "stageP50Ms": 0.7005000000003747,
+  "stageP95Ms": 1.0443750000000591,
+  "sql": {
+    "receipt_lookup": {
+      "calls": 3800,
+      "ms": 54.38924999998872,
+      "sql": "SELECT kind,digest,result FROM quixi_extract_operations WHERE id=?"
+    },
+    "transaction": {
+      "calls": 7600,
+      "ms": 101.75038299999679,
+      "sql": "BEGIN IMMEDIATE"
+    },
+    "schema_guards": {
+      "calls": 19000,
+      "ms": 293.38424700001497,
+      "sql": "SELECT EXISTS(SELECT 1 FROM sqlite_schema WHERE type='table' AND name=?)"
+    },
+    "claim_lookup": {
+      "calls": 3800,
+      "ms": 27.74520899998896,
+      "sql": "SELECT domain,request_digest,identity_digest FROM quixi_local_operation_claims WHERE operation_id=?"
+    },
+    "claim_insert": {
+      "calls": 3800,
+      "ms": 145.11458000000215,
+      "sql": "INSERT INTO quixi_local_operation_claims VALUES(?,?,?,?)"
+    },
+    "run_read": {
+      "calls": 11400,
+      "ms": 183.83998199997922,
+      "sql": "SELECT * FROM quixi_extract_runs WHERE id=?"
+    },
+    "document_current": {
+      "calls": 3800,
+      "ms": 39.575570999993516,
+      "sql": "SELECT * FROM quixi_extract_documents WHERE document_id=?"
+    },
+    "canonical_identity": {
+      "calls": 7600,
+      "ms": 65.76251200002201,
+      "sql": "SELECT payload FROM quixi_records WHERE collection=? AND id=?"
+    },
+    "page_read": {
+      "calls": 3800,
+      "ms": 89.39034800001357,
+      "sql": "SELECT id,run_id,page,state,next_sequence,utf16,map_count,map_bytes,max_item,text_sha,map_sha,source_digest,publication_revision,classification,published_bytes FROM quixi_extract_pages WHERE id=? AND run_id=?"
+    },
+    "text_stage": {
+      "calls": 3800,
+      "ms": 79.52710800001017,
+      "sql": "INSERT INTO quixi_extract_text_batches VALUES(?,?,?,?,?)"
+    },
+    "maps_stage": {
+      "calls": 3800,
+      "ms": 81.58503799999599,
+      "sql": "INSERT INTO quixi_extract_map_batches VALUES(?,?,?,?,?,?,?)"
+    },
+    "page_checkpoint": {
+      "calls": 3800,
+      "ms": 51.8452650000292,
+      "sql": "UPDATE quixi_extract_pages SET next_sequence=next_sequence+1,utf16=utf16+?,map_count=map_count+?,map_bytes=map_bytes+?,max_item=? WHERE id=?"
+    },
+    "accounting_read": {
+      "calls": 7600,
+      "ms": 44.798511999991604,
+      "sql": "SELECT used_bytes FROM quixi_extract_meta"
+    },
+    "accounting_write": {
+      "calls": 15200,
+      "ms": 98.0677459999952,
+      "sql": "UPDATE quixi_extract_runs SET used_bytes=used_bytes+? WHERE id=?"
+    },
+    "receipt_insert": {
+      "calls": 3800,
+      "ms": 44.192577999980585,
+      "sql": "INSERT INTO quixi_extract_operations VALUES(?,?,?,?,?,?)"
+    }
+  },
+  "sqlByPhase": {
+    "extraction": {
+      "calls": 68400,
+      "ms": 868.9617809999745
+    },
+    "claim_registry": {
+      "calls": 26600,
+      "ms": 466.2440360000061
+    },
+    "canonical_identity": {
+      "calls": 7600,
+      "ms": 65.76251200002201
+    }
+  },
+  "pageSamples": [
+    {
+      "page": 1,
+      "stageMs": 47.735416999999984,
+      "sql": {
+        "receipt_lookup": {
+          "calls": 38,
+          "ms": 1.54824899999997,
+          "sql": "SELECT kind,digest,result FROM quixi_extract_operations WHERE id=?"
+        },
+        "transaction": {
+          "calls": 76,
+          "ms": 1.969128000000154,
+          "sql": "BEGIN IMMEDIATE"
+        },
+        "schema_guards": {
+          "calls": 190,
+          "ms": 4.805542000000088,
+          "sql": "SELECT EXISTS(SELECT 1 FROM sqlite_schema WHERE type='table' AND name=?)"
+        },
+        "claim_lookup": {
+          "calls": 38,
+          "ms": 0.4741670000000795,
+          "sql": "SELECT domain,request_digest,identity_digest FROM quixi_local_operation_claims WHERE operation_id=?"
+        },
+        "claim_insert": {
+          "calls": 38,
+          "ms": 2.7701229999999555,
+          "sql": "INSERT INTO quixi_local_operation_claims VALUES(?,?,?,?)"
+        },
+        "run_read": {
+          "calls": 114,
+          "ms": 3.7998739999998747,
+          "sql": "SELECT * FROM quixi_extract_runs WHERE id=?"
+        },
+        "document_current": {
+          "calls": 38,
+          "ms": 0.7142480000000262,
+          "sql": "SELECT * FROM quixi_extract_documents WHERE document_id=?"
+        },
+        "canonical_identity": {
+          "calls": 76,
+          "ms": 1.1887069999999085,
+          "sql": "SELECT payload FROM quixi_records WHERE collection=? AND id=?"
+        },
+        "page_read": {
+          "calls": 38,
+          "ms": 1.6933730000000935,
+          "sql": "SELECT id,run_id,page,state,next_sequence,utf16,map_count,map_bytes,max_item,text_sha,map_sha,source_digest,publication_revision,classification,published_bytes FROM quixi_extract_pages WHERE id=? AND run_id=?"
+        },
+        "text_stage": {
+          "calls": 38,
+          "ms": 1.4552110000000198,
+          "sql": "INSERT INTO quixi_extract_text_batches VALUES(?,?,?,?,?)"
+        },
+        "maps_stage": {
+          "calls": 38,
+          "ms": 1.1566290000000379,
+          "sql": "INSERT INTO quixi_extract_map_batches VALUES(?,?,?,?,?,?,?)"
+        },
+        "page_checkpoint": {
+          "calls": 38,
+          "ms": 1.2709179999999947,
+          "sql": "UPDATE quixi_extract_pages SET next_sequence=next_sequence+1,utf16=utf16+?,map_count=map_count+?,map_bytes=map_bytes+?,max_item=? WHERE id=?"
+        },
+        "accounting_read": {
+          "calls": 76,
+          "ms": 0.9946639999997728,
+          "sql": "SELECT used_bytes FROM quixi_extract_meta"
+        },
+        "accounting_write": {
+          "calls": 152,
+          "ms": 2.1083360000001505,
+          "sql": "UPDATE quixi_extract_runs SET used_bytes=used_bytes+? WHERE id=?"
+        },
+        "receipt_insert": {
+          "calls": 38,
+          "ms": 0.7762089999999375,
+          "sql": "INSERT INTO quixi_extract_operations VALUES(?,?,?,?,?,?)"
+        }
+      }
+    },
+    {
+      "page": 10,
+      "stageMs": 31.190374999999676,
+      "sql": {
+        "receipt_lookup": {
+          "calls": 38,
+          "ms": 1.0020419999998467,
+          "sql": "SELECT kind,digest,result FROM quixi_extract_operations WHERE id=?"
+        },
+        "transaction": {
+          "calls": 76,
+          "ms": 1.0911240000003772,
+          "sql": "BEGIN IMMEDIATE"
+        },
+        "schema_guards": {
+          "calls": 190,
+          "ms": 3.355921999999282,
+          "sql": "SELECT EXISTS(SELECT 1 FROM sqlite_schema WHERE type='table' AND name=?)"
+        },
+        "claim_lookup": {
+          "calls": 38,
+          "ms": 0.2985819999996693,
+          "sql": "SELECT domain,request_digest,identity_digest FROM quixi_local_operation_claims WHERE operation_id=?"
+        },
+        "claim_insert": {
+          "calls": 38,
+          "ms": 1.9289580000000797,
+          "sql": "INSERT INTO quixi_local_operation_claims VALUES(?,?,?,?)"
+        },
+        "run_read": {
+          "calls": 114,
+          "ms": 1.854045000000383,
+          "sql": "SELECT * FROM quixi_extract_runs WHERE id=?"
+        },
+        "document_current": {
+          "calls": 38,
+          "ms": 0.39116999999998825,
+          "sql": "SELECT * FROM quixi_extract_documents WHERE document_id=?"
+        },
+        "canonical_identity": {
+          "calls": 76,
+          "ms": 0.6703350000001365,
+          "sql": "SELECT payload FROM quixi_records WHERE collection=? AND id=?"
+        },
+        "page_read": {
+          "calls": 38,
+          "ms": 0.8956209999998919,
+          "sql": "SELECT id,run_id,page,state,next_sequence,utf16,map_count,map_bytes,max_item,text_sha,map_sha,source_digest,publication_revision,classification,published_bytes FROM quixi_extract_pages WHERE id=? AND run_id=?"
+        },
+        "text_stage": {
+          "calls": 38,
+          "ms": 0.8546269999997094,
+          "sql": "INSERT INTO quixi_extract_text_batches VALUES(?,?,?,?,?)"
+        },
+        "maps_stage": {
+          "calls": 38,
+          "ms": 0.8538740000002463,
+          "sql": "INSERT INTO quixi_extract_map_batches VALUES(?,?,?,?,?,?,?)"
+        },
+        "page_checkpoint": {
+          "calls": 38,
+          "ms": 0.5365429999994831,
+          "sql": "UPDATE quixi_extract_pages SET next_sequence=next_sequence+1,utf16=utf16+?,map_count=map_count+?,map_bytes=map_bytes+?,max_item=? WHERE id=?"
+        },
+        "accounting_read": {
+          "calls": 76,
+          "ms": 0.44087500000023283,
+          "sql": "SELECT used_bytes FROM quixi_extract_meta"
+        },
+        "accounting_write": {
+          "calls": 152,
+          "ms": 1.02244999999823,
+          "sql": "UPDATE quixi_extract_runs SET used_bytes=used_bytes+? WHERE id=?"
+        },
+        "receipt_insert": {
+          "calls": 38,
+          "ms": 0.4640819999996211,
+          "sql": "INSERT INTO quixi_extract_operations VALUES(?,?,?,?,?,?)"
+        }
+      }
+    },
+    {
+      "page": 100,
+      "stageMs": 26.84166699999787,
+      "sql": {
+        "receipt_lookup": {
+          "calls": 38,
+          "ms": 0.49204000000463566,
+          "sql": "SELECT kind,digest,result FROM quixi_extract_operations WHERE id=?"
+        },
+        "transaction": {
+          "calls": 76,
+          "ms": 0.6635429999978442,
+          "sql": "BEGIN IMMEDIATE"
+        },
+        "schema_guards": {
+          "calls": 190,
+          "ms": 2.7413780000115366,
+          "sql": "SELECT EXISTS(SELECT 1 FROM sqlite_schema WHERE type='table' AND name=?)"
+        },
+        "claim_lookup": {
+          "calls": 38,
+          "ms": 0.26404100000036124,
+          "sql": "SELECT domain,request_digest,identity_digest FROM quixi_local_operation_claims WHERE operation_id=?"
+        },
+        "claim_insert": {
+          "calls": 38,
+          "ms": 1.3134629999995013,
+          "sql": "INSERT INTO quixi_local_operation_claims VALUES(?,?,?,?)"
+        },
+        "run_read": {
+          "calls": 114,
+          "ms": 1.70100199999888,
+          "sql": "SELECT * FROM quixi_extract_runs WHERE id=?"
+        },
+        "document_current": {
+          "calls": 38,
+          "ms": 0.36616899999808084,
+          "sql": "SELECT * FROM quixi_extract_documents WHERE document_id=?"
+        },
+        "canonical_identity": {
+          "calls": 76,
+          "ms": 0.6058739999971294,
+          "sql": "SELECT payload FROM quixi_records WHERE collection=? AND id=?"
+        },
+        "page_read": {
+          "calls": 38,
+          "ms": 0.8283310000006168,
+          "sql": "SELECT id,run_id,page,state,next_sequence,utf16,map_count,map_bytes,max_item,text_sha,map_sha,source_digest,publication_revision,classification,published_bytes FROM quixi_extract_pages WHERE id=? AND run_id=?"
+        },
+        "text_stage": {
+          "calls": 38,
+          "ms": 0.7676669999991645,
+          "sql": "INSERT INTO quixi_extract_text_batches VALUES(?,?,?,?,?)"
+        },
+        "maps_stage": {
+          "calls": 38,
+          "ms": 0.7613769999989017,
+          "sql": "INSERT INTO quixi_extract_map_batches VALUES(?,?,?,?,?,?,?)"
+        },
+        "page_checkpoint": {
+          "calls": 38,
+          "ms": 0.48983100000259583,
+          "sql": "UPDATE quixi_extract_pages SET next_sequence=next_sequence+1,utf16=utf16+?,map_count=map_count+?,map_bytes=map_bytes+?,max_item=? WHERE id=?"
+        },
+        "accounting_read": {
+          "calls": 76,
+          "ms": 0.42679800000041723,
+          "sql": "SELECT used_bytes FROM quixi_extract_meta"
+        },
+        "accounting_write": {
+          "calls": 152,
+          "ms": 0.926381000001129,
+          "sql": "UPDATE quixi_extract_runs SET used_bytes=used_bytes+? WHERE id=?"
+        },
+        "receipt_insert": {
+          "calls": 38,
+          "ms": 0.43454300000030344,
+          "sql": "INSERT INTO quixi_extract_operations VALUES(?,?,?,?,?,?)"
+        }
+      }
+    }
+  ],
+  "cpuSampling": {
+    "artifact": "baseline.cpuprofile.gz",
+    "uncompressedSha256": "c416c6eafa2ab27c0319aeefb36e553194fb14a90f5427834cc217c610da6ebe",
+    "compressedSha256": "df4fe9604721b58305f1915b199b130c766526394f7ca74e7c288f9e6769e9b9",
+    "compressedBytes": 260403,
+    "intervalMicroseconds": 100,
+    "stageSamples": 21873,
+    "stageSampleUs": 2782710,
+    "topSelf": [
+      {
+        "samples": 3116,
+        "microseconds": 394665,
+        "functionName": "visit",
+        "url": "file:///Users/eric/QuixiChat/packages/core/src/contracts/storage.ts",
+        "line": 177
+      },
+      {
+        "samples": 1391,
+        "microseconds": 181474,
+        "functionName": "process",
+        "url": "file:///Users/eric/QuixiChat/node_modules/@noble/hashes/sha2.js",
+        "line": 72
+      },
+      {
+        "samples": 1166,
+        "microseconds": 148722,
+        "functionName": "visit",
+        "url": "file:///Users/eric/QuixiChat/packages/core/src/contracts/serialization.ts",
+        "line": 31
+      },
+      {
+        "samples": 1147,
+        "microseconds": 146072,
+        "functionName": "",
+        "url": "file:///Users/eric/QuixiChat/packages/core/src/contracts/storage.ts",
+        "line": 179
+      },
+      {
+        "samples": 835,
+        "microseconds": 107745,
+        "functionName": "encode",
+        "url": "node:internal/encoding",
+        "line": 351
+      },
+      {
+        "samples": 742,
+        "microseconds": 96335,
+        "functionName": "wasm-function[128]",
+        "url": "wasm://wasm/0061a45e",
+        "line": 1
+      },
+      {
+        "samples": 589,
+        "microseconds": 74537,
+        "functionName": "visit",
+        "url": "file:///Users/eric/QuixiChat/packages/core/src/model/validation.ts",
+        "line": 29
+      },
+      {
+        "samples": 569,
+        "microseconds": 72920,
+        "functionName": "visit",
+        "url": "file:///Users/eric/QuixiChat/packages/core/src/contracts/extraction.ts",
+        "line": 206
+      },
+      {
+        "samples": 518,
+        "microseconds": 67248,
+        "functionName": "expandFileStorage",
+        "url": "file:///Users/eric/QuixiChat/packages/storage/sqlite/dist/sqlite3.mjs",
+        "line": 1231
+      },
+      {
+        "samples": 447,
+        "microseconds": 57198,
+        "functionName": "execute",
+        "url": "file:///Users/eric/QuixiChat/packages/storage/src/worker/extraction/index.ts",
+        "line": 240
+      },
+      {
+        "samples": 431,
+        "microseconds": 56128,
+        "functionName": "",
+        "url": "file:///Users/eric/QuixiChat/packages/storage/sqlite/dist/sqlite3.mjs",
+        "line": 9365
+      },
+      {
+        "samples": 413,
+        "microseconds": 53087,
+        "functionName": "encodeUtf8String",
+        "url": "",
+        "line": 0
+      },
+      {
+        "samples": 408,
+        "microseconds": 53034,
+        "functionName": "exec",
+        "url": "file:///Users/eric/QuixiChat/packages/storage/sqlite/dist/sqlite3.mjs",
+        "line": 13696
+      },
+      {
+        "samples": 382,
+        "microseconds": 49667,
+        "functionName": "string",
+        "url": "file:///Users/eric/QuixiChat/packages/core/src/contracts/serialization.ts",
+        "line": 9
+      },
+      {
+        "samples": 347,
+        "microseconds": 44452,
+        "functionName": "write",
+        "url": "file:///Users/eric/QuixiChat/packages/storage/sqlite/dist/sqlite3.mjs",
+        "line": 1362
+      },
+      {
+        "samples": 339,
+        "microseconds": 43458,
+        "functionName": "WhWasmUtilInstaller.target.scopedAllocPop",
+        "url": "file:///Users/eric/QuixiChat/packages/storage/sqlite/dist/sqlite3.mjs",
+        "line": 8470
+      },
+      {
+        "samples": 216,
+        "microseconds": 27711,
+        "functionName": "out.cbArg",
+        "url": "file:///Users/eric/QuixiChat/packages/storage/sqlite/dist/sqlite3.mjs",
+        "line": 13289
+      },
+      {
+        "samples": 199,
+        "microseconds": 25669,
+        "functionName": "finalize",
+        "url": "file:///Users/eric/QuixiChat/packages/storage/sqlite/dist/sqlite3.mjs",
+        "line": 14411
+      },
+      {
+        "samples": 182,
+        "microseconds": 23872,
+        "functionName": "wasm-function[2272]",
+        "url": "wasm://wasm/0061a45e",
+        "line": 1
+      },
+      {
+        "samples": 173,
+        "microseconds": 22832,
+        "functionName": "wasm-function[367]",
+        "url": "wasm://wasm/0061a45e",
+        "line": 1
+      },
+      {
+        "samples": 175,
+        "microseconds": 22378,
+        "functionName": "get",
+        "url": "file:///Users/eric/QuixiChat/packages/storage/sqlite/dist/sqlite3.mjs",
+        "line": 14709
+      },
+      {
+        "samples": 166,
+        "microseconds": 21541,
+        "functionName": "wasm-function[363]",
+        "url": "wasm://wasm/0061a45e",
+        "line": 1
+      },
+      {
+        "samples": 142,
+        "microseconds": 18626,
+        "functionName": "WhWasmUtilInstaller.target.jstrcpy",
+        "url": "file:///Users/eric/QuixiChat/packages/storage/sqlite/dist/sqlite3.mjs",
+        "line": 8277
+      },
+      {
+        "samples": 140,
+        "microseconds": 17878,
+        "functionName": "",
+        "url": "file:///Users/eric/QuixiChat/packages/core/src/model/validation.ts",
+        "line": 36
+      },
+      {
+        "samples": 118,
+        "microseconds": 14503,
+        "functionName": "wellFormed",
+        "url": "file:///Users/eric/QuixiChat/packages/core/src/contracts/extraction.ts",
+        "line": 111
+      },
+      {
+        "samples": 111,
+        "microseconds": 14085,
+        "functionName": "__affirmAlloc",
+        "url": "file:///Users/eric/QuixiChat/packages/storage/sqlite/dist/sqlite3.mjs",
+        "line": 8364
+      },
+      {
+        "samples": 109,
+        "microseconds": 14003,
+        "functionName": "wasm-function[2335]",
+        "url": "wasm://wasm/0061a45e",
+        "line": 1
+      },
+      {
+        "samples": 104,
+        "microseconds": 13706,
+        "functionName": "get",
+        "url": "file:///Users/eric/QuixiChat/packages/storage/sqlite/dist/sqlite3.mjs",
+        "line": 14884
+      },
+      {
+        "samples": 91,
+        "microseconds": 12295,
+        "functionName": "WhWasmUtilInstaller.cache.xWrap.convertArgNoCheck",
+        "url": "file:///Users/eric/QuixiChat/packages/storage/sqlite/dist/sqlite3.mjs",
+        "line": 9145
+      },
+      {
+        "samples": 80,
+        "microseconds": 10753,
+        "functionName": "Stmt",
+        "url": "file:///Users/eric/QuixiChat/packages/storage/sqlite/dist/sqlite3.mjs",
+        "line": 13194
+      }
+    ]
+  },
+  "sourceHashes": {
+    "packages/storage/src/worker/extraction/index.ts": "be7a6a8981271619a0f3d37daa61594da489feb5b76a193427b7d6dfa0e69ecc",
+    "packages/storage/src/worker/extraction/schema.ts": "e08905c3ed353f8bfbbef90f5d768126eac5713e471c4ceec283e62a99961487",
+    "packages/storage/src/worker/operation-claims.ts": "b90a22768dd7797058221fd509b1f02bd34e4e54a7aa77c15304e7cb19b0725b",
+    "packages/core/src/contracts/extraction.ts": "b05bcd2ef02bd60694bff7cc5d83fccbd10e2584f1ba9edf17505241c209b483",
+    "packages/core/src/contracts/storage.ts": "8f156bc4d7c4a580b6b4ba982372b72da569513602c3815a99686141d9a2c1e4",
+    "packages/core/src/model/validation.ts": "5feb020a6cf7d361c2661e4e012c24a8b2f329ce4efda1a7ebe5d8ccd11ae0a9",
+    "packages/core/src/contracts/serialization.ts": "a1d6cc8792dc6aeac4310f8b3f2545c0414b9425d7983fb4a80b7e7b0808116e",
+    "node_modules/@noble/hashes/sha2.js": "471746bba6ec4c6238ca41358d1d3b40b6ff31cf3363f0b4d550c649c1a8e83b",
+    "node_modules/@noble/hashes/_md.js": "60cf3010fda89e3e4d3f0e7ff1ce249e9c467f34b4fd41b6fd6101d9f69be763",
+    "node_modules/@noble/hashes/_u64.js": "b09da8c07fe8187c07649494cdb7cd0bcf13df90b506a9473d19e4d5f8c2e102",
+    "node_modules/@noble/hashes/utils.js": "037ad49adb78168b6b699598fd33f85f7877456b1d28b4d032e2a1a16807947c",
+    "node_modules/@noble/hashes/package.json": "3e361734f5269de162fa362483d7f45dee7efb533ec217157945338f7591baaf",
+    "packages/storage/src/worker/canonical/repository.ts": "326367b3b5ff6c4660baf95abba160f6b98ccdd7e7fe458f72ecf56b2b3e2428",
+    "packages/storage/migrations/index.ts": "2c5089fa41c8c96a1a46e3dab0aeb72dbe70dcfb2ee8bf6109b94142d0dde418",
+    "packages/storage/src/worker/archives/index.ts": "858d8ed4431b7a57c764e62a8c060528d29ad331511909619c405d8227f679e9",
+    "packages/documents/src/persist.ts": "ef469c91ed74e4c4cef9502117cf1dcd21f44f194a439e4518e863f16c508e32",
+    "packages/documents/src/persist-mutation.ts": "179c6d56c36bda9b73e2b9afb7d15ad41008f459763a7167397b0e4df2aacc58",
+    "perf/documents/generate_dense_fixtures.py": "58b212810e7999075dc1a6882153c35a1fe2c557ac84d34b627c9ccf5847e812",
+    "perf/documents/fixtures/dense-manifest.json": "d7c6aa07d1492e523599d1dfe928c9e4759cb3af5197241f07a4fe46ccf2b928",
+    "packages/storage/tests/extraction-performance/profile.ts": "1580ba8e70c2922457c9e16966789bf198e9acc62f2b43953b7ad683306b493f",
+    "packages/storage/sqlite/dist/sqlite3.wasm": "dd7c22431a3b8ad51ab5e6ed91065593574c34c5959d2efdef2f17484eedcb2c",
+    "packages/storage/sqlite/dist/sqlite3.mjs": "127c4f37a4ce3449d464b976ac4979fc6b016ae974c0aea9ba8afef85d3b4d5d",
+    "packages/storage/sqlite/artifacts.json": "d6033112dabf47ede85c0599777f07261d475221fa3e0e315afbf1f8341096cb"
+  },
+  "sourceStable": true
+}

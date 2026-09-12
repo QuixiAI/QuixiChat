@@ -1,0 +1,42 @@
+{
+  "passed": true,
+  "status": "passed",
+  "artifactVersion": "1.0.2",
+  "command": [
+    "docker",
+    "run",
+    "--rm",
+    "--platform",
+    "linux/amd64",
+    "--mount",
+    "type=bind,source=/Users/eric/QuixiChat/packages/quixi-embed,target=/src",
+    "emscripten/emsdk@sha256:90b757eb11fa9a0e3ce4d2d9f76d932a56018e4accc37b5a28b2783751e60eb7",
+    "emcc",
+    "-std=c11",
+    "-O2",
+    "-ffp-contract=off",
+    "-fno-vectorize",
+    "-fno-slp-vectorize",
+    "-fstack-usage",
+    "-c",
+    "/src/native/tokenizer.c",
+    "-o",
+    "/src/build/tokenizer-offset-stack.o"
+  ],
+  "frames": {
+    "qx_vocabulary_init": 0,
+    "qx_unicode_init": 0,
+    "qx_tokenize": 0,
+    "tokenize_bounded": 480,
+    "qx_inspect_tokens": 2064,
+    "qx_tokenize_offsets": 6880,
+    "process": 48,
+    "flush": 1616,
+    "normalized_cp": 16
+  },
+  "offsetPathTokenizerFrameSum": 8560,
+  "explicitProvenanceArrayBytes": 6400,
+  "reservedWasmStackBytes": 1048576,
+  "stackUsageSha256": "55141cfa4f348f24f4a6acaec26ba09686343fe1a0b629cf9e2f43a34abd1a6a",
+  "scope": "Sum of compiler-reported tokenizer frames on the nonrecursive offset path; excludes caller/libc frames. Same pinned production optimization flags."
+}

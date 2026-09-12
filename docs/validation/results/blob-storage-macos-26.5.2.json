@@ -1,0 +1,214 @@
+{
+  "status": "passed",
+  "startedAt": "2026-09-08T10:19:45.588Z",
+  "hosts": [
+    {
+      "name": "chromium",
+      "status": "passed",
+      "phases": {
+        "write": {
+          "checks": [
+            "verified staging is invisible to published reads",
+            "publication and finalization retries preserve identity",
+            "bounded reads round-trip 5 MiB with four-chunk backpressure",
+            "concurrent reads and deduplication share one immutable file handle",
+            "duplicate content shares one verified file",
+            "sequence, oversize, incomplete and incorrect digest rejection",
+            "empty blob has an acknowledged terminal chunk",
+            "canonical UTF-8 validates across chunks and rejects invalid or truncated sequences",
+            "cancelled publication leaves no visible partial file",
+            "cancellation during publication cleans partial output and permits verified retry",
+            "corruption rejected and preserved for recovery",
+            "open transfer count is bounded",
+            "owner restart preserves published data and fences interrupted transfer IDs"
+          ],
+          "digest": "0de713fa5b019638b007265d24ed5d77dddfee3451a3259be27ff90dd398775b",
+          "byteLength": 5242897,
+          "chunkBytes": 1048576,
+          "maxOpenTransfers": 8
+        },
+        "catalog_write": {
+          "checks": [
+            "begin and finish replay retain transfer identity",
+            "verified UTF-8 bytes precede canonical availability",
+            "canonical transaction failure rolls back references and every sync operation while preserving recoverable bytes",
+            "terminal import cleanup preserves published transfer identity for canonical retries",
+            "canonical commit publishes references and sync operations atomically",
+            "replay after staging cleanup adds no duplicate mutations",
+            "postcommit cleanup lookup failure preserves committed result",
+            "failed begin metadata update releases the real byte handle",
+            "finished stages release handles and do not cap an import at eight blobs",
+            "corrupt published bytes quarantine authorization until fresh verification",
+            "interrupted-copy disk state retained for next-process repair test"
+          ],
+          "sha256": "bc1ffc9d0926ef88a44a8ea5ea5edfc4ac511df4cf5970cd9e1b6f7a7e622f76",
+          "byteLength": 32,
+          "sqliteVersion": "3.53.4"
+        },
+        "interruption": {
+          "transferId": "4e2c89ce-7871-4a4c-b921-45201baf80bf",
+          "checks": [
+            "unfinished upload left open for browser termination"
+          ]
+        },
+        "restart": {
+          "checks": [
+            "published bytes survive browser process restart",
+            "interrupted staging remains visible for SQL reconciliation"
+          ],
+          "digest": "0de713fa5b019638b007265d24ed5d77dddfee3451a3259be27ff90dd398775b",
+          "byteLength": 5242897,
+          "stagedFiles": [
+            {
+              "kind": "staged",
+              "name": "752d7378-8935-4b96-b696-8b977c855009.stage",
+              "byteLength": 1
+            },
+            {
+              "kind": "staged",
+              "name": "4e2c89ce-7871-4a4c-b921-45201baf80bf.stage",
+              "byteLength": 3
+            }
+          ]
+        },
+        "catalog_restart": {
+          "checks": [
+            "verified staging resumes after restart and repairs an uncatalogued partial publication",
+            "canonical attachment and blob bytes survive process restart",
+            "unfinished durable transfer is fenced on owner restart",
+            "SQLite integrity is ok"
+          ]
+        },
+        "quota": {
+          "checks": [
+            "real quota failure reported",
+            "failed write cannot continue",
+            "failed staging cleaned"
+          ],
+          "errorCode": "QUOTA_EXCEEDED",
+          "usageBefore": 12057164,
+          "imposedQuota": 12319308
+        },
+        "afterQuota": {
+          "checks": [
+            "new verified publication succeeds after quota is restored",
+            "published bytes survive browser process restart",
+            "interrupted staging remains visible for SQL reconciliation"
+          ],
+          "digest": "0de713fa5b019638b007265d24ed5d77dddfee3451a3259be27ff90dd398775b",
+          "byteLength": 5242897,
+          "stagedFiles": [
+            {
+              "kind": "staged",
+              "name": "752d7378-8935-4b96-b696-8b977c855009.stage",
+              "byteLength": 1
+            },
+            {
+              "kind": "staged",
+              "name": "4e2c89ce-7871-4a4c-b921-45201baf80bf.stage",
+              "byteLength": 3
+            }
+          ]
+        }
+      },
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36"
+    },
+    {
+      "name": "webkit",
+      "status": "passed",
+      "phases": {
+        "write": {
+          "checks": [
+            "verified staging is invisible to published reads",
+            "publication and finalization retries preserve identity",
+            "bounded reads round-trip 5 MiB with four-chunk backpressure",
+            "concurrent reads and deduplication share one immutable file handle",
+            "duplicate content shares one verified file",
+            "sequence, oversize, incomplete and incorrect digest rejection",
+            "empty blob has an acknowledged terminal chunk",
+            "canonical UTF-8 validates across chunks and rejects invalid or truncated sequences",
+            "cancelled publication leaves no visible partial file",
+            "cancellation during publication cleans partial output and permits verified retry",
+            "corruption rejected and preserved for recovery",
+            "open transfer count is bounded",
+            "owner restart preserves published data and fences interrupted transfer IDs"
+          ],
+          "digest": "0de713fa5b019638b007265d24ed5d77dddfee3451a3259be27ff90dd398775b",
+          "byteLength": 5242897,
+          "chunkBytes": 1048576,
+          "maxOpenTransfers": 8
+        },
+        "catalog_write": {
+          "checks": [
+            "begin and finish replay retain transfer identity",
+            "verified UTF-8 bytes precede canonical availability",
+            "canonical transaction failure rolls back references and every sync operation while preserving recoverable bytes",
+            "terminal import cleanup preserves published transfer identity for canonical retries",
+            "canonical commit publishes references and sync operations atomically",
+            "replay after staging cleanup adds no duplicate mutations",
+            "postcommit cleanup lookup failure preserves committed result",
+            "failed begin metadata update releases the real byte handle",
+            "finished stages release handles and do not cap an import at eight blobs",
+            "corrupt published bytes quarantine authorization until fresh verification",
+            "interrupted-copy disk state retained for next-process repair test"
+          ],
+          "sha256": "bc1ffc9d0926ef88a44a8ea5ea5edfc4ac511df4cf5970cd9e1b6f7a7e622f76",
+          "byteLength": 32,
+          "sqliteVersion": "3.53.4"
+        },
+        "interruption": {
+          "transferId": "a7b370e3-98fc-407a-ab19-365e20e08ae5",
+          "checks": [
+            "unfinished upload left open for browser termination"
+          ]
+        },
+        "restart": {
+          "checks": [
+            "published bytes survive browser process restart",
+            "interrupted staging remains visible for SQL reconciliation"
+          ],
+          "digest": "0de713fa5b019638b007265d24ed5d77dddfee3451a3259be27ff90dd398775b",
+          "byteLength": 5242897,
+          "stagedFiles": [
+            {
+              "kind": "staged",
+              "name": "a61e390b-8d4f-4fbd-9b23-c2524a21a3d3.stage",
+              "byteLength": 1
+            },
+            {
+              "kind": "staged",
+              "name": "a7b370e3-98fc-407a-ab19-365e20e08ae5.stage",
+              "byteLength": 3
+            }
+          ]
+        },
+        "catalog_restart": {
+          "checks": [
+            "verified staging resumes after restart and repairs an uncatalogued partial publication",
+            "canonical attachment and blob bytes survive process restart",
+            "unfinished durable transfer is fenced on owner restart",
+            "SQLite integrity is ok"
+          ]
+        },
+        "quota": {
+          "status": "not_run",
+          "reason": "No equivalent browser quota override available in this harness"
+        }
+      },
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15"
+    }
+  ],
+  "sourceSha256": {
+    "packages/storage/src/worker/blobs.ts": "1eabb00163f334b733ac4284fdb5ac5b28d3c5063ef1ff868702f3eadb950eba",
+    "packages/storage/src/worker/blob-catalog.ts": "6f1a3b10f7492483c69e81a8808b726a4ab5f91277177271939cf46883fbfb52",
+    "packages/storage/src/worker/canonical/repository.ts": "5d4ed71da9a4654ddab0c61c06fffec84d587ba48e23c88cebc5a461e9b2252b",
+    "packages/storage/migrations/index.ts": "abcfcdebe39835381447aaf93cd163923890fad60df465f5b997b7ef22d8b32f",
+    "packages/core/src/contracts/transfer.ts": "73563a59e5d0964657a88c025a1b0935a1ae7eb77161e96404a4d37b375d6a6f",
+    "packages/storage/tests/browser/main.ts": "d2cc2526ba858e8cc2daf679cc325c4bc796b9c780995b1fd87bf8c146abd5d8",
+    "packages/storage/tests/browser/worker.ts": "3e31d46c0eccfaded17e617a6fe66847a375e095eb16a3aff314479c70e73ffd",
+    "packages/storage/tests/browser/catalog.ts": "001187b14ebf8c3cff6b6a9f061a5de2d2b460200d4daa0f42fa6fc72cb578dc",
+    "packages/storage/tests/browser/run.mjs": "8476e0de3ca5ccfe5c4406d3dcd6a226048f115d27961fb3c6d1b4da29ad20b1",
+    "package-lock.json": "48870a3222cab45e561d28da2b2c48a629db837edd5b0beffa9f321bc90de702"
+  },
+  "finishedAt": "2026-09-08T10:19:48.786Z"
+}

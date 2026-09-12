@@ -1,0 +1,520 @@
+
+> quixi@0.0.1 test:app:switching
+> tsc --noEmit -p packages/app/tsconfig.tests.json && node --experimental-transform-types --test packages/app/tests/switching/*.test.ts
+
+TAP version 13
+# (node:89177) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: audio inspection, counting, send preparation and regeneration rehydrate the same original bytes and filename
+ok 1 - audio inspection, counting, send preparation and regeneration rehydrate the same original bytes and filename
+  ---
+  duration_ms: 4.731
+  type: 'test'
+  ...
+# Subtest: missing and unsupported historical audio remain Audio parts without invented text or byte reads
+ok 2 - missing and unsupported historical audio remain Audio parts without invented text or byte reads
+  ---
+  duration_ms: 0.217292
+  type: 'test'
+  ...
+# Subtest: explicitly excluded Audio reads no attachment metadata or bytes
+ok 3 - explicitly excluded Audio reads no attachment metadata or bytes
+  ---
+  duration_ms: 0.146625
+  type: 'test'
+  ...
+# Subtest: aggregate allocation bound refuses before opening a second oversized branch attachment
+ok 4 - aggregate allocation bound refuses before opening a second oversized branch attachment
+  ---
+  duration_ms: 0.42775
+  type: 'test'
+  ...
+# Subtest: malformed storage sequence releases its reader and refuses before provider preparation
+ok 5 - malformed storage sequence releases its reader and refuses before provider preparation
+  ---
+  duration_ms: 0.091291
+  type: 'test'
+  ...
+# Subtest: draft audio kind and filename reach counting and compatibility inspection without publication
+ok 6 - draft audio kind and filename reach counting and compatibility inspection without publication
+  ---
+  duration_ms: 0.337459
+  type: 'test'
+  ...
+# Subtest: MP3 aliases normalize for dispatch while an excluded audio occurrence stays unread
+ok 7 - MP3 aliases normalize for dispatch while an excluded audio occurrence stays unread
+  ---
+  duration_ms: 0.130709
+  type: 'test'
+  ...
+# (node:89178) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: without a count the report shows the room, asks for a count and quotes the reviewed rates
+ok 8 - without a count the report shows the room, asks for a count and quotes the reviewed rates
+  ---
+  duration_ms: 14.972792
+  type: 'test'
+  ...
+# Subtest: a count that fits reports the spare room and an input plus bounded output estimate
+ok 9 - a count that fits reports the spare room and an input plus bounded output estimate
+  ---
+  duration_ms: 0.100542
+  type: 'test'
+  ...
+# Subtest: a count over the room states the excess and that compaction is not available
+ok 10 - a count over the room states the excess and that compaction is not available
+  ---
+  duration_ms: 0.131708
+  type: 'test'
+  ...
+# Subtest: a connection without a count endpoint, an unknown window and no price are each stated
+ok 11 - a connection without a count endpoint, an unknown window and no price are each stated
+  ---
+  duration_ms: 0.073958
+  type: 'test'
+  ...
+# (node:89179) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: the routing profile round-trips a fallback and rejects other shapes
+ok 12 - the routing profile round-trips a fallback and rejects other shapes
+  ---
+  duration_ms: 1.199667
+  type: 'test'
+  ...
+# Subtest: a provider failure with a healthy, compatible, same-privacy target applies
+ok 13 - a provider failure with a healthy, compatible, same-privacy target applies
+  ---
+  duration_ms: 0.141042
+  type: 'test'
+  ...
+# Subtest: a user stop never falls back
+ok 14 - a user stop never falls back
+  ---
+  duration_ms: 0.085333
+  type: 'test'
+  ...
+# Subtest: a missing connection, missing model or the failed target itself are refused by name
+ok 15 - a missing connection, missing model or the failed target itself are refused by name
+  ---
+  duration_ms: 0.0695
+  type: 'test'
+  ...
+# Subtest: a privacy-class change is refused unless the policy allows it, and the allowance is recorded in the reason
+ok 16 - a privacy-class change is refused unless the policy allows it, and the allowance is recorded in the reason
+  ---
+  duration_ms: 0.072125
+  type: 'test'
+  ...
+# Subtest: a target whose health blocks sending or whose report refuses the path is not used
+ok 17 - a target whose health blocks sending or whose report refuses the path is not used
+  ---
+  duration_ms: 0.108708
+  type: 'test'
+  ...
+# (node:89180) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: file inspection, counting, send preparation and regeneration rehydrate the same original bytes and filename
+ok 18 - file inspection, counting, send preparation and regeneration rehydrate the same original bytes and filename
+  ---
+  duration_ms: 3.912833
+  type: 'test'
+  ...
+# Subtest: missing and unsupported historical files remain File parts without invented text or byte reads
+ok 19 - missing and unsupported historical files remain File parts without invented text or byte reads
+  ---
+  duration_ms: 0.206667
+  type: 'test'
+  ...
+# Subtest: explicitly excluded File reads no attachment metadata or bytes
+ok 20 - explicitly excluded File reads no attachment metadata or bytes
+  ---
+  duration_ms: 0.1445
+  type: 'test'
+  ...
+# Subtest: aggregate allocation bound refuses before opening a second oversized branch attachment
+ok 21 - aggregate allocation bound refuses before opening a second oversized branch attachment
+  ---
+  duration_ms: 0.389375
+  type: 'test'
+  ...
+# Subtest: malformed storage sequence releases its reader and refuses before provider preparation
+ok 22 - malformed storage sequence releases its reader and refuses before provider preparation
+  ---
+  duration_ms: 0.085167
+  type: 'test'
+  ...
+# Subtest: draft PDF kind and filename reach counting and compatibility inspection without publication
+ok 23 - draft PDF kind and filename reach counting and compatibility inspection without publication
+  ---
+  duration_ms: 0.322333
+  type: 'test'
+  ...
+# (node:89181) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: every target carrying every part is fully portable, with one reason per target
+ok 24 - every target carrying every part is fully portable, with one reason per target
+  ---
+  duration_ms: 8.835583
+  type: 'test'
+  ...
+# Subtest: inlined long text or images without local bytes make the path portable with transformations
+ok 25 - inlined long text or images without local bytes make the path portable with transformations
+  ---
+  duration_ms: 0.109417
+  type: 'test'
+  ...
+# Subtest: a path some targets refuse is provider-dependent and names each refusal
+ok 26 - a path some targets refuse is provider-dependent and names each refusal
+  ---
+  duration_ms: 0.116209
+  type: 'test'
+  ...
+# Subtest: a path no target can carry is blocked, and constraints are quoted
+ok 27 - a path no target can carry is blocked, and constraints are quoted
+  ---
+  duration_ms: 0.061583
+  type: 'test'
+  ...
+# Subtest: without a configured target the status is unknown with an explicit reason
+ok 28 - without a configured target the status is unknown with an explicit reason
+  ---
+  duration_ms: 0.081375
+  type: 'test'
+  ...
+# Subtest: a reviewed summary is reported as a transformation with retained source history
+ok 29 - a reviewed summary is reported as a transformation with retained source history
+  ---
+  duration_ms: 0.073458
+  type: 'test'
+  ...
+# (node:89182) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: admitted regional relay evidence qualifies with distinct historical origin and an evidence-bound key
+ok 30 - admitted regional relay evidence qualifies with distinct historical origin and an evidence-bound key
+  ---
+  duration_ms: 2.250167
+  type: 'test'
+  ...
+# Subtest: relay evaluator rejects a native binding, malformed declarations and cross-region relay claims
+ok 31 - relay evaluator rejects a native binding, malformed declarations and cross-region relay claims
+  ---
+  duration_ms: 0.215042
+  type: 'test'
+  ...
+# Subtest: required US and EU processing accept exact reviewed target evidence and expose its configuration basis
+ok 32 - required US and EU processing accept exact reviewed target evidence and expose its configuration basis
+  ---
+  duration_ms: 0.093167
+  type: 'test'
+  ...
+# Subtest: unknown or global processing cannot satisfy a region requirement
+ok 33 - unknown or global processing cannot satisfy a region requirement
+  ---
+  duration_ms: 0.053
+  type: 'test'
+  ...
+# Subtest: reviewed processing in the other region is explicitly refused
+ok 34 - reviewed processing in the other region is explicitly refused
+  ---
+  duration_ms: 0.088583
+  type: 'test'
+  ...
+# Subtest: binding account destination transport protocol and model must all match the reviewed region
+ok 35 - binding account destination transport protocol and model must all match the reviewed region
+  ---
+  duration_ms: 0.058459
+  type: 'test'
+  ...
+# Subtest: tampered review metadata and broadened model endpoint or modality claims are refused
+ok 36 - tampered review metadata and broadened model endpoint or modality claims are refused
+  ---
+  duration_ms: 0.11275
+  type: 'test'
+  ...
+# Subtest: region evidence keys ignore object ordering but invalidate on changed review scope
+ok 37 - region evidence keys ignore object ordering but invalidate on changed review scope
+  ---
+  duration_ms: 0.10175
+  type: 'test'
+  ...
+# Subtest: historical regional destinations remain distinct without a configured adapter or current review revision
+ok 38 - historical regional destinations remain distinct without a configured adapter or current review revision
+  ---
+  duration_ms: 0.260042
+  type: 'test'
+  ...
+# (node:89183) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: direct workflow send enforces the conservative cost bound without counting automatically
+ok 39 - direct workflow send enforces the conservative cost bound without counting automatically
+  ---
+  duration_ms: 6.366916
+  type: 'test'
+  ...
+# Subtest: unknown pricing refuses before writes or generation even after explicit token counting
+ok 40 - unknown pricing refuses before writes or generation even after explicit token counting
+  ---
+  duration_ms: 0.759
+  type: 'test'
+  ...
+# Subtest: an explicit count unlocks identical wire content despite fresh canonical and request IDs
+ok 41 - an explicit count unlocks identical wire content despite fresh canonical and request IDs
+  ---
+  duration_ms: 1.289334
+  type: 'test'
+  ...
+# Subtest: changed draft, system, model, adapter or output limit cannot reuse a count
+ok 42 - changed draft, system, model, adapter or output limit cannot reuse a count
+  ---
+  duration_ms: 1.490042
+  type: 'test'
+  ...
+# Subtest: regeneration refuses a tight cap because the counted draft is a different request
+ok 43 - regeneration refuses a tight cap because the counted draft is a different request
+  ---
+  duration_ms: 0.533458
+  type: 'test'
+  ...
+# Subtest: malformed or unsupported routing cost policies fail closed at the workflow boundary
+ok 44 - malformed or unsupported routing cost policies fail closed at the workflow boundary
+  ---
+  duration_ms: 0.563292
+  type: 'test'
+  ...
+# Subtest: counts taken without a cap do not silently become cost authorization later
+ok 45 - counts taken without a cap do not silently become cost authorization later
+  ---
+  duration_ms: 0.429042
+  type: 'test'
+  ...
+# Subtest: the bounded count cache evicts older requests while retaining the other sixteen
+ok 46 - the bounded count cache evicts older requests while retaining the other sixteen
+  ---
+  duration_ms: 1.628625
+  type: 'test'
+  ...
+# Subtest: unavailable or invalid count results cannot unlock capped requests
+ok 47 - unavailable or invalid count results cannot unlock capped requests
+  ---
+  duration_ms: 0.851667
+  type: 'test'
+  ...
+# Subtest: a late count after cancellation or context replacement cannot authorize a send
+ok 48 - a late count after cancellation or context replacement cannot authorize a send
+  ---
+  duration_ms: 1.180958
+  type: 'test'
+  ...
+# Subtest: required processing region refuses count, send and regeneration before dispatch or canonical writes
+ok 49 - required processing region refuses count, send and regeneration before dispatch or canonical writes
+  ---
+  duration_ms: 0.522875
+  type: 'test'
+  ...
+# Subtest: matching processing evidence permits preparation up to the canonical commit boundary
+ok 50 - matching processing evidence permits preparation up to the canonical commit boundary
+  ---
+  duration_ms: 0.497417
+  type: 'test'
+  ...
+# Subtest: a tightened canonical region during count preparation refuses before the dispatch callback returns
+ok 51 - a tightened canonical region during count preparation refuses before the dispatch callback returns
+  ---
+  duration_ms: 0.083625
+  type: 'test'
+  ...
+# Subtest: other canonical policy changes during count preparation also require a fresh review before dispatch
+ok 52 - other canonical policy changes during count preparation also require a fresh review before dispatch
+  ---
+  duration_ms: 0.38125
+  type: 'test'
+  ...
+# Subtest: a late count is discarded after policy, canonical view or connection evidence changes
+ok 53 - a late count is discarded after policy, canonical view or connection evidence changes
+  ---
+  duration_ms: 0.341541
+  type: 'test'
+  ...
+# Subtest: revoked regional eligibility rejects an otherwise current late count
+ok 54 - revoked regional eligibility rejects an otherwise current late count
+  ---
+  duration_ms: 0.124083
+  type: 'test'
+  ...
+# (node:89184) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: the uncounted conservative bound includes the entire input window and maximum output
+ok 55 - the uncounted conservative bound includes the entire input window and maximum output
+  ---
+  duration_ms: 0.781292
+  type: 'test'
+  ...
+# Subtest: a bound count permits a cheaper estimate without assuming a cache discount
+ok 56 - a bound count permits a cheaper estimate without assuming a cache discount
+  ---
+  duration_ms: 0.567917
+  type: 'test'
+  ...
+# Subtest: nanodollar rounding compares exact decimal boundaries and rounds combined cost once
+ok 57 - nanodollar rounding compares exact decimal boundaries and rounds combined cost once
+  ---
+  duration_ms: 0.071208
+  type: 'test'
+  ...
+# Subtest: legacy input-only and total attempt limits are both enforced independently
+ok 58 - legacy input-only and total attempt limits are both enforced independently
+  ---
+  duration_ms: 0.121333
+  type: 'test'
+  ...
+# Subtest: missing or malformed price information and unsupported currency refuse capped attempts
+ok 59 - missing or malformed price information and unsupported currency refuse capped attempts
+  ---
+  duration_ms: 0.139042
+  type: 'test'
+  ...
+# Subtest: invalid cost limits fail closed, including old input-only limits
+ok 60 - invalid cost limits fail closed, including old input-only limits
+  ---
+  duration_ms: 0.054042
+  type: 'test'
+  ...
+# Subtest: invalid counts and output or context limits cannot satisfy a configured cap
+ok 61 - invalid counts and output or context limits cannot satisfy a configured cap
+  ---
+  duration_ms: 0.107042
+  type: 'test'
+  ...
+# Subtest: an unknown context requires a valid count; null counts use the conservative bound
+ok 62 - an unknown context requires a valid count; null counts use the conservative bound
+  ---
+  duration_ms: 0.042209
+  type: 'test'
+  ...
+# Subtest: zero caps accept only zero relevant cost and zero counts remain counted evidence
+ok 63 - zero caps accept only zero relevant cost and zero counts remain counted evidence
+  ---
+  duration_ms: 0.179375
+  type: 'test'
+  ...
+# Subtest: uncapped requests do not require pricing, counts, or valid estimate-only limits
+ok 64 - uncapped requests do not require pricing, counts, or valid estimate-only limits
+  ---
+  duration_ms: 0.213542
+  type: 'test'
+  ...
+# Subtest: large safe token budgets retain exact precision with nine-place rates
+ok 65 - large safe token budgets retain exact precision with nine-place rates
+  ---
+  duration_ms: 0.076833
+  type: 'test'
+  ...
+# (node:89185) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: version 3 retains an applied primary and attribution without changing version 2 profiles
+ok 66 - version 3 retains an applied primary and attribution without changing version 2 profiles
+  ---
+  duration_ms: 1.203666
+  type: 'test'
+  ...
+# Subtest: a version 1 fallback policy reads as a one-candidate profile and version 2 round-trips
+ok 67 - a version 1 fallback policy reads as a one-candidate profile and version 2 round-trips
+  ---
+  duration_ms: 0.226375
+  type: 'test'
+  ...
+# Subtest: a qualifying primary is chosen and the remaining candidates are not examined
+ok 68 - a qualifying primary is chosen and the remaining candidates are not examined
+  ---
+  duration_ms: 0.126042
+  type: 'test'
+  ...
+# Subtest: a primary that cannot send now or fails a requirement is routed around before the first attempt
+ok 69 - a primary that cannot send now or fails a requirement is routed around before the first attempt
+  ---
+  duration_ms: 7.288041
+  type: 'test'
+  ...
+# Subtest: capability, privacy, cost and configuration requirements name their refusal
+ok 70 - capability, privacy, cost and configuration requirements name their refusal
+  ---
+  duration_ms: 0.258291
+  type: 'test'
+  ...
+# Subtest: a primary whose report refuses the path is still chosen when nothing else qualifies
+ok 71 - a primary whose report refuses the path is still chosen when nothing else qualifies
+  ---
+  duration_ms: 0.071875
+  type: 'test'
+  ...
+# Subtest: total request caps require v4 and round-trip with or without a primary while legacy caps remain independent
+ok 72 - total request caps require v4 and round-trip with or without a primary while legacy caps remain independent
+  ---
+  duration_ms: 0.198791
+  type: 'test'
+  ...
+# Subtest: processing regions require v5 and round-trip independently of primary and total cost requirements
+ok 73 - processing regions require v5 and round-trip independently of primary and total cost requirements
+  ---
+  duration_ms: 0.358417
+  type: 'test'
+  ...
+# Subtest: region routing refuses unknown and denied candidates and names the qualifying fallback evidence
+ok 74 - region routing refuses unknown and denied candidates and names the qualifying fallback evidence
+  ---
+  duration_ms: 0.196083
+  type: 'test'
+  ...
+# (node:89186) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: summary inspection stops metadata paging at the cutoff and never reads covered parts or excluded bytes
+ok 75 - summary inspection stops metadata paging at the cutoff and never reads covered parts or excluded bytes
+  ---
+  duration_ms: 3.492667
+  type: 'test'
+  ...
+# Subtest: count, send preparation and regeneration use the same reviewed summary and retained tail
+ok 76 - count, send preparation and regeneration use the same reviewed summary and retained tail
+  ---
+  duration_ms: 2.0405
+  type: 'test'
+  ...
+# Subtest: a divergent or earlier branch is refused before parts, provider calls or writes
+ok 77 - a divergent or earlier branch is refused before parts, provider calls or writes
+  ---
+  duration_ms: 0.390209
+  type: 'test'
+  ...
+# Subtest: an empty branch cannot silently discard a selected summary and summary consumes message budget
+ok 78 - an empty branch cannot silently discard a selected summary and summary consumes message budget
+  ---
+  duration_ms: 0.94025
+  type: 'test'
+  ...
+# Subtest: busy or uncertain canonical changes refuse prompt counting before any source read or provider call
+ok 79 - busy or uncertain canonical changes refuse prompt counting before any source read or provider call
+  ---
+  duration_ms: 0.169083
+  type: 'test'
+  ...
+# Subtest: a branch change or uncertain write during context preparation prevents late count dispatch
+ok 80 - a branch change or uncertain write during context preparation prevents late count dispatch
+  ---
+  duration_ms: 0.284667
+  type: 'test'
+  ...
+# Subtest: a fresh empty branch counts only its current system prompt and new draft without reading old context
+ok 81 - a fresh empty branch counts only its current system prompt and new draft without reading old context
+  ---
+  duration_ms: 0.142334
+  type: 'test'
+  ...
+1..81
+# tests 81
+# suites 0
+# pass 81
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 206.62575

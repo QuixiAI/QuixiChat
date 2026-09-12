@@ -1,0 +1,426 @@
+{
+  "status": "passed",
+  "startedAt": "2026-09-08T14:51:01.816Z",
+  "hosts": [
+    {
+      "name": "chromium",
+      "status": "passed",
+      "checks": [
+        "two tabs share one SQLite/OPFS owner",
+        "64 control requests are admitted; the next is rejected before dispatch and admission recovers",
+        "verified range transfers preserve exact selected bytes, cap active leases, survive parent discard and acknowledge empty EOF ranges",
+        "follower publishes verified 5 MiB blob with canonical metadata and three atomic sync operations",
+        "four upload/read credits include pending replies and permit retry after local overload",
+        "out-of-order acknowledgements and final-chunk handling preserve exact SHA-256",
+        "invalid canonical transaction rolls back metadata and sync operations",
+        "transaction replay after staging cleanup does not duplicate operations",
+        "suppressed real commit reply produces UNKNOWN_OUTCOME and operation-status reconciliation finds the durable commit",
+        "a blob-control operation cannot reuse a canonical operation identity; SQLite constraint failure returns typed CONFLICT and preserves the original operation",
+        "bounded sync pages retain an ordered high-water snapshot without skipped or repeated operations",
+        "suppressed real upload acknowledgement invalidates the transfer; explicit discard and fresh transfer recover",
+        "change notifications reach owner and completion progress returns to follower",
+        "abrupt owner-tab termination transfers ownership and preserves canonical and blob data",
+        "upload interrupted by actual owner termination cannot resume under its previous operation identity and can be discarded",
+        "cancellation before owner acquisition is reported as not_dispatched",
+        "1001-part normalized import stays hidden during staging, requires fresh validation after owner restart, and atomically publishes records plus sync marker",
+        "cancelled import publishes no records or sync operations; idle maintenance removes published and cancelled temporary blob files",
+        "cleanup retains a shared transfer while another import is active and releases it after both are cancelled",
+        "independent producer lease survives abrupt storage-owner tab termination without sealing live output",
+        "actual producer-tab termination preserves committed prefix, seals partial output, records exactly one event and rejects delayed writes while committed retries remain idempotent",
+        "producer registration before creation fences delayed creation after context loss",
+        "idle owner maintenance indexes committed text automatically and publishes search status without foreground polling work",
+        "production FTS returns safe source-located excerpts without embedding weights and keeps old exact results available through an epoch rebuild",
+        "removing a derived table in an offline worker leaves canonical writes usable after reopen; explicit search repair rebuilds results without changing canonical records or sync operations",
+        "canonical metadata, blob SHA-256 and transaction replay survive actual browser-process restart",
+        "published many-part import and verified long-text blob survive browser-process restart",
+        "actual browser-process restart recovers registered lost producers while leaving uncoordinated history untouched"
+      ],
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36",
+      "owner": {
+        "backend": "sqlite-wasm-opfs-sahpool",
+        "ownerId": "24645ce7-1387-4b0d-95ff-d07080ef5085",
+        "schemaVersion": 6,
+        "integrity": "ok",
+        "canonicalRecords": 0,
+        "syncOperations": 0,
+        "persisted": false,
+        "usage": 6293518,
+        "quota": 10743711758
+      },
+      "requestAdmission": {
+        "admitted": 64,
+        "rejectedBeforeDispatch": 1,
+        "recovered": true
+      },
+      "ranges": {
+        "boundedChildLeases": 7,
+        "repeatedRanges": 128,
+        "childrenSurviveParentDiscard": true,
+        "emptyEofAcknowledged": true
+      },
+      "lostChunkReply": {
+        "suppressedReplies": 1,
+        "recovered": true
+      },
+      "afterTakeover": {
+        "backend": "sqlite-wasm-opfs-sahpool",
+        "ownerId": "02b19c6f-f5e6-4537-87a4-9a3d2c5cc348",
+        "schemaVersion": 6,
+        "integrity": "ok",
+        "canonicalRecords": 6,
+        "syncOperations": 3,
+        "persisted": false,
+        "usage": 11344558,
+        "quota": 10748762798
+      },
+      "interruptedUpload": {
+        "interruptedReplayRejected": true,
+        "discarded": true
+      },
+      "cancellation": {
+        "requestId": "c7d6f4c3-b0da-4474-8858-b5adeab8e9cb",
+        "operationId": null,
+        "outcome": "not_dispatched"
+      },
+      "importPublication": {
+        "diagnostics": {
+          "backend": "sqlite-wasm-opfs-sahpool",
+          "ownerId": "d17017a6-6d57-4827-8aa3-9ac971bd1043",
+          "schemaVersion": 6,
+          "integrity": "ok",
+          "canonicalRecords": 1006,
+          "syncOperations": 1007,
+          "persisted": false,
+          "usage": 21720089,
+          "quota": 10759138329
+        },
+        "partCount": 1001,
+        "state": "published"
+      },
+      "importCancellation": {
+        "importId": "3af1d422-746a-40c4-b7a4-5e8707bf2b6a",
+        "transferId": "b7a8b70a-57a3-4fad-9b72-86704bc62b5c",
+        "state": "cancelled"
+      },
+      "liveProducer": {
+        "status": "streaming",
+        "reconciliation": {
+          "checked": 2,
+          "recovered": 0,
+          "remaining": true,
+          "operationIds": []
+        }
+      },
+      "lostProducer": {
+        "status": "partial",
+        "reconciliation": {
+          "checked": 0,
+          "recovered": 0,
+          "remaining": false,
+          "operationIds": []
+        }
+      },
+      "orphanProducer": {
+        "status": "absent",
+        "reconciliation": {
+          "checked": 0,
+          "recovered": 0,
+          "remaining": false,
+          "operationIds": []
+        }
+      },
+      "search": {
+        "indexedChunks": 3,
+        "activeEpoch": 2,
+        "partId": "fb3f0d83-537c-4aa8-834a-3ae2eb4a73e3",
+        "semantic": {
+          "state": "unavailable",
+          "reason": "Semantic retrieval requires the separately enabled and validated plan21 embedding index."
+        }
+      },
+      "damagedSearch": {
+        "ok": true,
+        "records": 14,
+        "operations": 8
+      },
+      "repairedSearch": {
+        "indexedChunks": 3,
+        "activeEpoch": 2,
+        "partId": "fb3f0d83-537c-4aa8-834a-3ae2eb4a73e3",
+        "semantic": {
+          "state": "unavailable",
+          "reason": "Semantic retrieval requires the separately enabled and validated plan21 embedding index."
+        }
+      },
+      "afterProcessRestart": {
+        "backend": "sqlite-wasm-opfs-sahpool",
+        "ownerId": "9f1edad9-5bd0-46dd-a54b-f209eabff402",
+        "schemaVersion": 6,
+        "integrity": "ok",
+        "canonicalRecords": 6,
+        "syncOperations": 3,
+        "persisted": false,
+        "usage": 17585235,
+        "quota": 10755003475
+      },
+      "importAfterProcessRestart": {
+        "diagnostics": {
+          "backend": "sqlite-wasm-opfs-sahpool",
+          "ownerId": "8dc5fb91-eeb9-4731-9d9e-7edc434f64d6",
+          "schemaVersion": 6,
+          "integrity": "ok",
+          "canonicalRecords": 1006,
+          "syncOperations": 1007,
+          "persisted": false,
+          "usage": 17585235,
+          "quota": 10755003475
+        },
+        "partCount": 1001,
+        "state": "published"
+      },
+      "producerAfterProcessRestart": {
+        "status": "partial",
+        "reconciliation": {
+          "checked": 0,
+          "recovered": 0,
+          "remaining": false,
+          "operationIds": []
+        }
+      },
+      "uncoordinatedAfterProcessRestart": {
+        "status": "streaming",
+        "reconciliation": {
+          "checked": 0,
+          "recovered": 0,
+          "remaining": false,
+          "operationIds": []
+        }
+      }
+    },
+    {
+      "name": "webkit",
+      "status": "passed",
+      "checks": [
+        "two tabs share one SQLite/OPFS owner",
+        "64 control requests are admitted; the next is rejected before dispatch and admission recovers",
+        "verified range transfers preserve exact selected bytes, cap active leases, survive parent discard and acknowledge empty EOF ranges",
+        "follower publishes verified 5 MiB blob with canonical metadata and three atomic sync operations",
+        "four upload/read credits include pending replies and permit retry after local overload",
+        "out-of-order acknowledgements and final-chunk handling preserve exact SHA-256",
+        "invalid canonical transaction rolls back metadata and sync operations",
+        "transaction replay after staging cleanup does not duplicate operations",
+        "suppressed real commit reply produces UNKNOWN_OUTCOME and operation-status reconciliation finds the durable commit",
+        "a blob-control operation cannot reuse a canonical operation identity; SQLite constraint failure returns typed CONFLICT and preserves the original operation",
+        "bounded sync pages retain an ordered high-water snapshot without skipped or repeated operations",
+        "suppressed real upload acknowledgement invalidates the transfer; explicit discard and fresh transfer recover",
+        "change notifications reach owner and completion progress returns to follower",
+        "abrupt owner-tab termination transfers ownership and preserves canonical and blob data",
+        "upload interrupted by actual owner termination cannot resume under its previous operation identity and can be discarded",
+        "cancellation before owner acquisition is reported as not_dispatched",
+        "1001-part normalized import stays hidden during staging, requires fresh validation after owner restart, and atomically publishes records plus sync marker",
+        "cancelled import publishes no records or sync operations; idle maintenance removes published and cancelled temporary blob files",
+        "cleanup retains a shared transfer while another import is active and releases it after both are cancelled",
+        "independent producer lease survives abrupt storage-owner tab termination without sealing live output",
+        "actual producer-tab termination preserves committed prefix, seals partial output, records exactly one event and rejects delayed writes while committed retries remain idempotent",
+        "producer registration before creation fences delayed creation after context loss",
+        "idle owner maintenance indexes committed text automatically and publishes search status without foreground polling work",
+        "production FTS returns safe source-located excerpts without embedding weights and keeps old exact results available through an epoch rebuild",
+        "removing a derived table in an offline worker leaves canonical writes usable after reopen; explicit search repair rebuilds results without changing canonical records or sync operations",
+        "canonical metadata, blob SHA-256 and transaction replay survive actual browser-process restart",
+        "published many-part import and verified long-text blob survive browser-process restart",
+        "actual browser-process restart recovers registered lost producers while leaving uncoordinated history untouched"
+      ],
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+      "owner": {
+        "backend": "sqlite-wasm-opfs-sahpool",
+        "ownerId": "aff0afb1-0d7c-4950-8051-01d3f4e4c41c",
+        "schemaVersion": 6,
+        "integrity": "ok",
+        "canonicalRecords": 0,
+        "syncOperations": 0,
+        "persisted": false,
+        "usage": 84796361,
+        "quota": 20615843021
+      },
+      "requestAdmission": {
+        "admitted": 64,
+        "rejectedBeforeDispatch": 1,
+        "recovered": true
+      },
+      "ranges": {
+        "boundedChildLeases": 7,
+        "repeatedRanges": 128,
+        "childrenSurviveParentDiscard": true,
+        "emptyEofAcknowledged": true
+      },
+      "lostChunkReply": {
+        "suppressedReplies": 1,
+        "recovered": true
+      },
+      "afterTakeover": {
+        "backend": "sqlite-wasm-opfs-sahpool",
+        "ownerId": "ca99944d-19bc-49a5-a89b-67900ee12ad6",
+        "schemaVersion": 6,
+        "integrity": "ok",
+        "canonicalRecords": 6,
+        "syncOperations": 3,
+        "persisted": false,
+        "usage": 106816457,
+        "quota": 20615843021
+      },
+      "interruptedUpload": {
+        "interruptedReplayRejected": true,
+        "discarded": true
+      },
+      "cancellation": {
+        "requestId": "b0fc9fd2-7065-4a83-8c33-cfe55705acba",
+        "operationId": null,
+        "outcome": "not_dispatched"
+      },
+      "importPublication": {
+        "diagnostics": {
+          "backend": "sqlite-wasm-opfs-sahpool",
+          "ownerId": "53ad432d-a498-43eb-a20f-b432f67dbf80",
+          "schemaVersion": 6,
+          "integrity": "ok",
+          "canonicalRecords": 1006,
+          "syncOperations": 1007,
+          "persisted": false,
+          "usage": 135128009,
+          "quota": 20615843021
+        },
+        "partCount": 1001,
+        "state": "published"
+      },
+      "importCancellation": {
+        "importId": "00e1a690-3494-4b55-90dd-05796359e9c6",
+        "transferId": "fcc935d6-34bf-469a-890c-a3904fec482d",
+        "state": "cancelled"
+      },
+      "liveProducer": {
+        "status": "streaming",
+        "reconciliation": {
+          "checked": 2,
+          "recovered": 0,
+          "remaining": true,
+          "operationIds": []
+        }
+      },
+      "lostProducer": {
+        "status": "partial",
+        "reconciliation": {
+          "checked": 0,
+          "recovered": 0,
+          "remaining": false,
+          "operationIds": []
+        }
+      },
+      "orphanProducer": {
+        "status": "absent",
+        "reconciliation": {
+          "checked": 0,
+          "recovered": 0,
+          "remaining": false,
+          "operationIds": []
+        }
+      },
+      "search": {
+        "indexedChunks": 3,
+        "activeEpoch": 2,
+        "partId": "b812710b-bb07-4646-98dd-6ed182fa2fb3",
+        "semantic": {
+          "state": "unavailable",
+          "reason": "Semantic retrieval requires the separately enabled and validated plan21 embedding index."
+        }
+      },
+      "damagedSearch": {
+        "ok": true,
+        "records": 14,
+        "operations": 8
+      },
+      "repairedSearch": {
+        "indexedChunks": 3,
+        "activeEpoch": 2,
+        "partId": "b812710b-bb07-4646-98dd-6ed182fa2fb3",
+        "semantic": {
+          "state": "unavailable",
+          "reason": "Semantic retrieval requires the separately enabled and validated plan21 embedding index."
+        }
+      },
+      "afterProcessRestart": {
+        "backend": "sqlite-wasm-opfs-sahpool",
+        "ownerId": "f3a1c38b-49e5-40d5-ae1d-64160489c020",
+        "schemaVersion": 6,
+        "integrity": "ok",
+        "canonicalRecords": 6,
+        "syncOperations": 3,
+        "persisted": false,
+        "usage": 91010146,
+        "quota": 20615843021
+      },
+      "importAfterProcessRestart": {
+        "diagnostics": {
+          "backend": "sqlite-wasm-opfs-sahpool",
+          "ownerId": "0a66371f-4235-4c13-983d-793a7660c3d8",
+          "schemaVersion": 6,
+          "integrity": "ok",
+          "canonicalRecords": 1006,
+          "syncOperations": 1007,
+          "persisted": false,
+          "usage": 97301602,
+          "quota": 20615843021
+        },
+        "partCount": 1001,
+        "state": "published"
+      },
+      "producerAfterProcessRestart": {
+        "status": "partial",
+        "reconciliation": {
+          "checked": 0,
+          "recovered": 0,
+          "remaining": false,
+          "operationIds": []
+        }
+      },
+      "uncoordinatedAfterProcessRestart": {
+        "status": "streaming",
+        "reconciliation": {
+          "checked": 0,
+          "recovered": 0,
+          "remaining": false,
+          "operationIds": []
+        }
+      }
+    }
+  ],
+  "sourceSha256": {
+    "packages/storage/src/client/archive.ts": "13a056ac37d0525dfadb4fb26787d1d8ecfd3932d45e6e05e5d37ae9137064a7",
+    "packages/storage/src/client/producer.ts": "988b6b370998f14e3a059d118f229451ea98ca4a104e8e018ac18cd5832c3cbb",
+    "packages/storage/src/producer-protocol.ts": "6a7277ec92c73d8ca3e11f8d35a169d49aec3eb03c8ecaa96a2c247c9a055a0e",
+    "packages/storage/src/worker/producers.ts": "0eb2b0a9646ddb404338c51a03e05e38a224b80890c994e6a7fd779530a794da",
+    "packages/storage/migrations/producers.ts": "9df3aaf17e1e6b767f8f4fc3148ea60a740872a6da97266f2f5154c3fbd0be36",
+    "packages/core/src/contracts/producers.ts": "aaf026f6a774a1669190717aab6a5c2004e54d35adeea40a4e4ec8efb3485697",
+    "packages/core/src/contracts/search.ts": "d5b48ebf047afa039ededba831ff22a0eddd74809c915be74df6afdccb9a319b",
+    "packages/storage/src/worker/search/index.ts": "0212630a41d3b4ddd76cc1389e5d5f057d46b2195b3280c9223babaf5ab4e6ec",
+    "packages/storage/src/worker/search/schema.ts": "7d45a6d49276e8e9d213f9c1ea0d58e73514041aad476f8b11bb1020e92e86c4",
+    "packages/storage/src/worker/search/sources.ts": "ff460699fc23bdb626547dae0eee4f1b6474fed3524f45d6c4805b193c0e1803",
+    "packages/search/src/chunker.ts": "8e82abb13c825132019055610dab2897909fb191be32f4813eb045285dd57ec4",
+    "packages/search/src/query.ts": "d7e38fc4bde67078b9d2c0cc3ec903cfc2d417a7f7807a13aab614203e4e05c4",
+    "packages/storage/tests/browser/archive-lifecycle.ts": "270158c101e6a29d00c6f96a26e6cbbe743af6780dbab2f2cffc8c0558897c9c",
+    "packages/storage/src/archive-protocol.ts": "c89acdf44121d8b211f1160dadeadf63c6d8121694eca8faaed46fce21dbc6de",
+    "packages/storage/src/worker/archive.ts": "c22bcbbb07d9abdabe3d5c62e68daa0cc98aa0f00fa2eef3c0e3cd7fce9282ec",
+    "packages/storage/src/worker/archive-database.ts": "1bb246cf50798edf56443a1ad5deb8cb8d7c36da3824da4dceceb2cce23b3783",
+    "packages/storage/src/worker/blobs.ts": "5a8ee316532e92497eb6e700ba55f719c5188aef19cf39e04d8a938ec7de4f64",
+    "packages/storage/src/worker/blob-catalog.ts": "751af6f06d6a175284c2a39f0dd8c9522e18f865c0d8b8be283623a41524de8a",
+    "packages/storage/src/worker/canonical/repository.ts": "c2f68f48ac2b1042554a4a46112f50e97a9d5fdcd47886b9aa1faa5727972949",
+    "packages/storage/src/worker/canonical/imports.ts": "f9012b8f190f2014979ffc049ac5c7c5e35fc98f5413200ea70d1fec77125994",
+    "packages/storage/migrations/index.ts": "fc18e98d0b3535066090408b47ace2f732eaa1cc3b933912cf7bc07cdb81c411",
+    "packages/core/src/contracts/transfer.ts": "73563a59e5d0964657a88c025a1b0935a1ae7eb77161e96404a4d37b375d6a6f",
+    "packages/core/src/contracts/imports.ts": "f2f688aa9a4f67fd481546af9d947758ea9ca3dc835e8c56741a1bd5af5dd843",
+    "packages/storage/tests/browser/archive.ts": "ef3f6f79e95f4c7c0024e9d7b2a7b42c21cf1a9c828b5ac526fcc499998398d3",
+    "packages/storage/tests/browser/archive-import.ts": "5907af540175f7e7e59a4b9ced1b133d6519f15d893db646e15efde15cf78092",
+    "packages/storage/tests/browser/run-archive.mjs": "94da643cb1ca1aeb11b85b9d37133ff80cf7554c57e5d7f3191c81371c63d548",
+    "package-lock.json": "6e270765c265eece1cff3924dc911d3fae6d18280ea7ba05aa2c4c294829720e"
+  },
+  "finishedAt": "2026-09-08T14:51:40.937Z"
+}

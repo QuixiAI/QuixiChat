@@ -1,0 +1,286 @@
+{
+  "generator": "ReportLab 5.0.1; invariant=1; built-in Helvetica/Courier",
+  "coordinateSystem": "PDF points, bottom-left origin; pages 612x792",
+  "documents": {
+    "layout-columns.pdf": {
+      "pages": [
+        {
+          "page": 1,
+          "expectedBlocks": [
+            {
+              "kind": "heading",
+              "lines": [
+                "P1-TITLE: Two independent reading columns"
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "lines": [
+                "P1-L1: The amber boat leaves first.",
+                "Its quiet crew follows the western bank.",
+                "This sentence ends the first paragraph."
+              ],
+              "column": "left"
+            },
+            {
+              "kind": "paragraph",
+              "lines": [
+                "P1-L2: The second left paragraph starts.",
+                "The copper lantern remains on shore."
+              ],
+              "column": "left"
+            },
+            {
+              "kind": "paragraph",
+              "lines": [
+                "P1-R1: The violet train leaves later.",
+                "Its passengers follow the eastern ridge.",
+                "This sentence ends the right paragraph."
+              ],
+              "column": "right"
+            },
+            {
+              "kind": "paragraph",
+              "lines": [
+                "P1-R2: The final right paragraph starts.",
+                "The silver station closes at dusk."
+              ],
+              "column": "right"
+            },
+            {
+              "kind": "footer",
+              "lines": [
+                "P1-FOOTER: Read after both columns; synthetic page 1 of 2."
+              ]
+            }
+          ],
+          "columnLeftX": [
+            48,
+            336
+          ],
+          "bodyBaselineY": [
+            699,
+            684,
+            669,
+            627,
+            612
+          ]
+        },
+        {
+          "page": 2,
+          "expectedBlocks": [
+            {
+              "kind": "heading",
+              "lines": [
+                "P2-TITLE: Two independent reading columns"
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "lines": [
+                "P2-L1: The amber boat leaves first.",
+                "Its quiet crew follows the western bank.",
+                "This sentence ends the first paragraph."
+              ],
+              "column": "left"
+            },
+            {
+              "kind": "paragraph",
+              "lines": [
+                "P2-L2: The second left paragraph starts.",
+                "The copper lantern remains on shore."
+              ],
+              "column": "left"
+            },
+            {
+              "kind": "paragraph",
+              "lines": [
+                "P2-R1: The violet train leaves later.",
+                "Its passengers follow the eastern ridge.",
+                "This sentence ends the right paragraph."
+              ],
+              "column": "right"
+            },
+            {
+              "kind": "paragraph",
+              "lines": [
+                "P2-R2: The final right paragraph starts.",
+                "The silver station closes at dusk."
+              ],
+              "column": "right"
+            },
+            {
+              "kind": "footer",
+              "lines": [
+                "P2-FOOTER: Read after both columns; synthetic page 2 of 2."
+              ]
+            }
+          ],
+          "columnLeftX": [
+            48,
+            336
+          ],
+          "bodyBaselineY": [
+            699,
+            684,
+            669,
+            627,
+            612
+          ]
+        }
+      ],
+      "unsupported": [],
+      "bytes": 2935,
+      "sha256": "921c29f9f711df836fc54cff22f0618434a08d877926c8745187cce8f100bbf1"
+    },
+    "layout-table-code.pdf": {
+      "pages": [
+        {
+          "page": 1,
+          "expectedBlocks": [
+            {
+              "kind": "heading",
+              "lines": [
+                "TABLE-TITLE: Three cells per row"
+              ]
+            },
+            {
+              "kind": "table",
+              "rows": [
+                [
+                  "Item",
+                  "Quantity",
+                  "Note"
+                ],
+                [
+                  "amber",
+                  "7",
+                  "warm sample"
+                ],
+                [
+                  "cobalt",
+                  "12",
+                  "cool sample"
+                ],
+                [
+                  "jade",
+                  "4",
+                  "green sample"
+                ]
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "lines": [
+                "TABLE-AFTER: The paragraph follows all four rows.",
+                "The cell boundaries are structural, not literal text separators."
+              ]
+            },
+            {
+              "kind": "footer",
+              "lines": [
+                "TABLE-FOOTER: End of the table page."
+              ]
+            }
+          ],
+          "cellLeftX": [
+            60,
+            224,
+            390
+          ],
+          "rowBaselineY": [
+            688,
+            649,
+            610,
+            571
+          ]
+        },
+        {
+          "page": 2,
+          "expectedBlocks": [
+            {
+              "kind": "heading",
+              "lines": [
+                "CODE-TITLE: Preserve indentation and list structure"
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "lines": [
+                "CODE-INTRO: The next eight lines are one code block.",
+                "Whitespace inside that block carries indentation."
+              ]
+            },
+            {
+              "kind": "code",
+              "lines": [
+                "// CODE-START: nested accumulation",
+                "function total(values) {",
+                "  let sum = 0;",
+                "  for (const value of values) {",
+                "    sum += value;",
+                "  }",
+                "  return sum; // CODE-END",
+                "}"
+              ]
+            },
+            {
+              "kind": "list",
+              "lines": [
+                "1. LIST-ONE: Pack the amber map.",
+                "   Keep the folded copy with the original item.",
+                "2. LIST-TWO: Check the violet compass.",
+                "   a. LIST-NESTED: Record the northern bearing.",
+                "3. LIST-THREE: Close the copper case."
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "lines": [
+                "CODE-AFTER: This is a separate prose paragraph.",
+                "It must not become part of the final list item."
+              ]
+            },
+            {
+              "kind": "footer",
+              "lines": [
+                "CODE-FOOTER: End of the code and list page."
+              ]
+            }
+          ]
+        }
+      ],
+      "unsupported": [],
+      "bytes": 3308,
+      "sha256": "0fde3131ad068f49871c38b6fff4ccc6213e2ab1af61b054ab430dc549666fe5"
+    },
+    "layout-unsupported.pdf": {
+      "pages": [
+        {
+          "page": 1,
+          "sourceAnchors": [
+            "GEOMETRY-TITLE: Mixed horizontal and rotated text",
+            "HORIZONTAL-ONE: This text has an ordinary baseline.",
+            "HORIZONTAL-TWO: Rotated anchors are separate objects.",
+            "ROTATE-90: vertical baseline",
+            "ROTATE-45: diagonal baseline",
+            "HORIZONTAL-AFTER: Do not silently stitch rotated text into prose.",
+            "GEOMETRY-FOOTER: Unsupported geometry is explicit."
+          ],
+          "rotationsDegrees": [
+            90,
+            45
+          ]
+        }
+      ],
+      "unsupported": [
+        "mixed rotated baselines"
+      ],
+      "notCovered": [
+        "RTL: no verified RTL-capable pinned font is bundled; no missing-glyph substitute is used"
+      ],
+      "bytes": 1979,
+      "sha256": "72aa2ad6d0b494c8f9f30845dcdd407e549c91cebc45088506b8b491182c7f3d"
+    }
+  }
+}

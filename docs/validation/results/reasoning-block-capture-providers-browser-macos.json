@@ -1,0 +1,385 @@
+{
+  "selectedEngines": [
+    "chromium",
+    "webkit"
+  ],
+  "status": "passed",
+  "startedAt": "2026-09-11T04:51:19.927Z",
+  "hosts": [
+    {
+      "name": "chromium",
+      "status": "passed",
+      "checks": [
+        "openai-compatible: model discovery uses registered credential header and leaves unknown capability unknown",
+        "openai-compatible: wav original audio bytes reach the controlled endpoint with text-only output through the actual host transport",
+        "openai-compatible: mp3 original audio bytes reach the controlled endpoint with text-only output through the actual host transport",
+        "openai-compatible: synthetic-model preserves raw bytes and bounded output with complete outcome",
+        "openai-compatible: malformed preserves raw bytes and bounded output with partial outcome",
+        "openai-compatible: truncated preserves raw bytes and bounded output with partial outcome",
+        "openai-compatible: slow preserves raw bytes and bounded output with cancelled outcome",
+        "openai-compatible: rate preserves raw bytes and bounded output with failed outcome",
+        "anthropic: model discovery uses registered credential header and leaves unknown capability unknown",
+        "anthropic: fragmented host transport retains complete signed and redacted thinking blocks in source order",
+        "anthropic: synthetic-model preserves raw bytes and bounded output with complete outcome",
+        "anthropic: malformed preserves raw bytes and bounded output with partial outcome",
+        "anthropic: truncated preserves raw bytes and bounded output with partial outcome",
+        "anthropic: slow preserves raw bytes and bounded output with cancelled outcome",
+        "anthropic: rate preserves raw bytes and bounded output with failed outcome",
+        "openai-compatible/synthetic-model: public SQLite/OPFS checkpoints, source bytes, terminal manifest and replay identity survive reopen",
+        "openai-compatible/malformed: public SQLite/OPFS checkpoints, source bytes, terminal manifest and replay identity survive reopen",
+        "openai-compatible/slow: public SQLite/OPFS checkpoints, source bytes, terminal manifest and replay identity survive reopen",
+        "anthropic/synthetic-model: public SQLite/OPFS checkpoints, source bytes, terminal manifest and replay identity survive reopen",
+        "anthropic/malformed: public SQLite/OPFS checkpoints, source bytes, terminal manifest and replay identity survive reopen",
+        "anthropic/slow: public SQLite/OPFS checkpoints, source bytes, terminal manifest and replay identity survive reopen",
+        "awaited durable-creation hook reject prevents provider dispatch and commits its terminal outcome",
+        "awaited durable-creation hook cancel prevents provider dispatch and commits its terminal outcome",
+        "storage quota failure cancels transport; after the producer releases its independent lease, recovery seals the committed prefix as partial",
+        "terminating the storage owner tab preserves one live provider request and complete output through takeover",
+        "signed and redacted thinking receipts survive a lost commit reply, verified blob reads, reopen and full browser restart without changed source bytes or duplicate receipts",
+        "portable export and isolated restore preserve signed/redacted receipt hashes and canonical inventories under independent query-only candidate inspection",
+        "provider generation, raw response and terminal manifest survive browser process restart"
+      ],
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36",
+      "transport": {
+        "checks": [
+          "openai-compatible: model discovery uses registered credential header and leaves unknown capability unknown",
+          "openai-compatible: wav original audio bytes reach the controlled endpoint with text-only output through the actual host transport",
+          "openai-compatible: mp3 original audio bytes reach the controlled endpoint with text-only output through the actual host transport",
+          "openai-compatible: synthetic-model preserves raw bytes and bounded output with complete outcome",
+          "openai-compatible: malformed preserves raw bytes and bounded output with partial outcome",
+          "openai-compatible: truncated preserves raw bytes and bounded output with partial outcome",
+          "openai-compatible: slow preserves raw bytes and bounded output with cancelled outcome",
+          "openai-compatible: rate preserves raw bytes and bounded output with failed outcome",
+          "anthropic: model discovery uses registered credential header and leaves unknown capability unknown",
+          "anthropic: fragmented host transport retains complete signed and redacted thinking blocks in source order",
+          "anthropic: synthetic-model preserves raw bytes and bounded output with complete outcome",
+          "anthropic: malformed preserves raw bytes and bounded output with partial outcome",
+          "anthropic: truncated preserves raw bytes and bounded output with partial outcome",
+          "anthropic: slow preserves raw bytes and bounded output with cancelled outcome",
+          "anthropic: rate preserves raw bytes and bounded output with failed outcome"
+        ],
+        "results": [
+          {
+            "protocol": "openai-compatible",
+            "mode": "audio-wav",
+            "status": "complete",
+            "textChars": 13
+          },
+          {
+            "protocol": "openai-compatible",
+            "mode": "audio-mp3",
+            "status": "complete",
+            "textChars": 13
+          },
+          {
+            "protocol": "openai-compatible",
+            "mode": "synthetic-model",
+            "status": "complete",
+            "rawBytes": 1112,
+            "textChars": 13
+          },
+          {
+            "protocol": "openai-compatible",
+            "mode": "malformed",
+            "status": "partial",
+            "rawBytes": 178,
+            "textChars": 9
+          },
+          {
+            "protocol": "openai-compatible",
+            "mode": "truncated",
+            "status": "partial",
+            "rawBytes": 161,
+            "textChars": 9
+          },
+          {
+            "protocol": "openai-compatible",
+            "mode": "slow",
+            "status": "cancelled",
+            "rawBytes": 161,
+            "textChars": 9
+          },
+          {
+            "protocol": "openai-compatible",
+            "mode": "rate",
+            "status": "failed",
+            "rawBytes": 70,
+            "textChars": 0
+          },
+          {
+            "protocol": "anthropic",
+            "mode": "synthetic-model",
+            "status": "complete",
+            "rawBytes": 2426,
+            "textChars": 9
+          },
+          {
+            "protocol": "anthropic",
+            "mode": "malformed",
+            "status": "partial",
+            "rawBytes": 515,
+            "textChars": 9
+          },
+          {
+            "protocol": "anthropic",
+            "mode": "truncated",
+            "status": "partial",
+            "rawBytes": 470,
+            "textChars": 9
+          },
+          {
+            "protocol": "anthropic",
+            "mode": "slow",
+            "status": "cancelled",
+            "rawBytes": 470,
+            "textChars": 9
+          },
+          {
+            "protocol": "anthropic",
+            "mode": "rate",
+            "status": "failed",
+            "rawBytes": 70,
+            "textChars": 0
+          }
+        ]
+      },
+      "reasoningArchive": {
+        "archiveBytes": 827392,
+        "archiveSha256": "dc82f2ed69bec21673ca78c086a27e80424fe8bf6710c9a0840097df82e80d70",
+        "peakTransferBytes": 65536,
+        "steps": 92,
+        "candidate": {
+          "archiveId": "e5d54389-ce51-42e3-ac12-77d9c1b1c461",
+          "schemaVersion": 12,
+          "canonicalRecords": 60,
+          "syncOperations": 57,
+          "blobCount": 21,
+          "blobBytes": 4736,
+          "streamingGenerations": 0,
+          "defaultWorkspaceId": null,
+          "manifestSha256": "07f2d4db6c4215126000cab5f338b3591a619d5a095675c224c6b60fd123c456"
+        },
+        "retained": [
+          {
+            "canonicalRecords": 60,
+            "syncOperations": 57,
+            "integrity": "ok",
+            "blobBytes": 449,
+            "blobSha256": "43b446da603ce13b37ab14fb9b7e6e57069a60bbbfa02543c2131ee51e3896d2"
+          },
+          {
+            "canonicalRecords": 60,
+            "syncOperations": 57,
+            "integrity": "ok",
+            "blobBytes": 425,
+            "blobSha256": "89053e33a216a3cc052bd0ad094124e0a2ffab3f597e9d4a0612f84b20c36832"
+          }
+        ]
+      }
+    },
+    {
+      "name": "webkit",
+      "status": "passed",
+      "checks": [
+        "openai-compatible: model discovery uses registered credential header and leaves unknown capability unknown",
+        "openai-compatible: wav original audio bytes reach the controlled endpoint with text-only output through the actual host transport",
+        "openai-compatible: mp3 original audio bytes reach the controlled endpoint with text-only output through the actual host transport",
+        "openai-compatible: synthetic-model preserves raw bytes and bounded output with complete outcome",
+        "openai-compatible: malformed preserves raw bytes and bounded output with partial outcome",
+        "openai-compatible: truncated preserves raw bytes and bounded output with partial outcome",
+        "openai-compatible: slow preserves raw bytes and bounded output with cancelled outcome",
+        "openai-compatible: rate preserves raw bytes and bounded output with failed outcome",
+        "anthropic: model discovery uses registered credential header and leaves unknown capability unknown",
+        "anthropic: fragmented host transport retains complete signed and redacted thinking blocks in source order",
+        "anthropic: synthetic-model preserves raw bytes and bounded output with complete outcome",
+        "anthropic: malformed preserves raw bytes and bounded output with partial outcome",
+        "anthropic: truncated preserves raw bytes and bounded output with partial outcome",
+        "anthropic: slow preserves raw bytes and bounded output with cancelled outcome",
+        "anthropic: rate preserves raw bytes and bounded output with failed outcome",
+        "openai-compatible/synthetic-model: public SQLite/OPFS checkpoints, source bytes, terminal manifest and replay identity survive reopen",
+        "openai-compatible/malformed: public SQLite/OPFS checkpoints, source bytes, terminal manifest and replay identity survive reopen",
+        "openai-compatible/slow: public SQLite/OPFS checkpoints, source bytes, terminal manifest and replay identity survive reopen",
+        "anthropic/synthetic-model: public SQLite/OPFS checkpoints, source bytes, terminal manifest and replay identity survive reopen",
+        "anthropic/malformed: public SQLite/OPFS checkpoints, source bytes, terminal manifest and replay identity survive reopen",
+        "anthropic/slow: public SQLite/OPFS checkpoints, source bytes, terminal manifest and replay identity survive reopen",
+        "awaited durable-creation hook reject prevents provider dispatch and commits its terminal outcome",
+        "awaited durable-creation hook cancel prevents provider dispatch and commits its terminal outcome",
+        "storage quota failure cancels transport; after the producer releases its independent lease, recovery seals the committed prefix as partial",
+        "terminating the storage owner tab preserves one live provider request and complete output through takeover",
+        "signed and redacted thinking receipts survive a lost commit reply, verified blob reads, reopen and full browser restart without changed source bytes or duplicate receipts",
+        "portable export and isolated restore preserve signed/redacted receipt hashes and canonical inventories under independent query-only candidate inspection",
+        "provider generation, raw response and terminal manifest survive browser process restart"
+      ],
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+      "transport": {
+        "checks": [
+          "openai-compatible: model discovery uses registered credential header and leaves unknown capability unknown",
+          "openai-compatible: wav original audio bytes reach the controlled endpoint with text-only output through the actual host transport",
+          "openai-compatible: mp3 original audio bytes reach the controlled endpoint with text-only output through the actual host transport",
+          "openai-compatible: synthetic-model preserves raw bytes and bounded output with complete outcome",
+          "openai-compatible: malformed preserves raw bytes and bounded output with partial outcome",
+          "openai-compatible: truncated preserves raw bytes and bounded output with partial outcome",
+          "openai-compatible: slow preserves raw bytes and bounded output with cancelled outcome",
+          "openai-compatible: rate preserves raw bytes and bounded output with failed outcome",
+          "anthropic: model discovery uses registered credential header and leaves unknown capability unknown",
+          "anthropic: fragmented host transport retains complete signed and redacted thinking blocks in source order",
+          "anthropic: synthetic-model preserves raw bytes and bounded output with complete outcome",
+          "anthropic: malformed preserves raw bytes and bounded output with partial outcome",
+          "anthropic: truncated preserves raw bytes and bounded output with partial outcome",
+          "anthropic: slow preserves raw bytes and bounded output with cancelled outcome",
+          "anthropic: rate preserves raw bytes and bounded output with failed outcome"
+        ],
+        "results": [
+          {
+            "protocol": "openai-compatible",
+            "mode": "audio-wav",
+            "status": "complete",
+            "textChars": 13
+          },
+          {
+            "protocol": "openai-compatible",
+            "mode": "audio-mp3",
+            "status": "complete",
+            "textChars": 13
+          },
+          {
+            "protocol": "openai-compatible",
+            "mode": "synthetic-model",
+            "status": "complete",
+            "rawBytes": 1112,
+            "textChars": 13
+          },
+          {
+            "protocol": "openai-compatible",
+            "mode": "malformed",
+            "status": "partial",
+            "rawBytes": 178,
+            "textChars": 9
+          },
+          {
+            "protocol": "openai-compatible",
+            "mode": "truncated",
+            "status": "partial",
+            "rawBytes": 161,
+            "textChars": 9
+          },
+          {
+            "protocol": "openai-compatible",
+            "mode": "slow",
+            "status": "cancelled",
+            "rawBytes": 161,
+            "textChars": 9
+          },
+          {
+            "protocol": "openai-compatible",
+            "mode": "rate",
+            "status": "failed",
+            "rawBytes": 70,
+            "textChars": 0
+          },
+          {
+            "protocol": "anthropic",
+            "mode": "synthetic-model",
+            "status": "complete",
+            "rawBytes": 2426,
+            "textChars": 9
+          },
+          {
+            "protocol": "anthropic",
+            "mode": "malformed",
+            "status": "partial",
+            "rawBytes": 515,
+            "textChars": 9
+          },
+          {
+            "protocol": "anthropic",
+            "mode": "truncated",
+            "status": "partial",
+            "rawBytes": 470,
+            "textChars": 9
+          },
+          {
+            "protocol": "anthropic",
+            "mode": "slow",
+            "status": "cancelled",
+            "rawBytes": 470,
+            "textChars": 9
+          },
+          {
+            "protocol": "anthropic",
+            "mode": "rate",
+            "status": "failed",
+            "rawBytes": 70,
+            "textChars": 0
+          }
+        ]
+      },
+      "reasoningArchive": {
+        "archiveBytes": 780800,
+        "archiveSha256": "e809ea05f0e4658e6dd0a8259541574f7c8af8cfa3f341f3d85c19aaef5d5c18",
+        "peakTransferBytes": 65536,
+        "steps": 62,
+        "candidate": {
+          "archiveId": "bc8a3e46-8839-4ff2-b0b5-eccdafe31753",
+          "schemaVersion": 12,
+          "canonicalRecords": 34,
+          "syncOperations": 31,
+          "blobCount": 8,
+          "blobBytes": 4733,
+          "streamingGenerations": 0,
+          "defaultWorkspaceId": null,
+          "manifestSha256": "470b15a9b995054da5ee275d35cbef441dc47da97bc1865f88d1abb39746542f"
+        },
+        "retained": [
+          {
+            "canonicalRecords": 34,
+            "syncOperations": 31,
+            "integrity": "ok",
+            "blobBytes": 448,
+            "blobSha256": "80bcb3ff277100bb67951cfad750f08d8edbe92c6e66aecdd7625c4ad21e8847"
+          },
+          {
+            "canonicalRecords": 34,
+            "syncOperations": 31,
+            "integrity": "ok",
+            "blobBytes": 424,
+            "blobSha256": "2e7a11c7877e078f1b9ee35e685f2d3482365fdc7c361051af8b2631bb56373b"
+          }
+        ]
+      }
+    }
+  ],
+  "fixtureStats": {
+    "requests": 44,
+    "disconnected": 10,
+    "audioWav": 2,
+    "audioMp3": 2
+  },
+  "sourceSha256": {
+    "../../tooling/browser-engines.mjs": "136f16e63e905ae4c8305c7adedfce2411eff13b04f914054f8fb718155d0df1",
+    "src/types.ts": "3d9a7cf1261ce99f8b5f2f2b8da878e2e61a4a19295945f6a367f98f6b0e95f2",
+    "tests/fixtures.ts": "470a6d64feb90e6ef28eaa693d3c6e1e7df5916c6a19db669ffce27dc978e4b7",
+    "tests/reasoning.test.ts": "1450d40cfb139e83047b2f0f835a4fedcfa6ec7cd3a87c4036c217add53390c0",
+    "tests/generation.test.ts": "b6ff50c9179c9aa5ea600b04cf1994fe8089a7a36d39d8a9d99f3336582cb288",
+    "tests/run-browser.mjs": "0096b66600ab058c54448d06cbf5874b675c44cb5cbef1ef84613a532c1eb321",
+    "tests/reasoning-archive.ts": "a32bab6152c641c1e07d1c21eedf6f4fdcaa75e2a20e1098754f35e42d6be956",
+    "../storage/tests/archives/browser-worker.ts": "317b499c719f3679c3f216d23daedf60c968cec04727b44e3518486e58bc6235",
+    "../storage/tests/archives/candidate-reader.ts": "e9f8e0b115bc59a45bc05c891c5fd364419024f00e05df01a9130fb4c7ad19ac",
+    "src/adapter.ts": "5647e439a9b0c20e05e271c07cdfa416b8d93e281193a4a7e5b3199f57ceed91",
+    "src/normalize.ts": "0e6925a82269a598584cf381772b840c0a00045edf43f4e4e35fb5b4e1bfba05",
+    "src/sse.ts": "8752a278f766e53925aa413750b80350391a9eaa4334f7dd16c9ad501e506dce",
+    "src/request.ts": "f48e109670031ffd3b37b753a52e9d56b5d981c44cab5b52ef0c3a7ee8d6a8da",
+    "src/generation.ts": "c47c0bf67d82a33ec52517b504a9595259e04a10e76338c2509e4fdd4112f561",
+    "../app/src/workflows/generation.ts": "006d69b43a41f6f2d1f880a53c64a4cd5cfe0f97bc91e5e23558ab2d1b90e39b",
+    "../storage/src/client/producer.ts": "988b6b370998f14e3a059d118f229451ea98ca4a104e8e018ac18cd5832c3cbb",
+    "../storage/src/worker/producers.ts": "0eb2b0a9646ddb404338c51a03e05e38a224b80890c994e6a7fd779530a794da",
+    "../storage/src/worker/archive.ts": "f84c9ad0e41390d7230b232210ede2577d900d9a7f8f8deb9fc7e7f79aa9153c",
+    "../storage/src/worker/archive-database.ts": "7b189a6678eb07d8ae40832ad316e1fc05bb2eab78b32439adbd5cfe2d4da639",
+    "tests/browser.ts": "b06b082be5efdb8f96cdd1e2bc407481725338cb70e1de9da98e52385d060fda",
+    "tests/host-proof.ts": "acb12201a4c173d4a848bc7c6490edc32f8e81c661a5d2c1090a7d69809ccbd6",
+    "tests/audio-fixtures.ts": "8892fcc71b901191712aca0a19c3eaf3a48c30fbd0501c1e993fb0a135bae217",
+    "src/catalog.ts": "31439c015bc24e8c6df7bd95acc08d8a70eaa0d0f5412b3ebf78b93d7864d252",
+    "tests/fixture-server.ts": "224ba1e261fdd0906b2cbbdb55376cdbf2de4c81bd35db2c6285980dea637811"
+  },
+  "finishedAt": "2026-09-11T04:51:33.551Z"
+}

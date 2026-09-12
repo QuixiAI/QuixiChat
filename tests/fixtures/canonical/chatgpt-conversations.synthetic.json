@@ -1,0 +1,46 @@
+[
+  {
+    "title": "Original synthetic consumer export",
+    "mapping": {
+      "fixture-node-system": {
+        "message": {
+          "author": {
+            "role": "system"
+          },
+          "content": {
+            "parts": [
+              "Preserve source facts."
+            ]
+          },
+          "create_time": 1788868800
+        }
+      },
+      "fixture-node-user": {
+        "message": {
+          "author": {
+            "role": "user"
+          },
+          "content": {
+            "parts": [
+              "Keep this original synthetic question."
+            ]
+          },
+          "create_time": 1788868810
+        }
+      },
+      "fixture-node-assistant": {
+        "message": {
+          "author": {
+            "role": "assistant"
+          },
+          "content": {
+            "parts": [
+              "Keep this original synthetic answer."
+            ]
+          },
+          "create_time": 1788868820
+        }
+      }
+    }
+  }
+]

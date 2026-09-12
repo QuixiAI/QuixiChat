@@ -1,0 +1,16 @@
+{
+  "name": "@quixi/core",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "description": "Canonical model, contracts, and pure rules.",
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "node --experimental-transform-types --test tests/*.test.ts",
+    "typecheck:tests": "tsc --noEmit -p tsconfig.tests.json"
+  },
+  "exports": {
+    "./model": "./src/model/index.ts",
+    "./contracts": "./src/contracts/index.ts"
+  }
+}

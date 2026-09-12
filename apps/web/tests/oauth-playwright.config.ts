@@ -1,0 +1,3 @@
+import { defineConfig } from '@playwright/test';
+import { browserNames } from '../../../tooling/browser-engines.mjs';
+export default defineConfig({ testDir: '.', testMatch: 'oauth.spec.ts', workers: 1, timeout: 45000, expect: { timeout: 8000 }, outputDir: '../../../test-results/web-oauth', reporter: [['list'], ['json', { outputFile: '../../../test-results/web-oauth-playwright.json' }]], use: { baseURL: 'http://127.0.0.1:4216', trace: 'off', screenshot: 'off', video: 'off' }, projects: browserNames().map(name => ({ name, use: { browserName: name } })), webServer: { command: 'node apps/web/tests/oauth-server.mjs', url: 'http://127.0.0.1:4216/tests/oauth-fixture.html', reuseExistingServer: false, cwd: '../../..' } });

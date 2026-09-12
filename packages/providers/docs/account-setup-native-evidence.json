@@ -1,0 +1,233 @@
+{
+  "host": "bundled-tauri-native-host",
+  "timestamp": "2026-09-08T22:20:48.872724+00:00",
+  "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+  "namespace": "82366b6d-e0c5-4cdb-b531-a51e6c17ac73",
+  "binarySha256": "6671ea344e155298e5d2e3ea6801249da327b5ae3e6010a1a7e76e0c977e8a14",
+  "phases": [
+    {
+      "phase": "write",
+      "exitCode": 0,
+      "stderr": "",
+      "webview": {
+        "success": true,
+        "phase": "write",
+        "checks": [
+          "actual macOS keychain backend initialized",
+          "native registry reports local transport",
+          "native files available while OAuth and notifications remain unavailable",
+          "untracked or OS-keychain cancellation never claims prevention of an external commit",
+          "bridge rejects oversized credentials before IPC allocation",
+          "keychain binding reopens the newly stored opaque handle",
+          "native duplicate allocation requires the current replacement handle",
+          "keychain association rotates to the replacement handle",
+          "deleting an old handle cannot remove its replacement",
+          "native keychain replacement produces a new opaque handle",
+          "old keychain credential deleted by replacement",
+          "native HTTP injects the bound OS keychain credential",
+          "native registry rejects another account",
+          "native keychain validates handle binding independently",
+          "caller cannot override native authentication headers",
+          "native registry rejects an arbitrary destination URL",
+          "native redirects are rejected",
+          "native staged digest mismatch rejected",
+          "binary IPC request staging preserves the complete body",
+          "native transfer IDs are isolated between sessions",
+          "large provider request staging remains explicitly unavailable",
+          "native binary response frames preserve bounded chunks",
+          "native reader enforces four unacknowledged chunks",
+          "native acknowledgement offsets are checked",
+          "native acknowledgement restores one read credit",
+          "native cancellation reports possible upstream effects",
+          "cancelled native transfer is released",
+          "native cancellation interrupts an in-flight header wait",
+          "native body idle timeout releases its reader",
+          "native status and safe response metadata survive forwarding",
+          "native HTTP concurrency is bounded across all sessions",
+          "explicit release closes a native response without waiting for its deadline"
+        ],
+        "credential": {
+          "binding": {
+            "accountId": "synthetic-account",
+            "destinationId": "synthetic-local",
+            "providerId": "synthetic",
+            "transportId": "native-proof"
+          },
+          "id": "fafb266a-b6a9-4373-ad55-61ef809f8dfa",
+          "persistence": "native"
+        },
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko)",
+        "origin": "tauri://localhost",
+        "protocol": "tauri:",
+        "capabilities": {
+          "host": "desktop",
+          "nativeFiles": {
+            "available": true,
+            "permission": "prompt",
+            "reason": null
+          },
+          "notifications": {
+            "available": false,
+            "permission": "not_required",
+            "reason": "Native notifications are not implemented."
+          },
+          "oauth": {
+            "available": false,
+            "permission": "not_required",
+            "reason": "Native OAuth callbacks and provider registrations are not implemented."
+          },
+          "providerTransports": [
+            {
+              "capability": {
+                "available": true,
+                "permission": "not_required",
+                "reason": null
+              },
+              "endpointOrigin": "http://127.0.0.1:58148",
+              "id": "native-proof",
+              "kind": "native_direct",
+              "privacy": "local",
+              "relayIdentity": null
+            }
+          ],
+          "secretPersistence": "native"
+        },
+        "fileEvidence": null,
+        "providerEvidence": null
+      }
+    },
+    {
+      "phase": "retarget",
+      "exitCode": 0,
+      "stderr": "",
+      "webview": {
+        "success": true,
+        "phase": "retarget",
+        "checks": [
+          "actual macOS keychain backend initialized",
+          "native registry reports local transport",
+          "native files available while OAuth and notifications remain unavailable",
+          "untracked or OS-keychain cancellation never claims prevention of an external commit",
+          "opaque reopen rejects a retargeted credential authority",
+          "native keychain prevents retargeting an existing binding to another origin"
+        ],
+        "credential": {
+          "binding": {
+            "accountId": "synthetic-account",
+            "destinationId": "synthetic-local",
+            "providerId": "synthetic",
+            "transportId": "native-proof"
+          },
+          "id": "fafb266a-b6a9-4373-ad55-61ef809f8dfa",
+          "persistence": "native"
+        },
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko)",
+        "origin": "tauri://localhost",
+        "protocol": "tauri:",
+        "capabilities": {
+          "host": "desktop",
+          "nativeFiles": {
+            "available": true,
+            "permission": "prompt",
+            "reason": null
+          },
+          "notifications": {
+            "available": false,
+            "permission": "not_required",
+            "reason": "Native notifications are not implemented."
+          },
+          "oauth": {
+            "available": false,
+            "permission": "not_required",
+            "reason": "Native OAuth callbacks and provider registrations are not implemented."
+          },
+          "providerTransports": [
+            {
+              "capability": {
+                "available": true,
+                "permission": "not_required",
+                "reason": null
+              },
+              "endpointOrigin": "http://127.0.0.1:58157",
+              "id": "native-proof",
+              "kind": "native_direct",
+              "privacy": "local",
+              "relayIdentity": null
+            }
+          ],
+          "secretPersistence": "native"
+        },
+        "fileEvidence": null,
+        "providerEvidence": null
+      }
+    },
+    {
+      "phase": "restart",
+      "exitCode": 0,
+      "stderr": "",
+      "webview": {
+        "success": true,
+        "phase": "restart",
+        "checks": [
+          "actual macOS keychain backend initialized",
+          "native registry reports local transport",
+          "native files available while OAuth and notifications remain unavailable",
+          "untracked or OS-keychain cancellation never claims prevention of an external commit",
+          "binding-only opaque handle reopen survives complete native process restart",
+          "OS keychain credential survives complete native process restart",
+          "binding-only reopen observes confirmed credential deletion",
+          "persistent synthetic credential removed from OS keychain"
+        ],
+        "credential": null,
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko)",
+        "origin": "tauri://localhost",
+        "protocol": "tauri:",
+        "capabilities": {
+          "host": "desktop",
+          "nativeFiles": {
+            "available": true,
+            "permission": "prompt",
+            "reason": null
+          },
+          "notifications": {
+            "available": false,
+            "permission": "not_required",
+            "reason": "Native notifications are not implemented."
+          },
+          "oauth": {
+            "available": false,
+            "permission": "not_required",
+            "reason": "Native OAuth callbacks and provider registrations are not implemented."
+          },
+          "providerTransports": [
+            {
+              "capability": {
+                "available": true,
+                "permission": "not_required",
+                "reason": null
+              },
+              "endpointOrigin": "http://127.0.0.1:58148",
+              "id": "native-proof",
+              "kind": "native_direct",
+              "privacy": "local",
+              "relayIdentity": null
+            }
+          ],
+          "secretPersistence": "native"
+        },
+        "fileEvidence": null,
+        "providerEvidence": null
+      }
+    }
+  ],
+  "success": true,
+  "systemWebKitVersion": "21624.5.1.11.3",
+  "syntheticKeychainCleanup": {
+    "exitCode": 0,
+    "stderr": ""
+  },
+  "fixture": {
+    "requests": 13,
+    "observedDisconnects": 7
+  }
+}

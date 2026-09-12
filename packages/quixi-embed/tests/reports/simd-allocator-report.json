@@ -1,0 +1,57 @@
+{
+  "passed": true,
+  "backend": "wasm-simd-fp32",
+  "node": "v22.23.1",
+  "wasm_sha256": "8f5ac575f8c03755b4473bd4a173a95961ba2f163700fbd11d0385a5d7777088",
+  "allocator_peak_bytes": 182016928,
+  "linear_memory_peak_bytes": 183107584,
+  "steady_allocator_bytes": 100149952,
+  "samples": [
+    {
+      "phase": "allocator_initialized",
+      "allocator_live_bytes": 0,
+      "linear_memory_bytes": 16777216
+    },
+    {
+      "phase": "model_input",
+      "allocator_live_bytes": 90785608,
+      "linear_memory_bytes": 91881472
+    },
+    {
+      "phase": "model_validated_and_copied",
+      "allocator_live_bytes": 182016928,
+      "linear_memory_bytes": 183107584
+    },
+    {
+      "phase": "model_input_released",
+      "allocator_live_bytes": 91231336,
+      "linear_memory_bytes": 183107584
+    },
+    {
+      "phase": "workspace_reserved",
+      "allocator_live_bytes": 99097768,
+      "linear_memory_bytes": 183107584
+    },
+    {
+      "phase": "all_binding_scratch_reserved",
+      "allocator_live_bytes": 100149952,
+      "linear_memory_bytes": 183107584
+    },
+    {
+      "phase": "before_inference",
+      "allocator_live_bytes": 100149952,
+      "linear_memory_bytes": 183107584
+    },
+    {
+      "phase": "after_20_inferences",
+      "allocator_live_bytes": 100149952,
+      "linear_memory_bytes": 183107584
+    },
+    {
+      "phase": "disposed",
+      "allocator_live_bytes": 0,
+      "linear_memory_bytes": 183107584
+    }
+  ],
+  "scope": "C allocator live/peak bytes and retained WASM pages, observed at monotonic initialization phases. Source inspection establishes no transient forward allocations. The production-source probe has one additional observation export; it is not a timing artifact."
+}

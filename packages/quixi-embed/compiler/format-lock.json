@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "source_sha256": "ee789e0b1d6ecbbd5ce37b474af556cc1a1319cee4417d9e3b11f82e90300706",
+  "vocabulary_sha256": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3",
+  "unicode_sha256": "ad1bcb941d13cdcfed30330a10a5bda7fdfd6497cd6491326e70245e64c4dced",
+  "unicode": {
+    "deleted_ranges": 288,
+    "normalization_mappings": 14286,
+    "punctuation_ranges": 156,
+    "utf8_bytes": 107535
+  }
+}

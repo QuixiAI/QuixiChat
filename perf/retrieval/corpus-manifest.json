@@ -1,0 +1,17 @@
+{
+  "version": "quixi-synthetic-v1",
+  "license": "CC0-1.0",
+  "documents": 655,
+  "queries": 18,
+  "judgment_policy": "Authored before scoring; grades 1 and 2 both count as relevant.",
+  "limitations": [
+    "English-focused synthetic smoke corpus",
+    "Template distractors",
+    "Not sufficient to approve compression or claim general relevance"
+  ],
+  "files": {
+    "corpus.jsonl": "fe67f43c9a631fdb80b9a33f8c12ef7fd5b4dd2b2f8f3c3cd709ec938657613a",
+    "queries.json": "8cb5414f0f3b1545586ed5991de4f1ce75e9a27625a3008e00a428a9931294dc",
+    "qrels.json": "ebf9286f7f54ee3d0051ed844fa59fb0a79acaf17d996d4f0e4a53513a78e64a"
+  }
+}

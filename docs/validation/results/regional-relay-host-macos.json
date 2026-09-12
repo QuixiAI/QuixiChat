@@ -1,0 +1,1148 @@
+{
+  "status": "passed",
+  "recordedAt": "2026-09-10T19:53:48.702830+00:00",
+  "command": "npm run test:host:web",
+  "exitCode": 0,
+  "scope": "30 ordinary browser host regression tests, 15 each Chromium/WebKit; synthetic fixtures only. Regional application relay behavior has a separate focused report.",
+  "output": "\n> quixi@0.0.1 test:host:web\n> tsc --noEmit -p apps/web/tests/tsconfig.json && playwright test --config apps/web/tests/playwright.config.ts\n\n[WebServer] (node:65564) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)\n\nRunning 30 tests using 1 worker\n\n(node:65567) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n  \u2713   1 [chromium] \u203a apps/web/tests/host.spec.ts:118:1 \u203a session credentials bind account/destination, delete and disappear with the session (308ms)\n  \u2713   2 [chromium] \u203a apps/web/tests/host.spec.ts:178:1 \u203a clipboard writes come from a user action, stay bounded and are readable back where the engine permits (301ms)\n  \u2713   3 [chromium] \u203a apps/web/tests/host.spec.ts:208:1 \u203a verified request staging preserves bytes and rejects corrupted, oversized and released transfers (265ms)\n  \u2713   4 [chromium] \u203a apps/web/tests/host.spec.ts:295:1 \u203a real streamed response enforces acknowledgement window and cancellation releases upstream (313ms)\n  \u2713   5 [chromium] \u203a apps/web/tests/host.spec.ts:350:1 \u203a HTTP errors, redirect rejection, pre-header cancellation and idle deadlines are typed (329ms)\n  \u2713   6 [chromium] \u203a apps/web/tests/host.spec.ts:391:1 \u203a actual browser file selection streams fixture bytes and releases file handles (306ms)\n  \u2713   7 [chromium] \u203a apps/web/tests/host.spec.ts:436:1 \u203a registered query names are encoded onto the path and other names are refused before dispatch (242ms)\n  \u2713   8 [chromium] \u203a apps/web/tests/host.spec.ts:475:1 \u203a adopted dropped files stream through the selected-file handle path and release (249ms)\n  \u2713   9 [chromium] \u203a apps/web/tests/host.spec.ts:519:1 \u203a configured relay separates authorization credentials and fixes the forwarding route (246ms)\n  \u2713  10 [chromium] \u203a apps/web/tests/host.spec.ts:573:1 \u203a bounded fallback export downloads verified bytes in the actual browser (298ms)\n  \u2713  11 [chromium] \u203a apps/web/tests/host.spec.ts:630:1 \u203a concurrency limits and disposal close active streams without leaking credentials (246ms)\n  \u2713  12 [chromium] \u203a apps/web/tests/host.spec.ts:656:1 \u203a aggregate staging limit recovers after release and verification overload (248ms)\n  \u2713  13 [chromium] \u203a apps/web/tests/host.spec.ts:707:1 \u203a 32 MiB disk-backed download survives immediate transfer release and reload until explicit cleanup (1.6s)\n  \u2713  14 [chromium] \u203a apps/web/tests/host.spec.ts:797:1 \u203a disk save streams to an injected picker destination with 64 KiB writes and cancellation leaves original intact (317ms)\n  \u2713  15 [chromium] \u203a apps/web/tests/host.spec.ts:877:1 \u203a retained download admission stays capped across host disposal and explicit cleanup frees a slot (245ms)\n(node:65662) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n  \u2713  16 [webkit] \u203a apps/web/tests/host.spec.ts:118:1 \u203a session credentials bind account/destination, delete and disappear with the session (735ms)\n  \u2713  17 [webkit] \u203a apps/web/tests/host.spec.ts:178:1 \u203a clipboard writes come from a user action, stay bounded and are readable back where the engine permits (754ms)\n  \u2713  18 [webkit] \u203a apps/web/tests/host.spec.ts:208:1 \u203a verified request staging preserves bytes and rejects corrupted, oversized and released transfers (717ms)\n  \u2713  19 [webkit] \u203a apps/web/tests/host.spec.ts:295:1 \u203a real streamed response enforces acknowledgement window and cancellation releases upstream (790ms)\n  \u2713  20 [webkit] \u203a apps/web/tests/host.spec.ts:350:1 \u203a HTTP errors, redirect rejection, pre-header cancellation and idle deadlines are typed (792ms)\n  \u2713  21 [webkit] \u203a apps/web/tests/host.spec.ts:391:1 \u203a actual browser file selection streams fixture bytes and releases file handles (796ms)\n  \u2713  22 [webkit] \u203a apps/web/tests/host.spec.ts:436:1 \u203a registered query names are encoded onto the path and other names are refused before dispatch (725ms)\n  \u2713  23 [webkit] \u203a apps/web/tests/host.spec.ts:475:1 \u203a adopted dropped files stream through the selected-file handle path and release (717ms)\n  \u2713  24 [webkit] \u203a apps/web/tests/host.spec.ts:519:1 \u203a configured relay separates authorization credentials and fixes the forwarding route (725ms)\n  \u2713  25 [webkit] \u203a apps/web/tests/host.spec.ts:573:1 \u203a bounded fallback export downloads verified bytes in the actual browser (979ms)\n  \u2713  26 [webkit] \u203a apps/web/tests/host.spec.ts:630:1 \u203a concurrency limits and disposal close active streams without leaking credentials (724ms)\n  \u2713  27 [webkit] \u203a apps/web/tests/host.spec.ts:656:1 \u203a aggregate staging limit recovers after release and verification overload (733ms)\n  \u2713  28 [webkit] \u203a apps/web/tests/host.spec.ts:707:1 \u203a 32 MiB disk-backed download survives immediate transfer release and reload until explicit cleanup (1.6s)\n  \u2713  29 [webkit] \u203a apps/web/tests/host.spec.ts:797:1 \u203a disk save streams to an injected picker destination with 64 KiB writes and cancellation leaves original intact (963ms)\n  \u2713  30 [webkit] \u203a apps/web/tests/host.spec.ts:877:1 \u203a retained download admission stays capped across host disposal and explicit cleanup frees a slot (994ms)\n\n  30 passed (19.2s)\n",
+  "playwright": {
+    "config": {
+      "argv": [
+        "/opt/homebrew/Cellar/node@22/22.23.1/bin/node",
+        "/Users/eric/QuixiChat/node_modules/.bin/playwright",
+        "test",
+        "--config",
+        "apps/web/tests/playwright.config.ts"
+      ],
+      "configFile": "/Users/eric/QuixiChat/apps/web/tests/playwright.config.ts",
+      "rootDir": "/Users/eric/QuixiChat/apps/web/tests",
+      "failOnFlakyTests": false,
+      "forbidOnly": false,
+      "fullyParallel": false,
+      "globalSetup": null,
+      "globalTeardown": null,
+      "globalTimeout": 0,
+      "grep": {},
+      "grepInvert": null,
+      "maxFailures": 0,
+      "metadata": {
+        "actualWorkers": 1
+      },
+      "preserveOutput": "always",
+      "projects": [
+        {
+          "outputDir": "/Users/eric/QuixiChat/test-results/web-host",
+          "repeatEach": 1,
+          "retries": 0,
+          "metadata": {
+            "actualWorkers": 1
+          },
+          "id": "chromium",
+          "name": "chromium",
+          "testDir": "/Users/eric/QuixiChat/apps/web/tests",
+          "testIgnore": [],
+          "testMatch": [
+            "host.spec.ts"
+          ],
+          "timeout": 30000
+        },
+        {
+          "outputDir": "/Users/eric/QuixiChat/test-results/web-host",
+          "repeatEach": 1,
+          "retries": 0,
+          "metadata": {
+            "actualWorkers": 1
+          },
+          "id": "webkit",
+          "name": "webkit",
+          "testDir": "/Users/eric/QuixiChat/apps/web/tests",
+          "testIgnore": [],
+          "testMatch": [
+            "host.spec.ts"
+          ],
+          "timeout": 30000
+        }
+      ],
+      "quiet": false,
+      "reporter": [
+        [
+          "list",
+          null
+        ],
+        [
+          "json",
+          {
+            "outputFile": "test-results/web-host-results.json"
+          }
+        ]
+      ],
+      "reportSlowTests": {
+        "max": 5,
+        "threshold": 300000
+      },
+      "shard": null,
+      "tags": [],
+      "updateSnapshots": "missing",
+      "updateSourceMethod": "patch",
+      "version": "1.63.0",
+      "workers": 1,
+      "webServer": {
+        "command": "node apps/web/tests/server.mjs",
+        "url": "http://127.0.0.1:4196/tests/host.html",
+        "reuseExistingServer": false,
+        "cwd": "../../.."
+      }
+    },
+    "suites": [
+      {
+        "title": "host.spec.ts",
+        "file": "host.spec.ts",
+        "column": 0,
+        "line": 0,
+        "specs": [
+          {
+            "title": "session credentials bind account/destination, delete and disappear with the session",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "chromium",
+                "projectName": "chromium",
+                "results": [
+                  {
+                    "workerIndex": 0,
+                    "parallelIndex": 0,
+                    "status": "passed",
+                    "duration": 308,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-09-10T19:51:00.354Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "69cb82147222d773bdbe-06afd0bb473d1a518e0b",
+            "file": "host.spec.ts",
+            "line": 118,
+            "column": 1
+          },
+          {
+            "title": "clipboard writes come from a user action, stay bounded and are readable back where the engine permits",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "chromium",
+                "projectName": "chromium",
+                "results": [
+                  {
+                    "workerIndex": 0,
+                    "parallelIndex": 0,
+                    "status": "passed",
+                    "duration": 301,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-09-10T19:51:00.676Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "69cb82147222d773bdbe-63ba927c9fd7dbc10d8c",
+            "file": "host.spec.ts",
+            "line": 178,
+            "column": 1
+          },
+          {
+            "title": "verified request staging preserves bytes and rejects corrupted, oversized and released transfers",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "chromium",
+                "projectName": "chromium",
+                "results": [
+                  {
+                    "workerIndex": 0,
+                    "parallelIndex": 0,
+                    "status": "passed",
+                    "duration": 265,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-09-10T19:51:00.981Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "69cb82147222d773bdbe-9f95dd30a85da2d23c41",
+            "file": "host.spec.ts",
+            "line": 208,
+            "column": 1
+          },
+          {
+            "title": "real streamed response enforces acknowledgement window and cancellation releases upstream",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "chromium",
+                "projectName": "chromium",
+                "results": [
+                  {
+                    "workerIndex": 0,
+                    "parallelIndex": 0,
+                    "status": "passed",
+                    "duration": 313,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-09-10T19:51:01.250Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "69cb82147222d773bdbe-5e611f582b351d06c954",
+            "file": "host.spec.ts",
+            "line": 295,
+            "column": 1
+          },
+          {
+            "title": "HTTP errors, redirect rejection, pre-header cancellation and idle deadlines are typed",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "chromium",
+                "projectName": "chromium",
+                "results": [
+                  {
+                    "workerIndex": 0,
+                    "parallelIndex": 0,
+                    "status": "passed",
+                    "duration": 329,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-09-10T19:51:01.569Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "69cb82147222d773bdbe-eb02fffee822c258ac04",
+            "file": "host.spec.ts",
+            "line": 350,
+            "column": 1
+          },
+          {
+            "title": "actual browser file selection streams fixture bytes and releases file handles",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "chromium",
+                "projectName": "chromium",
+                "results": [
+                  {
+                    "workerIndex": 0,
+                    "parallelIndex": 0,
+                    "status": "passed",
+                    "duration": 306,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-09-10T19:51:01.901Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "69cb82147222d773bdbe-7421a4690f4746c04f64",
+            "file": "host.spec.ts",
+            "line": 391,
+            "column": 1
+          },
+          {
+            "title": "registered query names are encoded onto the path and other names are refused before dispatch",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "chromium",
+                "projectName": "chromium",
+                "results": [
+                  {
+                    "workerIndex": 0,
+                    "parallelIndex": 0,
+                    "status": "passed",
+                    "duration": 242,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-09-10T19:51:02.211Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "69cb82147222d773bdbe-7a91f5aea73a3700604f",
+            "file": "host.spec.ts",
+            "line": 436,
+            "column": 1
+          },
+          {
+            "title": "adopted dropped files stream through the selected-file handle path and release",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "chromium",
+                "projectName": "chromium",
+                "results": [
+                  {
+                    "workerIndex": 0,
+                    "parallelIndex": 0,
+                    "status": "passed",
+                    "duration": 249,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-09-10T19:51:02.457Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "69cb82147222d773bdbe-3103da5d0845e7e2fafc",
+            "file": "host.spec.ts",
+            "line": 475,
+            "column": 1
+          },
+          {
+            "title": "configured relay separates authorization credentials and fixes the forwarding route",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "chromium",
+                "projectName": "chromium",
+                "results": [
+                  {
+                    "workerIndex": 0,
+                    "parallelIndex": 0,
+                    "status": "passed",
+                    "duration": 246,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-09-10T19:51:02.710Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "69cb82147222d773bdbe-e337148db36be7db9b31",
+            "file": "host.spec.ts",
+            "line": 519,
+            "column": 1
+          },
+          {
+            "title": "bounded fallback export downloads verified bytes in the actual browser",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "chromium",
+                "projectName": "chromium",
+                "results": [
+                  {
+                    "workerIndex": 0,
+                    "parallelIndex": 0,
+                    "status": "passed",
+                    "duration": 298,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-09-10T19:51:02.959Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "69cb82147222d773bdbe-768f2ff6889457ec32a1",
+            "file": "host.spec.ts",
+            "line": 573,
+            "column": 1
+          },
+          {
+            "title": "concurrency limits and disposal close active streams without leaking credentials",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "chromium",
+                "projectName": "chromium",
+                "results": [
+                  {
+                    "workerIndex": 0,
+                    "parallelIndex": 0,
+                    "status": "passed",
+                    "duration": 246,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-09-10T19:51:03.261Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "69cb82147222d773bdbe-f8b2e29a98b3e08d650d",
+            "file": "host.spec.ts",
+            "line": 630,
+            "column": 1
+          },
+          {
+            "title": "aggregate staging limit recovers after release and verification overload",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "chromium",
+                "projectName": "chromium",
+                "results": [
+                  {
+                    "workerIndex": 0,
+                    "parallelIndex": 0,
+                    "status": "passed",
+                    "duration": 248,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-09-10T19:51:03.511Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "69cb82147222d773bdbe-677ce47ff6543ec0dfa2",
+            "file": "host.spec.ts",
+            "line": 656,
+            "column": 1
+          },
+          {
+            "title": "32 MiB disk-backed download survives immediate transfer release and reload until explicit cleanup",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "chromium",
+                "projectName": "chromium",
+                "results": [
+                  {
+                    "workerIndex": 0,
+                    "parallelIndex": 0,
+                    "status": "passed",
+                    "duration": 1591,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-09-10T19:51:03.762Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "69cb82147222d773bdbe-3655a838c8e5c1b6af3b",
+            "file": "host.spec.ts",
+            "line": 707,
+            "column": 1
+          },
+          {
+            "title": "disk save streams to an injected picker destination with 64 KiB writes and cancellation leaves original intact",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "chromium",
+                "projectName": "chromium",
+                "results": [
+                  {
+                    "workerIndex": 0,
+                    "parallelIndex": 0,
+                    "status": "passed",
+                    "duration": 317,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-09-10T19:51:05.357Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "69cb82147222d773bdbe-e97de9134c48e53ce274",
+            "file": "host.spec.ts",
+            "line": 797,
+            "column": 1
+          },
+          {
+            "title": "retained download admission stays capped across host disposal and explicit cleanup frees a slot",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "chromium",
+                "projectName": "chromium",
+                "results": [
+                  {
+                    "workerIndex": 0,
+                    "parallelIndex": 0,
+                    "status": "passed",
+                    "duration": 245,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-09-10T19:51:05.678Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "69cb82147222d773bdbe-efee1285eeb14850bcb0",
+            "file": "host.spec.ts",
+            "line": 877,
+            "column": 1
+          },
+          {
+            "title": "session credentials bind account/destination, delete and disappear with the session",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "webkit",
+                "projectName": "webkit",
+                "results": [
+                  {
+                    "workerIndex": 1,
+                    "parallelIndex": 0,
+                    "status": "passed",
+                    "duration": 735,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-09-10T19:51:06.128Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "69cb82147222d773bdbe-88a8550a13e2cbca2cb3",
+            "file": "host.spec.ts",
+            "line": 118,
+            "column": 1
+          },
+          {
+            "title": "clipboard writes come from a user action, stay bounded and are readable back where the engine permits",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "webkit",
+                "projectName": "webkit",
+                "results": [
+                  {
+                    "workerIndex": 1,
+                    "parallelIndex": 0,
+                    "status": "passed",
+                    "duration": 754,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-09-10T19:51:06.876Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "69cb82147222d773bdbe-6bef8d9ce917a73bbe0f",
+            "file": "host.spec.ts",
+            "line": 178,
+            "column": 1
+          },
+          {
+            "title": "verified request staging preserves bytes and rejects corrupted, oversized and released transfers",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "webkit",
+                "projectName": "webkit",
+                "results": [
+                  {
+                    "workerIndex": 1,
+                    "parallelIndex": 0,
+                    "status": "passed",
+                    "duration": 717,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-09-10T19:51:07.634Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "69cb82147222d773bdbe-e5aad7587b14d33e461b",
+            "file": "host.spec.ts",
+            "line": 208,
+            "column": 1
+          },
+          {
+            "title": "real streamed response enforces acknowledgement window and cancellation releases upstream",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "webkit",
+                "projectName": "webkit",
+                "results": [
+                  {
+                    "workerIndex": 1,
+                    "parallelIndex": 0,
+                    "status": "passed",
+                    "duration": 790,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-09-10T19:51:08.355Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "69cb82147222d773bdbe-ba5cab0f8f3bebaa178c",
+            "file": "host.spec.ts",
+            "line": 295,
+            "column": 1
+          },
+          {
+            "title": "HTTP errors, redirect rejection, pre-header cancellation and idle deadlines are typed",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "webkit",
+                "projectName": "webkit",
+                "results": [
+                  {
+                    "workerIndex": 1,
+                    "parallelIndex": 0,
+                    "status": "passed",
+                    "duration": 792,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-09-10T19:51:09.148Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "69cb82147222d773bdbe-933e93dfaefb207e87f0",
+            "file": "host.spec.ts",
+            "line": 350,
+            "column": 1
+          },
+          {
+            "title": "actual browser file selection streams fixture bytes and releases file handles",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "webkit",
+                "projectName": "webkit",
+                "results": [
+                  {
+                    "workerIndex": 1,
+                    "parallelIndex": 0,
+                    "status": "passed",
+                    "duration": 796,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-09-10T19:51:09.944Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "69cb82147222d773bdbe-7579a029f0654c88a21d",
+            "file": "host.spec.ts",
+            "line": 391,
+            "column": 1
+          },
+          {
+            "title": "registered query names are encoded onto the path and other names are refused before dispatch",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "webkit",
+                "projectName": "webkit",
+                "results": [
+                  {
+                    "workerIndex": 1,
+                    "parallelIndex": 0,
+                    "status": "passed",
+                    "duration": 725,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-09-10T19:51:10.744Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "69cb82147222d773bdbe-6fc2099b04092e5013ff",
+            "file": "host.spec.ts",
+            "line": 436,
+            "column": 1
+          },
+          {
+            "title": "adopted dropped files stream through the selected-file handle path and release",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "webkit",
+                "projectName": "webkit",
+                "results": [
+                  {
+                    "workerIndex": 1,
+                    "parallelIndex": 0,
+                    "status": "passed",
+                    "duration": 717,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-09-10T19:51:11.472Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "69cb82147222d773bdbe-94bce792f2b3d0564aca",
+            "file": "host.spec.ts",
+            "line": 475,
+            "column": 1
+          },
+          {
+            "title": "configured relay separates authorization credentials and fixes the forwarding route",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "webkit",
+                "projectName": "webkit",
+                "results": [
+                  {
+                    "workerIndex": 1,
+                    "parallelIndex": 0,
+                    "status": "passed",
+                    "duration": 725,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-09-10T19:51:12.193Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "69cb82147222d773bdbe-7ace0a81d1d2a3b7ebb5",
+            "file": "host.spec.ts",
+            "line": 519,
+            "column": 1
+          },
+          {
+            "title": "bounded fallback export downloads verified bytes in the actual browser",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "webkit",
+                "projectName": "webkit",
+                "results": [
+                  {
+                    "workerIndex": 1,
+                    "parallelIndex": 0,
+                    "status": "passed",
+                    "duration": 979,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-09-10T19:51:12.921Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "69cb82147222d773bdbe-1b09b29dcde33815d35e",
+            "file": "host.spec.ts",
+            "line": 573,
+            "column": 1
+          },
+          {
+            "title": "concurrency limits and disposal close active streams without leaking credentials",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "webkit",
+                "projectName": "webkit",
+                "results": [
+                  {
+                    "workerIndex": 1,
+                    "parallelIndex": 0,
+                    "status": "passed",
+                    "duration": 724,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-09-10T19:51:13.903Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "69cb82147222d773bdbe-a52e96e2f20a20130451",
+            "file": "host.spec.ts",
+            "line": 630,
+            "column": 1
+          },
+          {
+            "title": "aggregate staging limit recovers after release and verification overload",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "webkit",
+                "projectName": "webkit",
+                "results": [
+                  {
+                    "workerIndex": 1,
+                    "parallelIndex": 0,
+                    "status": "passed",
+                    "duration": 733,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-09-10T19:51:14.629Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "69cb82147222d773bdbe-440c4cee5d295fe3dcd0",
+            "file": "host.spec.ts",
+            "line": 656,
+            "column": 1
+          },
+          {
+            "title": "32 MiB disk-backed download survives immediate transfer release and reload until explicit cleanup",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "webkit",
+                "projectName": "webkit",
+                "results": [
+                  {
+                    "workerIndex": 1,
+                    "parallelIndex": 0,
+                    "status": "passed",
+                    "duration": 1601,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-09-10T19:51:15.365Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "69cb82147222d773bdbe-84163dda783d9fb5cbe2",
+            "file": "host.spec.ts",
+            "line": 707,
+            "column": 1
+          },
+          {
+            "title": "disk save streams to an injected picker destination with 64 KiB writes and cancellation leaves original intact",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "webkit",
+                "projectName": "webkit",
+                "results": [
+                  {
+                    "workerIndex": 1,
+                    "parallelIndex": 0,
+                    "status": "passed",
+                    "duration": 963,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-09-10T19:51:16.970Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "69cb82147222d773bdbe-5b11e82f00f8cbae053b",
+            "file": "host.spec.ts",
+            "line": 797,
+            "column": 1
+          },
+          {
+            "title": "retained download admission stays capped across host disposal and explicit cleanup frees a slot",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "webkit",
+                "projectName": "webkit",
+                "results": [
+                  {
+                    "workerIndex": 1,
+                    "parallelIndex": 0,
+                    "status": "passed",
+                    "duration": 994,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-09-10T19:51:17.936Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "69cb82147222d773bdbe-c22ba7511946d10e1f02",
+            "file": "host.spec.ts",
+            "line": 877,
+            "column": 1
+          }
+        ]
+      }
+    ],
+    "errors": [],
+    "stats": {
+      "startTime": "2026-09-10T19:50:59.784Z",
+      "duration": 19172.886000000002,
+      "expected": 30,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    }
+  },
+  "sourceSha256": {
+    "tooling/browser-engines.mjs": "136f16e63e905ae4c8305c7adedfce2411eff13b04f914054f8fb718155d0df1",
+    "apps/web/tests/host.spec.ts": "ec3b8bf588b307c642c5c98a19d1e67ba4c98167081b4360a1550f83452bdc4b",
+    "apps/web/tests/server.mjs": "7d537ee18cf351901d0fb657455a99122eab242c8e17abd2edc1a0f5a0fd1b14",
+    "apps/web/tests/playwright.config.ts": "93dfb080cccdd13483213b1783cbdf6bf0bdcfe6bf066c86f5326d74416f5f63",
+    "apps/web/src/host/index.ts": "d279fc6e3d196393c9cd2c930c1272c0749b1e784cb55a95baa9961914760e84",
+    "apps/web/src/host/regional-relay.ts": "e6f78f3cfc06cbc23a70d354e5c1fdcb5a6fa4255b39196bd5927c99be4754de",
+    "apps/web/src/host/transfers.ts": "5718b2743caeffb00f4e736393ddff691b94fd896453aafbd696ac50d2e618f1",
+    "apps/web/src/host/disk-stages.ts": "db313149f8838160928fd41637bb8b04b58b94b72bad4cc4580def6b61370eac",
+    "packages/core/src/contracts/host.ts": "9541887378a0ae5549ff10c4d6f1c400b06d610ab521ff89cc5f29b877e5c575",
+    "packages/providers/src/regional.ts": "1f09a2bf83e16d41aa4ca220c81b14c10b1ab719f5493e952d9371beefe835ca"
+  }
+}

@@ -1,0 +1,533 @@
+{
+  "threads": [
+    {
+      "id": "00000000-0000-4000-8000-000000000010",
+      "workspaceId": "00000000-0000-4000-8000-000000000001",
+      "createdAt": 1788868800000,
+      "recordedAt": 1788868800000,
+      "systemPrompt": "Preserve history honestly.",
+      "preferredRoute": null,
+      "importSourceId": null
+    }
+  ],
+  "threadStates": [
+    {
+      "threadId": "00000000-0000-4000-8000-000000000010",
+      "title": "Synthetic history",
+      "tags": [
+        "fixture"
+      ],
+      "pinned": false,
+      "archived": false,
+      "activeLeafMessageId": "00000000-0000-4000-8000-000000000107",
+      "contextSnapshotId": "00000000-0000-4000-8000-000000000011",
+      "routingProfile": null,
+      "revision": 0
+    }
+  ],
+  "contexts": [
+    {
+      "id": "00000000-0000-4000-8000-000000000011",
+      "threadId": "00000000-0000-4000-8000-000000000010",
+      "previousId": null,
+      "version": 1,
+      "systemPrompt": "Preserve history honestly.",
+      "preferredRoute": null,
+      "recordedAt": 1788868800000
+    }
+  ],
+  "messages": [
+    {
+      "id": "00000000-0000-4000-8000-000000000100",
+      "threadId": "00000000-0000-4000-8000-000000000010",
+      "parentId": null,
+      "role": "user",
+      "createdAt": 1788868800100,
+      "recordedAt": 1788868800100,
+      "generationId": null,
+      "editedFromMessageId": null,
+      "sealed": true,
+      "partCount": 1
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000101",
+      "threadId": "00000000-0000-4000-8000-000000000010",
+      "parentId": "00000000-0000-4000-8000-000000000100",
+      "role": "assistant",
+      "createdAt": 1788868800101,
+      "recordedAt": 1788868800101,
+      "generationId": "00000000-0000-4000-8000-000000000200",
+      "editedFromMessageId": null,
+      "sealed": true,
+      "partCount": 1
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000102",
+      "threadId": "00000000-0000-4000-8000-000000000010",
+      "parentId": "00000000-0000-4000-8000-000000000100",
+      "role": "assistant",
+      "createdAt": 1788868800102,
+      "recordedAt": 1788868800102,
+      "generationId": "00000000-0000-4000-8000-000000000201",
+      "editedFromMessageId": null,
+      "sealed": true,
+      "partCount": 1
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000103",
+      "threadId": "00000000-0000-4000-8000-000000000010",
+      "parentId": "00000000-0000-4000-8000-000000000102",
+      "role": "user",
+      "createdAt": 1788868800103,
+      "recordedAt": 1788868800103,
+      "generationId": null,
+      "editedFromMessageId": null,
+      "sealed": true,
+      "partCount": 2
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000104",
+      "threadId": "00000000-0000-4000-8000-000000000010",
+      "parentId": "00000000-0000-4000-8000-000000000103",
+      "role": "assistant",
+      "createdAt": 1788868800104,
+      "recordedAt": 1788868800104,
+      "generationId": "00000000-0000-4000-8000-000000000202",
+      "editedFromMessageId": null,
+      "sealed": true,
+      "partCount": 1
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000105",
+      "threadId": "00000000-0000-4000-8000-000000000010",
+      "parentId": "00000000-0000-4000-8000-000000000103",
+      "role": "assistant",
+      "createdAt": 1788868800105,
+      "recordedAt": 1788868800105,
+      "generationId": "00000000-0000-4000-8000-000000000203",
+      "editedFromMessageId": null,
+      "sealed": true,
+      "partCount": 1
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000106",
+      "threadId": "00000000-0000-4000-8000-000000000010",
+      "parentId": "00000000-0000-4000-8000-000000000105",
+      "role": "tool",
+      "createdAt": 1788868800106,
+      "recordedAt": 1788868800106,
+      "generationId": null,
+      "editedFromMessageId": null,
+      "sealed": true,
+      "partCount": 1
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000107",
+      "threadId": "00000000-0000-4000-8000-000000000010",
+      "parentId": "00000000-0000-4000-8000-000000000106",
+      "role": "assistant",
+      "createdAt": 1788868800107,
+      "recordedAt": 1788868800107,
+      "generationId": "00000000-0000-4000-8000-000000000204",
+      "editedFromMessageId": null,
+      "sealed": true,
+      "partCount": 2
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000108",
+      "threadId": "00000000-0000-4000-8000-000000000010",
+      "parentId": null,
+      "role": "user",
+      "createdAt": 1788868800108,
+      "recordedAt": 1788868800108,
+      "generationId": null,
+      "editedFromMessageId": "00000000-0000-4000-8000-000000000100",
+      "sealed": true,
+      "partCount": 1
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000109",
+      "threadId": "00000000-0000-4000-8000-000000000010",
+      "parentId": "00000000-0000-4000-8000-000000000108",
+      "role": "assistant",
+      "createdAt": 1788868800109,
+      "recordedAt": 1788868800109,
+      "generationId": "00000000-0000-4000-8000-000000000205",
+      "editedFromMessageId": null,
+      "sealed": true,
+      "partCount": 1
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000110",
+      "threadId": "00000000-0000-4000-8000-000000000010",
+      "parentId": "00000000-0000-4000-8000-000000000108",
+      "role": "assistant",
+      "createdAt": 1788868800110,
+      "recordedAt": 1788868800110,
+      "generationId": "00000000-0000-4000-8000-000000000206",
+      "editedFromMessageId": null,
+      "sealed": false,
+      "partCount": 1
+    }
+  ],
+  "generations": [
+    {
+      "id": "00000000-0000-4000-8000-000000000200",
+      "threadId": "00000000-0000-4000-8000-000000000010",
+      "parentMessageId": "00000000-0000-4000-8000-000000000100",
+      "outputMessageId": "00000000-0000-4000-8000-000000000101",
+      "contextSnapshotId": "00000000-0000-4000-8000-000000000011",
+      "provider": "anthropic",
+      "providerAccountId": "synthetic-account",
+      "model": "fixture-model-a",
+      "parameters": {},
+      "status": "complete",
+      "createdAt": 1788868800100,
+      "recordedAt": 1788868800100,
+      "completedAt": 1788868800101,
+      "tokensIn": null,
+      "tokensOut": null,
+      "cachedTokens": null,
+      "estimatedCost": null,
+      "reportedCost": null,
+      "lastSequence": 0,
+      "rawResponseId": null,
+      "compatibility": []
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000201",
+      "threadId": "00000000-0000-4000-8000-000000000010",
+      "parentMessageId": "00000000-0000-4000-8000-000000000100",
+      "outputMessageId": "00000000-0000-4000-8000-000000000102",
+      "contextSnapshotId": "00000000-0000-4000-8000-000000000011",
+      "provider": "openai",
+      "providerAccountId": "synthetic-account",
+      "model": "fixture-model-b",
+      "parameters": {},
+      "status": "complete",
+      "createdAt": 1788868800101,
+      "recordedAt": 1788868800101,
+      "completedAt": 1788868800102,
+      "tokensIn": null,
+      "tokensOut": null,
+      "cachedTokens": null,
+      "estimatedCost": null,
+      "reportedCost": null,
+      "lastSequence": 0,
+      "rawResponseId": null,
+      "compatibility": []
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000202",
+      "threadId": "00000000-0000-4000-8000-000000000010",
+      "parentMessageId": "00000000-0000-4000-8000-000000000103",
+      "outputMessageId": "00000000-0000-4000-8000-000000000104",
+      "contextSnapshotId": "00000000-0000-4000-8000-000000000011",
+      "provider": "openai",
+      "providerAccountId": "synthetic-account",
+      "model": "fixture-model-b",
+      "parameters": {},
+      "status": "failed",
+      "createdAt": 1788868800103,
+      "recordedAt": 1788868800103,
+      "completedAt": 1788868800104,
+      "tokensIn": null,
+      "tokensOut": null,
+      "cachedTokens": null,
+      "estimatedCost": null,
+      "reportedCost": null,
+      "lastSequence": 0,
+      "rawResponseId": null,
+      "compatibility": []
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000203",
+      "threadId": "00000000-0000-4000-8000-000000000010",
+      "parentMessageId": "00000000-0000-4000-8000-000000000103",
+      "outputMessageId": "00000000-0000-4000-8000-000000000105",
+      "contextSnapshotId": "00000000-0000-4000-8000-000000000011",
+      "provider": "anthropic",
+      "providerAccountId": "synthetic-account",
+      "model": "fixture-model-a",
+      "parameters": {},
+      "status": "complete",
+      "createdAt": 1788868800104,
+      "recordedAt": 1788868800104,
+      "completedAt": 1788868800105,
+      "tokensIn": null,
+      "tokensOut": null,
+      "cachedTokens": null,
+      "estimatedCost": null,
+      "reportedCost": null,
+      "lastSequence": 0,
+      "rawResponseId": null,
+      "compatibility": []
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000204",
+      "threadId": "00000000-0000-4000-8000-000000000010",
+      "parentMessageId": "00000000-0000-4000-8000-000000000106",
+      "outputMessageId": "00000000-0000-4000-8000-000000000107",
+      "contextSnapshotId": "00000000-0000-4000-8000-000000000011",
+      "provider": "anthropic",
+      "providerAccountId": "synthetic-account",
+      "model": "fixture-model-a",
+      "parameters": {},
+      "status": "complete",
+      "createdAt": 1788868800106,
+      "recordedAt": 1788868800106,
+      "completedAt": 1788868800107,
+      "tokensIn": null,
+      "tokensOut": null,
+      "cachedTokens": null,
+      "estimatedCost": null,
+      "reportedCost": null,
+      "lastSequence": 0,
+      "rawResponseId": null,
+      "compatibility": []
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000205",
+      "threadId": "00000000-0000-4000-8000-000000000010",
+      "parentMessageId": "00000000-0000-4000-8000-000000000108",
+      "outputMessageId": "00000000-0000-4000-8000-000000000109",
+      "contextSnapshotId": "00000000-0000-4000-8000-000000000011",
+      "provider": "anthropic",
+      "providerAccountId": "synthetic-account",
+      "model": "fixture-model-a",
+      "parameters": {},
+      "status": "stopped",
+      "createdAt": 1788868800108,
+      "recordedAt": 1788868800108,
+      "completedAt": 1788868800109,
+      "tokensIn": null,
+      "tokensOut": null,
+      "cachedTokens": null,
+      "estimatedCost": null,
+      "reportedCost": null,
+      "lastSequence": 0,
+      "rawResponseId": null,
+      "compatibility": []
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000206",
+      "threadId": "00000000-0000-4000-8000-000000000010",
+      "parentMessageId": "00000000-0000-4000-8000-000000000108",
+      "outputMessageId": "00000000-0000-4000-8000-000000000110",
+      "contextSnapshotId": "00000000-0000-4000-8000-000000000011",
+      "provider": "openai",
+      "providerAccountId": "synthetic-account",
+      "model": "fixture-model-b",
+      "parameters": {},
+      "status": "streaming",
+      "createdAt": 1788868800109,
+      "recordedAt": 1788868800109,
+      "completedAt": null,
+      "tokensIn": null,
+      "tokensOut": null,
+      "cachedTokens": null,
+      "estimatedCost": null,
+      "reportedCost": null,
+      "lastSequence": 0,
+      "rawResponseId": null,
+      "compatibility": []
+    }
+  ],
+  "parts": [
+    {
+      "id": "00000000-0000-4000-8000-000000001100",
+      "messageId": "00000000-0000-4000-8000-000000000100",
+      "order": 0,
+      "kind": "Text",
+      "data": {
+        "text": "Plan a two-day trip."
+      }
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000001101",
+      "messageId": "00000000-0000-4000-8000-000000000101",
+      "order": 0,
+      "kind": "Text",
+      "data": {
+        "text": "Original two-day answer."
+      }
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000001102",
+      "messageId": "00000000-0000-4000-8000-000000000102",
+      "order": 0,
+      "kind": "Text",
+      "data": {
+        "text": "Alternative candidate from another provider."
+      }
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000001103",
+      "messageId": "00000000-0000-4000-8000-000000000103",
+      "order": 0,
+      "kind": "Text",
+      "data": {
+        "text": "Include a map."
+      }
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000001104",
+      "messageId": "00000000-0000-4000-8000-000000000104",
+      "order": 0,
+      "kind": "Text",
+      "data": {
+        "text": "Checking routes\u2026"
+      }
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000001105",
+      "messageId": "00000000-0000-4000-8000-000000000105",
+      "order": 0,
+      "kind": "ToolCall",
+      "data": {
+        "name": "lookup_map",
+        "input": {
+          "place": "Example Bay"
+        },
+        "providerCallId": "fixture-call-1"
+      }
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000001106",
+      "messageId": "00000000-0000-4000-8000-000000000106",
+      "order": 0,
+      "kind": "ToolResult",
+      "data": {
+        "callPartId": "00000000-0000-4000-8000-000000001105",
+        "unresolvedProviderCallId": null,
+        "content": {
+          "map": "synthetic map summary"
+        },
+        "isError": false
+      }
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000001107",
+      "messageId": "00000000-0000-4000-8000-000000000107",
+      "order": 0,
+      "kind": "Text",
+      "data": {
+        "text": "The map is preserved as a tool result."
+      }
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000001108",
+      "messageId": "00000000-0000-4000-8000-000000000108",
+      "order": 0,
+      "kind": "Text",
+      "data": {
+        "text": "Plan a three-day trip."
+      }
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000001109",
+      "messageId": "00000000-0000-4000-8000-000000000109",
+      "order": 0,
+      "kind": "Text",
+      "data": {
+        "text": "Day one begins\u2026"
+      }
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000001110",
+      "messageId": "00000000-0000-4000-8000-000000000110",
+      "order": 0,
+      "kind": "Text",
+      "data": {
+        "text": "Another candidate is arriving"
+      }
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000001203",
+      "messageId": "00000000-0000-4000-8000-000000000103",
+      "order": 1,
+      "kind": "File",
+      "data": {
+        "attachmentId": "00000000-0000-4000-8000-000000000400",
+        "description": "Source metadata retained; no file bytes"
+      }
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000001207",
+      "messageId": "00000000-0000-4000-8000-000000000107",
+      "order": 1,
+      "kind": "ProviderArtifact",
+      "data": {
+        "providerKind": "unrendered_card",
+        "rawObjectId": "00000000-0000-4000-8000-000000000500",
+        "locator": "/payload"
+      }
+    }
+  ],
+  "events": [
+    {
+      "id": "00000000-0000-4000-8000-000000000300",
+      "threadId": "00000000-0000-4000-8000-000000000010",
+      "type": "ProviderSwitch",
+      "createdAt": 1788868800300,
+      "recordedAt": 1788868800300,
+      "messageId": "00000000-0000-4000-8000-000000000100",
+      "generationId": "00000000-0000-4000-8000-000000000201",
+      "details": {
+        "from": "anthropic",
+        "to": "openai",
+        "reason": "explicit selection"
+      }
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000301",
+      "threadId": "00000000-0000-4000-8000-000000000010",
+      "type": "ImportWarning",
+      "createdAt": 1788868800301,
+      "recordedAt": 1788868800301,
+      "messageId": "00000000-0000-4000-8000-000000000103",
+      "generationId": null,
+      "details": {
+        "code": "missing_attachment",
+        "filename": "map.pdf"
+      }
+    }
+  ],
+  "attachments": [
+    {
+      "id": "00000000-0000-4000-8000-000000000400",
+      "availability": "missing",
+      "filename": "map.pdf",
+      "mimeType": "application/pdf",
+      "sizeBytes": null,
+      "blobSha256": null,
+      "rawObjectId": null
+    }
+  ],
+  "rawObjects": [
+    {
+      "id": "00000000-0000-4000-8000-000000000500",
+      "availability": "available",
+      "mediaType": "application/json",
+      "storageRef": "native-provider-response.synthetic.json",
+      "sha256": "67550c5220dbc31b62fb95b1c42068d892ee48975fadbf5467bcf2a43fea2530",
+      "byteLength": 138
+    }
+  ],
+  "importSources": [],
+  "sourceIdentities": [],
+  "provenance": [],
+  "tombstones": [],
+  "version": 1,
+  "documents": [
+    {
+      "id": "00000000-0000-4000-8000-000000000450",
+      "workspaceId": "00000000-0000-4000-8000-000000000001",
+      "attachmentId": "00000000-0000-4000-8000-000000000400",
+      "title": "Synthetic missing itinerary document",
+      "createdAt": null,
+      "recordedAt": 1788870000000,
+      "importSourceId": null
+    }
+  ]
+}

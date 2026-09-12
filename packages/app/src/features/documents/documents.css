@@ -1,0 +1,11 @@
+.document-layout { display: grid; grid-template-columns: minmax(11rem, 1fr) minmax(0, 3fr); gap: 1.5rem; margin-top: 1.5rem; }
+.document-list { list-style: none; padding: 0; margin: 0 0 1rem; display: grid; gap: .5rem; }
+.document-list button { width: 100%; text-align: left; overflow-wrap: anywhere; }
+.document-list button[aria-current="true"] { background: #e5efe8; border-color: #2c624b; }
+.document-detail { min-width: 0; }
+.document-detail h2, .document-detail p { overflow-wrap: anywhere; }
+.document-page-form { display: flex; align-items: end; gap: .75rem; margin-block: 1.5rem; }
+.document-page-form input { width: 8rem; }
+.document-text { white-space: pre-wrap; overflow-wrap: anywhere; border: 1px solid #bac6bd; border-radius: 7px; padding: 1rem; margin-bottom: 1rem; background: white; }
+.document-text mark { background: #fff1a3; color: #243b32; }
+@media (max-width: 760px) { .document-layout { grid-template-columns: minmax(0, 1fr); } }

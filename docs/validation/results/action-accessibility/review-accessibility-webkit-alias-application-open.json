@@ -1,0 +1,297 @@
+{
+  "mode": "assert",
+  "name": "webkit",
+  "caseName": "alias-application-open",
+  "scope": "Computed CSS reflow and enabled control-border contrast; no screen-reader or native-control pixel-rendering qualification.",
+  "samples": [
+    {
+      "size": "normal",
+      "viewportWidth": 320,
+      "documentWidth": 320,
+      "region": {
+        "left": 37.78,
+        "right": 282.22,
+        "width": 244.44,
+        "height": 773.16
+      },
+      "rootFontSize": "16px",
+      "focused": {
+        "tag": "SELECT",
+        "id": "_r_1g_",
+        "label": "Routing alias",
+        "insideRegion": true
+      },
+      "controlCount": 4,
+      "controls": [
+        {
+          "tag": "SELECT",
+          "label": "Routing alias",
+          "bounds": {
+            "left": 37.78,
+            "right": 282.22,
+            "width": 244.44,
+            "height": 23
+          },
+          "containerBounds": {
+            "left": 19.19,
+            "right": 300.81,
+            "width": 281.63,
+            "height": 3120.31
+          },
+          "disabled": false,
+          "overflow": false
+        },
+        {
+          "tag": "INPUT",
+          "label": "I reviewed this alias profile",
+          "bounds": {
+            "left": 39.78,
+            "right": 284.22,
+            "width": 244.44,
+            "height": 12
+          },
+          "containerBounds": {
+            "left": 19.19,
+            "right": 300.81,
+            "width": 281.63,
+            "height": 3120.31
+          },
+          "disabled": false,
+          "overflow": false
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Apply alias to conversation",
+          "bounds": {
+            "left": 37.78,
+            "right": 257.7,
+            "width": 219.92,
+            "height": 38.94
+          },
+          "containerBounds": {
+            "left": 19.19,
+            "right": 300.81,
+            "width": 281.63,
+            "height": 3120.31
+          },
+          "disabled": true,
+          "overflow": false
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Cancel alias application",
+          "bounds": {
+            "left": 37.78,
+            "right": 233.77,
+            "width": 195.98,
+            "height": 38.94
+          },
+          "containerBounds": {
+            "left": 19.19,
+            "right": 300.81,
+            "width": 281.63,
+            "height": 3120.31
+          },
+          "disabled": false,
+          "overflow": false
+        }
+      ],
+      "borders": [
+        {
+          "label": "Routing alias",
+          "fill": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            255
+          ],
+          "sides": [
+            {
+              "side": "Top",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 4.114544191782779
+            },
+            {
+              "side": "Right",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 4.114544191782779
+            },
+            {
+              "side": "Bottom",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 4.114544191782779
+            },
+            {
+              "side": "Left",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 4.114544191782779
+            }
+          ]
+        }
+      ],
+      "documentOverflow": [],
+      "violations": []
+    },
+    {
+      "size": "enlarged",
+      "viewportWidth": 320,
+      "documentWidth": 320,
+      "region": {
+        "left": 74.58,
+        "right": 245.42,
+        "width": 170.84,
+        "height": 3317.97
+      },
+      "rootFontSize": "32px",
+      "focused": {
+        "tag": "SELECT",
+        "id": "_r_1g_",
+        "label": "Routing alias",
+        "insideRegion": true
+      },
+      "controlCount": 4,
+      "controls": [
+        {
+          "tag": "SELECT",
+          "label": "Routing alias",
+          "bounds": {
+            "left": 74.58,
+            "right": 245.42,
+            "width": 170.84,
+            "height": 43
+          },
+          "containerBounds": {
+            "left": 38.39,
+            "right": 281.61,
+            "width": 243.22,
+            "height": 10832.89
+          },
+          "disabled": false,
+          "overflow": false
+        },
+        {
+          "tag": "INPUT",
+          "label": "I reviewed this alias profile",
+          "bounds": {
+            "left": 76.58,
+            "right": 247.42,
+            "width": 170.84,
+            "height": 12
+          },
+          "containerBounds": {
+            "left": 38.39,
+            "right": 281.61,
+            "width": 243.22,
+            "height": 10832.89
+          },
+          "disabled": false,
+          "overflow": false
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Apply alias to conversation",
+          "bounds": {
+            "left": 74.58,
+            "right": 245.42,
+            "width": 170.84,
+            "height": 205.47
+          },
+          "containerBounds": {
+            "left": 38.39,
+            "right": 281.61,
+            "width": 243.22,
+            "height": 10832.89
+          },
+          "disabled": true,
+          "overflow": false
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Cancel alias application",
+          "bounds": {
+            "left": 74.58,
+            "right": 245.42,
+            "width": 170.84,
+            "height": 205.47
+          },
+          "containerBounds": {
+            "left": 38.39,
+            "right": 281.61,
+            "width": 243.22,
+            "height": 10832.89
+          },
+          "disabled": false,
+          "overflow": false
+        }
+      ],
+      "borders": [
+        {
+          "label": "Routing alias",
+          "fill": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            255
+          ],
+          "sides": [
+            {
+              "side": "Top",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 4.114544191782779
+            },
+            {
+              "side": "Right",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 4.114544191782779
+            },
+            {
+              "side": "Bottom",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 4.114544191782779
+            },
+            {
+              "side": "Left",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 4.114544191782779
+            }
+          ]
+        }
+      ],
+      "documentOverflow": [],
+      "violations": []
+    }
+  ],
+  "status": "passed"
+}

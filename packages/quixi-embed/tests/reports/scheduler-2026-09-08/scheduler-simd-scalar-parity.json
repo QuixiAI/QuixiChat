@@ -1,0 +1,22 @@
+{
+  "route": "wasm-simd-fp32",
+  "cases": 159,
+  "reference_manifest_sha256": "58fdb82888c5d9e44fca2231184d49449cdb81c3b1e65b859a45bb993ab7eb8e",
+  "candidate_manifest_sha256": "e0c43ced8e1f17e59c6376d1ee5b4dde59b750849bd02b0b1c62afc6a6fcf009",
+  "candidate_backend": {
+    "route": "wasm-simd-fp32",
+    "wasm_sha256": "0925f75af66677a35801c9e1b82ba05a0f12bef54c61cc04c9d8ea7caf7cab5d",
+    "model_sha256": "e1ef345cd35088b06f70c199f5a4e0311bda5983716ad6a3e7d0a604202efffc"
+  },
+  "thresholds": {
+    "atol": 0.0002,
+    "rtol": 0.0002,
+    "vector_atol": 5e-05,
+    "min_cosine": 0.999999,
+    "norm_atol": 2e-05
+  },
+  "max_absolute_error": 0.0,
+  "minimum_cosine": 0.9999999999999998,
+  "passed": true,
+  "errors": []
+}

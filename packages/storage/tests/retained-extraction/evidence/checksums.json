@@ -1,0 +1,7 @@
+{
+  "packages/storage/tests/retained-extraction/evidence/browser-evidence.json": "cd0385af48bd0dedbf592010651735e451cecea5ca748e31ebca96da3930273c",
+  "packages/storage/tests/retained-extraction/evidence/fixture-worker.mjs": "8aadad7387961e0a81fb4d7135c8d21069204ded887320d32f4fb4a27b1c752b",
+  "packages/storage/tests/retained-extraction/evidence/index.html": "8c63f0b3b816b92a0ca30303c30f3fdec2587ac2e2331dbd14122c18d17862c2",
+  "packages/storage/tests/retained-extraction/evidence/index.mjs": "d5da381aace6362c28411cd124abd219fe52b4d5ee1c0f68cf68e3ed0947a830",
+  "packages/storage/tests/retained-extraction/evidence/run.mjs": "b141656af169d804e18c989d46c920340b28ebe39bf5f30e6307ac45770e8ccd"
+}

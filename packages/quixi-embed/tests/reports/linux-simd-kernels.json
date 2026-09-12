@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "checks": 2400,
+  "kernels": [
+    "dot",
+    "weighted_value_accumulation"
+  ],
+  "runtime": "Node v22.16.0",
+  "platform": "Linux x86_64 container",
+  "image": "emscripten/emsdk@sha256:90b757eb11fa9a0e3ce4d2d9f76d932a56018e4accc37b5a28b2783751e60eb7",
+  "command": "node /src/tests/kernel-parity.mjs",
+  "limitations": "Linux x86_64 was emulated on macOS arm64. This checks another WASM runtime architecture; it is not native x86 hardware performance evidence."
+}

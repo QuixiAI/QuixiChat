@@ -1,0 +1,28 @@
+{
+  "startedAt": "2026-09-09T11:13:37.244Z",
+  "completedAt": "2026-09-09T11:13:37.675Z",
+  "status": "passed",
+  "tests": 4,
+  "passed": 4,
+  "failed": 0,
+  "node": "v22.23.1",
+  "platform": "darwin",
+  "arch": "arm64",
+  "sourceStable": true,
+  "sourceHashes": {
+    "packages/storage/src/worker/extraction/index.ts": "e0175db4d0a20b182d7c31bda46e95dd5eb15e82c60e67cf09ad6c4d5779b92d",
+    "packages/storage/src/worker/extraction/schema.ts": "e08905c3ed353f8bfbbef90f5d768126eac5713e471c4ceec283e62a99961487",
+    "packages/storage/src/worker/operation-claims.ts": "b90a22768dd7797058221fd509b1f02bd34e4e54a7aa77c15304e7cb19b0725b",
+    "packages/core/src/contracts/extraction.ts": "b05bcd2ef02bd60694bff7cc5d83fccbd10e2584f1ba9edf17505241c209b483",
+    "packages/core/src/contracts/storage.ts": "8f156bc4d7c4a580b6b4ba982372b72da569513602c3815a99686141d9a2c1e4",
+    "packages/core/src/contracts/serialization.ts": "a1d6cc8792dc6aeac4310f8b3f2545c0414b9425d7983fb4a80b7e7b0808116e",
+    "packages/storage/tests/extraction-performance/serialization.test.ts": "d3bea3d8eade0b79212ad32fbf9d5d62bd5cf8a06899735abbd669a28808f658",
+    "packages/storage/tests/extraction-performance/run.mjs": "a2c77e975818b503ba85a687e853ee64c7acbe24c1c240b65e5b02cf3c0e2c17",
+    "packages/storage/tests/extraction-search/fixture.ts": "c4696c106bd9cfb7673d1a295b7c63141c951e966d7d79a12f727af5f4bc7ac5",
+    "packages/storage/tests/extraction-layout/fixtures/v1.json": "eebf8c2dba0045e8a7b22d895a717861976732a5b6481ca50b66a24326ac036f",
+    "packages/storage/tests/extraction-layout/fixtures/extraction-v1.mjs": "92744a1ca04f2a038a354b0a567f5c5ea4dbe8294b6e0b895dcf98932c8a553b",
+    "packages/storage/sqlite/dist/sqlite3.mjs": "127c4f37a4ce3449d464b976ac4979fc6b016ae974c0aea9ba8afef85d3b4d5d",
+    "packages/storage/sqlite/dist/sqlite3.wasm": "dd7c22431a3b8ad51ab5e6ed91065593574c34c5959d2efdef2f17484eedcb2c"
+  },
+  "scope": "Actual pinned SQLite WASM execute/replay with immutable caller snapshots. Reuses extraction-search fixture claim adapter; production claim registry is exercised separately by profile.ts and operation-claims regressions. No OPFS/browser timing claim."
+}

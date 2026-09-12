@@ -1,0 +1,145 @@
+
+> quixi@0.0.1 test:app:browser
+> tsc --noEmit -p packages/app/tsconfig.tests.json && node packages/app/tests/browser/run.mjs
+
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+Skip to conversation
+Quixi
+Your history. Your choice.
+New conversation
+Preferences
+Storage health
+Library
+Import history
+Providers
+Documents
+Export history
+Filter titles
+Filter
+Archived conversations
+Refresh library
+Comet notebook
+space · ideas
+Portability thread
+Image thread
+Previous
+Next
+
+History stays on this device. Sending shares the selected branch with your chosen provider.
+
+Search your history
+Search
+Comet notebook
+
+1 attempt · tokens in unknown · out unknown · no price estimate
+
+Portability: Fully portable. Every configured target can carry all 2 parts of the active path.
+
+OpenAI · GPT-4.1 mini: carries all 2 parts.
+3 internal provider records and 0 empty responses are never sent to any provider.
+Conversation settings
+Older messages
+Latest messages
+Show starting branches
+You
+View source
+
+First comet question
+
+Edit as new branch
+Quote in reply
+First parts
+Sibling branches
+Continue from here
+Generate another response
+Assistant
+openai · gpt-4.1-mini-2025-04-14 · partial
+View source
+
+Visible stream 🧪 segment 1
+
+Response source records
+
+Tokens in: unknown · out: unknown · Cost: unknown
+
+Quote in reply
+First parts
+Sibling branches
+Continue from here
+Branch continuations
+
+No further branches here.
+
+Provider
+OpenAI
+Model
+GPT-4.1 mini
+Maximum output tokens
+Enter 1–32,768 tokens for this model.
+Temperature
+Leave blank for the model default, or enter 0–2.
+Top-p
+Leave blank for the model default, or enter 0–1.
+Stop sequences
+One per line, up to 4 sequences of 1,024 characters. Blank lines are ignored.
+
+OpenAI: Unknown · Provider transport failed or was interrupted. · from the last response
+
+Route: OpenAI · GPT-4.1 mini: chosen.
+
+Fallback candidate
+Choose a connection and model
+ Add candidate
+ Require tool support
+ Require image input
+Required processing region
+Unrestricted
+United States
+Europe (EEA + Switzerland)
+Maximum estimated request cost per attempt (USD)
+Minimum context window
+Maximum estimated input cost (USD)
+ Allow the route to change the privacy class
+Profile name
+
+0 attachment occurrence(s) excluded from future requests. Originals remain in history.
+
+Review attachment exclusions
+Attachment exclusions
+Conversation summary
+Review conversation summaries
+Fresh context branch
+Review fresh branch
+Apply routing alias
+Routing alias
+Choose a saved alias
+Message
+Attach files
+PNG, JPEG, GIF, WebP or PDF files, up to 20 attachments and 2.5 MiB total per message. Drop files anywhere in the composer.
+⌘ / Ctrl + Enter to send
+Count prompt tokens
+Send message
+
+Response partial.
+SUMMARY DOM [{"label":"Portability","hidden":false},{"label":"Conversation messages","hidden":false},{"label":"Branch choices","hidden":false},{"label":"Request context","hidden":false},{"label":"Attachment exclusions","hidden":false},{"label":"Conversation summary","hidden":false},{"label":"Fresh context branch","hidden":false},{"label":"Apply routing alias","hidden":false}]
+SUMMARY LOCATORS 1 0 0
+{"items":[{"cachedTokens":null,"compatibility":[],"completedAt":1789092379709,"contextSnapshotId":"f5d27629-7d1a-4fd1-ae19-e09929f92216","createdAt":1789092378991,"estimatedCost":null,"id":"7134811b-469c-4907-95fe-5f27baf37471","lastSequence":5,"model":"gpt-4.1-mini-2025-04-14","outputMessageId":"44ffba88-b74f-4236-9fa2-732b495819ec","parameters":{"max_completion_tokens":768,"stop":["END","STOP"],"store":false,"stream":true,"stream_options":{"include_usage":true},"temperature":0.3,"top_p":0.9},"parentMessageId":"3ba9869b-626c-488b-9077-746b97ac1362","provider":"openai","providerAccountId":"primary","rawResponseId":"b8f0987f-4988-4cd4-90e2-5779718139d7","recordedAt":1789092378991,"reportedCost":null,"status":"partial","threadId":"a404c9bb-20ae-461c-be65-be9add972ee9","tokensIn":null,"tokensOut":null}],"nextCursor":null,"bytes":802}
+Error: expect(locator).toBeVisible() failed
+
+Locator: getByRole('button', { name: 'Stop response', exact: true })
+Expected: visible
+Timeout: 5000ms
+Error: element(s) not found
+
+Call log:
+  - Expect "toBeVisible" getByRole('button', { name: 'Stop response', exact: true }) with timeout 5000ms
+  - waiting for getByRole('button', { name: 'Stop response', exact: true })
+
+    at captureRawStack (/Users/eric/QuixiChat/node_modules/playwright-core/lib/coreBundle.js:8588:17)
+    at callMatcherAsStep (/Users/eric/QuixiChat/node_modules/playwright/lib/matchers/expect.js:13310:57)
+    at Object.toBeVisible (/Users/eric/QuixiChat/node_modules/playwright/lib/matchers/expect.js:13302:23)
+    at /Users/eric/QuixiChat/packages/app/tests/browser/run.mjs:563:9

@@ -1,0 +1,73 @@
+TAP version 13
+# (node:72157) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# quixi-extraction-schema [{"version":1,"name":"canonical_records_and_atomic_operations","checksum":"16724a690f441af0162c0b49f3256bac152fb98a31f1a99c6ef40076d7dfd7d5"},{"version":2,"name":"source_and_generation_uniqueness","checksum":"bba4a045a82d42714d43d9ee709412eab759da65122b7abb244186b6a2d9b24f"},{"version":3,"name":"verified_blob_catalog_and_transfer_recovery","checksum":"705b844874dece6b5cc1881cb45ccc3b2907a2719036283fe165a0a07f6fe14e"},{"version":4,"name":"hidden_normalized_import_groups","checksum":"9988edddaf4483b380ab33f1017f141304484b1bc1662e74fb1c2de75ca2467e"},{"version":5,"name":"bounded_importer_work_and_uuid_checkpoints","checksum":"cd43d1aeb7f9fdf33c6efd0dcb3b87d00eef9169fe002c81ee6856750a49468b"},{"version":6,"name":"generation_producer_fences","checksum":"32e6035cd4ea8cabe3d327772c0d291de08a1ae24c2a23b360dc6661c6315c11"},{"version":7,"name":"local_workspace_and_message_recency","checksum":"da34a61082c74eae78301b25b83cc8525addfb6df1b5e450c33c2a63ec974151"},{"version":8,"name":"streaming_text_across_transport_provenance","checksum":"9c6a87fde402ff33d164ee7db92b34088ab05d458686670ee3d317dc24ca1263"},{"version":9,"name":"mandatory_archive_selection_protocol","checksum":"d124a56c86b6b42a8429114e253030b1cbc88e774ec8ff3e44cc9105dd5b6dab"},{"version":10,"name":"stable_local_operation_claims","checksum":"3f20f0a536ee783777602dda90a3f575cf17ddfe6bba277dc9cfa740e413770b"}]
+# Subtest: actual v1 checkpoint/page/receipt fixture upgrades and reopens without rewriting legacy content or operations
+ok 1 - actual v1 checkpoint/page/receipt fixture upgrades and reopens without rewriting legacy content or operations
+  ---
+  duration_ms: 56.404083
+  type: 'test'
+  ...
+# Subtest: schema upgrade interruption rolls back every DDL/ledger change and safely retries after reopen
+ok 2 - schema upgrade interruption rolls back every DDL/ledger change and safely retries after reopen
+  ---
+  duration_ms: 17.987292
+  type: 'test'
+  ...
+# Subtest: unknown ledger and partial prior schema fail without resetting legacy pages or receipts
+ok 3 - unknown ledger and partial prior schema fail without resetting legacy pages or receipts
+  ---
+  duration_ms: 21.168542
+  type: 'test'
+  ...
+# Subtest: frozen actual v1 repository accepts v1 but refuses schema2 reads/writes before mutation
+ok 4 - frozen actual v1 repository accepts v1 but refuses schema2 reads/writes before mutation
+  ---
+  duration_ms: 13.112125
+  type: 'test'
+  ...
+# Subtest: layout publication is transactional, replay-fenced and durable with a digest-bound nullable read outcome
+ok 5 - layout publication is transactional, replay-fenced and durable with a digest-bound nullable read outcome
+  ---
+  duration_ms: 15.072709
+  type: 'test'
+  ...
+# Subtest: deleted, malformed and changed valid v2 layout metadata refuse instead of becoming unknown legacy layout
+ok 6 - deleted, malformed and changed valid v2 layout metadata refuse instead of becoming unknown legacy layout
+  ---
+  duration_ms: 31.972792
+  type: 'test'
+  ...
+# Subtest: layout bounds and semantic outcome constraints are validated without mutating omitted legacy args
+ok 7 - layout bounds and semantic outcome constraints are validated without mutating omitted legacy args
+  ---
+  duration_ms: 0.249709
+  type: 'test'
+  ...
+# Subtest: cleanup releases layout metadata accounting while preserving historical receipts
+ok 8 - cleanup releases layout metadata accounting while preserving historical receipts
+  ---
+  duration_ms: 12.181541
+  type: 'test'
+  ...
+# Subtest: a changed normalizer cannot displace an interrupted old run checkpoint before explicit producer recovery
+ok 9 - a changed normalizer cannot displace an interrupted old run checkpoint before explicit producer recovery
+  ---
+  duration_ms: 10.004708
+  type: 'test'
+  ...
+# Subtest: logical budget counts layout metadata and rolls back a publication that no longer fits
+ok 10 - logical budget counts layout metadata and rolls back a publication that no longer fits
+  ---
+  duration_ms: 17.692125
+  type: 'test'
+  ...
+1..10
+# tests 10
+# suites 0
+# pass 10
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 393.506083

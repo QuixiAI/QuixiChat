@@ -1,0 +1,7 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>QuixiEmbed CPU benchmark</title><body><p>Running complete CPU encoder benchmark</p><script type="module">
+const worker=new Worker(new URL('./browser-worker.ts',import.meta.url),{type:'module'});
+window.quixiBenchmark={status:'running'};
+worker.onmessage=({data})=>{window.quixiBenchmark=data.value;if(data.kind==='complete'){window.quixiComplete=true;worker.terminate();}};
+worker.onerror=event=>{window.quixiBenchmark={status:'failed',error:event.message};window.quixiComplete=true;worker.terminate();};
+worker.postMessage({short:new URL(location.href).searchParams.has('short')});
+</script></body></html>

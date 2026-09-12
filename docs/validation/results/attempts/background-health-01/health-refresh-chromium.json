@@ -1,0 +1,12 @@
+{
+  "status": "failed",
+  "stages": [
+    "automatic-failure-updates-health-without-focus-change",
+    "overdue-probe-suppressed-while-offline-or-hidden",
+    "visible-online-resume-recovers-with-one-probe",
+    "rejected-credential-pauses-automatic-checks-until-explicit-check",
+    "offline-cancels-held-probe-without-poisoning-health"
+  ],
+  "scope": "Production shared UI, session controller, provider adapters and HTTP/OPFS; synthetic model responses and an advanced health clock, with real visibility/connectivity event handling.",
+  "error": "TimeoutError: locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Open Providers', exact: true })\u001b[22m\n"
+}

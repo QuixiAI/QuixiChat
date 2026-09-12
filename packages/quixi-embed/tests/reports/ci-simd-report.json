@@ -1,0 +1,238 @@
+{
+  "status": "passed",
+  "passed": true,
+  "mode": "smoke",
+  "browsers": true,
+  "backend": "simd",
+  "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+  "started_at": "2026-09-08T10:30:07.171916+00:00",
+  "commands": [
+    {
+      "command": [
+        "uv",
+        "pip",
+        "sync",
+        "--python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "--require-hashes",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/requirements.lock"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.43303474999265745
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/fetch.py"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.10429591697175056
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/compiler/compile_model.py"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 2.1528912089997903
+    },
+    {
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/Users/eric/QuixiChat/packages/quixi-embed/native/build.py",
+        "--target",
+        "wasm"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 4.01420799997868
+    },
+    {
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/Users/eric/QuixiChat/packages/quixi-embed/native/build.py",
+        "--target",
+        "wasm",
+        "--simd"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 4.058377915993333
+    },
+    {
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/Users/eric/QuixiChat/packages/quixi-embed/native/check_kernels.py"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 3.7996700420044363
+    },
+    {
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/Users/eric/QuixiChat/packages/quixi-embed/native/check_memory.py"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 5.067083666974213
+    },
+    {
+      "command": [
+        "node",
+        "--expose-gc",
+        "--experimental-strip-types",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/cpu-memory.mjs"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 6.622182165971026
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests",
+        "-p",
+        "test_performance.py"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.03187399997841567
+    },
+    {
+      "command": [
+        "node",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/perf-reporting.mjs"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.3106341250240803
+    },
+    {
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/Users/eric/QuixiChat/packages/quixi-embed/native/release.py"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.08103608299279585
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference",
+        "-p",
+        "test_*.py"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 1.7766225419472903
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests",
+        "-p",
+        "test_ci_report.py"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.049516583036165684
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "/Users/eric/QuixiChat/perf/retrieval",
+        "-p",
+        "test_*.py"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.020170625008177012
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/generate_browser_fixtures.py",
+        "--verify"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.057119290984701365
+    },
+    {
+      "command": [
+        "node",
+        "--experimental-strip-types",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/scalar-api.mjs"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.9895022499840707
+    },
+    {
+      "command": [
+        "node",
+        "--experimental-strip-types",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/scalar-api.mjs",
+        "simd"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.8935822920175269
+    },
+    {
+      "command": [
+        "npx",
+        "playwright",
+        "install",
+        "chromium",
+        "firefox",
+        "webkit"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.37498929200228304
+    },
+    {
+      "command": [
+        "node",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/browser-check.mjs"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 21.16218912502518
+    },
+    {
+      "command": [
+        "node",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/browser-check.mjs",
+        "simd"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 11.831245292036328
+    }
+  ],
+  "requirements": "requirements.lock",
+  "finished_at": "2026-09-08T10:31:11.021062+00:00"
+}

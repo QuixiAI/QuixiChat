@@ -1,0 +1,29 @@
+{
+  "capturedAt": "2026-09-09T09:36:16.947Z",
+  "sourceHashes": {
+    "node_modules/@noble/hashes/_u64.js": "b09da8c07fe8187c07649494cdb7cd0bcf13df90b506a9473d19e4d5f8c2e102",
+    "node_modules/@noble/hashes/utils.js": "037ad49adb78168b6b699598fd33f85f7877456b1d28b4d032e2a1a16807947c",
+    "node_modules/@noble/hashes/_md.js": "60cf3010fda89e3e4d3f0e7ff1ce249e9c467f34b4fd41b6fd6101d9f69be763",
+    "node_modules/@noble/hashes/sha2.js": "471746bba6ec4c6238ca41358d1d3b40b6ff31cf3363f0b4d550c649c1a8e83b",
+    "packages/core/src/model/validation.ts": "5feb020a6cf7d361c2661e4e012c24a8b2f329ce4efda1a7ebe5d8ccd11ae0a9",
+    "packages/core/src/contracts/producers.ts": "aaf026f6a774a1669190717aab6a5c2004e54d35adeea40a4e4ec8efb3485697",
+    "packages/core/src/contracts/serialization.ts": "a1d6cc8792dc6aeac4310f8b3f2545c0414b9425d7983fb4a80b7e7b0808116e",
+    "packages/core/src/contracts/extraction.ts": "9ed517e5c6d0c7d91fb715fedae4dcee7a6d15c362de18f695da80f5e6c060a8",
+    "packages/core/src/contracts/selection.ts": "5e87c6b21f0aea9cd139c2ca09d66d31614fc725d3163fb00c982d0ec3c7584b",
+    "packages/core/src/contracts/views.ts": "90b038bdf6644c43bf5a6b02b74693ad75c235a711856ed29a084107493c8b3a",
+    "packages/core/src/contracts/archives.ts": "bc59c914256f51b3a650d23892adb28f311c9e443373b9bd0fe1a63c3dc72911",
+    "packages/core/src/contracts/search.ts": "6c059ba15eef98f1b2ac2fb175aa809cfeecc60480b4ce533caab389dd5cc872",
+    "packages/core/src/contracts/import-work.ts": "3b1781783db87db4233d7ff19241b70bd3a3749b84c669587906f995b998313a",
+    "packages/core/src/contracts/imports.ts": "f2f688aa9a4f67fd481546af9d947758ea9ca3dc835e8c56741a1bd5af5dd843",
+    "packages/core/src/contracts/transfer.ts": "73563a59e5d0964657a88c025a1b0935a1ae7eb77161e96404a4d37b375d6a6f",
+    "packages/core/src/model/branches.ts": "aabaf03facf31f8598b53e1ad716cb0f403496f1d5bcab35ecae4956ddb020b3",
+    "packages/core/src/contracts/mutations.ts": "c7e00f0bdb4238dea2f2fbbf0e13c0bcfe2c329b8b91d2b7171525017d180632",
+    "packages/core/src/contracts/storage.ts": "8f156bc4d7c4a580b6b4ba982372b72da569513602c3815a99686141d9a2c1e4",
+    "packages/core/src/contracts/host.ts": "16e12761feee4509cefa7715a05cf80737d7acfc010031a0b3c8197efecdd1b5",
+    "packages/core/src/contracts/index.ts": "21a2e0cfaa6cc19cc81e3a6067c45083bf23a178f29462fe6f3b920b3effd43c",
+    "packages/core/src/model/index.ts": "abd31bc6badf1bab006956f61f7c47b9ffaf89b79269d889c656c10471f2f12c",
+    "packages/storage/src/worker/extraction/schema.ts": "97782b22ed5586d10724c03fa59ea30f09865377d330da6e2b0a345433a2ae5e",
+    "packages/storage/src/worker/extraction/index.ts": "c01f95a9e6d7fdcd591d73dce42a8a0076df913fd761bdc113740b5f10f94ae6"
+  },
+  "bundleSha256": "92744a1ca04f2a038a354b0a567f5c5ea4dbe8294b6e0b895dcf98932c8a553b"
+}

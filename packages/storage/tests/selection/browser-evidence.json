@@ -1,0 +1,709 @@
+{
+  "status": "passed",
+  "startedAt": "2026-09-08T23:51:35.134Z",
+  "hosts": [
+    {
+      "name": "chromium",
+      "status": "passed",
+      "checks": [
+        "two real worker clients race through one selection gate; one atomic head+receipt wins, 16-request admission enforced, source high-water10 differs from count1, full-payload conflicts rejected",
+        "stale selection revisions including switch-away/back cannot checkpoint generation; in-flight source write precedes activation and invalidates reviewed high-water",
+        "candidate owner contention and failed fresh candidate validation keep prior selection and meaningful failed intent",
+        "real SQLite page-cap failure rolls back selection and receipt together, preserving integrity",
+        "browser-enforced OPFS quota denies actual writes; after restoring quota/reopen, both selection and receipt rolled back with integrityok",
+        "actual owner-worker termination after durable intent recovers interrupted, never committed",
+        "actual worker termination inside open selection+receipt transaction recovers SQLite rollback journal and prior head",
+        "lost real committed reply remains inspectable/replayable after a later switch without switching back; changed revision conflicts",
+        "40 serialized real fixture generation checkpoints measure per-operation selection pool reopen/pause and guard roundtrip",
+        "complete browser-process restart preserves head, older receipt and separate fixture history; interrupted intent commits only after explicit same-ID revalidation",
+        "physical SQLite header corruption fails unavailable on repeated opens without writable default rollback or damage to retained fixture databases",
+        "activateReviewed composes with exactly one external candidate lock; callback expires on return/throw, commits once, and preserves receipts through replay and postcommit cleanup/cancellation",
+        "before-publication cancellation and a validator returning without commit leave failed intents and unchanged selection",
+        "real pre-fence worker bypass is reproduced after old-owner release; unqualified rollout refuses activation even when the current source has no observed owner, without claiming lock snapshots certify compatibility"
+      ],
+      "timings": [
+        {
+          "waitMs": 0,
+          "openMs": 1.0999999977648258,
+          "workMs": 5.800000000745058,
+          "closeMs": 0.3999999985098839,
+          "roundtripMs": 7
+        },
+        {
+          "waitMs": 0,
+          "openMs": 1.199999999254942,
+          "workMs": 4.5,
+          "closeMs": 5.899999998509884,
+          "roundtripMs": 13
+        },
+        {
+          "waitMs": 0.09999999776482582,
+          "openMs": 3.600000001490116,
+          "workMs": 29.899999998509884,
+          "closeMs": 1,
+          "roundtripMs": 35
+        },
+        {
+          "waitMs": 0.10000000149011612,
+          "openMs": 1.5999999977648258,
+          "workMs": 35.600000001490116,
+          "closeMs": 4.300000000745058,
+          "roundtripMs": 42
+        },
+        {
+          "waitMs": 0,
+          "openMs": 2.199999999254942,
+          "workMs": 18.5,
+          "closeMs": 4.100000001490116,
+          "roundtripMs": 25
+        },
+        {
+          "waitMs": 0.10000000149011612,
+          "openMs": 2.199999999254942,
+          "workMs": 16.400000002235174,
+          "closeMs": 4.799999997019768,
+          "roundtripMs": 25
+        },
+        {
+          "waitMs": 0.10000000149011612,
+          "openMs": 2.2999999970197678,
+          "workMs": 20.400000002235174,
+          "closeMs": 4.599999997764826,
+          "roundtripMs": 28
+        },
+        {
+          "waitMs": 0.10000000149011612,
+          "openMs": 4.399999998509884,
+          "workMs": 23.399999998509884,
+          "closeMs": 3.2000000029802322,
+          "roundtripMs": 33
+        },
+        {
+          "waitMs": 0.10000000149011612,
+          "openMs": 3.300000000745058,
+          "workMs": 15.699999999254942,
+          "closeMs": 4.300000000745058,
+          "roundtripMs": 24
+        },
+        {
+          "waitMs": 0.09999999776482582,
+          "openMs": 3.600000001490116,
+          "workMs": 19.600000001490116,
+          "closeMs": 4.399999998509884,
+          "roundtripMs": 29
+        },
+        {
+          "waitMs": 0,
+          "openMs": 2.699999999254942,
+          "workMs": 24.899999998509884,
+          "closeMs": 4.100000001490116,
+          "roundtripMs": 33
+        },
+        {
+          "waitMs": 0.09999999776482582,
+          "openMs": 3.300000000745058,
+          "workMs": 18.800000000745058,
+          "closeMs": 4.199999999254942,
+          "roundtripMs": 28
+        },
+        {
+          "waitMs": 0.10000000149011612,
+          "openMs": 5.899999998509884,
+          "workMs": 22.800000000745058,
+          "closeMs": 4.5,
+          "roundtripMs": 34
+        },
+        {
+          "waitMs": 0.10000000149011612,
+          "openMs": 2.399999998509884,
+          "workMs": 18.600000001490116,
+          "closeMs": 0.6999999992549419,
+          "roundtripMs": 23
+        },
+        {
+          "waitMs": 0.10000000149011612,
+          "openMs": 2,
+          "workMs": 16.699999999254942,
+          "closeMs": 4.900000002235174,
+          "roundtripMs": 25
+        },
+        {
+          "waitMs": 0.10000000149011612,
+          "openMs": 5.199999999254942,
+          "workMs": 20.300000000745058,
+          "closeMs": 0.6999999992549419,
+          "roundtripMs": 28
+        },
+        {
+          "waitMs": 0.19999999925494194,
+          "openMs": 6.199999999254942,
+          "workMs": 23.600000001490116,
+          "closeMs": 0.6999999992549419,
+          "roundtripMs": 32
+        },
+        {
+          "waitMs": 0.10000000149011612,
+          "openMs": 2.899999998509884,
+          "workMs": 14.400000002235174,
+          "closeMs": 1,
+          "roundtripMs": 19
+        },
+        {
+          "waitMs": 0,
+          "openMs": 3,
+          "workMs": 10,
+          "closeMs": 0.7000000029802322,
+          "roundtripMs": 15
+        },
+        {
+          "waitMs": 0,
+          "openMs": 1.9000000022351742,
+          "workMs": 4.399999998509884,
+          "closeMs": 0.6999999992549419,
+          "roundtripMs": 8
+        },
+        {
+          "waitMs": 0.10000000149011612,
+          "openMs": 3.399999998509884,
+          "workMs": 32.30000000074506,
+          "closeMs": 4.400000002235174,
+          "roundtripMs": 41
+        },
+        {
+          "waitMs": 0,
+          "openMs": 3.100000001490116,
+          "workMs": 16.800000000745058,
+          "closeMs": 0.5999999977648258,
+          "roundtripMs": 21
+        },
+        {
+          "waitMs": 0,
+          "openMs": 2.2999999970197678,
+          "workMs": 15.600000001490116,
+          "closeMs": 0.5,
+          "roundtripMs": 19
+        },
+        {
+          "waitMs": 0.10000000149011612,
+          "openMs": 4.199999999254942,
+          "workMs": 16.5,
+          "closeMs": 4.400000002235174,
+          "roundtripMs": 26
+        },
+        {
+          "waitMs": 0.09999999776482582,
+          "openMs": 2.800000000745058,
+          "workMs": 14.899999998509884,
+          "closeMs": 3.800000000745058,
+          "roundtripMs": 22
+        },
+        {
+          "waitMs": 0,
+          "openMs": 1.6000000014901161,
+          "workMs": 20.199999999254942,
+          "closeMs": 3.899999998509884,
+          "roundtripMs": 26
+        },
+        {
+          "waitMs": 0.19999999925494194,
+          "openMs": 2.5,
+          "workMs": 8.400000002235174,
+          "closeMs": 0.5999999977648258,
+          "roundtripMs": 12
+        },
+        {
+          "waitMs": 0.10000000149011612,
+          "openMs": 4.5,
+          "workMs": 33.69999999925494,
+          "closeMs": 8.199999999254942,
+          "roundtripMs": 48
+        },
+        {
+          "waitMs": 0,
+          "openMs": 2.5,
+          "workMs": 10,
+          "closeMs": 1.6000000014901161,
+          "roundtripMs": 15
+        },
+        {
+          "waitMs": 0,
+          "openMs": 1.5999999977648258,
+          "workMs": 7,
+          "closeMs": 0.5,
+          "roundtripMs": 10
+        },
+        {
+          "waitMs": 0.19999999925494194,
+          "openMs": 1.4000000022351742,
+          "workMs": 3.699999999254942,
+          "closeMs": 0.5,
+          "roundtripMs": 7
+        },
+        {
+          "waitMs": 0,
+          "openMs": 1.0999999977648258,
+          "workMs": 3.7000000029802322,
+          "closeMs": 0.3999999985098839,
+          "roundtripMs": 6
+        },
+        {
+          "waitMs": 0.10000000149011612,
+          "openMs": 1.199999999254942,
+          "workMs": 3.400000002235174,
+          "closeMs": 0.5,
+          "roundtripMs": 6
+        },
+        {
+          "waitMs": 0,
+          "openMs": 1.5999999977648258,
+          "workMs": 4.100000001490116,
+          "closeMs": 0.5,
+          "roundtripMs": 7
+        },
+        {
+          "waitMs": 0,
+          "openMs": 1.5999999977648258,
+          "workMs": 4.200000002980232,
+          "closeMs": 0.5,
+          "roundtripMs": 7
+        },
+        {
+          "waitMs": 0,
+          "openMs": 1.6000000014901161,
+          "workMs": 4,
+          "closeMs": 0.5,
+          "roundtripMs": 7
+        },
+        {
+          "waitMs": 0,
+          "openMs": 1.4000000022351742,
+          "workMs": 4.5,
+          "closeMs": 0.5,
+          "roundtripMs": 7
+        },
+        {
+          "waitMs": 0.09999999776482582,
+          "openMs": 1.4000000022351742,
+          "workMs": 4.899999998509884,
+          "closeMs": 0.6000000014901161,
+          "roundtripMs": 8
+        },
+        {
+          "waitMs": 0.09999999776482582,
+          "openMs": 1.7000000029802322,
+          "workMs": 4.299999997019768,
+          "closeMs": 0.5,
+          "roundtripMs": 7
+        },
+        {
+          "waitMs": 0.09999999776482582,
+          "openMs": 1.7000000029802322,
+          "workMs": 5.5,
+          "closeMs": 0.5999999977648258,
+          "roundtripMs": 8
+        }
+      ],
+      "coldOpen": {
+        "waitMs": 50.899999998509884,
+        "openMs": 76.80000000074506,
+        "workMs": 0.10000000149011612,
+        "closeMs": 1.199999999254942
+      },
+      "quota": {
+        "usage": 150890,
+        "quotaSize": 413034,
+        "failures": [
+          {
+            "name": "QuotaExceededError",
+            "method": "write"
+          }
+        ]
+      },
+      "cadence": {
+        "samples": 40,
+        "minimumSpacingMs": 20,
+        "openMs": {
+          "median": 2.2999999970197678,
+          "p95": 5.899999998509884,
+          "max": 6.199999999254942
+        },
+        "pauseCloseMs": {
+          "median": 1,
+          "p95": 5.899999998509884,
+          "max": 8.199999999254942
+        },
+        "roundtripMs": {
+          "median": 22,
+          "p95": 42,
+          "max": 48
+        }
+      },
+      "legacy": {
+        "negativeFixture": "pre-selection writer reacquired old source owner and wrote after selection changed",
+        "sequence": 12,
+        "refusedStatus": "not_found",
+        "observations": [
+          {
+            "event": "compatibility-observation",
+            "held": 0,
+            "pending": 0
+          }
+        ]
+      },
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36"
+    },
+    {
+      "name": "webkit",
+      "status": "passed",
+      "checks": [
+        "two real worker clients race through one selection gate; one atomic head+receipt wins, 16-request admission enforced, source high-water10 differs from count1, full-payload conflicts rejected",
+        "stale selection revisions including switch-away/back cannot checkpoint generation; in-flight source write precedes activation and invalidates reviewed high-water",
+        "candidate owner contention and failed fresh candidate validation keep prior selection and meaningful failed intent",
+        "real SQLite page-cap failure rolls back selection and receipt together, preserving integrity",
+        "actual owner-worker termination after durable intent recovers interrupted, never committed",
+        "actual worker termination inside open selection+receipt transaction recovers SQLite rollback journal and prior head",
+        "lost real committed reply remains inspectable/replayable after a later switch without switching back; changed revision conflicts",
+        "40 serialized real fixture generation checkpoints measure per-operation selection pool reopen/pause and guard roundtrip",
+        "complete browser-process restart preserves head, older receipt and separate fixture history; interrupted intent commits only after explicit same-ID revalidation",
+        "physical SQLite header corruption fails unavailable on repeated opens without writable default rollback or damage to retained fixture databases",
+        "activateReviewed composes with exactly one external candidate lock; callback expires on return/throw, commits once, and preserves receipts through replay and postcommit cleanup/cancellation",
+        "before-publication cancellation and a validator returning without commit leave failed intents and unchanged selection",
+        "real pre-fence worker bypass is reproduced after old-owner release; unqualified rollout refuses activation even when the current source has no observed owner, without claiming lock snapshots certify compatibility"
+      ],
+      "timings": [
+        {
+          "waitMs": 0,
+          "openMs": 2,
+          "workMs": 3,
+          "closeMs": 0,
+          "roundtripMs": 6
+        },
+        {
+          "waitMs": 1,
+          "openMs": 1,
+          "workMs": 1,
+          "closeMs": 1,
+          "roundtripMs": 4
+        },
+        {
+          "waitMs": 0,
+          "openMs": 1,
+          "workMs": 2,
+          "closeMs": 0,
+          "roundtripMs": 4
+        },
+        {
+          "waitMs": 0,
+          "openMs": 2,
+          "workMs": 2,
+          "closeMs": 0,
+          "roundtripMs": 5
+        },
+        {
+          "waitMs": 0,
+          "openMs": 1,
+          "workMs": 2,
+          "closeMs": 0,
+          "roundtripMs": 5
+        },
+        {
+          "waitMs": 0,
+          "openMs": 1,
+          "workMs": 2,
+          "closeMs": 0,
+          "roundtripMs": 5
+        },
+        {
+          "waitMs": 0,
+          "openMs": 2,
+          "workMs": 1,
+          "closeMs": 0,
+          "roundtripMs": 4
+        },
+        {
+          "waitMs": 0,
+          "openMs": 1,
+          "workMs": 1,
+          "closeMs": 1,
+          "roundtripMs": 4
+        },
+        {
+          "waitMs": 0,
+          "openMs": 1,
+          "workMs": 2,
+          "closeMs": 0,
+          "roundtripMs": 4
+        },
+        {
+          "waitMs": 0,
+          "openMs": 1,
+          "workMs": 2,
+          "closeMs": 0,
+          "roundtripMs": 5
+        },
+        {
+          "waitMs": 0,
+          "openMs": 1,
+          "workMs": 2,
+          "closeMs": 0,
+          "roundtripMs": 3
+        },
+        {
+          "waitMs": 0,
+          "openMs": 2,
+          "workMs": 1,
+          "closeMs": 0,
+          "roundtripMs": 4
+        },
+        {
+          "waitMs": 0,
+          "openMs": 2,
+          "workMs": 1,
+          "closeMs": 1,
+          "roundtripMs": 4
+        },
+        {
+          "waitMs": 0,
+          "openMs": 2,
+          "workMs": 1,
+          "closeMs": 1,
+          "roundtripMs": 4
+        },
+        {
+          "waitMs": 0,
+          "openMs": 2,
+          "workMs": 1,
+          "closeMs": 1,
+          "roundtripMs": 4
+        },
+        {
+          "waitMs": 0,
+          "openMs": 2,
+          "workMs": 2,
+          "closeMs": 1,
+          "roundtripMs": 5
+        },
+        {
+          "waitMs": 0,
+          "openMs": 2,
+          "workMs": 2,
+          "closeMs": 0,
+          "roundtripMs": 5
+        },
+        {
+          "waitMs": 0,
+          "openMs": 2,
+          "workMs": 2,
+          "closeMs": 0,
+          "roundtripMs": 5
+        },
+        {
+          "waitMs": 0,
+          "openMs": 3,
+          "workMs": 2,
+          "closeMs": 0,
+          "roundtripMs": 6
+        },
+        {
+          "waitMs": 0,
+          "openMs": 3,
+          "workMs": 2,
+          "closeMs": 0,
+          "roundtripMs": 7
+        },
+        {
+          "waitMs": 1,
+          "openMs": 2,
+          "workMs": 1,
+          "closeMs": 1,
+          "roundtripMs": 5
+        },
+        {
+          "waitMs": 0,
+          "openMs": 2,
+          "workMs": 2,
+          "closeMs": 0,
+          "roundtripMs": 6
+        },
+        {
+          "waitMs": 0,
+          "openMs": 2,
+          "workMs": 2,
+          "closeMs": 0,
+          "roundtripMs": 6
+        },
+        {
+          "waitMs": 0,
+          "openMs": 2,
+          "workMs": 2,
+          "closeMs": 0,
+          "roundtripMs": 6
+        },
+        {
+          "waitMs": 0,
+          "openMs": 2,
+          "workMs": 2,
+          "closeMs": 0,
+          "roundtripMs": 5
+        },
+        {
+          "waitMs": 0,
+          "openMs": 1,
+          "workMs": 1,
+          "closeMs": 0,
+          "roundtripMs": 4
+        },
+        {
+          "waitMs": 0,
+          "openMs": 2,
+          "workMs": 1,
+          "closeMs": 0,
+          "roundtripMs": 5
+        },
+        {
+          "waitMs": 0,
+          "openMs": 1,
+          "workMs": 1,
+          "closeMs": 1,
+          "roundtripMs": 4
+        },
+        {
+          "waitMs": 0,
+          "openMs": 2,
+          "workMs": 1,
+          "closeMs": 0,
+          "roundtripMs": 4
+        },
+        {
+          "waitMs": 0,
+          "openMs": 1,
+          "workMs": 1,
+          "closeMs": 0,
+          "roundtripMs": 3
+        },
+        {
+          "waitMs": 0,
+          "openMs": 1,
+          "workMs": 1,
+          "closeMs": 0,
+          "roundtripMs": 4
+        },
+        {
+          "waitMs": 0,
+          "openMs": 1,
+          "workMs": 1,
+          "closeMs": 1,
+          "roundtripMs": 4
+        },
+        {
+          "waitMs": 0,
+          "openMs": 1,
+          "workMs": 1,
+          "closeMs": 1,
+          "roundtripMs": 4
+        },
+        {
+          "waitMs": 0,
+          "openMs": 1,
+          "workMs": 1,
+          "closeMs": 0,
+          "roundtripMs": 4
+        },
+        {
+          "waitMs": 0,
+          "openMs": 1,
+          "workMs": 1,
+          "closeMs": 1,
+          "roundtripMs": 4
+        },
+        {
+          "waitMs": 0,
+          "openMs": 2,
+          "workMs": 2,
+          "closeMs": 1,
+          "roundtripMs": 6
+        },
+        {
+          "waitMs": 1,
+          "openMs": 2,
+          "workMs": 2,
+          "closeMs": 0,
+          "roundtripMs": 6
+        },
+        {
+          "waitMs": 0,
+          "openMs": 3,
+          "workMs": 2,
+          "closeMs": 1,
+          "roundtripMs": 7
+        },
+        {
+          "waitMs": 0,
+          "openMs": 2,
+          "workMs": 3,
+          "closeMs": 0,
+          "roundtripMs": 7
+        },
+        {
+          "waitMs": 0,
+          "openMs": 3,
+          "workMs": 2,
+          "closeMs": 1,
+          "roundtripMs": 7
+        }
+      ],
+      "coldOpen": {
+        "waitMs": 0,
+        "openMs": 75,
+        "workMs": 0,
+        "closeMs": 0
+      },
+      "quota": {
+        "status": "skipped",
+        "reason": "WebKit exposes no equivalent CDP quota override; SQL_FULL rollback is tested separately."
+      },
+      "cadence": {
+        "samples": 40,
+        "minimumSpacingMs": 20,
+        "openMs": {
+          "median": 2,
+          "p95": 3,
+          "max": 3
+        },
+        "pauseCloseMs": {
+          "median": 0,
+          "p95": 1,
+          "max": 1
+        },
+        "roundtripMs": {
+          "median": 5,
+          "p95": 7,
+          "max": 7
+        }
+      },
+      "legacy": {
+        "negativeFixture": "pre-selection writer reacquired old source owner and wrote after selection changed",
+        "sequence": 12,
+        "refusedStatus": "not_found",
+        "observations": [
+          {
+            "event": "compatibility-observation",
+            "held": 0,
+            "pending": 0
+          }
+        ]
+      },
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15"
+    }
+  ],
+  "sourceSha256": {
+    "packages/storage/src/selection/catalog.ts": "0d636894d826d92ed15aa11712dad692088af4faa36f07014f0413dff7547a53",
+    "packages/storage/tests/selection/worker.ts": "2ddd73a8c33093959442beebda1a2988de788582724ed9967a7224835531316d",
+    "packages/storage/tests/selection/legacy-worker.ts": "4352d333190eeb7687377d8116f51e322e323d9829077ba8e80881c384ca5ae8",
+    "packages/storage/tests/selection/index.ts": "078bb58a7fc824027e28609f02c10148ceabcc1df9b2612523611931cdc5478d",
+    "packages/storage/tests/selection/run.mjs": "80b40a9cdb3b5a22e745ecb6f803563bd073c5f31d4b9d791fdfb310ff11b2c4",
+    "packages/storage/sqlite/dist/verification.json": "ac8b8f430dc4e98271431feb30c75a85d3ed4c13ce48a9495a91b5e9bf2bf5b8",
+    "packages/storage/sqlite/dist/sqlite3.wasm": "dd7c22431a3b8ad51ab5e6ed91065593574c34c5959d2efdef2f17484eedcb2c"
+  },
+  "finishedAt": "2026-09-08T23:51:44.313Z"
+}

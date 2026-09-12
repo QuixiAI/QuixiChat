@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "sqliteVersion": "3.53.4",
+  "sqliteVecVersion": "v0.1.9",
+  "toolchain": {
+    "image": "emscripten/emsdk@sha256:90b757eb11fa9a0e3ce4d2d9f76d932a56018e4accc37b5a28b2783751e60eb7",
+    "tagForHumans": "4.0.10",
+    "platform": "linux/amd64",
+    "compiler": "Emscripten 4.0.10 (b7dc6e5747465580df5984e723b9d1f10d8e804b)",
+    "optimization": "-O2 -g3; Binaryen --all-features --strip-debug --strip-producers",
+    "binaryen": "wasm-opt version 123 (version_123-168-g8c82b6884)",
+    "sourceDateEpoch": 1785542400
+  },
+  "sources": [
+    {
+      "file": "sqlite-src-3530400.zip",
+      "url": "https://sqlite.org/2026/sqlite-src-3530400.zip",
+      "sha256": "d18fa15aec74d8c17e1463f861095adc01b5ad190256acb4f91d22f0368d232b",
+      "upstreamSha3_256": "b834d474b9b393d85a9e3ee4cc11f1329e007e9376a424ee740796f5c4bda3a8",
+      "license": "Public domain"
+    },
+    {
+      "file": "sqlite-amalgamation-3530400.zip",
+      "url": "https://sqlite.org/2026/sqlite-amalgamation-3530400.zip",
+      "sha256": "1e71ddf93849c6a6ecf58b827c0692073d2dd7ee40196158068f7b29f422e87d",
+      "upstreamSha3_256": "628a44cfe82c66aed1ccbbe85a562d2e33ebe64b3288981ed76285612227934e",
+      "license": "Public domain"
+    },
+    {
+      "file": "sqlite-vec-0.1.9-amalgamation.tar.gz",
+      "url": "https://github.com/asg017/sqlite-vec/releases/download/v0.1.9/sqlite-vec-0.1.9-amalgamation.tar.gz",
+      "sha256": "3acd67cb4aff080c7050926fd3cf8227905fe5b7ee3829d8ee5024ab1283cf61",
+      "sourceCommit": "e9f598abfa0c06b328d8fe5da9c3760cce74be10",
+      "license": "MIT (selected from MIT OR Apache-2.0)",
+      "extractSubdirectory": "vec"
+    }
+  ],
+  "configuration": {
+    "upstreamBuild": "ext/wasm/GNUmakefile, full-featured wasm32 ES module",
+    "sqliteFeatures": ["FTS5", "JSON", "RTREE", "SESSION", "PREUPDATE_HOOK", "COLUMN_METADATA"],
+    "extensionDefines": ["SQLITE_CORE=1", "SQLITE_VEC_STATIC=1", "SQLITE_VEC_OMIT_FS=1"],
+    "extensionRegistration": "sqlite3_auto_extension via SQLITE_EXTRA_INIT_MUTEXED",
+    "bigInt": true,
+    "initialMemoryBytes": 8388608,
+    "stackBytes": 524288,
+    "memoryGrowth": true,
+    "dynamicExecution": false,
+    "opfs": "Official OPFS SAH-pool VFS; no SharedArrayBuffer required"
+  }
+}

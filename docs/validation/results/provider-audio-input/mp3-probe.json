@@ -1,0 +1,20 @@
+{
+  "programs": [],
+  "stream_groups": [],
+  "streams": [
+    {
+      "codec_name": "mp3",
+      "sample_rate": "44100",
+      "channels": 1,
+      "duration": "0.130500"
+    }
+  ],
+  "source": "packages/app/tests/browser/audio-input.mjs",
+  "sha256": "a6c92fb7f5cda4fde942e35151c6fa9008fb929cd1f51ca49551568aa5f65f02",
+  "byteLength": 522,
+  "decoderCheck": {
+    "command": "ffmpeg -v error -i /tmp/quixi-audio-proof.mp3 -f null -",
+    "exitCode": 0,
+    "stderr": ""
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "bert.py": {
+    "url": "https://raw.githubusercontent.com/huggingface/transformers/v4.49.0/src/transformers/models/bert/modeling_bert.py",
+    "sha256": "92c8a613e537f160080eee95500ec6eb4c46379527c0f6eb14b6cc1605214385"
+  },
+  "bert_normalizer.rs": {
+    "url": "https://raw.githubusercontent.com/huggingface/tokenizers/v0.21.0/tokenizers/src/normalizers/bert.rs",
+    "sha256": "a938fdac02447e33393d98edcaad015f58e2095d633521cee85a2b60ccd995bd"
+  },
+  "bert_pretokenizer.rs": {
+    "url": "https://raw.githubusercontent.com/huggingface/tokenizers/v0.21.0/tokenizers/src/pre_tokenizers/bert.rs",
+    "sha256": "32dd35c1f815072c6ba32df390389d10e5f4073b480d1c4ade06143ba23b571d"
+  },
+  "wordpiece.rs": {
+    "url": "https://raw.githubusercontent.com/huggingface/tokenizers/v0.21.0/tokenizers/src/models/wordpiece/mod.rs",
+    "sha256": "5f83214247ccaac4db9ad86d71cdeb28c37faf73d35f03971c804daf12ebae5d"
+  }
+}

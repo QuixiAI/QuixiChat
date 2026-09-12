@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "artifactVersion": "1.0.1",
+  "routes": [
+    {
+      "route": "scalar",
+      "cases": 397,
+      "standalone_and_model": true,
+      "legacy_truncated_ids_preserved": true
+    },
+    {
+      "route": "simd",
+      "cases": 397,
+      "standalone_and_model": true,
+      "legacy_truncated_ids_preserved": true
+    }
+  ],
+  "untruncated_reference": true,
+  "legacy_inspection_rejected": true
+}

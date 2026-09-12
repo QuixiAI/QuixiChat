@@ -1,0 +1,76 @@
+{
+  "selectedEngines": [
+    "chromium",
+    "webkit"
+  ],
+  "status": "failed",
+  "startedAt": "2026-09-11T03:56:24.904Z",
+  "hosts": [
+    {
+      "name": "chromium",
+      "status": "running",
+      "phases": {
+        "write": {
+          "checks": [
+            "verified staging is invisible to published reads",
+            "publication and finalization retries preserve identity",
+            "bounded reads round-trip 5 MiB with four-chunk backpressure",
+            "concurrent reads and deduplication share one immutable file handle",
+            "duplicate content shares one verified file",
+            "sequence, oversize, incomplete and incorrect digest rejection",
+            "empty blob has an acknowledged terminal chunk",
+            "canonical UTF-8 validates across chunks and rejects invalid or truncated sequences",
+            "cancelled publication leaves no visible partial file",
+            "cancellation during publication cleans partial output and permits verified retry",
+            "corruption rejected and preserved for recovery",
+            "open transfer count is bounded",
+            "owner restart preserves published data and fences interrupted transfer IDs"
+          ],
+          "digest": "0de713fa5b019638b007265d24ed5d77dddfee3451a3259be27ff90dd398775b",
+          "byteLength": 5242897,
+          "chunkBytes": 1048576,
+          "maxOpenTransfers": 8
+        },
+        "catalog_write": {
+          "checks": [
+            "begin and finish replay retain transfer identity",
+            "verified UTF-8 bytes precede canonical availability",
+            "canonical transaction failure rolls back references and every sync operation while preserving recoverable bytes",
+            "terminal import cleanup preserves published transfer identity for canonical retries",
+            "canonical commit publishes references and sync operations atomically",
+            "replay after staging cleanup adds no duplicate mutations",
+            "postcommit cleanup lookup failure preserves committed result",
+            "failed begin metadata update releases the real byte handle",
+            "finished stages release handles and do not cap an import at eight blobs",
+            "corrupt published bytes quarantine authorization until fresh verification",
+            "interrupted-copy disk state retained for next-process repair test"
+          ],
+          "sha256": "bc1ffc9d0926ef88a44a8ea5ea5edfc4ac511df4cf5970cd9e1b6f7a7e622f76",
+          "byteLength": 32,
+          "sqliteVersion": "3.53.4"
+        }
+      },
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36"
+    }
+  ],
+  "sourceSha256": {
+    "tooling/browser-engines.mjs": "136f16e63e905ae4c8305c7adedfce2411eff13b04f914054f8fb718155d0df1",
+    "packages/storage/tests/browser/search-verification.ts": "212f34b730367f0d56297798750bb79f007db8604032546523394ecd60b408f2",
+    "packages/storage/src/worker/search/index.ts": "ff06619d669bf838cd73e2672519d1a7ce414be08f13eddbe55813d517a2fe5b",
+    "packages/storage/src/worker/search/sources.ts": "c3b55d79b0196092fa9cbe2a5bfc97f10903974dede99bbef4419f5bcaa6aebf",
+    "packages/storage/src/worker/search/schema.ts": "ac6a9bbca9ebb51be79afce94f25415ba79e7ec30753ac3433d2ab944cf0f09b",
+    "packages/search/src/chunker.ts": "8e82abb13c825132019055610dab2897909fb191be32f4813eb045285dd57ec4",
+    "packages/storage/src/worker/blobs.ts": "7599e9af6b7626d6f41d0c9aa64119c7574a7c042d4aaecd176cc9a1f8fb7e60",
+    "packages/storage/src/worker/blob-catalog.ts": "6004fc6398cf97b3af233e3016db3d4267a20ad7cd2b4b016ec0f9608cc4914f",
+    "packages/storage/src/worker/canonical/repository.ts": "d08f508c0a7b9a150690b9f8f42805354825785d28c05c4fdb967a7a926e159c",
+    "packages/storage/migrations/index.ts": "463331ffb83ce77bd759505d3e3b39376a193c146bb5e68fd5178af4c63867fd",
+    "packages/core/src/contracts/transfer.ts": "73563a59e5d0964657a88c025a1b0935a1ae7eb77161e96404a4d37b375d6a6f",
+    "packages/storage/tests/browser/main.ts": "d2cc2526ba858e8cc2daf679cc325c4bc796b9c780995b1fd87bf8c146abd5d8",
+    "packages/storage/tests/browser/worker.ts": "6607502bbdaeaa9bdbfb3cbef289d154d3551d9e61bfce0d738b63d5ba6f8d91",
+    "packages/storage/tests/browser/catalog.ts": "001187b14ebf8c3cff6b6a9f061a5de2d2b460200d4daa0f42fa6fc72cb578dc",
+    "packages/storage/tests/browser/run.mjs": "ac4a9bf89ccbd56328bf88f5deddbda7d51c0e8fa9450872ead0e1cac0be29dc",
+    "package-lock.json": "aadb456e2a567a2b91cbb81a502650ebac93541f0a59d54035bdde2cacd97672"
+  },
+  "error": "page.evaluate: Target page, context or browser has been closed\n    at /Users/eric/QuixiChat/packages/storage/tests/browser/run.mjs:39:70",
+  "finishedAt": "2026-09-11T04:03:41.027Z"
+}

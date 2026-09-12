@@ -1,0 +1,9 @@
+{
+  "name": "@quixi/extension",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@quixi/core": "0.0.1"
+  }
+}

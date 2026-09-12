@@ -1,0 +1,58 @@
+{
+  "scope": "Synthetic temporary alias in the production local registry; keyboard removal and confirmation focus, with no provider dispatch.",
+  "initialRevision": 0,
+  "stages": [
+    {
+      "stage": "remove-middle",
+      "remaining": [
+        "missing-focus-first",
+        "missing-focus-last"
+      ],
+      "activeTag": "H2",
+      "activeText": "Routing aliases"
+    },
+    {
+      "stage": "remove-first",
+      "remaining": [
+        "missing-focus-last"
+      ],
+      "activeTag": "H2",
+      "activeText": "Routing aliases"
+    },
+    {
+      "stage": "remove-last",
+      "remaining": [],
+      "activeTag": "H2",
+      "activeText": "Routing aliases"
+    },
+    {
+      "stage": "cancel-preserves-all-saved-candidates",
+      "remaining": [
+        "missing-focus-first",
+        "missing-focus-middle",
+        "missing-focus-last"
+      ],
+      "activeTag": "H2",
+      "activeText": "Routing aliases"
+    },
+    {
+      "stage": "keep-dismisses-confirmation",
+      "remaining": [
+        "missing-focus-first",
+        "missing-focus-middle",
+        "missing-focus-last"
+      ],
+      "activeTag": "H2",
+      "activeText": "Routing aliases"
+    },
+    {
+      "stage": "last-alias-deleted",
+      "remaining": [],
+      "activeTag": "H2",
+      "activeText": "Routing aliases"
+    }
+  ],
+  "finalRevision": 2,
+  "providerDispatchCount": 0,
+  "status": "passed"
+}

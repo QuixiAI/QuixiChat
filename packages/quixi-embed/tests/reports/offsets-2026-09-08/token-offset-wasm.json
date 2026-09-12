@@ -1,0 +1,52 @@
+{
+  "passed": true,
+  "status": "passed",
+  "fixtureSha256": "76b78540f4ba78a7feaa3c0851809f79dcb9602498f014b00087f9d0cc1de0a3",
+  "routes": [
+    {
+      "route": "scalar",
+      "cases": 870,
+      "manualContributorCases": 28,
+      "upstreamOffsetDivergences": 16,
+      "wasmSha256": "e477d3e35b6e83c39e206e76079a4d5136a227711a0124b64bf885f3165cee65",
+      "memory": {
+        "tokenizerBytes": 959947,
+        "linearMemoryBytes": 16777216,
+        "offsetScratchBytes": 0,
+        "peakOffsetScratchBytes": 1572864
+      }
+    },
+    {
+      "route": "simd",
+      "cases": 870,
+      "manualContributorCases": 28,
+      "upstreamOffsetDivergences": 16,
+      "wasmSha256": "d07bbc26c3f35731d7e2c6885405205a64852f40f9d7c5878c6efe77e8f9b198",
+      "memory": {
+        "tokenizerBytes": 959947,
+        "linearMemoryBytes": 16777216,
+        "offsetScratchBytes": 0,
+        "peakOffsetScratchBytes": 1572864
+      }
+    }
+  ],
+  "coverage": {
+    "focusedAndSeeded": true
+  },
+  "resources": {
+    "maxInputBytes": 1048576,
+    "maxRecords": 65536,
+    "nativeRecordScratchBytes": 1572864,
+    "copiedResultBytes": 1376256,
+    "provenanceStackBytes": 6400,
+    "maxCapacityRepeats": 128,
+    "exactMillionTokenRejectionCounts": [
+      1048578,
+      1048586
+    ],
+    "largeSourceOffsets": [
+      1048576,
+      524288
+    ]
+  }
+}

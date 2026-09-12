@@ -1,0 +1,118 @@
+TAP version 13
+# (node:82850) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: fresh accounts wait 30 seconds with an exact inclusive deadline
+ok 1 - fresh accounts wait 30 seconds with an exact inclusive deadline
+  ---
+  duration_ms: 0.556292
+  type: 'test'
+  ...
+# Subtest: healthy observations defer checks five minutes from the latest observation or attempt
+ok 2 - healthy observations defer checks five minutes from the latest observation or attempt
+  ---
+  duration_ms: 0.04975
+  type: 'test'
+  ...
+# Subtest: recent generation evidence postpones a previously due probe
+ok 3 - recent generation evidence postpones a previously due probe
+  ---
+  duration_ms: 0.094
+  type: 'test'
+  ...
+# Subtest: authentication expiry never schedules another automatic request
+ok 4 - authentication expiry never schedules another automatic request
+  ---
+  duration_ms: 0.079917
+  type: 'test'
+  ...
+# Subtest: observed transient failures back off from 30 seconds to the five minute cap
+ok 5 - observed transient failures back off from 30 seconds to the five minute cap
+  ---
+  duration_ms: 0.122917
+  type: 'test'
+  ...
+# Subtest: region failures wait at least five minutes and still honor a later retry deadline
+ok 6 - region failures wait at least five minutes and still honor a later retry deadline
+  ---
+  duration_ms: 0.032708
+  type: 'test'
+  ...
+# Subtest: Retry-After is a lower bound and never shortens the normal interval
+ok 7 - Retry-After is a lower bound and never shortens the normal interval
+  ---
+  duration_ms: 0.079708
+  type: 'test'
+  ...
+# Subtest: invalid timestamp inputs cannot produce a nonfinite or negative deadline
+ok 8 - invalid timestamp inputs cannot produce a nonfinite or negative deadline
+  ---
+  duration_ms: 0.050666
+  type: 'test'
+  ...
+# Subtest: extreme and fractional failure counts use bounded exponential arithmetic
+ok 9 - extreme and fractional failure counts use bounded exponential arithmetic
+  ---
+  duration_ms: 0.174167
+  type: 'test'
+  ...
+# Subtest: deadline calculation does not mutate health or attempt state
+ok 10 - deadline calculation does not mutate health or attempt state
+  ---
+  duration_ms: 0.203291
+  type: 'test'
+  ...
+# (node:82851) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: a fresh adapter has no observed health; probes and responses do
+ok 11 - a fresh adapter has no observed health; probes and responses do
+  ---
+  duration_ms: 0.458917
+  type: 'test'
+  ...
+# Subtest: every health state maps to a label, its evidence and an availability decision
+ok 12 - every health state maps to a label, its evidence and an availability decision
+  ---
+  duration_ms: 7.568
+  type: 'test'
+  ...
+# Subtest: the device's offline signal overrides any provider health and a missing one is not checked
+ok 13 - the device's offline signal overrides any provider health and a missing one is not checked
+  ---
+  duration_ms: 0.051083
+  type: 'test'
+  ...
+# (node:82852) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: cost amounts drop trailing zeros without rounding and keep two decimals
+ok 14 - cost amounts drop trailing zeros without rounding and keep two decimals
+  ---
+  duration_ms: 0.519333
+  type: 'test'
+  ...
+# Subtest: an attempt line names reported cost, reviewed estimates and unknowns
+ok 15 - an attempt line names reported cost, reviewed estimates and unknowns
+  ---
+  duration_ms: 7.339916
+  type: 'test'
+  ...
+# Subtest: conversation totals name attempts, tokens, priced and unpriced attempts
+ok 16 - conversation totals name attempts, tokens, priced and unpriced attempts
+  ---
+  duration_ms: 0.133125
+  type: 'test'
+  ...
+# Subtest: conversation totals identify the included summary attempts and their own usage
+ok 17 - conversation totals identify the included summary attempts and their own usage
+  ---
+  duration_ms: 0.118
+  type: 'test'
+  ...
+1..17
+# tests 17
+# suites 0
+# pass 17
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 97.932583

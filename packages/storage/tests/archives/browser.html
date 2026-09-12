@@ -1,0 +1,22 @@
+<!doctype html><meta charset="utf-8" /><title>Archive snapshot proof</title>
+<script type="module">
+  import { archiveWorkflowProof } from "./browser-workflows.ts";
+  import { publicArchiveProof } from "./browser-client.ts";
+  window.proof = new Promise((resolve, reject) => {
+    const worker = new Worker(new URL("./browser-worker.ts", import.meta.url), {
+      type: "module",
+    });
+    worker.onmessage = (event) => {
+      worker.terminate();
+      event.data.ok
+        ? resolve(event.data.result)
+        : reject(new Error(event.data.error));
+    };
+    worker.onerror = (event) => reject(new Error(event.message));
+    worker.postMessage({ namespace: crypto.randomUUID() });
+  }).then(async (snapshot) => ({
+    snapshot,
+    publicClient: await publicArchiveProof(),
+    workflows: await archiveWorkflowProof(),
+  }));
+</script>

@@ -1,0 +1,173 @@
+{
+  "status": "passed",
+  "startedAt": "2026-09-12T06:36:08.321Z",
+  "selectedEngines": [
+    "chromium",
+    "webkit"
+  ],
+  "environment": {
+    "platform": "darwin",
+    "release": "25.6.0",
+    "arch": "arm64",
+    "node": "v22.23.1"
+  },
+  "sourceSha256": {
+    "package-lock.json": "aadb456e2a567a2b91cbb81a502650ebac93541f0a59d54035bdde2cacd97672",
+    "apps/web/src/main.ts": "156aa02138dbf9ca41fb973134fe352f0feb598f9048e34eccb85bcad91bbfa3",
+    "packages/app/src/AppRoot.tsx": "98794adf08ecf61a379ca40b3f3c7bfd8e21b345e0bcae0942f636d68d08797d",
+    "packages/app/src/runtime/library.ts": "34fd344d87475fc5e49706124081734173842f9f5057c0ec6763a10c089ba9ca",
+    "packages/app/src/features/content/access.ts": "ba4ba1c7fcabcc88866938636691300b1ca0f226b45028871014911f1a17d776",
+    "packages/app/src/features/content/ContentPartView.tsx": "635a94a19b6cbe9edcd1f40316c747b451db675a501e559a8eabf54346ddcdb7",
+    "packages/app/src/features/content/conversation-search.ts": "19ab22829f0304d78a4a639909492efca1e28cb5ceb83b231c5c392023fb2e93",
+    "packages/app/src/features/content/ConversationSearchFocus.tsx": "55afa8a239537a89a15177152c5dccd0316097708c8a208ce0c82306017892ed",
+    "packages/app/src/features/content/content.css": "95a9c596ff2413c334c492b6c5e600021e7604da4c77c631bd99fcd9b2b83db2",
+    "packages/app/src/features/content/tests/search-browser/index.ts": "066cde7384539619db7eb5e0d8328a877b842dc17bcfb02c47a7617e7d6f931c",
+    "packages/app/src/features/content/tests/search-browser/run.mjs": "48f859ff045ef9928676aa9346355d89aa7aa297293ead67b55a30f5bde15aee",
+    "packages/storage/src/worker/archive-database.ts": "e4909a52d30e8c57743be137845fa7af12286fd9ef5450238fbd65aecd9f25f1",
+    "packages/storage/src/client/archive.ts": "844981f196ebee613c584dadf3d1cef2c1af15f3aa06daf253d6d48c3b553c24",
+    "packages/storage/src/worker/search/index.ts": "ae5d113561d6373d7ad8070388c2afdf532579eaede4ddeae6388efed78e3334",
+    "packages/storage/src/worker/search/sources.ts": "c3b55d79b0196092fa9cbe2a5bfc97f10903974dede99bbef4419f5bcaa6aebf",
+    "packages/storage/src/worker/views.ts": "c4e5ccf93b63678cdd237adca2d9151ec319ef232a33f40fb5aa4fa3ce885f47",
+    "packages/core/src/contracts/search.ts": "8b496fb4fffcae02425f5c0fd7ca83a1f96468fb30a6e4b2461b285cd095b832",
+    "packages/storage/sqlite/dist/sqlite3.wasm": "dd7c22431a3b8ad51ab5e6ed91065593574c34c5959d2efdef2f17484eedcb2c"
+  },
+  "hosts": [
+    {
+      "name": "chromium",
+      "status": "passed",
+      "checks": [
+        "actual webmain search resolves image filename at part96 beyond first64; exact canonical filename field is marked, description is not, and no preceding part pages or mutations are requested",
+        "ordinary text result opens exact part95 without enumerating earlier part pages; same-conversation draft and canonical context remain intact",
+        "description source never receives filename marking; normal navigation clears focus and all display/search actions leave thread/context/canonical/sync unchanged",
+        "cross-conversation search refuses draft loss and retains original composer/context",
+        "a delayed real metadata reply cannot discard a newly typed draft or restore focus after newer normal navigation",
+        "a retained search result is refused by the production resolver after canonical branch tombstoning; no current part is substituted",
+        "390px viewport remains within layout bounds; no browser exceptions or external requests"
+      ],
+      "pageErrors": [],
+      "externalRequests": [],
+      "seeded": {
+        "threadId": "94b70cf3-94f0-41cf-a3c0-7c459cf7a884",
+        "messageId": "2cfe127a-a5fc-4139-b2a9-0d6ed207c1b9",
+        "latePartId": "ad62f892-cd86-4fff-b845-ea399a727d12",
+        "imagePartId": "4145cbb4-59f9-4b25-9906-20ffa34e9659",
+        "attachmentId": "94ac118d-5432-4967-bee3-a908431026f1",
+        "draftThreadId": "a7bcdaf3-4fa7-4566-bd29-dcb0019aabe3"
+      },
+      "navigationTrace": [
+        {
+          "operation": "readEntity",
+          "args": {
+            "collection": "parts",
+            "id": "4145cbb4-59f9-4b25-9906-20ffa34e9659"
+          }
+        },
+        {
+          "operation": "readEntity",
+          "args": {
+            "collection": "messages",
+            "id": "2cfe127a-a5fc-4139-b2a9-0d6ed207c1b9"
+          }
+        },
+        {
+          "operation": "readEntity",
+          "args": {
+            "collection": "attachments",
+            "id": "94ac118d-5432-4967-bee3-a908431026f1"
+          }
+        },
+        {
+          "operation": "resolveConversationSearchHit",
+          "args": {
+            "chunkId": "406960c15479fe34e2b14940bc7f75735871c78d4e067ff4020dc074d980639e",
+            "threadId": "94b70cf3-94f0-41cf-a3c0-7c459cf7a884",
+            "messageId": "2cfe127a-a5fc-4139-b2a9-0d6ed207c1b9",
+            "partId": "4145cbb4-59f9-4b25-9906-20ffa34e9659"
+          }
+        },
+        {
+          "operation": "readMessageParts",
+          "args": {
+            "messageId": "2cfe127a-a5fc-4139-b2a9-0d6ed207c1b9",
+            "page": {
+              "maxItems": 64,
+              "maxBytes": 300000,
+              "cursor": null
+            }
+          }
+        }
+      ],
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36"
+    },
+    {
+      "name": "webkit",
+      "status": "passed",
+      "checks": [
+        "actual webmain search resolves image filename at part96 beyond first64; exact canonical filename field is marked, description is not, and no preceding part pages or mutations are requested",
+        "ordinary text result opens exact part95 without enumerating earlier part pages; same-conversation draft and canonical context remain intact",
+        "description source never receives filename marking; normal navigation clears focus and all display/search actions leave thread/context/canonical/sync unchanged",
+        "cross-conversation search refuses draft loss and retains original composer/context",
+        "a delayed real metadata reply cannot discard a newly typed draft or restore focus after newer normal navigation",
+        "a retained search result is refused by the production resolver after canonical branch tombstoning; no current part is substituted",
+        "390px viewport remains within layout bounds; no browser exceptions or external requests"
+      ],
+      "pageErrors": [],
+      "externalRequests": [],
+      "seeded": {
+        "threadId": "efa4d15e-404a-4c21-8eb9-f9a0c3b3df40",
+        "messageId": "a9bf0ff7-880d-43de-9cdd-103183e3d58b",
+        "latePartId": "b828dfcc-359d-4ffd-90d3-7b7debcf2671",
+        "imagePartId": "0448dabd-1839-40f2-9a5a-2a881e592e56",
+        "attachmentId": "5c0588e2-1ee7-403f-8739-a9a8ba8d0efc",
+        "draftThreadId": "da32c83b-babd-4ca4-b159-390653645571"
+      },
+      "navigationTrace": [
+        {
+          "operation": "readEntity",
+          "args": {
+            "collection": "parts",
+            "id": "0448dabd-1839-40f2-9a5a-2a881e592e56"
+          }
+        },
+        {
+          "operation": "readEntity",
+          "args": {
+            "collection": "messages",
+            "id": "a9bf0ff7-880d-43de-9cdd-103183e3d58b"
+          }
+        },
+        {
+          "operation": "readEntity",
+          "args": {
+            "collection": "attachments",
+            "id": "5c0588e2-1ee7-403f-8739-a9a8ba8d0efc"
+          }
+        },
+        {
+          "operation": "resolveConversationSearchHit",
+          "args": {
+            "chunkId": "8bcf521844bcfa34f7f927cc9e8a92e1a45bcbba1f7e2834fe80d97e66fee81b",
+            "threadId": "efa4d15e-404a-4c21-8eb9-f9a0c3b3df40",
+            "messageId": "a9bf0ff7-880d-43de-9cdd-103183e3d58b",
+            "partId": "0448dabd-1839-40f2-9a5a-2a881e592e56"
+          }
+        },
+        {
+          "operation": "readMessageParts",
+          "args": {
+            "messageId": "a9bf0ff7-880d-43de-9cdd-103183e3d58b",
+            "page": {
+              "maxItems": 64,
+              "maxBytes": 300000,
+              "cursor": null
+            }
+          }
+        }
+      ],
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15"
+    }
+  ],
+  "origin": "http://127.0.0.1:59344",
+  "sourceStable": true,
+  "finishedAt": "2026-09-12T06:36:16.600Z"
+}

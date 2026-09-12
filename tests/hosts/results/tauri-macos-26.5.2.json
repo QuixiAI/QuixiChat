@@ -1,0 +1,452 @@
+{
+  "host": "bundled-tauri-webview",
+  "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+  "timestamp": "2026-09-08T07:50:41.739353+00:00",
+  "buildProfile": "dev with custom-protocol",
+  "macos": "26.5.2",
+  "namespace": "tauri-proof-18d76dff680e4d3a89ff08f925544d5f",
+  "sqliteWasmSha256": "dd7c22431a3b8ad51ab5e6ed91065593574c34c5959d2efdef2f17484eedcb2c",
+  "binarySha256": "43c93511999eef24d8168a1c6feedf43f2aed12058368107183abba6353781be",
+  "phases": [
+    {
+      "phase": "write",
+      "exitCode": 0,
+      "stderr": "",
+      "webview": {
+        "phase": "write",
+        "url": "tauri://localhost/storage-proof?namespace=tauri-proof-18d76dff680e4d3a89ff08f925544d5f&phase=write",
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko)",
+        "secureContext": true,
+        "crossOriginIsolated": false,
+        "capabilities": {
+          "storage": true,
+          "getDirectory": true,
+          "webLocks": true,
+          "worker": true,
+          "broadcastChannel": true
+        },
+        "checks": [
+          {
+            "name": "shared proof ready",
+            "passed": true
+          },
+          {
+            "name": "shared SQLite WASM OPFS backend",
+            "passed": true
+          },
+          {
+            "name": "database integrity",
+            "passed": true
+          },
+          {
+            "name": "record survives write",
+            "passed": true
+          },
+          {
+            "name": "FTS diacritic match",
+            "passed": true
+          },
+          {
+            "name": "sqlite-vec nearest neighbor",
+            "passed": true
+          },
+          {
+            "name": "transaction rollback",
+            "passed": true
+          },
+          {
+            "name": "migration rollback",
+            "passed": true
+          },
+          {
+            "name": "SQLite full recovery",
+            "passed": true
+          },
+          {
+            "name": "new shared client after close",
+            "passed": true
+          },
+          {
+            "name": "reopen integrity",
+            "passed": true
+          },
+          {
+            "name": "atomic operation survived",
+            "passed": true
+          },
+          {
+            "name": "new client after owner failure",
+            "passed": true
+          },
+          {
+            "name": "uncommitted owner write absent",
+            "passed": true
+          },
+          {
+            "name": "recovered integrity",
+            "passed": true
+          },
+          {
+            "name": "second real WebView ready",
+            "passed": true
+          },
+          {
+            "name": "two WebViews share one owner",
+            "passed": true
+          },
+          {
+            "name": "follower write visible in owner WebView",
+            "passed": true
+          },
+          {
+            "name": "follower write atomically logged",
+            "passed": true
+          },
+          {
+            "name": "follower becomes new owner",
+            "passed": true
+          },
+          {
+            "name": "takeover database integrity",
+            "passed": true
+          },
+          {
+            "name": "takeover retains committed records only",
+            "passed": true
+          }
+        ],
+        "success": true,
+        "initial": {
+          "backend": "sqlite-wasm-opfs-sahpool",
+          "sqliteVersion": "3.53.4",
+          "vectorVersion": "v0.1.9",
+          "schemaVersion": 1,
+          "integrity": "ok",
+          "recordCount": 0,
+          "operationCount": 0,
+          "ownerId": "d748ef63-1ff2-4f22-8979-391f56648ad7",
+          "namespace": "tauri-proof-18d76dff680e4d3a89ff08f925544d5f",
+          "poolCapacity": 6,
+          "persisted": false,
+          "usage": 7053344,
+          "quota": 20615843021
+        },
+        "persistenceRequested": false,
+        "vector": {
+          "nearestId": 1,
+          "distance": 0.141421377658844
+        },
+        "full": {
+          "rejected": true,
+          "integrity": "ok"
+        },
+        "final": {
+          "backend": "sqlite-wasm-opfs-sahpool",
+          "sqliteVersion": "3.53.4",
+          "vectorVersion": "v0.1.9",
+          "schemaVersion": 1,
+          "integrity": "ok",
+          "recordCount": 1,
+          "operationCount": 1,
+          "ownerId": "4fc1664d-4e5c-42e1-98fb-a0278ffa1e87",
+          "namespace": "tauri-proof-18d76dff680e4d3a89ff08f925544d5f",
+          "poolCapacity": 6,
+          "persisted": false,
+          "usage": 7053344,
+          "quota": 20615843021
+        },
+        "recovered": {
+          "backend": "sqlite-wasm-opfs-sahpool",
+          "sqliteVersion": "3.53.4",
+          "vectorVersion": "v0.1.9",
+          "schemaVersion": 1,
+          "integrity": "ok",
+          "recordCount": 1,
+          "operationCount": 1,
+          "ownerId": "89b91be9-e1ed-4db3-921f-865ae7b6ddc9",
+          "namespace": "tauri-proof-18d76dff680e4d3a89ff08f925544d5f",
+          "poolCapacity": 6,
+          "persisted": false,
+          "usage": 8101920,
+          "quota": 20615843021
+        },
+        "multiWindow": {
+          "mainOwnerId": "89b91be9-e1ed-4db3-921f-865ae7b6ddc9",
+          "followerInitial": {
+            "type": "ready",
+            "diagnostics": {
+              "backend": "sqlite-wasm-opfs-sahpool",
+              "sqliteVersion": "3.53.4",
+              "vectorVersion": "v0.1.9",
+              "schemaVersion": 1,
+              "integrity": "ok",
+              "recordCount": 1,
+              "operationCount": 1,
+              "ownerId": "89b91be9-e1ed-4db3-921f-865ae7b6ddc9",
+              "namespace": "tauri-proof-18d76dff680e4d3a89ff08f925544d5f",
+              "poolCapacity": 6,
+              "persisted": false,
+              "usage": 8101920,
+              "quota": 20615843021
+            },
+            "url": "tauri://localhost/storage-proof?namespace=tauri-proof-18d76dff680e4d3a89ff08f925544d5f&phase=write&role=follower"
+          },
+          "beforeTakeover": {
+            "backend": "sqlite-wasm-opfs-sahpool",
+            "sqliteVersion": "3.53.4",
+            "vectorVersion": "v0.1.9",
+            "schemaVersion": 1,
+            "integrity": "ok",
+            "recordCount": 2,
+            "operationCount": 2,
+            "ownerId": "89b91be9-e1ed-4db3-921f-865ae7b6ddc9",
+            "namespace": "tauri-proof-18d76dff680e4d3a89ff08f925544d5f",
+            "poolCapacity": 6,
+            "persisted": false,
+            "usage": 9150496,
+            "quota": 20615843021
+          },
+          "transitionMessage": "Database owner changed during the request. Inspect state before retrying a write.",
+          "afterTakeover": {
+            "backend": "sqlite-wasm-opfs-sahpool",
+            "sqliteVersion": "3.53.4",
+            "vectorVersion": "v0.1.9",
+            "schemaVersion": 1,
+            "integrity": "ok",
+            "recordCount": 2,
+            "operationCount": 2,
+            "ownerId": "06122443-eaf0-45b6-a715-631e2d7dbf1f",
+            "namespace": "tauri-proof-18d76dff680e4d3a89ff08f925544d5f",
+            "poolCapacity": 6,
+            "persisted": false,
+            "usage": 10199072,
+            "quota": 20615843021
+          }
+        }
+      }
+    },
+    {
+      "phase": "restart",
+      "exitCode": 0,
+      "stderr": "",
+      "webview": {
+        "phase": "restart",
+        "url": "tauri://localhost/storage-proof?namespace=tauri-proof-18d76dff680e4d3a89ff08f925544d5f&phase=restart",
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko)",
+        "secureContext": true,
+        "crossOriginIsolated": false,
+        "capabilities": {
+          "storage": true,
+          "getDirectory": true,
+          "webLocks": true,
+          "worker": true,
+          "broadcastChannel": true
+        },
+        "checks": [
+          {
+            "name": "shared proof ready",
+            "passed": true
+          },
+          {
+            "name": "shared SQLite WASM OPFS backend",
+            "passed": true
+          },
+          {
+            "name": "database integrity",
+            "passed": true
+          },
+          {
+            "name": "record survives restart",
+            "passed": true
+          },
+          {
+            "name": "follower commit survives process restart",
+            "passed": true
+          },
+          {
+            "name": "FTS diacritic match",
+            "passed": true
+          },
+          {
+            "name": "sqlite-vec nearest neighbor",
+            "passed": true
+          },
+          {
+            "name": "transaction rollback",
+            "passed": true
+          },
+          {
+            "name": "migration rollback",
+            "passed": true
+          },
+          {
+            "name": "SQLite full recovery",
+            "passed": true
+          },
+          {
+            "name": "new shared client after close",
+            "passed": true
+          },
+          {
+            "name": "reopen integrity",
+            "passed": true
+          },
+          {
+            "name": "atomic operation survived",
+            "passed": true
+          },
+          {
+            "name": "new client after owner failure",
+            "passed": true
+          },
+          {
+            "name": "uncommitted owner write absent",
+            "passed": true
+          },
+          {
+            "name": "recovered integrity",
+            "passed": true
+          },
+          {
+            "name": "second real WebView ready",
+            "passed": true
+          },
+          {
+            "name": "two WebViews share one owner",
+            "passed": true
+          },
+          {
+            "name": "follower write visible in owner WebView",
+            "passed": true
+          },
+          {
+            "name": "follower write atomically logged",
+            "passed": true
+          },
+          {
+            "name": "follower becomes new owner",
+            "passed": true
+          },
+          {
+            "name": "takeover database integrity",
+            "passed": true
+          },
+          {
+            "name": "takeover retains committed records only",
+            "passed": true
+          }
+        ],
+        "success": true,
+        "initial": {
+          "backend": "sqlite-wasm-opfs-sahpool",
+          "sqliteVersion": "3.53.4",
+          "vectorVersion": "v0.1.9",
+          "schemaVersion": 1,
+          "integrity": "ok",
+          "recordCount": 2,
+          "operationCount": 2,
+          "ownerId": "789e4ae2-dcd5-4499-9803-2f9a133edf47",
+          "namespace": "tauri-proof-18d76dff680e4d3a89ff08f925544d5f",
+          "poolCapacity": 6,
+          "persisted": false,
+          "usage": 962608,
+          "quota": 20615843021
+        },
+        "persistenceRequested": false,
+        "vector": {
+          "nearestId": 1,
+          "distance": 0.141421377658844
+        },
+        "full": {
+          "rejected": true,
+          "integrity": "ok"
+        },
+        "final": {
+          "backend": "sqlite-wasm-opfs-sahpool",
+          "sqliteVersion": "3.53.4",
+          "vectorVersion": "v0.1.9",
+          "schemaVersion": 1,
+          "integrity": "ok",
+          "recordCount": 2,
+          "operationCount": 2,
+          "ownerId": "9859b402-864c-45a9-aa30-0c137a3ec243",
+          "namespace": "tauri-proof-18d76dff680e4d3a89ff08f925544d5f",
+          "poolCapacity": 6,
+          "persisted": false,
+          "usage": 4108336,
+          "quota": 20615843021
+        },
+        "recovered": {
+          "backend": "sqlite-wasm-opfs-sahpool",
+          "sqliteVersion": "3.53.4",
+          "vectorVersion": "v0.1.9",
+          "schemaVersion": 1,
+          "integrity": "ok",
+          "recordCount": 2,
+          "operationCount": 2,
+          "ownerId": "1ad4168e-d649-4c63-aacf-5e512ad8a3e4",
+          "namespace": "tauri-proof-18d76dff680e4d3a89ff08f925544d5f",
+          "poolCapacity": 6,
+          "persisted": false,
+          "usage": 5156912,
+          "quota": 20615843021
+        },
+        "multiWindow": {
+          "mainOwnerId": "1ad4168e-d649-4c63-aacf-5e512ad8a3e4",
+          "followerInitial": {
+            "type": "ready",
+            "diagnostics": {
+              "backend": "sqlite-wasm-opfs-sahpool",
+              "sqliteVersion": "3.53.4",
+              "vectorVersion": "v0.1.9",
+              "schemaVersion": 1,
+              "integrity": "ok",
+              "recordCount": 2,
+              "operationCount": 2,
+              "ownerId": "1ad4168e-d649-4c63-aacf-5e512ad8a3e4",
+              "namespace": "tauri-proof-18d76dff680e4d3a89ff08f925544d5f",
+              "poolCapacity": 6,
+              "persisted": false,
+              "usage": 5156912,
+              "quota": 20615843021
+            },
+            "url": "tauri://localhost/storage-proof?namespace=tauri-proof-18d76dff680e4d3a89ff08f925544d5f&phase=restart&role=follower"
+          },
+          "beforeTakeover": {
+            "backend": "sqlite-wasm-opfs-sahpool",
+            "sqliteVersion": "3.53.4",
+            "vectorVersion": "v0.1.9",
+            "schemaVersion": 1,
+            "integrity": "ok",
+            "recordCount": 2,
+            "operationCount": 3,
+            "ownerId": "1ad4168e-d649-4c63-aacf-5e512ad8a3e4",
+            "namespace": "tauri-proof-18d76dff680e4d3a89ff08f925544d5f",
+            "poolCapacity": 6,
+            "persisted": false,
+            "usage": 6205488,
+            "quota": 20615843021
+          },
+          "transitionMessage": "Database owner changed during the request. Inspect state before retrying a write.",
+          "afterTakeover": {
+            "backend": "sqlite-wasm-opfs-sahpool",
+            "sqliteVersion": "3.53.4",
+            "vectorVersion": "v0.1.9",
+            "schemaVersion": 1,
+            "integrity": "ok",
+            "recordCount": 2,
+            "operationCount": 3,
+            "ownerId": "65df31b8-4fd2-4450-a487-9b5230def42b",
+            "namespace": "tauri-proof-18d76dff680e4d3a89ff08f925544d5f",
+            "poolCapacity": 6,
+            "persisted": false,
+            "usage": 7254064,
+            "quota": 20615843021
+          }
+        }
+      }
+    }
+  ],
+  "success": true,
+  "systemWebKitVersion": "21624.2.5.11.8"
+}

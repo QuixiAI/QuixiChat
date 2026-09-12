@@ -1,0 +1,46 @@
+{
+  "selectedEngines": [
+    "chromium",
+    "webkit"
+  ],
+  "status": "passed",
+  "startedAt": "2026-09-09T01:46:19.208Z",
+  "hosts": [
+    {
+      "name": "chromium",
+      "status": "passed",
+      "checks": [
+        "real canonical text renders Markdown, GFM tables, fenced code and locally bundled LaTeX without scripts or remote image fetches",
+        "verified OPFS text ranges preserve a four-byte scalar split at16KiB and enforce two held readers",
+        "canonical attachment bytes pass PNG dimension admission, explicit local preview, staged host save gesture and exact downloaded hash",
+        "missing attachments and tool source remain readable without execution",
+        "deep nesting, oversized text and recursive math retain bounded responsive source fallbacks",
+        "display operations leave canonical sync count unchanged and active unmount releases readers"
+      ],
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36"
+    },
+    {
+      "name": "webkit",
+      "status": "passed",
+      "checks": [
+        "real canonical text renders Markdown, GFM tables, fenced code and locally bundled LaTeX without scripts or remote image fetches",
+        "verified OPFS text ranges preserve a four-byte scalar split at16KiB and enforce two held readers",
+        "canonical attachment bytes pass PNG dimension admission, explicit local preview, staged host save gesture and exact downloaded hash",
+        "missing attachments and tool source remain readable without execution",
+        "deep nesting, oversized text and recursive math retain bounded responsive source fallbacks",
+        "display operations leave canonical sync count unchanged and active unmount releases readers"
+      ],
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15"
+    }
+  ],
+  "sourceSha256": {
+    "tooling/browser-engines.mjs": "136f16e63e905ae4c8305c7adedfce2411eff13b04f914054f8fb718155d0df1",
+    "packages/app/src/features/content/access.ts": "0163d843213e9c72c434ea0348af3bdc9a8d44a2ef795d9ea48e7ad87d0192b8",
+    "packages/app/src/features/content/ContentPartView.tsx": "1dace58783e51182d7dc9b24e28e536b86bbf00dbd59fe6a6b0f7c84e361553e",
+    "packages/app/src/features/content/Markdown.tsx": "527de2d9c047a22d127d827418b392ab8675d0430213b791d554572cb0a47c60",
+    "packages/app/src/features/content/markdown-budget.ts": "9b4d7dd3bb72c46e459c5edce3be00486cfee5c61bb37aef2a97a85da14e5d21",
+    "packages/app/src/features/content/image-metadata.ts": "5da3a3820c51b23a31cdc2a7a42f5a3cd8783cf240f46bf7bf01cee6fa6b5e0c",
+    "package-lock.json": "14938dfb335480fccf15ef675167da13a3aac8832d29891e38ff67175920ad2c"
+  },
+  "finishedAt": "2026-09-09T01:46:25.660Z"
+}

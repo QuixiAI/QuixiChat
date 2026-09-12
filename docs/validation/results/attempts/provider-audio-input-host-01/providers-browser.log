@@ -1,0 +1,29 @@
+
+> quixi@0.0.1 test:providers:browser
+> npm run test:browser --workspace @quixi/providers
+
+
+> @quixi/providers@0.0.1 test:browser
+> node --experimental-transform-types tests/run-browser.mjs
+
+(node:91025) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+{
+  "status": "failed",
+  "hosts": [
+    {
+      "name": "chromium",
+      "status": "running",
+      "checks": 0
+    }
+  ],
+  "error": "page.evaluate: Error: Audio wav transport failed: {\"type\":\"terminal\",\"status\":\"failed\",\"stopReason\":null,\"responseId\":null,\"usage\":{\"inputTokens\":null,\"outputTokens\":null,\"cachedInputTokens\":null,\"cacheWriteInputTokens\":null,\"reasoningTokens\":null,\"raw\":{},\"source\":\"provider\"},\"error\":{\"code\":\"transport\",\"message\":\"Provider transport failed or was interrupted.\",\"status\":null,\"providerCode\":null,\"retryAfterMs\":null,\"retry\":\"manual_new_attempt\"}}\n    at er (http://127.0.0.1:4198/assets/browser-C0oC3DzQ.js:4:88572)\n    at tr (http://127.0.0.1:4198/assets/browser-C0oC3DzQ.js:4:89843)\n    at async providerProof (http://127.0.0.1:4198/assets/browser-C0oC3DzQ.js:4:96343)\n    at async <anonymous>:337:30\n    at call (/Users/eric/QuixiChat/packages/providers/tests/run-browser.mjs:28:8)\n    at /Users/eric/QuixiChat/packages/providers/tests/run-browser.mjs:77:30",
+  "reportFile": "/Users/eric/QuixiChat/test-results/providers-browser.json"
+}
+npm error Lifecycle script `test:browser` failed with error:
+npm error code 1
+npm error path /Users/eric/QuixiChat/packages/providers
+npm error workspace @quixi/providers@0.0.1
+npm error location /Users/eric/QuixiChat/packages/providers
+npm error command failed
+npm error command sh -c node --experimental-transform-types tests/run-browser.mjs

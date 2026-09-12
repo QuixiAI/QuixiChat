@@ -1,0 +1,84 @@
+TAP version 13
+# (node:92350) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: replacing a session key cannot expose an empty binding to a concurrent new store
+ok 1 - replacing a session key cannot expose an empty binding to a concurrent new store
+  ---
+  duration_ms: 3.678334
+  type: 'test'
+  ...
+# Subtest: OAuth reserves the popup before WebCrypto and publishes only one opaque session handle
+ok 2 - OAuth reserves the popup before WebCrypto and publishes only one opaque session handle
+  ---
+  duration_ms: 23.627584
+  type: 'test'
+  ...
+# Subtest: BFCache restore discards session secrets and pending OAuth while allowing a fresh connection
+ok 3 - BFCache restore discards session secrets and pending OAuth while allowing a fresh connection
+  ---
+  duration_ms: 1.558541
+  type: 'test'
+  ...
+# Subtest: BFCache waits for late disk admission release and permanent disposal cannot be undone by pageshow
+ok 4 - BFCache waits for late disk admission release and permanent disposal cannot be undone by pageshow
+  ---
+  duration_ms: 1.55475
+  type: 'test'
+  ...
+# Subtest: transfer admissions stay bounded and failed late cleanup prevents BFCache resumption
+ok 5 - transfer admissions stay bounded and failed late cleanup prevents BFCache resumption
+  ---
+  duration_ms: 1.221166
+  type: 'test'
+  ...
+# Subtest: a relay-token replacement suspended in reader cleanup cannot resurrect after BFCache resume
+ok 6 - a relay-token replacement suspended in reader cleanup cannot resurrect after BFCache resume
+  ---
+  duration_ms: 1.599291
+  type: 'test'
+  ...
+# Subtest: unrelated or malformed callbacks do not consume the pending authorization
+ok 7 - unrelated or malformed callbacks do not consume the pending authorization
+  ---
+  duration_ms: 0.859041
+  type: 'test'
+  ...
+# Subtest: late valid token responses cannot publish after cancellation, connection changes or owner loss
+ok 8 - late valid token responses cannot publish after cancellation, connection changes or owner loss
+  ---
+  duration_ms: 3.302834
+  type: 'test'
+  ...
+# Subtest: the active transaction snapshots caller request and composition registration before asynchronous work
+ok 9 - the active transaction snapshots caller request and composition registration before asynchronous work
+  ---
+  duration_ms: 0.977625
+  type: 'test'
+  ...
+# Subtest: cancellation while PKCE digest is pending closes admission without authorization or token dispatch
+ok 10 - cancellation while PKCE digest is pending closes admission without authorization or token dispatch
+  ---
+  duration_ms: 0.733125
+  type: 'test'
+  ...
+# Subtest: invalid token JSON and widened scopes never create a credential
+ok 11 - invalid token JSON and widened scopes never create a credential
+  ---
+  duration_ms: 3.708
+  type: 'test'
+  ...
+# Subtest: header rejection cancels a token response body before exposing bytes
+ok 12 - header rejection cancels a token response body before exposing bytes
+  ---
+  duration_ms: 0.566375
+  type: 'test'
+  ...
+1..12
+# tests 12
+# suites 0
+# pass 12
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 199.575458

@@ -1,0 +1,69 @@
+{
+  "scope": "Emulated document.hasFocus, window focus events and explicit origin.blur(); real DOM disabling, production preference controller and durable StorageWorker write.",
+  "stages": [
+    {
+      "stage": "focused-before-mutation",
+      "documentFocused": true,
+      "activeTag": "SELECT",
+      "activeId": "send-key-preference",
+      "controlFocused": true,
+      "disabled": false,
+      "value": "mod-enter"
+    },
+    {
+      "stage": "disabled-before-emulated-origin-blur",
+      "documentFocused": false,
+      "activeTag": "SELECT",
+      "activeId": "send-key-preference",
+      "controlFocused": true,
+      "disabled": true,
+      "value": "mod-enter"
+    },
+    {
+      "stage": "disabled-while-document-unfocused",
+      "documentFocused": false,
+      "activeTag": "BODY",
+      "activeId": "",
+      "controlFocused": false,
+      "disabled": true,
+      "value": "mod-enter"
+    },
+    {
+      "stage": "saved-while-document-unfocused",
+      "documentFocused": false,
+      "activeTag": "BODY",
+      "activeId": "",
+      "controlFocused": false,
+      "disabled": false,
+      "value": "enter"
+    },
+    {
+      "stage": "original-control-restored-on-window-return",
+      "documentFocused": true,
+      "activeTag": "SELECT",
+      "activeId": "send-key-preference",
+      "controlFocused": true,
+      "disabled": false,
+      "value": "enter"
+    },
+    {
+      "stage": "enabled-origin-blurred-without-mutation",
+      "documentFocused": false,
+      "activeTag": "BODY",
+      "activeId": "",
+      "controlFocused": false,
+      "disabled": false,
+      "value": "enter"
+    },
+    {
+      "stage": "window-return-does-not-focus-uninterrupted-origin",
+      "documentFocused": true,
+      "activeTag": "BODY",
+      "activeId": "",
+      "controlFocused": false,
+      "disabled": false,
+      "value": "enter"
+    }
+  ],
+  "status": "passed"
+}

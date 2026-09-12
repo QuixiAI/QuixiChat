@@ -1,0 +1,38 @@
+{
+  "observedDate": "2026-09-08",
+  "host": "installed-safari",
+  "macos": "26.5.2",
+  "safariVersion": "26.5.2",
+  "safariBuild": "21624.2.5.11.8",
+  "driverVersion": "Included with Safari 26.5.2 (21624.2.5.11.8)",
+  "driver": "/usr/bin/safaridriver",
+  "driverPort": 56198,
+  "statusResponse": {
+    "value": {
+      "message": "",
+      "ready": true
+    }
+  },
+  "sessionRequest": {
+    "capabilities": {
+      "alwaysMatch": {
+        "browserName": "safari"
+      }
+    }
+  },
+  "sessionHttpStatus": 500,
+  "sessionResponse": {
+    "value": {
+      "error": "session not created",
+      "message": "Could not create a session: You must enable 'Allow remote automation' in the Developer section of Safari Settings to control Safari via WebDriver.",
+      "stacktrace": ""
+    }
+  },
+  "driverExitCode": 0,
+  "stdout": "",
+  "stderr": "",
+  "globalSettingsChanged": false,
+  "storageProofExecuted": false,
+  "storageSupport": "unverified",
+  "limitation": "Local Safari remote automation access is disabled; no storage operation was attempted."
+}

@@ -1,0 +1,134 @@
+{
+  "completedAt": "2026-09-09T09:02:09.923Z",
+  "backend": "pinned SQLite WASM in Node fixture; no OPFS/browser timing claim",
+  "pages": 1000,
+  "admissions": 1000,
+  "totalAdvanceMs": 2676.7183289999934,
+  "total": {
+    "other": {
+      "calls": 77041,
+      "ms": 1316.187482000067,
+      "sql": "PRAGMA schema_version"
+    },
+    "queue_pick": {
+      "calls": 2005,
+      "ms": 61.927074999991845,
+      "sql": "SELECT * FROM quixi_search_queue WHERE failed=0 ORDER BY CASE scope WHEN 'source' THEN 0 ELSE 1 END,epoch,scope,id LIMIT 1"
+    }
+  },
+  "samples": [
+    {
+      "page": 1,
+      "slices": 0,
+      "advanceMs": 23.602082999999993,
+      "progressCalls": 0,
+      "stats": {
+        "other": {
+          "calls": 118,
+          "ms": 9.680453999999884,
+          "sql": "PRAGMA schema_version"
+        },
+        "queue_pick": {
+          "calls": 7,
+          "ms": 0.8088750000000005,
+          "sql": "SELECT * FROM quixi_search_queue WHERE failed=0 ORDER BY CASE scope WHEN 'source' THEN 0 ELSE 1 END,epoch,scope,id LIMIT 1"
+        }
+      }
+    },
+    {
+      "page": 10,
+      "slices": 0,
+      "advanceMs": 4.684374999999989,
+      "progressCalls": 0,
+      "stats": {
+        "other": {
+          "calls": 77,
+          "ms": 2.2848330000000487,
+          "sql": "PRAGMA schema_version"
+        },
+        "queue_pick": {
+          "calls": 2,
+          "ms": 0.115791999999999,
+          "sql": "SELECT * FROM quixi_search_queue WHERE failed=0 ORDER BY CASE scope WHEN 'source' THEN 0 ELSE 1 END,epoch,scope,id LIMIT 1"
+        }
+      }
+    },
+    {
+      "page": 100,
+      "slices": 0,
+      "advanceMs": 3.8519169999999576,
+      "progressCalls": 0,
+      "stats": {
+        "other": {
+          "calls": 77,
+          "ms": 1.8030879999996614,
+          "sql": "PRAGMA schema_version"
+        },
+        "queue_pick": {
+          "calls": 2,
+          "ms": 0.06837499999994634,
+          "sql": "SELECT * FROM quixi_search_queue WHERE failed=0 ORDER BY CASE scope WHEN 'source' THEN 0 ELSE 1 END,epoch,scope,id LIMIT 1"
+        }
+      }
+    },
+    {
+      "page": 500,
+      "slices": 0,
+      "advanceMs": 2.0561250000000655,
+      "progressCalls": 0,
+      "stats": {
+        "other": {
+          "calls": 77,
+          "ms": 0.9993360000025859,
+          "sql": "PRAGMA schema_version"
+        },
+        "queue_pick": {
+          "calls": 2,
+          "ms": 0.04770800000005693,
+          "sql": "SELECT * FROM quixi_search_queue WHERE failed=0 ORDER BY CASE scope WHEN 'source' THEN 0 ELSE 1 END,epoch,scope,id LIMIT 1"
+        }
+      }
+    },
+    {
+      "page": 1000,
+      "slices": 0,
+      "advanceMs": 2.4884579999998095,
+      "progressCalls": 0,
+      "stats": {
+        "other": {
+          "calls": 77,
+          "ms": 1.1942160000071453,
+          "sql": "PRAGMA schema_version"
+        },
+        "queue_pick": {
+          "calls": 2,
+          "ms": 0.048584000000118976,
+          "sql": "SELECT * FROM quixi_search_queue WHERE failed=0 ORDER BY CASE scope WHEN 'source' THEN 0 ELSE 1 END,epoch,scope,id LIMIT 1"
+        }
+      }
+    }
+  ],
+  "queryPlans": {
+    "queue_pick": [
+      {
+        "id": 4,
+        "parent": 0,
+        "notused": 216,
+        "detail": "SCAN quixi_search_queue"
+      },
+      {
+        "id": 28,
+        "parent": 0,
+        "notused": 0,
+        "detail": "USE TEMP B-TREE FOR ORDER BY"
+      }
+    ]
+  },
+  "sourceHashes": {
+    "packages/storage/src/worker/search/index.ts": "61b8de39bccea68848a8a7b10f45dec6a8a7e26397a4da800b19110841e0f4c6",
+    "packages/storage/src/worker/search/schema.ts": "27f06f47227d4a0871724fdecba334229d3320909a6e4ace3c93f6e066c6a9ba",
+    "packages/storage/src/worker/search/extraction.ts": "ba85bc1954ce553a3268e1b924f8eeed879f0b1dad694108090de77301096033",
+    "packages/storage/src/worker/archive-database.ts": "246dad0d10b1bc1d97f8b399806c219f873356f7ca24fc366d7f0b2d766ab979",
+    "packages/storage/tests/search-performance/diagnose.ts": "1fac3a659924450c371f8963966d95b70bc6d9f6db9b7ab99f17329a08c429a4"
+  }
+}

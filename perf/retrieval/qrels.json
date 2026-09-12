@@ -1,0 +1,75 @@
+{
+  "opfs": {
+    "opfs-a": 2,
+    "opfs-b": 1,
+    "opfs-long": 2
+  },
+  "desktop": {
+    "desktop-a": 2,
+    "desktop-b": 1
+  },
+  "credentials": {
+    "credentials-a": 2,
+    "credentials-b": 1
+  },
+  "oauth": {
+    "oauth-a": 2,
+    "oauth-b": 1
+  },
+  "switch": {
+    "switch-a": 2,
+    "switch-b": 1
+  },
+  "branch": {
+    "branch-a": 2,
+    "branch-b": 1
+  },
+  "dedup": {
+    "dedup-a": 2,
+    "dedup-b": 1
+  },
+  "archive": {
+    "archive-a": 2,
+    "archive-b": 1
+  },
+  "fts": {
+    "fts-a": 2,
+    "fts-b": 1
+  },
+  "pdf": {
+    "pdf-a": 2,
+    "pdf-b": 1
+  },
+  "ocr": {
+    "ocr-a": 2,
+    "ocr-b": 1
+  },
+  "sync": {
+    "sync-a": 2,
+    "sync-b": 1
+  },
+  "recovery": {
+    "recovery-a": 2,
+    "recovery-b": 1
+  },
+  "priority": {
+    "priority-a": 2,
+    "priority-b": 1
+  },
+  "cache": {
+    "cache-a": 2,
+    "cache-b": 1
+  },
+  "sql": {
+    "sql-a": 2,
+    "sql-b": 1
+  },
+  "rrf": {
+    "rrf-a": 2,
+    "rrf-b": 1
+  },
+  "accessibility": {
+    "accessibility-a": 2,
+    "accessibility-b": 1
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "status": "failed",
+  "startedAt": "2026-09-09T17:59:02.677Z",
+  "sizes": {
+    "threads": 2000,
+    "longMessages": 2000
+  },
+  "budgets": {
+    "interactiveMs": 5000,
+    "pageBytes": 900000
+  },
+  "selectedEngines": [
+    "chromium"
+  ],
+  "hosts": [
+    {
+      "name": "chromium",
+      "status": "failed",
+      "checks": [
+        "cold open renders one bounded library page (24 of 2001 conversations) with at most three list requests and no whole-collection read",
+        "title filter and next/previous library pages each issue bounded list requests and render at most one page of conversations",
+        "opening a 2000-message conversation renders its latest 12 messages with bounded window and part reads",
+        "paging older and back to latest keeps a twelve-message window with bounded reads per step"
+      ],
+      "timings": {
+        "seedMs": 13206,
+        "coldLibraryMs": 238,
+        "filterMs": 135,
+        "nextPageMs": 195,
+        "openLongMs": 2314,
+        "olderMs": [
+          2348,
+          2324,
+          2333
+        ],
+        "latestMs": 2338,
+        "indexingWaitMs": 309975,
+        "searchMs": 73
+      },
+      "requests": {
+        "coldLibrary": {
+          "archiveWorkspace": {
+            "calls": 1,
+            "maxBytes": 0
+          },
+          "listLibrary": {
+            "calls": 1,
+            "maxBytes": 4831
+          }
+        },
+        "filter": {
+          "listLibrary": {
+            "calls": 1,
+            "maxBytes": 202
+          }
+        },
+        "nextPage": {
+          "listLibrary": {
+            "calls": 1,
+            "maxBytes": 4825
+          }
+        },
+        "openLong": {
+          "readThreadView": {
+            "calls": 1,
+            "maxBytes": 0
+          },
+          "readConversationWindow": {
+            "calls": 1,
+            "maxBytes": 3487
+          },
+          "readMessageParts": {
+            "calls": 12,
+            "maxBytes": 179
+          },
+          "readMessageChildren": {
+            "calls": 1,
+            "maxBytes": 2
+          }
+        },
+        "search": {
+          "searchArchive": {
+            "calls": 1,
+            "maxBytes": 633
+          }
+        }
+      },
+      "seedBatches": 67,
+      "error": "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('region', { name: 'Search results' }).getByRole('button', { name: /Message 1000 of the / }).first()\u001b[22m\n\n    at /Users/eric/QuixiChat/packages/app/tests/browser/scale.mjs:131:139\n    at timed (/Users/eric/QuixiChat/packages/app/tests/browser/scale.mjs:27:76)\n    at /Users/eric/QuixiChat/packages/app/tests/browser/scale.mjs:130:42"
+    }
+  ],
+  "sourceSha256": {
+    "tooling/browser-engines.mjs": "136f16e63e905ae4c8305c7adedfce2411eff13b04f914054f8fb718155d0df1",
+    "packages/app/src/AppRoot.tsx": "a9cd21f9d6ac263c337816ff488539641796320cae6e8247749d758fff62ba74",
+    "packages/app/src/runtime/library.ts": "ffdff4f07fec5b521f442fa2b1bb7da99fd5bc963e3aba9a774fa35b9b77c814",
+    "packages/storage/src/worker/views.ts": "79e733521669f584b319be97c9b490e98faf146e3a9f6a11f620540cd29840d9",
+    "packages/storage/src/worker/archive-database.ts": "c0ee0ac2aa0003ba630c0c91b38269df903fb4e096f164210c07e002af2bbf6a",
+    "packages/storage/src/worker/canonical/repository.ts": "326367b3b5ff6c4660baf95abba160f6b98ccdd7e7fe458f72ecf56b2b3e2428",
+    "packages/core/src/contracts/views.ts": "90b038bdf6644c43bf5a6b02b74693ad75c235a711856ed29a084107493c8b3a",
+    "packages/app/tests/browser/index.ts": "2d2f32a4ec342d96bf3394ef7d1e80e405f8bdd56fe449967ed735ba0170c156",
+    "packages/app/tests/browser/scale.mjs": "3fe03b20c17ef6f2dce3934dc53cdbb1ed562a69cf7f9da0b8c81a25529cac52",
+    "package-lock.json": "aadb456e2a567a2b91cbb81a502650ebac93541f0a59d54035bdde2cacd97672"
+  },
+  "environment": {
+    "platform": "darwin",
+    "release": "25.6.0",
+    "arch": "arm64",
+    "osVersion": "26.6.2",
+    "node": "v22.23.1"
+  },
+  "qualification": "Synthetic unique titles and short texts seeded through the production worker in bounded batches. Timings are single runs under development load on one machine; the structural bounds (page bytes, request counts) are the acceptance evidence, the timings are context.",
+  "error": "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('region', { name: 'Search results' }).getByRole('button', { name: /Message 1000 of the / }).first()\u001b[22m\n\n    at /Users/eric/QuixiChat/packages/app/tests/browser/scale.mjs:131:139\n    at timed (/Users/eric/QuixiChat/packages/app/tests/browser/scale.mjs:27:76)\n    at /Users/eric/QuixiChat/packages/app/tests/browser/scale.mjs:130:42",
+  "finishedAt": "2026-09-09T18:05:09.903Z"
+}

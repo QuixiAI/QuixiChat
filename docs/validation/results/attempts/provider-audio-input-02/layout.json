@@ -1,0 +1,507 @@
+{
+  "mode": "assert",
+  "name": "chromium",
+  "caseName": "alias-application-closed",
+  "scope": "Computed CSS reflow and enabled control-border contrast; no screen-reader or native-control pixel-rendering qualification.",
+  "samples": [
+    {
+      "size": "normal",
+      "viewportWidth": 320,
+      "documentWidth": 320,
+      "region": {
+        "left": 37.78,
+        "right": 282.22,
+        "width": 244.44,
+        "height": 109
+      },
+      "rootFontSize": "16px",
+      "focused": {
+        "tag": "BUTTON",
+        "id": "",
+        "label": "Library",
+        "insideRegion": false
+      },
+      "controlCount": 1,
+      "controls": [
+        {
+          "tag": "SELECT",
+          "label": "Routing alias",
+          "bounds": {
+            "left": 37.78,
+            "right": 282.22,
+            "width": 244.44,
+            "height": 39.59
+          },
+          "containerBounds": {
+            "left": 19.19,
+            "right": 300.81,
+            "width": 281.63,
+            "height": 2521.47
+          },
+          "disabled": false,
+          "overflow": false
+        }
+      ],
+      "borders": [
+        {
+          "label": "Routing alias",
+          "fill": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            255
+          ],
+          "sides": [
+            {
+              "side": "Top",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 4.114544191782779
+            },
+            {
+              "side": "Right",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 4.114544191782779
+            },
+            {
+              "side": "Bottom",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 4.114544191782779
+            },
+            {
+              "side": "Left",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 4.114544191782779
+            }
+          ]
+        }
+      ],
+      "documentOverflow": [],
+      "violations": []
+    },
+    {
+      "size": "enlarged",
+      "viewportWidth": 320,
+      "documentWidth": 325,
+      "region": {
+        "left": 74.58,
+        "right": 245.42,
+        "width": 170.84,
+        "height": 332.06
+      },
+      "rootFontSize": "32px",
+      "focused": {
+        "tag": "BUTTON",
+        "id": "",
+        "label": "Library",
+        "insideRegion": false
+      },
+      "controlCount": 1,
+      "controls": [
+        {
+          "tag": "SELECT",
+          "label": "Routing alias",
+          "bounds": {
+            "left": 74.58,
+            "right": 245.42,
+            "width": 170.84,
+            "height": 77.19
+          },
+          "containerBounds": {
+            "left": 38.39,
+            "right": 281.61,
+            "width": 243.22,
+            "height": 7973.61
+          },
+          "disabled": false,
+          "overflow": false
+        }
+      ],
+      "borders": [
+        {
+          "label": "Routing alias",
+          "fill": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            255
+          ],
+          "sides": [
+            {
+              "side": "Top",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 4.114544191782779
+            },
+            {
+              "side": "Right",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 4.114544191782779
+            },
+            {
+              "side": "Bottom",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 4.114544191782779
+            },
+            {
+              "side": "Left",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 4.114544191782779
+            }
+          ]
+        }
+      ],
+      "documentOverflow": [
+        {
+          "tag": "DIV",
+          "id": "app",
+          "className": "",
+          "label": "Skip to conversationQuixiYour history. Your choice.New conversationPreferencesStorage healthLibraryImport historyProvidersDocumentsExport historyFilter titlesFi",
+          "bounds": {
+            "left": 0,
+            "right": 320,
+            "width": 320,
+            "height": 14065.84
+          },
+          "scrollWidth": 325,
+          "clientWidth": 320,
+          "overflowX": "visible"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "app-shell",
+          "label": "Skip to conversationQuixiYour history. Your choice.New conversationPreferencesStorage healthLibraryImport historyProvidersDocumentsExport historyFilter titlesFi",
+          "bounds": {
+            "left": 0,
+            "right": 320,
+            "width": 320,
+            "height": 14065.84
+          },
+          "scrollWidth": 325,
+          "clientWidth": 320,
+          "overflowX": "visible"
+        },
+        {
+          "tag": "MAIN",
+          "id": "workspace",
+          "className": "workspace",
+          "label": "Workspace statusSearch your historySearchImage thread1 attempt · tokens in 12 · out 20 · estimated ≈ 0.000112 USD across 1 priced attemptPortability: Provider-d",
+          "bounds": {
+            "left": 0,
+            "right": 320,
+            "width": 320,
+            "height": 13660.73
+          },
+          "scrollWidth": 325,
+          "clientWidth": 320,
+          "overflowX": "visible"
+        },
+        {
+          "tag": "LABEL",
+          "id": "",
+          "className": "",
+          "label": "Search your history",
+          "bounds": {
+            "left": 38.39,
+            "right": 116.19,
+            "width": 77.8,
+            "height": 221.94
+          },
+          "scrollWidth": 88,
+          "clientWidth": 78,
+          "overflowX": "visible"
+        },
+        {
+          "tag": "HEADER",
+          "id": "",
+          "className": "conversation-header",
+          "label": "Image thread1 attempt · tokens in 12 · out 20 · estimated ≈ 0.000112 USD across 1 priced attemptPortability: Provider-dependent. 2 targets of 3 can carry the ac",
+          "bounds": {
+            "left": 38.39,
+            "right": 281.61,
+            "width": 243.22,
+            "height": 1337.13
+          },
+          "scrollWidth": 287,
+          "clientWidth": 243,
+          "overflowX": "visible"
+        },
+        {
+          "tag": "SECTION",
+          "id": "",
+          "className": "portability",
+          "label": "Portability",
+          "bounds": {
+            "left": 38.39,
+            "right": 281.61,
+            "width": 243.22,
+            "height": 759.86
+          },
+          "scrollWidth": 287,
+          "clientWidth": 243,
+          "overflowX": "visible"
+        },
+        {
+          "tag": "UL",
+          "id": "",
+          "className": "",
+          "label": "Portability reasons",
+          "bounds": {
+            "left": 38.39,
+            "right": 281.61,
+            "width": 243.22,
+            "height": 594.84
+          },
+          "scrollWidth": 287,
+          "clientWidth": 243,
+          "overflowX": "visible"
+        },
+        {
+          "tag": "LI",
+          "id": "",
+          "className": "",
+          "label": "OpenAI · GPT-Audio-1.5: blocked — 1 Image part (images_unsupported)",
+          "bounds": {
+            "left": 73.58,
+            "right": 281.61,
+            "width": 208.03,
+            "height": 158.63
+          },
+          "scrollWidth": 252,
+          "clientWidth": 208,
+          "overflowX": "visible"
+        },
+        {
+          "tag": "LABEL",
+          "id": "",
+          "className": "",
+          "label": "Tags, separated by commas",
+          "bounds": {
+            "left": 38.39,
+            "right": 98.02,
+            "width": 59.63,
+            "height": 265.33
+          },
+          "scrollWidth": 127,
+          "clientWidth": 60,
+          "overflowX": "visible"
+        },
+        {
+          "tag": "FORM",
+          "id": "",
+          "className": "composer",
+          "label": "ProviderOpenAIAnthropicModelClaude Haiku 4.5Maximum output tokensEnter 1–64,000 tokens for this model.TemperatureLeave blank for the model default, or enter 0–1",
+          "bounds": {
+            "left": 38.39,
+            "right": 281.61,
+            "width": 243.22,
+            "height": 7973.61
+          },
+          "scrollWidth": 268,
+          "clientWidth": 241,
+          "overflowX": "visible"
+        },
+        {
+          "tag": "SECTION",
+          "id": "",
+          "className": "routing-profile",
+          "label": "Conversation routing",
+          "bounds": {
+            "left": 74.58,
+            "right": 245.42,
+            "width": 170.84,
+            "height": 2060.23
+          },
+          "scrollWidth": 199,
+          "clientWidth": 171,
+          "overflowX": "visible"
+        },
+        {
+          "tag": "H3",
+          "id": "",
+          "className": "focus-anchor",
+          "label": "Conversation routing",
+          "bounds": {
+            "left": 74.58,
+            "right": 245.42,
+            "width": 170.84,
+            "height": 98.66
+          },
+          "scrollWidth": 199,
+          "clientWidth": 171,
+          "overflowX": "visible"
+        },
+        {
+          "tag": "LABEL",
+          "id": "",
+          "className": "",
+          "label": "Require tool support",
+          "bounds": {
+            "left": 74.58,
+            "right": 245.42,
+            "width": 170.84,
+            "height": 130.17
+          },
+          "scrollWidth": 178,
+          "clientWidth": 171,
+          "overflowX": "visible"
+        },
+        {
+          "tag": "LABEL",
+          "id": "",
+          "className": "",
+          "label": "Require image input",
+          "bounds": {
+            "left": 74.58,
+            "right": 245.42,
+            "width": 170.84,
+            "height": 130.17
+          },
+          "scrollWidth": 178,
+          "clientWidth": 171,
+          "overflowX": "visible"
+        },
+        {
+          "tag": "LABEL",
+          "id": "",
+          "className": "",
+          "label": "Allow the route to change the privacy class",
+          "bounds": {
+            "left": 74.58,
+            "right": 245.42,
+            "width": 170.84,
+            "height": 216.95
+          },
+          "scrollWidth": 178,
+          "clientWidth": 171,
+          "overflowX": "visible"
+        },
+        {
+          "tag": "SECTION",
+          "id": "",
+          "className": "",
+          "label": "Request context",
+          "bounds": {
+            "left": 74.58,
+            "right": 245.42,
+            "width": 170.84,
+            "height": 880.47
+          },
+          "scrollWidth": 206,
+          "clientWidth": 171,
+          "overflowX": "visible"
+        },
+        {
+          "tag": "P",
+          "id": "",
+          "className": "",
+          "label": "0 attachment occurrence(s) excluded from future requests. Originals remain in history.",
+          "bounds": {
+            "left": 74.58,
+            "right": 245.42,
+            "width": 170.84,
+            "height": 446.34
+          },
+          "scrollWidth": 191,
+          "clientWidth": 171,
+          "overflowX": "visible"
+        },
+        {
+          "tag": "SECTION",
+          "id": "",
+          "className": "",
+          "label": "Attachment exclusions",
+          "bounds": {
+            "left": 74.58,
+            "right": 245.42,
+            "width": 170.84,
+            "height": 116.03
+          },
+          "scrollWidth": 206,
+          "clientWidth": 171,
+          "overflowX": "visible"
+        },
+        {
+          "tag": "H3",
+          "id": "",
+          "className": "focus-anchor",
+          "label": "Attachment exclusions",
+          "bounds": {
+            "left": 74.58,
+            "right": 245.42,
+            "width": 170.84,
+            "height": 116.03
+          },
+          "scrollWidth": 206,
+          "clientWidth": 171,
+          "overflowX": "visible"
+        },
+        {
+          "tag": "SECTION",
+          "id": "",
+          "className": "",
+          "label": "Conversation summary",
+          "bounds": {
+            "left": 74.58,
+            "right": 245.42,
+            "width": 170.84,
+            "height": 402.13
+          },
+          "scrollWidth": 233,
+          "clientWidth": 171,
+          "overflowX": "visible"
+        },
+        {
+          "tag": "H3",
+          "id": "",
+          "className": "focus-anchor",
+          "label": "Conversation summary",
+          "bounds": {
+            "left": 74.58,
+            "right": 245.42,
+            "width": 170.84,
+            "height": 116.03
+          },
+          "scrollWidth": 233,
+          "clientWidth": 171,
+          "overflowX": "visible"
+        }
+      ],
+      "violations": [
+        "Document overflows the viewport"
+      ]
+    }
+  ],
+  "status": "failed"
+}

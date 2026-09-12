@@ -1,0 +1,1374 @@
+{
+  "mode": "capture",
+  "name": "webkit",
+  "caseName": "select-containment",
+  "scope": "Computed CSS reflow and enabled control-border contrast; no screen-reader or native-control pixel-rendering qualification.",
+  "samples": [
+    {
+      "size": "normal",
+      "viewportWidth": 320,
+      "documentWidth": 320,
+      "region": {
+        "left": 19.19,
+        "right": 300.81,
+        "width": 281.63,
+        "height": 1344.22
+      },
+      "rootFontSize": "16px",
+      "focused": {
+        "tag": "BUTTON",
+        "id": "",
+        "label": "Cancel alias edit",
+        "insideRegion": true
+      },
+      "controlCount": 14,
+      "controls": [
+        {
+          "tag": "FIELDSET",
+          "label": "Alias profileAlias nameAlias primaryChoose a connection and modelAlias fallback candidateChoose a connection and modelAdd alias fallbackRequire alias tool suppo",
+          "bounds": {
+            "left": 19.19,
+            "right": 300.81,
+            "width": 281.63,
+            "height": 1219.66
+          },
+          "containerBounds": {
+            "left": 19.19,
+            "right": 300.81,
+            "width": 281.63,
+            "height": 1219.66
+          },
+          "disabled": false,
+          "overflow": false
+        },
+        {
+          "tag": "INPUT",
+          "label": "Alias name",
+          "bounds": {
+            "left": 32.19,
+            "right": 287.81,
+            "width": 255.63,
+            "height": 41.28
+          },
+          "containerBounds": {
+            "left": 19.19,
+            "right": 300.81,
+            "width": 281.63,
+            "height": 1219.66
+          },
+          "disabled": false,
+          "overflow": false
+        },
+        {
+          "tag": "SELECT",
+          "label": "Alias primary",
+          "bounds": {
+            "left": 32.19,
+            "right": 287.81,
+            "width": 255.63,
+            "height": 23
+          },
+          "containerBounds": {
+            "left": 19.19,
+            "right": 300.81,
+            "width": 281.63,
+            "height": 1219.66
+          },
+          "disabled": false,
+          "overflow": false
+        },
+        {
+          "tag": "SELECT",
+          "label": "Alias fallback candidate",
+          "bounds": {
+            "left": 32.19,
+            "right": 287.81,
+            "width": 255.63,
+            "height": 23
+          },
+          "containerBounds": {
+            "left": 19.19,
+            "right": 300.81,
+            "width": 281.63,
+            "height": 1219.66
+          },
+          "disabled": false,
+          "overflow": false
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Add alias fallback",
+          "bounds": {
+            "left": 32.19,
+            "right": 287.81,
+            "width": 255.63,
+            "height": 38.94
+          },
+          "containerBounds": {
+            "left": 19.19,
+            "right": 300.81,
+            "width": 281.63,
+            "height": 1219.66
+          },
+          "disabled": true,
+          "overflow": false
+        },
+        {
+          "tag": "INPUT",
+          "label": "Require alias tool support",
+          "bounds": {
+            "left": 34.19,
+            "right": 46.19,
+            "width": 12,
+            "height": 12
+          },
+          "containerBounds": {
+            "left": 19.19,
+            "right": 300.81,
+            "width": 281.63,
+            "height": 1219.66
+          },
+          "disabled": false,
+          "overflow": false
+        },
+        {
+          "tag": "INPUT",
+          "label": "Require alias image input",
+          "bounds": {
+            "left": 34.19,
+            "right": 46.19,
+            "width": 12,
+            "height": 12
+          },
+          "containerBounds": {
+            "left": 19.19,
+            "right": 300.81,
+            "width": 281.63,
+            "height": 1219.66
+          },
+          "disabled": false,
+          "overflow": false
+        },
+        {
+          "tag": "SELECT",
+          "label": "Alias required processing region",
+          "bounds": {
+            "left": 32.19,
+            "right": 287.81,
+            "width": 255.63,
+            "height": 23
+          },
+          "containerBounds": {
+            "left": 19.19,
+            "right": 300.81,
+            "width": 281.63,
+            "height": 1219.66
+          },
+          "disabled": false,
+          "overflow": false
+        },
+        {
+          "tag": "INPUT",
+          "label": "Alias minimum context",
+          "bounds": {
+            "left": 32.19,
+            "right": 287.81,
+            "width": 255.63,
+            "height": 41.28
+          },
+          "containerBounds": {
+            "left": 19.19,
+            "right": 300.81,
+            "width": 281.63,
+            "height": 1219.66
+          },
+          "disabled": false,
+          "overflow": false
+        },
+        {
+          "tag": "INPUT",
+          "label": "Alias maximum estimated input cost (USD)",
+          "bounds": {
+            "left": 32.19,
+            "right": 287.81,
+            "width": 255.63,
+            "height": 41.28
+          },
+          "containerBounds": {
+            "left": 19.19,
+            "right": 300.81,
+            "width": 281.63,
+            "height": 1219.66
+          },
+          "disabled": false,
+          "overflow": false
+        },
+        {
+          "tag": "INPUT",
+          "label": "Alias maximum estimated request cost per attempt (USD)",
+          "bounds": {
+            "left": 32.19,
+            "right": 287.81,
+            "width": 255.63,
+            "height": 41.28
+          },
+          "containerBounds": {
+            "left": 19.19,
+            "right": 300.81,
+            "width": 281.63,
+            "height": 1219.66
+          },
+          "disabled": false,
+          "overflow": false
+        },
+        {
+          "tag": "INPUT",
+          "label": "Allow alias fallback to change the privacy class",
+          "bounds": {
+            "left": 34.19,
+            "right": 46.19,
+            "width": 12,
+            "height": 12
+          },
+          "containerBounds": {
+            "left": 19.19,
+            "right": 300.81,
+            "width": 281.63,
+            "height": 1219.66
+          },
+          "disabled": false,
+          "overflow": false
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Save routing alias",
+          "bounds": {
+            "left": 32.19,
+            "right": 287.81,
+            "width": 255.63,
+            "height": 38.94
+          },
+          "containerBounds": {
+            "left": 19.19,
+            "right": 300.81,
+            "width": 281.63,
+            "height": 1219.66
+          },
+          "disabled": false,
+          "overflow": false
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Cancel alias edit",
+          "bounds": {
+            "left": 19.19,
+            "right": 300.81,
+            "width": 281.63,
+            "height": 38.94
+          },
+          "containerBounds": {
+            "left": 19.19,
+            "right": 300.81,
+            "width": 281.63,
+            "height": 1344.22
+          },
+          "disabled": false,
+          "overflow": false
+        }
+      ],
+      "borders": [
+        {
+          "label": "Alias name",
+          "fill": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            249,
+            250,
+            247
+          ],
+          "sides": [
+            {
+              "side": "Top",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 3.927483360092991
+            },
+            {
+              "side": "Right",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 3.927483360092991
+            },
+            {
+              "side": "Bottom",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 3.927483360092991
+            },
+            {
+              "side": "Left",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 3.927483360092991
+            }
+          ]
+        },
+        {
+          "label": "Alias primary",
+          "fill": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            249,
+            250,
+            247
+          ],
+          "sides": [
+            {
+              "side": "Top",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 3.927483360092991
+            },
+            {
+              "side": "Right",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 3.927483360092991
+            },
+            {
+              "side": "Bottom",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 3.927483360092991
+            },
+            {
+              "side": "Left",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 3.927483360092991
+            }
+          ]
+        },
+        {
+          "label": "Alias fallback candidate",
+          "fill": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            249,
+            250,
+            247
+          ],
+          "sides": [
+            {
+              "side": "Top",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 3.927483360092991
+            },
+            {
+              "side": "Right",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 3.927483360092991
+            },
+            {
+              "side": "Bottom",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 3.927483360092991
+            },
+            {
+              "side": "Left",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 3.927483360092991
+            }
+          ]
+        },
+        {
+          "label": "Alias required processing region",
+          "fill": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            249,
+            250,
+            247
+          ],
+          "sides": [
+            {
+              "side": "Top",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 3.927483360092991
+            },
+            {
+              "side": "Right",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 3.927483360092991
+            },
+            {
+              "side": "Bottom",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 3.927483360092991
+            },
+            {
+              "side": "Left",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 3.927483360092991
+            }
+          ]
+        },
+        {
+          "label": "Alias minimum context",
+          "fill": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            249,
+            250,
+            247
+          ],
+          "sides": [
+            {
+              "side": "Top",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 3.927483360092991
+            },
+            {
+              "side": "Right",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 3.927483360092991
+            },
+            {
+              "side": "Bottom",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 3.927483360092991
+            },
+            {
+              "side": "Left",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 3.927483360092991
+            }
+          ]
+        },
+        {
+          "label": "Alias maximum estimated input cost (USD)",
+          "fill": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            249,
+            250,
+            247
+          ],
+          "sides": [
+            {
+              "side": "Top",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 3.927483360092991
+            },
+            {
+              "side": "Right",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 3.927483360092991
+            },
+            {
+              "side": "Bottom",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 3.927483360092991
+            },
+            {
+              "side": "Left",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 3.927483360092991
+            }
+          ]
+        },
+        {
+          "label": "Alias maximum estimated request cost per attempt (USD)",
+          "fill": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            249,
+            250,
+            247
+          ],
+          "sides": [
+            {
+              "side": "Top",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 3.927483360092991
+            },
+            {
+              "side": "Right",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 3.927483360092991
+            },
+            {
+              "side": "Bottom",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 3.927483360092991
+            },
+            {
+              "side": "Left",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 3.927483360092991
+            }
+          ]
+        }
+      ],
+      "documentOverflow": [],
+      "violations": []
+    },
+    {
+      "size": "enlarged",
+      "viewportWidth": 320,
+      "documentWidth": 514,
+      "region": {
+        "left": 38.39,
+        "right": 281.61,
+        "width": 243.22,
+        "height": 4401.94
+      },
+      "rootFontSize": "32px",
+      "focused": {
+        "tag": "BUTTON",
+        "id": "",
+        "label": "Cancel alias edit",
+        "insideRegion": true
+      },
+      "controlCount": 14,
+      "controls": [
+        {
+          "tag": "FIELDSET",
+          "label": "Alias profileAlias nameAlias primaryChoose a connection and modelAlias fallback candidateChoose a connection and modelAdd alias fallbackRequire alias tool suppo",
+          "bounds": {
+            "left": 38.39,
+            "right": 281.61,
+            "width": 243.22,
+            "height": 4053.56
+          },
+          "containerBounds": {
+            "left": 38.39,
+            "right": 281.61,
+            "width": 243.22,
+            "height": 4053.56
+          },
+          "disabled": false,
+          "overflow": false
+        },
+        {
+          "tag": "INPUT",
+          "label": "Alias name",
+          "bounds": {
+            "left": 63.39,
+            "right": 256.61,
+            "width": 193.22,
+            "height": 80.58
+          },
+          "containerBounds": {
+            "left": 38.39,
+            "right": 281.61,
+            "width": 243.22,
+            "height": 4053.56
+          },
+          "disabled": false,
+          "overflow": false
+        },
+        {
+          "tag": "SELECT",
+          "label": "Alias primary",
+          "bounds": {
+            "left": 63.39,
+            "right": 256.61,
+            "width": 193.22,
+            "height": 43
+          },
+          "containerBounds": {
+            "left": 38.39,
+            "right": 281.61,
+            "width": 243.22,
+            "height": 4053.56
+          },
+          "disabled": false,
+          "overflow": false
+        },
+        {
+          "tag": "SELECT",
+          "label": "Alias fallback candidate",
+          "bounds": {
+            "left": 63.39,
+            "right": 256.61,
+            "width": 193.22,
+            "height": 43
+          },
+          "containerBounds": {
+            "left": 38.39,
+            "right": 281.61,
+            "width": 243.22,
+            "height": 4053.56
+          },
+          "disabled": false,
+          "overflow": false
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Add alias fallback",
+          "bounds": {
+            "left": 63.39,
+            "right": 256.61,
+            "width": 193.22,
+            "height": 119.09
+          },
+          "containerBounds": {
+            "left": 38.39,
+            "right": 281.61,
+            "width": 243.22,
+            "height": 4053.56
+          },
+          "disabled": true,
+          "overflow": false
+        },
+        {
+          "tag": "INPUT",
+          "label": "Require alias tool support",
+          "bounds": {
+            "left": 65.39,
+            "right": 77.39,
+            "width": 12,
+            "height": 12
+          },
+          "containerBounds": {
+            "left": 38.39,
+            "right": 281.61,
+            "width": 243.22,
+            "height": 4053.56
+          },
+          "disabled": false,
+          "overflow": false
+        },
+        {
+          "tag": "INPUT",
+          "label": "Require alias image input",
+          "bounds": {
+            "left": 65.39,
+            "right": 77.39,
+            "width": 12,
+            "height": 12
+          },
+          "containerBounds": {
+            "left": 38.39,
+            "right": 281.61,
+            "width": 243.22,
+            "height": 4053.56
+          },
+          "disabled": false,
+          "overflow": false
+        },
+        {
+          "tag": "SELECT",
+          "label": "Alias required processing region",
+          "bounds": {
+            "left": 63.39,
+            "right": 256.61,
+            "width": 193.22,
+            "height": 43
+          },
+          "containerBounds": {
+            "left": 38.39,
+            "right": 281.61,
+            "width": 243.22,
+            "height": 4053.56
+          },
+          "disabled": false,
+          "overflow": false
+        },
+        {
+          "tag": "INPUT",
+          "label": "Alias minimum context",
+          "bounds": {
+            "left": 63.39,
+            "right": 256.61,
+            "width": 193.22,
+            "height": 80.58
+          },
+          "containerBounds": {
+            "left": 38.39,
+            "right": 281.61,
+            "width": 243.22,
+            "height": 4053.56
+          },
+          "disabled": false,
+          "overflow": false
+        },
+        {
+          "tag": "INPUT",
+          "label": "Alias maximum estimated input cost (USD)",
+          "bounds": {
+            "left": 63.39,
+            "right": 256.61,
+            "width": 193.22,
+            "height": 80.58
+          },
+          "containerBounds": {
+            "left": 38.39,
+            "right": 281.61,
+            "width": 243.22,
+            "height": 4053.56
+          },
+          "disabled": false,
+          "overflow": false
+        },
+        {
+          "tag": "INPUT",
+          "label": "Alias maximum estimated request cost per attempt (USD)",
+          "bounds": {
+            "left": 63.39,
+            "right": 256.61,
+            "width": 193.22,
+            "height": 80.58
+          },
+          "containerBounds": {
+            "left": 38.39,
+            "right": 281.61,
+            "width": 243.22,
+            "height": 4053.56
+          },
+          "disabled": false,
+          "overflow": false
+        },
+        {
+          "tag": "INPUT",
+          "label": "Allow alias fallback to change the privacy class",
+          "bounds": {
+            "left": 65.39,
+            "right": 77.39,
+            "width": 12,
+            "height": 12
+          },
+          "containerBounds": {
+            "left": 38.39,
+            "right": 281.61,
+            "width": 243.22,
+            "height": 4053.56
+          },
+          "disabled": false,
+          "overflow": false
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Save routing alias",
+          "bounds": {
+            "left": 63.39,
+            "right": 256.61,
+            "width": 193.22,
+            "height": 162.28
+          },
+          "containerBounds": {
+            "left": 38.39,
+            "right": 281.61,
+            "width": 243.22,
+            "height": 4053.56
+          },
+          "disabled": false,
+          "overflow": false
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Cancel alias edit",
+          "bounds": {
+            "left": 38.39,
+            "right": 281.61,
+            "width": 243.22,
+            "height": 119.09
+          },
+          "containerBounds": {
+            "left": 38.39,
+            "right": 281.61,
+            "width": 243.22,
+            "height": 4401.94
+          },
+          "disabled": false,
+          "overflow": false
+        }
+      ],
+      "borders": [
+        {
+          "label": "Alias name",
+          "fill": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            249,
+            250,
+            247
+          ],
+          "sides": [
+            {
+              "side": "Top",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 3.927483360092991
+            },
+            {
+              "side": "Right",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 3.927483360092991
+            },
+            {
+              "side": "Bottom",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 3.927483360092991
+            },
+            {
+              "side": "Left",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 3.927483360092991
+            }
+          ]
+        },
+        {
+          "label": "Alias primary",
+          "fill": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            249,
+            250,
+            247
+          ],
+          "sides": [
+            {
+              "side": "Top",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 3.927483360092991
+            },
+            {
+              "side": "Right",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 3.927483360092991
+            },
+            {
+              "side": "Bottom",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 3.927483360092991
+            },
+            {
+              "side": "Left",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 3.927483360092991
+            }
+          ]
+        },
+        {
+          "label": "Alias fallback candidate",
+          "fill": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            249,
+            250,
+            247
+          ],
+          "sides": [
+            {
+              "side": "Top",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 3.927483360092991
+            },
+            {
+              "side": "Right",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 3.927483360092991
+            },
+            {
+              "side": "Bottom",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 3.927483360092991
+            },
+            {
+              "side": "Left",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 3.927483360092991
+            }
+          ]
+        },
+        {
+          "label": "Alias required processing region",
+          "fill": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            249,
+            250,
+            247
+          ],
+          "sides": [
+            {
+              "side": "Top",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 3.927483360092991
+            },
+            {
+              "side": "Right",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 3.927483360092991
+            },
+            {
+              "side": "Bottom",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 3.927483360092991
+            },
+            {
+              "side": "Left",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 3.927483360092991
+            }
+          ]
+        },
+        {
+          "label": "Alias minimum context",
+          "fill": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            249,
+            250,
+            247
+          ],
+          "sides": [
+            {
+              "side": "Top",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 3.927483360092991
+            },
+            {
+              "side": "Right",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 3.927483360092991
+            },
+            {
+              "side": "Bottom",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 3.927483360092991
+            },
+            {
+              "side": "Left",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 3.927483360092991
+            }
+          ]
+        },
+        {
+          "label": "Alias maximum estimated input cost (USD)",
+          "fill": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            249,
+            250,
+            247
+          ],
+          "sides": [
+            {
+              "side": "Top",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 3.927483360092991
+            },
+            {
+              "side": "Right",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 3.927483360092991
+            },
+            {
+              "side": "Bottom",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 3.927483360092991
+            },
+            {
+              "side": "Left",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 3.927483360092991
+            }
+          ]
+        },
+        {
+          "label": "Alias maximum estimated request cost per attempt (USD)",
+          "fill": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            249,
+            250,
+            247
+          ],
+          "sides": [
+            {
+              "side": "Top",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 3.927483360092991
+            },
+            {
+              "side": "Right",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 3.927483360092991
+            },
+            {
+              "side": "Bottom",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 3.927483360092991
+            },
+            {
+              "side": "Left",
+              "color": "rgb(113, 129, 118)",
+              "width": 1,
+              "style": "solid",
+              "fillContrast": 4.114544191782779,
+              "outsideContrast": 3.927483360092991
+            }
+          ]
+        }
+      ],
+      "documentOverflow": [
+        {
+          "tag": "DIV",
+          "id": "app",
+          "className": "",
+          "label": "Skip to conversationQuixiYour history. Your choice.New conversationPreferencesStorage healthLibraryImport historyProvidersDocumentsExport historyFilter titlesFi",
+          "bounds": {
+            "left": 0,
+            "right": 320,
+            "width": 320,
+            "height": 7282.17
+          },
+          "scrollWidth": 514,
+          "clientWidth": 320,
+          "overflowX": "visible"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "app-shell",
+          "label": "Skip to conversationQuixiYour history. Your choice.New conversationPreferencesStorage healthLibraryImport historyProvidersDocumentsExport historyFilter titlesFi",
+          "bounds": {
+            "left": 0,
+            "right": 320,
+            "width": 320,
+            "height": 7282.17
+          },
+          "scrollWidth": 514,
+          "clientWidth": 320,
+          "overflowX": "visible"
+        },
+        {
+          "tag": "MAIN",
+          "id": "workspace",
+          "className": "workspace",
+          "label": "PreferencesThese preferences apply to this archive on this device and browser profile. History exports do not include them.Send key⌘ / Ctrl + EnterEnter (Shift ",
+          "bounds": {
+            "left": 0,
+            "right": 320,
+            "width": 320,
+            "height": 6877.06
+          },
+          "scrollWidth": 514,
+          "clientWidth": 320,
+          "overflowX": "visible"
+        },
+        {
+          "tag": "SECTION",
+          "id": "",
+          "className": "",
+          "label": "Routing aliases",
+          "bounds": {
+            "left": 38.39,
+            "right": 281.61,
+            "width": 243.22,
+            "height": 5301.72
+          },
+          "scrollWidth": 476,
+          "clientWidth": 243,
+          "overflowX": "visible"
+        },
+        {
+          "tag": "FORM",
+          "id": "",
+          "className": "routing-alias-editor",
+          "label": "Routing alias editor",
+          "bounds": {
+            "left": 38.39,
+            "right": 281.61,
+            "width": 243.22,
+            "height": 4401.94
+          },
+          "scrollWidth": 476,
+          "clientWidth": 243,
+          "overflowX": "visible"
+        },
+        {
+          "tag": "FIELDSET",
+          "id": "",
+          "className": "",
+          "label": "Alias profileAlias nameAlias primaryChoose a connection and modelAlias fallback candidateChoose a connection and modelAdd alias fallbackRequire alias tool suppo",
+          "bounds": {
+            "left": 38.39,
+            "right": 281.61,
+            "width": 243.22,
+            "height": 4053.56
+          },
+          "scrollWidth": 475,
+          "clientWidth": 241,
+          "overflowX": "visible"
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "className": "",
+          "label": "Alias name",
+          "bounds": {
+            "left": 63.39,
+            "right": 256.61,
+            "width": 193.22,
+            "height": 80.58
+          },
+          "scrollWidth": 943,
+          "clientWidth": 191,
+          "overflowX": "visible"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "routing-alias-field",
+          "label": "Alias primaryChoose a connection and model",
+          "bounds": {
+            "left": 63.39,
+            "right": 256.61,
+            "width": 193.22,
+            "height": 97.58
+          },
+          "scrollWidth": 451,
+          "clientWidth": 193,
+          "overflowX": "visible"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "routing-alias-field",
+          "label": "Alias fallback candidateChoose a connection and model",
+          "bounds": {
+            "left": 63.39,
+            "right": 256.61,
+            "width": 193.22,
+            "height": 140.97
+          },
+          "scrollWidth": 451,
+          "clientWidth": 193,
+          "overflowX": "visible"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "className": "routing-alias-field",
+          "label": "Alias required processing regionNo region requirementUSEU",
+          "bounds": {
+            "left": 63.39,
+            "right": 256.61,
+            "width": 193.22,
+            "height": 184.36
+          },
+          "scrollWidth": 314,
+          "clientWidth": 193,
+          "overflowX": "visible"
+        }
+      ],
+      "violations": [
+        "Document overflows the viewport"
+      ]
+    }
+  ],
+  "status": "failed"
+}

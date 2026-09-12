@@ -1,0 +1,607 @@
+{
+  "scope": "Actual AppRoot inspection and StorageWorker reads; DOM live-region mutations, not screen-reader utterances.",
+  "updates": [
+    {
+      "outputLimit": 512,
+      "sameNode": true,
+      "announcement": "Last completed compatibility check for Anthropic · Claude Haiku 4.5: sending blocked. Unsupported content is listed in the report.",
+      "focus": "Maximum output tokens"
+    },
+    {
+      "outputLimit": 768,
+      "sameNode": true,
+      "announcement": "Last completed compatibility check for Anthropic · Claude Haiku 4.5: sending blocked. Unsupported content is listed in the report.",
+      "focus": "Maximum output tokens"
+    },
+    {
+      "outputLimit": 1024,
+      "sameNode": true,
+      "announcement": "Last completed compatibility check for Anthropic · Claude Haiku 4.5: sending blocked. Unsupported content is listed in the report.",
+      "focus": "Maximum output tokens"
+    },
+    {
+      "outputLimit": 2048,
+      "sameNode": true,
+      "announcement": "Last completed compatibility check for Anthropic · Claude Haiku 4.5: sending blocked. Unsupported content is listed in the report.",
+      "focus": "Maximum output tokens"
+    }
+  ],
+  "initialAnnouncement": "Last completed compatibility check for Anthropic · Claude Haiku 4.5: sending blocked. Unsupported content is listed in the report.",
+  "initialReasons": [
+    "Blocked ProviderArtifact: Explicit compatibility handling is required for ProviderArtifact."
+  ],
+  "before": {
+    "syncSequence": 726,
+    "commitCalls": 414,
+    "providerDispatches": [
+      {
+        "binding": {
+          "providerId": "openai",
+          "accountId": "primary",
+          "destinationId": "openai",
+          "transportId": "openai"
+        },
+        "path": "/v1/chat/completions",
+        "method": "POST"
+      },
+      {
+        "binding": {
+          "providerId": "openai",
+          "accountId": "primary",
+          "destinationId": "openai",
+          "transportId": "openai"
+        },
+        "path": "/v1/chat/completions",
+        "method": "POST"
+      },
+      {
+        "binding": {
+          "providerId": "openai",
+          "accountId": "primary",
+          "destinationId": "openai",
+          "transportId": "openai"
+        },
+        "path": "/v1/chat/completions",
+        "method": "POST"
+      },
+      {
+        "binding": {
+          "providerId": "anthropic",
+          "accountId": "primary",
+          "destinationId": "anthropic",
+          "transportId": "anthropic"
+        },
+        "path": "/v1/messages",
+        "method": "POST"
+      },
+      {
+        "binding": {
+          "providerId": "anthropic",
+          "accountId": "primary",
+          "destinationId": "anthropic",
+          "transportId": "anthropic"
+        },
+        "path": "/v1/messages",
+        "method": "POST"
+      },
+      {
+        "binding": {
+          "providerId": "anthropic",
+          "accountId": "primary",
+          "destinationId": "anthropic",
+          "transportId": "anthropic"
+        },
+        "path": "/v1/messages",
+        "method": "POST"
+      },
+      {
+        "binding": {
+          "providerId": "anthropic",
+          "accountId": "primary",
+          "destinationId": "anthropic",
+          "transportId": "anthropic"
+        },
+        "path": "/v1/messages",
+        "method": "POST"
+      },
+      {
+        "binding": {
+          "providerId": "anthropic",
+          "accountId": "primary",
+          "destinationId": "anthropic",
+          "transportId": "anthropic"
+        },
+        "path": "/v1/messages",
+        "method": "POST"
+      },
+      {
+        "binding": {
+          "providerId": "anthropic",
+          "accountId": "primary",
+          "destinationId": "anthropic",
+          "transportId": "anthropic"
+        },
+        "path": "/v1/messages",
+        "method": "POST"
+      },
+      {
+        "binding": {
+          "providerId": "anthropic",
+          "accountId": "primary",
+          "destinationId": "anthropic",
+          "transportId": "anthropic"
+        },
+        "path": "/v1/messages",
+        "method": "POST"
+      },
+      {
+        "binding": {
+          "providerId": "anthropic",
+          "accountId": "primary",
+          "destinationId": "anthropic",
+          "transportId": "anthropic"
+        },
+        "path": "/v1/messages",
+        "method": "POST"
+      },
+      {
+        "binding": {
+          "providerId": "anthropic",
+          "accountId": "primary",
+          "destinationId": "anthropic",
+          "transportId": "anthropic"
+        },
+        "path": "/v1/messages",
+        "method": "POST"
+      },
+      {
+        "binding": {
+          "providerId": "anthropic",
+          "accountId": "primary",
+          "destinationId": "anthropic",
+          "transportId": "anthropic"
+        },
+        "path": "/v1/models",
+        "method": "GET"
+      },
+      {
+        "binding": {
+          "providerId": "anthropic",
+          "accountId": "primary",
+          "destinationId": "anthropic",
+          "transportId": "anthropic"
+        },
+        "path": "/v1/messages/count_tokens",
+        "method": "POST"
+      },
+      {
+        "binding": {
+          "providerId": "openai",
+          "accountId": "primary",
+          "destinationId": "openai",
+          "transportId": "openai"
+        },
+        "path": "/v1/chat/completions",
+        "method": "POST"
+      },
+      {
+        "binding": {
+          "providerId": "anthropic",
+          "accountId": "primary",
+          "destinationId": "anthropic",
+          "transportId": "anthropic"
+        },
+        "path": "/v1/messages",
+        "method": "POST"
+      },
+      {
+        "binding": {
+          "providerId": "openai",
+          "accountId": "primary",
+          "destinationId": "openai",
+          "transportId": "openai"
+        },
+        "path": "/v1/chat/completions",
+        "method": "POST"
+      },
+      {
+        "binding": {
+          "providerId": "anthropic",
+          "accountId": "primary",
+          "destinationId": "anthropic",
+          "transportId": "anthropic"
+        },
+        "path": "/v1/messages/count_tokens",
+        "method": "POST"
+      },
+      {
+        "binding": {
+          "providerId": "anthropic",
+          "accountId": "primary",
+          "destinationId": "anthropic",
+          "transportId": "anthropic"
+        },
+        "path": "/v1/messages",
+        "method": "POST"
+      },
+      {
+        "binding": {
+          "providerId": "openai",
+          "accountId": "primary",
+          "destinationId": "openai",
+          "transportId": "openai"
+        },
+        "path": "/v1/chat/completions",
+        "method": "POST"
+      },
+      {
+        "binding": {
+          "providerId": "anthropic",
+          "accountId": "primary",
+          "destinationId": "anthropic",
+          "transportId": "anthropic"
+        },
+        "path": "/v1/messages",
+        "method": "POST"
+      },
+      {
+        "binding": {
+          "providerId": "openai",
+          "accountId": "primary",
+          "destinationId": "openai",
+          "transportId": "openai"
+        },
+        "path": "/v1/chat/completions",
+        "method": "POST"
+      },
+      {
+        "binding": {
+          "providerId": "anthropic",
+          "accountId": "primary",
+          "destinationId": "anthropic",
+          "transportId": "anthropic"
+        },
+        "path": "/v1/messages",
+        "method": "POST"
+      },
+      {
+        "binding": {
+          "providerId": "openai",
+          "accountId": "primary",
+          "destinationId": "openai",
+          "transportId": "openai"
+        },
+        "path": "/v1/chat/completions",
+        "method": "POST"
+      },
+      {
+        "binding": {
+          "providerId": "anthropic",
+          "accountId": "primary",
+          "destinationId": "anthropic",
+          "transportId": "anthropic"
+        },
+        "path": "/v1/messages",
+        "method": "POST"
+      },
+      {
+        "binding": {
+          "providerId": "openai",
+          "accountId": "primary",
+          "destinationId": "openai",
+          "transportId": "openai"
+        },
+        "path": "/v1/chat/completions",
+        "method": "POST"
+      },
+      {
+        "binding": {
+          "providerId": "openai",
+          "accountId": "primary",
+          "destinationId": "openai",
+          "transportId": "openai"
+        },
+        "path": "/v1/chat/completions",
+        "method": "POST"
+      },
+      {
+        "binding": {
+          "providerId": "anthropic",
+          "accountId": "primary",
+          "destinationId": "anthropic",
+          "transportId": "anthropic"
+        },
+        "path": "/v1/models",
+        "method": "GET"
+      }
+    ]
+  },
+  "after": {
+    "syncSequence": 726,
+    "commitCalls": 414,
+    "providerDispatches": [
+      {
+        "binding": {
+          "providerId": "openai",
+          "accountId": "primary",
+          "destinationId": "openai",
+          "transportId": "openai"
+        },
+        "path": "/v1/chat/completions",
+        "method": "POST"
+      },
+      {
+        "binding": {
+          "providerId": "openai",
+          "accountId": "primary",
+          "destinationId": "openai",
+          "transportId": "openai"
+        },
+        "path": "/v1/chat/completions",
+        "method": "POST"
+      },
+      {
+        "binding": {
+          "providerId": "openai",
+          "accountId": "primary",
+          "destinationId": "openai",
+          "transportId": "openai"
+        },
+        "path": "/v1/chat/completions",
+        "method": "POST"
+      },
+      {
+        "binding": {
+          "providerId": "anthropic",
+          "accountId": "primary",
+          "destinationId": "anthropic",
+          "transportId": "anthropic"
+        },
+        "path": "/v1/messages",
+        "method": "POST"
+      },
+      {
+        "binding": {
+          "providerId": "anthropic",
+          "accountId": "primary",
+          "destinationId": "anthropic",
+          "transportId": "anthropic"
+        },
+        "path": "/v1/messages",
+        "method": "POST"
+      },
+      {
+        "binding": {
+          "providerId": "anthropic",
+          "accountId": "primary",
+          "destinationId": "anthropic",
+          "transportId": "anthropic"
+        },
+        "path": "/v1/messages",
+        "method": "POST"
+      },
+      {
+        "binding": {
+          "providerId": "anthropic",
+          "accountId": "primary",
+          "destinationId": "anthropic",
+          "transportId": "anthropic"
+        },
+        "path": "/v1/messages",
+        "method": "POST"
+      },
+      {
+        "binding": {
+          "providerId": "anthropic",
+          "accountId": "primary",
+          "destinationId": "anthropic",
+          "transportId": "anthropic"
+        },
+        "path": "/v1/messages",
+        "method": "POST"
+      },
+      {
+        "binding": {
+          "providerId": "anthropic",
+          "accountId": "primary",
+          "destinationId": "anthropic",
+          "transportId": "anthropic"
+        },
+        "path": "/v1/messages",
+        "method": "POST"
+      },
+      {
+        "binding": {
+          "providerId": "anthropic",
+          "accountId": "primary",
+          "destinationId": "anthropic",
+          "transportId": "anthropic"
+        },
+        "path": "/v1/messages",
+        "method": "POST"
+      },
+      {
+        "binding": {
+          "providerId": "anthropic",
+          "accountId": "primary",
+          "destinationId": "anthropic",
+          "transportId": "anthropic"
+        },
+        "path": "/v1/messages",
+        "method": "POST"
+      },
+      {
+        "binding": {
+          "providerId": "anthropic",
+          "accountId": "primary",
+          "destinationId": "anthropic",
+          "transportId": "anthropic"
+        },
+        "path": "/v1/messages",
+        "method": "POST"
+      },
+      {
+        "binding": {
+          "providerId": "anthropic",
+          "accountId": "primary",
+          "destinationId": "anthropic",
+          "transportId": "anthropic"
+        },
+        "path": "/v1/models",
+        "method": "GET"
+      },
+      {
+        "binding": {
+          "providerId": "anthropic",
+          "accountId": "primary",
+          "destinationId": "anthropic",
+          "transportId": "anthropic"
+        },
+        "path": "/v1/messages/count_tokens",
+        "method": "POST"
+      },
+      {
+        "binding": {
+          "providerId": "openai",
+          "accountId": "primary",
+          "destinationId": "openai",
+          "transportId": "openai"
+        },
+        "path": "/v1/chat/completions",
+        "method": "POST"
+      },
+      {
+        "binding": {
+          "providerId": "anthropic",
+          "accountId": "primary",
+          "destinationId": "anthropic",
+          "transportId": "anthropic"
+        },
+        "path": "/v1/messages",
+        "method": "POST"
+      },
+      {
+        "binding": {
+          "providerId": "openai",
+          "accountId": "primary",
+          "destinationId": "openai",
+          "transportId": "openai"
+        },
+        "path": "/v1/chat/completions",
+        "method": "POST"
+      },
+      {
+        "binding": {
+          "providerId": "anthropic",
+          "accountId": "primary",
+          "destinationId": "anthropic",
+          "transportId": "anthropic"
+        },
+        "path": "/v1/messages/count_tokens",
+        "method": "POST"
+      },
+      {
+        "binding": {
+          "providerId": "anthropic",
+          "accountId": "primary",
+          "destinationId": "anthropic",
+          "transportId": "anthropic"
+        },
+        "path": "/v1/messages",
+        "method": "POST"
+      },
+      {
+        "binding": {
+          "providerId": "openai",
+          "accountId": "primary",
+          "destinationId": "openai",
+          "transportId": "openai"
+        },
+        "path": "/v1/chat/completions",
+        "method": "POST"
+      },
+      {
+        "binding": {
+          "providerId": "anthropic",
+          "accountId": "primary",
+          "destinationId": "anthropic",
+          "transportId": "anthropic"
+        },
+        "path": "/v1/messages",
+        "method": "POST"
+      },
+      {
+        "binding": {
+          "providerId": "openai",
+          "accountId": "primary",
+          "destinationId": "openai",
+          "transportId": "openai"
+        },
+        "path": "/v1/chat/completions",
+        "method": "POST"
+      },
+      {
+        "binding": {
+          "providerId": "anthropic",
+          "accountId": "primary",
+          "destinationId": "anthropic",
+          "transportId": "anthropic"
+        },
+        "path": "/v1/messages",
+        "method": "POST"
+      },
+      {
+        "binding": {
+          "providerId": "openai",
+          "accountId": "primary",
+          "destinationId": "openai",
+          "transportId": "openai"
+        },
+        "path": "/v1/chat/completions",
+        "method": "POST"
+      },
+      {
+        "binding": {
+          "providerId": "anthropic",
+          "accountId": "primary",
+          "destinationId": "anthropic",
+          "transportId": "anthropic"
+        },
+        "path": "/v1/messages",
+        "method": "POST"
+      },
+      {
+        "binding": {
+          "providerId": "openai",
+          "accountId": "primary",
+          "destinationId": "openai",
+          "transportId": "openai"
+        },
+        "path": "/v1/chat/completions",
+        "method": "POST"
+      },
+      {
+        "binding": {
+          "providerId": "openai",
+          "accountId": "primary",
+          "destinationId": "openai",
+          "transportId": "openai"
+        },
+        "path": "/v1/chat/completions",
+        "method": "POST"
+      },
+      {
+        "binding": {
+          "providerId": "anthropic",
+          "accountId": "primary",
+          "destinationId": "anthropic",
+          "transportId": "anthropic"
+        },
+        "path": "/v1/models",
+        "method": "GET"
+      }
+    ]
+  },
+  "liveMutations": [],
+  "status": "passed"
+}

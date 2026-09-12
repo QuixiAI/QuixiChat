@@ -1,0 +1,294 @@
+{
+  "status": "passed",
+  "finishedAt": "2026-09-09T10:41:11.198Z",
+  "qualification": "Synthetic dense text/maps through actual extraction/search repositories and shipped SQLite WASM in Node. Publication is outside timing; index-credit timing includes nested instrumentation. No OPFS, PDF parser or production durable-claim timing claim.",
+  "pages": 10,
+  "textUTF16PerPage": 151000,
+  "spansPerPage": 2000,
+  "stageBatchesPerPage": 38,
+  "currentCalls": 1120,
+  "currentMs": 136.3462660000002,
+  "samples": [
+    {
+      "page": 1,
+      "elapsedMs": 56.02287500000003,
+      "slices": 10,
+      "currentCalls": 112
+    },
+    {
+      "page": 2,
+      "elapsedMs": 35.99795800000004,
+      "slices": 10,
+      "currentCalls": 112
+    },
+    {
+      "page": 3,
+      "elapsedMs": 32.622292000000016,
+      "slices": 10,
+      "currentCalls": 112
+    },
+    {
+      "page": 4,
+      "elapsedMs": 35.55808400000001,
+      "slices": 10,
+      "currentCalls": 112
+    },
+    {
+      "page": 5,
+      "elapsedMs": 41.17083400000001,
+      "slices": 10,
+      "currentCalls": 112
+    },
+    {
+      "page": 6,
+      "elapsedMs": 33.76941700000009,
+      "slices": 10,
+      "currentCalls": 112
+    },
+    {
+      "page": 7,
+      "elapsedMs": 33.916291,
+      "slices": 10,
+      "currentCalls": 112
+    },
+    {
+      "page": 8,
+      "elapsedMs": 26.834540999999945,
+      "slices": 10,
+      "currentCalls": 112
+    },
+    {
+      "page": 9,
+      "elapsedMs": 27.206666999999925,
+      "slices": 10,
+      "currentCalls": 112
+    },
+    {
+      "page": 10,
+      "elapsedMs": 28.146291999999903,
+      "slices": 10,
+      "currentCalls": 112
+    }
+  ],
+  "statements": [
+    {
+      "sql": "SELECT coalesce((SELECT revision FROM quixi_search_scopes WHERE scope=? AND id=?),0)",
+      "calls": 3060,
+      "ms": 37.26872300000119
+    },
+    {
+      "sql": "SELECT id,run_id,page,state,next_sequence,utf16,map_count,map_bytes,max_item,text_sha,map_sha,source_digest,publication_revision,classification,published_bytes FROM quixi_extract_pages WHERE id=? AND state='published'",
+      "calls": 1140,
+      "ms": 34.05841499999755
+    },
+    {
+      "sql": "INSERT INTO quixi_search_chunks(epoch,source_key,run_id,chunk_id,source_type,has_code,text,context,position,payload) VALUES(?,?,?,?,?,?,?,?,?,?)",
+      "calls": 380,
+      "ms": 30.5504949999999
+    },
+    {
+      "sql": "SELECT payload FROM quixi_records WHERE collection=? AND id=?",
+      "calls": 2284,
+      "ms": 30.2720669999986
+    },
+    {
+      "sql": "SELECT * FROM quixi_extract_runs WHERE id=?",
+      "calls": 1150,
+      "ms": 23.378818000004628
+    },
+    {
+      "sql": "SELECT EXISTS(SELECT 1 FROM quixi_search_heads h WHERE h.epoch=(SELECT active_epoch FROM quixi_search_meta) AND h.source_key=? AND h.source_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='source' AND id=h.source_key),0)\nAND h.message_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='message' AND id=h.message_id),0)\nAND h.thread_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='thread' AND id=h.thread_id),0)\nAND h.document_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='document' AND id=h.document_id),0)\nAND h.global_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='global' AND id='*'),0) AND (substr(h.source_key,1,2)<>'e:' OR (NOT EXISTS(SELECT 1 FROM quixi_search_scopes WHERE scope='extraction_failed' AND id=h.document_id) AND EXISTS(\nSELECT 1 FROM quixi_search_page_refs er\nJOIN quixi_extract_pages ep ON ep.id=er.page_id AND ep.state='published' AND ep.run_id=er.extraction_run_id AND ep.page=er.page AND ep.source_digest=er.source_digest AND ep.publication_revision=er.publication_revision\nJOIN quixi_extract_runs ex ON ex.id=ep.run_id AND ex.document_id=er.document_id AND ex.identity=er.identity\nJOIN quixi_extract_documents ed ON ed.document_id=ex.document_id AND ed.visible_run=ex.id\nJOIN quixi_records doc ON doc.collection='documents' AND doc.id=er.document_id AND json_extract(doc.payload,'$.attachmentId')=er.attachment_id\nJOIN quixi_records att ON att.collection='attachments' AND att.id=er.attachment_id AND json_extract(att.payload,'$.availability')='available' AND json_extract(att.payload,'$.blobSha256')=er.attachment_sha256 AND json_extract(att.payload,'$.sizeBytes')=er.attachment_bytes AND lower(trim(CASE WHEN instr(json_extract(att.payload,'$.mimeType'),';')>0 THEN substr(json_extract(att.payload,'$.mimeType'),1,instr(json_extract(att.payload,'$.mimeType'),';')-1) ELSE json_extract(att.payload,'$.mimeType') END))='application/pdf'\nWHERE er.epoch=h.epoch AND er.source_key=h.source_key AND er.run_id=h.run_id))))",
+      "calls": 110,
+      "ms": 18.966246000000154
+    },
+    {
+      "sql": "SELECT version,substr(checksum,1,65) AS checksum FROM quixi_extract_schema LIMIT 2",
+      "calls": 1355,
+      "ms": 18.3755529999994
+    },
+    {
+      "sql": "UPDATE quixi_search_meta SET revision=revision+1",
+      "calls": 402,
+      "ms": 17.760533999999836
+    },
+    {
+      "sql": "SELECT * FROM quixi_extract_documents WHERE document_id=?",
+      "calls": 1130,
+      "ms": 17.15781099999907
+    },
+    {
+      "sql": "SELECT CASE WHEN length(CAST(layout AS BLOB))<=512 THEN layout ELSE NULL END AS layout FROM quixi_extract_page_layout WHERE page_id=?",
+      "calls": 1140,
+      "ms": 13.346854000001542
+    },
+    {
+      "sql": "PRAGMA schema_version",
+      "calls": 1355,
+      "ms": 12.513989999999495
+    },
+    {
+      "sql": "COMMIT",
+      "calls": 404,
+      "ms": 7.983218999999536
+    },
+    {
+      "sql": "BEGIN IMMEDIATE",
+      "calls": 404,
+      "ms": 3.4961280000005104
+    },
+    {
+      "sql": "SELECT EXISTS(SELECT 1 FROM quixi_search_heads h WHERE h.epoch=? AND h.source_key=? AND h.source_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='source' AND id=h.source_key),0)\nAND h.message_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='message' AND id=h.message_id),0)\nAND h.thread_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='thread' AND id=h.thread_id),0)\nAND h.document_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='document' AND id=h.document_id),0)\nAND h.global_revision=coalesce((SELECT revision FROM quixi_search_scopes WHERE scope='global' AND id='*'),0) AND (substr(h.source_key,1,2)<>'e:' OR (NOT EXISTS(SELECT 1 FROM quixi_search_scopes WHERE scope='extraction_failed' AND id=h.document_id) AND EXISTS(\nSELECT 1 FROM quixi_search_page_refs er\nJOIN quixi_extract_pages ep ON ep.id=er.page_id AND ep.state='published' AND ep.run_id=er.extraction_run_id AND ep.page=er.page AND ep.source_digest=er.source_digest AND ep.publication_revision=er.publication_revision\nJOIN quixi_extract_runs ex ON ex.id=ep.run_id AND ex.document_id=er.document_id AND ex.identity=er.identity\nJOIN quixi_extract_documents ed ON ed.document_id=ex.document_id AND ed.visible_run=ex.id\nJOIN quixi_records doc ON doc.collection='documents' AND doc.id=er.document_id AND json_extract(doc.payload,'$.attachmentId')=er.attachment_id\nJOIN quixi_records att ON att.collection='attachments' AND att.id=er.attachment_id AND json_extract(att.payload,'$.availability')='available' AND json_extract(att.payload,'$.blobSha256')=er.attachment_sha256 AND json_extract(att.payload,'$.sizeBytes')=er.attachment_bytes AND lower(trim(CASE WHEN instr(json_extract(att.payload,'$.mimeType'),';')>0 THEN substr(json_extract(att.payload,'$.mimeType'),1,instr(json_extract(att.payload,'$.mimeType'),';')-1) ELSE json_extract(att.payload,'$.mimeType') END))='application/pdf'\nWHERE er.epoch=h.epoch AND er.source_key=h.source_key AND er.run_id=h.run_id))))",
+      "calls": 13,
+      "ms": 2.597917999999879
+    },
+    {
+      "sql": "SELECT * FROM quixi_extract_publications ORDER BY revision LIMIT ?",
+      "calls": 100,
+      "ms": 1.8843790000003366
+    },
+    {
+      "sql": "SELECT json_quote(text) AS value FROM quixi_extract_pages WHERE id=?",
+      "calls": 10,
+      "ms": 1.15674800000005
+    },
+    {
+      "sql": "SELECT * FROM quixi_search_queue WHERE failed=0 ORDER BY CASE scope WHEN 'source' THEN 0 ELSE 1 END,epoch,scope,id LIMIT 1",
+      "calls": 25,
+      "ms": 1.1154209999997988
+    },
+    {
+      "sql": "INSERT INTO quixi_search_heads VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ON CONFLICT(epoch,source_key) DO UPDATE SET run_id=excluded.run_id,source_type=excluded.source_type,source_id=excluded.source_id,part_id=excluded.part_id,thread_id=excluded.thread_id,message_id=excluded.message_id,document_id=excluded.document_id,title=excluded.title,role=excluded.role,provider=excluded.provider,model=excluded.model,date=excluded.date,tags=excluded.tags,media_type=excluded.media_type,origin=excluded.origin,source_revision=excluded.source_revision,message_revision=excluded.message_revision,thread_revision=excluded.thread_revision,document_revision=excluded.document_revision,global_revision=excluded.global_revision",
+      "calls": 10,
+      "ms": 0.5467889999999898
+    },
+    {
+      "sql": "INSERT INTO quixi_search_builds VALUES(?,?,?) ON CONFLICT(epoch,source_key) DO UPDATE SET run_id=excluded.run_id",
+      "calls": 10,
+      "ms": 0.5207079999998996
+    },
+    {
+      "sql": "INSERT INTO quixi_search_page_refs VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?) ON CONFLICT(epoch,source_key) DO UPDATE SET run_id=excluded.run_id,page_id=excluded.page_id,extraction_run_id=excluded.extraction_run_id,page=excluded.page,document_id=excluded.document_id,attachment_id=excluded.attachment_id,attachment_sha256=excluded.attachment_sha256,attachment_bytes=excluded.attachment_bytes,source_digest=excluded.source_digest,publication_revision=excluded.publication_revision,identity=excluded.identity",
+      "calls": 10,
+      "ms": 0.49191499999983535
+    },
+    {
+      "sql": "SELECT * FROM quixi_search_meta",
+      "calls": 20,
+      "ms": 0.3876220000001638
+    },
+    {
+      "sql": "SELECT key FROM (SELECT 'd:'||id AS key FROM quixi_records WHERE collection='documents' AND id=? UNION ALL SELECT 'x:'||id FROM quixi_search_extractions WHERE document_id=?) WHERE key>? ORDER BY key LIMIT 32",
+      "calls": 1,
+      "ms": 0.3634169999999983
+    },
+    {
+      "sql": "DELETE FROM quixi_search_builds WHERE epoch=? AND source_key=? AND run_id=?",
+      "calls": 10,
+      "ms": 0.31879100000008975
+    },
+    {
+      "sql": "INSERT INTO quixi_search_scopes VALUES(?,?,?) ON CONFLICT(scope,id) DO UPDATE SET revision=excluded.revision",
+      "calls": 10,
+      "ms": 0.2833309999998619
+    },
+    {
+      "sql": "DELETE FROM quixi_search_queue WHERE epoch=? AND scope='source' AND id=?",
+      "calls": 13,
+      "ms": 0.2357919999998046
+    },
+    {
+      "sql": "INSERT INTO quixi_search_queue(epoch,scope,id,revision,after_id,failed) VALUES(?,?,?,?,'',0) ON CONFLICT(epoch,scope,id) DO UPDATE SET revision=excluded.revision,after_id='',failed=0",
+      "calls": 10,
+      "ms": 0.21291800000000194
+    },
+    {
+      "sql": "SELECT p.id FROM quixi_extract_pages p JOIN quixi_extract_documents d ON d.visible_run=p.run_id WHERE p.state='published' AND p.id>? AND (? IS NULL OR d.document_id=?) ORDER BY p.id LIMIT ?",
+      "calls": 2,
+      "ms": 0.18891600000000608
+    },
+    {
+      "sql": "SELECT CASE WHEN length(sql)<=8192 THEN sql ELSE NULL END AS sql FROM sqlite_schema WHERE (name GLOB 'quixi_extract_*' OR tbl_name GLOB 'quixi_extract_*') AND sql IS NOT NULL AND type IN('table','index','trigger','view') LIMIT 32",
+      "calls": 1,
+      "ms": 0.13595800000001645
+    },
+    {
+      "sql": "INSERT INTO quixi_search_queue(epoch,scope,id,revision,failed) VALUES(?,'source',?,?,0) ON CONFLICT(epoch,scope,id) DO UPDATE SET revision=excluded.revision,failed=0",
+      "calls": 4,
+      "ms": 0.12129099999998516
+    },
+    {
+      "sql": "DELETE FROM quixi_search_scopes WHERE scope='extraction_failed' AND id=?",
+      "calls": 10,
+      "ms": 0.09937399999986951
+    },
+    {
+      "sql": "SELECT key FROM (SELECT 'p:'||id AS key FROM quixi_records WHERE collection='parts' UNION ALL SELECT 'f:'||id FROM quixi_records WHERE collection='parts' AND json_extract(payload,'$.kind')='Image' UNION ALL SELECT 'd:'||id FROM quixi_records WHERE collection='documents' UNION ALL SELECT 'x:'||id FROM quixi_search_extractions) WHERE key>? ORDER BY key LIMIT 32",
+      "calls": 1,
+      "ms": 0.09508399999998574
+    },
+    {
+      "sql": "UPDATE quixi_extract_runs SET used_bytes=used_bytes+? WHERE id=?",
+      "calls": 10,
+      "ms": 0.08970900000031179
+    },
+    {
+      "sql": "SELECT run_id FROM quixi_extract_publications WHERE revision=?",
+      "calls": 10,
+      "ms": 0.08504099999970549
+    },
+    {
+      "sql": "DELETE FROM quixi_extract_publications WHERE revision=?",
+      "calls": 10,
+      "ms": 0.0794569999998771
+    },
+    {
+      "sql": "UPDATE quixi_extract_meta SET used_bytes=used_bytes+?",
+      "calls": 10,
+      "ms": 0.06862499999999727
+    },
+    {
+      "sql": "SELECT used_bytes FROM quixi_extract_meta",
+      "calls": 10,
+      "ms": 0.059543000000132906
+    },
+    {
+      "sql": "DELETE FROM quixi_search_queue WHERE epoch=? AND scope=? AND id=?",
+      "calls": 2,
+      "ms": 0.024500000000017508
+    },
+    {
+      "sql": "DELETE FROM quixi_search_heads WHERE epoch=? AND source_key=?",
+      "calls": 2,
+      "ms": 0.020375000000001364
+    }
+  ],
+  "sourceSha256": {
+    "packages/storage/src/worker/search/index.ts": "818ea13f31a67615c39e6ffe8a251d6534a6663ce80f35d65262f1efd9807b3e",
+    "packages/storage/src/worker/search/extraction.ts": "ba85bc1954ce553a3268e1b924f8eeed879f0b1dad694108090de77301096033",
+    "packages/storage/src/worker/search/schema.ts": "ac6a9bbca9ebb51be79afce94f25415ba79e7ec30753ac3433d2ab944cf0f09b",
+    "packages/storage/src/worker/search/sources.ts": "8cc39deab6b441c4ea067ed5a2ffe208e46dc4bb8af7df35267354d5a664c7f4",
+    "packages/storage/src/worker/extraction/index.ts": "be7a6a8981271619a0f3d37daa61594da489feb5b76a193427b7d6dfa0e69ecc",
+    "packages/storage/src/worker/extraction/schema.ts": "e08905c3ed353f8bfbbef90f5d768126eac5713e471c4ceec283e62a99961487",
+    "packages/core/src/contracts/extraction.ts": "b05bcd2ef02bd60694bff7cc5d83fccbd10e2584f1ba9edf17505241c209b483",
+    "packages/storage/tests/search-performance/dense-credit.ts": "c913c9e3521e4bafa640b9307b8e08545b196a11699fa6d61f449634bcbb617a",
+    "packages/storage/tests/extraction-search/fixture.ts": "c4696c106bd9cfb7673d1a295b7c63141c951e966d7d79a12f727af5f4bc7ac5",
+    "packages/storage/sqlite/artifacts.json": "d6033112dabf47ede85c0599777f07261d475221fa3e0e315afbf1f8341096cb"
+  },
+  "sourceStable": true,
+  "search": {
+    "state": "ready",
+    "version": "fts-v1:quixi-structural-utf16-v1:4096:64:none:none:code-v1:nul-space-v1",
+    "indexedChunks": 380,
+    "pendingSources": 0,
+    "failedSources": 0,
+    "activeEpoch": 1,
+    "rebuildingEpoch": null,
+    "revision": 402,
+    "semantic": {
+      "state": "unavailable",
+      "reason": "Semantic retrieval requires the separately enabled and validated plan21 embedding index."
+    },
+    "activeSource": null,
+    "lastFailure": null
+  }
+}

@@ -1,0 +1,70 @@
+
+> quixi@0.0.1 test:app:library
+> tsc --noEmit -p packages/app/tsconfig.tests.json && node --experimental-transform-types --test packages/app/tests/library-refresh.test.ts
+
+TAP version 13
+# (node:2988) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: notifications during a slow automatic view publish that view and coalesce into one followup
+ok 1 - notifications during a slow automatic view publish that view and coalesce into one followup
+  ---
+  duration_ms: 1154.855209
+  type: 'test'
+  ...
+# Subtest: notifications during initial explicit navigation wait for publication before automatic refresh
+ok 2 - notifications during initial explicit navigation wait for publication before automatic refresh
+  ---
+  duration_ms: 463.531334
+  type: 'test'
+  ...
+# Subtest: latest explicit navigation wins over an older slow view and its queued notification
+ok 3 - latest explicit navigation wins over an older slow view and its queued notification
+  ---
+  duration_ms: 261.795
+  type: 'test'
+  ...
+# Subtest: an older navigation failure cannot overwrite the current view error state
+ok 4 - an older navigation failure cannot overwrite the current view error state
+  ---
+  duration_ms: 0.322833
+  type: 'test'
+  ...
+# Subtest: a failed automatic read does not busy retry, and a later notification can recover
+ok 5 - a failed automatic read does not busy retry, and a later notification can recover
+  ---
+  duration_ms: 869.554792
+  type: 'test'
+  ...
+# Subtest: a failed grouped part read keeps the automatic refresh slot until its held sibling settles
+ok 6 - a failed grouped part read keeps the automatic refresh slot until its held sibling settles
+  ---
+  duration_ms: 742.244792
+  type: 'test'
+  ...
+# Subtest: dispose cancels a pending automatic timer without further reads or publications
+ok 7 - dispose cancels a pending automatic timer without further reads or publications
+  ---
+  duration_ms: 261.477209
+  type: 'test'
+  ...
+# Subtest: dispose during an automatic read prevents later stages and a dirty followup
+ok 8 - dispose during an automatic read prevents later stages and a dirty followup
+  ---
+  duration_ms: 469.194708
+  type: 'test'
+  ...
+# Subtest: archive selection change suppresses a pending automatic refresh and subsequent notifications
+ok 9 - archive selection change suppresses a pending automatic refresh and subsequent notifications
+  ---
+  duration_ms: 524.739791
+  type: 'test'
+  ...
+1..9
+# tests 9
+# suites 0
+# pass 9
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 4855.813709

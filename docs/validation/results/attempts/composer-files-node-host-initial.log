@@ -1,0 +1,77 @@
+TAP version 13
+# (node:91525) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: openai-compatible: byte-fragmented UTF-8, tools, citations, raw-only unknown outputs and cumulative usage
+ok 1 - openai-compatible: byte-fragmented UTF-8, tools, citations, raw-only unknown outputs and cumulative usage
+  ---
+  duration_ms: 3.114084
+  type: 'test'
+  ...
+# Subtest: openai-compatible: explicit limit stop and terminal truncation differ
+ok 2 - openai-compatible: explicit limit stop and terminal truncation differ
+  ---
+  duration_ms: 1.184083
+  type: 'test'
+  ...
+# Subtest: anthropic: byte-fragmented UTF-8, tools, citations, raw-only unknown outputs and cumulative usage
+ok 3 - anthropic: byte-fragmented UTF-8, tools, citations, raw-only unknown outputs and cumulative usage
+  ---
+  duration_ms: 1.121083
+  type: 'test'
+  ...
+# Subtest: anthropic: explicit limit stop and terminal truncation differ
+ok 4 - anthropic: explicit limit stop and terminal truncation differ
+  ---
+  duration_ms: 1.261125
+  type: 'test'
+  ...
+# Subtest: SSE bounds include fragmented Unicode and unterminated records
+ok 5 - SSE bounds include fragmented Unicode and unterminated records
+  ---
+  duration_ms: 28.755166
+  type: 'test'
+  ...
+# Subtest: tool JSON, depth and byte limits fail without fabricating a complete tool
+ok 6 - tool JSON, depth and byte limits fail without fabricating a complete tool
+  ---
+  duration_ms: 3.821209
+  type: 'test'
+  ...
+# Subtest: controlled HTTP: bindings, request bodies, stream cleanup, error health, cancellation, compatibility and cost
+not ok 7 - controlled HTTP: bindings, request bodies, stream cleanup, error health, cancellation, compatibility and cost
+  ---
+  duration_ms: 7.732917
+  type: 'test'
+  location: '/Users/eric/QuixiChat/packages/providers/tests/adapter.test.ts:154:1'
+  failureType: 'testCodeFailure'
+  error: 'window is not defined'
+  code: 'ERR_TEST_FAILURE'
+  name: 'ReferenceError'
+  stack: |-
+    createWebHost (/Users/eric/QuixiChat/apps/web/src/host/index.ts:1125:3)
+    TestContext.<anonymous> (/Users/eric/QuixiChat/packages/providers/tests/adapter.test.ts:236:20)
+    process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: framing byte cap includes line endings and structural bounds include queued nodes
+ok 8 - framing byte cap includes line endings and structural bounds include queued nodes
+  ---
+  duration_ms: 7.286167
+  type: 'test'
+  ...
+# Subtest: usage metadata cannot grow without bound across otherwise small records
+ok 9 - usage metadata cannot grow without bound across otherwise small records
+  ---
+  duration_ms: 2.769916
+  type: 'test'
+  ...
+1..9
+# tests 9
+# suites 0
+# pass 8
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 240.196958

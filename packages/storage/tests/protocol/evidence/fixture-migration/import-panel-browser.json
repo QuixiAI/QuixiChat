@@ -1,0 +1,55 @@
+{
+  "selectedEngines": [
+    "chromium",
+    "webkit"
+  ],
+  "status": "passed",
+  "startedAt": "2026-09-09T01:46:19.200Z",
+  "hosts": [
+    {
+      "name": "chromium",
+      "status": "passed",
+      "checks": [
+        "React StrictMode panel selects a real host File, imports through production storage, releases selected handle and shows durable completion",
+        "bounded source-specific warning review renders missing and unsupported content notices",
+        "conversation action returns the canonical thread ID to host composition",
+        "report is streamed into a verified host transfer and saved via a separate user gesture",
+        "pause during an in-flight actual storage acknowledgment retains hidden progress without publishing a partial thread",
+        "saved run listing and warning/report access survive an actual browser-process restart",
+        "paused import resumes after an actual browser-process restart without a selected File or provider account",
+        "explicit discard removes unfinished import work while preserving already saved conversations and original files",
+        "unmount cancels active import, persists paused progress, releases selected host file and publishes no partial thread"
+      ],
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36"
+    },
+    {
+      "name": "webkit",
+      "status": "passed",
+      "checks": [
+        "React StrictMode panel selects a real host File, imports through production storage, releases selected handle and shows durable completion",
+        "bounded source-specific warning review renders missing and unsupported content notices",
+        "conversation action returns the canonical thread ID to host composition",
+        "report is streamed into a verified host transfer and saved via a separate user gesture",
+        "pause during an in-flight actual storage acknowledgment retains hidden progress without publishing a partial thread",
+        "saved run listing and warning/report access survive an actual browser-process restart",
+        "paused import resumes after an actual browser-process restart without a selected File or provider account",
+        "explicit discard removes unfinished import work while preserving already saved conversations and original files",
+        "unmount cancels active import, persists paused progress, releases selected host file and publishes no partial thread"
+      ],
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15"
+    }
+  ],
+  "sourceSha256": {
+    "tooling/browser-engines.mjs": "136f16e63e905ae4c8305c7adedfce2411eff13b04f914054f8fb718155d0df1",
+    "packages/app/src/features/imports/ImportPanel.tsx": "173e999d994c66b0ee36d2ddf26fb97b534c1b00f2b373a4f1bd5ed88e30c692",
+    "packages/app/src/features/imports/controller.ts": "546f04aa91a12a45164a95c22e16ad2b988abf2a42d4d859eab0f7b7ccb3e82a",
+    "packages/app/src/features/imports/host-files.ts": "3cf152190b585f932619d53fc64b7fce934fff6291ebf64e96e0fa5a993b9dd6",
+    "packages/app/src/features/imports/discard.ts": "9daf2de2fdfc7caea98346b6eba14058c980fe2448a193994901310a552a2763",
+    "packages/importers/src/host-report.ts": "6c41791c7961f838542d020098469a2557f25ad9de1a1d5b49444dc2058a4d71",
+    "apps/web/src/host/index.ts": "11263c0804c978458bd81db44de022ca671fa2083be2e3d4710d428e213ff6b4",
+    "apps/web/src/host/transfers.ts": "5718b2743caeffb00f4e736393ddff691b94fd896453aafbd696ac50d2e618f1",
+    "packages/storage/src/client/archive.ts": "8c2e1ac1858b6a62cf0875822ea04643b79b37bfa97fc50be6f5ab02c0736b61",
+    "package-lock.json": "14938dfb335480fccf15ef675167da13a3aac8832d29891e38ff67175920ad2c"
+  },
+  "finishedAt": "2026-09-09T01:46:31.313Z"
+}

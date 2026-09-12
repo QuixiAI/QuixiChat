@@ -1,0 +1,1634 @@
+{
+  "report": "dense-sql-small",
+  "reportSha256": "62470c2322ff441715d29d26a61a4061c9fbf5621827ad1924462f83992eb8ca",
+  "analysisToolSha256": "39b0938dbe04d07e02097e1f2814244d287438b8e4b97e033c275e12c316297e",
+  "method": "Fixed-category synchronous SQLite OO1 adapter time includes wasm/bind/step/IO/result conversion. Fenced scope residual is not isolated CPU/serialization. Client minus scope includes queue/protocol/scheduling. No per-call SQL trace or values.",
+  "cases": [
+    {
+      "engine": "chromium",
+      "fixture": "dense-1",
+      "stageCalls": 38,
+      "sourceSha256": "985fad8a10c48110f96151a868ef5c41c4a10e7a029b88e663276f053bc75cd3",
+      "outputUTF16": 151000,
+      "stagedSpans": 2000,
+      "clientStageMs": 343.10000002384186,
+      "fencedStageMs": 299.1000000163913,
+      "sqlStageMs": 190.5000000372529,
+      "archiveCommitMs": 96.9999999627471,
+      "claimWriteMs": 36.50000000745058,
+      "selectionSqlMs": 9.99999999254942,
+      "schemaReadMs": 5.1000000312924385,
+      "scopeResidualMs": 108.59999997913837,
+      "clientMinusScopeMs": 44.00000000745058,
+      "unattributedSqlMs": 145.7999999895692,
+      "stageSqlCalls": 1406,
+      "stageRows": [
+        {
+          "operation": "stagePageText",
+          "database": "archive",
+          "method": "exec",
+          "category": "transaction.commit",
+          "count": 38,
+          "totalMs": 96.9999999627471,
+          "minMs": 1.5,
+          "maxMs": 10.5,
+          "errors": 0,
+          "histogram": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            29,
+            5,
+            1,
+            3,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "operation": "stagePageText",
+          "database": "archive",
+          "method": "exec",
+          "category": "claim.write",
+          "count": 38,
+          "totalMs": 36.50000000745058,
+          "minMs": 0.3999999985098839,
+          "maxMs": 5.600000001490116,
+          "errors": 0,
+          "histogram": [
+            0,
+            0,
+            0,
+            0,
+            29,
+            5,
+            0,
+            0,
+            4,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "operation": "stagePageText",
+          "database": "archive",
+          "method": "exec",
+          "category": "extraction.text.write",
+          "count": 38,
+          "totalMs": 21.399999976158142,
+          "minMs": 0,
+          "maxMs": 6,
+          "errors": 0,
+          "histogram": [
+            6,
+            0,
+            8,
+            19,
+            0,
+            0,
+            0,
+            4,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "operation": "stagePageText",
+          "database": "archive",
+          "method": "exec",
+          "category": "extraction.accounting.write",
+          "count": 152,
+          "totalMs": 5.600000001490116,
+          "minMs": 0,
+          "maxMs": 3.399999998509884,
+          "errors": 0,
+          "histogram": [
+            130,
+            0,
+            3,
+            18,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "operation": "stagePageText",
+          "database": "archive",
+          "method": "exec",
+          "category": "extraction.other.read",
+          "count": 190,
+          "totalMs": 5.500000022351742,
+          "minMs": 0,
+          "maxMs": 0.20000000298023224,
+          "errors": 0,
+          "histogram": [
+            139,
+            0,
+            7,
+            44,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "operation": "stagePageText",
+          "database": "archive",
+          "method": "selectValue",
+          "category": "schema.read",
+          "count": 190,
+          "totalMs": 5.1000000312924385,
+          "minMs": 0,
+          "maxMs": 0.20000000298023224,
+          "errors": 0,
+          "histogram": [
+            142,
+            0,
+            5,
+            43,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "operation": "stagePageText",
+          "database": "selection",
+          "method": "exec",
+          "category": "schema.configure",
+          "count": 38,
+          "totalMs": 3.6000000163912773,
+          "minMs": 0,
+          "maxMs": 0.20000000298023224,
+          "errors": 0,
+          "histogram": [
+            8,
+            0,
+            3,
+            27,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "operation": "stagePageText",
+          "database": "archive",
+          "method": "exec",
+          "category": "extraction.map.write",
+          "count": 38,
+          "totalMs": 2.700000025331974,
+          "minMs": 0,
+          "maxMs": 0.29999999701976776,
+          "errors": 0,
+          "histogram": [
+            16,
+            0,
+            1,
+            20,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "operation": "stagePageText",
+          "database": "selection",
+          "method": "exec",
+          "category": "other.read",
+          "count": 152,
+          "totalMs": 2.0000000074505806,
+          "minMs": 0,
+          "maxMs": 0.10000000149011612,
+          "errors": 0,
+          "histogram": [
+            132,
+            0,
+            3,
+            17,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "operation": "stagePageText",
+          "database": "selection",
+          "method": "exec",
+          "category": "schema.read",
+          "count": 38,
+          "totalMs": 1.6999999731779099,
+          "minMs": 0,
+          "maxMs": 0.10000000149011612,
+          "errors": 0,
+          "histogram": [
+            21,
+            0,
+            7,
+            10,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "operation": "stagePageText",
+          "database": "selection",
+          "method": "exec",
+          "category": "other.write",
+          "count": 38,
+          "totalMs": 1.6000000014901161,
+          "minMs": 0,
+          "maxMs": 0.10000000149011612,
+          "errors": 0,
+          "histogram": [
+            22,
+            0,
+            3,
+            13,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "operation": "stagePageText",
+          "database": "archive",
+          "method": "exec",
+          "category": "archive.receipt.read",
+          "count": 38,
+          "totalMs": 1.5000000149011612,
+          "minMs": 0,
+          "maxMs": 0.20000000298023224,
+          "errors": 0,
+          "histogram": [
+            25,
+            0,
+            1,
+            12,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "operation": "stagePageText",
+          "database": "archive",
+          "method": "exec",
+          "category": "extraction.receipt.write",
+          "count": 38,
+          "totalMs": 1.4999999925494194,
+          "minMs": 0,
+          "maxMs": 0.10000000149011612,
+          "errors": 0,
+          "histogram": [
+            23,
+            0,
+            4,
+            11,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "operation": "stagePageText",
+          "database": "archive",
+          "method": "exec",
+          "category": "extraction.other.write",
+          "count": 38,
+          "totalMs": 1.1000000089406967,
+          "minMs": 0,
+          "maxMs": 0.19999999552965164,
+          "errors": 0,
+          "histogram": [
+            28,
+            0,
+            0,
+            10,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "operation": "stagePageText",
+          "database": "selection",
+          "method": "selectValue",
+          "category": "schema.configure",
+          "count": 76,
+          "totalMs": 1.0999999940395355,
+          "minMs": 0,
+          "maxMs": 0.10000000149011612,
+          "errors": 0,
+          "histogram": [
+            65,
+            0,
+            3,
+            8,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "operation": "stagePageText",
+          "database": "archive",
+          "method": "exec",
+          "category": "canonical.read",
+          "count": 76,
+          "totalMs": 0.8999999985098839,
+          "minMs": 0,
+          "maxMs": 0.10000000149011612,
+          "errors": 0,
+          "histogram": [
+            67,
+            0,
+            2,
+            7,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "operation": "stagePageText",
+          "database": "archive",
+          "method": "exec",
+          "category": "extraction.accounting.read",
+          "count": 76,
+          "totalMs": 0.8000000044703484,
+          "minMs": 0,
+          "maxMs": 0.10000000149011612,
+          "errors": 0,
+          "histogram": [
+            68,
+            0,
+            1,
+            7,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "operation": "stagePageText",
+          "database": "archive",
+          "method": "exec",
+          "category": "extraction.receipt.read",
+          "count": 38,
+          "totalMs": 0.4000000059604645,
+          "minMs": 0,
+          "maxMs": 0.10000000149011612,
+          "errors": 0,
+          "histogram": [
+            34,
+            0,
+            0,
+            4,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "operation": "stagePageText",
+          "database": "archive",
+          "method": "exec",
+          "category": "transaction.begin",
+          "count": 38,
+          "totalMs": 0.29999999701976776,
+          "minMs": 0,
+          "maxMs": 0.10000000149011612,
+          "errors": 0,
+          "histogram": [
+            35,
+            0,
+            1,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "operation": "stagePageText",
+          "database": "archive",
+          "method": "exec",
+          "category": "claim.read",
+          "count": 38,
+          "totalMs": 0.19999999552965164,
+          "minMs": 0,
+          "maxMs": 0.10000000149011612,
+          "errors": 0,
+          "histogram": [
+            36,
+            0,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "allGroups": [
+        {
+          "group": "scoped|archive|transaction.commit",
+          "count": 60,
+          "totalMs": 132.79999995231628
+        },
+        {
+          "group": "unattributed|archive|transaction.commit",
+          "count": 108,
+          "totalMs": 42.400000013411045
+        },
+        {
+          "group": "scoped|archive|claim.write",
+          "count": 42,
+          "totalMs": 38.400000013411045
+        },
+        {
+          "group": "unattributed|archive|extraction.other.read",
+          "count": 1098,
+          "totalMs": 36.30000001937151
+        },
+        {
+          "group": "scoped|archive|extraction.text.write",
+          "count": 38,
+          "totalMs": 21.399999976158142
+        },
+        {
+          "group": "scoped|archive|extraction.other.read",
+          "count": 386,
+          "totalMs": 18.400000013411045
+        },
+        {
+          "group": "scoped|archive|search.write",
+          "count": 44,
+          "totalMs": 17.700000010430813
+        },
+        {
+          "group": "unattributed|archive|search.write",
+          "count": 48,
+          "totalMs": 17.100000001490116
+        },
+        {
+          "group": "unattributed|archive|other.read",
+          "count": 336,
+          "totalMs": 12.599999964237213
+        },
+        {
+          "group": "scoped|selection|schema.configure",
+          "count": 258,
+          "totalMs": 10.400000028312206
+        },
+        {
+          "group": "unattributed|selection|schema.configure",
+          "count": 252,
+          "totalMs": 9.199999995529652
+        },
+        {
+          "group": "unattributed|archive|search.read",
+          "count": 470,
+          "totalMs": 8.799999989569187
+        },
+        {
+          "group": "scoped|archive|extraction.accounting.write",
+          "count": 171,
+          "totalMs": 6.200000002980232
+        },
+        {
+          "group": "unattributed|selection|other.read",
+          "count": 336,
+          "totalMs": 6
+        },
+        {
+          "group": "scoped|selection|other.read",
+          "count": 344,
+          "totalMs": 5.600000008940697
+        },
+        {
+          "group": "scoped|archive|schema.read",
+          "count": 210,
+          "totalMs": 5.400000020861626
+        },
+        {
+          "group": "scoped|selection|schema.read",
+          "count": 86,
+          "totalMs": 3.599999964237213
+        },
+        {
+          "group": "scoped|archive|canonical.read",
+          "count": 176,
+          "totalMs": 3.299999989569187
+        },
+        {
+          "group": "unattributed|selection|schema.read",
+          "count": 84,
+          "totalMs": 3.0999999940395355
+        },
+        {
+          "group": "scoped|archive|extraction.map.write",
+          "count": 38,
+          "totalMs": 2.700000025331974
+        },
+        {
+          "group": "scoped|selection|other.write",
+          "count": 86,
+          "totalMs": 2.700000010430813
+        },
+        {
+          "group": "unattributed|selection|other.write",
+          "count": 84,
+          "totalMs": 2.4000000283122063
+        },
+        {
+          "group": "unattributed|archive|schema.configure",
+          "count": 237,
+          "totalMs": 2.3999999836087227
+        },
+        {
+          "group": "unattributed|archive|canonical.read",
+          "count": 120,
+          "totalMs": 2.2999999970197678
+        },
+        {
+          "group": "scoped|archive|schema.configure",
+          "count": 52,
+          "totalMs": 1.7999999895691872
+        },
+        {
+          "group": "scoped|archive|extraction.receipt.write",
+          "count": 42,
+          "totalMs": 1.7999999895691872
+        },
+        {
+          "group": "scoped|archive|extraction.other.write",
+          "count": 50,
+          "totalMs": 1.7000000104308128
+        },
+        {
+          "group": "scoped|archive|search.read",
+          "count": 58,
+          "totalMs": 1.5000000149011612
+        },
+        {
+          "group": "scoped|archive|archive.receipt.read",
+          "count": 42,
+          "totalMs": 1.5000000149011612
+        },
+        {
+          "group": "unattributed|archive|extraction.text.write",
+          "count": 38,
+          "totalMs": 1.2000000029802322
+        },
+        {
+          "group": "unattributed|archive|extraction.accounting.write",
+          "count": 76,
+          "totalMs": 0.9000000134110451
+        },
+        {
+          "group": "scoped|archive|transaction.begin",
+          "count": 60,
+          "totalMs": 0.8000000044703484
+        },
+        {
+          "group": "scoped|archive|extraction.accounting.read",
+          "count": 87,
+          "totalMs": 0.8000000044703484
+        },
+        {
+          "group": "scoped|archive|extraction.text.read",
+          "count": 3,
+          "totalMs": 0.6000000014901161
+        },
+        {
+          "group": "unattributed|archive|transaction.begin",
+          "count": 108,
+          "totalMs": 0.5999999940395355
+        },
+        {
+          "group": "scoped|archive|extraction.receipt.read",
+          "count": 42,
+          "totalMs": 0.5000000074505806
+        },
+        {
+          "group": "unattributed|archive|extraction.text.read",
+          "count": 39,
+          "totalMs": 0.3999999910593033
+        },
+        {
+          "group": "scoped|archive|claim.read",
+          "count": 42,
+          "totalMs": 0.19999999552965164
+        },
+        {
+          "group": "unattributed|archive|extraction.other.write",
+          "count": 1,
+          "totalMs": 0.10000000149011612
+        },
+        {
+          "group": "scoped|archive|other.write",
+          "count": 1,
+          "totalMs": 0.09999999403953552
+        },
+        {
+          "group": "scoped|archive|other.read",
+          "count": 4,
+          "totalMs": 0
+        },
+        {
+          "group": "unattributed|archive|extraction.accounting.read",
+          "count": 38,
+          "totalMs": 0
+        }
+      ]
+    },
+    {
+      "engine": "chromium",
+      "fixture": "dense-10",
+      "stageCalls": 380,
+      "sourceSha256": "4769512a1accd9d23b2f71b722932a9e8675d065b58dc85079b3e81098404ea9",
+      "outputUTF16": 1510000,
+      "stagedSpans": 20000,
+      "clientStageMs": 4314.899999931455,
+      "fencedStageMs": 3671.0000000223517,
+      "sqlStageMs": 2281.1999998763204,
+      "archiveCommitMs": 1224.1000000461936,
+      "claimWriteMs": 461.40000005066395,
+      "selectionSqlMs": 107.4999999254942,
+      "schemaReadMs": 47.80000001937151,
+      "scopeResidualMs": 1389.8000001460314,
+      "clientMinusScopeMs": 643.8999999091029,
+      "unattributedSqlMs": 2119.399999976158,
+      "stageSqlCalls": 14060,
+      "stageRows": [
+        {
+          "operation": "stagePageText",
+          "database": "archive",
+          "method": "exec",
+          "category": "transaction.commit",
+          "count": 380,
+          "totalMs": 1224.1000000461936,
+          "minMs": 1.3000000044703484,
+          "maxMs": 21.400000005960464,
+          "errors": 0,
+          "histogram": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            244,
+            84,
+            8,
+            36,
+            8,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "operation": "stagePageText",
+          "database": "archive",
+          "method": "exec",
+          "category": "claim.write",
+          "count": 380,
+          "totalMs": 461.40000005066395,
+          "minMs": 0.29999999701976776,
+          "maxMs": 11.399999998509884,
+          "errors": 0,
+          "histogram": [
+            0,
+            0,
+            0,
+            0,
+            174,
+            154,
+            2,
+            5,
+            39,
+            6,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "operation": "stagePageText",
+          "database": "archive",
+          "method": "exec",
+          "category": "extraction.text.write",
+          "count": 380,
+          "totalMs": 148.2999999821186,
+          "minMs": 0,
+          "maxMs": 6.100000001490116,
+          "errors": 0,
+          "histogram": [
+            89,
+            0,
+            39,
+            209,
+            8,
+            0,
+            0,
+            34,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "operation": "stagePageText",
+          "database": "archive",
+          "method": "exec",
+          "category": "extraction.accounting.write",
+          "count": 1520,
+          "totalMs": 66.39999996125698,
+          "minMs": 0,
+          "maxMs": 3.7999999970197678,
+          "errors": 0,
+          "histogram": [
+            1237,
+            0,
+            57,
+            214,
+            1,
+            0,
+            0,
+            11,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "operation": "stagePageText",
+          "database": "archive",
+          "method": "exec",
+          "category": "extraction.map.write",
+          "count": 380,
+          "totalMs": 60.30000004172325,
+          "minMs": 0,
+          "maxMs": 3.5,
+          "errors": 0,
+          "histogram": [
+            114,
+            0,
+            44,
+            205,
+            8,
+            0,
+            0,
+            9,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "operation": "stagePageText",
+          "database": "archive",
+          "method": "exec",
+          "category": "extraction.receipt.write",
+          "count": 380,
+          "totalMs": 52.09999995678663,
+          "minMs": 0,
+          "maxMs": 3.6999999955296516,
+          "errors": 0,
+          "histogram": [
+            204,
+            0,
+            30,
+            133,
+            3,
+            0,
+            0,
+            10,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "operation": "stagePageText",
+          "database": "archive",
+          "method": "exec",
+          "category": "extraction.other.read",
+          "count": 1900,
+          "totalMs": 48.799999967217445,
+          "minMs": 0,
+          "maxMs": 0.20000000298023224,
+          "errors": 0,
+          "histogram": [
+            1429,
+            0,
+            94,
+            377,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "operation": "stagePageText",
+          "database": "archive",
+          "method": "selectValue",
+          "category": "schema.read",
+          "count": 1900,
+          "totalMs": 47.80000001937151,
+          "minMs": 0,
+          "maxMs": 0.30000000447034836,
+          "errors": 0,
+          "histogram": [
+            1438,
+            0,
+            88,
+            373,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "operation": "stagePageText",
+          "database": "selection",
+          "method": "exec",
+          "category": "schema.configure",
+          "count": 380,
+          "totalMs": 39.8999999910593,
+          "minMs": 0,
+          "maxMs": 0.29999999701976776,
+          "errors": 0,
+          "histogram": [
+            67,
+            0,
+            51,
+            261,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "operation": "stagePageText",
+          "database": "selection",
+          "method": "exec",
+          "category": "other.read",
+          "count": 1520,
+          "totalMs": 28.999999962747097,
+          "minMs": 0,
+          "maxMs": 0.20000000298023224,
+          "errors": 0,
+          "histogram": [
+            1238,
+            0,
+            59,
+            223,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "operation": "stagePageText",
+          "database": "archive",
+          "method": "exec",
+          "category": "extraction.other.write",
+          "count": 380,
+          "totalMs": 23.299999959766865,
+          "minMs": 0,
+          "maxMs": 3.899999998509884,
+          "errors": 0,
+          "histogram": [
+            238,
+            0,
+            30,
+            108,
+            2,
+            0,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "operation": "stagePageText",
+          "database": "selection",
+          "method": "exec",
+          "category": "schema.read",
+          "count": 380,
+          "totalMs": 17.19999995827675,
+          "minMs": 0,
+          "maxMs": 0.20000000298023224,
+          "errors": 0,
+          "histogram": [
+            219,
+            0,
+            34,
+            127,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "operation": "stagePageText",
+          "database": "selection",
+          "method": "exec",
+          "category": "other.write",
+          "count": 380,
+          "totalMs": 13.000000044703484,
+          "minMs": 0,
+          "maxMs": 0.20000000298023224,
+          "errors": 0,
+          "histogram": [
+            256,
+            0,
+            17,
+            107,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "operation": "stagePageText",
+          "database": "archive",
+          "method": "exec",
+          "category": "archive.receipt.read",
+          "count": 380,
+          "totalMs": 10.700000040233135,
+          "minMs": 0,
+          "maxMs": 0.20000000298023224,
+          "errors": 0,
+          "histogram": [
+            276,
+            0,
+            15,
+            89,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "operation": "stagePageText",
+          "database": "archive",
+          "method": "exec",
+          "category": "extraction.receipt.read",
+          "count": 380,
+          "totalMs": 9.299999982118607,
+          "minMs": 0,
+          "maxMs": 0.10000000149011612,
+          "errors": 0,
+          "histogram": [
+            287,
+            0,
+            21,
+            72,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "operation": "stagePageText",
+          "database": "selection",
+          "method": "selectValue",
+          "category": "schema.configure",
+          "count": 760,
+          "totalMs": 8.399999968707561,
+          "minMs": 0,
+          "maxMs": 0.10000000149011612,
+          "errors": 0,
+          "histogram": [
+            676,
+            0,
+            21,
+            63,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "operation": "stagePageText",
+          "database": "archive",
+          "method": "exec",
+          "category": "canonical.read",
+          "count": 760,
+          "totalMs": 8.299999982118607,
+          "minMs": 0,
+          "maxMs": 0.10000000149011612,
+          "errors": 0,
+          "histogram": [
+            677,
+            0,
+            19,
+            64,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "operation": "stagePageText",
+          "database": "archive",
+          "method": "exec",
+          "category": "extraction.accounting.read",
+          "count": 760,
+          "totalMs": 6.099999964237213,
+          "minMs": 0,
+          "maxMs": 0.30000000447034836,
+          "errors": 0,
+          "histogram": [
+            701,
+            0,
+            17,
+            41,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "operation": "stagePageText",
+          "database": "archive",
+          "method": "exec",
+          "category": "claim.read",
+          "count": 380,
+          "totalMs": 3.800000011920929,
+          "minMs": 0,
+          "maxMs": 0.10000000149011612,
+          "errors": 0,
+          "histogram": [
+            342,
+            0,
+            6,
+            32,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "operation": "stagePageText",
+          "database": "archive",
+          "method": "exec",
+          "category": "transaction.begin",
+          "count": 380,
+          "totalMs": 2.999999985098839,
+          "minMs": 0,
+          "maxMs": 0.10000000149011612,
+          "errors": 0,
+          "histogram": [
+            350,
+            0,
+            8,
+            22,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "allGroups": [
+        {
+          "group": "scoped|archive|transaction.commit",
+          "count": 564,
+          "totalMs": 1734.8000000193715
+        },
+        {
+          "group": "unattributed|archive|extraction.other.read",
+          "count": 9171,
+          "totalMs": 746.9000001177192
+        },
+        {
+          "group": "unattributed|archive|transaction.commit",
+          "count": 727,
+          "totalMs": 639.6000000163913
+        },
+        {
+          "group": "scoped|archive|claim.write",
+          "count": 402,
+          "totalMs": 488.00000005960464
+        },
+        {
+          "group": "scoped|archive|search.write",
+          "count": 386,
+          "totalMs": 301.50000002235174
+        },
+        {
+          "group": "unattributed|archive|search.write",
+          "count": 480,
+          "totalMs": 301.4999999701977
+        },
+        {
+          "group": "scoped|archive|extraction.text.write",
+          "count": 380,
+          "totalMs": 148.2999999821186
+        },
+        {
+          "group": "unattributed|archive|search.read",
+          "count": 4075,
+          "totalMs": 135.79999990016222
+        },
+        {
+          "group": "scoped|archive|extraction.other.read",
+          "count": 3332,
+          "totalMs": 120.89999998360872
+        },
+        {
+          "group": "unattributed|archive|other.read",
+          "count": 1948,
+          "totalMs": 80.00000010430813
+        },
+        {
+          "group": "scoped|archive|extraction.accounting.write",
+          "count": 1656,
+          "totalMs": 72.89999996125698
+        },
+        {
+          "group": "unattributed|selection|schema.configure",
+          "count": 1461,
+          "totalMs": 64.59999995678663
+        },
+        {
+          "group": "scoped|selection|schema.configure",
+          "count": 1473,
+          "totalMs": 62.99999988824129
+        },
+        {
+          "group": "scoped|archive|extraction.map.write",
+          "count": 380,
+          "totalMs": 60.30000004172325
+        },
+        {
+          "group": "scoped|archive|extraction.receipt.write",
+          "count": 402,
+          "totalMs": 53.09999995678663
+        },
+        {
+          "group": "scoped|archive|schema.read",
+          "count": 2010,
+          "totalMs": 51.100000001490116
+        },
+        {
+          "group": "unattributed|selection|other.read",
+          "count": 1948,
+          "totalMs": 39.29999991506338
+        },
+        {
+          "group": "scoped|selection|other.read",
+          "count": 1964,
+          "totalMs": 37.69999997317791
+        },
+        {
+          "group": "scoped|archive|extraction.other.write",
+          "count": 464,
+          "totalMs": 32.39999996125698
+        },
+        {
+          "group": "unattributed|selection|schema.read",
+          "count": 487,
+          "totalMs": 25.80000002682209
+        },
+        {
+          "group": "unattributed|archive|schema.configure",
+          "count": 1995,
+          "totalMs": 22.999999925494194
+        },
+        {
+          "group": "scoped|selection|schema.read",
+          "count": 491,
+          "totalMs": 22.299999967217445
+        },
+        {
+          "group": "scoped|archive|canonical.read",
+          "count": 1276,
+          "totalMs": 17.900000020861626
+        },
+        {
+          "group": "unattributed|archive|canonical.read",
+          "count": 1200,
+          "totalMs": 17.600000001490116
+        },
+        {
+          "group": "scoped|selection|other.write",
+          "count": 491,
+          "totalMs": 17.500000044703484
+        },
+        {
+          "group": "unattributed|selection|other.write",
+          "count": 487,
+          "totalMs": 16.200000062584877
+        },
+        {
+          "group": "unattributed|archive|extraction.text.write",
+          "count": 380,
+          "totalMs": 14.499999985098839
+        },
+        {
+          "group": "scoped|archive|schema.configure",
+          "count": 310,
+          "totalMs": 12.199999995529652
+        },
+        {
+          "group": "scoped|archive|archive.receipt.read",
+          "count": 402,
+          "totalMs": 11.700000040233135
+        },
+        {
+          "group": "scoped|archive|extraction.receipt.read",
+          "count": 402,
+          "totalMs": 9.599999979138374
+        },
+        {
+          "group": "scoped|archive|search.read",
+          "count": 293,
+          "totalMs": 7.600000001490116
+        },
+        {
+          "group": "scoped|archive|extraction.accounting.read",
+          "count": 834,
+          "totalMs": 6.999999977648258
+        },
+        {
+          "group": "scoped|archive|transaction.begin",
+          "count": 564,
+          "totalMs": 6.299999982118607
+        },
+        {
+          "group": "unattributed|archive|transaction.begin",
+          "count": 727,
+          "totalMs": 5.4000000059604645
+        },
+        {
+          "group": "scoped|archive|extraction.text.read",
+          "count": 30,
+          "totalMs": 4.5999999940395355
+        },
+        {
+          "group": "scoped|archive|claim.read",
+          "count": 402,
+          "totalMs": 3.800000011920929
+        },
+        {
+          "group": "unattributed|archive|extraction.text.read",
+          "count": 390,
+          "totalMs": 3.6000000089406967
+        },
+        {
+          "group": "unattributed|archive|extraction.accounting.write",
+          "count": 760,
+          "totalMs": 3.3999999910593033
+        },
+        {
+          "group": "unattributed|archive|extraction.accounting.read",
+          "count": 380,
+          "totalMs": 1.7999999821186066
+        },
+        {
+          "group": "scoped|archive|other.read",
+          "count": 6,
+          "totalMs": 0.4000000059604645
+        },
+        {
+          "group": "unattributed|archive|extraction.other.write",
+          "count": 10,
+          "totalMs": 0.4000000059604645
+        },
+        {
+          "group": "scoped|archive|other.write",
+          "count": 1,
+          "totalMs": 0
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+
+> quixi@0.0.1 test:app:browser
+> tsc --noEmit -p packages/app/tsconfig.tests.json && node packages/app/tests/browser/run.mjs
+
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+chromium: 54 application checks passed
+Skip to conversation
+Quixi
+Your history. Your choice.
+New conversation
+Preferences
+Storage health
+Library
+Import history
+Providers
+Documents
+Export history
+Filter titles
+Filter
+Archived conversations
+
+No conversations in this view.
+
+Previous
+Next
+
+History stays on this device. Sending shares the selected branch with your chosen provider.
+
+Search your history
+Search
+
+A HOME FOR YOUR CONVERSATIONS
+
+Pick up where you left off.
+
+Import your history, find an old idea, or start a conversation with a provider of your choice.
+
+Start a conversation
+Import history
+SUMMARY DOM []
+SUMMARY LOCATORS 0 0 0
+{"items":[],"nextCursor":null,"bytes":2}
+Error: expect(received).toEqual(expected) // deep equality
+
+- Expected  - 1
++ Received  + 3
+
+- Array []
++ Array [
++   "enlarged: Document overflows the viewport",
++ ]
+    at captureRawStack (/Users/eric/QuixiChat/node_modules/playwright-core/lib/coreBundle.js:8588:17)
+    at callMatcherAsStep (/Users/eric/QuixiChat/node_modules/playwright/lib/matchers/expect.js:13310:57)
+    at Object.toEqual (/Users/eric/QuixiChat/node_modules/playwright/lib/matchers/expect.js:13302:23)
+    at captureReviewLayout (/Users/eric/QuixiChat/packages/app/tests/browser/review-accessibility.mjs:111:127)
+    at async exerciseAliasReflow (/Users/eric/QuixiChat/packages/app/tests/browser/review-accessibility.mjs:137:12)
+    at async file:///Users/eric/QuixiChat/packages/app/tests/browser/run.mjs:450:30

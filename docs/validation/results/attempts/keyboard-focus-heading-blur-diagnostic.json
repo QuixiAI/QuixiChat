@@ -1,0 +1,43 @@
+{
+  "scope": "Real preference save with one test-only held reply; explicit blur of the parked heading, without an external focusin event.",
+  "stages": [
+    {
+      "stage": "save-pending-focus-parked-on-heading",
+      "documentFocused": true,
+      "activeTag": "H1",
+      "activeId": "",
+      "activeText": "Preferences",
+      "controlDisabled": true,
+      "value": "mod-enter"
+    },
+    {
+      "stage": "parked-heading-explicitly-blurred",
+      "documentFocused": true,
+      "activeTag": "BODY",
+      "activeId": "",
+      "activeText": null,
+      "controlDisabled": true,
+      "value": "mod-enter"
+    },
+    {
+      "stage": "save-completed-after-heading-blur",
+      "documentFocused": true,
+      "activeTag": "SELECT",
+      "activeId": "send-key-preference",
+      "activeText": "⌘ / Ctrl + EnterEnter (Shift + Enter for a new line)",
+      "controlDisabled": false,
+      "value": "enter"
+    },
+    {
+      "stage": "failure",
+      "documentFocused": true,
+      "activeTag": "SELECT",
+      "activeId": "send-key-preference",
+      "activeText": "⌘ / Ctrl + EnterEnter (Shift + Enter for a new line)",
+      "controlDisabled": false,
+      "value": "enter"
+    }
+  ],
+  "status": "failed",
+  "error": "Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false"
+}

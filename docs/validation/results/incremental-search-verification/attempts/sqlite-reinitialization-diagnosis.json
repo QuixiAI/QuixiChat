@@ -1,0 +1,13 @@
+{
+  "reason": "Second SQLite initialization in one worker attempted assets/undefined; worker promise did not reject",
+  "errors": [
+    {
+      "name": "TypeError",
+      "message": "Failed to execute 'compile' on 'WebAssembly': Incorrect response MIME type. Expected 'application/wasm'."
+    }
+  ],
+  "console": [
+    "globalThis.sqlite3InitModuleState is missing [pre-js.js sqlite3InitModuleState =, Object]",
+    "globalThis.sqlite3InitModuleState is missing [instantiateWasm() uri =, http://127.0.0.1:4187/assets/undefined, sIMS =, Object]"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "date": "2026-09-08",
+  "host": "Apple M5 Max, macOS26.5.2 arm64 (Darwin25.5.0)",
+  "browsers": {
+    "chromium": "153.0.8010.12",
+    "webkit": "26.6"
+  },
+  "hardware_families": 1,
+  "conditions": "Shared development host. Concurrent frontend/TypeScript/Cargo work and root React19.2.8 lockfile edits occurred. No quiescence or clean driver cache was established. Alternating pairs reduce but cannot remove contention. Raw timing evidence is preserved without deleting slow samples.",
+  "launch_args": {
+    "chromium": [
+      "--enable-gpu",
+      "--use-angle=metal"
+    ],
+    "webkit": []
+  },
+  "memory": "Owned GPU allocation sizes are measurable; physical heap residency and driver-private memory are unavailable through WebGPU.",
+  "initialization": "Fresh encoder instance with already-fetched model/assets; includes verification, tokenizer, pipelines, weight upload and optional tuning. Driver/OS caches were not cleared.",
+  "historical_reports": "First baseline/tile/half/attention/subgroup/profile files preserve the original observations before the final tuning/resource wrapper. Final files contain the current complete source manifest; kernel numerical sources remained unchanged."
+}

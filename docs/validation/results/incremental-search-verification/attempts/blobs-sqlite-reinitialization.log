@@ -1,0 +1,22 @@
+
+> quixi@0.0.1 test:storage:blobs
+> tsc --noEmit -p packages/storage/tsconfig.tests.json && node packages/storage/tests/browser/run.mjs
+
+Debugger listening on ws://127.0.0.1:9229/a71a81e9-33ba-4a9f-a9de-2f5a492dc907
+For help, see: https://nodejs.org/learn/getting-started/debugging
+Debugger attached.
+Debugger ending on ws://127.0.0.1:9229/a71a81e9-33ba-4a9f-a9de-2f5a492dc907
+For help, see: https://nodejs.org/learn/getting-started/debugging
+Debugger attached.
+Debugger ending on ws://127.0.0.1:9229/a71a81e9-33ba-4a9f-a9de-2f5a492dc907
+For help, see: https://nodejs.org/learn/getting-started/debugging
+Debugger attached.
+Debugger ending on ws://127.0.0.1:9229/a71a81e9-33ba-4a9f-a9de-2f5a492dc907
+For help, see: https://nodejs.org/learn/getting-started/debugging
+Debugger attached.
+Debugger ending on ws://127.0.0.1:9229/a71a81e9-33ba-4a9f-a9de-2f5a492dc907
+For help, see: https://nodejs.org/learn/getting-started/debugging
+Debugger attached.
+page.evaluate: Target page, context or browser has been closed
+    at /Users/eric/QuixiChat/packages/storage/tests/browser/run.mjs:39:70
+Waiting for the debugger to disconnect...

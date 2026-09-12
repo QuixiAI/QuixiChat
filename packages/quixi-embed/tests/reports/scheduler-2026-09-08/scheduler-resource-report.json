@@ -1,0 +1,51 @@
+{
+  "passed": true,
+  "executor": "deterministic CPU substitute; no hardware performance claim",
+  "uniqueBackfillJobs": 5120,
+  "duplicateConsumersAdmitted": 4,
+  "duplicateConsumersRejected": 5000,
+  "jobCapacityRejections": 160,
+  "actualInferences": 5121,
+  "limits": {
+    "maxJobs": 32,
+    "maxConsumers": 64,
+    "maxConsumersPerJob": 4,
+    "maxAdmittedBytes": 131072,
+    "maxCacheEntries": 16,
+    "maxCacheBytes": 40960
+  },
+  "peaks": {
+    "jobs": 32,
+    "consumers": 32,
+    "admittedBytes": 75906,
+    "cacheEntries": 16,
+    "cacheBytes": 35264
+  },
+  "final": {
+    "state": "ready",
+    "route": "wasm-simd-fp32",
+    "kind": "cpu",
+    "background": "running",
+    "jobs": 0,
+    "consumers": 0,
+    "admittedBytes": 0,
+    "activeRequests": 0,
+    "cacheEntries": 16,
+    "cacheBytes": 35264,
+    "storeOperations": 0,
+    "storeBytes": 0,
+    "submitted": 5124,
+    "completed": 5124,
+    "cancelled": 0,
+    "failed": 0,
+    "cacheHits": 0,
+    "singleflightJoins": 3,
+    "dispatches": 5121,
+    "inferred": 5121,
+    "fallbacks": 0,
+    "recentChunksPerSecond": 168421.05263158097,
+    "estimatedRemainingSeconds": 0,
+    "etaScope": "admitted-documents",
+    "inferenceCompletionsAreDurable": false
+  }
+}

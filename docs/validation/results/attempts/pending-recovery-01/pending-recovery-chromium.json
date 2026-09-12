@@ -1,0 +1,96 @@
+{
+  "scope": "Actual durable lost-summary reply, dedicated recovery across error dismissal, thread navigation and lexical search; one precommit refusal and one held idempotent retry; no extra canonical writes or provider requests.",
+  "status": "failed",
+  "before": {
+    "threadStates": [
+      {
+        "activeLeafMessageId": "c133aed9-2b68-4bf8-9ab3-e28a88870840",
+        "archived": false,
+        "contextSnapshotId": "1ea68bc0-89cb-4e25-9330-fcaa8e3ebb91",
+        "pinned": false,
+        "revision": 53,
+        "routingProfile": {
+          "alias": null,
+          "allowPrivacyChange": false,
+          "candidates": [
+            {
+              "model": "gpt-4.1-mini-2025-04-14",
+              "provider": "openai"
+            }
+          ],
+          "requirements": {},
+          "version": 2
+        },
+        "tags": [
+          "space",
+          "ideas"
+        ],
+        "threadId": "ded00e3d-274c-4549-a9e3-2b93e5378eda",
+        "title": "Comet notebook"
+      },
+      {
+        "activeLeafMessageId": "69f89de0-5c39-49bb-9e1c-ebd9c48db054",
+        "archived": false,
+        "contextSnapshotId": "7e31bb2c-bbc9-4481-9165-04aa2d7ac82f",
+        "pinned": false,
+        "revision": 6,
+        "routingProfile": {
+          "alias": null,
+          "allowPrivacyChange": false,
+          "candidates": [
+            {
+              "model": "gpt-4.1-mini-2025-04-14",
+              "provider": "openai"
+            }
+          ],
+          "requirements": {},
+          "version": 2
+        },
+        "tags": [],
+        "threadId": "eb94fc0b-f244-4098-955c-ae9b373e7eeb",
+        "title": "Summary notebook"
+      }
+    ],
+    "collections": {
+      "threadStates": {
+        "count": 6,
+        "sha256": "8330b3aead74eb6d69816c568afde7d5ee215bcd38b627e5c051b27ea01d197c"
+      },
+      "messages": {
+        "count": 64,
+        "sha256": "c51926867b09662a2c23f4e8c5eccff7a5966bd1b1fb5f983e7cffc4a74311d4"
+      },
+      "parts": {
+        "count": 331,
+        "sha256": "2fb652c43fdb18aaef540aea74adca670bc83d84a8fef4e3b73f88f9c067ecb4"
+      },
+      "events": {
+        "count": 26,
+        "sha256": "fd6c45661564423c59126cd1d965007944251351add9204b76fd1a49129a0039"
+      },
+      "contexts": {
+        "count": 13,
+        "sha256": "68f2e6b3a669aa73ce863e7cd41bdf519a25ffd8f3ce0706d1381fd42a9c31ab"
+      },
+      "generations": {
+        "count": 32,
+        "sha256": "ba1720b59d34c79e45e41cb9143389dfdf5f4494d8d58ce4a2bcfe3557a64dcb"
+      },
+      "summaryProposals": {
+        "count": 1,
+        "sha256": "636ba168dad5c7463824638f32754028a1f427ef183782554bd8a8b6950a8ab5"
+      }
+    },
+    "syncSha256": "6ef0fc33cac232e5f74d2ac3430dfac0edda3c8430f992e05ed73ffede86ce49",
+    "highWaterSequence": 1001,
+    "providerDispatchCount": 38,
+    "providerDispatchSha256": "6f651213f0fb3c15ef0f3ad678ed62e3a9aedb9d284da43f85d24a597a6c5cce"
+  },
+  "stages": [
+    "initial-unknown-outcome",
+    "ordinary-error-dismissed",
+    "other-thread-selected",
+    "lexical-search-completed"
+  ],
+  "error": "Error: expect(received).toEqual(expected) // deep equality\n\n- Expected  - 2\n+ Received  + 2\n\n@@ -6157,13 +6157,13 @@\n          \"title\": \"Comet notebook\",\n        },\n        Object {\n          \"activeLeafMessageId\": \"69f89de0-5c39-49bb-9e1c-ebd9c48db054\",\n          \"archived\": false,\n-         \"contextSnapshotId\": \"7e31bb2c-bbc9-4481-9165-04aa2d7ac82f\",\n+         \"contextSnapshotId\": \"db42d45e-13ec-46a7-86a7-e76b953f1d4c\",\n          \"pinned\": false,\n-         \"revision\": 6,\n+         \"revision\": 7,\n          \"routingProfile\": Object {\n            \"alias\": null,\n            \"allowPrivacyChange\": false,\n            \"candidates\": Array [\n              Object {"
+}

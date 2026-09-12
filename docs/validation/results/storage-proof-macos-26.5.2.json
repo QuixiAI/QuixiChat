@@ -1,0 +1,1138 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-09-08T07:50:46.755787+00:00",
+  "recordingPlatform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+  "sqliteDistribution": {
+    "schemaVersion": 1,
+    "sqliteVersion": "3.53.4",
+    "sqliteVecVersion": "v0.1.9",
+    "sqliteSourceId": "2026-07-24 19:02:57 bf7c7f30031888f4e796e429ab3978879485813aaca6f641c7b33e4e09459bcc",
+    "toolchain": {
+      "image": "emscripten/emsdk@sha256:90b757eb11fa9a0e3ce4d2d9f76d932a56018e4accc37b5a28b2783751e60eb7",
+      "tagForHumans": "4.0.10",
+      "platform": "linux/amd64",
+      "compiler": "Emscripten 4.0.10 (b7dc6e5747465580df5984e723b9d1f10d8e804b)",
+      "optimization": "-O2 -g3; Binaryen --all-features --strip-debug --strip-producers",
+      "binaryen": "wasm-opt version 123 (version_123-168-g8c82b6884)",
+      "sourceDateEpoch": 1785542400
+    },
+    "artifacts": {
+      "sqlite3.mjs": {
+        "bytes": 814433,
+        "sha256": "127c4f37a4ce3449d464b976ac4979fc6b016ae974c0aea9ba8afef85d3b4d5d"
+      },
+      "sqlite3.wasm": {
+        "bytes": 1599767,
+        "sha256": "dd7c22431a3b8ad51ab5e6ed91065593574c34c5959d2efdef2f17484eedcb2c"
+      },
+      "sqlite3.d.mts": {
+        "bytes": 301,
+        "sha256": "b8e07e97bae25e943668876a8fa32e7b674736bb62041d1683e9a9d17c697436"
+      }
+    },
+    "compileOptions": [
+      "ATOMIC_INTRINSICS=1",
+      "COMPILER=clang-21.0.0",
+      "DEFAULT_AUTOVACUUM",
+      "DEFAULT_CACHE_SIZE=-16384",
+      "DEFAULT_FILE_FORMAT=4",
+      "DEFAULT_JOURNAL_SIZE_LIMIT=-1",
+      "DEFAULT_MMAP_SIZE=0",
+      "DEFAULT_PAGE_SIZE=8192",
+      "DEFAULT_PCACHE_INITSZ=20",
+      "DEFAULT_RECURSIVE_TRIGGERS",
+      "DEFAULT_SECTOR_SIZE=4096",
+      "DEFAULT_SYNCHRONOUS=2",
+      "DEFAULT_WAL_AUTOCHECKPOINT=1000",
+      "DEFAULT_WAL_SYNCHRONOUS=2",
+      "DEFAULT_WORKER_THREADS=0",
+      "DIRECT_OVERFLOW_READ",
+      "DQS=0",
+      "ENABLE_API_ARMOR",
+      "ENABLE_BYTECODE_VTAB",
+      "ENABLE_COLUMN_METADATA",
+      "ENABLE_DBPAGE_VTAB",
+      "ENABLE_DBSTAT_VTAB",
+      "ENABLE_FTS5",
+      "ENABLE_MATH_FUNCTIONS",
+      "ENABLE_OFFSET_SQL_FUNC",
+      "ENABLE_PERCENTILE",
+      "ENABLE_PREUPDATE_HOOK",
+      "ENABLE_RTREE",
+      "ENABLE_SESSION",
+      "ENABLE_STMTVTAB",
+      "ENABLE_UNKNOWN_SQL_FUNCTION",
+      "EXTRA_INIT_MUTEXED=sqlite3_wasm_extra_init",
+      "MALLOC_SOFT_LIMIT=1024",
+      "MAX_ATTACHED=10",
+      "MAX_COLUMN=2000",
+      "MAX_COMPOUND_SELECT=500",
+      "MAX_DEFAULT_PAGE_SIZE=8192",
+      "MAX_EXPR_DEPTH=1000",
+      "MAX_FUNCTION_ARG=1000",
+      "MAX_LENGTH=1000000000",
+      "MAX_LIKE_PATTERN_LENGTH=50000",
+      "MAX_MMAP_SIZE=0",
+      "MAX_PAGE_COUNT=0xfffffffe",
+      "MAX_PAGE_SIZE=65536",
+      "MAX_SQL_LENGTH=1000000000",
+      "MAX_TRIGGER_DEPTH=1000",
+      "MAX_VARIABLE_NUMBER=32766",
+      "MAX_VDBE_OP=250000000",
+      "MAX_WORKER_THREADS=0",
+      "MUTEX_OMIT",
+      "OMIT_DEPRECATED",
+      "OMIT_LOAD_EXTENSION",
+      "OMIT_SHARED_CACHE",
+      "OMIT_UTF16",
+      "STRICT_SUBTYPE",
+      "SYSTEM_MALLOC",
+      "TEMP_STORE=2",
+      "THREADSAFE=0",
+      "USE_URI"
+    ]
+  },
+  "runs": [
+    {
+      "host": "web",
+      "stats": {
+        "startTime": "2026-09-08T07:43:18.756Z",
+        "duration": 9075.548999999999,
+        "expected": 15,
+        "skipped": 1,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "tests": [
+        {
+          "file": "storage-proof.spec.ts",
+          "title": "real OPFS persistence, FTS and vec0 through the rendered proof",
+          "project": "chromium",
+          "status": "expected",
+          "annotations": [],
+          "results": [
+            {
+              "status": "passed",
+              "durationMs": 851,
+              "errors": [],
+              "attachments": {
+                "storage-diagnostics": {
+                  "backend": "sqlite-wasm-opfs-sahpool",
+                  "sqliteVersion": "3.53.4",
+                  "vectorVersion": "v0.1.9",
+                  "schemaVersion": 1,
+                  "integrity": "ok",
+                  "recordCount": 0,
+                  "operationCount": 0,
+                  "ownerId": "51568d35-d7dc-4a01-8bbc-9b75a1f9462e",
+                  "namespace": "persistence-01294178-3b93-44f7-89bf-8604fbe18874",
+                  "poolCapacity": 6,
+                  "persisted": false,
+                  "usage": 6293198,
+                  "quota": 10743711438
+                },
+                "host-environment": {
+                  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+                  "origin": "http://127.0.0.1:4173",
+                  "secureContext": true,
+                  "crossOriginIsolated": true,
+                  "webLocks": true,
+                  "opfs": true,
+                  "sqliteWasmSha256": "dd7c22431a3b8ad51ab5e6ed91065593574c34c5959d2efdef2f17484eedcb2c"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "file": "storage-proof.spec.ts",
+          "title": "committed history survives browser process restart",
+          "project": "chromium",
+          "status": "expected",
+          "annotations": [],
+          "results": [
+            {
+              "status": "passed",
+              "durationMs": 1111,
+              "errors": [],
+              "attachments": {}
+            }
+          ]
+        },
+        {
+          "file": "storage-proof.spec.ts",
+          "title": "record and operation rollback, migration rollback, repeatable SQLITE_FULL",
+          "project": "chromium",
+          "status": "expected",
+          "annotations": [],
+          "results": [
+            {
+              "status": "passed",
+              "durationMs": 479,
+              "errors": [],
+              "attachments": {}
+            }
+          ]
+        },
+        {
+          "file": "storage-proof.spec.ts",
+          "title": "one owner across tabs, forwarded writes, graceful handoff",
+          "project": "chromium",
+          "status": "expected",
+          "annotations": [],
+          "results": [
+            {
+              "status": "passed",
+              "durationMs": 706,
+              "errors": [],
+              "attachments": {}
+            }
+          ]
+        },
+        {
+          "file": "storage-proof.spec.ts",
+          "title": "owner death rolls back an uncommitted transaction and permits takeover",
+          "project": "chromium",
+          "status": "expected",
+          "annotations": [],
+          "results": [
+            {
+              "status": "passed",
+              "durationMs": 783,
+              "errors": [],
+              "attachments": {}
+            }
+          ]
+        },
+        {
+          "file": "storage-proof.spec.ts",
+          "title": "bounded requests, pagination, and FTS update/removal",
+          "project": "chromium",
+          "status": "expected",
+          "annotations": [],
+          "results": [
+            {
+              "status": "passed",
+              "durationMs": 738,
+              "errors": [],
+              "attachments": {}
+            }
+          ]
+        },
+        {
+          "file": "storage-proof.spec.ts",
+          "title": "real OPFS persistence, FTS and vec0 through the rendered proof",
+          "project": "webkit",
+          "status": "expected",
+          "annotations": [],
+          "results": [
+            {
+              "status": "passed",
+              "durationMs": 1395,
+              "errors": [],
+              "attachments": {
+                "storage-diagnostics": {
+                  "backend": "sqlite-wasm-opfs-sahpool",
+                  "sqliteVersion": "3.53.4",
+                  "vectorVersion": "v0.1.9",
+                  "schemaVersion": 1,
+                  "integrity": "ok",
+                  "recordCount": 0,
+                  "operationCount": 0,
+                  "ownerId": "84db9ff4-f8bd-4933-8944-6b7795cbe378",
+                  "namespace": "persistence-5b3f51f3-d3dd-437c-acd5-4e38cb848985",
+                  "poolCapacity": 6,
+                  "persisted": false,
+                  "usage": 9416752,
+                  "quota": 20615843021
+                },
+                "host-environment": {
+                  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+                  "origin": "http://127.0.0.1:4173",
+                  "secureContext": true,
+                  "crossOriginIsolated": true,
+                  "webLocks": true,
+                  "opfs": true,
+                  "sqliteWasmSha256": "dd7c22431a3b8ad51ab5e6ed91065593574c34c5959d2efdef2f17484eedcb2c"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "file": "storage-proof.spec.ts",
+          "title": "committed history survives browser process restart",
+          "project": "webkit",
+          "status": "expected",
+          "annotations": [],
+          "results": [
+            {
+              "status": "passed",
+              "durationMs": 2219,
+              "errors": [],
+              "attachments": {}
+            }
+          ]
+        },
+        {
+          "file": "storage-proof.spec.ts",
+          "title": "record and operation rollback, migration rollback, repeatable SQLITE_FULL",
+          "project": "webkit",
+          "status": "expected",
+          "annotations": [],
+          "results": [
+            {
+              "status": "passed",
+              "durationMs": 1033,
+              "errors": [],
+              "attachments": {}
+            }
+          ]
+        },
+        {
+          "file": "storage-proof.spec.ts",
+          "title": "one owner across tabs, forwarded writes, graceful handoff",
+          "project": "webkit",
+          "status": "expected",
+          "annotations": [],
+          "results": [
+            {
+              "status": "passed",
+              "durationMs": 1451,
+              "errors": [],
+              "attachments": {}
+            }
+          ]
+        },
+        {
+          "file": "storage-proof.spec.ts",
+          "title": "owner death rolls back an uncommitted transaction and permits takeover",
+          "project": "webkit",
+          "status": "expected",
+          "annotations": [],
+          "results": [
+            {
+              "status": "passed",
+              "durationMs": 1546,
+              "errors": [],
+              "attachments": {}
+            }
+          ]
+        },
+        {
+          "file": "storage-proof.spec.ts",
+          "title": "bounded requests, pagination, and FTS update/removal",
+          "project": "webkit",
+          "status": "expected",
+          "annotations": [],
+          "results": [
+            {
+              "status": "passed",
+              "durationMs": 1016,
+              "errors": [],
+              "attachments": {}
+            }
+          ]
+        },
+        {
+          "file": "storage-quota.spec.ts",
+          "title": "browser OPFS quota exhaustion preserves committed history after quota restoration and reopen",
+          "project": "chromium",
+          "status": "expected",
+          "annotations": [],
+          "results": [
+            {
+              "status": "passed",
+              "durationMs": 633,
+              "errors": [],
+              "attachments": {
+                "browser-quota-evidence": {
+                  "origin": "http://127.0.0.1:4173",
+                  "browserVersion": "153.0.8010.12",
+                  "initial": {
+                    "backend": "sqlite-wasm-opfs-sahpool",
+                    "sqliteVersion": "3.53.4",
+                    "vectorVersion": "v0.1.9",
+                    "schemaVersion": 1,
+                    "integrity": "ok",
+                    "recordCount": 1,
+                    "operationCount": 1,
+                    "ownerId": "1bf4f83b-0270-41e7-8270-9b528cd35ce3",
+                    "namespace": "quota-f5cc548c-3dfb-4ed9-a313-cc78fb488d66",
+                    "poolCapacity": 6,
+                    "persisted": false,
+                    "usage": 6293182,
+                    "quota": 10743711422
+                  },
+                  "beforeQuota": {
+                    "usage": 6293182,
+                    "quota": 2397766139904,
+                    "overrideActive": false,
+                    "usageBreakdown": [
+                      {
+                        "storageType": "file_systems",
+                        "usage": 6293182
+                      },
+                      {
+                        "storageType": "indexeddb",
+                        "usage": 0
+                      },
+                      {
+                        "storageType": "cache_storage",
+                        "usage": 0
+                      },
+                      {
+                        "storageType": "service_workers",
+                        "usage": 0
+                      }
+                    ]
+                  },
+                  "quotaSize": 6817470,
+                  "override": {
+                    "usage": 6293182,
+                    "quota": 6817470,
+                    "overrideActive": true,
+                    "usageBreakdown": [
+                      {
+                        "storageType": "file_systems",
+                        "usage": 6293182
+                      },
+                      {
+                        "storageType": "indexeddb",
+                        "usage": 0
+                      },
+                      {
+                        "storageType": "cache_storage",
+                        "usage": 0
+                      },
+                      {
+                        "storageType": "service_workers",
+                        "usage": 0
+                      }
+                    ]
+                  },
+                  "pressure": {
+                    "committed": [
+                      "pressure-000",
+                      "pressure-001",
+                      "pressure-002",
+                      "pressure-003",
+                      "pressure-004",
+                      "pressure-005"
+                    ],
+                    "failedId": "pressure-006",
+                    "error": {
+                      "code": "DATABASE_ERROR",
+                      "message": "Local archive storage could not complete an I/O operation. Check available disk/site storage and permissions, then close and reopen the archive before inspecting and retrying the change. SQLITE_IOERR: sqlite3 result code 10: disk I/O error"
+                    }
+                  },
+                  "lowQuota": {
+                    "usage": 6293182,
+                    "quota": 6817470,
+                    "overrideActive": true,
+                    "usageBreakdown": [
+                      {
+                        "storageType": "file_systems",
+                        "usage": 6293182
+                      },
+                      {
+                        "storageType": "indexeddb",
+                        "usage": 0
+                      },
+                      {
+                        "storageType": "cache_storage",
+                        "usage": 0
+                      },
+                      {
+                        "storageType": "service_workers",
+                        "usage": 0
+                      }
+                    ]
+                  },
+                  "writeFailures": [
+                    {
+                      "name": "QuotaExceededError",
+                      "message": "Failed to execute 'write' on 'FileSystemSyncAccessHandle': No space available for this operation",
+                      "operation": "write"
+                    }
+                  ],
+                  "restoredQuota": {
+                    "usage": 6293182,
+                    "quota": 2397766139904,
+                    "overrideActive": false,
+                    "usageBreakdown": [
+                      {
+                        "storageType": "file_systems",
+                        "usage": 6293182
+                      },
+                      {
+                        "storageType": "indexeddb",
+                        "usage": 0
+                      },
+                      {
+                        "storageType": "cache_storage",
+                        "usage": 0
+                      },
+                      {
+                        "storageType": "service_workers",
+                        "usage": 0
+                      }
+                    ]
+                  },
+                  "recovered": {
+                    "diagnostics": {
+                      "backend": "sqlite-wasm-opfs-sahpool",
+                      "sqliteVersion": "3.53.4",
+                      "vectorVersion": "v0.1.9",
+                      "schemaVersion": 1,
+                      "integrity": "ok",
+                      "recordCount": 7,
+                      "operationCount": 7,
+                      "ownerId": "46d2fe5f-a971-4580-980f-31386a087124",
+                      "namespace": "quota-f5cc548c-3dfb-4ed9-a313-cc78fb488d66",
+                      "poolCapacity": 6,
+                      "persisted": false,
+                      "usage": 6272702,
+                      "quota": 10743690942
+                    },
+                    "records": [
+                      {
+                        "id": "pressure-000",
+                        "textLength": 65536,
+                        "updatedAt": 1788853402011
+                      },
+                      {
+                        "id": "pressure-001",
+                        "textLength": 65536,
+                        "updatedAt": 1788853402017
+                      },
+                      {
+                        "id": "pressure-002",
+                        "textLength": 65536,
+                        "updatedAt": 1788853402022
+                      },
+                      {
+                        "id": "pressure-003",
+                        "textLength": 65536,
+                        "updatedAt": 1788853402025
+                      },
+                      {
+                        "id": "pressure-004",
+                        "textLength": 65536,
+                        "updatedAt": 1788853402029
+                      },
+                      {
+                        "id": "pressure-005",
+                        "textLength": 65536,
+                        "updatedAt": 1788853402032
+                      },
+                      {
+                        "id": "sentinel",
+                        "textLength": 55,
+                        "updatedAt": 1788853401991
+                      }
+                    ],
+                    "sentinel": [
+                      {
+                        "id": "sentinel",
+                        "text": "Committed archive sentinel before browser quota failure",
+                        "updatedAt": 1788853401991
+                      }
+                    ],
+                    "pressureFTS": [
+                      "pressure-000",
+                      "pressure-001",
+                      "pressure-002",
+                      "pressure-003",
+                      "pressure-004",
+                      "pressure-005"
+                    ]
+                  },
+                  "consoleErrors": [
+                    "quixi-proof: QuotaExceededError: Failed to execute 'write' on 'FileSystemSyncAccessHandle': No space available for this operation\n    at scope.FileSystemSyncAccessHandle.<computed> [as write] (eval at evaluate (:311:30), <anonymous>:8:27)\n    at xWrite (http://127.0.0.1:4173/assets/index-DOXlbdQe.js:78:14085)\n    at http://127.0.0.1:4173/assets/sqlite3-BzAlo58v.wasm:wasm-function[177]:0x20939\n    at http://127.0.0.1:4173/assets/sqlite3-BzAlo58v.wasm:wasm-function[161]:0x1e438\n    at http://127.0.0.1:4173/assets/sqlite3-BzAlo58v.wasm:wasm-function[164]:0x1ea2c\n    at http://127.0.0.1:4173/assets/sqlite3-BzAlo58v.wasm:wasm-function[767]:0x691a7\n    at http://127.0.0.1:4173/assets/sqlite3-BzAlo58v.wasm:wasm-function[196]:0x229e9\n    at http://127.0.0.1:4173/assets/sqlite3-BzAlo58v.wasm:wasm-function[128]:0x178d7\n    at http://127.0.0.1:4173/assets/sqlite3-BzAlo58v.wasm:wasm-function[114]:0xd095\n    at Object.sqlite3_step (http://127.0.0.1:4173/assets/index-DOXlbdQe.js:77:32001)"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "file": "storage-quota.spec.ts",
+          "title": "browser OPFS quota exhaustion preserves committed history after quota restoration and reopen",
+          "project": "webkit",
+          "status": "skipped",
+          "annotations": [
+            {
+              "type": "skip",
+              "description": "Actual quota override uses Chromium CDP; no equivalent WebKit control is available.",
+              "location": {
+                "file": "/Users/eric/QuixiChat/tests/e2e/storage-quota.spec.ts",
+                "line": 7,
+                "column": 8
+              }
+            }
+          ],
+          "results": [
+            {
+              "status": "skipped",
+              "durationMs": 739,
+              "errors": [],
+              "attachments": {}
+            }
+          ]
+        },
+        {
+          "file": "storage-unavailable.spec.ts",
+          "title": "unavailable OPFS produces actionable failure without enabling writes",
+          "project": "chromium",
+          "status": "expected",
+          "annotations": [],
+          "results": [
+            {
+              "status": "passed",
+              "durationMs": 152,
+              "errors": [],
+              "attachments": {}
+            }
+          ]
+        },
+        {
+          "file": "storage-unavailable.spec.ts",
+          "title": "unavailable OPFS produces actionable failure without enabling writes",
+          "project": "webkit",
+          "status": "expected",
+          "annotations": [],
+          "results": [
+            {
+              "status": "passed",
+              "durationMs": 455,
+              "errors": [],
+              "attachments": {}
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "host": "docker",
+      "stats": {
+        "startTime": "2026-09-08T07:43:18.759Z",
+        "duration": 8827.158000000001,
+        "expected": 15,
+        "skipped": 1,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "tests": [
+        {
+          "file": "storage-proof.spec.ts",
+          "title": "real OPFS persistence, FTS and vec0 through the rendered proof",
+          "project": "chromium",
+          "status": "expected",
+          "annotations": [],
+          "results": [
+            {
+              "status": "passed",
+              "durationMs": 827,
+              "errors": [],
+              "attachments": {
+                "storage-diagnostics": {
+                  "backend": "sqlite-wasm-opfs-sahpool",
+                  "sqliteVersion": "3.53.4",
+                  "vectorVersion": "v0.1.9",
+                  "schemaVersion": 1,
+                  "integrity": "ok",
+                  "recordCount": 0,
+                  "operationCount": 0,
+                  "ownerId": "2dbba59a-21c7-4a70-878b-cf278ef75e41",
+                  "namespace": "persistence-2aca77a7-029e-4d7b-a511-cd7f7b28ce6f",
+                  "poolCapacity": 6,
+                  "persisted": false,
+                  "usage": 6293196,
+                  "quota": 10743711436
+                },
+                "host-environment": {
+                  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+                  "origin": "http://127.0.0.1:4180",
+                  "secureContext": true,
+                  "crossOriginIsolated": true,
+                  "webLocks": true,
+                  "opfs": true,
+                  "sqliteWasmSha256": "dd7c22431a3b8ad51ab5e6ed91065593574c34c5959d2efdef2f17484eedcb2c"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "file": "storage-proof.spec.ts",
+          "title": "committed history survives browser process restart",
+          "project": "chromium",
+          "status": "expected",
+          "annotations": [],
+          "results": [
+            {
+              "status": "passed",
+              "durationMs": 1003,
+              "errors": [],
+              "attachments": {}
+            }
+          ]
+        },
+        {
+          "file": "storage-proof.spec.ts",
+          "title": "record and operation rollback, migration rollback, repeatable SQLITE_FULL",
+          "project": "chromium",
+          "status": "expected",
+          "annotations": [],
+          "results": [
+            {
+              "status": "passed",
+              "durationMs": 473,
+              "errors": [],
+              "attachments": {}
+            }
+          ]
+        },
+        {
+          "file": "storage-proof.spec.ts",
+          "title": "one owner across tabs, forwarded writes, graceful handoff",
+          "project": "chromium",
+          "status": "expected",
+          "annotations": [],
+          "results": [
+            {
+              "status": "passed",
+              "durationMs": 798,
+              "errors": [],
+              "attachments": {}
+            }
+          ]
+        },
+        {
+          "file": "storage-proof.spec.ts",
+          "title": "owner death rolls back an uncommitted transaction and permits takeover",
+          "project": "chromium",
+          "status": "expected",
+          "annotations": [],
+          "results": [
+            {
+              "status": "passed",
+              "durationMs": 721,
+              "errors": [],
+              "attachments": {}
+            }
+          ]
+        },
+        {
+          "file": "storage-proof.spec.ts",
+          "title": "bounded requests, pagination, and FTS update/removal",
+          "project": "chromium",
+          "status": "expected",
+          "annotations": [],
+          "results": [
+            {
+              "status": "passed",
+              "durationMs": 794,
+              "errors": [],
+              "attachments": {}
+            }
+          ]
+        },
+        {
+          "file": "storage-proof.spec.ts",
+          "title": "real OPFS persistence, FTS and vec0 through the rendered proof",
+          "project": "webkit",
+          "status": "expected",
+          "annotations": [],
+          "results": [
+            {
+              "status": "passed",
+              "durationMs": 1516,
+              "errors": [],
+              "attachments": {
+                "storage-diagnostics": {
+                  "backend": "sqlite-wasm-opfs-sahpool",
+                  "sqliteVersion": "3.53.4",
+                  "vectorVersion": "v0.1.9",
+                  "schemaVersion": 1,
+                  "integrity": "ok",
+                  "recordCount": 0,
+                  "operationCount": 0,
+                  "ownerId": "e5226c13-7ef8-47a8-82a2-3a543e749ec3",
+                  "namespace": "persistence-94a3fa80-169e-4aa7-acaa-fdd83b066f4a",
+                  "poolCapacity": 6,
+                  "persisted": false,
+                  "usage": 7393296,
+                  "quota": 20615843021
+                },
+                "host-environment": {
+                  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+                  "origin": "http://127.0.0.1:4180",
+                  "secureContext": true,
+                  "crossOriginIsolated": true,
+                  "webLocks": true,
+                  "opfs": true,
+                  "sqliteWasmSha256": "dd7c22431a3b8ad51ab5e6ed91065593574c34c5959d2efdef2f17484eedcb2c"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "file": "storage-proof.spec.ts",
+          "title": "committed history survives browser process restart",
+          "project": "webkit",
+          "status": "expected",
+          "annotations": [],
+          "results": [
+            {
+              "status": "passed",
+              "durationMs": 2230,
+              "errors": [],
+              "attachments": {}
+            }
+          ]
+        },
+        {
+          "file": "storage-proof.spec.ts",
+          "title": "record and operation rollback, migration rollback, repeatable SQLITE_FULL",
+          "project": "webkit",
+          "status": "expected",
+          "annotations": [],
+          "results": [
+            {
+              "status": "passed",
+              "durationMs": 1096,
+              "errors": [],
+              "attachments": {}
+            }
+          ]
+        },
+        {
+          "file": "storage-proof.spec.ts",
+          "title": "one owner across tabs, forwarded writes, graceful handoff",
+          "project": "webkit",
+          "status": "expected",
+          "annotations": [],
+          "results": [
+            {
+              "status": "passed",
+              "durationMs": 1516,
+              "errors": [],
+              "attachments": {}
+            }
+          ]
+        },
+        {
+          "file": "storage-proof.spec.ts",
+          "title": "owner death rolls back an uncommitted transaction and permits takeover",
+          "project": "webkit",
+          "status": "expected",
+          "annotations": [],
+          "results": [
+            {
+              "status": "passed",
+              "durationMs": 1465,
+              "errors": [],
+              "attachments": {}
+            }
+          ]
+        },
+        {
+          "file": "storage-proof.spec.ts",
+          "title": "bounded requests, pagination, and FTS update/removal",
+          "project": "webkit",
+          "status": "expected",
+          "annotations": [],
+          "results": [
+            {
+              "status": "passed",
+              "durationMs": 1069,
+              "errors": [],
+              "attachments": {}
+            }
+          ]
+        },
+        {
+          "file": "storage-quota.spec.ts",
+          "title": "browser OPFS quota exhaustion preserves committed history after quota restoration and reopen",
+          "project": "chromium",
+          "status": "expected",
+          "annotations": [],
+          "results": [
+            {
+              "status": "passed",
+              "durationMs": 774,
+              "errors": [],
+              "attachments": {
+                "browser-quota-evidence": {
+                  "origin": "http://127.0.0.1:4180",
+                  "browserVersion": "153.0.8010.12",
+                  "initial": {
+                    "backend": "sqlite-wasm-opfs-sahpool",
+                    "sqliteVersion": "3.53.4",
+                    "vectorVersion": "v0.1.9",
+                    "schemaVersion": 1,
+                    "integrity": "ok",
+                    "recordCount": 1,
+                    "operationCount": 1,
+                    "ownerId": "4bc48abe-f0f3-47d7-a71f-fb8ea6588f7a",
+                    "namespace": "quota-e4f1079d-fbd4-4bb8-9c06-24afe2c8cb67",
+                    "poolCapacity": 6,
+                    "persisted": false,
+                    "usage": 6293180,
+                    "quota": 10743711420
+                  },
+                  "beforeQuota": {
+                    "usage": 6293180,
+                    "quota": 2397766139904,
+                    "overrideActive": false,
+                    "usageBreakdown": [
+                      {
+                        "storageType": "file_systems",
+                        "usage": 6293180
+                      },
+                      {
+                        "storageType": "indexeddb",
+                        "usage": 0
+                      },
+                      {
+                        "storageType": "cache_storage",
+                        "usage": 0
+                      },
+                      {
+                        "storageType": "service_workers",
+                        "usage": 0
+                      }
+                    ]
+                  },
+                  "quotaSize": 6817468,
+                  "override": {
+                    "usage": 6293180,
+                    "quota": 6817468,
+                    "overrideActive": true,
+                    "usageBreakdown": [
+                      {
+                        "storageType": "file_systems",
+                        "usage": 6293180
+                      },
+                      {
+                        "storageType": "indexeddb",
+                        "usage": 0
+                      },
+                      {
+                        "storageType": "cache_storage",
+                        "usage": 0
+                      },
+                      {
+                        "storageType": "service_workers",
+                        "usage": 0
+                      }
+                    ]
+                  },
+                  "pressure": {
+                    "committed": [
+                      "pressure-000",
+                      "pressure-001",
+                      "pressure-002",
+                      "pressure-003",
+                      "pressure-004",
+                      "pressure-005"
+                    ],
+                    "failedId": "pressure-006",
+                    "error": {
+                      "code": "DATABASE_ERROR",
+                      "message": "Local archive storage could not complete an I/O operation. Check available disk/site storage and permissions, then close and reopen the archive before inspecting and retrying the change. SQLITE_IOERR: sqlite3 result code 10: disk I/O error"
+                    }
+                  },
+                  "lowQuota": {
+                    "usage": 6293180,
+                    "quota": 6817468,
+                    "overrideActive": true,
+                    "usageBreakdown": [
+                      {
+                        "storageType": "file_systems",
+                        "usage": 6293180
+                      },
+                      {
+                        "storageType": "indexeddb",
+                        "usage": 0
+                      },
+                      {
+                        "storageType": "cache_storage",
+                        "usage": 0
+                      },
+                      {
+                        "storageType": "service_workers",
+                        "usage": 0
+                      }
+                    ]
+                  },
+                  "writeFailures": [
+                    {
+                      "name": "QuotaExceededError",
+                      "message": "Failed to execute 'write' on 'FileSystemSyncAccessHandle': No space available for this operation",
+                      "operation": "write"
+                    }
+                  ],
+                  "restoredQuota": {
+                    "usage": 6293180,
+                    "quota": 2397766139904,
+                    "overrideActive": false,
+                    "usageBreakdown": [
+                      {
+                        "storageType": "file_systems",
+                        "usage": 6293180
+                      },
+                      {
+                        "storageType": "indexeddb",
+                        "usage": 0
+                      },
+                      {
+                        "storageType": "cache_storage",
+                        "usage": 0
+                      },
+                      {
+                        "storageType": "service_workers",
+                        "usage": 0
+                      }
+                    ]
+                  },
+                  "recovered": {
+                    "diagnostics": {
+                      "backend": "sqlite-wasm-opfs-sahpool",
+                      "sqliteVersion": "3.53.4",
+                      "vectorVersion": "v0.1.9",
+                      "schemaVersion": 1,
+                      "integrity": "ok",
+                      "recordCount": 7,
+                      "operationCount": 7,
+                      "ownerId": "731cd1fa-04a9-4eaa-bcd4-c0cc97458437",
+                      "namespace": "quota-e4f1079d-fbd4-4bb8-9c06-24afe2c8cb67",
+                      "poolCapacity": 6,
+                      "persisted": false,
+                      "usage": 6272700,
+                      "quota": 10743690940
+                    },
+                    "records": [
+                      {
+                        "id": "pressure-000",
+                        "textLength": 65536,
+                        "updatedAt": 1788853401578
+                      },
+                      {
+                        "id": "pressure-001",
+                        "textLength": 65536,
+                        "updatedAt": 1788853401585
+                      },
+                      {
+                        "id": "pressure-002",
+                        "textLength": 65536,
+                        "updatedAt": 1788853401596
+                      },
+                      {
+                        "id": "pressure-003",
+                        "textLength": 65536,
+                        "updatedAt": 1788853401601
+                      },
+                      {
+                        "id": "pressure-004",
+                        "textLength": 65536,
+                        "updatedAt": 1788853401608
+                      },
+                      {
+                        "id": "pressure-005",
+                        "textLength": 65536,
+                        "updatedAt": 1788853401615
+                      },
+                      {
+                        "id": "sentinel",
+                        "textLength": 55,
+                        "updatedAt": 1788853401531
+                      }
+                    ],
+                    "sentinel": [
+                      {
+                        "id": "sentinel",
+                        "text": "Committed archive sentinel before browser quota failure",
+                        "updatedAt": 1788853401531
+                      }
+                    ],
+                    "pressureFTS": [
+                      "pressure-000",
+                      "pressure-001",
+                      "pressure-002",
+                      "pressure-003",
+                      "pressure-004",
+                      "pressure-005"
+                    ]
+                  },
+                  "consoleErrors": [
+                    "quixi-proof: QuotaExceededError: Failed to execute 'write' on 'FileSystemSyncAccessHandle': No space available for this operation\n    at scope.FileSystemSyncAccessHandle.<computed> [as write] (eval at evaluate (:311:30), <anonymous>:8:27)\n    at xWrite (http://127.0.0.1:4180/assets/index-DOXlbdQe.js:78:14085)\n    at http://127.0.0.1:4180/assets/sqlite3-BzAlo58v.wasm:wasm-function[177]:0x20939\n    at http://127.0.0.1:4180/assets/sqlite3-BzAlo58v.wasm:wasm-function[161]:0x1e438\n    at http://127.0.0.1:4180/assets/sqlite3-BzAlo58v.wasm:wasm-function[164]:0x1ea2c\n    at http://127.0.0.1:4180/assets/sqlite3-BzAlo58v.wasm:wasm-function[767]:0x691a7\n    at http://127.0.0.1:4180/assets/sqlite3-BzAlo58v.wasm:wasm-function[196]:0x229e9\n    at http://127.0.0.1:4180/assets/sqlite3-BzAlo58v.wasm:wasm-function[128]:0x178d7\n    at http://127.0.0.1:4180/assets/sqlite3-BzAlo58v.wasm:wasm-function[114]:0xd095\n    at Object.sqlite3_step (http://127.0.0.1:4180/assets/index-DOXlbdQe.js:77:32001)"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "file": "storage-quota.spec.ts",
+          "title": "browser OPFS quota exhaustion preserves committed history after quota restoration and reopen",
+          "project": "webkit",
+          "status": "skipped",
+          "annotations": [
+            {
+              "type": "skip",
+              "description": "Actual quota override uses Chromium CDP; no equivalent WebKit control is available.",
+              "location": {
+                "file": "/Users/eric/QuixiChat/tests/e2e/storage-quota.spec.ts",
+                "line": 7,
+                "column": 8
+              }
+            }
+          ],
+          "results": [
+            {
+              "status": "skipped",
+              "durationMs": 674,
+              "errors": [],
+              "attachments": {}
+            }
+          ]
+        },
+        {
+          "file": "storage-unavailable.spec.ts",
+          "title": "unavailable OPFS produces actionable failure without enabling writes",
+          "project": "chromium",
+          "status": "expected",
+          "annotations": [],
+          "results": [
+            {
+              "status": "passed",
+              "durationMs": 156,
+              "errors": [],
+              "attachments": {}
+            }
+          ]
+        },
+        {
+          "file": "storage-unavailable.spec.ts",
+          "title": "unavailable OPFS produces actionable failure without enabling writes",
+          "project": "webkit",
+          "status": "expected",
+          "annotations": [],
+          "results": [
+            {
+              "status": "passed",
+              "durationMs": 414,
+              "errors": [],
+              "attachments": {}
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "limitations": "Reports establish only the named tests in the recorded engines and contexts. Skipped checks, installed Safari, other OS/WebViews, eviction, and product-scale workloads require separate evidence."
+}

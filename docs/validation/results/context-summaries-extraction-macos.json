@@ -1,0 +1,144 @@
+{
+  "status": "passed",
+  "selectedEngines": [
+    "chromium",
+    "webkit"
+  ],
+  "startedAt": "2026-09-10T07:32:00.489Z",
+  "environment": {
+    "platform": "darwin",
+    "release": "25.6.0",
+    "arch": "arm64",
+    "osVersion": "26.6.2",
+    "node": "v22.23.1"
+  },
+  "sourceSha256": {
+    "tooling/browser-engines.mjs": "136f16e63e905ae4c8305c7adedfce2411eff13b04f914054f8fb718155d0df1",
+    "packages/storage/src/client/archive.ts": "844981f196ebee613c584dadf3d1cef2c1af15f3aa06daf253d6d48c3b553c24",
+    "packages/storage/src/archive-protocol.ts": "02bbc935808f8ebbf4aff19d11f811ec82b754e14b1741dec8d111deb8c9660d",
+    "packages/storage/src/worker/archive.ts": "f84c9ad0e41390d7230b232210ede2577d900d9a7f8f8deb9fc7e7f79aa9153c",
+    "packages/storage/src/worker/archive-runtime.ts": "647e0c309c8defd42bb6e0f2a902e98d0a356bde1f75521a512fb23dd1453a2e",
+    "packages/storage/src/worker/archive-database.ts": "fbd9436598bfbd0cc75e39482e57d27099b0bcdfcb1526cfe8a8c7e2236e6e73",
+    "packages/storage/src/worker/operation-claims.ts": "b90a22768dd7797058221fd509b1f02bd34e4e54a7aa77c15304e7cb19b0725b",
+    "packages/storage/src/worker/archive-operation-fences.ts": "6fa14608c52c2e691f4a418b4b7f495e8ca3e0f8c0f4bc1e9b4ecb445c733feb",
+    "packages/storage/src/worker/extraction/index.ts": "e0175db4d0a20b182d7c31bda46e95dd5eb15e82c60e67cf09ad6c4d5779b92d",
+    "packages/storage/src/worker/extraction/schema.ts": "e08905c3ed353f8bfbbef90f5d768126eac5713e471c4ceec283e62a99961487",
+    "packages/storage/src/worker/search/index.ts": "c65bdb72396fe09bbb00067a9cd524bbbdf18bf394929db20b7e457c385e98ac",
+    "packages/storage/src/worker/search/schema.ts": "ac6a9bbca9ebb51be79afce94f25415ba79e7ec30753ac3433d2ab944cf0f09b",
+    "packages/storage/src/worker/search/sources.ts": "c3b55d79b0196092fa9cbe2a5bfc97f10903974dede99bbef4419f5bcaa6aebf",
+    "packages/storage/src/worker/search/extraction.ts": "ba85bc1954ce553a3268e1b924f8eeed879f0b1dad694108090de77301096033",
+    "packages/storage/src/worker/blob-catalog.ts": "751af6f06d6a175284c2a39f0dd8c9522e18f865c0d8b8be283623a41524de8a",
+    "packages/storage/src/worker/blobs.ts": "5a8ee316532e92497eb6e700ba55f719c5188aef19cf39e04d8a938ec7de4f64",
+    "packages/storage/migrations/index.ts": "463331ffb83ce77bd759505d3e3b39376a193c146bb5e68fd5178af4c63867fd",
+    "packages/core/src/contracts/extraction.ts": "b05bcd2ef02bd60694bff7cc5d83fccbd10e2584f1ba9edf17505241c209b483",
+    "packages/core/src/contracts/storage.ts": "9848e0fe5ae04cc262512dfbe6fa102bb957ef96790139f4c643181cd10cda47",
+    "packages/storage/tests/extraction-browser/index.ts": "73d77e263e9e876be7502aacda5470badf2bbdc90df962f10a1619c07faa6625",
+    "packages/storage/tests/extraction-browser/run.mjs": "668435ce0cb5e98d8aa7c2ca79f3373741db0a3edfa8b782378ac3eeb3f9e4ad",
+    "packages/documents/tests/fixtures/pages-100.pdf": "6f70ed0674549f75fcaf6577c88d8c19539b168f1e0a05180b048c50878a2785",
+    "packages/storage/sqlite/dist/sqlite3.wasm": "dd7c22431a3b8ad51ab5e6ed91065593574c34c5959d2efdef2f17484eedcb2c"
+  },
+  "hosts": [
+    {
+      "name": "chromium",
+      "status": "passed",
+      "checks": [
+        "twenty real lost read/slice creation replies release by known request ID; eight fresh reader slots and seven child slots plus parent remain available",
+        "two actual managed clients share the OPFS owner; verified original PDF and canonical Document/Attachment support a durable extraction run",
+        "actual lost stage/publication replies reconcile by stable operation IDs; changed replay rejects; unsealed page is invisible; complete page has continuous phrase/NUL/Unicode text and bounded source maps",
+        "page 1 remains searchable with the same shared chunk identity while page2 is paused/staged and after independent page2 publication",
+        "canonical/blob/extraction operation identities are globally fenced and rejected cross-domain attempts retain original receipts and canonical title",
+        "abrupt real owner-tab loss preserves completed pages and exact staged checkpoint/receipt without inventing producer interruption or canonical/sync writes",
+        "complete browser-process restart preserves global receipts, text/search/checkpoints and exact original bytes; explicit interrupt/resume rotates writer epoch and fences old writes"
+      ],
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36",
+      "initialOpfs": [],
+      "original": {
+        "sha256": "6f70ed0674549f75fcaf6577c88d8c19539b168f1e0a05180b048c50878a2785",
+        "byteLength": 65679,
+        "peak": 65679
+      },
+      "allocationLoss": {
+        "lostReadReplies": 10,
+        "lostSliceReplies": 10,
+        "admittedFullReadsAfterCleanup": 8,
+        "admittedChildrenWithParent": 7
+      },
+      "lostStage": {
+        "code": "UNKNOWN_OUTCOME",
+        "message": "ArchiveStorageError: Archive reply deadline elapsed after dispatch. Inspect canonical operation status before retrying a write; restart byte transfers after an unknown chunk outcome.",
+        "detail": {
+          "code": "UNKNOWN_OUTCOME",
+          "message": "Archive reply deadline elapsed after dispatch. Inspect canonical operation status before retrying a write; restart byte transfers after an unknown chunk outcome.",
+          "requestId": "b155262c-0a46-445d-936e-e762a2dc3d39",
+          "operationId": "9a1c1530-5b4f-412c-a456-075d2839ad74",
+          "retry": "same_operation_id",
+          "details": {}
+        }
+      },
+      "lostPublication": {
+        "code": "UNKNOWN_OUTCOME",
+        "message": "ArchiveStorageError: Archive reply deadline elapsed after dispatch. Inspect canonical operation status before retrying a write; restart byte transfers after an unknown chunk outcome.",
+        "detail": {
+          "code": "UNKNOWN_OUTCOME",
+          "message": "Archive reply deadline elapsed after dispatch. Inspect canonical operation status before retrying a write; restart byte transfers after an unknown chunk outcome.",
+          "requestId": "d121b286-333f-4abf-aed6-105e701b05bf",
+          "operationId": "1b508cf7-dd8c-4535-81c3-bd98e01ebd5d",
+          "retry": "same_operation_id",
+          "details": {}
+        }
+      }
+    },
+    {
+      "name": "webkit",
+      "status": "passed",
+      "checks": [
+        "twenty real lost read/slice creation replies release by known request ID; eight fresh reader slots and seven child slots plus parent remain available",
+        "two actual managed clients share the OPFS owner; verified original PDF and canonical Document/Attachment support a durable extraction run",
+        "actual lost stage/publication replies reconcile by stable operation IDs; changed replay rejects; unsealed page is invisible; complete page has continuous phrase/NUL/Unicode text and bounded source maps",
+        "page 1 remains searchable with the same shared chunk identity while page2 is paused/staged and after independent page2 publication",
+        "canonical/blob/extraction operation identities are globally fenced and rejected cross-domain attempts retain original receipts and canonical title",
+        "abrupt real owner-tab loss preserves completed pages and exact staged checkpoint/receipt without inventing producer interruption or canonical/sync writes",
+        "complete browser-process restart preserves global receipts, text/search/checkpoints and exact original bytes; explicit interrupt/resume rotates writer epoch and fences old writes"
+      ],
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+      "initialOpfs": [],
+      "original": {
+        "sha256": "6f70ed0674549f75fcaf6577c88d8c19539b168f1e0a05180b048c50878a2785",
+        "byteLength": 65679,
+        "peak": 65679
+      },
+      "allocationLoss": {
+        "lostReadReplies": 10,
+        "lostSliceReplies": 10,
+        "admittedFullReadsAfterCleanup": 8,
+        "admittedChildrenWithParent": 7
+      },
+      "lostStage": {
+        "code": "UNKNOWN_OUTCOME",
+        "message": "ArchiveStorageError: Archive reply deadline elapsed after dispatch. Inspect canonical operation status before retrying a write; restart byte transfers after an unknown chunk outcome.",
+        "detail": {
+          "code": "UNKNOWN_OUTCOME",
+          "message": "Archive reply deadline elapsed after dispatch. Inspect canonical operation status before retrying a write; restart byte transfers after an unknown chunk outcome.",
+          "requestId": "504cd04e-5b91-4a2b-bc75-3ab7bf6ca1af",
+          "operationId": "40a76377-e45a-45fa-a92e-032bd4dfd0d8",
+          "retry": "same_operation_id",
+          "details": {}
+        }
+      },
+      "lostPublication": {
+        "code": "UNKNOWN_OUTCOME",
+        "message": "ArchiveStorageError: Archive reply deadline elapsed after dispatch. Inspect canonical operation status before retrying a write; restart byte transfers after an unknown chunk outcome.",
+        "detail": {
+          "code": "UNKNOWN_OUTCOME",
+          "message": "Archive reply deadline elapsed after dispatch. Inspect canonical operation status before retrying a write; restart byte transfers after an unknown chunk outcome.",
+          "requestId": "9a800885-886b-45a9-9b29-c3efd11b483c",
+          "operationId": "27f18a8a-b605-4599-8da2-6f654bba99b4",
+          "retry": "same_operation_id",
+          "details": {}
+        }
+      }
+    }
+  ],
+  "origin": "http://127.0.0.1:52533",
+  "finishedAt": "2026-09-10T07:32:21.418Z"
+}

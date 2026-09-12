@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="referrer" content="no-referrer" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; base-uri 'none'; form-action 'none'" />
+    <title>Provider connection — Quixi</title>
+  </head>
+  <body>
+    <main>
+      <h1>Provider connection</h1>
+      <p id="oauth-status" role="status">Checking this connection request…</p>
+      <button id="oauth-close" type="button">Close tab</button>
+      <noscript>JavaScript is required to finish connecting. Return to Quixi and try again.</noscript>
+    </main>
+    <script type="module" src="/src/oauth-callback.ts"></script>
+  </body>
+</html>

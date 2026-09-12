@@ -1,0 +1,12 @@
+{
+  "name": "@quixi/relay",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22.21.0 <23" },
+  "scripts": {
+    "start": "node src/main.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "test:browser": "node tests/browser.mjs"
+  }
+}

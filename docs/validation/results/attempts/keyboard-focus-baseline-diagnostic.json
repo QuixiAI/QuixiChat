@@ -1,0 +1,18 @@
+{
+  "error": "Error: expect(locator).toBeFocused() failed\n\nLocator:  getByLabel('Send key', { exact: true })\nExpected: focused\nReceived: inactive\nTimeout:  5000ms\n\nCall log:\n  - Expect \"toBeFocused\" getByLabel('Send key', { exact: true }) with timeout 5000ms\n  - waiting for getByLabel('Send key', { exact: true })\n    14 × locator resolved to <select id=\"send-key-preference\">…</select>\n       - unexpected value \"inactive\"\n",
+  "active": {
+    "tag": "BODY",
+    "id": "",
+    "role": null,
+    "label": null,
+    "html": "<body><div id=\"app\"><div class=\"app-shell\"><a class=\"skip-link\" href=\"#workspace\">Skip to conversation</a><aside class=\"sidebar\" aria-label=\"Conversation library\"><a class=\"brand\" href=\"/\" aria-label=\"Quixi home\">Quixi<span>Your history. Your choice.</span></a><button class=\"primary\">New conversation</button><nav aria-label=\"Workspace\"><button aria-current=\"page\">Preferences</button><button>Storage health</button><button>Library</button><button>Import history</button><button>Providers</button><button>Documents</button><button>Export history</button></nav><form><label>Filter titles<input maxlength=\"512\" value=\"\"></label><button>Filter</button></form><label class=\"checkbox\"><input type=\"checkbox\"> Archived conversations</label><ul class=\"thread-list\"></ul><p class=\"muted\">No conversations in this view.</p><div class=\"actions\"><button>Previous</button><button disabled=\"\">Next</button></div><p class=\"local-note\">History stays on this device. Sending shares the selected branch with your chosen provider.</p></aside"
+  },
+  "control": "<select id=\"send-key-preference\"><option value=\"mod-enter\">⌘ / Ctrl + Enter</option><option value=\"enter\">Enter (Shift + Enter for a new line)</option></select>",
+  "headings": [
+    "Preferences",
+    "Routing aliases"
+  ],
+  "status": [
+    "Preferences are saved on this device."
+  ]
+}

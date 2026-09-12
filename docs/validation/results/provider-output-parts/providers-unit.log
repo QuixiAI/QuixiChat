@@ -1,0 +1,616 @@
+
+> @quixi/providers@0.0.1 test
+> npm run typecheck && npm run typecheck:tests && node --experimental-transform-types --test tests/*.test.ts
+
+
+> @quixi/providers@0.0.1 typecheck
+> tsc --noEmit -p tsconfig.json
+
+
+> @quixi/providers@0.0.1 typecheck:tests
+> tsc --noEmit -p tsconfig.tests.json
+
+TAP version 13
+# (node:8729) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: openai-compatible: byte-fragmented UTF-8, tools, citations, raw-only unknown outputs and cumulative usage
+ok 1 - openai-compatible: byte-fragmented UTF-8, tools, citations, raw-only unknown outputs and cumulative usage
+  ---
+  duration_ms: 2.409291
+  type: 'test'
+  ...
+# Subtest: openai-compatible: explicit limit stop and terminal truncation differ
+ok 2 - openai-compatible: explicit limit stop and terminal truncation differ
+  ---
+  duration_ms: 1.134917
+  type: 'test'
+  ...
+# Subtest: anthropic: byte-fragmented UTF-8, tools, citations, raw-only unknown outputs and cumulative usage
+ok 3 - anthropic: byte-fragmented UTF-8, tools, citations, raw-only unknown outputs and cumulative usage
+  ---
+  duration_ms: 2.132167
+  type: 'test'
+  ...
+# Subtest: anthropic: explicit limit stop and terminal truncation differ
+ok 4 - anthropic: explicit limit stop and terminal truncation differ
+  ---
+  duration_ms: 1.61575
+  type: 'test'
+  ...
+# Subtest: SSE bounds include fragmented Unicode and unterminated records
+ok 5 - SSE bounds include fragmented Unicode and unterminated records
+  ---
+  duration_ms: 32.516416
+  type: 'test'
+  ...
+# Subtest: tool JSON, depth and byte limits fail without fabricating a complete tool
+ok 6 - tool JSON, depth and byte limits fail without fabricating a complete tool
+  ---
+  duration_ms: 3.82075
+  type: 'test'
+  ...
+# Subtest: controlled HTTP: bindings, request bodies, stream cleanup, error health, cancellation, compatibility and cost
+ok 7 - controlled HTTP: bindings, request bodies, stream cleanup, error health, cancellation, compatibility and cost
+  ---
+  duration_ms: 123.97875
+  type: 'test'
+  ...
+# Subtest: framing byte cap includes line endings and structural bounds include queued nodes
+ok 8 - framing byte cap includes line endings and structural bounds include queued nodes
+  ---
+  duration_ms: 8.653792
+  type: 'test'
+  ...
+# Subtest: usage metadata cannot grow without bound across otherwise small records
+ok 9 - usage metadata cannot grow without bound across otherwise small records
+  ---
+  duration_ms: 2.118792
+  type: 'test'
+  ...
+# (node:8730) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: reviewed audio catalog keeps provider audio output separate from implemented text output and declines misleading prices
+ok 10 - reviewed audio catalog keeps provider audio output separate from implemented text output and declines misleading prices
+  ---
+  duration_ms: 1.570542
+  type: 'test'
+  ...
+# Subtest: WAV and MP3 plus historical MIME aliases map exact bytes and canonical order to input_audio
+ok 11 - WAV and MP3 plus historical MIME aliases map exact bytes and canonical order to input_audio
+  ---
+  duration_ms: 3.342959
+  type: 'test'
+  ...
+# Subtest: audio-only user messages remain content blocks and text-only messages on audio models explicitly request text output
+ok 12 - audio-only user messages remain content blocks and text-only messages on audio models explicitly request text output
+  ---
+  duration_ms: 0.290542
+  type: 'test'
+  ...
+# Subtest: audio capability, protocol, role, bytes, format, size and occurrence refusals identify the affected part
+ok 13 - audio capability, protocol, role, bytes, format, size and occurrence refusals identify the affected part
+  ---
+  duration_ms: 1.64
+  type: 'test'
+  ...
+# Subtest: Audio occurrences share the audio raw request budget before rejected base64 allocation
+ok 14 - Audio occurrences share the audio raw request budget before rejected base64 allocation
+  ---
+  duration_ms: 59.476208
+  type: 'test'
+  ...
+# Subtest: Image occurrences share the audio raw request budget before rejected base64 allocation
+ok 15 - Image occurrences share the audio raw request budget before rejected base64 allocation
+  ---
+  duration_ms: 43.624
+  type: 'test'
+  ...
+# Subtest: File occurrences share the audio raw request budget before rejected base64 allocation
+ok 16 - File occurrences share the audio raw request budget before rejected base64 allocation
+  ---
+  duration_ms: 43.042
+  type: 'test'
+  ...
+# Subtest: audio bytes plus text still enforce the final encoded JSON request bound
+ok 17 - audio bytes plus text still enforce the final encoded JSON request bound
+  ---
+  duration_ms: 45.013834
+  type: 'test'
+  ...
+# Subtest: audio model applies reviewed Chat Completions parameters, output cap and unknown price
+ok 18 - audio model applies reviewed Chat Completions parameters, output cap and unknown price
+  ---
+  duration_ms: 0.525583
+  type: 'test'
+  ...
+# (node:8731) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: a clean path reports every part preserved by kind and the encoded request size
+ok 19 - a clean path reports every part preserved by kind and the encoded request size
+  ---
+  duration_ms: 3.837333
+  type: 'test'
+  ...
+# Subtest: refused parts are listed by kind with the mapper's own reason, and prepare refuses the same path
+ok 20 - refused parts are listed by kind with the mapper's own reason, and prepare refuses the same path
+  ---
+  duration_ms: 0.947667
+  type: 'test'
+  ...
+# Subtest: request-level constraints and an unregistered model are reported without throwing
+ok 21 - request-level constraints and an unregistered model are reported without throwing
+  ---
+  duration_ms: 0.249834
+  type: 'test'
+  ...
+# Subtest: citations, structured output and provider artifacts are refused by name on both protocols
+ok 22 - citations, structured output and provider artifacts are refused by name on both protocols
+  ---
+  duration_ms: 0.237875
+  type: 'test'
+  ...
+# (node:8732) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: manual thinking maps to Anthropic's enabled budget only under the reviewed profile and its constraints
+ok 23 - manual thinking maps to Anthropic's enabled budget only under the reviewed profile and its constraints
+  ---
+  duration_ms: 3.551875
+  type: 'test'
+  ...
+# Subtest: the shipped Haiku 4.5 catalog declares the manual-thinking profile with dated sources
+ok 24 - the shipped Haiku 4.5 catalog declares the manual-thinking profile with dated sources
+  ---
+  duration_ms: 0.384542
+  type: 'test'
+  ...
+# Subtest: verified thinking and redacted blocks are carried first, in order, exactly as captured
+ok 25 - verified thinking and redacted blocks are carried first, in order, exactly as captured
+  ---
+  duration_ms: 0.429
+  type: 'test'
+  ...
+# Subtest: every unverifiable, foreign, misordered or oversized reasoning marker is a named refusal
+ok 26 - every unverifiable, foreign, misordered or oversized reasoning marker is a named refusal
+  ---
+  duration_ms: 3.983166
+  type: 'test'
+  ...
+# Subtest: receipt parsing accepts exactly the version-1 contract
+ok 27 - receipt parsing accepts exactly the version-1 contract
+  ---
+  duration_ms: 5.696791
+  type: 'test'
+  ...
+# Subtest: markers bind to receipts only when generation, response, kinds, records and order all agree
+ok 28 - markers bind to receipts only when generation, response, kinds, records and order all agree
+  ---
+  duration_ms: 0.559292
+  type: 'test'
+  ...
+# Subtest: retained raw segments reconstruct the same receipts the live consumer would have written
+ok 29 - retained raw segments reconstruct the same receipts the live consumer would have written
+  ---
+  duration_ms: 1.823709
+  type: 'test'
+  ...
+# Subtest: count and generation requests carry the same thinking parameter and blocks through actual HTTP
+ok 30 - count and generation requests carry the same thinking parameter and blocks through actual HTTP
+  ---
+  duration_ms: 23.103916
+  type: 'test'
+  ...
+# (node:8733) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: openai-compatible: reviewed existing model maps a PDF and text in canonical order with exact bytes
+ok 31 - openai-compatible: reviewed existing model maps a PDF and text in canonical order with exact bytes
+  ---
+  duration_ms: 2.379583
+  type: 'test'
+  ...
+# Subtest: openai-compatible: PDF capability, bytes, roles, MIME, filename, size and count refusals are explicit
+ok 32 - openai-compatible: PDF capability, bytes, roles, MIME, filename, size and count refusals are explicit
+  ---
+  duration_ms: 1.88575
+  type: 'test'
+  ...
+# Subtest: openai-compatible: repeated PDFs and mixed image/file occurrences share a pre-base64 raw byte bound
+ok 33 - openai-compatible: repeated PDFs and mixed image/file occurrences share a pre-base64 raw byte bound
+  ---
+  duration_ms: 90.728583
+  type: 'test'
+  ...
+# Subtest: openai-compatible: final four-MiB JSON cap still rejects a valid raw-size PDF plus text
+ok 34 - openai-compatible: final four-MiB JSON cap still rejects a valid raw-size PDF plus text
+  ---
+  duration_ms: 43.922917
+  type: 'test'
+  ...
+# Subtest: anthropic: reviewed existing model maps a PDF and text in canonical order with exact bytes
+ok 35 - anthropic: reviewed existing model maps a PDF and text in canonical order with exact bytes
+  ---
+  duration_ms: 0.260084
+  type: 'test'
+  ...
+# Subtest: anthropic: PDF capability, bytes, roles, MIME, filename, size and count refusals are explicit
+ok 36 - anthropic: PDF capability, bytes, roles, MIME, filename, size and count refusals are explicit
+  ---
+  duration_ms: 0.627917
+  type: 'test'
+  ...
+# Subtest: anthropic: repeated PDFs and mixed image/file occurrences share a pre-base64 raw byte bound
+ok 37 - anthropic: repeated PDFs and mixed image/file occurrences share a pre-base64 raw byte bound
+  ---
+  duration_ms: 86.698541
+  type: 'test'
+  ...
+# Subtest: anthropic: final four-MiB JSON cap still rejects a valid raw-size PDF plus text
+ok 38 - anthropic: final four-MiB JSON cap still rejects a valid raw-size PDF plus text
+  ---
+  duration_ms: 43.034417
+  type: 'test'
+  ...
+# Subtest: both adapters count/analyze/stream the same reviewed PDF mapping, with no dispatch on unsupported files
+ok 39 - both adapters count/analyze/stream the same reviewed PDF mapping, with no dispatch on unsupported files
+  ---
+  duration_ms: 23.202041
+  type: 'test'
+  ...
+# (node:8734) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: summary permits exactly 16 KiB of UTF-8 and seals complete output
+ok 40 - summary permits exactly 16 KiB of UTF-8 and seals complete output
+  ---
+  duration_ms: 6.026792
+  type: 'test'
+  ...
+# Subtest: summary overflow cancels before appending excess text and seals the committed prefix partial
+ok 41 - summary overflow cancels before appending excess text and seals the committed prefix partial
+  ---
+  duration_ms: 1.114916
+  type: 'test'
+  ...
+# Subtest: summary oversized first delta persists an empty partial attempt with a terminal manifest
+ok 42 - summary oversized first delta persists an empty partial attempt with a terminal manifest
+  ---
+  duration_ms: 3.500125
+  type: 'test'
+  ...
+# Subtest: summary counts Text and Note output parts together with streaming deltas
+ok 43 - summary counts Text and Note output parts together with streaming deltas
+  ---
+  duration_ms: 3.178333
+  type: 'test'
+  ...
+# Subtest: summary cancellation rejection still seals the retained prefix partial
+ok 44 - summary cancellation rejection still seals the retained prefix partial
+  ---
+  duration_ms: 0.955041
+  type: 'test'
+  ...
+# Subtest: ordinary chat may exceed the summary review cap and keeps its normal terminal status
+ok 45 - ordinary chat may exceed the summary review cap and keeps its normal terminal status
+  ---
+  duration_ms: 1.012375
+  type: 'test'
+  ...
+# Subtest: initial thread revision guards creation only while later output checkpoints survive revision changes
+ok 46 - initial thread revision guards creation only while later output checkpoints survive revision changes
+  ---
+  duration_ms: 1.41825
+  type: 'test'
+  ...
+# Subtest: a conversation revision race before initial commit refuses the attempt before provider dispatch
+ok 47 - a conversation revision race before initial commit refuses the attempt before provider dispatch
+  ---
+  duration_ms: 0.241917
+  type: 'test'
+  ...
+# Subtest: unknown initial outcomes retain the same guarded batch or resolve its committed identity without redispatch
+ok 48 - unknown initial outcomes retain the same guarded batch or resolve its committed identity without redispatch
+  ---
+  duration_ms: 1.339541
+  type: 'test'
+  ...
+# Subtest: invalid initial revisions fail before adapter preparation
+ok 49 - invalid initial revisions fail before adapter preparation
+  ---
+  duration_ms: 0.374792
+  type: 'test'
+  ...
+# Subtest: generation passes the final authorization guard to the adapter before consuming provider events
+ok 50 - generation passes the final authorization guard to the adapter before consuming provider events
+  ---
+  duration_ms: 0.1865
+  type: 'test'
+  ...
+# Subtest: closed reasoning receipt is a verified blob atomically referenced by canonical output, including lost reply
+ok 51 - closed reasoning receipt is a verified blob atomically referenced by canonical output, including lost reply
+  ---
+  duration_ms: 1.204208
+  type: 'test'
+  ...
+# Subtest: receipt persistence refuses wrong protocol, absent source, duplicate index and oversized content
+ok 52 - receipt persistence refuses wrong protocol, absent source, duplicate index and oversized content
+  ---
+  duration_ms: 5.561792
+  type: 'test'
+  ...
+# (node:8735) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: openai-compatible: late 200 model probe preserves newer 200 generation health
+ok 53 - openai-compatible: late 200 model probe preserves newer 200 generation health
+  ---
+  duration_ms: 12.00725
+  type: 'test'
+  ...
+# Subtest: openai-compatible: late 401 model probe preserves newer 200 generation health
+ok 54 - openai-compatible: late 401 model probe preserves newer 200 generation health
+  ---
+  duration_ms: 2.960625
+  type: 'test'
+  ...
+# Subtest: openai-compatible: late 200 model probe preserves newer 429 generation health
+ok 55 - openai-compatible: late 200 model probe preserves newer 429 generation health
+  ---
+  duration_ms: 1.533
+  type: 'test'
+  ...
+# Subtest: openai-compatible: late 401 model probe preserves newer 429 generation health
+ok 56 - openai-compatible: late 401 model probe preserves newer 429 generation health
+  ---
+  duration_ms: 0.808833
+  type: 'test'
+  ...
+# Subtest: anthropic: late 200 model probe preserves newer 200 generation health
+ok 57 - anthropic: late 200 model probe preserves newer 200 generation health
+  ---
+  duration_ms: 1.366958
+  type: 'test'
+  ...
+# Subtest: anthropic: late 401 model probe preserves newer 200 generation health
+ok 58 - anthropic: late 401 model probe preserves newer 200 generation health
+  ---
+  duration_ms: 4.555125
+  type: 'test'
+  ...
+# Subtest: anthropic: late 200 model probe preserves newer 429 generation health
+ok 59 - anthropic: late 200 model probe preserves newer 429 generation health
+  ---
+  duration_ms: 0.426541
+  type: 'test'
+  ...
+# Subtest: anthropic: late 401 model probe preserves newer 429 generation health
+ok 60 - anthropic: late 401 model probe preserves newer 429 generation health
+  ---
+  duration_ms: 0.351583
+  type: 'test'
+  ...
+# Subtest: late 200 model probe preserves newer 200 token-count health
+ok 61 - late 200 model probe preserves newer 200 token-count health
+  ---
+  duration_ms: 1.4105
+  type: 'test'
+  ...
+# Subtest: late 401 model probe preserves newer 200 token-count health
+ok 62 - late 401 model probe preserves newer 200 token-count health
+  ---
+  duration_ms: 0.603916
+  type: 'test'
+  ...
+# Subtest: late 200 model probe preserves newer 429 token-count health
+ok 63 - late 200 model probe preserves newer 429 token-count health
+  ---
+  duration_ms: 0.35425
+  type: 'test'
+  ...
+# Subtest: late 401 model probe preserves newer 429 token-count health
+ok 64 - late 401 model probe preserves newer 429 token-count health
+  ---
+  duration_ms: 0.235166
+  type: 'test'
+  ...
+# Subtest: an overlapping old model probe cannot clear an already observed probe refusal
+ok 65 - an overlapping old model probe cannot clear an already observed probe refusal
+  ---
+  duration_ms: 0.134167
+  type: 'test'
+  ...
+# Subtest: a pre-aborted probe dispatches nothing and preserves health
+ok 66 - a pre-aborted probe dispatches nothing and preserves health
+  ---
+  duration_ms: 0.248417
+  type: 'test'
+  ...
+# Subtest: an aborted held 200 response cancels its request, rejects pre-dispatch and releases its late body
+ok 67 - an aborted held 200 response cancels its request, rejects pre-dispatch and releases its late body
+  ---
+  duration_ms: 0.154084
+  type: 'test'
+  ...
+# Subtest: an aborted held 401 response cancels its request, rejects pre-dispatch and releases its late body
+ok 68 - an aborted held 401 response cancels its request, rejects pre-dispatch and releases its late body
+  ---
+  duration_ms: 0.108625
+  type: 'test'
+  ...
+# Subtest: cancellation during collection ignores bytes returned after cancellation and removes its listener
+ok 69 - cancellation during collection ignores bytes returned after cancellation and removes its listener
+  ---
+  duration_ms: 0.162292
+  type: 'test'
+  ...
+# (node:8736) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: openai-compatible: an available PNG maps to a base64 image block that decodes to the exact bytes
+ok 70 - openai-compatible: an available PNG maps to a base64 image block that decodes to the exact bytes
+  ---
+  duration_ms: 1.676833
+  type: 'test'
+  ...
+# Subtest: openai-compatible: image issues are explicit for unsupported models, roles, missing bytes, media types, size and count
+ok 71 - openai-compatible: image issues are explicit for unsupported models, roles, missing bytes, media types, size and count
+  ---
+  duration_ms: 9.585167
+  type: 'test'
+  ...
+# Subtest: openai-compatible: multiple images share the raw attachment bound before further base64 allocation
+ok 72 - openai-compatible: multiple images share the raw attachment bound before further base64 allocation
+  ---
+  duration_ms: 50.7345
+  type: 'test'
+  ...
+# Subtest: anthropic: an available PNG maps to a base64 image block that decodes to the exact bytes
+ok 73 - anthropic: an available PNG maps to a base64 image block that decodes to the exact bytes
+  ---
+  duration_ms: 0.201625
+  type: 'test'
+  ...
+# Subtest: anthropic: image issues are explicit for unsupported models, roles, missing bytes, media types, size and count
+ok 74 - anthropic: image issues are explicit for unsupported models, roles, missing bytes, media types, size and count
+  ---
+  duration_ms: 0.436125
+  type: 'test'
+  ...
+# Subtest: anthropic: multiple images share the raw attachment bound before further base64 allocation
+ok 75 - anthropic: multiple images share the raw attachment bound before further base64 allocation
+  ---
+  duration_ms: 42.825458
+  type: 'test'
+  ...
+# Subtest: text-only messages keep the OpenAI string content form
+ok 76 - text-only messages keep the OpenAI string content form
+  ---
+  duration_ms: 0.173292
+  type: 'test'
+  ...
+# (node:8737) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: reviewed catalogs declare sampling parameters with dated protocol sources
+ok 77 - reviewed catalogs declare sampling parameters with dated protocol sources
+  ---
+  duration_ms: 2.311875
+  type: 'test'
+  ...
+# Subtest: openai-compatible: sampling parameters map to protocol fields and blank settings are omitted
+ok 78 - openai-compatible: sampling parameters map to protocol fields and blank settings are omitted
+  ---
+  duration_ms: 2.563334
+  type: 'test'
+  ...
+# Subtest: openai-compatible: catalog permission and protocol ranges reject settings before any request
+ok 79 - openai-compatible: catalog permission and protocol ranges reject settings before any request
+  ---
+  duration_ms: 0.959167
+  type: 'test'
+  ...
+# Subtest: anthropic: sampling parameters map to protocol fields and blank settings are omitted
+ok 80 - anthropic: sampling parameters map to protocol fields and blank settings are omitted
+  ---
+  duration_ms: 0.098708
+  type: 'test'
+  ...
+# Subtest: anthropic: catalog permission and protocol ranges reject settings before any request
+ok 81 - anthropic: catalog permission and protocol ranges reject settings before any request
+  ---
+  duration_ms: 0.156875
+  type: 'test'
+  ...
+# (node:8738) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: both reviewed catalog entries carry dated pricing from the provider's published rates
+ok 82 - both reviewed catalog entries carry dated pricing from the provider's published rates
+  ---
+  duration_ms: 1.427583
+  type: 'test'
+  ...
+# Subtest: estimates follow the reviewed rates exactly and stay unknown without cache accounting
+ok 83 - estimates follow the reviewed rates exactly and stay unknown without cache accounting
+  ---
+  duration_ms: 2.492958
+  type: 'test'
+  ...
+# (node:8739) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: closed thinking joins exact text and split signatures across byte-fragmented SSE
+ok 84 - closed thinking joins exact text and split signatures across byte-fragmented SSE
+  ---
+  duration_ms: 2.656084
+  type: 'test'
+  ...
+# Subtest: omitted display and encrypted redacted blocks retain exact opaque values and indexes
+ok 85 - omitted display and encrypted redacted blocks retain exact opaque values and indexes
+  ---
+  duration_ms: 0.509625
+  type: 'test'
+  ...
+# Subtest: an interrupted block never emits a complete receipt, even after its signature
+ok 86 - an interrupted block never emits a complete receipt, even after its signature
+  ---
+  duration_ms: 0.476125
+  type: 'test'
+  ...
+# Subtest: unknown, malformed and out-of-order reasoning fields cannot become a receipt
+ok 87 - unknown, malformed and out-of-order reasoning fields cannot become a receipt
+  ---
+  duration_ms: 0.791833
+  type: 'test'
+  ...
+# Subtest: duplicate block indexes, deltas after closure and unsigned closure fail
+ok 88 - duplicate block indexes, deltas after closure and unsigned closure fail
+  ---
+  duration_ms: 0.238584
+  type: 'test'
+  ...
+# Subtest: thinking capture limits escaped bytes before concatenating fragments
+ok 89 - thinking capture limits escaped bytes before concatenating fragments
+  ---
+  duration_ms: 20.330333
+  type: 'test'
+  ...
+# Subtest: total thinking credit is not reset when a block closes
+ok 90 - total thinking credit is not reset when a block closes
+  ---
+  duration_ms: 34.719
+  type: 'test'
+  ...
+# (node:8740) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: reviewed native US/EU metadata is exact, independent and bound to one model and endpoint
+ok 91 - reviewed native US/EU metadata is exact, independent and bound to one model and endpoint
+  ---
+  duration_ms: 1.348834
+  type: 'test'
+  ...
+# Subtest: privacy labels, regional-looking origins and client-side relay claims cannot replace reviewed evidence
+ok 92 - privacy labels, regional-looking origins and client-side relay claims cannot replace reviewed evidence
+  ---
+  duration_ms: 0.236292
+  type: 'test'
+  ...
+# Subtest: host-admitted regional relay metadata retains exact upstream facts and both routing identities
+ok 93 - host-admitted regional relay metadata retains exact upstream facts and both routing identities
+  ---
+  duration_ms: 0.502833
+  type: 'test'
+  ...
+# Subtest: relay declarations refuse extra fields, weak digests, arbitrary origins and unsupported identifiers
+ok 94 - relay declarations refuse extra fields, weak digests, arbitrary origins and unsupported identifiers
+  ---
+  duration_ms: 0.303209
+  type: 'test'
+  ...
+# Subtest: regional relay transport refuses mismatched operator origin binding region and broadened provider facts
+ok 95 - regional relay transport refuses mismatched operator origin binding region and broadened provider facts
+  ---
+  duration_ms: 0.329209
+  type: 'test'
+  ...
+1..95
+# tests 95
+# suites 0
+# pass 95
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 559.409333

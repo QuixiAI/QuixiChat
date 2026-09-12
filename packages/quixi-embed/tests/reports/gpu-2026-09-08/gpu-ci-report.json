@@ -1,0 +1,1692 @@
+{
+  "status": "passed",
+  "passed": true,
+  "started_at": "2026-09-08T14:49:21.514351+00:00",
+  "engines": [
+    "chromium",
+    "webkit"
+  ],
+  "full": true,
+  "skip_provision": true,
+  "commands": [
+    {
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/Users/eric/QuixiChat/packages/quixi-embed/native/gpu_release.py"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.04065183400052774
+    },
+    {
+      "command": [
+        "node",
+        "--experimental-strip-types",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/gpu-tuning.mjs"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.12138833300014085
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/node_modules/.bin/tsc",
+        "-p",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tsconfig.gpu.json"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.16307454199977656
+    },
+    {
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests",
+        "-p",
+        "test_gpu_*.py"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.10577616699993087
+    },
+    {
+      "command": [
+        "node",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/gpu/probe.mjs",
+        "chromium"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.4068439999991824
+    },
+    {
+      "command": [
+        "node",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/gpu/probe.mjs",
+        "webkit"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.6500373330000002
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/generate_gpu_kernel_fixtures.py"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 1.007249750000483
+    },
+    {
+      "command": [
+        "node",
+        "--experimental-strip-types",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/scalar-api.mjs",
+        "simd"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.9432573750000302
+    },
+    {
+      "command": [
+        "node",
+        "--experimental-strip-types",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/scalar-api.mjs"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 1.057681959000547
+    },
+    {
+      "command": [
+        "node",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/gpu/run.mjs",
+        "chromium",
+        "--kernels"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 1.8489095830000224
+    },
+    {
+      "command": [
+        "node",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/gpu/run.mjs",
+        "chromium",
+        "--kernels",
+        "--tiled"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 1.8725923750007496
+    },
+    {
+      "command": [
+        "node",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/gpu/run.mjs",
+        "chromium",
+        "--kernels",
+        "--half"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 1.9142827089999628
+    },
+    {
+      "command": [
+        "node",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/gpu/run.mjs",
+        "chromium",
+        "--lifecycle"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 2.3459269590002805
+    },
+    {
+      "command": [
+        "node",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/generate_gpu.mjs",
+        "chromium",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-baseline-raw"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 13.374600417000693
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/convert_wasm.py",
+        "--source",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-baseline-raw",
+        "--output",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-baseline-goldens",
+        "--goldens",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/goldens"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.5136426250001023
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/compare.py",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-baseline-goldens",
+        "--goldens",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/goldens",
+        "--route",
+        "webgpu-fp32",
+        "--report",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-baseline-parity.json"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.26462787499986007
+    },
+    {
+      "command": [
+        "node",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/generate_gpu.mjs",
+        "chromium",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-baseline-boundaries-raw",
+        "--boundaries"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 3.1444583339998644
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/convert_wasm.py",
+        "--source",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-baseline-boundaries-raw",
+        "--output",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-baseline-boundaries-goldens",
+        "--goldens",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/gpu/goldens"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 1.4033790000003137
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/compare.py",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-baseline-boundaries-goldens",
+        "--goldens",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/gpu/goldens",
+        "--route",
+        "webgpu-fp32",
+        "--report",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-baseline-boundaries-parity.json"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.38813849999951344
+    },
+    {
+      "command": [
+        "node",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/generate_gpu.mjs",
+        "chromium",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-tiled-raw",
+        "--tiled"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 5.9429777499999545
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/convert_wasm.py",
+        "--source",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-tiled-raw",
+        "--output",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-tiled-goldens",
+        "--goldens",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/goldens"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.4963810839999496
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/compare.py",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-tiled-goldens",
+        "--goldens",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/goldens",
+        "--route",
+        "webgpu-fp32",
+        "--report",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-tiled-parity.json"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.23684308399970178
+    },
+    {
+      "command": [
+        "node",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/generate_gpu.mjs",
+        "chromium",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-tiled-boundaries-raw",
+        "--tiled",
+        "--boundaries"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 2.7205578749999404
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/convert_wasm.py",
+        "--source",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-tiled-boundaries-raw",
+        "--output",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-tiled-boundaries-goldens",
+        "--goldens",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/gpu/goldens"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 1.415394916999503
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/compare.py",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-tiled-boundaries-goldens",
+        "--goldens",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/gpu/goldens",
+        "--route",
+        "webgpu-fp32",
+        "--report",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-tiled-boundaries-parity.json"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.37137716699999146
+    },
+    {
+      "command": [
+        "node",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/generate_gpu.mjs",
+        "chromium",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-half-raw",
+        "--half"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 5.627508874999876
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/convert_wasm.py",
+        "--source",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-half-raw",
+        "--output",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-half-goldens",
+        "--goldens",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/goldens"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.4876346669998384
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/compare.py",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-half-goldens",
+        "--goldens",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/goldens",
+        "--route",
+        "webgpu-fp16",
+        "--report",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-half-parity.json"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.24177549999967596
+    },
+    {
+      "command": [
+        "node",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/generate_gpu.mjs",
+        "chromium",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-half-boundaries-raw",
+        "--half",
+        "--boundaries"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 2.7840830000004644
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/convert_wasm.py",
+        "--source",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-half-boundaries-raw",
+        "--output",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-half-boundaries-goldens",
+        "--goldens",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/gpu/goldens"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 1.380605249999462
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/compare.py",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-half-boundaries-goldens",
+        "--goldens",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/gpu/goldens",
+        "--route",
+        "webgpu-fp16",
+        "--report",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-half-boundaries-parity.json"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.37135058300009405
+    },
+    {
+      "command": [
+        "node",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/generate_gpu.mjs",
+        "chromium",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-baseline-fused-raw",
+        "--fused"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 13.168538165999962
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/convert_wasm.py",
+        "--source",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-baseline-fused-raw",
+        "--output",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-baseline-fused-goldens",
+        "--goldens",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/goldens"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.5033122079994428
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/compare.py",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-baseline-fused-goldens",
+        "--goldens",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/goldens",
+        "--route",
+        "webgpu-fp32",
+        "--report",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-baseline-fused-parity.json"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.23975479199998517
+    },
+    {
+      "command": [
+        "node",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/generate_gpu.mjs",
+        "chromium",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-baseline-fused-boundaries-raw",
+        "--fused",
+        "--boundaries"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 2.8366160839996155
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/convert_wasm.py",
+        "--source",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-baseline-fused-boundaries-raw",
+        "--output",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-baseline-fused-boundaries-goldens",
+        "--goldens",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/gpu/goldens"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 1.3884062500001164
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/compare.py",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-baseline-fused-boundaries-goldens",
+        "--goldens",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/gpu/goldens",
+        "--route",
+        "webgpu-fp32",
+        "--report",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-baseline-fused-boundaries-parity.json"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.37855941699945106
+    },
+    {
+      "command": [
+        "node",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/generate_gpu.mjs",
+        "chromium",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-tiled-fused-raw",
+        "--tiled",
+        "--fused"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 5.7125762919995395
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/convert_wasm.py",
+        "--source",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-tiled-fused-raw",
+        "--output",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-tiled-fused-goldens",
+        "--goldens",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/goldens"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.4874247080006171
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/compare.py",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-tiled-fused-goldens",
+        "--goldens",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/goldens",
+        "--route",
+        "webgpu-fp32",
+        "--report",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-tiled-fused-parity.json"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.24144887500006007
+    },
+    {
+      "command": [
+        "node",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/generate_gpu.mjs",
+        "chromium",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-tiled-fused-boundaries-raw",
+        "--tiled",
+        "--fused",
+        "--boundaries"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 2.9014700420002555
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/convert_wasm.py",
+        "--source",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-tiled-fused-boundaries-raw",
+        "--output",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-tiled-fused-boundaries-goldens",
+        "--goldens",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/gpu/goldens"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 1.818168875000083
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/compare.py",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-tiled-fused-boundaries-goldens",
+        "--goldens",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/gpu/goldens",
+        "--route",
+        "webgpu-fp32",
+        "--report",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-tiled-fused-boundaries-parity.json"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.39059262499995384
+    },
+    {
+      "command": [
+        "node",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/generate_gpu.mjs",
+        "chromium",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-half-fused-raw",
+        "--half",
+        "--fused"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 5.420747166999718
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/convert_wasm.py",
+        "--source",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-half-fused-raw",
+        "--output",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-half-fused-goldens",
+        "--goldens",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/goldens"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.48541608300001826
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/compare.py",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-half-fused-goldens",
+        "--goldens",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/goldens",
+        "--route",
+        "webgpu-fp16",
+        "--report",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-half-fused-parity.json"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.22336545899997873
+    },
+    {
+      "command": [
+        "node",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/generate_gpu.mjs",
+        "chromium",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-half-fused-boundaries-raw",
+        "--half",
+        "--fused",
+        "--boundaries"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 2.6885152499999094
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/convert_wasm.py",
+        "--source",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-half-fused-boundaries-raw",
+        "--output",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-half-fused-boundaries-goldens",
+        "--goldens",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/gpu/goldens"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 1.3420448340002622
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/compare.py",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-half-fused-boundaries-goldens",
+        "--goldens",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/gpu/goldens",
+        "--route",
+        "webgpu-fp16",
+        "--report",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-half-fused-boundaries-parity.json"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.3720453340001768
+    },
+    {
+      "command": [
+        "node",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/generate_gpu.mjs",
+        "chromium",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-auto-fused-raw",
+        "--auto",
+        "--fused"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 5.519331624999722
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/convert_wasm.py",
+        "--source",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-auto-fused-raw",
+        "--output",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-auto-fused-goldens",
+        "--goldens",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/goldens"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.48806916600005934
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/compare.py",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-auto-fused-goldens",
+        "--goldens",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/goldens",
+        "--route",
+        "webgpu-fp32",
+        "--report",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-auto-fused-parity.json"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.2440613749995464
+    },
+    {
+      "command": [
+        "node",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/generate_gpu.mjs",
+        "chromium",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-auto-fused-boundaries-raw",
+        "--auto",
+        "--fused",
+        "--boundaries"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 2.9255106250002427
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/convert_wasm.py",
+        "--source",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-auto-fused-boundaries-raw",
+        "--output",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-auto-fused-boundaries-goldens",
+        "--goldens",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/gpu/goldens"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 1.388773915999991
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/compare.py",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-auto-fused-boundaries-goldens",
+        "--goldens",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/gpu/goldens",
+        "--route",
+        "webgpu-fp32",
+        "--report",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-auto-fused-boundaries-parity.json"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.37837141700038046
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/check_retrieval.py",
+        "--route",
+        "gpu-fp32",
+        "--engine",
+        "chromium",
+        "--projection",
+        "baseline",
+        "--attention",
+        "baseline",
+        "--report",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-baseline-baseline-retrieval.json"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 5.874389958000393
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/check_retrieval.py",
+        "--route",
+        "gpu-fp32",
+        "--engine",
+        "chromium",
+        "--projection",
+        "tiled",
+        "--attention",
+        "baseline",
+        "--report",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-tiled-baseline-retrieval.json"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 4.628943000000618
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/check_retrieval.py",
+        "--route",
+        "gpu-fp16",
+        "--engine",
+        "chromium",
+        "--projection",
+        "half",
+        "--attention",
+        "baseline",
+        "--report",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-half-baseline-retrieval.json"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 4.421608083000137
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/check_retrieval.py",
+        "--route",
+        "gpu-fp32",
+        "--engine",
+        "chromium",
+        "--projection",
+        "baseline",
+        "--attention",
+        "fused",
+        "--report",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-baseline-fused-retrieval.json"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 5.137100791000194
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/check_retrieval.py",
+        "--route",
+        "gpu-fp32",
+        "--engine",
+        "chromium",
+        "--projection",
+        "tiled",
+        "--attention",
+        "fused",
+        "--report",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-tiled-fused-retrieval.json"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 4.293067749999864
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/check_retrieval.py",
+        "--route",
+        "gpu-fp32",
+        "--engine",
+        "chromium",
+        "--projection",
+        "auto",
+        "--attention",
+        "fused",
+        "--report",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-auto-fused-retrieval.json"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 4.572725250000076
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/check_retrieval.py",
+        "--route",
+        "gpu-fp16",
+        "--engine",
+        "chromium",
+        "--projection",
+        "half",
+        "--attention",
+        "fused",
+        "--report",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-chromium-half-fused-retrieval.json"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 5.083330749999732
+    },
+    {
+      "command": [
+        "node",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/gpu/run.mjs",
+        "webkit",
+        "--kernels"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 2.4450676659998862
+    },
+    {
+      "command": [
+        "node",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/gpu/run.mjs",
+        "webkit",
+        "--kernels",
+        "--tiled"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 2.198747082999944
+    },
+    {
+      "command": [
+        "node",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/gpu/run.mjs",
+        "webkit",
+        "--kernels",
+        "--half"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 2.552895000000717
+    },
+    {
+      "command": [
+        "node",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/gpu/run.mjs",
+        "webkit",
+        "--lifecycle"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 3.007911791999504
+    },
+    {
+      "command": [
+        "node",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/generate_gpu.mjs",
+        "webkit",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-baseline-raw"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 14.220053707999796
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/convert_wasm.py",
+        "--source",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-baseline-raw",
+        "--output",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-baseline-goldens",
+        "--goldens",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/goldens"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.4702180000003864
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/compare.py",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-baseline-goldens",
+        "--goldens",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/goldens",
+        "--route",
+        "webgpu-fp32",
+        "--report",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-baseline-parity.json"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.22618750000037835
+    },
+    {
+      "command": [
+        "node",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/generate_gpu.mjs",
+        "webkit",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-baseline-boundaries-raw",
+        "--boundaries"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 2.5027869999994437
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/convert_wasm.py",
+        "--source",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-baseline-boundaries-raw",
+        "--output",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-baseline-boundaries-goldens",
+        "--goldens",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/gpu/goldens"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 1.3706775410000773
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/compare.py",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-baseline-boundaries-goldens",
+        "--goldens",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/gpu/goldens",
+        "--route",
+        "webgpu-fp32",
+        "--report",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-baseline-boundaries-parity.json"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.3812984590003907
+    },
+    {
+      "command": [
+        "node",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/generate_gpu.mjs",
+        "webkit",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-tiled-raw",
+        "--tiled"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 9.092790707999484
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/convert_wasm.py",
+        "--source",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-tiled-raw",
+        "--output",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-tiled-goldens",
+        "--goldens",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/goldens"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.47764125000048807
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/compare.py",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-tiled-goldens",
+        "--goldens",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/goldens",
+        "--route",
+        "webgpu-fp32",
+        "--report",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-tiled-parity.json"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.2338711250004053
+    },
+    {
+      "command": [
+        "node",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/generate_gpu.mjs",
+        "webkit",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-tiled-boundaries-raw",
+        "--tiled",
+        "--boundaries"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 2.5257231660007164
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/convert_wasm.py",
+        "--source",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-tiled-boundaries-raw",
+        "--output",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-tiled-boundaries-goldens",
+        "--goldens",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/gpu/goldens"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 1.3854961249999178
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/compare.py",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-tiled-boundaries-goldens",
+        "--goldens",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/gpu/goldens",
+        "--route",
+        "webgpu-fp32",
+        "--report",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-tiled-boundaries-parity.json"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.38116312500005733
+    },
+    {
+      "command": [
+        "node",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/generate_gpu.mjs",
+        "webkit",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-half-raw",
+        "--half"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 8.468562041999576
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/convert_wasm.py",
+        "--source",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-half-raw",
+        "--output",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-half-goldens",
+        "--goldens",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/goldens"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.47825900000043475
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/compare.py",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-half-goldens",
+        "--goldens",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/goldens",
+        "--route",
+        "webgpu-fp16",
+        "--report",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-half-parity.json"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.24374458299917023
+    },
+    {
+      "command": [
+        "node",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/generate_gpu.mjs",
+        "webkit",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-half-boundaries-raw",
+        "--half",
+        "--boundaries"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 2.534115958000257
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/convert_wasm.py",
+        "--source",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-half-boundaries-raw",
+        "--output",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-half-boundaries-goldens",
+        "--goldens",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/gpu/goldens"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 1.3759869169998638
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/compare.py",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-half-boundaries-goldens",
+        "--goldens",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/gpu/goldens",
+        "--route",
+        "webgpu-fp16",
+        "--report",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-half-boundaries-parity.json"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.3772940419994484
+    },
+    {
+      "command": [
+        "node",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/generate_gpu.mjs",
+        "webkit",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-baseline-fused-raw",
+        "--fused"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 14.597476416999598
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/convert_wasm.py",
+        "--source",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-baseline-fused-raw",
+        "--output",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-baseline-fused-goldens",
+        "--goldens",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/goldens"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.4856631249995189
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/compare.py",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-baseline-fused-goldens",
+        "--goldens",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/goldens",
+        "--route",
+        "webgpu-fp32",
+        "--report",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-baseline-fused-parity.json"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.2360158749997936
+    },
+    {
+      "command": [
+        "node",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/generate_gpu.mjs",
+        "webkit",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-baseline-fused-boundaries-raw",
+        "--fused",
+        "--boundaries"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 2.5315190000001166
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/convert_wasm.py",
+        "--source",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-baseline-fused-boundaries-raw",
+        "--output",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-baseline-fused-boundaries-goldens",
+        "--goldens",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/gpu/goldens"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 1.3865642920000028
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/compare.py",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-baseline-fused-boundaries-goldens",
+        "--goldens",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/gpu/goldens",
+        "--route",
+        "webgpu-fp32",
+        "--report",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-baseline-fused-boundaries-parity.json"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.385945707999781
+    },
+    {
+      "command": [
+        "node",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/generate_gpu.mjs",
+        "webkit",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-tiled-fused-raw",
+        "--tiled",
+        "--fused"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 8.367626833999566
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/convert_wasm.py",
+        "--source",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-tiled-fused-raw",
+        "--output",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-tiled-fused-goldens",
+        "--goldens",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/goldens"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.4797232079999958
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/compare.py",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-tiled-fused-goldens",
+        "--goldens",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/goldens",
+        "--route",
+        "webgpu-fp32",
+        "--report",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-tiled-fused-parity.json"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.23559929199927865
+    },
+    {
+      "command": [
+        "node",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/generate_gpu.mjs",
+        "webkit",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-tiled-fused-boundaries-raw",
+        "--tiled",
+        "--fused",
+        "--boundaries"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 2.557270416999927
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/convert_wasm.py",
+        "--source",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-tiled-fused-boundaries-raw",
+        "--output",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-tiled-fused-boundaries-goldens",
+        "--goldens",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/gpu/goldens"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 1.4216026670001156
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/compare.py",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-tiled-fused-boundaries-goldens",
+        "--goldens",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/gpu/goldens",
+        "--route",
+        "webgpu-fp32",
+        "--report",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-tiled-fused-boundaries-parity.json"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.3925169170006484
+    },
+    {
+      "command": [
+        "node",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/generate_gpu.mjs",
+        "webkit",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-half-fused-raw",
+        "--half",
+        "--fused"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 8.040052583000033
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/convert_wasm.py",
+        "--source",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-half-fused-raw",
+        "--output",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-half-fused-goldens",
+        "--goldens",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/goldens"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.4782383749998189
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/compare.py",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-half-fused-goldens",
+        "--goldens",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/goldens",
+        "--route",
+        "webgpu-fp16",
+        "--report",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-half-fused-parity.json"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.2341266249995897
+    },
+    {
+      "command": [
+        "node",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/generate_gpu.mjs",
+        "webkit",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-half-fused-boundaries-raw",
+        "--half",
+        "--fused",
+        "--boundaries"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 2.471349000000373
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/convert_wasm.py",
+        "--source",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-half-fused-boundaries-raw",
+        "--output",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-half-fused-boundaries-goldens",
+        "--goldens",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/gpu/goldens"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 1.3935489160003272
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/compare.py",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-half-fused-boundaries-goldens",
+        "--goldens",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/gpu/goldens",
+        "--route",
+        "webgpu-fp16",
+        "--report",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-half-fused-boundaries-parity.json"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.38240583300012077
+    },
+    {
+      "command": [
+        "node",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/generate_gpu.mjs",
+        "webkit",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-auto-fused-raw",
+        "--auto",
+        "--fused"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 8.236706125000637
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/convert_wasm.py",
+        "--source",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-auto-fused-raw",
+        "--output",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-auto-fused-goldens",
+        "--goldens",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/goldens"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.45795183300015196
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/compare.py",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-auto-fused-goldens",
+        "--goldens",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/goldens",
+        "--route",
+        "webgpu-fp32",
+        "--report",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-auto-fused-parity.json"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.21986424999977316
+    },
+    {
+      "command": [
+        "node",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/generate_gpu.mjs",
+        "webkit",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-auto-fused-boundaries-raw",
+        "--auto",
+        "--fused",
+        "--boundaries"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 2.5697484999991502
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/convert_wasm.py",
+        "--source",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-auto-fused-boundaries-raw",
+        "--output",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-auto-fused-boundaries-goldens",
+        "--goldens",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/gpu/goldens"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 1.3255532500006666
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/compare.py",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-auto-fused-boundaries-goldens",
+        "--goldens",
+        "/Users/eric/QuixiChat/packages/quixi-embed/tests/gpu/goldens",
+        "--route",
+        "webgpu-fp32",
+        "--report",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-auto-fused-boundaries-parity.json"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 0.3792175419994237
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/check_retrieval.py",
+        "--route",
+        "gpu-fp32",
+        "--engine",
+        "webkit",
+        "--projection",
+        "baseline",
+        "--attention",
+        "baseline",
+        "--report",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-baseline-baseline-retrieval.json"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 5.42054087500037
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/check_retrieval.py",
+        "--route",
+        "gpu-fp32",
+        "--engine",
+        "webkit",
+        "--projection",
+        "tiled",
+        "--attention",
+        "baseline",
+        "--report",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-tiled-baseline-retrieval.json"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 4.935545041999831
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/check_retrieval.py",
+        "--route",
+        "gpu-fp16",
+        "--engine",
+        "webkit",
+        "--projection",
+        "half",
+        "--attention",
+        "baseline",
+        "--report",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-half-baseline-retrieval.json"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 4.854716792000545
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/check_retrieval.py",
+        "--route",
+        "gpu-fp32",
+        "--engine",
+        "webkit",
+        "--projection",
+        "baseline",
+        "--attention",
+        "fused",
+        "--report",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-baseline-fused-retrieval.json"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 5.491123916999641
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/check_retrieval.py",
+        "--route",
+        "gpu-fp32",
+        "--engine",
+        "webkit",
+        "--projection",
+        "tiled",
+        "--attention",
+        "fused",
+        "--report",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-tiled-fused-retrieval.json"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 4.807761541000218
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/check_retrieval.py",
+        "--route",
+        "gpu-fp32",
+        "--engine",
+        "webkit",
+        "--projection",
+        "auto",
+        "--attention",
+        "fused",
+        "--report",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-auto-fused-retrieval.json"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 4.841107207999812
+    },
+    {
+      "command": [
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/reference-env/bin/python",
+        "/Users/eric/QuixiChat/packages/quixi-embed/reference/check_retrieval.py",
+        "--route",
+        "gpu-fp16",
+        "--engine",
+        "webkit",
+        "--projection",
+        "half",
+        "--attention",
+        "fused",
+        "--report",
+        "/Users/eric/QuixiChat/packages/quixi-embed/build/gpu-final-webkit-half-fused-retrieval.json"
+      ],
+      "status": "passed",
+      "exit_code": 0,
+      "seconds": 4.795318457999201
+    }
+  ],
+  "finished_at": "2026-09-08T14:54:12.221976+00:00"
+}

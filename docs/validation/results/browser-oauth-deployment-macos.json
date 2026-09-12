@@ -1,0 +1,37 @@
+{
+  "status": "passed",
+  "startedAt": "2026-09-10T22:42:56.558683+00:00",
+  "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+  "checks": [
+    "Server is published only on loopback",
+    "Built callback is served within the fixture document bound",
+    "Cross-Origin-Opener-Policy matches callback policy",
+    "Cross-Origin-Embedder-Policy matches callback policy",
+    "Referrer-Policy matches callback policy",
+    "Cache-Control matches callback policy",
+    "Content-Security-Policy matches callback policy",
+    "Served callback bytes match the built artifact",
+    "Callback response does not reflect query data",
+    "Built callback retains its referrer policy and dedicated entry",
+    "Callback requests are absent from nginx logs"
+  ],
+  "scope": "Built static callback served by local cached nginx over loopback HTTP. No public proxy, TLS, provider or release-image build claim.",
+  "imageId": "sha256:f2c20eb1fb7c1e842c69876bb0cd0dbedaa07aa296d33dd4c7c5dc96402370d1",
+  "callbackHeaders": {
+    "Cross-Origin-Opener-Policy": "same-origin",
+    "Cross-Origin-Embedder-Policy": "require-corp",
+    "Referrer-Policy": "no-referrer",
+    "Cache-Control": "no-store",
+    "Content-Security-Policy": "default-src 'none'; script-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'"
+  },
+  "sourceSha256": {
+    "apps/web/vite.config.ts": "ec27074b7a57cbc5d8597ee9771dc4b3a288bb0a701be0f5c629bc31208907ca",
+    "apps/web/oauth/callback.html": "a5798ab22f7828c2e74e3180efaebe9d8981dc8f3449e670f9c1343259ee8d71",
+    "apps/web/src/oauth-callback.ts": "5f1ad42093662c242c3fd37a84e8f1fd3eb0e8d1ac6a588393efdbbc7a49c0b8",
+    "deploy/docker/nginx.conf": "fe64cfe06891ba88617427b8d4ce4901c000f0c14f2e8ea589e98479f903605d",
+    "tests/hosts/browser-oauth-deployment.py": "7ffc8a7d5a3ba759e6e1b0bfc62592b8964f8bc47286697057d90723ca0f078e"
+  },
+  "builtCallbackSha256": "60dd61e5ae5fc41aa1609fa8b901c939170f81271c91de5ffce63bc4cd2acace",
+  "containerRemoved": true,
+  "completedAt": "2026-09-10T22:42:56.938802+00:00"
+}

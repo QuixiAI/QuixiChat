@@ -1,0 +1,24 @@
+{
+  "name": "@quixi/documents",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "description": "Document extraction and structural normalization.",
+  "exports": {
+    ".": "./src/index.ts",
+    "./storage": "./src/storage.ts",
+    "./worker": "./src/worker/index.ts"
+  },
+  "dependencies": {
+    "@quixi/core": "0.0.1",
+    "pdfjs-dist": "6.3.289",
+    "@noble/hashes": "2.4.0"
+  },
+  "engines": {
+    "node": ">=22.13.0 || >=24"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tests/tsconfig.json",
+    "test": "node tests/verify-distribution.mjs && node --test tests/range-patch.test.mjs && tsc --noEmit -p tests/tsconfig.json && node tests/run.mjs"
+  }
+}

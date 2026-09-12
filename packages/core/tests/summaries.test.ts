@@ -1,0 +1,31 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readFile} from 'node:fs/promises';
+import {assertHistory,assertSummarySource,summaryOutputText,summarySourceCounts,utf8ByteLength} from '../src/model/index.ts';
+import type {CanonicalHistory,ContentPart,Generation,Message,SummarySourceDescriptor} from '../src/model/index.ts';
+const h:CanonicalHistory=JSON.parse(await readFile(new URL('../../../tests/fixtures/canonical/native-branches.history.json',import.meta.url),'utf8'));assertHistory(h);
+const source:SummarySourceDescriptor={version:1,threadId:h.threads[0]!.id,context:h.contexts[0]!,throughMessageId:h.messages[2]!.id,messages:[h.messages[0]!,h.messages[2]!].map(message=>({message,parts:h.parts.filter(part=>part.messageId===message.id),generation:message.generationId?(()=>{const g=h.generations.find(g=>g.id===message.generationId)!;return{id:g.id,status:g.status};})():null})),attachments:[]};
+const generation:Generation={...h.generations[0]!,purpose:'context_summary'};
+const output:Message={...h.messages[1]!};
+const part:ContentPart={...h.parts.find(part=>part.messageId===output.id)!} as ContentPart;
+test('summary source preserves contiguous immutable evidence and rejects branch gaps, unsealed content and split tools',()=>{
+ assertSummarySource(source);assert.deepEqual(summarySourceCounts(source),{sourceMessageCount:2,sourcePartCount:2});
+ const gap=structuredClone(source);gap.messages[1]!.message.parentId=null;assert.throws(()=>assertSummarySource(gap),/contiguous/);
+ const streaming=structuredClone(source);streaming.messages[1]!.message.sealed=false;assert.throws(()=>assertSummarySource(streaming),/sealed/);
+ const tool=structuredClone(source);tool.messages[1]!.parts[0]={...tool.messages[1]!.parts[0]!,kind:'ToolCall',data:{name:'lookup',input:{},providerCallId:'call'}};assert.throws(()=>assertSummarySource(tool),/unfinished tool/);
+ const unknown=structuredClone(source);unknown.messages[1]!.parts[0]={...unknown.messages[1]!.parts[0]!,kind:'ToolResult',data:{callPartId:null,unresolvedProviderCallId:'missing',content:{},isError:false}};assert.throws(()=>assertSummarySource(unknown),/unresolved or ambiguous/);
+});
+test('summary output review eligibility uses UTF-8 bytes, exact part projection and visible text only',()=>{
+ const text:ContentPart={...part,kind:'Text',data:{text:'🧭'.repeat(4096)}};
+ assert.equal(utf8ByteLength(summaryOutputText(generation,output,[text])),16384);
+ assert.throws(()=>summaryOutputText(generation,output,[{...text,data:{text:'🧭'.repeat(4097)}}]),/16 KiB/);
+ for(const status of ['partial','stopped','streaming','failed'] as const)assert.throws(()=>summaryOutputText({...generation,status},output,[text]),/complete sealed/);
+ assert.throws(()=>summaryOutputText(generation,{...output,sealed:false},[text]));
+ assert.throws(()=>summaryOutputText(generation,output,[{...text,data:{text:'  '}}]),/no proposed text/);
+ assert.throws(()=>summaryOutputText(generation,output,[{...text,data:{textBlob:{sha256:'a'.repeat(64),byteLength:1,encoding:'utf-8'}}}]),/inline text/);
+ assert.throws(()=>summaryOutputText(generation,output,[{...text,kind:'ReasoningMetadata',data:{redacted:false,summary:'reasoning'}}]),/inline text/);
+ assert.throws(()=>summaryOutputText(generation,output,[{...text,order:1}]),/order/);
+ const internal:ContentPart={id:h.rawObjects[0]!.id,messageId:output.id,order:1,kind:'ProviderArtifact',data:{providerKind:'quixi.provider.response-manifest',rawObjectId:h.rawObjects[0]!.id,locator:'/'}};
+ assert.equal(summaryOutputText(generation,{...output,partCount:2},[text,internal]),'🧭'.repeat(4096));
+ assert.throws(()=>summaryOutputText(generation,{...output,partCount:2},[text,{...internal,data:{...internal.data,providerKind:'unknown'}}]),/inline text/);
+});

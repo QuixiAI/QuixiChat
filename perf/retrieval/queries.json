@@ -1,0 +1,74 @@
+[
+  {
+    "id": "opfs",
+    "text": "Where did we decide to use OPFS for the archive?"
+  },
+  {
+    "id": "desktop",
+    "text": "Find the discussion about a Rust desktop wrapper."
+  },
+  {
+    "id": "credentials",
+    "text": "How are provider API credentials stored?"
+  },
+  {
+    "id": "oauth",
+    "text": "Show the PDF section about OAuth redirects."
+  },
+  {
+    "id": "switch",
+    "text": "Can I continue the same conversation after switching providers?"
+  },
+  {
+    "id": "branch",
+    "text": "What happens when an earlier user message is edited?"
+  },
+  {
+    "id": "dedup",
+    "text": "Why does importing the same export twice not duplicate messages?"
+  },
+  {
+    "id": "archive",
+    "text": "How can I recover my conversations from an exported archive?"
+  },
+  {
+    "id": "fts",
+    "text": "Does search still work when the embedding model is disabled?"
+  },
+  {
+    "id": "pdf",
+    "text": "How do we process a thousand page PDF without retaining every page?"
+  },
+  {
+    "id": "ocr",
+    "text": "When does the app ask me to run OCR on a scan?"
+  },
+  {
+    "id": "sync",
+    "text": "How are offline conversation edits synchronized later?"
+  },
+  {
+    "id": "recovery",
+    "text": "What if I lose a device containing my encrypted archive key?"
+  },
+  {
+    "id": "priority",
+    "text": "Can an interactive search interrupt background embedding work?"
+  },
+  {
+    "id": "cache",
+    "text": "Why is transformer prefix caching invalid for this encoder?"
+  },
+  {
+    "id": "sql",
+    "text": "Show the code example for an atomic canonical write and sync operation."
+  },
+  {
+    "id": "rrf",
+    "text": "How do lexical and semantic result lists get combined?"
+  },
+  {
+    "id": "accessibility",
+    "text": "How should streaming responses be announced to a screen reader?"
+  }
+]

@@ -1,0 +1,5 @@
+<!doctype html><html><head><title>Quixi full GPU measurements</title></head><body><script type="module">
+const worker=new Worker(new URL('./gpu-worker.ts',import.meta.url),{type:'module'});
+worker.onmessage=({data})=>{if(data.progress)window.quixiProgress=data.progress;if(data.result)window.quixiResult=data.result;};
+worker.onerror=event=>{window.quixiResult={status:'failed',passed:false,error:event.message};};worker.postMessage({anchors:new URLSearchParams(location.search).has('anchors'),auto:new URLSearchParams(location.search).has('auto'),finalhalf:new URLSearchParams(location.search).has('finalhalf'),half:new URLSearchParams(location.search).has('half'),subgroups:new URLSearchParams(location.search).has('subgroups'),attention:new URLSearchParams(location.search).has('attention')});
+</script></body></html>

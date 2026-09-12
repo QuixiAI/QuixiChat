@@ -1,0 +1,1215 @@
+import { sha256 } from "@noble/hashes/sha2.js";
+import { bytesToHex } from "@noble/hashes/utils.js";
+import { canonicalJson, jsonByteLength } from "@quixi/core/contracts";
+import { isQuixiId } from "@quixi/core/model";
+import type { JsonValue } from "@quixi/core/model";
+import {
+  assertExtractionArgs,
+  assertExtractionIdentity,
+  assertPublishedPageRef,
+  assertPageLayout,
+  EXTRACTION_LIMITS,
+  ExtractionStorageError,
+} from "@quixi/core/contracts";
+import type {
+  ExtractionIdentity,
+  ExtractionOperations,
+  ExtractionRunStatus,
+  ExtractionPageStatus,
+  ExtractionWrite,
+  ExtractionPageWrite,
+  PageSourceSpan,
+  PublishedPageRef,
+  PageLayout,
+} from "@quixi/core/contracts";
+import type { CanonicalSqlite, SqlValue } from "../canonical/repository.ts";
+import { EXTRACTION_SCHEMA, EXTRACTION_SCHEMA_VERSION, EXTRACTION_SCHEMA_V1, EXTRACTION_LAYOUT_SCHEMA } from "./schema.ts";
+type Row = Record<string, SqlValue>;
+type Args<K extends keyof ExtractionOperations> =
+  ExtractionOperations[K]["args"];
+export interface CanonicalExtractionIdentity {
+  documentId: string;
+  attachmentId: string;
+  attachmentSha256: string | null;
+  attachmentByteLength: number | null;
+  available: boolean;
+  mediaType: string;
+}
+export interface ExtractionOperationClaims {
+  /** Must synchronously claim in this SAME database transaction; no external effects.
+   * Throws on another domain/digest. Stable owner-owned journal, not canonical triggers. */
+  claim(value: {
+    operationId: string;
+    domain: "extraction";
+    requestDigest: string;
+  }): void;
+}
+export interface ExtractionRepositoryOptions {
+  lookupIdentity(documentId: string): CanonicalExtractionIdentity | null;
+  operations: ExtractionOperationClaims;
+  supportedVersions: readonly {
+    extractorVersion: string;
+    normalizerVersion: string;
+  }[];
+  /** Tests/hosts may tighten but never increase initial logical admission limits. */
+  limits?: { runBytes?: number; archiveBytes?: number };
+  beforeCommit?: () => void;
+}
+export interface ExtractionPublication {
+  revision: number;
+  documentId: string;
+  runId: string;
+  pageAttemptId: string | null;
+  kind: "page" | "replace" | "clear";
+}
+export interface PublishedExtractionPage {
+  ref: PublishedPageRef;
+  text: string;
+  utf16: number;
+  classification: "text" | "possible_scanned";
+  layout: PageLayout | null;
+}
+export interface PublishedExtractionSources {
+  ready(): boolean;
+  listVisiblePages(
+    documentId: string | null,
+    afterPageId: string | null,
+    limit: number,
+  ): { pageAttemptId: string }[];
+  loadPage(pageAttemptId: string): PublishedExtractionPage | null;
+  current(ref: PublishedPageRef): boolean;
+  readPublicationBatch(limit: number): ExtractionPublication[];
+  /** Caller commits this together with corresponding FTS dirtiness; no nested tx. */
+  acknowledgePublications(revisions: readonly number[]): void;
+}
+const json = (value: unknown) => canonicalJson(value as JsonValue);
+export const extractionDigest = (value: unknown) =>
+  bytesToHex(sha256(new TextEncoder().encode(json(value))));
+export const extractionTextDigest = (value: string) =>
+  bytesToHex(sha256(new TextEncoder().encode(value)));
+export function extractionMapDigest(spans: Iterable<PageSourceSpan>): string {
+  const hash = sha256.create();
+  for (const span of spans)
+    hash.update(new TextEncoder().encode(json(span) + "\n"));
+  return bytesToHex(hash.digest());
+}
+const fail = (code: ExtractionStorageError["code"], message: string): never => {
+  throw new ExtractionStorageError(code, message);
+};
+const schemaDigest = extractionTextDigest(EXTRACTION_SCHEMA);
+const readJSON = <T>(v: SqlValue | undefined): T => JSON.parse(String(v)) as T;
+
+/** Synchronous, owner-serialized derived repository; never executes caller SQL. */
+export class ExtractionRepository {
+  private initialized = false;
+  private closed = false;
+  private controlAdmission = false;
+  private readonly runLimit: number;
+  private readonly archiveLimit: number;
+  readonly publishedSources: PublishedExtractionSources;
+  constructor(
+    private readonly db: CanonicalSqlite,
+    private readonly options: ExtractionRepositoryOptions,
+  ) {
+    this.runLimit = options.limits?.runBytes ?? EXTRACTION_LIMITS.runBytes;
+    this.archiveLimit =
+      options.limits?.archiveBytes ?? EXTRACTION_LIMITS.archiveBytes;
+    if (
+      !Number.isSafeInteger(this.runLimit) ||
+      this.runLimit < 1 ||
+      this.runLimit > EXTRACTION_LIMITS.runBytes ||
+      !Number.isSafeInteger(this.archiveLimit) ||
+      this.archiveLimit < 1 ||
+      this.archiveLimit > EXTRACTION_LIMITS.archiveBytes
+    )
+      fail("INVALID_REQUEST", "Invalid logical extraction budget.");
+    this.publishedSources = {
+      ready: () => this.initialized && !this.closed,
+      listVisiblePages: (doc, after, limit) =>
+        this.listVisiblePages(doc, after, limit),
+      loadPage: (id) => this.loadPage(id),
+      current: (ref) => this.current(ref),
+      readPublicationBatch: (limit) => this.publications(limit),
+      acknowledgePublications: (ids) => this.acknowledge(ids),
+    };
+  }
+  private rows(sql: string, bind: SqlValue[] = []): Row[] {
+    return this.db.exec({
+      sql,
+      ...(bind.length ? { bind } : {}),
+      rowMode: "object",
+      returnValue: "resultRows",
+    }) as Row[];
+  }
+  private exec(sql: string, bind: SqlValue[] = []) {
+    this.db.exec({ sql, ...(bind.length ? { bind } : {}) });
+  }
+  private one(sql: string, bind: SqlValue[] = []): Row | undefined {
+    return this.rows(sql, bind)[0];
+  }
+  private tx<T>(work: () => T): T {
+    this.db.exec("BEGIN IMMEDIATE");
+    try {
+      const result = work();
+      this.options.beforeCommit?.();
+      this.db.exec("COMMIT");
+      return result;
+    } catch (e) {
+      try {
+        this.db.exec("ROLLBACK");
+      } catch {
+        /* SQLITE_FULL may already roll back the transaction. */
+      }
+      if (/SQLITE_FULL|database or disk is full/i.test(String(e)))
+        fail(
+          "CAPACITY",
+          "Extraction storage is full; committed pages are retained.",
+        );
+      throw e;
+    }
+  }
+  initialize(): void {
+    if (this.closed) fail("CONFLICT", "Extraction repository is closed.");
+    this.initialized = false;
+    const objects = (schema: string) => schema.split(";").map(sql => sql.replace(/\s+/g, " ").trim()).filter(Boolean);
+    const inspect = () => this.rows(
+      "SELECT name,CASE WHEN length(CAST(sql AS BLOB))<=8192 THEN sql ELSE NULL END AS sql FROM sqlite_schema WHERE (name GLOB 'quixi_extract_*' OR tbl_name GLOB 'quixi_extract_*') AND sql IS NOT NULL AND type IN('table','index','trigger','view') LIMIT 32",
+    );
+    const exact = (actual: Row[], schema: string) => {
+      const expected = objects(schema);
+      return actual.length === expected.length && expected.every(sql => actual.some(row =>
+        typeof row.sql === "string" && row.sql.replace(/\s+/g, " ").trim() === sql));
+    };
+    const existing = inspect();
+    if (!existing.length) {
+      this.tx(() => {
+        this.db.exec(EXTRACTION_SCHEMA);
+        this.exec("INSERT INTO quixi_extract_schema VALUES(?,?)", [EXTRACTION_SCHEMA_VERSION, schemaDigest]);
+        this.exec("INSERT INTO quixi_extract_meta VALUES(1,0,0)");
+      });
+    } else {
+      // Never run new DDL against an unknown or partial prior schema. A failed
+      // transaction retains every old page, checkpoint and exact operation row.
+      const previous = exact(existing, EXTRACTION_SCHEMA_V1);
+      if (!previous && !exact(existing, EXTRACTION_SCHEMA))
+        fail("MIGRATION_FAILED", "Extraction schema differs; isolate and explicitly repair derived extraction.");
+      const ledger = this.rows("SELECT version,substr(checksum,1,65) AS checksum FROM quixi_extract_schema LIMIT 2");
+      const expectedVersion = previous ? 1 : EXTRACTION_SCHEMA_VERSION;
+      const expectedDigest = previous ? extractionTextDigest(EXTRACTION_SCHEMA_V1) : schemaDigest;
+      if (ledger.length !== 1 || ledger[0]!.version !== expectedVersion || ledger[0]!.checksum !== expectedDigest)
+        fail("MIGRATION_FAILED", "Unsupported extraction schema ledger.");
+      if (previous) this.tx(() => {
+        this.db.exec(EXTRACTION_LAYOUT_SCHEMA);
+        this.exec("UPDATE quixi_extract_schema SET version=?,checksum=? WHERE version=1", [EXTRACTION_SCHEMA_VERSION, schemaDigest]);
+      });
+    }
+    if (!exact(inspect(), EXTRACTION_SCHEMA))
+      fail("MIGRATION_FAILED", "Extraction schema upgrade did not produce the verified object set.");
+    const ledger = this.rows("SELECT version,substr(checksum,1,65) AS checksum FROM quixi_extract_schema LIMIT 2");
+    if (ledger.length !== 1 || ledger[0]!.version !== EXTRACTION_SCHEMA_VERSION || ledger[0]!.checksum !== schemaDigest)
+      fail("MIGRATION_FAILED", "Unsupported extraction schema ledger.");
+    this.initialized = true;
+  }
+  close(): void {
+    this.closed = true;
+    this.initialized = false;
+  }
+  private check() {
+    if (!this.initialized || this.closed)
+      fail(
+        "MIGRATION_FAILED",
+        "Extraction repository is unavailable; canonical data is unaffected.",
+      );
+  }
+  private run(id: string): Row {
+    return (
+      this.one("SELECT * FROM quixi_extract_runs WHERE id=?", [id]) ??
+      fail("NOT_FOUND", "Extraction run not found.")
+    );
+  }
+  private document(id: string): Row {
+    return (
+      this.one("SELECT * FROM quixi_extract_documents WHERE document_id=?", [
+        id,
+      ]) ?? fail("NOT_FOUND", "Extraction document not found.")
+    );
+  }
+  private identity(run: Row): ExtractionIdentity {
+    const value = readJSON<ExtractionIdentity>(run.identity);
+    assertExtractionIdentity(value);
+    return value;
+  }
+  private assertIdentity(identity: ExtractionIdentity) {
+    const current = this.options.lookupIdentity(identity.documentId);
+    if (
+      !current ||
+      !current.available ||
+      current.documentId !== identity.documentId ||
+      current.attachmentId !== identity.attachmentId ||
+      current.attachmentSha256 !== identity.attachmentSha256 ||
+      current.attachmentByteLength !== identity.attachmentByteLength ||
+      current.mediaType.split(";")[0]!.trim().toLowerCase() !==
+        "application/pdf"
+    )
+      fail(
+        "SOURCE_UNAVAILABLE",
+        "Original document attachment identity is unavailable or changed.",
+      );
+  }
+  private write(value: ExtractionWrite, checkIdentity = true): Row {
+    const run = this.run(value.runId);
+    if (run.writer_epoch !== value.writerEpoch)
+      fail("STALE_WRITER", "Extraction writer was superseded.");
+    if (
+      run.state !== "working" ||
+      this.document(String(run.document_id)).latest_run !== run.id
+    )
+      fail("CONFLICT", "Run is not the current working extraction.");
+    if (checkIdentity) this.assertIdentity(this.identity(run));
+    return run;
+  }
+  private page(value: ExtractionPageWrite): { run: Row; page: Row } {
+    const run = this.write(value);
+    const page = this.one(
+      "SELECT id,run_id,page,state,next_sequence,utf16,map_count,map_bytes,max_item,text_sha,map_sha,source_digest,publication_revision,classification,published_bytes FROM quixi_extract_pages WHERE id=? AND run_id=?",
+      [value.pageAttemptId, value.runId],
+    );
+    if (!page || page.state !== "staging" || run.current_page !== page.id)
+      fail("CONFLICT", "Page attempt is not the current unpublished page.");
+    return { run, page: page! };
+  }
+  private charge(runId: string, delta: number) {
+    const run = this.run(runId),
+      meta = this.one("SELECT used_bytes FROM quixi_extract_meta")!;
+    if (
+      Number(run.used_bytes) + delta < 0 ||
+      Number(meta.used_bytes) + delta < 0
+    )
+      fail("MIGRATION_FAILED", "Derived byte accounting is inconsistent.");
+    const runBudget =
+        this.runLimit -
+        (this.controlAdmission || delta < 0
+          ? 0
+          : Math.min(65536, Math.floor(this.runLimit / 4))),
+      archiveBudget =
+        this.archiveLimit -
+        (this.controlAdmission || delta < 0
+          ? 0
+          : Math.min(1048576, Math.floor(this.archiveLimit / 4)));
+    if (
+      Number(run.used_bytes) + delta > runBudget ||
+      Number(meta.used_bytes) + delta > archiveBudget
+    )
+      fail(
+        "CAPACITY",
+        "Logical extraction budget exceeded; committed pages are retained.",
+      );
+    this.exec(
+      "UPDATE quixi_extract_runs SET used_bytes=used_bytes+? WHERE id=?",
+      [delta, runId],
+    );
+    this.exec("UPDATE quixi_extract_meta SET used_bytes=used_bytes+?", [delta]);
+  }
+  private revision(): number {
+    this.exec("UPDATE quixi_extract_meta SET revision=revision+1");
+    const n = Number(
+      this.one("SELECT revision FROM quixi_extract_meta")!.revision,
+    );
+    if (!Number.isSafeInteger(n))
+      fail("CAPACITY", "Extraction revision exhausted.");
+    return n;
+  }
+  private publishNotice(
+    run: Row,
+    pageId: string | null,
+    kind: ExtractionPublication["kind"],
+  ): number {
+    const revision = this.revision();
+    this.exec("INSERT INTO quixi_extract_publications VALUES(?,?,?,?,?)", [
+      revision,
+      String(run.document_id),
+      String(run.id),
+      pageId,
+      kind,
+    ]);
+    this.charge(String(run.id), 256);
+    return revision;
+  }
+  private pageStatus(page: Row): ExtractionPageStatus {
+    return {
+      pageAttemptId: String(page.id),
+      page: Number(page.page),
+      nextSequence: Number(page.next_sequence),
+      utf16: Number(page.utf16),
+      mapCount: Number(page.map_count),
+    };
+  }
+  private status(runId: string): ExtractionRunStatus {
+    const run = this.run(runId),
+      doc = this.document(String(run.document_id));
+    const page = run.current_page
+      ? this.one(
+          "SELECT id,run_id,page,state,next_sequence,utf16,map_count,map_bytes,max_item,text_sha,map_sha,source_digest,publication_revision,classification,published_bytes FROM quixi_extract_pages WHERE id=?",
+          [run.current_page],
+        )
+      : null;
+    return {
+      runId,
+      identity: this.identity(run),
+      state: run.state as ExtractionRunStatus["state"],
+      writerEpoch: Number(run.writer_epoch),
+      pageCount: run.page_count === null ? null : Number(run.page_count),
+      completedPage: Number(run.completed_page),
+      currentPage: page ? this.pageStatus(page) : null,
+      visibleRunId: doc.visible_run === null ? null : String(doc.visible_run),
+      documentRevision: Number(doc.revision),
+      retainedBytes: Number(run.used_bytes),
+      failure: run.failure === null ? null : String(run.failure),
+    };
+  }
+  operationStatus(
+    operationId: string,
+  ): ExtractionOperations["getExtractionOperation"]["result"] {
+    this.check();
+    if (!isQuixiId(operationId))
+      fail("INVALID_REQUEST", "Invalid operation identity.");
+    const row = this.one(
+      "SELECT digest,result FROM quixi_extract_operations WHERE id=?",
+      [operationId],
+    );
+    return row
+      ? {
+          status: "committed",
+          requestDigest: String(row.digest),
+          result: readJSON(row.result),
+        }
+      : { status: "not_found" };
+  }
+  execute<K extends keyof ExtractionOperations>(
+    operation: K,
+    input: ExtractionOperations[K]["args"],
+  ): ExtractionOperations[K]["result"] {
+    this.check();
+    assertExtractionArgs(operation, input);
+    const args = JSON.parse(json(input)) as ExtractionOperations[K]["args"];
+    if (operation === 'getPublishedExtractionPage') {
+      const { runId, page: pageNumber } = args as Args<'getPublishedExtractionPage'>;
+      const page = this.one("SELECT id,run_id,page,source_digest,publication_revision FROM quixi_extract_pages WHERE run_id=? AND page=? AND state='published'", [runId, pageNumber]);
+      if (!page) return null as ExtractionOperations[K]['result'];
+      const ref = this.ref(page, this.run(runId));
+      return (this.current(ref) ? ref : null) as ExtractionOperations[K]['result'];
+    }
+    if (operation === "getExtractionOperation")
+      return this.operationStatus(
+        (args as Args<"getExtractionOperation">).operationId,
+      ) as ExtractionOperations[K]["result"];
+    if (operation === "getDocumentExtraction") {
+      const doc = this.one(
+        "SELECT latest_run FROM quixi_extract_documents WHERE document_id=?",
+        [(args as Args<"getDocumentExtraction">).documentId],
+      );
+      return (
+        doc ? this.status(String(doc.latest_run)) : null
+      ) as ExtractionOperations[K]["result"];
+    }
+    if (operation === "readExtractedPageText")
+      return this.readText(
+        args as Args<"readExtractedPageText">,
+      ) as ExtractionOperations[K]["result"];
+    if (operation === "readExtractedPageMap")
+      return this.readMaps(
+        args as Args<"readExtractedPageMap">,
+      ) as ExtractionOperations[K]["result"];
+    const operationId = (args as { operationId: string }).operationId,
+      digest = extractionDigest({ operation, args });
+    const previous = this.one(
+      "SELECT kind,digest,result FROM quixi_extract_operations WHERE id=?",
+      [operationId],
+    );
+    if (previous) {
+      if (previous.kind !== operation || previous.digest !== digest)
+        fail(
+          "CONFLICT",
+          "Operation ID describes a different extraction request.",
+        );
+      return readJSON(previous.result);
+    }
+    this.controlAdmission =
+      operation === "clearDocumentExtraction" ||
+      operation === "interruptDocumentExtraction";
+    try {
+      return this.tx(() => {
+        this.options.operations.claim({
+          operationId,
+          domain: "extraction",
+          requestDigest: digest,
+        });
+        let result: unknown;
+        let runId: string;
+        switch (operation) {
+          case "beginDocumentExtraction":
+            result = this.begin(args as Args<"beginDocumentExtraction">);
+            runId = operationId;
+            break;
+          case "resumeDocumentExtraction":
+            result = this.resume(args as Args<"resumeDocumentExtraction">);
+            runId = (args as { runId: string }).runId;
+            break;
+          case "beginExtractionPage":
+            result = this.beginPage(args as Args<"beginExtractionPage">);
+            runId = (args as { runId: string }).runId;
+            break;
+          case "stagePageText":
+            result = this.stage(args as Args<"stagePageText">);
+            runId = (args as { runId: string }).runId;
+            break;
+          case "publishExtractionPage":
+            result = this.publish(args as Args<"publishExtractionPage">);
+            runId = (args as { runId: string }).runId;
+            break;
+          case "completeDocumentExtraction":
+            result = this.complete(args as Args<"completeDocumentExtraction">);
+            runId = (args as { runId: string }).runId;
+            break;
+          case "interruptDocumentExtraction":
+            result = this.interrupt(
+              args as Args<"interruptDocumentExtraction">,
+            );
+            runId = (args as { runId: string }).runId;
+            break;
+          case "clearDocumentExtraction": {
+            const a = args as Args<"clearDocumentExtraction">;
+            result = this.clear(a);
+            runId = a.expectedRunId;
+            break;
+          }
+          default:
+            return fail("INVALID_REQUEST", "Unsupported extraction operation.");
+        }
+        const receiptBytes = jsonByteLength(result, 16384) + 512;
+        this.charge(runId, receiptBytes);
+        if (result && typeof result === "object" && "retainedBytes" in result)
+          (result as ExtractionRunStatus).retainedBytes = Number(
+            this.run(runId).used_bytes,
+          );
+        this.exec("INSERT INTO quixi_extract_operations VALUES(?,?,?,?,?,?)", [
+          operationId,
+          operation,
+          digest,
+          runId,
+          json(result),
+          receiptBytes,
+        ]);
+        return result as ExtractionOperations[K]["result"];
+      });
+    } finally {
+      this.controlAdmission = false;
+    }
+  }
+  private begin(a: Args<"beginDocumentExtraction">): ExtractionRunStatus {
+    this.assertIdentity(a.identity);
+    if (
+      !this.options.supportedVersions.some(
+        (v) =>
+          v.extractorVersion === a.identity.extractorVersion &&
+          v.normalizerVersion === a.identity.normalizerVersion,
+      )
+    )
+      fail(
+        "INVALID_REQUEST",
+        "Extractor/normalizer version is not registered.",
+      );
+    if (
+      this.one(
+        "SELECT id FROM quixi_extract_runs WHERE state='working' LIMIT 1",
+      )
+    )
+      fail(
+        "OVERLOADED",
+        "One extraction is already working; interrupt or resume it first.",
+      );
+    const doc = this.one(
+      "SELECT * FROM quixi_extract_documents WHERE document_id=?",
+      [a.identity.documentId],
+    );
+    this.exec(
+      "INSERT INTO quixi_extract_runs VALUES(?,?,?,'working',1,NULL,0,NULL,0,NULL)",
+      [a.operationId, a.identity.documentId, json(a.identity)],
+    );
+    if (doc)
+      this.exec(
+        "UPDATE quixi_extract_documents SET latest_run=?,revision=revision+1 WHERE document_id=?",
+        [a.operationId, a.identity.documentId],
+      );
+    else
+      this.exec("INSERT INTO quixi_extract_documents VALUES(?,?,NULL,1)", [
+        a.identity.documentId,
+        a.operationId,
+      ]);
+    if (doc && doc.latest_run !== doc.visible_run)
+      this.queueRun(String(doc.latest_run));
+    this.charge(a.operationId, 1024 + jsonByteLength(a.identity));
+    return this.status(a.operationId);
+  }
+  private queuePage(id: string) {
+    this.exec("INSERT OR IGNORE INTO quixi_extract_cleanup_pages VALUES(?)", [
+      id,
+    ]);
+  }
+  private queueRun(id: string) {
+    this.exec("INSERT OR IGNORE INTO quixi_extract_cleanup_runs VALUES(?,'')", [
+      id,
+    ]);
+  }
+  private abandon(run: Row) {
+    if (run.current_page) {
+      this.queuePage(String(run.current_page));
+      this.exec(
+        "UPDATE quixi_extract_pages SET state='abandoned' WHERE id=? AND state='staging'",
+        [run.current_page],
+      );
+    }
+    this.exec("UPDATE quixi_extract_runs SET current_page=NULL WHERE id=?", [
+      run.id!,
+    ]);
+  }
+  private resume(a: Args<"resumeDocumentExtraction">): ExtractionRunStatus {
+    const run = this.run(a.runId);
+    if (run.writer_epoch !== a.expectedWriterEpoch)
+      fail("STALE_WRITER", "Writer epoch changed before claim.");
+    if (
+      !["working", "interrupted"].includes(String(run.state)) ||
+      this.document(String(run.document_id)).latest_run !== run.id
+    )
+      fail("CONFLICT", "Only the latest resumable run may be claimed.");
+    this.assertIdentity(this.identity(run));
+    if (
+      this.one(
+        "SELECT id FROM quixi_extract_runs WHERE state='working' AND id<>? LIMIT 1",
+        [a.runId],
+      )
+    )
+      fail("OVERLOADED", "Another document extraction is working.");
+    if (a.expectedWriterEpoch >= Number.MAX_SAFE_INTEGER)
+      fail("CAPACITY", "Writer epoch exhausted.");
+    this.abandon(run);
+    this.exec(
+      "UPDATE quixi_extract_runs SET writer_epoch=writer_epoch+1,state='working',failure=NULL WHERE id=?",
+      [a.runId],
+    );
+    return this.status(a.runId);
+  }
+  private beginPage(a: Args<"beginExtractionPage">): ExtractionPageStatus {
+    const run = this.write(a);
+    if (
+      run.current_page ||
+      a.page !== Number(run.completed_page) + 1 ||
+      (run.page_count !== null && run.page_count !== a.documentPageCount)
+    )
+      fail(
+        "CONFLICT",
+        "Page is not the next contiguous page or count changed.",
+      );
+    if (
+      this.one(
+        "SELECT id FROM quixi_extract_pages WHERE run_id=? AND state='abandoned' LIMIT 1",
+        [a.runId],
+      )
+    )
+      fail("OVERLOADED", "Clean abandoned page work before another attempt.");
+    this.exec(
+      "INSERT INTO quixi_extract_pages(id,run_id,page,state,next_sequence,utf16,map_count,map_bytes,max_item) VALUES(?,?,?,'staging',0,0,0,0,-1)",
+      [a.operationId, a.runId, a.page],
+    );
+    this.exec(
+      "UPDATE quixi_extract_runs SET current_page=?,page_count=? WHERE id=?",
+      [a.operationId, a.documentPageCount, a.runId],
+    );
+    this.charge(a.runId, 512);
+    return this.pageStatus(
+      this.one(
+        "SELECT id,run_id,page,state,next_sequence,utf16,map_count,map_bytes,max_item,text_sha,map_sha,source_digest,publication_revision,classification,published_bytes FROM quixi_extract_pages WHERE id=?",
+        [a.operationId],
+      )!,
+    );
+  }
+  private stage(
+    a: Args<"stagePageText">,
+  ): ExtractionOperations["stagePageText"]["result"] {
+    const { page } = this.page(a);
+    if (
+      page.next_sequence !== a.sequence ||
+      page.utf16 !== a.expectedUTF16Offset
+    )
+      fail("CONFLICT", "Stage sequence or committed offset changed.");
+    const maps = json(a.spans),
+      mapBytes = new TextEncoder().encode(maps).length,
+      textBytes = new TextEncoder().encode(a.text).length;
+    if (
+      Number(page.utf16) + a.text.length > EXTRACTION_LIMITS.pageUTF16 ||
+      Number(page.map_count) + a.spans.length > EXTRACTION_LIMITS.pageSpans ||
+      Number(page.map_bytes) + mapBytes > EXTRACTION_LIMITS.pageMapBytes
+    )
+      fail("CAPACITY", "Page text or mapping budget exceeded.");
+    this.exec("INSERT INTO quixi_extract_text_batches VALUES(?,?,?,?,?)", [
+      a.pageAttemptId,
+      a.sequence,
+      a.expectedUTF16Offset,
+      a.text,
+      textBytes + 128,
+    ]);
+    this.exec("INSERT INTO quixi_extract_map_batches VALUES(?,?,?,?,?,?,?)", [
+      a.pageAttemptId,
+      a.sequence,
+      a.expectedUTF16Offset,
+      a.expectedUTF16Offset + a.text.length,
+      maps,
+      extractionTextDigest(maps),
+      mapBytes + 128,
+    ]);
+    const maxItem = Math.max(
+      Number(page.max_item),
+      ...a.spans.map((span) => span.source?.itemIndex ?? -1),
+    );
+    this.exec(
+      "UPDATE quixi_extract_pages SET next_sequence=next_sequence+1,utf16=utf16+?,map_count=map_count+?,map_bytes=map_bytes+?,max_item=? WHERE id=?",
+      [a.text.length, a.spans.length, mapBytes, maxItem, a.pageAttemptId],
+    );
+    this.charge(a.runId, textBytes + mapBytes + 256);
+    return {
+      pageAttemptId: a.pageAttemptId,
+      sequence: a.sequence,
+      committedUTF16Offset: a.expectedUTF16Offset + a.text.length,
+      committedMapCount: Number(page.map_count) + a.spans.length,
+    };
+  }
+  private publish(
+    a: Args<"publishExtractionPage">,
+  ): ExtractionOperations["publishExtractionPage"]["result"] {
+    const { run, page } = this.page(a);
+    if (
+      Number(page.next_sequence) !== a.lastSequence + 1 ||
+      page.utf16 !== a.expectedUTF16Length ||
+      Number(page.max_item) >= a.itemCount
+    )
+      fail("CONFLICT", "Final page counters or source item count differ.");
+    const textHash = sha256.create(),
+      mapHash = sha256.create(),
+      fragments: string[] = [];
+    let sequence = 0,
+      units = 0,
+      mapCount = 0,
+      after = -1;
+    while (true) {
+      const batch = this.rows(
+        "SELECT t.sequence,t.start_utf16,json_quote(t.text) AS text_json,m.maps,m.map_digest FROM quixi_extract_text_batches t JOIN quixi_extract_map_batches m ON m.page_id=t.page_id AND m.sequence=t.sequence WHERE t.page_id=? AND t.sequence>? ORDER BY t.sequence LIMIT 32",
+        [a.pageAttemptId, after],
+      );
+      if (!batch.length) break;
+      for (const row of batch) {
+        if (
+          row.sequence !== sequence ||
+          row.start_utf16 !== units ||
+          sequence >= EXTRACTION_LIMITS.pageBatches
+        )
+          fail("CONFLICT", "Staged page is discontinuous.");
+        const text = readJSON<string>(row.text_json),
+          maps = this.checkedMaps(row);
+        fragments.push(text);
+        textHash.update(new TextEncoder().encode(text));
+        let mapOffset = units;
+        for (const span of maps) {
+          if (span.start !== mapOffset || span.end <= span.start)
+            fail("CONFLICT", "Stored page map is discontinuous.");
+          mapOffset = span.end;
+          mapHash.update(new TextEncoder().encode(json(span) + "\n"));
+          mapCount++;
+        }
+        units += text.length;
+        if (
+          mapOffset !== units ||
+          units > EXTRACTION_LIMITS.pageUTF16 ||
+          mapCount > EXTRACTION_LIMITS.pageSpans
+        )
+          fail("CAPACITY", "Final page exceeds admitted bounds.");
+        sequence++;
+        after = Number(row.sequence);
+      }
+    }
+    const textSha = bytesToHex(textHash.digest()),
+      mapSha = bytesToHex(mapHash.digest());
+    if (
+      sequence !== a.lastSequence + 1 ||
+      units !== a.expectedUTF16Length ||
+      mapCount !== page.map_count ||
+      textSha !== a.expectedTextSha256 ||
+      mapSha !== a.expectedMapSha256
+    )
+      fail(
+        "CONFLICT",
+        "Final source text/maps do not match their committed digest.",
+      );
+    this.assertIdentity(this.identity(run));
+    const text = fragments.join(""),
+      identity = this.identity(run);
+    const layout = a.layout ?? null;
+    const sourceDigest = this.pageDigest(identity, Number(page.page), textSha, mapSha, layout);
+    const doc = this.document(identity.documentId),
+      kind = doc.visible_run === a.runId ? "page" : "replace";
+    if (kind === "replace") {
+      if (doc.visible_run) this.queueRun(String(doc.visible_run));
+      this.exec(
+        "UPDATE quixi_extract_documents SET visible_run=?,revision=revision+1 WHERE document_id=?",
+        [a.runId, identity.documentId],
+      );
+    }
+    const revision = this.publishNotice(run, a.pageAttemptId, kind),
+      publishedBytes = new TextEncoder().encode(text).length + (layout ? jsonByteLength(layout) + 128 : 0);
+    if (layout) this.exec("INSERT INTO quixi_extract_page_layout VALUES(?,?)", [a.pageAttemptId, json(layout)]);
+    this.exec(
+      "UPDATE quixi_extract_pages SET state='published',text=?,text_sha=?,map_sha=?,source_digest=?,publication_revision=?,classification=?,published_bytes=? WHERE id=?",
+      [
+        text,
+        textSha,
+        mapSha,
+        sourceDigest,
+        revision,
+        a.classification,
+        publishedBytes,
+        a.pageAttemptId,
+      ],
+    );
+    this.exec(
+      "UPDATE quixi_extract_runs SET completed_page=?,current_page=NULL WHERE id=?",
+      [page.page!, a.runId],
+    );
+    this.charge(a.runId, publishedBytes);
+    this.queuePage(a.pageAttemptId);
+    return {
+      pageRef: {
+        pageAttemptId: a.pageAttemptId,
+        runId: a.runId,
+        page: Number(page.page),
+        identity,
+        sourceDigest,
+        publicationRevision: revision,
+      },
+      completedPage: Number(page.page),
+    };
+  }
+  private complete(a: Args<"completeDocumentExtraction">) {
+    const run = this.write(a);
+    if (
+      run.current_page ||
+      run.page_count === null ||
+      run.completed_page !== run.page_count
+    )
+      fail(
+        "CONFLICT",
+        "All pages must be durably published before completion.",
+      );
+    this.exec("UPDATE quixi_extract_runs SET state='completed' WHERE id=?", [
+      a.runId,
+    ]);
+    return this.status(a.runId);
+  }
+  private interrupt(a: Args<"interruptDocumentExtraction">) {
+    const run = this.write(a, false);
+    this.abandon(run);
+    this.exec(
+      "UPDATE quixi_extract_runs SET state='interrupted',failure=? WHERE id=?",
+      [a.reason, a.runId],
+    );
+    return this.status(a.runId);
+  }
+  private clear(a: Args<"clearDocumentExtraction">) {
+    const doc = this.document(a.documentId);
+    if (
+      doc.latest_run !== a.expectedRunId ||
+      doc.revision !== a.expectedDocumentRevision
+    )
+      fail("CONFLICT", "Extraction selection changed before clear.");
+    const run = this.run(a.expectedRunId);
+    this.abandon(run);
+    this.queueRun(a.expectedRunId);
+    if (doc.visible_run && doc.visible_run !== a.expectedRunId)
+      this.queueRun(String(doc.visible_run));
+    this.exec(
+      "UPDATE quixi_extract_runs SET state='cleared',writer_epoch=writer_epoch+1,failure=NULL WHERE id=?",
+      [a.expectedRunId],
+    );
+    this.exec(
+      "UPDATE quixi_extract_documents SET visible_run=NULL,revision=revision+1 WHERE document_id=?",
+      [a.documentId],
+    );
+    this.publishNotice(run, null, "clear");
+    return {
+      documentId: a.documentId,
+      documentRevision: Number(doc.revision) + 1,
+      cleared: true as const,
+    };
+  }
+  private pageDigest(identity: ExtractionIdentity, page: number, textSha256: string, mapSha256: string, layout: PageLayout | null): string {
+    // Keep the legacy recipe exactly unchanged when no assessment was supplied.
+    return extractionDigest({ version: layout ? 2 : 1, identity, page, textSha256, mapSha256,
+      ...(layout ? { layout } : {}) });
+  }
+  private pageLayout(page: Row, identity: ExtractionIdentity): PageLayout | null {
+    const row = this.one("SELECT CASE WHEN length(CAST(layout AS BLOB))<=512 THEN layout ELSE NULL END AS layout FROM quixi_extract_page_layout WHERE page_id=?", [page.id!]);
+    let layout: PageLayout | null = null;
+    if (row) {
+      try { layout = JSON.parse(String(row.layout)); assertPageLayout(layout); }
+      catch { fail("MIGRATION_FAILED", "Published page layout metadata is invalid; retain its source for recovery."); }
+    }
+    if (this.pageDigest(identity, Number(page.page), String(page.text_sha), String(page.map_sha), layout) !== page.source_digest)
+      fail("MIGRATION_FAILED", "Published page layout/source metadata no longer matches its digest.");
+    return layout;
+  }
+  private ref(page: Row, run: Row): PublishedPageRef {
+    return {
+      pageAttemptId: String(page.id),
+      runId: String(run.id),
+      page: Number(page.page),
+      identity: this.identity(run),
+      sourceDigest: String(page.source_digest),
+      publicationRevision: Number(page.publication_revision),
+    };
+  }
+  private current(ref: PublishedPageRef): boolean {
+    this.check();
+    assertPublishedPageRef(ref);
+    const page = this.one(
+      "SELECT id,run_id,page,state,next_sequence,utf16,map_count,map_bytes,max_item,text_sha,map_sha,source_digest,publication_revision,classification,published_bytes FROM quixi_extract_pages WHERE id=? AND state='published'",
+      [ref.pageAttemptId],
+    );
+    if (!page) return false;
+    const run = this.run(String(page.run_id)),
+      doc = this.document(String(run.document_id));
+    if (doc.visible_run !== run.id || json(this.ref(page, run)) !== json(ref))
+      return false;
+    try {
+      this.assertIdentity(ref.identity);
+      this.pageLayout(page, ref.identity);
+      return true;
+    } catch (e) {
+      if (
+        e instanceof ExtractionStorageError &&
+        e.code === "SOURCE_UNAVAILABLE"
+      )
+        return false;
+      throw e;
+    }
+  }
+  private requireCurrent(ref: PublishedPageRef) {
+    if (!this.current(ref))
+      fail("CONFLICT", "Extracted page reference is stale or unavailable.");
+  }
+  private loadPage(pageId: string): PublishedExtractionPage | null {
+    this.check();
+    if (!isQuixiId(pageId)) fail("INVALID_REQUEST", "Invalid page identity.");
+    const page = this.one(
+      "SELECT id,run_id,page,state,next_sequence,utf16,map_count,map_bytes,max_item,text_sha,map_sha,source_digest,publication_revision,classification,published_bytes FROM quixi_extract_pages WHERE id=? AND state='published'",
+      [pageId],
+    );
+    if (!page) return null;
+    const ref = this.ref(page, this.run(String(page.run_id)));
+    if (!this.current(ref)) return null;
+    const text = readJSON<string>(
+      this.one(
+        "SELECT json_quote(text) AS value FROM quixi_extract_pages WHERE id=?",
+        [pageId],
+      )!.value,
+    );
+    if (
+      text.length !== page.utf16 ||
+      text.length > EXTRACTION_LIMITS.pageUTF16 ||
+      !['text', 'possible_scanned'].includes(String(page.classification)) ||
+      extractionTextDigest(text) !== page.text_sha
+    )
+      fail(
+        "MIGRATION_FAILED",
+        "Published derived text no longer matches its digest.",
+      );
+    return {
+      ref,
+      text,
+      utf16: text.length,
+      classification:
+        page.classification as PublishedExtractionPage["classification"],
+      layout: this.pageLayout(page, ref.identity),
+    };
+  }
+  private readText(
+    a: Args<"readExtractedPageText">,
+  ): ExtractionOperations["readExtractedPageText"]["result"] {
+    this.requireCurrent(a.pageRef);
+    const page = this.loadPage(a.pageRef.pageAttemptId)!;
+    if (a.startUTF16 > page.utf16)
+      fail("INVALID_REQUEST", "Text range starts past the page.");
+    let start = a.startUTF16,
+      end = Math.min(page.utf16, start + a.maxUTF16);
+    if (start > 0 && /[\uDC00-\uDFFF]/.test(page.text[start] ?? ""))
+      fail("INVALID_REQUEST", "Text range starts inside a surrogate pair.");
+    if (end < page.utf16 && /[\uD800-\uDBFF]/.test(page.text[end - 1] ?? ""))
+      end--;
+    if (end === start && start < page.utf16)
+      fail(
+        "INVALID_REQUEST",
+        "Text budget cannot contain the next code point.",
+      );
+    return {
+      text: page.text.slice(start, end),
+      startUTF16: start,
+      endUTF16: end,
+      totalUTF16: page.utf16,
+      classification: page.classification,
+      layout: page.layout,
+    };
+  }
+  private checkedMaps(row: Row): PageSourceSpan[] {
+    const raw = String(row.maps);
+    if (
+      raw.length > EXTRACTION_LIMITS.stageBytes ||
+      extractionTextDigest(raw) !== row.map_digest
+    )
+      fail("MIGRATION_FAILED", "Derived map batch digest differs.");
+    const maps = readJSON<PageSourceSpan[]>(row.maps);
+    if (!Array.isArray(maps) || maps.length > EXTRACTION_LIMITS.stageSpans)
+      fail("MIGRATION_FAILED", "Derived map batch exceeds bound.");
+    return maps;
+  }
+  private readMaps(
+    a: Args<"readExtractedPageMap">,
+  ): ExtractionOperations["readExtractedPageMap"]["result"] {
+    this.requireCurrent(a.pageRef);
+    const size = Number(
+      this.one("SELECT utf16 FROM quixi_extract_pages WHERE id=?", [
+        a.pageRef.pageAttemptId,
+      ])!.utf16,
+    );
+    if (a.endUTF16 > size) fail("INVALID_REQUEST", "Map range exceeds page.");
+    const scope = extractionDigest({
+      pageRef: a.pageRef,
+      start: a.startUTF16,
+      end: a.endUTF16,
+    });
+    let sequence = 0,
+      index = 0;
+    if (a.cursor) {
+      try {
+        const c = JSON.parse(a.cursor);
+        if (
+          c.scope !== scope ||
+          !Number.isInteger(c.sequence) ||
+          c.sequence < 0 ||
+          c.sequence > 1024 ||
+          !Number.isInteger(c.index) ||
+          c.index < 0 ||
+          c.index > 128
+        )
+          throw 0;
+        sequence = c.sequence;
+        index = c.index;
+      } catch {
+        fail("CONFLICT", "Map cursor does not describe this page/range.");
+      }
+    }
+    const items: PageSourceSpan[] = [];
+    let bytes = 2,
+      scanned = 0;
+    const finish = (nextCursor: string | null) => {
+      const result = { items, nextCursor, bytes: 0 };
+      result.bytes = jsonByteLength(result);
+      result.bytes = jsonByteLength(result);
+      if (result.bytes > a.maxBytes)
+        fail("OVERLOADED", "Map response envelope exceeds budget.");
+      return result;
+    };
+    const cursor = (s: number, i: number) =>
+      json({ scope, sequence: s, index: i });
+    while (scanned++ < 32) {
+      const row = this.one(
+        "SELECT sequence,maps,map_digest FROM quixi_extract_map_batches WHERE page_id=? AND sequence>=? AND end_utf16>? AND start_utf16<? ORDER BY sequence LIMIT 1",
+        [a.pageRef.pageAttemptId, sequence, a.startUTF16, a.endUTF16],
+      );
+      if (!row) return finish(null);
+      const maps = this.checkedMaps(row);
+      if (row.sequence !== sequence) index = 0;
+      sequence = Number(row.sequence);
+      for (; index < maps.length; index++) {
+        const span = maps[index]!;
+        if (span.end <= a.startUTF16 || span.start >= a.endUTF16) continue;
+        const cost = jsonByteLength(span) + Number(items.length > 0);
+        if (items.length >= a.maxItems || bytes + cost > a.maxBytes - 384) {
+          if (!items.length)
+            fail("OVERLOADED", "Map response budget cannot contain one span.");
+          return finish(cursor(sequence, index));
+        }
+        items.push(span);
+        bytes += cost;
+      }
+      sequence++;
+      index = 0;
+    }
+    return finish(cursor(sequence, 0));
+  }
+  private listVisiblePages(
+    documentId: string | null,
+    after: string | null,
+    limit: number,
+  ): { pageAttemptId: string }[] {
+    this.check();
+    if (
+      (documentId !== null && !isQuixiId(documentId)) ||
+      (after !== null && !isQuixiId(after)) ||
+      !Number.isInteger(limit) ||
+      limit < 1 ||
+      limit > 32
+    )
+      fail("INVALID_REQUEST", "Invalid page enumeration budget.");
+    return this.rows(
+      "SELECT p.id FROM quixi_extract_pages p JOIN quixi_extract_documents d ON d.visible_run=p.run_id WHERE p.state='published' AND p.id>? AND (? IS NULL OR d.document_id=?) ORDER BY p.id LIMIT ?",
+      [after ?? "", documentId, documentId, limit],
+    ).map((row) => ({ pageAttemptId: String(row.id) }));
+  }
+  private publications(limit: number): ExtractionPublication[] {
+    this.check();
+    if (!Number.isInteger(limit) || limit < 1 || limit > 32)
+      fail("INVALID_REQUEST", "Invalid outbox budget.");
+    return this.rows(
+      "SELECT * FROM quixi_extract_publications ORDER BY revision LIMIT ?",
+      [limit],
+    ).map((row) => ({
+      revision: Number(row.revision),
+      documentId: String(row.document_id),
+      runId: String(row.run_id),
+      pageAttemptId: row.page_id === null ? null : String(row.page_id),
+      kind: row.kind as ExtractionPublication["kind"],
+    }));
+  }
+  private acknowledge(revisions: readonly number[]): void {
+    this.check();
+    if (
+      revisions.length > 32 ||
+      revisions.some((n) => !Number.isSafeInteger(n) || n < 1) ||
+      new Set(revisions).size !== revisions.length
+    )
+      fail("INVALID_REQUEST", "Invalid outbox acknowledgement.");
+    for (const revision of revisions) {
+      const row = this.one(
+        "SELECT run_id FROM quixi_extract_publications WHERE revision=?",
+        [revision],
+      );
+      if (row) {
+        this.exec("DELETE FROM quixi_extract_publications WHERE revision=?", [
+          revision,
+        ]);
+        this.charge(String(row.run_id), -256);
+      }
+    }
+  }
+  /** Bounded cleanup must be called before retrying abandoned page admission.
+   * Receipts/run summaries survive cleanup; original/canonical tables are untouched. */
+  cleanup({
+    maxRows = 32,
+    maxBytes = 1048576,
+  }: { maxRows?: number; maxBytes?: number } = {}): {
+    rows: number;
+    bytes: number;
+  } {
+    this.check();
+    if (
+      !Number.isInteger(maxRows) ||
+      maxRows < 1 ||
+      maxRows > 32 ||
+      !Number.isInteger(maxBytes) ||
+      maxBytes < 65536 ||
+      maxBytes > 1048576
+    )
+      fail("INVALID_REQUEST", "Invalid cleanup slice.");
+    return this.tx(() => {
+      let deleted = 0,
+        bytes = 0;
+      while (deleted < maxRows) {
+        const queued = this.one(
+          "SELECT page_id FROM quixi_extract_cleanup_pages ORDER BY page_id LIMIT 1",
+        );
+        if (queued) {
+          const page = this.one(
+            "SELECT id,run_id,state,published_bytes FROM quixi_extract_pages WHERE id=?",
+            [queued.page_id!],
+          );
+          if (!page) {
+            this.exec(
+              "DELETE FROM quixi_extract_cleanup_pages WHERE page_id=?",
+              [queued.page_id!],
+            );
+            deleted++;
+            continue;
+          }
+          const run = this.run(String(page.run_id)),
+            doc = this.document(String(run.document_id));
+          const obsolete =
+            page.state === "abandoned" ||
+            run.state === "cleared" ||
+            (run.id !== doc.latest_run && run.id !== doc.visible_run);
+          let handled = false;
+          for (const table of ["text", "map"] as const) {
+            if (table === "map" && !obsolete) continue;
+            const row = this.one(
+              `SELECT sequence,bytes FROM quixi_extract_${table}_batches WHERE page_id=? ORDER BY sequence LIMIT 1`,
+              [page.id!],
+            );
+            if (!row) continue;
+            if (bytes + Number(row.bytes) > maxBytes)
+              return { rows: deleted, bytes };
+            this.exec(
+              `DELETE FROM quixi_extract_${table}_batches WHERE page_id=? AND sequence=?`,
+              [page.id!, row.sequence!],
+            );
+            this.charge(String(run.id), -Number(row.bytes));
+            bytes += Number(row.bytes);
+            deleted++;
+            handled = true;
+            break;
+          }
+          if (handled) continue;
+          if (obsolete) {
+            const cost = Number(page.published_bytes) + 512;
+            if (bytes + cost > maxBytes) break;
+            this.exec("DELETE FROM quixi_extract_page_layout WHERE page_id=?", [page.id!]);
+            this.exec("DELETE FROM quixi_extract_pages WHERE id=?", [page.id!]);
+            this.charge(String(run.id), -cost);
+            bytes += cost;
+          }
+          this.exec("DELETE FROM quixi_extract_cleanup_pages WHERE page_id=?", [
+            page.id!,
+          ]);
+          deleted++;
+          continue;
+        }
+        const run = this.one(
+          "SELECT run_id,after_id FROM quixi_extract_cleanup_runs ORDER BY run_id LIMIT 1",
+        );
+        if (!run) break;
+        const limit = Math.min(32, maxRows - deleted),
+          pages = this.rows(
+            "SELECT id FROM quixi_extract_pages WHERE run_id=? AND id>? ORDER BY id LIMIT ?",
+            [run.run_id!, run.after_id!, limit],
+          );
+        for (const page of pages) this.queuePage(String(page.id));
+        if (pages.length < limit)
+          this.exec("DELETE FROM quixi_extract_cleanup_runs WHERE run_id=?", [
+            run.run_id!,
+          ]);
+        else
+          this.exec(
+            "UPDATE quixi_extract_cleanup_runs SET after_id=? WHERE run_id=?",
+            [pages.at(-1)!.id!, run.run_id!],
+          );
+        deleted += Math.max(1, pages.length);
+      }
+      return { rows: deleted, bytes };
+    });
+  }
+}

@@ -1,0 +1,176 @@
+
+> quixi@0.0.1 test:search
+> npm run typecheck:tests --workspace @quixi/search && npm test --workspace @quixi/search
+
+
+> @quixi/search@0.0.1 typecheck:tests
+> tsc --noEmit -p tsconfig.tests.json
+
+
+> @quixi/search@0.0.1 test
+> node --experimental-transform-types --test tests/*.test.ts
+
+TAP version 13
+# (node:86516) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: stream fragment boundaries do not change chunks, identity or exact source coverage
+ok 1 - stream fragment boundaries do not change chunks, identity or exact source coverage
+  ---
+  duration_ms: 12.081041
+  type: 'test'
+  ...
+# Subtest: long code/identifier and late text remain covered with overlap only at forced splits
+ok 2 - long code/identifier and late text remain covered with overlap only at forced splits
+  ---
+  duration_ms: 1.411042
+  type: 'test'
+  ...
+# Subtest: document and message sources use identical segmentation with distinct navigable identities
+ok 3 - document and message sources use identical segmentation with distinct navigable identities
+  ---
+  duration_ms: 0.529542
+  type: 'test'
+  ...
+# Subtest: injected untruncated token offsets constrain chunks independently of inference weights
+ok 4 - injected untruncated token offsets constrain chunks independently of inference weights
+  ---
+  duration_ms: 7.455208
+  type: 'test'
+  ...
+# Subtest: bounded fragments, policy, lifetime and malformed token offsets fail explicitly
+ok 5 - bounded fragments, policy, lifetime and malformed token offsets fail explicitly
+  ---
+  duration_ms: 0.37175
+  type: 'test'
+  ...
+# (node:86517) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: pinned WASM: tail text is searchable with accurate UTF-16 positions and one retained verified source
+ok 6 - pinned WASM: tail text is searchable with accurate UTF-16 positions and one retained verified source
+  ---
+  duration_ms: 155.498792
+  type: 'test'
+  ...
+# Subtest: scope triggers hide stale titles/tags and tombstones during held source indexing
+ok 7 - scope triggers hide stale titles/tags and tombstones during held source indexing
+  ---
+  duration_ms: 360.583416
+  type: 'test'
+  ...
+# Subtest: rebuild preserves usable old epoch and canonical records/operations; stale cursors reject
+ok 8 - rebuild preserves usable old epoch and canonical records/operations; stale cursors reject
+  ---
+  duration_ms: 31.425
+  type: 'test'
+  ...
+# Subtest: source/provider/model/date/tag/media/origin filters and explicit dependency gates
+ok 9 - source/provider/model/date/tag/media/origin filters and explicit dependency gates
+  ---
+  duration_ms: 14.462042
+  type: 'test'
+  ...
+# Subtest: plain documents and registered PDF pages share chunks and distinct page identities
+ok 10 - plain documents and registered PDF pages share chunks and distinct page identities
+  ---
+  duration_ms: 21.321083
+  type: 'test'
+  ...
+# Subtest: owner restart discards invisible partial runs and retrying a repaired failure can complete a rebuild
+ok 11 - owner restart discards invisible partial runs and retrying a repaired failure can complete a rebuild
+  ---
+  duration_ms: 180.621125
+  type: 'test'
+  ...
+# Subtest: initial verified-file scan exposes phase and abort leaves a retryable dirty source
+ok 12 - initial verified-file scan exposes phase and abort leaves a retryable dirty source
+  ---
+  duration_ms: 28.374875
+  type: 'test'
+  ...
+# Subtest: append during a held source restarts that source and ordinary generation metadata does not dirty completed parts
+ok 13 - append during a held source restarts that source and ordinary generation metadata does not dirty completed parts
+  ---
+  duration_ms: 19.960667
+  type: 'test'
+  ...
+# Subtest: Unicode and embedded control text retain searchable tail and exact source offsets
+ok 14 - Unicode and embedded control text retain searchable tail and exact source offsets
+  ---
+  duration_ms: 9.882834
+  type: 'test'
+  ...
+# Subtest: transient transfer pressure retries; repeated foreground yields clean partial runs before new builds
+ok 15 - transient transfer pressure retries; repeated foreground yields clean partial runs before new builds
+  ---
+  duration_ms: 125.064
+  type: 'test'
+  ...
+# Subtest: missing derived tables isolate canonical writes; explicit repair restores triggers and indexing
+ok 16 - missing derived tables isolate canonical writes; explicit repair restores triggers and indexing
+  ---
+  duration_ms: 18.3325
+  type: 'test'
+  ...
+# Subtest: repair can release held bytes even when the derived build table disappeared
+ok 17 - repair can release held bytes even when the derived build table disappeared
+  ---
+  duration_ms: 45.304541
+  type: 'test'
+  ...
+# Subtest: tombstone during held source indexing prevents partial publication and releases the reader
+ok 18 - tombstone during held source indexing prevents partial publication and releases the reader
+  ---
+  duration_ms: 11.841708
+  type: 'test'
+  ...
+# Subtest: search result bytes are bounded and FTS operators remain literal user terms
+ok 19 - search result bytes are bounded and FTS operators remain literal user terms
+  ---
+  duration_ms: 12.75525
+  type: 'test'
+  ...
+# Subtest: incremental verification spends at most one byte budget per admission and publishes no prefix
+ok 20 - incremental verification spends at most one byte budget per admission and publishes no prefix
+  ---
+  duration_ms: 59.657833
+  type: 'test'
+  ...
+# Subtest: foreground cancellation discards a partially verified source and retry hashes from byte zero
+ok 21 - foreground cancellation discards a partially verified source and retry hashes from byte zero
+  ---
+  duration_ms: 56.009625
+  type: 'test'
+  ...
+# Subtest: owner restart drops verification handles and re-verifies the complete original before indexing
+ok 22 - owner restart drops verification handles and re-verifies the complete original before indexing
+  ---
+  duration_ms: 53.922667
+  type: 'test'
+  ...
+# Subtest: title invalidation discards a partially verified parent before any source publication
+ok 23 - title invalidation discards a partially verified parent before any source publication
+  ---
+  duration_ms: 53.346
+  type: 'test'
+  ...
+# Subtest: tombstone invalidation discards a partially verified parent before any source publication
+ok 24 - tombstone invalidation discards a partially verified parent before any source publication
+  ---
+  duration_ms: 10.369
+  type: 'test'
+  ...
+# Subtest: late digest mismatch releases verification without derived publication or canonical changes
+ok 25 - late digest mismatch releases verification without derived publication or canonical changes
+  ---
+  duration_ms: 15.062958
+  type: 'test'
+  ...
+1..25
+# tests 25
+# suites 0
+# pass 25
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1479.176958

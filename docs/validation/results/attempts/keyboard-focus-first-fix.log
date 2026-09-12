@@ -1,0 +1,76 @@
+
+> quixi@0.0.1 test:app:browser
+> tsc --noEmit -p packages/app/tsconfig.tests.json && node packages/app/tests/browser/run.mjs
+
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+Skip to conversation
+Quixi
+Your history. Your choice.
+New conversation
+Preferences
+Storage health
+Library
+Import history
+Providers
+Documents
+Export history
+Filter titles
+Filter
+Archived conversations
+
+No conversations in this view.
+
+Previous
+Next
+
+History stays on this device. Sending shares the selected branch with your chosen provider.
+
+Preferences
+
+These preferences apply to this archive on this device and browser profile. History exports do not include them.
+
+Send key
+⌘ / Ctrl + Enter
+Enter (Shift + Enter for a new line)
+Show message timestamps
+Show model badges
+Composer layout
+Comfortable
+Compact
+Model switcher style
+Dropdown
+Model list
+
+Preferences are saved on this device.
+
+Reload preferences
+Routing aliases
+
+Save named routes to reuse across conversations in this archive. Editing or deleting an alias does not change conversations where you already applied it.
+
+Reload aliasesNew routing alias
+SUMMARY DOM [{"label":"Preferences","hidden":false},{"label":"Routing aliases","hidden":false}]
+SUMMARY LOCATORS 0 0 0
+{"items":[],"nextCursor":null,"bytes":2}
+Error: expect(locator).toBeFocused() failed
+
+Locator:  getByLabel('Send key', { exact: true })
+Expected: focused
+Received: inactive
+Timeout:  5000ms
+
+Call log:
+  - Expect "toBeFocused" getByLabel('Send key', { exact: true }) with timeout 5000ms
+  - waiting for getByLabel('Send key', { exact: true })
+    14 × locator resolved to <select id="send-key-preference">…</select>
+       - unexpected value "inactive"
+
+    at captureRawStack (/Users/eric/QuixiChat/node_modules/playwright-core/lib/coreBundle.js:8588:17)
+    at callMatcherAsStep (/Users/eric/QuixiChat/node_modules/playwright/lib/matchers/expect.js:13310:57)
+    at Object.toBeFocused (/Users/eric/QuixiChat/node_modules/playwright/lib/matchers/expect.js:13302:23)
+    at exercisePreferenceFocus (/Users/eric/QuixiChat/packages/app/tests/browser/keyboard-focus.mjs:57:27)
+    at async file:///Users/eric/QuixiChat/packages/app/tests/browser/run.mjs:439:7

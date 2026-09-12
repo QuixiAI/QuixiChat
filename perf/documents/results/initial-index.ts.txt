@@ -1,0 +1,370 @@
+import { openActiveStorageClient } from "@quixi/storage/client";
+import type { ArchiveStorageClient } from "@quixi/storage/client";
+import type { StorageClient, StorageOperations } from "@quixi/core/contracts";
+import { persistPdfDocument } from "@quixi/documents/storage";
+import { sha256 } from "@noble/hashes/sha2.js";
+import { bytesToHex } from "@noble/hashes/utils.js";
+const id = () => crypto.randomUUID();
+const urls: Record<string, URL> = {
+  "1": new URL(
+    "../../packages/documents/tests/fixtures/pages-1.pdf",
+    import.meta.url,
+  ),
+  "100": new URL(
+    "../../packages/documents/tests/fixtures/pages-100.pdf",
+    import.meta.url,
+  ),
+  "1000": new URL(
+    "../../packages/documents/tests/fixtures/pages-1000.pdf",
+    import.meta.url,
+  ),
+  image: new URL("./fixtures/image-heavy.pdf", import.meta.url),
+};
+let client: ArchiveStorageClient;
+let documentId: string;
+let activePdfWorkers = 0;
+const NativeWorker = Worker;
+globalThis.Worker = class extends NativeWorker {
+  private released = false;
+  private readonly pdf: boolean;
+  constructor(url: string | URL, options?: WorkerOptions) {
+    super(url, options);
+    this.pdf =
+      options?.name === "quixi-pdf-parser" ||
+      options?.name === "quixi-document-extractor";
+    if (this.pdf) activePdfWorkers++;
+  }
+  override terminate() {
+    if (this.pdf && !this.released) {
+      activePdfWorkers--;
+      this.released = true;
+    }
+    super.terminate();
+  }
+};
+const request = <K extends keyof StorageOperations>(
+  operation: K,
+  args: StorageOperations[K]["args"],
+) => client.request(id(), operation, args);
+async function setup(key: string) {
+  client = await openActiveStorageClient({ timeoutMs: 30000 });
+  const response = await fetch(urls[key]!);
+  if (!response.ok || !response.body) throw new Error("Fixture unavailable");
+  const length = Number(response.headers.get("content-length"));
+  if (!Number.isSafeInteger(length) || length < 1 || length > 32 * 1024 * 1024)
+    throw new Error("Invalid fixture size");
+  // Setup streams the original into OPFS and does not retain a whole-file JS buffer.
+  const upload = await request("beginBlobTransfer", {
+    operationId: id(),
+    purpose: "document",
+    expectedBytes: length,
+    expectedSha256: null,
+  });
+  const reader = response.body.getReader(),
+    hash = sha256.create();
+  let offset = 0,
+    sequence = 0,
+    maxSetupChunkBytes = 0;
+  for (;;) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    for (let cursor = 0; cursor < value.length; cursor += 65536) {
+      const bytes = value.slice(cursor, cursor + 65536);
+      const size = bytes.length;
+      hash.update(bytes);
+      maxSetupChunkBytes = Math.max(maxSetupChunkBytes, bytes.length);
+      await client.sendChunk({
+        transferId: upload.transferId,
+        sequence: sequence++,
+        offset,
+        bytes,
+        final: offset + bytes.length === length,
+      });
+      offset += size;
+    }
+  }
+  reader.releaseLock();
+  if (offset !== length) throw new Error("Source length mismatch");
+  const digest = bytesToHex(hash.digest());
+  await request("finishBlobTransfer", {
+    operationId: id(),
+    transferId: upload.transferId,
+    expectedBytes: length,
+    expectedSha256: digest,
+  });
+  const { workspaceId } = await request("archiveWorkspace", null);
+  documentId = id();
+  const attachmentId = id();
+  await request("commit", {
+    transactionId: id(),
+    expectedThreadRevisions: [],
+    stagedBlobIds: [upload.transferId],
+    mutations: [
+      {
+        version: 1,
+        operationId: id(),
+        recordedAt: 1,
+        kind: "RegisterAttachment",
+        payload: {
+          attachment: {
+            id: attachmentId,
+            availability: "available",
+            filename: `performance-${key}.pdf`,
+            mimeType: "application/pdf",
+            sizeBytes: length,
+            blobSha256: digest,
+            rawObjectId: null,
+          },
+        },
+      },
+      {
+        version: 1,
+        operationId: id(),
+        recordedAt: 1,
+        kind: "RegisterDocument",
+        payload: {
+          document: {
+            id: documentId,
+            workspaceId,
+            attachmentId,
+            title: `Performance ${key}`,
+            createdAt: null,
+            recordedAt: 1,
+            importSourceId: null,
+          },
+        },
+      },
+    ],
+  });
+  return {
+    documentId,
+    attachmentId,
+    sourceBytes: length,
+    sourceSha256: digest,
+    maxSetupChunkBytes,
+    diagnostics: await request("diagnostics", null),
+  };
+}
+function stats(values: number[]) {
+  const ordered = [...values].sort((a, b) => a - b);
+  return {
+    count: values.length,
+    totalMs: values.reduce((a, b) => a + b, 0),
+    minMs: ordered[0] ?? null,
+    p50Ms: ordered[Math.floor(ordered.length * 0.5)] ?? null,
+    p95Ms:
+      ordered[
+        Math.min(ordered.length - 1, Math.floor(ordered.length * 0.95))
+      ] ?? null,
+    maxMs: ordered.at(-1) ?? null,
+  };
+}
+async function run(cancelAfterFirst: boolean) {
+  const start = performance.now(),
+    controller = new AbortController();
+  const timings: Record<string, number[]> = {};
+  const probes: {
+    page: number;
+    dispatchedMs: number;
+    latencyMs: number;
+    publicationSettledBeforeProbe: boolean;
+  }[] = [];
+  const probeTasks: Promise<void>[] = [];
+  let currentPage = 0,
+    totalTextUTF16 = 0,
+    currentPageUTF16 = 0,
+    maxPageUTF16 = 0,
+    stageBatches = 0,
+    maxStageUTF16 = 0,
+    maxStageSpans = 0;
+  let sourceReadBytes = 0,
+    sourceChunks = 0,
+    maxSourceChunkBytes = 0;
+  let firstIndexedPageMs: number | null = null,
+    cancellationRequestedMs: number | null = null;
+  let publicationMs: number | null = null,
+    indexedThroughPage = 0;
+  const milestones: { page: number; indexedMs: number }[] = [];
+  const before = await request("diagnostics", null);
+  const foreground = () =>
+    request("readEntities", {
+      threadId: null,
+      collection: "documents",
+      page: { cursor: null, maxItems: 1, maxBytes: 8192 },
+    });
+  const baselineReads = [];
+  for (let i = 0; i < 10; i++) {
+    const t = performance.now();
+    await foreground();
+    baselineReads.push(performance.now() - t);
+  }
+  const extractionStart = performance.now();
+  const facade = Object.freeze({
+    archiveId: client.archiveId,
+    request: async (
+      requestId: string,
+      operation: keyof StorageOperations,
+      args: any,
+    ) => {
+      if (operation === "beginExtractionPage") {
+        currentPage = args.page;
+        currentPageUTF16 = 0;
+      }
+      if (operation === "stagePageText") {
+        stageBatches++;
+        maxStageUTF16 = Math.max(maxStageUTF16, args.text.length);
+        maxStageSpans = Math.max(maxStageSpans, args.spans.length);
+        currentPageUTF16 += args.text.length;
+        totalTextUTF16 += args.text.length;
+        maxPageUTF16 = Math.max(maxPageUTF16, currentPageUTF16);
+      }
+      const t = performance.now();
+      let settled = false;
+      const dispatched = client
+        .request(requestId, operation, args)
+        .finally(() => {
+          settled = true;
+        });
+      // A real foreground read is admitted immediately behind this real publication,
+      // independently of its reply. Sample one every ten pages; at most 101 probes.
+      if (
+        operation === "publishExtractionPage" &&
+        (currentPage === 1 || currentPage % 10 === 0)
+      ) {
+        const page = currentPage,
+          dispatchedMs = t - extractionStart;
+        probeTasks.push(
+          foreground().then(() => {
+            probes.push({
+              page,
+              dispatchedMs,
+              latencyMs: performance.now() - t,
+              publicationSettledBeforeProbe: settled,
+            });
+          }),
+        );
+      }
+      try {
+        return await dispatched;
+      } finally {
+        const values = (timings[operation] ??= []);
+        if (values.length >= 10000)
+          throw new Error("Performance sample admission exceeded");
+        values.push(performance.now() - t);
+        if (operation === "publishExtractionPage" && publicationMs === null)
+          publicationMs = performance.now() - extractionStart;
+      }
+    },
+    sendChunk: client.sendChunk.bind(client),
+    readChunk: async (transferId: string) => {
+      const chunk = await client.readChunk(transferId);
+      sourceChunks++;
+      sourceReadBytes += chunk.bytes.length;
+      maxSourceChunkBytes = Math.max(maxSourceChunkBytes, chunk.bytes.length);
+      return chunk;
+    },
+    acknowledgeChunk: client.acknowledgeChunk.bind(client),
+    cancel: client.cancel.bind(client),
+    onProgress: client.onProgress.bind(client),
+    onChange: client.onChange.bind(client),
+    close: async () => {},
+  }) as StorageClient & { readonly archiveId: string };
+  let failure: { code?: string; message: string } | null = null;
+  try {
+    await persistPdfDocument({
+      storage: facade,
+      documentId,
+      signal: controller.signal,
+      onProgress: (progress) => {
+        indexedThroughPage = progress.indexedThroughPage;
+        if (progress.indexedThroughPage > 0 && firstIndexedPageMs === null)
+          firstIndexedPageMs = performance.now() - extractionStart;
+        if (
+          progress.phase === "indexing" &&
+          progress.indexedThroughPage === progress.page &&
+          (progress.page === 1 || progress.page % 100 === 0) &&
+          milestones.at(-1)?.page !== progress.page
+        )
+          milestones.push({
+            page: progress.page,
+            indexedMs: performance.now() - extractionStart,
+          });
+        if (
+          cancelAfterFirst &&
+          progress.indexedThroughPage === 1 &&
+          !controller.signal.aborted
+        ) {
+          cancellationRequestedMs = performance.now() - extractionStart;
+          controller.abort();
+        }
+      },
+    });
+  } catch (error) {
+    failure = { code: (error as any)?.code, message: String(error) };
+  }
+  const totalExtractionMs = performance.now() - extractionStart;
+  await Promise.all(probeTasks);
+  const state = await request("getDocumentExtraction", { documentId });
+  const after = await request("diagnostics", null);
+  if (
+    !state ||
+    before.canonicalRecords !== after.canonicalRecords ||
+    before.syncOperations !== after.syncOperations
+  )
+    throw new Error("Extraction changed canonical history");
+  if (activePdfWorkers !== 0) throw new Error("Parser workers leaked");
+  if (
+    cancelAfterFirst
+      ? state.state !== "interrupted" ||
+        state.completedPage !== 1 ||
+        failure?.code !== "CANCELLED"
+      : state.state !== "completed" || failure !== null
+  )
+    throw new Error(
+      `Unexpected extraction outcome: ${JSON.stringify({ state, failure })}`,
+    );
+  const hits = await request("searchArchive", {
+    query: '"Quixi document fixture"',
+    mode: "exact",
+    filters: { documentIds: [documentId] },
+    page: { cursor: null, maxItems: 4, maxBytes: 16384 },
+  });
+  if (!hits.items.some((hit) => hit.position.page === 1))
+    throw new Error("First indexed page missing from actual FTS");
+  return {
+    totalExtractionMs,
+    firstIndexedPageMs,
+    firstPublicationMs: publicationMs,
+    cancellationRequestedMs,
+    cancellationDrainMs:
+      cancellationRequestedMs === null
+        ? null
+        : totalExtractionMs - cancellationRequestedMs,
+    indexedThroughPage,
+    state: state.state,
+    storedPages: state.completedPage,
+    pageCount: state.pageCount,
+    failure,
+    activePdfWorkers,
+    totalTextUTF16,
+    maxPageUTF16,
+    stageBatches,
+    maxStageUTF16,
+    maxStageSpans,
+    sourceReadBytes,
+    sourceChunks,
+    maxSourceChunkBytes,
+    milestones,
+    foregroundBaseline: stats(baselineReads),
+    foregroundAroundPublication: stats(probes.map((p) => p.latencyMs)),
+    foregroundProbes: probes,
+    requestTimings: Object.fromEntries(
+      Object.entries(timings).map(([k, v]) => [k, stats(v)]),
+    ),
+    canonicalRecords: after.canonicalRecords,
+    syncOperations: after.syncOperations,
+    measurementWallMs: performance.now() - start,
+  };
+}
+const api = { setup, run, close: () => client.close() };
+(window as unknown as { documentPerf: typeof api }).documentPerf = api;

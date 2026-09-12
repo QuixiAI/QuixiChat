@@ -1,0 +1,118 @@
+TAP version 13
+# Subtest: P0 promotion, independent joiner cancellation and one active batch
+ok 1 - P0 promotion, independent joiner cancellation and one active batch
+  ---
+  duration_ms: 6.727125
+  type: 'test'
+  ...
+# Subtest: padded token budget controls dynamic batches
+ok 2 - padded token budget controls dynamic batches
+  ---
+  duration_ms: 6.849709
+  type: 'test'
+  ...
+# Subtest: CPU dispatch yields a task before selecting the next background item
+ok 3 - CPU dispatch yields a task before selecting the next background item
+  ---
+  duration_ms: 4.449291
+  type: 'test'
+  ...
+# Subtest: pause, background drain and interactive admission
+ok 4 - pause, background drain and interactive admission
+  ---
+  duration_ms: 5.285292
+  type: 'test'
+  ...
+# Subtest: job, consumer, joiner, input, admitted byte and token bounds
+ok 5 - job, consumer, joiner, input, admitted byte and token bounds
+  ---
+  duration_ms: 0.635334
+  type: 'test'
+  ...
+# Subtest: bounded copied cache, exact UTF8 identity and role/identity separation
+ok 6 - bounded copied cache, exact UTF8 identity and role/identity separation
+  ---
+  duration_ms: 38.341875
+  type: 'test'
+  ...
+# Subtest: background aging preserves FIFO fairness below P0
+ok 7 - background aging preserves FIFO fairness below P0
+  ---
+  duration_ms: 9.707875
+  type: 'test'
+  ...
+# Subtest: GPU loss requeues on CPU; new P0 outranks the failed background batch
+ok 8 - GPU loss requeues on CPU; new P0 outranks the failed background batch
+  ---
+  duration_ms: 6.226583
+  type: 'test'
+  ...
+# Subtest: cancelled active output cannot be cached or published; shutdown is idempotent
+ok 9 - cancelled active output cannot be cached or published; shutdown is idempotent
+  ---
+  duration_ms: 4.026167
+  type: 'test'
+  ...
+# Subtest: hanging private storage retains bounded actual permits and never blocks inference
+ok 10 - hanging private storage retains bounded actual permits and never blocks inference
+  ---
+  duration_ms: 25.241041
+  type: 'test'
+  ...
+# Subtest: stored cache is copied and corrupt records/errors are misses
+ok 11 - stored cache is copied and corrupt records/errors are misses
+  ---
+  duration_ms: 6.331708
+  type: 'test'
+  ...
+# Subtest: snapshot drain does not wait for later submissions; execution failure disables backend
+ok 12 - snapshot drain does not wait for later submissions; execution failure disables backend
+  ---
+  duration_ms: 2.710166
+  type: 'test'
+  ...
+# Subtest: document throughput includes task yields and owner ETA is explicitly scoped
+ok 13 - document throughput includes task yields and owner ETA is explicitly scoped
+  ---
+  duration_ms: 2.61025
+  type: 'test'
+  ...
+# Subtest: nonfinite/nonunit model output is never published or cached
+ok 14 - nonfinite/nonunit model output is never published or cached
+  ---
+  duration_ms: 0.425917
+  type: 'test'
+  ...
+# Subtest: cancellation during asynchronous fallback disposes the late CPU instance
+ok 15 - cancellation during asynchronous fallback disposes the late CPU instance
+  ---
+  duration_ms: 3.6975
+  type: 'test'
+  ...
+# Subtest: sustained backfill and duplicate flood stay within every admission/cache bound
+ok 16 - sustained backfill and duplicate flood stay within every admission/cache bound
+  ---
+  duration_ms: 92.0155
+  type: 'test'
+  ...
+# Subtest: shutdown drain finishes paused work and rejects new admission without losing outputs
+ok 17 - shutdown drain finishes paused work and rejects new admission without losing outputs
+  ---
+  duration_ms: 5.286209
+  type: 'test'
+  ...
+# Subtest: cancelled cache lookup cannot publish its late hit and drain observers are bounded
+ok 18 - cancelled cache lookup cannot publish its late hit and drain observers are bounded
+  ---
+  duration_ms: 2.746834
+  type: 'test'
+  ...
+1..18
+# tests 18
+# suites 0
+# pass 18
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 310.295875

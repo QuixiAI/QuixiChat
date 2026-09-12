@@ -1,0 +1,390 @@
+
+> quixi@0.0.1 test:storage:canonical
+> tsc --noEmit -p packages/storage/tests/canonical/tsconfig.json && node --experimental-transform-types --test packages/storage/tests/canonical/*.test.ts
+
+TAP version 13
+# (node:4470) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# sqlite3_step() rc= 1555 SQLITE_CONSTRAINT_PRIMARYKEY SQL = INSERT INTO quixi_import_work(run_id,group_key,key,ordinal,parent_key,byte_start,byte_end,payload) VALUES(?,?,?,?,?,?,?,?)
+# sqlite3_step() rc= 13 SQLITE_FULL SQL = INSERT INTO quixi_import_work(run_id,group_key,key,ordinal,parent_key,byte_start,byte_end,payload) VALUES(?,?,?,?,?,?,?,?)
+# sqlite3_step() rc= 1 SQLITE_ERROR SQL = ROLLBACK
+# sqlite3_step() rc= 1811 SQLITE_CONSTRAINT_TRIGGER SQL = INSERT INTO quixi_blob_operations VALUES(?,?,?)
+# sqlite3_step() rc= 1811 SQLITE_CONSTRAINT_TRIGGER SQL = INSERT INTO quixi_blob_operations VALUES(?,?,?)
+# Subtest: run identity and random UUID allocations remain stable across unknown replies and database reopen
+ok 1 - run identity and random UUID allocations remain stable across unknown replies and database reopen
+  ---
+  duration_ms: 50.452459
+  type: 'test'
+  ...
+# Subtest: arbitrary input order resolves through bounded ready work with exact parent results and immutable staging
+ok 2 - arbitrary input order resolves through bounded ready work with exact parent results and immutable staging
+  ---
+  duration_ms: 33.267375
+  type: 'test'
+  ...
+# Subtest: missing parents and dependency cycles report blocked work, while pause retains restartable scratch
+ok 3 - missing parents and dependency cycles report blocked work, while pause retains restartable scratch
+  ---
+  duration_ms: 17.310167
+  type: 'test'
+  ...
+# Subtest: SQLite allocation denial rolls back scratch and checkpoint before same-ID retry
+ok 4 - SQLite allocation denial rolls back scratch and checkpoint before same-ID retry
+  ---
+  duration_ms: 21.272584
+  type: 'test'
+  ...
+# Subtest: 10,000 reverse-ordered parent dependencies have bounded ready results and no in-memory thread graph
+ok 5 - 10,000 reverse-ordered parent dependencies have bounded ready results and no in-memory thread graph
+  ---
+  duration_ms: 2907.1535
+  type: 'test'
+  ...
+# Subtest: control status recovers exact acknowledgments and operation IDs stay fenced across work, blob and normalized journals
+ok 6 - control status recovers exact acknowledgments and operation IDs stay fenced across work, blob and normalized journals
+  ---
+  duration_ms: 5.265917
+  type: 'test'
+  ...
+# (node:4471) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# sqlite3_step() rc= 2067 SQLITE_CONSTRAINT_UNIQUE SQL = INSERT INTO quixi_import_records(import_id,ordinal,collection,id,payload,operation_id,recorded_at,identity,sync_payload,affects) VALUES(?,?,?,?,?,?,?,?,?,?)
+# sqlite3_step() rc= 1811 SQLITE_CONSTRAINT_TRIGGER SQL = INSERT INTO quixi_records(collection,id,payload) VALUES(?,?,?)
+# sqlite3_step() rc= 1555 SQLITE_CONSTRAINT_PRIMARYKEY SQL = INSERT INTO quixi_import_record_identities VALUES(?,?,?)
+# sqlite3_step() rc= 13 SQLITE_FULL SQL = INSERT INTO quixi_records(collection,id,payload) SELECT collection,id,payload FROM quixi_import_records WHERE import_id=? ORDER BY ordinal
+# Subtest: provider-shaped normalized graphs stay hidden through staging/restart and publish with grouped sync coverage
+ok 7 - provider-shaped normalized graphs stay hidden through staging/restart and publish with grouped sync coverage
+  ---
+  duration_ms: 169.382833
+  type: 'test'
+  ...
+# Subtest: sealed 2,000-part message spans bounded controls, validation and ordered pages without partial visibility
+ok 8 - sealed 2,000-part message spans bounded controls, validation and ordered pages without partial visibility
+  ---
+  duration_ms: 723.50925
+  type: 'test'
+  ...
+# Subtest: stage operations, global IDs and native source mappings are fenced across overlapping jobs and normal commits
+ok 9 - stage operations, global IDs and native source mappings are fenced across overlapping jobs and normal commits
+  ---
+  duration_ms: 10.457584
+  type: 'test'
+  ...
+# Subtest: missing references, ancestry/edit cycles and incomplete messages cannot become visible
+ok 10 - missing references, ancestry/edit cycles and incomplete messages cannot become visible
+  ---
+  duration_ms: 14.878417
+  type: 'test'
+  ...
+# Subtest: publication rollback under SQLite allocation denial preserves staged work and retries the same operation
+ok 11 - publication rollback under SQLite allocation denial preserves staged work and retries the same operation
+  ---
+  duration_ms: 36.327416
+  type: 'test'
+  ...
+# Subtest: restart and concurrent live commits require fresh bounded validation, while extension preserves user state
+ok 12 - restart and concurrent live commits require fresh bounded validation, while extension preserves user state
+  ---
+  duration_ms: 11.015417
+  type: 'test'
+  ...
+# Subtest: bounded prevalidation iterator and durable blob transfer cleanup survive restart, cancellation and revoked evidence
+ok 13 - bounded prevalidation iterator and durable blob transfer cleanup survive restart, cancellation and revoked evidence
+  ---
+  duration_ms: 9.607125
+  type: 'test'
+  ...
+# Subtest: 50,000-message arbitrary-order import uses bounded JS pages and one complete SQL publication
+ok 14 - 50,000-message arbitrary-order import uses bounded JS pages and one complete SQL publication
+  ---
+  duration_ms: 17709.11525
+  type: 'test'
+  ...
+# stage 50k: 4319ms
+# stage + validate 50k: 15872ms
+# stage + validate + publish 50k: 17218ms
+# (node:4472) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: pinned WASM SQL retains provider branches/provenance/raw references across close/reopen
+ok 15 - pinned WASM SQL retains provider branches/provenance/raw references across close/reopen
+  ---
+  duration_ms: 169.858542
+  type: 'test'
+  ...
+# Subtest: operation and transaction retries preserve results and reject payload conflicts before revisions
+ok 16 - operation and transaction retries preserve results and reject payload conflicts before revisions
+  ---
+  duration_ms: 41.120791
+  type: 'test'
+  ...
+# Subtest: injected precommit failure and a later invalid command roll back records, edges, operations and transaction result
+ok 17 - injected precommit failure and a later invalid command roll back records, edges, operations and transaction result
+  ---
+  duration_ms: 104.417292
+  type: 'test'
+  ...
+# Subtest: every canonical kind persists actual record effects and exactly one matching sync operation
+ok 18 - every canonical kind persists actual record effects and exactly one matching sync operation
+  ---
+  duration_ms: 52.942083
+  type: 'test'
+  ...
+# sqlite3_step() rc= 2067 SQLITE_CONSTRAINT_UNIQUE SQL = INSERT INTO quixi_records(collection,id,payload) VALUES(?,?,?)
+# Subtest: provider scoped identity uniqueness rejects overlapping imports without partial observations
+ok 19 - provider scoped identity uniqueness rejects overlapping imports without partial observations
+  ---
+  duration_ms: 15.457709
+  type: 'test'
+  ...
+# Subtest: ordered parts and keyset entity pages obey byte/item budgets and scope cursors
+ok 20 - ordered parts and keyset entity pages obey byte/item budgets and scope cursors
+  ---
+  duration_ms: 19.666083
+  type: 'test'
+  ...
+# sqlite3_step() rc= 275 SQLITE_CONSTRAINT_CHECK SQL = UPDATE quixi_blob_catalog SET availability='invalid'
+# Subtest: only confirmed lost producers recover as partial; ordinary reopen preserves live streaming
+ok 21 - only confirmed lost producers recover as partial; ordinary reopen preserves live streaming
+  ---
+  duration_ms: 22.978458
+  type: 'test'
+  ...
+# Subtest: migration upgrades and injected failures preserve the previous valid schema and data
+ok 22 - migration upgrades and injected failures preserve the previous valid schema and data
+  ---
+  duration_ms: 6.2825
+  type: 'test'
+  ...
+# sqlite3_step() rc= 1811 SQLITE_CONSTRAINT_TRIGGER SQL = UPDATE quixi_records SET payload=? WHERE collection='parts' AND id=?
+# sqlite3_step() rc= 1811 SQLITE_CONSTRAINT_TRIGGER SQL = UPDATE quixi_records SET payload=? WHERE collection='parts' AND id=?
+# sqlite3_step() rc= 1811 SQLITE_CONSTRAINT_TRIGGER SQL = UPDATE quixi_records SET payload=? WHERE collection='parts' AND id=?
+# sqlite3_step() rc= 1811 SQLITE_CONSTRAINT_TRIGGER SQL = UPDATE quixi_records SET payload=? WHERE collection='parts' AND id=?
+# sqlite3_step() rc= 1811 SQLITE_CONSTRAINT_TRIGGER SQL = UPDATE quixi_records SET payload=? WHERE collection='parts' AND id=?
+# sqlite3_step() rc= 1811 SQLITE_CONSTRAINT_TRIGGER SQL = UPDATE quixi_records SET payload=? WHERE collection='parts' AND id=?
+# sqlite3_step() rc= 1811 SQLITE_CONSTRAINT_TRIGGER SQL = UPDATE quixi_records SET payload=? WHERE collection='parts' AND id=?
+# Subtest: migration 8 preserves append prefixes across transport records and closes text at semantic barriers
+ok 23 - migration 8 preserves append prefixes across transport records and closes text at semantic barriers
+  ---
+  duration_ms: 55.59275
+  type: 'test'
+  ...
+# sqlite3_step() rc= 1811 SQLITE_CONSTRAINT_TRIGGER SQL = UPDATE quixi_records SET payload=?3 WHERE collection=?1 AND id=?2
+# Subtest: schema 7 upgrade retains canonical history and old migration identities before enabling streaming text
+ok 24 - schema 7 upgrade retains canonical history and old migration identities before enabling streaming text
+  ---
+  duration_ms: 23.318458
+  type: 'test'
+  ...
+# Subtest: long text references verified blobs and streaming grows ordered parts without growing a message manifest
+ok 25 - long text references verified blobs and streaming grows ordered parts without growing a message manifest
+  ---
+  duration_ms: 163.361291
+  type: 'test'
+  ...
+# Subtest: a 50,000-message thread has a bounded root tombstone and cannot grow after deletion
+ok 26 - a 50,000-message thread has a bounded root tombstone and cannot grow after deletion
+  ---
+  duration_ms: 9532.561292
+  type: 'test'
+  ...
+# Subtest: sync pages follow commit sequence, pin a high-water mark and resume later writes independently of UUID sorting
+ok 27 - sync pages follow commit sequence, pin a high-water mark and resume later writes independently of UUID sorting
+  ---
+  duration_ms: 14.930167
+  type: 'test'
+  ...
+# sqlite3_step() rc= 1811 SQLITE_CONSTRAINT_TRIGGER SQL = UPDATE quixi_records SET payload=json_set(payload,'$.parentId',NULL) WHERE collection='messages' AND id=?
+# sqlite3_step() rc= 1811 SQLITE_CONSTRAINT_TRIGGER SQL = UPDATE quixi_records SET payload=json_set(payload,'$.data.text','replaced') WHERE collection='parts' AND id=?
+# sqlite3_step() rc= 1811 SQLITE_CONSTRAINT_TRIGGER SQL = UPDATE quixi_records SET payload=json_set(payload,'$.status','failed') WHERE collection='generations' AND id=?
+# Subtest: SQL guards immutable message identity, sealed text, terminal attempts and committed operation coverage
+ok 28 - SQL guards immutable message identity, sealed text, terminal attempts and committed operation coverage
+  ---
+  duration_ms: 15.879708
+  type: 'test'
+  ...
+# Subtest: live raw capture requires verified bytes and sync coverage without inventing an import source
+ok 29 - live raw capture requires verified bytes and sync coverage without inventing an import source
+  ---
+  duration_ms: 3.912875
+  type: 'test'
+  ...
+# Subtest: schema 9 writer barrier commits only with its ledger and preserves all existing history
+ok 30 - schema 9 writer barrier commits only with its ledger and preserves all existing history
+  ---
+  duration_ms: 15.570042
+  type: 'test'
+  ...
+# Subtest: attachment exclusions commit with their event, replay once, reject stale and invalid references, and survive reopen
+ok 31 - attachment exclusions commit with their event, replay once, reject stale and invalid references, and survive reopen
+  ---
+  duration_ms: 17.457792
+  type: 'test'
+  ...
+# Subtest: schema 10 and 11 upgrade without losing history and each older migration ceiling refuses schema 12
+ok 32 - schema 10 and 11 upgrade without losing history and each older migration ceiling refuses schema 12
+  ---
+  duration_ms: 26.87625
+  type: 'test'
+  ...
+# Subtest: summary attempt and immutable provenance commit together, apply/event replay exactly and survive reopen
+ok 33 - summary attempt and immutable provenance commit together, apply/event replay exactly and survive reopen
+  ---
+  duration_ms: 22.677916
+  type: 'test'
+  ...
+# sqlite3_step() rc= 2067 SQLITE_CONSTRAINT_UNIQUE SQL = INSERT INTO quixi_records(collection,id,payload) VALUES(?,?,?)
+# Subtest: summary registration rejects stale revision, mismatched fingerprint, wrong branch and duplicate provenance atomically
+ok 34 - summary registration rejects stale revision, mismatched fingerprint, wrong branch and duplicate provenance atomically
+  ---
+  duration_ms: 19.769584
+  type: 'test'
+  ...
+# Subtest: summary application rejects partial, stopped, streaming, empty, nontext, unknown artifacts and oversized UTF-8 output
+ok 35 - summary application rejects partial, stopped, streaming, empty, nontext, unknown artifacts and oversized UTF-8 output
+  ---
+  duration_ms: 117.529333
+  type: 'test'
+  ...
+# Subtest: summary bad reviewed digest and stale source selection roll back audit event and context; proposals cannot be chat branches
+ok 36 - summary bad reviewed digest and stale source selection roll back audit event and context; proposals cannot be chat branches
+  ---
+  duration_ms: 19.454291
+  type: 'test'
+  ...
+# Subtest: successive summaries advance the boundary and fingerprint attachment changes even without a thread revision
+ok 37 - successive summaries advance the boundary and fingerprint attachment changes even without a thread revision
+  ---
+  duration_ms: 22.489833
+  type: 'test'
+  ...
+# Subtest: summary apply and clear require matching audit events and revision in the same atomic batch
+ok 38 - summary apply and clear require matching audit events and revision in the same atomic batch
+  ---
+  duration_ms: 25.940542
+  type: 'test'
+  ...
+# Subtest: summary outputs remain searchable with explicit proposal title and context labels
+ok 39 - summary outputs remain searchable with explicit proposal title and context labels
+  ---
+  duration_ms: 38.097083
+  type: 'test'
+  ...
+# Subtest: thread usage separates summary attempts and tokens/cost while inclusive totals retain ordinary attempts
+ok 40 - thread usage separates summary attempts and tokens/cost while inclusive totals retain ordinary attempts
+  ---
+  duration_ms: 25.8325
+  type: 'test'
+  ...
+# Subtest: fresh context branch atomically preserves source history, settings and exclusions across retry and reopen
+ok 41 - fresh context branch atomically preserves source history, settings and exclusions across retry and reopen
+  ---
+  duration_ms: 20.321292
+  type: 'test'
+  ...
+# Subtest: fresh branch rejects stale, unaudited, retargeted or destructive batches without any writes
+ok 42 - fresh branch rejects stale, unaudited, retargeted or destructive batches without any writes
+  ---
+  duration_ms: 21.545125
+  type: 'test'
+  ...
+# Subtest: fresh branch clears only applied summary with matching audit while preserving proposal and exclusions
+ok 43 - fresh branch clears only applied summary with matching audit while preserving proposal and exclusions
+  ---
+  duration_ms: 28.694875
+  type: 'test'
+  ...
+# Subtest: fresh branch cannot race a live generation on a different selected branch or a summary producer
+ok 44 - fresh branch cannot race a live generation on a different selected branch or a summary producer
+  ---
+  duration_ms: 35.052375
+  type: 'test'
+  ...
+# (node:4473) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: routing aliases persist independently, reject stale/duplicate writes and reopen exactly
+ok 45 - routing aliases persist independently, reject stale/duplicate writes and reopen exactly
+  ---
+  duration_ms: 45.164708
+  type: 'test'
+  ...
+# Subtest: unsupported alias data is preserved and an interrupted registry update rolls back
+ok 46 - unsupported alias data is preserved and an interrupted registry update rolls back
+  ---
+  duration_ms: 5.603458
+  type: 'test'
+  ...
+# Subtest: alias application is an atomic canonical copy; edits and deletion never change it
+ok 47 - alias application is an atomic canonical copy; edits and deletion never change it
+  ---
+  duration_ms: 26.226292
+  type: 'test'
+  ...
+# Subtest: local preferences default without writes, reject stale edits and survive reopening the database
+ok 48 - local preferences default without writes, reject stale edits and survive reopening the database
+  ---
+  duration_ms: 6.398167
+  type: 'test'
+  ...
+# Subtest: closed legacy preference rows normalize on read without rewriting and upgrade only on explicit edit
+ok 49 - closed legacy preference rows normalize on read without rewriting and upgrade only on explicit edit
+  ---
+  duration_ms: 6.323875
+  type: 'test'
+  ...
+# Subtest: local preferences preserve unsupported rows and roll back interrupted writes
+ok 50 - local preferences preserve unsupported rows and roll back interrupted writes
+  ---
+  duration_ms: 7.151958
+  type: 'test'
+  ...
+# Subtest: conditional preference update refuses a changed SQL revision without overwriting the competing value
+ok 51 - conditional preference update refuses a changed SQL revision without overwriting the competing value
+  ---
+  duration_ms: 5.300083
+  type: 'test'
+  ...
+# Subtest: invalid interaction writes refuse before any database access
+ok 52 - invalid interaction writes refuse before any database access
+  ---
+  duration_ms: 0.10425
+  type: 'test'
+  ...
+# Subtest: preference boundary refuses malformed revisions, values and arbitrary fields
+ok 53 - preference boundary refuses malformed revisions, values and arbitrary fields
+  ---
+  duration_ms: 0.246167
+  type: 'test'
+  ...
+# Subtest: library sorts pins/recency, filters literal titles/archive, bounds metadata and rejects stale pages
+ok 54 - library sorts pins/recency, filters literal titles/archive, bounds metadata and rejects stale pages
+  ---
+  duration_ms: 17.935709
+  type: 'test'
+  ...
+# Subtest: deep paths page backwards without loading siblings, preserve ordering and reject unrelated cursor/leaf
+ok 55 - deep paths page backwards without loading siblings, preserve ordering and reject unrelated cursor/leaf
+  ---
+  duration_ms: 82.09625
+  type: 'test'
+  ...
+# Subtest: deleted subtrees and whole threads disappear from views while retained siblings stay readable
+ok 56 - deleted subtrees and whole threads disappear from views while retained siblings stay readable
+  ---
+  duration_ms: 16.836667
+  type: 'test'
+  ...
+# Subtest: thread view sums attempt usage in SQL, keeping unreported values out and one currency for estimates
+ok 57 - thread view sums attempt usage in SQL, keeping unreported values out and one currency for estimates
+  ---
+  duration_ms: 15.406208
+  type: 'test'
+  ...
+1..57
+# tests 57
+# suites 0
+# pass 57
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 18910.188417

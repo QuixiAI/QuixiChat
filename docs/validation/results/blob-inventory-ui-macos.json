@@ -1,0 +1,134 @@
+{
+  "status": "passed",
+  "startedAt": "2026-09-10T20:39:30.897Z",
+  "selectedEngines": [
+    "chromium",
+    "webkit"
+  ],
+  "environment": {
+    "platform": "darwin",
+    "release": "25.6.0",
+    "arch": "arm64",
+    "node": "v22.23.1"
+  },
+  "scope": "Production AppRoot/storage-health controller and panel with real isolated OPFS/SQLite workers. Test-only corruption helper creates synthetic fixtures before mounting. The explicit owner-loss case replaces its real isolated client; worker results are never mocked. No file or canonical cleanup is offered by the product.",
+  "hosts": [
+    {
+      "name": "chromium",
+      "status": "passed",
+      "checks": [
+        "Opening Storage health performs no inventory work; keyboard start and stop cancel a real bounded worker scan without showing partial findings",
+        "Navigating away and back retains the same active scan and completes without automatically starting another scan",
+        "All seven finding categories have counts and plain-language guidance; managed identifiers reveal no synthetic private names or original content and no deletion control exists",
+        "Keyboard pagination replaces one bounded page and returns focus to the results heading; First findings returns to the first page",
+        "Long managed digests wrap within the narrow layout without horizontal page overflow",
+        "Real scan, cancellation and pagination leave canonical rows, sync/blob operation records and every original/staged/unrecognized fixture byte unchanged",
+        "A real canonical change immediately hides stale findings; replacing the real storage owner also discards unavailable results and both require an explicit successful new scan"
+      ],
+      "requestBounds": {
+        "advances": 6,
+        "maxAdvanceItems": 64,
+        "findingPages": 3,
+        "maxPageItems": 32,
+        "maxPageBytes": 16384
+      },
+      "baseline": {
+        "canonicalSha256": "3bd23130f43dcf3fb756439851e1c2771a4534d63af429234f954e5faa9d91ed",
+        "operationsSha256": "3aa8e054467dc4e3e2e695ad568771cc9bbb344e30db5b40a17f3e05ffcab191",
+        "blobOperationsSha256": "7a152df97234e60dcc947f4712f67f44f1fd5391ab494bb246b14804c3875e95",
+        "blobCatalogSha256": "5155ee5f09fdeb05a961b57e53bf52885120709f7a16bc81d2395f0f13e05106",
+        "blobTransfersSha256": "df8123986346c13e2789f1277d65776fb2f04bc41d747841abdc7748509431c3",
+        "blobsSha256": "330856b327db737487e1f8cd82371de8229d789a3228677cce41e4f2c6b0a6c5",
+        "canonicalRecords": 106,
+        "syncOperations": 103,
+        "physicalFiles": 112,
+        "sqliteTemporaryStore": 1,
+        "sqliteTemporaryCacheKiB": -1024
+      },
+      "after": {
+        "canonicalSha256": "3bd23130f43dcf3fb756439851e1c2771a4534d63af429234f954e5faa9d91ed",
+        "operationsSha256": "3aa8e054467dc4e3e2e695ad568771cc9bbb344e30db5b40a17f3e05ffcab191",
+        "blobOperationsSha256": "7a152df97234e60dcc947f4712f67f44f1fd5391ab494bb246b14804c3875e95",
+        "blobCatalogSha256": "5155ee5f09fdeb05a961b57e53bf52885120709f7a16bc81d2395f0f13e05106",
+        "blobTransfersSha256": "df8123986346c13e2789f1277d65776fb2f04bc41d747841abdc7748509431c3",
+        "blobsSha256": "330856b327db737487e1f8cd82371de8229d789a3228677cce41e4f2c6b0a6c5",
+        "canonicalRecords": 106,
+        "syncOperations": 103,
+        "physicalFiles": 112,
+        "sqliteTemporaryStore": 1,
+        "sqliteTemporaryCacheKiB": -1024
+      }
+    },
+    {
+      "name": "webkit",
+      "status": "passed",
+      "checks": [
+        "Opening Storage health performs no inventory work; keyboard start and stop cancel a real bounded worker scan without showing partial findings",
+        "Navigating away and back retains the same active scan and completes without automatically starting another scan",
+        "All seven finding categories have counts and plain-language guidance; managed identifiers reveal no synthetic private names or original content and no deletion control exists",
+        "Keyboard pagination replaces one bounded page and returns focus to the results heading; First findings returns to the first page",
+        "Long managed digests wrap within the narrow layout without horizontal page overflow",
+        "Real scan, cancellation and pagination leave canonical rows, sync/blob operation records and every original/staged/unrecognized fixture byte unchanged",
+        "A real canonical change immediately hides stale findings; replacing the real storage owner also discards unavailable results and both require an explicit successful new scan"
+      ],
+      "requestBounds": {
+        "advances": 6,
+        "maxAdvanceItems": 64,
+        "findingPages": 3,
+        "maxPageItems": 32,
+        "maxPageBytes": 16384
+      },
+      "baseline": {
+        "canonicalSha256": "2e3bd7d2b914fb6dfb874eef646cf75134d03c48ed74cce0471f7c097c44b77f",
+        "operationsSha256": "7faba3e159522885a41e7f8343436a1e243e6d806969e8b5f7e0a2e5f3a37ba0",
+        "blobOperationsSha256": "6db6e1f9fb1b72e94b10ed9d7b30f4dd5dda9e795d5b485ecffe761106bf2f10",
+        "blobCatalogSha256": "5155ee5f09fdeb05a961b57e53bf52885120709f7a16bc81d2395f0f13e05106",
+        "blobTransfersSha256": "82ed3e478df645fe06252b4fb6ce819785bd6b1a8f5aadf3955398082f07389a",
+        "blobsSha256": "a62920af851670886737cab17ff20a37a3e99821faba241815f0d8fbff1385fe",
+        "canonicalRecords": 106,
+        "syncOperations": 103,
+        "physicalFiles": 112,
+        "sqliteTemporaryStore": 1,
+        "sqliteTemporaryCacheKiB": -1024
+      },
+      "after": {
+        "canonicalSha256": "2e3bd7d2b914fb6dfb874eef646cf75134d03c48ed74cce0471f7c097c44b77f",
+        "operationsSha256": "7faba3e159522885a41e7f8343436a1e243e6d806969e8b5f7e0a2e5f3a37ba0",
+        "blobOperationsSha256": "6db6e1f9fb1b72e94b10ed9d7b30f4dd5dda9e795d5b485ecffe761106bf2f10",
+        "blobCatalogSha256": "5155ee5f09fdeb05a961b57e53bf52885120709f7a16bc81d2395f0f13e05106",
+        "blobTransfersSha256": "82ed3e478df645fe06252b4fb6ce819785bd6b1a8f5aadf3955398082f07389a",
+        "blobsSha256": "a62920af851670886737cab17ff20a37a3e99821faba241815f0d8fbff1385fe",
+        "canonicalRecords": 106,
+        "syncOperations": 103,
+        "physicalFiles": 112,
+        "sqliteTemporaryStore": 1,
+        "sqliteTemporaryCacheKiB": -1024
+      }
+    }
+  ],
+  "sourceSha256": {
+    "packages/app/src/AppRoot.tsx": "e60257f2c10c1a3fa54530b4f0ff2def6478fff669954f650c81ff05b48671f0",
+    "packages/app/src/features/diagnostics/controller.ts": "b1e1e57b6f21b2c1f533df584c72b6e858a8f7d5319eab65fc09a679a7154165",
+    "packages/app/src/features/diagnostics/StorageHealthPanel.tsx": "25252c7c0c105425bef82ee99f5592fda31319138bab5d4cb2d84452baf26509",
+    "packages/app/src/features/diagnostics/diagnostics.css": "ab06e394a92c8f4aa469802ff9dc0c090f34634025611edc1d9d34e1a68c8cba",
+    "packages/app/tests/browser/diagnostics/index.ts": "1d47bc1e052f07d4156d1f4caeac4a7afd5506217e95dfb91a80f2bf900f8f3f",
+    "packages/app/tests/browser/diagnostics/index.html": "964a2f785ece6812fb00fc852f50ecbf83917373231107c5b5b439d6d432f13d",
+    "packages/app/tests/browser/diagnostics/run.mjs": "b062add869118714c883d3b7593acc2a471b86def9b6837d2c9f3e0e6d9f604c",
+    "packages/core/src/contracts/blob-inventory.ts": "ca8fde78ea5dcc13d36264f806e22f5437cf2545dd5ca51f1273e1aefac3a886",
+    "packages/core/src/contracts/storage.ts": "6f407bf21cb03f1fbe306b56bf87f990e93d029286cf0d2acec7984d313b4416",
+    "packages/storage/tests/blob-inventory/fixture.ts": "9b4fe35dfa59fa51af811cf10b2d480296b76377c32429c3c7778b2861c41031",
+    "packages/storage/tests/blob-inventory/fixture-worker.ts": "14887573b099b0c7319a38930d811c1536a759347a4e7c5d7297365a5219a205",
+    "packages/storage/tests/isolated-client.ts": "72b2ace2196bfc8f662b8108d30972da9fe4cf4cf5b4f18714449f08746a4776",
+    "packages/storage/tests/isolated-worker.ts": "d05ffe2db78e7808bf7a99884477d11c36b762ff9ec1a4cdf80ed6bf491308bd",
+    "packages/storage/src/worker/archive-runtime.ts": "647e0c309c8defd42bb6e0f2a902e98d0a356bde1f75521a512fb23dd1453a2e",
+    "packages/storage/src/worker/archive-database.ts": "ff01dd410e9de32b941a10f31c92738d22d4cb2bdcb9587bbb47eb85af411dbb",
+    "packages/storage/src/worker/blob-inventory.ts": "525c798ec8ee0fd38c68ead55c321897cb23e9343f53aa1c1cb91bfd30f1d418",
+    "packages/storage/src/worker/blobs.ts": "6cbd433df3837b7881cddb3975fcc649891a3c20d1a204e91080e660f104631d",
+    "packages/storage/src/worker/blob-catalog.ts": "751af6f06d6a175284c2a39f0dd8c9522e18f865c0d8b8be283623a41524de8a",
+    "tooling/browser-engines.mjs": "136f16e63e905ae4c8305c7adedfce2411eff13b04f914054f8fb718155d0df1",
+    "package-lock.json": "aadb456e2a567a2b91cbb81a502650ebac93541f0a59d54035bdde2cacd97672"
+  },
+  "changedSources": [],
+  "sourceStable": true,
+  "finishedAt": "2026-09-10T20:39:39.783Z"
+}

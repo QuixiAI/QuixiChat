@@ -1,0 +1,90 @@
+{
+  "startedAt": "2026-09-12T06:36:06.235Z",
+  "completedAt": "2026-09-12T06:36:07.125Z",
+  "node": "v22.23.1",
+  "platform": "darwin",
+  "arch": "arm64",
+  "status": "passed",
+  "exitCode": 0,
+  "signal": null,
+  "tests": 10,
+  "passed": 10,
+  "failed": 0,
+  "canonicalMigrations": [
+    {
+      "version": 1,
+      "name": "canonical_records_and_atomic_operations",
+      "checksum": "16724a690f441af0162c0b49f3256bac152fb98a31f1a99c6ef40076d7dfd7d5"
+    },
+    {
+      "version": 2,
+      "name": "source_and_generation_uniqueness",
+      "checksum": "bba4a045a82d42714d43d9ee709412eab759da65122b7abb244186b6a2d9b24f"
+    },
+    {
+      "version": 3,
+      "name": "verified_blob_catalog_and_transfer_recovery",
+      "checksum": "705b844874dece6b5cc1881cb45ccc3b2907a2719036283fe165a0a07f6fe14e"
+    },
+    {
+      "version": 4,
+      "name": "hidden_normalized_import_groups",
+      "checksum": "9988edddaf4483b380ab33f1017f141304484b1bc1662e74fb1c2de75ca2467e"
+    },
+    {
+      "version": 5,
+      "name": "bounded_importer_work_and_uuid_checkpoints",
+      "checksum": "cd43d1aeb7f9fdf33c6efd0dcb3b87d00eef9169fe002c81ee6856750a49468b"
+    },
+    {
+      "version": 6,
+      "name": "generation_producer_fences",
+      "checksum": "32e6035cd4ea8cabe3d327772c0d291de08a1ae24c2a23b360dc6661c6315c11"
+    },
+    {
+      "version": 7,
+      "name": "local_workspace_and_message_recency",
+      "checksum": "da34a61082c74eae78301b25b83cc8525addfb6df1b5e450c33c2a63ec974151"
+    },
+    {
+      "version": 8,
+      "name": "streaming_text_across_transport_provenance",
+      "checksum": "9c6a87fde402ff33d164ee7db92b34088ab05d458686670ee3d317dc24ca1263"
+    },
+    {
+      "version": 9,
+      "name": "mandatory_archive_selection_protocol",
+      "checksum": "d124a56c86b6b42a8429114e253030b1cbc88e774ec8ff3e44cc9105dd5b6dab"
+    },
+    {
+      "version": 10,
+      "name": "stable_local_operation_claims",
+      "checksum": "3f20f0a536ee783777602dda90a3f575cf17ddfe6bba277dc9cfa740e413770b"
+    },
+    {
+      "version": 11,
+      "name": "reviewed_context_attachment_exclusions",
+      "checksum": "5dcdae7dd8c7a054cc3a1cbe4e2bd19f0890e7c213b90b30f3457c43667e75f3"
+    },
+    {
+      "version": 12,
+      "name": "reviewed_summary_proposal_provenance",
+      "checksum": "231dc27fdff21cd5a8c48722f34af18df2b939978f17be62de19dcd24c0427e8"
+    }
+  ],
+  "sourceHashes": {
+    "packages/core/src/contracts/extraction.ts": "b05bcd2ef02bd60694bff7cc5d83fccbd10e2584f1ba9edf17505241c209b483",
+    "packages/storage/src/worker/extraction/index.ts": "e0175db4d0a20b182d7c31bda46e95dd5eb15e82c60e67cf09ad6c4d5779b92d",
+    "packages/storage/src/worker/extraction/schema.ts": "e08905c3ed353f8bfbbef90f5d768126eac5713e471c4ceec283e62a99961487",
+    "packages/storage/src/worker/search/index.ts": "ae5d113561d6373d7ad8070388c2afdf532579eaede4ddeae6388efed78e3334",
+    "packages/storage/src/worker/search/schema.ts": "85de7888960e84f98f107650e0975080099e1b7f55f748145aaaebdef3d188e7",
+    "packages/storage/src/worker/search/sources.ts": "c3b55d79b0196092fa9cbe2a5bfc97f10903974dede99bbef4419f5bcaa6aebf",
+    "packages/storage/src/worker/search/extraction.ts": "ba85bc1954ce553a3268e1b924f8eeed879f0b1dad694108090de77301096033",
+    "packages/storage/tests/extraction-search/fixture.ts": "c4696c106bd9cfb7673d1a295b7c63141c951e966d7d79a12f727af5f4bc7ac5",
+    "packages/storage/tests/extraction-search/repository.test.ts": "df6bb1d3db490026252c7c02e2ba9a624c72971a248413a5901814b2184fcdd9",
+    "packages/storage/tests/extraction-search/run.mjs": "424213d5386d5f7514c627e0c29046d53051b5a4b87dcc7b8e9a06f2d74dc1bf",
+    "packages/storage/sqlite/dist/sqlite3.wasm": "dd7c22431a3b8ad51ab5e6ed91065593574c34c5959d2efdef2f17484eedcb2c"
+  },
+  "metrics": [],
+  "evidenceScope": "Pinned SQLite WASM in Node memory VFS with real canonical/extraction/search repositories, transactions, SQLite close/reopen and FTS5. Original blob availability is an injected proof check; no PDF parser runs here. No production StorageClient, OPFS, browser-owner termination or app integration claim."
+}

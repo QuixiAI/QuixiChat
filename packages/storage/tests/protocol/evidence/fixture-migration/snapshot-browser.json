@@ -1,0 +1,271 @@
+{
+  "selectedEngines": [
+    "chromium",
+    "webkit"
+  ],
+  "status": "passed",
+  "startedAt": "2026-09-09T01:45:16.077Z",
+  "context": "fresh isolated persistent profiles",
+  "hosts": [
+    {
+      "name": "chromium",
+      "status": "passed",
+      "result": {
+        "snapshot": {
+          "roundtrip": {
+            "jobSteps": 155,
+            "schemaSevenRejection": {
+              "sourceSchemaVersion": 7,
+              "targetSchemaVersion": 9,
+              "archiveBytes": 669184,
+              "rejectedAt": "schema_validation",
+              "reason": "Error: Archive schema object quixi_part_append_only is unsupported.",
+              "activeHistoryUnchanged": true,
+              "candidateReady": false
+            },
+            "schemaVersion": 9,
+            "migrations": [
+              {
+                "checksum": "16724a690f441af0162c0b49f3256bac152fb98a31f1a99c6ef40076d7dfd7d5",
+                "name": "canonical_records_and_atomic_operations",
+                "version": 1
+              },
+              {
+                "checksum": "bba4a045a82d42714d43d9ee709412eab759da65122b7abb244186b6a2d9b24f",
+                "name": "source_and_generation_uniqueness",
+                "version": 2
+              },
+              {
+                "checksum": "705b844874dece6b5cc1881cb45ccc3b2907a2719036283fe165a0a07f6fe14e",
+                "name": "verified_blob_catalog_and_transfer_recovery",
+                "version": 3
+              },
+              {
+                "checksum": "9988edddaf4483b380ab33f1017f141304484b1bc1662e74fb1c2de75ca2467e",
+                "name": "hidden_normalized_import_groups",
+                "version": 4
+              },
+              {
+                "checksum": "cd43d1aeb7f9fdf33c6efd0dcb3b87d00eef9169fe002c81ee6856750a49468b",
+                "name": "bounded_importer_work_and_uuid_checkpoints",
+                "version": 5
+              },
+              {
+                "checksum": "32e6035cd4ea8cabe3d327772c0d291de08a1ae24c2a23b360dc6661c6315c11",
+                "name": "generation_producer_fences",
+                "version": 6
+              },
+              {
+                "checksum": "da34a61082c74eae78301b25b83cc8525addfb6df1b5e450c33c2a63ec974151",
+                "name": "local_workspace_and_message_recency",
+                "version": 7
+              },
+              {
+                "checksum": "9c6a87fde402ff33d164ee7db92b34088ab05d458686670ee3d317dc24ca1263",
+                "name": "streaming_text_across_transport_provenance",
+                "version": 8
+              },
+              {
+                "checksum": "d124a56c86b6b42a8429114e253030b1cbc88e774ec8ff3e44cc9105dd5b6dab",
+                "name": "mandatory_archive_selection_protocol",
+                "version": 9
+              }
+            ],
+            "archiveBytes": 1294848,
+            "openBytes": 1360384,
+            "canonicalRecords": 23,
+            "syncOperations": 19,
+            "blobBytes": 600013,
+            "peakTarChunk": 65536,
+            "copySteps": 55,
+            "validationSteps": 66,
+            "manifestEntries": 3,
+            "checks": [
+              "schema-7 portable rejected before activation with active history unchanged",
+              "activation barrier target lock and fresh corruption rejection",
+              "serialized repository export/restore job lifecycle",
+              "candidate review current-revision fence and retention",
+              "owner-loss unfinished job fence",
+              "actual OPFS streamed portable export/receive",
+              "manifest inventory validation",
+              "canonical branches/provenance exact",
+              "operation journal exact",
+              "generation/tombstone and published import receipts exact",
+              "schema-8 text append across reserved transport provenance preserves NUL/Unicode and full Markdown",
+              "raw/text blob SHA-256 exact",
+              "private staging excluded",
+              "Markdown includes full blob-backed tail"
+            ]
+          },
+          "origin": "http://127.0.0.1:4280",
+          "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36",
+          "copiedBytes": 5259264,
+          "peakBlock": 65536,
+          "blocks": 81,
+          "sourceDigest": "8fa959e88760225de724f4c8850b123f32f293cd91433cc85df97eba5e93d6de",
+          "snapshotDigest": "8fa959e88760225de724f4c8850b123f32f293cd91433cc85df97eba5e93d6de",
+          "snapshotRows": 1,
+          "sourceRows": 2,
+          "integrity": "ok",
+          "mechanism": "FILE_POINTER/xRead -> SAHPool.importDb(callback)",
+          "backend": "actual SQLite WASM OPFS SAH-pool"
+        },
+        "publicClient": {
+          "archiveBytes": 10116096,
+          "blobBytes": 9437201,
+          "peakTransferBytes": 65536,
+          "steps": 145,
+          "checks": [
+            "actual ArchiveStorageClient owner-worker job and transfer routes",
+            "9 MiB blob streamed without whole-archive array",
+            "stable operation replay and bidirectional identity fences",
+            "all eight foreground blob leases pause then resume export",
+            "ready restore survives owner restart and requires revalidation",
+            "canonical active archive unchanged",
+            "private query-only candidate reader verifies canonical counts and raw bytes without writable client activation"
+          ]
+        },
+        "workflows": {
+          "checks": [
+            "shared workflow lost successful begin reply reconciles by preallocated job identity",
+            "shared export streams into real browser disk staging",
+            "shared restore consumes actual disk File through programmatic file-selection fixture and produces isolated candidate",
+            "released jobs disappear from bounded outstanding-job list",
+            "ready open export stages again without a new archive job"
+          ]
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "webkit",
+      "status": "passed",
+      "result": {
+        "snapshot": {
+          "roundtrip": {
+            "jobSteps": 155,
+            "schemaSevenRejection": {
+              "sourceSchemaVersion": 7,
+              "targetSchemaVersion": 9,
+              "archiveBytes": 669184,
+              "rejectedAt": "schema_validation",
+              "reason": "Error: Archive schema object quixi_part_append_only is unsupported.",
+              "activeHistoryUnchanged": true,
+              "candidateReady": false
+            },
+            "schemaVersion": 9,
+            "migrations": [
+              {
+                "checksum": "16724a690f441af0162c0b49f3256bac152fb98a31f1a99c6ef40076d7dfd7d5",
+                "name": "canonical_records_and_atomic_operations",
+                "version": 1
+              },
+              {
+                "checksum": "bba4a045a82d42714d43d9ee709412eab759da65122b7abb244186b6a2d9b24f",
+                "name": "source_and_generation_uniqueness",
+                "version": 2
+              },
+              {
+                "checksum": "705b844874dece6b5cc1881cb45ccc3b2907a2719036283fe165a0a07f6fe14e",
+                "name": "verified_blob_catalog_and_transfer_recovery",
+                "version": 3
+              },
+              {
+                "checksum": "9988edddaf4483b380ab33f1017f141304484b1bc1662e74fb1c2de75ca2467e",
+                "name": "hidden_normalized_import_groups",
+                "version": 4
+              },
+              {
+                "checksum": "cd43d1aeb7f9fdf33c6efd0dcb3b87d00eef9169fe002c81ee6856750a49468b",
+                "name": "bounded_importer_work_and_uuid_checkpoints",
+                "version": 5
+              },
+              {
+                "checksum": "32e6035cd4ea8cabe3d327772c0d291de08a1ae24c2a23b360dc6661c6315c11",
+                "name": "generation_producer_fences",
+                "version": 6
+              },
+              {
+                "checksum": "da34a61082c74eae78301b25b83cc8525addfb6df1b5e450c33c2a63ec974151",
+                "name": "local_workspace_and_message_recency",
+                "version": 7
+              },
+              {
+                "checksum": "9c6a87fde402ff33d164ee7db92b34088ab05d458686670ee3d317dc24ca1263",
+                "name": "streaming_text_across_transport_provenance",
+                "version": 8
+              },
+              {
+                "checksum": "d124a56c86b6b42a8429114e253030b1cbc88e774ec8ff3e44cc9105dd5b6dab",
+                "name": "mandatory_archive_selection_protocol",
+                "version": 9
+              }
+            ],
+            "archiveBytes": 1294848,
+            "openBytes": 1360384,
+            "canonicalRecords": 23,
+            "syncOperations": 19,
+            "blobBytes": 600013,
+            "peakTarChunk": 65536,
+            "copySteps": 55,
+            "validationSteps": 66,
+            "manifestEntries": 3,
+            "checks": [
+              "schema-7 portable rejected before activation with active history unchanged",
+              "activation barrier target lock and fresh corruption rejection",
+              "serialized repository export/restore job lifecycle",
+              "candidate review current-revision fence and retention",
+              "owner-loss unfinished job fence",
+              "actual OPFS streamed portable export/receive",
+              "manifest inventory validation",
+              "canonical branches/provenance exact",
+              "operation journal exact",
+              "generation/tombstone and published import receipts exact",
+              "schema-8 text append across reserved transport provenance preserves NUL/Unicode and full Markdown",
+              "raw/text blob SHA-256 exact",
+              "private staging excluded",
+              "Markdown includes full blob-backed tail"
+            ]
+          },
+          "origin": "http://127.0.0.1:4280",
+          "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+          "copiedBytes": 5259264,
+          "peakBlock": 65536,
+          "blocks": 81,
+          "sourceDigest": "8fa959e88760225de724f4c8850b123f32f293cd91433cc85df97eba5e93d6de",
+          "snapshotDigest": "8fa959e88760225de724f4c8850b123f32f293cd91433cc85df97eba5e93d6de",
+          "snapshotRows": 1,
+          "sourceRows": 2,
+          "integrity": "ok",
+          "mechanism": "FILE_POINTER/xRead -> SAHPool.importDb(callback)",
+          "backend": "actual SQLite WASM OPFS SAH-pool"
+        },
+        "publicClient": {
+          "archiveBytes": 10116096,
+          "blobBytes": 9437201,
+          "peakTransferBytes": 65536,
+          "steps": 145,
+          "checks": [
+            "actual ArchiveStorageClient owner-worker job and transfer routes",
+            "9 MiB blob streamed without whole-archive array",
+            "stable operation replay and bidirectional identity fences",
+            "all eight foreground blob leases pause then resume export",
+            "ready restore survives owner restart and requires revalidation",
+            "canonical active archive unchanged",
+            "private query-only candidate reader verifies canonical counts and raw bytes without writable client activation"
+          ]
+        },
+        "workflows": {
+          "checks": [
+            "shared workflow lost successful begin reply reconciles by preallocated job identity",
+            "shared export streams into real browser disk staging",
+            "shared restore consumes actual disk File through programmatic file-selection fixture and produces isolated candidate",
+            "released jobs disappear from bounded outstanding-job list",
+            "ready open export stages again without a new archive job"
+          ]
+        }
+      },
+      "error": null
+    }
+  ]
+}

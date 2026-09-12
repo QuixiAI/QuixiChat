@@ -1,0 +1,257 @@
+{
+  "status": "passed",
+  "command": "npm run test:host:web",
+  "exitCode": 0,
+  "stats": {
+    "startTime": "2026-09-10T22:46:18.737Z",
+    "duration": 19916.583000000002,
+    "expected": 30,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "tests": [
+    {
+      "name": "session credentials bind account/destination, delete and disappear with the session",
+      "engine": "chromium",
+      "status": "passed",
+      "durationMs": 293
+    },
+    {
+      "name": "clipboard writes come from a user action, stay bounded and are readable back where the engine permits",
+      "engine": "chromium",
+      "status": "passed",
+      "durationMs": 294
+    },
+    {
+      "name": "verified request staging preserves bytes and rejects corrupted, oversized and released transfers",
+      "engine": "chromium",
+      "status": "passed",
+      "durationMs": 240
+    },
+    {
+      "name": "real streamed response enforces acknowledgement window and cancellation releases upstream",
+      "engine": "chromium",
+      "status": "passed",
+      "durationMs": 302
+    },
+    {
+      "name": "HTTP errors, redirect rejection, pre-header cancellation and idle deadlines are typed",
+      "engine": "chromium",
+      "status": "passed",
+      "durationMs": 313
+    },
+    {
+      "name": "actual browser file selection streams fixture bytes and releases file handles",
+      "engine": "chromium",
+      "status": "passed",
+      "durationMs": 302
+    },
+    {
+      "name": "registered query names are encoded onto the path and other names are refused before dispatch",
+      "engine": "chromium",
+      "status": "passed",
+      "durationMs": 239
+    },
+    {
+      "name": "adopted dropped files stream through the selected-file handle path and release",
+      "engine": "chromium",
+      "status": "passed",
+      "durationMs": 237
+    },
+    {
+      "name": "configured relay separates authorization credentials and fixes the forwarding route",
+      "engine": "chromium",
+      "status": "passed",
+      "durationMs": 234
+    },
+    {
+      "name": "bounded fallback export downloads verified bytes in the actual browser",
+      "engine": "chromium",
+      "status": "passed",
+      "durationMs": 310
+    },
+    {
+      "name": "concurrency limits and disposal close active streams without leaking credentials",
+      "engine": "chromium",
+      "status": "passed",
+      "durationMs": 228
+    },
+    {
+      "name": "aggregate staging limit recovers after release and verification overload",
+      "engine": "chromium",
+      "status": "passed",
+      "durationMs": 243
+    },
+    {
+      "name": "32 MiB disk-backed download survives immediate transfer release and reload until explicit cleanup",
+      "engine": "chromium",
+      "status": "passed",
+      "durationMs": 1573
+    },
+    {
+      "name": "disk save streams to an injected picker destination with 64 KiB writes and cancellation leaves original intact",
+      "engine": "chromium",
+      "status": "passed",
+      "durationMs": 300
+    },
+    {
+      "name": "retained download admission stays capped across host disposal and explicit cleanup frees a slot",
+      "engine": "chromium",
+      "status": "passed",
+      "durationMs": 257
+    },
+    {
+      "name": "session credentials bind account/destination, delete and disappear with the session",
+      "engine": "webkit",
+      "status": "passed",
+      "durationMs": 784
+    },
+    {
+      "name": "clipboard writes come from a user action, stay bounded and are readable back where the engine permits",
+      "engine": "webkit",
+      "status": "passed",
+      "durationMs": 804
+    },
+    {
+      "name": "verified request staging preserves bytes and rejects corrupted, oversized and released transfers",
+      "engine": "webkit",
+      "status": "passed",
+      "durationMs": 759
+    },
+    {
+      "name": "real streamed response enforces acknowledgement window and cancellation releases upstream",
+      "engine": "webkit",
+      "status": "passed",
+      "durationMs": 833
+    },
+    {
+      "name": "HTTP errors, redirect rejection, pre-header cancellation and idle deadlines are typed",
+      "engine": "webkit",
+      "status": "passed",
+      "durationMs": 860
+    },
+    {
+      "name": "actual browser file selection streams fixture bytes and releases file handles",
+      "engine": "webkit",
+      "status": "passed",
+      "durationMs": 806
+    },
+    {
+      "name": "registered query names are encoded onto the path and other names are refused before dispatch",
+      "engine": "webkit",
+      "status": "passed",
+      "durationMs": 769
+    },
+    {
+      "name": "adopted dropped files stream through the selected-file handle path and release",
+      "engine": "webkit",
+      "status": "passed",
+      "durationMs": 763
+    },
+    {
+      "name": "configured relay separates authorization credentials and fixes the forwarding route",
+      "engine": "webkit",
+      "status": "passed",
+      "durationMs": 758
+    },
+    {
+      "name": "bounded fallback export downloads verified bytes in the actual browser",
+      "engine": "webkit",
+      "status": "passed",
+      "durationMs": 1287
+    },
+    {
+      "name": "concurrency limits and disposal close active streams without leaking credentials",
+      "engine": "webkit",
+      "status": "passed",
+      "durationMs": 758
+    },
+    {
+      "name": "aggregate staging limit recovers after release and verification overload",
+      "engine": "webkit",
+      "status": "passed",
+      "durationMs": 756
+    },
+    {
+      "name": "32 MiB disk-backed download survives immediate transfer release and reload until explicit cleanup",
+      "engine": "webkit",
+      "status": "passed",
+      "durationMs": 1644
+    },
+    {
+      "name": "disk save streams to an injected picker destination with 64 KiB writes and cancellation leaves original intact",
+      "engine": "webkit",
+      "status": "passed",
+      "durationMs": 990
+    },
+    {
+      "name": "retained download admission stays capped across host disposal and explicit cleanup frees a slot",
+      "engine": "webkit",
+      "status": "passed",
+      "durationMs": 1046
+    }
+  ],
+  "sourceSha256": {
+    ".github/workflows/check.yml": "ced1dd2ae91de8f801ffa611d6f10169115acfdb72272a27ca9459a90d343039",
+    "apps/web/oauth/callback.html": "a5798ab22f7828c2e74e3180efaebe9d8981dc8f3449e670f9c1343259ee8d71",
+    "apps/web/package.json": "4b9cb7a2f3e7fe102e765e6d72c452fa00967abe2d39d9d47760ff5b6c8d0ff4",
+    "apps/web/src/host/disk-stages.ts": "db313149f8838160928fd41637bb8b04b58b94b72bad4cc4580def6b61370eac",
+    "apps/web/src/host/index.ts": "5f62e81d1358d206901e6c130e85cf4caeb0917660c550ee0c97248b4afb338b",
+    "apps/web/src/host/oauth.ts": "37ac3ab2004868437d94661d734604ee4be2b0002dc7d8c67b0aace63b8e8d54",
+    "apps/web/src/host/provider-connections.ts": "5a65b90c5d59006a69220793cce9e0093d94fffc16675a8ea19194584828f0b3",
+    "apps/web/src/host/regional-relay.ts": "e6f78f3cfc06cbc23a70d354e5c1fdcb5a6fa4255b39196bd5927c99be4754de",
+    "apps/web/src/host/transfers.ts": "5718b2743caeffb00f4e736393ddff691b94fd896453aafbd696ac50d2e618f1",
+    "apps/web/src/oauth-callback.ts": "5f1ad42093662c242c3fd37a84e8f1fd3eb0e8d1ac6a588393efdbbc7a49c0b8",
+    "apps/web/tests/oauth-fixture.html": "3cd00d4f4777e8b30720014f5c44f164a7486d13d994940a499c6bfcd1a04049",
+    "apps/web/tests/oauth-fixture.ts": "ca73dabb63ad841b47b49e50cc94b0e646c53a82e3bf48865d4637e96b105747",
+    "apps/web/tests/oauth-playwright.config.ts": "e687124b610ccb8e737fa0b7502c64c9e51685280e84bc5ab1d9efd1de780db3",
+    "apps/web/tests/oauth-run.mjs": "f0da8f722aef01c78d34e3148913ab0a95064a8c934b122f7556b9acc3848b38",
+    "apps/web/tests/oauth-server.mjs": "75fedd4284b18f2bc34180e299fa942b2bcc99e05b0ccab4fcaf10132302c4cb",
+    "apps/web/tests/oauth-unit.test.ts": "914ddee4957030e6e8e2ab0aafd93f700ee0119b3f64ed6e5abe061f8e2269e3",
+    "apps/web/tests/oauth.spec.ts": "ddaa10f286be2ef76a6da393caa2172d721e631847689ffaf2422c25ba788c48",
+    "apps/web/vite.config.ts": "ec27074b7a57cbc5d8597ee9771dc4b3a288bb0a701be0f5c629bc31208907ca",
+    "deploy/docker/nginx.conf": "fe64cfe06891ba88617427b8d4ce4901c000f0c14f2e8ea589e98479f903605d",
+    "package-lock.json": "aadb456e2a567a2b91cbb81a502650ebac93541f0a59d54035bdde2cacd97672",
+    "package.json": "2c37b85fc1a6ba4355c6e4efacebdd8bb406dbed6fabedb03b8c6e1e67bc82d8",
+    "packages/core/src/contracts/archives.ts": "db664351740b6fa07eb08a285c9be6b123f7c6d8dde344d8b966d4a9f0ff442f",
+    "packages/core/src/contracts/blob-inventory.ts": "ca8fde78ea5dcc13d36264f806e22f5437cf2545dd5ca51f1273e1aefac3a886",
+    "packages/core/src/contracts/extraction.ts": "b05bcd2ef02bd60694bff7cc5d83fccbd10e2584f1ba9edf17505241c209b483",
+    "packages/core/src/contracts/host.ts": "0bc21aef853666a0a41deca4ee2c572d0d4482d6ab04608286fd38263d5b08f2",
+    "packages/core/src/contracts/import-work.ts": "8631531d5c3e7c6acd966e902600f418e4fc605307d93ad0de758abb7421c7b5",
+    "packages/core/src/contracts/imports.ts": "d3ef73cdad9b92faa0352e341c896647f4c6db759648b19178cf76342934e5f3",
+    "packages/core/src/contracts/index.ts": "bbf27e97948407c9b39b848e74ec48842b27f887066c32b3b21b9dc7f8ef4124",
+    "packages/core/src/contracts/mutations.ts": "ba3ea4178452b1f0f3288c07d8667fa225204a2ed7adc055a0be1267621cd3a2",
+    "packages/core/src/contracts/preferences.ts": "e14de69f126d77f78c13d64e8912a56a290fdf2b11ac74d017679ca4a2ad5ac5",
+    "packages/core/src/contracts/producers.ts": "aaf026f6a774a1669190717aab6a5c2004e54d35adeea40a4e4ec8efb3485697",
+    "packages/core/src/contracts/routing-aliases.ts": "f43cd67e4e00cff69cbfdd51306b24a2dd234a729ca287b775f81bad74f47d42",
+    "packages/core/src/contracts/search.ts": "6c059ba15eef98f1b2ac2fb175aa809cfeecc60480b4ce533caab389dd5cc872",
+    "packages/core/src/contracts/selection.ts": "5e87c6b21f0aea9cd139c2ca09d66d31614fc725d3163fb00c982d0ec3c7584b",
+    "packages/core/src/contracts/serialization.ts": "a1d6cc8792dc6aeac4310f8b3f2545c0414b9425d7983fb4a80b7e7b0808116e",
+    "packages/core/src/contracts/storage.ts": "6f407bf21cb03f1fbe306b56bf87f990e93d029286cf0d2acec7984d313b4416",
+    "packages/core/src/contracts/transfer.ts": "73563a59e5d0964657a88c025a1b0935a1ae7eb77161e96404a4d37b375d6a6f",
+    "packages/core/src/contracts/views.ts": "54d95cc0d90d01a0ece75628ac78f5f99795fc2b69968c6e0d355530e3ef454c",
+    "packages/core/src/model/branches.ts": "57a43bb03bf3f41d270e3d8e9d11ed2df87430d2fba98724c2c2dd741bbaf08a",
+    "packages/core/src/model/compaction.ts": "33e724d0610024ebe5b9247196beea0971d72afe77e53f8ccebacfada2c54d28",
+    "packages/core/src/model/index.ts": "62324a44028e68698c1bc09039726f6f286aa1a2a75986a96384ebfd61f3ad87",
+    "packages/core/src/model/provenance.ts": "191f723124ffe3b0f5957a90a1a60449406a1ba0cfbe258f9d401db0c62e8d26",
+    "packages/core/src/model/summaries.ts": "ebb396a3f6ec22c26d244845dbfef77a0de04dc9ddbc106263d81f3d8e4d7d86",
+    "packages/core/src/model/types.ts": "e9fa9d9292d8b93c04c3eb0828798dd0414264bd047e904b013c5084eeec6b1c",
+    "packages/core/src/model/validation.ts": "fccb9eb2d56a44697ac8b89fa97bb3418b9f4ee45a199f53fc5d68cf622a5756",
+    "packages/providers/src/adapter.ts": "d1f57c6b87c6328cabc84e0e2f90daec04d37f8c308cdf2b57ae91cfa3911d83",
+    "packages/providers/src/catalog.ts": "598f789b9ea3bcd9a23d4e312e4425ed2e54a1d2e36bf30c2a7e70fa972c8d53",
+    "packages/providers/src/generation.ts": "db4deb23f8269827e0b444b536333d73230d7d0ba18529783722ca54ab788dde",
+    "packages/providers/src/index.ts": "7d3f940a757574ccfe310a56417af420f21b50bde4baf6d4136b7355847257e5",
+    "packages/providers/src/normalize.ts": "83565676e6ac78862e95d754d3164ec0a49e2853a7f0b219fd9326312beb4a91",
+    "packages/providers/src/regional.ts": "1f09a2bf83e16d41aa4ca220c81b14c10b1ab719f5493e952d9371beefe835ca",
+    "packages/providers/src/request.ts": "21e1b77be73cfc669c6c04b8caab27ea94930229e87fa4aaa82ab294342b58e3",
+    "packages/providers/src/sse.ts": "8752a278f766e53925aa413750b80350391a9eaa4334f7dd16c9ad501e506dce",
+    "packages/providers/src/types.ts": "e1008b350f27745445df414149c9514e4a7c27bd05676657ac319e7022b136aa",
+    "tooling/browser-engines.mjs": "136f16e63e905ae4c8305c7adedfce2411eff13b04f914054f8fb718155d0df1",
+    "tooling/pdf-assets.ts": "65c259fb2cd01b9bd3b77630aee3ea15ff21c59d1fb65ac29bafef5bbd5e8007",
+    "tooling/vite.ts": "bb15f66712c80535ba8004f4b900185fadf0ce44deb0a7abd5b6121ba2f6d705"
+  },
+  "sourceStable": true,
+  "scope": "Existing 15 host scenarios per engine using current host modules; no provider OAuth enabled in these regression fixtures. Shared source hashes match the preceding final OAuth proof and current files.",
+  "rawReportSha256": "558b798537e994b52f156174fcc5ee3f403ad2d12a3e8110b78633a154966917"
+}

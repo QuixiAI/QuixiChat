@@ -1,0 +1,712 @@
+{
+  "analysisToolSha256": "7512e10fb3a7b8fee441d2a18700ee72f67dbc970dc85abf46ed455a14bb6d84",
+  "reports": [
+    {
+      "name": "dense-production",
+      "sha256": "688cc02e4ddb48860742f04d03964c4ade3e5e330d801e292d47b64344f3b585",
+      "startLoadAverage": [
+        3.6201171875,
+        4.099609375,
+        5.1015625
+      ],
+      "endLoadAverage": [
+        4.2314453125,
+        4.19921875,
+        4.9150390625
+      ]
+    },
+    {
+      "name": "dense-cleanup-production",
+      "sha256": "68466f4c4cfc03c48faee525b4d0ca4a1dc4c4cb6a0c26e1d401e9f26ad0cc39",
+      "startLoadAverage": [
+        4.6328125,
+        4.72802734375,
+        4.68505859375
+      ],
+      "endLoadAverage": [
+        6.26123046875,
+        5.443359375,
+        4.990234375
+      ]
+    }
+  ],
+  "sourceDifferencePaths": [
+    "packages/documents/src/worker/index.ts"
+  ],
+  "harnessHashesEqual": true,
+  "method": "Same captured harness and original fixture bytes. Numeric output/provenance bounds equivalence only, not a full text/map hash proof. One capture per case; timings and no-GC sampled highs are not statistical effect estimates or hard/peak memory bounds. GC diagnostic is excluded.",
+  "cases": [
+    {
+      "engine": "chromium",
+      "fixture": "dense-1",
+      "numericOutputEquivalent": true,
+      "outputUTF16": 151000,
+      "totalSpans": 2000,
+      "sourceSha256": "985fad8a10c48110f96151a868ef5c41c4a10e7a029b88e663276f053bc75cd3",
+      "before": {
+        "foregroundBaseline": {
+          "count": 10,
+          "totalMs": 39.399999998509884,
+          "minMs": 3.600000001490116,
+          "p50Ms": 3.899999998509884,
+          "p95Ms": 4.600000001490116,
+          "maxMs": 4.600000001490116
+        },
+        "caseStartLoadAverage": [
+          3.396484375,
+          4.02783203125,
+          5.05810546875
+        ],
+        "totalMs": 823.5,
+        "firstIndexedPageMs": 812.8000000044703,
+        "foregroundP95Ms": 19.69999999552965,
+        "stageTotalMs": 347.3000000193715,
+        "creditTotalMs": 76.70000001043081,
+        "publicationTotalMs": 17.399999998509884,
+        "publicationP95Ms": 17.399999998509884,
+        "cancelDrainMs": null,
+        "rssSampledHighKiB": 553744,
+        "heap": [
+          {
+            "role": "archive-storage-worker",
+            "usedSampledHighBytes": 14029308,
+            "backingSampledHighBytes": 6369545,
+            "samples": 5
+          },
+          {
+            "role": "page",
+            "usedSampledHighBytes": 7021148,
+            "backingSampledHighBytes": 850290,
+            "samples": 5
+          },
+          {
+            "role": "document-extractor",
+            "usedSampledHighBytes": 2392160,
+            "backingSampledHighBytes": 601427,
+            "samples": 2
+          },
+          {
+            "role": "pdfjs-parser",
+            "usedSampledHighBytes": 4494744,
+            "backingSampledHighBytes": 2130702,
+            "samples": 2
+          }
+        ]
+      },
+      "after": {
+        "foregroundBaseline": {
+          "count": 10,
+          "totalMs": 42.399999998509884,
+          "minMs": 3.5,
+          "p50Ms": 4.300000004470348,
+          "p95Ms": 5.100000001490116,
+          "maxMs": 5.100000001490116
+        },
+        "caseStartLoadAverage": [
+          4.33837890625,
+          4.65869140625,
+          4.66015625
+        ],
+        "totalMs": 854.2999999970198,
+        "firstIndexedPageMs": 841.5,
+        "foregroundP95Ms": 21.200000002980232,
+        "stageTotalMs": 348.7999999821186,
+        "creditTotalMs": 92.19999999552965,
+        "publicationTotalMs": 18.700000002980232,
+        "publicationP95Ms": 18.700000002980232,
+        "cancelDrainMs": null,
+        "rssSampledHighKiB": 553280,
+        "heap": [
+          {
+            "role": "archive-storage-worker",
+            "usedSampledHighBytes": 13849068,
+            "backingSampledHighBytes": 6349724,
+            "samples": 5
+          },
+          {
+            "role": "page",
+            "usedSampledHighBytes": 7140976,
+            "backingSampledHighBytes": 850290,
+            "samples": 5
+          },
+          {
+            "role": "document-extractor",
+            "usedSampledHighBytes": 2357512,
+            "backingSampledHighBytes": 601445,
+            "samples": 2
+          },
+          {
+            "role": "pdfjs-parser",
+            "usedSampledHighBytes": 4526900,
+            "backingSampledHighBytes": 2130702,
+            "samples": 2
+          }
+        ]
+      },
+      "totalTimeChangePercent": 3.7401335758372456
+    },
+    {
+      "engine": "chromium",
+      "fixture": "dense-10",
+      "numericOutputEquivalent": true,
+      "outputUTF16": 1510000,
+      "totalSpans": 20000,
+      "sourceSha256": "4769512a1accd9d23b2f71b722932a9e8675d065b58dc85079b3e81098404ea9",
+      "before": {
+        "foregroundBaseline": {
+          "count": 10,
+          "totalMs": 152.10000000149012,
+          "minMs": 7,
+          "p50Ms": 16,
+          "p95Ms": 18,
+          "maxMs": 18
+        },
+        "caseStartLoadAverage": [
+          3.396484375,
+          4.02783203125,
+          5.05810546875
+        ],
+        "totalMs": 8903.19999999553,
+        "firstIndexedPageMs": 1297.1999999955297,
+        "foregroundP95Ms": 24,
+        "stageTotalMs": 4088.4000000432134,
+        "creditTotalMs": 1622.6000000238419,
+        "publicationTotalMs": 224.09999998658895,
+        "publicationP95Ms": 46.69999999552965,
+        "cancelDrainMs": null,
+        "rssSampledHighKiB": 811744,
+        "heap": [
+          {
+            "role": "archive-storage-worker",
+            "usedSampledHighBytes": 29037664,
+            "backingSampledHighBytes": 12798398,
+            "samples": 22
+          },
+          {
+            "role": "page",
+            "usedSampledHighBytes": 28354284,
+            "backingSampledHighBytes": 6392268,
+            "samples": 22
+          },
+          {
+            "role": "document-extractor",
+            "usedSampledHighBytes": 12523980,
+            "backingSampledHighBytes": 681730,
+            "samples": 19
+          },
+          {
+            "role": "pdfjs-parser",
+            "usedSampledHighBytes": 22729052,
+            "backingSampledHighBytes": 5677604,
+            "samples": 19
+          }
+        ]
+      },
+      "after": {
+        "foregroundBaseline": {
+          "count": 10,
+          "totalMs": 48.100000001490116,
+          "minMs": 4.100000001490116,
+          "p50Ms": 4.800000004470348,
+          "p95Ms": 5.5,
+          "maxMs": 5.5
+        },
+        "caseStartLoadAverage": [
+          4.33837890625,
+          4.65869140625,
+          4.66015625
+        ],
+        "totalMs": 9908.29999999702,
+        "firstIndexedPageMs": 1667.5,
+        "foregroundP95Ms": 55.400000005960464,
+        "stageTotalMs": 4526.399999946356,
+        "creditTotalMs": 1895.1000000089407,
+        "publicationTotalMs": 248.89999998360872,
+        "publicationP95Ms": 48,
+        "cancelDrainMs": null,
+        "rssSampledHighKiB": 798928,
+        "heap": [
+          {
+            "role": "archive-storage-worker",
+            "usedSampledHighBytes": 31156220,
+            "backingSampledHighBytes": 12567741,
+            "samples": 24
+          },
+          {
+            "role": "page",
+            "usedSampledHighBytes": 26816728,
+            "backingSampledHighBytes": 6352414,
+            "samples": 24
+          },
+          {
+            "role": "document-extractor",
+            "usedSampledHighBytes": 11780856,
+            "backingSampledHighBytes": 2076868,
+            "samples": 20
+          },
+          {
+            "role": "pdfjs-parser",
+            "usedSampledHighBytes": 25118108,
+            "backingSampledHighBytes": 8313188,
+            "samples": 20
+          }
+        ]
+      },
+      "totalTimeChangePercent": 11.289199389006143
+    },
+    {
+      "engine": "chromium",
+      "fixture": "dense-100",
+      "numericOutputEquivalent": true,
+      "outputUTF16": 15100000,
+      "totalSpans": 200000,
+      "sourceSha256": "1e7910141d121ee3598acf229cbc8c145720cecb971c8e016367e101da5f6918",
+      "before": {
+        "foregroundBaseline": {
+          "count": 10,
+          "totalMs": 39.19999999552965,
+          "minMs": 3.600000001490116,
+          "p50Ms": 3.9000000059604645,
+          "p95Ms": 4.200000002980232,
+          "maxMs": 4.200000002980232
+        },
+        "caseStartLoadAverage": [
+          3.4755859375,
+          4.02587890625,
+          5.04541015625
+        ],
+        "totalMs": 100485.70000000298,
+        "firstIndexedPageMs": 1033.1000000014901,
+        "foregroundP95Ms": 26.69999999552965,
+        "stageTotalMs": 53964.69999977201,
+        "creditTotalMs": 18703.600000031292,
+        "publicationTotalMs": 1841.4000000283122,
+        "publicationP95Ms": 22.700000002980232,
+        "cancelDrainMs": null,
+        "rssSampledHighKiB": 1047184,
+        "heap": [
+          {
+            "role": "archive-storage-worker",
+            "usedSampledHighBytes": 31547400,
+            "backingSampledHighBytes": 15541862,
+            "samples": 205
+          },
+          {
+            "role": "page",
+            "usedSampledHighBytes": 30189648,
+            "backingSampledHighBytes": 7947619,
+            "samples": 205
+          },
+          {
+            "role": "document-extractor",
+            "usedSampledHighBytes": 25727032,
+            "backingSampledHighBytes": 893223,
+            "samples": 201
+          },
+          {
+            "role": "pdfjs-parser",
+            "usedSampledHighBytes": 140187808,
+            "backingSampledHighBytes": 6934606,
+            "samples": 201
+          }
+        ]
+      },
+      "after": {
+        "foregroundBaseline": {
+          "count": 10,
+          "totalMs": 42.400000005960464,
+          "minMs": 3.5,
+          "p50Ms": 4.399999998509884,
+          "p95Ms": 4.899999998509884,
+          "maxMs": 4.899999998509884
+        },
+        "caseStartLoadAverage": [
+          4.3466796875,
+          4.65234375,
+          4.65771484375
+        ],
+        "totalMs": 102706.29999999702,
+        "firstIndexedPageMs": 1104.1999999955297,
+        "foregroundP95Ms": 29.299999997019768,
+        "stageTotalMs": 55335.59999989718,
+        "creditTotalMs": 18367.19999999553,
+        "publicationTotalMs": 1927.099999986589,
+        "publicationP95Ms": 26.19999999552965,
+        "cancelDrainMs": null,
+        "rssSampledHighKiB": 993504,
+        "heap": [
+          {
+            "role": "page",
+            "usedSampledHighBytes": 29813584,
+            "backingSampledHighBytes": 7947290,
+            "samples": 209
+          },
+          {
+            "role": "archive-storage-worker",
+            "usedSampledHighBytes": 30656224,
+            "backingSampledHighBytes": 13665666,
+            "samples": 209
+          },
+          {
+            "role": "document-extractor",
+            "usedSampledHighBytes": 25261492,
+            "backingSampledHighBytes": 4520553,
+            "samples": 206
+          },
+          {
+            "role": "pdfjs-parser",
+            "usedSampledHighBytes": 36270508,
+            "backingSampledHighBytes": 9193902,
+            "samples": 206
+          }
+        ]
+      },
+      "totalTimeChangePercent": 2.20986667754115
+    },
+    {
+      "engine": "chromium",
+      "fixture": "cancel-dense-100",
+      "numericOutputEquivalent": true,
+      "outputUTF16": 151000,
+      "totalSpans": 2000,
+      "sourceSha256": "1e7910141d121ee3598acf229cbc8c145720cecb971c8e016367e101da5f6918",
+      "before": {
+        "foregroundBaseline": {
+          "count": 10,
+          "totalMs": 40.100000001490116,
+          "minMs": 3.5999999940395355,
+          "p50Ms": 4.199999995529652,
+          "p95Ms": 4.300000004470348,
+          "maxMs": 4.300000004470348
+        },
+        "caseStartLoadAverage": [
+          3.97900390625,
+          4.1875,
+          4.99658203125
+        ],
+        "totalMs": 1033.3999999985099,
+        "firstIndexedPageMs": 1022,
+        "foregroundP95Ms": 20.600000001490116,
+        "stageTotalMs": 270.4999999925494,
+        "creditTotalMs": 106.39999999850988,
+        "publicationTotalMs": 18.30000000447035,
+        "publicationP95Ms": 18.30000000447035,
+        "cancelDrainMs": 11.399999998509884,
+        "rssSampledHighKiB": 591056,
+        "heap": [
+          {
+            "role": "page",
+            "usedSampledHighBytes": 7512556,
+            "backingSampledHighBytes": 2708997,
+            "samples": 6
+          },
+          {
+            "role": "archive-storage-worker",
+            "usedSampledHighBytes": 13477612,
+            "backingSampledHighBytes": 12669214,
+            "samples": 6
+          },
+          {
+            "role": "document-extractor",
+            "usedSampledHighBytes": 2975996,
+            "backingSampledHighBytes": 695847,
+            "samples": 3
+          },
+          {
+            "role": "pdfjs-parser",
+            "usedSampledHighBytes": 4770596,
+            "backingSampledHighBytes": 3105974,
+            "samples": 3
+          }
+        ]
+      },
+      "after": {
+        "foregroundBaseline": {
+          "count": 10,
+          "totalMs": 44.30000000447035,
+          "minMs": 3.6999999955296516,
+          "p50Ms": 4.700000002980232,
+          "p95Ms": 5.700000002980232,
+          "maxMs": 5.700000002980232
+        },
+        "caseStartLoadAverage": [
+          4.96240234375,
+          4.876953125,
+          4.74951171875
+        ],
+        "totalMs": 1333.6999999955297,
+        "firstIndexedPageMs": 1319.3999999985099,
+        "foregroundP95Ms": 33.20000000298023,
+        "stageTotalMs": 341.80000000447035,
+        "creditTotalMs": 136.60000000149012,
+        "publicationTotalMs": 29.30000000447035,
+        "publicationP95Ms": 29.30000000447035,
+        "cancelDrainMs": 14.299999997019768,
+        "rssSampledHighKiB": 593136,
+        "heap": [
+          {
+            "role": "page",
+            "usedSampledHighBytes": 6999752,
+            "backingSampledHighBytes": 3854453,
+            "samples": 6
+          },
+          {
+            "role": "archive-storage-worker",
+            "usedSampledHighBytes": 13526212,
+            "backingSampledHighBytes": 12669233,
+            "samples": 6
+          },
+          {
+            "role": "document-extractor",
+            "usedSampledHighBytes": 2735304,
+            "backingSampledHighBytes": 695865,
+            "samples": 3
+          },
+          {
+            "role": "pdfjs-parser",
+            "usedSampledHighBytes": 4761312,
+            "backingSampledHighBytes": 3105974,
+            "samples": 3
+          }
+        ]
+      },
+      "totalTimeChangePercent": 29.059415521332753
+    },
+    {
+      "engine": "webkit",
+      "fixture": "dense-1",
+      "numericOutputEquivalent": true,
+      "outputUTF16": 151000,
+      "totalSpans": 2000,
+      "sourceSha256": "985fad8a10c48110f96151a868ef5c41c4a10e7a029b88e663276f053bc75cd3",
+      "before": {
+        "foregroundBaseline": {
+          "count": 10,
+          "totalMs": 37,
+          "minMs": 3,
+          "p50Ms": 4,
+          "p95Ms": 5,
+          "maxMs": 5
+        },
+        "caseStartLoadAverage": [
+          3.97900390625,
+          4.1875,
+          4.99658203125
+        ],
+        "totalMs": 752,
+        "firstIndexedPageMs": 741,
+        "foregroundP95Ms": 19,
+        "stageTotalMs": 203,
+        "creditTotalMs": 55,
+        "publicationTotalMs": 16,
+        "publicationP95Ms": 16,
+        "cancelDrainMs": null,
+        "rssSampledHighKiB": 115872,
+        "heap": []
+      },
+      "after": {
+        "foregroundBaseline": {
+          "count": 10,
+          "totalMs": 66,
+          "minMs": 5,
+          "p50Ms": 7,
+          "p95Ms": 8,
+          "maxMs": 8
+        },
+        "caseStartLoadAverage": [
+          5.60595703125,
+          5.01171875,
+          4.7978515625
+        ],
+        "totalMs": 1034,
+        "firstIndexedPageMs": 1019,
+        "foregroundP95Ms": 26,
+        "stageTotalMs": 284,
+        "creditTotalMs": 65,
+        "publicationTotalMs": 23,
+        "publicationP95Ms": 23,
+        "cancelDrainMs": null,
+        "rssSampledHighKiB": 115584,
+        "heap": []
+      },
+      "totalTimeChangePercent": 37.5
+    },
+    {
+      "engine": "webkit",
+      "fixture": "dense-10",
+      "numericOutputEquivalent": true,
+      "outputUTF16": 1510000,
+      "totalSpans": 20000,
+      "sourceSha256": "4769512a1accd9d23b2f71b722932a9e8675d065b58dc85079b3e81098404ea9",
+      "before": {
+        "foregroundBaseline": {
+          "count": 10,
+          "totalMs": 34,
+          "minMs": 3,
+          "p50Ms": 3,
+          "p95Ms": 4,
+          "maxMs": 4
+        },
+        "caseStartLoadAverage": [
+          3.8203125,
+          4.15087890625,
+          4.97900390625
+        ],
+        "totalMs": 5901,
+        "firstIndexedPageMs": 765,
+        "foregroundP95Ms": 18,
+        "stageTotalMs": 1813,
+        "creditTotalMs": 458,
+        "publicationTotalMs": 128,
+        "publicationP95Ms": 15,
+        "cancelDrainMs": null,
+        "rssSampledHighKiB": 114368,
+        "heap": []
+      },
+      "after": {
+        "foregroundBaseline": {
+          "count": 10,
+          "totalMs": 71,
+          "minMs": 6,
+          "p50Ms": 7,
+          "p95Ms": 9,
+          "maxMs": 9
+        },
+        "caseStartLoadAverage": [
+          5.39697265625,
+          4.97802734375,
+          4.787109375
+        ],
+        "totalMs": 8304,
+        "firstIndexedPageMs": 1122,
+        "foregroundP95Ms": 31,
+        "stageTotalMs": 2722,
+        "creditTotalMs": 749,
+        "publicationTotalMs": 198,
+        "publicationP95Ms": 26,
+        "cancelDrainMs": null,
+        "rssSampledHighKiB": 115584,
+        "heap": []
+      },
+      "totalTimeChangePercent": 40.72191154041689
+    },
+    {
+      "engine": "webkit",
+      "fixture": "dense-100",
+      "numericOutputEquivalent": true,
+      "outputUTF16": 15100000,
+      "totalSpans": 200000,
+      "sourceSha256": "1e7910141d121ee3598acf229cbc8c145720cecb971c8e016367e101da5f6918",
+      "before": {
+        "foregroundBaseline": {
+          "count": 10,
+          "totalMs": 34,
+          "minMs": 3,
+          "p50Ms": 3,
+          "p95Ms": 4,
+          "maxMs": 4
+        },
+        "caseStartLoadAverage": [
+          3.67431640625,
+          4.111328125,
+          4.95556640625
+        ],
+        "totalMs": 74448,
+        "firstIndexedPageMs": 1042,
+        "foregroundP95Ms": 19,
+        "stageTotalMs": 35600,
+        "creditTotalMs": 8291,
+        "publicationTotalMs": 1111,
+        "publicationP95Ms": 16,
+        "cancelDrainMs": null,
+        "rssSampledHighKiB": 114816,
+        "heap": []
+      },
+      "after": {
+        "foregroundBaseline": {
+          "count": 10,
+          "totalMs": 38,
+          "minMs": 3,
+          "p50Ms": 4,
+          "p95Ms": 5,
+          "maxMs": 5
+        },
+        "caseStartLoadAverage": [
+          5.41552734375,
+          4.99462890625,
+          4.794921875
+        ],
+        "totalMs": 93890,
+        "firstIndexedPageMs": 1136,
+        "foregroundP95Ms": 36,
+        "stageTotalMs": 45305,
+        "creditTotalMs": 11511,
+        "publicationTotalMs": 1484,
+        "publicationP95Ms": 28,
+        "cancelDrainMs": null,
+        "rssSampledHighKiB": 115936,
+        "heap": []
+      },
+      "totalTimeChangePercent": 26.114872125510423
+    },
+    {
+      "engine": "webkit",
+      "fixture": "cancel-dense-100",
+      "numericOutputEquivalent": true,
+      "outputUTF16": 151000,
+      "totalSpans": 2000,
+      "sourceSha256": "1e7910141d121ee3598acf229cbc8c145720cecb971c8e016367e101da5f6918",
+      "before": {
+        "foregroundBaseline": {
+          "count": 10,
+          "totalMs": 32,
+          "minMs": 3,
+          "p50Ms": 3,
+          "p95Ms": 4,
+          "maxMs": 4
+        },
+        "caseStartLoadAverage": [
+          4.2314453125,
+          4.19921875,
+          4.9150390625
+        ],
+        "totalMs": 925,
+        "firstIndexedPageMs": 917,
+        "foregroundP95Ms": 16,
+        "stageTotalMs": 227,
+        "creditTotalMs": 44,
+        "publicationTotalMs": 14,
+        "publicationP95Ms": 14,
+        "cancelDrainMs": 8,
+        "rssSampledHighKiB": 115184,
+        "heap": []
+      },
+      "after": {
+        "foregroundBaseline": {
+          "count": 10,
+          "totalMs": 40,
+          "minMs": 3,
+          "p50Ms": 4,
+          "p95Ms": 5,
+          "maxMs": 5
+        },
+        "caseStartLoadAverage": [
+          6.54541015625,
+          5.48486328125,
+          5.00244140625
+        ],
+        "totalMs": 1234,
+        "firstIndexedPageMs": 1222,
+        "foregroundP95Ms": 27,
+        "stageTotalMs": 252,
+        "creditTotalMs": 66,
+        "publicationTotalMs": 21,
+        "publicationP95Ms": 21,
+        "cancelDrainMs": 12,
+        "rssSampledHighKiB": 114864,
+        "heap": []
+      },
+      "totalTimeChangePercent": 33.405405405405396
+    }
+  ]
+}

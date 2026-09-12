@@ -1,0 +1,377 @@
+{
+  "host": "bundled-tauri-native-host",
+  "timestamp": "2026-09-10T18:45:23.549138+00:00",
+  "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+  "namespace": "e89151d9-3182-47d8-9dee-e234dd8991fe",
+  "binarySha256": "f2a2440db89abec2b434ce77c77b418b6f86627a91fff5ad58c2fc12c0cf3270",
+  "phases": [
+    {
+      "phase": "regions",
+      "exitCode": 0,
+      "stderr": "",
+      "webview": {
+        "success": true,
+        "phase": "regions",
+        "checks": [
+          "actual macOS keychain backend initialized",
+          "native registry reports local transport",
+          "native files available while OAuth and notifications remain unavailable",
+          "untracked or OS-keychain cancellation never claims prevention of an external commit",
+          "existing global connection IDs and order remain available",
+          "openai: global transport makes no regional claim",
+          "anthropic: global transport makes no regional claim",
+          "us: desktop connection resolves to exact production native regional transport",
+          "us: native capability exposes the exact fixed review, model, endpoint, modalities, origin and binding",
+          "us: synthetic loopback registration cannot claim regional processing",
+          "us: native model discovery injects only the bound opaque credential without returning secret text",
+          "us: real Rust HTTP dispatch preserves exact synthetic Chat Completions bytes and opaque credential isolation",
+          "us: wrong account refused before HTTP",
+          "us: regional credential cannot cross into the other registered destination",
+          "us: unreviewed endpoint refused before HTTP",
+          "us: wrong generation method refused before HTTP",
+          "us: caller supplied absolute URL refused before HTTP",
+          "us: synthetic regional credential removed from OS keychain",
+          "eu: desktop connection resolves to exact production native regional transport",
+          "eu: native capability exposes the exact fixed review, model, endpoint, modalities, origin and binding",
+          "eu: synthetic loopback registration cannot claim regional processing",
+          "eu: native model discovery injects only the bound opaque credential without returning secret text",
+          "eu: real Rust HTTP dispatch preserves exact synthetic Chat Completions bytes and opaque credential isolation",
+          "eu: wrong account refused before HTTP",
+          "eu: regional credential cannot cross into the other registered destination",
+          "eu: unreviewed endpoint refused before HTTP",
+          "eu: wrong generation method refused before HTTP",
+          "eu: caller supplied absolute URL refused before HTTP",
+          "eu: synthetic regional credential removed from OS keychain"
+        ],
+        "credential": null,
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko)",
+        "origin": "tauri://localhost",
+        "protocol": "tauri:",
+        "capabilities": {
+          "host": "desktop",
+          "nativeFiles": {
+            "available": true,
+            "permission": "prompt",
+            "reason": null
+          },
+          "notifications": {
+            "available": false,
+            "permission": "not_required",
+            "reason": "Native notifications are not implemented."
+          },
+          "oauth": {
+            "available": false,
+            "permission": "not_required",
+            "reason": "Native OAuth callbacks and provider registrations are not implemented."
+          },
+          "providerTransports": [
+            {
+              "capability": {
+                "available": true,
+                "permission": "not_required",
+                "reason": null
+              },
+              "endpointOrigin": "http://127.0.0.1:53605",
+              "id": "native-proof",
+              "kind": "native_direct",
+              "privacy": "local",
+              "relayIdentity": null
+            },
+            {
+              "capability": {
+                "available": true,
+                "permission": "not_required",
+                "reason": null
+              },
+              "endpointOrigin": "https://api.openai.com",
+              "id": "quixi-openai-native-v1",
+              "kind": "native_direct",
+              "privacy": "direct_provider",
+              "relayIdentity": null
+            },
+            {
+              "capability": {
+                "available": true,
+                "permission": "not_required",
+                "reason": null
+              },
+              "endpointOrigin": "https://api.anthropic.com",
+              "id": "quixi-anthropic-native-v1",
+              "kind": "native_direct",
+              "privacy": "direct_provider",
+              "relayIdentity": null
+            },
+            {
+              "capability": {
+                "available": true,
+                "permission": "not_required",
+                "reason": null
+              },
+              "endpointOrigin": "http://127.0.0.1:53605",
+              "id": "quixi-openai-us-native-v1-loopback-proof",
+              "kind": "native_direct",
+              "privacy": "local",
+              "relayIdentity": null
+            },
+            {
+              "capability": {
+                "available": true,
+                "permission": "not_required",
+                "reason": null
+              },
+              "endpointOrigin": "https://us.api.openai.com",
+              "id": "quixi-openai-us-native-v1",
+              "kind": "native_direct",
+              "privacy": "direct_provider",
+              "regionalProcessing": {
+                "binding": {
+                  "accountId": "primary",
+                  "destinationId": "quixi-openai-us-api-v1",
+                  "providerId": "openai",
+                  "transportId": "quixi-openai-us-native-v1"
+                },
+                "configurationId": "openai-us-gpt41-mini-2026-09-10",
+                "endpoints": [
+                  "/v1/chat/completions"
+                ],
+                "inputModalities": [
+                  "text",
+                  "image"
+                ],
+                "modelIds": [
+                  "gpt-4.1-mini-2025-04-14"
+                ],
+                "region": "us",
+                "reviewedAt": 1788998400000,
+                "sourceUrl": "https://developers.openai.com/api/docs/guides/your-data",
+                "upstreamOrigin": "https://us.api.openai.com",
+                "version": 1
+              },
+              "relayIdentity": null
+            },
+            {
+              "capability": {
+                "available": true,
+                "permission": "not_required",
+                "reason": null
+              },
+              "endpointOrigin": "http://127.0.0.1:53605",
+              "id": "quixi-openai-eu-native-v1-loopback-proof",
+              "kind": "native_direct",
+              "privacy": "local",
+              "relayIdentity": null
+            },
+            {
+              "capability": {
+                "available": true,
+                "permission": "not_required",
+                "reason": null
+              },
+              "endpointOrigin": "https://eu.api.openai.com",
+              "id": "quixi-openai-eu-native-v1",
+              "kind": "native_direct",
+              "privacy": "direct_provider",
+              "regionalProcessing": {
+                "binding": {
+                  "accountId": "primary",
+                  "destinationId": "quixi-openai-eu-api-v1",
+                  "providerId": "openai",
+                  "transportId": "quixi-openai-eu-native-v1"
+                },
+                "configurationId": "openai-eu-gpt41-mini-2026-09-10",
+                "endpoints": [
+                  "/v1/chat/completions"
+                ],
+                "inputModalities": [
+                  "text",
+                  "image"
+                ],
+                "modelIds": [
+                  "gpt-4.1-mini-2025-04-14"
+                ],
+                "region": "eu",
+                "reviewedAt": 1788998400000,
+                "sourceUrl": "https://developers.openai.com/api/docs/guides/your-data",
+                "upstreamOrigin": "https://eu.api.openai.com",
+                "version": 1
+              },
+              "relayIdentity": null
+            }
+          ],
+          "secretPersistence": "native",
+          "clipboard": {
+            "available": true,
+            "permission": "prompt",
+            "reason": null
+          }
+        },
+        "fileEvidence": null,
+        "providerEvidence": {
+          "checks": [
+            "existing global connection IDs and order remain available",
+            "openai: global transport makes no regional claim",
+            "anthropic: global transport makes no regional claim",
+            "us: desktop connection resolves to exact production native regional transport",
+            "us: native capability exposes the exact fixed review, model, endpoint, modalities, origin and binding",
+            "us: synthetic loopback registration cannot claim regional processing",
+            "us: native model discovery injects only the bound opaque credential without returning secret text",
+            "us: real Rust HTTP dispatch preserves exact synthetic Chat Completions bytes and opaque credential isolation",
+            "us: wrong account refused before HTTP",
+            "us: regional credential cannot cross into the other registered destination",
+            "us: unreviewed endpoint refused before HTTP",
+            "us: wrong generation method refused before HTTP",
+            "us: caller supplied absolute URL refused before HTTP",
+            "us: synthetic regional credential removed from OS keychain",
+            "eu: desktop connection resolves to exact production native regional transport",
+            "eu: native capability exposes the exact fixed review, model, endpoint, modalities, origin and binding",
+            "eu: synthetic loopback registration cannot claim regional processing",
+            "eu: native model discovery injects only the bound opaque credential without returning secret text",
+            "eu: real Rust HTTP dispatch preserves exact synthetic Chat Completions bytes and opaque credential isolation",
+            "eu: wrong account refused before HTTP",
+            "eu: regional credential cannot cross into the other registered destination",
+            "eu: unreviewed endpoint refused before HTTP",
+            "eu: wrong generation method refused before HTTP",
+            "eu: caller supplied absolute URL refused before HTTP",
+            "eu: synthetic regional credential removed from OS keychain"
+          ],
+          "registrations": [
+            {
+              "connectionId": "openai-us",
+              "transport": {
+                "capability": {
+                  "available": true,
+                  "permission": "not_required",
+                  "reason": null
+                },
+                "endpointOrigin": "https://us.api.openai.com",
+                "id": "quixi-openai-us-native-v1",
+                "kind": "native_direct",
+                "privacy": "direct_provider",
+                "regionalProcessing": {
+                  "binding": {
+                    "accountId": "primary",
+                    "destinationId": "quixi-openai-us-api-v1",
+                    "providerId": "openai",
+                    "transportId": "quixi-openai-us-native-v1"
+                  },
+                  "configurationId": "openai-us-gpt41-mini-2026-09-10",
+                  "endpoints": [
+                    "/v1/chat/completions"
+                  ],
+                  "inputModalities": [
+                    "text",
+                    "image"
+                  ],
+                  "modelIds": [
+                    "gpt-4.1-mini-2025-04-14"
+                  ],
+                  "region": "us",
+                  "reviewedAt": 1788998400000,
+                  "sourceUrl": "https://developers.openai.com/api/docs/guides/your-data",
+                  "upstreamOrigin": "https://us.api.openai.com",
+                  "version": 1
+                },
+                "relayIdentity": null
+              }
+            },
+            {
+              "connectionId": "openai-eu",
+              "transport": {
+                "capability": {
+                  "available": true,
+                  "permission": "not_required",
+                  "reason": null
+                },
+                "endpointOrigin": "https://eu.api.openai.com",
+                "id": "quixi-openai-eu-native-v1",
+                "kind": "native_direct",
+                "privacy": "direct_provider",
+                "regionalProcessing": {
+                  "binding": {
+                    "accountId": "primary",
+                    "destinationId": "quixi-openai-eu-api-v1",
+                    "providerId": "openai",
+                    "transportId": "quixi-openai-eu-native-v1"
+                  },
+                  "configurationId": "openai-eu-gpt41-mini-2026-09-10",
+                  "endpoints": [
+                    "/v1/chat/completions"
+                  ],
+                  "inputModalities": [
+                    "text",
+                    "image"
+                  ],
+                  "modelIds": [
+                    "gpt-4.1-mini-2025-04-14"
+                  ],
+                  "region": "eu",
+                  "reviewedAt": 1788998400000,
+                  "sourceUrl": "https://developers.openai.com/api/docs/guides/your-data",
+                  "upstreamOrigin": "https://eu.api.openai.com",
+                  "version": 1
+                },
+                "relayIdentity": null
+              }
+            }
+          ],
+          "scope": "Production metadata plus separate synthetic loopback dispatch; no physical location or provider account eligibility assertion."
+        }
+      }
+    }
+  ],
+  "success": true,
+  "systemWebKitVersion": "21624.5.1.11.3",
+  "syntheticKeychainCleanup": {
+    "exitCode": 0,
+    "stderr": ""
+  },
+  "fixture": {
+    "requests": 4,
+    "observedDisconnects": 0,
+    "routes": [
+      {
+        "method": "GET",
+        "path": "/v1/models"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/chat/completions"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/models"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/chat/completions"
+      }
+    ]
+  },
+  "scope": "Production native regional registration metadata, with separate origin-substituted loopback copies for actual Rust HTTP dispatch. No regional provider requests, account eligibility, or physical geography verified.",
+  "sourceSha256": {
+    "apps/desktop/src-tauri/src/registered_destinations.rs": "54f5c90e441d6342f5c870cb4d57b9368ed6364578804468f1270a37ab945ca5",
+    "apps/desktop/src-tauri/src/host/mod.rs": "b74c5c83f4c28ddfc7be66e0b3189ff576c60f2bd32d950d4f58222c123be2b3",
+    "apps/desktop/src-tauri/src/host/models.rs": "031cb4bd8d4b1470ca81ab904a6514d679d90e944e030f58a5956cf6915f9708",
+    "apps/desktop/src-tauri/src/host/secrets.rs": "4426dd8a0ff5dda8541f212c8f1786a8d1b61adda87587630500fe5c4abd4b92",
+    "apps/desktop/src-tauri/src/host_proof.rs": "f44ea9482f6842268da08a3e2e05b1507908f1396018ac842a46e214634455a7",
+    "apps/desktop/src-tauri/src/main.rs": "b17f69c3cc6a80bf86a21dc56da35de031bd528e2e4e09bdfbe5e9b6894ebaa4",
+    "apps/desktop/src/host/index.ts": "73fc273c3a050824b7104e1f96d3cca6de7eb14d8dca6c508f772885e54b96b7",
+    "apps/desktop/src/host/provider-connections.ts": "5c4f421637ee0c25c394b69f5014add2b86d3b026ddc5c8b41ad6ffc0cfc30d2",
+    "apps/desktop/tests/host-proof.ts": "935f5d597cf9bb28bb2ebc9185c4fad0b93835789c3a13bc370cea6d4e9bc1db",
+    "apps/desktop/tests/regional-host-proof.ts": "8f4c1a70d82806cfd81a76a968571bb05f4fd60a9e2a8ea4e734a8592e8ce289",
+    "tests/hosts/run_tauri_native_host_proof.py": "a3e726fcaff623511d4bf07929c68ea0c709583293b5bd2e232981bf2164e549",
+    "packages/core/src/contracts/host.ts": "d8007b969a7133a19465c46215f4c563c0515fd6fdea974cfeb1bacc53d8bfce"
+  },
+  "validationCommands": [
+    {
+      "command": "cargo test --locked -p quixi-desktop",
+      "exitCode": 0,
+      "stdout": "   Compiling quixi-desktop v0.0.1 (/Users/eric/QuixiChat/apps/desktop/src-tauri)\n    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.18s\n     Running unittests src/main.rs (target/debug/deps/quixi_desktop-d7a42e074ae4ce12)\n\nrunning 3 tests\ntest registered_destinations::tests::regional_registry_has_exact_origins_bindings_routes_and_evidence ... ok\ntest registered_destinations::tests::modified_regional_registrations_cannot_claim_processing_evidence ... ok\ntest host::secrets::tests::explicit_legacy_handle_migrates_to_one_reopenable_item ... ok\n\ntest result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.31s\n\n"
+    },
+    {
+      "command": "npx tsc --noEmit -p apps/desktop/tests/tsconfig.json",
+      "exitCode": 0,
+      "stdout": ""
+    }
+  ]
+}

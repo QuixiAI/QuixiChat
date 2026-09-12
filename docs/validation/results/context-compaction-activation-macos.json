@@ -1,0 +1,284 @@
+{
+  "status": "passed",
+  "selectedEngines": [
+    "chromium",
+    "webkit"
+  ],
+  "startedAt": "2026-09-10T06:20:48.620Z",
+  "environment": {
+    "platform": "darwin",
+    "release": "25.6.0",
+    "arch": "arm64",
+    "osVersion": "26.6.2",
+    "node": "v22.23.1"
+  },
+  "sourceSha256": {
+    "packages/storage/src/client/archive.ts": "844981f196ebee613c584dadf3d1cef2c1af15f3aa06daf253d6d48c3b553c24",
+    "packages/storage/src/client/selection.ts": "3be6215f42123384024fe65de83577a46f82fbc4408270d75c7c0e399a66c59b",
+    "packages/storage/src/client/reconcile-retained.ts": "4f36a87defe0b84885ecd3ab67df36aa4aecde40d7c97b8d6fd4f9722d780e8a",
+    "packages/storage/src/client/retained-archive.ts": "8a2cb708dab495caa9a09585f1611f26856cba4d0ebeb83769ffd5a0f5fc26b2",
+    "packages/storage/src/worker/retained-archive.ts": "79e87d48a4e5559bfb28c8504ac9bc2d854471d59e8988b8eea170cebe290ebd",
+    "packages/storage/src/archive-protocol.ts": "d1c5bb90375de4770b265e2d557f15f90c8f3abcb7bde994a993660bb6c09253",
+    "packages/storage/src/worker/archive.ts": "f84c9ad0e41390d7230b232210ede2577d900d9a7f8f8deb9fc7e7f79aa9153c",
+    "packages/storage/src/worker/archive-runtime.ts": "647e0c309c8defd42bb6e0f2a902e98d0a356bde1f75521a512fb23dd1453a2e",
+    "packages/storage/src/worker/archive-database.ts": "b0ce562d0effbca33e154ea1598864010b4fb9ff830de874130711f893acd266",
+    "packages/storage/src/worker/selection.ts": "281fd0f9088feec8906ce1923255eaff9fb998371e659c8f41d7cd7ed4b4d594",
+    "packages/storage/src/worker/sqlite-module.ts": "fb5889c277872ef8623cb0bb21b8afa58d0b08a8fddabc2caa7b96981f92ddbc",
+    "packages/storage/src/selection/managed-catalog.ts": "4f624d5b5000941944c84574cac9c7241d8a76bd3a299c4d266726d485c356fb",
+    "packages/storage/src/worker/archives/index.ts": "f3425fec39bb0d372c715f4ef89f63adef7f4a1728dc4ac3c3a6af99c52d74c2",
+    "packages/storage/migrations/index.ts": "bd1c63d1f1675877b15b8fc887d163b116587e12b9b555e495e3e6fc39e0f9ac",
+    "packages/core/src/contracts/selection.ts": "5e87c6b21f0aea9cd139c2ca09d66d31614fc725d3163fb00c982d0ec3c7584b",
+    "packages/core/src/contracts/archives.ts": "db664351740b6fa07eb08a285c9be6b123f7c6d8dde344d8b966d4a9f0ff442f",
+    "packages/storage/tests/selection/integration/index.ts": "cdfe2dd0d7daeb350c00833e724466ffd6e069c0815e5957c1ea1258eaa36f2c",
+    "packages/storage/tests/selection/integration/run.mjs": "fc1bd6adfbdcdf78dfbcfc77f92c5b7d158f79a9b31afe3111510356a05bdd7c",
+    "tooling/browser-engines.mjs": "136f16e63e905ae4c8305c7adedfce2411eff13b04f914054f8fb718155d0df1"
+  },
+  "hosts": [
+    {
+      "name": "chromium",
+      "status": "passed",
+      "checks": [
+        "actual default bootstrap/schema11 and public managed owner/follower commits survive complete client closure and reopen",
+        "portable export and real bounded restore produce schema11 isolated candidate; review preparation does not change active selection",
+        "forged full candidate summary and changed source sync high-water refuse real activation and preserve active source",
+        "positively live registered generation prevents activation; explicit partial completion and producer release permit a fresh review",
+        "lost real activation reply resolves through global committed receipt; stale follower writes fail; actual candidate opens with exact snapshot history, NUL/Unicode text and 2MiB original bytes",
+        "global same-ID receipt and public read-only retained source rows/sync history remain available after source clients close; selected snapshot excludes the later source thread",
+        "complete persistent browser-process restart preserves selected candidate, exact canonical/blob history and global activation receipt",
+        "deleting selected archive namespace blocks selection/open but global committed receipt remains inspectable without fallback or recreation",
+        "subsequent whole catalog-root loss with surviving default bootstrap marker fails instead of selecting default or recreating the deliberately deleted candidate; retained default survives"
+      ],
+      "refusals": [
+        {
+          "code": "CONFLICT",
+          "message": "ArchiveStorageError: Activation review token does not match its durable review.",
+          "detail": {
+            "code": "CONFLICT",
+            "message": "Activation review token does not match its durable review.",
+            "requestId": "66ebb76e-d37c-453f-a7f5-46a093d53706",
+            "operationId": "3d1f04ee-212f-4202-a990-be8b3c9d9817",
+            "retry": "never",
+            "details": {}
+          }
+        },
+        {
+          "code": "CONFLICT",
+          "message": "ArchiveStorageError: Active history changed after replacement review.",
+          "detail": {
+            "code": "CONFLICT",
+            "message": "Active history changed after replacement review.",
+            "requestId": "3b943e81-f571-4784-a100-fde2ff23df3f",
+            "operationId": "08d4cdd4-5911-46b0-9852-a7dadff7774b",
+            "retry": "never",
+            "details": {}
+          }
+        },
+        {
+          "code": "CONFLICT",
+          "message": "ArchiveStorageError: Stop active generations and finish producer recovery before replacing the active archive.",
+          "detail": {
+            "code": "CONFLICT",
+            "message": "Stop active generations and finish producer recovery before replacing the active archive.",
+            "requestId": "d8418e96-c53a-43ff-b6b2-6a6f7b9741a0",
+            "operationId": "c4c6d19e-35cc-4c4c-9786-cf77eda7e88a",
+            "retry": "never",
+            "details": {}
+          }
+        },
+        {
+          "code": "CONFLICT",
+          "message": "ArchiveStorageError: The active archive changed; this context cannot write under its old selection.",
+          "detail": {
+            "code": "CONFLICT",
+            "message": "The active archive changed; this context cannot write under its old selection.",
+            "requestId": "c2caa746-edb9-43cc-b2fd-c99c6db516bf",
+            "operationId": null,
+            "retry": "never",
+            "details": {}
+          }
+        }
+      ],
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36",
+      "initialOpfs": [],
+      "copy": {
+        "job": {
+          "candidate": {
+            "archiveId": "2c542199-b1dc-4ce3-bd14-6388e6e611bf",
+            "schemaVersion": 11,
+            "canonicalRecords": 9,
+            "syncOperations": 4,
+            "blobCount": 1,
+            "blobBytes": 2097169,
+            "streamingGenerations": 0,
+            "defaultWorkspaceId": "a6a3c7e0-29d6-4e9a-b566-74ebf886222f",
+            "manifestSha256": "725f3f3cc460e70151b968079d4e2170dec0138c7148af25f7a245016fcea9b7"
+          },
+          "completedBytes": 2808832,
+          "completedRecords": 9,
+          "entryCount": 3,
+          "failure": null,
+          "format": "portable",
+          "jobId": "7423f2e5-17db-49b0-af13-d3b9f1007476",
+          "kind": "restore",
+          "output": null,
+          "phase": "ready",
+          "sourceSchemaVersion": null,
+          "state": "ready",
+          "totalBytes": 2808832,
+          "totalRecords": 9
+        },
+        "peakChunkBytes": 65536,
+        "byteLength": 2808832,
+        "steps": 36
+      },
+      "lostReply": {
+        "code": "UNKNOWN_OUTCOME",
+        "message": "ArchiveStorageError: The active archive changed; this context cannot write under its old selection. A dispatched request has an unknown outcome; inspect its original operation identity before retrying.",
+        "detail": {
+          "code": "UNKNOWN_OUTCOME",
+          "message": "The active archive changed; this context cannot write under its old selection. A dispatched request has an unknown outcome; inspect its original operation identity before retrying.",
+          "requestId": "0fef6c06-2b97-425e-ad3c-0f1e44ba5654",
+          "operationId": "e8d88cfa-6e7f-4ad2-9796-77608b4921b5",
+          "retry": "same_operation_id",
+          "details": {}
+        }
+      },
+      "catalogLoss": {
+        "code": "IO_ERROR",
+        "message": "ArchiveStorageError: Selection catalog could not be opened; existing archives remain retained. BlobStorageError: The archive selection catalog is missing after prior initialization; recover the retained catalog before reopening.",
+        "detail": {
+          "code": "IO_ERROR",
+          "message": "Selection catalog could not be opened; existing archives remain retained. BlobStorageError: The archive selection catalog is missing after prior initialization; recover the retained catalog before reopening.",
+          "requestId": "5095da8c-d7a0-40c1-94e1-4e9f272ad4bf",
+          "operationId": null,
+          "retry": "after_user_action",
+          "details": {}
+        }
+      }
+    },
+    {
+      "name": "webkit",
+      "status": "passed",
+      "checks": [
+        "actual default bootstrap/schema11 and public managed owner/follower commits survive complete client closure and reopen",
+        "portable export and real bounded restore produce schema11 isolated candidate; review preparation does not change active selection",
+        "forged full candidate summary and changed source sync high-water refuse real activation and preserve active source",
+        "positively live registered generation prevents activation; explicit partial completion and producer release permit a fresh review",
+        "lost real activation reply resolves through global committed receipt; stale follower writes fail; actual candidate opens with exact snapshot history, NUL/Unicode text and 2MiB original bytes",
+        "global same-ID receipt and public read-only retained source rows/sync history remain available after source clients close; selected snapshot excludes the later source thread",
+        "complete persistent browser-process restart preserves selected candidate, exact canonical/blob history and global activation receipt",
+        "deleting selected archive namespace blocks selection/open but global committed receipt remains inspectable without fallback or recreation",
+        "subsequent whole catalog-root loss with surviving default bootstrap marker fails instead of selecting default or recreating the deliberately deleted candidate; retained default survives"
+      ],
+      "refusals": [
+        {
+          "code": "CONFLICT",
+          "message": "ArchiveStorageError: Activation review token does not match its durable review.",
+          "detail": {
+            "code": "CONFLICT",
+            "message": "Activation review token does not match its durable review.",
+            "requestId": "162a31c9-de4c-4ea2-ad38-9a96a40dfcc6",
+            "operationId": "f7892da2-ddcd-4581-86b6-dc2f681971f5",
+            "retry": "never",
+            "details": {}
+          }
+        },
+        {
+          "code": "CONFLICT",
+          "message": "ArchiveStorageError: Active history changed after replacement review.",
+          "detail": {
+            "code": "CONFLICT",
+            "message": "Active history changed after replacement review.",
+            "requestId": "94fb15e4-9339-4a20-bd24-5e7c1954f59b",
+            "operationId": "aba6b05b-dc6a-45a2-9a5c-298b02261d6c",
+            "retry": "never",
+            "details": {}
+          }
+        },
+        {
+          "code": "CONFLICT",
+          "message": "ArchiveStorageError: Stop active generations and finish producer recovery before replacing the active archive.",
+          "detail": {
+            "code": "CONFLICT",
+            "message": "Stop active generations and finish producer recovery before replacing the active archive.",
+            "requestId": "dbae8f25-2551-4e3a-a814-cb14541ac382",
+            "operationId": "f57de952-cc52-4c61-b461-4c1050b5c826",
+            "retry": "never",
+            "details": {}
+          }
+        },
+        {
+          "code": "CONFLICT",
+          "message": "ArchiveStorageError: The active archive changed; this context cannot write under its old selection.",
+          "detail": {
+            "code": "CONFLICT",
+            "message": "The active archive changed; this context cannot write under its old selection.",
+            "requestId": "e84aac6b-1769-4e69-83e4-7dfac7483693",
+            "operationId": null,
+            "retry": "never",
+            "details": {}
+          }
+        }
+      ],
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+      "initialOpfs": [],
+      "copy": {
+        "job": {
+          "candidate": {
+            "archiveId": "d399e2a3-7d33-4650-afa4-b958b57c3a64",
+            "schemaVersion": 11,
+            "canonicalRecords": 9,
+            "syncOperations": 4,
+            "blobCount": 1,
+            "blobBytes": 2097169,
+            "streamingGenerations": 0,
+            "defaultWorkspaceId": "c0c82c5f-3d0c-4d07-9a73-538dfd1d257d",
+            "manifestSha256": "d54c4c5015fc458c753ac98151f134d5067a42d8090ad5be305229a24ab7ddb1"
+          },
+          "completedBytes": 2808832,
+          "completedRecords": 9,
+          "entryCount": 3,
+          "failure": null,
+          "format": "portable",
+          "jobId": "eb5c0ec4-d53a-49df-9e56-afb7878decd1",
+          "kind": "restore",
+          "output": null,
+          "phase": "ready",
+          "sourceSchemaVersion": null,
+          "state": "ready",
+          "totalBytes": 2808832,
+          "totalRecords": 9
+        },
+        "peakChunkBytes": 65536,
+        "byteLength": 2808832,
+        "steps": 36
+      },
+      "lostReply": {
+        "code": "UNKNOWN_OUTCOME",
+        "message": "ArchiveStorageError: The active archive changed; this context cannot write under its old selection. A dispatched request has an unknown outcome; inspect its original operation identity before retrying.",
+        "detail": {
+          "code": "UNKNOWN_OUTCOME",
+          "message": "The active archive changed; this context cannot write under its old selection. A dispatched request has an unknown outcome; inspect its original operation identity before retrying.",
+          "requestId": "193e8a22-d0ac-413b-871a-5d811c259149",
+          "operationId": "835d0b83-13f0-410b-8b77-614f6f87545d",
+          "retry": "same_operation_id",
+          "details": {}
+        }
+      },
+      "catalogLoss": {
+        "code": "IO_ERROR",
+        "message": "ArchiveStorageError: Selection catalog could not be opened; existing archives remain retained. BlobStorageError: The archive selection catalog is missing after prior initialization; recover the retained catalog before reopening.",
+        "detail": {
+          "code": "IO_ERROR",
+          "message": "Selection catalog could not be opened; existing archives remain retained. BlobStorageError: The archive selection catalog is missing after prior initialization; recover the retained catalog before reopening.",
+          "requestId": "7d8187e8-2be9-4586-8b86-4d444389268f",
+          "operationId": null,
+          "retry": "after_user_action",
+          "details": {}
+        }
+      }
+    }
+  ],
+  "origin": "http://127.0.0.1:51435",
+  "finishedAt": "2026-09-10T06:20:58.898Z"
+}

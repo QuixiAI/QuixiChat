@@ -1,0 +1,1015 @@
+{
+  "createdAt": "2026-09-09T09:13:44.527Z",
+  "report": "post-fix.json",
+  "comparisonToolSha256": "271f711495a05285c88befc076a4584917ca52ec4df70229c09d6acdd184d29b",
+  "reportSha256": "af32d39b68a1d5dbc4cb404dfa0dbeee4e7775c965d5f87be601c89731ba72cc",
+  "sourceStable": true,
+  "status": "passed",
+  "parserSha256": "5de8099723be073084ade9e371597083efa230d74e199c7f5fc1fdd675cf2671",
+  "rangePatchToolSha256": "185a271ba2977f79a23b1223d05d203068bbcc20d10a8ff5c7fd5bbae27098de",
+  "rows": [
+    {
+      "engine": "chromium",
+      "fixture": "1",
+      "status": "passed",
+      "baselineStatus": "passed",
+      "sourceBytes": 1683,
+      "sourceSha256": "3e318e5196a931424d1801943726943d492e5a020f764a9e8aaaf5924f5be846",
+      "totalExtractionMs": 226.10000000149012,
+      "baselineTotalExtractionMs": 335.1000000014901,
+      "totalRatio": 0.674723962997567,
+      "firstIndexedPageMs": 209.5,
+      "baselineFirstIndexedPageMs": 304.5,
+      "indexCreditRequestMs": 27.100000001490116,
+      "baselineIndexCreditRequestMs": 70.10000000149012,
+      "indexCreditRatio": 0.3865905848917839,
+      "publicationRequestMs": 9.300000004470348,
+      "foregroundP95Ms": 12.100000001490116,
+      "baselineForegroundP95Ms": 21.200000002980232,
+      "foregroundBaselineP95Ms": 7.600000001490116,
+      "cancellationDrainMs": null,
+      "baselineCancellationDrainMs": null,
+      "postExtractionObservation": {
+        "durationMs": 1088.7000000029802,
+        "foreground": {
+          "count": 10,
+          "totalMs": 48.49999999254942,
+          "minMs": 3.2000000029802322,
+          "p50Ms": 4.199999995529652,
+          "p95Ms": 11,
+          "maxMs": 11
+        },
+        "foregroundSamples": [
+          {
+            "elapsedMs": 114.5,
+            "latencyMs": 11
+          },
+          {
+            "elapsedMs": 226.60000000149012,
+            "latencyMs": 4.200000002980232
+          },
+          {
+            "elapsedMs": 331.90000000596046,
+            "latencyMs": 3.5999999940395355
+          },
+          {
+            "elapsedMs": 436.70000000298023,
+            "latencyMs": 3.600000001490116
+          },
+          {
+            "elapsedMs": 540.8000000044703,
+            "latencyMs": 4.199999995529652
+          },
+          {
+            "elapsedMs": 645.9000000059605,
+            "latencyMs": 3.6999999955296516
+          },
+          {
+            "elapsedMs": 750.6000000014901,
+            "latencyMs": 3.2000000029802322
+          },
+          {
+            "elapsedMs": 854.2000000029802,
+            "latencyMs": 3.399999998509884
+          },
+          {
+            "elapsedMs": 958.6000000014901,
+            "latencyMs": 5.899999998509884
+          },
+          {
+            "elapsedMs": 1065.6000000014901,
+            "latencyMs": 5.700000002980232
+          }
+        ],
+        "searchStatusReads": [
+          {
+            "elapsedMs": 0,
+            "latencyMs": 13.400000005960464,
+            "state": "ready",
+            "indexedChunks": 1,
+            "pendingSources": 0
+          },
+          {
+            "elapsedMs": 1071.3000000044703,
+            "latencyMs": 17.299999997019768,
+            "state": "ready",
+            "indexedChunks": 1,
+            "pendingSources": 0
+          }
+        ],
+        "searchNotifications": 0
+      },
+      "totalTimedPublicRequestMs": 115.6000000089407,
+      "workflowOutsideTimedPublicRequestsMs": 110.49999999254942,
+      "observedDescendantPeakRssKiB": 487776,
+      "memoryBoundary": "Whole browser descendant RSS includes storage/browser/shared pages and is not isolated parser heap; no parser-inclusive attribution proved.",
+      "failure": null,
+      "storedPages": 1,
+      "pageCount": 1
+    },
+    {
+      "engine": "chromium",
+      "fixture": "100",
+      "status": "passed",
+      "baselineStatus": "passed",
+      "sourceBytes": 65679,
+      "sourceSha256": "6f70ed0674549f75fcaf6577c88d8c19539b168f1e0a05180b048c50878a2785",
+      "totalExtractionMs": 7217.29999999702,
+      "baselineTotalExtractionMs": 11740.39999999851,
+      "totalRatio": 0.6147405539843562,
+      "firstIndexedPageMs": 234,
+      "baselineFirstIndexedPageMs": 395,
+      "indexCreditRequestMs": 3353.2999999970198,
+      "baselineIndexCreditRequestMs": 6501.700000017881,
+      "indexCreditRatio": 0.5157574172889855,
+      "publicationRequestMs": 1216.8000000044703,
+      "foregroundP95Ms": 42.399999998509884,
+      "baselineForegroundP95Ms": 21.600000001490116,
+      "foregroundBaselineP95Ms": 19.80000000447035,
+      "cancellationDrainMs": null,
+      "baselineCancellationDrainMs": null,
+      "postExtractionObservation": {
+        "durationMs": 1108.8999999985099,
+        "foreground": {
+          "count": 10,
+          "totalMs": 69.09999999403954,
+          "minMs": 4.199999995529652,
+          "p50Ms": 7.700000002980232,
+          "p95Ms": 9.600000001490116,
+          "maxMs": 9.600000001490116
+        },
+        "foregroundSamples": [
+          {
+            "elapsedMs": 118.29999999701977,
+            "latencyMs": 9.600000001490116
+          },
+          {
+            "elapsedMs": 228.89999999850988,
+            "latencyMs": 8.399999998509884
+          },
+          {
+            "elapsedMs": 338.3999999985099,
+            "latencyMs": 5.5
+          },
+          {
+            "elapsedMs": 444.5,
+            "latencyMs": 7.799999997019768
+          },
+          {
+            "elapsedMs": 553.1000000014901,
+            "latencyMs": 4.199999995529652
+          },
+          {
+            "elapsedMs": 658.3999999985099,
+            "latencyMs": 5.700000002980232
+          },
+          {
+            "elapsedMs": 765.1000000014901,
+            "latencyMs": 5
+          },
+          {
+            "elapsedMs": 871,
+            "latencyMs": 8.199999995529652
+          },
+          {
+            "elapsedMs": 980.2999999970198,
+            "latencyMs": 7.700000002980232
+          },
+          {
+            "elapsedMs": 1089,
+            "latencyMs": 7
+          }
+        ],
+        "searchStatusReads": [
+          {
+            "elapsedMs": 0.10000000149011612,
+            "latencyMs": 17.69999999552965,
+            "state": "ready",
+            "indexedChunks": 100,
+            "pendingSources": 0
+          },
+          {
+            "elapsedMs": 1096,
+            "latencyMs": 12.899999998509884,
+            "state": "ready",
+            "indexedChunks": 100,
+            "pendingSources": 0
+          }
+        ],
+        "searchNotifications": 0
+      },
+      "totalTimedPublicRequestMs": 6953.9000000059605,
+      "workflowOutsideTimedPublicRequestsMs": 263.3999999910593,
+      "observedDescendantPeakRssKiB": 637712,
+      "memoryBoundary": "Whole browser descendant RSS includes storage/browser/shared pages and is not isolated parser heap; no parser-inclusive attribution proved.",
+      "failure": null,
+      "storedPages": 100,
+      "pageCount": 100
+    },
+    {
+      "engine": "chromium",
+      "fixture": "1000",
+      "status": "passed",
+      "baselineStatus": "passed",
+      "sourceBytes": 652935,
+      "sourceSha256": "79e522013b1322a16d23beb8b4e4e9db58773c92c819e3860770e6344ed5402a",
+      "totalExtractionMs": 54943,
+      "baselineTotalExtractionMs": 156898.1000000015,
+      "totalRatio": 0.3501826981971068,
+      "firstIndexedPageMs": 488,
+      "baselineFirstIndexedPageMs": 778.1000000014901,
+      "indexCreditRequestMs": 27542.199999973178,
+      "baselineIndexCreditRequestMs": 98354.70000007004,
+      "indexCreditRatio": 0.28002932244166845,
+      "publicationRequestMs": 8569.200000025332,
+      "foregroundP95Ms": 16.399999998509884,
+      "baselineForegroundP95Ms": 35.5,
+      "foregroundBaselineP95Ms": 5.0999999940395355,
+      "cancellationDrainMs": null,
+      "baselineCancellationDrainMs": null,
+      "postExtractionObservation": {
+        "durationMs": 1081.2000000029802,
+        "foreground": {
+          "count": 10,
+          "totalMs": 38.399999998509884,
+          "minMs": 2.899999998509884,
+          "p50Ms": 3.7999999970197678,
+          "p95Ms": 5.5,
+          "maxMs": 5.5
+        },
+        "foregroundSamples": [
+          {
+            "elapsedMs": 116.40000000596046,
+            "latencyMs": 4.799999997019768
+          },
+          {
+            "elapsedMs": 221.5,
+            "latencyMs": 2.9000000059604645
+          },
+          {
+            "elapsedMs": 325.40000000596046,
+            "latencyMs": 2.899999998509884
+          },
+          {
+            "elapsedMs": 428.6000000014901,
+            "latencyMs": 5.100000001490116
+          },
+          {
+            "elapsedMs": 534.7000000029802,
+            "latencyMs": 3.2000000029802322
+          },
+          {
+            "elapsedMs": 638.9000000059605,
+            "latencyMs": 3.1999999955296516
+          },
+          {
+            "elapsedMs": 743.1000000014901,
+            "latencyMs": 3.100000001490116
+          },
+          {
+            "elapsedMs": 847.3000000044703,
+            "latencyMs": 3.899999998509884
+          },
+          {
+            "elapsedMs": 952.3000000044703,
+            "latencyMs": 5.5
+          },
+          {
+            "elapsedMs": 1058.8000000044703,
+            "latencyMs": 3.7999999970197678
+          }
+        ],
+        "searchStatusReads": [
+          {
+            "elapsedMs": 0,
+            "latencyMs": 15.700000002980232,
+            "state": "ready",
+            "indexedChunks": 1000,
+            "pendingSources": 0
+          },
+          {
+            "elapsedMs": 1062.6000000014901,
+            "latencyMs": 18.600000001490116,
+            "state": "ready",
+            "indexedChunks": 1000,
+            "pendingSources": 0
+          }
+        ],
+        "searchNotifications": 0
+      },
+      "totalTimedPublicRequestMs": 53080.3999998942,
+      "workflowOutsideTimedPublicRequestsMs": 1862.6000001057982,
+      "observedDescendantPeakRssKiB": 745376,
+      "memoryBoundary": "Whole browser descendant RSS includes storage/browser/shared pages and is not isolated parser heap; no parser-inclusive attribution proved.",
+      "failure": null,
+      "storedPages": 1000,
+      "pageCount": 1000
+    },
+    {
+      "engine": "chromium",
+      "fixture": "image",
+      "status": "passed",
+      "baselineStatus": "rejected",
+      "sourceBytes": 31115264,
+      "sourceSha256": "3fec2fa189a9b2ac5f932ca2faf41594f5cdac49822f1f8def49fa894b32c54f",
+      "totalExtractionMs": 21650.29999999702,
+      "baselineTotalExtractionMs": 19782.10000000149,
+      "totalRatio": null,
+      "firstIndexedPageMs": 21632.29999999702,
+      "baselineFirstIndexedPageMs": null,
+      "indexCreditRequestMs": 29.399999998509884,
+      "baselineIndexCreditRequestMs": 0,
+      "indexCreditRatio": null,
+      "publicationRequestMs": 12.799999997019768,
+      "foregroundP95Ms": 16.299999997019768,
+      "baselineForegroundP95Ms": null,
+      "foregroundBaselineP95Ms": 12.600000001490116,
+      "cancellationDrainMs": null,
+      "baselineCancellationDrainMs": null,
+      "postExtractionObservation": {
+        "durationMs": 1064.1000000014901,
+        "foreground": {
+          "count": 10,
+          "totalMs": 42.29999999701977,
+          "minMs": 3.5,
+          "p50Ms": 4.399999998509884,
+          "p95Ms": 5.399999998509884,
+          "maxMs": 5.399999998509884
+        },
+        "foregroundSamples": [
+          {
+            "elapsedMs": 106.39999999850988,
+            "latencyMs": 4.700000002980232
+          },
+          {
+            "elapsedMs": 211.79999999701977,
+            "latencyMs": 5.399999998509884
+          },
+          {
+            "elapsedMs": 317.8999999985099,
+            "latencyMs": 4.100000001490116
+          },
+          {
+            "elapsedMs": 423.1000000014901,
+            "latencyMs": 5.0999999940395355
+          },
+          {
+            "elapsedMs": 529,
+            "latencyMs": 4.399999998509884
+          },
+          {
+            "elapsedMs": 634.5,
+            "latencyMs": 3.600000001490116
+          },
+          {
+            "elapsedMs": 739.1999999955297,
+            "latencyMs": 4.4000000059604645
+          },
+          {
+            "elapsedMs": 844.6000000014901,
+            "latencyMs": 3.5999999940395355
+          },
+          {
+            "elapsedMs": 949.1999999955297,
+            "latencyMs": 3.5
+          },
+          {
+            "elapsedMs": 1053.7999999970198,
+            "latencyMs": 3.5
+          }
+        ],
+        "searchStatusReads": [
+          {
+            "elapsedMs": 0,
+            "latencyMs": 6,
+            "state": "ready",
+            "indexedChunks": 1,
+            "pendingSources": 0
+          },
+          {
+            "elapsedMs": 1057.2999999970198,
+            "latencyMs": 6.800000004470348,
+            "state": "ready",
+            "indexedChunks": 1,
+            "pendingSources": 0
+          }
+        ],
+        "searchNotifications": 0
+      },
+      "totalTimedPublicRequestMs": 11006.299999840558,
+      "workflowOutsideTimedPublicRequestsMs": 10644.000000156462,
+      "observedDescendantPeakRssKiB": 739024,
+      "memoryBoundary": "Whole browser descendant RSS includes storage/browser/shared pages and is not isolated parser heap; no parser-inclusive attribution proved.",
+      "failure": null,
+      "storedPages": 1,
+      "pageCount": 1
+    },
+    {
+      "engine": "chromium",
+      "fixture": "cancel-1000",
+      "status": "passed",
+      "baselineStatus": "passed",
+      "sourceBytes": 652935,
+      "sourceSha256": "79e522013b1322a16d23beb8b4e4e9db58773c92c819e3860770e6344ed5402a",
+      "totalExtractionMs": 708.4000000059605,
+      "baselineTotalExtractionMs": 766.6999999955297,
+      "totalRatio": 0.9239598278467339,
+      "firstIndexedPageMs": 692.7000000029802,
+      "baselineFirstIndexedPageMs": 734.5,
+      "indexCreditRequestMs": 35.20000000298023,
+      "baselineIndexCreditRequestMs": 67.70000000298023,
+      "indexCreditRatio": 0.5199409158261549,
+      "publicationRequestMs": 12.099999994039536,
+      "foregroundP95Ms": 15.199999995529652,
+      "baselineForegroundP95Ms": 24.399999998509884,
+      "foregroundBaselineP95Ms": 12.199999995529652,
+      "cancellationDrainMs": 15.700000002980232,
+      "baselineCancellationDrainMs": 32.19999999552965,
+      "postExtractionObservation": {
+        "durationMs": 1064.8999999985099,
+        "foreground": {
+          "count": 10,
+          "totalMs": 42.19999999552965,
+          "minMs": 3.6999999955296516,
+          "p50Ms": 4.200000002980232,
+          "p95Ms": 4.700000002980232,
+          "maxMs": 4.700000002980232
+        },
+        "foregroundSamples": [
+          {
+            "elapsedMs": 108.10000000149012,
+            "latencyMs": 4.600000001490116
+          },
+          {
+            "elapsedMs": 213.80000000447035,
+            "latencyMs": 4.399999998509884
+          },
+          {
+            "elapsedMs": 318.3999999985099,
+            "latencyMs": 4.700000002980232
+          },
+          {
+            "elapsedMs": 424.1000000014901,
+            "latencyMs": 4.399999998509884
+          },
+          {
+            "elapsedMs": 529,
+            "latencyMs": 4.200000002980232
+          },
+          {
+            "elapsedMs": 634.3000000044703,
+            "latencyMs": 4
+          },
+          {
+            "elapsedMs": 739.3000000044703,
+            "latencyMs": 4
+          },
+          {
+            "elapsedMs": 844.3000000044703,
+            "latencyMs": 4.199999995529652
+          },
+          {
+            "elapsedMs": 949.6000000014901,
+            "latencyMs": 4
+          },
+          {
+            "elapsedMs": 1054.3000000044703,
+            "latencyMs": 3.6999999955296516
+          }
+        ],
+        "searchStatusReads": [
+          {
+            "elapsedMs": 0,
+            "latencyMs": 7.700000002980232,
+            "state": "ready",
+            "indexedChunks": 1,
+            "pendingSources": 0
+          },
+          {
+            "elapsedMs": 1058,
+            "latencyMs": 6.899999998509884,
+            "state": "ready",
+            "indexedChunks": 1,
+            "pendingSources": 0
+          }
+        ],
+        "searchNotifications": 0
+      },
+      "totalTimedPublicRequestMs": 344.99999998509884,
+      "workflowOutsideTimedPublicRequestsMs": 363.4000000208616,
+      "observedDescendantPeakRssKiB": 528368,
+      "memoryBoundary": "Whole browser descendant RSS includes storage/browser/shared pages and is not isolated parser heap; no parser-inclusive attribution proved.",
+      "failure": {
+        "code": "CANCELLED",
+        "message": "ExtractionError: Document extraction cancelled; published pages remain available."
+      },
+      "storedPages": 1,
+      "pageCount": 1000
+    },
+    {
+      "engine": "webkit",
+      "fixture": "1",
+      "status": "passed",
+      "baselineStatus": "passed",
+      "sourceBytes": 1683,
+      "sourceSha256": "3e318e5196a931424d1801943726943d492e5a020f764a9e8aaaf5924f5be846",
+      "totalExtractionMs": 383,
+      "baselineTotalExtractionMs": 170,
+      "totalRatio": 2.2529411764705882,
+      "firstIndexedPageMs": 353,
+      "baselineFirstIndexedPageMs": 161,
+      "indexCreditRequestMs": 49,
+      "baselineIndexCreditRequestMs": 14,
+      "indexCreditRatio": 3.5,
+      "publicationRequestMs": 15,
+      "foregroundP95Ms": 45,
+      "baselineForegroundP95Ms": 8,
+      "foregroundBaselineP95Ms": 65,
+      "cancellationDrainMs": null,
+      "baselineCancellationDrainMs": null,
+      "postExtractionObservation": {
+        "durationMs": 1142,
+        "foreground": {
+          "count": 10,
+          "totalMs": 97,
+          "minMs": 3,
+          "p50Ms": 7,
+          "p95Ms": 43,
+          "maxMs": 43
+        },
+        "foregroundSamples": [
+          {
+            "elapsedMs": 112,
+            "latencyMs": 7
+          },
+          {
+            "elapsedMs": 220,
+            "latencyMs": 4
+          },
+          {
+            "elapsedMs": 325,
+            "latencyMs": 5
+          },
+          {
+            "elapsedMs": 431,
+            "latencyMs": 7
+          },
+          {
+            "elapsedMs": 538,
+            "latencyMs": 5
+          },
+          {
+            "elapsedMs": 643,
+            "latencyMs": 9
+          },
+          {
+            "elapsedMs": 752,
+            "latencyMs": 3
+          },
+          {
+            "elapsedMs": 856,
+            "latencyMs": 6
+          },
+          {
+            "elapsedMs": 962,
+            "latencyMs": 8
+          },
+          {
+            "elapsedMs": 1071,
+            "latencyMs": 43
+          }
+        ],
+        "searchStatusReads": [
+          {
+            "elapsedMs": 0,
+            "latencyMs": 11,
+            "state": "ready",
+            "indexedChunks": 1,
+            "pendingSources": 0
+          },
+          {
+            "elapsedMs": 1114,
+            "latencyMs": 28,
+            "state": "ready",
+            "indexedChunks": 1,
+            "pendingSources": 0
+          }
+        ],
+        "searchNotifications": 0
+      },
+      "totalTimedPublicRequestMs": 174,
+      "workflowOutsideTimedPublicRequestsMs": 209,
+      "observedDescendantPeakRssKiB": 115584,
+      "memoryBoundary": "WebKit XPC WebContent/Networking/GPU have PPID1 and are excluded; descendant-only RSS is not extraction memory.",
+      "failure": null,
+      "storedPages": 1,
+      "pageCount": 1
+    },
+    {
+      "engine": "webkit",
+      "fixture": "100",
+      "status": "passed",
+      "baselineStatus": "passed",
+      "sourceBytes": 65679,
+      "sourceSha256": "6f70ed0674549f75fcaf6577c88d8c19539b168f1e0a05180b048c50878a2785",
+      "totalExtractionMs": 6239,
+      "baselineTotalExtractionMs": 4140,
+      "totalRatio": 1.5070048309178743,
+      "firstIndexedPageMs": 360,
+      "baselineFirstIndexedPageMs": 185,
+      "indexCreditRequestMs": 2252,
+      "baselineIndexCreditRequestMs": 1913,
+      "indexCreditRatio": 1.1772085729221118,
+      "publicationRequestMs": 1175,
+      "foregroundP95Ms": 28,
+      "baselineForegroundP95Ms": 29,
+      "foregroundBaselineP95Ms": 16,
+      "cancellationDrainMs": null,
+      "baselineCancellationDrainMs": null,
+      "postExtractionObservation": {
+        "durationMs": 1077,
+        "foreground": {
+          "count": 10,
+          "totalMs": 54,
+          "minMs": 3,
+          "p50Ms": 6,
+          "p95Ms": 8,
+          "maxMs": 8
+        },
+        "foregroundSamples": [
+          {
+            "elapsedMs": 108,
+            "latencyMs": 3
+          },
+          {
+            "elapsedMs": 212,
+            "latencyMs": 4
+          },
+          {
+            "elapsedMs": 317,
+            "latencyMs": 3
+          },
+          {
+            "elapsedMs": 420,
+            "latencyMs": 6
+          },
+          {
+            "elapsedMs": 526,
+            "latencyMs": 6
+          },
+          {
+            "elapsedMs": 633,
+            "latencyMs": 6
+          },
+          {
+            "elapsedMs": 739,
+            "latencyMs": 8
+          },
+          {
+            "elapsedMs": 848,
+            "latencyMs": 5
+          },
+          {
+            "elapsedMs": 953,
+            "latencyMs": 7
+          },
+          {
+            "elapsedMs": 1061,
+            "latencyMs": 6
+          }
+        ],
+        "searchStatusReads": [
+          {
+            "elapsedMs": 0,
+            "latencyMs": 7,
+            "state": "ready",
+            "indexedChunks": 100,
+            "pendingSources": 0
+          },
+          {
+            "elapsedMs": 1067,
+            "latencyMs": 10,
+            "state": "ready",
+            "indexedChunks": 100,
+            "pendingSources": 0
+          }
+        ],
+        "searchNotifications": 0
+      },
+      "totalTimedPublicRequestMs": 5752,
+      "workflowOutsideTimedPublicRequestsMs": 487,
+      "observedDescendantPeakRssKiB": 114656,
+      "memoryBoundary": "WebKit XPC WebContent/Networking/GPU have PPID1 and are excluded; descendant-only RSS is not extraction memory.",
+      "failure": null,
+      "storedPages": 100,
+      "pageCount": 100
+    },
+    {
+      "engine": "webkit",
+      "fixture": "1000",
+      "status": "passed",
+      "baselineStatus": "passed",
+      "sourceBytes": 652935,
+      "sourceSha256": "79e522013b1322a16d23beb8b4e4e9db58773c92c819e3860770e6344ed5402a",
+      "totalExtractionMs": 30740,
+      "baselineTotalExtractionMs": 45468,
+      "totalRatio": 0.6760798803554148,
+      "firstIndexedPageMs": 574,
+      "baselineFirstIndexedPageMs": 317,
+      "indexCreditRequestMs": 11761,
+      "baselineIndexCreditRequestMs": 30132,
+      "indexCreditRatio": 0.3903159431833267,
+      "publicationRequestMs": 5738,
+      "foregroundP95Ms": 14,
+      "baselineForegroundP95Ms": 7,
+      "foregroundBaselineP95Ms": 9,
+      "cancellationDrainMs": null,
+      "baselineCancellationDrainMs": null,
+      "postExtractionObservation": {
+        "durationMs": 1088,
+        "foreground": {
+          "count": 10,
+          "totalMs": 56,
+          "minMs": 2,
+          "p50Ms": 3,
+          "p95Ms": 21,
+          "maxMs": 21
+        },
+        "foregroundSamples": [
+          {
+            "elapsedMs": 113,
+            "latencyMs": 2
+          },
+          {
+            "elapsedMs": 216,
+            "latencyMs": 2
+          },
+          {
+            "elapsedMs": 319,
+            "latencyMs": 21
+          },
+          {
+            "elapsedMs": 441,
+            "latencyMs": 3
+          },
+          {
+            "elapsedMs": 544,
+            "latencyMs": 3
+          },
+          {
+            "elapsedMs": 647,
+            "latencyMs": 3
+          },
+          {
+            "elapsedMs": 751,
+            "latencyMs": 2
+          },
+          {
+            "elapsedMs": 854,
+            "latencyMs": 2
+          },
+          {
+            "elapsedMs": 957,
+            "latencyMs": 16
+          },
+          {
+            "elapsedMs": 1073,
+            "latencyMs": 2
+          }
+        ],
+        "searchStatusReads": [
+          {
+            "elapsedMs": 0,
+            "latencyMs": 12,
+            "state": "ready",
+            "indexedChunks": 1000,
+            "pendingSources": 0
+          },
+          {
+            "elapsedMs": 1075,
+            "latencyMs": 13,
+            "state": "ready",
+            "indexedChunks": 1000,
+            "pendingSources": 0
+          }
+        ],
+        "searchNotifications": 0
+      },
+      "totalTimedPublicRequestMs": 28377,
+      "workflowOutsideTimedPublicRequestsMs": 2363,
+      "observedDescendantPeakRssKiB": 115408,
+      "memoryBoundary": "WebKit XPC WebContent/Networking/GPU have PPID1 and are excluded; descendant-only RSS is not extraction memory.",
+      "failure": null,
+      "storedPages": 1000,
+      "pageCount": 1000
+    },
+    {
+      "engine": "webkit",
+      "fixture": "image",
+      "status": "passed",
+      "baselineStatus": "rejected",
+      "sourceBytes": 31115264,
+      "sourceSha256": "3fec2fa189a9b2ac5f932ca2faf41594f5cdac49822f1f8def49fa894b32c54f",
+      "totalExtractionMs": 15585,
+      "baselineTotalExtractionMs": 10367,
+      "totalRatio": null,
+      "firstIndexedPageMs": 15577,
+      "baselineFirstIndexedPageMs": null,
+      "indexCreditRequestMs": 13,
+      "baselineIndexCreditRequestMs": 0,
+      "indexCreditRatio": null,
+      "publicationRequestMs": 5,
+      "foregroundP95Ms": 7,
+      "baselineForegroundP95Ms": null,
+      "foregroundBaselineP95Ms": 15,
+      "cancellationDrainMs": null,
+      "baselineCancellationDrainMs": null,
+      "postExtractionObservation": {
+        "durationMs": 1044,
+        "foreground": {
+          "count": 10,
+          "totalMs": 27,
+          "minMs": 2,
+          "p50Ms": 3,
+          "p95Ms": 3,
+          "maxMs": 3
+        },
+        "foregroundSamples": [
+          {
+            "elapsedMs": 104,
+            "latencyMs": 3
+          },
+          {
+            "elapsedMs": 208,
+            "latencyMs": 2
+          },
+          {
+            "elapsedMs": 311,
+            "latencyMs": 2
+          },
+          {
+            "elapsedMs": 414,
+            "latencyMs": 3
+          },
+          {
+            "elapsedMs": 518,
+            "latencyMs": 3
+          },
+          {
+            "elapsedMs": 622,
+            "latencyMs": 2
+          },
+          {
+            "elapsedMs": 725,
+            "latencyMs": 3
+          },
+          {
+            "elapsedMs": 828,
+            "latencyMs": 3
+          },
+          {
+            "elapsedMs": 932,
+            "latencyMs": 3
+          },
+          {
+            "elapsedMs": 1036,
+            "latencyMs": 3
+          }
+        ],
+        "searchStatusReads": [
+          {
+            "elapsedMs": 0,
+            "latencyMs": 4,
+            "state": "ready",
+            "indexedChunks": 1,
+            "pendingSources": 0
+          },
+          {
+            "elapsedMs": 1039,
+            "latencyMs": 5,
+            "state": "ready",
+            "indexedChunks": 1,
+            "pendingSources": 0
+          }
+        ],
+        "searchNotifications": 0
+      },
+      "totalTimedPublicRequestMs": 7980,
+      "workflowOutsideTimedPublicRequestsMs": 7605,
+      "observedDescendantPeakRssKiB": 114848,
+      "memoryBoundary": "WebKit XPC WebContent/Networking/GPU have PPID1 and are excluded; descendant-only RSS is not extraction memory.",
+      "failure": null,
+      "storedPages": 1,
+      "pageCount": 1
+    },
+    {
+      "engine": "webkit",
+      "fixture": "cancel-1000",
+      "status": "passed",
+      "baselineStatus": "passed",
+      "sourceBytes": 652935,
+      "sourceSha256": "79e522013b1322a16d23beb8b4e4e9db58773c92c819e3860770e6344ed5402a",
+      "totalExtractionMs": 698,
+      "baselineTotalExtractionMs": 535,
+      "totalRatio": 1.3046728971962618,
+      "firstIndexedPageMs": 681,
+      "baselineFirstIndexedPageMs": 525,
+      "indexCreditRequestMs": 24,
+      "baselineIndexCreditRequestMs": 17,
+      "indexCreditRatio": 1.411764705882353,
+      "publicationRequestMs": 14,
+      "foregroundP95Ms": 20,
+      "baselineForegroundP95Ms": 10,
+      "foregroundBaselineP95Ms": 8,
+      "cancellationDrainMs": 17,
+      "baselineCancellationDrainMs": 10,
+      "postExtractionObservation": {
+        "durationMs": 1057,
+        "foreground": {
+          "count": 10,
+          "totalMs": 39,
+          "minMs": 2,
+          "p50Ms": 4,
+          "p95Ms": 6,
+          "maxMs": 6
+        },
+        "foregroundSamples": [
+          {
+            "elapsedMs": 108,
+            "latencyMs": 6
+          },
+          {
+            "elapsedMs": 215,
+            "latencyMs": 4
+          },
+          {
+            "elapsedMs": 320,
+            "latencyMs": 4
+          },
+          {
+            "elapsedMs": 425,
+            "latencyMs": 4
+          },
+          {
+            "elapsedMs": 530,
+            "latencyMs": 4
+          },
+          {
+            "elapsedMs": 634,
+            "latencyMs": 5
+          },
+          {
+            "elapsedMs": 739,
+            "latencyMs": 4
+          },
+          {
+            "elapsedMs": 843,
+            "latencyMs": 2
+          },
+          {
+            "elapsedMs": 946,
+            "latencyMs": 3
+          },
+          {
+            "elapsedMs": 1050,
+            "latencyMs": 3
+          }
+        ],
+        "searchStatusReads": [
+          {
+            "elapsedMs": 0,
+            "latencyMs": 8,
+            "state": "ready",
+            "indexedChunks": 1,
+            "pendingSources": 0
+          },
+          {
+            "elapsedMs": 1053,
+            "latencyMs": 4,
+            "state": "ready",
+            "indexedChunks": 1,
+            "pendingSources": 0
+          }
+        ],
+        "searchNotifications": 0
+      },
+      "totalTimedPublicRequestMs": 341,
+      "workflowOutsideTimedPublicRequestsMs": 357,
+      "observedDescendantPeakRssKiB": 114368,
+      "memoryBoundary": "WebKit XPC WebContent/Networking/GPU have PPID1 and are excluded; descendant-only RSS is not extraction memory.",
+      "failure": {
+        "code": "CANCELLED",
+        "message": "ExtractionError: Document extraction cancelled; published pages remain available."
+      },
+      "storedPages": 1,
+      "pageCount": 1000
+    }
+  ],
+  "limits": [
+    "Baseline is a split single-run capture, Chromium used nonpersistent contexts; post-fix uses fresh persistent profiles and new origins per case. No statistically controlled cross-engine or before/after speedup guarantee.",
+    "Image baseline was rejected; its failure-path time is not a successful extraction baseline and totalRatio is null.",
+    "Workflow time outside timed requests includes parser, chunk reads/ACKs, scheduling, and cleanup; it is not an isolated idle-maintenance CPU measurement.",
+    "Post-extraction read latency and searchStatus timing observe residual queue/status cost; explicit probes themselves can affect scheduling.",
+    "Descendant RSS excludes WebKit XPC content processes; no parser heap or hard memory bound follows."
+  ]
+}

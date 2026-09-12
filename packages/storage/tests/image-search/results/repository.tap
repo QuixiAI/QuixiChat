@@ -1,0 +1,49 @@
+TAP version 13
+# (node:37664) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# quixi-extraction-schema [{"version":1,"name":"canonical_records_and_atomic_operations","checksum":"16724a690f441af0162c0b49f3256bac152fb98a31f1a99c6ef40076d7dfd7d5"},{"version":2,"name":"source_and_generation_uniqueness","checksum":"bba4a045a82d42714d43d9ee709412eab759da65122b7abb244186b6a2d9b24f"},{"version":3,"name":"verified_blob_catalog_and_transfer_recovery","checksum":"705b844874dece6b5cc1881cb45ccc3b2907a2719036283fe165a0a07f6fe14e"},{"version":4,"name":"hidden_normalized_import_groups","checksum":"9988edddaf4483b380ab33f1017f141304484b1bc1662e74fb1c2de75ca2467e"},{"version":5,"name":"bounded_importer_work_and_uuid_checkpoints","checksum":"cd43d1aeb7f9fdf33c6efd0dcb3b87d00eef9169fe002c81ee6856750a49468b"},{"version":6,"name":"generation_producer_fences","checksum":"32e6035cd4ea8cabe3d327772c0d291de08a1ae24c2a23b360dc6661c6315c11"},{"version":7,"name":"local_workspace_and_message_recency","checksum":"da34a61082c74eae78301b25b83cc8525addfb6df1b5e450c33c2a63ec974151"},{"version":8,"name":"streaming_text_across_transport_provenance","checksum":"9c6a87fde402ff33d164ee7db92b34088ab05d458686670ee3d317dc24ca1263"},{"version":9,"name":"mandatory_archive_selection_protocol","checksum":"d124a56c86b6b42a8429114e253030b1cbc88e774ec8ff3e44cc9105dd5b6dab"},{"version":10,"name":"stable_local_operation_claims","checksum":"3f20f0a536ee783777602dda90a3f575cf17ddfe6bba277dc9cfa740e413770b"},{"version":11,"name":"reviewed_context_attachment_exclusions","checksum":"5dcdae7dd8c7a054cc3a1cbe4e2bd19f0890e7c213b90b30f3457c43667e75f3"},{"version":12,"name":"reviewed_summary_proposal_provenance","checksum":"231dc27fdff21cd5a8c48722f34af18df2b939978f17be62de19dcd24c0427e8"}]
+# Subtest: filename-only missing image is searchable with exact filename offsets and media/thread filters
+ok 1 - filename-only missing image is searchable with exact filename offsets and media/thread filters
+  ---
+  duration_ms: 78.091
+  type: 'test'
+  ...
+# Subtest: filename is a separate source and never prefixes or shifts an existing description
+ok 2 - filename is a separate source and never prefixes or shifts an existing description
+  ---
+  duration_ms: 29.444125
+  type: 'test'
+  ...
+# Subtest: metadata-only filename changes fence old heads immediately and replay the unchanged caption identity
+ok 3 - metadata-only filename changes fence old heads immediately and replay the unchanged caption identity
+  ---
+  duration_ms: 52.646542
+  type: 'test'
+  ...
+# Subtest: null filename creates no invented text and later metadata becomes searchable
+ok 4 - null filename creates no invented text and later metadata becomes searchable
+  ---
+  duration_ms: 39.989417
+  type: 'test'
+  ...
+# Subtest: new Image parts and thread metadata changes discover filenames after the initial index is ready
+ok 5 - new Image parts and thread metadata changes discover filenames after the initial index is ready
+  ---
+  duration_ms: 60.2755
+  type: 'test'
+  ...
+# Subtest: a filename changed while its source is held cannot publish stale chunks
+ok 6 - a filename changed while its source is held cannot publish stale chunks
+  ---
+  duration_ms: 40.813292
+  type: 'test'
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 6
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 527.318916

@@ -1,0 +1,12 @@
+{
+  "route": "simd",
+  "passed": true,
+  "engine": "Node WebAssembly",
+  "repeated_inferences": 20,
+  "model_bytes": 91231307,
+  "workspace_bytes": 7866420,
+  "linear_memory_bytes": 183107584,
+  "tokenizer_bytes": 959947,
+  "stage_hooks_in_production": false,
+  "browser_verified": false
+}

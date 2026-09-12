@@ -1,0 +1,459 @@
+import { chromium, webkit } from "@playwright/test";
+import { browserEngines } from "../../tooling/browser-engines.mjs";
+import { build, preview } from "vite";
+import {
+  mkdtemp,
+  mkdir,
+  readFile,
+  writeFile,
+  readdir,
+  rm,
+} from "node:fs/promises";
+import { resolve, relative } from "node:path";
+import {
+  tmpdir,
+  platform,
+  release,
+  arch,
+  loadavg,
+  totalmem,
+  cpus,
+} from "node:os";
+import { execFileSync } from "node:child_process";
+import { createHash } from "node:crypto";
+import { startHeapSampler } from "./heap-sampler.mjs";
+const root = resolve(import.meta.dirname, "../..");
+const selected = browserEngines({ chromium, webkit });
+const heapEnabled = process.env.QUIXI_PERF_HEAP !== "off";
+if (process.env.QUIXI_PERF_HEAP && !["on","off"].includes(process.env.QUIXI_PERF_HEAP)) throw new Error("QUIXI_PERF_HEAP must be on or off");
+const defaultCases = ["1", "100", "1000", "image", "cancel-1000"];
+const allCases = [...defaultCases,"dense-1","dense-10","dense-100","cancel-dense-100"];
+const cases =
+  process.env.QUIXI_PERF_CASES === undefined
+    ? defaultCases
+    : process.env.QUIXI_PERF_CASES.split(",");
+if (
+  !cases.length ||
+  new Set(cases).size !== cases.length ||
+  cases.some((key) => !allCases.includes(key))
+)
+  throw new Error(
+    "QUIXI_PERF_CASES must be a nonempty unique comma-separated subset of 1,100,1000,image,cancel-1000,dense-1,dense-10,dense-100,cancel-dense-100",
+  );
+const reportName = process.env.QUIXI_PERF_REPORT ?? "production-browser";
+if (!/^[a-z0-9][a-z0-9-]{0,63}$/.test(reportName))
+  throw new Error("Invalid QUIXI_PERF_REPORT name");
+const temporary = await mkdtemp(resolve(tmpdir(), "quixi-pdf-perf-"));
+const output = resolve(import.meta.dirname, `results/${reportName}.json`);
+const report = {
+  status: "running",
+  startedAt: new Date().toISOString(),
+  selectedEngines: selected.map(([name]) => name),
+  environment: {
+    platform: platform(),
+    release: release(),
+    arch: arch(),
+    node: process.version,
+    osVersion:
+      platform() === "darwin"
+        ? execFileSync("sw_vers", ["-productVersion"], {
+            encoding: "utf8",
+          }).trim()
+        : release(),
+    cpu: cpus()[0]?.model,
+    cpuCount: cpus().length,
+    totalMemoryBytes: totalmem(),
+    startLoadAverage: loadavg(),
+  },
+  method: {
+    heap: "Dense Chromium cases: 500ms documented CDP Runtime.getHeapUsage per identified target/isolate, no forced GC, with reply times and page progress. Sampled high water is not peak/live-after-GC/hard memory bound; backing storage is separate. WebKit heap unavailable.",
+    heapEnabled,
+    repetitions: 1,
+    order: cases,
+    freshBrowserPerCase: true,
+    freshOriginPerCase: true,
+    browserLaunch:
+      "launchPersistentContext; fresh profile per case; browser PID is the unique new live direct child of this runner",
+    sourceSetupIncludedInExtraction: false,
+    postExtractionObservation:
+      "Outside totalExtractionMs: ten foreground reads spaced100ms apart, two timed public searchStatus reads, and advisory search notification count. Queue-inclusive latency; no isolated background SQL CPU attribution.",
+    rss: "500 ms ps browser-server process-tree RSS. Includes browser/storage/PDF workers and shared pages (which may be counted more than once); excludes reparented or OS-managed processes. Sampling misses brief peaks. Not parser heap, physical memory, or a hard memory bound. Runner/OS file caches are outside this process-tree measure.",
+    foreground:
+      "Bounded public readEntities(document,1 item,8192 bytes), dispatched immediately after real publishExtractionPage without awaiting its reply. First page and every tenth page. Queue-inclusive latency, observer overhead included. Baseline: ten reads immediately before extraction.",
+    limits:
+      "32 MiB source cap; PDF.js may allocate whole source, decompressed structures and page arrays. No production heap guarantee. Single synthetic run per case is diagnostic, not a release threshold or controlled distribution.",
+  },
+  sourceSha256: {},
+  hosts: [],
+};
+const save = async () => {
+  await mkdir(resolve(import.meta.dirname, "results"), { recursive: true });
+  await writeFile(output, JSON.stringify(report, null, 2) + "\n");
+};
+const digest = async (path) =>
+  createHash("sha256")
+    .update(await readFile(path))
+    .digest("hex");
+async function filesUnder(directory) {
+  const out = [];
+  for (const entry of await readdir(directory, { withFileTypes: true })) {
+    const path = resolve(directory, entry.name);
+    if (entry.isDirectory()) out.push(...(await filesUnder(path)));
+    else out.push(path);
+  }
+  return out;
+}
+async function fingerprint() {
+  const paths = [
+    "package-lock.json",
+    "tooling/browser-engines.mjs",
+    "perf/documents/run.mjs",
+    "perf/documents/heap-sampler.mjs",
+    "perf/documents/generate_dense_fixtures.py",
+    "perf/documents/fixtures/dense-manifest.json",
+    "perf/documents/index.ts",
+    "perf/documents/index.html",
+    "perf/documents/generate_image_fixture.py",
+    "perf/documents/fixtures/manifest.json",
+    "packages/storage/sqlite/dist/sqlite3.wasm",
+    "node_modules/pdfjs-dist/build/pdf.worker.mjs",
+    "packages/documents/tooling/pdfjs-range-patch.mjs",
+  ];
+  for (const dir of [
+    "packages/documents/src",
+    "packages/storage/src",
+    "packages/core/src",
+  ])
+    for (const path of await filesUnder(resolve(root, dir)))
+      if (/\.(ts|json)$/.test(path)) paths.push(relative(root, path));
+  for (const n of [1, 100, 1000])
+    paths.push(`packages/documents/tests/fixtures/pages-${n}.pdf`);
+  return Object.fromEntries(
+    await Promise.all(
+      paths
+        .sort()
+        .map(async (path) => [path, await digest(resolve(root, path))]),
+    ),
+  );
+}
+function liveChildPids() {
+  const rows = execFileSync("ps", ["-axo", "pid=,ppid="], { encoding: "utf8" })
+    .trim()
+    .split("\n")
+    .map((line) => line.trim().split(/\s+/).map(Number));
+  return rows
+    .filter(([pid, parent]) => {
+      if (parent !== process.pid) return false;
+      try {
+        process.kill(pid, 0);
+        return true;
+      } catch {
+        return false;
+      }
+    })
+    .map(([pid]) => pid);
+}
+function memorySampler(pid) {
+  const data = {
+    browserPid: pid,
+    baselineRssKiB: null,
+    peakRssKiB: null,
+    peakProcessCount: 0,
+    unavailable: null,
+    samples: [],
+    droppedSamples: 0,
+  };
+  const started = performance.now();
+  const sample = () => {
+    try {
+      const rows = execFileSync("ps", ["-axo", "pid=,ppid=,rss="], {
+        encoding: "utf8",
+        timeout: 3000,
+      })
+        .trim()
+        .split("\n")
+        .map((line) => line.trim().split(/\s+/).map(Number));
+      if (
+        !rows.some((row) => row[0] === pid) ||
+        rows.some((row) => row.length !== 3 || !row.every(Number.isFinite))
+      )
+        throw new Error("ps process-tree output unavailable");
+      const ids = new Set([pid]);
+      let changed = true;
+      while (changed) {
+        changed = false;
+        for (const [child, parent] of rows)
+          if (ids.has(parent) && !ids.has(child)) {
+            ids.add(child);
+            changed = true;
+          }
+      }
+      const selected = rows.filter((row) => ids.has(row[0]));
+      const rssKiB = selected.reduce((sum, row) => sum + row[2], 0);
+      data.baselineRssKiB ??= rssKiB;
+      data.peakRssKiB = Math.max(data.peakRssKiB ?? rssKiB, rssKiB);
+      data.peakProcessCount = Math.max(data.peakProcessCount, selected.length);
+      if (data.samples.length < 2400)
+        data.samples.push({
+          elapsedMs: performance.now() - started,
+          rssKiB,
+          processCount: selected.length,
+        });
+      else data.droppedSamples++;
+    } catch (error) {
+      data.unavailable ??= String(error);
+    }
+  };
+  sample();
+  const timer = setInterval(sample, 500);
+  return {
+    stop() {
+      clearInterval(timer);
+      sample();
+      return data;
+    },
+  };
+}
+let server;
+try {
+  execFileSync(
+    process.execPath,
+    ["packages/documents/tests/verify-distribution.mjs"],
+    { cwd: root, stdio: "pipe" },
+  );
+  // Existing pinned fixture tools only; generated source remains ignored.
+  execFileSync(
+    "uv",
+    [
+      "run",
+      "--with",
+      "reportlab==5.0.1",
+      "--with",
+      "pypdf==6.18.0",
+      "--with",
+      "pillow==12.3.0",
+      "--with",
+      "charset-normalizer==3.4.7",
+      "python",
+      "perf/documents/generate_image_fixture.py",
+    ],
+    { cwd: root, stdio: "pipe", timeout: 120000 },
+  );
+  execFileSync("uv", ["run","--with","reportlab==5.0.1","--with","pypdf==6.18.0","--with","pillow==12.3.0","--with","charset-normalizer==3.4.7","python","perf/documents/generate_dense_fixtures.py"], {cwd:root,stdio:"pipe",timeout:120000});
+  report.denseFixtures = JSON.parse(await readFile(resolve(import.meta.dirname,"fixtures/dense-manifest.json"),"utf8"));
+  report.sourceSha256 = await fingerprint();
+  report.imageFixture = JSON.parse(
+    await readFile(
+      resolve(import.meta.dirname, "fixtures/manifest.json"),
+      "utf8",
+    ),
+  );
+  const outDir = resolve(temporary, "dist");
+  await build({
+    configFile: false,
+    root: import.meta.dirname,
+    logLevel: "warn",
+    plugins: [
+      {
+        name: "retain-pdf-licenses",
+        async generateBundle() {
+          for (const name of await readdir(
+            resolve(root, "packages/documents/third-party"),
+          ))
+            this.emitFile({
+              type: "asset",
+              fileName: `third-party/${name}`,
+              source: await readFile(
+                resolve(root, "packages/documents/third-party", name),
+              ),
+            });
+        },
+      },
+    ],
+    build: { outDir, emptyOutDir: true, assetsInlineLimit: 0 },
+    worker: { format: "es" },
+  });
+  report.buildSha256 = Object.fromEntries(
+    await Promise.all(
+      (await filesUnder(outDir)).map(async (path) => [
+        relative(outDir, path),
+        await digest(path),
+      ]),
+    ),
+  );
+  server = await preview({
+    configFile: false,
+    root: import.meta.dirname,
+    logLevel: "warn",
+    build: { outDir },
+    preview: { host: "127.0.0.1", port: 0, strictPort: true },
+  });
+  const address = server.httpServer.address();
+  if (!address || typeof address === "string")
+    throw new Error("No isolated origin");
+  let origin = `http://127.0.0.1:${address.port}`;
+  report.origin = origin;
+  report.origins = [origin];
+  await save();
+  for (const [name, engine] of selected) {
+    const host = { name, status: "running", cases: [] };
+    report.hosts.push(host);
+    for (const key of report.method.order) {
+      if (!server) {
+        server = await preview({
+          configFile: false,
+          root: import.meta.dirname,
+          logLevel: "warn",
+          build: { outDir },
+          preview: { host: "127.0.0.1", port: 0, strictPort: true },
+        });
+        const nextAddress = server.httpServer.address();
+        if (!nextAddress || typeof nextAddress === "string")
+          throw new Error("No isolated case origin");
+        origin = `http://127.0.0.1:${nextAddress.port}`;
+        if (report.origins.includes(origin))
+          throw new Error("Case origin was reused");
+        report.origins.push(origin);
+      }
+      const beforeChildren = new Set(liveChildPids());
+      const profile = resolve(temporary, `profile-${name}-${key}`);
+      const context = await engine.launchPersistentContext(
+        profile,
+        { headless: true, ...(name === "chromium" && key.includes("dense") ? {args:["--remote-debugging-port=0"]} : {}) },
+      );
+      const browserPids = liveChildPids().filter(
+        (pid) => !beforeChildren.has(pid),
+      );
+      const browserPid = browserPids.length === 1 ? browserPids[0] : null;
+      const page = await context.newPage();
+      const record = {
+        fixture: key,
+        origin,
+        status: "running",
+        startedAt: new Date().toISOString(),
+        loadAverage: loadavg(),
+        externalRequests: [],
+        pageErrors: [],
+      };
+      host.cases.push(record);
+      await save();
+      let memory, heap;
+      context.on("request", (request) => {
+        if (
+          !request.url().startsWith(origin + "/") &&
+          record.externalRequests.length < 20
+        )
+          record.externalRequests.push(request.url());
+      });
+      page.on("pageerror", (error) => {
+        if (record.pageErrors.length < 20)
+          record.pageErrors.push(String(error));
+      });
+      try {
+        await page.goto(origin);
+        await page.waitForFunction(() => !!window.documentPerf);
+        record.userAgent = await page.evaluate(() => navigator.userAgent);
+        record.initialOpfs = await page.evaluate(async () => {
+          const names = [];
+          for await (const entry of (
+            await navigator.storage.getDirectory()
+          ).values())
+            names.push(entry.name);
+          return names;
+        });
+        if (record.initialOpfs.length)
+          throw new Error("Case must start with fresh OPFS");
+        const setupStart = performance.now();
+        record.source = await page.evaluate(
+          (key) => window.documentPerf.setup(key),
+          key.replace(/^cancel-/, ""),
+        );
+        record.setupMs = performance.now() - setupStart;
+        if(key.includes("dense")) { const fixture=report.denseFixtures[`${key.replace(/^cancel-/, "")}.pdf`]; if(record.source.sourceSha256!==fixture.sha256 || record.source.sourceBytes!==fixture.bytes) throw new Error("Dense fixture hash/length mismatch"); }
+        memory = memorySampler(browserPid);
+        if (key.includes("dense")) {
+          if(name === "chromium" && heapEnabled) { try { heap = await startHeapSampler(profile,origin); } catch(error) { record.heap={available:false,reason:String(error)}; } }
+          else record.heap={available:false,reason:!heapEnabled ? "CDP observer explicitly disabled for control capture" : "WebKit does not expose Chromium CDP Runtime.getHeapUsage; descendant RSS excludes OS-managed XPC services on macOS."};
+        }
+        console.log(
+          `${name} ${key}: production persistence measurement started`,
+        );
+        let timeout;
+        try {
+          record.extraction = await Promise.race([
+            page.evaluate(
+              (cancel) => window.documentPerf.run(cancel),
+              key.startsWith("cancel-"),
+            ),
+            new Promise((_, reject) => {
+              timeout = setTimeout(
+                () =>
+                  reject(new Error("Bounded 20-minute case deadline exceeded")),
+                1200000,
+              );
+            }),
+          ]);
+        } finally {
+          clearTimeout(timeout);
+        }
+        if(heap) { record.heap=await heap.stop(); heap=undefined; }
+        record.memory = memory.stop();
+        memory = undefined;
+        if (record.externalRequests.length || record.pageErrors.length)
+          throw new Error("Unexpected browser errors or external requests");
+        const expectedPages =
+          key === "image" ? 1 : Number(key.replace(/^cancel-/, "").replace(/^dense-/, ""));
+        if (record.extraction.pageCount !== expectedPages)
+          throw new Error("Fixture page count mismatch");
+        if(key.includes("dense") && !record.extraction.failure && (record.extraction.maxPageUTF16<100000 || record.extraction.maxPageUTF16>200000 || record.extraction.totalTextUTF16 < expectedPages*100000)) throw new Error("Dense output workload was not attained");
+        record.status =
+          !key.startsWith("cancel-") && record.extraction.failure
+            ? "rejected"
+            : "passed";
+        console.log(
+          `${name} ${key} ${record.status}: ${record.extraction.totalExtractionMs.toFixed(1)} ms total, first indexed ${record.extraction.firstIndexedPageMs?.toFixed(1)} ms, RSS peak ${record.memory.peakRssKiB} KiB`,
+        );
+        await page.evaluate(() => window.documentPerf.close());
+      } catch (error) {
+        record.status = "failed";
+        record.error = String(error?.stack ?? error);
+        throw error;
+      } finally {
+        if(heap) record.heap=await heap.stop();
+        if (memory) record.memory = memory.stop();
+        record.finishedAt = new Date().toISOString();
+        await context.close();
+        await new Promise((resolve) => server.httpServer.close(resolve));
+        server = undefined;
+        await save();
+      }
+    }
+    host.status = host.cases.some((record) => record.status === "rejected")
+      ? "measured_with_rejections"
+      : "passed";
+    await save();
+  }
+  const after = await fingerprint();
+  report.sourceStable =
+    JSON.stringify(after) === JSON.stringify(report.sourceSha256);
+  if (!report.sourceStable) {
+    report.sourceSha256After = after;
+    throw new Error("Measured source changed during capture");
+  }
+  report.status = report.hosts.some(
+    (host) => host.status === "measured_with_rejections",
+  )
+    ? "measured_with_rejections"
+    : "passed";
+} catch (error) {
+  report.status = "failed";
+  report.error = String(error?.stack ?? error);
+  process.exitCode = 1;
+  console.error(report.error);
+} finally {
+  report.finishedAt = new Date().toISOString();
+  report.endLoadAverage = loadavg();
+  await save();
+  if (server) await new Promise((resolve) => server.httpServer.close(resolve));
+  await rm(temporary, { recursive: true, force: true });
+}

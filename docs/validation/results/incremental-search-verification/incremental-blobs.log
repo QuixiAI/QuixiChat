@@ -1,0 +1,120 @@
+TAP version 13
+# (node:86153) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: incremental begin reads zero bytes; each advance respects budget and forbids premature reads/slices
+ok 1 - incremental begin reads zero bytes; each advance respects budget and forbids premature reads/slices
+  ---
+  duration_ms: 14.196333
+  type: 'test'
+  ...
+# Subtest: foreground openRead finishes a pending shared digest exactly once and promotes the original parent
+ok 2 - foreground openRead finishes a pending shared digest exactly once and promotes the original parent
+  ---
+  duration_ms: 14.898042
+  type: 'test'
+  ...
+# Subtest: foreground cancellation preserves another pending verifier and its existing hash progress
+ok 3 - foreground cancellation preserves another pending verifier and its existing hash progress
+  ---
+  duration_ms: 11.659083
+  type: 'test'
+  ...
+# Subtest: bad digest invalidates every shared waiter and never exposes bytes
+ok 4 - bad digest invalidates every shared waiter and never exposes bytes
+  ---
+  duration_ms: 0.2805
+  type: 'test'
+  ...
+# Subtest: eight pending reservations enforce slot limit; discard and close release all shared references
+ok 5 - eight pending reservations enforce slot limit; discard and close release all shared references
+  ---
+  duration_ms: 8.950334
+  type: 'test'
+  ...
+# Subtest: zero-length content requires one digest finalization step without disk reads
+ok 6 - zero-length content requires one digest finalization step without disk reads
+  ---
+  duration_ms: 0.141125
+  type: 'test'
+  ...
+# Subtest: invalid budgets do not advance or discard a valid pending transfer
+ok 7 - invalid budgets do not advance or discard a valid pending transfer
+  ---
+  duration_ms: 0.181042
+  type: 'test'
+  ...
+# Subtest: catalog trusts only completed verification and retains promoted parent for ranged reads
+ok 8 - catalog trusts only completed verification and retains promoted parent for ranged reads
+  ---
+  duration_ms: 0.336042
+  type: 'test'
+  ...
+# Subtest: catalog incremental reader observes foreground shared verification without rehash
+ok 9 - catalog incremental reader observes foreground shared verification without rehash
+  ---
+  duration_ms: 0.371292
+  type: 'test'
+  ...
+# Subtest: catalog length changes quarantine without spending another byte budget
+ok 10 - catalog length changes quarantine without spending another byte budget
+  ---
+  duration_ms: 0.293792
+  type: 'test'
+  ...
+# Subtest: catalog corrupt content and changed physical size quarantine and release handles
+ok 11 - catalog corrupt content and changed physical size quarantine and release handles
+  ---
+  duration_ms: 0.182083
+  type: 'test'
+  ...
+# Subtest: catalog cancellation, overload, duplicate IDs, and invalid budgets never quarantine good bytes
+ok 12 - catalog cancellation, overload, duplicate IDs, and invalid budgets never quarantine good bytes
+  ---
+  duration_ms: 0.226708
+  type: 'test'
+  ...
+# Subtest: catalog discard removes cursor ownership and removed metadata fails before further hashing
+ok 13 - catalog discard removes cursor ownership and removed metadata fails before further hashing
+  ---
+  duration_ms: 0.104959
+  type: 'test'
+  ...
+# Subtest: cached verified reuse detects changed physical size and invalidates existing readers
+ok 14 - cached verified reuse detects changed physical size and invalidates existing readers
+  ---
+  duration_ms: 0.131
+  type: 'test'
+  ...
+# Subtest: foreground digest failure invalidates a pending catalog reader without any readable fallback
+ok 15 - foreground digest failure invalidates a pending catalog reader without any readable fallback
+  ---
+  duration_ms: 0.141166
+  type: 'test'
+  ...
+# Subtest: publication hashes pending shared bytes without replacing or trusting their unfinished hash
+ok 16 - publication hashes pending shared bytes without replacing or trusting their unfinished hash
+  ---
+  duration_ms: 5.209208
+  type: 'test'
+  ...
+# Subtest: shared corruption clears every catalog cursor so abandoned sibling failures cannot accumulate
+ok 17 - shared corruption clears every catalog cursor so abandoned sibling failures cannot accumulate
+  ---
+  duration_ms: 0.689459
+  type: 'test'
+  ...
+# Subtest: consuming a foreground-promoted incremental parent retires its catalog cursor
+ok 18 - consuming a foreground-promoted incremental parent retires its catalog cursor
+  ---
+  duration_ms: 0.102584
+  type: 'test'
+  ...
+1..18
+# tests 18
+# suites 0
+# pass 18
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 177.730708

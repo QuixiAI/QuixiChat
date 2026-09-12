@@ -1,0 +1,27 @@
+{
+  "allowedOrigins": ["https://chat.example.com"],
+  "destinations": [{
+    "id": "example-provider",
+    "origin": "https://api.example.com",
+    "credential": { "header": "Authorization", "prefix": "Bearer ", "required": true },
+    "routes": [{ "path": "/v1/chat/completions", "methods": ["POST"], "headers": ["content-type"] }]
+  }],
+  "principals": [{
+    "id": "example-account",
+    "tokenSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "destinations": ["example-provider"],
+    "maxConcurrent": 2,
+    "requestsPerMinute": 30,
+    "burst": 10
+  }],
+  "limits": {
+    "maxConcurrent": 8,
+    "requestsPerMinute": 120,
+    "burst": 32,
+    "maxUploadBytes": 8388608,
+    "maxResponseBytes": 67108864,
+    "totalMs": 120000,
+    "idleMs": 30000,
+    "maxConnections": 64
+  }
+}

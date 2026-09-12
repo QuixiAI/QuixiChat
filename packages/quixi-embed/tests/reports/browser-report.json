@@ -1,0 +1,61 @@
+{
+  "results": [
+    {
+      "engine": "chromium",
+      "version": "153.0.8010.12",
+      "passed": true,
+      "route": "scalar",
+      "backend": "wasm-scalar-fp32",
+      "webgpuDisabled": true,
+      "fixtures": 16,
+      "maxError": 1.4901161193847656e-7,
+      "memory": {
+        "modelBytes": 91231307,
+        "workspaceBytes": 7866420,
+        "linearMemoryBytes": 183107584
+      },
+      "tokenizerMemory": {
+        "tokenizerBytes": 959947,
+        "linearMemoryBytes": 16777216
+      }
+    },
+    {
+      "engine": "firefox",
+      "version": "155.0",
+      "passed": true,
+      "route": "scalar",
+      "backend": "wasm-scalar-fp32",
+      "webgpuDisabled": true,
+      "fixtures": 16,
+      "maxError": 1.4901161193847656e-7,
+      "memory": {
+        "modelBytes": 91231307,
+        "workspaceBytes": 7866420,
+        "linearMemoryBytes": 183107584
+      },
+      "tokenizerMemory": {
+        "tokenizerBytes": 959947,
+        "linearMemoryBytes": 16777216
+      }
+    },
+    {
+      "engine": "webkit",
+      "version": "26.6",
+      "passed": true,
+      "route": "scalar",
+      "backend": "wasm-scalar-fp32",
+      "webgpuDisabled": true,
+      "fixtures": 16,
+      "maxError": 1.4901161193847656e-7,
+      "memory": {
+        "modelBytes": 91231307,
+        "workspaceBytes": 7866420,
+        "linearMemoryBytes": 183107584
+      },
+      "tokenizerMemory": {
+        "tokenizerBytes": 959947,
+        "linearMemoryBytes": 16777216
+      }
+    }
+  ]
+}

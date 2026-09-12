@@ -1,0 +1,20 @@
+{
+  "completedAt": "2026-09-10T07:32:00.537Z",
+  "status": "passed",
+  "backend": "pinned SQLite WASM in Node; metadata fixtures, no image decoding or OPFS claim",
+  "node": "v22.23.1",
+  "tests": 7,
+  "passed": 7,
+  "sourceHashes": {
+    "packages/core/src/contracts/search.ts": "6c059ba15eef98f1b2ac2fb175aa809cfeecc60480b4ce533caab389dd5cc872",
+    "packages/core/src/contracts/storage.ts": "9848e0fe5ae04cc262512dfbe6fa102bb957ef96790139f4c643181cd10cda47",
+    "packages/storage/src/worker/archive-database.ts": "fbd9436598bfbd0cc75e39482e57d27099b0bcdfcb1526cfe8a8c7e2236e6e73",
+    "packages/storage/src/worker/search/navigation.ts": "3dcd3f3e2061af65d03339a77e65ac6711eb8ee868c52dbc988db6600ac21494",
+    "packages/storage/src/worker/search/index.ts": "c65bdb72396fe09bbb00067a9cd524bbbdf18bf394929db20b7e457c385e98ac",
+    "packages/storage/src/worker/search/sources.ts": "c3b55d79b0196092fa9cbe2a5bfc97f10903974dede99bbef4419f5bcaa6aebf",
+    "packages/storage/src/worker/search/schema.ts": "ac6a9bbca9ebb51be79afce94f25415ba79e7ec30753ac3433d2ab944cf0f09b",
+    "packages/storage/tests/conversation-search-navigation/fixture.ts": "5ddd2db3ab719a6ce9b1c8e4f95393f20ba022d9982c899c371e69a138632923",
+    "packages/storage/tests/conversation-search-navigation/repository.test.ts": "a3e08b81e9b97b7d3b410d05021b70c82f1e79597e0bba64f8edb808f82f3540",
+    "packages/storage/tests/conversation-search-navigation/run.mjs": "fb4097db7cc9e7608226af73e7042d39a5eb9cc04e70cced08b16af069be4c6f"
+  }
+}

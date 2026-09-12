@@ -1,0 +1,20 @@
+import assert from 'node:assert/strict';
+import {tuneProjections,tuningKey,validTuningRecord} from '../src/gpu/tuning.ts';
+const key=await tuningKey({model:'frozen',runtime:'1',kernels:'one',adapter:'apple',browser:'153'});
+let calls=0;const cache=new Map();
+const measured=await tuneProjections({key,cache:{get:async k=>cache.get(k),set:async(k,v)=>{cache.set(k,v);}},
+  measure:async(route,tokens)=>{calls++;return tokens===32?(route==='baseline'?2:3):(route==='baseline'?8:3);}});
+assert.equal(calls,24);assert.equal(measured.record.status,'complete');
+assert.deepEqual(measured.record.selections,{small:'baseline',medium:'tiled',large:'tiled'});
+assert(validTuningRecord(measured.record,key));
+const hit=await tuneProjections({key,cache:{get:async k=>cache.get(k),set:async()=>{}},measure:async()=>{throw Error('Cached tuning must not execute');}});
+assert(hit.cacheHit);hit.record.selections.small='tiled';assert.equal(cache.get(key).selections.small,'baseline');
+assert.notEqual(key,await tuningKey({model:'frozen',runtime:'2',kernels:'one',adapter:'apple',browser:'153'}));
+assert(!validTuningRecord({...measured.record,key:'other'},key));
+assert(!validTuningRecord({...measured.record,samples:{small:{baseline:[NaN,1,1],tiled:[1,1,1]}}},key));
+let clock=0,probes=0;
+const exhausted=await tuneProjections({key,now:()=>clock,measure:async()=>{probes++;clock+=500;return 500;}});
+assert.equal(probes,2);assert.equal(exhausted.record.status,'budget-exhausted');assert.equal(exhausted.record.selections.small,'baseline');
+const timeout=await tuneProjections({key,cache:{get:()=>new Promise(()=>{}),set:async()=>{throw Error('Unavailable storage');}},measure:async()=>1});
+assert(!timeout.cacheHit);assert.equal(timeout.record.probes,24);
+console.log('Passed tuning identity, cache isolation/corruption, deadline, probe bounds and unavailable-cache checks');

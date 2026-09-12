@@ -1,0 +1,11 @@
+.storage-health { max-width: 64rem; }
+.storage-health-actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-block: 1rem; }
+.storage-health-progress, .storage-health-counts { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr)); gap: .75rem 1.5rem; }
+.storage-health-progress div, .storage-health-counts div { display: flex; align-items: baseline; justify-content: space-between; gap: .75rem; }
+.storage-health dd { margin-inline-start: 0; }
+.storage-health-findings { padding-inline-start: 1.75rem; }
+.storage-health-findings > li { padding: 1rem; margin-block: 1rem; border: 1px solid var(--line, #ddd); border-radius: .5rem; }
+.storage-health-findings h3 { margin-block-start: 0; }
+.storage-health-findings dl { display: grid; grid-template-columns: minmax(0, 9rem) minmax(0, 1fr); gap: .35rem .75rem; }
+.storage-health-findings code { overflow-wrap: anywhere; white-space: normal; }
+@media (max-width: 520px) { .storage-health-findings dl { grid-template-columns: 1fr; } .storage-health-findings dt { margin-block-start: .5rem; } }

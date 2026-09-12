@@ -1,0 +1,25 @@
+{
+  "recordedAt": "2026-09-08T23:00:12.923912+00:00",
+  "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+  "machine": "arm64",
+  "conditions": "Shared development host, including concurrent native/scalar/SIMD reference generation. Final report timings are short correctness observations, not quiescent release benchmarks. Initial and preprovisioned runs retained separately.",
+  "sourceSnapshot": "After completion; scheduler types gained documentation comments after final CI, no runtime edits followed that run.",
+  "sources": {
+    "src/scheduler/scheduler.ts": "e05313db56309c25f2dbc9f66c5739002bad319ee9c0df5e2330d679613c7546",
+    "src/scheduler/types.ts": "0e2d3348c3231a3114c6601a3bce31b18e737891f52791dff2828da0836e6853",
+    "src/scheduler/executors.ts": "a04b3495307a9e6ef4c4d1643673e0d30bf97919a42daf4b820e20a89d1295ce",
+    "src/worker/index.ts": "6eb2a35586d185348f1d1e1556310cefd4f0f52c9e7ada3fbb775d77aa893e2f",
+    "src/scalar.ts": "1f44ab4770fc55de3188497a9df1a0b87dcca53bf9800d22893f93d991f52246",
+    "src/tokenizer.ts": "49af961b90de1a54cc44c19d56f3174f969567c360512f4181ff4ca9040a086d",
+    "tests/scheduler.mjs": "18904bb2c91f993b789ad41b7d375999a18d9ef2819a106e7ac9414810fc0561",
+    "tests/scheduler/worker.ts": "f84ccc4b7cc681f4a1904ea7e4e1eb989f2c44f3a6a1bb99ffb652908888c8da",
+    "tests/scheduler/run.mjs": "ce1e3a26740e3f69de4b7173c73f88ae4ca417a8833e032843c1007ff31dbf52",
+    "tests/scheduler/browser.html": "aa6ba48c910ee93e59c640881a565a33179ae53c8137267c3a076c5765e7b99f",
+    "native/scheduler_ci.py": "4bafb39dc4f67bad887bfc27c628247cb14875ba16879ae3b63d08986493af6e",
+    "tests/token-preflight-fixtures.json": "7d7ce49e6f7e936b2e87245cb7cbe880f236e07b61d3b50a25f7d4db55c8d04e",
+    "reference/generate_preflight_fixtures.py": "2a28a7c2390e43284604c046b601c8574539ffe661d23a43711dd52c19caf273"
+  },
+  "cpuArtifactVersion": "1.0.1",
+  "gpuArtifactVersion": "1.0.0",
+  "modelFormatVersion": 1
+}

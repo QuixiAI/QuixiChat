@@ -1,0 +1,16 @@
+import { spawnSync } from 'node:child_process';
+import { readFile, writeFile } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
+import { fileURLToPath } from 'node:url';
+const root=new URL('../../../../',import.meta.url), directory=new URL('.',import.meta.url);
+const files=['packages/storage/src/worker/extraction/index.ts','packages/storage/src/worker/extraction/schema.ts','packages/storage/src/worker/operation-claims.ts','packages/core/src/contracts/extraction.ts','packages/core/src/contracts/storage.ts','packages/core/src/contracts/serialization.ts','packages/storage/tests/extraction-performance/serialization.test.ts','packages/storage/tests/extraction-performance/run.mjs','packages/storage/tests/extraction-search/fixture.ts','packages/storage/tests/extraction-layout/fixtures/v1.json','packages/storage/tests/extraction-layout/fixtures/extraction-v1.mjs','packages/storage/sqlite/dist/sqlite3.mjs','packages/storage/sqlite/dist/sqlite3.wasm'];
+const fingerprints=async()=>Object.fromEntries(await Promise.all(files.map(async file=>[file,createHash('sha256').update(await readFile(new URL(file,root))).digest('hex')])));
+const startedAt=new Date().toISOString(),sourceHashes=await fingerprints();
+const run=spawnSync(process.execPath,['--experimental-transform-types','--test',fileURLToPath(new URL('serialization.test.ts',directory))],{cwd:fileURLToPath(root),encoding:'utf8',timeout:120000,maxBuffer:4*1024*1024});
+const tap=(run.stdout??'')+(run.stderr??'');process.stdout.write(tap);
+const number=key=>Number(new RegExp(`^# ${key} (\\d+)$`,'m').exec(tap)?.[1]??0);
+const sourceStable=JSON.stringify(sourceHashes)===JSON.stringify(await fingerprints());
+const report={startedAt,completedAt:new Date().toISOString(),status:run.status===0&&number('tests')===4&&sourceStable?'passed':'failed',tests:number('tests'),passed:number('pass'),failed:number('fail'),node:process.version,platform:process.platform,arch:process.arch,sourceStable,sourceHashes,scope:'Actual pinned SQLite WASM execute/replay with immutable caller snapshots. Reuses extraction-search fixture claim adapter; production claim registry is exercised separately by profile.ts and operation-claims regressions. No OPFS/browser timing claim.'};
+await writeFile(new URL('results/serialization.tap',directory),tap);
+await writeFile(new URL('results/serialization.json',directory),JSON.stringify(report,null,2)+'\n');
+if(report.status!=='passed')process.exitCode=1;

@@ -1,0 +1,185 @@
+
+> quixi@0.0.1 test:app:browser
+> tsc --noEmit -p packages/app/tsconfig.tests.json && node packages/app/tests/browser/run.mjs
+
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+Skip to conversation
+Quixi
+Your history. Your choice.
+New conversation
+Preferences
+Storage health
+Library
+Import history
+Providers
+Documents
+Export history
+Filter titles
+Filter
+Archived conversations
+Refresh library
+Summary notebook
+Image thread
+Comet design
+Comet notebook
+space · ideas
+Keyboard notebook
+Portability thread
+Previous
+Next
+
+History stays on this device. Sending shares the selected branch with your chosen provider.
+
+Search your history
+Search
+Summary notebook
+
+2 attempts · tokens in 12 · out 20 · estimated ≈ 0.000037 USD across 1 priced attempt, 1 without a price
+
+Portability: Portable with transformations. Every configured target can carry the active path; 1 attachment occurrence replaced with the reviewed context-exclusion marker.
+
+OpenAI · GPT-4.1 mini: carries all 4 parts; 1 attachment occurrence replaced with the reviewed context-exclusion marker.
+Anthropic · Claude Haiku 4.5: carries all 4 parts; 1 attachment occurrence replaced with the reviewed context-exclusion marker.
+10 internal provider records and 0 empty responses are never sent to any provider.
+9/10/2026, 6:50:48 PM · Fell back Anthropic claude-haiku-4-5-20251001 → OpenAI gpt-4.1-mini-2025-04-14 · Anthropic failed: Synthetic excluded-attachment fallback. Continued with OpenAI · GPT-4.1 mini.
+9/10/2026, 6:50:48 PM · Context compaction: 1 attachment occurrence(s) excluded from requests · original history retained · context fadf60f1-2778-48fe-b6c1-baff995537a3
+Conversation settings
+Older messages
+Latest messages
+Show starting branches
+You
+View source
+
+What is in this picture?
+
+Image: seeded PNG
+
+Attachment details
+Preview image
+Prepare download
+Quote in reply
+First parts
+Sibling branches
+Continue from here
+Generate another response
+You
+View source
+
+Retain this user turn after the summary boundary
+
+Edit as new branch
+Quote in reply
+First parts
+Sibling branches
+Continue from here
+Generate another response
+Assistant
+openai · gpt-4.1-mini-2025-04-14 · complete
+View source
+
+Visible stream 🧪 segment 1 segment 2 segment 3 segment 4 segment 5 segment 6 segment 7
+
+Response source records
+
+Tokens in: 12 · out: 20 · Cost: ≈ 0.0000368 USD estimated from reviewed pricing
+
+Quote in reply
+First parts
+Sibling branches
+Continue from here
+Branch continuations
+
+No further branches here.
+
+Provider
+OpenAI
+Anthropic
+Model
+Claude Haiku 4.5
+Maximum output tokens
+Enter 1–64,000 tokens for this model.
+Temperature
+Leave blank for the model default, or enter 0–1.
+Top-p
+Leave blank for the model default, or enter 0–1.
+Stop sequences
+One per line, up to 4 sequences of 1,024 characters. Blank lines are ignored.
+
+Anthropic: Provider degraded · Synthetic excluded-attachment fallback · from the last response
+
+Route: Anthropic · Claude Haiku 4.5: chosen. If it fails, continue with OpenAI · GPT-4.1 mini. A stopped response never falls back.
+
+Fallback candidate
+Choose a connection and model
+ Add candidate
+OpenAI · GPT-4.1 mini Remove
+ Require tool support
+ Require image input
+Required processing region
+Unrestricted
+United States
+Europe (EEA + Switzerland)
+Maximum estimated request cost per attempt (USD)
+Minimum context window
+Maximum estimated input cost (USD)
+ Allow the route to change the privacy class
+Profile name
+Switching to Anthropic · Claude Haiku 4.5
+
+Preserved: 3 parts (4 Text) · Transformed: 1 · Omitted: 10 · Blocked: 0 · Request 481 bytes
+
+Transformed: 1 attachment occurrence replaced with the reviewed context-exclusion marker.
+
+0 empty responses and 10 internal provider records are never sent.
+
+Context: target window 200,000 tokens · requested output 2,048 · room for input 197,952 tokens.
+
+Count prompt tokens to compare this draft and branch with the room; counting sends them to Anthropic.
+
+Cost: reviewed rates are 1.00 USD per million input tokens and 5.00 USD per million output tokens, reviewed 2026-09-09; count the prompt for an input estimate.
+
+Your conversation will be sent to a different provider.
+
+I reviewed this switch and want to continue with Anthropic
+
+1 attachment occurrence(s) excluded from future requests. Originals remain in history.
+
+Review attachment exclusions
+Attachment exclusions
+Conversation summary
+Review conversation summaries
+Summarize older messages
+
+Choose a completed prefix before a user turn. A separate provider request creates a proposal; it is used only after you review and apply it. Check decisions, exact constraints, source IDs, and unresolved questions against the original messages.
+
+Summarize through message
+1. user · 7fad3ebc-8aba-4832-811b-62a7702ca7db
+Prepare summary request
+Saved proposals
+Close summary review
+Fresh context branch
+Review fresh branch
+Apply routing alias
+Routing alias
+Choose a saved alias
+Private
+Message
+Attach files
+PNG, JPEG, GIF, WebP or PDF files, up to 20 attachments and 2.5 MiB total per message. Drop files anywhere in the composer.
+Enter to send · Shift + Enter for a new line
+Count prompt tokens
+Send message
+
+Response complete.
+SUMMARY DOM [{"label":"Portability","hidden":false},{"label":"Conversation messages","hidden":false},{"label":"Branch choices","hidden":false},{"label":"Compatibility report","hidden":false},{"label":"Request context","hidden":false},{"label":"Attachment exclusions","hidden":false},{"label":"Conversation summary","hidden":false},{"label":"Saved summary proposals","hidden":false},{"label":"Fresh context branch","hidden":false},{"label":"Apply routing alias","hidden":false}]
+SUMMARY LOCATORS 1 0 0
+{"items":[{"cachedTokens":0,"compatibility":[],"completedAt":1789091449299,"contextSnapshotId":"fadf60f1-2778-48fe-b6c1-baff995537a3","createdAt":1789091448519,"estimatedCost":{"amount":"0.000036800","currency":"USD"},"id":"08a11728-2251-4ffd-a9b5-36885d7d149e","lastSequence":18,"model":"gpt-4.1-mini-2025-04-14","outputMessageId":"89a5f3a2-ea33-4ec8-ad2d-de8dd209cb5c","parameters":{"max_completion_tokens":2048,"store":false,"stream":true,"stream_options":{"include_usage":true}},"parentMessageId":"9c4fb7d5-fd1a-4e3d-813f-61e88f8b8c5b","provider":"openai","providerAccountId":"primary","rawResponseId":"188a9917-b782-4632-a457-29c0f3da0355","recordedAt":1789091448519,"reportedCost":null,"status":"complete","threadId":"ad29ed15-0a85-4106-b664-f32287a52db4","tokensIn":12,"tokensOut":20},{"cachedTokens":0,"compatibility":[],"completedAt":1789091430900,"contextSnapshotId":"f7ccdd28-0a81-4784-8927-99b2f6939c5b","createdAt":1789091430115,"estimatedCost":{"amount":"0.000036800","currency":"USD"},"id":"0a33216a-96f4-48e4-a09a-08d1dcfbae7b","lastSequence":18,"model":"gpt-4.1-mini-2025-04-14","outputMessageId":"42751ced-781f-49a1-a19e-a572e6c418aa","parameters":{"max_completion_tokens":2048,"store":false,"stream":true,"stream_options":{"include_usage":true}},"parentMessageId":"1c2db751-f372-4302-8abb-f79c9ea3aa78","provider":"openai","providerAccountId":"primary","rawResponseId":"e72ef106-8b1d-4ddc-a332-66301c4333ea","recordedAt":1789091430115,"reportedCost":null,"status":"complete","threadId":"24998feb-e774-4f52-b750-baca18048000","tokensIn":12,"tokensOut":20},{"cachedTokens":0,"compatibility":[],"completedAt":1789091433937,"contextSnapshotId":"f7ccdd28-0a81-4784-8927-99b2f6939c5b","createdAt":1789091433158,"estimatedCost":{"amount":"0.000036800","currency":"USD"},"id":"1783501b-c084-4da7-834a-7c7cfe796823","lastSequence":18,"model":"gpt-4.1-mini-2025-04-14","outputMessageId":"95ff955b-7087-457b-9c7f-e92e8252bd42","parameters":{"max_completion_tokens":2048,"store":false,"stream":true,"stream_options":{"include_usage":true}},"parentMessageId":"e0eaf9da-813c-4509-9fe0-647168f82c03","provider":"openai","providerAccountId":"primary","rawResponseId":"d17a0c3e-c22b-4711-9e48-89b1fd082330","recordedAt":1789091433158,"reportedCost":null,"status":"complete","threadId":"24998feb-e774-4f52-b750-baca18048000","tokensIn":12,"tokensOut":20},{"cachedTokens":null,"compatibility":[],"completedAt":1789091431491,"contextSnapshotId":"f7ccdd28-0a81-4784-8927-99b2f6939c5b","createdAt":1789091431432,"estimatedCost":null,"id":"17ef2a22-050f-4a7c-a414-19fa4ad86897","lastSequence":2,"model":"claude-haiku-4-5-20251001","outputMessageId":"09373df0-4086-4c2b-b39e-343755dd8f65","parameters":{"max_tokens":2048,"stream":true},"parentMessageId":"c302969e-6f31-4361-943a-83830f2fba99","provider":"anthropic","providerAccountId":"primary","rawResponseId":"1e090c0e-d0f1-40ba-b1f0-0fa8cc97e7be","recordedAt":1789091431432,"reportedCost":null,"status":"failed","threadId":"24998feb-e774-4f52-b750-baca18048000","tokensIn":null,"tokensOut":null},{"cachedTokens":0,"compatibility":[],"completedAt":1789091433116,"contextSnapshotId":"f7ccdd28-0a81-4784-8927-99b2f6939c5b","createdAt":1789091432734,"estimatedCost":{"amount":"0.000012000","currency":"USD"},"id":"373ac5b8-e191-426d-9506-88b9bd86341a","lastSequence":9,"model":"claude-haiku-4-5-20251001","outputMessageId":"7654a4f9-33fe-4c62-b11e-cc0d34f9139f","parameters":{"max_tokens":2048,"stream":true},"parentMessageId":"e0eaf9da-813c-4509-9fe0-647168f82c03","provider":"anthropic","providerAccountId":"primary","rawResponseId":"1254dfd9-5ddc-415c-aa9b-8fbc647badc3","recordedAt":1789091432734,"reportedCost":null,"status":"partial","threadId":"24998feb-e774-4f52-b750-baca18048000","tokensIn":12,"tokensOut":0},{"cachedTokens":0,"compatibility":[],"completedAt":1789091434822,"contextSnapshotId":"f7ccdd28-0a81-4784-8927-99b2f6939c5b","createdAt":1789091434512,"estimatedCost":{"amount":"0.000012000","currency":"USD"},"id":"395a775f-f4ae-4afc-be68-e272c7de5cd0","lastSequence":8,"model":"claude-haiku-4-5-20251001","outputMessageId":"c7616735-5fca-48b3-8eda-fae6479a6161","parameters":{"max_tokens":2048,"stream":true},"parentMessageId":"42f6fcb8-4335-423a-a457-37011d2a959a","provider":"anthropic","providerAccountId":"primary","rawResponseId":"a0baed9e-fb8f-4793-8151-69556fc9e4c5","recordedAt":1789091434512,"reportedCost":null,"status":"cancelled","threadId":"24998feb-e774-4f52-b750-baca18048000","tokensIn":12,"tokensOut":0},{"cachedTokens":0,"compatibility":[],"completedAt":1789091409799,"contextSnapshotId":"f7ccdd28-0a81-4784-8927-99b2f6939c5b","createdAt":1789091408994,"estimatedCost":{"amount":"0.000112000","currency":"USD"},"id":"3b2da23b-91e3-4f9f-a609-e23a52fd1513","lastSequence":19,"model":"claude-haiku-4-5-20251001","outputMessageId":"4ee8346b-cfa0-4389-9ef3-0f8534bd079a","parameters":{"max_tokens":2048,"stream":true},"parentMessageId":"e173a55d-6523-46ca-9e30-36d4a666f45f","provider":"anthropic","providerAccountId":"primary","rawResponseId":"82f1764c-f1ba-45ee-9f3b-db955f22532d","recordedAt":1789091408994,"reportedCost":null,"status":"complete","threadId":"24998feb-e774-4f52-b750-baca18048000","tokensIn":12,"tokensOut":20},{"cachedTokens":0,"compatibility":[],"completedAt":1789091440598,"contextSnapshotId":"7941de72-b315-4210-86fb-31f7c44dcb96","createdAt":1789091439822,"estimatedCost":{"amount":"0.000112000","currency":"USD"},"id":"489fa769-da27-486d-aec7-4ae29a18ddd2","lastSequence":19,"model":"claude-haiku-4-5-20251001","outputMessageId":"040d17a9-d248-4ca4-9440-f606abf246d6","parameters":{"max_tokens":2048,"stream":true},"parentMessageId":"0382096d-937a-4968-8e0c-ddda98c23b41","provider":"anthropic","providerAccountId":"primary","rawResponseId":"eeebc6c3-0464-41dd-a052-e1fa2b6208ee","recordedAt":1789091439822,"reportedCost":null,"status":"complete","threadId":"b485d371-442f-409c-b504-cb29f291620b","tokensIn":12,"tokensOut":20},{"cachedTokens":null,"compatibility":[],"completedAt":1789091423273,"contextSnapshotId":"f7ccdd28-0a81-4784-8927-99b2f6939c5b","createdAt":1789091423201,"estimatedCost":null,"id":"62359614-2003-49b7-b52f-f95cfdaedffb","lastSequence":2,"model":"claude-haiku-4-5-20251001","outputMessageId":"f2c2e667-12cd-47e4-b396-9c7c8db98244","parameters":{"max_tokens":2048,"stream":true},"parentMessageId":"870bb39c-067c-4aa4-94e6-af75b486a407","provider":"anthropic","providerAccountId":"primary","rawResponseId":"f7546dd9-3bb0-446f-8ff4-a7ba44d538a3","recordedAt":1789091423201,"reportedCost":null,"status":"failed","threadId":"24998feb-e774-4f52-b750-baca18048000","tokensIn":null,"tokensOut":null},{"cachedTokens":null,"compatibility":[],"completedAt":1789091426860,"contextSnapshotId":"f7ccdd28-0a81-4784-8927-99b2f6939c5b","createdAt":1789091426786,"estimatedCost":null,"id":"68190500-8524-492f-8726-0283a365d064","lastSequence":2,"model":"claude-haiku-4-5-20251001","outputMessageId":"e4c90588-8d3a-4b7b-bb97-42ec70682214","parameters":{"max_tokens":2048,"stream":true},"parentMessageId":"819b7b30-264a-47b7-9793-815651b392c3","provider":"anthropic","providerAccountId":"primary","rawResponseId":"28dc2c4c-5479-4552-bcfa-63ee15b61d1e","recordedAt":1789091426786,"reportedCost":null,"status":"failed","threadId":"24998feb-e774-4f52-b750-baca18048000","tokensIn":null,"tokensOut":null},{"cachedTokens":0,"compatibility":[],"completedAt":1789091407492,"contextSnapshotId":"f7ccdd28-0a81-4784-8927-99b2f6939c5b","createdAt":1789091407176,"estimatedCost":{"amount":"0.000012000","currency":"USD"},"id":"80f953bb-b662-41d2-961e-7b482a54e798","lastSequence":8,"model":"claude-haiku-4-5-20251001","outputMessageId":"d3a21ce3-6a41-4f1e-a6f6-6acd3fdea29e","parameters":{"max_tokens":2048,"stream":true},"parentMessageId":"f46cf11a-cb3b-46fd-8c7d-1c20ebbb189b","provider":"anthropic","providerAccountId":"primary","rawResponseId":"78efc857-4901-4ae4-99a9-0936038f9146","recordedAt":1789091407176,"reportedCost":null,"status":"cancelled","threadId":"24998feb-e774-4f52-b750-baca18048000","tokensIn":12,"tokensOut":0},{"cachedTokens":0,"compatibility":[],"completedAt":1789091403343,"contextSnapshotId":"f7ccdd28-0a81-4784-8927-99b2f6939c5b","createdAt":1789091402391,"estimatedCost":{"amount":"0.000036800","currency":"USD"},"id":"8100f693-3628-4eb9-a070-eb179127fe71","lastSequence":18,"model":"gpt-4.1-mini-2025-04-14","outputMessageId":"d9d754a5-0ba3-4c70-9634-be53664bc707","parameters":{"max_completion_tokens":768,"store":false,"stream":true,"stream_options":{"include_usage":true}},"parentMessageId":"037f684b-e9b4-4335-95cd-44172f76c019","provider":"openai","providerAccountId":"primary","rawResponseId":"72662f13-e181-4f59-bbe6-0be2360e2b8a","recordedAt":1789091402391,"reportedCost":null,"status":"complete","threadId":"24998feb-e774-4f52-b750-baca18048000","tokensIn":12,"tokensOut":20},{"cachedTokens":0,"compatibility":[],"completedAt":1789091406847,"contextSnapshotId":"f7ccdd28-0a81-4784-8927-99b2f6939c5b","createdAt":1789091406071,"estimatedCost":{"amount":"0.000112000","currency":"USD"},"id":"8435c7b5-510f-4069-a0e8-83b0544cbd4c","lastSequence":19,"model":"claude-haiku-4-5-20251001","outputMessageId":"da53ec5a-b73b-48fb-ac44-67c000100f29","parameters":{"max_tokens":2048,"stop_sequences":["Human:"],"stream":true,"temperature":0.5},"parentMessageId":"166fc741-8018-412c-8b9c-08fa916057ec","provider":"anthropic","providerAccountId":"primary","rawResponseId":"f1de7f27-a16f-423f-b384-f35473270df4","recordedAt":1789091406071,"reportedCost":null,"status":"complete","threadId":"24998feb-e774-4f52-b750-baca18048000","tokensIn":12,"tokensOut":20},{"cachedTokens":0,"compatibility":[],"completedAt":1789091443522,"contextSnapshotId":"1e616c49-1265-4bd1-8a76-e618c403b763","createdAt":1789091442745,"estimatedCost":{"amount":"0.000036800","currency":"USD"},"id":"860902fa-a14f-47ac-9397-6285fde6c6d7","lastSequence":18,"model":"gpt-4.1-mini-2025-04-14","outputMessageId":"59ee870d-745b-46c1-a82a-eb12c66f9947","parameters":{"max_completion_tokens":2048,"store":false,"stream":true,"stream_options":{"include_usage":true}},"parentMessageId":"a8b1742d-7b9f-4619-be98-af5f55cbaeef","provider":"openai","providerAccountId":"primary","rawResponseId":"2186b6d1-f69a-4bb6-bc50-5ca68dd32f19","recordedAt":1789091442745,"reportedCost":null,"status":"complete","threadId":"eb43e432-8c1d-4727-b896-49cb1d9eba26","tokensIn":12,"tokensOut":20},{"cachedTokens":0,"compatibility":[],"completedAt":1789091411329,"contextSnapshotId":"a1edbe10-821a-4494-ad51-23bcf863c855","createdAt":1789091410543,"estimatedCost":{"amount":"0.000112000","currency":"USD"},"id":"88c93045-cf13-4507-86b4-ce9ead1594d2","lastSequence":19,"model":"claude-haiku-4-5-20251001","outputMessageId":"7fbbb8e7-29c0-41f9-b50a-58ead5312ad4","parameters":{"max_tokens":2048,"stream":true},"parentMessageId":"a9a9b460-1ab5-4dd2-836b-ca5abdbfc756","provider":"anthropic","providerAccountId":"primary","rawResponseId":"e899e156-7f8a-4f8f-b5c7-d6a769483b12","recordedAt":1789091410543,"reportedCost":null,"status":"complete","threadId":"249b4827-4324-4d70-86c3-771f93b3f29e","tokensIn":12,"tokensOut":20},{"cachedTokens":null,"compatibility":[],"completedAt":1789091436316,"contextSnapshotId":"f7ccdd28-0a81-4784-8927-99b2f6939c5b","createdAt":1789091436265,"estimatedCost":null,"id":"8966e4f8-fa42-46fc-9dc7-085ef74cd556","lastSequence":2,"model":"claude-haiku-4-5-20251001","outputMessageId":"4373d541-935a-4fa2-934e-4bf9332fc4cd","parameters":{"max_tokens":2048,"stream":true},"parentMessageId":"addff001-d4f4-41bc-b790-371cbcb7cc49","provider":"anthropic","providerAccountId":"primary","rawResponseId":"7281307f-7d70-49f2-b241-5a7bcbe4d496","recordedAt":1789091436265,"reportedCost":null,"status":"failed","threadId":"24998feb-e774-4f52-b750-baca18048000","tokensIn":null,"tokensOut":null},{"cachedTokens":null,"compatibility":[],"completedAt":1789091448490,"contextSnapshotId":"fadf60f1-2778-48fe-b6c1-baff995537a3","createdAt":1789091448449,"estimatedCost":null,"id":"945610ff-9ba6-4f61-8fb2-b2580db4b8a1","lastSequence":2,"model":"claude-haiku-4-5-20251001","outputMessageId":"5511e140-5816-4696-a9ee-0f1ead9ca229","parameters":{"max_tokens":2048,"stream":true},"parentMessageId":"9c4fb7d5-fd1a-4e3d-813f-61e88f8b8c5b","provider":"anthropic","providerAccountId":"primary","rawResponseId":"1e719c90-1e06-4678-a108-06650b64bd95","recordedAt":1789091448449,"reportedCost":null,"status":"failed","threadId":"ad29ed15-0a85-4106-b664-f32287a52db4","tokensIn":null,"tokensOut":null},{"cachedTokens":0,"compatibility":[],"completedAt":1789091405693,"contextSnapshotId":"f7ccdd28-0a81-4784-8927-99b2f6939c5b","createdAt":1789091404910,"estimatedCost":{"amount":"0.000036800","currency":"USD"},"id":"a1bdf4f4-f16a-4161-9848-77e38ac8200f","lastSequence":18,"model":"gpt-4.1-mini-2025-04-14","outputMessageId":"e1cb8ae5-fb6a-46d1-bede-3c153f692768","parameters":{"max_completion_tokens":1536,"store":false,"stream":true,"stream_options":{"include_usage":true},"temperature":1.2},"parentMessageId":"94de8118-3a30-408c-96fb-66ed6be27755","provider":"openai","providerAccountId":"primary","rawResponseId":"c5f114b2-46cf-4549-8029-916b84e54656","recordedAt":1789091404910,"reportedCost":null,"status":"complete","threadId":"24998feb-e774-4f52-b750-baca18048000","tokensIn":12,"tokensOut":20},{"cachedTokens":0,"compatibility":[],"completedAt":1789091432334,"contextSnapshotId":"f7ccdd28-0a81-4784-8927-99b2f6939c5b","createdAt":1789091431532,"estimatedCost":{"amount":"0.000036800","currency":"USD"},"id":"a2fd99f2-ac9d-4918-a129-841b30bb5ec9","lastSequence":18,"model":"gpt-4.1-mini-2025-04-14","outputMessageId":"95b7c330-613b-440e-8d4c-c4d0eb227629","parameters":{"max_completion_tokens":2048,"store":false,"stream":true,"stream_options":{"include_usage":true}},"parentMessageId":"c302969e-6f31-4361-943a-83830f2fba99","provider":"openai","providerAccountId":"primary","rawResponseId":"7945d64b-a96b-4735-b505-d72e6bcf4628","recordedAt":1789091431532,"reportedCost":null,"status":"complete","threadId":"24998feb-e774-4f52-b750-baca18048000","tokensIn":12,"tokensOut":20},{"cachedTokens":0,"compatibility":[],"completedAt":1789091437141,"contextSnapshotId":"f7ccdd28-0a81-4784-8927-99b2f6939c5b","createdAt":1789091436354,"estimatedCost":{"amount":"0.000036800","currency":"USD"},"id":"b2fd0f9d-8768-4cc1-bab8-fce1b9eeaf2b","lastSequence":18,"model":"gpt-4.1-mini-2025-04-14","outputMessageId":"d1acad36-0d16-4161-adf8-f5ad352e489c","parameters":{"max_completion_tokens":2048,"store":false,"stream":true,"stream_options":{"include_usage":true}},"parentMessageId":"addff001-d4f4-41bc-b790-371cbcb7cc49","provider":"openai","providerAccountId":"primary","rawResponseId":"3744a332-6368-4ba6-86da-47de9efe26c1","recordedAt":1789091436354,"reportedCost":null,"status":"complete","threadId":"24998feb-e774-4f52-b750-baca18048000","tokensIn":12,"tokensOut":20},{"cachedTokens":null,"compatibility":[],"completedAt":1789091428200,"contextSnapshotId":"f7ccdd28-0a81-4784-8927-99b2f6939c5b","createdAt":1789091427859,"estimatedCost":null,"id":"b8d8f673-10ec-4959-b98b-5b4f8209cee8","lastSequence":7,"model":"gpt-4.1-mini-2025-04-14","outputMessageId":"27a96e81-c01f-4be5-b01c-31f549437de2","parameters":{"max_completion_tokens":2048,"store":false,"stream":true,"stream_options":{"include_usage":true}},"parentMessageId":"9af50d36-d775-4bd8-99d7-8e4fe9614600","provider":"openai","providerAccountId":"primary","rawResponseId":"665ff0a6-3c4e-48c4-8c62-4fa361e05408","recordedAt":1789091427859,"reportedCost":null,"status":"cancelled","threadId":"24998feb-e774-4f52-b750-baca18048000","tokensIn":null,"tokensOut":null},{"cachedTokens":0,"compatibility":[],"completedAt":1789091422791,"contextSnapshotId":"f7ccdd28-0a81-4784-8927-99b2f6939c5b","createdAt":1789091421987,"estimatedCost":{"amount":"0.000112000","currency":"USD"},"id":"c4ade88a-05df-43c0-9e7e-8f7181a85b47","lastSequence":19,"model":"claude-haiku-4-5-20251001","outputMessageId":"b85b2524-a830-446c-a3e1-5776ac678e77","parameters":{"max_tokens":2048,"stream":true},"parentMessageId":"0188ea46-52b9-4f95-816e-dab152833648","provider":"anthropic","providerAccountId":"primary","rawResponseId":"02e63bc8-7476-4b05-b0d2-eedf57ace877","recordedAt":1789091421987,"reportedCost":null,"status":"complete","threadId":"24998feb-e774-4f52-b750-baca18048000","tokensIn":12,"tokensOut":20},{"cachedTokens":0,"compatibility":[],"completedAt":1789091438291,"contextSnapshotId":"f7ccdd28-0a81-4784-8927-99b2f6939c5b","createdAt":1789091437501,"estimatedCost":{"amount":"0.000036800","currency":"USD"},"id":"c5ab5ed4-e824-41ff-aa6e-22bf02b2ee47","lastSequence":18,"model":"gpt-4.1-mini-2025-04-14","outputMessageId":"723ee255-bfa5-444a-a64f-743fcc47f7ed","parameters":{"max_completion_tokens":2048,"store":false,"stream":true,"stream_options":{"include_usage":true}},"parentMessageId":"6cc3709a-8cea-4fd0-a979-0eca0d1d5670","provider":"openai","providerAccountId":"primary","rawResponseId":"ab999b5d-9011-4b3d-846a-9d2f717ccd23","recordedAt":1789091437501,"reportedCost":null,"status":"complete","threadId":"24998feb-e774-4f52-b750-baca18048000","tokensIn":12,"tokensOut":20},{"cachedTokens":0,"compatibility":[],"completedAt":1789091441674,"contextSnapshotId":"1e616c49-1265-4bd1-8a76-e618c403b763","createdAt":1789091440894,"estimatedCost":{"amount":"0.000112000","currency":"USD"},"id":"ce6b8b0e-aa5d-4c7a-921d-298c7222fca2","lastSequence":19,"model":"claude-haiku-4-5-20251001","outputMessageId":"30a76cc7-041a-4205-ad65-783ebe7ddd41","parameters":{"max_tokens":2048,"stream":true},"parentMessageId":"bedda7f6-b23e-4a9c-b4ce-fdddbd4d1db7","provider":"anthropic","providerAccountId":"primary","rawResponseId":"70527c15-37ad-4bc0-8b9f-4898fc421796","recordedAt":1789091440894,"reportedCost":null,"status":"complete","threadId":"eb43e432-8c1d-4727-b896-49cb1d9eba26","tokensIn":12,"tokensOut":20},{"cachedTokens":0,"compatibility":[],"completedAt":1789091408428,"contextSnapshotId":"f7ccdd28-0a81-4784-8927-99b2f6939c5b","createdAt":1789091407645,"estimatedCost":{"amount":"0.000112000","currency":"USD"},"id":"d1124af4-c51c-420f-bd8c-ae9de28e8e2b","lastSequence":20,"model":"claude-haiku-4-5-20251001","outputMessageId":"da4ac60c-b4f6-4471-b2b4-085f532d57a1","parameters":{"max_tokens":2048,"stream":true},"parentMessageId":"87e13c78-e9d8-41db-a756-194ec878c76b","provider":"anthropic","providerAccountId":"primary","rawResponseId":"a646b00a-5e2e-46d3-9f76-68f10e4e2c0d","recordedAt":1789091407645,"reportedCost":null,"status":"complete","threadId":"24998feb-e774-4f52-b750-baca18048000","tokensIn":12,"tokensOut":20},{"cachedTokens":0,"compatibility":[],"completedAt":1789091429268,"contextSnapshotId":"f7ccdd28-0a81-4784-8927-99b2f6939c5b","createdAt":1789091428386,"estimatedCost":{"amount":"0.000112000","currency":"USD"},"id":"d28168d1-946e-40b9-a844-a2abf3bd02b8","lastSequence":21,"model":"claude-haiku-4-5-20251001","outputMessageId":"b287daa3-c27b-4948-a8b9-8d7b0ef8ca50","parameters":{"max_tokens":2048,"stream":true},"parentMessageId":"1cfa69dd-66d6-4d96-83f0-65d1c084e59e","provider":"anthropic","providerAccountId":"primary","rawResponseId":"e28092a4-6e65-44d3-80d4-0dcad7e688d0","recordedAt":1789091428386,"reportedCost":null,"status":"complete","threadId":"24998feb-e774-4f52-b750-baca18048000","tokensIn":12,"tokensOut":20},{"cachedTokens":0,"compatibility":[],"completedAt":1789091435883,"contextSnapshotId":"f7ccdd28-0a81-4784-8927-99b2f6939c5b","createdAt":1789091435105,"estimatedCost":{"amount":"0.000036800","currency":"USD"},"id":"d9d75903-9420-42d7-964a-d98c74dae1bf","lastSequence":18,"model":"gpt-4.1-mini-2025-04-14","outputMessageId":"6f5f2f49-77f1-4882-a295-a0a270835003","parameters":{"max_completion_tokens":2048,"store":false,"stream":true,"stream_options":{"include_usage":true}},"parentMessageId":"b2d4518c-3a3a-4768-900c-0da5fe7c3df8","provider":"openai","providerAccountId":"primary","rawResponseId":"1704579e-d726-4e8d-8909-36a8dfcdfe17","recordedAt":1789091435105,"reportedCost":null,"status":"complete","threadId":"24998feb-e774-4f52-b750-baca18048000","tokensIn":12,"tokensOut":20},{"cachedTokens":0,"compatibility":[],"completedAt":1789091447855,"contextSnapshotId":"df6faca6-d72a-473b-bf57-09c0f6e9c9df","createdAt":1789091447074,"estimatedCost":{"amount":"0.000036800","currency":"USD"},"id":"da5ce3cd-00f0-49df-87e3-bde093f458a5","lastSequence":18,"model":"gpt-4.1-mini-2025-04-14","outputMessageId":"a785e731-f1bc-4bef-99b7-faee6dc19baf","parameters":{"max_completion_tokens":2048,"store":false,"stream":true,"stream_options":{"include_usage":true}},"parentMessageId":"bedda7f6-b23e-4a9c-b4ce-fdddbd4d1db7","provider":"openai","providerAccountId":"primary","rawResponseId":"02e16416-53bd-444a-9d45-249c0ea17978","recordedAt":1789091447074,"reportedCost":null,"status":"complete","threadId":"eb43e432-8c1d-4727-b896-49cb1d9eba26","tokensIn":12,"tokensOut":20},{"cachedTokens":0,"compatibility":[],"completedAt":1789091401700,"contextSnapshotId":"f7ccdd28-0a81-4784-8927-99b2f6939c5b","createdAt":1789091400902,"estimatedCost":{"amount":"0.000036800","currency":"USD"},"id":"edc95843-74ba-46ea-b56b-f9cf1991a455","lastSequence":18,"model":"gpt-4.1-mini-2025-04-14","outputMessageId":"060d9d5a-a89c-4878-a9c5-776554b70f08","parameters":{"max_completion_tokens":768,"stop":["END","STOP"],"store":false,"stream":true,"stream_options":{"include_usage":true},"temperature":0.3,"top_p":0.9},"parentMessageId":"94de8118-3a30-408c-96fb-66ed6be27755","provider":"openai","providerAccountId":"primary","rawResponseId":"42a4e014-3560-46a8-8ca5-36cfb7a0f9b3","recordedAt":1789091400902,"reportedCost":null,"status":"complete","threadId":"24998feb-e774-4f52-b750-baca18048000","tokensIn":12,"tokensOut":20},{"cachedTokens":0,"compatibility":[],"completedAt":1789091410448,"contextSnapshotId":"a1edbe10-821a-4494-ad51-23bcf863c855","createdAt":1789091410149,"estimatedCost":{"amount":"0.000012000","currency":"USD"},"id":"f6b4dbcf-e6e0-47c3-900c-b462417e7441","lastSequence":8,"model":"claude-haiku-4-5-20251001","outputMessageId":"3027a07e-2387-45d4-94c4-79de78e5a4f0","parameters":{"max_tokens":2048,"stream":true},"parentMessageId":"a9a9b460-1ab5-4dd2-836b-ca5abdbfc756","provider":"anthropic","providerAccountId":"primary","rawResponseId":"4f06d1b4-6eba-4950-a60b-37b83d5b6a09","recordedAt":1789091410149,"reportedCost":null,"status":"cancelled","threadId":"249b4827-4324-4d70-86c3-771f93b3f29e","tokensIn":12,"tokensOut":0},{"cachedTokens":0,"compatibility":[],"completedAt":1789091446413,"contextSnapshotId":"00455c14-4cff-4e00-9bc8-36ca9fcdadf5","createdAt":1789091445636,"estimatedCost":{"amount":"0.000036800","currency":"USD"},"id":"fbb5fb4f-9156-4104-aa04-f601e8096b1c","lastSequence":18,"model":"gpt-4.1-mini-2025-04-14","outputMessageId":"1437d954-97de-4f31-8c59-3b0ec20aacd1","parameters":{"max_completion_tokens":2048,"store":false,"stream":true,"stream_options":{"include_usage":true}},"parentMessageId":"a5438178-fd16-4cce-96d4-a0aaf5906225","provider":"openai","providerAccountId":"primary","rawResponseId":"cacdabb4-5e43-4ab8-b6d0-da1b0f56e726","recordedAt":1789091445636,"reportedCost":null,"status":"complete","threadId":"eb43e432-8c1d-4727-b896-49cb1d9eba26","tokensIn":12,"tokensOut":20}],"nextCursor":null,"bytes":23136}
+locator.inputValue: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for getByRole('region', { name: 'Conversation summary', exact: true }).getByLabel('Summarize through message', { exact: true })[22m
+
+    at /Users/eric/QuixiChat/packages/app/tests/browser/run.mjs:2130:105

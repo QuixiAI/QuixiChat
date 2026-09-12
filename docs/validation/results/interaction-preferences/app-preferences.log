@@ -1,0 +1,90 @@
+
+> quixi@0.0.1 test:app:preferences
+> tsc --noEmit -p packages/app/tsconfig.tests.json && node --experimental-transform-types --test packages/app/tests/preferences/*.test.ts
+
+TAP version 13
+# (node:4872) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: lost alias-save replies recover by reading durable state, without automatic replay
+ok 1 - lost alias-save replies recover by reading durable state, without automatic replay
+  ---
+  duration_ms: 2.055125
+  type: 'test'
+  ...
+# Subtest: alias I/O is bounded to one call and preserves a displayed editor's original revision
+ok 2 - alias I/O is bounded to one call and preserves a displayed editor's original revision
+  ---
+  duration_ms: 0.223292
+  type: 'test'
+  ...
+# Subtest: unsupported alias registries stay unavailable without harming recovery
+ok 3 - unsupported alias registries stay unavailable without harming recovery
+  ---
+  duration_ms: 0.074375
+  type: 'test'
+  ...
+# Subtest: saved aliases retain independent cost and processing region requirements through save and reload
+ok 4 - saved aliases retain independent cost and processing region requirements through save and reload
+  ---
+  duration_ms: 0.431459
+  type: 'test'
+  ...
+# (node:4873) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: lost save reply requires read recovery before another edit and never retries a write
+ok 5 - lost save reply requires read recovery before another edit and never retries a write
+  ---
+  duration_ms: 3.592125
+  type: 'test'
+  ...
+# Subtest: pending preference I/O admits no queued refresh or competing save
+ok 6 - pending preference I/O admits no queued refresh or competing save
+  ---
+  duration_ms: 0.161167
+  type: 'test'
+  ...
+# Subtest: invalid reads keep keyboard sending unavailable and can recover
+ok 7 - invalid reads keep keyboard sending unavailable and can recover
+  ---
+  duration_ms: 0.157833
+  type: 'test'
+  ...
+# Subtest: send keys preserve multiline input and refuse composing, repeated and modified newlines
+ok 8 - send keys preserve multiline input and refuse composing, repeated and modified newlines
+  ---
+  duration_ms: 0.084791
+  type: 'test'
+  ...
+# Subtest: interaction saves use the current revision, preserve the send key, and survive a later send-key change
+ok 9 - interaction saves use the current revision, preserve the send key, and survive a later send-key change
+  ---
+  duration_ms: 0.359958
+  type: 'test'
+  ...
+# Subtest: a lost interaction save reply blocks both edit types until read-only recovery
+ok 10 - a lost interaction save reply blocks both edit types until read-only recovery
+  ---
+  duration_ms: 0.304458
+  type: 'test'
+  ...
+# Subtest: an interaction save snapshots caller choices and admits no competing save or refresh
+ok 11 - an interaction save snapshots caller choices and admits no competing save or refresh
+  ---
+  duration_ms: 0.34475
+  type: 'test'
+  ...
+# Subtest: invalid interaction receipts retain the last confirmed choices and require recovery
+ok 12 - invalid interaction receipts retain the last confirmed choices and require recovery
+  ---
+  duration_ms: 0.108542
+  type: 'test'
+  ...
+1..12
+# tests 12
+# suites 0
+# pass 12
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 165.250375

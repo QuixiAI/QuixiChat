@@ -1,0 +1,2643 @@
+{
+  "status": "measured_with_rejections",
+  "startedAt": "2026-09-09T08:58:26.315Z",
+  "selectedEngines": [
+    "webkit"
+  ],
+  "environment": {
+    "platform": "darwin",
+    "release": "25.6.0",
+    "arch": "arm64",
+    "node": "v22.23.1",
+    "osVersion": "26.6.2",
+    "cpu": "Apple M5 Max",
+    "cpuCount": 18,
+    "totalMemoryBytes": 137438953472,
+    "startLoadAverage": [
+      4.2568359375,
+      5.3271484375,
+      5.5234375
+    ]
+  },
+  "method": {
+    "repetitions": 1,
+    "order": [
+      "1",
+      "100",
+      "1000",
+      "image",
+      "cancel-1000"
+    ],
+    "freshBrowserPerCase": true,
+    "freshOriginPerCase": true,
+    "browserLaunch": "launchPersistentContext; fresh profile per case; browser PID is the unique new live direct child of this runner",
+    "sourceSetupIncludedInExtraction": false,
+    "rss": "500 ms ps browser-server process-tree RSS. Includes browser/storage/PDF workers and shared pages (which may be counted more than once); excludes reparented or OS-managed processes. Sampling misses brief peaks. Not parser heap, physical memory, or a hard memory bound. Runner/OS file caches are outside this process-tree measure.",
+    "foreground": "Bounded public readEntities(document,1 item,8192 bytes), dispatched immediately after real publishExtractionPage without awaiting its reply. First page and every tenth page. Queue-inclusive latency, observer overhead included. Baseline: ten reads immediately before extraction.",
+    "limits": "32 MiB source cap; PDF.js may allocate whole source, decompressed structures and page arrays. No production heap guarantee. Single synthetic run per case is diagnostic, not a release threshold or controlled distribution."
+  },
+  "sourceSha256": {
+    "node_modules/pdfjs-dist/build/pdf.worker.mjs": "f2870db902eaff8397442c912b69459980ac91f6f4b5ed827167b12cf7057930",
+    "package-lock.json": "dc5e918be2f449635c39b95bc5783c7c04e78cf05fec2a3d007a7ca23cb07b16",
+    "packages/core/src/contracts/archives.ts": "bc59c914256f51b3a650d23892adb28f311c9e443373b9bd0fe1a63c3dc72911",
+    "packages/core/src/contracts/extraction.ts": "2cf05775cc79dfb7cd33a3316e69106771417b8a2822b62813ec283c75e1b752",
+    "packages/core/src/contracts/host.ts": "16e12761feee4509cefa7715a05cf80737d7acfc010031a0b3c8197efecdd1b5",
+    "packages/core/src/contracts/import-work.ts": "3b1781783db87db4233d7ff19241b70bd3a3749b84c669587906f995b998313a",
+    "packages/core/src/contracts/imports.ts": "f2f688aa9a4f67fd481546af9d947758ea9ca3dc835e8c56741a1bd5af5dd843",
+    "packages/core/src/contracts/index.ts": "21a2e0cfaa6cc19cc81e3a6067c45083bf23a178f29462fe6f3b920b3effd43c",
+    "packages/core/src/contracts/mutations.ts": "c7e00f0bdb4238dea2f2fbbf0e13c0bcfe2c329b8b91d2b7171525017d180632",
+    "packages/core/src/contracts/producers.ts": "aaf026f6a774a1669190717aab6a5c2004e54d35adeea40a4e4ec8efb3485697",
+    "packages/core/src/contracts/search.ts": "7ec5f499cfb11a8bc22f1b40d87dff27717f7555e6d48a23c5912b9b52201b28",
+    "packages/core/src/contracts/selection.ts": "5e87c6b21f0aea9cd139c2ca09d66d31614fc725d3163fb00c982d0ec3c7584b",
+    "packages/core/src/contracts/serialization.ts": "a1d6cc8792dc6aeac4310f8b3f2545c0414b9425d7983fb4a80b7e7b0808116e",
+    "packages/core/src/contracts/storage.ts": "56183e576bdd898c39814c0dac8a2e0dde13d19e1e15bffb88438b883c0abfa1",
+    "packages/core/src/contracts/transfer.ts": "73563a59e5d0964657a88c025a1b0935a1ae7eb77161e96404a4d37b375d6a6f",
+    "packages/core/src/contracts/views.ts": "90b038bdf6644c43bf5a6b02b74693ad75c235a711856ed29a084107493c8b3a",
+    "packages/core/src/model/branches.ts": "aabaf03facf31f8598b53e1ad716cb0f403496f1d5bcab35ecae4956ddb020b3",
+    "packages/core/src/model/index.ts": "abd31bc6badf1bab006956f61f7c47b9ffaf89b79269d889c656c10471f2f12c",
+    "packages/core/src/model/provenance.ts": "191f723124ffe3b0f5957a90a1a60449406a1ba0cfbe258f9d401db0c62e8d26",
+    "packages/core/src/model/types.ts": "8bda9a807e6789eeea4fa1192c80378c075756c0503e944096d57a68cd4d614e",
+    "packages/core/src/model/validation.ts": "5feb020a6cf7d361c2661e4e012c24a8b2f329ce4efda1a7ebe5d8ccd11ae0a9",
+    "packages/documents/src/contracts.ts": "53858a5acfe929579206f3276de5c2d39362aa146ca70e45402387b90d9d4f6d",
+    "packages/documents/src/index.ts": "23aae9a175165715b60def7aa636404e9c2a2efd860f4158346c94a0d4301abc",
+    "packages/documents/src/persist-mutation.ts": "179c6d56c36bda9b73e2b9afb7d15ad41008f459763a7167397b0e4df2aacc58",
+    "packages/documents/src/persist.ts": "0147935193b28e8533561ad07d3fcc093ad4be79eb95e76343f9f7a1c4466f51",
+    "packages/documents/src/storage-source.ts": "e689652883932e8a7b710c4ab78c8b780b364fdd020e11446c47104721f4b9ef",
+    "packages/documents/src/storage.ts": "49a62000284495b50e9dbf71120d86e36b0ba2770038d45c96a5a495fbe47fe7",
+    "packages/documents/src/worker/assets.ts": "2883011039c6da2f7a7b8452ab6e687ec73fc41514fd776997b01f94d9c6a54a",
+    "packages/documents/src/worker/index.ts": "065ba329499630f2194ab1ef5c12b60382d4aeae7d1bd322121c6db7ff9ac7c4",
+    "packages/documents/src/worker/parser.ts": "f54aefa10a479d57a9a67d5050b631dde51c2278cbb93664a7a6ed2a280e4a1e",
+    "packages/documents/tests/fixtures/pages-1.pdf": "3e318e5196a931424d1801943726943d492e5a020f764a9e8aaaf5924f5be846",
+    "packages/documents/tests/fixtures/pages-100.pdf": "6f70ed0674549f75fcaf6577c88d8c19539b168f1e0a05180b048c50878a2785",
+    "packages/documents/tests/fixtures/pages-1000.pdf": "79e522013b1322a16d23beb8b4e4e9db58773c92c819e3860770e6344ed5402a",
+    "packages/storage/sqlite/dist/sqlite3.wasm": "dd7c22431a3b8ad51ab5e6ed91065593574c34c5959d2efdef2f17484eedcb2c",
+    "packages/storage/src/archive-protocol.ts": "8fc3b872ac1a05baa5d901a8450abc3fa2766a3ed84573e0ff827c0239011282",
+    "packages/storage/src/client/archive.ts": "844981f196ebee613c584dadf3d1cef2c1af15f3aa06daf253d6d48c3b553c24",
+    "packages/storage/src/client/index.ts": "82250efcc74480029790937f9ab3eebbb61790adb35003d38051738b7fc1bb1c",
+    "packages/storage/src/client/producer.ts": "988b6b370998f14e3a059d118f229451ea98ca4a104e8e018ac18cd5832c3cbb",
+    "packages/storage/src/client/reconcile-extraction.ts": "fd79b561b86cfba75b4665ec32670c3e1626865cf0ade383818cfe6401285b73",
+    "packages/storage/src/client/reconcile-retained.ts": "4f36a87defe0b84885ecd3ab67df36aa4aecde40d7c97b8d6fd4f9722d780e8a",
+    "packages/storage/src/client/retained-archive.ts": "8a2cb708dab495caa9a09585f1611f26856cba4d0ebeb83769ffd5a0f5fc26b2",
+    "packages/storage/src/client/selection.ts": "3be6215f42123384024fe65de83577a46f82fbc4408270d75c7c0e399a66c59b",
+    "packages/storage/src/producer-protocol.ts": "6a7277ec92c73d8ca3e11f8d35a169d49aec3eb03c8ecaa96a2c247c9a055a0e",
+    "packages/storage/src/proof/index.ts": "d2fce13e175a1e464d1f710b4bd37063de9e4aec3a34d9bc43185a2e793dd5f4",
+    "packages/storage/src/protocol.ts": "2c4c7cf75e0b58176f99eb23c7e253e6be25fee52ed70d6b51070411b5a2ba88",
+    "packages/storage/src/selection/catalog.ts": "0d636894d826d92ed15aa11712dad692088af4faa36f07014f0413dff7547a53",
+    "packages/storage/src/selection/managed-catalog.ts": "b362e377cdfb3fe82d062877e8ff5410ca6ce9d9bbadccd48ef255c1d0e16b2b",
+    "packages/storage/src/worker/archive-database.ts": "ef3b2f9bb448307a16634d7c69cfd9bb2bc3d5ac525f4338ecdb3b1365d8b192",
+    "packages/storage/src/worker/archive-operation-fences.ts": "6fa14608c52c2e691f4a418b4b7f495e8ca3e0f8c0f4bc1e9b4ecb445c733feb",
+    "packages/storage/src/worker/archive-runtime.ts": "81f238dd54d48b607323710c4159e4518007c7a034dc371b477754f15e61e26b",
+    "packages/storage/src/worker/archive.ts": "f84c9ad0e41390d7230b232210ede2577d900d9a7f8f8deb9fc7e7f79aa9153c",
+    "packages/storage/src/worker/archives/clean-copy.ts": "404bedbbecb57fedd86d957b51427cca3b5304339ff4120d6091114650c3046c",
+    "packages/storage/src/worker/archives/export.ts": "8b7ce6aba6b9045b17354464b720e07459672baf06accd7d5834c0e3bb07bcb7",
+    "packages/storage/src/worker/archives/files.ts": "6690e6ef602826e72826a2ecb5e4592451b3b901e4f7c0b9f99dcbfc865a313c",
+    "packages/storage/src/worker/archives/format.ts": "d57389c03aaa36838efe8bcb477255fb1f60980e0217ad2e84a9563ec71a044c",
+    "packages/storage/src/worker/archives/index.ts": "858d8ed4431b7a57c764e62a8c060528d29ad331511909619c405d8227f679e9",
+    "packages/storage/src/worker/archives/receive.ts": "e9dc178c61e162a49112b2a92ef02954b8f988e2a436f89215058e31be9b232d",
+    "packages/storage/src/worker/archives/schema-validation.ts": "ff3aecb064a430513890d9a66379b3904caa09de5f455580a98f299a74ebed22",
+    "packages/storage/src/worker/archives/snapshot.ts": "a8b9d47f8edef1793b0a11eac55be89d9b830900420119bdfc782f173d3d9572",
+    "packages/storage/src/worker/archives/sqlite-file.ts": "04c96f086504a976db6349e9e5819b1a6bee60a026e9ff998523d7b7141c3cd9",
+    "packages/storage/src/worker/archives/tar.ts": "9ac85f07f8de1e0267f7da58c34f6a6c7e8cf937b83500e3682efd45c9f9124b",
+    "packages/storage/src/worker/archives/validation.ts": "5e6b0186cbb8eb064f522a35963e10d0bf8690ec3038d07bbd6a5dc1effeb0e9",
+    "packages/storage/src/worker/blob-catalog.ts": "751af6f06d6a175284c2a39f0dd8c9522e18f865c0d8b8be283623a41524de8a",
+    "packages/storage/src/worker/blobs.ts": "5a8ee316532e92497eb6e700ba55f719c5188aef19cf39e04d8a938ec7de4f64",
+    "packages/storage/src/worker/canonical/import-work.ts": "f5d25c914a580c548f2f20748a60854f04e339ed1d704dcc72202e014547801c",
+    "packages/storage/src/worker/canonical/imports.ts": "f9012b8f190f2014979ffc049ac5c7c5e35fc98f5413200ea70d1fec77125994",
+    "packages/storage/src/worker/canonical/index.ts": "9d06de53c6e74d0e53af55bbef9cf344cc7bde72d13b9803a60e8c5de977369c",
+    "packages/storage/src/worker/canonical/repository.ts": "326367b3b5ff6c4660baf95abba160f6b98ccdd7e7fe458f72ecf56b2b3e2428",
+    "packages/storage/src/worker/database.ts": "da05100a21960999959ca94d7427cdef88ac7cdd385eee7db087fd7374b8bc1c",
+    "packages/storage/src/worker/extraction/index.ts": "c01f95a9e6d7fdcd591d73dce42a8a0076df913fd761bdc113740b5f10f94ae6",
+    "packages/storage/src/worker/extraction/schema.ts": "97782b22ed5586d10724c03fa59ea30f09865377d330da6e2b0a345433a2ae5e",
+    "packages/storage/src/worker/index.ts": "56f5e2a4ebf7a2ae5833403e681109258d522ba7570bf5df1df3014d6da4d933",
+    "packages/storage/src/worker/operation-claims.ts": "b90a22768dd7797058221fd509b1f02bd34e4e54a7aa77c15304e7cb19b0725b",
+    "packages/storage/src/worker/producers.ts": "0eb2b0a9646ddb404338c51a03e05e38a224b80890c994e6a7fd779530a794da",
+    "packages/storage/src/worker/retained-archive.ts": "a9b0d97389cecdc9bdcfa5df0814a4a53f8e9b056dddea39c310b6ea9092856a",
+    "packages/storage/src/worker/search/extraction.ts": "ba85bc1954ce553a3268e1b924f8eeed879f0b1dad694108090de77301096033",
+    "packages/storage/src/worker/search/index.ts": "677c6d528c9e1248d3674a0ab6bb775163ac0c55585eeb396fd607b3b8b88d59",
+    "packages/storage/src/worker/search/navigation.ts": "ceec53d4ba21251da1c03dbbf24f04770075674a408092b6ba1372db099006a6",
+    "packages/storage/src/worker/search/schema.ts": "27f06f47227d4a0871724fdecba334229d3320909a6e4ace3c93f6e066c6a9ba",
+    "packages/storage/src/worker/search/sources.ts": "6bb753c9c70999088a4bd79f5655db6ec40a903fccffd82927f11d09a1b47fad",
+    "packages/storage/src/worker/selection.ts": "f3f3c2a896c1d18d57053c57594315e707b6217a7cc575cfd2d84d72bdb11844",
+    "packages/storage/src/worker/sqlite-module.ts": "fb5889c277872ef8623cb0bb21b8afa58d0b08a8fddabc2caa7b96981f92ddbc",
+    "packages/storage/src/worker/views.ts": "79e733521669f584b319be97c9b490e98faf146e3a9f6a11f620540cd29840d9",
+    "perf/documents/fixtures/manifest.json": "6ed245274ddc731a29aad884769e74ac5043e8792c32455e3204105b7a99e9bf",
+    "perf/documents/generate_image_fixture.py": "4b47701e31545ddfb8a477f315f2aafcb161f9f58b5dd9a52a5204481906a507",
+    "perf/documents/index.html": "25dde3568231ee6ca6c9840b3c52997e03606caa7b61db27e174ab90d0c9fe73",
+    "perf/documents/index.ts": "ae1ec3409804f8e37bf7f6e8884a51dd8e6473b544f8e216e782b1608adb3d44",
+    "perf/documents/run.mjs": "d8baab1d56320b9a68855fac91b2d2482a0b5413c6efc81b5a4e773bcd02817e",
+    "tooling/browser-engines.mjs": "136f16e63e905ae4c8305c7adedfce2411eff13b04f914054f8fb718155d0df1"
+  },
+  "hosts": [
+    {
+      "name": "webkit",
+      "status": "measured_with_rejections",
+      "cases": [
+        {
+          "fixture": "1",
+          "origin": "http://127.0.0.1:65260",
+          "status": "passed",
+          "startedAt": "2026-09-09T08:58:32.479Z",
+          "loadAverage": [
+            4.77099609375,
+            5.39892578125,
+            5.5458984375
+          ],
+          "externalRequests": [],
+          "pageErrors": [],
+          "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+          "initialOpfs": [],
+          "source": {
+            "documentId": "f97fc1d2-a86f-422a-8f06-f99c53687424",
+            "attachmentId": "e9a9cd13-39c1-4fb4-ae58-50df379980dc",
+            "sourceBytes": 1683,
+            "sourceSha256": "3e318e5196a931424d1801943726943d492e5a020f764a9e8aaaf5924f5be846",
+            "maxSetupChunkBytes": 1683,
+            "diagnostics": {
+              "backend": "sqlite-wasm-opfs-sahpool",
+              "ownerId": "8bef6a11-52af-4115-8104-5e5a17de5239",
+              "schemaVersion": 10,
+              "integrity": "ok",
+              "canonicalRecords": 2,
+              "syncOperations": 2,
+              "persisted": false,
+              "usage": 27262976,
+              "quota": 20615843021
+            }
+          },
+          "setupMs": 319.98149999999987,
+          "extraction": {
+            "totalExtractionMs": 170,
+            "firstIndexedPageMs": 161,
+            "firstPublicationMs": 147,
+            "cancellationRequestedMs": null,
+            "cancellationDrainMs": null,
+            "indexedThroughPage": 1,
+            "state": "completed",
+            "storedPages": 1,
+            "pageCount": 1,
+            "failure": null,
+            "activePdfWorkers": 0,
+            "totalTextUTF16": 156,
+            "maxPageUTF16": 156,
+            "stageBatches": 1,
+            "maxStageUTF16": 156,
+            "maxStageSpans": 11,
+            "sourceReadBytes": 3366,
+            "sourceChunks": 2,
+            "maxSourceChunkBytes": 1683,
+            "milestones": [
+              {
+                "page": 1,
+                "indexedMs": 161
+              }
+            ],
+            "foregroundBaseline": {
+              "count": 10,
+              "totalMs": 37,
+              "minMs": 3,
+              "p50Ms": 4,
+              "p95Ms": 5,
+              "maxMs": 5
+            },
+            "foregroundAroundPublication": {
+              "count": 1,
+              "totalMs": 8,
+              "minMs": 8,
+              "p50Ms": 8,
+              "p95Ms": 8,
+              "maxMs": 8
+            },
+            "foregroundProbes": [
+              {
+                "page": 1,
+                "dispatchedMs": 141,
+                "latencyMs": 8,
+                "publicationSettledBeforeProbe": true
+              }
+            ],
+            "requestTimings": {
+              "readEntity": {
+                "count": 2,
+                "totalMs": 8,
+                "minMs": 3,
+                "p50Ms": 5,
+                "p95Ms": 5,
+                "maxMs": 5
+              },
+              "readBlobTransfer": {
+                "count": 1,
+                "totalMs": 4,
+                "minMs": 4,
+                "p50Ms": 4,
+                "p95Ms": 4,
+                "maxMs": 4
+              },
+              "getDocumentExtraction": {
+                "count": 1,
+                "totalMs": 4,
+                "minMs": 4,
+                "p50Ms": 4,
+                "p95Ms": 4,
+                "maxMs": 4
+              },
+              "beginDocumentExtraction": {
+                "count": 1,
+                "totalMs": 5,
+                "minMs": 5,
+                "p50Ms": 5,
+                "p95Ms": 5,
+                "maxMs": 5
+              },
+              "sliceBlobTransfer": {
+                "count": 2,
+                "totalMs": 7,
+                "minMs": 3,
+                "p50Ms": 4,
+                "p95Ms": 4,
+                "maxMs": 4
+              },
+              "discardBlobTransfer": {
+                "count": 3,
+                "totalMs": 13,
+                "minMs": 4,
+                "p50Ms": 4,
+                "p95Ms": 5,
+                "maxMs": 5
+              },
+              "beginExtractionPage": {
+                "count": 1,
+                "totalMs": 3,
+                "minMs": 3,
+                "p50Ms": 3,
+                "p95Ms": 3,
+                "maxMs": 3
+              },
+              "stagePageText": {
+                "count": 1,
+                "totalMs": 5,
+                "minMs": 5,
+                "p50Ms": 5,
+                "p95Ms": 5,
+                "maxMs": 5
+              },
+              "publishExtractionPage": {
+                "count": 1,
+                "totalMs": 6,
+                "minMs": 6,
+                "p50Ms": 6,
+                "p95Ms": 6,
+                "maxMs": 6
+              },
+              "advanceExtractionPageIndex": {
+                "count": 1,
+                "totalMs": 14,
+                "minMs": 14,
+                "p50Ms": 14,
+                "p95Ms": 14,
+                "maxMs": 14
+              },
+              "completeDocumentExtraction": {
+                "count": 1,
+                "totalMs": 5,
+                "minMs": 5,
+                "p50Ms": 5,
+                "p95Ms": 5,
+                "maxMs": 5
+              }
+            },
+            "canonicalRecords": 2,
+            "syncOperations": 2,
+            "measurementWallMs": 223
+          },
+          "memory": {
+            "browserPid": 21716,
+            "baselineRssKiB": 114192,
+            "peakRssKiB": 114416,
+            "peakProcessCount": 2,
+            "unavailable": null,
+            "samples": [
+              {
+                "elapsedMs": 16.338208000000122,
+                "rssKiB": 114192,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 254.70337500000005,
+                "rssKiB": 114416,
+                "processCount": 2
+              }
+            ],
+            "droppedSamples": 0
+          },
+          "finishedAt": "2026-09-09T08:58:33.106Z"
+        },
+        {
+          "fixture": "100",
+          "origin": "http://127.0.0.1:65264",
+          "status": "passed",
+          "startedAt": "2026-09-09T08:58:33.596Z",
+          "loadAverage": [
+            4.77099609375,
+            5.39892578125,
+            5.5458984375
+          ],
+          "externalRequests": [],
+          "pageErrors": [],
+          "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+          "initialOpfs": [],
+          "source": {
+            "documentId": "8b2790fa-e289-4dff-9797-4369f9452f53",
+            "attachmentId": "96329435-bff3-4cd7-8576-5eed59d5500d",
+            "sourceBytes": 65679,
+            "sourceSha256": "6f70ed0674549f75fcaf6577c88d8c19539b168f1e0a05180b048c50878a2785",
+            "maxSetupChunkBytes": 65536,
+            "diagnostics": {
+              "backend": "sqlite-wasm-opfs-sahpool",
+              "ownerId": "935b8834-1841-42b7-a103-e0aebd8cbe6a",
+              "schemaVersion": 10,
+              "integrity": "ok",
+              "canonicalRecords": 2,
+              "syncOperations": 2,
+              "persisted": false,
+              "usage": 27262976,
+              "quota": 20615843021
+            }
+          },
+          "setupMs": 329.86645899999985,
+          "extraction": {
+            "totalExtractionMs": 4140,
+            "firstIndexedPageMs": 185,
+            "firstPublicationMs": 171,
+            "cancellationRequestedMs": null,
+            "cancellationDrainMs": null,
+            "indexedThroughPage": 100,
+            "state": "completed",
+            "storedPages": 100,
+            "pageCount": 100,
+            "failure": null,
+            "activePdfWorkers": 0,
+            "totalTextUTF16": 15692,
+            "maxPageUTF16": 158,
+            "stageBatches": 100,
+            "maxStageUTF16": 158,
+            "maxStageSpans": 11,
+            "sourceReadBytes": 131358,
+            "sourceChunks": 4,
+            "maxSourceChunkBytes": 65536,
+            "milestones": [
+              {
+                "page": 1,
+                "indexedMs": 185
+              },
+              {
+                "page": 100,
+                "indexedMs": 4109
+              }
+            ],
+            "foregroundBaseline": {
+              "count": 10,
+              "totalMs": 34,
+              "minMs": 3,
+              "p50Ms": 3,
+              "p95Ms": 4,
+              "maxMs": 4
+            },
+            "foregroundAroundPublication": {
+              "count": 11,
+              "totalMs": 117,
+              "minMs": 5,
+              "p50Ms": 8,
+              "p95Ms": 29,
+              "maxMs": 29
+            },
+            "foregroundProbes": [
+              {
+                "page": 1,
+                "dispatchedMs": 165,
+                "latencyMs": 8,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 10,
+                "dispatchedMs": 471,
+                "latencyMs": 29,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 20,
+                "dispatchedMs": 779,
+                "latencyMs": 5,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 30,
+                "dispatchedMs": 1050,
+                "latencyMs": 6,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 40,
+                "dispatchedMs": 1301,
+                "latencyMs": 5,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 50,
+                "dispatchedMs": 1990,
+                "latencyMs": 18,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 60,
+                "dispatchedMs": 2801,
+                "latencyMs": 10,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 70,
+                "dispatchedMs": 3137,
+                "latencyMs": 6,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 80,
+                "dispatchedMs": 3392,
+                "latencyMs": 6,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 90,
+                "dispatchedMs": 3642,
+                "latencyMs": 8,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 100,
+                "dispatchedMs": 4066,
+                "latencyMs": 16,
+                "publicationSettledBeforeProbe": true
+              }
+            ],
+            "requestTimings": {
+              "readEntity": {
+                "count": 2,
+                "totalMs": 5,
+                "minMs": 2,
+                "p50Ms": 3,
+                "p95Ms": 3,
+                "maxMs": 3
+              },
+              "readBlobTransfer": {
+                "count": 1,
+                "totalMs": 4,
+                "minMs": 4,
+                "p50Ms": 4,
+                "p95Ms": 4,
+                "maxMs": 4
+              },
+              "getDocumentExtraction": {
+                "count": 1,
+                "totalMs": 3,
+                "minMs": 3,
+                "p50Ms": 3,
+                "p95Ms": 3,
+                "maxMs": 3
+              },
+              "beginDocumentExtraction": {
+                "count": 1,
+                "totalMs": 6,
+                "minMs": 6,
+                "p50Ms": 6,
+                "p95Ms": 6,
+                "maxMs": 6
+              },
+              "sliceBlobTransfer": {
+                "count": 4,
+                "totalMs": 13,
+                "minMs": 2,
+                "p50Ms": 4,
+                "p95Ms": 4,
+                "maxMs": 4
+              },
+              "discardBlobTransfer": {
+                "count": 5,
+                "totalMs": 21,
+                "minMs": 3,
+                "p50Ms": 3,
+                "p95Ms": 9,
+                "maxMs": 9
+              },
+              "beginExtractionPage": {
+                "count": 100,
+                "totalMs": 660,
+                "minMs": 3,
+                "p50Ms": 4,
+                "p95Ms": 23,
+                "maxMs": 35
+              },
+              "stagePageText": {
+                "count": 100,
+                "totalMs": 520,
+                "minMs": 2,
+                "p50Ms": 3,
+                "p95Ms": 15,
+                "maxMs": 22
+              },
+              "publishExtractionPage": {
+                "count": 100,
+                "totalMs": 655,
+                "minMs": 3,
+                "p50Ms": 4,
+                "p95Ms": 19,
+                "maxMs": 24
+              },
+              "advanceExtractionPageIndex": {
+                "count": 100,
+                "totalMs": 1913,
+                "minMs": 10,
+                "p50Ms": 12,
+                "p95Ms": 63,
+                "maxMs": 79
+              },
+              "completeDocumentExtraction": {
+                "count": 1,
+                "totalMs": 22,
+                "minMs": 22,
+                "p50Ms": 22,
+                "p95Ms": 22,
+                "maxMs": 22
+              }
+            },
+            "canonicalRecords": 2,
+            "syncOperations": 2,
+            "measurementWallMs": 4207
+          },
+          "memory": {
+            "browserPid": 21758,
+            "baselineRssKiB": 114208,
+            "peakRssKiB": 114416,
+            "peakProcessCount": 2,
+            "unavailable": null,
+            "samples": [
+              {
+                "elapsedMs": 16.619666999999936,
+                "rssKiB": 114208,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 534.2850419999995,
+                "rssKiB": 114352,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 1033.9224999999988,
+                "rssKiB": 114336,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 1533.0012079999997,
+                "rssKiB": 114336,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 2034.610208,
+                "rssKiB": 114336,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 2536.9138329999987,
+                "rssKiB": 114336,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 3036.6362499999996,
+                "rssKiB": 114336,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 3538.2863749999997,
+                "rssKiB": 114368,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 4037.408874999999,
+                "rssKiB": 114368,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 4238.686833,
+                "rssKiB": 114416,
+                "processCount": 2
+              }
+            ],
+            "droppedSamples": 0
+          },
+          "finishedAt": "2026-09-09T08:58:38.216Z"
+        },
+        {
+          "fixture": "1000",
+          "origin": "http://127.0.0.1:65269",
+          "status": "passed",
+          "startedAt": "2026-09-09T08:58:38.703Z",
+          "loadAverage": [
+            4.7890625,
+            5.39208984375,
+            5.54248046875
+          ],
+          "externalRequests": [],
+          "pageErrors": [],
+          "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+          "initialOpfs": [],
+          "source": {
+            "documentId": "7f8bf2ea-87be-424f-af3e-e898b07d7fbd",
+            "attachmentId": "664204a2-7aa3-4f13-b79b-77014eb6690c",
+            "sourceBytes": 652935,
+            "sourceSha256": "79e522013b1322a16d23beb8b4e4e9db58773c92c819e3860770e6344ed5402a",
+            "maxSetupChunkBytes": 65536,
+            "diagnostics": {
+              "backend": "sqlite-wasm-opfs-sahpool",
+              "ownerId": "5ad7233a-7aff-4424-afa0-87fbdecbddaf",
+              "schemaVersion": 10,
+              "integrity": "ok",
+              "canonicalRecords": 2,
+              "syncOperations": 2,
+              "persisted": false,
+              "usage": 27262976,
+              "quota": 20615843021
+            }
+          },
+          "setupMs": 501.566417,
+          "extraction": {
+            "totalExtractionMs": 45468,
+            "firstIndexedPageMs": 317,
+            "firstPublicationMs": 304,
+            "cancellationRequestedMs": null,
+            "cancellationDrainMs": null,
+            "indexedThroughPage": 1000,
+            "state": "completed",
+            "storedPages": 1000,
+            "pageCount": 1000,
+            "failure": null,
+            "activePdfWorkers": 0,
+            "totalTextUTF16": 157893,
+            "maxPageUTF16": 159,
+            "stageBatches": 1000,
+            "maxStageUTF16": 159,
+            "maxStageSpans": 11,
+            "sourceReadBytes": 1305870,
+            "sourceChunks": 20,
+            "maxSourceChunkBytes": 65536,
+            "milestones": [
+              {
+                "page": 1,
+                "indexedMs": 317
+              },
+              {
+                "page": 100,
+                "indexedMs": 3901
+              },
+              {
+                "page": 200,
+                "indexedMs": 7678
+              },
+              {
+                "page": 300,
+                "indexedMs": 10759
+              },
+              {
+                "page": 400,
+                "indexedMs": 14237
+              },
+              {
+                "page": 500,
+                "indexedMs": 18231
+              },
+              {
+                "page": 600,
+                "indexedMs": 22567
+              },
+              {
+                "page": 700,
+                "indexedMs": 27355
+              },
+              {
+                "page": 800,
+                "indexedMs": 32826
+              },
+              {
+                "page": 900,
+                "indexedMs": 38785
+              },
+              {
+                "page": 1000,
+                "indexedMs": 45455
+              }
+            ],
+            "foregroundBaseline": {
+              "count": 10,
+              "totalMs": 32,
+              "minMs": 2,
+              "p50Ms": 3,
+              "p95Ms": 4,
+              "maxMs": 4
+            },
+            "foregroundAroundPublication": {
+              "count": 101,
+              "totalMs": 591,
+              "minMs": 4,
+              "p50Ms": 5,
+              "p95Ms": 7,
+              "maxMs": 29
+            },
+            "foregroundProbes": [
+              {
+                "page": 1,
+                "dispatchedMs": 299,
+                "latencyMs": 6,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 10,
+                "dispatchedMs": 536,
+                "latencyMs": 7,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 20,
+                "dispatchedMs": 878,
+                "latencyMs": 6,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 30,
+                "dispatchedMs": 1128,
+                "latencyMs": 5,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 40,
+                "dispatchedMs": 1376,
+                "latencyMs": 6,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 50,
+                "dispatchedMs": 1622,
+                "latencyMs": 6,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 60,
+                "dispatchedMs": 2059,
+                "latencyMs": 16,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 70,
+                "dispatchedMs": 2805,
+                "latencyMs": 5,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 80,
+                "dispatchedMs": 3374,
+                "latencyMs": 6,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 90,
+                "dispatchedMs": 3625,
+                "latencyMs": 5,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 100,
+                "dispatchedMs": 3884,
+                "latencyMs": 6,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 110,
+                "dispatchedMs": 4172,
+                "latencyMs": 5,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 120,
+                "dispatchedMs": 4984,
+                "latencyMs": 29,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 130,
+                "dispatchedMs": 5737,
+                "latencyMs": 5,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 140,
+                "dispatchedMs": 6007,
+                "latencyMs": 5,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 150,
+                "dispatchedMs": 6268,
+                "latencyMs": 5,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 160,
+                "dispatchedMs": 6532,
+                "latencyMs": 6,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 170,
+                "dispatchedMs": 6799,
+                "latencyMs": 6,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 180,
+                "dispatchedMs": 7066,
+                "latencyMs": 7,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 190,
+                "dispatchedMs": 7341,
+                "latencyMs": 5,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 200,
+                "dispatchedMs": 7656,
+                "latencyMs": 7,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 210,
+                "dispatchedMs": 7960,
+                "latencyMs": 5,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 220,
+                "dispatchedMs": 8241,
+                "latencyMs": 6,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 230,
+                "dispatchedMs": 8532,
+                "latencyMs": 6,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 240,
+                "dispatchedMs": 8835,
+                "latencyMs": 7,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 250,
+                "dispatchedMs": 9143,
+                "latencyMs": 5,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 260,
+                "dispatchedMs": 9453,
+                "latencyMs": 6,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 270,
+                "dispatchedMs": 9779,
+                "latencyMs": 5,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 280,
+                "dispatchedMs": 10105,
+                "latencyMs": 5,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 290,
+                "dispatchedMs": 10413,
+                "latencyMs": 6,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 300,
+                "dispatchedMs": 10735,
+                "latencyMs": 5,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 310,
+                "dispatchedMs": 11065,
+                "latencyMs": 5,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 320,
+                "dispatchedMs": 11398,
+                "latencyMs": 5,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 330,
+                "dispatchedMs": 11731,
+                "latencyMs": 6,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 340,
+                "dispatchedMs": 12079,
+                "latencyMs": 4,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 350,
+                "dispatchedMs": 12426,
+                "latencyMs": 5,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 360,
+                "dispatchedMs": 12771,
+                "latencyMs": 4,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 370,
+                "dispatchedMs": 13132,
+                "latencyMs": 5,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 380,
+                "dispatchedMs": 13468,
+                "latencyMs": 5,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 390,
+                "dispatchedMs": 13837,
+                "latencyMs": 5,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 400,
+                "dispatchedMs": 14210,
+                "latencyMs": 5,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 410,
+                "dispatchedMs": 14584,
+                "latencyMs": 5,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 420,
+                "dispatchedMs": 14972,
+                "latencyMs": 5,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 430,
+                "dispatchedMs": 15344,
+                "latencyMs": 5,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 440,
+                "dispatchedMs": 15732,
+                "latencyMs": 5,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 450,
+                "dispatchedMs": 16136,
+                "latencyMs": 5,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 460,
+                "dispatchedMs": 16540,
+                "latencyMs": 4,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 470,
+                "dispatchedMs": 16937,
+                "latencyMs": 5,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 480,
+                "dispatchedMs": 17338,
+                "latencyMs": 5,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 490,
+                "dispatchedMs": 17748,
+                "latencyMs": 5,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 500,
+                "dispatchedMs": 18201,
+                "latencyMs": 5,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 510,
+                "dispatchedMs": 18613,
+                "latencyMs": 5,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 520,
+                "dispatchedMs": 19028,
+                "latencyMs": 5,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 530,
+                "dispatchedMs": 19441,
+                "latencyMs": 8,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 540,
+                "dispatchedMs": 19871,
+                "latencyMs": 6,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 550,
+                "dispatchedMs": 20303,
+                "latencyMs": 5,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 560,
+                "dispatchedMs": 20735,
+                "latencyMs": 5,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 570,
+                "dispatchedMs": 21162,
+                "latencyMs": 4,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 580,
+                "dispatchedMs": 21633,
+                "latencyMs": 5,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 590,
+                "dispatchedMs": 22089,
+                "latencyMs": 5,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 600,
+                "dispatchedMs": 22533,
+                "latencyMs": 5,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 610,
+                "dispatchedMs": 23015,
+                "latencyMs": 6,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 620,
+                "dispatchedMs": 23475,
+                "latencyMs": 5,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 630,
+                "dispatchedMs": 23949,
+                "latencyMs": 6,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 640,
+                "dispatchedMs": 24417,
+                "latencyMs": 6,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 650,
+                "dispatchedMs": 24881,
+                "latencyMs": 4,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 660,
+                "dispatchedMs": 25350,
+                "latencyMs": 5,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 670,
+                "dispatchedMs": 25836,
+                "latencyMs": 5,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 680,
+                "dispatchedMs": 26337,
+                "latencyMs": 5,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 690,
+                "dispatchedMs": 26823,
+                "latencyMs": 5,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 700,
+                "dispatchedMs": 27317,
+                "latencyMs": 5,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 710,
+                "dispatchedMs": 27829,
+                "latencyMs": 5,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 720,
+                "dispatchedMs": 28343,
+                "latencyMs": 8,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 730,
+                "dispatchedMs": 28877,
+                "latencyMs": 5,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 740,
+                "dispatchedMs": 29415,
+                "latencyMs": 6,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 750,
+                "dispatchedMs": 29938,
+                "latencyMs": 6,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 760,
+                "dispatchedMs": 30481,
+                "latencyMs": 6,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 770,
+                "dispatchedMs": 31036,
+                "latencyMs": 6,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 780,
+                "dispatchedMs": 31628,
+                "latencyMs": 5,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 790,
+                "dispatchedMs": 32213,
+                "latencyMs": 6,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 800,
+                "dispatchedMs": 32779,
+                "latencyMs": 6,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 810,
+                "dispatchedMs": 33366,
+                "latencyMs": 6,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 820,
+                "dispatchedMs": 33942,
+                "latencyMs": 6,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 830,
+                "dispatchedMs": 34522,
+                "latencyMs": 5,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 840,
+                "dispatchedMs": 35107,
+                "latencyMs": 7,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 850,
+                "dispatchedMs": 35687,
+                "latencyMs": 5,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 860,
+                "dispatchedMs": 36281,
+                "latencyMs": 6,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 870,
+                "dispatchedMs": 36877,
+                "latencyMs": 5,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 880,
+                "dispatchedMs": 37478,
+                "latencyMs": 5,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 890,
+                "dispatchedMs": 38089,
+                "latencyMs": 5,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 900,
+                "dispatchedMs": 38731,
+                "latencyMs": 7,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 910,
+                "dispatchedMs": 39350,
+                "latencyMs": 7,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 920,
+                "dispatchedMs": 39955,
+                "latencyMs": 5,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 930,
+                "dispatchedMs": 40622,
+                "latencyMs": 7,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 940,
+                "dispatchedMs": 41248,
+                "latencyMs": 6,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 950,
+                "dispatchedMs": 41882,
+                "latencyMs": 6,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 960,
+                "dispatchedMs": 42612,
+                "latencyMs": 7,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 970,
+                "dispatchedMs": 43297,
+                "latencyMs": 6,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 980,
+                "dispatchedMs": 44018,
+                "latencyMs": 7,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 990,
+                "dispatchedMs": 44713,
+                "latencyMs": 6,
+                "publicationSettledBeforeProbe": true
+              },
+              {
+                "page": 1000,
+                "dispatchedMs": 45398,
+                "latencyMs": 5,
+                "publicationSettledBeforeProbe": true
+              }
+            ],
+            "requestTimings": {
+              "readEntity": {
+                "count": 2,
+                "totalMs": 5,
+                "minMs": 2,
+                "p50Ms": 3,
+                "p95Ms": 3,
+                "maxMs": 3
+              },
+              "readBlobTransfer": {
+                "count": 1,
+                "totalMs": 7,
+                "minMs": 7,
+                "p50Ms": 7,
+                "p95Ms": 7,
+                "maxMs": 7
+              },
+              "getDocumentExtraction": {
+                "count": 1,
+                "totalMs": 4,
+                "minMs": 4,
+                "p50Ms": 4,
+                "p95Ms": 4,
+                "maxMs": 4
+              },
+              "beginDocumentExtraction": {
+                "count": 1,
+                "totalMs": 5,
+                "minMs": 5,
+                "p50Ms": 5,
+                "p95Ms": 5,
+                "maxMs": 5
+              },
+              "sliceBlobTransfer": {
+                "count": 20,
+                "totalMs": 86,
+                "minMs": 3,
+                "p50Ms": 4,
+                "p95Ms": 10,
+                "maxMs": 10
+              },
+              "discardBlobTransfer": {
+                "count": 21,
+                "totalMs": 64,
+                "minMs": 2,
+                "p50Ms": 3,
+                "p95Ms": 4,
+                "maxMs": 4
+              },
+              "beginExtractionPage": {
+                "count": 1000,
+                "totalMs": 4588,
+                "minMs": 2,
+                "p50Ms": 4,
+                "p95Ms": 7,
+                "maxMs": 28
+              },
+              "stagePageText": {
+                "count": 1000,
+                "totalMs": 4038,
+                "minMs": 2,
+                "p50Ms": 3,
+                "p95Ms": 9,
+                "maxMs": 23
+              },
+              "publishExtractionPage": {
+                "count": 1000,
+                "totalMs": 4400,
+                "minMs": 3,
+                "p50Ms": 4,
+                "p95Ms": 6,
+                "maxMs": 24
+              },
+              "advanceExtractionPageIndex": {
+                "count": 1000,
+                "totalMs": 30132,
+                "minMs": 8,
+                "p50Ms": 29,
+                "p95Ms": 51,
+                "maxMs": 80
+              },
+              "completeDocumentExtraction": {
+                "count": 1,
+                "totalMs": 8,
+                "minMs": 8,
+                "p50Ms": 8,
+                "p95Ms": 8,
+                "maxMs": 8
+              }
+            },
+            "canonicalRecords": 2,
+            "syncOperations": 2,
+            "measurementWallMs": 45548
+          },
+          "memory": {
+            "browserPid": 21860,
+            "baselineRssKiB": 114832,
+            "peakRssKiB": 115184,
+            "peakProcessCount": 2,
+            "unavailable": null,
+            "samples": [
+              {
+                "elapsedMs": 15.505083000000013,
+                "rssKiB": 114832,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 531.2218329999996,
+                "rssKiB": 114880,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 1031.4628329999996,
+                "rssKiB": 114992,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 1531.679791999999,
+                "rssKiB": 114992,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 2032.029208,
+                "rssKiB": 115024,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 2532.42,
+                "rssKiB": 115088,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 3033.3039580000004,
+                "rssKiB": 115136,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 3534.352332999999,
+                "rssKiB": 115168,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 4033.6633330000004,
+                "rssKiB": 115184,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 4533.352041999999,
+                "rssKiB": 115072,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 5034.621041999999,
+                "rssKiB": 115024,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 5536.345291999998,
+                "rssKiB": 114976,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 6035.437207999999,
+                "rssKiB": 114976,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 6536.867332999998,
+                "rssKiB": 114976,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 7039.110958000001,
+                "rssKiB": 114976,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 7541.999917000001,
+                "rssKiB": 114976,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 8038.609207999998,
+                "rssKiB": 114976,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 8540.538832999999,
+                "rssKiB": 114976,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 9041.123416999999,
+                "rssKiB": 114976,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 9543.207458,
+                "rssKiB": 114976,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 10043.172167,
+                "rssKiB": 114976,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 10544.781583,
+                "rssKiB": 114976,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 11045.9055,
+                "rssKiB": 114976,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 11546.983499999998,
+                "rssKiB": 114976,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 12047.657124999998,
+                "rssKiB": 114976,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 12548.763500000001,
+                "rssKiB": 114992,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 13049.744458000001,
+                "rssKiB": 114992,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 13550.289083,
+                "rssKiB": 115008,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 14051.485874999998,
+                "rssKiB": 115008,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 14551.513041999999,
+                "rssKiB": 115008,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 15051.368332999999,
+                "rssKiB": 115008,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 15553.247416999999,
+                "rssKiB": 114976,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 16054.493875,
+                "rssKiB": 114976,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 16556.902875,
+                "rssKiB": 114976,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 17057.664333,
+                "rssKiB": 114976,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 17557.958708,
+                "rssKiB": 115008,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 18060.227625,
+                "rssKiB": 115008,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 18559.391708,
+                "rssKiB": 115008,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 19061.049,
+                "rssKiB": 115008,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 19561.855667,
+                "rssKiB": 115008,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 20064.182749999996,
+                "rssKiB": 115008,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 20565.139458,
+                "rssKiB": 115008,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 21064.821042,
+                "rssKiB": 115008,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 21566.998417,
+                "rssKiB": 115008,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 22066.228,
+                "rssKiB": 115008,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 22566.615416999997,
+                "rssKiB": 115008,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 23069.110917,
+                "rssKiB": 115008,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 23569.620042,
+                "rssKiB": 115008,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 24069.226124999997,
+                "rssKiB": 115008,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 24571.290417,
+                "rssKiB": 115008,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 25070.958541999997,
+                "rssKiB": 115008,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 25571.942916999997,
+                "rssKiB": 115008,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 26072.215833,
+                "rssKiB": 115008,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 26573.084207999997,
+                "rssKiB": 115008,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 27074.828082999997,
+                "rssKiB": 115008,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 27576.397875,
+                "rssKiB": 115008,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 28075.265958,
+                "rssKiB": 115008,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 28576.802458000002,
+                "rssKiB": 115008,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 29079.600083,
+                "rssKiB": 115008,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 29580.211667,
+                "rssKiB": 115008,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 30081.070541999998,
+                "rssKiB": 115008,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 30581.976832999997,
+                "rssKiB": 115008,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 31083.099625,
+                "rssKiB": 115008,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 31582.598792,
+                "rssKiB": 115008,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 32084.521458,
+                "rssKiB": 115008,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 32586.855708,
+                "rssKiB": 115008,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 33088.081332999995,
+                "rssKiB": 115040,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 33590.188624999995,
+                "rssKiB": 115040,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 34087.705458,
+                "rssKiB": 115040,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 34589.48375,
+                "rssKiB": 115040,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 35090.361999999994,
+                "rssKiB": 115040,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 35591.991292000006,
+                "rssKiB": 115040,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 36093.121667,
+                "rssKiB": 115072,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 36592.528374999994,
+                "rssKiB": 115072,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 37092.715249999994,
+                "rssKiB": 115072,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 37595.92045799999,
+                "rssKiB": 115072,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 38095.32883300001,
+                "rssKiB": 115072,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 38595.587167000005,
+                "rssKiB": 115072,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 39096.076583,
+                "rssKiB": 115072,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 39596.806625,
+                "rssKiB": 115072,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 40098.219125,
+                "rssKiB": 115072,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 40597.51325,
+                "rssKiB": 115072,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 41098.418374999994,
+                "rssKiB": 115072,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 41600.836417,
+                "rssKiB": 115072,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 42101.159875,
+                "rssKiB": 115072,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 42605.363874999995,
+                "rssKiB": 115072,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 43104.439667,
+                "rssKiB": 115072,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 43603.766667,
+                "rssKiB": 115072,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 44103.865458,
+                "rssKiB": 115072,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 44606.047957999996,
+                "rssKiB": 115072,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 45108.409833,
+                "rssKiB": 115072,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 45583.353667,
+                "rssKiB": 115120,
+                "processCount": 2
+              }
+            ],
+            "droppedSamples": 0
+          },
+          "finishedAt": "2026-09-09T08:59:24.846Z"
+        },
+        {
+          "fixture": "image",
+          "origin": "http://127.0.0.1:65298",
+          "status": "rejected",
+          "startedAt": "2026-09-09T08:59:25.365Z",
+          "loadAverage": [
+            6.23876953125,
+            5.6416015625,
+            5.62255859375
+          ],
+          "externalRequests": [],
+          "pageErrors": [],
+          "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+          "initialOpfs": [],
+          "source": {
+            "documentId": "a8fcc080-f012-4270-aa21-5a87c3f73928",
+            "attachmentId": "16c5e4c5-24f1-419a-9a42-4ff6b80f6d11",
+            "sourceBytes": 31115264,
+            "sourceSha256": "3fec2fa189a9b2ac5f932ca2faf41594f5cdac49822f1f8def49fa894b32c54f",
+            "maxSetupChunkBytes": 65536,
+            "diagnostics": {
+              "backend": "sqlite-wasm-opfs-sahpool",
+              "ownerId": "b7bf476e-d9a3-4566-9360-0704f0fd77dc",
+              "schemaVersion": 10,
+              "integrity": "ok",
+              "canonicalRecords": 2,
+              "syncOperations": 2,
+              "persisted": false,
+              "usage": 92274688,
+              "quota": 20615843021
+            }
+          },
+          "setupMs": 4212.737458000003,
+          "extraction": {
+            "totalExtractionMs": 10367,
+            "firstIndexedPageMs": null,
+            "firstPublicationMs": null,
+            "cancellationRequestedMs": null,
+            "cancellationDrainMs": null,
+            "indexedThroughPage": 0,
+            "state": "interrupted",
+            "storedPages": 0,
+            "pageCount": 1,
+            "failure": {
+              "code": "CAPACITY",
+              "message": "ExtractionError: PDF parser requested an oversized range or queue."
+            },
+            "activePdfWorkers": 0,
+            "totalTextUTF16": 0,
+            "maxPageUTF16": 0,
+            "stageBatches": 0,
+            "maxStageUTF16": 0,
+            "maxStageSpans": 0,
+            "sourceReadBytes": 31232000,
+            "sourceChunks": 477,
+            "maxSourceChunkBytes": 65536,
+            "milestones": [],
+            "foregroundBaseline": {
+              "count": 10,
+              "totalMs": 42,
+              "minMs": 4,
+              "p50Ms": 4,
+              "p95Ms": 5,
+              "maxMs": 5
+            },
+            "foregroundAroundPublication": {
+              "count": 0,
+              "totalMs": 0,
+              "minMs": null,
+              "p50Ms": null,
+              "p95Ms": null,
+              "maxMs": null
+            },
+            "foregroundProbes": [],
+            "requestTimings": {
+              "readEntity": {
+                "count": 2,
+                "totalMs": 8,
+                "minMs": 4,
+                "p50Ms": 4,
+                "p95Ms": 4,
+                "maxMs": 4
+              },
+              "readBlobTransfer": {
+                "count": 1,
+                "totalMs": 239,
+                "minMs": 239,
+                "p50Ms": 239,
+                "p95Ms": 239,
+                "maxMs": 239
+              },
+              "getDocumentExtraction": {
+                "count": 1,
+                "totalMs": 6,
+                "minMs": 6,
+                "p50Ms": 6,
+                "p95Ms": 6,
+                "maxMs": 6
+              },
+              "beginDocumentExtraction": {
+                "count": 1,
+                "totalMs": 6,
+                "minMs": 6,
+                "p50Ms": 6,
+                "p95Ms": 6,
+                "maxMs": 6
+              },
+              "sliceBlobTransfer": {
+                "count": 477,
+                "totalMs": 2694,
+                "minMs": 2,
+                "p50Ms": 5,
+                "p95Ms": 10,
+                "maxMs": 50
+              },
+              "discardBlobTransfer": {
+                "count": 478,
+                "totalMs": 2416,
+                "minMs": 2,
+                "p50Ms": 4,
+                "p95Ms": 10,
+                "maxMs": 23
+              },
+              "beginExtractionPage": {
+                "count": 1,
+                "totalMs": 5,
+                "minMs": 5,
+                "p50Ms": 5,
+                "p95Ms": 5,
+                "maxMs": 5
+              },
+              "interruptDocumentExtraction": {
+                "count": 1,
+                "totalMs": 3,
+                "minMs": 3,
+                "p50Ms": 3,
+                "p95Ms": 3,
+                "maxMs": 3
+              }
+            },
+            "canonicalRecords": 2,
+            "syncOperations": 2,
+            "measurementWallMs": 10420
+          },
+          "memory": {
+            "browserPid": 22671,
+            "baselineRssKiB": 114880,
+            "peakRssKiB": 114944,
+            "peakProcessCount": 2,
+            "unavailable": null,
+            "samples": [
+              {
+                "elapsedMs": 17.74162499999511,
+                "rssKiB": 114880,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 536.4414579999939,
+                "rssKiB": 114832,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 1039.1652499999982,
+                "rssKiB": 114672,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 1541.1074999999983,
+                "rssKiB": 114736,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 2040.6942909999998,
+                "rssKiB": 114752,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 2543.2172499999942,
+                "rssKiB": 114784,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 3044.8341659999933,
+                "rssKiB": 114816,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 3545.3024579999983,
+                "rssKiB": 114912,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 4044.422707999991,
+                "rssKiB": 114944,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 4544.511833000004,
+                "rssKiB": 114944,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 5045.296915999999,
+                "rssKiB": 114896,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 5546.578124999993,
+                "rssKiB": 114896,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 6048.9282909999965,
+                "rssKiB": 114896,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 6551.074790999999,
+                "rssKiB": 114896,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 7050.652708000001,
+                "rssKiB": 114896,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 7551.21624999999,
+                "rssKiB": 114896,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 8051.30933299999,
+                "rssKiB": 114896,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 8551.43770799999,
+                "rssKiB": 114896,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 9053.319582999997,
+                "rssKiB": 114896,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 9555.029457999997,
+                "rssKiB": 114896,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 10054.401791000004,
+                "rssKiB": 114896,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 10458.49404099999,
+                "rssKiB": 114912,
+                "processCount": 2
+              }
+            ],
+            "droppedSamples": 0
+          },
+          "finishedAt": "2026-09-09T08:59:40.092Z"
+        },
+        {
+          "fixture": "cancel-1000",
+          "origin": "http://127.0.0.1:65310",
+          "status": "passed",
+          "startedAt": "2026-09-09T08:59:40.696Z",
+          "loadAverage": [
+            7.65283203125,
+            5.98486328125,
+            5.7451171875
+          ],
+          "externalRequests": [],
+          "pageErrors": [],
+          "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+          "initialOpfs": [],
+          "source": {
+            "documentId": "3d57620d-60ad-4497-b3d0-b0fb96882a00",
+            "attachmentId": "60ab5db6-c4ff-417b-8a57-f0ae29ff6cad",
+            "sourceBytes": 652935,
+            "sourceSha256": "79e522013b1322a16d23beb8b4e4e9db58773c92c819e3860770e6344ed5402a",
+            "maxSetupChunkBytes": 65536,
+            "diagnostics": {
+              "backend": "sqlite-wasm-opfs-sahpool",
+              "ownerId": "fd528d41-c83a-4e27-b81c-bc3b5c4a574d",
+              "schemaVersion": 10,
+              "integrity": "ok",
+              "canonicalRecords": 2,
+              "syncOperations": 2,
+              "persisted": false,
+              "usage": 27262976,
+              "quota": 20615843021
+            }
+          },
+          "setupMs": 619.0794590000005,
+          "extraction": {
+            "totalExtractionMs": 535,
+            "firstIndexedPageMs": 525,
+            "firstPublicationMs": 508,
+            "cancellationRequestedMs": 525,
+            "cancellationDrainMs": 10,
+            "indexedThroughPage": 1,
+            "state": "interrupted",
+            "storedPages": 1,
+            "pageCount": 1000,
+            "failure": {
+              "code": "CANCELLED",
+              "message": "ExtractionError: Document extraction cancelled; published pages remain available."
+            },
+            "activePdfWorkers": 0,
+            "totalTextUTF16": 156,
+            "maxPageUTF16": 156,
+            "stageBatches": 1,
+            "maxStageUTF16": 156,
+            "maxStageSpans": 11,
+            "sourceReadBytes": 978190,
+            "sourceChunks": 15,
+            "maxSourceChunkBytes": 65536,
+            "milestones": [
+              {
+                "page": 1,
+                "indexedMs": 525
+              }
+            ],
+            "foregroundBaseline": {
+              "count": 10,
+              "totalMs": 48,
+              "minMs": 4,
+              "p50Ms": 5,
+              "p95Ms": 7,
+              "maxMs": 7
+            },
+            "foregroundAroundPublication": {
+              "count": 1,
+              "totalMs": 10,
+              "minMs": 10,
+              "p50Ms": 10,
+              "p95Ms": 10,
+              "maxMs": 10
+            },
+            "foregroundProbes": [
+              {
+                "page": 1,
+                "dispatchedMs": 501,
+                "latencyMs": 10,
+                "publicationSettledBeforeProbe": true
+              }
+            ],
+            "requestTimings": {
+              "readEntity": {
+                "count": 2,
+                "totalMs": 9,
+                "minMs": 4,
+                "p50Ms": 5,
+                "p95Ms": 5,
+                "maxMs": 5
+              },
+              "readBlobTransfer": {
+                "count": 1,
+                "totalMs": 10,
+                "minMs": 10,
+                "p50Ms": 10,
+                "p95Ms": 10,
+                "maxMs": 10
+              },
+              "getDocumentExtraction": {
+                "count": 1,
+                "totalMs": 9,
+                "minMs": 9,
+                "p50Ms": 9,
+                "p95Ms": 9,
+                "maxMs": 9
+              },
+              "beginDocumentExtraction": {
+                "count": 1,
+                "totalMs": 15,
+                "minMs": 15,
+                "p50Ms": 15,
+                "p95Ms": 15,
+                "maxMs": 15
+              },
+              "sliceBlobTransfer": {
+                "count": 15,
+                "totalMs": 95,
+                "minMs": 4,
+                "p50Ms": 5,
+                "p95Ms": 9,
+                "maxMs": 9
+              },
+              "discardBlobTransfer": {
+                "count": 16,
+                "totalMs": 103,
+                "minMs": 4,
+                "p50Ms": 6,
+                "p95Ms": 11,
+                "maxMs": 11
+              },
+              "beginExtractionPage": {
+                "count": 1,
+                "totalMs": 5,
+                "minMs": 5,
+                "p50Ms": 5,
+                "p95Ms": 5,
+                "maxMs": 5
+              },
+              "stagePageText": {
+                "count": 1,
+                "totalMs": 5,
+                "minMs": 5,
+                "p50Ms": 5,
+                "p95Ms": 5,
+                "maxMs": 5
+              },
+              "publishExtractionPage": {
+                "count": 1,
+                "totalMs": 7,
+                "minMs": 7,
+                "p50Ms": 7,
+                "p95Ms": 7,
+                "maxMs": 7
+              },
+              "advanceExtractionPageIndex": {
+                "count": 1,
+                "totalMs": 17,
+                "minMs": 17,
+                "p50Ms": 17,
+                "p95Ms": 17,
+                "maxMs": 17
+              },
+              "interruptDocumentExtraction": {
+                "count": 1,
+                "totalMs": 9,
+                "minMs": 9,
+                "p50Ms": 9,
+                "p95Ms": 9,
+                "maxMs": 9
+              }
+            },
+            "canonicalRecords": 2,
+            "syncOperations": 2,
+            "measurementWallMs": 602
+          },
+          "memory": {
+            "browserPid": 22992,
+            "baselineRssKiB": 114864,
+            "peakRssKiB": 114992,
+            "peakProcessCount": 2,
+            "unavailable": null,
+            "samples": [
+              {
+                "elapsedMs": 18.64629099999729,
+                "rssKiB": 114864,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 541.4629159999895,
+                "rssKiB": 114976,
+                "processCount": 2
+              },
+              {
+                "elapsedMs": 639.3305409999884,
+                "rssKiB": 114992,
+                "processCount": 2
+              }
+            ],
+            "droppedSamples": 0
+          },
+          "finishedAt": "2026-09-09T08:59:42.024Z"
+        }
+      ]
+    }
+  ],
+  "imageFixture": {
+    "image-heavy.pdf": {
+      "bytes": 31115264,
+      "sha256": "3fec2fa189a9b2ac5f932ca2faf41594f5cdac49822f1f8def49fa894b32c54f",
+      "pages": 1,
+      "imagePixels": [
+        2880,
+        2880
+      ],
+      "seed": 20260909,
+      "generator": {
+        "reportlab": "5.0.1",
+        "pypdf": "6.18.0",
+        "pillow": "12.3.0",
+        "charset-normalizer": "3.4.7"
+      },
+      "license": "CC0-1.0 synthetic fixture",
+      "scope": "Source-size/range/hash stress. Text-only PDF.js extraction need not decode the embedded image."
+    }
+  },
+  "buildSha256": {
+    "assets/78-EUC-H-Uf9aYsyl.bcmap": "d92a261336dc18b8c03a46eb4d462382d33f4338fa195d303256b2031434c874",
+    "assets/78-EUC-V-ChJxef36.bcmap": "61670bebc4e4827b67230c054fd0d820d6e30c3584d02e386804e62bbedc032a",
+    "assets/78-H-CSvm1opZ.bcmap": "ece6415b853d61e1b2560165151407d35cf16e6556932b85a13ea75276b77402",
+    "assets/78-RKSJ-H-34XPL1-s.bcmap": "696b1f973c97623496703809eaaa5f9b40696c77540057413f4b826a08edfa7b",
+    "assets/78-RKSJ-V-CyaguwXf.bcmap": "53cb6d560ab377da48cf65d6dcacb0bdb31f13fab7066c580de38c12a73a7ff9",
+    "assets/78-V-CJGcNX1t.bcmap": "289000f02fd34872b6975503217f33abae6bee676e7d28f640473a67c8db1712",
+    "assets/78ms-RKSJ-H-BuwLY695.bcmap": "a2442595218f5f8bd8e1b42188e368587d876cfe0cc4cd87196f077c878f72e2",
+    "assets/78ms-RKSJ-V-4hl06FMz.bcmap": "f8ddceba96bfd9d3740bd1789ee30d1f47c78371520a8084f71f7df58f19be0b",
+    "assets/83pv-RKSJ-H-DNQtuaxs.bcmap": "44040051ec818fe09b9703472bea72efd2759d5eeb5ff0d77c718d6bb5e6d1df",
+    "assets/90ms-RKSJ-H-Bhsfh4Ys.bcmap": "c13e043e85ff715b75bb03801e8fd0fb8f3a75e4a48496faa6baaf92b5b48ba1",
+    "assets/90ms-RKSJ-V-BbstlayK.bcmap": "499bb916ce1adbe4289b6e5811f4dc20eb238cdc2ffad20cf26ae56716885bab",
+    "assets/90msp-RKSJ-H-GTsoumJQ.bcmap": "7b8b3b8bbf821702e9a4df9f3596ce292380c8c1b0925dedadbb4e4b2d80498b",
+    "assets/90msp-RKSJ-V-BWep_0YK.bcmap": "6296c2b5c07dca8128e96d5296d621a3268803d4fa0e5812a21e52fe2802aacb",
+    "assets/90pv-RKSJ-H-DOcWKG7K.bcmap": "fb5103f03d3a34547e18d316e52b6d9b26e485c662999222f84d2ba54c2e4fa8",
+    "assets/90pv-RKSJ-V-BuoQaCHG.bcmap": "7bcb5ad2ba55b9662ce379e16c2d9cc2b82d621a579807353741172e4af615c2",
+    "assets/Add-H-1H-FQZVX.bcmap": "a2ffab28b990998181bcca9b0e914bb2207820f100ae31d5c469444892e5ad8e",
+    "assets/Add-RKSJ-H-BpPRzomz.bcmap": "b29f4b52e2465d0485856d5e69f1ba69927deb2848d8fd328c8035583b35bb7e",
+    "assets/Add-RKSJ-V-C7YDsPzV.bcmap": "2aa2232c283a3f5d0997c2834a36cead0b79ce2657944cfeed08140c293460ff",
+    "assets/Add-V-CzFvKnCs.bcmap": "25125d3b1be64e86b2df5b3344170b45a42bcaa0b46e43a34314ef73c166e542",
+    "assets/Adobe-CNS1-0-CfVBOElR.bcmap": "8c65be9d51a9f269a547dc12460707aaf4031ab67ebe8a2900f4b4cc6b3e450e",
+    "assets/Adobe-CNS1-1-Cs9TI-Yv.bcmap": "73152bc1a59cc594b414ac6068be48e5512b96ae85920c40e32a99269fdb0c04",
+    "assets/Adobe-CNS1-2-D3SWzMKj.bcmap": "a1b8d353bdef9584c820464e8f1c9e2013d64ebf433cba0aa831dddf515818c2",
+    "assets/Adobe-CNS1-3-BNxX-hNa.bcmap": "2ffc0c75c79fafde506163d3c08c390d183251009f3fbf6ae50d1167d14b9570",
+    "assets/Adobe-CNS1-4-uApBOf1n.bcmap": "98a1f470c878c6b9691a4d7aef776af8ac9b55f5587c9fafa00547f3bf655716",
+    "assets/Adobe-CNS1-5-BWUfkzOP.bcmap": "ddd6e29955eb8cb545f2ebd09c628c3bbda5023256eda1b728f743c75fb77829",
+    "assets/Adobe-CNS1-6-DfjBny4_.bcmap": "317bb2db71e0e5b7b0c47b75de1da915c2e22f65f0c0861507f9ca7ba238f8a2",
+    "assets/Adobe-CNS1-UCS2-fO900upv.bcmap": "e665837f2197c6bd08cd8955ad4d6932cee2398e2e328b25b00e6bfb3bd72af9",
+    "assets/Adobe-GB1-0-DCLN2jmY.bcmap": "8b81cce8a11d510e505704953cfa4e4ab080c1a0cab991145a3512ee433946b9",
+    "assets/Adobe-GB1-1-C_oGAEc2.bcmap": "0426983081788ec7202703e71f1efa4b860f75b936994236010b39d89251a81e",
+    "assets/Adobe-GB1-2-BT5g0uLo.bcmap": "e67b37a83b160ab3831306a71a605893b24454ee81ac9b6123bf2d3984d268d5",
+    "assets/Adobe-GB1-3-BWe_tZZF.bcmap": "aa299afc3e12a28726147305f191be28c7498078c8b182ece7886ac79cd99078",
+    "assets/Adobe-GB1-4-CYF1KDey.bcmap": "8fbd7d74c2ddb1350c1cecce54a73fde3f5453093d4bed445283ec0033d2097f",
+    "assets/Adobe-GB1-5-B89PBerI.bcmap": "c22cb2fcff24112fa31dab2111bdc51957006576d31aad5a25e67793ac01428c",
+    "assets/Adobe-GB1-UCS2-BA083yIo.bcmap": "20507620260c0c935c35afc1e70e5888aa7125d5ec7ffc03cef1959feb2c1641",
+    "assets/Adobe-Japan1-0-7ueYY-cc.bcmap": "464f08905236f5703b1f5cf8358767c8b18e6bcc808840d081f1de2c7ab38134",
+    "assets/Adobe-Japan1-1-DymoVrld.bcmap": "4c823848722187d1ffe75ae3f5f9126ccd2d7895a05fad14c919fb119e037008",
+    "assets/Adobe-Japan1-2-WYxwCoVU.bcmap": "7810fb808e367e70429e90a9478fe6a3fdc3e214f25c7582ce9c2da6a242315c",
+    "assets/Adobe-Japan1-3-DU7EG9_k.bcmap": "84deb1828711ad3d390c9899c38abce1bf619d65ff7bf1a326ec95acc45f08f8",
+    "assets/Adobe-Japan1-4-CPqEnWe7.bcmap": "3f8a4f974919c2b8bae5d10175ffa2673be140481e00840542c85d48ef184067",
+    "assets/Adobe-Japan1-5-CyFviWdc.bcmap": "1d3ce4ff28d977f8cf37a912ae4ec811f4175c3167b1ec0b2567feec3e79e1db",
+    "assets/Adobe-Japan1-6-8p9YIft8.bcmap": "5609797b9401b30be72ef9645da62a87829f058c3be4b5c623383119f584b1d9",
+    "assets/Adobe-Japan1-UCS2-BL-4M2vS.bcmap": "66c5d0dc4964f4093e77b194023f3a0f689324028ec8330e1e1d0570bcba7c2f",
+    "assets/Adobe-Korea1-0-A0Ew6GJu.bcmap": "dfb8c3874f0e5a8c3acf597d2c12d2b63e90bc5e4f0fce990ec4c56077d80b32",
+    "assets/Adobe-Korea1-1-DFSgDZ4w.bcmap": "62f277b7b1c441c007797ae707d5c37258d029ce4661a2b911e2e1ee35e6adc1",
+    "assets/Adobe-Korea1-2-LZ89XEQ6.bcmap": "1d77068af462f96d7ad28ad7e7d43eef6423c685b479d7dc25ff5df38db0380d",
+    "assets/Adobe-Korea1-UCS2-BEQZuOdo.bcmap": "857b723088be97255053562bfa41bd1075a7f7910d3bab59a0645c8bbc7060ff",
+    "assets/B5-H-Cw4_8on0.bcmap": "718ad0ffbef4c34f8f3f31292c462e519cd567a5511fc8b346c60010d64f4ef9",
+    "assets/B5-V-3ShXAXP7.bcmap": "b5c37383517477620ced927b6b4ffd4f4cc6230d8051b5b46a21d6768e07f7d8",
+    "assets/B5pc-H-BLVOWhvh.bcmap": "bab6028aead1d6149400e904ab10cfd319082d826473ed4c582c8eeed920f17e",
+    "assets/B5pc-V-1X0fY8mT.bcmap": "41543142b9767f3b76133899fc8453282b01ad3c653acaeea42d78c5a7d08c63",
+    "assets/CNS-EUC-H-C1HifF4e.bcmap": "e8f89cd61e6486b948205da46499d659ed0aed949b7095fd3c8e95ffe2b0e7a9",
+    "assets/CNS-EUC-V-DYWNmJNX.bcmap": "cae422bec2ac6dbe86bf921cec942bacd2d0b733ffcca5f91b3ba14e917025a0",
+    "assets/CNS1-H-DAbVz1sI.bcmap": "e8487971ab20cd16f3de3e8ac56ec994b72b658ad113f2818239dfd5108f501a",
+    "assets/CNS1-V-BUvSsmpl.bcmap": "42df8076aaa7574505e7304af83a3323ec032c4177d64b1309db8c043d594a8a",
+    "assets/CNS2-H-COHfjmw4.bcmap": "bc6024d274d440f0625c69e25f37036ef6cb6689432ceaa160d3432a2a716ca7",
+    "assets/CNS2-V-DgHqi_gL.bcmap": "2e4f70a8afd23a121030fc2e5b5f3816e903b11e7ba8b8c09654b31c80399c38",
+    "assets/ETHK-B5-H-1MLb5v9x.bcmap": "d2f10fa519336bc4efcc7b6deb9604b75429946b40d82e311cb3a97a1994c89a",
+    "assets/ETHK-B5-V-DmzBBgI2.bcmap": "1fea3fd0d9f0f679f80505800851ef2e4131d81127e18c006938ffa2f4c8b247",
+    "assets/ETen-B5-H-BUa4x82H.bcmap": "87ee6b3f5bfda5fe26fa35431264c7d73070d10dbbf398a75185d63ae322c18d",
+    "assets/ETen-B5-V-CyIout1L.bcmap": "47dc0d2c21e3bde317947aec1675ceabc1d5460a60bf9c24334b8c407a17172c",
+    "assets/ETenms-B5-H-DbS1LlRr.bcmap": "d5f5a73da4173b7da9a3a20e16f26f9cd5d12deb1553409919e0cec6fd37fdee",
+    "assets/ETenms-B5-V-DsL3AkeM.bcmap": "18252fca90f472f479af1bddd60d6ab51c8e1b55dcf6845951426504934543e0",
+    "assets/EUC-H-D0J4HUB1.bcmap": "f9939cd57fccdc65c5d9f4c205fd497ebdbd283643308da5663801a8c1d9c595",
+    "assets/EUC-V-BQ9CW2K_.bcmap": "1283a50a706507c4436da83ede9ad7a4440be25378f2e96f6c81a430081426a3",
+    "assets/Ext-H-BSOXjlXj.bcmap": "4000ed4e61a1c668ef453bbd0603cfa383defa793abd46a57ed870d7f527350b",
+    "assets/Ext-RKSJ-H-DGTwwnmY.bcmap": "e0d2f0df337660e73813238dd4a725f11f0621b90f3273857db253d0e7694caa",
+    "assets/Ext-RKSJ-V-gySMsgy2.bcmap": "f617a22b6d67febb187990952006c91a9f5a4db21155d268c656252d0c21985d",
+    "assets/Ext-V-ByyLJMVu.bcmap": "c2087fb845a9e3acea0c2922cd40e6af67e11957bec74dcd597f1285edd490ce",
+    "assets/FoxitDingbats-BaQLufoW.pfb": "845c752392b6c914fb989c75a08b7792b88f542d2499042ef2889f8c814a16ed",
+    "assets/FoxitFixed-Dyd5Nipw.pfb": "b6c8fe53f134b8b6d4578cd2d544df4cee9624c4efa8d51a560fb40ea296101b",
+    "assets/FoxitFixedBold-D5TuYRwj.pfb": "f1b7159702973f54fc86254ea38bcf3712b2a736eb3a0995751e9f4bb45ad603",
+    "assets/FoxitFixedBoldItalic-BqlXQ_Yv.pfb": "8a000945843bd31add06aee63bf9fd41b7578b4f3242a4b7cd46349ad9d24d4d",
+    "assets/FoxitFixedItalic-DqjQkmbS.pfb": "5007faf8320fa1fcc08b8894b356ad976f60b992ba29ee5272578bbdebaf3876",
+    "assets/FoxitSerif-qbgiDIe-.pfb": "4f57d2b9d884af8f907bf22df6019b52d86cbf6214fdbd02b1ae05472a543f35",
+    "assets/FoxitSerifBold-DZZ4CclT.pfb": "0bdf4b04e964139818d51eda03d566ba999fc3ba2421b1c6c51f9dc969022e80",
+    "assets/FoxitSerifBoldItalic-DSQtwd_X.pfb": "a406cac82583bf98175cb62c87ed5e95c45fbb34eece63a10b0a13e793cb2e10",
+    "assets/FoxitSerifItalic-CQs5lx9Y.pfb": "610ae0687198045c4db5d1a6650fd5e92536631706382eb8b72e38df578d0ae9",
+    "assets/FoxitSymbol-BVtbc20u.pfb": "47967d055530e7357088a08403115425643ec2cdfd6201ba8af0fbd7116c1539",
+    "assets/GB-EUC-H-OgfW-rVY.bcmap": "928bad06fd84a48f5ba7150d7716609119fb660f2aaa73eccad81ddab9b9d203",
+    "assets/GB-EUC-V-DUJE8ZfE.bcmap": "a9ad88ac2479da529b16dc48abc5952332e27bc355335f91df5729a587533324",
+    "assets/GB-H-CjAQlF1j.bcmap": "1018c777a8910b5bb46d7d54a4aee9d51ca5cff8addb2b41c969d9101cb3fd1c",
+    "assets/GB-V-DQcXdwec.bcmap": "0b96789143c0bbf9f1641ae7165b3456dccd14dabffcbb0bd654d5bf6f94f863",
+    "assets/GBK-EUC-H-CAORqCkf.bcmap": "2103fed28650ede096a2281104a1a8a4304dae0db414342c636867522307123b",
+    "assets/GBK-EUC-V-bmo5E_xa.bcmap": "a7fd35dd14d9dbdb955f34e6c0630618b6620dfd09d4283b2f65a65ce77fcaea",
+    "assets/GBK2K-H-Cv55KPk8.bcmap": "3d919ae72af16c5cc6846ec87a4326a9f125e493c59d3628429d35c2c95fe8c4",
+    "assets/GBK2K-V-VEqjiYVJ.bcmap": "b927fdfd595c07ce9158bf2ec13f4641b2e83b01c70989dadfabd6ed7c6ac2dc",
+    "assets/GBKp-EUC-H-CElrnV5g.bcmap": "d15ebd8e81fb4fe8a244f1b1e877922e03500ac69eddf5001093e502430451d2",
+    "assets/GBKp-EUC-V-FKuJrjD8.bcmap": "fdc736d46e642625dccc8ad8c59f2c69fc7db7a13f2e799c6c6b779e707bb97a",
+    "assets/GBT-EUC-H-BTsQIL1M.bcmap": "dc5f44e48a39f3367ae28665027d8ab1d8cedb5a9dcc5068a900acd6709f60f9",
+    "assets/GBT-EUC-V-CCaONgYB.bcmap": "a1ad24e63653b8aa388c18fa5e498f007564e43dde699a9f91ccb4645c999be8",
+    "assets/GBT-H-DL9h-WkS.bcmap": "8afda745a505763f3ff54c8126eeb48ef376ea9ed07d9f42ff9a22c5c547ec57",
+    "assets/GBT-V-DVsZ47Yj.bcmap": "cdc2ec5c3c7c7033290c9a8894878202f08674eb9b1ae7d36218430326768771",
+    "assets/GBTpc-EUC-H-DnIh5WJ3.bcmap": "7b23e2f7bfdb6c918f567b7324bf858f398bd8cd5f268d74ece19a3c91bf4f32",
+    "assets/GBTpc-EUC-V-D_dpKF5g.bcmap": "d7a1b13ead9ab511cf2cd01de6ce8b02aa8e8767e84895337d7a3b67f039f93b",
+    "assets/GBpc-EUC-H-4mXfmDQd.bcmap": "3c4a4eb82f05abe51f6650985c630e180438bfdd491318f5d20d2ec29236e1c3",
+    "assets/GBpc-EUC-V-BNBtOgzw.bcmap": "215bdfa2842705624b4cf4cd29b8e3c720f1e192365e0305c11030a424c84d7c",
+    "assets/H-BJYV6_el.bcmap": "a0233e21047ec00b852125b243cbcf30abee511155b6d8159c24f944384bc9ee",
+    "assets/HKdla-B5-H-Bg4tZIUs.bcmap": "5242bce18fb13ab4cc59b146a03eba36e4ce42667eeff09e10981a9d2aa4996b",
+    "assets/HKdla-B5-V-CHovDFKh.bcmap": "2e0537f786c0791d41a925f72bad2d4e7268aa6cbf15a1400a722672cec38e2c",
+    "assets/HKdlb-B5-H-Bf7o2mkD.bcmap": "fdc8159984bf5dbe475c0d5dfcb621ecee4dea07c38c668bd77f4c679e23b9b3",
+    "assets/HKdlb-B5-V-CDfiFKye.bcmap": "b249eb9dcb915ab45057c5d4d7aa55ef88d0efbb092af6bae0b2d4705d139abf",
+    "assets/HKgccs-B5-H-BSg_4Hb2.bcmap": "ab64c7fc5e9b2e97750cc4f269b0da14fd8649e49151b7598c8df86599bac591",
+    "assets/HKgccs-B5-V-Bb0FD7uo.bcmap": "02ebdf7cdffb5395fb21091cd58a013a18ae5388922822f9dc6292ef16b98956",
+    "assets/HKm314-B5-H-CUeI2x46.bcmap": "bfd8bbde6b36a9da4c1c902c74121a30d9807a7079a00eeea218be6adc223cef",
+    "assets/HKm314-B5-V-BrK5Z_J-.bcmap": "2a64a815cfb6fdd480674a868762e3d161fda17543b20c9209978559f0667164",
+    "assets/HKm471-B5-H-B_3IWC_G.bcmap": "49d7c037758826b5b6c0fa329c35bbf25d3943197754e72ecd30c6fb04d745e6",
+    "assets/HKm471-B5-V-B7Ks-vkf.bcmap": "be24c109e78aa4fe3c1f27d30aab3ed0741e783fa1b6b6c2719741072b54b132",
+    "assets/HKscs-B5-H-CXbBbq6g.bcmap": "08599378f41d96b40537adef6e6edcc4a787bc63f5accf47c026df4905a13914",
+    "assets/HKscs-B5-V-CrljkNDo.bcmap": "d073542b7dad1c4cbf01c1af5f0cd13218d1281a491956e310c55702fc8705c4",
+    "assets/Hankaku-SMDjWZXJ.bcmap": "b454701f7aecd7856769016dfd04ca64280a060f2c67a2466d50b4395d24974e",
+    "assets/Hiragana-Dy6yEHKG.bcmap": "2ed669394756dd9458651cd9995ab29ab691ecb7686659003306cdf22767a414",
+    "assets/KSC-EUC-H-CYoqfsaA.bcmap": "6784e16dbc5861c036c23d3e55f0d4ba0975a3e464da0ee8e49bcfff0be070c4",
+    "assets/KSC-EUC-V-C8-Y2jkl.bcmap": "fdb36bad85e9924823d49db374067988e024cf80fc894711f2c9178951cbbe95",
+    "assets/KSC-H-CUtFgdXl.bcmap": "c1f6d61f1d3304fd539a65ae72624fa567ecc3853bf52e283958a7a2515b3eee",
+    "assets/KSC-Johab-H-CGtV3MPT.bcmap": "939993d213f68db763bf156217c217ae23af082b91a0eacecf3d11eb4ff8ef8c",
+    "assets/KSC-Johab-V-CWzqnmVV.bcmap": "5d61967aac0e666def721e8b8d0fed8f95a879a14f2e76ce516c3d11c621e519",
+    "assets/KSC-V-CDXb0xyy.bcmap": "d7da5afd9f1fe74816d79c9325f0139a4efb6438664ebfdf9a7aa92f3034360f",
+    "assets/KSCms-UHC-H-i6eA63f9.bcmap": "5b70d8f6a4fa9e2283dc649f0ff95d906d56efbee50a20e8d2faec3a8fed078e",
+    "assets/KSCms-UHC-HW-H-lQjjyo98.bcmap": "a5e6ba22aceb02fdedee11bfb9ed138463d89e85b87810b9f075b469d936f8ec",
+    "assets/KSCms-UHC-HW-V-DKemUgQi.bcmap": "890332a6a26880d463a12f2a6ff048bf9cf7e45077cfb1ca8815b89baa7bf411",
+    "assets/KSCms-UHC-V-DaEePsjg.bcmap": "1631b531c9a40c8cbe24c2317dba107362e49fa6e18af620414d627c111d570c",
+    "assets/KSCpc-EUC-H-BxNLD7US.bcmap": "709480682c55cedbb0124b9960d78e28febeee0df2e34607d61aac6601647ec7",
+    "assets/KSCpc-EUC-V-Bd6pD5ID.bcmap": "031707887d6fc2378a36cdb6775334fd7a236c3f95048d8436abf43fe26fc49d",
+    "assets/Katakana-DueN_6wN.bcmap": "3b6ca6642fbf8822da00d5e58a8aa275216d5c32dbf2bd73e934197fc9fc5c53",
+    "assets/LiberationSans-Bold-BPt4bU5Z.ttf": "361c61b82d575c5c35fd9157fda8b0194bcfcd0d88ea8521a4fb5dd53d33dddc",
+    "assets/LiberationSans-BoldItalic-Bj53-jFw.ttf": "a224075ac17495ad0a3af3bc0a419ac0704a8b3fd1095456201fb9b095fc281d",
+    "assets/LiberationSans-Italic-5QhGB3P9.ttf": "832b4406dbef23628800d3aaad21048534ac84d7e3ad955be83b8172ed8ef512",
+    "assets/LiberationSans-Regular-cbskN6YR.ttf": "f8ace1f892b2bd9dc1792ba7f097fa7588f84fed48321480e04de5390828221f",
+    "assets/NWP-H-BSh0nlh5.bcmap": "286c6c9e335da330928a01edc3c97a3a623f1f7f3c42762b0a7dc2f651b1a78f",
+    "assets/NWP-V-DvbaGBQ0.bcmap": "3a75fb7b59adfb172710758c425d8ac6c93fd5360a64dd4afd5dd04e60ab4b4d",
+    "assets/RKSJ-H-CotmKIAY.bcmap": "a70de61a22a898f693f02cc011c3e3cff2e10aaa7cddb4661e456a21ae859f78",
+    "assets/RKSJ-V-CVQ5ujKs.bcmap": "68c1a64506471a524ea5cfc3b3a9f8f70031989a6bd95427b1351f33ccf50b06",
+    "assets/Roman-CGyUGrKi.bcmap": "1c6b3ef9d9e5cb1aa329142ce9414b90f9b6d7f9182a2a9e927378dab8f0d43f",
+    "assets/UniCNS-UCS2-H-DWzv8UhH.bcmap": "779428116752f34e2490a1941d24e4634c71e3c22d053b811d2090ae2fb3c704",
+    "assets/UniCNS-UCS2-V-CbsnO1ia.bcmap": "1e5cc184b850ea44abc2df8ae5674279df668e8edf5e2a1a2ea2bd77adbd280f",
+    "assets/UniCNS-UTF16-H-Bw0JKgCq.bcmap": "32ff139b3c7b91d6ad25f994701f3ce7b242906022c418fd73e6493fc228bfe5",
+    "assets/UniCNS-UTF16-V-DoPO_42D.bcmap": "278eb1e68d1a236c60ef59472cf0176ee0d45f364285e76ca12419a08d46fb9a",
+    "assets/UniCNS-UTF32-H-IE_GrH2i.bcmap": "bf26eb67fe19ee5ba915799e80ca72408400aa8342fdf6a244a4f44de8f97336",
+    "assets/UniCNS-UTF32-V-DpuHKqNE.bcmap": "f7da3caf83ceb1cb37936fa10700d9ba6e9c3f72c5bc9724e3ac79bff0c0179e",
+    "assets/UniCNS-UTF8-H-BbLcFh6Q.bcmap": "2f2a742bcd1a84a148a4a518b9eed51a8f9c6ca5ed3bc5e2e41fff97de5dc2d8",
+    "assets/UniCNS-UTF8-V-BD4cmnNX.bcmap": "b7c3f10780a8c62dd1c8ff6c30dc1e4e23b6cdc87c3a96fcd514cc98ffd3af9d",
+    "assets/UniGB-UCS2-H-D7xzRvZN.bcmap": "9201569b402e81ad8860650bd86350c4fa28e5dd5971f05fcacaf40f51de18ed",
+    "assets/UniGB-UCS2-V-COOBrDBb.bcmap": "f10282335e4d64203bc2a653a3a47d745ec76c8ae04549f4d50180c1899be216",
+    "assets/UniGB-UTF16-H-DKjbEwc0.bcmap": "386fd39581245c034da016a92d23f3df1117d169f996100050b264fc09a84e35",
+    "assets/UniGB-UTF16-V-E1RoE6KW.bcmap": "0473cfbba612b92dd9918f0ff8aee9112897c48e0ffdc0eb82da3144ed8ea84a",
+    "assets/UniGB-UTF32-H-Behfouj5.bcmap": "f48a145dc4e3ed1dca1dde7111716a72306a2a4191ab05c6bae3a5c3a961cd2f",
+    "assets/UniGB-UTF32-V-BFm4myiz.bcmap": "106acc49b7118bdef944e32107b4f348238f3929a0a15d3b7aab7b9101535993",
+    "assets/UniGB-UTF8-H-EROft1ro.bcmap": "f217b439c80ee5fa1bc2cf6d1defcc319f8d84483d166a00ee199e05a68588df",
+    "assets/UniGB-UTF8-V-C8SGUjFI.bcmap": "a64df947632878eacc532fa193c735c92a383b7d66e6f8374ac193af7c64fc63",
+    "assets/UniJIS-UCS2-H-2DbZ0MaQ.bcmap": "ad2352f40870880fbf7f8ee5abadff743fbd025fbf9830b8ada472d1c5e4da0b",
+    "assets/UniJIS-UCS2-HW-H-BfJ3t__Z.bcmap": "16e87edca954177c0881c874859d6783220925d821b5cdfb8755b61ebd93f9ce",
+    "assets/UniJIS-UCS2-HW-V-BZyQaeYZ.bcmap": "1973457e2c0192819947e56068625b34fb9a72ecc8a476ce6d7eaae5f73e2e5c",
+    "assets/UniJIS-UCS2-V-Cr3xs5m4.bcmap": "42a133d8e2ce9dd6d2288018e01592d2bf2435b326d39b94ea0b6e6a44ac33d3",
+    "assets/UniJIS-UTF16-H-BlDDPdCK.bcmap": "f6a89c5688978548c83fcee990e205bc63c74274d5c69b49032a3bd4c49a05ee",
+    "assets/UniJIS-UTF16-V-DfK_Aqy1.bcmap": "c67126fc7c73850855186bb0d6482ac0a365057e0b58778c4ab9f234683fef53",
+    "assets/UniJIS-UTF32-H-BIQPWkjv.bcmap": "96195950ce0fe24443d8eb426fa6b88534ec421d7bef9046f0b2362809cfba73",
+    "assets/UniJIS-UTF32-V-0rh54ED3.bcmap": "ed4dafda402bdd19c4d5d8bf2ab41473c0f86f384552b4c7b963d6627daedeb1",
+    "assets/UniJIS-UTF8-H-CGusholx.bcmap": "798fb0bf06ab0788d1f6a91c2db7de581612eef03c628f10e8f7ecd8f70ab448",
+    "assets/UniJIS-UTF8-V-BGWFHinB.bcmap": "1021611424f913b2df0bfdbe94bd327c04e224ec89d8e821c6501ea3d21f4265",
+    "assets/UniJIS2004-UTF16-H-KXixH-HI.bcmap": "710a32d7cb43fd6bd9dbf30da5971f8c941590f74441e208d852c2be0e74cc97",
+    "assets/UniJIS2004-UTF16-V-BSHgoaRy.bcmap": "3b149aff5c5707b57fb3215d1775852c8b1f413ec0f679ea628f25cf87fe098d",
+    "assets/UniJIS2004-UTF32-H-CXrD-9YE.bcmap": "8d2658e18741af7937d586a57c89729a6fec0d86121197c1f8518aa58b29cdfb",
+    "assets/UniJIS2004-UTF32-V-CH3k_ouF.bcmap": "6dd475782f2897648a683c48b2fa015a15b8f06856760bddc8a17a63f418bacb",
+    "assets/UniJIS2004-UTF8-H-BkOctZjn.bcmap": "691c614ce432b3e62486efb54e5c84c6da5afe9b51b21253bde4758feb484183",
+    "assets/UniJIS2004-UTF8-V-D8AJhywu.bcmap": "40a8c7ea2d46711c5f78fc9a878a7db68b1543ba5cd60ecf14f519a2deb829b7",
+    "assets/UniJISPro-UCS2-HW-V-DLNkNO1x.bcmap": "6826f94d789d7bf1960668c1c5819c34c9585c1b23152fbc19ee81c7df08524b",
+    "assets/UniJISPro-UCS2-V-BpvX7JBA.bcmap": "493de9fd1a08f7946065d8ab58f0c3c9fe489f5a0f109f2d05a3169b4bd5789f",
+    "assets/UniJISPro-UTF8-V-Db5K6XXE.bcmap": "6181d382cf736c5e09492e8be9f26f31fa25b7462253f23ab16646af432cad81",
+    "assets/UniJISX0213-UTF32-H-BavAhZjb.bcmap": "692044e1fb33445668632bc9fe7386805c624864be1ddeb29d65bb0c99fc630c",
+    "assets/UniJISX0213-UTF32-V-Cz7JBDr9.bcmap": "dd54e16ca7bffb3a886242549b2bf7d78a277087f7c60d2636f118c21a5b0646",
+    "assets/UniJISX02132004-UTF32-H-DAH-AgUq.bcmap": "f80ea5a989be30ccda5a8804baef6d3b4b044d2b339bf8b31c671b2466171cf6",
+    "assets/UniJISX02132004-UTF32-V-BqqDIAe5.bcmap": "94c22bd99e771c5fbe0dd8dc39850570d4db0075074aca13e272813edd7cc57f",
+    "assets/UniKS-UCS2-H-YeUc7k1L.bcmap": "a1081396ab4adb6f4a5b6c15f896963c244c1c9bcb65ce5616d06096a1b9811c",
+    "assets/UniKS-UCS2-V-ahlksFWQ.bcmap": "6cab547431958fbdc1d401d06ebd4dd61a73f5509a10f974df32bcbca11a2e43",
+    "assets/UniKS-UTF16-H-B0dvB-Td.bcmap": "42d35b396286499dfae1737a07adb3a64500df37b426580bfb1d3ea872938519",
+    "assets/UniKS-UTF16-V-EgvK-6IG.bcmap": "5bdb7390c80dcc136cb47d41dc7460082560969c17322ee739fe3020fb642410",
+    "assets/UniKS-UTF32-H-olR_LtmR.bcmap": "3a01ec51ed1b828101351e337ffb8250abe11880032e5210f881170fed2588de",
+    "assets/UniKS-UTF32-V-CnOTbPsn.bcmap": "dfda895eceaed081af030dbbb962b49629eea817fc3c02bae15db93d0c68acd7",
+    "assets/UniKS-UTF8-H-CbpebD-y.bcmap": "3fac9c65145f72d7d42157a3b9c5ed6904632184e6a0888f2b828699afd2002f",
+    "assets/UniKS-UTF8-V-BIFFPWWm.bcmap": "9ecc6cf30dd354b9778ddba163b6cc7302b087ce9f39d1ba73472d2b75ed13ca",
+    "assets/V-BJkwLeFB.bcmap": "b9ad1c0c09ff14bca52f9a28a9767eb857ad0e8946e64ba14c7387a7eb69866a",
+    "assets/WP-Symbol-C3zzKJnO.bcmap": "543923bead225732aba30976690ee89095a19628277b5863efecc2c728d5d7bf",
+    "assets/archive-Ccb8XqG2.js": "f44853dfecec17d1a55267c79d075eb2334f67f2653905e8630ed76e1390b5f1",
+    "assets/image-heavy-D5Vt_A1S.pdf": "3fec2fa189a9b2ac5f932ca2faf41594f5cdac49822f1f8def49fa894b32c54f",
+    "assets/index-BVwH0Ayj.js": "8a77bf96dfbbc2207c016883d056d96239d4580443b42bcab2c550389a4d89fe",
+    "assets/index-Bnzvuw8w.js": "5a57ad79f708d6e626e303e137cb89cfa3deb6ebe15fba90914d894ccca31c29",
+    "assets/index-dNLwQLXp.js": "b23d3316dc05e876915490307f406b997ffd131ee0657c6f0875e06beaaadf2f",
+    "assets/pages-1-Bik4QdlP.pdf": "3e318e5196a931424d1801943726943d492e5a020f764a9e8aaaf5924f5be846",
+    "assets/pages-100-WB7dcXzt.pdf": "6f70ed0674549f75fcaf6577c88d8c19539b168f1e0a05180b048c50878a2785",
+    "assets/pages-1000-BBl1QaHp.pdf": "79e522013b1322a16d23beb8b4e4e9db58773c92c819e3860770e6344ed5402a",
+    "assets/parser-COCeVM8c.js": "27e24420f58846eeec37cc972191fbf8a3b4031e02dafddf212b8e516d35d008",
+    "assets/retained-archive-3BpMDBu3.js": "9c3d06d31a83a7a0226d70ae8634fce93e3422f9ca407daa286cd54280d7472e",
+    "assets/selection-DhekxNDN.js": "f6618b3b1c36fe1a2bb9340048230c7a70b7260f913c7c721d569d00e8a3bede",
+    "assets/sqlite3-BzAlo58v.wasm": "dd7c22431a3b8ad51ab5e6ed91065593574c34c5959d2efdef2f17484eedcb2c",
+    "index.html": "33155aa6c8bc67e58b2c06f96073941d1b0b6a85f790079655816af77958eb4e",
+    "third-party/CHARSET-NORMALIZER-LICENSE": "6d0d41bfe170ac6c7dc248c9a63e254d0fb45a60d50a8257d0af92c6e249b887",
+    "third-party/CMAPS-LICENSE": "aa92ab5a472974865a96fd4a4e9c13bb41bf6fe1b309cb6b8da48bc9e19839a2",
+    "third-party/FOXIT-LICENSE": "b578cdd2345840ada550bd12519533812320d5f1d21cf4c1c7e1b1b0a31c98b7",
+    "third-party/LIBERATION-LICENSE": "d2c4d5b3e115a519cb58eb691aa64538397e2611f9ebe801392cf9667997e7dc",
+    "third-party/PDFJS-LICENSE": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594",
+    "third-party/PILLOW-LICENSE": "dda12a98c1979cf3d94df1cff45d27a4cb3f04a60c76f76902ac54cac03ec0ce",
+    "third-party/PYPDF-LICENSE": "a97ac230e5f33ef10a5367a850eb01f91f1a0b064e34742c7794d2294557f524",
+    "third-party/REPORTLAB-LICENSE": "ef831761646313921375fc2cb888e8eeaf7da213d0b92852c10c42f3a0b4d138",
+    "third-party/manifest.json": "7967b74271226a8139740b7ad70d1612f6f81231fc4575c7b10e6b90e5973246"
+  },
+  "origin": "http://127.0.0.1:65260",
+  "origins": [
+    "http://127.0.0.1:65260",
+    "http://127.0.0.1:65264",
+    "http://127.0.0.1:65269",
+    "http://127.0.0.1:65298",
+    "http://127.0.0.1:65310"
+  ],
+  "sourceStable": true,
+  "finishedAt": "2026-09-09T08:59:42.047Z",
+  "endLoadAverage": [
+    7.65283203125,
+    5.98486328125,
+    5.7451171875
+  ]
+}

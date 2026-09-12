@@ -1,0 +1,72 @@
+{
+  "status": "passed",
+  "selectedEngines": [
+    "chromium",
+    "webkit"
+  ],
+  "startedAt": "2026-09-09T04:13:08.465Z",
+  "environment": {
+    "platform": "darwin",
+    "release": "25.6.0",
+    "arch": "arm64",
+    "osVersion": "26.6.2",
+    "node": "v22.23.1"
+  },
+  "sourceSha256": {
+    "packages/storage/src/client/archive.ts": "844981f196ebee613c584dadf3d1cef2c1af15f3aa06daf253d6d48c3b553c24",
+    "packages/storage/src/client/selection.ts": "3be6215f42123384024fe65de83577a46f82fbc4408270d75c7c0e399a66c59b",
+    "packages/storage/src/client/reconcile-retained.ts": "4f36a87defe0b84885ecd3ab67df36aa4aecde40d7c97b8d6fd4f9722d780e8a",
+    "packages/storage/src/client/retained-archive.ts": "2a69cfcbcd86d9d6e4643d40b4ea349fc35d96994fe1648cc3858cdfad0d46bb",
+    "packages/storage/src/worker/retained-archive.ts": "c5bb6fb0196f6344c097c654f037ed10d1692456ed6f4195f227acfac565361a",
+    "packages/storage/src/archive-protocol.ts": "d2ffe08c170227c42492e645fffcb7de358cb3a64ef447d84f6715dd7c485dfb",
+    "packages/storage/src/worker/archive.ts": "f84c9ad0e41390d7230b232210ede2577d900d9a7f8f8deb9fc7e7f79aa9153c",
+    "packages/storage/src/worker/archive-runtime.ts": "3c5b773aa6aad15146beff291c2a948148b7f2d04e7530412adae8a0a7a36048",
+    "packages/storage/src/worker/archive-database.ts": "b047d733bcb790155282373b5b3e98bb92ed441e7e208955b2e825625857db47",
+    "packages/storage/src/worker/selection.ts": "f3f3c2a896c1d18d57053c57594315e707b6217a7cc575cfd2d84d72bdb11844",
+    "packages/storage/src/worker/sqlite-module.ts": "fb5889c277872ef8623cb0bb21b8afa58d0b08a8fddabc2caa7b96981f92ddbc",
+    "packages/storage/src/selection/managed-catalog.ts": "b362e377cdfb3fe82d062877e8ff5410ca6ce9d9bbadccd48ef255c1d0e16b2b",
+    "packages/storage/src/worker/archives/index.ts": "858d8ed4431b7a57c764e62a8c060528d29ad331511909619c405d8227f679e9",
+    "packages/storage/migrations/index.ts": "dac4b5a7b9b7bb57d472dcf841f64d5bd7dea1191ca7d991802cfcf12c8a2c19",
+    "packages/core/src/contracts/selection.ts": "5e87c6b21f0aea9cd139c2ca09d66d31614fc725d3163fb00c982d0ec3c7584b",
+    "packages/core/src/contracts/archives.ts": "bc59c914256f51b3a650d23892adb28f311c9e443373b9bd0fe1a63c3dc72911",
+    "packages/storage/tests/selection/integration/index.ts": "380c1031c1d383002a6283a3c963b4ea53cd798162f6734b50ddd8f5ed3cc8c8",
+    "packages/storage/tests/selection/integration/reconcile.mjs": "66b16bdeb5271c11225fa762f6739190c4ac0bb8e06e94f013350e4ca22d9bed",
+    "tooling/browser-engines.mjs": "136f16e63e905ae4c8305c7adedfce2411eff13b04f914054f8fb718155d0df1"
+  },
+  "hosts": [
+    {
+      "name": "chromium",
+      "status": "passed",
+      "checks": [
+        "currently selected client refuses retained reconciliation without closing; a subsequent real canonical write and read succeed",
+        "closed original client resolves all committed and all absent source operation IDs, rejects mixed/invalid sets, preserves exact source receipts and sync page, and never replays or retargets selected canonical writes"
+      ],
+      "refusals": [],
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36",
+      "initialOpfs": [],
+      "counts": {
+        "selectedCanonical": 9,
+        "selectedSync": 4,
+        "retainedHighWater": 5
+      }
+    },
+    {
+      "name": "webkit",
+      "status": "passed",
+      "checks": [
+        "currently selected client refuses retained reconciliation without closing; a subsequent real canonical write and read succeed",
+        "closed original client resolves all committed and all absent source operation IDs, rejects mixed/invalid sets, preserves exact source receipts and sync page, and never replays or retargets selected canonical writes"
+      ],
+      "refusals": [],
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+      "initialOpfs": [],
+      "counts": {
+        "selectedCanonical": 9,
+        "selectedSync": 4,
+        "retainedHighWater": 5
+      }
+    }
+  ],
+  "origin": "http://127.0.0.1:58964",
+  "finishedAt": "2026-09-09T04:13:15.040Z"
+}

@@ -1,0 +1,12 @@
+<!doctype html><html><head><title>Quixi scheduler integration</title></head><body><script type="module">
+const options=new URLSearchParams(location.search);
+let heartbeat=performance.now(),count=0,maxGapMs=0;
+const pulse=setInterval(()=>{const now=performance.now();maxGapMs=Math.max(maxGapMs,now-heartbeat);heartbeat=now;count++;},10);
+const worker=new Worker(new URL('./worker.ts',import.meta.url),{type:'module'});
+worker.onmessage=({data})=>{
+  if(data.phase==='first-dispatch')worker.postMessage({kind:'interactive'});
+  if(data.result){clearInterval(pulse);window.quixiResult={...data.result,rendererHeartbeat:{samples:count,maxGapMs}};}
+};
+worker.onerror=event=>{window.quixiResult={passed:false,error:event.message};};
+worker.postMessage({route:options.get('route')??'simd',loss:options.has('loss')});
+</script></body></html>

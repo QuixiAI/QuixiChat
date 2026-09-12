@@ -1,0 +1,51 @@
+{
+  "repository": "Snowflake/snowflake-arctic-embed-xs",
+  "revision": "d8c86521100d3556476a063fc2342036d45c106f",
+  "license": "Apache-2.0",
+  "files": {
+    "config.json": {
+      "bytes": 737,
+      "sha256": "d7d071046ab952af96b7abad788db7ab3fc997b465e1b9914ff39707092254ec"
+    },
+    "config_sentence_transformers.json": {
+      "bytes": 252,
+      "sha256": "26a4caecbc808973e5b3b3a04484db1389078b0458254e4dd617ff361e2f378a"
+    },
+    "modules.json": {
+      "bytes": 349,
+      "sha256": "84e40c8e006c9b1d6c122e02cba9b02458120b5fb0c87b746c41e0207cf642cf"
+    },
+    "sentence_bert_config.json": {
+      "bytes": 107,
+      "sha256": "4dfc17a899f3ea25b5c8e9034a1d0d9ebd96eca0868b015a89d1d748c38e4b2f"
+    },
+    "special_tokens_map.json": {
+      "bytes": 695,
+      "sha256": "5d5b662e421ea9fac075174bb0688ee0d9431699900b90662acd44b2a350503a"
+    },
+    "tokenizer.json": {
+      "bytes": 711649,
+      "sha256": "91f1def9b9391fdabe028cd3f3fcc4efd34e5d1f08c3bf2de513ebb5911a1854"
+    },
+    "tokenizer_config.json": {
+      "bytes": 1433,
+      "sha256": "9ca59277519f6e3692c8685e26b94d4afca2d5438deff66483db495e48735810"
+    },
+    "vocab.txt": {
+      "bytes": 231508,
+      "sha256": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3"
+    },
+    "1_Pooling/config.json": {
+      "bytes": 296,
+      "sha256": "83eeb6d0c128b377a452f121f8c5a19bbbf9322092a87b856ef782f4ad2326b9"
+    },
+    "model.safetensors": {
+      "bytes": 90272656,
+      "sha256": "ee789e0b1d6ecbbd5ce37b474af556cc1a1319cee4417d9e3b11f82e90300706"
+    },
+    "README.md": {
+      "bytes": 85189,
+      "sha256": "6bfaf51250f5360e505272dde4a9ffcdc41bf66b090d68e8f9ecc4807ab80507"
+    }
+  }
+}

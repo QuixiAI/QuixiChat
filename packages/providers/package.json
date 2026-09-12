@@ -1,0 +1,20 @@
+{
+  "name": "@quixi/providers",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "description": "Live provider protocol adapters.",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@quixi/core": "0.0.1"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "typecheck:tests": "tsc --noEmit -p tsconfig.tests.json",
+    "test": "npm run typecheck && npm run typecheck:tests && node --experimental-transform-types --test tests/*.test.ts",
+    "test:browser": "node --experimental-transform-types tests/run-browser.mjs",
+    "test:native": "node --experimental-transform-types tests/run-native.mjs"
+  }
+}

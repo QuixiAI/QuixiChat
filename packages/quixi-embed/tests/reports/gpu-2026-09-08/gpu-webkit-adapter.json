@@ -1,0 +1,53 @@
+{
+  "status": "passed",
+  "passed": true,
+  "engine": "webkit",
+  "available": true,
+  "adapter": {
+    "vendor": "apple",
+    "architecture": "apple",
+    "device": "apple",
+    "description": "apple",
+    "isFallbackAdapter": false
+  },
+  "features": [
+    "bgra8unorm-storage",
+    "clip-distances",
+    "core-features-and-limits",
+    "depth-clip-control",
+    "depth32float-stencil8",
+    "float16-renderable",
+    "float32-blendable",
+    "float32-filterable",
+    "float32-renderable",
+    "indirect-first-instance",
+    "primitive-index",
+    "rg11b10ufloat-renderable",
+    "shader-f16",
+    "subgroups",
+    "texture-compression-astc",
+    "texture-compression-astc-sliced-3d",
+    "texture-compression-bc",
+    "texture-compression-bc-sliced-3d",
+    "texture-compression-etc2",
+    "texture-formats-tier1",
+    "texture-formats-tier2",
+    "timestamp-query"
+  ],
+  "limits": {
+    "maxBufferSize": 2147483644,
+    "maxStorageBufferBindingSize": 2147483644,
+    "maxComputeInvocationsPerWorkgroup": 1024,
+    "maxComputeWorkgroupStorageSize": 32768,
+    "maxComputeWorkgroupsPerDimension": 65535,
+    "maxStorageBuffersPerShaderStage": 44
+  },
+  "version": "26.6",
+  "launchArgs": [],
+  "host": {
+    "platform": "darwin",
+    "release": "25.6.0",
+    "arch": "arm64",
+    "cpu": "Apple M5 Max"
+  }
+}

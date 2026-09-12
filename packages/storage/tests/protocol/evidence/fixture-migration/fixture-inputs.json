@@ -1,0 +1,30 @@
+{
+  "status": "passed",
+  "scope": "Fixture migration to explicit private isolated source namespaces; current fixture source fingerprints. Browser report production-source identities remain independently recorded by their runners.",
+  "sourceSha256": {
+    "packages/storage/tests/isolated-client.ts": "72b2ace2196bfc8f662b8108d30972da9fe4cf4cf5b4f18714449f08746a4776",
+    "packages/storage/tests/isolated-worker.ts": "d05ffe2db78e7808bf7a99884477d11c36b762ff9ec1a4cdf80ed6bf491308bd",
+    "packages/storage/tests/browser/archive.ts": "bcafd24e7d255db3b2ac3c482c7509dd826b659a7c2895a28a56412f907a9ec6",
+    "packages/storage/tests/browser/run-archive.mjs": "85250f802a3a9558caa827c61f660530aec4fa4a6e5f4a4848d4e7f7b4812e39",
+    "packages/storage/tests/archives/browser-client.ts": "145f9d0b703ad651f628e2d4e7b5a349697ca0d254f8519d219218c0d78a0829",
+    "packages/storage/tests/archives/browser-workflows.ts": "fa215372d79ad4dceab38388d5d0f2bed505ce45fa44076de70fa7fd9c8f151b",
+    "packages/storage/tests/archives/browser-worker.ts": "317b499c719f3679c3f216d23daedf60c968cec04727b44e3518486e58bc6235",
+    "packages/storage/tests/archives/candidate-reader.ts": "e9f8e0b115bc59a45bc05c891c5fd364419024f00e05df01a9130fb4c7ad19ac",
+    "packages/providers/tests/browser.ts": "6a71c510c7353f110bbac69fc6dc1606223fca1d3242461379a605e6ede1ef87",
+    "packages/providers/tests/run-browser.mjs": "bbebb880e2d382efd8a4d05784474c997a2193aa7fdc4e8c18d7cea13fc7d05d",
+    "packages/importers/tests/browser/index.ts": "59bf68f5834dba8972a87f2d36623e2bf5b6ed20959e79c16a3f9bf9673200fc",
+    "packages/importers/tests/browser/run.mjs": "267e3951891bd065ae86bd6057c37d18eaf031dd4c7ae0eda8dde87144bb4042",
+    "packages/app/tests/browser/index.ts": "a4ec41273b11327ec0f594da786006d40ebb0ccee4fd42bf88d86ffa90e9384f",
+    "packages/app/tests/browser/run.mjs": "148c2755534b7631e4b6deee42da65a9354079723a3422d3c4dfda65469f32c5",
+    "packages/app/src/features/imports/tests/browser/index.tsx": "e238c7db7e28b4a20d93101e24beedf0d06d923c9f8de85f62465137de5f235c",
+    "packages/app/src/features/imports/tests/browser/run.mjs": "4faede091c15e0800f84aba92164fe6d2246bf06d0608f34966744431fda398a",
+    "packages/app/src/features/content/tests/browser/index.tsx": "dbc73761feddc287c4849bfeccfb02382956985dcb4e091eaba4593959082e2f"
+  },
+  "typecheckCommands": [
+    "node_modules/.bin/tsc --noEmit -p packages/storage/tsconfig.tests.json",
+    "node_modules/.bin/tsc --noEmit -p packages/storage/tests/archives/tsconfig.json",
+    "node_modules/.bin/tsc --noEmit -p packages/app/tsconfig.tests.json",
+    "node_modules/.bin/tsc --noEmit -p packages/providers/tsconfig.tests.json",
+    "node_modules/.bin/tsc --noEmit -p packages/importers/tsconfig.tests.json"
+  ]
+}

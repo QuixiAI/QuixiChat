@@ -1,0 +1,36 @@
+{
+  "modelName": "snowflake-arctic-embed-xs",
+  "sourceRepository": "Snowflake/snowflake-arctic-embed-xs",
+  "sourceRevision": "d8c86521100d3556476a063fc2342036d45c106f",
+  "sourceLicense": "Apache-2.0",
+  "sourceCheckpointSha256": "ee789e0b1d6ecbbd5ce37b474af556cc1a1319cee4417d9e3b11f82e90300706",
+  "modelFormatVersion": 1,
+  "dimensions": 384,
+  "maxTokens": 512,
+  "queryPrefix": "Represent this sentence for searching relevant passages: ",
+  "preprocessingVersion": "arctic-query-prefix-v1",
+  "runtimeVersion": "1.0.2",
+  "model": {
+    "file": "arctic-xs.qxmodel",
+    "bytes": 90785583,
+    "sha256": "e1ef345cd35088b06f70c199f5a4e0311bda5983716ad6a3e7d0a604202efffc",
+    "distribution": "provisioned separately; not in source control. Build it with compiler/compile_model.py from the frozen reference or copy the verified artifact into a host's model directory."
+  },
+  "tokenizer": {
+    "file": "arctic-xs.qxtokenizer",
+    "bytes": 514223,
+    "sha256": "d15cd90acf9df73913b5c7f8af9ddc7c2d8afee8e4777f6f71e6d1bb4875c8db",
+    "vocabularySha256": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3"
+  },
+  "wasm": {
+    "scalar": { "file": "../1.0.2/quixi-scalar.wasm", "sha256": "e477d3e35b6e83c39e206e76079a4d5136a227711a0124b64bf885f3165cee65" },
+    "simd": { "file": "../1.0.2/quixi-simd.wasm", "sha256": "d07bbc26c3f35731d7e2c6885405205a64852f40f9d7c5878c6efe77e8f9b198" }
+  },
+  "webgpuKernels": {
+    "version": "1.0.0",
+    "baseline": "6671b18619861d88c9cb46ffc7eb72464d975dc028478da18a47a8712d476a18",
+    "tiled": "6d5ea4ab0951cc237a5e87802019b5e107bfdd81c822cf7e4971099e64a6e79d",
+    "half": "54222a8a80b836ceb42a5827cccb23ae3b0bc7a802c78d23d422c11d570ae4c8",
+    "attention": "3f07b3c79ef2c0de2d741fea21c77e3183dc2cced788a7295338c025d374e44b"
+  }
+}

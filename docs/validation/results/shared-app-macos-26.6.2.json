@@ -1,0 +1,279 @@
+{
+  "selectedEngines": [
+    "chromium",
+    "webkit"
+  ],
+  "status": "passed",
+  "startedAt": "2026-09-10T06:21:32.092Z",
+  "hosts": [
+    {
+      "name": "chromium",
+      "status": "passed",
+      "checks": [
+        "create, rename, tags and system prompt commit through the production worker",
+        "actual provider HTTP stream is visible before terminal; generation completes durably",
+        "send-key preferences save through the production worker without changing the draft, a lost save reply is shown and recovered by reloading the durable value, another client reads the saved value and its stale edit is refused; Mod+Enter and Enter each submit through the provider path, newline input survives, and composition/repeated Enter events never submit; the preference survives a fresh browser process",
+        "second turn sends the exact selected ancestor path and prompt while retaining internal provenance locally",
+        "regenerate creates a distinct attempt and preserves both response branches",
+        "editing creates a new immutable sibling and keeps the original message and generated descendants",
+        "the selected branch continues through the second real provider adapter",
+        "model output limits gate invalid keyboard/button sends and persist exact settings independently for both providers and regenerated attempts",
+        "catalog-declared temperature, top-p and stop sequences gate invalid sends without losing the draft, map to each protocol's fields, omit blank settings and are recorded per attempt",
+        "stop terminates controlled HTTP and retains the committed response prefix",
+        "long streamed text uses bounded mutable segments without splitting Unicode scalars or losing text",
+        "quote in reply appends the selected passage or whole inline message as a blockquote with the caret at the end, refuses an over-limit quote without altering the draft, and sends the quoted text",
+        "keyboard-only workflow: skip link, new conversation, send, stop, regenerate, edit/cancel, rename and search-result navigation keep visible focus on a named control; streamed content is not a live region and status announces only at boundaries",
+        "automatic derived indexing supplies lexical search across streamed deltas in the shared interface",
+        "portable and open exports download actual disk-backed TAR bytes; user-confirmed temporary cleanup preserves canonical history",
+        "composer attaches images through the host file picker and drag-and-drop, refuses non-image, oversized and mislabeled files, removes a staged image before sending, and publishes the remaining image as a verified attachment, Image part and provider image block that previews from the archive",
+        "provider answers drive the composer's connection status and availability: a 429 with retry-after shows rate limited with the provider's reason and blocks sending until the retry time passes, a 401 shows authentication expired and blocks sending until Providers re-checks the connection, the device's offline signal blocks sending until it returns, both failed attempts are recorded, and the next request omits the failed attempt's empty assistant turn",
+        "every completed attempt records reported tokens and a cost estimated from the reviewed catalog price, failed attempts stay unpriced, each attempt line shows its usage and estimate provenance, and the conversation header sums attempts, tokens and priced estimates from the storage worker",
+        "counting prompt tokens sends the exact draft and branch to Anthropic's count endpoint without generation fields, shows the provider's count for this draft, commits nothing, clears when the draft changes, and reports that the OpenAI connection has no counting endpoint",
+        "the starting-branch list shows every root alternative, choosing one commits the active path and lists its own continuations step by step, and the edited branch and its descendants stay intact while another path is active",
+        "stop terminates an OpenAI stream and records its interrupted attempt, and text streamed by the Anthropic connection is indexed and found by search, which opens the hit at the exact generated part; create, reopen, edit and search themselves involve no provider",
+        "the connected credential is absent from every canonical record, every provider request body, every exported archive, browser storage and the rendered document; only the host injects it into request headers",
+        "switching the composer to another provider shows the compatibility report for the active path, refuses to send until the exact report is reviewed, records the switch as a ProviderSwitch event committed with the user turn, and lists it in the conversation",
+        "a stored fallback continues a failed or partial primary attempt with the other connection as a separate attempt whose AutomaticFallback event is committed with it and names the failure, the partial attempt keeps its committed text off the active path, and a user stop never falls back",
+        "the conversation's routing profile chooses the route before the first attempt: a selected connection that fails the minimum context requirement or whose credential the provider rejected is routed around with the reason recorded as an AutomaticFallback event on the attempt, no qualifying candidate refuses sending with every reason stated, and clearing the requirement restores the selected connection",
+        "the open conversation shows its portability status with one inspectable reason per configured target and what is never sent, and a path whose assistant turn carries reasoning metadata is blocked for every target with the adapter's own reason",
+        "a ChatGPT export imported through the production importer continues with the Anthropic connection: the artifact-bearing branch is blocked with the adapter's reason, the text branch is chosen, its sketch without exported bytes is shown as a transformation and sent as a note naming the file, the switch from the import origin is reviewed with an unknown privacy class and recorded, the request carries exactly the imported path plus the new turn, and every imported message and part is unchanged afterwards",
+        "a verified PNG attachment on a user message is sent as a provider image block with its exact bytes, and the recorded attempt keeps parameters without image data",
+        "routing aliases create/edit/delete in Preferences, preserve and reorder an unavailable target, recover a lost durable-save reply and refuse stale edits; applying an explicitly reviewed immutable snapshot preserves the draft, commits the primary/fallbacks/constraints with one atomic canonical sync operation, requires a fresh provider-switch review and sends through the chosen route; later alias edits/deletion never change the conversation, and registry/profile/missing-primary behavior survive a browser-process restart",
+        "reviewed attachment exclusions cancel without a write, commit immutable context and event, replace a verified PNG with the identical marker in token counting, sending and regeneration, retain original parts, clear and reapply without rewriting snapshots, and survive process restart",
+        "a fresh browser process retains canonical branches and messages, keeps the stopped attempt with its recorded interrupted status and sealed output, can switch branches without a provider, loses session credentials, and fits a narrow viewport",
+        "saved ready export is discovered after process loss, downloaded without re-exporting and matches its original checksum",
+        "invalid operator relay configuration leaves local history, search and creation available while provider connections remain disabled"
+      ],
+      "exports": [
+        {
+          "format": "portable",
+          "byteLength": 1515520,
+          "sha256": "f3d74f1f2f0361cf9a8a66915c94ee2448bc11762ceb8a2bf2321b524e316197"
+        },
+        {
+          "format": "open",
+          "byteLength": 628224,
+          "sha256": "c1cb0c08ede2c15d508bb721157c7d08dfb5bb40342402d83991137bfe357943"
+        }
+      ],
+      "aliasProfile": {
+        "version": 3,
+        "alias": "Coding",
+        "primary": {
+          "provider": "anthropic",
+          "model": "claude-haiku-4-5-20251001"
+        },
+        "candidates": [
+          {
+            "provider": "unavailable-connection",
+            "model": "old-model"
+          },
+          {
+            "provider": "openai",
+            "model": "gpt-4.1-mini-2025-04-14"
+          }
+        ],
+        "requirements": {
+          "images": true,
+          "contextAtLeast": 500000
+        },
+        "allowPrivacyChange": false,
+        "aliasSource": {
+          "id": "fb136c96-2181-41cd-bf1d-769d4927f8a3",
+          "revision": 4
+        }
+      },
+      "exclusionPartId": "29cd9eac-5676-4bc5-a6bd-71d8d277ca90",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36",
+      "unclaimedExport": {
+        "candidate": null,
+        "completedBytes": 2872320,
+        "completedRecords": 0,
+        "entryCount": 0,
+        "failure": null,
+        "format": "portable",
+        "jobId": "7424dfca-034f-4964-97f4-1823bf0766e2",
+        "kind": "export",
+        "output": {
+          "name": "quixi-portable-7424dfca-034f-4964-97f4-1823bf0766e2.tar",
+          "mediaType": "application/x-tar",
+          "byteLength": 2872320,
+          "sha256": "ef0d87b0ce53cc3794bf5ae80df6d57e95c41adede35109b7d1843113c859c88"
+        },
+        "phase": "ready",
+        "sourceSchemaVersion": null,
+        "state": "ready",
+        "totalBytes": 2872320,
+        "totalRecords": null
+      },
+      "savedMessages": 59
+    },
+    {
+      "name": "webkit",
+      "status": "passed",
+      "checks": [
+        "create, rename, tags and system prompt commit through the production worker",
+        "actual provider HTTP stream is visible before terminal; generation completes durably",
+        "send-key preferences save through the production worker without changing the draft, a lost save reply is shown and recovered by reloading the durable value, another client reads the saved value and its stale edit is refused; Mod+Enter and Enter each submit through the provider path, newline input survives, and composition/repeated Enter events never submit; the preference survives a fresh browser process",
+        "second turn sends the exact selected ancestor path and prompt while retaining internal provenance locally",
+        "regenerate creates a distinct attempt and preserves both response branches",
+        "editing creates a new immutable sibling and keeps the original message and generated descendants",
+        "the selected branch continues through the second real provider adapter",
+        "model output limits gate invalid keyboard/button sends and persist exact settings independently for both providers and regenerated attempts",
+        "catalog-declared temperature, top-p and stop sequences gate invalid sends without losing the draft, map to each protocol's fields, omit blank settings and are recorded per attempt",
+        "stop terminates controlled HTTP and retains the committed response prefix",
+        "long streamed text uses bounded mutable segments without splitting Unicode scalars or losing text",
+        "quote in reply appends the selected passage or whole inline message as a blockquote with the caret at the end, refuses an over-limit quote without altering the draft, and sends the quoted text",
+        "keyboard-only workflow: skip link, new conversation, send, stop, regenerate, edit/cancel, rename and search-result navigation keep visible focus on a named control; streamed content is not a live region and status announces only at boundaries",
+        "automatic derived indexing supplies lexical search across streamed deltas in the shared interface",
+        "portable and open exports download actual disk-backed TAR bytes; user-confirmed temporary cleanup preserves canonical history",
+        "composer attaches images through the host file picker and drag-and-drop, refuses non-image, oversized and mislabeled files, removes a staged image before sending, and publishes the remaining image as a verified attachment, Image part and provider image block that previews from the archive",
+        "provider answers drive the composer's connection status and availability: a 429 with retry-after shows rate limited with the provider's reason and blocks sending until the retry time passes, a 401 shows authentication expired and blocks sending until Providers re-checks the connection, the device's offline signal blocks sending until it returns, both failed attempts are recorded, and the next request omits the failed attempt's empty assistant turn",
+        "every completed attempt records reported tokens and a cost estimated from the reviewed catalog price, failed attempts stay unpriced, each attempt line shows its usage and estimate provenance, and the conversation header sums attempts, tokens and priced estimates from the storage worker",
+        "counting prompt tokens sends the exact draft and branch to Anthropic's count endpoint without generation fields, shows the provider's count for this draft, commits nothing, clears when the draft changes, and reports that the OpenAI connection has no counting endpoint",
+        "the starting-branch list shows every root alternative, choosing one commits the active path and lists its own continuations step by step, and the edited branch and its descendants stay intact while another path is active",
+        "stop terminates an OpenAI stream and records its interrupted attempt, and text streamed by the Anthropic connection is indexed and found by search, which opens the hit at the exact generated part; create, reopen, edit and search themselves involve no provider",
+        "the connected credential is absent from every canonical record, every provider request body, every exported archive, browser storage and the rendered document; only the host injects it into request headers",
+        "switching the composer to another provider shows the compatibility report for the active path, refuses to send until the exact report is reviewed, records the switch as a ProviderSwitch event committed with the user turn, and lists it in the conversation",
+        "a stored fallback continues a failed or partial primary attempt with the other connection as a separate attempt whose AutomaticFallback event is committed with it and names the failure, the partial attempt keeps its committed text off the active path, and a user stop never falls back",
+        "the conversation's routing profile chooses the route before the first attempt: a selected connection that fails the minimum context requirement or whose credential the provider rejected is routed around with the reason recorded as an AutomaticFallback event on the attempt, no qualifying candidate refuses sending with every reason stated, and clearing the requirement restores the selected connection",
+        "the open conversation shows its portability status with one inspectable reason per configured target and what is never sent, and a path whose assistant turn carries reasoning metadata is blocked for every target with the adapter's own reason",
+        "a ChatGPT export imported through the production importer continues with the Anthropic connection: the artifact-bearing branch is blocked with the adapter's reason, the text branch is chosen, its sketch without exported bytes is shown as a transformation and sent as a note naming the file, the switch from the import origin is reviewed with an unknown privacy class and recorded, the request carries exactly the imported path plus the new turn, and every imported message and part is unchanged afterwards",
+        "a verified PNG attachment on a user message is sent as a provider image block with its exact bytes, and the recorded attempt keeps parameters without image data",
+        "routing aliases create/edit/delete in Preferences, preserve and reorder an unavailable target, recover a lost durable-save reply and refuse stale edits; applying an explicitly reviewed immutable snapshot preserves the draft, commits the primary/fallbacks/constraints with one atomic canonical sync operation, requires a fresh provider-switch review and sends through the chosen route; later alias edits/deletion never change the conversation, and registry/profile/missing-primary behavior survive a browser-process restart",
+        "reviewed attachment exclusions cancel without a write, commit immutable context and event, replace a verified PNG with the identical marker in token counting, sending and regeneration, retain original parts, clear and reapply without rewriting snapshots, and survive process restart",
+        "a fresh browser process retains canonical branches and messages, keeps the stopped attempt with its recorded interrupted status and sealed output, can switch branches without a provider, loses session credentials, and fits a narrow viewport",
+        "saved ready export is discovered after process loss, downloaded without re-exporting and matches its original checksum",
+        "invalid operator relay configuration leaves local history, search and creation available while provider connections remain disabled"
+      ],
+      "exports": [
+        {
+          "format": "portable",
+          "byteLength": 1466368,
+          "sha256": "a12bb9c93aaee14943548452c1809662a1c6fb71162f844e5cc32fbfb3ca3601"
+        },
+        {
+          "format": "open",
+          "byteLength": 604672,
+          "sha256": "93599d03b75e09d3e4ff36bc188c0a680edcdb6ddb54420879be73701b5c43a2"
+        }
+      ],
+      "aliasProfile": {
+        "version": 3,
+        "alias": "Coding",
+        "primary": {
+          "provider": "anthropic",
+          "model": "claude-haiku-4-5-20251001"
+        },
+        "candidates": [
+          {
+            "provider": "unavailable-connection",
+            "model": "old-model"
+          },
+          {
+            "provider": "openai",
+            "model": "gpt-4.1-mini-2025-04-14"
+          }
+        ],
+        "requirements": {
+          "images": true,
+          "contextAtLeast": 500000
+        },
+        "allowPrivacyChange": false,
+        "aliasSource": {
+          "id": "3e06fb6b-6368-4864-93be-ccdb077c768c",
+          "revision": 4
+        }
+      },
+      "exclusionPartId": "5cea7ffa-2b49-4708-b249-b054753a2d53",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+      "unclaimedExport": {
+        "candidate": null,
+        "completedBytes": 2839552,
+        "completedRecords": 0,
+        "entryCount": 0,
+        "failure": null,
+        "format": "portable",
+        "jobId": "8b2840e0-5dc2-41b1-89c4-1934fc8250bd",
+        "kind": "export",
+        "output": {
+          "name": "quixi-portable-8b2840e0-5dc2-41b1-89c4-1934fc8250bd.tar",
+          "mediaType": "application/x-tar",
+          "byteLength": 2839552,
+          "sha256": "00166dba344db9a261ccbc48a0da5bd717392c45e46ef90b26f1a8812a46b516"
+        },
+        "phase": "ready",
+        "sourceSchemaVersion": null,
+        "state": "ready",
+        "totalBytes": 2839552,
+        "totalRecords": null
+      },
+      "savedMessages": 59
+    }
+  ],
+  "sourceSha256": {
+    "tooling/browser-engines.mjs": "136f16e63e905ae4c8305c7adedfce2411eff13b04f914054f8fb718155d0df1",
+    "packages/app/src/AppRoot.tsx": "78b64852b1b79fcdf0eaeffee36ba4a3761076ba132cdd3b68787756a1918dad",
+    "packages/core/src/model/compaction.ts": "f808423e3d1a1445762e9f43bc979d917310b91021976a3e4f230a3732b69493",
+    "packages/core/src/model/validation.ts": "fa10001de65491186dfbb2808fdbe1c083649b91f44eb1a6a7c7b33fce35981d",
+    "packages/core/src/model/types.ts": "5b56963ca23241fe5d843d3106e234a9415519fc46753433401f58133c055ccc",
+    "packages/app/src/features/compaction/controller.ts": "2177b70f5c23bde1d9da0aa7282d81f4bf5b85fd2ad7f414b7531e688c81c1e4",
+    "packages/app/src/features/compaction/AttachmentCompaction.tsx": "762620d7f71f3c3d5ce8e2e40f32014c1ce67cb39016a17c72ed04aa8614338b",
+    "packages/storage/migrations/context-compaction.ts": "9f6457d0cbf08c9134279f5fb305b0af907478e9083294e06883422c1176d29b",
+    "packages/storage/src/worker/archives/validation.ts": "b807752eca97e4a620af21cec87a3062caac3e585968b1f9a6b1bf2ab4f5166f",
+    "packages/storage/src/worker/canonical/repository.ts": "c9566272b3bbd3fb49401d82dc94609d3758be1531255fcb3f7f03dfeee105ec",
+    "packages/storage/src/archive-protocol.ts": "d1c5bb90375de4770b265e2d557f15f90c8f3abcb7bde994a993660bb6c09253",
+    "packages/app/src/features/preferences/controller.ts": "24456ba7b35ed0b0df114088f7bc596e929f1d6a7b4d3931b61177a76e70d669",
+    "packages/app/src/features/preferences/PreferencesPanel.tsx": "8e8bf7ce2854df55eab90e0d5393ddfd201bdee08d440b121c6acab2a651b6c6",
+    "packages/app/src/features/preferences/send-key.ts": "2e985ef8ef08712b04fdc36bad04428650a2a7f2b5de8f4da7e9909a331387de",
+    "packages/app/src/features/preferences/aliases-controller.ts": "2314b16457147f13da3501b2ebe533987c361dffdaf1cf3e3ca8ffaaa5fadb74",
+    "packages/app/src/features/preferences/RoutingAliases.tsx": "daa35522b334e07eff818f7f22cbc2a468a243cb880c4a52ce849caf3a45a236",
+    "packages/core/src/contracts/routing-aliases.ts": "f19b0f954ba08725baf771744ec9efb09776f03ecdd3723b6fe7aaa86a194633",
+    "packages/core/src/contracts/index.ts": "cb7099a8b366e12feaed5d6c8018f4c28097a446ededa1ad428a02e037c0735b",
+    "packages/storage/src/worker/routing-aliases.ts": "534ee69d7275c1872a0a4e68ff77fed526f1efe09835c075445a392a3e7f45ba",
+    "packages/core/src/contracts/preferences.ts": "e14de69f126d77f78c13d64e8912a56a290fdf2b11ac74d017679ca4a2ad5ac5",
+    "packages/core/src/contracts/storage.ts": "d5ccb9247502403b19eff4347de38dbebe2ef842f4344ea7354f8a8ce981dcad",
+    "packages/storage/src/worker/preferences.ts": "0be584e6bdee5233f2a4975426a8bb4c6676d691f88578947e71e9bef479de99",
+    "packages/app/src/index.ts": "0b1dd20ef2723bead5e1aceae4faac783abf717a37fef4be1edcd333608c8302",
+    "packages/app/src/styles.css": "738c3bb4919c034fc3115feec8a4bd172480e1e3fe9504c4634818710e8788ab",
+    "packages/app/src/runtime/library.ts": "b09cb3124ec6f8d3eab6a0ee9a153a5fea93d92cce31cd8f77aeaa953c654d13",
+    "packages/app/src/workflows/chat.ts": "ee082c9afe781fcc01c34c34ab30fdf03a4b5ad1afd7cb6b548d1797c2722904",
+    "packages/app/src/features/attachments/staging.ts": "9d95d55a83e750fd8e92eaee6143dfc0f07104a6f099e9c710fb85362e012b9d",
+    "packages/app/src/features/attachments/composer-attachments.ts": "52282547fad0710ec3adb991317c8e5c96c039fac4bf822316d793c405730e90",
+    "packages/app/src/features/attachments/ComposerAttachments.tsx": "ecab4868a835180e5fe0f593e99633c11e978801b14f43a7247700c3824ebfcc",
+    "packages/core/src/contracts/host.ts": "07eacafe0939a8d9695eb887337bb6d24d5a5903e38a3b349d1a3593a5f66d26",
+    "apps/web/src/host/index.ts": "af07620c4bf5ca38bda08dc037b93c74fecdca9a627e9a27e53e07d827e82e12",
+    "packages/storage/src/worker/views.ts": "d84f7131e16b369c19d09191c59da6e52ac3a5ad35c0973efed4704d769fedbf",
+    "packages/core/src/contracts/views.ts": "9bef62bc4efb0fd1164b7c6b84dd7a416ba436ab55ce9713652073c3aae093a8",
+    "packages/app/src/features/content/Markdown.tsx": "81ac722c048dd0de1b3fcad420f140cf11560bc3930bda752c4c7162f7c17884",
+    "packages/app/src/features/content/ContentPartView.tsx": "635a94a19b6cbe9edcd1f40316c747b451db675a501e559a8eabf54346ddcdb7",
+    "packages/app/src/features/content/access.ts": "ba4ba1c7fcabcc88866938636691300b1ca0f226b45028871014911f1a17d776",
+    "packages/app/src/features/providers/controller.ts": "01e7545ce25fd64f72e42a18db092dc5db557e686ad5fc6a5c7abfb13c653c63",
+    "packages/app/src/features/providers/health.ts": "9f36a742e627678e5a8e898b9b237cd716f24d0fd6ef2b9176e414886ebc622a",
+    "packages/app/src/runtime/usage.ts": "16135113eb6944e44c4f10e64bde301bffd1c15a9d77d4f4e6b95b782337d878",
+    "packages/app/src/runtime/events.ts": "f2bae8eb7e66c443c80dfe7f67632a36a1c5140d028adbd4ab4338cd10a6cf82",
+    "packages/app/src/runtime/switching.ts": "bea1f1ee89ff54948d971fa2f6b0c43d9f5d1f6b72c99ecb8b925a9d7498a628",
+    "packages/app/src/runtime/portability.ts": "9e641a90195aca7ae7013085e6b78abeefaf19d024287d6caadab34912003aff",
+    "packages/app/src/runtime/fallback.ts": "c3d7b0a42f7b0696e70b5e438358067f893496f3622b549047b19aacbde2cd53",
+    "packages/app/src/runtime/routing.ts": "ee75af3eec96146d56d164baf7f1865c0986e5d6d7fe6b1dae494f33c645fdb8",
+    "packages/storage/src/worker/archive-database.ts": "b0ce562d0effbca33e154ea1598864010b4fb9ff830de874130711f893acd266",
+    "packages/storage/migrations/views.ts": "49b3b6890c3711b2406db59c37979364a526bb99d7794d67ceeafb42838500aa",
+    "packages/storage/migrations/streaming-text.ts": "e027dc12cf7d301359d0dfea7ef5de20eb3c6d1279d8dc94859b277cc0c4bc86",
+    "packages/providers/src/generation.ts": "e07c2f34f7de07f793fe0692147c1479bee4ee9f68e61bca8240a022e0cf6240",
+    "packages/providers/src/request.ts": "21e1b77be73cfc669c6c04b8caab27ea94930229e87fa4aaa82ab294342b58e3",
+    "packages/providers/src/catalog.ts": "2b01453c195c454b875c81740e35943950752c0257f1d2506b62cb8f23f87edd",
+    "packages/core/src/model/provenance.ts": "191f723124ffe3b0f5957a90a1a60449406a1ba0cfbe258f9d401db0c62e8d26",
+    "apps/web/src/configuration.ts": "4bf0a495315142d50c9249423615279d25de0cbdaccc0fa60a900ec1e20d178e",
+    "packages/app/tests/browser/index.ts": "4fcac385ef866e87e52f246c3a1f8aeff47674a3b2622d6dd32a782da2af0fd5",
+    "packages/app/tests/browser/run.mjs": "08e05b0bfd5889baaf914d0fdc51736cb8fad1c8dce2e854321cff45799fe56b",
+    "package-lock.json": "aadb456e2a567a2b91cbb81a502650ebac93541f0a59d54035bdde2cacd97672"
+  },
+  "environment": {
+    "platform": "darwin",
+    "release": "25.6.0",
+    "arch": "arm64",
+    "osVersion": "26.6.2",
+    "node": "v22.23.1"
+  },
+  "finishedAt": "2026-09-10T06:23:10.247Z"
+}

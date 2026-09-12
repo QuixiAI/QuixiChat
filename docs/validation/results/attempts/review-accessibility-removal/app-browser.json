@@ -1,0 +1,1337 @@
+{
+  "selectedEngines": [
+    "chromium",
+    "webkit"
+  ],
+  "status": "failed",
+  "startedAt": "2026-09-11T01:47:09.100Z",
+  "hosts": [
+    {
+      "name": "chromium",
+      "status": "running",
+      "checks": [
+        "routing alias editor fits 320px at normal and enlarged text, authored input boundaries meet measured contrast, and cancelling leaves the alias registry unchanged"
+      ],
+      "aliasReflow": {
+        "mode": "assert",
+        "name": "chromium",
+        "caseName": "alias-editor",
+        "scope": "Computed CSS reflow and enabled control-border contrast; no screen-reader or native-control pixel-rendering qualification.",
+        "samples": [
+          {
+            "size": "normal",
+            "viewportWidth": 320,
+            "documentWidth": 320,
+            "region": {
+              "left": 19.19,
+              "right": 300.81,
+              "width": 281.63,
+              "height": 1464.78
+            },
+            "rootFontSize": "16px",
+            "focused": {
+              "tag": "BUTTON",
+              "id": "",
+              "label": "Cancel alias edit",
+              "insideRegion": true
+            },
+            "controlCount": 14,
+            "controls": [
+              {
+                "tag": "FIELDSET",
+                "label": "Alias profileAlias nameAlias primaryChoose a connection and modelAlias fallback candidateChoose a connection and modelAdd alias fallbackRequire alias tool suppo",
+                "bounds": {
+                  "left": 19.19,
+                  "right": 300.81,
+                  "width": 281.63,
+                  "height": 1340.22
+                },
+                "containerBounds": {
+                  "left": 19.19,
+                  "right": 300.81,
+                  "width": 281.63,
+                  "height": 1340.22
+                },
+                "disabled": false,
+                "overflow": false
+              },
+              {
+                "tag": "INPUT",
+                "label": "Alias name",
+                "bounds": {
+                  "left": 32.19,
+                  "right": 287.81,
+                  "width": 255.63,
+                  "height": 41.28
+                },
+                "containerBounds": {
+                  "left": 19.19,
+                  "right": 300.81,
+                  "width": 281.63,
+                  "height": 1340.22
+                },
+                "disabled": false,
+                "overflow": false
+              },
+              {
+                "tag": "SELECT",
+                "label": "Alias primary",
+                "bounds": {
+                  "left": 32.19,
+                  "right": 287.81,
+                  "width": 255.63,
+                  "height": 38.59
+                },
+                "containerBounds": {
+                  "left": 19.19,
+                  "right": 300.81,
+                  "width": 281.63,
+                  "height": 1340.22
+                },
+                "disabled": false,
+                "overflow": false
+              },
+              {
+                "tag": "SELECT",
+                "label": "Alias fallback candidate",
+                "bounds": {
+                  "left": 32.19,
+                  "right": 287.81,
+                  "width": 255.63,
+                  "height": 38.59
+                },
+                "containerBounds": {
+                  "left": 19.19,
+                  "right": 300.81,
+                  "width": 281.63,
+                  "height": 1340.22
+                },
+                "disabled": false,
+                "overflow": false
+              },
+              {
+                "tag": "BUTTON",
+                "label": "Add alias fallback",
+                "bounds": {
+                  "left": 32.19,
+                  "right": 287.81,
+                  "width": 255.63,
+                  "height": 38.94
+                },
+                "containerBounds": {
+                  "left": 19.19,
+                  "right": 300.81,
+                  "width": 281.63,
+                  "height": 1340.22
+                },
+                "disabled": true,
+                "overflow": false
+              },
+              {
+                "tag": "INPUT",
+                "label": "Require alias tool support",
+                "bounds": {
+                  "left": 36.19,
+                  "right": 291.81,
+                  "width": 255.63,
+                  "height": 13
+                },
+                "containerBounds": {
+                  "left": 19.19,
+                  "right": 300.81,
+                  "width": 281.63,
+                  "height": 1340.22
+                },
+                "disabled": false,
+                "overflow": false
+              },
+              {
+                "tag": "INPUT",
+                "label": "Require alias image input",
+                "bounds": {
+                  "left": 36.19,
+                  "right": 291.81,
+                  "width": 255.63,
+                  "height": 13
+                },
+                "containerBounds": {
+                  "left": 19.19,
+                  "right": 300.81,
+                  "width": 281.63,
+                  "height": 1340.22
+                },
+                "disabled": false,
+                "overflow": false
+              },
+              {
+                "tag": "SELECT",
+                "label": "Alias required processing region",
+                "bounds": {
+                  "left": 32.19,
+                  "right": 287.81,
+                  "width": 255.63,
+                  "height": 38.59
+                },
+                "containerBounds": {
+                  "left": 19.19,
+                  "right": 300.81,
+                  "width": 281.63,
+                  "height": 1340.22
+                },
+                "disabled": false,
+                "overflow": false
+              },
+              {
+                "tag": "INPUT",
+                "label": "Alias minimum context",
+                "bounds": {
+                  "left": 32.19,
+                  "right": 287.81,
+                  "width": 255.63,
+                  "height": 41.28
+                },
+                "containerBounds": {
+                  "left": 19.19,
+                  "right": 300.81,
+                  "width": 281.63,
+                  "height": 1340.22
+                },
+                "disabled": false,
+                "overflow": false
+              },
+              {
+                "tag": "INPUT",
+                "label": "Alias maximum estimated input cost (USD)",
+                "bounds": {
+                  "left": 32.19,
+                  "right": 287.81,
+                  "width": 255.63,
+                  "height": 41.28
+                },
+                "containerBounds": {
+                  "left": 19.19,
+                  "right": 300.81,
+                  "width": 281.63,
+                  "height": 1340.22
+                },
+                "disabled": false,
+                "overflow": false
+              },
+              {
+                "tag": "INPUT",
+                "label": "Alias maximum estimated request cost per attempt (USD)",
+                "bounds": {
+                  "left": 32.19,
+                  "right": 287.81,
+                  "width": 255.63,
+                  "height": 41.28
+                },
+                "containerBounds": {
+                  "left": 19.19,
+                  "right": 300.81,
+                  "width": 281.63,
+                  "height": 1340.22
+                },
+                "disabled": false,
+                "overflow": false
+              },
+              {
+                "tag": "INPUT",
+                "label": "Allow alias fallback to change the privacy class",
+                "bounds": {
+                  "left": 36.19,
+                  "right": 291.81,
+                  "width": 255.63,
+                  "height": 13
+                },
+                "containerBounds": {
+                  "left": 19.19,
+                  "right": 300.81,
+                  "width": 281.63,
+                  "height": 1340.22
+                },
+                "disabled": false,
+                "overflow": false
+              },
+              {
+                "tag": "BUTTON",
+                "label": "Save routing alias",
+                "bounds": {
+                  "left": 32.19,
+                  "right": 287.81,
+                  "width": 255.63,
+                  "height": 38.94
+                },
+                "containerBounds": {
+                  "left": 19.19,
+                  "right": 300.81,
+                  "width": 281.63,
+                  "height": 1340.22
+                },
+                "disabled": false,
+                "overflow": false
+              },
+              {
+                "tag": "BUTTON",
+                "label": "Cancel alias edit",
+                "bounds": {
+                  "left": 19.19,
+                  "right": 300.81,
+                  "width": 281.63,
+                  "height": 38.94
+                },
+                "containerBounds": {
+                  "left": 19.19,
+                  "right": 300.81,
+                  "width": 281.63,
+                  "height": 1464.78
+                },
+                "disabled": false,
+                "overflow": false
+              }
+            ],
+            "borders": [
+              {
+                "label": "Alias name",
+                "fill": [
+                  255,
+                  255,
+                  255
+                ],
+                "outside": [
+                  249,
+                  250,
+                  247
+                ],
+                "sides": [
+                  {
+                    "side": "Top",
+                    "color": "rgb(113, 129, 118)",
+                    "width": 1,
+                    "style": "solid",
+                    "fillContrast": 4.114544191782779,
+                    "outsideContrast": 3.927483360092991
+                  },
+                  {
+                    "side": "Right",
+                    "color": "rgb(113, 129, 118)",
+                    "width": 1,
+                    "style": "solid",
+                    "fillContrast": 4.114544191782779,
+                    "outsideContrast": 3.927483360092991
+                  },
+                  {
+                    "side": "Bottom",
+                    "color": "rgb(113, 129, 118)",
+                    "width": 1,
+                    "style": "solid",
+                    "fillContrast": 4.114544191782779,
+                    "outsideContrast": 3.927483360092991
+                  },
+                  {
+                    "side": "Left",
+                    "color": "rgb(113, 129, 118)",
+                    "width": 1,
+                    "style": "solid",
+                    "fillContrast": 4.114544191782779,
+                    "outsideContrast": 3.927483360092991
+                  }
+                ]
+              },
+              {
+                "label": "Alias primary",
+                "fill": [
+                  255,
+                  255,
+                  255
+                ],
+                "outside": [
+                  249,
+                  250,
+                  247
+                ],
+                "sides": [
+                  {
+                    "side": "Top",
+                    "color": "rgb(113, 129, 118)",
+                    "width": 1,
+                    "style": "solid",
+                    "fillContrast": 4.114544191782779,
+                    "outsideContrast": 3.927483360092991
+                  },
+                  {
+                    "side": "Right",
+                    "color": "rgb(113, 129, 118)",
+                    "width": 1,
+                    "style": "solid",
+                    "fillContrast": 4.114544191782779,
+                    "outsideContrast": 3.927483360092991
+                  },
+                  {
+                    "side": "Bottom",
+                    "color": "rgb(113, 129, 118)",
+                    "width": 1,
+                    "style": "solid",
+                    "fillContrast": 4.114544191782779,
+                    "outsideContrast": 3.927483360092991
+                  },
+                  {
+                    "side": "Left",
+                    "color": "rgb(113, 129, 118)",
+                    "width": 1,
+                    "style": "solid",
+                    "fillContrast": 4.114544191782779,
+                    "outsideContrast": 3.927483360092991
+                  }
+                ]
+              },
+              {
+                "label": "Alias fallback candidate",
+                "fill": [
+                  255,
+                  255,
+                  255
+                ],
+                "outside": [
+                  249,
+                  250,
+                  247
+                ],
+                "sides": [
+                  {
+                    "side": "Top",
+                    "color": "rgb(113, 129, 118)",
+                    "width": 1,
+                    "style": "solid",
+                    "fillContrast": 4.114544191782779,
+                    "outsideContrast": 3.927483360092991
+                  },
+                  {
+                    "side": "Right",
+                    "color": "rgb(113, 129, 118)",
+                    "width": 1,
+                    "style": "solid",
+                    "fillContrast": 4.114544191782779,
+                    "outsideContrast": 3.927483360092991
+                  },
+                  {
+                    "side": "Bottom",
+                    "color": "rgb(113, 129, 118)",
+                    "width": 1,
+                    "style": "solid",
+                    "fillContrast": 4.114544191782779,
+                    "outsideContrast": 3.927483360092991
+                  },
+                  {
+                    "side": "Left",
+                    "color": "rgb(113, 129, 118)",
+                    "width": 1,
+                    "style": "solid",
+                    "fillContrast": 4.114544191782779,
+                    "outsideContrast": 3.927483360092991
+                  }
+                ]
+              },
+              {
+                "label": "Alias required processing region",
+                "fill": [
+                  255,
+                  255,
+                  255
+                ],
+                "outside": [
+                  249,
+                  250,
+                  247
+                ],
+                "sides": [
+                  {
+                    "side": "Top",
+                    "color": "rgb(113, 129, 118)",
+                    "width": 1,
+                    "style": "solid",
+                    "fillContrast": 4.114544191782779,
+                    "outsideContrast": 3.927483360092991
+                  },
+                  {
+                    "side": "Right",
+                    "color": "rgb(113, 129, 118)",
+                    "width": 1,
+                    "style": "solid",
+                    "fillContrast": 4.114544191782779,
+                    "outsideContrast": 3.927483360092991
+                  },
+                  {
+                    "side": "Bottom",
+                    "color": "rgb(113, 129, 118)",
+                    "width": 1,
+                    "style": "solid",
+                    "fillContrast": 4.114544191782779,
+                    "outsideContrast": 3.927483360092991
+                  },
+                  {
+                    "side": "Left",
+                    "color": "rgb(113, 129, 118)",
+                    "width": 1,
+                    "style": "solid",
+                    "fillContrast": 4.114544191782779,
+                    "outsideContrast": 3.927483360092991
+                  }
+                ]
+              },
+              {
+                "label": "Alias minimum context",
+                "fill": [
+                  255,
+                  255,
+                  255
+                ],
+                "outside": [
+                  249,
+                  250,
+                  247
+                ],
+                "sides": [
+                  {
+                    "side": "Top",
+                    "color": "rgb(113, 129, 118)",
+                    "width": 1,
+                    "style": "solid",
+                    "fillContrast": 4.114544191782779,
+                    "outsideContrast": 3.927483360092991
+                  },
+                  {
+                    "side": "Right",
+                    "color": "rgb(113, 129, 118)",
+                    "width": 1,
+                    "style": "solid",
+                    "fillContrast": 4.114544191782779,
+                    "outsideContrast": 3.927483360092991
+                  },
+                  {
+                    "side": "Bottom",
+                    "color": "rgb(113, 129, 118)",
+                    "width": 1,
+                    "style": "solid",
+                    "fillContrast": 4.114544191782779,
+                    "outsideContrast": 3.927483360092991
+                  },
+                  {
+                    "side": "Left",
+                    "color": "rgb(113, 129, 118)",
+                    "width": 1,
+                    "style": "solid",
+                    "fillContrast": 4.114544191782779,
+                    "outsideContrast": 3.927483360092991
+                  }
+                ]
+              },
+              {
+                "label": "Alias maximum estimated input cost (USD)",
+                "fill": [
+                  255,
+                  255,
+                  255
+                ],
+                "outside": [
+                  249,
+                  250,
+                  247
+                ],
+                "sides": [
+                  {
+                    "side": "Top",
+                    "color": "rgb(113, 129, 118)",
+                    "width": 1,
+                    "style": "solid",
+                    "fillContrast": 4.114544191782779,
+                    "outsideContrast": 3.927483360092991
+                  },
+                  {
+                    "side": "Right",
+                    "color": "rgb(113, 129, 118)",
+                    "width": 1,
+                    "style": "solid",
+                    "fillContrast": 4.114544191782779,
+                    "outsideContrast": 3.927483360092991
+                  },
+                  {
+                    "side": "Bottom",
+                    "color": "rgb(113, 129, 118)",
+                    "width": 1,
+                    "style": "solid",
+                    "fillContrast": 4.114544191782779,
+                    "outsideContrast": 3.927483360092991
+                  },
+                  {
+                    "side": "Left",
+                    "color": "rgb(113, 129, 118)",
+                    "width": 1,
+                    "style": "solid",
+                    "fillContrast": 4.114544191782779,
+                    "outsideContrast": 3.927483360092991
+                  }
+                ]
+              },
+              {
+                "label": "Alias maximum estimated request cost per attempt (USD)",
+                "fill": [
+                  255,
+                  255,
+                  255
+                ],
+                "outside": [
+                  249,
+                  250,
+                  247
+                ],
+                "sides": [
+                  {
+                    "side": "Top",
+                    "color": "rgb(113, 129, 118)",
+                    "width": 1,
+                    "style": "solid",
+                    "fillContrast": 4.114544191782779,
+                    "outsideContrast": 3.927483360092991
+                  },
+                  {
+                    "side": "Right",
+                    "color": "rgb(113, 129, 118)",
+                    "width": 1,
+                    "style": "solid",
+                    "fillContrast": 4.114544191782779,
+                    "outsideContrast": 3.927483360092991
+                  },
+                  {
+                    "side": "Bottom",
+                    "color": "rgb(113, 129, 118)",
+                    "width": 1,
+                    "style": "solid",
+                    "fillContrast": 4.114544191782779,
+                    "outsideContrast": 3.927483360092991
+                  },
+                  {
+                    "side": "Left",
+                    "color": "rgb(113, 129, 118)",
+                    "width": 1,
+                    "style": "solid",
+                    "fillContrast": 4.114544191782779,
+                    "outsideContrast": 3.927483360092991
+                  }
+                ]
+              }
+            ],
+            "violations": []
+          },
+          {
+            "size": "enlarged",
+            "viewportWidth": 320,
+            "documentWidth": 320,
+            "region": {
+              "left": 38.39,
+              "right": 281.61,
+              "width": 243.22,
+              "height": 4580.06
+            },
+            "rootFontSize": "32px",
+            "focused": {
+              "tag": "BUTTON",
+              "id": "",
+              "label": "Cancel alias edit",
+              "insideRegion": true
+            },
+            "controlCount": 14,
+            "controls": [
+              {
+                "tag": "FIELDSET",
+                "label": "Alias profileAlias nameAlias primaryChoose a connection and modelAlias fallback candidateChoose a connection and modelAdd alias fallbackRequire alias tool suppo",
+                "bounds": {
+                  "left": 38.39,
+                  "right": 281.61,
+                  "width": 243.22,
+                  "height": 4231.69
+                },
+                "containerBounds": {
+                  "left": 38.39,
+                  "right": 281.61,
+                  "width": 243.22,
+                  "height": 4231.69
+                },
+                "disabled": false,
+                "overflow": false
+              },
+              {
+                "tag": "INPUT",
+                "label": "Alias name",
+                "bounds": {
+                  "left": 63.39,
+                  "right": 256.61,
+                  "width": 193.22,
+                  "height": 80.58
+                },
+                "containerBounds": {
+                  "left": 38.39,
+                  "right": 281.61,
+                  "width": 243.22,
+                  "height": 4231.69
+                },
+                "disabled": false,
+                "overflow": false
+              },
+              {
+                "tag": "SELECT",
+                "label": "Alias primary",
+                "bounds": {
+                  "left": 63.39,
+                  "right": 256.61,
+                  "width": 193.22,
+                  "height": 72.19
+                },
+                "containerBounds": {
+                  "left": 38.39,
+                  "right": 281.61,
+                  "width": 243.22,
+                  "height": 4231.69
+                },
+                "disabled": false,
+                "overflow": false
+              },
+              {
+                "tag": "SELECT",
+                "label": "Alias fallback candidate",
+                "bounds": {
+                  "left": 63.39,
+                  "right": 256.61,
+                  "width": 193.22,
+                  "height": 72.19
+                },
+                "containerBounds": {
+                  "left": 38.39,
+                  "right": 281.61,
+                  "width": 243.22,
+                  "height": 4231.69
+                },
+                "disabled": false,
+                "overflow": false
+              },
+              {
+                "tag": "BUTTON",
+                "label": "Add alias fallback",
+                "bounds": {
+                  "left": 63.39,
+                  "right": 256.61,
+                  "width": 193.22,
+                  "height": 119.09
+                },
+                "containerBounds": {
+                  "left": 38.39,
+                  "right": 281.61,
+                  "width": 243.22,
+                  "height": 4231.69
+                },
+                "disabled": true,
+                "overflow": false
+              },
+              {
+                "tag": "INPUT",
+                "label": "Require alias tool support",
+                "bounds": {
+                  "left": 67.39,
+                  "right": 260.61,
+                  "width": 193.22,
+                  "height": 13
+                },
+                "containerBounds": {
+                  "left": 38.39,
+                  "right": 281.61,
+                  "width": 243.22,
+                  "height": 4231.69
+                },
+                "disabled": false,
+                "overflow": false
+              },
+              {
+                "tag": "INPUT",
+                "label": "Require alias image input",
+                "bounds": {
+                  "left": 67.39,
+                  "right": 260.61,
+                  "width": 193.22,
+                  "height": 13
+                },
+                "containerBounds": {
+                  "left": 38.39,
+                  "right": 281.61,
+                  "width": 243.22,
+                  "height": 4231.69
+                },
+                "disabled": false,
+                "overflow": false
+              },
+              {
+                "tag": "SELECT",
+                "label": "Alias required processing region",
+                "bounds": {
+                  "left": 63.39,
+                  "right": 256.61,
+                  "width": 193.22,
+                  "height": 72.19
+                },
+                "containerBounds": {
+                  "left": 38.39,
+                  "right": 281.61,
+                  "width": 243.22,
+                  "height": 4231.69
+                },
+                "disabled": false,
+                "overflow": false
+              },
+              {
+                "tag": "INPUT",
+                "label": "Alias minimum context",
+                "bounds": {
+                  "left": 63.39,
+                  "right": 256.61,
+                  "width": 193.22,
+                  "height": 80.58
+                },
+                "containerBounds": {
+                  "left": 38.39,
+                  "right": 281.61,
+                  "width": 243.22,
+                  "height": 4231.69
+                },
+                "disabled": false,
+                "overflow": false
+              },
+              {
+                "tag": "INPUT",
+                "label": "Alias maximum estimated input cost (USD)",
+                "bounds": {
+                  "left": 63.39,
+                  "right": 256.61,
+                  "width": 193.22,
+                  "height": 80.58
+                },
+                "containerBounds": {
+                  "left": 38.39,
+                  "right": 281.61,
+                  "width": 243.22,
+                  "height": 4231.69
+                },
+                "disabled": false,
+                "overflow": false
+              },
+              {
+                "tag": "INPUT",
+                "label": "Alias maximum estimated request cost per attempt (USD)",
+                "bounds": {
+                  "left": 63.39,
+                  "right": 256.61,
+                  "width": 193.22,
+                  "height": 80.58
+                },
+                "containerBounds": {
+                  "left": 38.39,
+                  "right": 281.61,
+                  "width": 243.22,
+                  "height": 4231.69
+                },
+                "disabled": false,
+                "overflow": false
+              },
+              {
+                "tag": "INPUT",
+                "label": "Allow alias fallback to change the privacy class",
+                "bounds": {
+                  "left": 67.39,
+                  "right": 260.61,
+                  "width": 193.22,
+                  "height": 13
+                },
+                "containerBounds": {
+                  "left": 38.39,
+                  "right": 281.61,
+                  "width": 243.22,
+                  "height": 4231.69
+                },
+                "disabled": false,
+                "overflow": false
+              },
+              {
+                "tag": "BUTTON",
+                "label": "Save routing alias",
+                "bounds": {
+                  "left": 63.39,
+                  "right": 256.61,
+                  "width": 193.22,
+                  "height": 162.28
+                },
+                "containerBounds": {
+                  "left": 38.39,
+                  "right": 281.61,
+                  "width": 243.22,
+                  "height": 4231.69
+                },
+                "disabled": false,
+                "overflow": false
+              },
+              {
+                "tag": "BUTTON",
+                "label": "Cancel alias edit",
+                "bounds": {
+                  "left": 38.39,
+                  "right": 281.61,
+                  "width": 243.22,
+                  "height": 119.09
+                },
+                "containerBounds": {
+                  "left": 38.39,
+                  "right": 281.61,
+                  "width": 243.22,
+                  "height": 4580.06
+                },
+                "disabled": false,
+                "overflow": false
+              }
+            ],
+            "borders": [
+              {
+                "label": "Alias name",
+                "fill": [
+                  255,
+                  255,
+                  255
+                ],
+                "outside": [
+                  249,
+                  250,
+                  247
+                ],
+                "sides": [
+                  {
+                    "side": "Top",
+                    "color": "rgb(113, 129, 118)",
+                    "width": 1,
+                    "style": "solid",
+                    "fillContrast": 4.114544191782779,
+                    "outsideContrast": 3.927483360092991
+                  },
+                  {
+                    "side": "Right",
+                    "color": "rgb(113, 129, 118)",
+                    "width": 1,
+                    "style": "solid",
+                    "fillContrast": 4.114544191782779,
+                    "outsideContrast": 3.927483360092991
+                  },
+                  {
+                    "side": "Bottom",
+                    "color": "rgb(113, 129, 118)",
+                    "width": 1,
+                    "style": "solid",
+                    "fillContrast": 4.114544191782779,
+                    "outsideContrast": 3.927483360092991
+                  },
+                  {
+                    "side": "Left",
+                    "color": "rgb(113, 129, 118)",
+                    "width": 1,
+                    "style": "solid",
+                    "fillContrast": 4.114544191782779,
+                    "outsideContrast": 3.927483360092991
+                  }
+                ]
+              },
+              {
+                "label": "Alias primary",
+                "fill": [
+                  255,
+                  255,
+                  255
+                ],
+                "outside": [
+                  249,
+                  250,
+                  247
+                ],
+                "sides": [
+                  {
+                    "side": "Top",
+                    "color": "rgb(113, 129, 118)",
+                    "width": 1,
+                    "style": "solid",
+                    "fillContrast": 4.114544191782779,
+                    "outsideContrast": 3.927483360092991
+                  },
+                  {
+                    "side": "Right",
+                    "color": "rgb(113, 129, 118)",
+                    "width": 1,
+                    "style": "solid",
+                    "fillContrast": 4.114544191782779,
+                    "outsideContrast": 3.927483360092991
+                  },
+                  {
+                    "side": "Bottom",
+                    "color": "rgb(113, 129, 118)",
+                    "width": 1,
+                    "style": "solid",
+                    "fillContrast": 4.114544191782779,
+                    "outsideContrast": 3.927483360092991
+                  },
+                  {
+                    "side": "Left",
+                    "color": "rgb(113, 129, 118)",
+                    "width": 1,
+                    "style": "solid",
+                    "fillContrast": 4.114544191782779,
+                    "outsideContrast": 3.927483360092991
+                  }
+                ]
+              },
+              {
+                "label": "Alias fallback candidate",
+                "fill": [
+                  255,
+                  255,
+                  255
+                ],
+                "outside": [
+                  249,
+                  250,
+                  247
+                ],
+                "sides": [
+                  {
+                    "side": "Top",
+                    "color": "rgb(113, 129, 118)",
+                    "width": 1,
+                    "style": "solid",
+                    "fillContrast": 4.114544191782779,
+                    "outsideContrast": 3.927483360092991
+                  },
+                  {
+                    "side": "Right",
+                    "color": "rgb(113, 129, 118)",
+                    "width": 1,
+                    "style": "solid",
+                    "fillContrast": 4.114544191782779,
+                    "outsideContrast": 3.927483360092991
+                  },
+                  {
+                    "side": "Bottom",
+                    "color": "rgb(113, 129, 118)",
+                    "width": 1,
+                    "style": "solid",
+                    "fillContrast": 4.114544191782779,
+                    "outsideContrast": 3.927483360092991
+                  },
+                  {
+                    "side": "Left",
+                    "color": "rgb(113, 129, 118)",
+                    "width": 1,
+                    "style": "solid",
+                    "fillContrast": 4.114544191782779,
+                    "outsideContrast": 3.927483360092991
+                  }
+                ]
+              },
+              {
+                "label": "Alias required processing region",
+                "fill": [
+                  255,
+                  255,
+                  255
+                ],
+                "outside": [
+                  249,
+                  250,
+                  247
+                ],
+                "sides": [
+                  {
+                    "side": "Top",
+                    "color": "rgb(113, 129, 118)",
+                    "width": 1,
+                    "style": "solid",
+                    "fillContrast": 4.114544191782779,
+                    "outsideContrast": 3.927483360092991
+                  },
+                  {
+                    "side": "Right",
+                    "color": "rgb(113, 129, 118)",
+                    "width": 1,
+                    "style": "solid",
+                    "fillContrast": 4.114544191782779,
+                    "outsideContrast": 3.927483360092991
+                  },
+                  {
+                    "side": "Bottom",
+                    "color": "rgb(113, 129, 118)",
+                    "width": 1,
+                    "style": "solid",
+                    "fillContrast": 4.114544191782779,
+                    "outsideContrast": 3.927483360092991
+                  },
+                  {
+                    "side": "Left",
+                    "color": "rgb(113, 129, 118)",
+                    "width": 1,
+                    "style": "solid",
+                    "fillContrast": 4.114544191782779,
+                    "outsideContrast": 3.927483360092991
+                  }
+                ]
+              },
+              {
+                "label": "Alias minimum context",
+                "fill": [
+                  255,
+                  255,
+                  255
+                ],
+                "outside": [
+                  249,
+                  250,
+                  247
+                ],
+                "sides": [
+                  {
+                    "side": "Top",
+                    "color": "rgb(113, 129, 118)",
+                    "width": 1,
+                    "style": "solid",
+                    "fillContrast": 4.114544191782779,
+                    "outsideContrast": 3.927483360092991
+                  },
+                  {
+                    "side": "Right",
+                    "color": "rgb(113, 129, 118)",
+                    "width": 1,
+                    "style": "solid",
+                    "fillContrast": 4.114544191782779,
+                    "outsideContrast": 3.927483360092991
+                  },
+                  {
+                    "side": "Bottom",
+                    "color": "rgb(113, 129, 118)",
+                    "width": 1,
+                    "style": "solid",
+                    "fillContrast": 4.114544191782779,
+                    "outsideContrast": 3.927483360092991
+                  },
+                  {
+                    "side": "Left",
+                    "color": "rgb(113, 129, 118)",
+                    "width": 1,
+                    "style": "solid",
+                    "fillContrast": 4.114544191782779,
+                    "outsideContrast": 3.927483360092991
+                  }
+                ]
+              },
+              {
+                "label": "Alias maximum estimated input cost (USD)",
+                "fill": [
+                  255,
+                  255,
+                  255
+                ],
+                "outside": [
+                  249,
+                  250,
+                  247
+                ],
+                "sides": [
+                  {
+                    "side": "Top",
+                    "color": "rgb(113, 129, 118)",
+                    "width": 1,
+                    "style": "solid",
+                    "fillContrast": 4.114544191782779,
+                    "outsideContrast": 3.927483360092991
+                  },
+                  {
+                    "side": "Right",
+                    "color": "rgb(113, 129, 118)",
+                    "width": 1,
+                    "style": "solid",
+                    "fillContrast": 4.114544191782779,
+                    "outsideContrast": 3.927483360092991
+                  },
+                  {
+                    "side": "Bottom",
+                    "color": "rgb(113, 129, 118)",
+                    "width": 1,
+                    "style": "solid",
+                    "fillContrast": 4.114544191782779,
+                    "outsideContrast": 3.927483360092991
+                  },
+                  {
+                    "side": "Left",
+                    "color": "rgb(113, 129, 118)",
+                    "width": 1,
+                    "style": "solid",
+                    "fillContrast": 4.114544191782779,
+                    "outsideContrast": 3.927483360092991
+                  }
+                ]
+              },
+              {
+                "label": "Alias maximum estimated request cost per attempt (USD)",
+                "fill": [
+                  255,
+                  255,
+                  255
+                ],
+                "outside": [
+                  249,
+                  250,
+                  247
+                ],
+                "sides": [
+                  {
+                    "side": "Top",
+                    "color": "rgb(113, 129, 118)",
+                    "width": 1,
+                    "style": "solid",
+                    "fillContrast": 4.114544191782779,
+                    "outsideContrast": 3.927483360092991
+                  },
+                  {
+                    "side": "Right",
+                    "color": "rgb(113, 129, 118)",
+                    "width": 1,
+                    "style": "solid",
+                    "fillContrast": 4.114544191782779,
+                    "outsideContrast": 3.927483360092991
+                  },
+                  {
+                    "side": "Bottom",
+                    "color": "rgb(113, 129, 118)",
+                    "width": 1,
+                    "style": "solid",
+                    "fillContrast": 4.114544191782779,
+                    "outsideContrast": 3.927483360092991
+                  },
+                  {
+                    "side": "Left",
+                    "color": "rgb(113, 129, 118)",
+                    "width": 1,
+                    "style": "solid",
+                    "fillContrast": 4.114544191782779,
+                    "outsideContrast": 3.927483360092991
+                  }
+                ]
+              }
+            ],
+            "violations": []
+          }
+        ],
+        "status": "passed"
+      }
+    }
+  ],
+  "sourceSha256": {
+    "tooling/browser-engines.mjs": "136f16e63e905ae4c8305c7adedfce2411eff13b04f914054f8fb718155d0df1",
+    "packages/app/src/AppRoot.tsx": "8ef6d3d1dca3eaf71e05bc1b3ff444be358e3021e10fc23dc6c99ceb9c0a44e2",
+    "packages/core/src/model/compaction.ts": "33e724d0610024ebe5b9247196beea0971d72afe77e53f8ccebacfada2c54d28",
+    "packages/core/src/model/summaries.ts": "ebb396a3f6ec22c26d244845dbfef77a0de04dc9ddbc106263d81f3d8e4d7d86",
+    "packages/storage/src/worker/canonical/summary-source.ts": "5fc70e1137f9630fa5975b4a3ae3a31bd7eba82e224e8777620ef75d5b6b865c",
+    "packages/storage/migrations/summary-proposals.ts": "a3500ade690d146e49e49e85895398866aaf6472254f2e20e0420a2baa485948",
+    "packages/app/src/features/compaction/summaries.ts": "a0dcb41e1a0320be9446cf71b2c73216daea6eabae16f8526e04a4007c83df8e",
+    "packages/app/src/features/compaction/summary-source.ts": "f26f2322b34900019fb436dea4fbe142c119206b1aab18dabbfd687a998b0cf4",
+    "packages/app/src/features/compaction/SummaryCompaction.tsx": "4e6ae1c9d013dd4086db80498a6cb06513a24150f96a41f1c2cf15da3a32f2e4",
+    "packages/app/src/features/compaction/FreshBranch.tsx": "11e0327ece1a4a0677a96bbf957bcbfbe64dcedd1f0df89d932f077e20789eaa",
+    "packages/core/src/model/validation.ts": "fccb9eb2d56a44697ac8b89fa97bb3418b9f4ee45a199f53fc5d68cf622a5756",
+    "packages/core/src/model/types.ts": "e9fa9d9292d8b93c04c3eb0828798dd0414264bd047e904b013c5084eeec6b1c",
+    "packages/app/src/features/compaction/controller.ts": "2177b70f5c23bde1d9da0aa7282d81f4bf5b85fd2ad7f414b7531e688c81c1e4",
+    "packages/app/src/features/compaction/AttachmentCompaction.tsx": "a832e1191c2a43ff49824c42f3d27ecad379bfac9c713738e64da4fa9cb3657d",
+    "packages/storage/migrations/context-compaction.ts": "9f6457d0cbf08c9134279f5fb305b0af907478e9083294e06883422c1176d29b",
+    "packages/storage/src/worker/archives/validation.ts": "a162b28d203503c632caf992aa6b6ff362c890d15393b37077f804b3da147cbf",
+    "packages/storage/src/worker/canonical/repository.ts": "d08f508c0a7b9a150690b9f8f42805354825785d28c05c4fdb967a7a926e159c",
+    "packages/storage/src/archive-protocol.ts": "02bbc935808f8ebbf4aff19d11f811ec82b754e14b1741dec8d111deb8c9660d",
+    "packages/app/src/features/preferences/controller.ts": "2f3dd88bf81f55e3c83a4208c6f144bce59352dbd4d4b15b64c9170b699e2647",
+    "packages/app/src/features/preferences/PreferencesPanel.tsx": "98b5f21402dd1e2ed4bde504c02b9fa96ddef7de9f69b96339131eff58ed989c",
+    "packages/app/src/features/preferences/ModelSwitcher.tsx": "4cd6a3805b51be05bf7708a639c38ac43fe9cea83d37bbe4ac511abee57ebe39",
+    "packages/app/src/features/preferences/MessageTimestamp.tsx": "6111f6014895a82803a7461d1701a10745739f3cbd3004e8cf91d90416f144b1",
+    "packages/app/tests/browser/interaction-preferences.mjs": "5a247f989f318db505e80e90fee6072775b18246f74bbc1b9e086e7f3c306cbc",
+    "packages/app/tests/browser/keyboard-focus.mjs": "553ec98e9313c55665ed087df169df1069c6ccd712352c893fa3ed0a0116cb35",
+    "packages/app/tests/browser/review-accessibility.mjs": "bc3b83137b911ca19646f6eebfd076c565d41ee44f85d7cad73ccc427087d525",
+    "packages/app/tests/browser/alias-removal-focus.mjs": "2767c666444bea59d9c257c8606cf59d8047f57257a6c7bdd0d43f6ce820d816",
+    "packages/app/src/features/accessibility/useFocusRecovery.ts": "f5903619c09fda764cd9b60a529ce22d1318bc92d0964e395c7faa19950cf6ad",
+    "packages/app/src/features/imports/ImportPanel.tsx": "ce38a55ee148d605add2fe46965549f6d45986236993c686e5fef189e18597a0",
+    "packages/app/src/features/archives/ExportPanel.tsx": "c50936ffe7326f220aa4525138031ba2352e863e1d5b18be9db6805876d6ddc7",
+    "packages/app/src/features/archives/RestorePanel.tsx": "fd64e5c492a2cd894f54bdef7eccbfa085a00a2b65ce7963fd26ee6d6b7026c6",
+    "packages/app/src/features/archives/controller.ts": "a0a77796f2893cf556aeeeebe4de6180b4127b5b71faacaeae3ef1ecc5ef6c76",
+    "packages/app/src/features/archives/tests/export-controller.test.mjs": "641e2b0225b9658029314ccf24ae918c19c7df4ec5c32673d4152a97b822299a",
+    "package.json": "78028b4c436c895402d39e71616747ddba250b095575b3089263d3200dd3b860",
+    "packages/app/src/features/preferences/send-key.ts": "2e985ef8ef08712b04fdc36bad04428650a2a7f2b5de8f4da7e9909a331387de",
+    "packages/app/src/features/preferences/aliases-controller.ts": "2314b16457147f13da3501b2ebe533987c361dffdaf1cf3e3ca8ffaaa5fadb74",
+    "packages/app/src/features/preferences/RoutingAliases.tsx": "3588d36dee225525f106804eb5ed0c4440ce358515306e59b8ddd7a5ee7e90b0",
+    "packages/core/src/contracts/routing-aliases.ts": "f43cd67e4e00cff69cbfdd51306b24a2dd234a729ca287b775f81bad74f47d42",
+    "packages/core/src/contracts/index.ts": "bbf27e97948407c9b39b848e74ec48842b27f887066c32b3b21b9dc7f8ef4124",
+    "packages/storage/src/worker/routing-aliases.ts": "534ee69d7275c1872a0a4e68ff77fed526f1efe09835c075445a392a3e7f45ba",
+    "packages/core/src/contracts/preferences.ts": "519b1c37b57cb26aece640ae6faf539500a1f7642984c9f22b8836687f912c06",
+    "packages/core/src/contracts/storage.ts": "bdd24142a1e4576f669a3426c06f367354de6cb87611be8b323b2637438b29c4",
+    "packages/storage/src/worker/preferences.ts": "f4f9d761544bd96941087ba8e7ade07e5ffbd35862c5e813583cd2fb6ff95fbf",
+    "packages/app/src/index.ts": "0b1dd20ef2723bead5e1aceae4faac783abf717a37fef4be1edcd333608c8302",
+    "packages/app/src/styles.css": "c8fa148c3a9b9776910d104ee320f3a0869389918fcc8ccd1b62fe72c3cc0317",
+    "packages/app/src/runtime/library.ts": "8096a8be36088825cf614096b5a9ba527cbf579c45cf7a15b2ff69d7cf7fa6dc",
+    "packages/app/src/workflows/chat.ts": "d06d449a0194a24af7c1caf4505d73a32ec314492a74a25a93b984306f4b1fa8",
+    "packages/app/src/features/attachments/staging.ts": "2ed7d7401bead515bc9d260939ea8310ecaef2e8a851d59404125d0832c8e9b6",
+    "packages/app/src/features/attachments/composer-attachments.ts": "7f80522da72504efe55126921bbdf6082268110b52fad01c2d122fee75310f85",
+    "packages/app/src/features/attachments/ComposerAttachments.tsx": "1e775149922bbf7bcf1f6a32123aa2605796b6315375fc308bc95f4db9ab47cd",
+    "packages/app/src/features/attachments/attachments.css": "91090a5059caf2ebfcf3b6f6e1305177b04ba4c96c5ddf78847db60c3225c81f",
+    "packages/core/src/contracts/host.ts": "0bc21aef853666a0a41deca4ee2c572d0d4482d6ab04608286fd38263d5b08f2",
+    "apps/web/src/host/index.ts": "2cc66dc5cf3507cf57f64da6f744d533a529204f63b2a89926475bffddbea96e",
+    "apps/web/src/host/regional-relay.ts": "e6f78f3cfc06cbc23a70d354e5c1fdcb5a6fa4255b39196bd5927c99be4754de",
+    "apps/web/src/host/provider-connections.ts": "5a65b90c5d59006a69220793cce9e0093d94fffc16675a8ea19194584828f0b3",
+    "packages/storage/src/worker/views.ts": "c4e5ccf93b63678cdd237adca2d9151ec319ef232a33f40fb5aa4fa3ce885f47",
+    "packages/core/src/contracts/views.ts": "54d95cc0d90d01a0ece75628ac78f5f99795fc2b69968c6e0d355530e3ef454c",
+    "packages/app/src/features/content/Markdown.tsx": "81ac722c048dd0de1b3fcad420f140cf11560bc3930bda752c4c7162f7c17884",
+    "packages/app/src/features/content/ContentPartView.tsx": "635a94a19b6cbe9edcd1f40316c747b451db675a501e559a8eabf54346ddcdb7",
+    "packages/app/src/features/content/access.ts": "ba4ba1c7fcabcc88866938636691300b1ca0f226b45028871014911f1a17d776",
+    "packages/app/src/features/providers/controller.ts": "f4d28b1d123cf82528465dae935a1afe6eb1763ce5a6e7766e80e2425dc39fcb",
+    "packages/app/src/features/providers/health.ts": "9f36a742e627678e5a8e898b9b237cd716f24d0fd6ef2b9176e414886ebc622a",
+    "packages/app/src/runtime/usage.ts": "01a3b2bebe56976ca6a857d560061cb1790c5e273fb9370a6ace5b1b085fc8ab",
+    "packages/app/src/runtime/events.ts": "8480102a0c4eff285d853b78d298b877e24abd4324f2b231a1e518df15a3fac7",
+    "packages/app/src/runtime/switching.ts": "7a56fcdd73c1307653713954e4ed0f2c1f28a4a69538e51a97d45710f9bc9f23",
+    "packages/app/src/runtime/portability.ts": "f6342bb0e6fee09ca4275514c6df2a576da829d37e67803956390e20e567660a",
+    "packages/app/src/runtime/fallback.ts": "c3d7b0a42f7b0696e70b5e438358067f893496f3622b549047b19aacbde2cd53",
+    "packages/app/src/runtime/routing.ts": "c603127b9ef84049f2cfc74a40dd759d7bbd6ed173e99cb4d4613e61125af2ad",
+    "packages/app/src/runtime/request-cost.ts": "9b9692596f5231bd85af8edfcc017ebb5ebc7269f195e11068c532d06a31e86d",
+    "packages/app/src/runtime/processing-region.ts": "99099c37608edc288b082b03da24522a20f9a815366abe533d218e6932589aa5",
+    "packages/app/src/features/providers/types.ts": "e6c24beaa93be6ba0a8410d5c1df1eaeb163d3bea07b8ae5ef49aa15feec03c5",
+    "packages/app/src/features/providers/ProviderSettingsPanel.tsx": "64b4182b1f19a108312cca78685c31ab66f908812f1f365c928c93bedb33df66",
+    "packages/providers/src/regional.ts": "1f09a2bf83e16d41aa4ca220c81b14c10b1ab719f5493e952d9371beefe835ca",
+    "packages/storage/src/worker/archive-database.ts": "7b189a6678eb07d8ae40832ad316e1fc05bb2eab78b32439adbd5cfe2d4da639",
+    "packages/storage/migrations/views.ts": "49b3b6890c3711b2406db59c37979364a526bb99d7794d67ceeafb42838500aa",
+    "packages/storage/migrations/streaming-text.ts": "e027dc12cf7d301359d0dfea7ef5de20eb3c6d1279d8dc94859b277cc0c4bc86",
+    "packages/providers/src/generation.ts": "db4deb23f8269827e0b444b536333d73230d7d0ba18529783722ca54ab788dde",
+    "packages/providers/src/request.ts": "0d5a1dcddc6fe694bf2cc66cc4dc2d7f9ea2ce1990500a6fa152e49cd4f8d478",
+    "packages/providers/src/adapter.ts": "64d439500f230a05cb75651c0d14f430906c43fdc1c0f87c7f75c451aef3cdbc",
+    "packages/providers/src/catalog.ts": "d7d1f4ed6381fc7146bf904021a919cbc993c2f0aa28a55bf030af8af9e5f824",
+    "packages/providers/src/types.ts": "847f38093e7f61236406daed1b499d23e1916feed0ed3f3564e4a2a7616d2104",
+    "packages/core/src/model/provenance.ts": "191f723124ffe3b0f5957a90a1a60449406a1ba0cfbe258f9d401db0c62e8d26",
+    "apps/web/src/configuration.ts": "4bf0a495315142d50c9249423615279d25de0cbdaccc0fa60a900ec1e20d178e",
+    "packages/app/tests/browser/index.ts": "73dace7097396d51f1827348c0b1951c249ae7c42db958e8265469ccb78e9eba",
+    "packages/app/tests/browser/regions.mjs": "a7e9026294041bd4a41508cf4cfd4f3787641d945dd863d8ca6fab38041a45d6",
+    "packages/app/tests/browser/composer-files.mjs": "618f254a6fedc0febb7ae1d0f8cb2ee81aab30077b1f7b32a7bf981b5223e3d4",
+    "packages/app/tests/browser/composer-files-storage.ts": "6117016481c24011ef654451bc66ec9e13ec368eace53e1445ea36bbc3fe905a",
+    "packages/app/tests/browser/composer-files-restore.ts": "dd30b7b4c2a0fe4648993e3e165995ffd945fd1b73104b7598d40700c1b013ee",
+    "packages/app/tests/browser/composer-files-restore.html": "5c5523f111a36567f6e0e1ea7bba614e8ec26fd15a8c03416aabbc21c0810528",
+    "packages/app/tests/browser/run.mjs": "19546a609799d404aa9e472737f18e0b37f5c7b41d8d8180b71d7dcac1fb87f7",
+    "package-lock.json": "aadb456e2a567a2b91cbb81a502650ebac93541f0a59d54035bdde2cacd97672"
+  },
+  "environment": {
+    "platform": "darwin",
+    "release": "25.6.0",
+    "arch": "arm64",
+    "osVersion": "26.6.2",
+    "node": "v22.23.1"
+  },
+  "error": "Error: expect(locator).toBeFocused() failed\n\nLocator:  getByRole('region', { name: 'Routing aliases', exact: true }).getByRole('heading', { name: 'Routing aliases', exact: true })\nExpected: focused\nReceived: inactive\nTimeout:  5000ms\n\nCall log:\n  - Expect \"toBeFocused\" getByRole('region', { name: 'Routing aliases', exact: true }).getByRole('heading', { name: 'Routing aliases', exact: true }) with timeout 5000ms\n  - waiting for getByRole('region', { name: 'Routing aliases', exact: true }).getByRole('heading', { name: 'Routing aliases', exact: true })\n    14 × locator resolved to <h2 tabindex=\"-1\" class=\"focus-anchor\">Routing aliases</h2>\n       - unexpected value \"inactive\"\n\n    at captureRawStack (/Users/eric/QuixiChat/node_modules/playwright-core/lib/coreBundle.js:8588:17)\n    at callMatcherAsStep (/Users/eric/QuixiChat/node_modules/playwright/lib/matchers/expect.js:13310:57)\n    at Object.toBeFocused (/Users/eric/QuixiChat/node_modules/playwright/lib/matchers/expect.js:13302:23)\n    at keyboardReviewAction (/Users/eric/QuixiChat/packages/app/tests/browser/review-accessibility.mjs:9:44)\n    at async exerciseAliasRemovalFocus (/Users/eric/QuixiChat/packages/app/tests/browser/alias-removal-focus.mjs:35:7)\n    at async file:///Users/eric/QuixiChat/packages/app/tests/browser/run.mjs:453:36",
+  "finishedAt": "2026-09-11T01:47:17.104Z"
+}

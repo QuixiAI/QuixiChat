@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "exhaustive_unicode_scalars": true,
+  "cases": 2229144,
+  "contexts": [
+    "single scalar",
+    "ASCII word around scalar",
+    "focused normalization/special cases",
+    "5000 seeded mixed strings"
+  ],
+  "elapsed_seconds": 11.539636754998355,
+  "library_sha256": "d13f244919e22662a927724e619a9d08446f4c50e954d9c1a89483b19391c185",
+  "tokenizer_artifact_sha256": "d15cd90acf9df73913b5c7f8af9ddc7c2d8afee8e4777f6f71e6d1bb4875c8db"
+}

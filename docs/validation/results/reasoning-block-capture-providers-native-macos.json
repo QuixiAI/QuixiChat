@@ -1,0 +1,233 @@
+{
+  "host": "bundled-tauri-native-host",
+  "timestamp": "2026-09-11T04:49:07.362614+00:00",
+  "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+  "namespace": "53aa741d-8e2b-40e9-bb57-9919fd881782",
+  "binarySha256": "08a027d7da6fa1d6614c21baa41e424688e69fe920f5a2d4f321c6bc9c91bf46",
+  "phases": [
+    {
+      "phase": "providers",
+      "exitCode": 0,
+      "stderr": "",
+      "webview": {
+        "success": true,
+        "phase": "providers",
+        "checks": [
+          "actual macOS keychain backend initialized",
+          "native registry reports local transport",
+          "native files available while OAuth and notifications remain unavailable",
+          "untracked or OS-keychain cancellation never claims prevention of an external commit",
+          "openai-compatible: model discovery uses registered credential header and leaves unknown capability unknown",
+          "openai-compatible: wav original audio bytes reach the controlled endpoint with text-only output through the actual host transport",
+          "openai-compatible: mp3 original audio bytes reach the controlled endpoint with text-only output through the actual host transport",
+          "openai-compatible: synthetic-model preserves raw bytes and bounded output with complete outcome",
+          "openai-compatible: malformed preserves raw bytes and bounded output with partial outcome",
+          "openai-compatible: truncated preserves raw bytes and bounded output with partial outcome",
+          "openai-compatible: slow preserves raw bytes and bounded output with cancelled outcome",
+          "openai-compatible: rate preserves raw bytes and bounded output with failed outcome",
+          "anthropic: model discovery uses registered credential header and leaves unknown capability unknown",
+          "anthropic: fragmented host transport retains complete signed and redacted thinking blocks in source order",
+          "anthropic: synthetic-model preserves raw bytes and bounded output with complete outcome",
+          "anthropic: malformed preserves raw bytes and bounded output with partial outcome",
+          "anthropic: truncated preserves raw bytes and bounded output with partial outcome",
+          "anthropic: slow preserves raw bytes and bounded output with cancelled outcome",
+          "anthropic: rate preserves raw bytes and bounded output with failed outcome"
+        ],
+        "credential": null,
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko)",
+        "origin": "tauri://localhost",
+        "protocol": "tauri:",
+        "capabilities": {
+          "host": "desktop",
+          "nativeFiles": {
+            "available": true,
+            "permission": "prompt",
+            "reason": null
+          },
+          "notifications": {
+            "available": false,
+            "permission": "not_required",
+            "reason": "Native notifications are not implemented."
+          },
+          "oauth": {
+            "available": false,
+            "permission": "not_required",
+            "reason": "Native OAuth requires a registered provider configuration and an available macOS keychain."
+          },
+          "providerTransports": [
+            {
+              "capability": {
+                "available": true,
+                "permission": "not_required",
+                "reason": null
+              },
+              "endpointOrigin": "http://127.0.0.1:60234",
+              "id": "native-proof",
+              "kind": "native_direct",
+              "privacy": "local",
+              "relayIdentity": null
+            },
+            {
+              "capability": {
+                "available": true,
+                "permission": "not_required",
+                "reason": null
+              },
+              "endpointOrigin": "http://127.0.0.1:60230",
+              "id": "native-provider-proof",
+              "kind": "native_direct",
+              "privacy": "local",
+              "relayIdentity": null
+            },
+            {
+              "capability": {
+                "available": true,
+                "permission": "not_required",
+                "reason": null
+              },
+              "endpointOrigin": "http://127.0.0.1:60230",
+              "id": "native-provider-proof",
+              "kind": "native_direct",
+              "privacy": "local",
+              "relayIdentity": null
+            }
+          ],
+          "secretPersistence": "native",
+          "clipboard": {
+            "available": true,
+            "permission": "prompt",
+            "reason": null
+          }
+        },
+        "fileEvidence": null,
+        "providerEvidence": [
+          {
+            "protocol": "openai-compatible",
+            "mode": "audio-wav",
+            "status": "complete",
+            "textChars": 13
+          },
+          {
+            "protocol": "openai-compatible",
+            "mode": "audio-mp3",
+            "status": "complete",
+            "textChars": 13
+          },
+          {
+            "protocol": "openai-compatible",
+            "mode": "synthetic-model",
+            "status": "complete",
+            "rawBytes": 1112,
+            "textChars": 13
+          },
+          {
+            "protocol": "openai-compatible",
+            "mode": "malformed",
+            "status": "partial",
+            "rawBytes": 178,
+            "textChars": 9
+          },
+          {
+            "protocol": "openai-compatible",
+            "mode": "truncated",
+            "status": "partial",
+            "rawBytes": 161,
+            "textChars": 9
+          },
+          {
+            "protocol": "openai-compatible",
+            "mode": "slow",
+            "status": "cancelled",
+            "rawBytes": 161,
+            "textChars": 9
+          },
+          {
+            "protocol": "openai-compatible",
+            "mode": "rate",
+            "status": "failed",
+            "rawBytes": 70,
+            "textChars": 0
+          },
+          {
+            "protocol": "anthropic",
+            "mode": "synthetic-model",
+            "status": "complete",
+            "rawBytes": 2426,
+            "textChars": 9
+          },
+          {
+            "protocol": "anthropic",
+            "mode": "malformed",
+            "status": "partial",
+            "rawBytes": 515,
+            "textChars": 9
+          },
+          {
+            "protocol": "anthropic",
+            "mode": "truncated",
+            "status": "partial",
+            "rawBytes": 470,
+            "textChars": 9
+          },
+          {
+            "protocol": "anthropic",
+            "mode": "slow",
+            "status": "cancelled",
+            "rawBytes": 470,
+            "textChars": 9
+          },
+          {
+            "protocol": "anthropic",
+            "mode": "rate",
+            "status": "failed",
+            "rawBytes": 70,
+            "textChars": 0
+          }
+        ]
+      }
+    }
+  ],
+  "success": true,
+  "systemWebKitVersion": "21624.5.1.11.3",
+  "syntheticKeychainCleanup": {
+    "exitCode": 0,
+    "stderr": ""
+  },
+  "fixture": {
+    "requests": 0,
+    "observedDisconnects": 0,
+    "routes": []
+  },
+  "providerFixture": {
+    "requests": 14,
+    "disconnected": 2,
+    "audioWav": 1,
+    "audioMp3": 1
+  },
+  "sourceSha256": {
+    "packages/providers/src/adapter.ts": "5647e439a9b0c20e05e271c07cdfa416b8d93e281193a4a7e5b3199f57ceed91",
+    "packages/providers/src/request.ts": "f48e109670031ffd3b37b753a52e9d56b5d981c44cab5b52ef0c3a7ee8d6a8da",
+    "packages/providers/src/types.ts": "3d9a7cf1261ce99f8b5f2f2b8da878e2e61a4a19295945f6a367f98f6b0e95f2",
+    "packages/providers/src/catalog.ts": "31439c015bc24e8c6df7bd95acc08d8a70eaa0d0f5412b3ebf78b93d7864d252",
+    "packages/providers/src/normalize.ts": "0e6925a82269a598584cf381772b840c0a00045edf43f4e4e35fb5b4e1bfba05",
+    "packages/providers/src/sse.ts": "8752a278f766e53925aa413750b80350391a9eaa4334f7dd16c9ad501e506dce",
+    "packages/providers/tests/host-proof.ts": "acb12201a4c173d4a848bc7c6490edc32f8e81c661a5d2c1090a7d69809ccbd6",
+    "packages/providers/tests/fixtures.ts": "470a6d64feb90e6ef28eaa693d3c6e1e7df5916c6a19db669ffce27dc978e4b7",
+    "packages/providers/tests/audio-fixtures.ts": "8892fcc71b901191712aca0a19c3eaf3a48c30fbd0501c1e993fb0a135bae217",
+    "packages/providers/tests/fixture-server.ts": "224ba1e261fdd0906b2cbbdb55376cdbf2de4c81bd35db2c6285980dea637811",
+    "packages/providers/tests/run-native.mjs": "8abc0a227b2f99e45094a623012920d938ca171c4ee1eb1ef4bcb25ea2b29509",
+    "apps/desktop/tests/host-proof.ts": "935f5d597cf9bb28bb2ebc9185c4fad0b93835789c3a13bc370cea6d4e9bc1db",
+    "apps/desktop/tests/vite.host-proof.config.ts": "742098659096159f17df5ebb069b68ee4563884f8e946184329e3c769d044db5",
+    "apps/desktop/src/host/index.ts": "6a7d0dcb1093296a830aa8044a220d4998fde75679daadb71a589cfe17e78160",
+    "apps/desktop/src-tauri/src/host_proof.rs": "f44ea9482f6842268da08a3e2e05b1507908f1396018ac842a46e214634455a7",
+    "apps/desktop/src-tauri/src/host/mod.rs": "324690f687b0a72070fb29dbd0613472a0538b7e43347c514bd2a1594fc0ef9d",
+    "apps/desktop/src-tauri/src/host/models.rs": "031cb4bd8d4b1470ca81ab904a6514d679d90e944e030f58a5956cf6915f9708",
+    "apps/desktop/src-tauri/src/host/secrets.rs": "df0fb5a6713c2c53b6be9f0f2c3b245faa936426221814bbddb9d36312df0b16",
+    "apps/desktop/src-tauri/src/registered_destinations.rs": "54f5c90e441d6342f5c870cb4d57b9368ed6364578804468f1270a37ab945ca5",
+    "tests/hosts/run_tauri_native_host_proof.py": "a3e726fcaff623511d4bf07929c68ea0c709583293b5bd2e232981bf2164e549",
+    "package-lock.json": "aadb456e2a567a2b91cbb81a502650ebac93541f0a59d54035bdde2cacd97672",
+    "Cargo.lock": "40cbf40648d9eb5358842d9047c4d251744fe8f3b91d83d3457f994818fc9e9d"
+  },
+  "sourceStable": true,
+  "testScope": "Actual macOS bundled Tauri WebView and native HostClient; controlled synthetic OpenAI-compatible/Anthropic endpoints; no live provider calls."
+}

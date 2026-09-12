@@ -1,0 +1,57 @@
+{
+  "startedAt": "2026-09-11T00:18:02.232882+00:00",
+  "before": {
+    "packages/core/src/contracts/preferences.ts": "519b1c37b57cb26aece640ae6faf539500a1f7642984c9f22b8836687f912c06",
+    "packages/core/src/contracts/storage.ts": "bdd24142a1e4576f669a3426c06f367354de6cb87611be8b323b2637438b29c4",
+    "packages/core/tests/preferences.test.ts": "e80c54943b2bcd27d08c875646110f7b793b1556de488de53a6b887aa845ad12",
+    "packages/storage/src/worker/preferences.ts": "f4f9d761544bd96941087ba8e7ade07e5ffbd35862c5e813583cd2fb6ff95fbf",
+    "packages/storage/src/worker/archive-database.ts": "7b189a6678eb07d8ae40832ad316e1fc05bb2eab78b32439adbd5cfe2d4da639",
+    "packages/storage/tests/canonical/views.test.ts": "a4e6a09b8ff985e9a254433b3675bbe5ffe76dc56de1eb37be1b7c210084d110",
+    "packages/storage/tests/archives/sqlite-file.test.ts": "656ffce3c0c359348ba035a09f59c046ded748ece46398b987503da8311a4d17",
+    "packages/storage/src/archive-protocol.ts": "02bbc935808f8ebbf4aff19d11f811ec82b754e14b1741dec8d111deb8c9660d"
+  },
+  "runs": [
+    {
+      "name": "core",
+      "command": [
+        "npm",
+        "run",
+        "test:core"
+      ],
+      "log": "/tmp/quixi-interaction-core-final.log",
+      "exitCode": 0
+    },
+    {
+      "name": "canonical",
+      "command": [
+        "npm",
+        "run",
+        "test:storage:canonical"
+      ],
+      "log": "/tmp/quixi-interaction-canonical-final.log",
+      "exitCode": 0
+    },
+    {
+      "name": "archives",
+      "command": [
+        "zsh",
+        "-c",
+        "npx tsc --noEmit -p packages/storage/tests/archives/tsconfig.json && node --experimental-transform-types --test packages/storage/tests/archives/*.test.ts"
+      ],
+      "log": "/tmp/quixi-interaction-archives-final.log",
+      "exitCode": 0
+    }
+  ],
+  "finishedAt": "2026-09-11T00:18:21.574515+00:00",
+  "after": {
+    "packages/core/src/contracts/preferences.ts": "519b1c37b57cb26aece640ae6faf539500a1f7642984c9f22b8836687f912c06",
+    "packages/core/src/contracts/storage.ts": "bdd24142a1e4576f669a3426c06f367354de6cb87611be8b323b2637438b29c4",
+    "packages/core/tests/preferences.test.ts": "e80c54943b2bcd27d08c875646110f7b793b1556de488de53a6b887aa845ad12",
+    "packages/storage/src/worker/preferences.ts": "f4f9d761544bd96941087ba8e7ade07e5ffbd35862c5e813583cd2fb6ff95fbf",
+    "packages/storage/src/worker/archive-database.ts": "7b189a6678eb07d8ae40832ad316e1fc05bb2eab78b32439adbd5cfe2d4da639",
+    "packages/storage/tests/canonical/views.test.ts": "a4e6a09b8ff985e9a254433b3675bbe5ffe76dc56de1eb37be1b7c210084d110",
+    "packages/storage/tests/archives/sqlite-file.test.ts": "656ffce3c0c359348ba035a09f59c046ded748ece46398b987503da8311a4d17",
+    "packages/storage/src/archive-protocol.ts": "02bbc935808f8ebbf4aff19d11f811ec82b754e14b1741dec8d111deb8c9660d"
+  },
+  "sourceStable": true
+}

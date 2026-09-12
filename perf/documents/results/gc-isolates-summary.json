@@ -1,0 +1,434 @@
+{
+  "analysisToolSha256": "ffab743085092726b1aff02bd94c83ecd3bd69d964d62428a01825ae5e32ca8f",
+  "method": "Awaited indexed-page producer pauses and forced GC. Isolate-wide before/after measurements; no peak/hard-bound/exact-retainer claim. Diagnostic timing is not production throughput.",
+  "reports": [
+    {
+      "name": "dense-gc-isolates",
+      "sha256": "4d82b28065addb2f301257d5177178fd27d6878e5d1edbced548b5b3fbad1b72",
+      "status": "passed",
+      "sourceStable": true,
+      "runtimeSha256": "aab554df5eea45851caca33984a024aeb0cad18fd9e62e666bdc15c28eec34f3",
+      "parserDistributionSha256": "5de8099723be073084ade9e371597083efa230d74e199c7f5fc1fdd675cf2671",
+      "checkpoints": [
+        {
+          "engine": "chromium",
+          "page": 1,
+          "outputUTF16": 151000,
+          "status": "passed",
+          "isolateId": "12f59694c26b2c37",
+          "beforeUsedBytes": 4805928,
+          "afterUsedBytes": 2807216,
+          "afterBackingBytes": 2224065,
+          "collectGarbageMs": 3.462374999999156,
+          "pauseMs": 27.76862500000061,
+          "error": null,
+          "isolates": [
+            {
+              "role": "pdfjs-parser",
+              "isolateId": "12f59694c26b2c37",
+              "beforeUsedBytes": 4805928,
+              "afterUsedBytes": 2807216,
+              "afterBackingBytes": 2224065,
+              "collectGarbageMs": 3.462374999999156,
+              "error": null
+            },
+            {
+              "role": "page",
+              "isolateId": "4786846d83c6f27b",
+              "beforeUsedBytes": 7578428,
+              "afterUsedBytes": 1817636,
+              "afterBackingBytes": 79399,
+              "collectGarbageMs": 4.2878749999981665,
+              "error": null
+            },
+            {
+              "role": "archive-storage-worker",
+              "isolateId": "540ddfa5906007d1",
+              "beforeUsedBytes": 9840060,
+              "afterUsedBytes": 2781692,
+              "afterBackingBytes": 575440,
+              "collectGarbageMs": 11.843000000000757,
+              "error": null
+            },
+            {
+              "role": "document-extractor",
+              "isolateId": "80ef4c2be6dff9af",
+              "beforeUsedBytes": 2984540,
+              "afterUsedBytes": 1424684,
+              "afterBackingBytes": 451909,
+              "collectGarbageMs": 2.4417500000017753,
+              "error": null
+            }
+          ]
+        },
+        {
+          "engine": "chromium",
+          "page": 10,
+          "outputUTF16": 1510000,
+          "status": "passed",
+          "isolateId": "12f59694c26b2c37",
+          "beforeUsedBytes": 19588260,
+          "afterUsedBytes": 3136164,
+          "afterBackingBytes": 2224065,
+          "collectGarbageMs": 4.552999999999884,
+          "pauseMs": 22.461458000001585,
+          "error": null,
+          "isolates": [
+            {
+              "role": "pdfjs-parser",
+              "isolateId": "12f59694c26b2c37",
+              "beforeUsedBytes": 19588260,
+              "afterUsedBytes": 3136164,
+              "afterBackingBytes": 2224065,
+              "collectGarbageMs": 4.552999999999884,
+              "error": null
+            },
+            {
+              "role": "page",
+              "isolateId": "4786846d83c6f27b",
+              "beforeUsedBytes": 12134820,
+              "afterUsedBytes": 1889376,
+              "afterBackingBytes": 79335,
+              "collectGarbageMs": 4.746291999999812,
+              "error": null
+            },
+            {
+              "role": "archive-storage-worker",
+              "isolateId": "540ddfa5906007d1",
+              "beforeUsedBytes": 3360140,
+              "afterUsedBytes": 3101056,
+              "afterBackingBytes": 575444,
+              "collectGarbageMs": 4.325709000000643,
+              "error": null
+            },
+            {
+              "role": "document-extractor",
+              "isolateId": "80ef4c2be6dff9af",
+              "beforeUsedBytes": 4914244,
+              "afterUsedBytes": 1101872,
+              "afterBackingBytes": 451909,
+              "collectGarbageMs": 3.4855830000014976,
+              "error": null
+            }
+          ]
+        },
+        {
+          "engine": "chromium",
+          "page": 50,
+          "outputUTF16": 7550000,
+          "status": "passed",
+          "isolateId": "12f59694c26b2c37",
+          "beforeUsedBytes": 31950040,
+          "afterUsedBytes": 3262584,
+          "afterBackingBytes": 2224065,
+          "collectGarbageMs": 4.716375000003609,
+          "pauseMs": 21.9755839999998,
+          "error": null,
+          "isolates": [
+            {
+              "role": "pdfjs-parser",
+              "isolateId": "12f59694c26b2c37",
+              "beforeUsedBytes": 31950040,
+              "afterUsedBytes": 3262584,
+              "afterBackingBytes": 2224065,
+              "collectGarbageMs": 4.716375000003609,
+              "error": null
+            },
+            {
+              "role": "page",
+              "isolateId": "4786846d83c6f27b",
+              "beforeUsedBytes": 17200908,
+              "afterUsedBytes": 1945536,
+              "afterBackingBytes": 79335,
+              "collectGarbageMs": 4.363041999997222,
+              "error": null
+            },
+            {
+              "role": "archive-storage-worker",
+              "isolateId": "540ddfa5906007d1",
+              "beforeUsedBytes": 10611064,
+              "afterUsedBytes": 3186896,
+              "afterBackingBytes": 575444,
+              "collectGarbageMs": 5.5743340000044554,
+              "error": null
+            },
+            {
+              "role": "document-extractor",
+              "isolateId": "80ef4c2be6dff9af",
+              "beforeUsedBytes": 3254568,
+              "afterUsedBytes": 1129680,
+              "afterBackingBytes": 451909,
+              "collectGarbageMs": 2.617459000000963,
+              "error": null
+            }
+          ]
+        },
+        {
+          "engine": "chromium",
+          "page": 100,
+          "outputUTF16": 15100000,
+          "status": "passed",
+          "isolateId": "12f59694c26b2c37",
+          "beforeUsedBytes": 32001316,
+          "afterUsedBytes": 3320448,
+          "afterBackingBytes": 2224065,
+          "collectGarbageMs": 4.25908299999719,
+          "pauseMs": 18.501167000009445,
+          "error": null,
+          "isolates": [
+            {
+              "role": "pdfjs-parser",
+              "isolateId": "12f59694c26b2c37",
+              "beforeUsedBytes": 32001316,
+              "afterUsedBytes": 3320448,
+              "afterBackingBytes": 2224065,
+              "collectGarbageMs": 4.25908299999719,
+              "error": null
+            },
+            {
+              "role": "page",
+              "isolateId": "4786846d83c6f27b",
+              "beforeUsedBytes": 6774784,
+              "afterUsedBytes": 1992032,
+              "afterBackingBytes": 79335,
+              "collectGarbageMs": 3.663417000003392,
+              "error": null
+            },
+            {
+              "role": "archive-storage-worker",
+              "isolateId": "540ddfa5906007d1",
+              "beforeUsedBytes": 13270296,
+              "afterUsedBytes": 3201692,
+              "afterBackingBytes": 575444,
+              "collectGarbageMs": 4.135167000000365,
+              "error": null
+            },
+            {
+              "role": "document-extractor",
+              "isolateId": "80ef4c2be6dff9af",
+              "beforeUsedBytes": 2728628,
+              "afterUsedBytes": 1184428,
+              "afterBackingBytes": 451909,
+              "collectGarbageMs": 2.857833000001847,
+              "error": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "gc-pages-1000",
+      "sha256": "131ae5b58a974d7d5ba14078cb6b49d75a54f03f8ec8fac8ce514f0f4725ee3e",
+      "status": "passed",
+      "sourceStable": true,
+      "runtimeSha256": "aab554df5eea45851caca33984a024aeb0cad18fd9e62e666bdc15c28eec34f3",
+      "parserDistributionSha256": "5de8099723be073084ade9e371597083efa230d74e199c7f5fc1fdd675cf2671",
+      "checkpoints": [
+        {
+          "engine": "chromium",
+          "page": 1,
+          "outputUTF16": 160,
+          "status": "passed",
+          "isolateId": "bcb72973f2ead2b9",
+          "beforeUsedBytes": 8160428,
+          "afterUsedBytes": 3766728,
+          "afterBackingBytes": 1986347,
+          "collectGarbageMs": 3.141874999999345,
+          "pauseMs": 17.108000000000175,
+          "error": null,
+          "isolates": [
+            {
+              "role": "pdfjs-parser",
+              "isolateId": "bcb72973f2ead2b9",
+              "beforeUsedBytes": 8160428,
+              "afterUsedBytes": 3766728,
+              "afterBackingBytes": 1986347,
+              "collectGarbageMs": 3.141874999999345,
+              "error": null
+            },
+            {
+              "role": "archive-storage-worker",
+              "isolateId": "21f31c828f77bf5c",
+              "beforeUsedBytes": 4013028,
+              "afterUsedBytes": 2605748,
+              "afterBackingBytes": 575251,
+              "collectGarbageMs": 6.260083000001032,
+              "error": null
+            },
+            {
+              "role": "page",
+              "isolateId": "d851145ee70bbd38",
+              "beforeUsedBytes": 3027748,
+              "afterUsedBytes": 1763684,
+              "afterBackingBytes": 79399,
+              "collectGarbageMs": 2.3481250000004366,
+              "error": null
+            },
+            {
+              "role": "document-extractor",
+              "isolateId": "5b14128c1532b50f",
+              "beforeUsedBytes": 1327444,
+              "afterUsedBytes": 1040712,
+              "afterBackingBytes": 451940,
+              "collectGarbageMs": 1.5697090000012395,
+              "error": null
+            }
+          ]
+        },
+        {
+          "engine": "chromium",
+          "page": 100,
+          "outputUTF16": 16092,
+          "status": "passed",
+          "isolateId": "bcb72973f2ead2b9",
+          "beforeUsedBytes": 8275176,
+          "afterUsedBytes": 4346080,
+          "afterBackingBytes": 1986347,
+          "collectGarbageMs": 4.032250000000204,
+          "pauseMs": 16.39824999999837,
+          "error": null,
+          "isolates": [
+            {
+              "role": "pdfjs-parser",
+              "isolateId": "bcb72973f2ead2b9",
+              "beforeUsedBytes": 8275176,
+              "afterUsedBytes": 4346080,
+              "afterBackingBytes": 1986347,
+              "collectGarbageMs": 4.032250000000204,
+              "error": null
+            },
+            {
+              "role": "archive-storage-worker",
+              "isolateId": "21f31c828f77bf5c",
+              "beforeUsedBytes": 6338744,
+              "afterUsedBytes": 2990112,
+              "afterBackingBytes": 575255,
+              "collectGarbageMs": 4.037083999999595,
+              "error": null
+            },
+            {
+              "role": "page",
+              "isolateId": "d851145ee70bbd38",
+              "beforeUsedBytes": 6178624,
+              "afterUsedBytes": 1871728,
+              "afterBackingBytes": 79399,
+              "collectGarbageMs": 2.939165999996476,
+              "error": null
+            },
+            {
+              "role": "document-extractor",
+              "isolateId": "5b14128c1532b50f",
+              "beforeUsedBytes": 1849700,
+              "afterUsedBytes": 1205908,
+              "afterBackingBytes": 451940,
+              "collectGarbageMs": 1.9930420000018785,
+              "error": null
+            }
+          ]
+        },
+        {
+          "engine": "chromium",
+          "page": 500,
+          "outputUTF16": 80892,
+          "status": "passed",
+          "isolateId": "bcb72973f2ead2b9",
+          "beforeUsedBytes": 13305136,
+          "afterUsedBytes": 4655708,
+          "afterBackingBytes": 1986347,
+          "collectGarbageMs": 4.557166999999026,
+          "pauseMs": 18.96454100000119,
+          "error": null,
+          "isolates": [
+            {
+              "role": "pdfjs-parser",
+              "isolateId": "bcb72973f2ead2b9",
+              "beforeUsedBytes": 13305136,
+              "afterUsedBytes": 4655708,
+              "afterBackingBytes": 1986347,
+              "collectGarbageMs": 4.557166999999026,
+              "error": null
+            },
+            {
+              "role": "archive-storage-worker",
+              "isolateId": "21f31c828f77bf5c",
+              "beforeUsedBytes": 13639756,
+              "afterUsedBytes": 3122836,
+              "afterBackingBytes": 575255,
+              "collectGarbageMs": 5.136665999998513,
+              "error": null
+            },
+            {
+              "role": "page",
+              "isolateId": "d851145ee70bbd38",
+              "beforeUsedBytes": 8262392,
+              "afterUsedBytes": 1953776,
+              "afterBackingBytes": 79335,
+              "collectGarbageMs": 3.476041999998415,
+              "error": null
+            },
+            {
+              "role": "document-extractor",
+              "isolateId": "5b14128c1532b50f",
+              "beforeUsedBytes": 1938592,
+              "afterUsedBytes": 1413496,
+              "afterBackingBytes": 451940,
+              "collectGarbageMs": 2.1020839999982854,
+              "error": null
+            }
+          ]
+        },
+        {
+          "engine": "chromium",
+          "page": 1000,
+          "outputUTF16": 161893,
+          "status": "passed",
+          "isolateId": "bcb72973f2ead2b9",
+          "beforeUsedBytes": 10344056,
+          "afterUsedBytes": 5064444,
+          "afterBackingBytes": 1986347,
+          "collectGarbageMs": 5.88366600000154,
+          "pauseMs": 35.9183339999945,
+          "error": null,
+          "isolates": [
+            {
+              "role": "pdfjs-parser",
+              "isolateId": "bcb72973f2ead2b9",
+              "beforeUsedBytes": 10344056,
+              "afterUsedBytes": 5064444,
+              "afterBackingBytes": 1986347,
+              "collectGarbageMs": 5.88366600000154,
+              "error": null
+            },
+            {
+              "role": "archive-storage-worker",
+              "isolateId": "21f31c828f77bf5c",
+              "beforeUsedBytes": 3807868,
+              "afterUsedBytes": 3172208,
+              "afterBackingBytes": 575255,
+              "collectGarbageMs": 17.885833000000275,
+              "error": null
+            },
+            {
+              "role": "page",
+              "isolateId": "d851145ee70bbd38",
+              "beforeUsedBytes": 8642404,
+              "afterUsedBytes": 2019672,
+              "afterBackingBytes": 79335,
+              "collectGarbageMs": 3.662750000003143,
+              "error": null
+            },
+            {
+              "role": "document-extractor",
+              "isolateId": "5b14128c1532b50f",
+              "beforeUsedBytes": 5619812,
+              "afterUsedBytes": 1700152,
+              "afterBackingBytes": 451940,
+              "collectGarbageMs": 3.592499999998836,
+              "error": null
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

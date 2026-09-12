@@ -1,0 +1,24 @@
+{
+  "recordedAt": "2026-09-09T00:05:12.243616+00:00",
+  "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+  "machine": "arm64",
+  "node": "v22.23.1",
+  "conditions": "Shared development host. Source-offset correctness and bounded-memory checks; no release-grade latency claim. Numerical reference routes executed concurrently.",
+  "sourceSha256": {
+    "src/tokenizer.ts": "88ceccf7626f1355f0d87a871f9ec3e92339d9eb57ed1e267b91d9b982cb68d6",
+    "src/index.ts": "e1a31cd69534581df668bd7c591e73bb5b0bf5a5b654a4a71ed1199e3bfcc5dd",
+    "native/tokenizer.c": "a17e49ff05df55fdb202f2b0a5594f8a01224b1fca15acbdc4675ac3b04ca85f",
+    "native/model.c": "7c29c9a8af9186be3ffadd60f106f686ab626d9585e24c7bbdc2cf300c4102de",
+    "native/quixi_embed.h": "d6bc1b60d1b10bf7bcdb72665a5141a706e05e6193654b7e67cd527e9f80c302",
+    "native/build.py": "9e09af5c66cd7e6180bfb87b8996d2e36fd542831b0138d550de1ee21128b2d4",
+    "native/offset_ci.py": "d3cf9ded76990578546437c938af0b54a80ce4ca024c429079eba848dbc5b3ff",
+    "reference/generate_offset_fixtures.py": "c1bd14777c3a756e39d27431e68aa8e096a825930e633e79189b43013cfeb3c0",
+    "reference/check_offsets_native.py": "9b2cefd4bf72695fe3f509d35e560d15393a60d67932d74970475df831b1e27b",
+    "tests/token-offsets.mjs": "3dc425cdf2fc31e27c23d64a5269d3de53025b8c92f3fab3af5a7efe49c96d48",
+    "tests/token-offset-safety.c": "85fe233c41efbf4375d042faf41abde34382006402b235977791321e5e731c07",
+    "tests/offsets/worker.ts": "8f60a6649713c0c16b8ade3143f62873c97d7a77cec06ca22c688da0d1bd8a81",
+    "tests/offsets/run.mjs": "cd45fb4fd4a8199243cef735a1126cc33852f381899454bdf46986d404cbe414",
+    "tests/token-offset-contributor-cases.json": "ded0c2e00cfbdeba2413855b85ff7780bc7d790020579b2e67016a6a41daa1b0",
+    "tests/token-offset-fixtures.jsonl": "76b78540f4ba78a7feaa3c0851809f79dcb9602498f014b00087f9d0cc1de0a3"
+  }
+}

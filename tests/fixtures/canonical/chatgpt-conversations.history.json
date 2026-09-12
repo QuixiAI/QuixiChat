@@ -1,0 +1,236 @@
+{
+  "threads": [
+    {
+      "id": "00000000-0000-4000-8000-000000000030",
+      "workspaceId": "00000000-0000-4000-8000-000000000001",
+      "createdAt": null,
+      "recordedAt": 1788868920000,
+      "systemPrompt": null,
+      "preferredRoute": null,
+      "importSourceId": "00000000-0000-4000-8000-000000000530"
+    }
+  ],
+  "threadStates": [
+    {
+      "threadId": "00000000-0000-4000-8000-000000000030",
+      "title": "Original synthetic consumer export",
+      "tags": [
+        "fixture"
+      ],
+      "pinned": false,
+      "archived": false,
+      "activeLeafMessageId": "00000000-0000-4000-8000-000000000132",
+      "contextSnapshotId": "00000000-0000-4000-8000-000000000031",
+      "routingProfile": null,
+      "revision": 0
+    }
+  ],
+  "contexts": [
+    {
+      "id": "00000000-0000-4000-8000-000000000031",
+      "threadId": "00000000-0000-4000-8000-000000000030",
+      "previousId": null,
+      "version": 1,
+      "systemPrompt": null,
+      "preferredRoute": null,
+      "recordedAt": 1788868920000
+    }
+  ],
+  "messages": [
+    {
+      "id": "00000000-0000-4000-8000-000000000130",
+      "threadId": "00000000-0000-4000-8000-000000000030",
+      "parentId": null,
+      "role": "system",
+      "createdAt": 1788868800000,
+      "recordedAt": 1788868920000,
+      "generationId": null,
+      "editedFromMessageId": null,
+      "sealed": true,
+      "partCount": 1
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000131",
+      "threadId": "00000000-0000-4000-8000-000000000030",
+      "parentId": "00000000-0000-4000-8000-000000000130",
+      "role": "user",
+      "createdAt": 1788868810000,
+      "recordedAt": 1788868920000,
+      "generationId": null,
+      "editedFromMessageId": null,
+      "sealed": true,
+      "partCount": 1
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000132",
+      "threadId": "00000000-0000-4000-8000-000000000030",
+      "parentId": "00000000-0000-4000-8000-000000000131",
+      "role": "assistant",
+      "createdAt": 1788868820000,
+      "recordedAt": 1788868920000,
+      "generationId": null,
+      "editedFromMessageId": null,
+      "sealed": true,
+      "partCount": 1
+    }
+  ],
+  "generations": [],
+  "parts": [
+    {
+      "id": "00000000-0000-4000-8000-000000001130",
+      "messageId": "00000000-0000-4000-8000-000000000130",
+      "order": 0,
+      "kind": "Text",
+      "data": {
+        "text": "Preserve source facts."
+      }
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000001131",
+      "messageId": "00000000-0000-4000-8000-000000000131",
+      "order": 0,
+      "kind": "Text",
+      "data": {
+        "text": "Keep this original synthetic question."
+      }
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000001132",
+      "messageId": "00000000-0000-4000-8000-000000000132",
+      "order": 0,
+      "kind": "Text",
+      "data": {
+        "text": "Keep this original synthetic answer."
+      }
+    }
+  ],
+  "events": [
+    {
+      "id": "00000000-0000-4000-8000-000000000330",
+      "threadId": "00000000-0000-4000-8000-000000000030",
+      "type": "ImportWarning",
+      "createdAt": 1788868800330,
+      "recordedAt": 1788868920000,
+      "messageId": null,
+      "generationId": null,
+      "details": {
+        "code": "inferred_linear_parentage",
+        "reason": "Loader-documented fields do not establish branch parent links"
+      }
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000331",
+      "threadId": "00000000-0000-4000-8000-000000000030",
+      "type": "ImportWarning",
+      "createdAt": 1788868800331,
+      "recordedAt": 1788868920000,
+      "messageId": null,
+      "generationId": null,
+      "details": {
+        "code": "fingerprint_thread_identity",
+        "reason": "No source conversation ID in this limited fixture shape"
+      }
+    }
+  ],
+  "attachments": [],
+  "rawObjects": [
+    {
+      "id": "00000000-0000-4000-8000-000000000531",
+      "availability": "available",
+      "mediaType": "application/json",
+      "storageRef": "chatgpt-conversations.synthetic.json",
+      "sha256": "d3f01580d7f61ce3f4b243abb62746970a6cca7991f6ce92dff44f25cc1e9a27",
+      "byteLength": 966
+    }
+  ],
+  "importSources": [
+    {
+      "id": "00000000-0000-4000-8000-000000000530",
+      "provider": "openai",
+      "method": "file_export",
+      "sourceThreadId": null,
+      "sourceUrl": null,
+      "importerName": "quixi-fixture-normalizer",
+      "importerVersion": "proposal-1",
+      "sourceFormatVersion": null,
+      "sourceFingerprint": "d3f01580d7f61ce3f4b243abb62746970a6cca7991f6ce92dff44f25cc1e9a27",
+      "importedAt": 1788868920000
+    }
+  ],
+  "sourceIdentities": [
+    {
+      "id": "00000000-0000-4000-8000-000000000630",
+      "provider": "openai",
+      "accountScope": "synthetic-account-scope",
+      "sourceThreadId": null,
+      "entityKind": "message",
+      "nativeId": "fixture-node-system",
+      "quixiId": "00000000-0000-4000-8000-000000000130",
+      "sourceContainerKey": "fingerprint:d3f01580d7f61ce3f4b243abb62746970a6cca7991f6ce92dff44f25cc1e9a27#/0"
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000631",
+      "provider": "openai",
+      "accountScope": "synthetic-account-scope",
+      "sourceThreadId": null,
+      "entityKind": "message",
+      "nativeId": "fixture-node-user",
+      "quixiId": "00000000-0000-4000-8000-000000000131",
+      "sourceContainerKey": "fingerprint:d3f01580d7f61ce3f4b243abb62746970a6cca7991f6ce92dff44f25cc1e9a27#/0"
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000632",
+      "provider": "openai",
+      "accountScope": "synthetic-account-scope",
+      "sourceThreadId": null,
+      "entityKind": "message",
+      "nativeId": "fixture-node-assistant",
+      "quixiId": "00000000-0000-4000-8000-000000000132",
+      "sourceContainerKey": "fingerprint:d3f01580d7f61ce3f4b243abb62746970a6cca7991f6ce92dff44f25cc1e9a27#/0"
+    }
+  ],
+  "provenance": [
+    {
+      "id": "00000000-0000-4000-8000-000000000730",
+      "entityKind": "message",
+      "entityId": "00000000-0000-4000-8000-000000000130",
+      "importSourceId": "00000000-0000-4000-8000-000000000530",
+      "rawObjectId": "00000000-0000-4000-8000-000000000531",
+      "locator": "/0/mapping/fixture-node-system/message",
+      "sourceCreatedAtText": "1788868800",
+      "compatibility": [
+        "synthetic_fixture",
+        "inferred_linear_parentage"
+      ]
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000731",
+      "entityKind": "message",
+      "entityId": "00000000-0000-4000-8000-000000000131",
+      "importSourceId": "00000000-0000-4000-8000-000000000530",
+      "rawObjectId": "00000000-0000-4000-8000-000000000531",
+      "locator": "/0/mapping/fixture-node-user/message",
+      "sourceCreatedAtText": "1788868810",
+      "compatibility": [
+        "synthetic_fixture",
+        "inferred_linear_parentage"
+      ]
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000732",
+      "entityKind": "message",
+      "entityId": "00000000-0000-4000-8000-000000000132",
+      "importSourceId": "00000000-0000-4000-8000-000000000530",
+      "rawObjectId": "00000000-0000-4000-8000-000000000531",
+      "locator": "/0/mapping/fixture-node-assistant/message",
+      "sourceCreatedAtText": "1788868820",
+      "compatibility": [
+        "synthetic_fixture",
+        "inferred_linear_parentage"
+      ]
+    }
+  ],
+  "tombstones": [],
+  "version": 1,
+  "documents": []
+}

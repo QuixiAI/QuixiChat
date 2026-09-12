@@ -1,0 +1,8 @@
+{
+  "browser-evidence-before-error-envelope-cap.json": "5b5c4ff6b53506986012f0312ff137fdb6fcd5b890257c4e8b67b3cfd2809f49",
+  "browser-evidence.json": "f0dadd53a343238ab93c949f308ee42d471ec4ed3554dafe7d18c3e8aed2055e",
+  "fixture-worker.mjs": "69ec602e9b1576524e29c518a39026abceece97854c4e2de9753a0b20c1ddf71",
+  "index.html": "33297522f35e3f8407f77f3398e5609e889e816eb4611f3ef212e75183d8b330",
+  "index.mjs": "1748467326f9752d96273274fee3883238fb1c7e435215f84d52553e4f5655cb",
+  "run.mjs": "771eca1ab537adfe6edf058fad3638a471eb31e16cfbaa5d8f4393e4c6be25c0"
+}

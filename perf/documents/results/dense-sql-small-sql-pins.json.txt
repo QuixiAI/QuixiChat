@@ -1,0 +1,4 @@
+{
+  "packages/storage/src/worker/sqlite-module.ts": "fb5889c277872ef8623cb0bb21b8afa58d0b08a8fddabc2caa7b96981f92ddbc",
+  "packages/storage/src/worker/archive-runtime.ts": "81f238dd54d48b607323710c4159e4518007c7a034dc371b477754f15e61e26b"
+}

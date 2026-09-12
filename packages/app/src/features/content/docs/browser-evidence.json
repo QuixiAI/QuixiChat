@@ -1,0 +1,53 @@
+{
+  "selectedEngines": [
+    "chromium",
+    "webkit"
+  ],
+  "status": "passed",
+  "startedAt": "2026-09-10T03:39:43.344Z",
+  "hosts": [
+    {
+      "name": "chromium",
+      "status": "passed",
+      "checks": [
+        "real canonical text renders Markdown, GFM tables, fenced code and locally bundled LaTeX without scripts or remote image fetches",
+        "fenced code in a supported language is coloured from lossless bounded tokens while unknown languages stay plain text",
+        "copy code writes the exact block text through the host clipboard capability and reads back identically",
+        "verified OPFS text ranges preserve a four-byte scalar split at16KiB and enforce two held readers",
+        "canonical attachment bytes pass PNG dimension admission, explicit local preview, staged host save gesture and exact downloaded hash",
+        "missing attachments and tool source remain readable without execution",
+        "citations link only credential-free HTTP(S) URLs while unsafe citations stay text; redacted reasoning, structured data, provider artifacts and audio attachments render as inert readable records with their original representation reachable and no fetches",
+        "deep nesting, oversized text and recursive math retain bounded responsive source fallbacks",
+        "display operations leave canonical sync count unchanged and active unmount releases readers"
+      ],
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36"
+    },
+    {
+      "name": "webkit",
+      "status": "passed",
+      "checks": [
+        "real canonical text renders Markdown, GFM tables, fenced code and locally bundled LaTeX without scripts or remote image fetches",
+        "fenced code in a supported language is coloured from lossless bounded tokens while unknown languages stay plain text",
+        "copy code writes the exact block text through the host clipboard capability (write only; this engine gates clipboard reading behind platform UI)",
+        "verified OPFS text ranges preserve a four-byte scalar split at16KiB and enforce two held readers",
+        "canonical attachment bytes pass PNG dimension admission, explicit local preview, staged host save gesture and exact downloaded hash",
+        "missing attachments and tool source remain readable without execution",
+        "citations link only credential-free HTTP(S) URLs while unsafe citations stay text; redacted reasoning, structured data, provider artifacts and audio attachments render as inert readable records with their original representation reachable and no fetches",
+        "deep nesting, oversized text and recursive math retain bounded responsive source fallbacks",
+        "display operations leave canonical sync count unchanged and active unmount releases readers"
+      ],
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15"
+    }
+  ],
+  "sourceSha256": {
+    "tooling/browser-engines.mjs": "136f16e63e905ae4c8305c7adedfce2411eff13b04f914054f8fb718155d0df1",
+    "packages/app/src/features/content/access.ts": "ba4ba1c7fcabcc88866938636691300b1ca0f226b45028871014911f1a17d776",
+    "packages/app/src/features/content/ContentPartView.tsx": "635a94a19b6cbe9edcd1f40316c747b451db675a501e559a8eabf54346ddcdb7",
+    "packages/app/src/features/content/Markdown.tsx": "81ac722c048dd0de1b3fcad420f140cf11560bc3930bda752c4c7162f7c17884",
+    "packages/app/src/features/content/markdown-budget.ts": "9b4d7dd3bb72c46e459c5edce3be00486cfee5c61bb37aef2a97a85da14e5d21",
+    "packages/app/src/features/content/highlight.ts": "839822492bfe40dbdb1caaed9f26d5e765c973f350a1c4e7b2f731b1bc801812",
+    "packages/app/src/features/content/image-metadata.ts": "5da3a3820c51b23a31cdc2a7a42f5a3cd8783cf240f46bf7bf01cee6fa6b5e0c",
+    "package-lock.json": "aadb456e2a567a2b91cbb81a502650ebac93541f0a59d54035bdde2cacd97672"
+  },
+  "finishedAt": "2026-09-10T03:39:47.789Z"
+}

@@ -1,0 +1,17 @@
+{
+  "command": "npm run test:app:library",
+  "startedAt": "2026-09-11T00:08:10.184397+00:00",
+  "before": {
+    "packages/app/src/runtime/library.ts": "8096a8be36088825cf614096b5a9ba527cbf579c45cf7a15b2ff69d7cf7fa6dc",
+    "packages/app/tests/library-refresh.test.ts": "dbe68d2e33f2513f5c3b3574c51628e604d9a93f8cbc75f846865f7452b8c7d5",
+    "package.json": "acb168a1111b5ff140f6770c6d06bc543595bf160bca7d2ab43d4a9d129ed343"
+  },
+  "finishedAt": "2026-09-11T00:08:15.469836+00:00",
+  "exitCode": 0,
+  "after": {
+    "packages/app/src/runtime/library.ts": "8096a8be36088825cf614096b5a9ba527cbf579c45cf7a15b2ff69d7cf7fa6dc",
+    "packages/app/tests/library-refresh.test.ts": "dbe68d2e33f2513f5c3b3574c51628e604d9a93f8cbc75f846865f7452b8c7d5",
+    "package.json": "acb168a1111b5ff140f6770c6d06bc543595bf160bca7d2ab43d4a9d129ed343"
+  },
+  "sourceStable": true
+}

@@ -1,0 +1,22 @@
+{
+  "allowedOrigins": ["https://chat.example.com"],
+  "regionalProcessing": { "operator": "Example regional relay operator", "region": "us" },
+  "destinations": [{
+    "id": "regional-openai-us",
+    "origin": "https://us.api.openai.com",
+    "processingRegion": "us",
+    "credential": { "header": "Authorization", "prefix": "Bearer ", "required": true },
+    "routes": [
+      { "path": "/v1/models", "methods": ["GET"], "headers": [] },
+      { "path": "/v1/chat/completions", "methods": ["POST"], "headers": ["content-type"] }
+    ]
+  }],
+  "principals": [{
+    "id": "example-account",
+    "tokenSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "destinations": ["regional-openai-us"],
+    "maxConcurrent": 2,
+    "requestsPerMinute": 30,
+    "burst": 10
+  }]
+}

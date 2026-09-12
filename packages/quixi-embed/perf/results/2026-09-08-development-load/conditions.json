@@ -1,0 +1,21 @@
+{
+  "evidence_grade": "directional-development-load",
+  "host": "Apple M5 Max / macOS arm64",
+  "concurrent_development_jobs": [
+    "frontend and TypeScript builds",
+    "browser tests",
+    "Cargo compilation"
+  ],
+  "conditions": "The parent agent confirmed concurrent development work during the Chromium benchmark. The subsequent Firefox/WebKit comparisons also have no verified quiescent-host conditions. Alternating pairs mitigate order bias but do not remove contention. These are not release-grade timings.",
+  "matrix_scope": {
+    "chromium": "Full 15 shapes: B1/4/8/16/32 \u00d7 T32/128/512",
+    "firefox": "Short 5 shapes: B1/4/8/16/32 \u00d7 T32",
+    "webkit": "Short 5 shapes: B1/4/8/16/32 \u00d7 T32"
+  },
+  "files": {
+    "simd-performance-chromium.json": "c3f58221fc7d5716efea5986ebdcd7d73b56e46f5d1b085045ec8f202dc0710e",
+    "simd-performance-firefox-short.json": "57c0e62296edf24c6d575091ed3f69157601684d2f3b32e648c5b26309e23113",
+    "simd-performance-webkit-short.json": "0901ffa2b7798dfd90652472b7d6ffb23283310c25e35ecb58240e5c6b5c8e9c",
+    "simd-performance-summary.json": "c93132a4053cb5b34787d35dc74edc6ba4f0a76e33a409589058d480fa8eb468"
+  }
+}

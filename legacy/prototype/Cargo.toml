@@ -1,0 +1,58 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/quixi-chat-kernels",
+    "crates/quixi-chat-engine",
+    "crates/quixi-chat-server",
+    "crates/quixi-chat",
+]
+default-members = ["crates/quixi-chat"]
+
+[workspace.package]
+version = "0.0.1"
+edition = "2024"
+rust-version = "1.92"
+license = "MIT"
+repository = "https://github.com/ehartford/QuixiChat"
+
+[workspace.dependencies]
+anyhow = "1.0"
+axum = { version = "0.8", features = ["http1", "json", "tokio"] }
+burn = { version = "=0.21.0", default-features = false, features = ["std"] }
+clap = { version = "4.5", features = ["derive"] }
+futures-util = "0.3"
+half = "2.7"
+minijinja = { version = "2", default-features = false, features = ["builtins", "macros", "std_collections", "serde"] }
+minijinja-contrib = { version = "2", default-features = false, features = ["pycompat"] }
+rand = "0.9"
+reqwest = { version = "0.12", default-features = false, features = ["rustls-tls", "stream"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+sha2 = "0.10"
+tauri = "=2.11.5"
+tauri-build = "2.6"
+thiserror = "2.0"
+tokenizers = { version = "0.22", default-features = false, features = ["onig"] }
+tokio = { version = "1.46", features = ["fs", "io-util", "macros", "net", "rt-multi-thread", "sync", "time"] }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "fmt"] }
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+
+[workspace.lints.clippy]
+all = { level = "warn", priority = -1 }
+pedantic = { level = "warn", priority = -1 }
+doc_markdown = "allow"
+missing_errors_doc = "allow"
+missing_panics_doc = "allow"
+module_name_repetitions = "allow"
+
+[profile.release]
+lto = "thin"
+codegen-units = 1
+strip = "symbols"
+
+# Avoid a second copy while uploading multi-gigabyte GGUF tensors to Metal.
+[patch.crates-io]
+cubecl-runtime = { path = "vendor/cubecl-runtime" }

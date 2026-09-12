@@ -1,0 +1,201 @@
+{
+  "mode": "assert",
+  "name": "webkit",
+  "caseName": "attachment-review",
+  "scope": "Computed CSS reflow and enabled control-border contrast; no screen-reader or native-control pixel-rendering qualification.",
+  "samples": [
+    {
+      "size": "normal",
+      "viewportWidth": 320,
+      "documentWidth": 320,
+      "region": {
+        "left": 37.78,
+        "right": 282.22,
+        "width": 244.44,
+        "height": 653.03
+      },
+      "rootFontSize": "16px",
+      "focused": {
+        "tag": "MAIN",
+        "id": "workspace",
+        "label": "Search your historySearchImage thread2 attempts · tokens in 24 · out 40 · estimated ≈ 0.000149 USD across 2 priced attemptsPortability: Fully portable. Every co",
+        "insideRegion": false
+      },
+      "controlCount": 4,
+      "controls": [
+        {
+          "tag": "INPUT",
+          "label": "seed.png · Image · message 040aa273",
+          "bounds": {
+            "left": 39.78,
+            "right": 284.22,
+            "width": 244.44,
+            "height": 12
+          },
+          "containerBounds": {
+            "left": 19.19,
+            "right": 300.81,
+            "width": 281.63,
+            "height": 3287.34
+          },
+          "disabled": false,
+          "overflow": false
+        },
+        {
+          "tag": "INPUT",
+          "label": "I reviewed these attachment exclusions",
+          "bounds": {
+            "left": 39.78,
+            "right": 284.22,
+            "width": 244.44,
+            "height": 12
+          },
+          "containerBounds": {
+            "left": 19.19,
+            "right": 300.81,
+            "width": 281.63,
+            "height": 3287.34
+          },
+          "disabled": false,
+          "overflow": false
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Apply attachment exclusions",
+          "bounds": {
+            "left": 37.78,
+            "right": 271.91,
+            "width": 234.13,
+            "height": 38.94
+          },
+          "containerBounds": {
+            "left": 19.19,
+            "right": 300.81,
+            "width": 281.63,
+            "height": 3287.34
+          },
+          "disabled": false,
+          "overflow": false
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Cancel attachment review",
+          "bounds": {
+            "left": 37.78,
+            "right": 251.91,
+            "width": 214.13,
+            "height": 38.94
+          },
+          "containerBounds": {
+            "left": 19.19,
+            "right": 300.81,
+            "width": 281.63,
+            "height": 3287.34
+          },
+          "disabled": false,
+          "overflow": false
+        }
+      ],
+      "borders": [],
+      "documentOverflow": [],
+      "violations": []
+    },
+    {
+      "size": "enlarged",
+      "viewportWidth": 320,
+      "documentWidth": 320,
+      "region": {
+        "left": 74.58,
+        "right": 245.42,
+        "width": 170.84,
+        "height": 3031.52
+      },
+      "rootFontSize": "32px",
+      "focused": {
+        "tag": "MAIN",
+        "id": "workspace",
+        "label": "Search your historySearchImage thread2 attempts · tokens in 24 · out 40 · estimated ≈ 0.000149 USD across 2 priced attemptsPortability: Fully portable. Every co",
+        "insideRegion": false
+      },
+      "controlCount": 4,
+      "controls": [
+        {
+          "tag": "INPUT",
+          "label": "seed.png · Image · message 040aa273",
+          "bounds": {
+            "left": 76.58,
+            "right": 247.42,
+            "width": 170.84,
+            "height": 12
+          },
+          "containerBounds": {
+            "left": 38.39,
+            "right": 281.61,
+            "width": 243.22,
+            "height": 12091.36
+          },
+          "disabled": false,
+          "overflow": false
+        },
+        {
+          "tag": "INPUT",
+          "label": "I reviewed these attachment exclusions",
+          "bounds": {
+            "left": 76.58,
+            "right": 247.42,
+            "width": 170.84,
+            "height": 12
+          },
+          "containerBounds": {
+            "left": 38.39,
+            "right": 281.61,
+            "width": 243.22,
+            "height": 12091.36
+          },
+          "disabled": false,
+          "overflow": false
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Apply attachment exclusions",
+          "bounds": {
+            "left": 74.58,
+            "right": 245.42,
+            "width": 170.84,
+            "height": 248.66
+          },
+          "containerBounds": {
+            "left": 38.39,
+            "right": 281.61,
+            "width": 243.22,
+            "height": 12091.36
+          },
+          "disabled": false,
+          "overflow": false
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Cancel attachment review",
+          "bounds": {
+            "left": 74.58,
+            "right": 245.42,
+            "width": 170.84,
+            "height": 205.47
+          },
+          "containerBounds": {
+            "left": 38.39,
+            "right": 281.61,
+            "width": 243.22,
+            "height": 12091.36
+          },
+          "disabled": false,
+          "overflow": false
+        }
+      ],
+      "borders": [],
+      "documentOverflow": [],
+      "violations": []
+    }
+  ],
+  "status": "passed"
+}

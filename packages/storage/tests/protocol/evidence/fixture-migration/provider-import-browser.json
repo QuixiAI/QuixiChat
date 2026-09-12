@@ -1,0 +1,3408 @@
+{
+  "selectedEngines": [
+    "chromium",
+    "webkit"
+  ],
+  "status": "passed",
+  "startedAt": "2026-09-09T01:46:19.221Z",
+  "hosts": [
+    {
+      "name": "chromium",
+      "status": "passed",
+      "checks": [
+        "follower imports ZIP64, numbered JSON, 1000+ parts, long UTF8 text and exact-path asset using actual SQLite/OPFS",
+        "Claude consumer-shaped source retains text, explicit branches, missing attachment and unknown blocks",
+        "an independent per-run Web Lock rejects competing importer execution before resuming or discarding transfers",
+        "unpublished import stays hidden; actual owner-tab termination and importer resume use retained OPFS source with stable stage identity",
+        "bounded NDJSON report includes source-scoped warnings",
+        "actual browser-process restart retains canonical history, original-source SHA256 and complete long-text blobs"
+      ],
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36",
+      "zip": {
+        "runId": "be4e7f4a-c8af-48fe-a4eb-77b12e027048",
+        "result": {
+          "runId": "be4e7f4a-c8af-48fe-a4eb-77b12e027048",
+          "groupKey": "[\"zip-directory\",\"0fcf1cb82b770bdd174b1adcf1085ee4b24d86f3c80be25d2fe98224884b1846\"]",
+          "state": "complete",
+          "recordCount": 2,
+          "resolvedCount": 2,
+          "metadata": {
+            "entries": 2,
+            "kind": "zip-directory",
+            "rawObjectId": "706a92f5-aecd-4c86-b10b-d5039354eb53",
+            "sha256": "0fcf1cb82b770bdd174b1adcf1085ee4b24d86f3c80be25d2fe98224884b1846"
+          },
+          "report": {
+            "assetMatching": "exact_archive_path_only",
+            "otherEntries": "retained_in_original_archive",
+            "rawObjectId": "706a92f5-aecd-4c86-b10b-d5039354eb53",
+            "selectedSources": 1,
+            "sha256": "0fcf1cb82b770bdd174b1adcf1085ee4b24d86f3c80be25d2fe98224884b1846"
+          },
+          "normalizedImportId": null
+        },
+        "verification": {
+          "diagnostics": {
+            "backend": "sqlite-wasm-opfs-sahpool",
+            "ownerId": "8f2b0a1d-b756-47a2-9881-1afed5207335",
+            "schemaVersion": 9,
+            "integrity": "ok",
+            "canonicalRecords": 3042,
+            "syncOperations": 3043,
+            "persisted": false,
+            "usage": 53112572,
+            "quota": 10790530812
+          },
+          "threads": 1,
+          "messages": 3,
+          "parts": 1006,
+          "textBlobs": 1,
+          "artifacts": 1,
+          "rawObjects": 2,
+          "availableAttachments": 1,
+          "progress": [
+            {
+              "phase": "preserving",
+              "processedBytes": 961651
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 966103
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 970555
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 975007
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 979459
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 983911
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 988363
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 992815
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 997267
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1001719
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1006170
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1010624
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1015076
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1019528
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1023980
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1028432
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1032884
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1037336
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1041788
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1046240
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1050692
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1055144
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1059595
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1064049
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1068501
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1072953
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1077405
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1081857
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1086309
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1090761
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1095213
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1099665
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1104117
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1108569
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1113020
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1117474
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1121926
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1126378
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1130830
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1135282
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1139734
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1144186
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1148638
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1153090
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1157542
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1161994
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1166445
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1170899
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1175351
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1179803
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1184255
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1188707
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1193159
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1197611
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1202063
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1206515
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1210967
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1215419
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1219870
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1224324
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1228776
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1233228
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1237680
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1242132
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1246584
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1251036
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1255488
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1259940
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1264392
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1268844
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1273295
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1277749
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1282201
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1286653
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1291105
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1295557
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1300009
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1304461
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1308913
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1313365
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1317817
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1322269
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1326720
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1331174
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1335626
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1340078
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1344530
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1348982
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1353434
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1357886
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1362338
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1366790
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1371242
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1375000
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 8
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1394656
+            },
+            {
+              "phase": "complete",
+              "processedBytes": 1394657
+            }
+          ]
+        }
+      },
+      "claude": {
+        "runId": "e0f166dd-fb59-44cd-bfa0-f72730a51c5b",
+        "verification": {
+          "diagnostics": {
+            "backend": "sqlite-wasm-opfs-sahpool",
+            "ownerId": "8f2b0a1d-b756-47a2-9881-1afed5207335",
+            "schemaVersion": 9,
+            "integrity": "ok",
+            "canonicalRecords": 3073,
+            "syncOperations": 3075,
+            "persisted": false,
+            "usage": 54162192,
+            "quota": 10791580432
+          },
+          "threads": 2,
+          "messages": 5,
+          "parts": 1010,
+          "textBlobs": 1,
+          "artifacts": 2,
+          "rawObjects": 3,
+          "availableAttachments": 1,
+          "progress": [
+            {
+              "phase": "preserving",
+              "processedBytes": 975007
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 979459
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 983911
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 988363
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 992815
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 997267
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1001719
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1006170
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1010624
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1015076
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1019528
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1023980
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1028432
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1032884
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1037336
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1041788
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1046240
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1050692
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1055144
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1059595
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1064049
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1068501
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1072953
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1077405
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1081857
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1086309
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1090761
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1095213
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1099665
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1104117
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1108569
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1113020
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1117474
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1121926
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1126378
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1130830
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1135282
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1139734
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1144186
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1148638
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1153090
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1157542
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1161994
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1166445
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1170899
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1175351
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1179803
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1184255
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1188707
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1193159
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1197611
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1202063
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1206515
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1210967
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1215419
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1219870
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1224324
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1228776
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1233228
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1237680
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1242132
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1246584
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1251036
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1255488
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1259940
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1264392
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1268844
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1273295
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1277749
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1282201
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1286653
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1291105
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1295557
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1300009
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1304461
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1308913
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1313365
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1317817
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1322269
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1326720
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1331174
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1335626
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1340078
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1344530
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1348982
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1353434
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1357886
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1362338
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1366790
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1371242
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1375000
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 8
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1394656
+            },
+            {
+              "phase": "complete",
+              "processedBytes": 1394657
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 620
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 618
+            },
+            {
+              "phase": "complete",
+              "processedBytes": 620
+            }
+          ]
+        }
+      },
+      "paused": {
+        "runId": "b02c7c92-04ab-4988-ab6b-c8e366bd2b0f",
+        "visibleThreads": 2,
+        "diagnostics": {
+          "backend": "sqlite-wasm-opfs-sahpool",
+          "ownerId": "8f2b0a1d-b756-47a2-9881-1afed5207335",
+          "schemaVersion": 9,
+          "integrity": "ok",
+          "canonicalRecords": 3074,
+          "syncOperations": 3076,
+          "persisted": false,
+          "usage": 54163379,
+          "quota": 10791581619
+        }
+      },
+      "executorLease": {
+        "busy": true,
+        "visibleThreads": 2
+      },
+      "resumed": {
+        "diagnostics": {
+          "backend": "sqlite-wasm-opfs-sahpool",
+          "ownerId": "bb880de1-54d4-4f7f-be46-0b372fa1c2a4",
+          "schemaVersion": 9,
+          "integrity": "ok",
+          "canonicalRecords": 3111,
+          "syncOperations": 3114,
+          "persisted": false,
+          "usage": 35153843,
+          "quota": 10772572083
+        },
+        "threads": 3,
+        "messages": 8,
+        "parts": 1015,
+        "textBlobs": 1,
+        "artifacts": 3,
+        "rawObjects": 4,
+        "availableAttachments": 1,
+        "progress": [
+          {
+            "phase": "preserving",
+            "processedBytes": 992815
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 997267
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1001719
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1006170
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1010624
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1015076
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1019528
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1023980
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1028432
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1032884
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1037336
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1041788
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1046240
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1050692
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1055144
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1059595
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1064049
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1068501
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1072953
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1077405
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1081857
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1086309
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1090761
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1095213
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1099665
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1104117
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1108569
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1113020
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1117474
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1121926
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1126378
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1130830
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1135282
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1139734
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1144186
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1148638
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1153090
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1157542
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1161994
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1166445
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1170899
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1175351
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1179803
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1184255
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1188707
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1193159
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1197611
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1202063
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1206515
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1210967
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1215419
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1219870
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1224324
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1228776
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1233228
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1237680
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1242132
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1246584
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1251036
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1255488
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1259940
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1264392
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1268844
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1273295
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1277749
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1282201
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1286653
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1291105
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1295557
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1300009
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1304461
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1308913
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1313365
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1317817
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1322269
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1326720
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1331174
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1335626
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1340078
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1344530
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1348982
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1353434
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1357886
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1362338
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1366790
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1371242
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1375000
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 1
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 1
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 1
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 1
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 1
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 1
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 1
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 1
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 1
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 1
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 1
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 1
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 1
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 1
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 1
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 1
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 1
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 1
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 1
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 1
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 1
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 1
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 1
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 1
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 1
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 1
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 1
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 1
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 1
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 1
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 1
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 8
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 1394656
+          },
+          {
+            "phase": "complete",
+            "processedBytes": 1394657
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 620
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 618
+          },
+          {
+            "phase": "complete",
+            "processedBytes": 620
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 763
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 1
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 761
+          },
+          {
+            "phase": "complete",
+            "processedBytes": 763
+          }
+        ]
+      },
+      "report": {
+        "lines": 7,
+        "warnings": 2
+      },
+      "afterProcessRestart": {
+        "diagnostics": {
+          "backend": "sqlite-wasm-opfs-sahpool",
+          "ownerId": "e64eb404-67c5-49af-ace9-b387de5767f7",
+          "schemaVersion": 9,
+          "integrity": "ok",
+          "canonicalRecords": 3111,
+          "syncOperations": 3114,
+          "persisted": false,
+          "usage": 34105267,
+          "quota": 10771523507
+        },
+        "threads": 3,
+        "messages": 8,
+        "parts": 1015,
+        "textBlobs": 1,
+        "artifacts": 3,
+        "rawObjects": 4,
+        "availableAttachments": 1,
+        "progress": []
+      }
+    },
+    {
+      "name": "webkit",
+      "status": "passed",
+      "checks": [
+        "follower imports ZIP64, numbered JSON, 1000+ parts, long UTF8 text and exact-path asset using actual SQLite/OPFS",
+        "Claude consumer-shaped source retains text, explicit branches, missing attachment and unknown blocks",
+        "an independent per-run Web Lock rejects competing importer execution before resuming or discarding transfers",
+        "unpublished import stays hidden; actual owner-tab termination and importer resume use retained OPFS source with stable stage identity",
+        "bounded NDJSON report includes source-scoped warnings",
+        "actual browser-process restart retains canonical history, original-source SHA256 and complete long-text blobs"
+      ],
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+      "zip": {
+        "runId": "5d5f4bf9-e356-4411-9937-ebe10e76fb6a",
+        "result": {
+          "runId": "5d5f4bf9-e356-4411-9937-ebe10e76fb6a",
+          "groupKey": "[\"zip-directory\",\"0fcf1cb82b770bdd174b1adcf1085ee4b24d86f3c80be25d2fe98224884b1846\"]",
+          "state": "complete",
+          "recordCount": 2,
+          "resolvedCount": 2,
+          "metadata": {
+            "entries": 2,
+            "kind": "zip-directory",
+            "rawObjectId": "aa982597-e42b-4f51-87bc-87f02b29c757",
+            "sha256": "0fcf1cb82b770bdd174b1adcf1085ee4b24d86f3c80be25d2fe98224884b1846"
+          },
+          "report": {
+            "assetMatching": "exact_archive_path_only",
+            "otherEntries": "retained_in_original_archive",
+            "rawObjectId": "aa982597-e42b-4f51-87bc-87f02b29c757",
+            "selectedSources": 1,
+            "sha256": "0fcf1cb82b770bdd174b1adcf1085ee4b24d86f3c80be25d2fe98224884b1846"
+          },
+          "normalizedImportId": null
+        },
+        "verification": {
+          "diagnostics": {
+            "backend": "sqlite-wasm-opfs-sahpool",
+            "ownerId": "1e59b343-033f-4535-a00b-fc0e16ba855e",
+            "schemaVersion": 9,
+            "integrity": "ok",
+            "canonicalRecords": 3042,
+            "syncOperations": 3043,
+            "persisted": false,
+            "usage": 87499535,
+            "quota": 20615843021
+          },
+          "threads": 1,
+          "messages": 3,
+          "parts": 1006,
+          "textBlobs": 1,
+          "artifacts": 1,
+          "rawObjects": 2,
+          "availableAttachments": 1,
+          "progress": [
+            {
+              "phase": "preserving",
+              "processedBytes": 961651
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 966103
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 970555
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 975007
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 979459
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 983911
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 988363
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 992815
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 997267
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1001719
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1006170
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1010624
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1015076
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1019528
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1023980
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1028432
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1032884
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1037336
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1041788
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1046240
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1050692
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1055144
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1059595
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1064049
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1068501
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1072953
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1077405
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1081857
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1086309
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1090761
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1095213
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1099665
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1104117
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1108569
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1113020
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1117474
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1121926
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1126378
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1130830
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1135282
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1139734
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1144186
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1148638
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1153090
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1157542
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1161994
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1166445
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1170899
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1175351
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1179803
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1184255
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1188707
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1193159
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1197611
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1202063
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1206515
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1210967
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1215419
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1219870
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1224324
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1228776
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1233228
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1237680
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1242132
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1246584
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1251036
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1255488
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1259940
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1264392
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1268844
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1273295
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1277749
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1282201
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1286653
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1291105
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1295557
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1300009
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1304461
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1308913
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1313365
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1317817
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1322269
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1326720
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1331174
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1335626
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1340078
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1344530
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1348982
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1353434
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1357886
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1362338
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1366790
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1371242
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1375000
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 8
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1394656
+            },
+            {
+              "phase": "complete",
+              "processedBytes": 1394657
+            }
+          ]
+        }
+      },
+      "claude": {
+        "runId": "21d5d16f-42da-4eb0-a879-3b526cccd60d",
+        "verification": {
+          "diagnostics": {
+            "backend": "sqlite-wasm-opfs-sahpool",
+            "ownerId": "1e59b343-033f-4535-a00b-fc0e16ba855e",
+            "schemaVersion": 9,
+            "integrity": "ok",
+            "canonicalRecords": 3073,
+            "syncOperations": 3075,
+            "persisted": false,
+            "usage": 90645263,
+            "quota": 20615843021
+          },
+          "threads": 2,
+          "messages": 5,
+          "parts": 1010,
+          "textBlobs": 1,
+          "artifacts": 2,
+          "rawObjects": 3,
+          "availableAttachments": 1,
+          "progress": [
+            {
+              "phase": "preserving",
+              "processedBytes": 975007
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 979459
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 983911
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 988363
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 992815
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 997267
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1001719
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1006170
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1010624
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1015076
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1019528
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1023980
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1028432
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1032884
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1037336
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1041788
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1046240
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1050692
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1055144
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1059595
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1064049
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1068501
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1072953
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1077405
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1081857
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1086309
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1090761
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1095213
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1099665
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1104117
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1108569
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1113020
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1117474
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1121926
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1126378
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1130830
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1135282
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1139734
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1144186
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1148638
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1153090
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1157542
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1161994
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1166445
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1170899
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1175351
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1179803
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1184255
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1188707
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1193159
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1197611
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1202063
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1206515
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1210967
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1215419
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1219870
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1224324
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1228776
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1233228
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1237680
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1242132
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1246584
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1251036
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1255488
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1259940
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1264392
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1268844
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1273295
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1277749
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1282201
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1286653
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1291105
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1295557
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1300009
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1304461
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1308913
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1313365
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1317817
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1322269
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1326720
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1331174
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1335626
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1340078
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1344530
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1348982
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1353434
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1357886
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1362338
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1366790
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1371242
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 1375000
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 8
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 1394656
+            },
+            {
+              "phase": "complete",
+              "processedBytes": 1394657
+            },
+            {
+              "phase": "preserving",
+              "processedBytes": 620
+            },
+            {
+              "phase": "normalizing",
+              "processedBytes": 618
+            },
+            {
+              "phase": "complete",
+              "processedBytes": 620
+            }
+          ]
+        }
+      },
+      "paused": {
+        "runId": "fa250fb4-6a16-416a-9449-7f761a5acce3",
+        "visibleThreads": 2,
+        "diagnostics": {
+          "backend": "sqlite-wasm-opfs-sahpool",
+          "ownerId": "1e59b343-033f-4535-a00b-fc0e16ba855e",
+          "schemaVersion": 9,
+          "integrity": "ok",
+          "canonicalRecords": 3074,
+          "syncOperations": 3076,
+          "persisted": false,
+          "usage": 92742415,
+          "quota": 20615843021
+        }
+      },
+      "executorLease": {
+        "busy": true,
+        "visibleThreads": 2
+      },
+      "resumed": {
+        "diagnostics": {
+          "backend": "sqlite-wasm-opfs-sahpool",
+          "ownerId": "aa505f93-f3a2-4fbb-8514-968e4e71925c",
+          "schemaVersion": 9,
+          "integrity": "ok",
+          "canonicalRecords": 3111,
+          "syncOperations": 3114,
+          "persisted": false,
+          "usage": 103228175,
+          "quota": 20615843021
+        },
+        "threads": 3,
+        "messages": 8,
+        "parts": 1015,
+        "textBlobs": 1,
+        "artifacts": 3,
+        "rawObjects": 4,
+        "availableAttachments": 1,
+        "progress": [
+          {
+            "phase": "preserving",
+            "processedBytes": 992815
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 997267
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1001719
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1006170
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1010624
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1015076
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1019528
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1023980
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1028432
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1032884
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1037336
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1041788
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1046240
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1050692
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1055144
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1059595
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1064049
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1068501
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1072953
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1077405
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1081857
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1086309
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1090761
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1095213
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1099665
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1104117
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1108569
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1113020
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1117474
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1121926
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1126378
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1130830
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1135282
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1139734
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1144186
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1148638
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1153090
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1157542
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1161994
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1166445
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1170899
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1175351
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1179803
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1184255
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1188707
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1193159
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1197611
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1202063
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1206515
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1210967
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1215419
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1219870
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1224324
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1228776
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1233228
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1237680
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1242132
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1246584
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1251036
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1255488
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1259940
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1264392
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1268844
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1273295
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1277749
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1282201
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1286653
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1291105
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1295557
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1300009
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1304461
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1308913
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1313365
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1317817
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1322269
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1326720
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1331174
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1335626
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1340078
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1344530
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1348982
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1353434
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1357886
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1362338
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1366790
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1371242
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 1375000
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 1
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 1
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 1
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 1
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 1
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 1
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 1
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 1
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 1
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 1
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 1
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 1
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 1
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 1
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 1
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 1
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 1
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 1
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 1
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 1
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 1
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 1
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 1
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 1
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 1
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 1
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 1
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 1
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 1
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 1
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 1
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 8
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 1394656
+          },
+          {
+            "phase": "complete",
+            "processedBytes": 1394657
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 620
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 618
+          },
+          {
+            "phase": "complete",
+            "processedBytes": 620
+          },
+          {
+            "phase": "preserving",
+            "processedBytes": 763
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 1
+          },
+          {
+            "phase": "normalizing",
+            "processedBytes": 761
+          },
+          {
+            "phase": "complete",
+            "processedBytes": 763
+          }
+        ]
+      },
+      "report": {
+        "lines": 7,
+        "warnings": 2
+      },
+      "afterProcessRestart": {
+        "diagnostics": {
+          "backend": "sqlite-wasm-opfs-sahpool",
+          "ownerId": "f53bdb0e-eeda-4853-9680-0d740ec9d6dd",
+          "schemaVersion": 9,
+          "integrity": "ok",
+          "canonicalRecords": 3111,
+          "syncOperations": 3114,
+          "persisted": false,
+          "usage": 52422174,
+          "quota": 20615843021
+        },
+        "threads": 3,
+        "messages": 8,
+        "parts": 1015,
+        "textBlobs": 1,
+        "artifacts": 3,
+        "rawObjects": 4,
+        "availableAttachments": 1,
+        "progress": []
+      }
+    }
+  ],
+  "sourceSha256": {
+    "tooling/browser-engines.mjs": "136f16e63e905ae4c8305c7adedfce2411eff13b04f914054f8fb718155d0df1",
+    "packages/importers/src/bytes.ts": "537fcb046c5dcbc161a4c7918c35bef721568d2bb6f79e970838eef876b2ed9f",
+    "packages/importers/src/capture.ts": "2927df00d446af24836b00b9da01116e27aa834d9cc7a23865ad9c4bd75dce07",
+    "packages/importers/src/report.ts": "586701f5430e3cf026c00e120f8f075583e8d752970eaec73f29ccdc167ee593",
+    "packages/importers/src/types.ts": "3dc14523cf2109c5aa66c2a2a5e71698b22ebf1141fea25a9d0cc1938ec2c202",
+    "packages/importers/src/json/tokens.ts": "81555eed926d4f2cd4ba2b65aac82899f3a7f8f29b9589d1f2559e29c23687ab",
+    "packages/importers/src/json/metadata.ts": "eda9b08160bc5c6fae46d1a10809824e314c2e21294b9237b7c4cd5e7c270d23",
+    "packages/importers/tests/browser/index.ts": "59bf68f5834dba8972a87f2d36623e2bf5b6ed20959e79c16a3f9bf9673200fc",
+    "packages/importers/tests/browser/run.mjs": "267e3951891bd065ae86bd6057c37d18eaf031dd4c7ae0eda8dde87144bb4042",
+    "packages/importers/src/chatgpt.ts": "e8428830227830ac1f5d4dddb37942e174d48f4906cfc5b3907451e166287494",
+    "packages/importers/src/normalize.ts": "3097d63eb563f02ce17d82fefbd6be9c7b2d49e5889d450bbfe79b044d1fcc9c",
+    "packages/importers/src/upload.ts": "8a9f4ddf798d36f6b73bd6da3aeb7b3682298c3cac2e0e3e9936b688f93e8032",
+    "packages/importers/src/storage.ts": "e0a75355117573fddd673afb88999f2dceda49cfb3f95e2fa05215769f3e084a",
+    "packages/importers/src/zip/import.ts": "b4f0da15f19511d053e692eb7ac53967e75c314b315855f035cbd2318d0f84ad",
+    "packages/importers/src/zip/reader.ts": "febd53869a2a2725278351bbcf594024d623afbd40c3e2595bdde782cebe81f9",
+    "packages/importers/src/chatgpt-scan.ts": "67a708f5b64b7afeb57bbef5fefca0bf7739166a654c58f3578ae2b68e329b2e",
+    "packages/importers/src/claude-scan.ts": "35511fb63efeb0f89a89210caa9bc4d56ba5da8456afc4afd141359a496208ed",
+    "packages/storage/src/client/archive.ts": "8c2e1ac1858b6a62cf0875822ea04643b79b37bfa97fc50be6f5ab02c0736b61",
+    "packages/storage/src/worker/archive-database.ts": "b56986cee418df2c9befe480c99e3cb986fe33bff5a0f8f1401eac863e816ee6",
+    "packages/storage/src/worker/blobs.ts": "5a8ee316532e92497eb6e700ba55f719c5188aef19cf39e04d8a938ec7de4f64",
+    "packages/storage/src/worker/blob-catalog.ts": "751af6f06d6a175284c2a39f0dd8c9522e18f865c0d8b8be283623a41524de8a",
+    "packages/storage/migrations/index.ts": "dac4b5a7b9b7bb57d472dcf841f64d5bd7dea1191ca7d991802cfcf12c8a2c19",
+    "package-lock.json": "14938dfb335480fccf15ef675167da13a3aac8832d29891e38ff67175920ad2c"
+  },
+  "finishedAt": "2026-09-09T01:48:01.262Z"
+}

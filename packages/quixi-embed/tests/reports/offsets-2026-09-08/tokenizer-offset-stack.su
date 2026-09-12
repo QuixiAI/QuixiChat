@@ -1,0 +1,9 @@
+native/tokenizer.c:9:qx_vocabulary_init	0	static
+native/tokenizer.c:36:qx_unicode_init	0	static
+native/tokenizer.c:174:qx_tokenize	0	static
+native/tokenizer.c:162:tokenize_bounded	480	static
+native/tokenizer.c:179:qx_inspect_tokens	2064	static
+native/tokenizer.c:183:qx_tokenize_offsets	6880	static
+native/tokenizer.c:135:process	48	static
+native/tokenizer.c:106:flush	1616	static
+native/tokenizer.c:124:normalized_cp	16	static

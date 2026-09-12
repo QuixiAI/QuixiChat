@@ -1,0 +1,1118 @@
+{
+  "selectedEngines": [
+    "chromium",
+    "webkit"
+  ],
+  "status": "passed",
+  "startedAt": "2026-09-11T04:04:18.207Z",
+  "hosts": [
+    {
+      "name": "chromium",
+      "status": "passed",
+      "phases": {
+        "write": {
+          "checks": [
+            "verified staging is invisible to published reads",
+            "publication and finalization retries preserve identity",
+            "bounded reads round-trip 5 MiB with four-chunk backpressure",
+            "concurrent reads and deduplication share one immutable file handle",
+            "duplicate content shares one verified file",
+            "sequence, oversize, incomplete and incorrect digest rejection",
+            "empty blob has an acknowledged terminal chunk",
+            "canonical UTF-8 validates across chunks and rejects invalid or truncated sequences",
+            "cancelled publication leaves no visible partial file",
+            "cancellation during publication cleans partial output and permits verified retry",
+            "corruption rejected and preserved for recovery",
+            "open transfer count is bounded",
+            "owner restart preserves published data and fences interrupted transfer IDs"
+          ],
+          "digest": "0de713fa5b019638b007265d24ed5d77dddfee3451a3259be27ff90dd398775b",
+          "byteLength": 5242897,
+          "chunkBytes": 1048576,
+          "maxOpenTransfers": 8
+        },
+        "catalog_write": {
+          "checks": [
+            "begin and finish replay retain transfer identity",
+            "verified UTF-8 bytes precede canonical availability",
+            "canonical transaction failure rolls back references and every sync operation while preserving recoverable bytes",
+            "terminal import cleanup preserves published transfer identity for canonical retries",
+            "canonical commit publishes references and sync operations atomically",
+            "replay after staging cleanup adds no duplicate mutations",
+            "postcommit cleanup lookup failure preserves committed result",
+            "failed begin metadata update releases the real byte handle",
+            "finished stages release handles and do not cap an import at eight blobs",
+            "corrupt published bytes quarantine authorization until fresh verification",
+            "interrupted-copy disk state retained for next-process repair test"
+          ],
+          "sha256": "bc1ffc9d0926ef88a44a8ea5ea5edfc4ac511df4cf5970cd9e1b6f7a7e622f76",
+          "byteLength": 32,
+          "sqliteVersion": "3.53.4"
+        },
+        "search_verification_write": {
+          "checks": [
+            "2 MiB canonical Text verifies through bounded admissions, remains hidden until complete, and resolves its exact tail position",
+            "cancellation releases the pending real byte handle and retries the queued source without failing history",
+            "same-digest foreground read completes shared verification safely and background indexing resumes without duplicate canonical history",
+            "foreground canonical reads succeed between bounded indexing turns; an open pending rebuild is retained for forced owner-process termination"
+          ],
+          "phase": "write",
+          "sha256": "7d406d1e1f2f05e3a2ceb29b8442cdb838abe26a4771cc07f2c37f9cb60f7d91",
+          "byteLength": 2097202,
+          "before": {
+            "records": 5,
+            "operations": 2,
+            "recordsSha256": "71ede15a4aa247e43b8c3a1595848337b0d1f00284f48002849fd6ddaecf5231",
+            "operationsSha256": "d549c341328db434c4c99587647880ea4d61745166ef075ff7c6542d856b25e4"
+          },
+          "after": {
+            "records": 5,
+            "operations": 2,
+            "recordsSha256": "71ede15a4aa247e43b8c3a1595848337b0d1f00284f48002849fd6ddaecf5231",
+            "operationsSha256": "d549c341328db434c4c99587647880ea4d61745166ef075ff7c6542d856b25e4"
+          },
+          "foregroundReads": 60,
+          "admissions": 60,
+          "begins": [
+            {
+              "transferId": "bf5a5ed4-d382-41c5-b6e4-d7ee0e0c7df8",
+              "verifiedBytes": 0,
+              "complete": false
+            },
+            {
+              "transferId": "3c8aacef-808e-4b91-a1aa-d1f078b3d247",
+              "verifiedBytes": 0,
+              "complete": false
+            },
+            {
+              "transferId": "b5b733ca-6071-4df7-b758-cb9db026cd91",
+              "verifiedBytes": 0,
+              "complete": false
+            },
+            {
+              "transferId": "373a4973-6159-43f3-a5f3-d99b26cf0e41",
+              "verifiedBytes": 0,
+              "complete": false
+            }
+          ],
+          "verification": [
+            {
+              "admission": 1,
+              "maxBytes": 131072,
+              "before": 0,
+              "after": 131072,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 2,
+              "maxBytes": 131072,
+              "before": 131072,
+              "after": 262144,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 3,
+              "maxBytes": 131072,
+              "before": 262144,
+              "after": 393216,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 4,
+              "maxBytes": 131072,
+              "before": 393216,
+              "after": 524288,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 5,
+              "maxBytes": 131072,
+              "before": 524288,
+              "after": 655360,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 6,
+              "maxBytes": 131072,
+              "before": 655360,
+              "after": 786432,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 7,
+              "maxBytes": 131072,
+              "before": 786432,
+              "after": 917504,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 8,
+              "maxBytes": 131072,
+              "before": 917504,
+              "after": 1048576,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 9,
+              "maxBytes": 131072,
+              "before": 1048576,
+              "after": 1179648,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 10,
+              "maxBytes": 131072,
+              "before": 1179648,
+              "after": 1310720,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 11,
+              "maxBytes": 131072,
+              "before": 1310720,
+              "after": 1441792,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 12,
+              "maxBytes": 131072,
+              "before": 1441792,
+              "after": 1572864,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 13,
+              "maxBytes": 131072,
+              "before": 1572864,
+              "after": 1703936,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 14,
+              "maxBytes": 131072,
+              "before": 1703936,
+              "after": 1835008,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 15,
+              "maxBytes": 131072,
+              "before": 1835008,
+              "after": 1966080,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 16,
+              "maxBytes": 131072,
+              "before": 1966080,
+              "after": 2097152,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 17,
+              "maxBytes": 131072,
+              "before": 2097152,
+              "after": 2097202,
+              "complete": true,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 35,
+              "maxBytes": 131072,
+              "before": 0,
+              "after": 131072,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 37,
+              "maxBytes": 131072,
+              "before": 0,
+              "after": 131072,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 38,
+              "maxBytes": 131072,
+              "before": 131072,
+              "after": 2097202,
+              "complete": true,
+              "foregroundCompleted": true
+            },
+            {
+              "admission": 60,
+              "maxBytes": 131072,
+              "before": 0,
+              "after": 131072,
+              "complete": false,
+              "foregroundCompleted": false
+            }
+          ],
+          "hit": {
+            "chunkId": "68436d6440cd9dce82de89d351607690de5a9851e9f8313c8c39c0b92ec36eba",
+            "threadId": "e85450b9-6711-4f47-a9ec-c42ccf6a5591",
+            "messageId": "e85450b9-6711-4f47-a9ec-c42ccf6a5593",
+            "position": {
+              "partId": "e85450b9-6711-4f47-a9ec-c42ccf6a5594",
+              "start": 2096640,
+              "end": 2097200,
+              "page": null,
+              "sectionPath": []
+            }
+          },
+          "interrupted": {
+            "state": "rebuilding",
+            "version": "fts-v1:quixi-structural-utf16-v1:4096:64:none:none:code-v1:nul-space-v1",
+            "indexedChunks": 521,
+            "pendingSources": 1,
+            "failedSources": 0,
+            "activeEpoch": 2,
+            "rebuildingEpoch": 3,
+            "revision": 1056,
+            "semantic": {
+              "state": "unavailable",
+              "reason": "Semantic retrieval requires the separately enabled and validated plan21 embedding index."
+            },
+            "activeSource": {
+              "sourceId": "p:e85450b9-6711-4f47-a9ec-c42ccf6a5594",
+              "phase": "verifying",
+              "readBytes": 131072,
+              "sourceBytes": 2097202
+            },
+            "lastFailure": null
+          }
+        },
+        "interruption": {
+          "transferId": "acd051ec-3d8e-4259-b936-a3b25f09e192",
+          "checks": [
+            "unfinished upload left open for browser termination"
+          ]
+        },
+        "restart": {
+          "checks": [
+            "published bytes survive browser process restart",
+            "interrupted staging remains visible for SQL reconciliation"
+          ],
+          "digest": "0de713fa5b019638b007265d24ed5d77dddfee3451a3259be27ff90dd398775b",
+          "byteLength": 5242897,
+          "stagedFiles": [
+            {
+              "kind": "staged",
+              "name": "f1e6a605-2747-4b50-975a-9c7c5f27a14d.stage",
+              "byteLength": 1
+            },
+            {
+              "kind": "staged",
+              "name": "acd051ec-3d8e-4259-b936-a3b25f09e192.stage",
+              "byteLength": 3
+            }
+          ]
+        },
+        "catalog_restart": {
+          "checks": [
+            "verified staging resumes after restart and repairs an uncatalogued partial publication",
+            "canonical attachment and blob bytes survive process restart",
+            "unfinished durable transfer is fenced on owner restart",
+            "SQLite integrity is ok"
+          ]
+        },
+        "search_verification_restart": {
+          "checks": [
+            "process restart retains the rebuild queue but starts fresh verification at zero with a new real OPFS handle",
+            "restarted rebuild reaches ready with an exact tail hit and unchanged original canonical/sync inventory",
+            "foreground canonical reads remain available between resumed verification turns and SQLite integrity is ok"
+          ],
+          "phase": "restart",
+          "sha256": "7d406d1e1f2f05e3a2ceb29b8442cdb838abe26a4771cc07f2c37f9cb60f7d91",
+          "byteLength": 2097202,
+          "before": {
+            "records": 5,
+            "operations": 2,
+            "recordsSha256": "71ede15a4aa247e43b8c3a1595848337b0d1f00284f48002849fd6ddaecf5231",
+            "operationsSha256": "d549c341328db434c4c99587647880ea4d61745166ef075ff7c6542d856b25e4"
+          },
+          "after": {
+            "records": 5,
+            "operations": 2,
+            "recordsSha256": "71ede15a4aa247e43b8c3a1595848337b0d1f00284f48002849fd6ddaecf5231",
+            "operationsSha256": "d549c341328db434c4c99587647880ea4d61745166ef075ff7c6542d856b25e4"
+          },
+          "foregroundReads": 38,
+          "admissions": 38,
+          "begins": [
+            {
+              "transferId": "c1791905-4523-47e3-8dea-2c9b7f178d8a",
+              "verifiedBytes": 0,
+              "complete": false
+            }
+          ],
+          "verification": [
+            {
+              "admission": 1,
+              "maxBytes": 131072,
+              "before": 0,
+              "after": 131072,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 2,
+              "maxBytes": 131072,
+              "before": 131072,
+              "after": 262144,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 3,
+              "maxBytes": 131072,
+              "before": 262144,
+              "after": 393216,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 4,
+              "maxBytes": 131072,
+              "before": 393216,
+              "after": 524288,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 5,
+              "maxBytes": 131072,
+              "before": 524288,
+              "after": 655360,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 6,
+              "maxBytes": 131072,
+              "before": 655360,
+              "after": 786432,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 7,
+              "maxBytes": 131072,
+              "before": 786432,
+              "after": 917504,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 8,
+              "maxBytes": 131072,
+              "before": 917504,
+              "after": 1048576,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 9,
+              "maxBytes": 131072,
+              "before": 1048576,
+              "after": 1179648,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 10,
+              "maxBytes": 131072,
+              "before": 1179648,
+              "after": 1310720,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 11,
+              "maxBytes": 131072,
+              "before": 1310720,
+              "after": 1441792,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 12,
+              "maxBytes": 131072,
+              "before": 1441792,
+              "after": 1572864,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 13,
+              "maxBytes": 131072,
+              "before": 1572864,
+              "after": 1703936,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 14,
+              "maxBytes": 131072,
+              "before": 1703936,
+              "after": 1835008,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 15,
+              "maxBytes": 131072,
+              "before": 1835008,
+              "after": 1966080,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 16,
+              "maxBytes": 131072,
+              "before": 1966080,
+              "after": 2097152,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 17,
+              "maxBytes": 131072,
+              "before": 2097152,
+              "after": 2097202,
+              "complete": true,
+              "foregroundCompleted": false
+            }
+          ],
+          "hit": {
+            "chunkId": "68436d6440cd9dce82de89d351607690de5a9851e9f8313c8c39c0b92ec36eba",
+            "threadId": "e85450b9-6711-4f47-a9ec-c42ccf6a5591",
+            "messageId": "e85450b9-6711-4f47-a9ec-c42ccf6a5593",
+            "position": {
+              "partId": "e85450b9-6711-4f47-a9ec-c42ccf6a5594",
+              "start": 2096640,
+              "end": 2097200,
+              "page": null,
+              "sectionPath": []
+            }
+          },
+          "completed": {
+            "state": "ready",
+            "version": "fts-v1:quixi-structural-utf16-v1:4096:64:none:none:code-v1:nul-space-v1",
+            "indexedChunks": 521,
+            "pendingSources": 0,
+            "failedSources": 0,
+            "activeEpoch": 3,
+            "rebuildingEpoch": null,
+            "revision": 1584,
+            "semantic": {
+              "state": "unavailable",
+              "reason": "Semantic retrieval requires the separately enabled and validated plan21 embedding index."
+            },
+            "activeSource": null,
+            "lastFailure": null
+          }
+        },
+        "quota": {
+          "checks": [
+            "real quota failure reported",
+            "failed write cannot continue",
+            "failed staging cleaned"
+          ],
+          "errorCode": "QUOTA_EXCEEDED",
+          "usageBefore": 26231898,
+          "imposedQuota": 26494042
+        },
+        "afterQuota": {
+          "checks": [
+            "new verified publication succeeds after quota is restored",
+            "published bytes survive browser process restart",
+            "interrupted staging remains visible for SQL reconciliation"
+          ],
+          "digest": "0de713fa5b019638b007265d24ed5d77dddfee3451a3259be27ff90dd398775b",
+          "byteLength": 5242897,
+          "stagedFiles": [
+            {
+              "kind": "staged",
+              "name": "f1e6a605-2747-4b50-975a-9c7c5f27a14d.stage",
+              "byteLength": 1
+            },
+            {
+              "kind": "staged",
+              "name": "acd051ec-3d8e-4259-b936-a3b25f09e192.stage",
+              "byteLength": 3
+            }
+          ]
+        }
+      },
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36"
+    },
+    {
+      "name": "webkit",
+      "status": "passed",
+      "phases": {
+        "write": {
+          "checks": [
+            "verified staging is invisible to published reads",
+            "publication and finalization retries preserve identity",
+            "bounded reads round-trip 5 MiB with four-chunk backpressure",
+            "concurrent reads and deduplication share one immutable file handle",
+            "duplicate content shares one verified file",
+            "sequence, oversize, incomplete and incorrect digest rejection",
+            "empty blob has an acknowledged terminal chunk",
+            "canonical UTF-8 validates across chunks and rejects invalid or truncated sequences",
+            "cancelled publication leaves no visible partial file",
+            "cancellation during publication cleans partial output and permits verified retry",
+            "corruption rejected and preserved for recovery",
+            "open transfer count is bounded",
+            "owner restart preserves published data and fences interrupted transfer IDs"
+          ],
+          "digest": "0de713fa5b019638b007265d24ed5d77dddfee3451a3259be27ff90dd398775b",
+          "byteLength": 5242897,
+          "chunkBytes": 1048576,
+          "maxOpenTransfers": 8
+        },
+        "catalog_write": {
+          "checks": [
+            "begin and finish replay retain transfer identity",
+            "verified UTF-8 bytes precede canonical availability",
+            "canonical transaction failure rolls back references and every sync operation while preserving recoverable bytes",
+            "terminal import cleanup preserves published transfer identity for canonical retries",
+            "canonical commit publishes references and sync operations atomically",
+            "replay after staging cleanup adds no duplicate mutations",
+            "postcommit cleanup lookup failure preserves committed result",
+            "failed begin metadata update releases the real byte handle",
+            "finished stages release handles and do not cap an import at eight blobs",
+            "corrupt published bytes quarantine authorization until fresh verification",
+            "interrupted-copy disk state retained for next-process repair test"
+          ],
+          "sha256": "bc1ffc9d0926ef88a44a8ea5ea5edfc4ac511df4cf5970cd9e1b6f7a7e622f76",
+          "byteLength": 32,
+          "sqliteVersion": "3.53.4"
+        },
+        "search_verification_write": {
+          "checks": [
+            "2 MiB canonical Text verifies through bounded admissions, remains hidden until complete, and resolves its exact tail position",
+            "cancellation releases the pending real byte handle and retries the queued source without failing history",
+            "same-digest foreground read completes shared verification safely and background indexing resumes without duplicate canonical history",
+            "foreground canonical reads succeed between bounded indexing turns; an open pending rebuild is retained for forced owner-process termination"
+          ],
+          "phase": "write",
+          "sha256": "7d406d1e1f2f05e3a2ceb29b8442cdb838abe26a4771cc07f2c37f9cb60f7d91",
+          "byteLength": 2097202,
+          "before": {
+            "records": 5,
+            "operations": 2,
+            "recordsSha256": "71ede15a4aa247e43b8c3a1595848337b0d1f00284f48002849fd6ddaecf5231",
+            "operationsSha256": "ed7ec412828f9e55a80a3f49c4a24fafce27f2fe7648b9e50ee4a92ed7757511"
+          },
+          "after": {
+            "records": 5,
+            "operations": 2,
+            "recordsSha256": "71ede15a4aa247e43b8c3a1595848337b0d1f00284f48002849fd6ddaecf5231",
+            "operationsSha256": "ed7ec412828f9e55a80a3f49c4a24fafce27f2fe7648b9e50ee4a92ed7757511"
+          },
+          "foregroundReads": 60,
+          "admissions": 60,
+          "begins": [
+            {
+              "transferId": "ba887291-41c5-4043-a61f-628b2caa245a",
+              "verifiedBytes": 0,
+              "complete": false
+            },
+            {
+              "transferId": "7d4bd8ef-571a-4766-8b50-f9a74a7a3255",
+              "verifiedBytes": 0,
+              "complete": false
+            },
+            {
+              "transferId": "8f7375ae-c212-460f-af17-3f0e7d6aebe2",
+              "verifiedBytes": 0,
+              "complete": false
+            },
+            {
+              "transferId": "a1e256bd-f137-4657-aedc-ec63c3825660",
+              "verifiedBytes": 0,
+              "complete": false
+            }
+          ],
+          "verification": [
+            {
+              "admission": 1,
+              "maxBytes": 131072,
+              "before": 0,
+              "after": 131072,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 2,
+              "maxBytes": 131072,
+              "before": 131072,
+              "after": 262144,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 3,
+              "maxBytes": 131072,
+              "before": 262144,
+              "after": 393216,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 4,
+              "maxBytes": 131072,
+              "before": 393216,
+              "after": 524288,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 5,
+              "maxBytes": 131072,
+              "before": 524288,
+              "after": 655360,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 6,
+              "maxBytes": 131072,
+              "before": 655360,
+              "after": 786432,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 7,
+              "maxBytes": 131072,
+              "before": 786432,
+              "after": 917504,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 8,
+              "maxBytes": 131072,
+              "before": 917504,
+              "after": 1048576,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 9,
+              "maxBytes": 131072,
+              "before": 1048576,
+              "after": 1179648,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 10,
+              "maxBytes": 131072,
+              "before": 1179648,
+              "after": 1310720,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 11,
+              "maxBytes": 131072,
+              "before": 1310720,
+              "after": 1441792,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 12,
+              "maxBytes": 131072,
+              "before": 1441792,
+              "after": 1572864,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 13,
+              "maxBytes": 131072,
+              "before": 1572864,
+              "after": 1703936,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 14,
+              "maxBytes": 131072,
+              "before": 1703936,
+              "after": 1835008,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 15,
+              "maxBytes": 131072,
+              "before": 1835008,
+              "after": 1966080,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 16,
+              "maxBytes": 131072,
+              "before": 1966080,
+              "after": 2097152,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 17,
+              "maxBytes": 131072,
+              "before": 2097152,
+              "after": 2097202,
+              "complete": true,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 35,
+              "maxBytes": 131072,
+              "before": 0,
+              "after": 131072,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 37,
+              "maxBytes": 131072,
+              "before": 0,
+              "after": 131072,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 38,
+              "maxBytes": 131072,
+              "before": 131072,
+              "after": 2097202,
+              "complete": true,
+              "foregroundCompleted": true
+            },
+            {
+              "admission": 60,
+              "maxBytes": 131072,
+              "before": 0,
+              "after": 131072,
+              "complete": false,
+              "foregroundCompleted": false
+            }
+          ],
+          "hit": {
+            "chunkId": "68436d6440cd9dce82de89d351607690de5a9851e9f8313c8c39c0b92ec36eba",
+            "threadId": "e85450b9-6711-4f47-a9ec-c42ccf6a5591",
+            "messageId": "e85450b9-6711-4f47-a9ec-c42ccf6a5593",
+            "position": {
+              "partId": "e85450b9-6711-4f47-a9ec-c42ccf6a5594",
+              "start": 2096640,
+              "end": 2097200,
+              "page": null,
+              "sectionPath": []
+            }
+          },
+          "interrupted": {
+            "state": "rebuilding",
+            "version": "fts-v1:quixi-structural-utf16-v1:4096:64:none:none:code-v1:nul-space-v1",
+            "indexedChunks": 521,
+            "pendingSources": 1,
+            "failedSources": 0,
+            "activeEpoch": 2,
+            "rebuildingEpoch": 3,
+            "revision": 1056,
+            "semantic": {
+              "state": "unavailable",
+              "reason": "Semantic retrieval requires the separately enabled and validated plan21 embedding index."
+            },
+            "activeSource": {
+              "sourceId": "p:e85450b9-6711-4f47-a9ec-c42ccf6a5594",
+              "phase": "verifying",
+              "readBytes": 131072,
+              "sourceBytes": 2097202
+            },
+            "lastFailure": null
+          }
+        },
+        "interruption": {
+          "transferId": "2fbbc043-a0ee-44c3-9bab-e2783db237aa",
+          "checks": [
+            "unfinished upload left open for browser termination"
+          ]
+        },
+        "restart": {
+          "checks": [
+            "published bytes survive browser process restart",
+            "interrupted staging remains visible for SQL reconciliation"
+          ],
+          "digest": "0de713fa5b019638b007265d24ed5d77dddfee3451a3259be27ff90dd398775b",
+          "byteLength": 5242897,
+          "stagedFiles": [
+            {
+              "kind": "staged",
+              "name": "2fbbc043-a0ee-44c3-9bab-e2783db237aa.stage",
+              "byteLength": 3
+            },
+            {
+              "kind": "staged",
+              "name": "57e285c8-df42-40f0-b639-914e0691ecba.stage",
+              "byteLength": 1
+            }
+          ]
+        },
+        "catalog_restart": {
+          "checks": [
+            "verified staging resumes after restart and repairs an uncatalogued partial publication",
+            "canonical attachment and blob bytes survive process restart",
+            "unfinished durable transfer is fenced on owner restart",
+            "SQLite integrity is ok"
+          ]
+        },
+        "search_verification_restart": {
+          "checks": [
+            "process restart retains the rebuild queue but starts fresh verification at zero with a new real OPFS handle",
+            "restarted rebuild reaches ready with an exact tail hit and unchanged original canonical/sync inventory",
+            "foreground canonical reads remain available between resumed verification turns and SQLite integrity is ok"
+          ],
+          "phase": "restart",
+          "sha256": "7d406d1e1f2f05e3a2ceb29b8442cdb838abe26a4771cc07f2c37f9cb60f7d91",
+          "byteLength": 2097202,
+          "before": {
+            "records": 5,
+            "operations": 2,
+            "recordsSha256": "71ede15a4aa247e43b8c3a1595848337b0d1f00284f48002849fd6ddaecf5231",
+            "operationsSha256": "ed7ec412828f9e55a80a3f49c4a24fafce27f2fe7648b9e50ee4a92ed7757511"
+          },
+          "after": {
+            "records": 5,
+            "operations": 2,
+            "recordsSha256": "71ede15a4aa247e43b8c3a1595848337b0d1f00284f48002849fd6ddaecf5231",
+            "operationsSha256": "ed7ec412828f9e55a80a3f49c4a24fafce27f2fe7648b9e50ee4a92ed7757511"
+          },
+          "foregroundReads": 38,
+          "admissions": 38,
+          "begins": [
+            {
+              "transferId": "5f3cac7b-6330-4a6b-ae8a-3082a9ae60fd",
+              "verifiedBytes": 0,
+              "complete": false
+            }
+          ],
+          "verification": [
+            {
+              "admission": 1,
+              "maxBytes": 131072,
+              "before": 0,
+              "after": 131072,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 2,
+              "maxBytes": 131072,
+              "before": 131072,
+              "after": 262144,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 3,
+              "maxBytes": 131072,
+              "before": 262144,
+              "after": 393216,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 4,
+              "maxBytes": 131072,
+              "before": 393216,
+              "after": 524288,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 5,
+              "maxBytes": 131072,
+              "before": 524288,
+              "after": 655360,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 6,
+              "maxBytes": 131072,
+              "before": 655360,
+              "after": 786432,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 7,
+              "maxBytes": 131072,
+              "before": 786432,
+              "after": 917504,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 8,
+              "maxBytes": 131072,
+              "before": 917504,
+              "after": 1048576,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 9,
+              "maxBytes": 131072,
+              "before": 1048576,
+              "after": 1179648,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 10,
+              "maxBytes": 131072,
+              "before": 1179648,
+              "after": 1310720,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 11,
+              "maxBytes": 131072,
+              "before": 1310720,
+              "after": 1441792,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 12,
+              "maxBytes": 131072,
+              "before": 1441792,
+              "after": 1572864,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 13,
+              "maxBytes": 131072,
+              "before": 1572864,
+              "after": 1703936,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 14,
+              "maxBytes": 131072,
+              "before": 1703936,
+              "after": 1835008,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 15,
+              "maxBytes": 131072,
+              "before": 1835008,
+              "after": 1966080,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 16,
+              "maxBytes": 131072,
+              "before": 1966080,
+              "after": 2097152,
+              "complete": false,
+              "foregroundCompleted": false
+            },
+            {
+              "admission": 17,
+              "maxBytes": 131072,
+              "before": 2097152,
+              "after": 2097202,
+              "complete": true,
+              "foregroundCompleted": false
+            }
+          ],
+          "hit": {
+            "chunkId": "68436d6440cd9dce82de89d351607690de5a9851e9f8313c8c39c0b92ec36eba",
+            "threadId": "e85450b9-6711-4f47-a9ec-c42ccf6a5591",
+            "messageId": "e85450b9-6711-4f47-a9ec-c42ccf6a5593",
+            "position": {
+              "partId": "e85450b9-6711-4f47-a9ec-c42ccf6a5594",
+              "start": 2096640,
+              "end": 2097200,
+              "page": null,
+              "sectionPath": []
+            }
+          },
+          "completed": {
+            "state": "ready",
+            "version": "fts-v1:quixi-structural-utf16-v1:4096:64:none:none:code-v1:nul-space-v1",
+            "indexedChunks": 521,
+            "pendingSources": 0,
+            "failedSources": 0,
+            "activeEpoch": 3,
+            "rebuildingEpoch": null,
+            "revision": 1584,
+            "semantic": {
+              "state": "unavailable",
+              "reason": "Semantic retrieval requires the separately enabled and validated plan21 embedding index."
+            },
+            "activeSource": null,
+            "lastFailure": null
+          }
+        },
+        "quota": {
+          "status": "not_run",
+          "reason": "No equivalent browser quota override available in this harness"
+        }
+      },
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15"
+    }
+  ],
+  "sourceSha256": {
+    "tooling/browser-engines.mjs": "136f16e63e905ae4c8305c7adedfce2411eff13b04f914054f8fb718155d0df1",
+    "packages/storage/tests/browser/search-verification.ts": "fd5f8c3a65d94f4185dbf4f81a4cf3274fed3728b6243de46d81ede438b08634",
+    "packages/storage/src/worker/search/index.ts": "ff06619d669bf838cd73e2672519d1a7ce414be08f13eddbe55813d517a2fe5b",
+    "packages/storage/src/worker/search/sources.ts": "c3b55d79b0196092fa9cbe2a5bfc97f10903974dede99bbef4419f5bcaa6aebf",
+    "packages/storage/src/worker/search/schema.ts": "ac6a9bbca9ebb51be79afce94f25415ba79e7ec30753ac3433d2ab944cf0f09b",
+    "packages/search/src/chunker.ts": "8e82abb13c825132019055610dab2897909fb191be32f4813eb045285dd57ec4",
+    "packages/storage/src/worker/blobs.ts": "7599e9af6b7626d6f41d0c9aa64119c7574a7c042d4aaecd176cc9a1f8fb7e60",
+    "packages/storage/src/worker/blob-catalog.ts": "6004fc6398cf97b3af233e3016db3d4267a20ad7cd2b4b016ec0f9608cc4914f",
+    "packages/storage/src/worker/canonical/repository.ts": "d08f508c0a7b9a150690b9f8f42805354825785d28c05c4fdb967a7a926e159c",
+    "packages/storage/migrations/index.ts": "463331ffb83ce77bd759505d3e3b39376a193c146bb5e68fd5178af4c63867fd",
+    "packages/core/src/contracts/transfer.ts": "73563a59e5d0964657a88c025a1b0935a1ae7eb77161e96404a4d37b375d6a6f",
+    "packages/storage/tests/browser/main.ts": "c9a0dc5365b9b8febd72643cd5cca68f0838cf8206bd6e153586d356fd9e202a",
+    "packages/storage/tests/browser/worker.ts": "6607502bbdaeaa9bdbfb3cbef289d154d3551d9e61bfce0d738b63d5ba6f8d91",
+    "packages/storage/tests/browser/catalog.ts": "b49d16a2c2ba0dafba59e6a908e1f58a52ac8ef78134d562ae17f9d356b5bfae",
+    "packages/storage/tests/browser/run.mjs": "ac4a9bf89ccbd56328bf88f5deddbda7d51c0e8fa9450872ead0e1cac0be29dc",
+    "package-lock.json": "aadb456e2a567a2b91cbb81a502650ebac93541f0a59d54035bdde2cacd97672"
+  },
+  "finishedAt": "2026-09-11T04:04:30.683Z"
+}

@@ -1,0 +1,9 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><title>QuixiEmbed CPU integration test</title>
+<body><p id="status">Running worker integration checks</p>
+<script type="module">
+const worker = new Worker(new URL('./browser-worker.ts', import.meta.url), { type: 'module' });
+worker.onmessage = ({data}) => { window.quixiResult = data; document.querySelector('#status').textContent = data.passed ? 'Passed' : data.error; worker.terminate(); };
+worker.onerror = (event) => { window.quixiResult = {passed:false,error:event.message}; worker.terminate(); };
+worker.postMessage({run:true,route:new URL(location.href).searchParams.get('route')});
+</script></body></html>

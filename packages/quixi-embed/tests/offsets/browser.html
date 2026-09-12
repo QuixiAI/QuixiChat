@@ -1,0 +1,9 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>Tokenizer offset worker verification</title><body>
+<script type="module">
+const worker=new Worker(new URL('./worker.ts',import.meta.url),{type:'module'});
+let last=performance.now(),samples=0,maxGapMs=0;
+const heartbeat=setInterval(()=>{const now=performance.now();maxGapMs=Math.max(maxGapMs,now-last);last=now;samples++;},10);
+worker.onmessage=({data})=>{clearInterval(heartbeat);window.quixiResult={...data.result,rendererHeartbeat:{samples,maxGapMs}};worker.terminate();};
+worker.onerror=event=>{clearInterval(heartbeat);window.quixiResult={passed:false,error:event.message};worker.terminate();};
+worker.postMessage({route:new URLSearchParams(location.search).get('route')});
+</script></body></html>

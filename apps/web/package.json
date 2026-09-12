@@ -1,0 +1,18 @@
+{
+  "name": "@quixi/web",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1 --port 5173 --strictPort",
+    "build": "vite build",
+    "preview": "vite preview --host 127.0.0.1 --port 5173 --strictPort"
+  },
+  "dependencies": {
+    "@noble/hashes": "2.4.0",
+    "@quixi/app": "0.0.1",
+    "@quixi/core": "0.0.1",
+    "@quixi/providers": "0.0.1",
+    "@quixi/storage": "0.0.1"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "status": "failed",
+  "selectedEngines": [
+    "webkit"
+  ],
+  "startedAt": "2026-09-09T03:57:31.805Z",
+  "environment": {
+    "platform": "darwin",
+    "release": "25.6.0",
+    "arch": "arm64",
+    "osVersion": "26.6.2",
+    "node": "v22.23.1"
+  },
+  "sourceSha256": {
+    "packages/storage/src/client/archive.ts": "123170ba136b7857af3c8b7e1091f176555b7511b16dcdc5d30220765a0dd1ed",
+    "packages/storage/src/client/selection.ts": "3be6215f42123384024fe65de83577a46f82fbc4408270d75c7c0e399a66c59b",
+    "packages/storage/src/archive-protocol.ts": "5f8d01f6f41f0b69f3dd983bbb54f31a33e13b9a5c49197839f931713edaf627",
+    "packages/storage/src/worker/archive.ts": "f84c9ad0e41390d7230b232210ede2577d900d9a7f8f8deb9fc7e7f79aa9153c",
+    "packages/storage/src/worker/archive-runtime.ts": "9b5e5195d31948b79c538dfbb82e50c294f3274b33a6a4eda99d68b13afcd4e3",
+    "packages/storage/src/worker/archive-database.ts": "b047d733bcb790155282373b5b3e98bb92ed441e7e208955b2e825625857db47",
+    "packages/storage/src/worker/selection.ts": "f3f3c2a896c1d18d57053c57594315e707b6217a7cc575cfd2d84d72bdb11844",
+    "packages/storage/src/worker/sqlite-module.ts": "fb5889c277872ef8623cb0bb21b8afa58d0b08a8fddabc2caa7b96981f92ddbc",
+    "packages/storage/src/selection/managed-catalog.ts": "b362e377cdfb3fe82d062877e8ff5410ca6ce9d9bbadccd48ef255c1d0e16b2b",
+    "packages/storage/src/worker/archives/index.ts": "858d8ed4431b7a57c764e62a8c060528d29ad331511909619c405d8227f679e9",
+    "packages/storage/migrations/index.ts": "dac4b5a7b9b7bb57d472dcf841f64d5bd7dea1191ca7d991802cfcf12c8a2c19",
+    "packages/core/src/contracts/selection.ts": "5e87c6b21f0aea9cd139c2ca09d66d31614fc725d3163fb00c982d0ec3c7584b",
+    "packages/core/src/contracts/archives.ts": "bc59c914256f51b3a650d23892adb28f311c9e443373b9bd0fe1a63c3dc72911",
+    "packages/storage/tests/selection/integration/index.ts": "cff3bdc0ea573a10ef8b368f83a2272ab5288fe11d287ecfb7ffccfc44a19a85",
+    "packages/storage/tests/selection/integration/run.mjs": "85cea847da18d1b551a8d45f71725a4a6caab4ac4a391e0c2a7af4fce68dac52",
+    "tooling/browser-engines.mjs": "136f16e63e905ae4c8305c7adedfce2411eff13b04f914054f8fb718155d0df1"
+  },
+  "hosts": [
+    {
+      "name": "webkit",
+      "status": "running",
+      "checks": [],
+      "refusals": [],
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+      "initialOpfs": [
+        "quixi",
+        "quixi-eac57dbe-f9e8-4c7a-9539-286e4796d771"
+      ]
+    }
+  ],
+  "error": "Error: {\"code\":\"IO_ERROR\",\"message\":\"ArchiveStorageError: Selection catalog could not be opened; existing archives remain retained. BlobStorageError: The archive selection catalog is missing after prior initialization; recover the retained catalog before reopening.\",\"detail\":{\"code\":\"IO_ERROR\",\"message\":\"Selection catalog could not be opened; existing archives remain retained. BlobStorageError: The archive selection catalog is missing after prior initialization; recover the retained catalog before reopening.\",\"requestId\":\"ab9370bd-27e4-451a-99e7-484e62a756bb\",\"operationId\":null,\"retry\":\"after_user_action\",\"details\":{}}}\n    at call (file:///Users/eric/QuixiChat/packages/storage/tests/selection/integration/run.mjs:18:93)\n    at async file:///Users/eric/QuixiChat/packages/storage/tests/selection/integration/run.mjs:44:22",
+  "finishedAt": "2026-09-09T03:57:33.413Z"
+}

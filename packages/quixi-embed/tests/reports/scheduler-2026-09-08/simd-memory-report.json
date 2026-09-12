@@ -1,0 +1,57 @@
+{
+  "passed": true,
+  "backend": "wasm-simd-fp32",
+  "node": "v22.23.1",
+  "completed_jobs": 2000,
+  "warmup_jobs": 100,
+  "initial_memory": {
+    "modelBytes": 91231307,
+    "workspaceBytes": 7866420,
+    "linearMemoryBytes": 183107584
+  },
+  "initial_heap_used_bytes": 7052168,
+  "retained_heap_tolerance_bytes": 2097152,
+  "samples": [
+    {
+      "completed_jobs": 250,
+      "heap_used_bytes": 7117568,
+      "linear_memory_bytes": 183107584
+    },
+    {
+      "completed_jobs": 500,
+      "heap_used_bytes": 7118896,
+      "linear_memory_bytes": 183107584
+    },
+    {
+      "completed_jobs": 750,
+      "heap_used_bytes": 7120296,
+      "linear_memory_bytes": 183107584
+    },
+    {
+      "completed_jobs": 1000,
+      "heap_used_bytes": 7121104,
+      "linear_memory_bytes": 183107584
+    },
+    {
+      "completed_jobs": 1250,
+      "heap_used_bytes": 7121480,
+      "linear_memory_bytes": 183107584
+    },
+    {
+      "completed_jobs": 1500,
+      "heap_used_bytes": 7122248,
+      "linear_memory_bytes": 183107584
+    },
+    {
+      "completed_jobs": 1750,
+      "heap_used_bytes": 7122376,
+      "linear_memory_bytes": 183107584
+    },
+    {
+      "completed_jobs": 2000,
+      "heap_used_bytes": 7122432,
+      "linear_memory_bytes": 183107584
+    }
+  ],
+  "scope": "WASM ownership remains exactly fixed; test-only forced GC bounds retained JS heap. Caller-retained outputs and OS RSS are outside this ownership check."
+}

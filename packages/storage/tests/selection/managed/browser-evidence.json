@@ -1,0 +1,75 @@
+{
+  "status": "passed",
+  "selectedEngines": [
+    "chromium",
+    "webkit"
+  ],
+  "startedAt": "2026-09-09T03:35:28.771Z",
+  "environment": {
+    "platform": "darwin",
+    "release": "25.6.0",
+    "arch": "arm64",
+    "osVersion": "26.6.2",
+    "node": "v22.23.1"
+  },
+  "sourceSha256": {
+    "packages/storage/src/selection/managed-catalog.ts": "b362e377cdfb3fe82d062877e8ff5410ca6ce9d9bbadccd48ef255c1d0e16b2b",
+    "packages/storage/src/worker/sqlite-module.ts": "fb5889c277872ef8623cb0bb21b8afa58d0b08a8fddabc2caa7b96981f92ddbc",
+    "packages/storage/tests/selection/managed/index.mjs": "16737927d50220480e80898e1876c1fb2c9c4515fa98010ac01340f9229ab459",
+    "packages/storage/tests/selection/managed/worker.ts": "d85d1b8a840a4fcede1ce2d134eaa10ff66b126552949caf8fe4757a366a0877",
+    "packages/storage/tests/selection/managed/run.mjs": "7fda0e21366c863891f0c8cfceb4f2aefa7407919c2193f4fab340ca71cada09",
+    "tooling/browser-engines.mjs": "136f16e63e905ae4c8305c7adedfce2411eff13b04f914054f8fb718155d0df1"
+  },
+  "hosts": [
+    {
+      "name": "chromium",
+      "status": "passed",
+      "checks": [
+        "first bootstrap requires actual canonical default creation under nonwaiting owner admission; failures create no catalog, existing catalog never reinitializes; singleton module and 16-call admission",
+        "two actual workers race one atomic selection/receipt; stale guard performs no real fixture write, current guard succeeds",
+        "full normalized review identity fences every candidate summary count, workspace, digest, token, job, source high-water and selection revision; oversized/unknown fields rejected before writes",
+        "single-use callback expires after return/throw; precommit cancellation stays cancelled, committed cleanup failures stay committed; same-ID old receipt survives later switch; retained archive cannot become arbitrary switch target",
+        "actual Chromium OPFS quota denies bounded 8MiB transaction writes; restoring quota preserves prior selection and absence of committed receipt",
+        "real SQLite FULL rolls back head/receipt/retention; lost COMMIT confirmation reconciles committed receipt, unreadable connection plus cancellation reports UNKNOWN_OUTCOME then recovers committed status",
+        "actual worker termination after prepared intent and inside head/receipt SQL transaction recovers interrupted intent and prior selection; explicit same-ID retry revalidates before commit",
+        "lost real committed reply remains recoverable after a later switch without switching back",
+        "postcommit pool-close failure preserves committed receipt and poisons that instance; new owner reopens confirmed selection",
+        "missing catalog/file or physical header corruption fail unavailable; missing selected namespace blocks read/guard but global receipt status and same-ID committed replay remain inspectable without default recreation",
+        "complete persistent browser-process restart retains active head and old committed receipt, distinguishing interrupted pending validation"
+      ],
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36",
+      "quota": {
+        "quotaSize": 9030894,
+        "usage": 8768750,
+        "failures": [
+          {
+            "name": "QuotaExceededError",
+            "method": "write"
+          }
+        ]
+      }
+    },
+    {
+      "name": "webkit",
+      "status": "passed",
+      "checks": [
+        "first bootstrap requires actual canonical default creation under nonwaiting owner admission; failures create no catalog, existing catalog never reinitializes; singleton module and 16-call admission",
+        "two actual workers race one atomic selection/receipt; stale guard performs no real fixture write, current guard succeeds",
+        "full normalized review identity fences every candidate summary count, workspace, digest, token, job, source high-water and selection revision; oversized/unknown fields rejected before writes",
+        "single-use callback expires after return/throw; precommit cancellation stays cancelled, committed cleanup failures stay committed; same-ID old receipt survives later switch; retained archive cannot become arbitrary switch target",
+        "real SQLite FULL rolls back head/receipt/retention; lost COMMIT confirmation reconciles committed receipt, unreadable connection plus cancellation reports UNKNOWN_OUTCOME then recovers committed status",
+        "actual worker termination after prepared intent and inside head/receipt SQL transaction recovers interrupted intent and prior selection; explicit same-ID retry revalidates before commit",
+        "lost real committed reply remains recoverable after a later switch without switching back",
+        "postcommit pool-close failure preserves committed receipt and poisons that instance; new owner reopens confirmed selection",
+        "missing catalog/file or physical header corruption fail unavailable; missing selected namespace blocks read/guard but global receipt status and same-ID committed replay remain inspectable without default recreation",
+        "complete persistent browser-process restart retains active head and old committed receipt, distinguishing interrupted pending validation"
+      ],
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+      "quota": {
+        "status": "skipped",
+        "reason": "WebKit has no equivalent CDP quota override; real SQLite FULL rollback is exercised independently."
+      }
+    }
+  ],
+  "finishedAt": "2026-09-09T03:35:38.367Z"
+}

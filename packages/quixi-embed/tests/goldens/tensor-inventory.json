@@ -1,0 +1,955 @@
+{
+  "checkpoint_sha256": "ee789e0b1d6ecbbd5ce37b474af556cc1a1319cee4417d9e3b11f82e90300706",
+  "tensor_count": 101,
+  "parameters": 22565376,
+  "tensors": [
+    {
+      "name": "embeddings.LayerNorm.bias",
+      "shape": [
+        384
+      ],
+      "dtype": "float32",
+      "elements": 384,
+      "sha256": "e9d729f74fa1e894959eff9a7e7e6e46f4b3e5d56e51b154b920be2d22d89f9a"
+    },
+    {
+      "name": "embeddings.LayerNorm.weight",
+      "shape": [
+        384
+      ],
+      "dtype": "float32",
+      "elements": 384,
+      "sha256": "dcd61a19222d14333f5161ad57284413da1fd012e0a39dd967ba6e1662f0659d"
+    },
+    {
+      "name": "embeddings.position_embeddings.weight",
+      "shape": [
+        512,
+        384
+      ],
+      "dtype": "float32",
+      "elements": 196608,
+      "sha256": "1f0826b2744ef057aa27d23e940cfa3e9b0ba7f40d730e323f83d243db2f8965"
+    },
+    {
+      "name": "embeddings.token_type_embeddings.weight",
+      "shape": [
+        2,
+        384
+      ],
+      "dtype": "float32",
+      "elements": 768,
+      "sha256": "c7b40e703d046c665b8ff91e713921de5de0eaf6bb2cae5bd209315ae470be49"
+    },
+    {
+      "name": "embeddings.word_embeddings.weight",
+      "shape": [
+        30522,
+        384
+      ],
+      "dtype": "float32",
+      "elements": 11720448,
+      "sha256": "8c6edab191841927a9fbab7af2b6ee8742dec48c2423b2bdd5148f319bec4822"
+    },
+    {
+      "name": "encoder.layer.0.attention.output.LayerNorm.bias",
+      "shape": [
+        384
+      ],
+      "dtype": "float32",
+      "elements": 384,
+      "sha256": "42a70a8cdbf3dd5570842fcb77aa8bf4de166a5e795e0324b6eb2ff5b85c8400"
+    },
+    {
+      "name": "encoder.layer.0.attention.output.LayerNorm.weight",
+      "shape": [
+        384
+      ],
+      "dtype": "float32",
+      "elements": 384,
+      "sha256": "a4f762109410e51793be913b44479671239f54700901d5b15bd0286a1df618a7"
+    },
+    {
+      "name": "encoder.layer.0.attention.output.dense.bias",
+      "shape": [
+        384
+      ],
+      "dtype": "float32",
+      "elements": 384,
+      "sha256": "b8b7b7ae1b8d04f75db40b1407f9dfe970f1cc7e47183f07641745f6ae49b7f6"
+    },
+    {
+      "name": "encoder.layer.0.attention.output.dense.weight",
+      "shape": [
+        384,
+        384
+      ],
+      "dtype": "float32",
+      "elements": 147456,
+      "sha256": "16a63c4b7f4c1f72520480d824db7ec22df7522569bf8ced05229387b2f18379"
+    },
+    {
+      "name": "encoder.layer.0.attention.self.key.bias",
+      "shape": [
+        384
+      ],
+      "dtype": "float32",
+      "elements": 384,
+      "sha256": "b516d7e8f696fa969871156438bf77b1489365884bd3d8f504db906562ba154c"
+    },
+    {
+      "name": "encoder.layer.0.attention.self.key.weight",
+      "shape": [
+        384,
+        384
+      ],
+      "dtype": "float32",
+      "elements": 147456,
+      "sha256": "5b21596d8f59af00f89133b353021c74c443527e9a0c516b7425ea1733d896d7"
+    },
+    {
+      "name": "encoder.layer.0.attention.self.query.bias",
+      "shape": [
+        384
+      ],
+      "dtype": "float32",
+      "elements": 384,
+      "sha256": "17cb1e6b4061db4b359de6aef53017545c7e8e2df53ae87110d5ee43133b6318"
+    },
+    {
+      "name": "encoder.layer.0.attention.self.query.weight",
+      "shape": [
+        384,
+        384
+      ],
+      "dtype": "float32",
+      "elements": 147456,
+      "sha256": "ef8218e5d683edb8912e46a3a5c460140f9d92690c138599ff7f652afa25767b"
+    },
+    {
+      "name": "encoder.layer.0.attention.self.value.bias",
+      "shape": [
+        384
+      ],
+      "dtype": "float32",
+      "elements": 384,
+      "sha256": "168b6eac56689ad1afe4cd8374521f4fd12d90755952bb521a44e31f46a657a9"
+    },
+    {
+      "name": "encoder.layer.0.attention.self.value.weight",
+      "shape": [
+        384,
+        384
+      ],
+      "dtype": "float32",
+      "elements": 147456,
+      "sha256": "69b212ac5b3a9086bf5ced76e08308203ac6d7b7d0d0dfff61065e2a5edc717d"
+    },
+    {
+      "name": "encoder.layer.0.intermediate.dense.bias",
+      "shape": [
+        1536
+      ],
+      "dtype": "float32",
+      "elements": 1536,
+      "sha256": "5f819478bca6e836047968f68be72b94a113a7883ebba4f2bceb4f7eeb26e6b5"
+    },
+    {
+      "name": "encoder.layer.0.intermediate.dense.weight",
+      "shape": [
+        1536,
+        384
+      ],
+      "dtype": "float32",
+      "elements": 589824,
+      "sha256": "74261d8e2cf238685877ce871fd7676b41b1931f945e5683941403204d1b840e"
+    },
+    {
+      "name": "encoder.layer.0.output.LayerNorm.bias",
+      "shape": [
+        384
+      ],
+      "dtype": "float32",
+      "elements": 384,
+      "sha256": "65c1d3c70a8931251a938aba64c1f1409dd7b0ded19962dd4390a37bf2a1ea16"
+    },
+    {
+      "name": "encoder.layer.0.output.LayerNorm.weight",
+      "shape": [
+        384
+      ],
+      "dtype": "float32",
+      "elements": 384,
+      "sha256": "fbd2db87ab9e2f09c3689b9e33936c5ffee4ae5fee57e7ab6ba220580d949665"
+    },
+    {
+      "name": "encoder.layer.0.output.dense.bias",
+      "shape": [
+        384
+      ],
+      "dtype": "float32",
+      "elements": 384,
+      "sha256": "7ce10adaf0a533860c27a51852ce1e32fc90d684ba8d5804064fdfd7dc67bca7"
+    },
+    {
+      "name": "encoder.layer.0.output.dense.weight",
+      "shape": [
+        384,
+        1536
+      ],
+      "dtype": "float32",
+      "elements": 589824,
+      "sha256": "bfa07af6f2eb9e384ab4e1f8261cabd41eb0fed1540bc31da4ab0bb04add5aa8"
+    },
+    {
+      "name": "encoder.layer.1.attention.output.LayerNorm.bias",
+      "shape": [
+        384
+      ],
+      "dtype": "float32",
+      "elements": 384,
+      "sha256": "6f2917ae49d4ab633eab5fe89fcf6fa2ec33e18b6d87653b65a1bf7c7f4708cb"
+    },
+    {
+      "name": "encoder.layer.1.attention.output.LayerNorm.weight",
+      "shape": [
+        384
+      ],
+      "dtype": "float32",
+      "elements": 384,
+      "sha256": "772422878a92a0433a27c83a2102c00fd8d7e11a5e31b3f347d645ded1fbd08b"
+    },
+    {
+      "name": "encoder.layer.1.attention.output.dense.bias",
+      "shape": [
+        384
+      ],
+      "dtype": "float32",
+      "elements": 384,
+      "sha256": "a7a4da455f0fc81b021cb5e1152817c8fa7ca54d9d4aaced7aa29a1921cc6e6b"
+    },
+    {
+      "name": "encoder.layer.1.attention.output.dense.weight",
+      "shape": [
+        384,
+        384
+      ],
+      "dtype": "float32",
+      "elements": 147456,
+      "sha256": "1df49de87749707d4ecfef1ac541e006cc93a24d8277bf337e76d9de51e9d34a"
+    },
+    {
+      "name": "encoder.layer.1.attention.self.key.bias",
+      "shape": [
+        384
+      ],
+      "dtype": "float32",
+      "elements": 384,
+      "sha256": "831cbf44700826ae8174621f78bcde5ab60fe31869f846a7b08ad118f96f9a21"
+    },
+    {
+      "name": "encoder.layer.1.attention.self.key.weight",
+      "shape": [
+        384,
+        384
+      ],
+      "dtype": "float32",
+      "elements": 147456,
+      "sha256": "9ad46a13acbaeb33769dd6f4e4d25768f4eda054b31b1e588861e9c78d2b032b"
+    },
+    {
+      "name": "encoder.layer.1.attention.self.query.bias",
+      "shape": [
+        384
+      ],
+      "dtype": "float32",
+      "elements": 384,
+      "sha256": "70daddb24c623a25f2071c9ab05255d08952e270884d58412a29b541c85b7ce6"
+    },
+    {
+      "name": "encoder.layer.1.attention.self.query.weight",
+      "shape": [
+        384,
+        384
+      ],
+      "dtype": "float32",
+      "elements": 147456,
+      "sha256": "38f03e7e04824a8eba4317055be6a96ae2d075f01de519506c9e416942fead0e"
+    },
+    {
+      "name": "encoder.layer.1.attention.self.value.bias",
+      "shape": [
+        384
+      ],
+      "dtype": "float32",
+      "elements": 384,
+      "sha256": "478ea8e194296c84a86cf5f0f2b092d7ecb2f37cf83f3524f085c36e249f6512"
+    },
+    {
+      "name": "encoder.layer.1.attention.self.value.weight",
+      "shape": [
+        384,
+        384
+      ],
+      "dtype": "float32",
+      "elements": 147456,
+      "sha256": "9eabac91023a11f8ebe1f82d0fd4fbd1538570cc10131617f34169770a5c0cf6"
+    },
+    {
+      "name": "encoder.layer.1.intermediate.dense.bias",
+      "shape": [
+        1536
+      ],
+      "dtype": "float32",
+      "elements": 1536,
+      "sha256": "7e2c8bca838fdf858dffee4db5456c6f57c9878d947a6edfa474a87bc40f883e"
+    },
+    {
+      "name": "encoder.layer.1.intermediate.dense.weight",
+      "shape": [
+        1536,
+        384
+      ],
+      "dtype": "float32",
+      "elements": 589824,
+      "sha256": "eb6995211444a7f65ce14af0871c9d0a2580260f4e3c5c86b97ec3f672c0501a"
+    },
+    {
+      "name": "encoder.layer.1.output.LayerNorm.bias",
+      "shape": [
+        384
+      ],
+      "dtype": "float32",
+      "elements": 384,
+      "sha256": "e2de381695fb5ecee2974acf8ac49faf0b568efb0159fba90ed026a49f33e758"
+    },
+    {
+      "name": "encoder.layer.1.output.LayerNorm.weight",
+      "shape": [
+        384
+      ],
+      "dtype": "float32",
+      "elements": 384,
+      "sha256": "26e96661b7fbab97b8457d8d63651eaaa1a53152b30171224f20e33332ec72c7"
+    },
+    {
+      "name": "encoder.layer.1.output.dense.bias",
+      "shape": [
+        384
+      ],
+      "dtype": "float32",
+      "elements": 384,
+      "sha256": "2142fbc6ef8c5d27b38dda13b5ed7d35b20cd998c848a50b44d8eff95757201e"
+    },
+    {
+      "name": "encoder.layer.1.output.dense.weight",
+      "shape": [
+        384,
+        1536
+      ],
+      "dtype": "float32",
+      "elements": 589824,
+      "sha256": "b4c19784622009fe4de5605550bb14ba097e479ff9b0f15032e449e165e43089"
+    },
+    {
+      "name": "encoder.layer.2.attention.output.LayerNorm.bias",
+      "shape": [
+        384
+      ],
+      "dtype": "float32",
+      "elements": 384,
+      "sha256": "03d8a64d31d983852667d780e348a4020722afbbdc9c9a0ac033d4a8c4cc9048"
+    },
+    {
+      "name": "encoder.layer.2.attention.output.LayerNorm.weight",
+      "shape": [
+        384
+      ],
+      "dtype": "float32",
+      "elements": 384,
+      "sha256": "7c50b694f6f2af59fbc7d518e052419e65aaae3d918d21fb55129c9ac0318346"
+    },
+    {
+      "name": "encoder.layer.2.attention.output.dense.bias",
+      "shape": [
+        384
+      ],
+      "dtype": "float32",
+      "elements": 384,
+      "sha256": "199b05b54555e978ea5b90bc1cabf57c6736028560fc4b9759289effcb5e35a0"
+    },
+    {
+      "name": "encoder.layer.2.attention.output.dense.weight",
+      "shape": [
+        384,
+        384
+      ],
+      "dtype": "float32",
+      "elements": 147456,
+      "sha256": "b3fdc96cd02cca7f1d8e87668397c3ccc02906e5baec59e40c2502e383161af7"
+    },
+    {
+      "name": "encoder.layer.2.attention.self.key.bias",
+      "shape": [
+        384
+      ],
+      "dtype": "float32",
+      "elements": 384,
+      "sha256": "8364e3c598a31504c47a916ac8bd344a490ef8c00b1945f7461cfb03fb8b73f5"
+    },
+    {
+      "name": "encoder.layer.2.attention.self.key.weight",
+      "shape": [
+        384,
+        384
+      ],
+      "dtype": "float32",
+      "elements": 147456,
+      "sha256": "fb5cee85fc11218253cacce282f7282ee75681c010c8efb48ddc63faf8c67c0d"
+    },
+    {
+      "name": "encoder.layer.2.attention.self.query.bias",
+      "shape": [
+        384
+      ],
+      "dtype": "float32",
+      "elements": 384,
+      "sha256": "748461dfc9a25bf9c502b2538395029fde31d1040e727b24cf8eca2bcb5aa368"
+    },
+    {
+      "name": "encoder.layer.2.attention.self.query.weight",
+      "shape": [
+        384,
+        384
+      ],
+      "dtype": "float32",
+      "elements": 147456,
+      "sha256": "660ff93df11a579594f7bcf51687b0bfa9bcca97a850e60dd0d984424861d998"
+    },
+    {
+      "name": "encoder.layer.2.attention.self.value.bias",
+      "shape": [
+        384
+      ],
+      "dtype": "float32",
+      "elements": 384,
+      "sha256": "962aa1716169b5e297882af3aefeac5ed8168ecc9e00cd3f1bcf7f03e7b29f6d"
+    },
+    {
+      "name": "encoder.layer.2.attention.self.value.weight",
+      "shape": [
+        384,
+        384
+      ],
+      "dtype": "float32",
+      "elements": 147456,
+      "sha256": "b837a2393c32b9c0d1541c8e24c8c1c556be1ce2e80c56533505bc3f73f5c892"
+    },
+    {
+      "name": "encoder.layer.2.intermediate.dense.bias",
+      "shape": [
+        1536
+      ],
+      "dtype": "float32",
+      "elements": 1536,
+      "sha256": "b51c4374257f09a2125043f6ad462f1bc4020a0301788a18364e73b8c8a1fe67"
+    },
+    {
+      "name": "encoder.layer.2.intermediate.dense.weight",
+      "shape": [
+        1536,
+        384
+      ],
+      "dtype": "float32",
+      "elements": 589824,
+      "sha256": "46c267dc4e19a525a1f482db990c90e442d6f267f51ce08919f522487dda9d83"
+    },
+    {
+      "name": "encoder.layer.2.output.LayerNorm.bias",
+      "shape": [
+        384
+      ],
+      "dtype": "float32",
+      "elements": 384,
+      "sha256": "08f24cd6e64993c1dc6857d05df0adeb8f5fc9fdfe52d136e9253b4f8519d723"
+    },
+    {
+      "name": "encoder.layer.2.output.LayerNorm.weight",
+      "shape": [
+        384
+      ],
+      "dtype": "float32",
+      "elements": 384,
+      "sha256": "8d8eddd2e2a2635568f90834623894c83b01c0183c9f1306c54ecd0cc9a8580d"
+    },
+    {
+      "name": "encoder.layer.2.output.dense.bias",
+      "shape": [
+        384
+      ],
+      "dtype": "float32",
+      "elements": 384,
+      "sha256": "605ec19736c0d034bb865f2e25cb5f5a9d8d0290317e287deb1a20adae25240a"
+    },
+    {
+      "name": "encoder.layer.2.output.dense.weight",
+      "shape": [
+        384,
+        1536
+      ],
+      "dtype": "float32",
+      "elements": 589824,
+      "sha256": "86fc682fca7e40da8c35a7995bb2eceb12d88875a9fffd2908dad554d2d66d01"
+    },
+    {
+      "name": "encoder.layer.3.attention.output.LayerNorm.bias",
+      "shape": [
+        384
+      ],
+      "dtype": "float32",
+      "elements": 384,
+      "sha256": "887a9eff805291c80bdde0fd3d9393fd4a65288d5d94c8940171224b45fca6cf"
+    },
+    {
+      "name": "encoder.layer.3.attention.output.LayerNorm.weight",
+      "shape": [
+        384
+      ],
+      "dtype": "float32",
+      "elements": 384,
+      "sha256": "b926c7810bc37d8ac7c1dfe26af99dbd9332f68c9aa1202b6dde3843b33ed527"
+    },
+    {
+      "name": "encoder.layer.3.attention.output.dense.bias",
+      "shape": [
+        384
+      ],
+      "dtype": "float32",
+      "elements": 384,
+      "sha256": "446c137c1b8a4540fa5b1ba63169a54e595dfb11d057844c2d8a8b7378b13548"
+    },
+    {
+      "name": "encoder.layer.3.attention.output.dense.weight",
+      "shape": [
+        384,
+        384
+      ],
+      "dtype": "float32",
+      "elements": 147456,
+      "sha256": "0562feb27d6ce7542096eeca6509ef432daba9f48d81af8925802e18669864e5"
+    },
+    {
+      "name": "encoder.layer.3.attention.self.key.bias",
+      "shape": [
+        384
+      ],
+      "dtype": "float32",
+      "elements": 384,
+      "sha256": "8aabfd235534e201e9c4ad329acc30a4f5493b0d6ebf6431f6b68c28d0aba960"
+    },
+    {
+      "name": "encoder.layer.3.attention.self.key.weight",
+      "shape": [
+        384,
+        384
+      ],
+      "dtype": "float32",
+      "elements": 147456,
+      "sha256": "b00944caa044a5e87afcf96a858d2f9477baf8f3e30b8928881d063f38d59a1e"
+    },
+    {
+      "name": "encoder.layer.3.attention.self.query.bias",
+      "shape": [
+        384
+      ],
+      "dtype": "float32",
+      "elements": 384,
+      "sha256": "552acd8f7de92ddae9b9c4da8948f72bb21838172948b6e32b6334888bc00246"
+    },
+    {
+      "name": "encoder.layer.3.attention.self.query.weight",
+      "shape": [
+        384,
+        384
+      ],
+      "dtype": "float32",
+      "elements": 147456,
+      "sha256": "006a7c97589797aa4b10f9454913f62a5588c554760365e3722c5d773d87549f"
+    },
+    {
+      "name": "encoder.layer.3.attention.self.value.bias",
+      "shape": [
+        384
+      ],
+      "dtype": "float32",
+      "elements": 384,
+      "sha256": "c3dd30f586982f232e3df24fd76cbb38e021e74047cac87ed7f59a6d105973f8"
+    },
+    {
+      "name": "encoder.layer.3.attention.self.value.weight",
+      "shape": [
+        384,
+        384
+      ],
+      "dtype": "float32",
+      "elements": 147456,
+      "sha256": "90256957cdd1381809bee0b80f4b7e1567aab87366ebf5a277e618ba52be5c65"
+    },
+    {
+      "name": "encoder.layer.3.intermediate.dense.bias",
+      "shape": [
+        1536
+      ],
+      "dtype": "float32",
+      "elements": 1536,
+      "sha256": "47aa4453c25e67fe6707ec6e8ee840d174d0669af940eeeb4ddd25685bd5ba23"
+    },
+    {
+      "name": "encoder.layer.3.intermediate.dense.weight",
+      "shape": [
+        1536,
+        384
+      ],
+      "dtype": "float32",
+      "elements": 589824,
+      "sha256": "28507487224fb1753c4385964c76f71c73bbe70a906ef054de5db8c1d99f9bf3"
+    },
+    {
+      "name": "encoder.layer.3.output.LayerNorm.bias",
+      "shape": [
+        384
+      ],
+      "dtype": "float32",
+      "elements": 384,
+      "sha256": "2a8ea7ee92754a9be98d0d8881d5c62903811922f4b714898b746b95fc6a2183"
+    },
+    {
+      "name": "encoder.layer.3.output.LayerNorm.weight",
+      "shape": [
+        384
+      ],
+      "dtype": "float32",
+      "elements": 384,
+      "sha256": "580851f9ff8867258424733e1923234443ccec79d9ff0fba5dd95a6c603cbae1"
+    },
+    {
+      "name": "encoder.layer.3.output.dense.bias",
+      "shape": [
+        384
+      ],
+      "dtype": "float32",
+      "elements": 384,
+      "sha256": "9d48db2c3978edfba5896dc7775d4d101c316d599a9f4703e9204912a5515376"
+    },
+    {
+      "name": "encoder.layer.3.output.dense.weight",
+      "shape": [
+        384,
+        1536
+      ],
+      "dtype": "float32",
+      "elements": 589824,
+      "sha256": "f3a66811a25339c6990d70c7a61b4bd60690951a0fc688f94aab3d8b3178d4e3"
+    },
+    {
+      "name": "encoder.layer.4.attention.output.LayerNorm.bias",
+      "shape": [
+        384
+      ],
+      "dtype": "float32",
+      "elements": 384,
+      "sha256": "18d99021773b03748a1b9dff90e2ec91faf81eaa4d6a438ffb252f850416ea94"
+    },
+    {
+      "name": "encoder.layer.4.attention.output.LayerNorm.weight",
+      "shape": [
+        384
+      ],
+      "dtype": "float32",
+      "elements": 384,
+      "sha256": "0982fb8e0a9d0817f24961e79ffc115f5218baa17857c993f2ffd1d032cb9ff1"
+    },
+    {
+      "name": "encoder.layer.4.attention.output.dense.bias",
+      "shape": [
+        384
+      ],
+      "dtype": "float32",
+      "elements": 384,
+      "sha256": "ff639d841fa66b103f7aef8dfaf1464ae38205cde8ce1b4030941d2af6e6f2fc"
+    },
+    {
+      "name": "encoder.layer.4.attention.output.dense.weight",
+      "shape": [
+        384,
+        384
+      ],
+      "dtype": "float32",
+      "elements": 147456,
+      "sha256": "a7c706845150913d2cc0f8a8cfefd4a36d1c12d1c8dc26996ad1f81b7c0138d0"
+    },
+    {
+      "name": "encoder.layer.4.attention.self.key.bias",
+      "shape": [
+        384
+      ],
+      "dtype": "float32",
+      "elements": 384,
+      "sha256": "548a77904c6a9f57ce155e0519e930ae47a4d3b5e160013714247a2f913cd1f2"
+    },
+    {
+      "name": "encoder.layer.4.attention.self.key.weight",
+      "shape": [
+        384,
+        384
+      ],
+      "dtype": "float32",
+      "elements": 147456,
+      "sha256": "0000057a0924e073fcff056fe4a1e6ff958d17becdd84522cb982bd08986e095"
+    },
+    {
+      "name": "encoder.layer.4.attention.self.query.bias",
+      "shape": [
+        384
+      ],
+      "dtype": "float32",
+      "elements": 384,
+      "sha256": "e3f7b805587e2405226d91aa077a2c3caf702d27bc247f374f269d9fd41553f9"
+    },
+    {
+      "name": "encoder.layer.4.attention.self.query.weight",
+      "shape": [
+        384,
+        384
+      ],
+      "dtype": "float32",
+      "elements": 147456,
+      "sha256": "eda485a67a731f60ed8c4f130abb93446cc26b45455e8ac797ca083b935cf64f"
+    },
+    {
+      "name": "encoder.layer.4.attention.self.value.bias",
+      "shape": [
+        384
+      ],
+      "dtype": "float32",
+      "elements": 384,
+      "sha256": "a602fe95784a3d167434428e838336b13960dac56f96f3da40c3cc02e8dd2b72"
+    },
+    {
+      "name": "encoder.layer.4.attention.self.value.weight",
+      "shape": [
+        384,
+        384
+      ],
+      "dtype": "float32",
+      "elements": 147456,
+      "sha256": "a28492fadb719c6237a3c03e7c0ee1f4aee2b9bc4ca4ef7d570ea3e9762cdd70"
+    },
+    {
+      "name": "encoder.layer.4.intermediate.dense.bias",
+      "shape": [
+        1536
+      ],
+      "dtype": "float32",
+      "elements": 1536,
+      "sha256": "93b9825df31d1f7a08f8ba22fc0627d797d2ce94926e9dd52d4b2d185d17d5f8"
+    },
+    {
+      "name": "encoder.layer.4.intermediate.dense.weight",
+      "shape": [
+        1536,
+        384
+      ],
+      "dtype": "float32",
+      "elements": 589824,
+      "sha256": "8b00b3102c994b0dba0f3c560f11c7a9000b6127ac1e435827c643bb2a608b7a"
+    },
+    {
+      "name": "encoder.layer.4.output.LayerNorm.bias",
+      "shape": [
+        384
+      ],
+      "dtype": "float32",
+      "elements": 384,
+      "sha256": "6468fb350a46fb11f3e11165291fec71a94da9f92d412fbdb4fc3352ee0ff952"
+    },
+    {
+      "name": "encoder.layer.4.output.LayerNorm.weight",
+      "shape": [
+        384
+      ],
+      "dtype": "float32",
+      "elements": 384,
+      "sha256": "89b86fdae1fb41977bdb99982fa7905892103c0e2fdde5f2767c1dba663c5725"
+    },
+    {
+      "name": "encoder.layer.4.output.dense.bias",
+      "shape": [
+        384
+      ],
+      "dtype": "float32",
+      "elements": 384,
+      "sha256": "5c460e0132510b6e3c01f1c0709a5998000360701a4089a03f3c3db8eb04e04c"
+    },
+    {
+      "name": "encoder.layer.4.output.dense.weight",
+      "shape": [
+        384,
+        1536
+      ],
+      "dtype": "float32",
+      "elements": 589824,
+      "sha256": "9b219f2909b52f10cf7769e445680412ecca878b2eec8487bb25f88a51006004"
+    },
+    {
+      "name": "encoder.layer.5.attention.output.LayerNorm.bias",
+      "shape": [
+        384
+      ],
+      "dtype": "float32",
+      "elements": 384,
+      "sha256": "d860f67a9c534fd1de75a9295be5660fcb5af8d348dc259b8d26d361bb4051c9"
+    },
+    {
+      "name": "encoder.layer.5.attention.output.LayerNorm.weight",
+      "shape": [
+        384
+      ],
+      "dtype": "float32",
+      "elements": 384,
+      "sha256": "c27fd0a63f2df2de956888a4c4a7b8eea89fc11ca8dc6dcadc175e26232096d1"
+    },
+    {
+      "name": "encoder.layer.5.attention.output.dense.bias",
+      "shape": [
+        384
+      ],
+      "dtype": "float32",
+      "elements": 384,
+      "sha256": "069ecc82872bd7c8125323e893473f32e007d83f22d48623103375c24976c275"
+    },
+    {
+      "name": "encoder.layer.5.attention.output.dense.weight",
+      "shape": [
+        384,
+        384
+      ],
+      "dtype": "float32",
+      "elements": 147456,
+      "sha256": "8013b12195ac7eac7ebab5710e1bafe39364fffb33e74d20112d2efd2bd76a82"
+    },
+    {
+      "name": "encoder.layer.5.attention.self.key.bias",
+      "shape": [
+        384
+      ],
+      "dtype": "float32",
+      "elements": 384,
+      "sha256": "c73aa445d4772eaac70dec8fa5541b67e083fece9a28fe855a580eee60eff2e6"
+    },
+    {
+      "name": "encoder.layer.5.attention.self.key.weight",
+      "shape": [
+        384,
+        384
+      ],
+      "dtype": "float32",
+      "elements": 147456,
+      "sha256": "94a83a5b014d501b9535c62a3117611a33627dfda768b1f5a755998e73fe2fda"
+    },
+    {
+      "name": "encoder.layer.5.attention.self.query.bias",
+      "shape": [
+        384
+      ],
+      "dtype": "float32",
+      "elements": 384,
+      "sha256": "4d6ab64489f78d4a28dff47a3b624bdb6225e929b1a4c02f4b38ed36e2d9ce20"
+    },
+    {
+      "name": "encoder.layer.5.attention.self.query.weight",
+      "shape": [
+        384,
+        384
+      ],
+      "dtype": "float32",
+      "elements": 147456,
+      "sha256": "441e4a11b4029ea249d8266aa41ee08ebad6b2ac4d0ea767aff83758d1d21cae"
+    },
+    {
+      "name": "encoder.layer.5.attention.self.value.bias",
+      "shape": [
+        384
+      ],
+      "dtype": "float32",
+      "elements": 384,
+      "sha256": "dd038254c97fb9ab2a71bca73717b1c43b9225d385fa03a649a1bb2cac8cbe01"
+    },
+    {
+      "name": "encoder.layer.5.attention.self.value.weight",
+      "shape": [
+        384,
+        384
+      ],
+      "dtype": "float32",
+      "elements": 147456,
+      "sha256": "8f4a63d7223d8e05c86ee99997718fad7618adc118e588ad7efc9b5d52b18444"
+    },
+    {
+      "name": "encoder.layer.5.intermediate.dense.bias",
+      "shape": [
+        1536
+      ],
+      "dtype": "float32",
+      "elements": 1536,
+      "sha256": "7703aa57f286a6f35251894fb7a14363c935c2803c79a3478d8aebd2c4f1b2e8"
+    },
+    {
+      "name": "encoder.layer.5.intermediate.dense.weight",
+      "shape": [
+        1536,
+        384
+      ],
+      "dtype": "float32",
+      "elements": 589824,
+      "sha256": "cc36fa13ab680b57428f9c28e0ebcaa16df0c4055d1cec75610d236d6e873f13"
+    },
+    {
+      "name": "encoder.layer.5.output.LayerNorm.bias",
+      "shape": [
+        384
+      ],
+      "dtype": "float32",
+      "elements": 384,
+      "sha256": "4df6eaa323adabd64bf234f8f3d367bb9837ed2ee4430c35a0fd97cf70409fd3"
+    },
+    {
+      "name": "encoder.layer.5.output.LayerNorm.weight",
+      "shape": [
+        384
+      ],
+      "dtype": "float32",
+      "elements": 384,
+      "sha256": "cb7b3da477998e04c891ca719bd6c249b6702e7f181fac092871d56fba6197c5"
+    },
+    {
+      "name": "encoder.layer.5.output.dense.bias",
+      "shape": [
+        384
+      ],
+      "dtype": "float32",
+      "elements": 384,
+      "sha256": "806f7b3e1f3797fefe782b54bad73e5f4650262798f1b9ba92c22db611134ecf"
+    },
+    {
+      "name": "encoder.layer.5.output.dense.weight",
+      "shape": [
+        384,
+        1536
+      ],
+      "dtype": "float32",
+      "elements": 589824,
+      "sha256": "08ea2c1e9e15323b7a97d5a04972a97205c7341fce9d0ec7a81443fab8c7fd5d"
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 # Rust
-/target/
-crates/quixi-chat/gen/
+target/
+**/gen/
 **/*.profraw
 **/*.profdata
 lcov.info
@@ -8,6 +8,21 @@ lcov.info
 # Downloaded model weights
 *.gguf
 *.part
+*.qxmodel
+*.safetensors
+*.wasm
+
+# JavaScript and generated artifacts
+node_modules/
+dist/
+build/
+coverage/
+test-results/
+playwright-report/
+*.tsbuildinfo
+
+# Local workspace search index
+.zvec-grep/
 
 # macOS and editor state
 .DS_Store
@@ -27,3 +42,6 @@ AuthKey_*.p8
 # Local distribution artifacts
 *.dmg
 *.pkg
+
+# Versioned QuixiEmbed distribution (small WASM modules, tokenizer artifact, pins)
+!packages/quixi-embed/artifacts/**

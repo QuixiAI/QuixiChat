@@ -1,0 +1,343 @@
+{
+  "status": "failed",
+  "startedAt": "2026-09-10T06:16:16.606Z",
+  "selectedEngines": [
+    "chromium",
+    "webkit"
+  ],
+  "environment": {
+    "platform": "darwin",
+    "release": "25.6.0",
+    "arch": "arm64",
+    "node": "v22.23.1"
+  },
+  "sourceSha256": {
+    "packages/storage/src/archive-protocol.ts": "d1c5bb90375de4770b265e2d557f15f90c8f3abcb7bde994a993660bb6c09253",
+    "packages/storage/src/client/archive.ts": "844981f196ebee613c584dadf3d1cef2c1af15f3aa06daf253d6d48c3b553c24",
+    "packages/storage/src/client/selection.ts": "3be6215f42123384024fe65de83577a46f82fbc4408270d75c7c0e399a66c59b",
+    "packages/storage/src/worker/archive.ts": "f84c9ad0e41390d7230b232210ede2577d900d9a7f8f8deb9fc7e7f79aa9153c",
+    "packages/storage/src/worker/archive-runtime.ts": "647e0c309c8defd42bb6e0f2a902e98d0a356bde1f75521a512fb23dd1453a2e",
+    "packages/storage/src/worker/archive-database.ts": "b0ce562d0effbca33e154ea1598864010b4fb9ff830de874130711f893acd266",
+    "packages/storage/src/worker/selection.ts": "281fd0f9088feec8906ce1923255eaff9fb998371e659c8f41d7cd7ed4b4d594",
+    "packages/storage/src/selection/managed-catalog.ts": "4f624d5b5000941944c84574cac9c7241d8a76bd3a299c4d266726d485c356fb",
+    "packages/storage/src/worker/sqlite-module.ts": "fb5889c277872ef8623cb0bb21b8afa58d0b08a8fddabc2caa7b96981f92ddbc",
+    "packages/storage/migrations/index.ts": "bd1c63d1f1675877b15b8fc887d163b116587e12b9b555e495e3e6fc39e0f9ac",
+    "packages/storage/migrations/archive-access.ts": "efbb426dc2f67ed00982119ba811aab780adfd9b8f60803f30f31a2a7e5abce8",
+    "packages/storage/tests/protocol/index.mjs": "9f234ea63e2717dde806f574612a01d430860f973a6ec322266d27354e0b7f83",
+    "packages/storage/tests/protocol/run.mjs": "b771425fd3d09214f064664950e3cc7d1a9cca6c6a5a1a33d2c0b692535f39ad",
+    "tooling/browser-engines.mjs": "136f16e63e905ae4c8305c7adedfce2411eff13b04f914054f8fb718155d0df1"
+  },
+  "hosts": [
+    {
+      "name": "chromium",
+      "status": "passed",
+      "checks": [
+        "Actual modern owner and follower commit through production client; common owner identity and held/pending owner locks observed",
+        "Unmodified frozen schema8 follower announces v1 hello and waits on the same lock; modern owner never advertises on v1 and old canonical call remains undispatched while modern commits progress",
+        "Missing, numeric v1/v2/v4 and string-version calls sent to v3 cannot commit; same-sender valid hello is an owner-processing barrier and subsequent production calls still succeed",
+        "Initialized actual worker rejects missing/wrong direct outer versions with UNSUPPORTED before mutation, then accepts legitimate version3 call with inner request version1",
+        "Missing/wrong direct init versions fail before OPFS namespace or owner lock exists; separate established modern session remains writable",
+        "After modern owner exits, frozen schema8 waiter acquires the same lock and refuses the current schema before its queued mutation; modern reopen preserves six committed operations and integrity"
+      ],
+      "rejected": [
+        {
+          "type": "reply",
+          "id": "63d89c55-f0f2-41d2-8c09-c9a14d317451",
+          "ok": false,
+          "error": {
+            "code": "UNSUPPORTED",
+            "message": "Unsupported archive worker protocol; reopen the application",
+            "requestId": "63d89c55-f0f2-41d2-8c09-c9a14d317451",
+            "operationId": null,
+            "retry": "never",
+            "details": {}
+          },
+          "version": 3
+        },
+        {
+          "type": "reply",
+          "id": "4cdd6eb3-b152-4be8-a27a-47be89969e3a",
+          "ok": false,
+          "error": {
+            "code": "UNSUPPORTED",
+            "message": "Unsupported archive worker protocol; reopen the application",
+            "requestId": "4cdd6eb3-b152-4be8-a27a-47be89969e3a",
+            "operationId": null,
+            "retry": "never",
+            "details": {}
+          },
+          "version": 3
+        },
+        {
+          "type": "reply",
+          "id": "3f656f71-1d62-4f15-a146-84ea0a5aaf64",
+          "ok": false,
+          "error": {
+            "code": "UNSUPPORTED",
+            "message": "Unsupported archive worker protocol; reopen the application",
+            "requestId": "3f656f71-1d62-4f15-a146-84ea0a5aaf64",
+            "operationId": null,
+            "retry": "never",
+            "details": {}
+          },
+          "version": 3
+        },
+        {
+          "type": "reply",
+          "id": "058291aa-31dd-4a01-82a8-ccbeab6615ff",
+          "ok": false,
+          "error": {
+            "code": "UNSUPPORTED",
+            "message": "Unsupported archive worker protocol; reopen the application",
+            "requestId": "058291aa-31dd-4a01-82a8-ccbeab6615ff",
+            "operationId": null,
+            "retry": "never",
+            "details": {}
+          },
+          "version": 3
+        },
+        {
+          "type": "reply",
+          "id": "acc365c5-06ad-4801-84c3-01573d44eee4",
+          "ok": false,
+          "error": {
+            "code": "UNSUPPORTED",
+            "message": "Unsupported archive worker protocol; reopen the application",
+            "requestId": "acc365c5-06ad-4801-84c3-01573d44eee4",
+            "operationId": null,
+            "retry": "never",
+            "details": {}
+          },
+          "version": 3
+        },
+        {
+          "type": "fatal",
+          "error": {
+            "code": "UNSUPPORTED",
+            "message": "Unsupported archive worker protocol; reopen the application",
+            "requestId": "82e2f0f7-a3e1-4b27-ba58-4feced17883f",
+            "operationId": null,
+            "retry": "never",
+            "details": {}
+          },
+          "version": 3
+        },
+        {
+          "type": "fatal",
+          "error": {
+            "code": "UNSUPPORTED",
+            "message": "Unsupported archive worker protocol; reopen the application",
+            "requestId": "61a13413-96a8-4deb-bfb3-d50b7f90d104",
+            "operationId": null,
+            "retry": "never",
+            "details": {}
+          },
+          "version": 3
+        },
+        {
+          "type": "fatal",
+          "error": {
+            "code": "UNSUPPORTED",
+            "message": "Unsupported archive worker protocol; reopen the application",
+            "requestId": "fc0a7a97-3eb2-4fda-9b02-5d92f346023e",
+            "operationId": null,
+            "retry": "never",
+            "details": {}
+          },
+          "version": 3
+        },
+        {
+          "type": "fatal",
+          "error": {
+            "code": "UNSUPPORTED",
+            "message": "Unsupported archive worker protocol; reopen the application",
+            "requestId": "b712ea6f-a249-47bf-b4d5-3fc7c5ed67f4",
+            "operationId": null,
+            "retry": "never",
+            "details": {}
+          },
+          "version": 3
+        },
+        {
+          "type": "fatal",
+          "error": {
+            "code": "UNSUPPORTED",
+            "message": "Unsupported archive worker protocol; reopen the application",
+            "requestId": "eed92ea1-f9e7-4cf8-9bee-bb636b2715e4",
+            "operationId": null,
+            "retry": "never",
+            "details": {}
+          },
+          "version": 3
+        }
+      ],
+      "observations": {
+        "selection": {
+          "archiveId": "default",
+          "selectionRevision": 0
+        },
+        "waitingLocks": {
+          "held": [
+            {
+              "clientId": "1E99C291E080E9C60F5EBAE7FC62C81A",
+              "mode": "exclusive",
+              "name": "quixi:archive:default:owner"
+            }
+          ],
+          "pending": [
+            {
+              "clientId": "62C5F0D07E8411CEAD64D9B7E2B2B075",
+              "mode": "exclusive",
+              "name": "quixi:archive:default:owner"
+            },
+            {
+              "clientId": "C8E58098128F6F8F4D0CE8180E6FD58C",
+              "mode": "exclusive",
+              "name": "quixi:archive:default:owner"
+            }
+          ]
+        },
+        "invalidBusCallIds": [
+          "db62519a-bfdc-42c3-873e-158bf7a379aa",
+          "0f2fc450-df52-4b55-a6f2-09a9b5b797b1",
+          "b9830a3a-6c0e-4fec-a80a-ca26c965b4c6",
+          "b7ea7123-b398-4c60-afe3-86bbe08f67bc",
+          "9745d056-31c4-4f2d-b70f-2992a4e74ef8"
+        ],
+        "productionBusTypes": [
+          "changed",
+          "hello",
+          "owner",
+          "call",
+          "reply",
+          "progress"
+        ],
+        "final": {
+          "backend": "sqlite-wasm-opfs-sahpool",
+          "ownerId": "15e7ed96-16a5-4454-b1b3-cd1fe14c9317",
+          "schemaVersion": 11,
+          "integrity": "ok",
+          "canonicalRecords": 18,
+          "syncOperations": 6,
+          "persisted": false,
+          "usage": 13864662,
+          "quota": 10751282902
+        },
+        "oldWaiterAfterOwnerExit": {
+          "status": "failed",
+          "reply": {
+            "type": "reply",
+            "id": "ec652cef-e3a7-427c-ac21-6a56fdb0b8fd",
+            "ok": false,
+            "error": {
+              "code": "MIGRATION_FAILED",
+              "message": "Unsupported canonical schema version; preserve database and use a compatible application/export path",
+              "requestId": "ec652cef-e3a7-427c-ac21-6a56fdb0b8fd",
+              "operationId": null,
+              "retry": "after_user_action",
+              "details": {}
+            }
+          }
+        }
+      },
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36"
+    },
+    {
+      "name": "webkit",
+      "status": "running",
+      "checks": [],
+      "rejected": [],
+      "observations": {
+        "selection": {
+          "archiveId": "default",
+          "selectionRevision": 0
+        }
+      },
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15"
+    }
+  ],
+  "frozen": {
+    "capturedAt": "2026-09-09T00:14:49.346Z",
+    "schemaVersion": 8,
+    "node": "v22.23.1",
+    "entry": "packages/storage/src/worker/archive.ts",
+    "sourceSha256": {
+      "packages/core/src/contracts/serialization.ts": "a1d6cc8792dc6aeac4310f8b3f2545c0414b9425d7983fb4a80b7e7b0808116e",
+      "packages/core/src/contracts/producers.ts": "aaf026f6a774a1669190717aab6a5c2004e54d35adeea40a4e4ec8efb3485697",
+      "packages/storage/src/worker/archive-database.ts": "f900a878f2028a837a94071e1d5e8d94df8302aa6e34bcc6b73d4b78a5914c59",
+      "packages/storage/src/worker/archives/format.ts": "d57389c03aaa36838efe8bcb477255fb1f60980e0217ad2e84a9563ec71a044c",
+      "packages/storage/sqlite/dist/sqlite3.mjs": "127c4f37a4ce3449d464b976ac4979fc6b016ae974c0aea9ba8afef85d3b4d5d",
+      "packages/core/src/contracts/imports.ts": "f2f688aa9a4f67fd481546af9d947758ea9ca3dc835e8c56741a1bd5af5dd843",
+      "packages/core/src/contracts/transfer.ts": "73563a59e5d0964657a88c025a1b0935a1ae7eb77161e96404a4d37b375d6a6f",
+      "packages/core/src/model/provenance.ts": "191f723124ffe3b0f5957a90a1a60449406a1ba0cfbe258f9d401db0c62e8d26",
+      "packages/storage/src/worker/search/index.ts": "e4e30a4cf9db52e9d4708dcdb5fca8f236959960bf5da76574e92934737d4cee",
+      "packages/storage/src/worker/archives/clean-copy.ts": "404bedbbecb57fedd86d957b51427cca3b5304339ff4120d6091114650c3046c",
+      "packages/storage/src/archive-protocol.ts": "c89acdf44121d8b211f1160dadeadf63c6d8121694eca8faaed46fce21dbc6de",
+      "packages/core/src/contracts/storage.ts": "3d7ca2be694b61f4e96240a39d579e4243375ba35cc387ff787b40b1f88d269b",
+      "packages/storage/src/worker/search/schema.ts": "c65fe8309e218ec0290eaf5a188b01631a76d43ab366bc971ef0d4819b1f5173",
+      "node_modules/@noble/hashes/_u64.js": "b09da8c07fe8187c07649494cdb7cd0bcf13df90b506a9473d19e4d5f8c2e102",
+      "packages/core/src/model/validation.ts": "5feb020a6cf7d361c2661e4e012c24a8b2f329ce4efda1a7ebe5d8ccd11ae0a9",
+      "packages/core/src/model/branches.ts": "aabaf03facf31f8598b53e1ad716cb0f403496f1d5bcab35ecae4956ddb020b3",
+      "packages/storage/migrations/producers.ts": "9df3aaf17e1e6b767f8f4fc3148ea60a740872a6da97266f2f5154c3fbd0be36",
+      "packages/storage/migrations/streaming-text.ts": "e027dc12cf7d301359d0dfea7ef5de20eb3c6d1279d8dc94859b277cc0c4bc86",
+      "packages/storage/src/worker/archive.ts": "7c825d80c9552bee2a530cf47111ca8e76353985e975c91f6bb6cef83f83a6af",
+      "packages/core/src/model/types.ts": "8bda9a807e6789eeea4fa1192c80378c075756c0503e944096d57a68cd4d614e",
+      "packages/storage/src/worker/archives/files.ts": "6690e6ef602826e72826a2ecb5e4592451b3b901e4f7c0b9f99dcbfc865a313c",
+      "packages/core/src/model/index.ts": "abd31bc6badf1bab006956f61f7c47b9ffaf89b79269d889c656c10471f2f12c",
+      "packages/storage/src/producer-protocol.ts": "6a7277ec92c73d8ca3e11f8d35a169d49aec3eb03c8ecaa96a2c247c9a055a0e",
+      "packages/search/src/query.ts": "269a950bfacec7e5b384d1c59a2a2a6b21fcbfe2f1be18a423fd0f71728f2976",
+      "packages/core/src/contracts/search.ts": "d5b48ebf047afa039ededba831ff22a0eddd74809c915be74df6afdccb9a319b",
+      "packages/storage/src/worker/canonical/repository.ts": "326367b3b5ff6c4660baf95abba160f6b98ccdd7e7fe458f72ecf56b2b3e2428",
+      "packages/storage/src/worker/archives/receive.ts": "e9dc178c61e162a49112b2a92ef02954b8f988e2a436f89215058e31be9b232d",
+      "packages/core/src/contracts/host.ts": "16e12761feee4509cefa7715a05cf80737d7acfc010031a0b3c8197efecdd1b5",
+      "node_modules/@noble/hashes/sha2.js": "471746bba6ec4c6238ca41358d1d3b40b6ff31cf3363f0b4d550c649c1a8e83b",
+      "node_modules/@noble/hashes/utils.js": "037ad49adb78168b6b699598fd33f85f7877456b1d28b4d032e2a1a16807947c",
+      "packages/storage/sqlite/dist/sqlite3.wasm": "dd7c22431a3b8ad51ab5e6ed91065593574c34c5959d2efdef2f17484eedcb2c",
+      "packages/storage/src/worker/archive-operation-fences.ts": "6fa14608c52c2e691f4a418b4b7f495e8ca3e0f8c0f4bc1e9b4ecb445c733feb",
+      "packages/core/src/contracts/index.ts": "2d6e5c390a372b773bb742f4f0c943314a6c4ba7e17344f8bd48724cfb63d6d6",
+      "packages/storage/src/worker/archives/tar.ts": "9ac85f07f8de1e0267f7da58c34f6a6c7e8cf937b83500e3682efd45c9f9124b",
+      "packages/storage/src/worker/archives/snapshot.ts": "a8b9d47f8edef1793b0a11eac55be89d9b830900420119bdfc782f173d3d9572",
+      "packages/core/src/contracts/import-work.ts": "3b1781783db87db4233d7ff19241b70bd3a3749b84c669587906f995b998313a",
+      "packages/search/src/index.ts": "d8129a7680fcba67f21a7a6dc658b7983f60ad1cfb34955ce67c9377e36e7f62",
+      "packages/storage/src/worker/views.ts": "79e733521669f584b319be97c9b490e98faf146e3a9f6a11f620540cd29840d9",
+      "node_modules/@noble/hashes/_md.js": "60cf3010fda89e3e4d3f0e7ff1ce249e9c467f34b4fd41b6fd6101d9f69be763",
+      "packages/core/src/contracts/mutations.ts": "c7e00f0bdb4238dea2f2fbbf0e13c0bcfe2c329b8b91d2b7171525017d180632",
+      "packages/storage/src/worker/archives/validation.ts": "6ed61bfaba1f74071790b558ff97fd5cce2ecd32a09ac69df4235ff7399c834d",
+      "packages/storage/migrations/views.ts": "49b3b6890c3711b2406db59c37979364a526bb99d7794d67ceeafb42838500aa",
+      "packages/storage/src/worker/canonical/imports.ts": "f9012b8f190f2014979ffc049ac5c7c5e35fc98f5413200ea70d1fec77125994",
+      "packages/storage/src/worker/canonical/import-work.ts": "f5d25c914a580c548f2f20748a60854f04e339ed1d704dcc72202e014547801c",
+      "packages/storage/src/worker/canonical/index.ts": "9d06de53c6e74d0e53af55bbef9cf344cc7bde72d13b9803a60e8c5de977369c",
+      "packages/search/src/chunker.ts": "8e82abb13c825132019055610dab2897909fb191be32f4813eb045285dd57ec4",
+      "packages/storage/src/worker/producers.ts": "0eb2b0a9646ddb404338c51a03e05e38a224b80890c994e6a7fd779530a794da",
+      "packages/storage/src/worker/search/sources.ts": "68aa284e779bda1594e9045da11e6f95ae58ac9661efdb165ba364b65fed3aea",
+      "packages/core/src/contracts/archives.ts": "bc59c914256f51b3a650d23892adb28f311c9e443373b9bd0fe1a63c3dc72911",
+      "packages/storage/src/worker/archives/sqlite-file.ts": "04c96f086504a976db6349e9e5819b1a6bee60a026e9ff998523d7b7141c3cd9",
+      "packages/storage/src/worker/archives/schema-validation.ts": "ff3aecb064a430513890d9a66379b3904caa09de5f455580a98f299a74ebed22",
+      "packages/storage/src/worker/archives/export.ts": "8b7ce6aba6b9045b17354464b720e07459672baf06accd7d5834c0e3bb07bcb7",
+      "packages/storage/src/worker/blob-catalog.ts": "751af6f06d6a175284c2a39f0dd8c9522e18f865c0d8b8be283623a41524de8a",
+      "packages/core/src/contracts/views.ts": "90b038bdf6644c43bf5a6b02b74693ad75c235a711856ed29a084107493c8b3a",
+      "packages/storage/src/worker/blobs.ts": "5a8ee316532e92497eb6e700ba55f719c5188aef19cf39e04d8a938ec7de4f64",
+      "packages/storage/src/worker/archives/index.ts": "858d8ed4431b7a57c764e62a8c060528d29ad331511909619c405d8227f679e9",
+      "packages/storage/migrations/index.ts": "843c1ef15aaccbc37db2e4f96d0a13aceb2a8544739a8b3f28efb121c30457f7",
+      "package-lock.json": "14938dfb335480fccf15ef675167da13a3aac8832d29891e38ff67175920ad2c",
+      "packages/storage/tests/selection/schema8/freeze.mjs": "bd27d4d27bb5583312db84037c420db1a82c08478e534f4c37a1d1232babcad3"
+    },
+    "artifacts": {
+      "archive-schema8.mjs": "87d0d0e60cbb3a5972b9d2fd7810be7ef6f18f34e44dd27b8049b69cbe05e5dd",
+      "sqlite3-BzAlo58v.wasm": "dd7c22431a3b8ad51ab5e6ed91065593574c34c5959d2efdef2f17484eedcb2c"
+    }
+  },
+  "builtArtifacts": {
+    "index.html": "5c003d5cf7bf7ce124215258889e8623e15758f62572cbd4795145c91943140d",
+    "assets/archive-CdGH_N-9.js": "490da4dfe5e6f1f8e30a4e05c7cf18a91008988d01088ef69ec4d7c56b3f9a84",
+    "assets/index-DOXlbdQe.js": "1cd265bce19e55dd989a6cb50b92b9948d721a3cf5bbec10e0f069dc71a0f8cf",
+    "assets/index-ykbE2BM0.js": "2532bd1ca67e2f8b65d15047d76a4ef2f5158d7aef4f6b9fa3687b5d9bea81fc",
+    "assets/rescue-export-CncxUh_n.js": "1ba4405e2edc226c2bf543f6de2f5db0891b7167103fa7f1b5c88754cbb7a83f",
+    "assets/retained-archive-zqMT2L5V.js": "2db08c5521d309246c5e40911bad6bc5237c7eb56f624bd16ee544617a20a8eb",
+    "assets/selection-Cpt6mKth.js": "09ceccbf64001e16e290e4f29a87271e33bd984f210efb02aab0de5befc56793",
+    "assets/sqlite3-BzAlo58v.wasm": "dd7c22431a3b8ad51ab5e6ed91065593574c34c5959d2efdef2f17484eedcb2c"
+  },
+  "origin": "http://127.0.0.1:51271",
+  "error": "Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: 2\nReceived: 19\n    at captureRawStack (/Users/eric/QuixiChat/node_modules/playwright-core/lib/coreBundle.js:8588:17)\n    at callMatcherAsStep (/Users/eric/QuixiChat/node_modules/playwright/lib/matchers/expect.js:13310:57)\n    at Object.toBe (/Users/eric/QuixiChat/node_modules/playwright/lib/matchers/expect.js:13302:23)\n    at /Users/eric/QuixiChat/packages/storage/tests/protocol/run.mjs:59:84",
+  "finishedAt": "2026-09-10T06:16:19.282Z"
+}

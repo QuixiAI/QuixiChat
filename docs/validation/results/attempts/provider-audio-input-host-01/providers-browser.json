@@ -1,0 +1,18 @@
+{
+  "selectedEngines": [
+    "chromium",
+    "webkit"
+  ],
+  "status": "failed",
+  "startedAt": "2026-09-11T04:33:20.806Z",
+  "hosts": [
+    {
+      "name": "chromium",
+      "status": "running",
+      "checks": [],
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36"
+    }
+  ],
+  "error": "page.evaluate: Error: Audio wav transport failed: {\"type\":\"terminal\",\"status\":\"failed\",\"stopReason\":null,\"responseId\":null,\"usage\":{\"inputTokens\":null,\"outputTokens\":null,\"cachedInputTokens\":null,\"cacheWriteInputTokens\":null,\"reasoningTokens\":null,\"raw\":{},\"source\":\"provider\"},\"error\":{\"code\":\"transport\",\"message\":\"Provider transport failed or was interrupted.\",\"status\":null,\"providerCode\":null,\"retryAfterMs\":null,\"retry\":\"manual_new_attempt\"}}\n    at er (http://127.0.0.1:4198/assets/browser-C0oC3DzQ.js:4:88572)\n    at tr (http://127.0.0.1:4198/assets/browser-C0oC3DzQ.js:4:89843)\n    at async providerProof (http://127.0.0.1:4198/assets/browser-C0oC3DzQ.js:4:96343)\n    at async <anonymous>:337:30\n    at call (/Users/eric/QuixiChat/packages/providers/tests/run-browser.mjs:28:8)\n    at /Users/eric/QuixiChat/packages/providers/tests/run-browser.mjs:77:30",
+  "finishedAt": "2026-09-11T04:33:21.306Z"
+}

@@ -1,0 +1,81 @@
+{
+  "status": "passed",
+  "stages": [
+    "automatic-failure-updates-health-without-focus-change",
+    "overdue-probe-suppressed-while-offline-or-hidden",
+    "visible-online-resume-recovers-with-one-probe",
+    "rejected-credential-pauses-automatic-checks-until-explicit-check",
+    "offline-cancels-held-probe-without-poisoning-health"
+  ],
+  "scope": "Production shared UI, session controller, provider adapters and HTTP/OPFS; synthetic model responses and an advanced health clock, with real visibility/connectivity event handling.",
+  "canonicalAndContentSha256": "946aa5df30e4670c154328f3b2551105c15b092f35fb93d6e3724cc4b65c7269",
+  "unchangedCanonicalAndContent": true,
+  "modelRequests": [
+    {
+      "provider": "openai",
+      "method": "GET",
+      "path": "/v1/models",
+      "bodyLength": 0
+    },
+    {
+      "provider": "anthropic",
+      "method": "GET",
+      "path": "/v1/models",
+      "bodyLength": 0
+    },
+    {
+      "provider": "anthropic",
+      "method": "GET",
+      "path": "/v1/models",
+      "bodyLength": 0
+    },
+    {
+      "provider": "openai",
+      "method": "GET",
+      "path": "/v1/models",
+      "bodyLength": 0
+    },
+    {
+      "provider": "anthropic",
+      "method": "GET",
+      "path": "/v1/models",
+      "bodyLength": 0
+    },
+    {
+      "provider": "openai",
+      "method": "GET",
+      "path": "/v1/models",
+      "bodyLength": 0
+    },
+    {
+      "provider": "anthropic",
+      "method": "GET",
+      "path": "/v1/models",
+      "bodyLength": 0
+    },
+    {
+      "provider": "openai",
+      "method": "GET",
+      "path": "/v1/models",
+      "bodyLength": 0
+    },
+    {
+      "provider": "anthropic",
+      "method": "GET",
+      "path": "/v1/models",
+      "bodyLength": 0
+    },
+    {
+      "provider": "openai",
+      "method": "GET",
+      "path": "/v1/models",
+      "bodyLength": 0
+    },
+    {
+      "provider": "anthropic",
+      "method": "GET",
+      "path": "/v1/models",
+      "bodyLength": 0
+    }
+  ]
+}

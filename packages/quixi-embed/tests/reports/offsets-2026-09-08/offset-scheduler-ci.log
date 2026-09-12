@@ -1,0 +1,2847 @@
+TAP version 13
+# Subtest: P0 promotion, independent joiner cancellation and one active batch
+ok 1 - P0 promotion, independent joiner cancellation and one active batch
+  ---
+  duration_ms: 5.757708
+  type: 'test'
+  ...
+# Subtest: padded token budget controls dynamic batches
+ok 2 - padded token budget controls dynamic batches
+  ---
+  duration_ms: 5.994917
+  type: 'test'
+  ...
+# Subtest: CPU dispatch yields a task before selecting the next background item
+ok 3 - CPU dispatch yields a task before selecting the next background item
+  ---
+  duration_ms: 3.364125
+  type: 'test'
+  ...
+# Subtest: pause, background drain and interactive admission
+ok 4 - pause, background drain and interactive admission
+  ---
+  duration_ms: 5.874917
+  type: 'test'
+  ...
+# Subtest: job, consumer, joiner, input, admitted byte and token bounds
+ok 5 - job, consumer, joiner, input, admitted byte and token bounds
+  ---
+  duration_ms: 0.522583
+  type: 'test'
+  ...
+# Subtest: bounded copied cache, exact UTF8 identity and role/identity separation
+ok 6 - bounded copied cache, exact UTF8 identity and role/identity separation
+  ---
+  duration_ms: 43.367167
+  type: 'test'
+  ...
+# Subtest: background aging preserves FIFO fairness below P0
+ok 7 - background aging preserves FIFO fairness below P0
+  ---
+  duration_ms: 12.392708
+  type: 'test'
+  ...
+# Subtest: GPU loss requeues on CPU; new P0 outranks the failed background batch
+ok 8 - GPU loss requeues on CPU; new P0 outranks the failed background batch
+  ---
+  duration_ms: 7.03175
+  type: 'test'
+  ...
+# Subtest: cancelled active output cannot be cached or published; shutdown is idempotent
+ok 9 - cancelled active output cannot be cached or published; shutdown is idempotent
+  ---
+  duration_ms: 5.745625
+  type: 'test'
+  ...
+# Subtest: hanging private storage retains bounded actual permits and never blocks inference
+ok 10 - hanging private storage retains bounded actual permits and never blocks inference
+  ---
+  duration_ms: 28.487959
+  type: 'test'
+  ...
+# Subtest: stored cache is copied and corrupt records/errors are misses
+ok 11 - stored cache is copied and corrupt records/errors are misses
+  ---
+  duration_ms: 5.852166
+  type: 'test'
+  ...
+# Subtest: snapshot drain does not wait for later submissions; execution failure disables backend
+ok 12 - snapshot drain does not wait for later submissions; execution failure disables backend
+  ---
+  duration_ms: 2.991875
+  type: 'test'
+  ...
+# Subtest: document throughput includes task yields and owner ETA is explicitly scoped
+ok 13 - document throughput includes task yields and owner ETA is explicitly scoped
+  ---
+  duration_ms: 2.9115
+  type: 'test'
+  ...
+# Subtest: nonfinite/nonunit model output is never published or cached
+ok 14 - nonfinite/nonunit model output is never published or cached
+  ---
+  duration_ms: 1.503708
+  type: 'test'
+  ...
+# Subtest: cancellation during asynchronous fallback disposes the late CPU instance
+ok 15 - cancellation during asynchronous fallback disposes the late CPU instance
+  ---
+  duration_ms: 4.209875
+  type: 'test'
+  ...
+# Subtest: sustained backfill and duplicate flood stay within every admission/cache bound
+ok 16 - sustained backfill and duplicate flood stay within every admission/cache bound
+  ---
+  duration_ms: 86.878666
+  type: 'test'
+  ...
+# Subtest: shutdown drain finishes paused work and rejects new admission without losing outputs
+ok 17 - shutdown drain finishes paused work and rejects new admission without losing outputs
+  ---
+  duration_ms: 4.807
+  type: 'test'
+  ...
+# Subtest: cancelled cache lookup cannot publish its late hit and drain observers are bounded
+ok 18 - cancelled cache lookup cannot publish its late hit and drain observers are bounded
+  ---
+  duration_ms: 2.99875
+  type: 'test'
+  ...
+1..18
+# tests 18
+# suites 0
+# pass 18
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 311.266083
+..
+----------------------------------------------------------------------
+Ran 2 tests in 0.022s
+
+OK
+Verified CPU WASM distribution 1.0.2
+Verified GPU source distribution 1.0.0
+Verified 397 untruncated preflight cases
+{
+  "passed": true,
+  "artifactVersion": "1.0.2",
+  "routes": [
+    {
+      "route": "scalar",
+      "cases": 397,
+      "standalone_and_model": true,
+      "legacy_truncated_ids_preserved": true
+    },
+    {
+      "route": "simd",
+      "cases": 397,
+      "standalone_and_model": true,
+      "legacy_truncated_ids_preserved": true
+    }
+  ],
+  "untruncated_reference": true,
+  "legacy_inspection_rejected": true
+}
+{
+  "route": "scalar",
+  "passed": true,
+  "engine": "Node WebAssembly",
+  "repeated_inferences": 20,
+  "model_bytes": 91231307,
+  "workspace_bytes": 7866420,
+  "linear_memory_bytes": 183107584,
+  "tokenizer_bytes": 959947,
+  "stage_hooks_in_production": false,
+  "browser_verified": false
+}
+{
+  "route": "simd",
+  "passed": true,
+  "engine": "Node WebAssembly",
+  "repeated_inferences": 20,
+  "model_bytes": 91231307,
+  "workspace_bytes": 7866420,
+  "linear_memory_bytes": 183107584,
+  "tokenizer_bytes": 959947,
+  "stage_hooks_in_production": false,
+  "browser_verified": false
+}
+4:53:34 PM [vite] (client) Re-optimizing dependencies because lockfile has changed
+{
+  "passed": true,
+  "route": "scalar",
+  "loss": false,
+  "initializationMs": 511.6000000014901,
+  "initialBackend": "wasm-scalar-fp32",
+  "initialUnavailableFallback": true,
+  "preflightCases": 397,
+  "frozenCases": 12,
+  "duplicates": 32,
+  "oneCancelledJoiner": true,
+  "exact512Accepted": true,
+  "overflowRejected": true,
+  "queryAcceptedSequence": 15,
+  "executions": [
+    {
+      "sequence": 14,
+      "route": "wasm-scalar-fp32",
+      "role": "document",
+      "batch": 1,
+      "tokens": [
+        512
+      ],
+      "durationMs": 1345.199999999255
+    },
+    {
+      "sequence": 16,
+      "route": "wasm-scalar-fp32",
+      "role": "query",
+      "batch": 1,
+      "tokens": [
+        10
+      ],
+      "durationMs": 20.100000001490116
+    },
+    {
+      "sequence": 17,
+      "route": "wasm-scalar-fp32",
+      "role": "document",
+      "batch": 1,
+      "tokens": [
+        512
+      ],
+      "durationMs": 1371.4000000022352
+    },
+    {
+      "sequence": 18,
+      "route": "wasm-scalar-fp32",
+      "role": "document",
+      "batch": 1,
+      "tokens": [
+        512
+      ],
+      "durationMs": 1357.5
+    }
+  ],
+  "final": {
+    "state": "ready",
+    "route": "wasm-scalar-fp32",
+    "kind": "cpu",
+    "background": "running",
+    "jobs": 0,
+    "consumers": 0,
+    "admittedBytes": 0,
+    "activeRequests": 0,
+    "cacheEntries": 4,
+    "cacheBytes": 12730,
+    "storeOperations": 0,
+    "storeBytes": 0,
+    "submitted": 48,
+    "completed": 47,
+    "cancelled": 1,
+    "failed": 0,
+    "cacheHits": 0,
+    "singleflightJoins": 31,
+    "dispatches": 17,
+    "inferred": 17,
+    "fallbacks": 0,
+    "recentChunksPerSecond": 2.794532032317602,
+    "estimatedRemainingSeconds": 0,
+    "etaScope": "admitted-documents",
+    "inferenceCompletionsAreDurable": false
+  },
+  "conditions": "Shared development host; real worker message arrives during active execution. Sequence assertions use receipt order, not cross-thread clock assumptions.",
+  "persistence": "Injected cache/checkpoint owner is separate; these counts are inference completions only.",
+  "rendererHeartbeat": {
+    "samples": 510,
+    "maxGapMs": 12.5
+  },
+  "engine": "chromium",
+  "version": "153.0.8010.12",
+  "launchArgs": [],
+  "host": {
+    "platform": "darwin",
+    "release": "25.6.0",
+    "cpu": "Apple M5 Max"
+  },
+  "cpuDistribution": {
+    "version": "1.0.2",
+    "model_format_version": 1,
+    "compiler_image": "emscripten/emsdk@sha256:90b757eb11fa9a0e3ce4d2d9f76d932a56018e4accc37b5a28b2783751e60eb7",
+    "model_sha256": "e1ef345cd35088b06f70c199f5a4e0311bda5983716ad6a3e7d0a604202efffc",
+    "artifacts": {
+      "quixi-scalar.wasm": {
+        "sha256": "e477d3e35b6e83c39e206e76079a4d5136a227711a0124b64bf885f3165cee65",
+        "bytes": 44805,
+        "route": "wasm-scalar-fp32",
+        "sources": {
+          "model.c": "7c29c9a8af9186be3ffadd60f106f686ab626d9585e24c7bbdc2cf300c4102de",
+          "tokenizer.c": "a17e49ff05df55fdb202f2b0a5594f8a01224b1fca15acbdc4675ac3b04ca85f",
+          "encoder.c": "5fca9c2f52fcd1baccee78ac6cf6e065b54e07a38117674d3d2b66ee8b03388e",
+          "sha256.c": "cdb83cc565e92869be60deaf07f028e4d8b45b07236927b7170ff9148c616e4d",
+          "kernels.h": "68d40f577de5607b1ddc249181a8ac0a0a8c5b33db30a65481ae33ec27f2cc55",
+          "internal.h": "7d802a00a4b7374d2bf98cb578a8f92d5e39aa1eaec929771dfa1edab430f767",
+          "model_contract.h": "362a413a843150d48b7431230a1cec78407dcf6feb3b0d648bb4ce3c16d700c7",
+          "quixi_embed.h": "d6bc1b60d1b10bf7bcdb72665a5141a706e05e6193654b7e67cd527e9f80c302"
+        },
+        "simd_required": false
+      },
+      "quixi-simd.wasm": {
+        "sha256": "d07bbc26c3f35731d7e2c6885405205a64852f40f9d7c5878c6efe77e8f9b198",
+        "bytes": 44657,
+        "route": "wasm-simd-fp32",
+        "sources": {
+          "model.c": "7c29c9a8af9186be3ffadd60f106f686ab626d9585e24c7bbdc2cf300c4102de",
+          "tokenizer.c": "a17e49ff05df55fdb202f2b0a5594f8a01224b1fca15acbdc4675ac3b04ca85f",
+          "encoder.c": "5fca9c2f52fcd1baccee78ac6cf6e065b54e07a38117674d3d2b66ee8b03388e",
+          "sha256.c": "cdb83cc565e92869be60deaf07f028e4d8b45b07236927b7170ff9148c616e4d",
+          "kernels.h": "68d40f577de5607b1ddc249181a8ac0a0a8c5b33db30a65481ae33ec27f2cc55",
+          "internal.h": "7d802a00a4b7374d2bf98cb578a8f92d5e39aa1eaec929771dfa1edab430f767",
+          "model_contract.h": "362a413a843150d48b7431230a1cec78407dcf6feb3b0d648bb4ce3c16d700c7",
+          "quixi_embed.h": "d6bc1b60d1b10bf7bcdb72665a5141a706e05e6193654b7e67cd527e9f80c302"
+        },
+        "simd_required": true
+      }
+    }
+  },
+  "gpuDistribution": {
+    "version": "1.0.0",
+    "model_format_version": 1,
+    "model_sha256": "e1ef345cd35088b06f70c199f5a4e0311bda5983716ad6a3e7d0a604202efffc",
+    "kernels": {
+      "attention": "3f07b3c79ef2c0de2d741fea21c77e3183dc2cced788a7295338c025d374e44b",
+      "baseline": "6671b18619861d88c9cb46ffc7eb72464d975dc028478da18a47a8712d476a18",
+      "half": "54222a8a80b836ceb42a5827cccb23ae3b0bc7a802c78d23d422c11d570ae4c8",
+      "subgroups": "9b2b0937d7b3911dccfcbeb8d36d373a857a01c6011fe0ba187ba3197cb92151",
+      "tiled": "6d5ea4ab0951cc237a5e87802019b5e107bfdd81c822cf7e4971099e64a6e79d"
+    },
+    "runtime_sources": {
+      "encoder.ts": "1fb0ad10c2c614a83019cfc14243c4a9968a331f54ce1b13ffd9ce71e7d79e9b",
+      "model.ts": "21813bee5db6a46bb60d1b02a6edcfbeb92418ffcf9ccb8bb8d693b3f8127f32",
+      "tuning.ts": "4d1f0e09824cc27f4cd68b87061115e790ddb5ed2f994dacfe62586406dda7d5"
+    },
+    "runtime_sha256": "9f50b0f32bc0e005e342212189df3c3e210ddc1aa92d09d6108bb94a8955837a",
+    "experimental": [
+      "subgroups"
+    ],
+    "note": "WGSL source distribution; actual driver compilation and optional routes require hardware gates."
+  },
+  "status": "passed"
+}
+{
+  "passed": true,
+  "route": "simd",
+  "loss": false,
+  "initializationMs": 511.30000000074506,
+  "initialBackend": "wasm-simd-fp32",
+  "initialUnavailableFallback": true,
+  "preflightCases": 397,
+  "frozenCases": 12,
+  "duplicates": 32,
+  "oneCancelledJoiner": true,
+  "exact512Accepted": true,
+  "overflowRejected": true,
+  "queryAcceptedSequence": 15,
+  "executions": [
+    {
+      "sequence": 14,
+      "route": "wasm-simd-fp32",
+      "role": "document",
+      "batch": 1,
+      "tokens": [
+        512
+      ],
+      "durationMs": 671.3000000007451
+    },
+    {
+      "sequence": 16,
+      "route": "wasm-simd-fp32",
+      "role": "query",
+      "batch": 1,
+      "tokens": [
+        10
+      ],
+      "durationMs": 10.899999998509884
+    },
+    {
+      "sequence": 17,
+      "route": "wasm-simd-fp32",
+      "role": "document",
+      "batch": 1,
+      "tokens": [
+        512
+      ],
+      "durationMs": 651.6999999992549
+    },
+    {
+      "sequence": 18,
+      "route": "wasm-simd-fp32",
+      "role": "document",
+      "batch": 1,
+      "tokens": [
+        512
+      ],
+      "durationMs": 654.8000000007451
+    }
+  ],
+  "final": {
+    "state": "ready",
+    "route": "wasm-simd-fp32",
+    "kind": "cpu",
+    "background": "running",
+    "jobs": 0,
+    "consumers": 0,
+    "admittedBytes": 0,
+    "activeRequests": 0,
+    "cacheEntries": 4,
+    "cacheBytes": 12730,
+    "storeOperations": 0,
+    "storeBytes": 0,
+    "submitted": 48,
+    "completed": 47,
+    "cancelled": 1,
+    "failed": 0,
+    "cacheHits": 0,
+    "singleflightJoins": 31,
+    "dispatches": 17,
+    "inferred": 17,
+    "fallbacks": 0,
+    "recentChunksPerSecond": 5.67134552673021,
+    "estimatedRemainingSeconds": 0,
+    "etaScope": "admitted-documents",
+    "inferenceCompletionsAreDurable": false
+  },
+  "conditions": "Shared development host; real worker message arrives during active execution. Sequence assertions use receipt order, not cross-thread clock assumptions.",
+  "persistence": "Injected cache/checkpoint owner is separate; these counts are inference completions only.",
+  "rendererHeartbeat": {
+    "samples": 295,
+    "maxGapMs": 12.100000001490116
+  },
+  "engine": "chromium",
+  "version": "153.0.8010.12",
+  "launchArgs": [],
+  "host": {
+    "platform": "darwin",
+    "release": "25.6.0",
+    "cpu": "Apple M5 Max"
+  },
+  "cpuDistribution": {
+    "version": "1.0.2",
+    "model_format_version": 1,
+    "compiler_image": "emscripten/emsdk@sha256:90b757eb11fa9a0e3ce4d2d9f76d932a56018e4accc37b5a28b2783751e60eb7",
+    "model_sha256": "e1ef345cd35088b06f70c199f5a4e0311bda5983716ad6a3e7d0a604202efffc",
+    "artifacts": {
+      "quixi-scalar.wasm": {
+        "sha256": "e477d3e35b6e83c39e206e76079a4d5136a227711a0124b64bf885f3165cee65",
+        "bytes": 44805,
+        "route": "wasm-scalar-fp32",
+        "sources": {
+          "model.c": "7c29c9a8af9186be3ffadd60f106f686ab626d9585e24c7bbdc2cf300c4102de",
+          "tokenizer.c": "a17e49ff05df55fdb202f2b0a5594f8a01224b1fca15acbdc4675ac3b04ca85f",
+          "encoder.c": "5fca9c2f52fcd1baccee78ac6cf6e065b54e07a38117674d3d2b66ee8b03388e",
+          "sha256.c": "cdb83cc565e92869be60deaf07f028e4d8b45b07236927b7170ff9148c616e4d",
+          "kernels.h": "68d40f577de5607b1ddc249181a8ac0a0a8c5b33db30a65481ae33ec27f2cc55",
+          "internal.h": "7d802a00a4b7374d2bf98cb578a8f92d5e39aa1eaec929771dfa1edab430f767",
+          "model_contract.h": "362a413a843150d48b7431230a1cec78407dcf6feb3b0d648bb4ce3c16d700c7",
+          "quixi_embed.h": "d6bc1b60d1b10bf7bcdb72665a5141a706e05e6193654b7e67cd527e9f80c302"
+        },
+        "simd_required": false
+      },
+      "quixi-simd.wasm": {
+        "sha256": "d07bbc26c3f35731d7e2c6885405205a64852f40f9d7c5878c6efe77e8f9b198",
+        "bytes": 44657,
+        "route": "wasm-simd-fp32",
+        "sources": {
+          "model.c": "7c29c9a8af9186be3ffadd60f106f686ab626d9585e24c7bbdc2cf300c4102de",
+          "tokenizer.c": "a17e49ff05df55fdb202f2b0a5594f8a01224b1fca15acbdc4675ac3b04ca85f",
+          "encoder.c": "5fca9c2f52fcd1baccee78ac6cf6e065b54e07a38117674d3d2b66ee8b03388e",
+          "sha256.c": "cdb83cc565e92869be60deaf07f028e4d8b45b07236927b7170ff9148c616e4d",
+          "kernels.h": "68d40f577de5607b1ddc249181a8ac0a0a8c5b33db30a65481ae33ec27f2cc55",
+          "internal.h": "7d802a00a4b7374d2bf98cb578a8f92d5e39aa1eaec929771dfa1edab430f767",
+          "model_contract.h": "362a413a843150d48b7431230a1cec78407dcf6feb3b0d648bb4ce3c16d700c7",
+          "quixi_embed.h": "d6bc1b60d1b10bf7bcdb72665a5141a706e05e6193654b7e67cd527e9f80c302"
+        },
+        "simd_required": true
+      }
+    }
+  },
+  "gpuDistribution": {
+    "version": "1.0.0",
+    "model_format_version": 1,
+    "model_sha256": "e1ef345cd35088b06f70c199f5a4e0311bda5983716ad6a3e7d0a604202efffc",
+    "kernels": {
+      "attention": "3f07b3c79ef2c0de2d741fea21c77e3183dc2cced788a7295338c025d374e44b",
+      "baseline": "6671b18619861d88c9cb46ffc7eb72464d975dc028478da18a47a8712d476a18",
+      "half": "54222a8a80b836ceb42a5827cccb23ae3b0bc7a802c78d23d422c11d570ae4c8",
+      "subgroups": "9b2b0937d7b3911dccfcbeb8d36d373a857a01c6011fe0ba187ba3197cb92151",
+      "tiled": "6d5ea4ab0951cc237a5e87802019b5e107bfdd81c822cf7e4971099e64a6e79d"
+    },
+    "runtime_sources": {
+      "encoder.ts": "1fb0ad10c2c614a83019cfc14243c4a9968a331f54ce1b13ffd9ce71e7d79e9b",
+      "model.ts": "21813bee5db6a46bb60d1b02a6edcfbeb92418ffcf9ccb8bb8d693b3f8127f32",
+      "tuning.ts": "4d1f0e09824cc27f4cd68b87061115e790ddb5ed2f994dacfe62586406dda7d5"
+    },
+    "runtime_sha256": "9f50b0f32bc0e005e342212189df3c3e210ddc1aa92d09d6108bb94a8955837a",
+    "experimental": [
+      "subgroups"
+    ],
+    "note": "WGSL source distribution; actual driver compilation and optional routes require hardware gates."
+  },
+  "status": "passed"
+}
+{
+  "passed": true,
+  "route": "scalar",
+  "loss": false,
+  "initializationMs": 572,
+  "initialBackend": "wasm-scalar-fp32",
+  "initialUnavailableFallback": true,
+  "preflightCases": 397,
+  "frozenCases": 12,
+  "duplicates": 32,
+  "oneCancelledJoiner": true,
+  "exact512Accepted": true,
+  "overflowRejected": true,
+  "queryAcceptedSequence": 15,
+  "executions": [
+    {
+      "sequence": 14,
+      "route": "wasm-scalar-fp32",
+      "role": "document",
+      "batch": 1,
+      "tokens": [
+        512
+      ],
+      "durationMs": 1509
+    },
+    {
+      "sequence": 16,
+      "route": "wasm-scalar-fp32",
+      "role": "query",
+      "batch": 1,
+      "tokens": [
+        10
+      ],
+      "durationMs": 23
+    },
+    {
+      "sequence": 17,
+      "route": "wasm-scalar-fp32",
+      "role": "document",
+      "batch": 1,
+      "tokens": [
+        512
+      ],
+      "durationMs": 1496
+    },
+    {
+      "sequence": 18,
+      "route": "wasm-scalar-fp32",
+      "role": "document",
+      "batch": 1,
+      "tokens": [
+        512
+      ],
+      "durationMs": 1495
+    }
+  ],
+  "final": {
+    "state": "ready",
+    "route": "wasm-scalar-fp32",
+    "kind": "cpu",
+    "background": "running",
+    "jobs": 0,
+    "consumers": 0,
+    "admittedBytes": 0,
+    "activeRequests": 0,
+    "cacheEntries": 4,
+    "cacheBytes": 12730,
+    "storeOperations": 0,
+    "storeBytes": 0,
+    "submitted": 48,
+    "completed": 47,
+    "cancelled": 1,
+    "failed": 0,
+    "cacheHits": 0,
+    "singleflightJoins": 31,
+    "dispatches": 17,
+    "inferred": 17,
+    "fallbacks": 0,
+    "recentChunksPerSecond": 2.527379949452401,
+    "estimatedRemainingSeconds": 0,
+    "etaScope": "admitted-documents",
+    "inferenceCompletionsAreDurable": false
+  },
+  "conditions": "Shared development host; real worker message arrives during active execution. Sequence assertions use receipt order, not cross-thread clock assumptions.",
+  "persistence": "Injected cache/checkpoint owner is separate; these counts are inference completions only.",
+  "rendererHeartbeat": {
+    "samples": 446,
+    "maxGapMs": 17
+  },
+  "engine": "firefox",
+  "version": "155.0",
+  "launchArgs": [],
+  "host": {
+    "platform": "darwin",
+    "release": "25.6.0",
+    "cpu": "Apple M5 Max"
+  },
+  "cpuDistribution": {
+    "version": "1.0.2",
+    "model_format_version": 1,
+    "compiler_image": "emscripten/emsdk@sha256:90b757eb11fa9a0e3ce4d2d9f76d932a56018e4accc37b5a28b2783751e60eb7",
+    "model_sha256": "e1ef345cd35088b06f70c199f5a4e0311bda5983716ad6a3e7d0a604202efffc",
+    "artifacts": {
+      "quixi-scalar.wasm": {
+        "sha256": "e477d3e35b6e83c39e206e76079a4d5136a227711a0124b64bf885f3165cee65",
+        "bytes": 44805,
+        "route": "wasm-scalar-fp32",
+        "sources": {
+          "model.c": "7c29c9a8af9186be3ffadd60f106f686ab626d9585e24c7bbdc2cf300c4102de",
+          "tokenizer.c": "a17e49ff05df55fdb202f2b0a5594f8a01224b1fca15acbdc4675ac3b04ca85f",
+          "encoder.c": "5fca9c2f52fcd1baccee78ac6cf6e065b54e07a38117674d3d2b66ee8b03388e",
+          "sha256.c": "cdb83cc565e92869be60deaf07f028e4d8b45b07236927b7170ff9148c616e4d",
+          "kernels.h": "68d40f577de5607b1ddc249181a8ac0a0a8c5b33db30a65481ae33ec27f2cc55",
+          "internal.h": "7d802a00a4b7374d2bf98cb578a8f92d5e39aa1eaec929771dfa1edab430f767",
+          "model_contract.h": "362a413a843150d48b7431230a1cec78407dcf6feb3b0d648bb4ce3c16d700c7",
+          "quixi_embed.h": "d6bc1b60d1b10bf7bcdb72665a5141a706e05e6193654b7e67cd527e9f80c302"
+        },
+        "simd_required": false
+      },
+      "quixi-simd.wasm": {
+        "sha256": "d07bbc26c3f35731d7e2c6885405205a64852f40f9d7c5878c6efe77e8f9b198",
+        "bytes": 44657,
+        "route": "wasm-simd-fp32",
+        "sources": {
+          "model.c": "7c29c9a8af9186be3ffadd60f106f686ab626d9585e24c7bbdc2cf300c4102de",
+          "tokenizer.c": "a17e49ff05df55fdb202f2b0a5594f8a01224b1fca15acbdc4675ac3b04ca85f",
+          "encoder.c": "5fca9c2f52fcd1baccee78ac6cf6e065b54e07a38117674d3d2b66ee8b03388e",
+          "sha256.c": "cdb83cc565e92869be60deaf07f028e4d8b45b07236927b7170ff9148c616e4d",
+          "kernels.h": "68d40f577de5607b1ddc249181a8ac0a0a8c5b33db30a65481ae33ec27f2cc55",
+          "internal.h": "7d802a00a4b7374d2bf98cb578a8f92d5e39aa1eaec929771dfa1edab430f767",
+          "model_contract.h": "362a413a843150d48b7431230a1cec78407dcf6feb3b0d648bb4ce3c16d700c7",
+          "quixi_embed.h": "d6bc1b60d1b10bf7bcdb72665a5141a706e05e6193654b7e67cd527e9f80c302"
+        },
+        "simd_required": true
+      }
+    }
+  },
+  "gpuDistribution": {
+    "version": "1.0.0",
+    "model_format_version": 1,
+    "model_sha256": "e1ef345cd35088b06f70c199f5a4e0311bda5983716ad6a3e7d0a604202efffc",
+    "kernels": {
+      "attention": "3f07b3c79ef2c0de2d741fea21c77e3183dc2cced788a7295338c025d374e44b",
+      "baseline": "6671b18619861d88c9cb46ffc7eb72464d975dc028478da18a47a8712d476a18",
+      "half": "54222a8a80b836ceb42a5827cccb23ae3b0bc7a802c78d23d422c11d570ae4c8",
+      "subgroups": "9b2b0937d7b3911dccfcbeb8d36d373a857a01c6011fe0ba187ba3197cb92151",
+      "tiled": "6d5ea4ab0951cc237a5e87802019b5e107bfdd81c822cf7e4971099e64a6e79d"
+    },
+    "runtime_sources": {
+      "encoder.ts": "1fb0ad10c2c614a83019cfc14243c4a9968a331f54ce1b13ffd9ce71e7d79e9b",
+      "model.ts": "21813bee5db6a46bb60d1b02a6edcfbeb92418ffcf9ccb8bb8d693b3f8127f32",
+      "tuning.ts": "4d1f0e09824cc27f4cd68b87061115e790ddb5ed2f994dacfe62586406dda7d5"
+    },
+    "runtime_sha256": "9f50b0f32bc0e005e342212189df3c3e210ddc1aa92d09d6108bb94a8955837a",
+    "experimental": [
+      "subgroups"
+    ],
+    "note": "WGSL source distribution; actual driver compilation and optional routes require hardware gates."
+  },
+  "status": "passed"
+}
+{
+  "passed": true,
+  "route": "simd",
+  "loss": false,
+  "initializationMs": 577,
+  "initialBackend": "wasm-simd-fp32",
+  "initialUnavailableFallback": true,
+  "preflightCases": 397,
+  "frozenCases": 12,
+  "duplicates": 32,
+  "oneCancelledJoiner": true,
+  "exact512Accepted": true,
+  "overflowRejected": true,
+  "queryAcceptedSequence": 15,
+  "executions": [
+    {
+      "sequence": 14,
+      "route": "wasm-simd-fp32",
+      "role": "document",
+      "batch": 1,
+      "tokens": [
+        512
+      ],
+      "durationMs": 677
+    },
+    {
+      "sequence": 16,
+      "route": "wasm-simd-fp32",
+      "role": "query",
+      "batch": 1,
+      "tokens": [
+        10
+      ],
+      "durationMs": 11
+    },
+    {
+      "sequence": 17,
+      "route": "wasm-simd-fp32",
+      "role": "document",
+      "batch": 1,
+      "tokens": [
+        512
+      ],
+      "durationMs": 683
+    },
+    {
+      "sequence": 18,
+      "route": "wasm-simd-fp32",
+      "role": "document",
+      "batch": 1,
+      "tokens": [
+        512
+      ],
+      "durationMs": 686
+    }
+  ],
+  "final": {
+    "state": "ready",
+    "route": "wasm-simd-fp32",
+    "kind": "cpu",
+    "background": "running",
+    "jobs": 0,
+    "consumers": 0,
+    "admittedBytes": 0,
+    "activeRequests": 0,
+    "cacheEntries": 4,
+    "cacheBytes": 12730,
+    "storeOperations": 0,
+    "storeBytes": 0,
+    "submitted": 48,
+    "completed": 47,
+    "cancelled": 1,
+    "failed": 0,
+    "cacheHits": 0,
+    "singleflightJoins": 31,
+    "dispatches": 17,
+    "inferred": 17,
+    "fallbacks": 0,
+    "recentChunksPerSecond": 5.476951163852123,
+    "estimatedRemainingSeconds": 0,
+    "etaScope": "admitted-documents",
+    "inferenceCompletionsAreDurable": false
+  },
+  "conditions": "Shared development host; real worker message arrives during active execution. Sequence assertions use receipt order, not cross-thread clock assumptions.",
+  "persistence": "Injected cache/checkpoint owner is separate; these counts are inference completions only.",
+  "rendererHeartbeat": {
+    "samples": 243,
+    "maxGapMs": 17
+  },
+  "engine": "firefox",
+  "version": "155.0",
+  "launchArgs": [],
+  "host": {
+    "platform": "darwin",
+    "release": "25.6.0",
+    "cpu": "Apple M5 Max"
+  },
+  "cpuDistribution": {
+    "version": "1.0.2",
+    "model_format_version": 1,
+    "compiler_image": "emscripten/emsdk@sha256:90b757eb11fa9a0e3ce4d2d9f76d932a56018e4accc37b5a28b2783751e60eb7",
+    "model_sha256": "e1ef345cd35088b06f70c199f5a4e0311bda5983716ad6a3e7d0a604202efffc",
+    "artifacts": {
+      "quixi-scalar.wasm": {
+        "sha256": "e477d3e35b6e83c39e206e76079a4d5136a227711a0124b64bf885f3165cee65",
+        "bytes": 44805,
+        "route": "wasm-scalar-fp32",
+        "sources": {
+          "model.c": "7c29c9a8af9186be3ffadd60f106f686ab626d9585e24c7bbdc2cf300c4102de",
+          "tokenizer.c": "a17e49ff05df55fdb202f2b0a5594f8a01224b1fca15acbdc4675ac3b04ca85f",
+          "encoder.c": "5fca9c2f52fcd1baccee78ac6cf6e065b54e07a38117674d3d2b66ee8b03388e",
+          "sha256.c": "cdb83cc565e92869be60deaf07f028e4d8b45b07236927b7170ff9148c616e4d",
+          "kernels.h": "68d40f577de5607b1ddc249181a8ac0a0a8c5b33db30a65481ae33ec27f2cc55",
+          "internal.h": "7d802a00a4b7374d2bf98cb578a8f92d5e39aa1eaec929771dfa1edab430f767",
+          "model_contract.h": "362a413a843150d48b7431230a1cec78407dcf6feb3b0d648bb4ce3c16d700c7",
+          "quixi_embed.h": "d6bc1b60d1b10bf7bcdb72665a5141a706e05e6193654b7e67cd527e9f80c302"
+        },
+        "simd_required": false
+      },
+      "quixi-simd.wasm": {
+        "sha256": "d07bbc26c3f35731d7e2c6885405205a64852f40f9d7c5878c6efe77e8f9b198",
+        "bytes": 44657,
+        "route": "wasm-simd-fp32",
+        "sources": {
+          "model.c": "7c29c9a8af9186be3ffadd60f106f686ab626d9585e24c7bbdc2cf300c4102de",
+          "tokenizer.c": "a17e49ff05df55fdb202f2b0a5594f8a01224b1fca15acbdc4675ac3b04ca85f",
+          "encoder.c": "5fca9c2f52fcd1baccee78ac6cf6e065b54e07a38117674d3d2b66ee8b03388e",
+          "sha256.c": "cdb83cc565e92869be60deaf07f028e4d8b45b07236927b7170ff9148c616e4d",
+          "kernels.h": "68d40f577de5607b1ddc249181a8ac0a0a8c5b33db30a65481ae33ec27f2cc55",
+          "internal.h": "7d802a00a4b7374d2bf98cb578a8f92d5e39aa1eaec929771dfa1edab430f767",
+          "model_contract.h": "362a413a843150d48b7431230a1cec78407dcf6feb3b0d648bb4ce3c16d700c7",
+          "quixi_embed.h": "d6bc1b60d1b10bf7bcdb72665a5141a706e05e6193654b7e67cd527e9f80c302"
+        },
+        "simd_required": true
+      }
+    }
+  },
+  "gpuDistribution": {
+    "version": "1.0.0",
+    "model_format_version": 1,
+    "model_sha256": "e1ef345cd35088b06f70c199f5a4e0311bda5983716ad6a3e7d0a604202efffc",
+    "kernels": {
+      "attention": "3f07b3c79ef2c0de2d741fea21c77e3183dc2cced788a7295338c025d374e44b",
+      "baseline": "6671b18619861d88c9cb46ffc7eb72464d975dc028478da18a47a8712d476a18",
+      "half": "54222a8a80b836ceb42a5827cccb23ae3b0bc7a802c78d23d422c11d570ae4c8",
+      "subgroups": "9b2b0937d7b3911dccfcbeb8d36d373a857a01c6011fe0ba187ba3197cb92151",
+      "tiled": "6d5ea4ab0951cc237a5e87802019b5e107bfdd81c822cf7e4971099e64a6e79d"
+    },
+    "runtime_sources": {
+      "encoder.ts": "1fb0ad10c2c614a83019cfc14243c4a9968a331f54ce1b13ffd9ce71e7d79e9b",
+      "model.ts": "21813bee5db6a46bb60d1b02a6edcfbeb92418ffcf9ccb8bb8d693b3f8127f32",
+      "tuning.ts": "4d1f0e09824cc27f4cd68b87061115e790ddb5ed2f994dacfe62586406dda7d5"
+    },
+    "runtime_sha256": "9f50b0f32bc0e005e342212189df3c3e210ddc1aa92d09d6108bb94a8955837a",
+    "experimental": [
+      "subgroups"
+    ],
+    "note": "WGSL source distribution; actual driver compilation and optional routes require hardware gates."
+  },
+  "status": "passed"
+}
+{
+  "passed": true,
+  "route": "scalar",
+  "loss": false,
+  "initializationMs": 503,
+  "initialBackend": "wasm-scalar-fp32",
+  "initialUnavailableFallback": true,
+  "preflightCases": 397,
+  "frozenCases": 12,
+  "duplicates": 32,
+  "oneCancelledJoiner": true,
+  "exact512Accepted": true,
+  "overflowRejected": true,
+  "queryAcceptedSequence": 15,
+  "executions": [
+    {
+      "sequence": 14,
+      "route": "wasm-scalar-fp32",
+      "role": "document",
+      "batch": 1,
+      "tokens": [
+        512
+      ],
+      "durationMs": 1403
+    },
+    {
+      "sequence": 16,
+      "route": "wasm-scalar-fp32",
+      "role": "query",
+      "batch": 1,
+      "tokens": [
+        10
+      ],
+      "durationMs": 21
+    },
+    {
+      "sequence": 17,
+      "route": "wasm-scalar-fp32",
+      "role": "document",
+      "batch": 1,
+      "tokens": [
+        512
+      ],
+      "durationMs": 1396
+    },
+    {
+      "sequence": 18,
+      "route": "wasm-scalar-fp32",
+      "role": "document",
+      "batch": 1,
+      "tokens": [
+        512
+      ],
+      "durationMs": 1395
+    }
+  ],
+  "final": {
+    "state": "ready",
+    "route": "wasm-scalar-fp32",
+    "kind": "cpu",
+    "background": "running",
+    "jobs": 0,
+    "consumers": 0,
+    "admittedBytes": 0,
+    "activeRequests": 0,
+    "cacheEntries": 4,
+    "cacheBytes": 12730,
+    "storeOperations": 0,
+    "storeBytes": 0,
+    "submitted": 48,
+    "completed": 47,
+    "cancelled": 1,
+    "failed": 0,
+    "cacheHits": 0,
+    "singleflightJoins": 31,
+    "dispatches": 17,
+    "inferred": 17,
+    "fallbacks": 0,
+    "recentChunksPerSecond": 2.7229407760381212,
+    "estimatedRemainingSeconds": 0,
+    "etaScope": "admitted-documents",
+    "inferenceCompletionsAreDurable": false
+  },
+  "conditions": "Shared development host; real worker message arrives during active execution. Sequence assertions use receipt order, not cross-thread clock assumptions.",
+  "persistence": "Injected cache/checkpoint owner is separate; these counts are inference completions only.",
+  "rendererHeartbeat": {
+    "samples": 405,
+    "maxGapMs": 16
+  },
+  "engine": "webkit",
+  "version": "26.6",
+  "launchArgs": [],
+  "host": {
+    "platform": "darwin",
+    "release": "25.6.0",
+    "cpu": "Apple M5 Max"
+  },
+  "cpuDistribution": {
+    "version": "1.0.2",
+    "model_format_version": 1,
+    "compiler_image": "emscripten/emsdk@sha256:90b757eb11fa9a0e3ce4d2d9f76d932a56018e4accc37b5a28b2783751e60eb7",
+    "model_sha256": "e1ef345cd35088b06f70c199f5a4e0311bda5983716ad6a3e7d0a604202efffc",
+    "artifacts": {
+      "quixi-scalar.wasm": {
+        "sha256": "e477d3e35b6e83c39e206e76079a4d5136a227711a0124b64bf885f3165cee65",
+        "bytes": 44805,
+        "route": "wasm-scalar-fp32",
+        "sources": {
+          "model.c": "7c29c9a8af9186be3ffadd60f106f686ab626d9585e24c7bbdc2cf300c4102de",
+          "tokenizer.c": "a17e49ff05df55fdb202f2b0a5594f8a01224b1fca15acbdc4675ac3b04ca85f",
+          "encoder.c": "5fca9c2f52fcd1baccee78ac6cf6e065b54e07a38117674d3d2b66ee8b03388e",
+          "sha256.c": "cdb83cc565e92869be60deaf07f028e4d8b45b07236927b7170ff9148c616e4d",
+          "kernels.h": "68d40f577de5607b1ddc249181a8ac0a0a8c5b33db30a65481ae33ec27f2cc55",
+          "internal.h": "7d802a00a4b7374d2bf98cb578a8f92d5e39aa1eaec929771dfa1edab430f767",
+          "model_contract.h": "362a413a843150d48b7431230a1cec78407dcf6feb3b0d648bb4ce3c16d700c7",
+          "quixi_embed.h": "d6bc1b60d1b10bf7bcdb72665a5141a706e05e6193654b7e67cd527e9f80c302"
+        },
+        "simd_required": false
+      },
+      "quixi-simd.wasm": {
+        "sha256": "d07bbc26c3f35731d7e2c6885405205a64852f40f9d7c5878c6efe77e8f9b198",
+        "bytes": 44657,
+        "route": "wasm-simd-fp32",
+        "sources": {
+          "model.c": "7c29c9a8af9186be3ffadd60f106f686ab626d9585e24c7bbdc2cf300c4102de",
+          "tokenizer.c": "a17e49ff05df55fdb202f2b0a5594f8a01224b1fca15acbdc4675ac3b04ca85f",
+          "encoder.c": "5fca9c2f52fcd1baccee78ac6cf6e065b54e07a38117674d3d2b66ee8b03388e",
+          "sha256.c": "cdb83cc565e92869be60deaf07f028e4d8b45b07236927b7170ff9148c616e4d",
+          "kernels.h": "68d40f577de5607b1ddc249181a8ac0a0a8c5b33db30a65481ae33ec27f2cc55",
+          "internal.h": "7d802a00a4b7374d2bf98cb578a8f92d5e39aa1eaec929771dfa1edab430f767",
+          "model_contract.h": "362a413a843150d48b7431230a1cec78407dcf6feb3b0d648bb4ce3c16d700c7",
+          "quixi_embed.h": "d6bc1b60d1b10bf7bcdb72665a5141a706e05e6193654b7e67cd527e9f80c302"
+        },
+        "simd_required": true
+      }
+    }
+  },
+  "gpuDistribution": {
+    "version": "1.0.0",
+    "model_format_version": 1,
+    "model_sha256": "e1ef345cd35088b06f70c199f5a4e0311bda5983716ad6a3e7d0a604202efffc",
+    "kernels": {
+      "attention": "3f07b3c79ef2c0de2d741fea21c77e3183dc2cced788a7295338c025d374e44b",
+      "baseline": "6671b18619861d88c9cb46ffc7eb72464d975dc028478da18a47a8712d476a18",
+      "half": "54222a8a80b836ceb42a5827cccb23ae3b0bc7a802c78d23d422c11d570ae4c8",
+      "subgroups": "9b2b0937d7b3911dccfcbeb8d36d373a857a01c6011fe0ba187ba3197cb92151",
+      "tiled": "6d5ea4ab0951cc237a5e87802019b5e107bfdd81c822cf7e4971099e64a6e79d"
+    },
+    "runtime_sources": {
+      "encoder.ts": "1fb0ad10c2c614a83019cfc14243c4a9968a331f54ce1b13ffd9ce71e7d79e9b",
+      "model.ts": "21813bee5db6a46bb60d1b02a6edcfbeb92418ffcf9ccb8bb8d693b3f8127f32",
+      "tuning.ts": "4d1f0e09824cc27f4cd68b87061115e790ddb5ed2f994dacfe62586406dda7d5"
+    },
+    "runtime_sha256": "9f50b0f32bc0e005e342212189df3c3e210ddc1aa92d09d6108bb94a8955837a",
+    "experimental": [
+      "subgroups"
+    ],
+    "note": "WGSL source distribution; actual driver compilation and optional routes require hardware gates."
+  },
+  "status": "passed"
+}
+{
+  "passed": true,
+  "route": "simd",
+  "loss": false,
+  "initializationMs": 509,
+  "initialBackend": "wasm-simd-fp32",
+  "initialUnavailableFallback": true,
+  "preflightCases": 397,
+  "frozenCases": 12,
+  "duplicates": 32,
+  "oneCancelledJoiner": true,
+  "exact512Accepted": true,
+  "overflowRejected": true,
+  "queryAcceptedSequence": 15,
+  "executions": [
+    {
+      "sequence": 14,
+      "route": "wasm-simd-fp32",
+      "role": "document",
+      "batch": 1,
+      "tokens": [
+        512
+      ],
+      "durationMs": 641
+    },
+    {
+      "sequence": 16,
+      "route": "wasm-simd-fp32",
+      "role": "query",
+      "batch": 1,
+      "tokens": [
+        10
+      ],
+      "durationMs": 11
+    },
+    {
+      "sequence": 17,
+      "route": "wasm-simd-fp32",
+      "role": "document",
+      "batch": 1,
+      "tokens": [
+        512
+      ],
+      "durationMs": 655
+    },
+    {
+      "sequence": 18,
+      "route": "wasm-simd-fp32",
+      "role": "document",
+      "batch": 1,
+      "tokens": [
+        512
+      ],
+      "durationMs": 665
+    }
+  ],
+  "final": {
+    "state": "ready",
+    "route": "wasm-simd-fp32",
+    "kind": "cpu",
+    "background": "running",
+    "jobs": 0,
+    "consumers": 0,
+    "admittedBytes": 0,
+    "activeRequests": 0,
+    "cacheEntries": 4,
+    "cacheBytes": 12730,
+    "storeOperations": 0,
+    "storeBytes": 0,
+    "submitted": 48,
+    "completed": 47,
+    "cancelled": 1,
+    "failed": 0,
+    "cacheHits": 0,
+    "singleflightJoins": 31,
+    "dispatches": 17,
+    "inferred": 17,
+    "fallbacks": 0,
+    "recentChunksPerSecond": 5.769230769230769,
+    "estimatedRemainingSeconds": 0,
+    "etaScope": "admitted-documents",
+    "inferenceCompletionsAreDurable": false
+  },
+  "conditions": "Shared development host; real worker message arrives during active execution. Sequence assertions use receipt order, not cross-thread clock assumptions.",
+  "persistence": "Injected cache/checkpoint owner is separate; these counts are inference completions only.",
+  "rendererHeartbeat": {
+    "samples": 225,
+    "maxGapMs": 16
+  },
+  "engine": "webkit",
+  "version": "26.6",
+  "launchArgs": [],
+  "host": {
+    "platform": "darwin",
+    "release": "25.6.0",
+    "cpu": "Apple M5 Max"
+  },
+  "cpuDistribution": {
+    "version": "1.0.2",
+    "model_format_version": 1,
+    "compiler_image": "emscripten/emsdk@sha256:90b757eb11fa9a0e3ce4d2d9f76d932a56018e4accc37b5a28b2783751e60eb7",
+    "model_sha256": "e1ef345cd35088b06f70c199f5a4e0311bda5983716ad6a3e7d0a604202efffc",
+    "artifacts": {
+      "quixi-scalar.wasm": {
+        "sha256": "e477d3e35b6e83c39e206e76079a4d5136a227711a0124b64bf885f3165cee65",
+        "bytes": 44805,
+        "route": "wasm-scalar-fp32",
+        "sources": {
+          "model.c": "7c29c9a8af9186be3ffadd60f106f686ab626d9585e24c7bbdc2cf300c4102de",
+          "tokenizer.c": "a17e49ff05df55fdb202f2b0a5594f8a01224b1fca15acbdc4675ac3b04ca85f",
+          "encoder.c": "5fca9c2f52fcd1baccee78ac6cf6e065b54e07a38117674d3d2b66ee8b03388e",
+          "sha256.c": "cdb83cc565e92869be60deaf07f028e4d8b45b07236927b7170ff9148c616e4d",
+          "kernels.h": "68d40f577de5607b1ddc249181a8ac0a0a8c5b33db30a65481ae33ec27f2cc55",
+          "internal.h": "7d802a00a4b7374d2bf98cb578a8f92d5e39aa1eaec929771dfa1edab430f767",
+          "model_contract.h": "362a413a843150d48b7431230a1cec78407dcf6feb3b0d648bb4ce3c16d700c7",
+          "quixi_embed.h": "d6bc1b60d1b10bf7bcdb72665a5141a706e05e6193654b7e67cd527e9f80c302"
+        },
+        "simd_required": false
+      },
+      "quixi-simd.wasm": {
+        "sha256": "d07bbc26c3f35731d7e2c6885405205a64852f40f9d7c5878c6efe77e8f9b198",
+        "bytes": 44657,
+        "route": "wasm-simd-fp32",
+        "sources": {
+          "model.c": "7c29c9a8af9186be3ffadd60f106f686ab626d9585e24c7bbdc2cf300c4102de",
+          "tokenizer.c": "a17e49ff05df55fdb202f2b0a5594f8a01224b1fca15acbdc4675ac3b04ca85f",
+          "encoder.c": "5fca9c2f52fcd1baccee78ac6cf6e065b54e07a38117674d3d2b66ee8b03388e",
+          "sha256.c": "cdb83cc565e92869be60deaf07f028e4d8b45b07236927b7170ff9148c616e4d",
+          "kernels.h": "68d40f577de5607b1ddc249181a8ac0a0a8c5b33db30a65481ae33ec27f2cc55",
+          "internal.h": "7d802a00a4b7374d2bf98cb578a8f92d5e39aa1eaec929771dfa1edab430f767",
+          "model_contract.h": "362a413a843150d48b7431230a1cec78407dcf6feb3b0d648bb4ce3c16d700c7",
+          "quixi_embed.h": "d6bc1b60d1b10bf7bcdb72665a5141a706e05e6193654b7e67cd527e9f80c302"
+        },
+        "simd_required": true
+      }
+    }
+  },
+  "gpuDistribution": {
+    "version": "1.0.0",
+    "model_format_version": 1,
+    "model_sha256": "e1ef345cd35088b06f70c199f5a4e0311bda5983716ad6a3e7d0a604202efffc",
+    "kernels": {
+      "attention": "3f07b3c79ef2c0de2d741fea21c77e3183dc2cced788a7295338c025d374e44b",
+      "baseline": "6671b18619861d88c9cb46ffc7eb72464d975dc028478da18a47a8712d476a18",
+      "half": "54222a8a80b836ceb42a5827cccb23ae3b0bc7a802c78d23d422c11d570ae4c8",
+      "subgroups": "9b2b0937d7b3911dccfcbeb8d36d373a857a01c6011fe0ba187ba3197cb92151",
+      "tiled": "6d5ea4ab0951cc237a5e87802019b5e107bfdd81c822cf7e4971099e64a6e79d"
+    },
+    "runtime_sources": {
+      "encoder.ts": "1fb0ad10c2c614a83019cfc14243c4a9968a331f54ce1b13ffd9ce71e7d79e9b",
+      "model.ts": "21813bee5db6a46bb60d1b02a6edcfbeb92418ffcf9ccb8bb8d693b3f8127f32",
+      "tuning.ts": "4d1f0e09824cc27f4cd68b87061115e790ddb5ed2f994dacfe62586406dda7d5"
+    },
+    "runtime_sha256": "9f50b0f32bc0e005e342212189df3c3e210ddc1aa92d09d6108bb94a8955837a",
+    "experimental": [
+      "subgroups"
+    ],
+    "note": "WGSL source distribution; actual driver compilation and optional routes require hardware gates."
+  },
+  "status": "passed"
+}
+{
+  "passed": true,
+  "route": "gpu",
+  "loss": false,
+  "initializationMs": 245.89999999850988,
+  "initialBackend": "webgpu-fp32",
+  "initialUnavailableFallback": false,
+  "preflightCases": 397,
+  "frozenCases": 12,
+  "duplicates": 32,
+  "oneCancelledJoiner": true,
+  "exact512Accepted": true,
+  "overflowRejected": true,
+  "queryAcceptedSequence": 15,
+  "executions": [
+    {
+      "sequence": 14,
+      "route": "webgpu-fp32",
+      "role": "document",
+      "batch": 4,
+      "tokens": [
+        512,
+        512,
+        512,
+        512
+      ],
+      "durationMs": 25.400000002235174
+    },
+    {
+      "sequence": 16,
+      "route": "webgpu-fp32",
+      "role": "query",
+      "batch": 1,
+      "tokens": [
+        10
+      ],
+      "durationMs": 1.699999999254942
+    },
+    {
+      "sequence": 17,
+      "route": "webgpu-fp32",
+      "role": "document",
+      "batch": 4,
+      "tokens": [
+        512,
+        512,
+        512,
+        512
+      ],
+      "durationMs": 24.900000002235174
+    }
+  ],
+  "final": {
+    "state": "ready",
+    "route": "webgpu-fp32",
+    "kind": "gpu",
+    "background": "running",
+    "jobs": 0,
+    "consumers": 0,
+    "admittedBytes": 0,
+    "activeRequests": 0,
+    "cacheEntries": 9,
+    "cacheBytes": 28650,
+    "storeOperations": 0,
+    "storeBytes": 0,
+    "submitted": 53,
+    "completed": 52,
+    "cancelled": 1,
+    "failed": 0,
+    "cacheHits": 0,
+    "singleflightJoins": 31,
+    "dispatches": 16,
+    "inferred": 22,
+    "fallbacks": 0,
+    "recentChunksPerSecond": 249.26686217281113,
+    "estimatedRemainingSeconds": 0,
+    "etaScope": "admitted-documents",
+    "inferenceCompletionsAreDurable": false
+  },
+  "gpuDiagnostics": {
+    "backend": "webgpu-fp32",
+    "projection": "auto",
+    "tuning": {
+      "record": {
+        "schema": 1,
+        "key": "quixi-gpu-tune-v1:676476ad89763e99e70f46152dbfd5cd8af8f01088403dc6485a422a78ba7105",
+        "createdAt": "2026-09-08T23:54:04.610Z",
+        "status": "complete",
+        "selections": {
+          "small": "baseline",
+          "medium": "tiled",
+          "large": "tiled"
+        },
+        "samples": {
+          "small": {
+            "baseline": [
+              2.699999999254942,
+              1.8999999985098839,
+              1.699999999254942
+            ],
+            "tiled": [
+              4,
+              3.300000000745058,
+              3.300000000745058
+            ]
+          },
+          "medium": {
+            "baseline": [
+              4.800000000745058,
+              4.799999997019768,
+              4.800000000745058
+            ],
+            "tiled": [
+              3.399999998509884,
+              3.400000002235174,
+              3.5
+            ]
+          },
+          "large": {
+            "baseline": [
+              18.5,
+              18.599999997764826,
+              18.5
+            ],
+            "tiled": [
+              7.600000001490116,
+              7.699999999254942,
+              7.700000002980232
+            ]
+          }
+        },
+        "probes": 24,
+        "elapsedMs": 170
+      },
+      "cacheHit": false
+    },
+    "subgroups": false,
+    "attention": "fused",
+    "modelSha256": "e1ef345cd35088b06f70c199f5a4e0311bda5983716ad6a3e7d0a604202efffc",
+    "kernelVersion": "1.0.0",
+    "adapter": {
+      "vendor": "apple",
+      "architecture": "metal-3",
+      "device": "",
+      "description": "",
+      "isFallbackAdapter": false
+    },
+    "features": [
+      "bgra8unorm-storage",
+      "clip-distances",
+      "core-features-and-limits",
+      "depth-clip-control",
+      "depth32float-stencil8",
+      "dual-source-blending",
+      "float32-blendable",
+      "float32-filterable",
+      "indirect-first-instance",
+      "primitive-index",
+      "rg11b10ufloat-renderable",
+      "shader-f16",
+      "subgroup-size-control",
+      "subgroups",
+      "texture-component-swizzle",
+      "texture-compression-astc",
+      "texture-compression-astc-sliced-3d",
+      "texture-compression-bc",
+      "texture-compression-bc-sliced-3d",
+      "texture-compression-etc2",
+      "texture-formats-tier1",
+      "texture-formats-tier2",
+      "timestamp-query"
+    ],
+    "enabledFeatures": [
+      "core-features-and-limits"
+    ],
+    "limits": {
+      "maxBufferSize": 268435456,
+      "maxStorageBufferBindingSize": 134217728,
+      "maxComputeInvocationsPerWorkgroup": 256,
+      "maxComputeWorkgroupStorageSize": 16384,
+      "maxComputeWorkgroupsPerDimension": 65535,
+      "maxStorageBuffersPerShaderStage": 8
+    },
+    "capacity": {
+      "batch": 4,
+      "tokens": 512
+    },
+    "memory": {
+      "weightsBytes": 90261504,
+      "scratchBytes": 31518736,
+      "allocatedBytes": 121780240,
+      "bufferCount": 17
+    },
+    "state": "ready"
+  },
+  "memory": {
+    "weightsBytes": 90261504,
+    "scratchBytes": 31518736,
+    "allocatedBytes": 121780240,
+    "bufferCount": 17
+  },
+  "conditions": "Shared development host; real worker message arrives during active execution. Sequence assertions use receipt order, not cross-thread clock assumptions.",
+  "persistence": "Injected cache/checkpoint owner is separate; these counts are inference completions only.",
+  "rendererHeartbeat": {
+    "samples": 57,
+    "maxGapMs": 12
+  },
+  "engine": "chromium",
+  "version": "153.0.8010.12",
+  "launchArgs": [
+    "--enable-gpu",
+    "--use-angle=metal"
+  ],
+  "host": {
+    "platform": "darwin",
+    "release": "25.6.0",
+    "cpu": "Apple M5 Max"
+  },
+  "cpuDistribution": {
+    "version": "1.0.2",
+    "model_format_version": 1,
+    "compiler_image": "emscripten/emsdk@sha256:90b757eb11fa9a0e3ce4d2d9f76d932a56018e4accc37b5a28b2783751e60eb7",
+    "model_sha256": "e1ef345cd35088b06f70c199f5a4e0311bda5983716ad6a3e7d0a604202efffc",
+    "artifacts": {
+      "quixi-scalar.wasm": {
+        "sha256": "e477d3e35b6e83c39e206e76079a4d5136a227711a0124b64bf885f3165cee65",
+        "bytes": 44805,
+        "route": "wasm-scalar-fp32",
+        "sources": {
+          "model.c": "7c29c9a8af9186be3ffadd60f106f686ab626d9585e24c7bbdc2cf300c4102de",
+          "tokenizer.c": "a17e49ff05df55fdb202f2b0a5594f8a01224b1fca15acbdc4675ac3b04ca85f",
+          "encoder.c": "5fca9c2f52fcd1baccee78ac6cf6e065b54e07a38117674d3d2b66ee8b03388e",
+          "sha256.c": "cdb83cc565e92869be60deaf07f028e4d8b45b07236927b7170ff9148c616e4d",
+          "kernels.h": "68d40f577de5607b1ddc249181a8ac0a0a8c5b33db30a65481ae33ec27f2cc55",
+          "internal.h": "7d802a00a4b7374d2bf98cb578a8f92d5e39aa1eaec929771dfa1edab430f767",
+          "model_contract.h": "362a413a843150d48b7431230a1cec78407dcf6feb3b0d648bb4ce3c16d700c7",
+          "quixi_embed.h": "d6bc1b60d1b10bf7bcdb72665a5141a706e05e6193654b7e67cd527e9f80c302"
+        },
+        "simd_required": false
+      },
+      "quixi-simd.wasm": {
+        "sha256": "d07bbc26c3f35731d7e2c6885405205a64852f40f9d7c5878c6efe77e8f9b198",
+        "bytes": 44657,
+        "route": "wasm-simd-fp32",
+        "sources": {
+          "model.c": "7c29c9a8af9186be3ffadd60f106f686ab626d9585e24c7bbdc2cf300c4102de",
+          "tokenizer.c": "a17e49ff05df55fdb202f2b0a5594f8a01224b1fca15acbdc4675ac3b04ca85f",
+          "encoder.c": "5fca9c2f52fcd1baccee78ac6cf6e065b54e07a38117674d3d2b66ee8b03388e",
+          "sha256.c": "cdb83cc565e92869be60deaf07f028e4d8b45b07236927b7170ff9148c616e4d",
+          "kernels.h": "68d40f577de5607b1ddc249181a8ac0a0a8c5b33db30a65481ae33ec27f2cc55",
+          "internal.h": "7d802a00a4b7374d2bf98cb578a8f92d5e39aa1eaec929771dfa1edab430f767",
+          "model_contract.h": "362a413a843150d48b7431230a1cec78407dcf6feb3b0d648bb4ce3c16d700c7",
+          "quixi_embed.h": "d6bc1b60d1b10bf7bcdb72665a5141a706e05e6193654b7e67cd527e9f80c302"
+        },
+        "simd_required": true
+      }
+    }
+  },
+  "gpuDistribution": {
+    "version": "1.0.0",
+    "model_format_version": 1,
+    "model_sha256": "e1ef345cd35088b06f70c199f5a4e0311bda5983716ad6a3e7d0a604202efffc",
+    "kernels": {
+      "attention": "3f07b3c79ef2c0de2d741fea21c77e3183dc2cced788a7295338c025d374e44b",
+      "baseline": "6671b18619861d88c9cb46ffc7eb72464d975dc028478da18a47a8712d476a18",
+      "half": "54222a8a80b836ceb42a5827cccb23ae3b0bc7a802c78d23d422c11d570ae4c8",
+      "subgroups": "9b2b0937d7b3911dccfcbeb8d36d373a857a01c6011fe0ba187ba3197cb92151",
+      "tiled": "6d5ea4ab0951cc237a5e87802019b5e107bfdd81c822cf7e4971099e64a6e79d"
+    },
+    "runtime_sources": {
+      "encoder.ts": "1fb0ad10c2c614a83019cfc14243c4a9968a331f54ce1b13ffd9ce71e7d79e9b",
+      "model.ts": "21813bee5db6a46bb60d1b02a6edcfbeb92418ffcf9ccb8bb8d693b3f8127f32",
+      "tuning.ts": "4d1f0e09824cc27f4cd68b87061115e790ddb5ed2f994dacfe62586406dda7d5"
+    },
+    "runtime_sha256": "9f50b0f32bc0e005e342212189df3c3e210ddc1aa92d09d6108bb94a8955837a",
+    "experimental": [
+      "subgroups"
+    ],
+    "note": "WGSL source distribution; actual driver compilation and optional routes require hardware gates."
+  },
+  "status": "passed"
+}
+{
+  "passed": true,
+  "route": "half",
+  "loss": false,
+  "initializationMs": 74.60000000149012,
+  "initialBackend": "webgpu-fp16",
+  "initialUnavailableFallback": false,
+  "preflightCases": 397,
+  "frozenCases": 12,
+  "duplicates": 32,
+  "oneCancelledJoiner": true,
+  "exact512Accepted": true,
+  "overflowRejected": true,
+  "queryAcceptedSequence": 15,
+  "executions": [
+    {
+      "sequence": 14,
+      "route": "webgpu-fp16",
+      "role": "document",
+      "batch": 4,
+      "tokens": [
+        512,
+        512,
+        512,
+        512
+      ],
+      "durationMs": 27.100000001490116
+    },
+    {
+      "sequence": 16,
+      "route": "webgpu-fp16",
+      "role": "query",
+      "batch": 1,
+      "tokens": [
+        10
+      ],
+      "durationMs": 2.600000001490116
+    },
+    {
+      "sequence": 17,
+      "route": "webgpu-fp16",
+      "role": "document",
+      "batch": 4,
+      "tokens": [
+        512,
+        512,
+        512,
+        512
+      ],
+      "durationMs": 24
+    }
+  ],
+  "final": {
+    "state": "ready",
+    "route": "webgpu-fp16",
+    "kind": "gpu",
+    "background": "running",
+    "jobs": 0,
+    "consumers": 0,
+    "admittedBytes": 0,
+    "activeRequests": 0,
+    "cacheEntries": 9,
+    "cacheBytes": 28650,
+    "storeOperations": 0,
+    "storeBytes": 0,
+    "submitted": 53,
+    "completed": 52,
+    "cancelled": 1,
+    "failed": 0,
+    "cacheHits": 0,
+    "singleflightJoins": 31,
+    "dispatches": 16,
+    "inferred": 22,
+    "fallbacks": 0,
+    "recentChunksPerSecond": 166.99410609526208,
+    "estimatedRemainingSeconds": 0,
+    "etaScope": "admitted-documents",
+    "inferenceCompletionsAreDurable": false
+  },
+  "gpuDiagnostics": {
+    "backend": "webgpu-fp16",
+    "projection": "half",
+    "tuning": null,
+    "subgroups": false,
+    "attention": "fused",
+    "modelSha256": "e1ef345cd35088b06f70c199f5a4e0311bda5983716ad6a3e7d0a604202efffc",
+    "kernelVersion": "1.0.0",
+    "adapter": {
+      "vendor": "apple",
+      "architecture": "metal-3",
+      "device": "",
+      "description": "",
+      "isFallbackAdapter": false
+    },
+    "features": [
+      "bgra8unorm-storage",
+      "clip-distances",
+      "core-features-and-limits",
+      "depth-clip-control",
+      "depth32float-stencil8",
+      "dual-source-blending",
+      "float32-blendable",
+      "float32-filterable",
+      "indirect-first-instance",
+      "primitive-index",
+      "rg11b10ufloat-renderable",
+      "shader-f16",
+      "subgroup-size-control",
+      "subgroups",
+      "texture-component-swizzle",
+      "texture-compression-astc",
+      "texture-compression-astc-sliced-3d",
+      "texture-compression-bc",
+      "texture-compression-bc-sliced-3d",
+      "texture-compression-etc2",
+      "texture-formats-tier1",
+      "texture-formats-tier2",
+      "timestamp-query"
+    ],
+    "enabledFeatures": [
+      "core-features-and-limits",
+      "shader-f16"
+    ],
+    "limits": {
+      "maxBufferSize": 268435456,
+      "maxStorageBufferBindingSize": 134217728,
+      "maxComputeInvocationsPerWorkgroup": 256,
+      "maxComputeWorkgroupStorageSize": 16384,
+      "maxComputeWorkgroupsPerDimension": 65535,
+      "maxStorageBuffersPerShaderStage": 8
+    },
+    "capacity": {
+      "batch": 4,
+      "tokens": 512
+    },
+    "memory": {
+      "weightsBytes": 135392256,
+      "scratchBytes": 31518736,
+      "allocatedBytes": 166910992,
+      "bufferCount": 18
+    },
+    "state": "ready"
+  },
+  "memory": {
+    "weightsBytes": 135392256,
+    "scratchBytes": 31518736,
+    "allocatedBytes": 166910992,
+    "bufferCount": 18
+  },
+  "conditions": "Shared development host; real worker message arrives during active execution. Sequence assertions use receipt order, not cross-thread clock assumptions.",
+  "persistence": "Injected cache/checkpoint owner is separate; these counts are inference completions only.",
+  "rendererHeartbeat": {
+    "samples": 50,
+    "maxGapMs": 12.299999997019768
+  },
+  "engine": "chromium",
+  "version": "153.0.8010.12",
+  "launchArgs": [
+    "--enable-gpu",
+    "--use-angle=metal"
+  ],
+  "host": {
+    "platform": "darwin",
+    "release": "25.6.0",
+    "cpu": "Apple M5 Max"
+  },
+  "cpuDistribution": {
+    "version": "1.0.2",
+    "model_format_version": 1,
+    "compiler_image": "emscripten/emsdk@sha256:90b757eb11fa9a0e3ce4d2d9f76d932a56018e4accc37b5a28b2783751e60eb7",
+    "model_sha256": "e1ef345cd35088b06f70c199f5a4e0311bda5983716ad6a3e7d0a604202efffc",
+    "artifacts": {
+      "quixi-scalar.wasm": {
+        "sha256": "e477d3e35b6e83c39e206e76079a4d5136a227711a0124b64bf885f3165cee65",
+        "bytes": 44805,
+        "route": "wasm-scalar-fp32",
+        "sources": {
+          "model.c": "7c29c9a8af9186be3ffadd60f106f686ab626d9585e24c7bbdc2cf300c4102de",
+          "tokenizer.c": "a17e49ff05df55fdb202f2b0a5594f8a01224b1fca15acbdc4675ac3b04ca85f",
+          "encoder.c": "5fca9c2f52fcd1baccee78ac6cf6e065b54e07a38117674d3d2b66ee8b03388e",
+          "sha256.c": "cdb83cc565e92869be60deaf07f028e4d8b45b07236927b7170ff9148c616e4d",
+          "kernels.h": "68d40f577de5607b1ddc249181a8ac0a0a8c5b33db30a65481ae33ec27f2cc55",
+          "internal.h": "7d802a00a4b7374d2bf98cb578a8f92d5e39aa1eaec929771dfa1edab430f767",
+          "model_contract.h": "362a413a843150d48b7431230a1cec78407dcf6feb3b0d648bb4ce3c16d700c7",
+          "quixi_embed.h": "d6bc1b60d1b10bf7bcdb72665a5141a706e05e6193654b7e67cd527e9f80c302"
+        },
+        "simd_required": false
+      },
+      "quixi-simd.wasm": {
+        "sha256": "d07bbc26c3f35731d7e2c6885405205a64852f40f9d7c5878c6efe77e8f9b198",
+        "bytes": 44657,
+        "route": "wasm-simd-fp32",
+        "sources": {
+          "model.c": "7c29c9a8af9186be3ffadd60f106f686ab626d9585e24c7bbdc2cf300c4102de",
+          "tokenizer.c": "a17e49ff05df55fdb202f2b0a5594f8a01224b1fca15acbdc4675ac3b04ca85f",
+          "encoder.c": "5fca9c2f52fcd1baccee78ac6cf6e065b54e07a38117674d3d2b66ee8b03388e",
+          "sha256.c": "cdb83cc565e92869be60deaf07f028e4d8b45b07236927b7170ff9148c616e4d",
+          "kernels.h": "68d40f577de5607b1ddc249181a8ac0a0a8c5b33db30a65481ae33ec27f2cc55",
+          "internal.h": "7d802a00a4b7374d2bf98cb578a8f92d5e39aa1eaec929771dfa1edab430f767",
+          "model_contract.h": "362a413a843150d48b7431230a1cec78407dcf6feb3b0d648bb4ce3c16d700c7",
+          "quixi_embed.h": "d6bc1b60d1b10bf7bcdb72665a5141a706e05e6193654b7e67cd527e9f80c302"
+        },
+        "simd_required": true
+      }
+    }
+  },
+  "gpuDistribution": {
+    "version": "1.0.0",
+    "model_format_version": 1,
+    "model_sha256": "e1ef345cd35088b06f70c199f5a4e0311bda5983716ad6a3e7d0a604202efffc",
+    "kernels": {
+      "attention": "3f07b3c79ef2c0de2d741fea21c77e3183dc2cced788a7295338c025d374e44b",
+      "baseline": "6671b18619861d88c9cb46ffc7eb72464d975dc028478da18a47a8712d476a18",
+      "half": "54222a8a80b836ceb42a5827cccb23ae3b0bc7a802c78d23d422c11d570ae4c8",
+      "subgroups": "9b2b0937d7b3911dccfcbeb8d36d373a857a01c6011fe0ba187ba3197cb92151",
+      "tiled": "6d5ea4ab0951cc237a5e87802019b5e107bfdd81c822cf7e4971099e64a6e79d"
+    },
+    "runtime_sources": {
+      "encoder.ts": "1fb0ad10c2c614a83019cfc14243c4a9968a331f54ce1b13ffd9ce71e7d79e9b",
+      "model.ts": "21813bee5db6a46bb60d1b02a6edcfbeb92418ffcf9ccb8bb8d693b3f8127f32",
+      "tuning.ts": "4d1f0e09824cc27f4cd68b87061115e790ddb5ed2f994dacfe62586406dda7d5"
+    },
+    "runtime_sha256": "9f50b0f32bc0e005e342212189df3c3e210ddc1aa92d09d6108bb94a8955837a",
+    "experimental": [
+      "subgroups"
+    ],
+    "note": "WGSL source distribution; actual driver compilation and optional routes require hardware gates."
+  },
+  "status": "passed"
+}
+{
+  "passed": true,
+  "route": "gpu",
+  "loss": true,
+  "initializationMs": 258.6000000014901,
+  "initialBackend": "webgpu-fp32",
+  "initialUnavailableFallback": false,
+  "preflightCases": 397,
+  "frozenCases": 12,
+  "duplicates": 32,
+  "oneCancelledJoiner": true,
+  "exact512Accepted": true,
+  "overflowRejected": true,
+  "queryAcceptedSequence": 15,
+  "executions": [
+    {
+      "sequence": 14,
+      "route": "webgpu-fp32",
+      "role": "document",
+      "batch": 4,
+      "tokens": [
+        512,
+        512,
+        512,
+        512
+      ],
+      "durationMs": 0.3999999985098839
+    },
+    {
+      "sequence": 16,
+      "route": "wasm-simd-fp32",
+      "role": "query",
+      "batch": 1,
+      "tokens": [
+        10
+      ],
+      "durationMs": 37.600000001490116
+    },
+    {
+      "sequence": 17,
+      "route": "wasm-simd-fp32",
+      "role": "document",
+      "batch": 1,
+      "tokens": [
+        512
+      ],
+      "durationMs": 676.1000000014901
+    },
+    {
+      "sequence": 18,
+      "route": "wasm-simd-fp32",
+      "role": "document",
+      "batch": 1,
+      "tokens": [
+        512
+      ],
+      "durationMs": 674.2000000029802
+    },
+    {
+      "sequence": 19,
+      "route": "wasm-simd-fp32",
+      "role": "document",
+      "batch": 1,
+      "tokens": [
+        512
+      ],
+      "durationMs": 673
+    },
+    {
+      "sequence": 20,
+      "route": "wasm-simd-fp32",
+      "role": "document",
+      "batch": 1,
+      "tokens": [
+        512
+      ],
+      "durationMs": 675.5
+    },
+    {
+      "sequence": 21,
+      "route": "wasm-simd-fp32",
+      "role": "document",
+      "batch": 1,
+      "tokens": [
+        512
+      ],
+      "durationMs": 674.5
+    },
+    {
+      "sequence": 22,
+      "route": "wasm-simd-fp32",
+      "role": "document",
+      "batch": 1,
+      "tokens": [
+        512
+      ],
+      "durationMs": 673.0999999977648
+    },
+    {
+      "sequence": 23,
+      "route": "wasm-simd-fp32",
+      "role": "document",
+      "batch": 1,
+      "tokens": [
+        512
+      ],
+      "durationMs": 665.5
+    },
+    {
+      "sequence": 24,
+      "route": "wasm-simd-fp32",
+      "role": "document",
+      "batch": 1,
+      "tokens": [
+        512
+      ],
+      "durationMs": 664.5999999977648
+    }
+  ],
+  "final": {
+    "state": "ready",
+    "route": "wasm-simd-fp32",
+    "kind": "cpu",
+    "background": "running",
+    "jobs": 0,
+    "consumers": 0,
+    "admittedBytes": 0,
+    "activeRequests": 0,
+    "cacheEntries": 9,
+    "cacheBytes": 28650,
+    "storeOperations": 0,
+    "storeBytes": 0,
+    "submitted": 53,
+    "completed": 52,
+    "cancelled": 1,
+    "failed": 0,
+    "cacheHits": 0,
+    "singleflightJoins": 31,
+    "dispatches": 23,
+    "inferred": 22,
+    "fallbacks": 1,
+    "recentChunksPerSecond": 1.3442215277072613,
+    "estimatedRemainingSeconds": 0,
+    "etaScope": "admitted-documents",
+    "inferenceCompletionsAreDurable": false
+  },
+  "gpuDiagnostics": {
+    "backend": "webgpu-fp32",
+    "projection": "auto",
+    "tuning": {
+      "record": {
+        "schema": 1,
+        "key": "quixi-gpu-tune-v1:676476ad89763e99e70f46152dbfd5cd8af8f01088403dc6485a422a78ba7105",
+        "createdAt": "2026-09-08T23:54:06.692Z",
+        "status": "complete",
+        "selections": {
+          "small": "baseline",
+          "medium": "tiled",
+          "large": "tiled"
+        },
+        "samples": {
+          "small": {
+            "baseline": [
+              3.300000000745058,
+              2,
+              2
+            ],
+            "tiled": [
+              5.699999999254942,
+              4.300000000745058,
+              3.399999998509884
+            ]
+          },
+          "medium": {
+            "baseline": [
+              5.100000001490116,
+              5,
+              4.899999998509884
+            ],
+            "tiled": [
+              3.600000001490116,
+              3.800000000745058,
+              3.699999999254942
+            ]
+          },
+          "large": {
+            "baseline": [
+              18.699999999254942,
+              18.600000001490116,
+              18.699999999254942
+            ],
+            "tiled": [
+              7.699999999254942,
+              7.5,
+              7.600000001490116
+            ]
+          }
+        },
+        "probes": 24,
+        "elapsedMs": 177.30000000074506
+      },
+      "cacheHit": false
+    },
+    "subgroups": false,
+    "attention": "fused",
+    "modelSha256": "e1ef345cd35088b06f70c199f5a4e0311bda5983716ad6a3e7d0a604202efffc",
+    "kernelVersion": "1.0.0",
+    "adapter": {
+      "vendor": "apple",
+      "architecture": "metal-3",
+      "device": "",
+      "description": "",
+      "isFallbackAdapter": false
+    },
+    "features": [
+      "bgra8unorm-storage",
+      "clip-distances",
+      "core-features-and-limits",
+      "depth-clip-control",
+      "depth32float-stencil8",
+      "dual-source-blending",
+      "float32-blendable",
+      "float32-filterable",
+      "indirect-first-instance",
+      "primitive-index",
+      "rg11b10ufloat-renderable",
+      "shader-f16",
+      "subgroup-size-control",
+      "subgroups",
+      "texture-component-swizzle",
+      "texture-compression-astc",
+      "texture-compression-astc-sliced-3d",
+      "texture-compression-bc",
+      "texture-compression-bc-sliced-3d",
+      "texture-compression-etc2",
+      "texture-formats-tier1",
+      "texture-formats-tier2",
+      "timestamp-query"
+    ],
+    "enabledFeatures": [
+      "core-features-and-limits"
+    ],
+    "limits": {
+      "maxBufferSize": 268435456,
+      "maxStorageBufferBindingSize": 134217728,
+      "maxComputeInvocationsPerWorkgroup": 256,
+      "maxComputeWorkgroupStorageSize": 16384,
+      "maxComputeWorkgroupsPerDimension": 65535,
+      "maxStorageBuffersPerShaderStage": 8
+    },
+    "capacity": {
+      "batch": 4,
+      "tokens": 512
+    },
+    "memory": {
+      "weightsBytes": 90261504,
+      "scratchBytes": 31518736,
+      "allocatedBytes": 121780240,
+      "bufferCount": 17
+    },
+    "state": "ready"
+  },
+  "memory": {
+    "weightsBytes": 90261504,
+    "scratchBytes": 31518736,
+    "allocatedBytes": 121780240,
+    "bufferCount": 0
+  },
+  "conditions": "Shared development host; real worker message arrives during active execution. Sequence assertions use receipt order, not cross-thread clock assumptions.",
+  "persistence": "Injected cache/checkpoint owner is separate; these counts are inference completions only.",
+  "rendererHeartbeat": {
+    "samples": 651,
+    "maxGapMs": 12.199999999254942
+  },
+  "engine": "chromium",
+  "version": "153.0.8010.12",
+  "launchArgs": [
+    "--enable-gpu",
+    "--use-angle=metal"
+  ],
+  "host": {
+    "platform": "darwin",
+    "release": "25.6.0",
+    "cpu": "Apple M5 Max"
+  },
+  "cpuDistribution": {
+    "version": "1.0.2",
+    "model_format_version": 1,
+    "compiler_image": "emscripten/emsdk@sha256:90b757eb11fa9a0e3ce4d2d9f76d932a56018e4accc37b5a28b2783751e60eb7",
+    "model_sha256": "e1ef345cd35088b06f70c199f5a4e0311bda5983716ad6a3e7d0a604202efffc",
+    "artifacts": {
+      "quixi-scalar.wasm": {
+        "sha256": "e477d3e35b6e83c39e206e76079a4d5136a227711a0124b64bf885f3165cee65",
+        "bytes": 44805,
+        "route": "wasm-scalar-fp32",
+        "sources": {
+          "model.c": "7c29c9a8af9186be3ffadd60f106f686ab626d9585e24c7bbdc2cf300c4102de",
+          "tokenizer.c": "a17e49ff05df55fdb202f2b0a5594f8a01224b1fca15acbdc4675ac3b04ca85f",
+          "encoder.c": "5fca9c2f52fcd1baccee78ac6cf6e065b54e07a38117674d3d2b66ee8b03388e",
+          "sha256.c": "cdb83cc565e92869be60deaf07f028e4d8b45b07236927b7170ff9148c616e4d",
+          "kernels.h": "68d40f577de5607b1ddc249181a8ac0a0a8c5b33db30a65481ae33ec27f2cc55",
+          "internal.h": "7d802a00a4b7374d2bf98cb578a8f92d5e39aa1eaec929771dfa1edab430f767",
+          "model_contract.h": "362a413a843150d48b7431230a1cec78407dcf6feb3b0d648bb4ce3c16d700c7",
+          "quixi_embed.h": "d6bc1b60d1b10bf7bcdb72665a5141a706e05e6193654b7e67cd527e9f80c302"
+        },
+        "simd_required": false
+      },
+      "quixi-simd.wasm": {
+        "sha256": "d07bbc26c3f35731d7e2c6885405205a64852f40f9d7c5878c6efe77e8f9b198",
+        "bytes": 44657,
+        "route": "wasm-simd-fp32",
+        "sources": {
+          "model.c": "7c29c9a8af9186be3ffadd60f106f686ab626d9585e24c7bbdc2cf300c4102de",
+          "tokenizer.c": "a17e49ff05df55fdb202f2b0a5594f8a01224b1fca15acbdc4675ac3b04ca85f",
+          "encoder.c": "5fca9c2f52fcd1baccee78ac6cf6e065b54e07a38117674d3d2b66ee8b03388e",
+          "sha256.c": "cdb83cc565e92869be60deaf07f028e4d8b45b07236927b7170ff9148c616e4d",
+          "kernels.h": "68d40f577de5607b1ddc249181a8ac0a0a8c5b33db30a65481ae33ec27f2cc55",
+          "internal.h": "7d802a00a4b7374d2bf98cb578a8f92d5e39aa1eaec929771dfa1edab430f767",
+          "model_contract.h": "362a413a843150d48b7431230a1cec78407dcf6feb3b0d648bb4ce3c16d700c7",
+          "quixi_embed.h": "d6bc1b60d1b10bf7bcdb72665a5141a706e05e6193654b7e67cd527e9f80c302"
+        },
+        "simd_required": true
+      }
+    }
+  },
+  "gpuDistribution": {
+    "version": "1.0.0",
+    "model_format_version": 1,
+    "model_sha256": "e1ef345cd35088b06f70c199f5a4e0311bda5983716ad6a3e7d0a604202efffc",
+    "kernels": {
+      "attention": "3f07b3c79ef2c0de2d741fea21c77e3183dc2cced788a7295338c025d374e44b",
+      "baseline": "6671b18619861d88c9cb46ffc7eb72464d975dc028478da18a47a8712d476a18",
+      "half": "54222a8a80b836ceb42a5827cccb23ae3b0bc7a802c78d23d422c11d570ae4c8",
+      "subgroups": "9b2b0937d7b3911dccfcbeb8d36d373a857a01c6011fe0ba187ba3197cb92151",
+      "tiled": "6d5ea4ab0951cc237a5e87802019b5e107bfdd81c822cf7e4971099e64a6e79d"
+    },
+    "runtime_sources": {
+      "encoder.ts": "1fb0ad10c2c614a83019cfc14243c4a9968a331f54ce1b13ffd9ce71e7d79e9b",
+      "model.ts": "21813bee5db6a46bb60d1b02a6edcfbeb92418ffcf9ccb8bb8d693b3f8127f32",
+      "tuning.ts": "4d1f0e09824cc27f4cd68b87061115e790ddb5ed2f994dacfe62586406dda7d5"
+    },
+    "runtime_sha256": "9f50b0f32bc0e005e342212189df3c3e210ddc1aa92d09d6108bb94a8955837a",
+    "experimental": [
+      "subgroups"
+    ],
+    "note": "WGSL source distribution; actual driver compilation and optional routes require hardware gates."
+  },
+  "status": "passed"
+}
+{
+  "passed": true,
+  "route": "gpu",
+  "loss": false,
+  "initializationMs": 411,
+  "initialBackend": "webgpu-fp32",
+  "initialUnavailableFallback": false,
+  "preflightCases": 397,
+  "frozenCases": 12,
+  "duplicates": 32,
+  "oneCancelledJoiner": true,
+  "exact512Accepted": true,
+  "overflowRejected": true,
+  "queryAcceptedSequence": 15,
+  "executions": [
+    {
+      "sequence": 14,
+      "route": "webgpu-fp32",
+      "role": "document",
+      "batch": 4,
+      "tokens": [
+        512,
+        512,
+        512,
+        512
+      ],
+      "durationMs": 39
+    },
+    {
+      "sequence": 16,
+      "route": "webgpu-fp32",
+      "role": "query",
+      "batch": 1,
+      "tokens": [
+        10
+      ],
+      "durationMs": 1
+    },
+    {
+      "sequence": 17,
+      "route": "webgpu-fp32",
+      "role": "document",
+      "batch": 4,
+      "tokens": [
+        512,
+        512,
+        512,
+        512
+      ],
+      "durationMs": 38
+    }
+  ],
+  "final": {
+    "state": "ready",
+    "route": "webgpu-fp32",
+    "kind": "gpu",
+    "background": "running",
+    "jobs": 0,
+    "consumers": 0,
+    "admittedBytes": 0,
+    "activeRequests": 0,
+    "cacheEntries": 9,
+    "cacheBytes": 28650,
+    "storeOperations": 0,
+    "storeBytes": 0,
+    "submitted": 53,
+    "completed": 52,
+    "cancelled": 1,
+    "failed": 0,
+    "cacheHits": 0,
+    "singleflightJoins": 31,
+    "dispatches": 16,
+    "inferred": 22,
+    "fallbacks": 0,
+    "recentChunksPerSecond": 177.08333333333334,
+    "estimatedRemainingSeconds": 0,
+    "etaScope": "admitted-documents",
+    "inferenceCompletionsAreDurable": false
+  },
+  "gpuDiagnostics": {
+    "backend": "webgpu-fp32",
+    "projection": "auto",
+    "tuning": {
+      "record": {
+        "schema": 1,
+        "key": "quixi-gpu-tune-v1:c3eb5406fdca87c4692d4eae96507e376d39b7ac7d9d5e21e299c75618a91f76",
+        "createdAt": "2026-09-08T23:54:13.921Z",
+        "status": "complete",
+        "selections": {
+          "small": "baseline",
+          "medium": "baseline",
+          "large": "tiled"
+        },
+        "samples": {
+          "small": {
+            "baseline": [
+              3,
+              2,
+              2
+            ],
+            "tiled": [
+              4,
+              4,
+              4
+            ]
+          },
+          "medium": {
+            "baseline": [
+              5,
+              5,
+              5
+            ],
+            "tiled": [
+              5,
+              5,
+              5
+            ]
+          },
+          "large": {
+            "baseline": [
+              20,
+              19,
+              20
+            ],
+            "tiled": [
+              11,
+              12,
+              12
+            ]
+          }
+        },
+        "probes": 24,
+        "elapsedMs": 203
+      },
+      "cacheHit": false
+    },
+    "subgroups": false,
+    "attention": "fused",
+    "modelSha256": "e1ef345cd35088b06f70c199f5a4e0311bda5983716ad6a3e7d0a604202efffc",
+    "kernelVersion": "1.0.0",
+    "adapter": {
+      "vendor": "apple",
+      "architecture": "apple",
+      "device": "apple",
+      "description": "apple",
+      "isFallbackAdapter": false
+    },
+    "features": [
+      "bgra8unorm-storage",
+      "clip-distances",
+      "core-features-and-limits",
+      "depth-clip-control",
+      "depth32float-stencil8",
+      "float16-renderable",
+      "float32-blendable",
+      "float32-filterable",
+      "float32-renderable",
+      "indirect-first-instance",
+      "primitive-index",
+      "rg11b10ufloat-renderable",
+      "shader-f16",
+      "subgroups",
+      "texture-compression-astc",
+      "texture-compression-astc-sliced-3d",
+      "texture-compression-bc",
+      "texture-compression-bc-sliced-3d",
+      "texture-compression-etc2",
+      "texture-formats-tier1",
+      "texture-formats-tier2",
+      "timestamp-query"
+    ],
+    "enabledFeatures": [
+      "core-features-and-limits"
+    ],
+    "limits": {
+      "maxBufferSize": 268435456,
+      "maxStorageBufferBindingSize": 134217728,
+      "maxComputeInvocationsPerWorkgroup": 256,
+      "maxComputeWorkgroupStorageSize": 16384,
+      "maxComputeWorkgroupsPerDimension": 65535,
+      "maxStorageBuffersPerShaderStage": 8
+    },
+    "capacity": {
+      "batch": 4,
+      "tokens": 512
+    },
+    "memory": {
+      "weightsBytes": 90261504,
+      "scratchBytes": 31518736,
+      "allocatedBytes": 121780240,
+      "bufferCount": 17
+    },
+    "state": "ready"
+  },
+  "memory": {
+    "weightsBytes": 90261504,
+    "scratchBytes": 31518736,
+    "allocatedBytes": 121780240,
+    "bufferCount": 17
+  },
+  "conditions": "Shared development host; real worker message arrives during active execution. Sequence assertions use receipt order, not cross-thread clock assumptions.",
+  "persistence": "Injected cache/checkpoint owner is separate; these counts are inference completions only.",
+  "rendererHeartbeat": {
+    "samples": 60,
+    "maxGapMs": 16
+  },
+  "engine": "webkit",
+  "version": "26.6",
+  "launchArgs": [],
+  "host": {
+    "platform": "darwin",
+    "release": "25.6.0",
+    "cpu": "Apple M5 Max"
+  },
+  "cpuDistribution": {
+    "version": "1.0.2",
+    "model_format_version": 1,
+    "compiler_image": "emscripten/emsdk@sha256:90b757eb11fa9a0e3ce4d2d9f76d932a56018e4accc37b5a28b2783751e60eb7",
+    "model_sha256": "e1ef345cd35088b06f70c199f5a4e0311bda5983716ad6a3e7d0a604202efffc",
+    "artifacts": {
+      "quixi-scalar.wasm": {
+        "sha256": "e477d3e35b6e83c39e206e76079a4d5136a227711a0124b64bf885f3165cee65",
+        "bytes": 44805,
+        "route": "wasm-scalar-fp32",
+        "sources": {
+          "model.c": "7c29c9a8af9186be3ffadd60f106f686ab626d9585e24c7bbdc2cf300c4102de",
+          "tokenizer.c": "a17e49ff05df55fdb202f2b0a5594f8a01224b1fca15acbdc4675ac3b04ca85f",
+          "encoder.c": "5fca9c2f52fcd1baccee78ac6cf6e065b54e07a38117674d3d2b66ee8b03388e",
+          "sha256.c": "cdb83cc565e92869be60deaf07f028e4d8b45b07236927b7170ff9148c616e4d",
+          "kernels.h": "68d40f577de5607b1ddc249181a8ac0a0a8c5b33db30a65481ae33ec27f2cc55",
+          "internal.h": "7d802a00a4b7374d2bf98cb578a8f92d5e39aa1eaec929771dfa1edab430f767",
+          "model_contract.h": "362a413a843150d48b7431230a1cec78407dcf6feb3b0d648bb4ce3c16d700c7",
+          "quixi_embed.h": "d6bc1b60d1b10bf7bcdb72665a5141a706e05e6193654b7e67cd527e9f80c302"
+        },
+        "simd_required": false
+      },
+      "quixi-simd.wasm": {
+        "sha256": "d07bbc26c3f35731d7e2c6885405205a64852f40f9d7c5878c6efe77e8f9b198",
+        "bytes": 44657,
+        "route": "wasm-simd-fp32",
+        "sources": {
+          "model.c": "7c29c9a8af9186be3ffadd60f106f686ab626d9585e24c7bbdc2cf300c4102de",
+          "tokenizer.c": "a17e49ff05df55fdb202f2b0a5594f8a01224b1fca15acbdc4675ac3b04ca85f",
+          "encoder.c": "5fca9c2f52fcd1baccee78ac6cf6e065b54e07a38117674d3d2b66ee8b03388e",
+          "sha256.c": "cdb83cc565e92869be60deaf07f028e4d8b45b07236927b7170ff9148c616e4d",
+          "kernels.h": "68d40f577de5607b1ddc249181a8ac0a0a8c5b33db30a65481ae33ec27f2cc55",
+          "internal.h": "7d802a00a4b7374d2bf98cb578a8f92d5e39aa1eaec929771dfa1edab430f767",
+          "model_contract.h": "362a413a843150d48b7431230a1cec78407dcf6feb3b0d648bb4ce3c16d700c7",
+          "quixi_embed.h": "d6bc1b60d1b10bf7bcdb72665a5141a706e05e6193654b7e67cd527e9f80c302"
+        },
+        "simd_required": true
+      }
+    }
+  },
+  "gpuDistribution": {
+    "version": "1.0.0",
+    "model_format_version": 1,
+    "model_sha256": "e1ef345cd35088b06f70c199f5a4e0311bda5983716ad6a3e7d0a604202efffc",
+    "kernels": {
+      "attention": "3f07b3c79ef2c0de2d741fea21c77e3183dc2cced788a7295338c025d374e44b",
+      "baseline": "6671b18619861d88c9cb46ffc7eb72464d975dc028478da18a47a8712d476a18",
+      "half": "54222a8a80b836ceb42a5827cccb23ae3b0bc7a802c78d23d422c11d570ae4c8",
+      "subgroups": "9b2b0937d7b3911dccfcbeb8d36d373a857a01c6011fe0ba187ba3197cb92151",
+      "tiled": "6d5ea4ab0951cc237a5e87802019b5e107bfdd81c822cf7e4971099e64a6e79d"
+    },
+    "runtime_sources": {
+      "encoder.ts": "1fb0ad10c2c614a83019cfc14243c4a9968a331f54ce1b13ffd9ce71e7d79e9b",
+      "model.ts": "21813bee5db6a46bb60d1b02a6edcfbeb92418ffcf9ccb8bb8d693b3f8127f32",
+      "tuning.ts": "4d1f0e09824cc27f4cd68b87061115e790ddb5ed2f994dacfe62586406dda7d5"
+    },
+    "runtime_sha256": "9f50b0f32bc0e005e342212189df3c3e210ddc1aa92d09d6108bb94a8955837a",
+    "experimental": [
+      "subgroups"
+    ],
+    "note": "WGSL source distribution; actual driver compilation and optional routes require hardware gates."
+  },
+  "status": "passed"
+}
+{
+  "passed": true,
+  "route": "half",
+  "loss": false,
+  "initializationMs": 205,
+  "initialBackend": "webgpu-fp16",
+  "initialUnavailableFallback": false,
+  "preflightCases": 397,
+  "frozenCases": 12,
+  "duplicates": 32,
+  "oneCancelledJoiner": true,
+  "exact512Accepted": true,
+  "overflowRejected": true,
+  "queryAcceptedSequence": 15,
+  "executions": [
+    {
+      "sequence": 14,
+      "route": "webgpu-fp16",
+      "role": "document",
+      "batch": 4,
+      "tokens": [
+        512,
+        512,
+        512,
+        512
+      ],
+      "durationMs": 40
+    },
+    {
+      "sequence": 16,
+      "route": "webgpu-fp16",
+      "role": "query",
+      "batch": 1,
+      "tokens": [
+        10
+      ],
+      "durationMs": 3
+    },
+    {
+      "sequence": 17,
+      "route": "webgpu-fp16",
+      "role": "document",
+      "batch": 4,
+      "tokens": [
+        512,
+        512,
+        512,
+        512
+      ],
+      "durationMs": 38
+    }
+  ],
+  "final": {
+    "state": "ready",
+    "route": "webgpu-fp16",
+    "kind": "gpu",
+    "background": "running",
+    "jobs": 0,
+    "consumers": 0,
+    "admittedBytes": 0,
+    "activeRequests": 0,
+    "cacheEntries": 9,
+    "cacheBytes": 28650,
+    "storeOperations": 0,
+    "storeBytes": 0,
+    "submitted": 53,
+    "completed": 52,
+    "cancelled": 1,
+    "failed": 0,
+    "cacheHits": 0,
+    "singleflightJoins": 31,
+    "dispatches": 16,
+    "inferred": 22,
+    "fallbacks": 0,
+    "recentChunksPerSecond": 136,
+    "estimatedRemainingSeconds": 0,
+    "etaScope": "admitted-documents",
+    "inferenceCompletionsAreDurable": false
+  },
+  "gpuDiagnostics": {
+    "backend": "webgpu-fp16",
+    "projection": "half",
+    "tuning": null,
+    "subgroups": false,
+    "attention": "fused",
+    "modelSha256": "e1ef345cd35088b06f70c199f5a4e0311bda5983716ad6a3e7d0a604202efffc",
+    "kernelVersion": "1.0.0",
+    "adapter": {
+      "vendor": "apple",
+      "architecture": "apple",
+      "device": "apple",
+      "description": "apple",
+      "isFallbackAdapter": false
+    },
+    "features": [
+      "bgra8unorm-storage",
+      "clip-distances",
+      "core-features-and-limits",
+      "depth-clip-control",
+      "depth32float-stencil8",
+      "float16-renderable",
+      "float32-blendable",
+      "float32-filterable",
+      "float32-renderable",
+      "indirect-first-instance",
+      "primitive-index",
+      "rg11b10ufloat-renderable",
+      "shader-f16",
+      "subgroups",
+      "texture-compression-astc",
+      "texture-compression-astc-sliced-3d",
+      "texture-compression-bc",
+      "texture-compression-bc-sliced-3d",
+      "texture-compression-etc2",
+      "texture-formats-tier1",
+      "texture-formats-tier2",
+      "timestamp-query"
+    ],
+    "enabledFeatures": [
+      "core-features-and-limits",
+      "shader-f16"
+    ],
+    "limits": {
+      "maxBufferSize": 268435456,
+      "maxStorageBufferBindingSize": 134217728,
+      "maxComputeInvocationsPerWorkgroup": 256,
+      "maxComputeWorkgroupStorageSize": 16384,
+      "maxComputeWorkgroupsPerDimension": 65535,
+      "maxStorageBuffersPerShaderStage": 8
+    },
+    "capacity": {
+      "batch": 4,
+      "tokens": 512
+    },
+    "memory": {
+      "weightsBytes": 135392256,
+      "scratchBytes": 31518736,
+      "allocatedBytes": 166910992,
+      "bufferCount": 18
+    },
+    "state": "ready"
+  },
+  "memory": {
+    "weightsBytes": 135392256,
+    "scratchBytes": 31518736,
+    "allocatedBytes": 166910992,
+    "bufferCount": 18
+  },
+  "conditions": "Shared development host; real worker message arrives during active execution. Sequence assertions use receipt order, not cross-thread clock assumptions.",
+  "persistence": "Injected cache/checkpoint owner is separate; these counts are inference completions only.",
+  "rendererHeartbeat": {
+    "samples": 47,
+    "maxGapMs": 16
+  },
+  "engine": "webkit",
+  "version": "26.6",
+  "launchArgs": [],
+  "host": {
+    "platform": "darwin",
+    "release": "25.6.0",
+    "cpu": "Apple M5 Max"
+  },
+  "cpuDistribution": {
+    "version": "1.0.2",
+    "model_format_version": 1,
+    "compiler_image": "emscripten/emsdk@sha256:90b757eb11fa9a0e3ce4d2d9f76d932a56018e4accc37b5a28b2783751e60eb7",
+    "model_sha256": "e1ef345cd35088b06f70c199f5a4e0311bda5983716ad6a3e7d0a604202efffc",
+    "artifacts": {
+      "quixi-scalar.wasm": {
+        "sha256": "e477d3e35b6e83c39e206e76079a4d5136a227711a0124b64bf885f3165cee65",
+        "bytes": 44805,
+        "route": "wasm-scalar-fp32",
+        "sources": {
+          "model.c": "7c29c9a8af9186be3ffadd60f106f686ab626d9585e24c7bbdc2cf300c4102de",
+          "tokenizer.c": "a17e49ff05df55fdb202f2b0a5594f8a01224b1fca15acbdc4675ac3b04ca85f",
+          "encoder.c": "5fca9c2f52fcd1baccee78ac6cf6e065b54e07a38117674d3d2b66ee8b03388e",
+          "sha256.c": "cdb83cc565e92869be60deaf07f028e4d8b45b07236927b7170ff9148c616e4d",
+          "kernels.h": "68d40f577de5607b1ddc249181a8ac0a0a8c5b33db30a65481ae33ec27f2cc55",
+          "internal.h": "7d802a00a4b7374d2bf98cb578a8f92d5e39aa1eaec929771dfa1edab430f767",
+          "model_contract.h": "362a413a843150d48b7431230a1cec78407dcf6feb3b0d648bb4ce3c16d700c7",
+          "quixi_embed.h": "d6bc1b60d1b10bf7bcdb72665a5141a706e05e6193654b7e67cd527e9f80c302"
+        },
+        "simd_required": false
+      },
+      "quixi-simd.wasm": {
+        "sha256": "d07bbc26c3f35731d7e2c6885405205a64852f40f9d7c5878c6efe77e8f9b198",
+        "bytes": 44657,
+        "route": "wasm-simd-fp32",
+        "sources": {
+          "model.c": "7c29c9a8af9186be3ffadd60f106f686ab626d9585e24c7bbdc2cf300c4102de",
+          "tokenizer.c": "a17e49ff05df55fdb202f2b0a5594f8a01224b1fca15acbdc4675ac3b04ca85f",
+          "encoder.c": "5fca9c2f52fcd1baccee78ac6cf6e065b54e07a38117674d3d2b66ee8b03388e",
+          "sha256.c": "cdb83cc565e92869be60deaf07f028e4d8b45b07236927b7170ff9148c616e4d",
+          "kernels.h": "68d40f577de5607b1ddc249181a8ac0a0a8c5b33db30a65481ae33ec27f2cc55",
+          "internal.h": "7d802a00a4b7374d2bf98cb578a8f92d5e39aa1eaec929771dfa1edab430f767",
+          "model_contract.h": "362a413a843150d48b7431230a1cec78407dcf6feb3b0d648bb4ce3c16d700c7",
+          "quixi_embed.h": "d6bc1b60d1b10bf7bcdb72665a5141a706e05e6193654b7e67cd527e9f80c302"
+        },
+        "simd_required": true
+      }
+    }
+  },
+  "gpuDistribution": {
+    "version": "1.0.0",
+    "model_format_version": 1,
+    "model_sha256": "e1ef345cd35088b06f70c199f5a4e0311bda5983716ad6a3e7d0a604202efffc",
+    "kernels": {
+      "attention": "3f07b3c79ef2c0de2d741fea21c77e3183dc2cced788a7295338c025d374e44b",
+      "baseline": "6671b18619861d88c9cb46ffc7eb72464d975dc028478da18a47a8712d476a18",
+      "half": "54222a8a80b836ceb42a5827cccb23ae3b0bc7a802c78d23d422c11d570ae4c8",
+      "subgroups": "9b2b0937d7b3911dccfcbeb8d36d373a857a01c6011fe0ba187ba3197cb92151",
+      "tiled": "6d5ea4ab0951cc237a5e87802019b5e107bfdd81c822cf7e4971099e64a6e79d"
+    },
+    "runtime_sources": {
+      "encoder.ts": "1fb0ad10c2c614a83019cfc14243c4a9968a331f54ce1b13ffd9ce71e7d79e9b",
+      "model.ts": "21813bee5db6a46bb60d1b02a6edcfbeb92418ffcf9ccb8bb8d693b3f8127f32",
+      "tuning.ts": "4d1f0e09824cc27f4cd68b87061115e790ddb5ed2f994dacfe62586406dda7d5"
+    },
+    "runtime_sha256": "9f50b0f32bc0e005e342212189df3c3e210ddc1aa92d09d6108bb94a8955837a",
+    "experimental": [
+      "subgroups"
+    ],
+    "note": "WGSL source distribution; actual driver compilation and optional routes require hardware gates."
+  },
+  "status": "passed"
+}
+{
+  "passed": true,
+  "route": "gpu",
+  "loss": true,
+  "initializationMs": 392,
+  "initialBackend": "webgpu-fp32",
+  "initialUnavailableFallback": false,
+  "preflightCases": 397,
+  "frozenCases": 12,
+  "duplicates": 32,
+  "oneCancelledJoiner": true,
+  "exact512Accepted": true,
+  "overflowRejected": true,
+  "queryAcceptedSequence": 15,
+  "executions": [
+    {
+      "sequence": 14,
+      "route": "webgpu-fp32",
+      "role": "document",
+      "batch": 4,
+      "tokens": [
+        512,
+        512,
+        512,
+        512
+      ],
+      "durationMs": 1
+    },
+    {
+      "sequence": 16,
+      "route": "wasm-simd-fp32",
+      "role": "query",
+      "batch": 1,
+      "tokens": [
+        10
+      ],
+      "durationMs": 14
+    },
+    {
+      "sequence": 17,
+      "route": "wasm-simd-fp32",
+      "role": "document",
+      "batch": 1,
+      "tokens": [
+        512
+      ],
+      "durationMs": 644
+    },
+    {
+      "sequence": 18,
+      "route": "wasm-simd-fp32",
+      "role": "document",
+      "batch": 1,
+      "tokens": [
+        512
+      ],
+      "durationMs": 644
+    },
+    {
+      "sequence": 19,
+      "route": "wasm-simd-fp32",
+      "role": "document",
+      "batch": 1,
+      "tokens": [
+        512
+      ],
+      "durationMs": 641
+    },
+    {
+      "sequence": 20,
+      "route": "wasm-simd-fp32",
+      "role": "document",
+      "batch": 1,
+      "tokens": [
+        512
+      ],
+      "durationMs": 642
+    },
+    {
+      "sequence": 21,
+      "route": "wasm-simd-fp32",
+      "role": "document",
+      "batch": 1,
+      "tokens": [
+        512
+      ],
+      "durationMs": 643
+    },
+    {
+      "sequence": 22,
+      "route": "wasm-simd-fp32",
+      "role": "document",
+      "batch": 1,
+      "tokens": [
+        512
+      ],
+      "durationMs": 641
+    },
+    {
+      "sequence": 23,
+      "route": "wasm-simd-fp32",
+      "role": "document",
+      "batch": 1,
+      "tokens": [
+        512
+      ],
+      "durationMs": 641
+    },
+    {
+      "sequence": 24,
+      "route": "wasm-simd-fp32",
+      "role": "document",
+      "batch": 1,
+      "tokens": [
+        512
+      ],
+      "durationMs": 642
+    }
+  ],
+  "final": {
+    "state": "ready",
+    "route": "wasm-simd-fp32",
+    "kind": "cpu",
+    "background": "running",
+    "jobs": 0,
+    "consumers": 0,
+    "admittedBytes": 0,
+    "activeRequests": 0,
+    "cacheEntries": 9,
+    "cacheBytes": 28650,
+    "storeOperations": 0,
+    "storeBytes": 0,
+    "submitted": 53,
+    "completed": 52,
+    "cancelled": 1,
+    "failed": 0,
+    "cacheHits": 0,
+    "singleflightJoins": 31,
+    "dispatches": 23,
+    "inferred": 22,
+    "fallbacks": 1,
+    "recentChunksPerSecond": 1.4146772767462423,
+    "estimatedRemainingSeconds": 0,
+    "etaScope": "admitted-documents",
+    "inferenceCompletionsAreDurable": false
+  },
+  "gpuDiagnostics": {
+    "backend": "webgpu-fp32",
+    "projection": "auto",
+    "tuning": {
+      "record": {
+        "schema": 1,
+        "key": "quixi-gpu-tune-v1:c3eb5406fdca87c4692d4eae96507e376d39b7ac7d9d5e21e299c75618a91f76",
+        "createdAt": "2026-09-08T23:54:16.538Z",
+        "status": "complete",
+        "selections": {
+          "small": "baseline",
+          "medium": "baseline",
+          "large": "tiled"
+        },
+        "samples": {
+          "small": {
+            "baseline": [
+              2,
+              1,
+              2
+            ],
+            "tiled": [
+              4,
+              5,
+              4
+            ]
+          },
+          "medium": {
+            "baseline": [
+              5,
+              5,
+              5
+            ],
+            "tiled": [
+              5,
+              5,
+              5
+            ]
+          },
+          "large": {
+            "baseline": [
+              19,
+              19,
+              20
+            ],
+            "tiled": [
+              12,
+              12,
+              11
+            ]
+          }
+        },
+        "probes": 24,
+        "elapsedMs": 202
+      },
+      "cacheHit": false
+    },
+    "subgroups": false,
+    "attention": "fused",
+    "modelSha256": "e1ef345cd35088b06f70c199f5a4e0311bda5983716ad6a3e7d0a604202efffc",
+    "kernelVersion": "1.0.0",
+    "adapter": {
+      "vendor": "apple",
+      "architecture": "apple",
+      "device": "apple",
+      "description": "apple",
+      "isFallbackAdapter": false
+    },
+    "features": [
+      "bgra8unorm-storage",
+      "clip-distances",
+      "core-features-and-limits",
+      "depth-clip-control",
+      "depth32float-stencil8",
+      "float16-renderable",
+      "float32-blendable",
+      "float32-filterable",
+      "float32-renderable",
+      "indirect-first-instance",
+      "primitive-index",
+      "rg11b10ufloat-renderable",
+      "shader-f16",
+      "subgroups",
+      "texture-compression-astc",
+      "texture-compression-astc-sliced-3d",
+      "texture-compression-bc",
+      "texture-compression-bc-sliced-3d",
+      "texture-compression-etc2",
+      "texture-formats-tier1",
+      "texture-formats-tier2",
+      "timestamp-query"
+    ],
+    "enabledFeatures": [
+      "core-features-and-limits"
+    ],
+    "limits": {
+      "maxBufferSize": 268435456,
+      "maxStorageBufferBindingSize": 134217728,
+      "maxComputeInvocationsPerWorkgroup": 256,
+      "maxComputeWorkgroupStorageSize": 16384,
+      "maxComputeWorkgroupsPerDimension": 65535,
+      "maxStorageBuffersPerShaderStage": 8
+    },
+    "capacity": {
+      "batch": 4,
+      "tokens": 512
+    },
+    "memory": {
+      "weightsBytes": 90261504,
+      "scratchBytes": 31518736,
+      "allocatedBytes": 121780240,
+      "bufferCount": 17
+    },
+    "state": "ready"
+  },
+  "memory": {
+    "weightsBytes": 90261504,
+    "scratchBytes": 31518736,
+    "allocatedBytes": 121780240,
+    "bufferCount": 0
+  },
+  "conditions": "Shared development host; real worker message arrives during active execution. Sequence assertions use receipt order, not cross-thread clock assumptions.",
+  "persistence": "Injected cache/checkpoint owner is separate; these counts are inference completions only.",
+  "rendererHeartbeat": {
+    "samples": 485,
+    "maxGapMs": 16
+  },
+  "engine": "webkit",
+  "version": "26.6",
+  "launchArgs": [],
+  "host": {
+    "platform": "darwin",
+    "release": "25.6.0",
+    "cpu": "Apple M5 Max"
+  },
+  "cpuDistribution": {
+    "version": "1.0.2",
+    "model_format_version": 1,
+    "compiler_image": "emscripten/emsdk@sha256:90b757eb11fa9a0e3ce4d2d9f76d932a56018e4accc37b5a28b2783751e60eb7",
+    "model_sha256": "e1ef345cd35088b06f70c199f5a4e0311bda5983716ad6a3e7d0a604202efffc",
+    "artifacts": {
+      "quixi-scalar.wasm": {
+        "sha256": "e477d3e35b6e83c39e206e76079a4d5136a227711a0124b64bf885f3165cee65",
+        "bytes": 44805,
+        "route": "wasm-scalar-fp32",
+        "sources": {
+          "model.c": "7c29c9a8af9186be3ffadd60f106f686ab626d9585e24c7bbdc2cf300c4102de",
+          "tokenizer.c": "a17e49ff05df55fdb202f2b0a5594f8a01224b1fca15acbdc4675ac3b04ca85f",
+          "encoder.c": "5fca9c2f52fcd1baccee78ac6cf6e065b54e07a38117674d3d2b66ee8b03388e",
+          "sha256.c": "cdb83cc565e92869be60deaf07f028e4d8b45b07236927b7170ff9148c616e4d",
+          "kernels.h": "68d40f577de5607b1ddc249181a8ac0a0a8c5b33db30a65481ae33ec27f2cc55",
+          "internal.h": "7d802a00a4b7374d2bf98cb578a8f92d5e39aa1eaec929771dfa1edab430f767",
+          "model_contract.h": "362a413a843150d48b7431230a1cec78407dcf6feb3b0d648bb4ce3c16d700c7",
+          "quixi_embed.h": "d6bc1b60d1b10bf7bcdb72665a5141a706e05e6193654b7e67cd527e9f80c302"
+        },
+        "simd_required": false
+      },
+      "quixi-simd.wasm": {
+        "sha256": "d07bbc26c3f35731d7e2c6885405205a64852f40f9d7c5878c6efe77e8f9b198",
+        "bytes": 44657,
+        "route": "wasm-simd-fp32",
+        "sources": {
+          "model.c": "7c29c9a8af9186be3ffadd60f106f686ab626d9585e24c7bbdc2cf300c4102de",
+          "tokenizer.c": "a17e49ff05df55fdb202f2b0a5594f8a01224b1fca15acbdc4675ac3b04ca85f",
+          "encoder.c": "5fca9c2f52fcd1baccee78ac6cf6e065b54e07a38117674d3d2b66ee8b03388e",
+          "sha256.c": "cdb83cc565e92869be60deaf07f028e4d8b45b07236927b7170ff9148c616e4d",
+          "kernels.h": "68d40f577de5607b1ddc249181a8ac0a0a8c5b33db30a65481ae33ec27f2cc55",
+          "internal.h": "7d802a00a4b7374d2bf98cb578a8f92d5e39aa1eaec929771dfa1edab430f767",
+          "model_contract.h": "362a413a843150d48b7431230a1cec78407dcf6feb3b0d648bb4ce3c16d700c7",
+          "quixi_embed.h": "d6bc1b60d1b10bf7bcdb72665a5141a706e05e6193654b7e67cd527e9f80c302"
+        },
+        "simd_required": true
+      }
+    }
+  },
+  "gpuDistribution": {
+    "version": "1.0.0",
+    "model_format_version": 1,
+    "model_sha256": "e1ef345cd35088b06f70c199f5a4e0311bda5983716ad6a3e7d0a604202efffc",
+    "kernels": {
+      "attention": "3f07b3c79ef2c0de2d741fea21c77e3183dc2cced788a7295338c025d374e44b",
+      "baseline": "6671b18619861d88c9cb46ffc7eb72464d975dc028478da18a47a8712d476a18",
+      "half": "54222a8a80b836ceb42a5827cccb23ae3b0bc7a802c78d23d422c11d570ae4c8",
+      "subgroups": "9b2b0937d7b3911dccfcbeb8d36d373a857a01c6011fe0ba187ba3197cb92151",
+      "tiled": "6d5ea4ab0951cc237a5e87802019b5e107bfdd81c822cf7e4971099e64a6e79d"
+    },
+    "runtime_sources": {
+      "encoder.ts": "1fb0ad10c2c614a83019cfc14243c4a9968a331f54ce1b13ffd9ce71e7d79e9b",
+      "model.ts": "21813bee5db6a46bb60d1b02a6edcfbeb92418ffcf9ccb8bb8d693b3f8127f32",
+      "tuning.ts": "4d1f0e09824cc27f4cd68b87061115e790ddb5ed2f994dacfe62586406dda7d5"
+    },
+    "runtime_sha256": "9f50b0f32bc0e005e342212189df3c3e210ddc1aa92d09d6108bb94a8955837a",
+    "experimental": [
+      "subgroups"
+    ],
+    "note": "WGSL source distribution; actual driver compilation and optional routes require hardware gates."
+  },
+  "status": "passed"
+}

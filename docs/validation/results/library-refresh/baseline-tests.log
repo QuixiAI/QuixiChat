@@ -1,0 +1,180 @@
+TAP version 13
+# (node:3045) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: notifications during a slow automatic view publish that view and coalesce into one followup
+not ok 1 - notifications during a slow automatic view publish that view and coalesce into one followup
+  ---
+  duration_ms: 448.340292
+  type: 'test'
+  location: '/private/var/folders/6m/094x3gh52ns_ds_zfts928rc0000gn/T/quixi-library-refresh-baseline-r1m_r_q4/library-refresh.test.ts:56:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Notifications must not supersede an active automatic view.
+    
+    3 !== 2
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 2
+  actual: 3
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/private/var/folders/6m/094x3gh52ns_ds_zfts928rc0000gn/T/quixi-library-refresh-baseline-r1m_r_q4/library-refresh.test.ts:65:12)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+  ...
+# Subtest: notifications during initial explicit navigation wait for publication before automatic refresh
+not ok 2 - notifications during initial explicit navigation wait for publication before automatic refresh
+  ---
+  duration_ms: 263.194708
+  type: 'test'
+  location: '/private/var/folders/6m/094x3gh52ns_ds_zfts928rc0000gn/T/quixi-library-refresh-baseline-r1m_r_q4/library-refresh.test.ts:76:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    2 !== 1
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 1
+  actual: 2
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/private/var/folders/6m/094x3gh52ns_ds_zfts928rc0000gn/T/quixi-library-refresh-baseline-r1m_r_q4/library-refresh.test.ts:81:10)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: latest explicit navigation wins over an older slow view and its queued notification
+not ok 3 - latest explicit navigation wins over an older slow view and its queued notification
+  ---
+  duration_ms: 261.20275
+  type: 'test'
+  location: '/private/var/folders/6m/094x3gh52ns_ds_zfts928rc0000gn/T/quixi-library-refresh-baseline-r1m_r_q4/library-refresh.test.ts:88:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Explicit navigation consumes the earlier queued refresh.
+    
+    3 !== 2
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 2
+  actual: 3
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/private/var/folders/6m/094x3gh52ns_ds_zfts928rc0000gn/T/quixi-library-refresh-baseline-r1m_r_q4/library-refresh.test.ts:99:10)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: an older navigation failure cannot overwrite the current view error state
+not ok 4 - an older navigation failure cannot overwrite the current view error state
+  ---
+  duration_ms: 0.640209
+  type: 'test'
+  location: '/private/var/folders/6m/094x3gh52ns_ds_zfts928rc0000gn/T/quixi-library-refresh-baseline-r1m_r_q4/library-refresh.test.ts:102:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'Synthetic stale read failure.'
+    - null
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: ~
+  actual: 'Synthetic stale read failure.'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/private/var/folders/6m/094x3gh52ns_ds_zfts928rc0000gn/T/quixi-library-refresh-baseline-r1m_r_q4/library-refresh.test.ts:110:10)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: a failed automatic read does not busy retry, and a later notification can recover
+ok 5 - a failed automatic read does not busy retry, and a later notification can recover
+  ---
+  duration_ms: 873.30875
+  type: 'test'
+  ...
+# Subtest: a failed grouped part read keeps the automatic refresh slot until its held sibling settles
+not ok 6 - a failed grouped part read keeps the automatic refresh slot until its held sibling settles
+  ---
+  duration_ms: 269.614
+  type: 'test'
+  location: '/private/var/folders/6m/094x3gh52ns_ds_zfts928rc0000gn/T/quixi-library-refresh-baseline-r1m_r_q4/library-refresh.test.ts:128:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    The rejected member cannot release the slot while its sibling remains active.
+    
+    2 !== 1
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 1
+  actual: 2
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/private/var/folders/6m/094x3gh52ns_ds_zfts928rc0000gn/T/quixi-library-refresh-baseline-r1m_r_q4/library-refresh.test.ts:135:10)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: dispose cancels a pending automatic timer without further reads or publications
+ok 7 - dispose cancels a pending automatic timer without further reads or publications
+  ---
+  duration_ms: 260.719292
+  type: 'test'
+  ...
+# Subtest: dispose during an automatic read prevents later stages and a dirty followup
+not ok 8 - dispose during an automatic read prevents later stages and a dirty followup
+  ---
+  duration_ms: 464.3745
+  type: 'test'
+  location: '/private/var/folders/6m/094x3gh52ns_ds_zfts928rc0000gn/T/quixi-library-refresh-baseline-r1m_r_q4/library-refresh.test.ts:160:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    An abandoned view must not request subsequent storage stages.
+    
+    10 !== 7
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 7
+  actual: 10
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/private/var/folders/6m/094x3gh52ns_ds_zfts928rc0000gn/T/quixi-library-refresh-baseline-r1m_r_q4/library-refresh.test.ts:170:10)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: archive selection change suppresses a pending automatic refresh and subsequent notifications
+not ok 9 - archive selection change suppresses a pending automatic refresh and subsequent notifications
+  ---
+  duration_ms: 260.225708
+  type: 'test'
+  location: '/private/var/folders/6m/094x3gh52ns_ds_zfts928rc0000gn/T/quixi-library-refresh-baseline-r1m_r_q4/library-refresh.test.ts:175:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    The pending timer must not refresh an archive after selection changes.
+    
+    7 !== 6
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 6
+  actual: 7
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/private/var/folders/6m/094x3gh52ns_ds_zfts928rc0000gn/T/quixi-library-refresh-baseline-r1m_r_q4/library-refresh.test.ts:182:10)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+1..9
+# tests 9
+# suites 0
+# pass 2
+# fail 7
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 3208.378792

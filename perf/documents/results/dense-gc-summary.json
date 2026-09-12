@@ -1,0 +1,130 @@
+{
+  "analysisToolSha256": "22570c38cc2028a3aa464e1c591be8e0746f7a5f8aac126273d8e72d9032637d",
+  "method": "Awaited indexed-page producer pauses and forced GC. Isolate-wide before/after measurements; no peak/hard-bound/exact-retainer claim. Diagnostic timing is not production throughput.",
+  "reports": [
+    {
+      "name": "dense-gc-baseline",
+      "sha256": "2d946f612695c2736b270d513467108efe5a6e8c04d993b627283b1a03f6c423",
+      "status": "passed",
+      "sourceStable": true,
+      "runtimeSha256": "a8884cc2d4df5d6f38cdcedbbd6062a8a4de471338131d7e299e15f06ac7a303",
+      "parserDistributionSha256": "5de8099723be073084ade9e371597083efa230d74e199c7f5fc1fdd675cf2671",
+      "checkpoints": [
+        {
+          "engine": "chromium",
+          "page": 1,
+          "outputUTF16": 151000,
+          "status": "passed",
+          "isolateId": "bb33d47aef007298",
+          "beforeUsedBytes": 4887916,
+          "afterUsedBytes": 3955268,
+          "afterBackingBytes": 2485905,
+          "collectGarbageMs": 4.2242499999993015,
+          "pauseMs": 5.497166999999536,
+          "error": null
+        },
+        {
+          "engine": "chromium",
+          "page": 10,
+          "outputUTF16": 1510000,
+          "status": "passed",
+          "isolateId": "bb33d47aef007298",
+          "beforeUsedBytes": 16230600,
+          "afterUsedBytes": 14209660,
+          "afterBackingBytes": 2485905,
+          "collectGarbageMs": 5.512124999997468,
+          "pauseMs": 6.729374999998981,
+          "error": null
+        },
+        {
+          "engine": "chromium",
+          "page": 50,
+          "outputUTF16": 7550000,
+          "status": "passed",
+          "isolateId": "bb33d47aef007298",
+          "beforeUsedBytes": 68903896,
+          "afterUsedBytes": 58826104,
+          "afterBackingBytes": 2485905,
+          "collectGarbageMs": 23.003499999998894,
+          "pauseMs": 24.275125000000116,
+          "error": null
+        },
+        {
+          "engine": "chromium",
+          "page": 100,
+          "outputUTF16": 15100000,
+          "status": "passed",
+          "isolateId": "bb33d47aef007298",
+          "beforeUsedBytes": 126137580,
+          "afterUsedBytes": 114602928,
+          "afterBackingBytes": 2485905,
+          "collectGarbageMs": 24.56875000000582,
+          "pauseMs": 26.305124999998952,
+          "error": null
+        }
+      ]
+    },
+    {
+      "name": "dense-gc-cleanup",
+      "sha256": "9b65ed159dfd8d78b54ea60c71edb40aa15546fee409608c7dfeef81a31cb8f0",
+      "status": "passed",
+      "sourceStable": true,
+      "runtimeSha256": "c7eefd342957a2ebf73005d94af82ff18bb35d8f17c1afe0723b29238a257dd5",
+      "parserDistributionSha256": "5de8099723be073084ade9e371597083efa230d74e199c7f5fc1fdd675cf2671",
+      "checkpoints": [
+        {
+          "engine": "chromium",
+          "page": 1,
+          "outputUTF16": 151000,
+          "status": "passed",
+          "isolateId": "9e383f42e5f2319a",
+          "beforeUsedBytes": 4774552,
+          "afterUsedBytes": 2807264,
+          "afterBackingBytes": 2224065,
+          "collectGarbageMs": 3.911667000000307,
+          "pauseMs": 5.379499999999098,
+          "error": null
+        },
+        {
+          "engine": "chromium",
+          "page": 10,
+          "outputUTF16": 1510000,
+          "status": "passed",
+          "isolateId": "9e383f42e5f2319a",
+          "beforeUsedBytes": 19621424,
+          "afterUsedBytes": 3135304,
+          "afterBackingBytes": 2224065,
+          "collectGarbageMs": 17.241750000001048,
+          "pauseMs": 18.61279099999956,
+          "error": null
+        },
+        {
+          "engine": "chromium",
+          "page": 50,
+          "outputUTF16": 7550000,
+          "status": "passed",
+          "isolateId": "9e383f42e5f2319a",
+          "beforeUsedBytes": 31949448,
+          "afterUsedBytes": 3261000,
+          "afterBackingBytes": 2224065,
+          "collectGarbageMs": 4.168208000002778,
+          "pauseMs": 5.302083999995375,
+          "error": null
+        },
+        {
+          "engine": "chromium",
+          "page": 100,
+          "outputUTF16": 15100000,
+          "status": "passed",
+          "isolateId": "9e383f42e5f2319a",
+          "beforeUsedBytes": 33769548,
+          "afterUsedBytes": 3319580,
+          "afterBackingBytes": 2224065,
+          "collectGarbageMs": 4.593082999999751,
+          "pauseMs": 5.975000000005821,
+          "error": null
+        }
+      ]
+    }
+  ]
+}

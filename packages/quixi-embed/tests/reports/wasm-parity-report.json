@@ -1,0 +1,23 @@
+{
+  "route": "scalar-fp32",
+  "cases": 159,
+  "thresholds": {
+    "atol": 0.0001,
+    "rtol": 0.0001,
+    "vector_atol": 2e-05,
+    "min_cosine": 0.999999,
+    "norm_atol": 1e-05
+  },
+  "max_absolute_error": 8.58306884765625e-06,
+  "minimum_cosine": 0.9999999999996364,
+  "passed": true,
+  "errors": [],
+  "backend": {
+    "route": "wasm-c-scalar-fp32",
+    "wasm_sha256": "890b05265afa477315adb3da3ffaeda53184b84e3d6b122288bc9cca13d9deb6",
+    "model_sha256": "e1ef345cd35088b06f70c199f5a4e0311bda5983716ad6a3e7d0a604202efffc"
+  },
+  "candidate_manifest_sha256": "067e9c88b322adcff43337e0cc5fbd4ca8f882a644a9493750f74e7a8161ff0b",
+  "golden_manifest_sha256": "f35fd454d81b7593c88624228fcba21371f120fc6133a6f3684b1ecfd519119b",
+  "elapsed_seconds": 805.5459409590001
+}

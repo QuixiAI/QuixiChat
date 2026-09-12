@@ -1,0 +1,241 @@
+{
+  "selectedEngines": [
+    "chromium",
+    "webkit"
+  ],
+  "status": "passed",
+  "startedAt": "2026-09-09T19:19:30.881Z",
+  "hosts": [
+    {
+      "name": "chromium",
+      "status": "passed",
+      "checks": [
+        "React StrictMode panel selects a real host File, imports through production storage, releases selected handle and shows durable completion",
+        "bounded source-specific warning review renders missing and unsupported content notices",
+        "conversation action returns the canonical thread ID to host composition",
+        "report is streamed into a verified host transfer and saved via a separate user gesture",
+        "importing the same export again for the same account creates no duplicate threads, messages or parts",
+        "importing changed source text adds a new sealed revision in the same thread while retaining the original message and raw source",
+        "imported text is searchable through the lexical index with no provider account and no semantic indexing",
+        "a malformed message record is skipped with a visible notice while the rest of the export imports and its raw source is retained",
+        "pause during an in-flight actual storage acknowledgment retains hidden progress without publishing a partial thread",
+        "saved run listing and warning/report access survive an actual browser-process restart",
+        "paused import resumes after an actual browser-process restart without a selected File or provider account",
+        "explicit discard removes unfinished import work while preserving already saved conversations and original files",
+        "unmount cancels active import, persists paused progress, releases selected host file and publishes no partial thread"
+      ],
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36",
+      "repeatImport": {
+        "before": {
+          "threads": 1,
+          "messages": 3,
+          "parts": 5,
+          "rawObjects": 1
+        },
+        "repeated": {
+          "threads": 1,
+          "messages": 3,
+          "parts": 5,
+          "rawObjects": 2
+        }
+      },
+      "changedImport": {
+        "before": {
+          "threads": 1,
+          "messages": 3,
+          "parts": 5,
+          "rawObjects": 2
+        },
+        "after": {
+          "threads": 1,
+          "messages": 6,
+          "parts": 10,
+          "rawObjects": 3
+        },
+        "changedSha256": "d7d8edb9a01748784203a548728451a321f5fc9ea01896bbc660b363e7925070",
+        "run": {
+          "accountScope": "Personal fixture",
+          "formatProfile": "chatgpt-mapping-observed-2026-v1",
+          "importerName": "quixi-provider-export",
+          "importerVersion": "0.1.0",
+          "provider": "openai",
+          "recordedAt": 1788981572781,
+          "runId": "87feca58-53b8-4a03-95a6-b95f61c5fd49",
+          "state": "complete",
+          "summary": {
+            "completedAt": 1788981573110,
+            "format": "json",
+            "sourceKey": "file-0",
+            "sourceName": "chatgpt-observed.changed.json"
+          },
+          "workspaceId": "00000000-0000-4000-8000-000000000021"
+        },
+        "groups": [
+          {
+            "state": "published",
+            "report": {
+              "importSourceId": "c1324546-fc55-47b5-a0ff-95b2d2dd3ac3",
+              "mode": "extend",
+              "records": 33,
+              "sourceFingerprint": "62220d325c9de74f1cd5679ad1f896a48b7a647e0f9c674ac47f89dd887d4644",
+              "threadId": "1c6c4268-243a-426e-ac95-03f825c3377a"
+            }
+          },
+          {
+            "state": "complete",
+            "report": {
+              "groups": 1,
+              "rawObjectId": "a5876364-98a6-4af7-aae3-f9b833ac45e6",
+              "sha256": "d7d8edb9a01748784203a548728451a321f5fc9ea01896bbc660b363e7925070"
+            }
+          }
+        ],
+        "rawObjects": [
+          {
+            "sha256": "6872243165447554db289d9ed93d7cfe86ae2a207fffb5dc9cc532523330f141",
+            "byteLength": 763
+          },
+          {
+            "sha256": "d7d8edb9a01748784203a548728451a321f5fc9ea01896bbc660b363e7925070",
+            "byteLength": 777
+          },
+          {
+            "sha256": "6872243165447554db289d9ed93d7cfe86ae2a207fffb5dc9cc532523330f141",
+            "byteLength": 763
+          }
+        ],
+        "events": [
+          "source_message_revision",
+          "unsupported_part_preserved",
+          "source_message_revision",
+          "source_message_revision",
+          "unsupported_part_preserved",
+          "attachment_bytes_missing",
+          "attachment_bytes_missing"
+        ]
+      }
+    },
+    {
+      "name": "webkit",
+      "status": "passed",
+      "checks": [
+        "React StrictMode panel selects a real host File, imports through production storage, releases selected handle and shows durable completion",
+        "bounded source-specific warning review renders missing and unsupported content notices",
+        "conversation action returns the canonical thread ID to host composition",
+        "report is streamed into a verified host transfer and saved via a separate user gesture",
+        "importing the same export again for the same account creates no duplicate threads, messages or parts",
+        "importing changed source text adds a new sealed revision in the same thread while retaining the original message and raw source",
+        "imported text is searchable through the lexical index with no provider account and no semantic indexing",
+        "a malformed message record is skipped with a visible notice while the rest of the export imports and its raw source is retained",
+        "pause during an in-flight actual storage acknowledgment retains hidden progress without publishing a partial thread",
+        "saved run listing and warning/report access survive an actual browser-process restart",
+        "paused import resumes after an actual browser-process restart without a selected File or provider account",
+        "explicit discard removes unfinished import work while preserving already saved conversations and original files",
+        "unmount cancels active import, persists paused progress, releases selected host file and publishes no partial thread"
+      ],
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+      "repeatImport": {
+        "before": {
+          "threads": 1,
+          "messages": 3,
+          "parts": 5,
+          "rawObjects": 1
+        },
+        "repeated": {
+          "threads": 1,
+          "messages": 3,
+          "parts": 5,
+          "rawObjects": 2
+        }
+      },
+      "changedImport": {
+        "before": {
+          "threads": 1,
+          "messages": 3,
+          "parts": 5,
+          "rawObjects": 2
+        },
+        "after": {
+          "threads": 1,
+          "messages": 6,
+          "parts": 10,
+          "rawObjects": 3
+        },
+        "changedSha256": "d7d8edb9a01748784203a548728451a321f5fc9ea01896bbc660b363e7925070",
+        "run": {
+          "accountScope": "Personal fixture",
+          "formatProfile": "chatgpt-mapping-observed-2026-v1",
+          "importerName": "quixi-provider-export",
+          "importerVersion": "0.1.0",
+          "provider": "openai",
+          "recordedAt": 1788981578033,
+          "runId": "4d8a71bf-f139-4816-b56a-cbe93fbf525a",
+          "state": "complete",
+          "summary": {
+            "completedAt": 1788981578162,
+            "format": "json",
+            "sourceKey": "file-0",
+            "sourceName": "chatgpt-observed.changed.json"
+          },
+          "workspaceId": "00000000-0000-4000-8000-000000000021"
+        },
+        "groups": [
+          {
+            "state": "published",
+            "report": {
+              "importSourceId": "80a0e683-0711-4191-aff9-224939427cd3",
+              "mode": "extend",
+              "records": 33,
+              "sourceFingerprint": "62220d325c9de74f1cd5679ad1f896a48b7a647e0f9c674ac47f89dd887d4644",
+              "threadId": "60c45bcf-7e1b-4eff-b4d3-9aa6e432e3f1"
+            }
+          },
+          {
+            "state": "complete",
+            "report": {
+              "groups": 1,
+              "rawObjectId": "98fca6c5-2db5-466d-b222-3389524cc3eb",
+              "sha256": "d7d8edb9a01748784203a548728451a321f5fc9ea01896bbc660b363e7925070"
+            }
+          }
+        ],
+        "rawObjects": [
+          {
+            "sha256": "d7d8edb9a01748784203a548728451a321f5fc9ea01896bbc660b363e7925070",
+            "byteLength": 777
+          },
+          {
+            "sha256": "6872243165447554db289d9ed93d7cfe86ae2a207fffb5dc9cc532523330f141",
+            "byteLength": 763
+          },
+          {
+            "sha256": "6872243165447554db289d9ed93d7cfe86ae2a207fffb5dc9cc532523330f141",
+            "byteLength": 763
+          }
+        ],
+        "events": [
+          "source_message_revision",
+          "source_message_revision",
+          "unsupported_part_preserved",
+          "unsupported_part_preserved",
+          "attachment_bytes_missing",
+          "attachment_bytes_missing",
+          "source_message_revision"
+        ]
+      }
+    }
+  ],
+  "sourceSha256": {
+    "tooling/browser-engines.mjs": "136f16e63e905ae4c8305c7adedfce2411eff13b04f914054f8fb718155d0df1",
+    "packages/app/src/features/imports/ImportPanel.tsx": "02e66eda559894fe093a1d0a5646cae4cfbdb4339adfe110677dd12e06175825",
+    "packages/app/src/features/imports/controller.ts": "6007aceb73acaea0a19c3c8230153deeac2c5a873cad4cc5c8960fa0ad1ced18",
+    "packages/app/src/features/imports/host-files.ts": "3cf152190b585f932619d53fc64b7fce934fff6291ebf64e96e0fa5a993b9dd6",
+    "packages/app/src/features/imports/discard.ts": "9daf2de2fdfc7caea98346b6eba14058c980fe2448a193994901310a552a2763",
+    "packages/importers/src/host-report.ts": "6c41791c7961f838542d020098469a2557f25ad9de1a1d5b49444dc2058a4d71",
+    "apps/web/src/host/index.ts": "61d9207d5371c25853dda13a978859a62546d73583ae9284cd2647c61c4bd1da",
+    "apps/web/src/host/transfers.ts": "5718b2743caeffb00f4e736393ddff691b94fd896453aafbd696ac50d2e618f1",
+    "packages/storage/src/client/archive.ts": "844981f196ebee613c584dadf3d1cef2c1af15f3aa06daf253d6d48c3b553c24",
+    "package-lock.json": "aadb456e2a567a2b91cbb81a502650ebac93541f0a59d54035bdde2cacd97672"
+  },
+  "finishedAt": "2026-09-09T19:19:40.731Z"
+}

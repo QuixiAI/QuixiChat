@@ -1,0 +1,165 @@
+{
+  "mode": "assert",
+  "name": "chromium",
+  "caseName": "fresh-branch-review",
+  "scope": "Computed CSS reflow and enabled control-border contrast; no screen-reader or native-control pixel-rendering qualification.",
+  "samples": [
+    {
+      "size": "normal",
+      "viewportWidth": 320,
+      "documentWidth": 320,
+      "region": {
+        "left": 37.78,
+        "right": 282.22,
+        "width": 244.44,
+        "height": 533.95
+      },
+      "rootFontSize": "16px",
+      "focused": {
+        "tag": "INPUT",
+        "id": "",
+        "label": "I want to start fresh without earlier messages or the applied summary",
+        "insideRegion": true
+      },
+      "controlCount": 3,
+      "controls": [
+        {
+          "tag": "INPUT",
+          "label": "I want to start fresh without earlier messages or the applied summary",
+          "bounds": {
+            "left": 41.78,
+            "right": 54.78,
+            "width": 13,
+            "height": 13
+          },
+          "containerBounds": {
+            "left": 19.19,
+            "right": 300.81,
+            "width": 281.63,
+            "height": 3352.41
+          },
+          "disabled": false,
+          "overflow": false
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Start fresh branch",
+          "bounds": {
+            "left": 37.78,
+            "right": 195.09,
+            "width": 157.31,
+            "height": 38.94
+          },
+          "containerBounds": {
+            "left": 19.19,
+            "right": 300.81,
+            "width": 281.63,
+            "height": 3352.41
+          },
+          "disabled": false,
+          "overflow": false
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Cancel branch review",
+          "bounds": {
+            "left": 37.78,
+            "right": 219.75,
+            "width": 181.97,
+            "height": 38.94
+          },
+          "containerBounds": {
+            "left": 19.19,
+            "right": 300.81,
+            "width": 281.63,
+            "height": 3352.41
+          },
+          "disabled": false,
+          "overflow": false
+        }
+      ],
+      "borders": [],
+      "documentOverflow": [],
+      "violations": []
+    },
+    {
+      "size": "enlarged",
+      "viewportWidth": 320,
+      "documentWidth": 320,
+      "region": {
+        "left": 74.58,
+        "right": 245.42,
+        "width": 170.84,
+        "height": 3061.67
+      },
+      "rootFontSize": "32px",
+      "focused": {
+        "tag": "INPUT",
+        "id": "",
+        "label": "I want to start fresh without earlier messages or the applied summary",
+        "insideRegion": true
+      },
+      "controlCount": 3,
+      "controls": [
+        {
+          "tag": "INPUT",
+          "label": "I want to start fresh without earlier messages or the applied summary",
+          "bounds": {
+            "left": 78.58,
+            "right": 91.58,
+            "width": 13,
+            "height": 13
+          },
+          "containerBounds": {
+            "left": 38.39,
+            "right": 281.61,
+            "width": 243.22,
+            "height": 13347.83
+          },
+          "disabled": false,
+          "overflow": false
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Start fresh branch",
+          "bounds": {
+            "left": 74.58,
+            "right": 245.42,
+            "width": 170.84,
+            "height": 162.28
+          },
+          "containerBounds": {
+            "left": 38.39,
+            "right": 281.61,
+            "width": 243.22,
+            "height": 13347.83
+          },
+          "disabled": false,
+          "overflow": false
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Cancel branch review",
+          "bounds": {
+            "left": 74.58,
+            "right": 245.42,
+            "width": 170.84,
+            "height": 162.28
+          },
+          "containerBounds": {
+            "left": 38.39,
+            "right": 281.61,
+            "width": 243.22,
+            "height": 13347.83
+          },
+          "disabled": false,
+          "overflow": false
+        }
+      ],
+      "borders": [],
+      "documentOverflow": [],
+      "violations": []
+    }
+  ],
+  "status": "passed"
+}

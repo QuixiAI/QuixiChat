@@ -1,0 +1,22 @@
+
+> @quixi/providers@0.0.1 test:browser
+> node --experimental-transform-types tests/run-browser.mjs
+
+(node:94519) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+{
+  "status": "passed",
+  "hosts": [
+    {
+      "name": "chromium",
+      "status": "passed",
+      "checks": 23
+    },
+    {
+      "name": "webkit",
+      "status": "passed",
+      "checks": 23
+    }
+  ],
+  "reportFile": "/Users/eric/QuixiChat/test-results/providers-browser.json"
+}

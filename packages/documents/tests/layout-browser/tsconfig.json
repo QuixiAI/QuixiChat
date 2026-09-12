@@ -1,0 +1,5 @@
+{
+  "extends": "../../../../tsconfig.json",
+  "compilerOptions": { "resolveJsonModule": true },
+  "include": ["./index.ts", "./raw-parser.ts"]
+}

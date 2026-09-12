@@ -1,0 +1,12 @@
+import { build } from 'vite';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
+const profile = process.env.QUIXI_OAUTH_PROOF_PROFILE;
+if (!/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/.test(profile ?? '')) throw new Error('Explicit UUIDv4 proof profile required');
+const output = resolve(import.meta.dirname, 'build'), root = resolve(import.meta.dirname, '../../..');
+await mkdir(output, { recursive: true });
+await build({ configFile: false, root: import.meta.dirname, logLevel: 'warn', build: { outDir: resolve(output, 'dist'), emptyOutDir: true } });
+const production = JSON.parse(await readFile(resolve(root, 'apps/desktop/src-tauri/tauri.conf.json'), 'utf8'));
+const proof = { ...production, productName: 'Quixi OAuth Proof', identifier: `ai.quixi.chat.oauth-proof.${profile}`, build: { frontendDist: './dist' }, app: { ...production.app, windows: [], security: { ...production.app.security } }, bundle: { active: false, icon: production.bundle.icon.map(name => resolve(root, 'apps/desktop/src-tauri', name)) } };
+if (proof.app.security.csp !== production.app.security.csp) throw new Error('Proof must preserve production CSP');
+await writeFile(resolve(output, 'tauri.conf.json'), JSON.stringify(proof, null, 2) + '\n');

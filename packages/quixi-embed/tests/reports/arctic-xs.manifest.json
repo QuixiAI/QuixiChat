@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "source_sha256": "ee789e0b1d6ecbbd5ce37b474af556cc1a1319cee4417d9e3b11f82e90300706",
+  "vocabulary_sha256": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3",
+  "unicode_sha256": "ad1bcb941d13cdcfed30330a10a5bda7fdfd6497cd6491326e70245e64c4dced",
+  "unicode": {
+    "deleted_ranges": 288,
+    "normalization_mappings": 14286,
+    "punctuation_ranges": 156,
+    "utf8_bytes": 107535
+  },
+  "artifact": "arctic-xs.qxmodel",
+  "bytes": 90785583,
+  "sha256": "e1ef345cd35088b06f70c199f5a4e0311bda5983716ad6a3e7d0a604202efffc",
+  "payload_sha256": "6834e6b69afc7295eeb60cb514e6ccbd6ea5648a9431263ad7fca1071c8a9c5e",
+  "sections": [
+    {
+      "type": 1,
+      "flags": 0,
+      "offset": 256,
+      "bytes": 9696,
+      "count": 101
+    },
+    {
+      "type": 2,
+      "flags": 0,
+      "offset": 9984,
+      "bytes": 90261504,
+      "count": 101
+    },
+    {
+      "type": 3,
+      "flags": 0,
+      "offset": 90271488,
+      "bytes": 231508,
+      "count": 30522
+    },
+    {
+      "type": 4,
+      "flags": 0,
+      "offset": 90503040,
+      "bytes": 282543,
+      "count": 1
+    }
+  ],
+  "precision": "fp32",
+  "layout": "row-major-output-input",
+  "compiler_sha256": "ef520f9260ff50a339c17a22dd41e4ffe8abfe5e3215bed0c2f86196f45134f4"
+}

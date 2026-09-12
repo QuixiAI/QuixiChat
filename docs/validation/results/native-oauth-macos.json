@@ -1,0 +1,2684 @@
+{
+  "status": "passed",
+  "startedAt": "2026-09-10T21:55:44.192316+00:00",
+  "profile": "170f78bb-f170-43aa-90bc-487fc0f1aff4",
+  "scheme": "ai.quixi.chat.oauth-proof.170f78bb-f170-43aa-90bc-487fc0f1aff4",
+  "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+  "macos": "26.6.2",
+  "systemWebKitVersion": "21624.5.1.11.3",
+  "scope": "Actual installed unique macOS app and LaunchServices cold/warm callback delivery into production native OAuth, TLS token exchange, and Keychain-backed native HTTP. The proof-only opener exports a synthetic authorization URL (state and PKCE challenge) to private temporary control files; it does not launch or qualify an external authorization browser. No live provider account, default browser/profile, production app registration, refresh/ID-token login, or expiry enforcement claim.",
+  "commands": [
+    {
+      "argv": [
+        "node_modules/.bin/tsc",
+        "--noEmit",
+        "-p",
+        "tests/hosts/oauth-proof/tsconfig.json"
+      ],
+      "startedAt": "2026-09-10T21:55:44.215344+00:00",
+      "completedAt": "2026-09-10T21:55:44.332221+00:00",
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "node",
+        "tests/hosts/oauth-proof/build.mjs"
+      ],
+      "startedAt": "2026-09-10T21:55:44.333550+00:00",
+      "completedAt": "2026-09-10T21:55:44.537557+00:00",
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "cargo",
+        "build",
+        "--locked",
+        "-p",
+        "quixi-desktop",
+        "--bin",
+        "quixi-oauth-proof",
+        "--features",
+        "oauth-proof"
+      ],
+      "startedAt": "2026-09-10T21:55:44.537905+00:00",
+      "completedAt": "2026-09-10T21:55:49.321781+00:00",
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "   Compiling quixi-desktop v0.0.1 (/Users/eric/QuixiChat/apps/desktop/src-tauri)\nwarning: unused import: `Manager`\n  --> apps/desktop/src-tauri/../../../tests/hosts/oauth-proof/native.rs:12:13\n   |\n12 | use tauri::{Manager, WebviewUrl, WebviewWindowBuilder};\n   |             ^^^^^^^\n   |\n   = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nwarning: methods `put` and `delete` are never used\n   --> apps/desktop/src-tauri/../../../tests/hosts/oauth-proof/../../../apps/desktop/src-tauri/src/host/secrets.rs:168:12\n    |\n 26 | impl Secrets {\n    | ------------ methods in this implementation\n...\n168 |     pub fn put(\n    |            ^^^\n...\n275 |     pub fn delete(&self, handle: &SecretHandle, request: &str) -> Result<()> {\n    |            ^^^^^^\n    |\n    = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default\n\nwarning: `quixi-desktop` (bin \"quixi-oauth-proof\") generated 2 warnings\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 4.72s\n"
+    },
+    {
+      "argv": [
+        "/usr/bin/codesign",
+        "--force",
+        "--deep",
+        "--sign",
+        "-",
+        "/Users/eric/Applications/Quixi OAuth Proof 170f78bb-f170-43aa-90bc-487fc0f1aff4.app"
+      ],
+      "startedAt": "2026-09-10T21:55:49.423551+00:00",
+      "completedAt": "2026-09-10T21:55:49.467269+00:00",
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "/Users/eric/Applications/Quixi OAuth Proof 170f78bb-f170-43aa-90bc-487fc0f1aff4.app: replacing existing signature\n"
+    },
+    {
+      "argv": [
+        "/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister",
+        "-f",
+        "/Users/eric/Applications/Quixi OAuth Proof 170f78bb-f170-43aa-90bc-487fc0f1aff4.app"
+      ],
+      "startedAt": "2026-09-10T21:55:49.467637+00:00",
+      "completedAt": "2026-09-10T21:55:49.486788+00:00",
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "phases": [
+    {
+      "phase": "cold",
+      "startedAt": "2026-09-10T21:55:49.508504+00:00",
+      "callbacks": [
+        {
+          "variant": "cold-no-pending",
+          "delivery": "/usr/bin/open",
+          "queryNames": [
+            "state",
+            "iss",
+            "code"
+          ]
+        }
+      ],
+      "launchMode": "LaunchServices URL cold launch; open exit status is launcher status, native exit marker is separate",
+      "native": {
+        "authorizations": 0,
+        "configuredCsp": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' asset: http://asset.localhost data:; connect-src 'self' ipc: http://ipc.localhost",
+        "keychainService": "ai.quixi.chat.oauth-proof.170f78bb-f170-43aa-90bc-487fc0f1aff4",
+        "oauth": {
+          "acceptedCallbacks": 0,
+          "openedEvents": 1,
+          "rejectedCallbacks": 1,
+          "tokenExchanges": 0
+        },
+        "phase": "cold",
+        "pid": 79289,
+        "profile": "170f78bb-f170-43aa-90bc-487fc0f1aff4",
+        "resources": [
+          {
+            "bytes": 351,
+            "csp": "connect-src 'self' ipc: http://ipc.localhost; worker-src 'self'; default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' asset: http://asset.localhost data:; script-src 'self' 'wasm-unsafe-eval' 'sha256-S0xrpj6jELMznS6PQspVma+3mVDUcu65Te62HW/uvJQ='",
+            "status": 200,
+            "url": "tauri://localhost/"
+          },
+          {
+            "bytes": 17949,
+            "csp": null,
+            "status": 200,
+            "url": "tauri://localhost/assets/index-DpW2cLKZ.js"
+          }
+        ],
+        "webview": {
+          "checks": [
+            "Explicit isolated proof profile is present",
+            "The isolated macOS Keychain service is available",
+            "Native OAuth is available for the configured proof registration",
+            "No synthetic credential was persisted for the refused/cancelled flow",
+            "Cold installed-app callback with no pending flow is refused before token HTTP",
+            "Raw OS callback URLs were not emitted to the renderer",
+            "OAuth leaves renderer localStorage and sessionStorage unchanged"
+          ],
+          "rendererCallbackEvents": 0,
+          "scope": "Production desktop HostClient, OAuth state machine, macOS callback plugin and OS Keychain. Native-only opener capture replaces launching an external authorization browser; callbacks are delivered to the installed unique app by LaunchServices. Synthetic endpoints and credentials only.",
+          "snapshot": {
+            "authorizations": 0,
+            "committing": false,
+            "oauth": {
+              "acceptedCallbacks": 0,
+              "openedEvents": 1,
+              "rejectedCallbacks": 1,
+              "tokenExchanges": 0
+            },
+            "pid": 79289,
+            "tokenRequests": 0
+          },
+          "success": true
+        }
+      },
+      "processExitCode": 0,
+      "stdout": "",
+      "stderr": "",
+      "nativeExit": {
+        "code": 0,
+        "phase": "cold",
+        "pid": 79289,
+        "runReturned": true
+      },
+      "success": true,
+      "ownedProcessesTerminated": true,
+      "tokenRequests": [],
+      "providerRequests": [],
+      "completedAt": "2026-09-10T21:55:51.388219+00:00"
+    },
+    {
+      "phase": "success",
+      "startedAt": "2026-09-10T21:55:51.389065+00:00",
+      "callbacks": [
+        {
+          "variant": "success",
+          "delivery": "/usr/bin/open",
+          "exitCode": 0,
+          "queryNames": [
+            "state",
+            "iss",
+            "code"
+          ],
+          "stderr": ""
+        }
+      ],
+      "launchMode": "direct installed executable with verified child exit code; callbacks delivered by LaunchServices",
+      "native": {
+        "authorizations": 1,
+        "configuredCsp": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' asset: http://asset.localhost data:; connect-src 'self' ipc: http://ipc.localhost",
+        "keychainService": "ai.quixi.chat.oauth-proof.170f78bb-f170-43aa-90bc-487fc0f1aff4",
+        "oauth": {
+          "acceptedCallbacks": 1,
+          "openedEvents": 1,
+          "rejectedCallbacks": 0,
+          "tokenExchanges": 1
+        },
+        "phase": "success",
+        "pid": 79299,
+        "profile": "170f78bb-f170-43aa-90bc-487fc0f1aff4",
+        "resources": [
+          {
+            "bytes": 351,
+            "csp": "default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'wasm-unsafe-eval' 'sha256-S0xrpj6jELMznS6PQspVma+3mVDUcu65Te62HW/uvJQ='; img-src 'self' asset: http://asset.localhost data:; connect-src 'self' ipc: http://ipc.localhost; worker-src 'self'",
+            "status": 200,
+            "url": "tauri://localhost/"
+          },
+          {
+            "bytes": 17949,
+            "csp": null,
+            "status": 200,
+            "url": "tauri://localhost/assets/index-DpW2cLKZ.js"
+          }
+        ],
+        "webview": {
+          "checks": [
+            "Explicit isolated proof profile is present",
+            "The isolated macOS Keychain service is available",
+            "Native OAuth is available for the configured proof registration",
+            "No synthetic credential was persisted for the refused/cancelled flow",
+            "Unknown OAuth configuration/provider/scope is refused before opening authorization",
+            "Unknown OAuth configuration/provider/scope is refused before opening authorization",
+            "Unknown OAuth configuration/provider/scope is refused before opening authorization",
+            "Actual installed warm callback completes native authorization-code flow",
+            "OAuth result is bound to the exact registered synthetic destination",
+            "Renderer receives only an opaque native Keychain handle",
+            "An existing Keychain credential is refused before any authorization opener",
+            "The native HTTP boundary used the returned Keychain credential successfully",
+            "Synthetic authenticated response is bounded",
+            "No synthetic credential was persisted for the refused/cancelled flow",
+            "Raw OS callback URLs were not emitted to the renderer",
+            "OAuth leaves renderer localStorage and sessionStorage unchanged"
+          ],
+          "oauthResult": {
+            "binding": {
+              "accountId": "primary",
+              "destinationId": "oauth-fixture-api",
+              "providerId": "oauth-fixture",
+              "transportId": "oauth-fixture-native"
+            },
+            "credential": {
+              "binding": {
+                "accountId": "primary",
+                "destinationId": "oauth-fixture-api",
+                "providerId": "oauth-fixture",
+                "transportId": "oauth-fixture-native"
+              },
+              "id": "7b703943-ef98-426b-8bba-5b184d31af11",
+              "persistence": "native"
+            },
+            "requestId": "ca4c994f-586c-40d6-85fe-21107fe69f20"
+          },
+          "rendererCallbackEvents": 0,
+          "scope": "Production desktop HostClient, OAuth state machine, macOS callback plugin and OS Keychain. Native-only opener capture replaces launching an external authorization browser; callbacks are delivered to the installed unique app by LaunchServices. Synthetic endpoints and credentials only.",
+          "snapshot": {
+            "authorizations": 1,
+            "committing": false,
+            "oauth": {
+              "acceptedCallbacks": 1,
+              "openedEvents": 1,
+              "rejectedCallbacks": 0,
+              "tokenExchanges": 1
+            },
+            "pid": 79299,
+            "tokenRequests": 1
+          },
+          "success": true
+        }
+      },
+      "processExitCode": 0,
+      "stdout": "QUIXI_OAUTH_PROOF_RESULT=passed\n",
+      "stderr": "",
+      "nativeExit": {
+        "code": 0,
+        "phase": "success",
+        "pid": 79299,
+        "runReturned": true
+      },
+      "success": true,
+      "ownedProcessesTerminated": true,
+      "tokenRequests": [
+        {
+          "phase": "success",
+          "path": "/token",
+          "method": "POST",
+          "bodyBytes": 280,
+          "headerNames": [
+            "accept",
+            "content-length",
+            "content-type",
+            "host"
+          ],
+          "sni": "oauth.synthetic.invalid",
+          "host": "oauth.synthetic.invalid",
+          "codeKnown": true,
+          "pkceMatches": true,
+          "redirectMatches": true,
+          "clientMatches": true,
+          "grantMatches": true,
+          "responseDelivered": true
+        }
+      ],
+      "providerRequests": [
+        {
+          "phase": "success",
+          "method": "GET",
+          "path": "/v1/models",
+          "credentialMatchesIssuedAccessToken": true,
+          "authorizationPresent": true,
+          "headerNames": [
+            "accept",
+            "authorization",
+            "host"
+          ]
+        }
+      ],
+      "completedAt": "2026-09-10T21:55:51.823738+00:00"
+    },
+    {
+      "phase": "bad-state",
+      "startedAt": "2026-09-10T21:55:51.832545+00:00",
+      "callbacks": [
+        {
+          "variant": "bad-state",
+          "delivery": "/usr/bin/open",
+          "exitCode": 0,
+          "queryNames": [
+            "state",
+            "iss",
+            "code"
+          ],
+          "stderr": ""
+        },
+        {
+          "variant": "legitimate-pending-flow-after-rejection",
+          "delivery": "/usr/bin/open",
+          "exitCode": 0,
+          "queryNames": [
+            "state",
+            "iss",
+            "code"
+          ],
+          "stderr": ""
+        }
+      ],
+      "launchMode": "direct installed executable with verified child exit code; callbacks delivered by LaunchServices",
+      "native": {
+        "authorizations": 1,
+        "configuredCsp": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' asset: http://asset.localhost data:; connect-src 'self' ipc: http://ipc.localhost",
+        "keychainService": "ai.quixi.chat.oauth-proof.170f78bb-f170-43aa-90bc-487fc0f1aff4",
+        "oauth": {
+          "acceptedCallbacks": 1,
+          "openedEvents": 2,
+          "rejectedCallbacks": 1,
+          "tokenExchanges": 1
+        },
+        "phase": "bad-state",
+        "pid": 79307,
+        "profile": "170f78bb-f170-43aa-90bc-487fc0f1aff4",
+        "resources": [
+          {
+            "bytes": 351,
+            "csp": "style-src 'self' 'unsafe-inline'; img-src 'self' asset: http://asset.localhost data:; worker-src 'self'; script-src 'self' 'wasm-unsafe-eval' 'sha256-S0xrpj6jELMznS6PQspVma+3mVDUcu65Te62HW/uvJQ='; connect-src 'self' ipc: http://ipc.localhost; default-src 'self'",
+            "status": 200,
+            "url": "tauri://localhost/"
+          },
+          {
+            "bytes": 17949,
+            "csp": null,
+            "status": 200,
+            "url": "tauri://localhost/assets/index-DpW2cLKZ.js"
+          }
+        ],
+        "webview": {
+          "checks": [
+            "Explicit isolated proof profile is present",
+            "The isolated macOS Keychain service is available",
+            "Native OAuth is available for the configured proof registration",
+            "No synthetic credential was persisted for the refused/cancelled flow",
+            "Malformed or mismatched callback causes zero token HTTP",
+            "A rejected callback leaves its legitimate pending flow usable",
+            "OAuth result is bound to the exact registered synthetic destination",
+            "Renderer receives only an opaque native Keychain handle",
+            "The native HTTP boundary used the returned Keychain credential successfully",
+            "Synthetic authenticated response is bounded",
+            "No synthetic credential was persisted for the refused/cancelled flow",
+            "Raw OS callback URLs were not emitted to the renderer",
+            "OAuth leaves renderer localStorage and sessionStorage unchanged"
+          ],
+          "oauthResult": {
+            "binding": {
+              "accountId": "primary",
+              "destinationId": "oauth-fixture-api",
+              "providerId": "oauth-fixture",
+              "transportId": "oauth-fixture-native"
+            },
+            "credential": {
+              "binding": {
+                "accountId": "primary",
+                "destinationId": "oauth-fixture-api",
+                "providerId": "oauth-fixture",
+                "transportId": "oauth-fixture-native"
+              },
+              "id": "642cb2bf-0236-4e85-bd56-bcc04a83eead",
+              "persistence": "native"
+            },
+            "requestId": "d5e0a22e-b685-4ee6-a056-76f88534bcb5"
+          },
+          "refusedCallbackSnapshot": {
+            "authorizations": 1,
+            "committing": false,
+            "oauth": {
+              "acceptedCallbacks": 0,
+              "openedEvents": 1,
+              "rejectedCallbacks": 1,
+              "tokenExchanges": 0
+            },
+            "pid": 79307,
+            "tokenRequests": 0
+          },
+          "rendererCallbackEvents": 0,
+          "scope": "Production desktop HostClient, OAuth state machine, macOS callback plugin and OS Keychain. Native-only opener capture replaces launching an external authorization browser; callbacks are delivered to the installed unique app by LaunchServices. Synthetic endpoints and credentials only.",
+          "snapshot": {
+            "authorizations": 1,
+            "committing": false,
+            "oauth": {
+              "acceptedCallbacks": 1,
+              "openedEvents": 2,
+              "rejectedCallbacks": 1,
+              "tokenExchanges": 1
+            },
+            "pid": 79307,
+            "tokenRequests": 1
+          },
+          "success": true
+        }
+      },
+      "processExitCode": 0,
+      "stdout": "QUIXI_OAUTH_PROOF_RESULT=passed\n",
+      "stderr": "",
+      "nativeExit": {
+        "code": 0,
+        "phase": "bad-state",
+        "pid": 79307,
+        "runReturned": true
+      },
+      "success": true,
+      "ownedProcessesTerminated": true,
+      "tokenRequests": [
+        {
+          "phase": "bad-state",
+          "path": "/token",
+          "method": "POST",
+          "bodyBytes": 280,
+          "headerNames": [
+            "accept",
+            "content-length",
+            "content-type",
+            "host"
+          ],
+          "sni": "oauth.synthetic.invalid",
+          "host": "oauth.synthetic.invalid",
+          "codeKnown": true,
+          "pkceMatches": true,
+          "redirectMatches": true,
+          "clientMatches": true,
+          "grantMatches": true,
+          "responseDelivered": true
+        }
+      ],
+      "providerRequests": [
+        {
+          "phase": "bad-state",
+          "method": "GET",
+          "path": "/v1/models",
+          "credentialMatchesIssuedAccessToken": true,
+          "authorizationPresent": true,
+          "headerNames": [
+            "accept",
+            "authorization",
+            "host"
+          ]
+        }
+      ],
+      "completedAt": "2026-09-10T21:55:52.316750+00:00"
+    },
+    {
+      "phase": "bad-issuer",
+      "startedAt": "2026-09-10T21:55:52.318328+00:00",
+      "callbacks": [
+        {
+          "variant": "bad-issuer",
+          "delivery": "/usr/bin/open",
+          "exitCode": 0,
+          "queryNames": [
+            "state",
+            "iss",
+            "code"
+          ],
+          "stderr": ""
+        },
+        {
+          "variant": "legitimate-pending-flow-after-rejection",
+          "delivery": "/usr/bin/open",
+          "exitCode": 0,
+          "queryNames": [
+            "state",
+            "iss",
+            "code"
+          ],
+          "stderr": ""
+        }
+      ],
+      "launchMode": "direct installed executable with verified child exit code; callbacks delivered by LaunchServices",
+      "native": {
+        "authorizations": 1,
+        "configuredCsp": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' asset: http://asset.localhost data:; connect-src 'self' ipc: http://ipc.localhost",
+        "keychainService": "ai.quixi.chat.oauth-proof.170f78bb-f170-43aa-90bc-487fc0f1aff4",
+        "oauth": {
+          "acceptedCallbacks": 1,
+          "openedEvents": 2,
+          "rejectedCallbacks": 1,
+          "tokenExchanges": 1
+        },
+        "phase": "bad-issuer",
+        "pid": 79316,
+        "profile": "170f78bb-f170-43aa-90bc-487fc0f1aff4",
+        "resources": [
+          {
+            "bytes": 351,
+            "csp": "default-src 'self'; connect-src 'self' ipc: http://ipc.localhost; worker-src 'self'; script-src 'self' 'wasm-unsafe-eval' 'sha256-S0xrpj6jELMznS6PQspVma+3mVDUcu65Te62HW/uvJQ='; style-src 'self' 'unsafe-inline'; img-src 'self' asset: http://asset.localhost data:",
+            "status": 200,
+            "url": "tauri://localhost/"
+          },
+          {
+            "bytes": 17949,
+            "csp": null,
+            "status": 200,
+            "url": "tauri://localhost/assets/index-DpW2cLKZ.js"
+          }
+        ],
+        "webview": {
+          "checks": [
+            "Explicit isolated proof profile is present",
+            "The isolated macOS Keychain service is available",
+            "Native OAuth is available for the configured proof registration",
+            "No synthetic credential was persisted for the refused/cancelled flow",
+            "Malformed or mismatched callback causes zero token HTTP",
+            "A rejected callback leaves its legitimate pending flow usable",
+            "OAuth result is bound to the exact registered synthetic destination",
+            "Renderer receives only an opaque native Keychain handle",
+            "The native HTTP boundary used the returned Keychain credential successfully",
+            "Synthetic authenticated response is bounded",
+            "No synthetic credential was persisted for the refused/cancelled flow",
+            "Raw OS callback URLs were not emitted to the renderer",
+            "OAuth leaves renderer localStorage and sessionStorage unchanged"
+          ],
+          "oauthResult": {
+            "binding": {
+              "accountId": "primary",
+              "destinationId": "oauth-fixture-api",
+              "providerId": "oauth-fixture",
+              "transportId": "oauth-fixture-native"
+            },
+            "credential": {
+              "binding": {
+                "accountId": "primary",
+                "destinationId": "oauth-fixture-api",
+                "providerId": "oauth-fixture",
+                "transportId": "oauth-fixture-native"
+              },
+              "id": "d2166f5c-61d6-4409-855c-2bb9285f6699",
+              "persistence": "native"
+            },
+            "requestId": "3794ad30-b5e6-49f1-a4a9-64e8e25200b0"
+          },
+          "refusedCallbackSnapshot": {
+            "authorizations": 1,
+            "committing": false,
+            "oauth": {
+              "acceptedCallbacks": 0,
+              "openedEvents": 1,
+              "rejectedCallbacks": 1,
+              "tokenExchanges": 0
+            },
+            "pid": 79316,
+            "tokenRequests": 0
+          },
+          "rendererCallbackEvents": 0,
+          "scope": "Production desktop HostClient, OAuth state machine, macOS callback plugin and OS Keychain. Native-only opener capture replaces launching an external authorization browser; callbacks are delivered to the installed unique app by LaunchServices. Synthetic endpoints and credentials only.",
+          "snapshot": {
+            "authorizations": 1,
+            "committing": false,
+            "oauth": {
+              "acceptedCallbacks": 1,
+              "openedEvents": 2,
+              "rejectedCallbacks": 1,
+              "tokenExchanges": 1
+            },
+            "pid": 79316,
+            "tokenRequests": 1
+          },
+          "success": true
+        }
+      },
+      "processExitCode": 0,
+      "stdout": "QUIXI_OAUTH_PROOF_RESULT=passed\n",
+      "stderr": "",
+      "nativeExit": {
+        "code": 0,
+        "phase": "bad-issuer",
+        "pid": 79316,
+        "runReturned": true
+      },
+      "success": true,
+      "ownedProcessesTerminated": true,
+      "tokenRequests": [
+        {
+          "phase": "bad-issuer",
+          "path": "/token",
+          "method": "POST",
+          "bodyBytes": 280,
+          "headerNames": [
+            "accept",
+            "content-length",
+            "content-type",
+            "host"
+          ],
+          "sni": "oauth.synthetic.invalid",
+          "host": "oauth.synthetic.invalid",
+          "codeKnown": true,
+          "pkceMatches": true,
+          "redirectMatches": true,
+          "clientMatches": true,
+          "grantMatches": true,
+          "responseDelivered": true
+        }
+      ],
+      "providerRequests": [
+        {
+          "phase": "bad-issuer",
+          "method": "GET",
+          "path": "/v1/models",
+          "credentialMatchesIssuedAccessToken": true,
+          "authorizationPresent": true,
+          "headerNames": [
+            "accept",
+            "authorization",
+            "host"
+          ]
+        }
+      ],
+      "completedAt": "2026-09-10T21:55:52.806005+00:00"
+    },
+    {
+      "phase": "bad-path",
+      "startedAt": "2026-09-10T21:55:52.807178+00:00",
+      "callbacks": [
+        {
+          "variant": "bad-path",
+          "delivery": "/usr/bin/open",
+          "exitCode": 0,
+          "queryNames": [
+            "state",
+            "iss",
+            "code"
+          ],
+          "stderr": ""
+        },
+        {
+          "variant": "legitimate-pending-flow-after-rejection",
+          "delivery": "/usr/bin/open",
+          "exitCode": 0,
+          "queryNames": [
+            "state",
+            "iss",
+            "code"
+          ],
+          "stderr": ""
+        }
+      ],
+      "launchMode": "direct installed executable with verified child exit code; callbacks delivered by LaunchServices",
+      "native": {
+        "authorizations": 1,
+        "configuredCsp": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' asset: http://asset.localhost data:; connect-src 'self' ipc: http://ipc.localhost",
+        "keychainService": "ai.quixi.chat.oauth-proof.170f78bb-f170-43aa-90bc-487fc0f1aff4",
+        "oauth": {
+          "acceptedCallbacks": 1,
+          "openedEvents": 2,
+          "rejectedCallbacks": 1,
+          "tokenExchanges": 1
+        },
+        "phase": "bad-path",
+        "pid": 79325,
+        "profile": "170f78bb-f170-43aa-90bc-487fc0f1aff4",
+        "resources": [
+          {
+            "bytes": 351,
+            "csp": "connect-src 'self' ipc: http://ipc.localhost; worker-src 'self'; default-src 'self'; script-src 'self' 'wasm-unsafe-eval' 'sha256-S0xrpj6jELMznS6PQspVma+3mVDUcu65Te62HW/uvJQ='; style-src 'self' 'unsafe-inline'; img-src 'self' asset: http://asset.localhost data:",
+            "status": 200,
+            "url": "tauri://localhost/"
+          },
+          {
+            "bytes": 17949,
+            "csp": null,
+            "status": 200,
+            "url": "tauri://localhost/assets/index-DpW2cLKZ.js"
+          }
+        ],
+        "webview": {
+          "checks": [
+            "Explicit isolated proof profile is present",
+            "The isolated macOS Keychain service is available",
+            "Native OAuth is available for the configured proof registration",
+            "No synthetic credential was persisted for the refused/cancelled flow",
+            "Malformed or mismatched callback causes zero token HTTP",
+            "A rejected callback leaves its legitimate pending flow usable",
+            "OAuth result is bound to the exact registered synthetic destination",
+            "Renderer receives only an opaque native Keychain handle",
+            "The native HTTP boundary used the returned Keychain credential successfully",
+            "Synthetic authenticated response is bounded",
+            "No synthetic credential was persisted for the refused/cancelled flow",
+            "Raw OS callback URLs were not emitted to the renderer",
+            "OAuth leaves renderer localStorage and sessionStorage unchanged"
+          ],
+          "oauthResult": {
+            "binding": {
+              "accountId": "primary",
+              "destinationId": "oauth-fixture-api",
+              "providerId": "oauth-fixture",
+              "transportId": "oauth-fixture-native"
+            },
+            "credential": {
+              "binding": {
+                "accountId": "primary",
+                "destinationId": "oauth-fixture-api",
+                "providerId": "oauth-fixture",
+                "transportId": "oauth-fixture-native"
+              },
+              "id": "b83149ac-3e63-4e4e-81df-2bb73e270532",
+              "persistence": "native"
+            },
+            "requestId": "0dd36f5c-afdc-47c0-8ac1-bbde3ce173be"
+          },
+          "refusedCallbackSnapshot": {
+            "authorizations": 1,
+            "committing": false,
+            "oauth": {
+              "acceptedCallbacks": 0,
+              "openedEvents": 1,
+              "rejectedCallbacks": 1,
+              "tokenExchanges": 0
+            },
+            "pid": 79325,
+            "tokenRequests": 0
+          },
+          "rendererCallbackEvents": 0,
+          "scope": "Production desktop HostClient, OAuth state machine, macOS callback plugin and OS Keychain. Native-only opener capture replaces launching an external authorization browser; callbacks are delivered to the installed unique app by LaunchServices. Synthetic endpoints and credentials only.",
+          "snapshot": {
+            "authorizations": 1,
+            "committing": false,
+            "oauth": {
+              "acceptedCallbacks": 1,
+              "openedEvents": 2,
+              "rejectedCallbacks": 1,
+              "tokenExchanges": 1
+            },
+            "pid": 79325,
+            "tokenRequests": 1
+          },
+          "success": true
+        }
+      },
+      "processExitCode": 0,
+      "stdout": "QUIXI_OAUTH_PROOF_RESULT=passed\n",
+      "stderr": "",
+      "nativeExit": {
+        "code": 0,
+        "phase": "bad-path",
+        "pid": 79325,
+        "runReturned": true
+      },
+      "success": true,
+      "ownedProcessesTerminated": true,
+      "tokenRequests": [
+        {
+          "phase": "bad-path",
+          "path": "/token",
+          "method": "POST",
+          "bodyBytes": 280,
+          "headerNames": [
+            "accept",
+            "content-length",
+            "content-type",
+            "host"
+          ],
+          "sni": "oauth.synthetic.invalid",
+          "host": "oauth.synthetic.invalid",
+          "codeKnown": true,
+          "pkceMatches": true,
+          "redirectMatches": true,
+          "clientMatches": true,
+          "grantMatches": true,
+          "responseDelivered": true
+        }
+      ],
+      "providerRequests": [
+        {
+          "phase": "bad-path",
+          "method": "GET",
+          "path": "/v1/models",
+          "credentialMatchesIssuedAccessToken": true,
+          "authorizationPresent": true,
+          "headerNames": [
+            "accept",
+            "authorization",
+            "host"
+          ]
+        }
+      ],
+      "completedAt": "2026-09-10T21:55:53.275273+00:00"
+    },
+    {
+      "phase": "duplicate-query",
+      "startedAt": "2026-09-10T21:55:53.276698+00:00",
+      "callbacks": [
+        {
+          "variant": "duplicate-query",
+          "delivery": "/usr/bin/open",
+          "exitCode": 0,
+          "queryNames": [
+            "state",
+            "iss",
+            "code",
+            "state"
+          ],
+          "stderr": ""
+        },
+        {
+          "variant": "legitimate-pending-flow-after-rejection",
+          "delivery": "/usr/bin/open",
+          "exitCode": 0,
+          "queryNames": [
+            "state",
+            "iss",
+            "code"
+          ],
+          "stderr": ""
+        }
+      ],
+      "launchMode": "direct installed executable with verified child exit code; callbacks delivered by LaunchServices",
+      "native": {
+        "authorizations": 1,
+        "configuredCsp": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' asset: http://asset.localhost data:; connect-src 'self' ipc: http://ipc.localhost",
+        "keychainService": "ai.quixi.chat.oauth-proof.170f78bb-f170-43aa-90bc-487fc0f1aff4",
+        "oauth": {
+          "acceptedCallbacks": 1,
+          "openedEvents": 2,
+          "rejectedCallbacks": 1,
+          "tokenExchanges": 1
+        },
+        "phase": "duplicate-query",
+        "pid": 79338,
+        "profile": "170f78bb-f170-43aa-90bc-487fc0f1aff4",
+        "resources": [
+          {
+            "bytes": 351,
+            "csp": "script-src 'self' 'wasm-unsafe-eval' 'sha256-S0xrpj6jELMznS6PQspVma+3mVDUcu65Te62HW/uvJQ='; worker-src 'self'; default-src 'self'; connect-src 'self' ipc: http://ipc.localhost; style-src 'self' 'unsafe-inline'; img-src 'self' asset: http://asset.localhost data:",
+            "status": 200,
+            "url": "tauri://localhost/"
+          },
+          {
+            "bytes": 17949,
+            "csp": null,
+            "status": 200,
+            "url": "tauri://localhost/assets/index-DpW2cLKZ.js"
+          }
+        ],
+        "webview": {
+          "checks": [
+            "Explicit isolated proof profile is present",
+            "The isolated macOS Keychain service is available",
+            "Native OAuth is available for the configured proof registration",
+            "No synthetic credential was persisted for the refused/cancelled flow",
+            "Malformed or mismatched callback causes zero token HTTP",
+            "A rejected callback leaves its legitimate pending flow usable",
+            "OAuth result is bound to the exact registered synthetic destination",
+            "Renderer receives only an opaque native Keychain handle",
+            "The native HTTP boundary used the returned Keychain credential successfully",
+            "Synthetic authenticated response is bounded",
+            "No synthetic credential was persisted for the refused/cancelled flow",
+            "Raw OS callback URLs were not emitted to the renderer",
+            "OAuth leaves renderer localStorage and sessionStorage unchanged"
+          ],
+          "oauthResult": {
+            "binding": {
+              "accountId": "primary",
+              "destinationId": "oauth-fixture-api",
+              "providerId": "oauth-fixture",
+              "transportId": "oauth-fixture-native"
+            },
+            "credential": {
+              "binding": {
+                "accountId": "primary",
+                "destinationId": "oauth-fixture-api",
+                "providerId": "oauth-fixture",
+                "transportId": "oauth-fixture-native"
+              },
+              "id": "2138d784-4ee4-436f-b7dc-c213fff5872c",
+              "persistence": "native"
+            },
+            "requestId": "57bfc780-80a1-4cf9-98a1-54642cc16f4f"
+          },
+          "refusedCallbackSnapshot": {
+            "authorizations": 1,
+            "committing": false,
+            "oauth": {
+              "acceptedCallbacks": 0,
+              "openedEvents": 1,
+              "rejectedCallbacks": 1,
+              "tokenExchanges": 0
+            },
+            "pid": 79338,
+            "tokenRequests": 0
+          },
+          "rendererCallbackEvents": 0,
+          "scope": "Production desktop HostClient, OAuth state machine, macOS callback plugin and OS Keychain. Native-only opener capture replaces launching an external authorization browser; callbacks are delivered to the installed unique app by LaunchServices. Synthetic endpoints and credentials only.",
+          "snapshot": {
+            "authorizations": 1,
+            "committing": false,
+            "oauth": {
+              "acceptedCallbacks": 1,
+              "openedEvents": 2,
+              "rejectedCallbacks": 1,
+              "tokenExchanges": 1
+            },
+            "pid": 79338,
+            "tokenRequests": 1
+          },
+          "success": true
+        }
+      },
+      "processExitCode": 0,
+      "stdout": "QUIXI_OAUTH_PROOF_RESULT=passed\n",
+      "stderr": "",
+      "nativeExit": {
+        "code": 0,
+        "phase": "duplicate-query",
+        "pid": 79338,
+        "runReturned": true
+      },
+      "success": true,
+      "ownedProcessesTerminated": true,
+      "tokenRequests": [
+        {
+          "phase": "duplicate-query",
+          "path": "/token",
+          "method": "POST",
+          "bodyBytes": 280,
+          "headerNames": [
+            "accept",
+            "content-length",
+            "content-type",
+            "host"
+          ],
+          "sni": "oauth.synthetic.invalid",
+          "host": "oauth.synthetic.invalid",
+          "codeKnown": true,
+          "pkceMatches": true,
+          "redirectMatches": true,
+          "clientMatches": true,
+          "grantMatches": true,
+          "responseDelivered": true
+        }
+      ],
+      "providerRequests": [
+        {
+          "phase": "duplicate-query",
+          "method": "GET",
+          "path": "/v1/models",
+          "credentialMatchesIssuedAccessToken": true,
+          "authorizationPresent": true,
+          "headerNames": [
+            "accept",
+            "authorization",
+            "host"
+          ]
+        }
+      ],
+      "completedAt": "2026-09-10T21:55:53.769547+00:00"
+    },
+    {
+      "phase": "denied",
+      "startedAt": "2026-09-10T21:55:53.773702+00:00",
+      "callbacks": [
+        {
+          "variant": "denied",
+          "delivery": "/usr/bin/open",
+          "exitCode": 0,
+          "queryNames": [
+            "state",
+            "iss",
+            "error"
+          ],
+          "stderr": ""
+        }
+      ],
+      "launchMode": "direct installed executable with verified child exit code; callbacks delivered by LaunchServices",
+      "native": {
+        "authorizations": 1,
+        "configuredCsp": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' asset: http://asset.localhost data:; connect-src 'self' ipc: http://ipc.localhost",
+        "keychainService": "ai.quixi.chat.oauth-proof.170f78bb-f170-43aa-90bc-487fc0f1aff4",
+        "oauth": {
+          "acceptedCallbacks": 1,
+          "openedEvents": 1,
+          "rejectedCallbacks": 0,
+          "tokenExchanges": 0
+        },
+        "phase": "denied",
+        "pid": 79347,
+        "profile": "170f78bb-f170-43aa-90bc-487fc0f1aff4",
+        "resources": [
+          {
+            "bytes": 351,
+            "csp": "style-src 'self' 'unsafe-inline'; img-src 'self' asset: http://asset.localhost data:; connect-src 'self' ipc: http://ipc.localhost; default-src 'self'; script-src 'self' 'wasm-unsafe-eval' 'sha256-S0xrpj6jELMznS6PQspVma+3mVDUcu65Te62HW/uvJQ='; worker-src 'self'",
+            "status": 200,
+            "url": "tauri://localhost/"
+          },
+          {
+            "bytes": 17949,
+            "csp": null,
+            "status": 200,
+            "url": "tauri://localhost/assets/index-DpW2cLKZ.js"
+          }
+        ],
+        "webview": {
+          "checks": [
+            "Explicit isolated proof profile is present",
+            "The isolated macOS Keychain service is available",
+            "Native OAuth is available for the configured proof registration",
+            "No synthetic credential was persisted for the refused/cancelled flow",
+            "Denial, expiry or invalid/bounded token response yields no credential",
+            "Correlated issuer-verified denial consumes the flow immediately without token HTTP",
+            "No synthetic credential was persisted for the refused/cancelled flow",
+            "Raw OS callback URLs were not emitted to the renderer",
+            "OAuth leaves renderer localStorage and sessionStorage unchanged"
+          ],
+          "failureCode": "IO_ERROR",
+          "rendererCallbackEvents": 0,
+          "scope": "Production desktop HostClient, OAuth state machine, macOS callback plugin and OS Keychain. Native-only opener capture replaces launching an external authorization browser; callbacks are delivered to the installed unique app by LaunchServices. Synthetic endpoints and credentials only.",
+          "snapshot": {
+            "authorizations": 1,
+            "committing": false,
+            "oauth": {
+              "acceptedCallbacks": 1,
+              "openedEvents": 1,
+              "rejectedCallbacks": 0,
+              "tokenExchanges": 0
+            },
+            "pid": 79347,
+            "tokenRequests": 0
+          },
+          "success": true
+        }
+      },
+      "processExitCode": 0,
+      "stdout": "QUIXI_OAUTH_PROOF_RESULT=passed\n",
+      "stderr": "",
+      "nativeExit": {
+        "code": 0,
+        "phase": "denied",
+        "pid": 79347,
+        "runReturned": true
+      },
+      "success": true,
+      "ownedProcessesTerminated": true,
+      "tokenRequests": [],
+      "providerRequests": [],
+      "completedAt": "2026-09-10T21:55:54.168833+00:00"
+    },
+    {
+      "phase": "expired",
+      "startedAt": "2026-09-10T21:55:54.171584+00:00",
+      "callbacks": [
+        {
+          "variant": "expired",
+          "delivery": "/usr/bin/open",
+          "exitCode": 0,
+          "queryNames": [
+            "state",
+            "iss",
+            "code"
+          ],
+          "stderr": ""
+        }
+      ],
+      "launchMode": "direct installed executable with verified child exit code; callbacks delivered by LaunchServices",
+      "native": {
+        "authorizations": 1,
+        "configuredCsp": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' asset: http://asset.localhost data:; connect-src 'self' ipc: http://ipc.localhost",
+        "keychainService": "ai.quixi.chat.oauth-proof.170f78bb-f170-43aa-90bc-487fc0f1aff4",
+        "oauth": {
+          "acceptedCallbacks": 0,
+          "openedEvents": 1,
+          "rejectedCallbacks": 1,
+          "tokenExchanges": 0
+        },
+        "phase": "expired",
+        "pid": 79357,
+        "profile": "170f78bb-f170-43aa-90bc-487fc0f1aff4",
+        "resources": [
+          {
+            "bytes": 351,
+            "csp": "style-src 'self' 'unsafe-inline'; img-src 'self' asset: http://asset.localhost data:; default-src 'self'; connect-src 'self' ipc: http://ipc.localhost; worker-src 'self'; script-src 'self' 'wasm-unsafe-eval' 'sha256-S0xrpj6jELMznS6PQspVma+3mVDUcu65Te62HW/uvJQ='",
+            "status": 200,
+            "url": "tauri://localhost/"
+          },
+          {
+            "bytes": 17949,
+            "csp": null,
+            "status": 200,
+            "url": "tauri://localhost/assets/index-DpW2cLKZ.js"
+          }
+        ],
+        "webview": {
+          "checks": [
+            "Explicit isolated proof profile is present",
+            "The isolated macOS Keychain service is available",
+            "Native OAuth is available for the configured proof registration",
+            "No synthetic credential was persisted for the refused/cancelled flow",
+            "Denial, expiry or invalid/bounded token response yields no credential",
+            "No synthetic credential was persisted for the refused/cancelled flow",
+            "Raw OS callback URLs were not emitted to the renderer",
+            "OAuth leaves renderer localStorage and sessionStorage unchanged"
+          ],
+          "failureCode": "CANCELLED",
+          "rendererCallbackEvents": 0,
+          "scope": "Production desktop HostClient, OAuth state machine, macOS callback plugin and OS Keychain. Native-only opener capture replaces launching an external authorization browser; callbacks are delivered to the installed unique app by LaunchServices. Synthetic endpoints and credentials only.",
+          "snapshot": {
+            "authorizations": 1,
+            "committing": false,
+            "oauth": {
+              "acceptedCallbacks": 0,
+              "openedEvents": 1,
+              "rejectedCallbacks": 1,
+              "tokenExchanges": 0
+            },
+            "pid": 79357,
+            "tokenRequests": 0
+          },
+          "success": true
+        }
+      },
+      "processExitCode": 0,
+      "stdout": "QUIXI_OAUTH_PROOF_RESULT=passed\n",
+      "stderr": "",
+      "nativeExit": {
+        "code": 0,
+        "phase": "expired",
+        "pid": 79357,
+        "runReturned": true
+      },
+      "success": true,
+      "ownedProcessesTerminated": true,
+      "tokenRequests": [],
+      "providerRequests": [],
+      "completedAt": "2026-09-10T21:55:55.302478+00:00"
+    },
+    {
+      "phase": "duplicate-callback",
+      "startedAt": "2026-09-10T21:55:55.304292+00:00",
+      "callbacks": [
+        {
+          "variant": "duplicate-callback",
+          "delivery": "/usr/bin/open",
+          "exitCode": 0,
+          "queryNames": [
+            "state",
+            "iss",
+            "code"
+          ],
+          "stderr": ""
+        },
+        {
+          "variant": "duplicate-of-consumed-callback",
+          "delivery": "/usr/bin/open",
+          "exitCode": 0,
+          "queryNames": [
+            "state",
+            "iss",
+            "code"
+          ],
+          "stderr": ""
+        }
+      ],
+      "launchMode": "direct installed executable with verified child exit code; callbacks delivered by LaunchServices",
+      "native": {
+        "authorizations": 1,
+        "configuredCsp": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' asset: http://asset.localhost data:; connect-src 'self' ipc: http://ipc.localhost",
+        "keychainService": "ai.quixi.chat.oauth-proof.170f78bb-f170-43aa-90bc-487fc0f1aff4",
+        "oauth": {
+          "acceptedCallbacks": 1,
+          "openedEvents": 2,
+          "rejectedCallbacks": 1,
+          "tokenExchanges": 1
+        },
+        "phase": "duplicate-callback",
+        "pid": 79365,
+        "profile": "170f78bb-f170-43aa-90bc-487fc0f1aff4",
+        "resources": [
+          {
+            "bytes": 351,
+            "csp": "script-src 'self' 'wasm-unsafe-eval' 'sha256-S0xrpj6jELMznS6PQspVma+3mVDUcu65Te62HW/uvJQ='; img-src 'self' asset: http://asset.localhost data:; worker-src 'self'; connect-src 'self' ipc: http://ipc.localhost; default-src 'self'; style-src 'self' 'unsafe-inline'",
+            "status": 200,
+            "url": "tauri://localhost/"
+          },
+          {
+            "bytes": 17949,
+            "csp": null,
+            "status": 200,
+            "url": "tauri://localhost/assets/index-DpW2cLKZ.js"
+          }
+        ],
+        "webview": {
+          "checks": [
+            "Explicit isolated proof profile is present",
+            "The isolated macOS Keychain service is available",
+            "Native OAuth is available for the configured proof registration",
+            "No synthetic credential was persisted for the refused/cancelled flow",
+            "Actual installed warm callback completes native authorization-code flow",
+            "OAuth result is bound to the exact registered synthetic destination",
+            "Renderer receives only an opaque native Keychain handle",
+            "The native HTTP boundary used the returned Keychain credential successfully",
+            "Synthetic authenticated response is bounded",
+            "No synthetic credential was persisted for the refused/cancelled flow",
+            "Duplicate callback cannot exchange the code twice",
+            "Raw OS callback URLs were not emitted to the renderer",
+            "OAuth leaves renderer localStorage and sessionStorage unchanged"
+          ],
+          "oauthResult": {
+            "binding": {
+              "accountId": "primary",
+              "destinationId": "oauth-fixture-api",
+              "providerId": "oauth-fixture",
+              "transportId": "oauth-fixture-native"
+            },
+            "credential": {
+              "binding": {
+                "accountId": "primary",
+                "destinationId": "oauth-fixture-api",
+                "providerId": "oauth-fixture",
+                "transportId": "oauth-fixture-native"
+              },
+              "id": "6bf4d7b0-753f-4353-83b2-a31604973209",
+              "persistence": "native"
+            },
+            "requestId": "08f00b95-3590-4b91-b9dc-4c576d5f7c42"
+          },
+          "rendererCallbackEvents": 0,
+          "scope": "Production desktop HostClient, OAuth state machine, macOS callback plugin and OS Keychain. Native-only opener capture replaces launching an external authorization browser; callbacks are delivered to the installed unique app by LaunchServices. Synthetic endpoints and credentials only.",
+          "snapshot": {
+            "authorizations": 1,
+            "committing": false,
+            "oauth": {
+              "acceptedCallbacks": 1,
+              "openedEvents": 2,
+              "rejectedCallbacks": 1,
+              "tokenExchanges": 1
+            },
+            "pid": 79365,
+            "tokenRequests": 1
+          },
+          "success": true
+        }
+      },
+      "processExitCode": 0,
+      "stdout": "QUIXI_OAUTH_PROOF_RESULT=passed\n",
+      "stderr": "",
+      "nativeExit": {
+        "code": 0,
+        "phase": "duplicate-callback",
+        "pid": 79365,
+        "runReturned": true
+      },
+      "success": true,
+      "ownedProcessesTerminated": true,
+      "tokenRequests": [
+        {
+          "phase": "duplicate-callback",
+          "path": "/token",
+          "method": "POST",
+          "bodyBytes": 280,
+          "headerNames": [
+            "accept",
+            "content-length",
+            "content-type",
+            "host"
+          ],
+          "sni": "oauth.synthetic.invalid",
+          "host": "oauth.synthetic.invalid",
+          "codeKnown": true,
+          "pkceMatches": true,
+          "redirectMatches": true,
+          "clientMatches": true,
+          "grantMatches": true,
+          "responseDelivered": true
+        }
+      ],
+      "providerRequests": [
+        {
+          "phase": "duplicate-callback",
+          "method": "GET",
+          "path": "/v1/models",
+          "credentialMatchesIssuedAccessToken": true,
+          "authorizationPresent": true,
+          "headerNames": [
+            "accept",
+            "authorization",
+            "host"
+          ]
+        }
+      ],
+      "completedAt": "2026-09-10T21:55:55.772640+00:00"
+    },
+    {
+      "phase": "cancel",
+      "startedAt": "2026-09-10T21:55:55.774976+00:00",
+      "callbacks": [
+        {
+          "variant": "cancel",
+          "delivery": "/usr/bin/open",
+          "exitCode": 0,
+          "queryNames": [
+            "state",
+            "iss",
+            "code"
+          ],
+          "stderr": ""
+        }
+      ],
+      "launchMode": "direct installed executable with verified child exit code; callbacks delivered by LaunchServices",
+      "native": {
+        "authorizations": 1,
+        "configuredCsp": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' asset: http://asset.localhost data:; connect-src 'self' ipc: http://ipc.localhost",
+        "keychainService": "ai.quixi.chat.oauth-proof.170f78bb-f170-43aa-90bc-487fc0f1aff4",
+        "oauth": {
+          "acceptedCallbacks": 0,
+          "openedEvents": 1,
+          "rejectedCallbacks": 1,
+          "tokenExchanges": 0
+        },
+        "phase": "cancel",
+        "pid": 79374,
+        "profile": "170f78bb-f170-43aa-90bc-487fc0f1aff4",
+        "resources": [
+          {
+            "bytes": 351,
+            "csp": "default-src 'self'; worker-src 'self'; img-src 'self' asset: http://asset.localhost data:; connect-src 'self' ipc: http://ipc.localhost; style-src 'self' 'unsafe-inline'; script-src 'self' 'wasm-unsafe-eval' 'sha256-S0xrpj6jELMznS6PQspVma+3mVDUcu65Te62HW/uvJQ='",
+            "status": 200,
+            "url": "tauri://localhost/"
+          },
+          {
+            "bytes": 17949,
+            "csp": null,
+            "status": 200,
+            "url": "tauri://localhost/assets/index-DpW2cLKZ.js"
+          }
+        ],
+        "webview": {
+          "checks": [
+            "Explicit isolated proof profile is present",
+            "The isolated macOS Keychain service is available",
+            "Native OAuth is available for the configured proof registration",
+            "No synthetic credential was persisted for the refused/cancelled flow",
+            "Cancellation also removes a disk file-save stage sharing the OAuth request ID",
+            "Cancelled/disposed pending OAuth never returns a credential",
+            "A callback after cancellation/disposal performs no token exchange",
+            "No synthetic credential was persisted for the refused/cancelled flow",
+            "Raw OS callback URLs were not emitted to the renderer",
+            "OAuth leaves renderer localStorage and sessionStorage unchanged"
+          ],
+          "rendererCallbackEvents": 0,
+          "scope": "Production desktop HostClient, OAuth state machine, macOS callback plugin and OS Keychain. Native-only opener capture replaces launching an external authorization browser; callbacks are delivered to the installed unique app by LaunchServices. Synthetic endpoints and credentials only.",
+          "snapshot": {
+            "authorizations": 1,
+            "committing": false,
+            "oauth": {
+              "acceptedCallbacks": 0,
+              "openedEvents": 1,
+              "rejectedCallbacks": 1,
+              "tokenExchanges": 0
+            },
+            "pid": 79374,
+            "tokenRequests": 0
+          },
+          "success": true
+        }
+      },
+      "processExitCode": 0,
+      "stdout": "QUIXI_OAUTH_PROOF_RESULT=passed\n",
+      "stderr": "",
+      "nativeExit": {
+        "code": 0,
+        "phase": "cancel",
+        "pid": 79374,
+        "runReturned": true
+      },
+      "success": true,
+      "ownedProcessesTerminated": true,
+      "tokenRequests": [],
+      "providerRequests": [],
+      "completedAt": "2026-09-10T21:55:56.176811+00:00"
+    },
+    {
+      "phase": "dispose",
+      "startedAt": "2026-09-10T21:55:56.178974+00:00",
+      "callbacks": [
+        {
+          "variant": "dispose",
+          "delivery": "/usr/bin/open",
+          "exitCode": 0,
+          "queryNames": [
+            "state",
+            "iss",
+            "code"
+          ],
+          "stderr": ""
+        }
+      ],
+      "launchMode": "direct installed executable with verified child exit code; callbacks delivered by LaunchServices",
+      "native": {
+        "authorizations": 1,
+        "configuredCsp": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' asset: http://asset.localhost data:; connect-src 'self' ipc: http://ipc.localhost",
+        "keychainService": "ai.quixi.chat.oauth-proof.170f78bb-f170-43aa-90bc-487fc0f1aff4",
+        "oauth": {
+          "acceptedCallbacks": 0,
+          "openedEvents": 1,
+          "rejectedCallbacks": 1,
+          "tokenExchanges": 0
+        },
+        "phase": "dispose",
+        "pid": 79382,
+        "profile": "170f78bb-f170-43aa-90bc-487fc0f1aff4",
+        "resources": [
+          {
+            "bytes": 351,
+            "csp": "img-src 'self' asset: http://asset.localhost data:; style-src 'self' 'unsafe-inline'; worker-src 'self'; default-src 'self'; connect-src 'self' ipc: http://ipc.localhost; script-src 'self' 'wasm-unsafe-eval' 'sha256-S0xrpj6jELMznS6PQspVma+3mVDUcu65Te62HW/uvJQ='",
+            "status": 200,
+            "url": "tauri://localhost/"
+          },
+          {
+            "bytes": 17949,
+            "csp": null,
+            "status": 200,
+            "url": "tauri://localhost/assets/index-DpW2cLKZ.js"
+          }
+        ],
+        "webview": {
+          "checks": [
+            "Explicit isolated proof profile is present",
+            "The isolated macOS Keychain service is available",
+            "Native OAuth is available for the configured proof registration",
+            "No synthetic credential was persisted for the refused/cancelled flow",
+            "Cancelled/disposed pending OAuth never returns a credential",
+            "A callback after cancellation/disposal performs no token exchange",
+            "No synthetic credential was persisted for the refused/cancelled flow",
+            "Raw OS callback URLs were not emitted to the renderer",
+            "OAuth leaves renderer localStorage and sessionStorage unchanged"
+          ],
+          "rendererCallbackEvents": 0,
+          "scope": "Production desktop HostClient, OAuth state machine, macOS callback plugin and OS Keychain. Native-only opener capture replaces launching an external authorization browser; callbacks are delivered to the installed unique app by LaunchServices. Synthetic endpoints and credentials only.",
+          "snapshot": {
+            "authorizations": 1,
+            "committing": false,
+            "oauth": {
+              "acceptedCallbacks": 0,
+              "openedEvents": 1,
+              "rejectedCallbacks": 1,
+              "tokenExchanges": 0
+            },
+            "pid": 79382,
+            "tokenRequests": 0
+          },
+          "success": true
+        }
+      },
+      "processExitCode": 0,
+      "stdout": "QUIXI_OAUTH_PROOF_RESULT=passed\n",
+      "stderr": "",
+      "nativeExit": {
+        "code": 0,
+        "phase": "dispose",
+        "pid": 79382,
+        "runReturned": true
+      },
+      "success": true,
+      "ownedProcessesTerminated": true,
+      "tokenRequests": [],
+      "providerRequests": [],
+      "completedAt": "2026-09-10T21:55:56.586705+00:00"
+    },
+    {
+      "phase": "reload",
+      "startedAt": "2026-09-10T21:55:56.589219+00:00",
+      "callbacks": [
+        {
+          "variant": "reload",
+          "delivery": "/usr/bin/open",
+          "exitCode": 0,
+          "queryNames": [
+            "state",
+            "iss",
+            "code"
+          ],
+          "stderr": ""
+        }
+      ],
+      "launchMode": "direct installed executable with verified child exit code; callbacks delivered by LaunchServices",
+      "native": {
+        "authorizations": 1,
+        "configuredCsp": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' asset: http://asset.localhost data:; connect-src 'self' ipc: http://ipc.localhost",
+        "keychainService": "ai.quixi.chat.oauth-proof.170f78bb-f170-43aa-90bc-487fc0f1aff4",
+        "oauth": {
+          "acceptedCallbacks": 0,
+          "openedEvents": 1,
+          "rejectedCallbacks": 1,
+          "tokenExchanges": 0
+        },
+        "phase": "reload",
+        "pid": 79390,
+        "profile": "170f78bb-f170-43aa-90bc-487fc0f1aff4",
+        "resources": [
+          {
+            "bytes": 351,
+            "csp": "default-src 'self'; img-src 'self' asset: http://asset.localhost data:; style-src 'self' 'unsafe-inline'; worker-src 'self'; connect-src 'self' ipc: http://ipc.localhost; script-src 'self' 'wasm-unsafe-eval' 'sha256-S0xrpj6jELMznS6PQspVma+3mVDUcu65Te62HW/uvJQ='",
+            "status": 200,
+            "url": "tauri://localhost/"
+          },
+          {
+            "bytes": 17949,
+            "csp": null,
+            "status": 200,
+            "url": "tauri://localhost/assets/index-DpW2cLKZ.js"
+          },
+          {
+            "bytes": 351,
+            "csp": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval' 'sha256-S0xrpj6jELMznS6PQspVma+3mVDUcu65Te62HW/uvJQ='; worker-src 'self'; img-src 'self' asset: http://asset.localhost data:; style-src 'self' 'unsafe-inline'; connect-src 'self' ipc: http://ipc.localhost",
+            "status": 200,
+            "url": "tauri://localhost/"
+          },
+          {
+            "bytes": 17949,
+            "csp": null,
+            "status": 200,
+            "url": "tauri://localhost/assets/index-DpW2cLKZ.js"
+          }
+        ],
+        "webview": {
+          "checks": [
+            "Explicit isolated proof profile is present",
+            "The isolated macOS Keychain service is available",
+            "Native OAuth is available for the configured proof registration",
+            "No synthetic credential was persisted for the refused/cancelled flow",
+            "Renderer navigation invalidates the old pending OAuth flow before callback delivery",
+            "No synthetic credential was persisted for the refused/cancelled flow",
+            "Raw OS callback URLs were not emitted to the renderer",
+            "OAuth leaves renderer localStorage and sessionStorage unchanged"
+          ],
+          "rendererCallbackEvents": 0,
+          "scope": "Production desktop HostClient, OAuth state machine, macOS callback plugin and OS Keychain. Native-only opener capture replaces launching an external authorization browser; callbacks are delivered to the installed unique app by LaunchServices. Synthetic endpoints and credentials only.",
+          "snapshot": {
+            "authorizations": 1,
+            "committing": false,
+            "oauth": {
+              "acceptedCallbacks": 0,
+              "openedEvents": 1,
+              "rejectedCallbacks": 1,
+              "tokenExchanges": 0
+            },
+            "pid": 79390,
+            "tokenRequests": 0
+          },
+          "success": true
+        }
+      },
+      "processExitCode": 0,
+      "stdout": "QUIXI_OAUTH_PROOF_RESULT=passed\n",
+      "stderr": "",
+      "nativeExit": {
+        "code": 0,
+        "phase": "reload",
+        "pid": 79390,
+        "runReturned": true
+      },
+      "success": true,
+      "ownedProcessesTerminated": true,
+      "tokenRequests": [],
+      "providerRequests": [],
+      "completedAt": "2026-09-10T21:55:57.133741+00:00"
+    },
+    {
+      "phase": "cancel-token",
+      "startedAt": "2026-09-10T21:55:57.136241+00:00",
+      "callbacks": [
+        {
+          "variant": "cancel-token",
+          "delivery": "/usr/bin/open",
+          "exitCode": 0,
+          "queryNames": [
+            "state",
+            "iss",
+            "code"
+          ],
+          "stderr": ""
+        }
+      ],
+      "launchMode": "direct installed executable with verified child exit code; callbacks delivered by LaunchServices",
+      "native": {
+        "authorizations": 1,
+        "configuredCsp": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' asset: http://asset.localhost data:; connect-src 'self' ipc: http://ipc.localhost",
+        "keychainService": "ai.quixi.chat.oauth-proof.170f78bb-f170-43aa-90bc-487fc0f1aff4",
+        "oauth": {
+          "acceptedCallbacks": 1,
+          "openedEvents": 1,
+          "rejectedCallbacks": 0,
+          "tokenExchanges": 1
+        },
+        "phase": "cancel-token",
+        "pid": 79398,
+        "profile": "170f78bb-f170-43aa-90bc-487fc0f1aff4",
+        "resources": [
+          {
+            "bytes": 351,
+            "csp": "connect-src 'self' ipc: http://ipc.localhost; worker-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'wasm-unsafe-eval' 'sha256-S0xrpj6jELMznS6PQspVma+3mVDUcu65Te62HW/uvJQ='; img-src 'self' asset: http://asset.localhost data:; default-src 'self'",
+            "status": 200,
+            "url": "tauri://localhost/"
+          },
+          {
+            "bytes": 17949,
+            "csp": null,
+            "status": 200,
+            "url": "tauri://localhost/assets/index-DpW2cLKZ.js"
+          }
+        ],
+        "webview": {
+          "checks": [
+            "Explicit isolated proof profile is present",
+            "The isolated macOS Keychain service is available",
+            "Native OAuth is available for the configured proof registration",
+            "No synthetic credential was persisted for the refused/cancelled flow",
+            "Explicit cancellation stops the active held token exchange before the commit cutoff",
+            "Cancellation during held token exchange rejects the pending result",
+            "No synthetic credential was persisted for the refused/cancelled flow",
+            "Raw OS callback URLs were not emitted to the renderer",
+            "OAuth leaves renderer localStorage and sessionStorage unchanged"
+          ],
+          "rendererCallbackEvents": 0,
+          "scope": "Production desktop HostClient, OAuth state machine, macOS callback plugin and OS Keychain. Native-only opener capture replaces launching an external authorization browser; callbacks are delivered to the installed unique app by LaunchServices. Synthetic endpoints and credentials only.",
+          "snapshot": {
+            "authorizations": 1,
+            "committing": false,
+            "oauth": {
+              "acceptedCallbacks": 1,
+              "openedEvents": 1,
+              "rejectedCallbacks": 0,
+              "tokenExchanges": 1
+            },
+            "pid": 79398,
+            "tokenRequests": 1
+          },
+          "success": true,
+          "tokenCancellation": {
+            "externalEffect": "may_have_occurred",
+            "outcome": "cancelled",
+            "requestId": "0a62e892-3ffb-48a8-82f1-3ac71f50e437"
+          }
+        }
+      },
+      "processExitCode": 0,
+      "stdout": "QUIXI_OAUTH_PROOF_RESULT=passed\n",
+      "stderr": "",
+      "nativeExit": {
+        "code": 0,
+        "phase": "cancel-token",
+        "pid": 79398,
+        "runReturned": true
+      },
+      "success": true,
+      "ownedProcessesTerminated": true,
+      "tokenRequests": [
+        {
+          "phase": "cancel-token",
+          "path": "/token",
+          "method": "POST",
+          "bodyBytes": 280,
+          "headerNames": [
+            "accept",
+            "content-length",
+            "content-type",
+            "host"
+          ],
+          "sni": "oauth.synthetic.invalid",
+          "host": "oauth.synthetic.invalid",
+          "codeKnown": true,
+          "pkceMatches": true,
+          "redirectMatches": true,
+          "clientMatches": true,
+          "grantMatches": true,
+          "responseDelivered": true,
+          "releasedAfterCancellation": true
+        }
+      ],
+      "providerRequests": [],
+      "completedAt": "2026-09-10T21:55:57.908269+00:00"
+    },
+    {
+      "phase": "commit-cancel",
+      "startedAt": "2026-09-10T21:55:57.910643+00:00",
+      "callbacks": [
+        {
+          "variant": "commit-cancel",
+          "delivery": "/usr/bin/open",
+          "exitCode": 0,
+          "queryNames": [
+            "state",
+            "iss",
+            "code"
+          ],
+          "stderr": ""
+        }
+      ],
+      "launchMode": "direct installed executable with verified child exit code; callbacks delivered by LaunchServices",
+      "native": {
+        "authorizations": 1,
+        "configuredCsp": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' asset: http://asset.localhost data:; connect-src 'self' ipc: http://ipc.localhost",
+        "keychainService": "ai.quixi.chat.oauth-proof.170f78bb-f170-43aa-90bc-487fc0f1aff4",
+        "oauth": {
+          "acceptedCallbacks": 1,
+          "openedEvents": 1,
+          "rejectedCallbacks": 0,
+          "tokenExchanges": 1
+        },
+        "phase": "commit-cancel",
+        "pid": 79406,
+        "profile": "170f78bb-f170-43aa-90bc-487fc0f1aff4",
+        "resources": [
+          {
+            "bytes": 351,
+            "csp": "connect-src 'self' ipc: http://ipc.localhost; script-src 'self' 'wasm-unsafe-eval' 'sha256-S0xrpj6jELMznS6PQspVma+3mVDUcu65Te62HW/uvJQ='; default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' asset: http://asset.localhost data:; worker-src 'self'",
+            "status": 200,
+            "url": "tauri://localhost/"
+          },
+          {
+            "bytes": 17949,
+            "csp": null,
+            "status": 200,
+            "url": "tauri://localhost/assets/index-DpW2cLKZ.js"
+          }
+        ],
+        "webview": {
+          "checks": [
+            "Explicit isolated proof profile is present",
+            "The isolated macOS Keychain service is available",
+            "Native OAuth is available for the configured proof registration",
+            "No synthetic credential was persisted for the refused/cancelled flow",
+            "Cancellation after the production COMMITTING cutoff reports unknown outcome",
+            "The abandoned pending caller receives UNKNOWN_OUTCOME after the commit cutoff",
+            "OAuth result is bound to the exact registered synthetic destination",
+            "Renderer receives only an opaque native Keychain handle",
+            "The native HTTP boundary used the returned Keychain credential successfully",
+            "Synthetic authenticated response is bounded",
+            "No synthetic credential was persisted for the refused/cancelled flow",
+            "Raw OS callback URLs were not emitted to the renderer",
+            "OAuth leaves renderer localStorage and sessionStorage unchanged"
+          ],
+          "commitCancellation": {
+            "externalEffect": "may_have_occurred",
+            "outcome": "unknown_outcome",
+            "requestId": "65396693-6cc4-487e-aeb4-7d8f7d9d75d9"
+          },
+          "oauthResult": {
+            "binding": {
+              "accountId": "primary",
+              "destinationId": "oauth-fixture-api",
+              "providerId": "oauth-fixture",
+              "transportId": "oauth-fixture-native"
+            },
+            "credential": {
+              "binding": {
+                "accountId": "primary",
+                "destinationId": "oauth-fixture-api",
+                "providerId": "oauth-fixture",
+                "transportId": "oauth-fixture-native"
+              },
+              "id": "0ed8508c-c2e3-44b3-8370-c5af497fc297",
+              "persistence": "native"
+            },
+            "requestId": "65396693-6cc4-487e-aeb4-7d8f7d9d75d9"
+          },
+          "rendererCallbackEvents": 0,
+          "scope": "Production desktop HostClient, OAuth state machine, macOS callback plugin and OS Keychain. Native-only opener capture replaces launching an external authorization browser; callbacks are delivered to the installed unique app by LaunchServices. Synthetic endpoints and credentials only.",
+          "snapshot": {
+            "authorizations": 1,
+            "committing": true,
+            "oauth": {
+              "acceptedCallbacks": 1,
+              "openedEvents": 1,
+              "rejectedCallbacks": 0,
+              "tokenExchanges": 1
+            },
+            "pid": 79406,
+            "tokenRequests": 1
+          },
+          "success": true
+        }
+      },
+      "processExitCode": 0,
+      "stdout": "QUIXI_OAUTH_PROOF_RESULT=passed\n",
+      "stderr": "",
+      "nativeExit": {
+        "code": 0,
+        "phase": "commit-cancel",
+        "pid": 79406,
+        "runReturned": true
+      },
+      "success": true,
+      "ownedProcessesTerminated": true,
+      "tokenRequests": [
+        {
+          "phase": "commit-cancel",
+          "path": "/token",
+          "method": "POST",
+          "bodyBytes": 280,
+          "headerNames": [
+            "accept",
+            "content-length",
+            "content-type",
+            "host"
+          ],
+          "sni": "oauth.synthetic.invalid",
+          "host": "oauth.synthetic.invalid",
+          "codeKnown": true,
+          "pkceMatches": true,
+          "redirectMatches": true,
+          "clientMatches": true,
+          "grantMatches": true,
+          "responseDelivered": true
+        }
+      ],
+      "providerRequests": [
+        {
+          "phase": "commit-cancel",
+          "method": "GET",
+          "path": "/v1/models",
+          "credentialMatchesIssuedAccessToken": true,
+          "authorizationPresent": true,
+          "headerNames": [
+            "accept",
+            "authorization",
+            "host"
+          ]
+        }
+      ],
+      "completedAt": "2026-09-10T21:55:58.375998+00:00"
+    },
+    {
+      "phase": "overload",
+      "startedAt": "2026-09-10T21:55:58.378818+00:00",
+      "callbacks": [],
+      "launchMode": "direct installed executable with verified child exit code; callbacks delivered by LaunchServices",
+      "native": {
+        "authorizations": 4,
+        "configuredCsp": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' asset: http://asset.localhost data:; connect-src 'self' ipc: http://ipc.localhost",
+        "keychainService": "ai.quixi.chat.oauth-proof.170f78bb-f170-43aa-90bc-487fc0f1aff4",
+        "oauth": {
+          "acceptedCallbacks": 0,
+          "openedEvents": 0,
+          "rejectedCallbacks": 0,
+          "tokenExchanges": 0
+        },
+        "phase": "overload",
+        "pid": 79414,
+        "profile": "170f78bb-f170-43aa-90bc-487fc0f1aff4",
+        "resources": [
+          {
+            "bytes": 351,
+            "csp": "script-src 'self' 'wasm-unsafe-eval' 'sha256-S0xrpj6jELMznS6PQspVma+3mVDUcu65Te62HW/uvJQ='; worker-src 'self'; style-src 'self' 'unsafe-inline'; default-src 'self'; img-src 'self' asset: http://asset.localhost data:; connect-src 'self' ipc: http://ipc.localhost",
+            "status": 200,
+            "url": "tauri://localhost/"
+          },
+          {
+            "bytes": 17949,
+            "csp": null,
+            "status": 200,
+            "url": "tauri://localhost/assets/index-DpW2cLKZ.js"
+          }
+        ],
+        "webview": {
+          "checks": [
+            "Explicit isolated proof profile is present",
+            "The isolated macOS Keychain service is available",
+            "Native OAuth is available for the configured proof registration",
+            "No synthetic credential was persisted for the refused/cancelled flow",
+            "Pending OAuth attempts are capped at four without queuing",
+            "All admitted pending attempts are cancelled without credentials",
+            "No synthetic credential was persisted for the refused/cancelled flow",
+            "Raw OS callback URLs were not emitted to the renderer",
+            "OAuth leaves renderer localStorage and sessionStorage unchanged"
+          ],
+          "rendererCallbackEvents": 0,
+          "scope": "Production desktop HostClient, OAuth state machine, macOS callback plugin and OS Keychain. Native-only opener capture replaces launching an external authorization browser; callbacks are delivered to the installed unique app by LaunchServices. Synthetic endpoints and credentials only.",
+          "snapshot": {
+            "authorizations": 4,
+            "committing": false,
+            "oauth": {
+              "acceptedCallbacks": 0,
+              "openedEvents": 0,
+              "rejectedCallbacks": 0,
+              "tokenExchanges": 0
+            },
+            "pid": 79414,
+            "tokenRequests": 0
+          },
+          "success": true
+        }
+      },
+      "processExitCode": 0,
+      "stdout": "QUIXI_OAUTH_PROOF_RESULT=passed\n",
+      "stderr": "",
+      "nativeExit": {
+        "code": 0,
+        "phase": "overload",
+        "pid": 79414,
+        "runReturned": true
+      },
+      "success": true,
+      "ownedProcessesTerminated": true,
+      "tokenRequests": [],
+      "providerRequests": [],
+      "completedAt": "2026-09-10T21:55:58.725034+00:00"
+    },
+    {
+      "phase": "oversize-token",
+      "startedAt": "2026-09-10T21:55:58.728920+00:00",
+      "callbacks": [
+        {
+          "variant": "oversize-token",
+          "delivery": "/usr/bin/open",
+          "exitCode": 0,
+          "queryNames": [
+            "state",
+            "iss",
+            "code"
+          ],
+          "stderr": ""
+        }
+      ],
+      "launchMode": "direct installed executable with verified child exit code; callbacks delivered by LaunchServices",
+      "native": {
+        "authorizations": 1,
+        "configuredCsp": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' asset: http://asset.localhost data:; connect-src 'self' ipc: http://ipc.localhost",
+        "keychainService": "ai.quixi.chat.oauth-proof.170f78bb-f170-43aa-90bc-487fc0f1aff4",
+        "oauth": {
+          "acceptedCallbacks": 1,
+          "openedEvents": 1,
+          "rejectedCallbacks": 0,
+          "tokenExchanges": 1
+        },
+        "phase": "oversize-token",
+        "pid": 79421,
+        "profile": "170f78bb-f170-43aa-90bc-487fc0f1aff4",
+        "resources": [
+          {
+            "bytes": 351,
+            "csp": "img-src 'self' asset: http://asset.localhost data:; script-src 'self' 'wasm-unsafe-eval' 'sha256-S0xrpj6jELMznS6PQspVma+3mVDUcu65Te62HW/uvJQ='; worker-src 'self'; default-src 'self'; connect-src 'self' ipc: http://ipc.localhost; style-src 'self' 'unsafe-inline'",
+            "status": 200,
+            "url": "tauri://localhost/"
+          },
+          {
+            "bytes": 17949,
+            "csp": null,
+            "status": 200,
+            "url": "tauri://localhost/assets/index-DpW2cLKZ.js"
+          }
+        ],
+        "webview": {
+          "checks": [
+            "Explicit isolated proof profile is present",
+            "The isolated macOS Keychain service is available",
+            "Native OAuth is available for the configured proof registration",
+            "No synthetic credential was persisted for the refused/cancelled flow",
+            "Denial, expiry or invalid/bounded token response yields no credential",
+            "No synthetic credential was persisted for the refused/cancelled flow",
+            "Raw OS callback URLs were not emitted to the renderer",
+            "OAuth leaves renderer localStorage and sessionStorage unchanged"
+          ],
+          "failureCode": "IO_ERROR",
+          "rendererCallbackEvents": 0,
+          "scope": "Production desktop HostClient, OAuth state machine, macOS callback plugin and OS Keychain. Native-only opener capture replaces launching an external authorization browser; callbacks are delivered to the installed unique app by LaunchServices. Synthetic endpoints and credentials only.",
+          "snapshot": {
+            "authorizations": 1,
+            "committing": false,
+            "oauth": {
+              "acceptedCallbacks": 1,
+              "openedEvents": 1,
+              "rejectedCallbacks": 0,
+              "tokenExchanges": 1
+            },
+            "pid": 79421,
+            "tokenRequests": 1
+          },
+          "success": true
+        }
+      },
+      "processExitCode": 0,
+      "stdout": "QUIXI_OAUTH_PROOF_RESULT=passed\n",
+      "stderr": "",
+      "nativeExit": {
+        "code": 0,
+        "phase": "oversize-token",
+        "pid": 79421,
+        "runReturned": true
+      },
+      "success": true,
+      "ownedProcessesTerminated": true,
+      "tokenRequests": [
+        {
+          "phase": "oversize-token",
+          "path": "/token",
+          "method": "POST",
+          "bodyBytes": 280,
+          "headerNames": [
+            "accept",
+            "content-length",
+            "content-type",
+            "host"
+          ],
+          "sni": "oauth.synthetic.invalid",
+          "host": "oauth.synthetic.invalid",
+          "codeKnown": true,
+          "pkceMatches": true,
+          "redirectMatches": true,
+          "clientMatches": true,
+          "grantMatches": true,
+          "responseDelivered": true
+        }
+      ],
+      "providerRequests": [],
+      "completedAt": "2026-09-10T21:55:59.161094+00:00"
+    },
+    {
+      "phase": "invalid-token",
+      "startedAt": "2026-09-10T21:55:59.163956+00:00",
+      "callbacks": [
+        {
+          "variant": "invalid-token",
+          "delivery": "/usr/bin/open",
+          "exitCode": 0,
+          "queryNames": [
+            "state",
+            "iss",
+            "code"
+          ],
+          "stderr": ""
+        }
+      ],
+      "launchMode": "direct installed executable with verified child exit code; callbacks delivered by LaunchServices",
+      "native": {
+        "authorizations": 1,
+        "configuredCsp": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' asset: http://asset.localhost data:; connect-src 'self' ipc: http://ipc.localhost",
+        "keychainService": "ai.quixi.chat.oauth-proof.170f78bb-f170-43aa-90bc-487fc0f1aff4",
+        "oauth": {
+          "acceptedCallbacks": 1,
+          "openedEvents": 1,
+          "rejectedCallbacks": 0,
+          "tokenExchanges": 1
+        },
+        "phase": "invalid-token",
+        "pid": 79431,
+        "profile": "170f78bb-f170-43aa-90bc-487fc0f1aff4",
+        "resources": [
+          {
+            "bytes": 351,
+            "csp": "img-src 'self' asset: http://asset.localhost data:; script-src 'self' 'wasm-unsafe-eval' 'sha256-S0xrpj6jELMznS6PQspVma+3mVDUcu65Te62HW/uvJQ='; worker-src 'self'; default-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self' ipc: http://ipc.localhost",
+            "status": 200,
+            "url": "tauri://localhost/"
+          },
+          {
+            "bytes": 17949,
+            "csp": null,
+            "status": 200,
+            "url": "tauri://localhost/assets/index-DpW2cLKZ.js"
+          }
+        ],
+        "webview": {
+          "checks": [
+            "Explicit isolated proof profile is present",
+            "The isolated macOS Keychain service is available",
+            "Native OAuth is available for the configured proof registration",
+            "No synthetic credential was persisted for the refused/cancelled flow",
+            "Denial, expiry or invalid/bounded token response yields no credential",
+            "No synthetic credential was persisted for the refused/cancelled flow",
+            "Raw OS callback URLs were not emitted to the renderer",
+            "OAuth leaves renderer localStorage and sessionStorage unchanged"
+          ],
+          "failureCode": "IO_ERROR",
+          "rendererCallbackEvents": 0,
+          "scope": "Production desktop HostClient, OAuth state machine, macOS callback plugin and OS Keychain. Native-only opener capture replaces launching an external authorization browser; callbacks are delivered to the installed unique app by LaunchServices. Synthetic endpoints and credentials only.",
+          "snapshot": {
+            "authorizations": 1,
+            "committing": false,
+            "oauth": {
+              "acceptedCallbacks": 1,
+              "openedEvents": 1,
+              "rejectedCallbacks": 0,
+              "tokenExchanges": 1
+            },
+            "pid": 79431,
+            "tokenRequests": 1
+          },
+          "success": true
+        }
+      },
+      "processExitCode": 0,
+      "stdout": "QUIXI_OAUTH_PROOF_RESULT=passed\n",
+      "stderr": "",
+      "nativeExit": {
+        "code": 0,
+        "phase": "invalid-token",
+        "pid": 79431,
+        "runReturned": true
+      },
+      "success": true,
+      "ownedProcessesTerminated": true,
+      "tokenRequests": [
+        {
+          "phase": "invalid-token",
+          "path": "/token",
+          "method": "POST",
+          "bodyBytes": 280,
+          "headerNames": [
+            "accept",
+            "content-length",
+            "content-type",
+            "host"
+          ],
+          "sni": "oauth.synthetic.invalid",
+          "host": "oauth.synthetic.invalid",
+          "codeKnown": true,
+          "pkceMatches": true,
+          "redirectMatches": true,
+          "clientMatches": true,
+          "grantMatches": true,
+          "responseDelivered": true
+        }
+      ],
+      "providerRequests": [],
+      "completedAt": "2026-09-10T21:55:59.578874+00:00"
+    },
+    {
+      "phase": "malformed-token",
+      "startedAt": "2026-09-10T21:55:59.582637+00:00",
+      "callbacks": [
+        {
+          "variant": "malformed-token",
+          "delivery": "/usr/bin/open",
+          "exitCode": 0,
+          "queryNames": [
+            "state",
+            "iss",
+            "code"
+          ],
+          "stderr": ""
+        }
+      ],
+      "launchMode": "direct installed executable with verified child exit code; callbacks delivered by LaunchServices",
+      "native": {
+        "authorizations": 1,
+        "configuredCsp": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' asset: http://asset.localhost data:; connect-src 'self' ipc: http://ipc.localhost",
+        "keychainService": "ai.quixi.chat.oauth-proof.170f78bb-f170-43aa-90bc-487fc0f1aff4",
+        "oauth": {
+          "acceptedCallbacks": 1,
+          "openedEvents": 1,
+          "rejectedCallbacks": 0,
+          "tokenExchanges": 1
+        },
+        "phase": "malformed-token",
+        "pid": 79439,
+        "profile": "170f78bb-f170-43aa-90bc-487fc0f1aff4",
+        "resources": [
+          {
+            "bytes": 351,
+            "csp": "script-src 'self' 'wasm-unsafe-eval' 'sha256-S0xrpj6jELMznS6PQspVma+3mVDUcu65Te62HW/uvJQ='; default-src 'self'; connect-src 'self' ipc: http://ipc.localhost; style-src 'self' 'unsafe-inline'; img-src 'self' asset: http://asset.localhost data:; worker-src 'self'",
+            "status": 200,
+            "url": "tauri://localhost/"
+          },
+          {
+            "bytes": 17949,
+            "csp": null,
+            "status": 200,
+            "url": "tauri://localhost/assets/index-DpW2cLKZ.js"
+          }
+        ],
+        "webview": {
+          "checks": [
+            "Explicit isolated proof profile is present",
+            "The isolated macOS Keychain service is available",
+            "Native OAuth is available for the configured proof registration",
+            "No synthetic credential was persisted for the refused/cancelled flow",
+            "Denial, expiry or invalid/bounded token response yields no credential",
+            "No synthetic credential was persisted for the refused/cancelled flow",
+            "Raw OS callback URLs were not emitted to the renderer",
+            "OAuth leaves renderer localStorage and sessionStorage unchanged"
+          ],
+          "failureCode": "IO_ERROR",
+          "rendererCallbackEvents": 0,
+          "scope": "Production desktop HostClient, OAuth state machine, macOS callback plugin and OS Keychain. Native-only opener capture replaces launching an external authorization browser; callbacks are delivered to the installed unique app by LaunchServices. Synthetic endpoints and credentials only.",
+          "snapshot": {
+            "authorizations": 1,
+            "committing": false,
+            "oauth": {
+              "acceptedCallbacks": 1,
+              "openedEvents": 1,
+              "rejectedCallbacks": 0,
+              "tokenExchanges": 1
+            },
+            "pid": 79439,
+            "tokenRequests": 1
+          },
+          "success": true
+        }
+      },
+      "processExitCode": 0,
+      "stdout": "QUIXI_OAUTH_PROOF_RESULT=passed\n",
+      "stderr": "",
+      "nativeExit": {
+        "code": 0,
+        "phase": "malformed-token",
+        "pid": 79439,
+        "runReturned": true
+      },
+      "success": true,
+      "ownedProcessesTerminated": true,
+      "tokenRequests": [
+        {
+          "phase": "malformed-token",
+          "path": "/token",
+          "method": "POST",
+          "bodyBytes": 280,
+          "headerNames": [
+            "accept",
+            "content-length",
+            "content-type",
+            "host"
+          ],
+          "sni": "oauth.synthetic.invalid",
+          "host": "oauth.synthetic.invalid",
+          "codeKnown": true,
+          "pkceMatches": true,
+          "redirectMatches": true,
+          "clientMatches": true,
+          "grantMatches": true,
+          "responseDelivered": true
+        }
+      ],
+      "providerRequests": [],
+      "completedAt": "2026-09-10T21:56:00.004362+00:00"
+    },
+    {
+      "phase": "redirect-token",
+      "startedAt": "2026-09-10T21:56:00.008178+00:00",
+      "callbacks": [
+        {
+          "variant": "redirect-token",
+          "delivery": "/usr/bin/open",
+          "exitCode": 0,
+          "queryNames": [
+            "state",
+            "iss",
+            "code"
+          ],
+          "stderr": ""
+        }
+      ],
+      "launchMode": "direct installed executable with verified child exit code; callbacks delivered by LaunchServices",
+      "native": {
+        "authorizations": 1,
+        "configuredCsp": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' asset: http://asset.localhost data:; connect-src 'self' ipc: http://ipc.localhost",
+        "keychainService": "ai.quixi.chat.oauth-proof.170f78bb-f170-43aa-90bc-487fc0f1aff4",
+        "oauth": {
+          "acceptedCallbacks": 1,
+          "openedEvents": 1,
+          "rejectedCallbacks": 0,
+          "tokenExchanges": 1
+        },
+        "phase": "redirect-token",
+        "pid": 79447,
+        "profile": "170f78bb-f170-43aa-90bc-487fc0f1aff4",
+        "resources": [
+          {
+            "bytes": 351,
+            "csp": "script-src 'self' 'wasm-unsafe-eval' 'sha256-S0xrpj6jELMznS6PQspVma+3mVDUcu65Te62HW/uvJQ='; connect-src 'self' ipc: http://ipc.localhost; style-src 'self' 'unsafe-inline'; default-src 'self'; img-src 'self' asset: http://asset.localhost data:; worker-src 'self'",
+            "status": 200,
+            "url": "tauri://localhost/"
+          },
+          {
+            "bytes": 17949,
+            "csp": null,
+            "status": 200,
+            "url": "tauri://localhost/assets/index-DpW2cLKZ.js"
+          }
+        ],
+        "webview": {
+          "checks": [
+            "Explicit isolated proof profile is present",
+            "The isolated macOS Keychain service is available",
+            "Native OAuth is available for the configured proof registration",
+            "No synthetic credential was persisted for the refused/cancelled flow",
+            "Denial, expiry or invalid/bounded token response yields no credential",
+            "No synthetic credential was persisted for the refused/cancelled flow",
+            "Raw OS callback URLs were not emitted to the renderer",
+            "OAuth leaves renderer localStorage and sessionStorage unchanged"
+          ],
+          "failureCode": "IO_ERROR",
+          "rendererCallbackEvents": 0,
+          "scope": "Production desktop HostClient, OAuth state machine, macOS callback plugin and OS Keychain. Native-only opener capture replaces launching an external authorization browser; callbacks are delivered to the installed unique app by LaunchServices. Synthetic endpoints and credentials only.",
+          "snapshot": {
+            "authorizations": 1,
+            "committing": false,
+            "oauth": {
+              "acceptedCallbacks": 1,
+              "openedEvents": 1,
+              "rejectedCallbacks": 0,
+              "tokenExchanges": 1
+            },
+            "pid": 79447,
+            "tokenRequests": 1
+          },
+          "success": true
+        }
+      },
+      "processExitCode": 0,
+      "stdout": "QUIXI_OAUTH_PROOF_RESULT=passed\n",
+      "stderr": "",
+      "nativeExit": {
+        "code": 0,
+        "phase": "redirect-token",
+        "pid": 79447,
+        "runReturned": true
+      },
+      "success": true,
+      "ownedProcessesTerminated": true,
+      "tokenRequests": [
+        {
+          "phase": "redirect-token",
+          "path": "/token",
+          "method": "POST",
+          "bodyBytes": 280,
+          "headerNames": [
+            "accept",
+            "content-length",
+            "content-type",
+            "host"
+          ],
+          "sni": "oauth.synthetic.invalid",
+          "host": "oauth.synthetic.invalid",
+          "codeKnown": true,
+          "pkceMatches": true,
+          "redirectMatches": true,
+          "clientMatches": true,
+          "grantMatches": true,
+          "responseDelivered": true
+        }
+      ],
+      "providerRequests": [],
+      "completedAt": "2026-09-10T21:56:00.426371+00:00"
+    },
+    {
+      "phase": "auxiliary-tokens",
+      "startedAt": "2026-09-10T21:56:00.430239+00:00",
+      "callbacks": [
+        {
+          "variant": "auxiliary-tokens",
+          "delivery": "/usr/bin/open",
+          "exitCode": 0,
+          "queryNames": [
+            "state",
+            "iss",
+            "code"
+          ],
+          "stderr": ""
+        }
+      ],
+      "launchMode": "direct installed executable with verified child exit code; callbacks delivered by LaunchServices",
+      "native": {
+        "authorizations": 1,
+        "configuredCsp": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' asset: http://asset.localhost data:; connect-src 'self' ipc: http://ipc.localhost",
+        "keychainService": "ai.quixi.chat.oauth-proof.170f78bb-f170-43aa-90bc-487fc0f1aff4",
+        "oauth": {
+          "acceptedCallbacks": 1,
+          "openedEvents": 1,
+          "rejectedCallbacks": 0,
+          "tokenExchanges": 1
+        },
+        "phase": "auxiliary-tokens",
+        "pid": 79455,
+        "profile": "170f78bb-f170-43aa-90bc-487fc0f1aff4",
+        "resources": [
+          {
+            "bytes": 351,
+            "csp": "script-src 'self' 'wasm-unsafe-eval' 'sha256-S0xrpj6jELMznS6PQspVma+3mVDUcu65Te62HW/uvJQ='; img-src 'self' asset: http://asset.localhost data:; connect-src 'self' ipc: http://ipc.localhost; default-src 'self'; worker-src 'self'; style-src 'self' 'unsafe-inline'",
+            "status": 200,
+            "url": "tauri://localhost/"
+          },
+          {
+            "bytes": 17949,
+            "csp": null,
+            "status": 200,
+            "url": "tauri://localhost/assets/index-DpW2cLKZ.js"
+          }
+        ],
+        "webview": {
+          "checks": [
+            "Explicit isolated proof profile is present",
+            "The isolated macOS Keychain service is available",
+            "Native OAuth is available for the configured proof registration",
+            "No synthetic credential was persisted for the refused/cancelled flow",
+            "Actual installed warm callback completes native authorization-code flow",
+            "OAuth result is bound to the exact registered synthetic destination",
+            "Renderer receives only an opaque native Keychain handle",
+            "The native HTTP boundary used the returned Keychain credential successfully",
+            "Synthetic authenticated response is bounded",
+            "No synthetic credential was persisted for the refused/cancelled flow",
+            "Raw OS callback URLs were not emitted to the renderer",
+            "OAuth leaves renderer localStorage and sessionStorage unchanged"
+          ],
+          "oauthResult": {
+            "binding": {
+              "accountId": "primary",
+              "destinationId": "oauth-fixture-api",
+              "providerId": "oauth-fixture",
+              "transportId": "oauth-fixture-native"
+            },
+            "credential": {
+              "binding": {
+                "accountId": "primary",
+                "destinationId": "oauth-fixture-api",
+                "providerId": "oauth-fixture",
+                "transportId": "oauth-fixture-native"
+              },
+              "id": "d3cb1f3a-75fa-42cf-9d81-b842cd84b55e",
+              "persistence": "native"
+            },
+            "requestId": "b4f4313a-38ef-4eca-89f2-94155b2ba088"
+          },
+          "rendererCallbackEvents": 0,
+          "scope": "Production desktop HostClient, OAuth state machine, macOS callback plugin and OS Keychain. Native-only opener capture replaces launching an external authorization browser; callbacks are delivered to the installed unique app by LaunchServices. Synthetic endpoints and credentials only.",
+          "snapshot": {
+            "authorizations": 1,
+            "committing": false,
+            "oauth": {
+              "acceptedCallbacks": 1,
+              "openedEvents": 1,
+              "rejectedCallbacks": 0,
+              "tokenExchanges": 1
+            },
+            "pid": 79455,
+            "tokenRequests": 1
+          },
+          "success": true
+        }
+      },
+      "processExitCode": 0,
+      "stdout": "QUIXI_OAUTH_PROOF_RESULT=passed\n",
+      "stderr": "",
+      "nativeExit": {
+        "code": 0,
+        "phase": "auxiliary-tokens",
+        "pid": 79455,
+        "runReturned": true
+      },
+      "success": true,
+      "ownedProcessesTerminated": true,
+      "tokenRequests": [
+        {
+          "phase": "auxiliary-tokens",
+          "path": "/token",
+          "method": "POST",
+          "bodyBytes": 280,
+          "headerNames": [
+            "accept",
+            "content-length",
+            "content-type",
+            "host"
+          ],
+          "sni": "oauth.synthetic.invalid",
+          "host": "oauth.synthetic.invalid",
+          "codeKnown": true,
+          "pkceMatches": true,
+          "redirectMatches": true,
+          "clientMatches": true,
+          "grantMatches": true,
+          "responseDelivered": true
+        }
+      ],
+      "providerRequests": [
+        {
+          "phase": "auxiliary-tokens",
+          "method": "GET",
+          "path": "/v1/models",
+          "credentialMatchesIssuedAccessToken": true,
+          "authorizationPresent": true,
+          "headerNames": [
+            "accept",
+            "authorization",
+            "host"
+          ]
+        }
+      ],
+      "completedAt": "2026-09-10T21:56:00.898781+00:00"
+    },
+    {
+      "phase": "cleanup",
+      "startedAt": "2026-09-10T21:56:00.902837+00:00",
+      "callbacks": [],
+      "launchMode": "direct installed executable with verified child exit code; callbacks delivered by LaunchServices",
+      "native": {
+        "authorizations": 0,
+        "configuredCsp": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' asset: http://asset.localhost data:; connect-src 'self' ipc: http://ipc.localhost",
+        "keychainService": "ai.quixi.chat.oauth-proof.170f78bb-f170-43aa-90bc-487fc0f1aff4",
+        "oauth": {
+          "acceptedCallbacks": 0,
+          "openedEvents": 0,
+          "rejectedCallbacks": 0,
+          "tokenExchanges": 0
+        },
+        "phase": "cleanup",
+        "pid": 79463,
+        "profile": "170f78bb-f170-43aa-90bc-487fc0f1aff4",
+        "resources": [
+          {
+            "bytes": 351,
+            "csp": "default-src 'self'; worker-src 'self'; img-src 'self' asset: http://asset.localhost data:; connect-src 'self' ipc: http://ipc.localhost; script-src 'self' 'wasm-unsafe-eval' 'sha256-S0xrpj6jELMznS6PQspVma+3mVDUcu65Te62HW/uvJQ='; style-src 'self' 'unsafe-inline'",
+            "status": 200,
+            "url": "tauri://localhost/"
+          },
+          {
+            "bytes": 17949,
+            "csp": null,
+            "status": 200,
+            "url": "tauri://localhost/assets/index-DpW2cLKZ.js"
+          }
+        ],
+        "webview": {
+          "checks": [
+            "Explicit isolated proof profile is present",
+            "The isolated macOS Keychain service is available",
+            "Native OAuth is available for the configured proof registration",
+            "Cleanup removes only this registered synthetic Keychain binding",
+            "Cleanup removes only this registered synthetic Keychain binding",
+            "Cleanup removes only this registered synthetic Keychain binding",
+            "Cleanup removes only this registered synthetic Keychain binding",
+            "Cleanup removes only this registered synthetic Keychain binding",
+            "Cleanup removes only this registered synthetic Keychain binding",
+            "No synthetic credential was persisted for the refused/cancelled flow",
+            "Raw OS callback URLs were not emitted to the renderer",
+            "OAuth leaves renderer localStorage and sessionStorage unchanged"
+          ],
+          "rendererCallbackEvents": 0,
+          "scope": "Production desktop HostClient, OAuth state machine, macOS callback plugin and OS Keychain. Native-only opener capture replaces launching an external authorization browser; callbacks are delivered to the installed unique app by LaunchServices. Synthetic endpoints and credentials only.",
+          "snapshot": {
+            "authorizations": 0,
+            "committing": false,
+            "oauth": {
+              "acceptedCallbacks": 0,
+              "openedEvents": 0,
+              "rejectedCallbacks": 0,
+              "tokenExchanges": 0
+            },
+            "pid": 79463,
+            "tokenRequests": 0
+          },
+          "success": true
+        }
+      },
+      "processExitCode": 0,
+      "stdout": "QUIXI_OAUTH_PROOF_RESULT=passed\n",
+      "stderr": "",
+      "nativeExit": {
+        "code": 0,
+        "phase": "cleanup",
+        "pid": 79463,
+        "runReturned": true
+      },
+      "success": true,
+      "ownedProcessesTerminated": true,
+      "tokenRequests": [],
+      "providerRequests": [],
+      "completedAt": "2026-09-10T21:56:01.220775+00:00"
+    }
+  ],
+  "sourceSha256": {
+    "Cargo.lock": "40cbf40648d9eb5358842d9047c4d251744fe8f3b91d83d3457f994818fc9e9d",
+    "package.json": "4a966ce5f2460058926d1f90c6e47b177529796ddf1f7a70bf79bab3f749ec81",
+    "package-lock.json": "aadb456e2a567a2b91cbb81a502650ebac93541f0a59d54035bdde2cacd97672",
+    ".github/workflows/check.yml": "98d864e3c11ece8838ba1b4c6b8519b34ba7fcbdc9d79a70d519d9c65adc4d0c",
+    "apps/desktop/src-tauri/Cargo.toml": "7ece182f473d9df26d1949080a59f754280be8742636c327f37e6d8c4fe191db",
+    "apps/desktop/src-tauri/tauri.conf.json": "9f37f19b5318efd5c21213eee07fa901d7836cb4caa104d4aff5ba790c6f2a86",
+    "apps/desktop/src-tauri/Info.plist": "3a6c70108706ca7f7cb401ff8fa88f3c049db0629d51e5f7c4dbd0b85d208ab7",
+    "apps/desktop/src-tauri/capabilities/default.json": "55d9a988acd0a705c559d9675e6b39ea53b126550ac772bb0d179a60465a22bc",
+    "apps/desktop/src/host/index.ts": "6a7d0dcb1093296a830aa8044a220d4998fde75679daadb71a589cfe17e78160",
+    "packages/core/src/contracts/archives.ts": "db664351740b6fa07eb08a285c9be6b123f7c6d8dde344d8b966d4a9f0ff442f",
+    "packages/core/src/contracts/blob-inventory.ts": "ca8fde78ea5dcc13d36264f806e22f5437cf2545dd5ca51f1273e1aefac3a886",
+    "packages/core/src/contracts/extraction.ts": "b05bcd2ef02bd60694bff7cc5d83fccbd10e2584f1ba9edf17505241c209b483",
+    "packages/core/src/contracts/host.ts": "0bc21aef853666a0a41deca4ee2c572d0d4482d6ab04608286fd38263d5b08f2",
+    "packages/core/src/contracts/import-work.ts": "8631531d5c3e7c6acd966e902600f418e4fc605307d93ad0de758abb7421c7b5",
+    "packages/core/src/contracts/imports.ts": "d3ef73cdad9b92faa0352e341c896647f4c6db759648b19178cf76342934e5f3",
+    "packages/core/src/contracts/index.ts": "bbf27e97948407c9b39b848e74ec48842b27f887066c32b3b21b9dc7f8ef4124",
+    "packages/core/src/contracts/mutations.ts": "ba3ea4178452b1f0f3288c07d8667fa225204a2ed7adc055a0be1267621cd3a2",
+    "packages/core/src/contracts/preferences.ts": "e14de69f126d77f78c13d64e8912a56a290fdf2b11ac74d017679ca4a2ad5ac5",
+    "packages/core/src/contracts/producers.ts": "aaf026f6a774a1669190717aab6a5c2004e54d35adeea40a4e4ec8efb3485697",
+    "packages/core/src/contracts/routing-aliases.ts": "f43cd67e4e00cff69cbfdd51306b24a2dd234a729ca287b775f81bad74f47d42",
+    "packages/core/src/contracts/search.ts": "6c059ba15eef98f1b2ac2fb175aa809cfeecc60480b4ce533caab389dd5cc872",
+    "packages/core/src/contracts/selection.ts": "5e87c6b21f0aea9cd139c2ca09d66d31614fc725d3163fb00c982d0ec3c7584b",
+    "packages/core/src/contracts/serialization.ts": "a1d6cc8792dc6aeac4310f8b3f2545c0414b9425d7983fb4a80b7e7b0808116e",
+    "packages/core/src/contracts/storage.ts": "6f407bf21cb03f1fbe306b56bf87f990e93d029286cf0d2acec7984d313b4416",
+    "packages/core/src/contracts/transfer.ts": "73563a59e5d0964657a88c025a1b0935a1ae7eb77161e96404a4d37b375d6a6f",
+    "packages/core/src/contracts/views.ts": "54d95cc0d90d01a0ece75628ac78f5f99795fc2b69968c6e0d355530e3ef454c",
+    "packages/core/src/model/branches.ts": "57a43bb03bf3f41d270e3d8e9d11ed2df87430d2fba98724c2c2dd741bbaf08a",
+    "packages/core/src/model/compaction.ts": "33e724d0610024ebe5b9247196beea0971d72afe77e53f8ccebacfada2c54d28",
+    "packages/core/src/model/index.ts": "62324a44028e68698c1bc09039726f6f286aa1a2a75986a96384ebfd61f3ad87",
+    "packages/core/src/model/provenance.ts": "191f723124ffe3b0f5957a90a1a60449406a1ba0cfbe258f9d401db0c62e8d26",
+    "packages/core/src/model/summaries.ts": "ebb396a3f6ec22c26d244845dbfef77a0de04dc9ddbc106263d81f3d8e4d7d86",
+    "packages/core/src/model/types.ts": "e9fa9d9292d8b93c04c3eb0828798dd0414264bd047e904b013c5084eeec6b1c",
+    "packages/core/src/model/validation.ts": "fccb9eb2d56a44697ac8b89fa97bb3418b9f4ee45a199f53fc5d68cf622a5756",
+    "apps/desktop/src-tauri/src/host/files.rs": "a9ee9a5e18846f795d3d54f4d9819e498d9b43c96d5d48ce436e51753dda59c9",
+    "apps/desktop/src-tauri/src/host/mod.rs": "324690f687b0a72070fb29dbd0613472a0538b7e43347c514bd2a1594fc0ef9d",
+    "apps/desktop/src-tauri/src/host/models.rs": "031cb4bd8d4b1470ca81ab904a6514d679d90e944e030f58a5956cf6915f9708",
+    "apps/desktop/src-tauri/src/host/oauth/tests.rs": "3ca9963a2d8d98d969e4126b73e747ca8cfe9fa9e3e48d2858b7ea9f827bb17e",
+    "apps/desktop/src-tauri/src/host/oauth.rs": "bcd3140af63c1d1556da48009c5d2c8c0b09f309cca770336f03599ff69da448",
+    "apps/desktop/src-tauri/src/host/secrets.rs": "df0fb5a6713c2c53b6be9f0f2c3b245faa936426221814bbddb9d36312df0b16",
+    "apps/desktop/src-tauri/src/host_proof.rs": "f44ea9482f6842268da08a3e2e05b1507908f1396018ac842a46e214634455a7",
+    "apps/desktop/src-tauri/src/main.rs": "b17f69c3cc6a80bf86a21dc56da35de031bd528e2e4e09bdfbe5e9b6894ebaa4",
+    "apps/desktop/src-tauri/src/registered_destinations.rs": "54f5c90e441d6342f5c870cb4d57b9368ed6364578804468f1270a37ab945ca5",
+    "apps/desktop/src-tauri/src/storage_proof.rs": "2739d68b1b390f5e15e6f1433249b4fe5863f485045d6434e5bf56caa234d154",
+    "tests/hosts/oauth-proof/build.mjs": "2e4f9d32a8ce86aa4b4b22a44734cefbd1e2821483c19ce2947027933fd67062",
+    "tests/hosts/oauth-proof/index.html": "c182bf778afad608df8f909f50c80a0a13cdd281c6ef4e8173712382e1b8b3c2",
+    "tests/hosts/oauth-proof/index.ts": "53d8de969d2c11035402bb421300ba81410a72742db2bbfb132fed4c9fac87e5",
+    "tests/hosts/oauth-proof/native.rs": "b8e4f2da8c5932ffc27d12f63f59a111732d973fabc6b0570cf92f6ffb0ed8a0",
+    "tests/hosts/oauth-proof/run.py": "7ec17aff77667c6fae9691dfab5787f1a4dc3c750b460b82b9870a43051935cd",
+    "tests/hosts/oauth-proof/tsconfig.json": "ab000e020690c7cf83c8dcd87e5acc78fcaa7a5af9af7d0c2024c30c4b4db59d"
+  },
+  "cleanup": {
+    "webkitDirectoryAbsentBeforeInstallation": true,
+    "launchServicesUnregisterExitCode": 0,
+    "installedBundleRemoved": true,
+    "ownedProcessesTerminated": true,
+    "isolatedWebKitDirectory": "/Users/eric/Library/WebKit/ai.quixi.chat.oauth-proof.170f78bb-f170-43aa-90bc-487fc0f1aff4",
+    "isolatedWebKitDirectoryRemoved": true,
+    "dataStoreRemovalMethod": "Remove only the unique proof application directory after its processes exit; no default profile inspection and no platform deletion API claim",
+    "temporaryControlAndTlsFilesRemoved": true,
+    "errors": []
+  },
+  "configuredCsp": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' asset: http://asset.localhost data:; connect-src 'self' ipc: http://ipc.localhost",
+  "buildBinarySha256": "37cfe479cfeef5d2affe693df91a93759e5f9ceee442f78d566e017d6a7d6229",
+  "bundledSha256": {
+    "assets/index-DpW2cLKZ.js": "4b4c6ba63ea310b3339d2e8f42ca5599afb79950d472eeb94deeb61d6feebc94",
+    "index.html": "fbc332d5bf1ae959b9c1a0a168dc9500dbc144917d5ffa16b36255eddbb02ced"
+  },
+  "fixture": {
+    "tlsHostname": "oauth.synthetic.invalid",
+    "tlsPort": 59929,
+    "certificateSha256": "31770c0b14dff06e9be17a3dd8a89d1afe2facec07838e36c53e0ebe5faf2ff0",
+    "providerOrigin": "http://127.0.0.1:59930",
+    "authorizationOpener": "native-only private temporary URL capture",
+    "externalBrowserQualified": false
+  },
+  "installedBundle": {
+    "path": "/Users/eric/Applications/Quixi OAuth Proof 170f78bb-f170-43aa-90bc-487fc0f1aff4.app",
+    "identifier": "ai.quixi.chat.oauth-proof.170f78bb-f170-43aa-90bc-487fc0f1aff4",
+    "scheme": "ai.quixi.chat.oauth-proof.170f78bb-f170-43aa-90bc-487fc0f1aff4",
+    "binarySha256": "f88bb76e84d9f41acff050a241c9f59890d0b199f1eeb57383a1e051e8b405a7",
+    "infoPlistSha256": "5586a3a09f03a4f016672b5504fca76141ec28db7faf0d48732e7f7b478e56a1",
+    "defaultHandler": "ai.quixi.chat.oauth-proof.170f78bb-f170-43aa-90bc-487fc0f1aff4",
+    "productionSchemeInherited": false
+  },
+  "changedSources": [],
+  "completedAt": "2026-09-10T21:56:01.375750+00:00"
+}

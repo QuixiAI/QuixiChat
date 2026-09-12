@@ -1,0 +1,165 @@
+{
+  "mode": "assert",
+  "name": "webkit",
+  "caseName": "fresh-branch-review",
+  "scope": "Computed CSS reflow and enabled control-border contrast; no screen-reader or native-control pixel-rendering qualification.",
+  "samples": [
+    {
+      "size": "normal",
+      "viewportWidth": 320,
+      "documentWidth": 320,
+      "region": {
+        "left": 37.78,
+        "right": 282.22,
+        "width": 244.44,
+        "height": 533.95
+      },
+      "rootFontSize": "16px",
+      "focused": {
+        "tag": "MAIN",
+        "id": "workspace",
+        "label": "Search your historySearchBranch notebook2 attempts · tokens in 24 · out 40 · estimated ≈ 0.000224 USD across 2 priced attempts · Summary proposals (included abo",
+        "insideRegion": false
+      },
+      "controlCount": 3,
+      "controls": [
+        {
+          "tag": "INPUT",
+          "label": "I want to start fresh without earlier messages or the applied summary",
+          "bounds": {
+            "left": 39.78,
+            "right": 51.78,
+            "width": 12,
+            "height": 12
+          },
+          "containerBounds": {
+            "left": 19.19,
+            "right": 300.81,
+            "width": 281.63,
+            "height": 3270.5
+          },
+          "disabled": false,
+          "overflow": false
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Start fresh branch",
+          "bounds": {
+            "left": 37.78,
+            "right": 195.09,
+            "width": 157.31,
+            "height": 38.94
+          },
+          "containerBounds": {
+            "left": 19.19,
+            "right": 300.81,
+            "width": 281.63,
+            "height": 3270.5
+          },
+          "disabled": false,
+          "overflow": false
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Cancel branch review",
+          "bounds": {
+            "left": 37.78,
+            "right": 219.75,
+            "width": 181.97,
+            "height": 38.94
+          },
+          "containerBounds": {
+            "left": 19.19,
+            "right": 300.81,
+            "width": 281.63,
+            "height": 3270.5
+          },
+          "disabled": false,
+          "overflow": false
+        }
+      ],
+      "borders": [],
+      "documentOverflow": [],
+      "violations": []
+    },
+    {
+      "size": "enlarged",
+      "viewportWidth": 320,
+      "documentWidth": 320,
+      "region": {
+        "left": 74.58,
+        "right": 245.42,
+        "width": 170.84,
+        "height": 3022.02
+      },
+      "rootFontSize": "32px",
+      "focused": {
+        "tag": "MAIN",
+        "id": "workspace",
+        "label": "Search your historySearchBranch notebook2 attempts · tokens in 24 · out 40 · estimated ≈ 0.000224 USD across 2 priced attempts · Summary proposals (included abo",
+        "insideRegion": false
+      },
+      "controlCount": 3,
+      "controls": [
+        {
+          "tag": "INPUT",
+          "label": "I want to start fresh without earlier messages or the applied summary",
+          "bounds": {
+            "left": 76.58,
+            "right": 88.58,
+            "width": 12,
+            "height": 12
+          },
+          "containerBounds": {
+            "left": 38.39,
+            "right": 281.61,
+            "width": 243.22,
+            "height": 13147.34
+          },
+          "disabled": false,
+          "overflow": false
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Start fresh branch",
+          "bounds": {
+            "left": 74.58,
+            "right": 245.42,
+            "width": 170.84,
+            "height": 162.28
+          },
+          "containerBounds": {
+            "left": 38.39,
+            "right": 281.61,
+            "width": 243.22,
+            "height": 13147.34
+          },
+          "disabled": false,
+          "overflow": false
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Cancel branch review",
+          "bounds": {
+            "left": 74.58,
+            "right": 245.42,
+            "width": 170.84,
+            "height": 162.28
+          },
+          "containerBounds": {
+            "left": 38.39,
+            "right": 281.61,
+            "width": 243.22,
+            "height": 13147.34
+          },
+          "disabled": false,
+          "overflow": false
+        }
+      ],
+      "borders": [],
+      "documentOverflow": [],
+      "violations": []
+    }
+  ],
+  "status": "passed"
+}

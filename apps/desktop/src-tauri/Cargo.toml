@@ -1,0 +1,61 @@
+[package]
+name = "quixi-desktop"
+default-run = "quixi-desktop"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+description = "Native host for the shared Quixi application"
+
+[features]
+default = ["custom-protocol"]
+custom-protocol = ["tauri/custom-protocol"]
+storage-proof = []
+host-proof = ["dep:objc2", "dep:objc2-app-kit"]
+document-proof = []
+regional-app-proof = []
+oauth-proof = []
+
+[[bin]]
+name = "quixi-oauth-proof"
+path = "../../../tests/hosts/oauth-proof/native.rs"
+required-features = ["oauth-proof", "custom-protocol"]
+
+[[bin]]
+name = "quixi-document-proof"
+path = "../../../tests/hosts/document-proof/native.rs"
+required-features = ["document-proof", "custom-protocol"]
+
+[[bin]]
+name = "quixi-regional-app-proof"
+path = "../../../tests/hosts/regional-app-proof/native.rs"
+required-features = ["regional-app-proof", "custom-protocol"]
+
+[dependencies]
+tauri.workspace = true
+reqwest = { version = "=0.13.4", default-features = false, features = ["native-tls", "stream"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tokio = { version = "1", features = ["sync", "time", "rt", "macros"] }
+tokio-util = { version = "0.7", features = ["rt"] }
+uuid = { version = "1", features = ["v4", "serde"] }
+sha2 = "0.10"
+zeroize = "1"
+bytes = "1"
+base64 = "=0.22.1"
+getrandom = "=0.4.3"
+tauri-plugin-opener = "=2.5.5"
+tauri-plugin-dialog = "=2.7.3"
+tempfile = "=3.27.0"
+
+[target.'cfg(target_os = "macos")'.dependencies]
+objc2 = { version = "=0.6.4", optional = true }
+objc2-app-kit = { version = "=0.3.2", default-features = false, features = ["NSApplication", "NSWindow", "NSSavePanel", "NSOpenPanel"], optional = true }
+keyring-core = "=1.0.0"
+apple-native-keyring-store = { version = "=1.0.2", features = ["keychain"] }
+
+[build-dependencies]
+tauri-build.workspace = true
+
+[lints]
+workspace = true

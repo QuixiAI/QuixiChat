@@ -1,0 +1,19 @@
+{
+  "name": "@quixi/importers",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "description": "Historical normalization, identity, and provenance.",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@quixi/core": "0.0.1",
+    "@noble/hashes": "2.4.0"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "typecheck:tests": "tsc --noEmit -p tsconfig.tests.json",
+    "test": "node --experimental-transform-types --test tests/*.test.ts"
+  }
+}

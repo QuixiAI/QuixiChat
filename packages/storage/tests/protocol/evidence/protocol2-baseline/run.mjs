@@ -1,0 +1,114 @@
+import { chromium, webkit, expect } from '@playwright/test';
+import { browserEngines } from '../../../../tooling/browser-engines.mjs';
+import { build, preview } from 'vite';
+import { mkdtemp, mkdir, readFile, writeFile, copyFile, rm } from 'node:fs/promises';
+import { resolve } from 'node:path';
+import { tmpdir, platform, release, arch } from 'node:os';
+import { createHash, randomUUID } from 'node:crypto';
+
+const engines = browserEngines({ chromium, webkit });
+const root = resolve(import.meta.dirname, '../../../..');
+const frozen = resolve(import.meta.dirname, '../selection/schema8/frozen');
+const hash = value => createHash('sha256').update(value).digest('hex');
+const report = { status: 'running', startedAt: new Date().toISOString(), selectedEngines: engines.map(([name]) => name), environment: { platform: platform(), release: release(), arch: arch(), node: process.version }, sourceSha256: {}, hosts: [] };
+const output = resolve(root, 'test-results/archive-protocol.json');
+const save = async () => { await mkdir(resolve(root, 'test-results'), { recursive: true }); await writeFile(output, JSON.stringify(report, null, 2) + '\n'); };
+await save();
+const temporary = await mkdtemp(resolve(tmpdir(), 'quixi-protocol-'));
+let server;
+const call = (page, method, ...args) => page.evaluate(({ method, args }) => window.protocolProof[method](...args), { method, args });
+const wait = (page, expression, arg) => page.waitForFunction(expression, arg, { timeout: 15_000 });
+const snapshot = d => ({ canonicalRecords: d.canonicalRecords, syncOperations: d.syncOperations, integrity: d.integrity });
+try {
+  const manifest = JSON.parse(await readFile(resolve(frozen, 'manifest.json'), 'utf8')); report.frozen = manifest;
+  const outDir = resolve(temporary, 'dist');
+  for (const file of ['packages/storage/src/archive-protocol.ts', 'packages/storage/src/client/archive.ts', 'packages/storage/src/worker/archive.ts', 'packages/storage/src/worker/archive-database.ts', 'packages/storage/tests/protocol/index.mjs', 'packages/storage/tests/protocol/run.mjs', 'tooling/browser-engines.mjs']) report.sourceSha256[file] = hash(await readFile(resolve(root, file)));
+  await build({ configFile: false, root: import.meta.dirname, logLevel: 'warn', build: { outDir, emptyOutDir: true } });
+  await mkdir(resolve(outDir, 'frozen'), { recursive: true });
+  for (const [file, digest] of Object.entries(manifest.artifacts)) {
+    const source = file.endsWith('.wasm') ? resolve(root, 'packages/storage/sqlite/dist/sqlite3.wasm') : resolve(frozen, file);
+    expect(hash(await readFile(source))).toBe(digest); await copyFile(source, resolve(outDir, 'frozen', file));
+  }
+  server = await preview({ configFile: false, root: import.meta.dirname, build: { outDir }, logLevel: 'warn', preview: { host: '127.0.0.1', port: 4203, strictPort: true } });
+  for (const [name, engine] of engines) {
+    const host = { name, status: 'running', checks: [], rejected: [], observations: {} }; report.hosts.push(host); await save();
+    const context = await engine.launchPersistentContext(resolve(temporary, name), { headless: true });
+    try {
+      const page = await context.newPage(); await page.goto('http://127.0.0.1:4203/'); await wait(page, () => !!window.protocolProof);
+      host.userAgent = await page.evaluate(() => navigator.userAgent);
+      const archiveId = `protocol-${randomUUID()}`, lockName = `quixi:archive:${archiveId}:owner`;
+      await call(page, 'bus', 'v1', archiveId, 1); await call(page, 'bus', 'v2', archiveId, 2);
+      await call(page, 'client', 'owner', archiveId);
+      const owner = await call(page, 'request', 'owner', 'diagnostics');
+      expect(owner.integrity).toBe('ok');
+      await call(page, 'write', 'owner', 'modern owner committed');
+      await call(page, 'client', 'follower', archiveId);
+      expect((await call(page, 'request', 'follower', 'diagnostics')).ownerId).toBe(owner.ownerId);
+      await wait(page, async lock => (await navigator.locks.query()).pending.filter(item => item.name === lock).length === 1, lockName);
+      await call(page, 'write', 'follower', 'modern follower forwarded');
+      expect((await call(page, 'request', 'owner', 'diagnostics')).syncOperations).toBe(2);
+      host.checks.push('Actual modern owner and follower commit through production client; common owner identity and held/pending owner locks observed');
+
+      await call(page, 'raw', 'old', true); await call(page, 'init', 'old', archiveId, null);
+      await wait(page, () => window.protocolProof.busMessages('v1').some(frame => frame.type === 'hello'));
+      await wait(page, async lock => (await navigator.locks.query()).pending.filter(item => item.name === lock).length === 2, lockName);
+      await call(page, 'queuedOldWrite', 'old', 'old-write');
+      await call(page, 'write', 'follower', 'modern follower progresses while old waits');
+      const before = await call(page, 'request', 'owner', 'diagnostics'); expect(before.syncOperations).toBe(3);
+      expect((await call(page, 'job', 'old-write')).status).toBe('pending');
+      expect((await call(page, 'busMessages', 'v1')).filter(frame => frame.type === 'owner')).toHaveLength(0);
+      host.observations.waitingLocks = await page.evaluate(() => navigator.locks.query());
+      host.checks.push('Unmodified frozen schema8 follower announces v1 hello and waits on the same lock; modern owner never advertises on v1 and old canonical call remains undispatched while modern commits progress');
+
+      const previousOwners = (await call(page, 'busMessages', 'v2')).filter(frame => frame.type === 'owner').length;
+      host.observations.invalidBusCallIds = await call(page, 'invalidBusWrites', 'v2', owner.ownerId);
+      await wait(page, count => window.protocolProof.busMessages('v2').filter(frame => frame.type === 'owner').length > count, previousOwners);
+      expect(snapshot(await call(page, 'request', 'follower', 'diagnostics'))).toEqual(snapshot(before));
+      await call(page, 'write', 'follower', 'modern commit after stale bus burst');
+      expect((await call(page, 'request', 'owner', 'diagnostics')).syncOperations).toBe(4);
+      const v2Frames = await call(page, 'busMessages', 'v2');
+      expect(v2Frames.every(frame => frame.version === 2)).toBe(true);
+      expect(v2Frames.some(frame => frame.type === 'call' && frame.call.request.version === 1)).toBe(true);
+      host.observations.productionBusTypes = [...new Set(v2Frames.map(frame => frame.type))];
+      host.checks.push('Missing, numeric v1/v3 and string-version calls sent to v2 cannot commit; same-sender valid hello is an owner-processing barrier and subsequent production calls still succeed');
+
+      await call(page, 'raw', 'direct'); await call(page, 'init', 'direct', archiveId);
+      expect((await call(page, 'rawRequest', 'direct', 'diagnostics', null)).ok).toBe(true);
+      const directBaseline = await call(page, 'request', 'owner', 'diagnostics');
+      for (const version of [null, 1, 3, '2']) {
+        const reply = await call(page, 'rawWrite', 'direct', 'invalid direct version must not commit', version);
+        expect(reply.ok).toBe(false); expect(reply.version).toBe(2); expect(reply.error.code).toBe('UNSUPPORTED'); host.rejected.push(reply);
+      }
+      expect(snapshot(await call(page, 'request', 'owner', 'diagnostics'))).toEqual(snapshot(directBaseline));
+      expect((await call(page, 'rawWrite', 'direct', 'valid direct after rejected frames')).ok).toBe(true);
+      expect((await call(page, 'request', 'follower', 'diagnostics')).syncOperations).toBe(5);
+      expect((await call(page, 'messages', 'direct')).every(frame => frame.version === 2)).toBe(true);
+      host.checks.push('Initialized actual worker rejects missing/wrong direct outer versions with UNSUPPORTED before mutation, then accepts legitimate version2 call with inner request version1');
+
+      for (const [index, version] of [null, 1, 3, '2'].entries()) {
+        const worker = `bad-init-${index}`, rejectedArchive = `protocol-rejected-${randomUUID()}`;
+        await call(page, 'raw', worker); await call(page, 'init', worker, rejectedArchive, version);
+        await wait(page, name => window.protocolProof.messages(name).some(frame => frame.type === 'fatal'), worker);
+        const fatal = (await call(page, 'messages', worker)).find(frame => frame.type === 'fatal');
+        expect(fatal.version).toBe(2); expect(fatal.error.code).toBe('UNSUPPORTED'); host.rejected.push(fatal);
+        expect(await call(page, 'namespaceExists', rejectedArchive)).toBe(false);
+        const locks = await page.evaluate(() => navigator.locks.query());
+        expect([...locks.held, ...locks.pending].some(lock => lock.name === `quixi:archive:${rejectedArchive}:owner`)).toBe(false);
+        await call(page, 'terminate', worker);
+      }
+      await call(page, 'write', 'owner', 'modern owner remains healthy after init rejections');
+      const final = await call(page, 'request', 'follower', 'diagnostics'); expect(final.syncOperations).toBe(6); expect(final.integrity).toBe('ok');
+      host.observations.final = final;
+      host.checks.push('Missing/wrong direct init versions fail before OPFS namespace or owner lock exists; separate established modern session remains writable');
+      expect((await call(page, 'job', 'old-write')).status).toBe('pending');
+      expect((await call(page, 'busMessages', 'v1')).filter(frame => frame.type === 'owner')).toHaveLength(0);
+      await call(page, 'terminate', 'old'); await call(page, 'terminate', 'direct');
+      await call(page, 'closeClient', 'follower'); await call(page, 'closeClient', 'owner');
+      await wait(page, async lock => { const q = await navigator.locks.query(); return ![...q.held, ...q.pending].some(item => item.name === lock); }, lockName);
+      host.checks.push('Legacy waiter is terminated before modern owner exits; explicit close acknowledgements release all observed owner locks without testing or claiming a schema barrier');
+    } finally { await context.close(); }
+    host.status = 'passed'; await save(); console.log(`${name}: archive protocol passed ${host.checks.length} checks`);
+  }
+  report.status = 'passed';
+} catch (error) { report.status = 'failed'; report.error = String(error?.stack ?? error); process.exitCode = 1; console.error(report.error); }
+finally { report.finishedAt = new Date().toISOString(); await save(); if (server) await new Promise(resolve => server.httpServer.close(resolve)); await rm(temporary, { recursive: true, force: true }); }

@@ -1,0 +1,776 @@
+{
+  "passed": true,
+  "route": "webgpu-fp32",
+  "chunks": 659,
+  "queries": 18,
+  "chunker": {
+    "id": "reference-wordpiece-window-v1",
+    "max_content_tokens": 256,
+    "overlap_tokens": 32,
+    "coordinate_unit": "python-unicode-codepoint",
+    "note": "Reference benchmark adapter; production shared SearchChunk parity is a later integration gate."
+  },
+  "model_sha256": "e1ef345cd35088b06f70c199f5a4e0311bda5983716ad6a3e7d0a604202efffc",
+  "library_sha256": "6671b18619861d88c9cb46ffc7eb72464d975dc028478da18a47a8712d476a18",
+  "gpu": {
+    "engine": "webkit",
+    "version": "26.6",
+    "jobs": 677,
+    "initializationMs": 426.51533299999994,
+    "measurements": [
+      {
+        "role": "document",
+        "batch": 32,
+        "tokenizationMs": 1,
+        "inputUploadMs": 0,
+        "dispatchMs": 0,
+        "completionReadbackMs": 36,
+        "totalMs": 37,
+        "gpuKernelMs": null
+      },
+      {
+        "role": "document",
+        "batch": 32,
+        "tokenizationMs": 1,
+        "inputUploadMs": 0,
+        "dispatchMs": 0,
+        "completionReadbackMs": 131,
+        "totalMs": 132,
+        "gpuKernelMs": null
+      },
+      {
+        "role": "document",
+        "batch": 32,
+        "tokenizationMs": 0,
+        "inputUploadMs": 0,
+        "dispatchMs": 0,
+        "completionReadbackMs": 23,
+        "totalMs": 23,
+        "gpuKernelMs": null
+      },
+      {
+        "role": "document",
+        "batch": 32,
+        "tokenizationMs": 1,
+        "inputUploadMs": 0,
+        "dispatchMs": 0,
+        "completionReadbackMs": 21,
+        "totalMs": 22,
+        "gpuKernelMs": null
+      },
+      {
+        "role": "document",
+        "batch": 32,
+        "tokenizationMs": 0,
+        "inputUploadMs": 0,
+        "dispatchMs": 0,
+        "completionReadbackMs": 22,
+        "totalMs": 22,
+        "gpuKernelMs": null
+      },
+      {
+        "role": "document",
+        "batch": 32,
+        "tokenizationMs": 0,
+        "inputUploadMs": 0,
+        "dispatchMs": 0,
+        "completionReadbackMs": 22,
+        "totalMs": 22,
+        "gpuKernelMs": null
+      },
+      {
+        "role": "document",
+        "batch": 32,
+        "tokenizationMs": 0,
+        "inputUploadMs": 0,
+        "dispatchMs": 0,
+        "completionReadbackMs": 22,
+        "totalMs": 22,
+        "gpuKernelMs": null
+      },
+      {
+        "role": "document",
+        "batch": 32,
+        "tokenizationMs": 0,
+        "inputUploadMs": 0,
+        "dispatchMs": 0,
+        "completionReadbackMs": 22,
+        "totalMs": 22,
+        "gpuKernelMs": null
+      },
+      {
+        "role": "document",
+        "batch": 32,
+        "tokenizationMs": 1,
+        "inputUploadMs": 0,
+        "dispatchMs": 0,
+        "completionReadbackMs": 27,
+        "totalMs": 28,
+        "gpuKernelMs": null
+      },
+      {
+        "role": "document",
+        "batch": 32,
+        "tokenizationMs": 0,
+        "inputUploadMs": 0,
+        "dispatchMs": 0,
+        "completionReadbackMs": 23,
+        "totalMs": 23,
+        "gpuKernelMs": null
+      },
+      {
+        "role": "document",
+        "batch": 32,
+        "tokenizationMs": 0,
+        "inputUploadMs": 0,
+        "dispatchMs": 0,
+        "completionReadbackMs": 22,
+        "totalMs": 22,
+        "gpuKernelMs": null
+      },
+      {
+        "role": "document",
+        "batch": 32,
+        "tokenizationMs": 0,
+        "inputUploadMs": 0,
+        "dispatchMs": 0,
+        "completionReadbackMs": 22,
+        "totalMs": 22,
+        "gpuKernelMs": null
+      },
+      {
+        "role": "document",
+        "batch": 32,
+        "tokenizationMs": 1,
+        "inputUploadMs": 0,
+        "dispatchMs": 0,
+        "completionReadbackMs": 23,
+        "totalMs": 24,
+        "gpuKernelMs": null
+      },
+      {
+        "role": "document",
+        "batch": 32,
+        "tokenizationMs": 1,
+        "inputUploadMs": 0,
+        "dispatchMs": 0,
+        "completionReadbackMs": 23,
+        "totalMs": 24,
+        "gpuKernelMs": null
+      },
+      {
+        "role": "document",
+        "batch": 32,
+        "tokenizationMs": 0,
+        "inputUploadMs": 0,
+        "dispatchMs": 0,
+        "completionReadbackMs": 23,
+        "totalMs": 23,
+        "gpuKernelMs": null
+      },
+      {
+        "role": "document",
+        "batch": 32,
+        "tokenizationMs": 0,
+        "inputUploadMs": 0,
+        "dispatchMs": 0,
+        "completionReadbackMs": 23,
+        "totalMs": 23,
+        "gpuKernelMs": null
+      },
+      {
+        "role": "document",
+        "batch": 32,
+        "tokenizationMs": 0,
+        "inputUploadMs": 0,
+        "dispatchMs": 0,
+        "completionReadbackMs": 23,
+        "totalMs": 23,
+        "gpuKernelMs": null
+      },
+      {
+        "role": "document",
+        "batch": 32,
+        "tokenizationMs": 0,
+        "inputUploadMs": 0,
+        "dispatchMs": 0,
+        "completionReadbackMs": 28,
+        "totalMs": 28,
+        "gpuKernelMs": null
+      },
+      {
+        "role": "document",
+        "batch": 32,
+        "tokenizationMs": 0,
+        "inputUploadMs": 0,
+        "dispatchMs": 0,
+        "completionReadbackMs": 25,
+        "totalMs": 25,
+        "gpuKernelMs": null
+      },
+      {
+        "role": "document",
+        "batch": 32,
+        "tokenizationMs": 1,
+        "inputUploadMs": 0,
+        "dispatchMs": 0,
+        "completionReadbackMs": 23,
+        "totalMs": 24,
+        "gpuKernelMs": null
+      },
+      {
+        "role": "document",
+        "batch": 19,
+        "tokenizationMs": 0,
+        "inputUploadMs": 0,
+        "dispatchMs": 0,
+        "completionReadbackMs": 15,
+        "totalMs": 15,
+        "gpuKernelMs": null
+      },
+      {
+        "role": "query",
+        "batch": 1,
+        "tokenizationMs": 0,
+        "inputUploadMs": 0,
+        "dispatchMs": 0,
+        "completionReadbackMs": 5,
+        "totalMs": 5,
+        "gpuKernelMs": null
+      },
+      {
+        "role": "query",
+        "batch": 1,
+        "tokenizationMs": 0,
+        "inputUploadMs": 1,
+        "dispatchMs": 0,
+        "completionReadbackMs": 3,
+        "totalMs": 4,
+        "gpuKernelMs": null
+      },
+      {
+        "role": "query",
+        "batch": 1,
+        "tokenizationMs": 0,
+        "inputUploadMs": 0,
+        "dispatchMs": 0,
+        "completionReadbackMs": 4,
+        "totalMs": 4,
+        "gpuKernelMs": null
+      },
+      {
+        "role": "query",
+        "batch": 1,
+        "tokenizationMs": 0,
+        "inputUploadMs": 0,
+        "dispatchMs": 0,
+        "completionReadbackMs": 4,
+        "totalMs": 4,
+        "gpuKernelMs": null
+      },
+      {
+        "role": "query",
+        "batch": 1,
+        "tokenizationMs": 0,
+        "inputUploadMs": 0,
+        "dispatchMs": 0,
+        "completionReadbackMs": 4,
+        "totalMs": 4,
+        "gpuKernelMs": null
+      },
+      {
+        "role": "query",
+        "batch": 1,
+        "tokenizationMs": 0,
+        "inputUploadMs": 0,
+        "dispatchMs": 0,
+        "completionReadbackMs": 4,
+        "totalMs": 4,
+        "gpuKernelMs": null
+      },
+      {
+        "role": "query",
+        "batch": 1,
+        "tokenizationMs": 0,
+        "inputUploadMs": 0,
+        "dispatchMs": 0,
+        "completionReadbackMs": 4,
+        "totalMs": 4,
+        "gpuKernelMs": null
+      },
+      {
+        "role": "query",
+        "batch": 1,
+        "tokenizationMs": 0,
+        "inputUploadMs": 0,
+        "dispatchMs": 0,
+        "completionReadbackMs": 4,
+        "totalMs": 4,
+        "gpuKernelMs": null
+      },
+      {
+        "role": "query",
+        "batch": 1,
+        "tokenizationMs": 0,
+        "inputUploadMs": 0,
+        "dispatchMs": 0,
+        "completionReadbackMs": 4,
+        "totalMs": 4,
+        "gpuKernelMs": null
+      },
+      {
+        "role": "query",
+        "batch": 1,
+        "tokenizationMs": 0,
+        "inputUploadMs": 0,
+        "dispatchMs": 0,
+        "completionReadbackMs": 4,
+        "totalMs": 4,
+        "gpuKernelMs": null
+      },
+      {
+        "role": "query",
+        "batch": 1,
+        "tokenizationMs": 0,
+        "inputUploadMs": 0,
+        "dispatchMs": 0,
+        "completionReadbackMs": 4,
+        "totalMs": 4,
+        "gpuKernelMs": null
+      },
+      {
+        "role": "query",
+        "batch": 1,
+        "tokenizationMs": 0,
+        "inputUploadMs": 0,
+        "dispatchMs": 0,
+        "completionReadbackMs": 4,
+        "totalMs": 4,
+        "gpuKernelMs": null
+      },
+      {
+        "role": "query",
+        "batch": 1,
+        "tokenizationMs": 0,
+        "inputUploadMs": 0,
+        "dispatchMs": 0,
+        "completionReadbackMs": 4,
+        "totalMs": 4,
+        "gpuKernelMs": null
+      },
+      {
+        "role": "query",
+        "batch": 1,
+        "tokenizationMs": 0,
+        "inputUploadMs": 0,
+        "dispatchMs": 0,
+        "completionReadbackMs": 4,
+        "totalMs": 4,
+        "gpuKernelMs": null
+      },
+      {
+        "role": "query",
+        "batch": 1,
+        "tokenizationMs": 0,
+        "inputUploadMs": 0,
+        "dispatchMs": 0,
+        "completionReadbackMs": 4,
+        "totalMs": 4,
+        "gpuKernelMs": null
+      },
+      {
+        "role": "query",
+        "batch": 1,
+        "tokenizationMs": 0,
+        "inputUploadMs": 0,
+        "dispatchMs": 0,
+        "completionReadbackMs": 4,
+        "totalMs": 4,
+        "gpuKernelMs": null
+      },
+      {
+        "role": "query",
+        "batch": 1,
+        "tokenizationMs": 0,
+        "inputUploadMs": 0,
+        "dispatchMs": 0,
+        "completionReadbackMs": 4,
+        "totalMs": 4,
+        "gpuKernelMs": null
+      },
+      {
+        "role": "query",
+        "batch": 1,
+        "tokenizationMs": 0,
+        "inputUploadMs": 0,
+        "dispatchMs": 0,
+        "completionReadbackMs": 4,
+        "totalMs": 4,
+        "gpuKernelMs": null
+      }
+    ],
+    "distribution": {
+      "version": "1.0.0",
+      "model_format_version": 1,
+      "model_sha256": "e1ef345cd35088b06f70c199f5a4e0311bda5983716ad6a3e7d0a604202efffc",
+      "kernels": {
+        "attention": "3f07b3c79ef2c0de2d741fea21c77e3183dc2cced788a7295338c025d374e44b",
+        "baseline": "6671b18619861d88c9cb46ffc7eb72464d975dc028478da18a47a8712d476a18",
+        "half": "54222a8a80b836ceb42a5827cccb23ae3b0bc7a802c78d23d422c11d570ae4c8",
+        "subgroups": "9b2b0937d7b3911dccfcbeb8d36d373a857a01c6011fe0ba187ba3197cb92151",
+        "tiled": "6d5ea4ab0951cc237a5e87802019b5e107bfdd81c822cf7e4971099e64a6e79d"
+      },
+      "runtime_sources": {
+        "encoder.ts": "1fb0ad10c2c614a83019cfc14243c4a9968a331f54ce1b13ffd9ce71e7d79e9b",
+        "model.ts": "21813bee5db6a46bb60d1b02a6edcfbeb92418ffcf9ccb8bb8d693b3f8127f32",
+        "tuning.ts": "4d1f0e09824cc27f4cd68b87061115e790ddb5ed2f994dacfe62586406dda7d5"
+      },
+      "runtime_sha256": "9f50b0f32bc0e005e342212189df3c3e210ddc1aa92d09d6108bb94a8955837a",
+      "experimental": [
+        "subgroups"
+      ],
+      "note": "WGSL source distribution; actual driver compilation and optional routes require hardware gates."
+    },
+    "diagnostics": {
+      "backend": "webgpu-fp32",
+      "projection": "tiled",
+      "tuning": null,
+      "subgroups": false,
+      "attention": "fused",
+      "modelSha256": "e1ef345cd35088b06f70c199f5a4e0311bda5983716ad6a3e7d0a604202efffc",
+      "kernelVersion": "1.0.0",
+      "adapter": {
+        "vendor": "apple",
+        "architecture": "apple",
+        "device": "apple",
+        "description": "apple",
+        "isFallbackAdapter": false
+      },
+      "features": [
+        "bgra8unorm-storage",
+        "clip-distances",
+        "core-features-and-limits",
+        "depth-clip-control",
+        "depth32float-stencil8",
+        "float16-renderable",
+        "float32-blendable",
+        "float32-filterable",
+        "float32-renderable",
+        "indirect-first-instance",
+        "primitive-index",
+        "rg11b10ufloat-renderable",
+        "shader-f16",
+        "subgroups",
+        "texture-compression-astc",
+        "texture-compression-astc-sliced-3d",
+        "texture-compression-bc",
+        "texture-compression-bc-sliced-3d",
+        "texture-compression-etc2",
+        "texture-formats-tier1",
+        "texture-formats-tier2",
+        "timestamp-query"
+      ],
+      "enabledFeatures": [
+        "core-features-and-limits"
+      ],
+      "limits": {
+        "maxBufferSize": 268435456,
+        "maxStorageBufferBindingSize": 134217728,
+        "maxComputeInvocationsPerWorkgroup": 256,
+        "maxComputeWorkgroupStorageSize": 16384,
+        "maxComputeWorkgroupsPerDimension": 65535,
+        "maxStorageBuffersPerShaderStage": 8
+      },
+      "capacity": {
+        "batch": 32,
+        "tokens": 512
+      },
+      "memory": {
+        "weightsBytes": 90261504,
+        "scratchBytes": 251920400,
+        "allocatedBytes": 342181904,
+        "bufferCount": 17
+      },
+      "state": "ready"
+    }
+  },
+  "baseline_sha256": "77606cac1fc3cb35a8f87778d0425a3af3096c800e7df76a5c939120655c12e6",
+  "maximum_vector_absolute_error": 1.4901161193847656e-07,
+  "changed_top_ten_queries": [],
+  "native": {
+    "mean": {
+      "recall@5": 0.8425925925925926,
+      "recall@10": 0.8981481481481483,
+      "recall@100": 0.9814814814814815,
+      "recall@500": 1.0,
+      "mrr": 0.8611111111111112
+    },
+    "per_query": {
+      "opfs": {
+        "recall@5": 0.6666666666666666,
+        "recall@10": 0.6666666666666666,
+        "recall@100": 0.6666666666666666,
+        "recall@500": 1.0,
+        "mrr": 0.5
+      },
+      "desktop": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 0.5
+      },
+      "credentials": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 1.0
+      },
+      "oauth": {
+        "recall@5": 0.5,
+        "recall@10": 1.0,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 0.5
+      },
+      "switch": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 1.0
+      },
+      "branch": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 1.0
+      },
+      "dedup": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 1.0
+      },
+      "archive": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 1.0
+      },
+      "fts": {
+        "recall@5": 0.5,
+        "recall@10": 0.5,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 1.0
+      },
+      "pdf": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 0.5
+      },
+      "ocr": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 1.0
+      },
+      "sync": {
+        "recall@5": 0.5,
+        "recall@10": 0.5,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 1.0
+      },
+      "recovery": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 1.0
+      },
+      "priority": {
+        "recall@5": 0.5,
+        "recall@10": 0.5,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 1.0
+      },
+      "cache": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 1.0
+      },
+      "sql": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 0.5
+      },
+      "rrf": {
+        "recall@5": 0.5,
+        "recall@10": 1.0,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 1.0
+      },
+      "accessibility": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 1.0
+      }
+    }
+  },
+  "reference": {
+    "mean": {
+      "recall@5": 0.8425925925925926,
+      "recall@10": 0.8981481481481483,
+      "recall@100": 0.9814814814814815,
+      "recall@500": 1.0,
+      "mrr": 0.8611111111111112
+    },
+    "per_query": {
+      "opfs": {
+        "recall@5": 0.6666666666666666,
+        "recall@10": 0.6666666666666666,
+        "recall@100": 0.6666666666666666,
+        "recall@500": 1.0,
+        "mrr": 0.5
+      },
+      "desktop": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 0.5
+      },
+      "credentials": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 1.0
+      },
+      "oauth": {
+        "recall@5": 0.5,
+        "recall@10": 1.0,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 0.5
+      },
+      "switch": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 1.0
+      },
+      "branch": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 1.0
+      },
+      "dedup": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 1.0
+      },
+      "archive": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 1.0
+      },
+      "fts": {
+        "recall@5": 0.5,
+        "recall@10": 0.5,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 1.0
+      },
+      "pdf": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 0.5
+      },
+      "ocr": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 1.0
+      },
+      "sync": {
+        "recall@5": 0.5,
+        "recall@10": 0.5,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 1.0
+      },
+      "recovery": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 1.0
+      },
+      "priority": {
+        "recall@5": 0.5,
+        "recall@10": 0.5,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 1.0
+      },
+      "cache": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 1.0
+      },
+      "sql": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 0.5
+      },
+      "rrf": {
+        "recall@5": 0.5,
+        "recall@10": 1.0,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 1.0
+      },
+      "accessibility": {
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "recall@100": 1.0,
+        "recall@500": 1.0,
+        "mrr": 1.0
+      }
+    }
+  },
+  "execution_seconds": 1.8906933339994794,
+  "limitations": "Small synthetic relevance corpus; no production compression or scale approval."
+}

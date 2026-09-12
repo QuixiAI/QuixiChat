@@ -1,0 +1,341 @@
+{
+  "selectedEngines": [
+    "chromium",
+    "webkit"
+  ],
+  "status": "passed",
+  "startedAt": "2026-09-10T18:52:42.634Z",
+  "scope": "Real React provider settings/controller and production browser HostClient on synthetic loopback HTTP. Regional native capabilities are explicitly injected fixtures; native registration, physical geography and live account eligibility are not established by this browser proof.",
+  "hosts": [
+    {
+      "name": "chromium",
+      "status": "passed",
+      "checks": [
+        "shared React settings connects both opaque session credentials and clears password inputs",
+        "actual production HostClient model probes and streams use the configured adapter instances",
+        "a connection check follows the Anthropic listing cursor to a second page and reports reviewed versus unreviewed models for both providers",
+        "credential replacement rotates the handle; disconnect revokes its host association",
+        "US and EU credentials remain unpublished until explicit eligibility confirmation; successful model probes cannot confirm eligibility",
+        "confirmed regional text streams preserve exact reviewed model and regional binding; images refuse until separately confirmed and then reach the synthetic wire",
+        "revoking eligibility invalidates retained adapter prepare, count and stream methods before any HTTP request",
+        "reopening and replacing either regional credential clear confirmation and invalidate old adapter references",
+        "a mismatched regional capability binding disables the connection and refuses publication before HTTP",
+        "expanded regional details, eligibility controls and provider limits fit desktop and 390-pixel viewports without horizontal overflow",
+        "actual reload loses all browser credentials, regional eligibility confirmations and configured adapters"
+      ],
+      "regionalRequests": [
+        {
+          "region": "us",
+          "text": {
+            "method": "POST",
+            "path": "/v1/chat/completions",
+            "authorized": true,
+            "body": {
+              "model": "gpt-4.1-mini-2025-04-14",
+              "messages": [
+                {
+                  "role": "developer",
+                  "content": "Synthetic system"
+                },
+                {
+                  "role": "user",
+                  "content": "Synthetic text"
+                }
+              ],
+              "stream": true,
+              "max_completion_tokens": 100,
+              "store": false,
+              "stream_options": {
+                "include_usage": true
+              }
+            }
+          },
+          "image": {
+            "method": "POST",
+            "path": "/v1/chat/completions",
+            "authorized": true,
+            "body": {
+              "model": "gpt-4.1-mini-2025-04-14",
+              "messages": [
+                {
+                  "role": "developer",
+                  "content": "Synthetic system"
+                },
+                {
+                  "role": "user",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Synthetic text"
+                    },
+                    {
+                      "type": "image_url",
+                      "image_url": {
+                        "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+a5x8AAAAASUVORK5CYII="
+                      }
+                    }
+                  ]
+                }
+              ],
+              "stream": true,
+              "max_completion_tokens": 100,
+              "store": false,
+              "stream_options": {
+                "include_usage": true
+              }
+            }
+          },
+          "binding": {
+            "providerId": "openai",
+            "accountId": "primary",
+            "destinationId": "quixi-openai-us-api-v1",
+            "transportId": "quixi-openai-us-native-v1"
+          }
+        },
+        {
+          "region": "eu",
+          "text": {
+            "method": "POST",
+            "path": "/v1/chat/completions",
+            "authorized": true,
+            "body": {
+              "model": "gpt-4.1-mini-2025-04-14",
+              "messages": [
+                {
+                  "role": "developer",
+                  "content": "Synthetic system"
+                },
+                {
+                  "role": "user",
+                  "content": "Synthetic text"
+                }
+              ],
+              "stream": true,
+              "max_completion_tokens": 100,
+              "store": false,
+              "stream_options": {
+                "include_usage": true
+              }
+            }
+          },
+          "image": {
+            "method": "POST",
+            "path": "/v1/chat/completions",
+            "authorized": true,
+            "body": {
+              "model": "gpt-4.1-mini-2025-04-14",
+              "messages": [
+                {
+                  "role": "developer",
+                  "content": "Synthetic system"
+                },
+                {
+                  "role": "user",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Synthetic text"
+                    },
+                    {
+                      "type": "image_url",
+                      "image_url": {
+                        "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+a5x8AAAAASUVORK5CYII="
+                      }
+                    }
+                  ]
+                }
+              ],
+              "stream": true,
+              "max_completion_tokens": 100,
+              "store": false,
+              "stream_options": {
+                "include_usage": true
+              }
+            }
+          },
+          "binding": {
+            "providerId": "openai",
+            "accountId": "primary",
+            "destinationId": "quixi-openai-eu-api-v1",
+            "transportId": "quixi-openai-eu-native-v1"
+          }
+        }
+      ],
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36",
+      "httpRequests": 11
+    },
+    {
+      "name": "webkit",
+      "status": "passed",
+      "checks": [
+        "shared React settings connects both opaque session credentials and clears password inputs",
+        "actual production HostClient model probes and streams use the configured adapter instances",
+        "a connection check follows the Anthropic listing cursor to a second page and reports reviewed versus unreviewed models for both providers",
+        "credential replacement rotates the handle; disconnect revokes its host association",
+        "US and EU credentials remain unpublished until explicit eligibility confirmation; successful model probes cannot confirm eligibility",
+        "confirmed regional text streams preserve exact reviewed model and regional binding; images refuse until separately confirmed and then reach the synthetic wire",
+        "revoking eligibility invalidates retained adapter prepare, count and stream methods before any HTTP request",
+        "reopening and replacing either regional credential clear confirmation and invalidate old adapter references",
+        "a mismatched regional capability binding disables the connection and refuses publication before HTTP",
+        "expanded regional details, eligibility controls and provider limits fit desktop and 390-pixel viewports without horizontal overflow",
+        "actual reload loses all browser credentials, regional eligibility confirmations and configured adapters"
+      ],
+      "regionalRequests": [
+        {
+          "region": "us",
+          "text": {
+            "method": "POST",
+            "path": "/v1/chat/completions",
+            "authorized": true,
+            "body": {
+              "model": "gpt-4.1-mini-2025-04-14",
+              "messages": [
+                {
+                  "role": "developer",
+                  "content": "Synthetic system"
+                },
+                {
+                  "role": "user",
+                  "content": "Synthetic text"
+                }
+              ],
+              "stream": true,
+              "max_completion_tokens": 100,
+              "store": false,
+              "stream_options": {
+                "include_usage": true
+              }
+            }
+          },
+          "image": {
+            "method": "POST",
+            "path": "/v1/chat/completions",
+            "authorized": true,
+            "body": {
+              "model": "gpt-4.1-mini-2025-04-14",
+              "messages": [
+                {
+                  "role": "developer",
+                  "content": "Synthetic system"
+                },
+                {
+                  "role": "user",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Synthetic text"
+                    },
+                    {
+                      "type": "image_url",
+                      "image_url": {
+                        "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+a5x8AAAAASUVORK5CYII="
+                      }
+                    }
+                  ]
+                }
+              ],
+              "stream": true,
+              "max_completion_tokens": 100,
+              "store": false,
+              "stream_options": {
+                "include_usage": true
+              }
+            }
+          },
+          "binding": {
+            "providerId": "openai",
+            "accountId": "primary",
+            "destinationId": "quixi-openai-us-api-v1",
+            "transportId": "quixi-openai-us-native-v1"
+          }
+        },
+        {
+          "region": "eu",
+          "text": {
+            "method": "POST",
+            "path": "/v1/chat/completions",
+            "authorized": true,
+            "body": {
+              "model": "gpt-4.1-mini-2025-04-14",
+              "messages": [
+                {
+                  "role": "developer",
+                  "content": "Synthetic system"
+                },
+                {
+                  "role": "user",
+                  "content": "Synthetic text"
+                }
+              ],
+              "stream": true,
+              "max_completion_tokens": 100,
+              "store": false,
+              "stream_options": {
+                "include_usage": true
+              }
+            }
+          },
+          "image": {
+            "method": "POST",
+            "path": "/v1/chat/completions",
+            "authorized": true,
+            "body": {
+              "model": "gpt-4.1-mini-2025-04-14",
+              "messages": [
+                {
+                  "role": "developer",
+                  "content": "Synthetic system"
+                },
+                {
+                  "role": "user",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Synthetic text"
+                    },
+                    {
+                      "type": "image_url",
+                      "image_url": {
+                        "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+a5x8AAAAASUVORK5CYII="
+                      }
+                    }
+                  ]
+                }
+              ],
+              "stream": true,
+              "max_completion_tokens": 100,
+              "store": false,
+              "stream_options": {
+                "include_usage": true
+              }
+            }
+          },
+          "binding": {
+            "providerId": "openai",
+            "accountId": "primary",
+            "destinationId": "quixi-openai-eu-api-v1",
+            "transportId": "quixi-openai-eu-native-v1"
+          }
+        }
+      ],
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+      "httpRequests": 11
+    }
+  ],
+  "sourceSha256": {
+    "tooling/browser-engines.mjs": "136f16e63e905ae4c8305c7adedfce2411eff13b04f914054f8fb718155d0df1",
+    "packages/core/src/contracts/host.ts": "d8007b969a7133a19465c46215f4c563c0515fd6fdea974cfeb1bacc53d8bfce",
+    "packages/app/src/features/providers/controller.ts": "e75efaf2a611649115cb78c0d4dcd3fc4bda3b8691245cdce2ac8c756b4b1088",
+    "packages/app/src/features/providers/types.ts": "e6c24beaa93be6ba0a8410d5c1df1eaeb163d3bea07b8ae5ef49aa15feec03c5",
+    "packages/app/src/features/providers/ProviderSettingsPanel.tsx": "e3f8276f753e87133672107e94b80ecd15995f1af429218b750063e47632b8d9",
+    "packages/app/src/features/providers/providers.css": "5dc4f265b7e4c650c09b6617ec1b533c78cfd0d662c098bfe31821827f77845d",
+    "packages/providers/src/catalog.ts": "598f789b9ea3bcd9a23d4e312e4425ed2e54a1d2e36bf30c2a7e70fa972c8d53",
+    "packages/providers/src/regional.ts": "18e286ae6e66ccbc028b77c8b328729dd77d680ff91b7fb18bf4252513e8d0a6",
+    "apps/web/src/host/index.ts": "af07620c4bf5ca38bda08dc037b93c74fecdca9a627e9a27e53e07d827e82e12",
+    "packages/providers/tests/fixture-server.ts": "b4b19689ffc0944e3dac1995b648438834ef7335f46419775366f69305c4685d",
+    "packages/app/src/features/providers/tests/browser/index.tsx": "e789cf9be69efe2b13de7c514b3647249f7cafb043b2dd6d6007873471587f35",
+    "packages/app/src/features/providers/tests/browser/index.html": "b0beb7887c31e4a95393f142f9287dfa855ad2b818d148194cdd32d5ece38e9a",
+    "packages/app/src/features/providers/tests/browser/run.mjs": "2e6d44c0f6cd7d5068272349ba76650fbb018ca64ef81859a4ed3b24e1a5608c"
+  },
+  "finishedAt": "2026-09-10T18:52:46.856Z"
+}

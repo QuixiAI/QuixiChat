@@ -1,0 +1,45 @@
+{
+  "before": {
+    "packages/app/src/runtime/library.ts": "dacbb1cb645136bb7df9a0d3d795a84ad52a029a9a1f0b1c3881821f55d1cc84",
+    "packages/app/tests/library-refresh.test.ts": "afd8b04c4500e362fb53176743a2fb15ee5d7dc4597741f06c77d83494810cb6"
+  },
+  "runs": [
+    {
+      "name": "library",
+      "command": [
+        "npm",
+        "run",
+        "test:app:library"
+      ],
+      "log": "/tmp/quixi-pending-recovery-library-final.log",
+      "exitCode": 0
+    },
+    {
+      "name": "compaction",
+      "command": [
+        "npm",
+        "run",
+        "test:app:summaries"
+      ],
+      "log": "/tmp/quixi-pending-recovery-compaction-final.log",
+      "exitCode": 0
+    },
+    {
+      "name": "typecheck",
+      "command": [
+        "npx",
+        "tsc",
+        "--noEmit",
+        "-p",
+        "tsconfig.json"
+      ],
+      "log": "/tmp/quixi-pending-recovery-typecheck-final.log",
+      "exitCode": 0
+    }
+  ],
+  "after": {
+    "packages/app/src/runtime/library.ts": "dacbb1cb645136bb7df9a0d3d795a84ad52a029a9a1f0b1c3881821f55d1cc84",
+    "packages/app/tests/library-refresh.test.ts": "afd8b04c4500e362fb53176743a2fb15ee5d7dc4597741f06c77d83494810cb6"
+  },
+  "sourceStable": true
+}

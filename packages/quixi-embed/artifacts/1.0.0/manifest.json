@@ -1,0 +1,38 @@
+{
+  "version": "1.0.0",
+  "model_format_version": 1,
+  "compiler_image": "emscripten/emsdk@sha256:90b757eb11fa9a0e3ce4d2d9f76d932a56018e4accc37b5a28b2783751e60eb7",
+  "model_sha256": "e1ef345cd35088b06f70c199f5a4e0311bda5983716ad6a3e7d0a604202efffc",
+  "artifacts": {
+    "quixi-scalar.wasm": {
+      "sha256": "7475f90c777ab324ef2de5ae9f7f03df14c07177c5e4788358f52c3603a04fb1",
+      "bytes": 43241,
+      "route": "wasm-scalar-fp32",
+      "sources": {
+        "model.c": "e510dac3f20f86afcfec23b16e56e91ec5c08adc9478de15e28df85d72364a63",
+        "tokenizer.c": "0360192ca6151350e623558f73ee82976b90b6d9fb93af9f82057b9793d5b9ec",
+        "encoder.c": "5fca9c2f52fcd1baccee78ac6cf6e065b54e07a38117674d3d2b66ee8b03388e",
+        "sha256.c": "cdb83cc565e92869be60deaf07f028e4d8b45b07236927b7170ff9148c616e4d",
+        "kernels.h": "68d40f577de5607b1ddc249181a8ac0a0a8c5b33db30a65481ae33ec27f2cc55",
+        "internal.h": "7d802a00a4b7374d2bf98cb578a8f92d5e39aa1eaec929771dfa1edab430f767",
+        "model_contract.h": "362a413a843150d48b7431230a1cec78407dcf6feb3b0d648bb4ce3c16d700c7"
+      },
+      "simd_required": false
+    },
+    "quixi-simd.wasm": {
+      "sha256": "85cf1fd1fc4b7609d9ac997d684afbef90ad7793e6a66358f1b6681288c6b547",
+      "bytes": 43171,
+      "route": "wasm-simd-fp32",
+      "sources": {
+        "model.c": "e510dac3f20f86afcfec23b16e56e91ec5c08adc9478de15e28df85d72364a63",
+        "tokenizer.c": "0360192ca6151350e623558f73ee82976b90b6d9fb93af9f82057b9793d5b9ec",
+        "encoder.c": "5fca9c2f52fcd1baccee78ac6cf6e065b54e07a38117674d3d2b66ee8b03388e",
+        "sha256.c": "cdb83cc565e92869be60deaf07f028e4d8b45b07236927b7170ff9148c616e4d",
+        "kernels.h": "68d40f577de5607b1ddc249181a8ac0a0a8c5b33db30a65481ae33ec27f2cc55",
+        "internal.h": "7d802a00a4b7374d2bf98cb578a8f92d5e39aa1eaec929771dfa1edab430f767",
+        "model_contract.h": "362a413a843150d48b7431230a1cec78407dcf6feb3b0d648bb4ce3c16d700c7"
+      },
+      "simd_required": true
+    }
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "host": "bundled-tauri-native-host",
+  "timestamp": "2026-09-08T10:26:13.730442+00:00",
+  "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+  "namespace": "48dd3981-9626-4070-a4cf-a18c76ba1332",
+  "binarySha256": "a5efc384e647d73bd8ee0a303520352a889606685a04b9ce001045d2175d935c",
+  "phases": [
+    {
+      "phase": "dialogs",
+      "exitCode": 0,
+      "stderr": "",
+      "webview": {
+        "success": true,
+        "phase": "dialogs",
+        "checks": [
+          "actual macOS keychain backend initialized",
+          "native registry reports local transport",
+          "native files available while OAuth and notifications remain unavailable",
+          "untracked or OS-keychain cancellation never claims prevention of an external commit",
+          "actual native open panel presentation and programmatic cancel return no file grant",
+          "actual native save panel presentation and programmatic cancel produce no destination write",
+          "actual AppKit file panels were observed and dismissed through their sheet callback"
+        ],
+        "credential": null,
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko)",
+        "origin": "tauri://localhost",
+        "protocol": "tauri:",
+        "capabilities": {
+          "host": "desktop",
+          "nativeFiles": {
+            "available": true,
+            "permission": "prompt",
+            "reason": null
+          },
+          "notifications": {
+            "available": false,
+            "permission": "not_required",
+            "reason": "Native notifications are not implemented."
+          },
+          "oauth": {
+            "available": false,
+            "permission": "not_required",
+            "reason": "Native OAuth callbacks and provider registrations are not implemented."
+          },
+          "providerTransports": [
+            {
+              "capability": {
+                "available": true,
+                "permission": "not_required",
+                "reason": null
+              },
+              "endpointOrigin": "http://127.0.0.1:60642",
+              "id": "native-proof",
+              "kind": "native_direct",
+              "privacy": "local",
+              "relayIdentity": null
+            }
+          ],
+          "secretPersistence": "native"
+        },
+        "fileEvidence": {
+          "creditWindow": 4,
+          "diskBytes": 0,
+          "diskStages": 0,
+          "fileHandles": 0,
+          "fileSources": 0,
+          "ioSlots": 4,
+          "maxChunkBytes": 65536,
+          "nativePanelsCancelled": 2
+        }
+      }
+    }
+  ],
+  "success": true,
+  "systemWebKitVersion": "21624.2.5.11.8",
+  "syntheticKeychainCleanup": {
+    "exitCode": 0,
+    "stderr": ""
+  },
+  "fixture": {
+    "requests": 0,
+    "observedDisconnects": 0
+  }
+}

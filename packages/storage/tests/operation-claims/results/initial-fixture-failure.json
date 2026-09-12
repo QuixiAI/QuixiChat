@@ -1,0 +1,45 @@
+{
+  "startedAt": "2026-09-09T04:35:49.522Z",
+  "completedAt": "2026-09-09T04:35:50.038Z",
+  "node": "v22.23.1",
+  "platform": "darwin",
+  "arch": "arm64",
+  "status": "failed",
+  "exitCode": 1,
+  "signal": null,
+  "command": [
+    "/opt/homebrew/Cellar/node@22/22.23.1/bin/node",
+    "--experimental-transform-types",
+    "--test",
+    "--test-reporter=tap",
+    "/Users/eric/QuixiChat/packages/storage/tests/operation-claims/registry.test.ts"
+  ],
+  "error": null,
+  "tests": 16,
+  "passed": 15,
+  "failed": 1,
+  "migration": {
+    "version": 10,
+    "name": "stable_local_operation_claims",
+    "sqlSha256": "48a9b27106bb7bf3c52726a8dad9c3f91fdd05abd191247e8eb48973c3dc8a8b",
+    "registeredInRoot": true
+  },
+  "sourceHashes": {
+    "packages/storage/migrations/operation-claims.ts": "b317daf1fe39656d98d58bb3418ed1f5da3687afa83da82a7281365bf61fb466",
+    "packages/storage/migrations/index.ts": "2c5089fa41c8c96a1a46e3dab0aeb72dbe70dcfb2ee8bf6109b94142d0dde418",
+    "packages/storage/src/worker/operation-claims.ts": "b90a22768dd7797058221fd509b1f02bd34e4e54a7aa77c15304e7cb19b0725b",
+    "packages/storage/src/worker/archive-operation-fences.ts": "6fa14608c52c2e691f4a418b4b7f495e8ca3e0f8c0f4bc1e9b4ecb445c733feb",
+    "packages/storage/src/worker/canonical/repository.ts": "326367b3b5ff6c4660baf95abba160f6b98ccdd7e7fe458f72ecf56b2b3e2428",
+    "packages/storage/src/worker/archives/clean-copy.ts": "404bedbbecb57fedd86d957b51427cca3b5304339ff4120d6091114650c3046c",
+    "packages/storage/src/worker/extraction/index.ts": "591b5267b6f5e11c58d24b9dbfcb6200c782f8ab598f7aa6551a8f2b00d3c725",
+    "packages/storage/src/worker/extraction/schema.ts": "97782b22ed5586d10724c03fa59ea30f09865377d330da6e2b0a345433a2ae5e",
+    "packages/core/src/contracts/extraction.ts": "7d947bb85bc68cd310044e67ae450193905a8ef5b60be651ff48c7977b940e1f",
+    "packages/storage/tests/operation-claims/registry.test.ts": "12d085e3cbefb79d43443ef57b3980886507518716e7b99c7ed368bdf9597698",
+    "packages/storage/tests/operation-claims/run.mjs": "bb5f55c07e07e9a5903b725e63332c9751f9e5b972b4c17a605c9c619ba3ce19",
+    "packages/storage/tests/operation-claims/tsconfig.json": "89cdd1a9aa71e98eb005df23f1bf97f6ddc077a1760c352a5f6c26a81c33fa35",
+    "packages/storage/sqlite/artifacts.json": "d6033112dabf47ede85c0599777f07261d475221fa3e0e315afbf1f8341096cb",
+    "packages/storage/sqlite/dist/sqlite3.mjs": "127c4f37a4ce3449d464b976ac4979fc6b016ae974c0aea9ba8afef85d3b4d5d",
+    "packages/storage/sqlite/dist/sqlite3.wasm": "dd7c22431a3b8ad51ab5e6ed91065593574c34c5959d2efdef2f17484eedcb2c"
+  },
+  "evidenceScope": "Pinned SQLite WASM in Node memory VFS: actual canonical/extraction repositories, SQL transactions, page-limit FULL, close/reopen and clean-copy. No browser, OPFS, process-crash or public dispatcher integration claim."
+}

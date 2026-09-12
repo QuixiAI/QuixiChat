@@ -1,0 +1,499 @@
+{
+  "status": "passed",
+  "startedAt": "2026-09-09T01:48:36.424Z",
+  "selectedEngines": [
+    "chromium",
+    "webkit"
+  ],
+  "environment": {
+    "platform": "darwin",
+    "release": "25.6.0",
+    "arch": "arm64",
+    "node": "v22.23.1"
+  },
+  "sourceSha256": {
+    "packages/storage/src/archive-protocol.ts": "5f8d01f6f41f0b69f3dd983bbb54f31a33e13b9a5c49197839f931713edaf627",
+    "packages/storage/src/client/archive.ts": "8c2e1ac1858b6a62cf0875822ea04643b79b37bfa97fc50be6f5ab02c0736b61",
+    "packages/storage/src/client/selection.ts": "3be6215f42123384024fe65de83577a46f82fbc4408270d75c7c0e399a66c59b",
+    "packages/storage/src/worker/archive.ts": "f84c9ad0e41390d7230b232210ede2577d900d9a7f8f8deb9fc7e7f79aa9153c",
+    "packages/storage/src/worker/archive-runtime.ts": "71d19f7909b3c2698dc82e912222e851487a2c1e98478574c42f788873fc830f",
+    "packages/storage/src/worker/archive-database.ts": "b56986cee418df2c9befe480c99e3cb986fe33bff5a0f8f1401eac863e816ee6",
+    "packages/storage/src/worker/selection.ts": "d3056c685125d249c7ac7b5ab66665283bf529fa1282d7b08ed214947b7ce7f1",
+    "packages/storage/src/selection/managed-catalog.ts": "d323adcd861a77ac678b0693d952ab730956b67edb6305094c8320d5579b5d2c",
+    "packages/storage/src/worker/sqlite-module.ts": "fb5889c277872ef8623cb0bb21b8afa58d0b08a8fddabc2caa7b96981f92ddbc",
+    "packages/storage/migrations/index.ts": "dac4b5a7b9b7bb57d472dcf841f64d5bd7dea1191ca7d991802cfcf12c8a2c19",
+    "packages/storage/migrations/archive-access.ts": "efbb426dc2f67ed00982119ba811aab780adfd9b8f60803f30f31a2a7e5abce8",
+    "packages/storage/tests/protocol/index.mjs": "186d4ee74f06ea7debacb498b8db6c0f345df9ff0034f31644b3436ff0d0468a",
+    "packages/storage/tests/protocol/run.mjs": "d85d59819145a54ba03848bef4636ad2eb1e65814de6c29a7f615c659fb0747d",
+    "tooling/browser-engines.mjs": "136f16e63e905ae4c8305c7adedfce2411eff13b04f914054f8fb718155d0df1"
+  },
+  "hosts": [
+    {
+      "name": "chromium",
+      "status": "passed",
+      "checks": [
+        "Actual modern owner and follower commit through production client; common owner identity and held/pending owner locks observed",
+        "Unmodified frozen schema8 follower announces v1 hello and waits on the same lock; modern owner never advertises on v1 and old canonical call remains undispatched while modern commits progress",
+        "Missing, numeric v1/v3 and string-version calls sent to v2 cannot commit; same-sender valid hello is an owner-processing barrier and subsequent production calls still succeed",
+        "Initialized actual worker rejects missing/wrong direct outer versions with UNSUPPORTED before mutation, then accepts legitimate version2 call with inner request version1",
+        "Missing/wrong direct init versions fail before OPFS namespace or owner lock exists; separate established modern session remains writable",
+        "After modern owner exits, frozen schema8 waiter acquires the same lock and refuses schema9 before its queued mutation; modern reopen preserves six committed operations and integrity"
+      ],
+      "rejected": [
+        {
+          "type": "reply",
+          "id": "b253edbf-6f30-40bd-b0ca-27a125d31dd7",
+          "ok": false,
+          "error": {
+            "code": "UNSUPPORTED",
+            "message": "Unsupported archive worker protocol; reopen the application",
+            "requestId": "b253edbf-6f30-40bd-b0ca-27a125d31dd7",
+            "operationId": null,
+            "retry": "never",
+            "details": {}
+          },
+          "version": 2
+        },
+        {
+          "type": "reply",
+          "id": "5792ccb2-e8f6-45f4-b6d9-53e7aacba76a",
+          "ok": false,
+          "error": {
+            "code": "UNSUPPORTED",
+            "message": "Unsupported archive worker protocol; reopen the application",
+            "requestId": "5792ccb2-e8f6-45f4-b6d9-53e7aacba76a",
+            "operationId": null,
+            "retry": "never",
+            "details": {}
+          },
+          "version": 2
+        },
+        {
+          "type": "reply",
+          "id": "7b9afac0-7fd8-4da0-84be-433fa5137921",
+          "ok": false,
+          "error": {
+            "code": "UNSUPPORTED",
+            "message": "Unsupported archive worker protocol; reopen the application",
+            "requestId": "7b9afac0-7fd8-4da0-84be-433fa5137921",
+            "operationId": null,
+            "retry": "never",
+            "details": {}
+          },
+          "version": 2
+        },
+        {
+          "type": "reply",
+          "id": "66231406-13d3-4509-81df-93124a4d7a14",
+          "ok": false,
+          "error": {
+            "code": "UNSUPPORTED",
+            "message": "Unsupported archive worker protocol; reopen the application",
+            "requestId": "66231406-13d3-4509-81df-93124a4d7a14",
+            "operationId": null,
+            "retry": "never",
+            "details": {}
+          },
+          "version": 2
+        },
+        {
+          "type": "fatal",
+          "error": {
+            "code": "UNSUPPORTED",
+            "message": "Unsupported archive worker protocol; reopen the application",
+            "requestId": "c23354c3-0059-48f6-ba8d-3a19d799005b",
+            "operationId": null,
+            "retry": "never",
+            "details": {}
+          },
+          "version": 2
+        },
+        {
+          "type": "fatal",
+          "error": {
+            "code": "UNSUPPORTED",
+            "message": "Unsupported archive worker protocol; reopen the application",
+            "requestId": "73c275cd-3c41-465e-985e-5eb8bc5107a2",
+            "operationId": null,
+            "retry": "never",
+            "details": {}
+          },
+          "version": 2
+        },
+        {
+          "type": "fatal",
+          "error": {
+            "code": "UNSUPPORTED",
+            "message": "Unsupported archive worker protocol; reopen the application",
+            "requestId": "eff9dcdf-acef-4e3e-8652-abf360aecab8",
+            "operationId": null,
+            "retry": "never",
+            "details": {}
+          },
+          "version": 2
+        },
+        {
+          "type": "fatal",
+          "error": {
+            "code": "UNSUPPORTED",
+            "message": "Unsupported archive worker protocol; reopen the application",
+            "requestId": "ed11ef54-2f21-4187-b981-609b4c425599",
+            "operationId": null,
+            "retry": "never",
+            "details": {}
+          },
+          "version": 2
+        }
+      ],
+      "observations": {
+        "selection": {
+          "archiveId": "default",
+          "selectionRevision": 0
+        },
+        "waitingLocks": {
+          "held": [
+            {
+              "clientId": "F7D2B0AE3DB81461F8D867AF36CEF5A5",
+              "mode": "exclusive",
+              "name": "quixi:archive:default:owner"
+            },
+            {
+              "clientId": "F7D2B0AE3DB81461F8D867AF36CEF5A5",
+              "mode": "exclusive",
+              "name": "quixi:selection:owner"
+            }
+          ],
+          "pending": [
+            {
+              "clientId": "84709136F09F23E7518FAC75FB92C12B",
+              "mode": "exclusive",
+              "name": "quixi:archive:default:owner"
+            },
+            {
+              "clientId": "4A851586CB2DB6F5A30CF15D02314736",
+              "mode": "exclusive",
+              "name": "quixi:archive:default:owner"
+            }
+          ]
+        },
+        "invalidBusCallIds": [
+          "15b7445e-3e59-4b16-a311-0224b0c2ec79",
+          "44ac8d49-ce3d-4aa0-9545-9b291318d2d4",
+          "24249e23-26dc-4ad3-ae31-22071de73b3f",
+          "d9daba05-83d1-4f9a-806c-1c65add0e2cc"
+        ],
+        "productionBusTypes": [
+          "search",
+          "changed",
+          "hello",
+          "owner",
+          "call",
+          "reply",
+          "progress"
+        ],
+        "final": {
+          "backend": "sqlite-wasm-opfs-sahpool",
+          "ownerId": "25e34398-341e-4344-8d3d-a6ea2f4c9fa4",
+          "schemaVersion": 9,
+          "integrity": "ok",
+          "canonicalRecords": 18,
+          "syncOperations": 6,
+          "persisted": false,
+          "usage": 13586140,
+          "quota": 10751004380
+        },
+        "oldWaiterAfterOwnerExit": {
+          "status": "failed",
+          "reply": {
+            "type": "reply",
+            "id": "6a8bd80b-ff44-47bb-9f83-2a82fa3057e6",
+            "ok": false,
+            "error": {
+              "code": "MIGRATION_FAILED",
+              "message": "Unsupported canonical schema version; preserve database and use a compatible application/export path",
+              "requestId": "6a8bd80b-ff44-47bb-9f83-2a82fa3057e6",
+              "operationId": null,
+              "retry": "after_user_action",
+              "details": {}
+            }
+          }
+        }
+      },
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36"
+    },
+    {
+      "name": "webkit",
+      "status": "passed",
+      "checks": [
+        "Actual modern owner and follower commit through production client; common owner identity and held/pending owner locks observed",
+        "Unmodified frozen schema8 follower announces v1 hello and waits on the same lock; modern owner never advertises on v1 and old canonical call remains undispatched while modern commits progress",
+        "Missing, numeric v1/v3 and string-version calls sent to v2 cannot commit; same-sender valid hello is an owner-processing barrier and subsequent production calls still succeed",
+        "Initialized actual worker rejects missing/wrong direct outer versions with UNSUPPORTED before mutation, then accepts legitimate version2 call with inner request version1",
+        "Missing/wrong direct init versions fail before OPFS namespace or owner lock exists; separate established modern session remains writable",
+        "After modern owner exits, frozen schema8 waiter acquires the same lock and refuses schema9 before its queued mutation; modern reopen preserves six committed operations and integrity"
+      ],
+      "rejected": [
+        {
+          "type": "reply",
+          "id": "93aafd00-019a-4f55-a238-879e262072fa",
+          "ok": false,
+          "error": {
+            "code": "UNSUPPORTED",
+            "message": "Unsupported archive worker protocol; reopen the application",
+            "requestId": "93aafd00-019a-4f55-a238-879e262072fa",
+            "operationId": null,
+            "retry": "never",
+            "details": {}
+          },
+          "version": 2
+        },
+        {
+          "type": "reply",
+          "id": "9eea9598-9e19-4af2-99e8-b76ccb2293ba",
+          "ok": false,
+          "error": {
+            "code": "UNSUPPORTED",
+            "message": "Unsupported archive worker protocol; reopen the application",
+            "requestId": "9eea9598-9e19-4af2-99e8-b76ccb2293ba",
+            "operationId": null,
+            "retry": "never",
+            "details": {}
+          },
+          "version": 2
+        },
+        {
+          "type": "reply",
+          "id": "8c73d7dd-f086-486d-ab21-96cf4d359efa",
+          "ok": false,
+          "error": {
+            "code": "UNSUPPORTED",
+            "message": "Unsupported archive worker protocol; reopen the application",
+            "requestId": "8c73d7dd-f086-486d-ab21-96cf4d359efa",
+            "operationId": null,
+            "retry": "never",
+            "details": {}
+          },
+          "version": 2
+        },
+        {
+          "type": "reply",
+          "id": "ba9daeb2-52aa-4fac-b775-2118ae660626",
+          "ok": false,
+          "error": {
+            "code": "UNSUPPORTED",
+            "message": "Unsupported archive worker protocol; reopen the application",
+            "requestId": "ba9daeb2-52aa-4fac-b775-2118ae660626",
+            "operationId": null,
+            "retry": "never",
+            "details": {}
+          },
+          "version": 2
+        },
+        {
+          "type": "fatal",
+          "error": {
+            "code": "UNSUPPORTED",
+            "message": "Unsupported archive worker protocol; reopen the application",
+            "requestId": "2a6207e7-a292-4390-85eb-363b465ea774",
+            "operationId": null,
+            "retry": "never",
+            "details": {}
+          },
+          "version": 2
+        },
+        {
+          "type": "fatal",
+          "error": {
+            "code": "UNSUPPORTED",
+            "message": "Unsupported archive worker protocol; reopen the application",
+            "requestId": "1987cf5d-e02e-4330-8e85-1d628b7536ba",
+            "operationId": null,
+            "retry": "never",
+            "details": {}
+          },
+          "version": 2
+        },
+        {
+          "type": "fatal",
+          "error": {
+            "code": "UNSUPPORTED",
+            "message": "Unsupported archive worker protocol; reopen the application",
+            "requestId": "9a764400-a538-4a61-8c99-76d3414f587a",
+            "operationId": null,
+            "retry": "never",
+            "details": {}
+          },
+          "version": 2
+        },
+        {
+          "type": "fatal",
+          "error": {
+            "code": "UNSUPPORTED",
+            "message": "Unsupported archive worker protocol; reopen the application",
+            "requestId": "20b87a00-5128-4621-9551-37f598cf0fb7",
+            "operationId": null,
+            "retry": "never",
+            "details": {}
+          },
+          "version": 2
+        }
+      ],
+      "observations": {
+        "selection": {
+          "archiveId": "default",
+          "selectionRevision": 0
+        },
+        "waitingLocks": {
+          "held": [
+            {
+              "clientId": "128f0945-514b-4c31-9c3d-48633d3491a6",
+              "mode": "exclusive",
+              "name": "quixi:selection:owner"
+            },
+            {
+              "clientId": "128f0945-514b-4c31-9c3d-48633d3491a6",
+              "mode": "exclusive",
+              "name": "quixi:archive:default:owner"
+            }
+          ],
+          "pending": [
+            {
+              "clientId": "c35a9000-2673-41a0-9e83-b36dc45c3501",
+              "mode": "exclusive",
+              "name": "quixi:archive:default:owner"
+            },
+            {
+              "clientId": "7819b43e-1057-4245-a7bc-7f469db8408a",
+              "mode": "exclusive",
+              "name": "quixi:archive:default:owner"
+            }
+          ]
+        },
+        "invalidBusCallIds": [
+          "f74694f7-aa02-4311-8e68-5e6e975a5325",
+          "0175bcca-ca9d-4d6c-8ae2-e9fa4c51ca26",
+          "5521a1e6-226e-49cf-af51-803219ace693",
+          "bca5a434-2dc7-4a94-907d-091286d8e11c"
+        ],
+        "productionBusTypes": [
+          "changed",
+          "search",
+          "hello",
+          "owner",
+          "call",
+          "reply",
+          "progress"
+        ],
+        "final": {
+          "backend": "sqlite-wasm-opfs-sahpool",
+          "ownerId": "46c3b780-1fcd-4198-9c91-96a179bc24b2",
+          "schemaVersion": 9,
+          "integrity": "ok",
+          "canonicalRecords": 18,
+          "syncOperations": 6,
+          "persisted": false,
+          "usage": 24117248,
+          "quota": 20615843021
+        },
+        "oldWaiterAfterOwnerExit": {
+          "status": "failed",
+          "reply": {
+            "type": "reply",
+            "id": "625b57e1-7456-4f84-a8f0-8111aedd5ab4",
+            "ok": false,
+            "error": {
+              "code": "MIGRATION_FAILED",
+              "message": "Unsupported canonical schema version; preserve database and use a compatible application/export path",
+              "requestId": "625b57e1-7456-4f84-a8f0-8111aedd5ab4",
+              "operationId": null,
+              "retry": "after_user_action",
+              "details": {}
+            }
+          }
+        }
+      },
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15"
+    }
+  ],
+  "frozen": {
+    "capturedAt": "2026-09-09T00:14:49.346Z",
+    "schemaVersion": 8,
+    "node": "v22.23.1",
+    "entry": "packages/storage/src/worker/archive.ts",
+    "sourceSha256": {
+      "packages/core/src/contracts/serialization.ts": "a1d6cc8792dc6aeac4310f8b3f2545c0414b9425d7983fb4a80b7e7b0808116e",
+      "packages/core/src/contracts/producers.ts": "aaf026f6a774a1669190717aab6a5c2004e54d35adeea40a4e4ec8efb3485697",
+      "packages/storage/src/worker/archive-database.ts": "f900a878f2028a837a94071e1d5e8d94df8302aa6e34bcc6b73d4b78a5914c59",
+      "packages/storage/src/worker/archives/format.ts": "d57389c03aaa36838efe8bcb477255fb1f60980e0217ad2e84a9563ec71a044c",
+      "packages/storage/sqlite/dist/sqlite3.mjs": "127c4f37a4ce3449d464b976ac4979fc6b016ae974c0aea9ba8afef85d3b4d5d",
+      "packages/core/src/contracts/imports.ts": "f2f688aa9a4f67fd481546af9d947758ea9ca3dc835e8c56741a1bd5af5dd843",
+      "packages/core/src/contracts/transfer.ts": "73563a59e5d0964657a88c025a1b0935a1ae7eb77161e96404a4d37b375d6a6f",
+      "packages/core/src/model/provenance.ts": "191f723124ffe3b0f5957a90a1a60449406a1ba0cfbe258f9d401db0c62e8d26",
+      "packages/storage/src/worker/search/index.ts": "e4e30a4cf9db52e9d4708dcdb5fca8f236959960bf5da76574e92934737d4cee",
+      "packages/storage/src/worker/archives/clean-copy.ts": "404bedbbecb57fedd86d957b51427cca3b5304339ff4120d6091114650c3046c",
+      "packages/storage/src/archive-protocol.ts": "c89acdf44121d8b211f1160dadeadf63c6d8121694eca8faaed46fce21dbc6de",
+      "packages/core/src/contracts/storage.ts": "3d7ca2be694b61f4e96240a39d579e4243375ba35cc387ff787b40b1f88d269b",
+      "packages/storage/src/worker/search/schema.ts": "c65fe8309e218ec0290eaf5a188b01631a76d43ab366bc971ef0d4819b1f5173",
+      "node_modules/@noble/hashes/_u64.js": "b09da8c07fe8187c07649494cdb7cd0bcf13df90b506a9473d19e4d5f8c2e102",
+      "packages/core/src/model/validation.ts": "5feb020a6cf7d361c2661e4e012c24a8b2f329ce4efda1a7ebe5d8ccd11ae0a9",
+      "packages/core/src/model/branches.ts": "aabaf03facf31f8598b53e1ad716cb0f403496f1d5bcab35ecae4956ddb020b3",
+      "packages/storage/migrations/producers.ts": "9df3aaf17e1e6b767f8f4fc3148ea60a740872a6da97266f2f5154c3fbd0be36",
+      "packages/storage/migrations/streaming-text.ts": "e027dc12cf7d301359d0dfea7ef5de20eb3c6d1279d8dc94859b277cc0c4bc86",
+      "packages/storage/src/worker/archive.ts": "7c825d80c9552bee2a530cf47111ca8e76353985e975c91f6bb6cef83f83a6af",
+      "packages/core/src/model/types.ts": "8bda9a807e6789eeea4fa1192c80378c075756c0503e944096d57a68cd4d614e",
+      "packages/storage/src/worker/archives/files.ts": "6690e6ef602826e72826a2ecb5e4592451b3b901e4f7c0b9f99dcbfc865a313c",
+      "packages/core/src/model/index.ts": "abd31bc6badf1bab006956f61f7c47b9ffaf89b79269d889c656c10471f2f12c",
+      "packages/storage/src/producer-protocol.ts": "6a7277ec92c73d8ca3e11f8d35a169d49aec3eb03c8ecaa96a2c247c9a055a0e",
+      "packages/search/src/query.ts": "269a950bfacec7e5b384d1c59a2a2a6b21fcbfe2f1be18a423fd0f71728f2976",
+      "packages/core/src/contracts/search.ts": "d5b48ebf047afa039ededba831ff22a0eddd74809c915be74df6afdccb9a319b",
+      "packages/storage/src/worker/canonical/repository.ts": "326367b3b5ff6c4660baf95abba160f6b98ccdd7e7fe458f72ecf56b2b3e2428",
+      "packages/storage/src/worker/archives/receive.ts": "e9dc178c61e162a49112b2a92ef02954b8f988e2a436f89215058e31be9b232d",
+      "packages/core/src/contracts/host.ts": "16e12761feee4509cefa7715a05cf80737d7acfc010031a0b3c8197efecdd1b5",
+      "node_modules/@noble/hashes/sha2.js": "471746bba6ec4c6238ca41358d1d3b40b6ff31cf3363f0b4d550c649c1a8e83b",
+      "node_modules/@noble/hashes/utils.js": "037ad49adb78168b6b699598fd33f85f7877456b1d28b4d032e2a1a16807947c",
+      "packages/storage/sqlite/dist/sqlite3.wasm": "dd7c22431a3b8ad51ab5e6ed91065593574c34c5959d2efdef2f17484eedcb2c",
+      "packages/storage/src/worker/archive-operation-fences.ts": "6fa14608c52c2e691f4a418b4b7f495e8ca3e0f8c0f4bc1e9b4ecb445c733feb",
+      "packages/core/src/contracts/index.ts": "2d6e5c390a372b773bb742f4f0c943314a6c4ba7e17344f8bd48724cfb63d6d6",
+      "packages/storage/src/worker/archives/tar.ts": "9ac85f07f8de1e0267f7da58c34f6a6c7e8cf937b83500e3682efd45c9f9124b",
+      "packages/storage/src/worker/archives/snapshot.ts": "a8b9d47f8edef1793b0a11eac55be89d9b830900420119bdfc782f173d3d9572",
+      "packages/core/src/contracts/import-work.ts": "3b1781783db87db4233d7ff19241b70bd3a3749b84c669587906f995b998313a",
+      "packages/search/src/index.ts": "d8129a7680fcba67f21a7a6dc658b7983f60ad1cfb34955ce67c9377e36e7f62",
+      "packages/storage/src/worker/views.ts": "79e733521669f584b319be97c9b490e98faf146e3a9f6a11f620540cd29840d9",
+      "node_modules/@noble/hashes/_md.js": "60cf3010fda89e3e4d3f0e7ff1ce249e9c467f34b4fd41b6fd6101d9f69be763",
+      "packages/core/src/contracts/mutations.ts": "c7e00f0bdb4238dea2f2fbbf0e13c0bcfe2c329b8b91d2b7171525017d180632",
+      "packages/storage/src/worker/archives/validation.ts": "6ed61bfaba1f74071790b558ff97fd5cce2ecd32a09ac69df4235ff7399c834d",
+      "packages/storage/migrations/views.ts": "49b3b6890c3711b2406db59c37979364a526bb99d7794d67ceeafb42838500aa",
+      "packages/storage/src/worker/canonical/imports.ts": "f9012b8f190f2014979ffc049ac5c7c5e35fc98f5413200ea70d1fec77125994",
+      "packages/storage/src/worker/canonical/import-work.ts": "f5d25c914a580c548f2f20748a60854f04e339ed1d704dcc72202e014547801c",
+      "packages/storage/src/worker/canonical/index.ts": "9d06de53c6e74d0e53af55bbef9cf344cc7bde72d13b9803a60e8c5de977369c",
+      "packages/search/src/chunker.ts": "8e82abb13c825132019055610dab2897909fb191be32f4813eb045285dd57ec4",
+      "packages/storage/src/worker/producers.ts": "0eb2b0a9646ddb404338c51a03e05e38a224b80890c994e6a7fd779530a794da",
+      "packages/storage/src/worker/search/sources.ts": "68aa284e779bda1594e9045da11e6f95ae58ac9661efdb165ba364b65fed3aea",
+      "packages/core/src/contracts/archives.ts": "bc59c914256f51b3a650d23892adb28f311c9e443373b9bd0fe1a63c3dc72911",
+      "packages/storage/src/worker/archives/sqlite-file.ts": "04c96f086504a976db6349e9e5819b1a6bee60a026e9ff998523d7b7141c3cd9",
+      "packages/storage/src/worker/archives/schema-validation.ts": "ff3aecb064a430513890d9a66379b3904caa09de5f455580a98f299a74ebed22",
+      "packages/storage/src/worker/archives/export.ts": "8b7ce6aba6b9045b17354464b720e07459672baf06accd7d5834c0e3bb07bcb7",
+      "packages/storage/src/worker/blob-catalog.ts": "751af6f06d6a175284c2a39f0dd8c9522e18f865c0d8b8be283623a41524de8a",
+      "packages/core/src/contracts/views.ts": "90b038bdf6644c43bf5a6b02b74693ad75c235a711856ed29a084107493c8b3a",
+      "packages/storage/src/worker/blobs.ts": "5a8ee316532e92497eb6e700ba55f719c5188aef19cf39e04d8a938ec7de4f64",
+      "packages/storage/src/worker/archives/index.ts": "858d8ed4431b7a57c764e62a8c060528d29ad331511909619c405d8227f679e9",
+      "packages/storage/migrations/index.ts": "843c1ef15aaccbc37db2e4f96d0a13aceb2a8544739a8b3f28efb121c30457f7",
+      "package-lock.json": "14938dfb335480fccf15ef675167da13a3aac8832d29891e38ff67175920ad2c",
+      "packages/storage/tests/selection/schema8/freeze.mjs": "bd27d4d27bb5583312db84037c420db1a82c08478e534f4c37a1d1232babcad3"
+    },
+    "artifacts": {
+      "archive-schema8.mjs": "87d0d0e60cbb3a5972b9d2fd7810be7ef6f18f34e44dd27b8049b69cbe05e5dd",
+      "sqlite3-BzAlo58v.wasm": "dd7c22431a3b8ad51ab5e6ed91065593574c34c5959d2efdef2f17484eedcb2c"
+    }
+  },
+  "builtArtifacts": {
+    "index.html": "adb14b0b3d66c84692da0ad08484c19bdb981b8c187be26f808287284bfee910",
+    "assets/archive-BIc0ck9k.js": "e5c5380693e8e3a4771be5c29b42e7cd9b98020b1203543ba87fad646a480aba",
+    "assets/index-BD31OWkK.js": "6da2d78bbeb934c18aadfe5078854b38b1dc15b72d5b401db875499a2c25ee77",
+    "assets/index-DOXlbdQe.js": "1cd265bce19e55dd989a6cb50b92b9948d721a3cf5bbec10e0f069dc71a0f8cf",
+    "assets/selection-B6GO38JR.js": "23758af4619ab248ce53ea95305b096573767c26135a4acdcb6a61487fe4e0de",
+    "assets/sqlite3-BzAlo58v.wasm": "dd7c22431a3b8ad51ab5e6ed91065593574c34c5959d2efdef2f17484eedcb2c"
+  },
+  "origin": "http://127.0.0.1:62807",
+  "finishedAt": "2026-09-09T01:48:40.144Z"
+}

@@ -1,0 +1,19 @@
+{
+  "name": "@quixi/desktop",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1 --port 1420 --strictPort",
+    "build": "vite build",
+    "preview": "vite preview --host 127.0.0.1 --port 1420 --strictPort",
+    "tauri": "tauri"
+  },
+  "dependencies": {
+    "@quixi/app": "0.0.1",
+    "@quixi/core": "0.0.1",
+    "@tauri-apps/api": "2.11.1",
+    "@quixi/providers": "0.0.1",
+    "@quixi/storage": "0.0.1"
+  }
+}

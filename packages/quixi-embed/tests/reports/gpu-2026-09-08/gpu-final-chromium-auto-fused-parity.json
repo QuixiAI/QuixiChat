@@ -1,0 +1,139 @@
+{
+  "route": "webgpu-fp32",
+  "cases": 159,
+  "reference_manifest_sha256": "f35fd454d81b7593c88624228fcba21371f120fc6133a6f3684b1ecfd519119b",
+  "candidate_manifest_sha256": "d7a23f884aed551d93fb32c527306a20b6a05d9d8cc262703c67e3b2c902cdf1",
+  "candidate_backend": {
+    "route": "webgpu-fp32",
+    "engine": "chromium",
+    "shader_sha256": "6671b18619861d88c9cb46ffc7eb72464d975dc028478da18a47a8712d476a18",
+    "additional_shader_sha256": "6d5ea4ab0951cc237a5e87802019b5e107bfdd81c822cf7e4971099e64a6e79d",
+    "runtime_sha256": "1fb0ad10c2c614a83019cfc14243c4a9968a331f54ce1b13ffd9ce71e7d79e9b",
+    "browser_version": "153.0.8010.12",
+    "backend": "webgpu-fp32",
+    "projection": "auto",
+    "tuning": {
+      "record": {
+        "schema": 1,
+        "key": "quixi-gpu-tune-v1:a5994967707fc10c8f1816b9d514cf9ddb57125bad273d9b9c8503a67b8fc791",
+        "createdAt": "2026-09-08T14:50:56.483Z",
+        "status": "complete",
+        "selections": {
+          "small": "baseline",
+          "medium": "tiled",
+          "large": "tiled"
+        },
+        "samples": {
+          "small": {
+            "baseline": [
+              3.2999999998137355,
+              2.599999999627471,
+              2.7000000001862645
+            ],
+            "tiled": [
+              5.7000000001862645,
+              5.2000000001862645,
+              4.5
+            ]
+          },
+          "medium": {
+            "baseline": [
+              5.800000000745058,
+              4.7999999998137355,
+              4.8999999994412065
+            ],
+            "tiled": [
+              3.599999999627471,
+              3.400000000372529,
+              3.400000000372529
+            ]
+          },
+          "large": {
+            "baseline": [
+              18.5,
+              19.100000000558794,
+              18.5
+            ],
+            "tiled": [
+              7.5,
+              7.2999999998137355,
+              7.5
+            ]
+          }
+        },
+        "probes": 24,
+        "elapsedMs": 183.30000000074506
+      },
+      "cacheHit": false
+    },
+    "subgroups": false,
+    "attention": "fused",
+    "modelSha256": "e1ef345cd35088b06f70c199f5a4e0311bda5983716ad6a3e7d0a604202efffc",
+    "kernelVersion": "1.0.0",
+    "adapter": {
+      "vendor": "apple",
+      "architecture": "metal-3",
+      "device": "",
+      "description": "",
+      "isFallbackAdapter": false
+    },
+    "features": [
+      "bgra8unorm-storage",
+      "clip-distances",
+      "core-features-and-limits",
+      "depth-clip-control",
+      "depth32float-stencil8",
+      "dual-source-blending",
+      "float32-blendable",
+      "float32-filterable",
+      "indirect-first-instance",
+      "primitive-index",
+      "rg11b10ufloat-renderable",
+      "shader-f16",
+      "subgroup-size-control",
+      "subgroups",
+      "texture-component-swizzle",
+      "texture-compression-astc",
+      "texture-compression-astc-sliced-3d",
+      "texture-compression-bc",
+      "texture-compression-bc-sliced-3d",
+      "texture-compression-etc2",
+      "texture-formats-tier1",
+      "texture-formats-tier2",
+      "timestamp-query"
+    ],
+    "enabledFeatures": [
+      "core-features-and-limits"
+    ],
+    "limits": {
+      "maxBufferSize": 268435456,
+      "maxStorageBufferBindingSize": 176259072,
+      "maxComputeInvocationsPerWorkgroup": 256,
+      "maxComputeWorkgroupStorageSize": 16384,
+      "maxComputeWorkgroupsPerDimension": 65535,
+      "maxStorageBuffersPerShaderStage": 8
+    },
+    "capacity": {
+      "batch": 32,
+      "tokens": 512
+    },
+    "memory": {
+      "weightsBytes": 90261504,
+      "scratchBytes": 604291084,
+      "allocatedBytes": 694552588,
+      "bufferCount": 17
+    },
+    "state": "ready"
+  },
+  "thresholds": {
+    "atol": 0.0003,
+    "rtol": 0.0003,
+    "vector_atol": 8e-05,
+    "min_cosine": 0.999999,
+    "norm_atol": 3e-05
+  },
+  "max_absolute_error": 8.702278137207031e-06,
+  "minimum_cosine": 0.9999999999997857,
+  "passed": true,
+  "errors": []
+}

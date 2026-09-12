@@ -1,0 +1,34 @@
+{
+  "scope": "Emulated document.hasFocus and window focus events; real DOM disabling, production preference controller and durable StorageWorker write.",
+  "stages": [
+    {
+      "stage": "focused-before-mutation",
+      "documentFocused": true,
+      "activeTag": "SELECT",
+      "activeId": "send-key-preference",
+      "controlFocused": true,
+      "disabled": false,
+      "value": "mod-enter"
+    },
+    {
+      "stage": "disabled-while-document-unfocused",
+      "documentFocused": false,
+      "activeTag": "SELECT",
+      "activeId": "send-key-preference",
+      "controlFocused": true,
+      "disabled": true,
+      "value": "mod-enter"
+    },
+    {
+      "stage": "failure",
+      "documentFocused": false,
+      "activeTag": "SELECT",
+      "activeId": "send-key-preference",
+      "controlFocused": true,
+      "disabled": true,
+      "value": "mod-enter"
+    }
+  ],
+  "status": "failed",
+  "error": "Error: expect(received).toMatchObject(expected)\n\n- Expected  - 2\n+ Received  + 2\n\n  Object {\n-   \"activeTag\": \"BODY\",\n-   \"controlFocused\": false,\n+   \"activeTag\": \"SELECT\",\n+   \"controlFocused\": true,\n    \"disabled\": true,\n    \"documentFocused\": false,\n  }"
+}

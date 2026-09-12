@@ -1,0 +1,55 @@
+{
+  "passed": true,
+  "reports": {
+    "packages/quixi-embed/perf/results/2026-09-08-gpu-development-load/gpu-final-chromium-anchors-performance.json": {
+      "passed": true,
+      "shapes": 3,
+      "errors": []
+    },
+    "packages/quixi-embed/perf/results/2026-09-08-gpu-development-load/gpu-final-chromium-auto-performance.json": {
+      "passed": true,
+      "shapes": 15,
+      "errors": []
+    },
+    "packages/quixi-embed/perf/results/2026-09-08-gpu-development-load/gpu-final-chromium-finalhalf-performance.json": {
+      "passed": true,
+      "shapes": 15,
+      "errors": []
+    },
+    "packages/quixi-embed/perf/results/2026-09-08-gpu-development-load/gpu-final-webkit-anchors-performance.json": {
+      "passed": true,
+      "shapes": 3,
+      "errors": []
+    },
+    "packages/quixi-embed/perf/results/2026-09-08-gpu-development-load/gpu-final-webkit-auto-performance.json": {
+      "passed": true,
+      "shapes": 15,
+      "errors": []
+    },
+    "packages/quixi-embed/perf/results/2026-09-08-gpu-development-load/gpu-final-webkit-finalhalf-performance.json": {
+      "passed": true,
+      "shapes": 15,
+      "errors": []
+    },
+    "packages/quixi-embed/perf/results/2026-09-08-gpu-development-load/baseline-vs-tiled-chromium.json": {
+      "passed": true,
+      "shapes": 15,
+      "errors": []
+    },
+    "packages/quixi-embed/perf/results/2026-09-08-gpu-development-load/tiled-vs-attention-chromium.json": {
+      "passed": true,
+      "shapes": 15,
+      "errors": []
+    },
+    "packages/quixi-embed/perf/results/2026-09-08-gpu-development-load/tiled-vs-half-chromium.json": {
+      "passed": true,
+      "shapes": 15,
+      "errors": []
+    },
+    "packages/quixi-embed/perf/results/2026-09-08-gpu-development-load/tiled-vs-subgroups-chromium.json": {
+      "passed": true,
+      "shapes": 15,
+      "errors": []
+    }
+  }
+}

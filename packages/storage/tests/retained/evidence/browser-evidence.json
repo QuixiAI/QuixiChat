@@ -1,0 +1,608 @@
+{
+  "status": "passed",
+  "startedAt": "2026-09-09T04:10:57.942Z",
+  "environment": {
+    "platform": "darwin",
+    "release": "25.6.0",
+    "arch": "arm64",
+    "node": "v22.23.1"
+  },
+  "selectedEngines": [
+    "chromium",
+    "webkit"
+  ],
+  "sourceSha256": {
+    "packages/storage/src/client/retained-archive.ts": "2a69cfcbcd86d9d6e4643d40b4ea349fc35d96994fe1648cc3858cdfad0d46bb",
+    "packages/storage/src/worker/retained-archive.ts": "c5bb6fb0196f6344c097c654f037ed10d1692456ed6f4195f227acfac565361a",
+    "packages/storage/src/worker/sqlite-module.ts": "fb5889c277872ef8623cb0bb21b8afa58d0b08a8fddabc2caa7b96981f92ddbc",
+    "packages/storage/src/worker/canonical/repository.ts": "326367b3b5ff6c4660baf95abba160f6b98ccdd7e7fe458f72ecf56b2b3e2428",
+    "packages/storage/src/worker/views.ts": "79e733521669f584b319be97c9b490e98faf146e3a9f6a11f620540cd29840d9",
+    "packages/storage/src/worker/archives/schema-validation.ts": "ff3aecb064a430513890d9a66379b3904caa09de5f455580a98f299a74ebed22",
+    "packages/storage/migrations/index.ts": "dac4b5a7b9b7bb57d472dcf841f64d5bd7dea1191ca7d991802cfcf12c8a2c19",
+    "packages/storage/migrations/archive-access.ts": "efbb426dc2f67ed00982119ba811aab780adfd9b8f60803f30f31a2a7e5abce8",
+    "packages/storage/sqlite/dist/sqlite3.mjs": "127c4f37a4ce3449d464b976ac4979fc6b016ae974c0aea9ba8afef85d3b4d5d",
+    "packages/storage/sqlite/dist/sqlite3.wasm": "dd7c22431a3b8ad51ab5e6ed91065593574c34c5959d2efdef2f17484eedcb2c",
+    "packages/storage/tests/retained/index.mjs": "1748467326f9752d96273274fee3883238fb1c7e435215f84d52553e4f5655cb",
+    "packages/storage/tests/retained/run.mjs": "771eca1ab537adfe6edf058fad3638a471eb31e16cfbaa5d8f4393e4c6be25c0",
+    "packages/storage/tests/retained/fixture-worker.mjs": "69ec602e9b1576524e29c518a39026abceece97854c4e2de9753a0b20c1ddf71"
+  },
+  "hosts": [
+    {
+      "name": "chromium",
+      "status": "passed",
+      "checks": [
+        "Nine approved operations use real read-only SQLite for managed source and production restore candidate; Unicode/NUL text is exact and literal candidate ID never retargets to active default",
+        "Canonical and archive-job operation receipts are readable without constructing writable archive repository",
+        "Worker rejects mutations/workspace/export/search and stale envelopes before effects; missing or arbitrary namespaces have no creation fallback",
+        "Four-worker admission and input byte bounds reject excess work before allocation; dropped actual reply times out and terminates worker, then a fresh read succeeds",
+        "Every source/candidate file hash is unchanged after approved reads, rejected writes, admission collisions and timeout cleanup",
+        "Compatible schema8 reads without migration; schema7/future/bad ledger, missing database, corrupt pool header and actual interrupted SQLite journal reject without changing any retained file bytes"
+      ],
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36",
+      "fixture": {
+        "candidateId": "b8db507a-543b-4ddb-a52d-dd243d176b4f",
+        "archiveOperationId": "a1af4668-be17-41a0-86ef-f0ba8e4049c9",
+        "threadId": "f193fab9-c0ec-4d0d-a2a3-e4101eb5b9de",
+        "messageId": "40ba7a82-4ee3-4919-b2d0-a2a268856ace",
+        "text": "before\u0000after 日本語 😀 café\nline two",
+        "operationId": "2ec9c259-1649-4b34-ad3f-5b64ab336061",
+        "laterThreadId": "3ffcdcb1-00db-4f41-9cdf-02b11b284ecf",
+        "selection": {
+          "archiveId": "default",
+          "selectionRevision": 0
+        }
+      },
+      "admission": {
+        "values": [
+          {
+            "ok": true,
+            "result": {
+              "createdAt": 1788927058748,
+              "id": "f193fab9-c0ec-4d0d-a2a3-e4101eb5b9de",
+              "importSourceId": null,
+              "preferredRoute": null,
+              "recordedAt": 1788927058748,
+              "systemPrompt": null,
+              "workspaceId": "3427a405-89a5-439b-9e52-d51503ce6ed6"
+            }
+          },
+          {
+            "ok": false,
+            "code": "CONFLICT",
+            "message": "Retained archive currently has an owner; close its session before reading"
+          },
+          {
+            "ok": false,
+            "code": "CONFLICT",
+            "message": "Retained archive currently has an owner; close its session before reading"
+          },
+          {
+            "ok": false,
+            "code": "CONFLICT",
+            "message": "Retained archive currently has an owner; close its session before reading"
+          },
+          {
+            "ok": false,
+            "code": "OVERLOADED",
+            "message": "Retained read admission is full; await existing reads before retrying"
+          }
+        ],
+        "invalid": {
+          "ok": false,
+          "code": "INVALID_REQUEST",
+          "message": "Unsupported retained archive identity or read operation"
+        },
+        "oversized": {
+          "ok": false,
+          "code": "INVALID_REQUEST",
+          "message": "Boundary payload exceeds byte limit"
+        },
+        "peak": 4,
+        "active": 0,
+        "created": 4,
+        "beforeInvalid": 4,
+        "limits": {
+          "maxWorkers": 4,
+          "maxRequestBytes": 262144,
+          "maxAdmittedBytes": 1048576,
+          "maxResponseBytes": 1048576,
+          "defaultTimeoutMs": 15000,
+          "maxTimeoutMs": 60000
+        }
+      },
+      "timeout": {
+        "outcome": {
+          "ok": false,
+          "code": "IO_ERROR",
+          "message": "Retained read deadline exceeded; no mutation was dispatched"
+        },
+        "dropped": 1,
+        "terminated": 1
+      },
+      "preserved": {
+        "source": [
+          {
+            "path": "database/.opaque/6bob728j917",
+            "bytes": 4096,
+            "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+          },
+          {
+            "path": "database/.opaque/8itv7vujzrg",
+            "bytes": 4096,
+            "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+          },
+          {
+            "path": "database/.opaque/dxdbzrbur9u",
+            "bytes": 4096,
+            "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+          },
+          {
+            "path": "database/.opaque/it6bo94j3s",
+            "bytes": 4096,
+            "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+          },
+          {
+            "path": "database/.opaque/kuadiozp45",
+            "bytes": 4096,
+            "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+          },
+          {
+            "path": "database/.opaque/mew6a84l74r",
+            "bytes": 4096,
+            "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+          },
+          {
+            "path": "database/.opaque/pmwkoty1bnj",
+            "bytes": 4096,
+            "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+          },
+          {
+            "path": "database/.opaque/ryz5wxg4agm",
+            "bytes": 4096,
+            "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+          },
+          {
+            "path": "database/.opaque/s7q1d8efh3",
+            "bytes": 4096,
+            "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+          },
+          {
+            "path": "database/.opaque/xhyi9iowvwh",
+            "bytes": 954368,
+            "sha256": "3862972619c4d13715fae89b5951ed7ea17fe917e006e478e82670774c841a85"
+          }
+        ],
+        "candidate": [
+          {
+            "path": "archive-ready.json",
+            "bytes": 334,
+            "sha256": "3f1277eaca07b5e6c32b6baa57c3ddc96b85a4b38ad0315b0ff784f8efbb04ae"
+          },
+          {
+            "path": "checksums.jsonl",
+            "bytes": 235,
+            "sha256": "b047447876207a9f15bb04f733da8ea35148665264fcac51a5c3281ea382936e"
+          },
+          {
+            "path": "database/.opaque/1ib8p2zla51",
+            "bytes": 4096,
+            "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+          },
+          {
+            "path": "database/.opaque/anjk57n59w",
+            "bytes": 4096,
+            "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+          },
+          {
+            "path": "database/.opaque/cdh8so880d",
+            "bytes": 675840,
+            "sha256": "01dd05404d49be5497868e8c51360403be8cc1678cd2ff6b4231b7f52b60d3fe"
+          },
+          {
+            "path": "database/.opaque/fof4sz9eu8",
+            "bytes": 4096,
+            "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+          },
+          {
+            "path": "database/.opaque/irttq19xdbo",
+            "bytes": 4096,
+            "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+          },
+          {
+            "path": "database/.opaque/uwxt1994di",
+            "bytes": 4096,
+            "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+          },
+          {
+            "path": "format.json",
+            "bytes": 57,
+            "sha256": "853c345a1dd78e1782197bb22b5072cde06189659c011f395d9bf2bf53201968"
+          },
+          {
+            "path": "incoming.sqlite3",
+            "bytes": 671744,
+            "sha256": "b23c79b42c331bd2204a89a7f64d5bc4bff46346c69fa0446a9c7bc2c34b2112"
+          },
+          {
+            "path": "manifest.json",
+            "bytes": 1737,
+            "sha256": "f31d52a7e1061c88171242ec7996cab4a18a722584c238642a42181ea1a159ca"
+          }
+        ]
+      },
+      "recoveryRefusals": [
+        {
+          "command": "ledger8",
+          "outcome": {
+            "ok": true,
+            "result": {
+              "createdAt": 1788927058748,
+              "id": "f193fab9-c0ec-4d0d-a2a3-e4101eb5b9de",
+              "importSourceId": null,
+              "preferredRoute": null,
+              "recordedAt": 1788927058748,
+              "systemPrompt": null,
+              "workspaceId": "3427a405-89a5-439b-9e52-d51503ce6ed6"
+            }
+          },
+          "preservedFiles": 11,
+          "snapshotSha256": "ec731456fd77038c07724197b74b608e22d1b42b3b363daf6b4cce29ff9e17f6"
+        },
+        {
+          "command": "ledger7",
+          "outcome": {
+            "ok": false,
+            "code": "MIGRATION_FAILED",
+            "message": "Retained archive schema is incompatible with this read-only build"
+          },
+          "preservedFiles": 11,
+          "snapshotSha256": "388909c1443d83365d4f34403bb01b3527c65d0e7f0f6b4f1b27931d7bf867b1"
+        },
+        {
+          "command": "bad-ledger",
+          "outcome": {
+            "ok": false,
+            "code": "MIGRATION_FAILED",
+            "message": "Retained archive migration ledger differs; no migration or reset was attempted"
+          },
+          "preservedFiles": 11,
+          "snapshotSha256": "c05dc3842c63be6abe8657960d2ce0c69c21d334972181c112c23f5e6277f4b1"
+        },
+        {
+          "command": "future-ledger",
+          "outcome": {
+            "ok": false,
+            "code": "MIGRATION_FAILED",
+            "message": "Retained archive schema is incompatible with this read-only build"
+          },
+          "preservedFiles": 11,
+          "snapshotSha256": "f39596c6cb7f910e60c45248ffad60908f6c31d31ba2e7dac300218b83e09cbd"
+        },
+        {
+          "command": "metadata",
+          "outcome": {
+            "ok": false,
+            "code": "IO_ERROR",
+            "message": "Retained pool metadata digest differs; automatic repair is forbidden"
+          },
+          "preservedFiles": 11,
+          "snapshotSha256": "bf1f1195c862d975947cbcbe80e9df8f645fd9b45e204608abbb97967b21cc18"
+        },
+        {
+          "command": "missing",
+          "outcome": {
+            "ok": false,
+            "code": "NOT_FOUND",
+            "message": "Retained archive database is absent; no empty database will be created"
+          },
+          "preservedFiles": 0,
+          "snapshotSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "command": "hot",
+          "outcome": {
+            "ok": false,
+            "code": "IO_ERROR",
+            "message": "Retained archive has journal or transient state; recovery requires its compatible writable owner"
+          },
+          "preservedFiles": 11,
+          "snapshotSha256": "1390fa5ca897639b3d8d97ab97846d817425829c92cc15b5041630b343db50e1"
+        }
+      ]
+    },
+    {
+      "name": "webkit",
+      "status": "passed",
+      "checks": [
+        "Nine approved operations use real read-only SQLite for managed source and production restore candidate; Unicode/NUL text is exact and literal candidate ID never retargets to active default",
+        "Canonical and archive-job operation receipts are readable without constructing writable archive repository",
+        "Worker rejects mutations/workspace/export/search and stale envelopes before effects; missing or arbitrary namespaces have no creation fallback",
+        "Four-worker admission and input byte bounds reject excess work before allocation; dropped actual reply times out and terminates worker, then a fresh read succeeds",
+        "Every source/candidate file hash is unchanged after approved reads, rejected writes, admission collisions and timeout cleanup",
+        "Compatible schema8 reads without migration; schema7/future/bad ledger, missing database, corrupt pool header and actual interrupted SQLite journal reject without changing any retained file bytes"
+      ],
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+      "fixture": {
+        "candidateId": "1f89012f-4be8-4623-826b-0749196701ba",
+        "archiveOperationId": "7e896629-65d2-434c-a079-361387cd34cd",
+        "threadId": "225ee579-0be5-4659-a3b8-3fa6f00cade8",
+        "messageId": "31fd8d9d-6ebe-4f22-83f4-de2a679dbcd0",
+        "text": "before\u0000after 日本語 😀 café\nline two",
+        "operationId": "4f33eda5-f99e-4164-bb0a-b2d9b20a0292",
+        "laterThreadId": "fb046b06-2e4d-4fb6-bb43-107ff1e2d983",
+        "selection": {
+          "archiveId": "default",
+          "selectionRevision": 0
+        }
+      },
+      "admission": {
+        "values": [
+          {
+            "ok": true,
+            "result": {
+              "createdAt": 1788927065433,
+              "id": "225ee579-0be5-4659-a3b8-3fa6f00cade8",
+              "importSourceId": null,
+              "preferredRoute": null,
+              "recordedAt": 1788927065433,
+              "systemPrompt": null,
+              "workspaceId": "09c3d8ad-e5ed-4f4b-bde4-aae703aeb87e"
+            }
+          },
+          {
+            "ok": false,
+            "code": "CONFLICT",
+            "message": "Retained archive currently has an owner; close its session before reading"
+          },
+          {
+            "ok": false,
+            "code": "CONFLICT",
+            "message": "Retained archive currently has an owner; close its session before reading"
+          },
+          {
+            "ok": false,
+            "code": "CONFLICT",
+            "message": "Retained archive currently has an owner; close its session before reading"
+          },
+          {
+            "ok": false,
+            "code": "OVERLOADED",
+            "message": "Retained read admission is full; await existing reads before retrying"
+          }
+        ],
+        "invalid": {
+          "ok": false,
+          "code": "INVALID_REQUEST",
+          "message": "Unsupported retained archive identity or read operation"
+        },
+        "oversized": {
+          "ok": false,
+          "code": "INVALID_REQUEST",
+          "message": "Boundary payload exceeds byte limit"
+        },
+        "peak": 4,
+        "active": 0,
+        "created": 4,
+        "beforeInvalid": 4,
+        "limits": {
+          "maxWorkers": 4,
+          "maxRequestBytes": 262144,
+          "maxAdmittedBytes": 1048576,
+          "maxResponseBytes": 1048576,
+          "defaultTimeoutMs": 15000,
+          "maxTimeoutMs": 60000
+        }
+      },
+      "timeout": {
+        "outcome": {
+          "ok": false,
+          "code": "IO_ERROR",
+          "message": "Retained read deadline exceeded; no mutation was dispatched"
+        },
+        "dropped": 1,
+        "terminated": 1
+      },
+      "preserved": {
+        "source": [
+          {
+            "path": "database/.opaque/00t27vr3yxh8n",
+            "bytes": 4096,
+            "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+          },
+          {
+            "path": "database/.opaque/42xnldr3ng",
+            "bytes": 4096,
+            "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+          },
+          {
+            "path": "database/.opaque/4o9j0c5e3hy",
+            "bytes": 4096,
+            "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+          },
+          {
+            "path": "database/.opaque/9tez9g4iapv",
+            "bytes": 4096,
+            "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+          },
+          {
+            "path": "database/.opaque/sx3p822thf",
+            "bytes": 4096,
+            "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+          },
+          {
+            "path": "database/.opaque/u4vbxibr6n",
+            "bytes": 954368,
+            "sha256": "268e0e5d604b28e87c792b5a654c2e805ddacaef35929ac2a9058b7dd74fc474"
+          },
+          {
+            "path": "database/.opaque/ukbsedgrgp",
+            "bytes": 4096,
+            "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+          },
+          {
+            "path": "database/.opaque/uq2p1f4i2bk",
+            "bytes": 4096,
+            "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+          },
+          {
+            "path": "database/.opaque/zycvgb6vtn",
+            "bytes": 4096,
+            "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+          },
+          {
+            "path": "database/.opaque/zzlihm8cl1p",
+            "bytes": 4096,
+            "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+          }
+        ],
+        "candidate": [
+          {
+            "path": "archive-ready.json",
+            "bytes": 334,
+            "sha256": "7685ea3ab556cb56beb9733e0ee95ab634e6ebe1b87f78ff6e0856a9a2a487e1"
+          },
+          {
+            "path": "checksums.jsonl",
+            "bytes": 235,
+            "sha256": "aa81b815594059529605196f34fed33e71027500628431608560d6d6dc98f8e6"
+          },
+          {
+            "path": "database/.opaque/30o468u39ii",
+            "bytes": 4096,
+            "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+          },
+          {
+            "path": "database/.opaque/4dacdqlgjmq",
+            "bytes": 4096,
+            "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+          },
+          {
+            "path": "database/.opaque/59m1rmwmaup",
+            "bytes": 4096,
+            "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+          },
+          {
+            "path": "database/.opaque/8gesmkq1d9n",
+            "bytes": 4096,
+            "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+          },
+          {
+            "path": "database/.opaque/b8q4tggmu1r",
+            "bytes": 675840,
+            "sha256": "f9a3ff3b60e2be5eccacd307599bc34a6d00f0fcdba5622cd80b98319747e7d0"
+          },
+          {
+            "path": "database/.opaque/hr2z7g6cw",
+            "bytes": 4096,
+            "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+          },
+          {
+            "path": "format.json",
+            "bytes": 57,
+            "sha256": "853c345a1dd78e1782197bb22b5072cde06189659c011f395d9bf2bf53201968"
+          },
+          {
+            "path": "incoming.sqlite3",
+            "bytes": 671744,
+            "sha256": "88298b48232e906dc211d7997d3088226c8dcab15a6d7bc9b23c2184ca0573f1"
+          },
+          {
+            "path": "manifest.json",
+            "bytes": 1737,
+            "sha256": "ffb5e960dc8017c1ad6a9599c8acdf6194f7d4bc9eb93a41cdaf44fc014f4b6d"
+          }
+        ]
+      },
+      "recoveryRefusals": [
+        {
+          "command": "ledger8",
+          "outcome": {
+            "ok": true,
+            "result": {
+              "createdAt": 1788927065433,
+              "id": "225ee579-0be5-4659-a3b8-3fa6f00cade8",
+              "importSourceId": null,
+              "preferredRoute": null,
+              "recordedAt": 1788927065433,
+              "systemPrompt": null,
+              "workspaceId": "09c3d8ad-e5ed-4f4b-bde4-aae703aeb87e"
+            }
+          },
+          "preservedFiles": 11,
+          "snapshotSha256": "6015266edc154173858efcad518f9a848b520af8394cc4c8b91e6261bb0d81b3"
+        },
+        {
+          "command": "ledger7",
+          "outcome": {
+            "ok": false,
+            "code": "MIGRATION_FAILED",
+            "message": "Retained archive schema is incompatible with this read-only build"
+          },
+          "preservedFiles": 11,
+          "snapshotSha256": "c907d67db447b972ac34dc2f0e97e622e2c6c8a8d31527a3ed09e872be3116fb"
+        },
+        {
+          "command": "bad-ledger",
+          "outcome": {
+            "ok": false,
+            "code": "MIGRATION_FAILED",
+            "message": "Retained archive migration ledger differs; no migration or reset was attempted"
+          },
+          "preservedFiles": 11,
+          "snapshotSha256": "f32cd5a8208d757c4084b102420a1535624d464a2de15aced1f0c8326dc91cf4"
+        },
+        {
+          "command": "future-ledger",
+          "outcome": {
+            "ok": false,
+            "code": "MIGRATION_FAILED",
+            "message": "Retained archive schema is incompatible with this read-only build"
+          },
+          "preservedFiles": 11,
+          "snapshotSha256": "15fb6cbd3397ad10844ac063bc4fd521c37ccd66cb56ffa96fdfd2f1e9ad5b6c"
+        },
+        {
+          "command": "metadata",
+          "outcome": {
+            "ok": false,
+            "code": "IO_ERROR",
+            "message": "Retained pool metadata digest differs; automatic repair is forbidden"
+          },
+          "preservedFiles": 11,
+          "snapshotSha256": "3b6757a6f1d4160de0d2873394eef5f69072baf99b9ed92938de024e0a956866"
+        },
+        {
+          "command": "missing",
+          "outcome": {
+            "ok": false,
+            "code": "NOT_FOUND",
+            "message": "Retained archive database is absent; no empty database will be created"
+          },
+          "preservedFiles": 0,
+          "snapshotSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "command": "hot",
+          "outcome": {
+            "ok": false,
+            "code": "IO_ERROR",
+            "message": "Retained archive has journal or transient state; recovery requires its compatible writable owner"
+          },
+          "preservedFiles": 11,
+          "snapshotSha256": "5c01e46c33b787e14bf90dd0114d1be3365400bfcf24a2bcb8c6cd14cdd26d42"
+        }
+      ]
+    }
+  ],
+  "builtArtifacts": {
+    "index.html": "7450cb96ca9d2bf1183cc3f954d7062c05666c87ddc5ac9a52307cd0d5e3bc73",
+    "assets/archive-CdjIdP8o.js": "8e492109f49894bf8e25e7d9518b536f7c3081a80b3b0070b0ff98c7b4cb24d8",
+    "assets/fixture-worker--cTFwaxD.js": "cbd61463c0246cbf14a23a7b2564bc03f8fdb6d91feb1810e1919c52af49fbe6",
+    "assets/index-CavynXiY.js": "36013834d615a0105b2f259ac970fad24b22a2e25513c711eb760037c782cc22",
+    "assets/retained-archive-C0yHm4RT.js": "0fd198fa6ab20052bb62b2afe928ac3ed1275a3fad07eafe460455ccf95f7644",
+    "assets/selection-K-rfbaJt.js": "9904c00fa8bdc3d80244c8893767ed9021b8808d692af221ab742405444ee58c",
+    "assets/sqlite3-BzAlo58v.wasm": "dd7c22431a3b8ad51ab5e6ed91065593574c34c5959d2efdef2f17484eedcb2c"
+  },
+  "origin": "http://127.0.0.1:58717",
+  "finishedAt": "2026-09-09T04:11:10.354Z"
+}

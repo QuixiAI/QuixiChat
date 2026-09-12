@@ -1,0 +1,17 @@
+export { createScalarEncoder } from './scalar.ts';
+export type { EmbeddingRole, ScalarEncoder } from './scalar.ts';
+export { createArcticTokenizer,TokenOffsetCapacityError,TOKEN_ORIGIN,ARCTIC_QUERY_PREFIX } from './tokenizer.ts';
+export type { ArcticTokenizer,TokenOffsets } from './tokenizer.ts';
+export { createSimdEncoder, supportsWasmSimd } from './simd.ts';
+export type { SimdEncoder, CpuEncoder, CpuBackend } from './scalar.ts';
+export { createWebGpuEncoder, GpuBackendError } from './gpu/encoder.ts';
+export type { WebGpuEncoder, GpuOptions, GpuDiagnostics, GpuTimings, GpuFailureCode } from './gpu/encoder.ts';
+export type { TuningCache, TuningRecord } from './gpu/tuning.ts';
+export {createEmbeddingScheduler,SchedulerError,embeddingIdentityKey} from './scheduler/scheduler.ts';
+export {cpuSchedulerExecutor,gpuSchedulerExecutor,createSchedulerWithFallback} from './scheduler/executors.ts';
+export {PRIORITY} from './scheduler/types.ts';
+export type {EmbeddingIdentity,EmbeddingPriority,EmbeddingRequest,EmbeddingResult,EmbeddingTicket,EmbeddingScheduler,SchedulerOptions,SchedulerExecutor,SchedulerStatistics,SchedulerEvent,SchedulerLimits,EmbeddingCacheStore,CachedEmbedding,SchedulerFailureCode} from './scheduler/types.ts';
+export type {TokenInspection} from './scalar.ts';
+export { MODEL_LOCK } from './lock.ts';
+export { createChunkTokenizer, chunkTokenizerVersion, CHUNK_TOKENIZER_VERSION_PREFIX } from './chunking.ts';
+export type { ChunkTokenizerAdapter } from './chunking.ts';

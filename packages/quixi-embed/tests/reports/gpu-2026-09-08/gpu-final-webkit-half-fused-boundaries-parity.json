@@ -1,0 +1,86 @@
+{
+  "route": "webgpu-fp16",
+  "cases": 30,
+  "reference_manifest_sha256": "662d0f034b5668d90885bc2cf7654f3a60fae257e3ac3a33d3f21746ed5c1e70",
+  "candidate_manifest_sha256": "8030ef2c32b2d6476145197b85d3da6653bfdbeb9a10588011bdc38e4938570f",
+  "candidate_backend": {
+    "route": "webgpu-fp16",
+    "engine": "webkit",
+    "shader_sha256": "6671b18619861d88c9cb46ffc7eb72464d975dc028478da18a47a8712d476a18",
+    "additional_shader_sha256": "54222a8a80b836ceb42a5827cccb23ae3b0bc7a802c78d23d422c11d570ae4c8",
+    "runtime_sha256": "1fb0ad10c2c614a83019cfc14243c4a9968a331f54ce1b13ffd9ce71e7d79e9b",
+    "browser_version": "26.6",
+    "backend": "webgpu-fp16",
+    "projection": "half",
+    "tuning": null,
+    "subgroups": false,
+    "attention": "fused",
+    "modelSha256": "e1ef345cd35088b06f70c199f5a4e0311bda5983716ad6a3e7d0a604202efffc",
+    "kernelVersion": "1.0.0",
+    "adapter": {
+      "vendor": "apple",
+      "architecture": "apple",
+      "device": "apple",
+      "description": "apple",
+      "isFallbackAdapter": false
+    },
+    "features": [
+      "bgra8unorm-storage",
+      "clip-distances",
+      "core-features-and-limits",
+      "depth-clip-control",
+      "depth32float-stencil8",
+      "float16-renderable",
+      "float32-blendable",
+      "float32-filterable",
+      "float32-renderable",
+      "indirect-first-instance",
+      "primitive-index",
+      "rg11b10ufloat-renderable",
+      "shader-f16",
+      "subgroups",
+      "texture-compression-astc",
+      "texture-compression-astc-sliced-3d",
+      "texture-compression-bc",
+      "texture-compression-bc-sliced-3d",
+      "texture-compression-etc2",
+      "texture-formats-tier1",
+      "texture-formats-tier2",
+      "timestamp-query"
+    ],
+    "enabledFeatures": [
+      "core-features-and-limits",
+      "shader-f16"
+    ],
+    "limits": {
+      "maxBufferSize": 268435456,
+      "maxStorageBufferBindingSize": 176259072,
+      "maxComputeInvocationsPerWorkgroup": 256,
+      "maxComputeWorkgroupStorageSize": 16384,
+      "maxComputeWorkgroupsPerDimension": 65535,
+      "maxStorageBuffersPerShaderStage": 8
+    },
+    "capacity": {
+      "batch": 32,
+      "tokens": 512
+    },
+    "memory": {
+      "weightsBytes": 135392256,
+      "scratchBytes": 604291084,
+      "allocatedBytes": 739683340,
+      "bufferCount": 18
+    },
+    "state": "ready"
+  },
+  "thresholds": {
+    "atol": 0.03,
+    "rtol": 0.02,
+    "vector_atol": 0.003,
+    "min_cosine": 0.9999,
+    "norm_atol": 0.001
+  },
+  "max_absolute_error": 0.0030155181884765625,
+  "minimum_cosine": 0.9999999311414649,
+  "passed": true,
+  "errors": []
+}

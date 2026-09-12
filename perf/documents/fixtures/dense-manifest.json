@@ -1,0 +1,74 @@
+{
+  "dense-1.pdf": {
+    "bytes": 9801,
+    "sha256": "985fad8a10c48110f96151a868ef5c41c4a10e7a029b88e663276f053bc75cd3",
+    "pages": 1,
+    "positionedTextLinesPerPage": 1000,
+    "charactersPerLine": 150,
+    "contentUTF16PerPageWithoutSeparators": 150000,
+    "pypdfTextUTF16PerPageRange": [
+      151000,
+      151000
+    ],
+    "pagePoints": [
+      2400,
+      10000
+    ],
+    "generator": {
+      "reportlab": "5.0.1",
+      "pypdf": "6.18.0",
+      "pillow": "12.3.0",
+      "charset-normalizer": "3.4.7"
+    },
+    "license": "CC0-1.0",
+    "scope": "Dense native-text extraction and mapping workload, no images; actual PDF.js normalized output/item admission checked by production persistence, not inferred from pypdf."
+  },
+  "dense-10.pdf": {
+    "bytes": 89848,
+    "sha256": "4769512a1accd9d23b2f71b722932a9e8675d065b58dc85079b3e81098404ea9",
+    "pages": 10,
+    "positionedTextLinesPerPage": 1000,
+    "charactersPerLine": 150,
+    "contentUTF16PerPageWithoutSeparators": 150000,
+    "pypdfTextUTF16PerPageRange": [
+      151000,
+      151000
+    ],
+    "pagePoints": [
+      2400,
+      10000
+    ],
+    "generator": {
+      "reportlab": "5.0.1",
+      "pypdf": "6.18.0",
+      "pillow": "12.3.0",
+      "charset-normalizer": "3.4.7"
+    },
+    "license": "CC0-1.0",
+    "scope": "Dense native-text extraction and mapping workload, no images; actual PDF.js normalized output/item admission checked by production persistence, not inferred from pypdf."
+  },
+  "dense-100.pdf": {
+    "bytes": 890653,
+    "sha256": "1e7910141d121ee3598acf229cbc8c145720cecb971c8e016367e101da5f6918",
+    "pages": 100,
+    "positionedTextLinesPerPage": 1000,
+    "charactersPerLine": 150,
+    "contentUTF16PerPageWithoutSeparators": 150000,
+    "pypdfTextUTF16PerPageRange": [
+      151000,
+      151000
+    ],
+    "pagePoints": [
+      2400,
+      10000
+    ],
+    "generator": {
+      "reportlab": "5.0.1",
+      "pypdf": "6.18.0",
+      "pillow": "12.3.0",
+      "charset-normalizer": "3.4.7"
+    },
+    "license": "CC0-1.0",
+    "scope": "Dense native-text extraction and mapping workload, no images; actual PDF.js normalized output/item admission checked by production persistence, not inferred from pypdf."
+  }
+}

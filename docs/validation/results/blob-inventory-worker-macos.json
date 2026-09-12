@@ -1,0 +1,3383 @@
+{
+  "status": "passed",
+  "startedAt": "2026-09-10T20:35:55.587Z",
+  "selectedEngines": [
+    "chromium",
+    "webkit"
+  ],
+  "environment": {
+    "platform": "darwin",
+    "release": "25.6.0",
+    "arch": "arm64",
+    "node": "v22.23.1"
+  },
+  "scope": "Actual isolated canonical SQLite/OPFS and production archive-worker/client inventory API. Impossible byte/catalog states are seeded only by a separate fixture worker. No deletion, repair, hash verification, physical disk corruption recovery, native host or private archive claim.",
+  "sourceSha256": {
+    "packages/core/src/contracts/blob-inventory.ts": "ca8fde78ea5dcc13d36264f806e22f5437cf2545dd5ca51f1273e1aefac3a886",
+    "packages/core/src/contracts/storage.ts": "6f407bf21cb03f1fbe306b56bf87f990e93d029286cf0d2acec7984d313b4416",
+    "packages/core/src/contracts/index.ts": "bbf27e97948407c9b39b848e74ec48842b27f887066c32b3b21b9dc7f8ef4124",
+    "packages/storage/src/worker/blob-inventory.ts": "525c798ec8ee0fd38c68ead55c321897cb23e9343f53aa1c1cb91bfd30f1d418",
+    "packages/storage/src/worker/blobs.ts": "6cbd433df3837b7881cddb3975fcc649891a3c20d1a204e91080e660f104631d",
+    "packages/storage/src/worker/blob-catalog.ts": "751af6f06d6a175284c2a39f0dd8c9522e18f865c0d8b8be283623a41524de8a",
+    "packages/storage/src/worker/archive-database.ts": "ff01dd410e9de32b941a10f31c92738d22d4cb2bdcb9587bbb47eb85af411dbb",
+    "packages/storage/src/worker/archive-runtime.ts": "647e0c309c8defd42bb6e0f2a902e98d0a356bde1f75521a512fb23dd1453a2e",
+    "packages/storage/src/client/archive.ts": "844981f196ebee613c584dadf3d1cef2c1af15f3aa06daf253d6d48c3b553c24",
+    "packages/storage/src/archive-protocol.ts": "02bbc935808f8ebbf4aff19d11f811ec82b754e14b1741dec8d111deb8c9660d",
+    "packages/storage/src/worker/canonical/repository.ts": "d08f508c0a7b9a150690b9f8f42805354825785d28c05c4fdb967a7a926e159c",
+    "packages/storage/src/worker/canonical/imports.ts": "7d92ad52460d27b6e46f5368e9eae02448037e9367054180651667f42dc5033e",
+    "packages/storage/src/worker/sqlite-module.ts": "fb5889c277872ef8623cb0bb21b8afa58d0b08a8fddabc2caa7b96981f92ddbc",
+    "packages/storage/migrations/index.ts": "463331ffb83ce77bd759505d3e3b39376a193c146bb5e68fd5178af4c63867fd",
+    "packages/storage/tests/isolated-worker.ts": "d05ffe2db78e7808bf7a99884477d11c36b762ff9ec1a4cdf80ed6bf491308bd",
+    "packages/storage/tests/isolated-client.ts": "72b2ace2196bfc8f662b8108d30972da9fe4cf4cf5b4f18714449f08746a4776",
+    "packages/storage/tests/blob-inventory/fixture.ts": "9b4fe35dfa59fa51af811cf10b2d480296b76377c32429c3c7778b2861c41031",
+    "packages/storage/tests/blob-inventory/fixture-worker.ts": "14887573b099b0c7319a38930d811c1536a759347a4e7c5d7297365a5219a205",
+    "packages/storage/tests/blob-inventory/index.ts": "75e0efa9d4c46cc99f23c24970a21e002296ea2803523cddf38ef86e7fc6ba0a",
+    "packages/storage/tests/blob-inventory/index.html": "1a126dbaff28fc68ee377732c6344d4d7bc39f2a5b5135d929fd26213017bdaa",
+    "packages/storage/tests/blob-inventory/tsconfig.json": "1a48c964ebc5c001bfe65a61452125ef94fed58fee85b7436e86377964dd9382",
+    "packages/storage/tests/blob-inventory/run.mjs": "0434c71fd97ccad5c047833b9502edeede92937107ee2a493b59ba6a76dc3006",
+    "packages/storage/sqlite/dist/sqlite3.mjs": "127c4f37a4ce3449d464b976ac4979fc6b016ae974c0aea9ba8afef85d3b4d5d",
+    "packages/storage/sqlite/dist/sqlite3.wasm": "dd7c22431a3b8ad51ab5e6ed91065593574c34c5959d2efdef2f17484eedcb2c",
+    "tooling/browser-engines.mjs": "136f16e63e905ae4c8305c7adedfce2411eff13b04f914054f8fb718155d0df1",
+    "package.json": "33728629d250a3cb420abecff8c9ad614b8286060144b213fa162a2658f81542",
+    "package-lock.json": "aadb456e2a567a2b91cbb81a502650ebac93541f0a59d54035bdde2cacd97672",
+    ".github/workflows/check.yml": "cc5c76d3fe6a6d373030e66dae9cb92429acba77dcb2fc6452016d373f2b6cfb"
+  },
+  "hosts": [
+    {
+      "name": "chromium",
+      "status": "passed",
+      "checks": [
+        "actual canonical attachment, raw-object and text-blob references distinguish all seven finding kinds while active import/verified/published descriptors protect recoverable bytes",
+        "real multi-slice SQLite/OPFS traversal and bounded cursor pages finish without blocking main-thread timers or returning uploaded names/content",
+        "a competing scan cannot replace active work, and closing a verified read-only transfer does not falsely invalidate the inventory",
+        "oversized work/pages and invalid or foreign cursors are refused; explicit cancellation preserves the bounded partial scan",
+        "complete/cancelled inventory leaves canonical records, sync operations, blob operations, catalog availability/size fields, durable transfer rows and every original/staged/unrecognized physical file hash unchanged",
+        "owner restart invalidates owner-local scan identities; a canonical mutation between slices marks the old scan stale",
+        "an actual unfinished upload remains protected/staged during inventory and is never reported as an orphan",
+        "appending bytes to a live production upload invalidates an already complete inventory snapshot without any canonical mutation",
+        "a canonical commit invalidates an already complete snapshot; scratch tables remain file-backed with an explicit one-MiB cache",
+        "fresh browser process preserves exact canonical/file fingerprints and the two intentional mutations while discarding transient inventory ownership",
+        "a deliberately malformed available canonical reference fails the scan before orphan classification and preserves the corrupt input for recovery"
+      ],
+      "slices": [
+        {
+          "phase": "references",
+          "elapsedMs": 1.8740409999998064,
+          "records": 4,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 0
+        },
+        {
+          "phase": "references",
+          "elapsedMs": 1.598833999999897,
+          "records": 7,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 0
+        },
+        {
+          "phase": "references",
+          "elapsedMs": 1.4499580000001515,
+          "records": 7,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 0
+        },
+        {
+          "phase": "references",
+          "elapsedMs": 1.6601670000000013,
+          "records": 7,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 0
+        },
+        {
+          "phase": "references",
+          "elapsedMs": 1.364917000000105,
+          "records": 7,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 0
+        },
+        {
+          "phase": "references",
+          "elapsedMs": 1.2637919999999667,
+          "records": 7,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 0
+        },
+        {
+          "phase": "references",
+          "elapsedMs": 1.084374999999909,
+          "records": 7,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 0
+        },
+        {
+          "phase": "references",
+          "elapsedMs": 1.159291999999823,
+          "records": 7,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 0
+        },
+        {
+          "phase": "references",
+          "elapsedMs": 1.2870000000000346,
+          "records": 7,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 0
+        },
+        {
+          "phase": "references",
+          "elapsedMs": 1.2109159999999974,
+          "records": 7,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 0
+        },
+        {
+          "phase": "references",
+          "elapsedMs": 1.1914589999998952,
+          "records": 7,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 0
+        },
+        {
+          "phase": "references",
+          "elapsedMs": 1.097791000000143,
+          "records": 7,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 0
+        },
+        {
+          "phase": "references",
+          "elapsedMs": 1.1657500000001164,
+          "records": 7,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 0
+        },
+        {
+          "phase": "references",
+          "elapsedMs": 1.2377910000000156,
+          "records": 7,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 0
+        },
+        {
+          "phase": "references",
+          "elapsedMs": 1.1045839999999316,
+          "records": 7,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 0
+        },
+        {
+          "phase": "references",
+          "elapsedMs": 1.6082499999999982,
+          "records": 5,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 0
+        },
+        {
+          "phase": "transfers",
+          "elapsedMs": 0.9501660000000811,
+          "records": 0,
+          "transfers": 6,
+          "catalog": 0,
+          "files": 0
+        },
+        {
+          "phase": "catalog",
+          "elapsedMs": 0.9090840000001208,
+          "records": 0,
+          "transfers": 5,
+          "catalog": 1,
+          "files": 0
+        },
+        {
+          "phase": "catalog",
+          "elapsedMs": 0.8981249999999363,
+          "records": 0,
+          "transfers": 0,
+          "catalog": 7,
+          "files": 0
+        },
+        {
+          "phase": "files",
+          "elapsedMs": 2.448457999999846,
+          "records": 0,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 6
+        },
+        {
+          "phase": "files",
+          "elapsedMs": 1.476666000000023,
+          "records": 0,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 7
+        },
+        {
+          "phase": "files",
+          "elapsedMs": 1.4032079999999496,
+          "records": 0,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 7
+        },
+        {
+          "phase": "files",
+          "elapsedMs": 1.36262499999998,
+          "records": 0,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 7
+        },
+        {
+          "phase": "files",
+          "elapsedMs": 1.501166000000012,
+          "records": 0,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 7
+        },
+        {
+          "phase": "files",
+          "elapsedMs": 1.7510830000001079,
+          "records": 0,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 7
+        },
+        {
+          "phase": "files",
+          "elapsedMs": 1.6920000000000073,
+          "records": 0,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 7
+        },
+        {
+          "phase": "files",
+          "elapsedMs": 2.216707999999926,
+          "records": 0,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 7
+        },
+        {
+          "phase": "files",
+          "elapsedMs": 1.8863750000000437,
+          "records": 0,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 7
+        },
+        {
+          "phase": "files",
+          "elapsedMs": 1.7374579999998332,
+          "records": 0,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 7
+        },
+        {
+          "phase": "files",
+          "elapsedMs": 1.428250000000162,
+          "records": 0,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 7
+        },
+        {
+          "phase": "files",
+          "elapsedMs": 1.3173749999998563,
+          "records": 0,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 7
+        },
+        {
+          "phase": "files",
+          "elapsedMs": 1.1902499999998781,
+          "records": 0,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 7
+        },
+        {
+          "phase": "files",
+          "elapsedMs": 1.3081250000000182,
+          "records": 0,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 7
+        },
+        {
+          "phase": "files",
+          "elapsedMs": 1.4819170000000668,
+          "records": 0,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 7
+        },
+        {
+          "phase": "files",
+          "elapsedMs": 1.2032910000000356,
+          "records": 0,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 7
+        },
+        {
+          "phase": "files",
+          "elapsedMs": 1.5901659999999538,
+          "records": 0,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 7
+        },
+        {
+          "phase": "files",
+          "elapsedMs": 1.4657079999999496,
+          "records": 0,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 7
+        },
+        {
+          "phase": "files",
+          "elapsedMs": 1.3034580000000915,
+          "records": 0,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 7
+        },
+        {
+          "phase": "files",
+          "elapsedMs": 1.4367910000000848,
+          "records": 0,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 7
+        },
+        {
+          "phase": "files",
+          "elapsedMs": 1.5385420000000067,
+          "records": 0,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 7
+        },
+        {
+          "phase": "files",
+          "elapsedMs": 1.2846669999998994,
+          "records": 0,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 7
+        },
+        {
+          "phase": "files",
+          "elapsedMs": 1.5739999999998417,
+          "records": 0,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 7
+        },
+        {
+          "phase": "files",
+          "elapsedMs": 1.4020409999998265,
+          "records": 0,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 7
+        },
+        {
+          "phase": "files",
+          "elapsedMs": 1.0664580000000115,
+          "records": 0,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 7
+        },
+        {
+          "phase": "files",
+          "elapsedMs": 1.3454580000000078,
+          "records": 0,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 7
+        },
+        {
+          "phase": "files",
+          "elapsedMs": 1.1209160000000793,
+          "records": 0,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 7
+        },
+        {
+          "phase": "files",
+          "elapsedMs": 1.3210829999998168,
+          "records": 0,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 7
+        },
+        {
+          "phase": "files",
+          "elapsedMs": 1.6254589999998643,
+          "records": 0,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 5
+        },
+        {
+          "phase": "files",
+          "elapsedMs": 0.6782499999999345,
+          "records": 0,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 0
+        },
+        {
+          "phase": "finished",
+          "elapsedMs": 0.5232500000001892,
+          "records": 0,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 0
+        }
+      ],
+      "pageSizes": [
+        {
+          "items": 5,
+          "bytes": 824
+        },
+        {
+          "items": 5,
+          "bytes": 994
+        },
+        {
+          "items": 5,
+          "bytes": 1246
+        },
+        {
+          "items": 5,
+          "bytes": 1246
+        },
+        {
+          "items": 5,
+          "bytes": 1246
+        },
+        {
+          "items": 5,
+          "bytes": 1246
+        },
+        {
+          "items": 5,
+          "bytes": 1246
+        },
+        {
+          "items": 5,
+          "bytes": 1246
+        },
+        {
+          "items": 5,
+          "bytes": 1246
+        },
+        {
+          "items": 5,
+          "bytes": 1246
+        },
+        {
+          "items": 5,
+          "bytes": 1246
+        },
+        {
+          "items": 5,
+          "bytes": 1246
+        },
+        {
+          "items": 5,
+          "bytes": 1246
+        },
+        {
+          "items": 5,
+          "bytes": 1246
+        },
+        {
+          "items": 5,
+          "bytes": 1246
+        },
+        {
+          "items": 5,
+          "bytes": 1246
+        },
+        {
+          "items": 5,
+          "bytes": 1246
+        },
+        {
+          "items": 5,
+          "bytes": 1246
+        },
+        {
+          "items": 5,
+          "bytes": 1246
+        },
+        {
+          "items": 5,
+          "bytes": 1247
+        },
+        {
+          "items": 5,
+          "bytes": 1251
+        },
+        {
+          "items": 5,
+          "bytes": 1255
+        },
+        {
+          "items": 1,
+          "bytes": 254
+        }
+      ],
+      "fixture": {
+        "archiveId": "test-inventory-4753daa1-0024-4512-8d97-44b6012111bf",
+        "threadId": "90074430-634e-47d3-b297-2ad67e455208",
+        "orphanCount": 96,
+        "digests": {
+          "attachment": "18381629d89a6ec6f33e33fbe12d724685cff72bd786a8cdd9fbf970ecaf71a2",
+          "raw": "33243f3e7b2108356e979f180b6f8545e8ff558039183444f57bd7141a278886",
+          "text": "99f92d4997cfc1eaaee9fbd1fb74253cea6636a7c11a19db7aff40ef8663290b",
+          "missing": "f2f99d3cc6038a6e8f11d9b5b06ebe0357341b367f47b60e26949d054b2ce49f",
+          "catalogMissing": "5f0978d41bb3b65cb5de7f47f29137b4de75f0afefbc9fb321d11a11f3785801",
+          "wrongSize": "41a8f1707651a49f81213c3f94b1cfad5cded4a3bf52afa76be34df9a4ab2011",
+          "registeredOrphan": "294ec214dccb72e95f44a28f63af3c7eae381eecba31fcf18b986c59ba3cd9d8",
+          "publishedProtected": "442229b676ff246160b8cb7a89d2a6bb01666290c1721e4e718847b178659b5c",
+          "importProtected": "ada37e179cb77ae848b8cbe74032119b8882045915e9a3d5d881f8ee1c8ca149",
+          "verifiedProtected": "f49de1866cfd2f38ab511f76b9941c3461765f0c61852b2318b53baeb5e00a34",
+          "physicalOrphan": "4d2b2048115f53010485b86acb72baf6eddeab9eab7c6b779ec55b8e1fdf437c",
+          "activeProtected": "6a38b62bcb2c37cc675836a51f75c69d6a38554434d9344b9a871e4b0ae10bd6"
+        },
+        "transferIds": {
+          "attachment": "35972e9e-20d2-44a6-b293-ceb9365eece5",
+          "raw": "aee79ba0-95c6-488b-b23e-b1c070910d81",
+          "text": "7c2838d1-06c8-4293-b4fc-a6df082081e9",
+          "missing": "edcf2dec-ce5b-4b08-af57-14d27a1ff036",
+          "catalogMissing": "bc1f3793-b34c-4c90-989c-bbe486fd1d08",
+          "wrongSize": "a1bc7918-c06e-4631-9221-1b517cbd4148",
+          "registeredOrphan": "adc76772-ff4e-4ffb-a549-853246ee284e",
+          "publishedProtected": "4d833db6-d652-4c59-ba9a-399bf03ef4b0",
+          "importProtected": "e50091d7-cb30-4a35-875f-4aca82cb4e1b",
+          "verifiedProtected": "62d0fe76-c54b-4487-8741-12506eb711b9",
+          "strayStage": "ffef2fcf-da30-4aec-9255-20aa42cecca2",
+          "activeProtected": "8f220dab-8844-40ed-bcb3-7070fdaf8415"
+        },
+        "baseline": {
+          "canonicalSha256": "2054e782cc5064aa4922ad39ab819300165fae833978e4c6e8a522202e7a3f53",
+          "operationsSha256": "6561d48579444fe8d1c5529f5fe19e79e434273713928c913e8958baf57cf929",
+          "blobOperationsSha256": "ededd4bfaf4fca91afa7d33d45bedb80eee9eed2f004306ffb40eff70617b1f6",
+          "blobCatalogSha256": "5155ee5f09fdeb05a961b57e53bf52885120709f7a16bc81d2395f0f13e05106",
+          "blobTransfersSha256": "94e878c36e5a772019d67b21e7a8fa802ac7b4834d36257adb1a07b7411e9d47",
+          "blobsSha256": "b9245eb537179863c86e04b23bec58cd66b4b13a37de2ddc4ec4d2440cd07545",
+          "canonicalRecords": 106,
+          "syncOperations": 103,
+          "physicalFiles": 112,
+          "sqliteTemporaryStore": 1,
+          "sqliteTemporaryCacheKiB": -1024
+        }
+      },
+      "byteLimitedPage": {
+        "items": 6,
+        "bytes": 948
+      },
+      "statusAfterScan": {
+        "scanId": "ccaff5ed-f44e-474b-9ebd-47cb07a65db3",
+        "state": "complete",
+        "phase": "finished",
+        "startedAt": 1789072556972,
+        "updatedAt": 1789072557050,
+        "scannedRecords": 107,
+        "scannedTransfers": 11,
+        "scannedCatalogEntries": 8,
+        "scannedFiles": 200,
+        "counts": {
+          "missing_blob": 1,
+          "missing_catalog": 1,
+          "orphan_blob": 98,
+          "size_mismatch": 1,
+          "protected_blob": 3,
+          "staged_file": 4,
+          "unrecognized_entry": 3
+        },
+        "message": null
+      },
+      "findings": [
+        {
+          "sequence": 1,
+          "kind": "unrecognized_entry",
+          "sha256": null,
+          "path": null,
+          "expectedBytes": null,
+          "actualBytes": null,
+          "references": 0
+        },
+        {
+          "sequence": 2,
+          "kind": "staged_file",
+          "sha256": null,
+          "path": "temp/blob-transfers/ffef2fcf-da30-4aec-9255-20aa42cecca2.stage",
+          "expectedBytes": null,
+          "actualBytes": 30,
+          "references": 0
+        },
+        {
+          "sequence": 3,
+          "kind": "staged_file",
+          "sha256": null,
+          "path": "temp/blob-transfers/8f220dab-8844-40ed-bcb3-7070fdaf8415.stage",
+          "expectedBytes": null,
+          "actualBytes": 3,
+          "references": 0
+        },
+        {
+          "sequence": 4,
+          "kind": "staged_file",
+          "sha256": null,
+          "path": "temp/blob-transfers/62d0fe76-c54b-4487-8741-12506eb711b9.stage",
+          "expectedBytes": null,
+          "actualBytes": 84,
+          "references": 0
+        },
+        {
+          "sequence": 5,
+          "kind": "staged_file",
+          "sha256": null,
+          "path": "temp/blob-transfers/4d833db6-d652-4c59-ba9a-399bf03ef4b0.stage",
+          "expectedBytes": null,
+          "actualBytes": 85,
+          "references": 0
+        },
+        {
+          "sequence": 6,
+          "kind": "unrecognized_entry",
+          "sha256": null,
+          "path": null,
+          "expectedBytes": null,
+          "actualBytes": null,
+          "references": 0
+        },
+        {
+          "sequence": 7,
+          "kind": "unrecognized_entry",
+          "sha256": null,
+          "path": null,
+          "expectedBytes": null,
+          "actualBytes": null,
+          "references": 0
+        },
+        {
+          "sequence": 8,
+          "kind": "orphan_blob",
+          "sha256": "fba7ebb2067441ba51586d7fa345d51a7b2a9ec6d23abed9ba6707e8f4104d3a",
+          "path": "blobs/fb/fba7ebb2067441ba51586d7fa345d51a7b2a9ec6d23abed9ba6707e8f4104d3a",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 9,
+          "kind": "orphan_blob",
+          "sha256": "fafcd042547100346fc14ecb09a08df2e073b5951cf8ef248ca8c501df50f2fa",
+          "path": "blobs/fa/fafcd042547100346fc14ecb09a08df2e073b5951cf8ef248ca8c501df50f2fa",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 10,
+          "kind": "orphan_blob",
+          "sha256": "f7f04c5620814ad3d51f5eb00d6cadc31f3a4507346b99476e44b915807729f5",
+          "path": "blobs/f7/f7f04c5620814ad3d51f5eb00d6cadc31f3a4507346b99476e44b915807729f5",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 11,
+          "kind": "orphan_blob",
+          "sha256": "f4094ef50a33a5db0f76f39b7e90dd1bda71b467540fb35a783de0782823dbb3",
+          "path": "blobs/f4/f4094ef50a33a5db0f76f39b7e90dd1bda71b467540fb35a783de0782823dbb3",
+          "expectedBytes": null,
+          "actualBytes": 38,
+          "references": 0
+        },
+        {
+          "sequence": 12,
+          "kind": "orphan_blob",
+          "sha256": "f1140d603aa92c52f4f1e93bd3f11d0e22be8a107391bf6a04cd317996b00a1f",
+          "path": "blobs/f1/f1140d603aa92c52f4f1e93bd3f11d0e22be8a107391bf6a04cd317996b00a1f",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 13,
+          "kind": "orphan_blob",
+          "sha256": "ef10fb9b34066435e4de636838574eb7c3761a5a904e0c83372975bb12c0a1d5",
+          "path": "blobs/ef/ef10fb9b34066435e4de636838574eb7c3761a5a904e0c83372975bb12c0a1d5",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 14,
+          "kind": "orphan_blob",
+          "sha256": "ee5397c5a5ee6aaf69f8d8370c5f77bb7f3e19a788ff1b692ef648b10779eb80",
+          "path": "blobs/ee/ee5397c5a5ee6aaf69f8d8370c5f77bb7f3e19a788ff1b692ef648b10779eb80",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 15,
+          "kind": "orphan_blob",
+          "sha256": "ece4d02aac1b656f0a3fefa9a377f4384f32c395ae544601bbc1e84ca7611fb8",
+          "path": "blobs/ec/ece4d02aac1b656f0a3fefa9a377f4384f32c395ae544601bbc1e84ca7611fb8",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 16,
+          "kind": "orphan_blob",
+          "sha256": "ea218e462bf093e9a5d9221e65729b09a2b1a0614ad510cdf636e41cf84de336",
+          "path": "blobs/ea/ea218e462bf093e9a5d9221e65729b09a2b1a0614ad510cdf636e41cf84de336",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 17,
+          "kind": "orphan_blob",
+          "sha256": "e8949c9daeea3ca27c320d2b7df322871c42282315cf8df5af156244c8599fe6",
+          "path": "blobs/e8/e8949c9daeea3ca27c320d2b7df322871c42282315cf8df5af156244c8599fe6",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 18,
+          "kind": "orphan_blob",
+          "sha256": "e821996f84e3d8f40e1682e4c091c6b4ef8cf61d37f7d3f84215386e0366ee24",
+          "path": "blobs/e8/e821996f84e3d8f40e1682e4c091c6b4ef8cf61d37f7d3f84215386e0366ee24",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 19,
+          "kind": "orphan_blob",
+          "sha256": "e5e44ff321037bf55c9d87e9b337de32892d83843fbc41514b1a4d7c77d78904",
+          "path": "blobs/e5/e5e44ff321037bf55c9d87e9b337de32892d83843fbc41514b1a4d7c77d78904",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 20,
+          "kind": "orphan_blob",
+          "sha256": "e234619d135b2fe9753db82c489dc90c57012c9017ef9c26ab1731832130dc2a",
+          "path": "blobs/e2/e234619d135b2fe9753db82c489dc90c57012c9017ef9c26ab1731832130dc2a",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 21,
+          "kind": "orphan_blob",
+          "sha256": "e0036a2b5449bb0f3f1c857385bae0691f0c452c25165c83118bd15f21cab0cd",
+          "path": "blobs/e0/e0036a2b5449bb0f3f1c857385bae0691f0c452c25165c83118bd15f21cab0cd",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 22,
+          "kind": "orphan_blob",
+          "sha256": "defd65c8c226d57ac04c4e19da4d51606e405d0444ddae46c3a8f82c5fff37c7",
+          "path": "blobs/de/defd65c8c226d57ac04c4e19da4d51606e405d0444ddae46c3a8f82c5fff37c7",
+          "expectedBytes": null,
+          "actualBytes": 38,
+          "references": 0
+        },
+        {
+          "sequence": 23,
+          "kind": "orphan_blob",
+          "sha256": "ddb7b85a322f643e5f4dd3eb523f95ce0f22b818cda69e66e779c7bfd9a4e060",
+          "path": "blobs/dd/ddb7b85a322f643e5f4dd3eb523f95ce0f22b818cda69e66e779c7bfd9a4e060",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 24,
+          "kind": "orphan_blob",
+          "sha256": "dae72facc8c780f12def6f69271685d0eb7203d61e502c63879421a09e7f6ec0",
+          "path": "blobs/da/dae72facc8c780f12def6f69271685d0eb7203d61e502c63879421a09e7f6ec0",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 25,
+          "kind": "orphan_blob",
+          "sha256": "d70e886f949c7e7c878d632045e6d6775c878abb0df363010809c81407e5beb7",
+          "path": "blobs/d7/d70e886f949c7e7c878d632045e6d6775c878abb0df363010809c81407e5beb7",
+          "expectedBytes": null,
+          "actualBytes": 38,
+          "references": 0
+        },
+        {
+          "sequence": 26,
+          "kind": "orphan_blob",
+          "sha256": "d4e79f2f8e2b3b6a80a6b7c1ac427513bef75d7b5380c739623d55a2883864d8",
+          "path": "blobs/d4/d4e79f2f8e2b3b6a80a6b7c1ac427513bef75d7b5380c739623d55a2883864d8",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 27,
+          "kind": "orphan_blob",
+          "sha256": "d05406bd2746bdd729ff848bcf2574714d3cf117b46a95ad10ec4524600b1f49",
+          "path": "blobs/d0/d05406bd2746bdd729ff848bcf2574714d3cf117b46a95ad10ec4524600b1f49",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 28,
+          "kind": "orphan_blob",
+          "sha256": "cc8b0f420c3e2fb51da030839d5acfb73e9e7267b23eb683b56d9ac7b5ce4053",
+          "path": "blobs/cc/cc8b0f420c3e2fb51da030839d5acfb73e9e7267b23eb683b56d9ac7b5ce4053",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 29,
+          "kind": "orphan_blob",
+          "sha256": "cc6abe17979296e55be18e15dba9f8118fa0887ba0d8ba59ee2d91e97bcac10b",
+          "path": "blobs/cc/cc6abe17979296e55be18e15dba9f8118fa0887ba0d8ba59ee2d91e97bcac10b",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 30,
+          "kind": "orphan_blob",
+          "sha256": "c4edf6c2de1cb6cdd8f432b5ce25d3a33004c842a39ef45a2b0bd0a2582efa05",
+          "path": "blobs/c4/c4edf6c2de1cb6cdd8f432b5ce25d3a33004c842a39ef45a2b0bd0a2582efa05",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 31,
+          "kind": "orphan_blob",
+          "sha256": "c15370d792103d11f7d6c4e737339a48cbec0127d9d534014219e6f83fb0407c",
+          "path": "blobs/c1/c15370d792103d11f7d6c4e737339a48cbec0127d9d534014219e6f83fb0407c",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 32,
+          "kind": "orphan_blob",
+          "sha256": "bfb804424608b391c05eccd7cb2029d9025a803576603cb4ebefad2d5ffc1bb0",
+          "path": "blobs/bf/bfb804424608b391c05eccd7cb2029d9025a803576603cb4ebefad2d5ffc1bb0",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 33,
+          "kind": "orphan_blob",
+          "sha256": "bd51bf72b574e48f96d62f6e1c68fd9f951ffc4d96eceb2ee6ace1503d09345e",
+          "path": "blobs/bd/bd51bf72b574e48f96d62f6e1c68fd9f951ffc4d96eceb2ee6ace1503d09345e",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 34,
+          "kind": "orphan_blob",
+          "sha256": "ba407841951fbfaf7724394825ecb3b7ea0eef166fc389233209f8e9549ff090",
+          "path": "blobs/ba/ba407841951fbfaf7724394825ecb3b7ea0eef166fc389233209f8e9549ff090",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 35,
+          "kind": "orphan_blob",
+          "sha256": "b5c19acd37c62d4773e6a1bb090d7bfd822e00d9cdded2895d7e059e3a4f294a",
+          "path": "blobs/b5/b5c19acd37c62d4773e6a1bb090d7bfd822e00d9cdded2895d7e059e3a4f294a",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 36,
+          "kind": "orphan_blob",
+          "sha256": "b4e7c99a29a2f04a6c4cfd6cf2f405da5df649ad7892952b642c124e581aff5c",
+          "path": "blobs/b4/b4e7c99a29a2f04a6c4cfd6cf2f405da5df649ad7892952b642c124e581aff5c",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 37,
+          "kind": "orphan_blob",
+          "sha256": "a80890c31418d9158adc45364f40c0f89e0f9d10219028e8420b2e71ff778ba7",
+          "path": "blobs/a8/a80890c31418d9158adc45364f40c0f89e0f9d10219028e8420b2e71ff778ba7",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 38,
+          "kind": "orphan_blob",
+          "sha256": "a4cca78006236ab7f90a6cbe10702e16222eb7ecda56ed83e5774063029f1e5c",
+          "path": "blobs/a4/a4cca78006236ab7f90a6cbe10702e16222eb7ecda56ed83e5774063029f1e5c",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 39,
+          "kind": "orphan_blob",
+          "sha256": "a20dfe0aa5b9de34b483dc8268765ce688b87749a91b1c8d4faf41cfb86dbb75",
+          "path": "blobs/a2/a20dfe0aa5b9de34b483dc8268765ce688b87749a91b1c8d4faf41cfb86dbb75",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 40,
+          "kind": "orphan_blob",
+          "sha256": "a1634d189795976c6f1704529338c266159ae1abafd737d8ffe764b6a6b74b54",
+          "path": "blobs/a1/a1634d189795976c6f1704529338c266159ae1abafd737d8ffe764b6a6b74b54",
+          "expectedBytes": null,
+          "actualBytes": 38,
+          "references": 0
+        },
+        {
+          "sequence": 41,
+          "kind": "orphan_blob",
+          "sha256": "a14eea996950099864fe382c7fe6426e2392a359a9c7fba23a201bd2d96c4afc",
+          "path": "blobs/a1/a14eea996950099864fe382c7fe6426e2392a359a9c7fba23a201bd2d96c4afc",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 42,
+          "kind": "orphan_blob",
+          "sha256": "a02222a5246fd7f0c666041ff35fb55268a14ea0aca185c764f465f2755ba754",
+          "path": "blobs/a0/a02222a5246fd7f0c666041ff35fb55268a14ea0aca185c764f465f2755ba754",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 43,
+          "kind": "orphan_blob",
+          "sha256": "9af35870525167f4842b7d7cc3d17e50eca66d23d8af8d4efa967671b29f5c79",
+          "path": "blobs/9a/9af35870525167f4842b7d7cc3d17e50eca66d23d8af8d4efa967671b29f5c79",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 44,
+          "kind": "orphan_blob",
+          "sha256": "9a679ec2d799ee788e2a1beb7275a9a30ccc71ccde90eb1e2dfe07cc77288315",
+          "path": "blobs/9a/9a679ec2d799ee788e2a1beb7275a9a30ccc71ccde90eb1e2dfe07cc77288315",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 45,
+          "kind": "orphan_blob",
+          "sha256": "998a9ff66ac7c194d7d739927340d905579ee857a4d3e87a9e92cef6476d14c0",
+          "path": "blobs/99/998a9ff66ac7c194d7d739927340d905579ee857a4d3e87a9e92cef6476d14c0",
+          "expectedBytes": null,
+          "actualBytes": 38,
+          "references": 0
+        },
+        {
+          "sequence": 46,
+          "kind": "orphan_blob",
+          "sha256": "97bbb5295ff0e6d0163406b78c3c95f0d900045bfaf14efc3cb5bc4878a781d7",
+          "path": "blobs/97/97bbb5295ff0e6d0163406b78c3c95f0d900045bfaf14efc3cb5bc4878a781d7",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 47,
+          "kind": "orphan_blob",
+          "sha256": "92e75bd3911b4ac15a049223260fbed2f784b9b9a3ddb8420ec2c1bcc7991be8",
+          "path": "blobs/92/92e75bd3911b4ac15a049223260fbed2f784b9b9a3ddb8420ec2c1bcc7991be8",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 48,
+          "kind": "orphan_blob",
+          "sha256": "920b193e54867aab6dab1822d8902516fb4069c755035246ee0ebee13594ace0",
+          "path": "blobs/92/920b193e54867aab6dab1822d8902516fb4069c755035246ee0ebee13594ace0",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 49,
+          "kind": "orphan_blob",
+          "sha256": "8f68995376404d70e9d0193b9f0064b8ded379faaee10cf09ab73a8e0d19a4ee",
+          "path": "blobs/8f/8f68995376404d70e9d0193b9f0064b8ded379faaee10cf09ab73a8e0d19a4ee",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 50,
+          "kind": "orphan_blob",
+          "sha256": "8abfe6bf03163b6c20bc4c84ca521b9c4d6653ef5329377565b418dfd1c00790",
+          "path": "blobs/8a/8abfe6bf03163b6c20bc4c84ca521b9c4d6653ef5329377565b418dfd1c00790",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 51,
+          "kind": "orphan_blob",
+          "sha256": "87c082685550902935ef9ff2854386ae1ef652c01fd32bcfaf99d0d2f82ac094",
+          "path": "blobs/87/87c082685550902935ef9ff2854386ae1ef652c01fd32bcfaf99d0d2f82ac094",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 52,
+          "kind": "orphan_blob",
+          "sha256": "865b7642c206c05e69242058c389784b293e4cc10e69c19e7dbf45986a300748",
+          "path": "blobs/86/865b7642c206c05e69242058c389784b293e4cc10e69c19e7dbf45986a300748",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 53,
+          "kind": "orphan_blob",
+          "sha256": "85ba678ea6e93c10073256d9e39a382f648416b4135f4add460653230499f847",
+          "path": "blobs/85/85ba678ea6e93c10073256d9e39a382f648416b4135f4add460653230499f847",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 54,
+          "kind": "orphan_blob",
+          "sha256": "84131a9febe2c7736245bd5760e3c3a4d41db3efd0c47ee2f9a25453eb9d46c4",
+          "path": "blobs/84/84131a9febe2c7736245bd5760e3c3a4d41db3efd0c47ee2f9a25453eb9d46c4",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 55,
+          "kind": "orphan_blob",
+          "sha256": "72b1a27bc2ea5bdc9f5bb4b9a680daced44ff941c08b06ff337c46eedce0d6a0",
+          "path": "blobs/72/72b1a27bc2ea5bdc9f5bb4b9a680daced44ff941c08b06ff337c46eedce0d6a0",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 56,
+          "kind": "orphan_blob",
+          "sha256": "7167d25f6d0e35682a6b116bf678526c180ee49f29a08ba7c9ec84c8ec224600",
+          "path": "blobs/71/7167d25f6d0e35682a6b116bf678526c180ee49f29a08ba7c9ec84c8ec224600",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 57,
+          "kind": "orphan_blob",
+          "sha256": "6d350bda1172028b6c377721095e063534dd40b6ebbc6b7ab383ae69980b3397",
+          "path": "blobs/6d/6d350bda1172028b6c377721095e063534dd40b6ebbc6b7ab383ae69980b3397",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 58,
+          "kind": "orphan_blob",
+          "sha256": "69531975dfea50a5794140af4ae3769da31ac05b5396fd56fcf201fb051270e1",
+          "path": "blobs/69/69531975dfea50a5794140af4ae3769da31ac05b5396fd56fcf201fb051270e1",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 59,
+          "kind": "orphan_blob",
+          "sha256": "65fdf090079198fb29061705ad2c63142637839ae9a636bd52c4951b13e40f16",
+          "path": "blobs/65/65fdf090079198fb29061705ad2c63142637839ae9a636bd52c4951b13e40f16",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 60,
+          "kind": "orphan_blob",
+          "sha256": "63c0d1c689ff34db00903d5f7a328766364d13ffa4fd1c6bb1d8791dbb41ed0f",
+          "path": "blobs/63/63c0d1c689ff34db00903d5f7a328766364d13ffa4fd1c6bb1d8791dbb41ed0f",
+          "expectedBytes": null,
+          "actualBytes": 38,
+          "references": 0
+        },
+        {
+          "sequence": 61,
+          "kind": "orphan_blob",
+          "sha256": "62d6c6c8ea5f7342ee7c401c19bb1ba37b8746e55bac51a5585f8c42336c42cf",
+          "path": "blobs/62/62d6c6c8ea5f7342ee7c401c19bb1ba37b8746e55bac51a5585f8c42336c42cf",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 62,
+          "kind": "orphan_blob",
+          "sha256": "62038ff0527cf34426e8157063b866d461ca8948fad73ef91c19466e5af14802",
+          "path": "blobs/62/62038ff0527cf34426e8157063b866d461ca8948fad73ef91c19466e5af14802",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 63,
+          "kind": "orphan_blob",
+          "sha256": "59b6240bbd137289ced2d64f8e4f31666d1122eb3cc5b3df82ecd8274e607845",
+          "path": "blobs/59/59b6240bbd137289ced2d64f8e4f31666d1122eb3cc5b3df82ecd8274e607845",
+          "expectedBytes": null,
+          "actualBytes": 38,
+          "references": 0
+        },
+        {
+          "sequence": 64,
+          "kind": "orphan_blob",
+          "sha256": "58b8379abd0e32931baf5408324b2879f6b99aac51a0ac1ab5c02677f784a047",
+          "path": "blobs/58/58b8379abd0e32931baf5408324b2879f6b99aac51a0ac1ab5c02677f784a047",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 65,
+          "kind": "orphan_blob",
+          "sha256": "57aa278083de054587f1ca02e55f6cec666b0a84fad9468b1ac169558f01e80c",
+          "path": "blobs/57/57aa278083de054587f1ca02e55f6cec666b0a84fad9468b1ac169558f01e80c",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 66,
+          "kind": "orphan_blob",
+          "sha256": "57675a52b2bbf98964bd74e4f75087d80e8a7ed6c0f1b81f7e6ed309f57a5c20",
+          "path": "blobs/57/57675a52b2bbf98964bd74e4f75087d80e8a7ed6c0f1b81f7e6ed309f57a5c20",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 67,
+          "kind": "orphan_blob",
+          "sha256": "570172907b5b77390f8562524c119595ece251e42e6965a46c4164e74d58670b",
+          "path": "blobs/57/570172907b5b77390f8562524c119595ece251e42e6965a46c4164e74d58670b",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 68,
+          "kind": "orphan_blob",
+          "sha256": "55b85d0b00cc9bde98b6afffabe412068078ed4989efd70917adbe7edea38756",
+          "path": "blobs/55/55b85d0b00cc9bde98b6afffabe412068078ed4989efd70917adbe7edea38756",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 69,
+          "kind": "orphan_blob",
+          "sha256": "55200f816311714b4e2ea663d5a99e87ab3d4731e8bb1b8dd1b967cb9710b5ae",
+          "path": "blobs/55/55200f816311714b4e2ea663d5a99e87ab3d4731e8bb1b8dd1b967cb9710b5ae",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 70,
+          "kind": "orphan_blob",
+          "sha256": "54075d292a38de7e33909ebfa765e2b4e53b96fc10bc4d4d9927e9f34005aa77",
+          "path": "blobs/54/54075d292a38de7e33909ebfa765e2b4e53b96fc10bc4d4d9927e9f34005aa77",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 71,
+          "kind": "orphan_blob",
+          "sha256": "4d7ea4d87e118095a720d30ffc806295b5052d343170f1d048aaaf666d229b37",
+          "path": "blobs/4d/4d7ea4d87e118095a720d30ffc806295b5052d343170f1d048aaaf666d229b37",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 72,
+          "kind": "orphan_blob",
+          "sha256": "4d2b2048115f53010485b86acb72baf6eddeab9eab7c6b779ec55b8e1fdf437c",
+          "path": "blobs/4d/4d2b2048115f53010485b86acb72baf6eddeab9eab7c6b779ec55b8e1fdf437c",
+          "expectedBytes": null,
+          "actualBytes": 37,
+          "references": 0
+        },
+        {
+          "sequence": 73,
+          "kind": "orphan_blob",
+          "sha256": "48befe43705958a0a0486ce3f8b85dd247a7210f519f1a31d5c18b75f4fc227b",
+          "path": "blobs/48/48befe43705958a0a0486ce3f8b85dd247a7210f519f1a31d5c18b75f4fc227b",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 74,
+          "kind": "orphan_blob",
+          "sha256": "44f4d283d0efed804980faadd66247ae5598e12e2c15d622349c28b9fb039162",
+          "path": "blobs/44/44f4d283d0efed804980faadd66247ae5598e12e2c15d622349c28b9fb039162",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 75,
+          "kind": "orphan_blob",
+          "sha256": "43a2107e8cb64cc29579c1fb61c5a5119d3047e91a20cefb075d7087bbc22fcb",
+          "path": "blobs/43/43a2107e8cb64cc29579c1fb61c5a5119d3047e91a20cefb075d7087bbc22fcb",
+          "expectedBytes": null,
+          "actualBytes": 38,
+          "references": 0
+        },
+        {
+          "sequence": 76,
+          "kind": "orphan_blob",
+          "sha256": "421f899866d5dcb8e96131435a306b229c5b2a31d868b5ff354c57ee79b822e5",
+          "path": "blobs/42/421f899866d5dcb8e96131435a306b229c5b2a31d868b5ff354c57ee79b822e5",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 77,
+          "kind": "orphan_blob",
+          "sha256": "421108a1536b93f675a6b519b4c173e52eb33a8ee4384e2d837f61db32060bd0",
+          "path": "blobs/42/421108a1536b93f675a6b519b4c173e52eb33a8ee4384e2d837f61db32060bd0",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 78,
+          "kind": "orphan_blob",
+          "sha256": "41bd066575ada784c2608f1e581937df16106f6cc3b6bc6993cb361f02a44126",
+          "path": "blobs/41/41bd066575ada784c2608f1e581937df16106f6cc3b6bc6993cb361f02a44126",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 79,
+          "kind": "orphan_blob",
+          "sha256": "4175271c306c176cc4f12928c088d9b2d22f068151a5be44012e510961bd1c72",
+          "path": "blobs/41/4175271c306c176cc4f12928c088d9b2d22f068151a5be44012e510961bd1c72",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 80,
+          "kind": "orphan_blob",
+          "sha256": "3fc57da403574535ddd644fe9509faac76050e25db25220fbd2e7fea9d768b7a",
+          "path": "blobs/3f/3fc57da403574535ddd644fe9509faac76050e25db25220fbd2e7fea9d768b7a",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 81,
+          "kind": "orphan_blob",
+          "sha256": "3cf72b0c6444d5101d8538c10a2fe6df8432c4aeb5d7f049d66434c9e25ca5c4",
+          "path": "blobs/3c/3cf72b0c6444d5101d8538c10a2fe6df8432c4aeb5d7f049d66434c9e25ca5c4",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 82,
+          "kind": "orphan_blob",
+          "sha256": "3bcdac06f5f865f832bc2a70dd0c67e7097e09b5a5a3e48f1d55bdb32df406ab",
+          "path": "blobs/3b/3bcdac06f5f865f832bc2a70dd0c67e7097e09b5a5a3e48f1d55bdb32df406ab",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 83,
+          "kind": "orphan_blob",
+          "sha256": "3b44b33897a13208509641cf84ddb8f297ddea7bc6c907f752cb4288fd46f48f",
+          "path": "blobs/3b/3b44b33897a13208509641cf84ddb8f297ddea7bc6c907f752cb4288fd46f48f",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 84,
+          "kind": "orphan_blob",
+          "sha256": "3b03835323207014d13c9d8a7237f2ddeb65e6a3cfc6e4aad92e9ae79f615549",
+          "path": "blobs/3b/3b03835323207014d13c9d8a7237f2ddeb65e6a3cfc6e4aad92e9ae79f615549",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 85,
+          "kind": "orphan_blob",
+          "sha256": "37a54d89b5434f8a5f07805ac4771a3690c79b978b1b32fd118099d5cb24841f",
+          "path": "blobs/37/37a54d89b5434f8a5f07805ac4771a3690c79b978b1b32fd118099d5cb24841f",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 86,
+          "kind": "orphan_blob",
+          "sha256": "36646ab525d45de966f4f1ba07d71c4fded005b3c88d912dbeb6aadaecbcc62f",
+          "path": "blobs/36/36646ab525d45de966f4f1ba07d71c4fded005b3c88d912dbeb6aadaecbcc62f",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 87,
+          "kind": "orphan_blob",
+          "sha256": "357d89b33d813ed2b5a19fc2eaaf8023f453966ed577b1d1a0687d40e0fe6589",
+          "path": "blobs/35/357d89b33d813ed2b5a19fc2eaaf8023f453966ed577b1d1a0687d40e0fe6589",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 88,
+          "kind": "orphan_blob",
+          "sha256": "31ab7e09e5b861571648cb7e1e0cd7d506c5c241df610a61e78f773a797534c0",
+          "path": "blobs/31/31ab7e09e5b861571648cb7e1e0cd7d506c5c241df610a61e78f773a797534c0",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 89,
+          "kind": "orphan_blob",
+          "sha256": "2ebea8ca37850f16070db0e88e041b7608d56d20ad71dd15548d721c50c05f27",
+          "path": "blobs/2e/2ebea8ca37850f16070db0e88e041b7608d56d20ad71dd15548d721c50c05f27",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 90,
+          "kind": "orphan_blob",
+          "sha256": "2cd483d6468d882f778ef39d9eac0f94cc65ce629020f7f06cd941e188ad970f",
+          "path": "blobs/2c/2cd483d6468d882f778ef39d9eac0f94cc65ce629020f7f06cd941e188ad970f",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 91,
+          "kind": "orphan_blob",
+          "sha256": "294ec214dccb72e95f44a28f63af3c7eae381eecba31fcf18b986c59ba3cd9d8",
+          "path": "blobs/29/294ec214dccb72e95f44a28f63af3c7eae381eecba31fcf18b986c59ba3cd9d8",
+          "expectedBytes": null,
+          "actualBytes": 83,
+          "references": 0
+        },
+        {
+          "sequence": 92,
+          "kind": "orphan_blob",
+          "sha256": "25033bbb81f3228facf2a7c3c1b286627679fcdd27e3dd5375a7ea47cc100207",
+          "path": "blobs/25/25033bbb81f3228facf2a7c3c1b286627679fcdd27e3dd5375a7ea47cc100207",
+          "expectedBytes": null,
+          "actualBytes": 38,
+          "references": 0
+        },
+        {
+          "sequence": 93,
+          "kind": "orphan_blob",
+          "sha256": "23494ff708068e6927d489ae8ae1ca50c20894c742fb709aa8e3c80a33cd1969",
+          "path": "blobs/23/23494ff708068e6927d489ae8ae1ca50c20894c742fb709aa8e3c80a33cd1969",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 94,
+          "kind": "orphan_blob",
+          "sha256": "22d0dab406101287cac1c9bca4cbdeab507b0c9236c00f5d52fc0bff10a878c9",
+          "path": "blobs/22/22d0dab406101287cac1c9bca4cbdeab507b0c9236c00f5d52fc0bff10a878c9",
+          "expectedBytes": null,
+          "actualBytes": 38,
+          "references": 0
+        },
+        {
+          "sequence": 95,
+          "kind": "orphan_blob",
+          "sha256": "1e1394c7d4d69f14b25ceee73d1ca46de45883b6e8ab572bfc8dae9be85ca7a1",
+          "path": "blobs/1e/1e1394c7d4d69f14b25ceee73d1ca46de45883b6e8ab572bfc8dae9be85ca7a1",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 96,
+          "kind": "orphan_blob",
+          "sha256": "1c3fd31af11f8790f7425e1423d812d4ba186a1e74b4766e1a6e79ed41cf7159",
+          "path": "blobs/1c/1c3fd31af11f8790f7425e1423d812d4ba186a1e74b4766e1a6e79ed41cf7159",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 97,
+          "kind": "orphan_blob",
+          "sha256": "16e042e3ac0924345a420b628a28c7f620cb29a268bd4520804c99bf7b9d85e5",
+          "path": "blobs/16/16e042e3ac0924345a420b628a28c7f620cb29a268bd4520804c99bf7b9d85e5",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 98,
+          "kind": "orphan_blob",
+          "sha256": "14c8c99aeab6b11808fdda03741edc2c13144cf2a8ceb20b457ee48512c4ab96",
+          "path": "blobs/14/14c8c99aeab6b11808fdda03741edc2c13144cf2a8ceb20b457ee48512c4ab96",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 99,
+          "kind": "orphan_blob",
+          "sha256": "12cd4d2dc1df5e59cb514d4892f7d97175ce3e2d4273fa758d0aab092e4c68d3",
+          "path": "blobs/12/12cd4d2dc1df5e59cb514d4892f7d97175ce3e2d4273fa758d0aab092e4c68d3",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 100,
+          "kind": "orphan_blob",
+          "sha256": "120d904bc287fa01a035839586e2ae7656efead9c83d440b4c31ad0018438e81",
+          "path": "blobs/12/120d904bc287fa01a035839586e2ae7656efead9c83d440b4c31ad0018438e81",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 101,
+          "kind": "orphan_blob",
+          "sha256": "11116ae9d0acf4c8c70d641a1097ff12217b3c14b5e133630f3586f737e5d4b5",
+          "path": "blobs/11/11116ae9d0acf4c8c70d641a1097ff12217b3c14b5e133630f3586f737e5d4b5",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 102,
+          "kind": "orphan_blob",
+          "sha256": "0d616cb8f4d983f1580814df207d0c4a7437cbb5912b2893e11e8f9aa7d425f5",
+          "path": "blobs/0d/0d616cb8f4d983f1580814df207d0c4a7437cbb5912b2893e11e8f9aa7d425f5",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 103,
+          "kind": "orphan_blob",
+          "sha256": "0c1cefb7381ce6d68f8d273dca31802d4b0e5066db8cce9a1510f32cd63eaf76",
+          "path": "blobs/0c/0c1cefb7381ce6d68f8d273dca31802d4b0e5066db8cce9a1510f32cd63eaf76",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 104,
+          "kind": "orphan_blob",
+          "sha256": "0bac24f2d40d439642328e02731b50684a2def1875c543cdcbd807188dd81dbc",
+          "path": "blobs/0b/0bac24f2d40d439642328e02731b50684a2def1875c543cdcbd807188dd81dbc",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 105,
+          "kind": "orphan_blob",
+          "sha256": "079d72efe61ad2892d2b34d66dfc672dff8ef0291eb7996456064d3cd85bb29b",
+          "path": "blobs/07/079d72efe61ad2892d2b34d66dfc672dff8ef0291eb7996456064d3cd85bb29b",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 106,
+          "kind": "size_mismatch",
+          "sha256": "41a8f1707651a49f81213c3f94b1cfad5cded4a3bf52afa76be34df9a4ab2011",
+          "path": "blobs/41/41a8f1707651a49f81213c3f94b1cfad5cded4a3bf52afa76be34df9a4ab2011",
+          "expectedBytes": 76,
+          "actualBytes": 5,
+          "references": 1
+        },
+        {
+          "sequence": 107,
+          "kind": "protected_blob",
+          "sha256": "442229b676ff246160b8cb7a89d2a6bb01666290c1721e4e718847b178659b5c",
+          "path": "blobs/44/442229b676ff246160b8cb7a89d2a6bb01666290c1721e4e718847b178659b5c",
+          "expectedBytes": 85,
+          "actualBytes": 85,
+          "references": 0
+        },
+        {
+          "sequence": 108,
+          "kind": "missing_catalog",
+          "sha256": "5f0978d41bb3b65cb5de7f47f29137b4de75f0afefbc9fb321d11a11f3785801",
+          "path": "blobs/5f/5f0978d41bb3b65cb5de7f47f29137b4de75f0afefbc9fb321d11a11f3785801",
+          "expectedBytes": 81,
+          "actualBytes": 81,
+          "references": 1
+        },
+        {
+          "sequence": 109,
+          "kind": "protected_blob",
+          "sha256": "ada37e179cb77ae848b8cbe74032119b8882045915e9a3d5d881f8ee1c8ca149",
+          "path": "blobs/ad/ada37e179cb77ae848b8cbe74032119b8882045915e9a3d5d881f8ee1c8ca149",
+          "expectedBytes": 82,
+          "actualBytes": 82,
+          "references": 0
+        },
+        {
+          "sequence": 110,
+          "kind": "missing_blob",
+          "sha256": "f2f99d3cc6038a6e8f11d9b5b06ebe0357341b367f47b60e26949d054b2ce49f",
+          "path": "blobs/f2/f2f99d3cc6038a6e8f11d9b5b06ebe0357341b367f47b60e26949d054b2ce49f",
+          "expectedBytes": 74,
+          "actualBytes": null,
+          "references": 1
+        },
+        {
+          "sequence": 111,
+          "kind": "protected_blob",
+          "sha256": "f49de1866cfd2f38ab511f76b9941c3461765f0c61852b2318b53baeb5e00a34",
+          "path": "blobs/f4/f49de1866cfd2f38ab511f76b9941c3461765f0c61852b2318b53baeb5e00a34",
+          "expectedBytes": 84,
+          "actualBytes": null,
+          "references": 0
+        }
+      ],
+      "preserved": {
+        "canonicalSha256": "2054e782cc5064aa4922ad39ab819300165fae833978e4c6e8a522202e7a3f53",
+        "operationsSha256": "6561d48579444fe8d1c5529f5fe19e79e434273713928c913e8958baf57cf929",
+        "blobOperationsSha256": "ededd4bfaf4fca91afa7d33d45bedb80eee9eed2f004306ffb40eff70617b1f6",
+        "blobCatalogSha256": "5155ee5f09fdeb05a961b57e53bf52885120709f7a16bc81d2395f0f13e05106",
+        "blobTransfersSha256": "94e878c36e5a772019d67b21e7a8fa802ac7b4834d36257adb1a07b7411e9d47",
+        "blobsSha256": "b9245eb537179863c86e04b23bec58cd66b4b13a37de2ddc4ec4d2440cd07545",
+        "canonicalRecords": 106,
+        "syncOperations": 103,
+        "physicalFiles": 112,
+        "sqliteTemporaryStore": 1,
+        "sqliteTemporaryCacheKiB": -1024
+      },
+      "activeTransferId": "69e42ee3-1464-4b67-a3fc-c86f49227544",
+      "activeStatus": {
+        "scanId": "b2f373f4-01ce-480c-959e-be6574034100",
+        "state": "complete",
+        "phase": "finished",
+        "startedAt": 1789072557242,
+        "updatedAt": 1789072557296,
+        "scannedRecords": 107,
+        "scannedTransfers": 12,
+        "scannedCatalogEntries": 8,
+        "scannedFiles": 201,
+        "counts": {
+          "missing_blob": 1,
+          "missing_catalog": 1,
+          "orphan_blob": 98,
+          "size_mismatch": 1,
+          "protected_blob": 3,
+          "staged_file": 5,
+          "unrecognized_entry": 3
+        },
+        "message": null
+      },
+      "beforeRestart": {
+        "canonicalSha256": "6b8850ca308889fa76f7f2533dd1845aaeb8f26267b489368c68027b5ee4a28a",
+        "operationsSha256": "2d7d991fde281f337175a64ab66d9886b38692d82adc7019b678d9a9903fad3f",
+        "blobOperationsSha256": "405e16d446eb8df9e16b0659439f71bf3f76577bd0952d1887c8c6081d5210b4",
+        "blobCatalogSha256": "5155ee5f09fdeb05a961b57e53bf52885120709f7a16bc81d2395f0f13e05106",
+        "blobTransfersSha256": "ef7537d31f55710495c5f1440996330baaca08363bb1d30be6711bd2ec7e3ae9",
+        "blobsSha256": "f0c8ee18062942b8e4a3c5b398cd6dac1fc798bd9493a71803ba6d461ef3bc99",
+        "canonicalRecords": 106,
+        "syncOperations": 105,
+        "physicalFiles": 113,
+        "sqliteTemporaryStore": 1,
+        "sqliteTemporaryCacheKiB": -1024
+      },
+      "restarted": {
+        "canonicalSha256": "6b8850ca308889fa76f7f2533dd1845aaeb8f26267b489368c68027b5ee4a28a",
+        "operationsSha256": "2d7d991fde281f337175a64ab66d9886b38692d82adc7019b678d9a9903fad3f",
+        "blobOperationsSha256": "405e16d446eb8df9e16b0659439f71bf3f76577bd0952d1887c8c6081d5210b4",
+        "blobCatalogSha256": "5155ee5f09fdeb05a961b57e53bf52885120709f7a16bc81d2395f0f13e05106",
+        "blobTransfersSha256": "ef7537d31f55710495c5f1440996330baaca08363bb1d30be6711bd2ec7e3ae9",
+        "blobsSha256": "f0c8ee18062942b8e4a3c5b398cd6dac1fc798bd9493a71803ba6d461ef3bc99",
+        "canonicalRecords": 106,
+        "syncOperations": 105,
+        "physicalFiles": 113,
+        "sqliteTemporaryStore": 1,
+        "sqliteTemporaryCacheKiB": -1024
+      },
+      "malformedStatus": {
+        "scanId": "69aa0474-e9e4-4dfe-b158-f0d1a629648a",
+        "state": "failed",
+        "phase": "references",
+        "startedAt": 1789072557933,
+        "updatedAt": 1789072557945,
+        "scannedRecords": 107,
+        "scannedTransfers": 0,
+        "scannedCatalogEntries": 0,
+        "scannedFiles": 0,
+        "counts": {
+          "missing_blob": 0,
+          "missing_catalog": 0,
+          "orphan_blob": 0,
+          "size_mismatch": 0,
+          "protected_blob": 0,
+          "staged_file": 0,
+          "unrecognized_entry": 0
+        },
+        "message": "Blob inventory could not finish; start a new scan."
+      }
+    },
+    {
+      "name": "webkit",
+      "status": "passed",
+      "checks": [
+        "actual canonical attachment, raw-object and text-blob references distinguish all seven finding kinds while active import/verified/published descriptors protect recoverable bytes",
+        "real multi-slice SQLite/OPFS traversal and bounded cursor pages finish without blocking main-thread timers or returning uploaded names/content",
+        "a competing scan cannot replace active work, and closing a verified read-only transfer does not falsely invalidate the inventory",
+        "oversized work/pages and invalid or foreign cursors are refused; explicit cancellation preserves the bounded partial scan",
+        "complete/cancelled inventory leaves canonical records, sync operations, blob operations, catalog availability/size fields, durable transfer rows and every original/staged/unrecognized physical file hash unchanged",
+        "owner restart invalidates owner-local scan identities; a canonical mutation between slices marks the old scan stale",
+        "an actual unfinished upload remains protected/staged during inventory and is never reported as an orphan",
+        "appending bytes to a live production upload invalidates an already complete inventory snapshot without any canonical mutation",
+        "a canonical commit invalidates an already complete snapshot; scratch tables remain file-backed with an explicit one-MiB cache",
+        "fresh browser process preserves exact canonical/file fingerprints and the two intentional mutations while discarding transient inventory ownership",
+        "a deliberately malformed available canonical reference fails the scan before orphan classification and preserves the corrupt input for recovery"
+      ],
+      "slices": [
+        {
+          "phase": "references",
+          "elapsedMs": 3.7936250000002474,
+          "records": 4,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 0
+        },
+        {
+          "phase": "references",
+          "elapsedMs": 2.3660829999998896,
+          "records": 7,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 0
+        },
+        {
+          "phase": "references",
+          "elapsedMs": 2.2492910000000848,
+          "records": 7,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 0
+        },
+        {
+          "phase": "references",
+          "elapsedMs": 1.8931659999998374,
+          "records": 7,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 0
+        },
+        {
+          "phase": "references",
+          "elapsedMs": 2.166457999999693,
+          "records": 7,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 0
+        },
+        {
+          "phase": "references",
+          "elapsedMs": 1.824583999999959,
+          "records": 7,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 0
+        },
+        {
+          "phase": "references",
+          "elapsedMs": 1.5763340000003154,
+          "records": 7,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 0
+        },
+        {
+          "phase": "references",
+          "elapsedMs": 1.261667000000216,
+          "records": 7,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 0
+        },
+        {
+          "phase": "references",
+          "elapsedMs": 1.4252089999999953,
+          "records": 7,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 0
+        },
+        {
+          "phase": "references",
+          "elapsedMs": 1.7363749999999527,
+          "records": 7,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 0
+        },
+        {
+          "phase": "references",
+          "elapsedMs": 1.5815410000000156,
+          "records": 7,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 0
+        },
+        {
+          "phase": "references",
+          "elapsedMs": 1.3937499999997272,
+          "records": 7,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 0
+        },
+        {
+          "phase": "references",
+          "elapsedMs": 1.3847500000001673,
+          "records": 7,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 0
+        },
+        {
+          "phase": "references",
+          "elapsedMs": 1.510834000000159,
+          "records": 7,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 0
+        },
+        {
+          "phase": "references",
+          "elapsedMs": 1.255750000000262,
+          "records": 7,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 0
+        },
+        {
+          "phase": "references",
+          "elapsedMs": 1.1582499999999527,
+          "records": 5,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 0
+        },
+        {
+          "phase": "transfers",
+          "elapsedMs": 0.9986249999997199,
+          "records": 0,
+          "transfers": 6,
+          "catalog": 0,
+          "files": 0
+        },
+        {
+          "phase": "catalog",
+          "elapsedMs": 1.342916999999943,
+          "records": 0,
+          "transfers": 5,
+          "catalog": 1,
+          "files": 0
+        },
+        {
+          "phase": "catalog",
+          "elapsedMs": 1.1235419999998157,
+          "records": 0,
+          "transfers": 0,
+          "catalog": 7,
+          "files": 0
+        },
+        {
+          "phase": "files",
+          "elapsedMs": 4.3826670000003105,
+          "records": 0,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 6
+        },
+        {
+          "phase": "files",
+          "elapsedMs": 3.221457999999984,
+          "records": 0,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 7
+        },
+        {
+          "phase": "files",
+          "elapsedMs": 3.306750000000193,
+          "records": 0,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 7
+        },
+        {
+          "phase": "files",
+          "elapsedMs": 2.8731669999997393,
+          "records": 0,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 7
+        },
+        {
+          "phase": "files",
+          "elapsedMs": 2.6800419999999576,
+          "records": 0,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 7
+        },
+        {
+          "phase": "files",
+          "elapsedMs": 3.5942909999998847,
+          "records": 0,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 7
+        },
+        {
+          "phase": "files",
+          "elapsedMs": 3.3967499999998836,
+          "records": 0,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 7
+        },
+        {
+          "phase": "files",
+          "elapsedMs": 3.531750000000102,
+          "records": 0,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 7
+        },
+        {
+          "phase": "files",
+          "elapsedMs": 2.4317089999999553,
+          "records": 0,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 7
+        },
+        {
+          "phase": "files",
+          "elapsedMs": 2.418999999999869,
+          "records": 0,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 7
+        },
+        {
+          "phase": "files",
+          "elapsedMs": 2.7829579999997804,
+          "records": 0,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 7
+        },
+        {
+          "phase": "files",
+          "elapsedMs": 2.594583000000057,
+          "records": 0,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 7
+        },
+        {
+          "phase": "files",
+          "elapsedMs": 2.556916000000001,
+          "records": 0,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 7
+        },
+        {
+          "phase": "files",
+          "elapsedMs": 2.557333000000199,
+          "records": 0,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 7
+        },
+        {
+          "phase": "files",
+          "elapsedMs": 2.539291999999932,
+          "records": 0,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 7
+        },
+        {
+          "phase": "files",
+          "elapsedMs": 2.205334000000221,
+          "records": 0,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 7
+        },
+        {
+          "phase": "files",
+          "elapsedMs": 2.361540999999761,
+          "records": 0,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 7
+        },
+        {
+          "phase": "files",
+          "elapsedMs": 2.4453330000001188,
+          "records": 0,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 7
+        },
+        {
+          "phase": "files",
+          "elapsedMs": 2.4160839999999553,
+          "records": 0,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 7
+        },
+        {
+          "phase": "files",
+          "elapsedMs": 2.6850829999998496,
+          "records": 0,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 7
+        },
+        {
+          "phase": "files",
+          "elapsedMs": 2.231416999999965,
+          "records": 0,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 7
+        },
+        {
+          "phase": "files",
+          "elapsedMs": 2.4677919999999176,
+          "records": 0,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 7
+        },
+        {
+          "phase": "files",
+          "elapsedMs": 2.439958999999817,
+          "records": 0,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 7
+        },
+        {
+          "phase": "files",
+          "elapsedMs": 2.5450409999998556,
+          "records": 0,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 7
+        },
+        {
+          "phase": "files",
+          "elapsedMs": 2.5927920000003724,
+          "records": 0,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 7
+        },
+        {
+          "phase": "files",
+          "elapsedMs": 2.573750000000018,
+          "records": 0,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 7
+        },
+        {
+          "phase": "files",
+          "elapsedMs": 2.459209000000101,
+          "records": 0,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 7
+        },
+        {
+          "phase": "files",
+          "elapsedMs": 2.3880420000000413,
+          "records": 0,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 7
+        },
+        {
+          "phase": "files",
+          "elapsedMs": 2.1387909999998556,
+          "records": 0,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 5
+        },
+        {
+          "phase": "files",
+          "elapsedMs": 0.8262920000001941,
+          "records": 0,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 0
+        },
+        {
+          "phase": "finished",
+          "elapsedMs": 0.6432920000002014,
+          "records": 0,
+          "transfers": 0,
+          "catalog": 0,
+          "files": 0
+        }
+      ],
+      "pageSizes": [
+        {
+          "items": 5,
+          "bytes": 824
+        },
+        {
+          "items": 5,
+          "bytes": 1242
+        },
+        {
+          "items": 5,
+          "bytes": 1246
+        },
+        {
+          "items": 5,
+          "bytes": 1122
+        },
+        {
+          "items": 5,
+          "bytes": 1246
+        },
+        {
+          "items": 5,
+          "bytes": 1246
+        },
+        {
+          "items": 5,
+          "bytes": 1246
+        },
+        {
+          "items": 5,
+          "bytes": 1246
+        },
+        {
+          "items": 5,
+          "bytes": 1246
+        },
+        {
+          "items": 5,
+          "bytes": 1246
+        },
+        {
+          "items": 5,
+          "bytes": 1246
+        },
+        {
+          "items": 5,
+          "bytes": 1246
+        },
+        {
+          "items": 5,
+          "bytes": 1246
+        },
+        {
+          "items": 5,
+          "bytes": 1246
+        },
+        {
+          "items": 5,
+          "bytes": 1122
+        },
+        {
+          "items": 5,
+          "bytes": 1246
+        },
+        {
+          "items": 5,
+          "bytes": 1246
+        },
+        {
+          "items": 5,
+          "bytes": 1246
+        },
+        {
+          "items": 5,
+          "bytes": 1246
+        },
+        {
+          "items": 5,
+          "bytes": 1247
+        },
+        {
+          "items": 5,
+          "bytes": 1251
+        },
+        {
+          "items": 5,
+          "bytes": 1255
+        },
+        {
+          "items": 1,
+          "bytes": 254
+        }
+      ],
+      "fixture": {
+        "archiveId": "test-inventory-c75ac725-ebfa-454e-98e9-745446910422",
+        "threadId": "7cfcbe86-988e-46cf-baf3-c3d7549f85ba",
+        "orphanCount": 96,
+        "digests": {
+          "attachment": "18381629d89a6ec6f33e33fbe12d724685cff72bd786a8cdd9fbf970ecaf71a2",
+          "raw": "33243f3e7b2108356e979f180b6f8545e8ff558039183444f57bd7141a278886",
+          "text": "99f92d4997cfc1eaaee9fbd1fb74253cea6636a7c11a19db7aff40ef8663290b",
+          "missing": "f2f99d3cc6038a6e8f11d9b5b06ebe0357341b367f47b60e26949d054b2ce49f",
+          "catalogMissing": "5f0978d41bb3b65cb5de7f47f29137b4de75f0afefbc9fb321d11a11f3785801",
+          "wrongSize": "41a8f1707651a49f81213c3f94b1cfad5cded4a3bf52afa76be34df9a4ab2011",
+          "registeredOrphan": "294ec214dccb72e95f44a28f63af3c7eae381eecba31fcf18b986c59ba3cd9d8",
+          "publishedProtected": "442229b676ff246160b8cb7a89d2a6bb01666290c1721e4e718847b178659b5c",
+          "importProtected": "ada37e179cb77ae848b8cbe74032119b8882045915e9a3d5d881f8ee1c8ca149",
+          "verifiedProtected": "f49de1866cfd2f38ab511f76b9941c3461765f0c61852b2318b53baeb5e00a34",
+          "physicalOrphan": "4d2b2048115f53010485b86acb72baf6eddeab9eab7c6b779ec55b8e1fdf437c",
+          "activeProtected": "6a38b62bcb2c37cc675836a51f75c69d6a38554434d9344b9a871e4b0ae10bd6"
+        },
+        "transferIds": {
+          "attachment": "7dfdfea4-036c-4ba0-8881-13be9b3b4da0",
+          "raw": "79f77abb-85cf-4553-ae58-2f3aaba04cd2",
+          "text": "c7a41513-2133-483e-8836-d7ef717c7327",
+          "missing": "16173b96-3b12-462c-98dc-79fa78cb2aa1",
+          "catalogMissing": "3cb420da-441e-4c89-8374-7786367fd7f2",
+          "wrongSize": "3e00a685-52fe-4b5f-b71b-bb9063d5a7e3",
+          "registeredOrphan": "8d493e88-0e71-4749-9158-71826663d752",
+          "publishedProtected": "ad4d65c0-7418-4b5e-89ef-0b2b6f5acfc7",
+          "importProtected": "ffc683ed-2a13-4f25-8795-b8061c8d500b",
+          "verifiedProtected": "9bf98164-bbe0-471a-b702-36fd5c5a608a",
+          "strayStage": "a8f14f23-c9ec-4ea9-acf3-a5afe046b06c",
+          "activeProtected": "2894d5b3-17b6-4322-b8c8-d06cc2b47912"
+        },
+        "baseline": {
+          "canonicalSha256": "8b3ba2595508a5d1ebd2726f24c019f7cbdd945ec034dae6c29ad73f04a70213",
+          "operationsSha256": "609e1adf58cd3b97334dbf8d5015225b98ca64446c774b57b0ff7828927f9f99",
+          "blobOperationsSha256": "0b33612a74a626f7c2e0c3e4dcffaf729fb68a0906c791870b74eb9a13eeb4d8",
+          "blobCatalogSha256": "5155ee5f09fdeb05a961b57e53bf52885120709f7a16bc81d2395f0f13e05106",
+          "blobTransfersSha256": "1002ecde0095c7f6f29fc8aa53706c1db7232b55908aca8d7790661c4a40f1e7",
+          "blobsSha256": "64d549d16e51b7a063b6a0a283ab8107af6618dea86e5d8c99598c5807fdeb45",
+          "canonicalRecords": 106,
+          "syncOperations": 103,
+          "physicalFiles": 112,
+          "sqliteTemporaryStore": 1,
+          "sqliteTemporaryCacheKiB": -1024
+        }
+      },
+      "byteLimitedPage": {
+        "items": 5,
+        "bytes": 824
+      },
+      "statusAfterScan": {
+        "scanId": "8b9a0249-8491-4646-9c35-3007d867e52c",
+        "state": "complete",
+        "phase": "finished",
+        "startedAt": 1789072559194,
+        "updatedAt": 1789072559312,
+        "scannedRecords": 107,
+        "scannedTransfers": 11,
+        "scannedCatalogEntries": 8,
+        "scannedFiles": 200,
+        "counts": {
+          "missing_blob": 1,
+          "missing_catalog": 1,
+          "orphan_blob": 98,
+          "size_mismatch": 1,
+          "protected_blob": 3,
+          "staged_file": 4,
+          "unrecognized_entry": 3
+        },
+        "message": null
+      },
+      "findings": [
+        {
+          "sequence": 1,
+          "kind": "staged_file",
+          "sha256": null,
+          "path": "temp/blob-transfers/9bf98164-bbe0-471a-b702-36fd5c5a608a.stage",
+          "expectedBytes": null,
+          "actualBytes": 84,
+          "references": 0
+        },
+        {
+          "sequence": 2,
+          "kind": "staged_file",
+          "sha256": null,
+          "path": "temp/blob-transfers/ad4d65c0-7418-4b5e-89ef-0b2b6f5acfc7.stage",
+          "expectedBytes": null,
+          "actualBytes": 85,
+          "references": 0
+        },
+        {
+          "sequence": 3,
+          "kind": "staged_file",
+          "sha256": null,
+          "path": "temp/blob-transfers/a8f14f23-c9ec-4ea9-acf3-a5afe046b06c.stage",
+          "expectedBytes": null,
+          "actualBytes": 30,
+          "references": 0
+        },
+        {
+          "sequence": 4,
+          "kind": "staged_file",
+          "sha256": null,
+          "path": "temp/blob-transfers/2894d5b3-17b6-4322-b8c8-d06cc2b47912.stage",
+          "expectedBytes": null,
+          "actualBytes": 3,
+          "references": 0
+        },
+        {
+          "sequence": 5,
+          "kind": "unrecognized_entry",
+          "sha256": null,
+          "path": null,
+          "expectedBytes": null,
+          "actualBytes": null,
+          "references": 0
+        },
+        {
+          "sequence": 6,
+          "kind": "orphan_blob",
+          "sha256": "0d616cb8f4d983f1580814df207d0c4a7437cbb5912b2893e11e8f9aa7d425f5",
+          "path": "blobs/0d/0d616cb8f4d983f1580814df207d0c4a7437cbb5912b2893e11e8f9aa7d425f5",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 7,
+          "kind": "orphan_blob",
+          "sha256": "59b6240bbd137289ced2d64f8e4f31666d1122eb3cc5b3df82ecd8274e607845",
+          "path": "blobs/59/59b6240bbd137289ced2d64f8e4f31666d1122eb3cc5b3df82ecd8274e607845",
+          "expectedBytes": null,
+          "actualBytes": 38,
+          "references": 0
+        },
+        {
+          "sequence": 8,
+          "kind": "orphan_blob",
+          "sha256": "92e75bd3911b4ac15a049223260fbed2f784b9b9a3ddb8420ec2c1bcc7991be8",
+          "path": "blobs/92/92e75bd3911b4ac15a049223260fbed2f784b9b9a3ddb8420ec2c1bcc7991be8",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 9,
+          "kind": "orphan_blob",
+          "sha256": "920b193e54867aab6dab1822d8902516fb4069c755035246ee0ebee13594ace0",
+          "path": "blobs/92/920b193e54867aab6dab1822d8902516fb4069c755035246ee0ebee13594ace0",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 10,
+          "kind": "orphan_blob",
+          "sha256": "0c1cefb7381ce6d68f8d273dca31802d4b0e5066db8cce9a1510f32cd63eaf76",
+          "path": "blobs/0c/0c1cefb7381ce6d68f8d273dca31802d4b0e5066db8cce9a1510f32cd63eaf76",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 11,
+          "kind": "orphan_blob",
+          "sha256": "57aa278083de054587f1ca02e55f6cec666b0a84fad9468b1ac169558f01e80c",
+          "path": "blobs/57/57aa278083de054587f1ca02e55f6cec666b0a84fad9468b1ac169558f01e80c",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 12,
+          "kind": "orphan_blob",
+          "sha256": "570172907b5b77390f8562524c119595ece251e42e6965a46c4164e74d58670b",
+          "path": "blobs/57/570172907b5b77390f8562524c119595ece251e42e6965a46c4164e74d58670b",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 13,
+          "kind": "orphan_blob",
+          "sha256": "57675a52b2bbf98964bd74e4f75087d80e8a7ed6c0f1b81f7e6ed309f57a5c20",
+          "path": "blobs/57/57675a52b2bbf98964bd74e4f75087d80e8a7ed6c0f1b81f7e6ed309f57a5c20",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 14,
+          "kind": "orphan_blob",
+          "sha256": "3bcdac06f5f865f832bc2a70dd0c67e7097e09b5a5a3e48f1d55bdb32df406ab",
+          "path": "blobs/3b/3bcdac06f5f865f832bc2a70dd0c67e7097e09b5a5a3e48f1d55bdb32df406ab",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 15,
+          "kind": "orphan_blob",
+          "sha256": "3b44b33897a13208509641cf84ddb8f297ddea7bc6c907f752cb4288fd46f48f",
+          "path": "blobs/3b/3b44b33897a13208509641cf84ddb8f297ddea7bc6c907f752cb4288fd46f48f",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 16,
+          "kind": "orphan_blob",
+          "sha256": "3b03835323207014d13c9d8a7237f2ddeb65e6a3cfc6e4aad92e9ae79f615549",
+          "path": "blobs/3b/3b03835323207014d13c9d8a7237f2ddeb65e6a3cfc6e4aad92e9ae79f615549",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 17,
+          "kind": "orphan_blob",
+          "sha256": "357d89b33d813ed2b5a19fc2eaaf8023f453966ed577b1d1a0687d40e0fe6589",
+          "path": "blobs/35/357d89b33d813ed2b5a19fc2eaaf8023f453966ed577b1d1a0687d40e0fe6589",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 18,
+          "kind": "unrecognized_entry",
+          "sha256": null,
+          "path": null,
+          "expectedBytes": null,
+          "actualBytes": null,
+          "references": 0
+        },
+        {
+          "sequence": 19,
+          "kind": "orphan_blob",
+          "sha256": "69531975dfea50a5794140af4ae3769da31ac05b5396fd56fcf201fb051270e1",
+          "path": "blobs/69/69531975dfea50a5794140af4ae3769da31ac05b5396fd56fcf201fb051270e1",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 20,
+          "kind": "orphan_blob",
+          "sha256": "3cf72b0c6444d5101d8538c10a2fe6df8432c4aeb5d7f049d66434c9e25ca5c4",
+          "path": "blobs/3c/3cf72b0c6444d5101d8538c10a2fe6df8432c4aeb5d7f049d66434c9e25ca5c4",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 21,
+          "kind": "orphan_blob",
+          "sha256": "58b8379abd0e32931baf5408324b2879f6b99aac51a0ac1ab5c02677f784a047",
+          "path": "blobs/58/58b8379abd0e32931baf5408324b2879f6b99aac51a0ac1ab5c02677f784a047",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 22,
+          "kind": "orphan_blob",
+          "sha256": "0bac24f2d40d439642328e02731b50684a2def1875c543cdcbd807188dd81dbc",
+          "path": "blobs/0b/0bac24f2d40d439642328e02731b50684a2def1875c543cdcbd807188dd81dbc",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 23,
+          "kind": "orphan_blob",
+          "sha256": "a4cca78006236ab7f90a6cbe10702e16222eb7ecda56ed83e5774063029f1e5c",
+          "path": "blobs/a4/a4cca78006236ab7f90a6cbe10702e16222eb7ecda56ed83e5774063029f1e5c",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 24,
+          "kind": "orphan_blob",
+          "sha256": "b5c19acd37c62d4773e6a1bb090d7bfd822e00d9cdded2895d7e059e3a4f294a",
+          "path": "blobs/b5/b5c19acd37c62d4773e6a1bb090d7bfd822e00d9cdded2895d7e059e3a4f294a",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 25,
+          "kind": "orphan_blob",
+          "sha256": "d70e886f949c7e7c878d632045e6d6775c878abb0df363010809c81407e5beb7",
+          "path": "blobs/d7/d70e886f949c7e7c878d632045e6d6775c878abb0df363010809c81407e5beb7",
+          "expectedBytes": null,
+          "actualBytes": 38,
+          "references": 0
+        },
+        {
+          "sequence": 26,
+          "kind": "orphan_blob",
+          "sha256": "d05406bd2746bdd729ff848bcf2574714d3cf117b46a95ad10ec4524600b1f49",
+          "path": "blobs/d0/d05406bd2746bdd729ff848bcf2574714d3cf117b46a95ad10ec4524600b1f49",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 27,
+          "kind": "orphan_blob",
+          "sha256": "dae72facc8c780f12def6f69271685d0eb7203d61e502c63879421a09e7f6ec0",
+          "path": "blobs/da/dae72facc8c780f12def6f69271685d0eb7203d61e502c63879421a09e7f6ec0",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 28,
+          "kind": "orphan_blob",
+          "sha256": "b4e7c99a29a2f04a6c4cfd6cf2f405da5df649ad7892952b642c124e581aff5c",
+          "path": "blobs/b4/b4e7c99a29a2f04a6c4cfd6cf2f405da5df649ad7892952b642c124e581aff5c",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 29,
+          "kind": "orphan_blob",
+          "sha256": "a20dfe0aa5b9de34b483dc8268765ce688b87749a91b1c8d4faf41cfb86dbb75",
+          "path": "blobs/a2/a20dfe0aa5b9de34b483dc8268765ce688b87749a91b1c8d4faf41cfb86dbb75",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 30,
+          "kind": "orphan_blob",
+          "sha256": "bd51bf72b574e48f96d62f6e1c68fd9f951ffc4d96eceb2ee6ace1503d09345e",
+          "path": "blobs/bd/bd51bf72b574e48f96d62f6e1c68fd9f951ffc4d96eceb2ee6ace1503d09345e",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 31,
+          "kind": "orphan_blob",
+          "sha256": "e5e44ff321037bf55c9d87e9b337de32892d83843fbc41514b1a4d7c77d78904",
+          "path": "blobs/e5/e5e44ff321037bf55c9d87e9b337de32892d83843fbc41514b1a4d7c77d78904",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 32,
+          "kind": "orphan_blob",
+          "sha256": "e234619d135b2fe9753db82c489dc90c57012c9017ef9c26ab1731832130dc2a",
+          "path": "blobs/e2/e234619d135b2fe9753db82c489dc90c57012c9017ef9c26ab1731832130dc2a",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 33,
+          "kind": "orphan_blob",
+          "sha256": "f4094ef50a33a5db0f76f39b7e90dd1bda71b467540fb35a783de0782823dbb3",
+          "path": "blobs/f4/f4094ef50a33a5db0f76f39b7e90dd1bda71b467540fb35a783de0782823dbb3",
+          "expectedBytes": null,
+          "actualBytes": 38,
+          "references": 0
+        },
+        {
+          "sequence": 34,
+          "kind": "orphan_blob",
+          "sha256": "ee5397c5a5ee6aaf69f8d8370c5f77bb7f3e19a788ff1b692ef648b10779eb80",
+          "path": "blobs/ee/ee5397c5a5ee6aaf69f8d8370c5f77bb7f3e19a788ff1b692ef648b10779eb80",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 35,
+          "kind": "orphan_blob",
+          "sha256": "fba7ebb2067441ba51586d7fa345d51a7b2a9ec6d23abed9ba6707e8f4104d3a",
+          "path": "blobs/fb/fba7ebb2067441ba51586d7fa345d51a7b2a9ec6d23abed9ba6707e8f4104d3a",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 36,
+          "kind": "orphan_blob",
+          "sha256": "c15370d792103d11f7d6c4e737339a48cbec0127d9d534014219e6f83fb0407c",
+          "path": "blobs/c1/c15370d792103d11f7d6c4e737339a48cbec0127d9d534014219e6f83fb0407c",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 37,
+          "kind": "orphan_blob",
+          "sha256": "ece4d02aac1b656f0a3fefa9a377f4384f32c395ae544601bbc1e84ca7611fb8",
+          "path": "blobs/ec/ece4d02aac1b656f0a3fefa9a377f4384f32c395ae544601bbc1e84ca7611fb8",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 38,
+          "kind": "orphan_blob",
+          "sha256": "11116ae9d0acf4c8c70d641a1097ff12217b3c14b5e133630f3586f737e5d4b5",
+          "path": "blobs/11/11116ae9d0acf4c8c70d641a1097ff12217b3c14b5e133630f3586f737e5d4b5",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 39,
+          "kind": "orphan_blob",
+          "sha256": "294ec214dccb72e95f44a28f63af3c7eae381eecba31fcf18b986c59ba3cd9d8",
+          "path": "blobs/29/294ec214dccb72e95f44a28f63af3c7eae381eecba31fcf18b986c59ba3cd9d8",
+          "expectedBytes": null,
+          "actualBytes": 83,
+          "references": 0
+        },
+        {
+          "sequence": 40,
+          "kind": "orphan_blob",
+          "sha256": "16e042e3ac0924345a420b628a28c7f620cb29a268bd4520804c99bf7b9d85e5",
+          "path": "blobs/16/16e042e3ac0924345a420b628a28c7f620cb29a268bd4520804c99bf7b9d85e5",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 41,
+          "kind": "orphan_blob",
+          "sha256": "421f899866d5dcb8e96131435a306b229c5b2a31d868b5ff354c57ee79b822e5",
+          "path": "blobs/42/421f899866d5dcb8e96131435a306b229c5b2a31d868b5ff354c57ee79b822e5",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 42,
+          "kind": "orphan_blob",
+          "sha256": "421108a1536b93f675a6b519b4c173e52eb33a8ee4384e2d837f61db32060bd0",
+          "path": "blobs/42/421108a1536b93f675a6b519b4c173e52eb33a8ee4384e2d837f61db32060bd0",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 43,
+          "kind": "orphan_blob",
+          "sha256": "87c082685550902935ef9ff2854386ae1ef652c01fd32bcfaf99d0d2f82ac094",
+          "path": "blobs/87/87c082685550902935ef9ff2854386ae1ef652c01fd32bcfaf99d0d2f82ac094",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 44,
+          "kind": "orphan_blob",
+          "sha256": "8f68995376404d70e9d0193b9f0064b8ded379faaee10cf09ab73a8e0d19a4ee",
+          "path": "blobs/8f/8f68995376404d70e9d0193b9f0064b8ded379faaee10cf09ab73a8e0d19a4ee",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 45,
+          "kind": "orphan_blob",
+          "sha256": "8abfe6bf03163b6c20bc4c84ca521b9c4d6653ef5329377565b418dfd1c00790",
+          "path": "blobs/8a/8abfe6bf03163b6c20bc4c84ca521b9c4d6653ef5329377565b418dfd1c00790",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 46,
+          "kind": "orphan_blob",
+          "sha256": "4d7ea4d87e118095a720d30ffc806295b5052d343170f1d048aaaf666d229b37",
+          "path": "blobs/4d/4d7ea4d87e118095a720d30ffc806295b5052d343170f1d048aaaf666d229b37",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 47,
+          "kind": "orphan_blob",
+          "sha256": "4d2b2048115f53010485b86acb72baf6eddeab9eab7c6b779ec55b8e1fdf437c",
+          "path": "blobs/4d/4d2b2048115f53010485b86acb72baf6eddeab9eab7c6b779ec55b8e1fdf437c",
+          "expectedBytes": null,
+          "actualBytes": 37,
+          "references": 0
+        },
+        {
+          "sequence": 48,
+          "kind": "orphan_blob",
+          "sha256": "865b7642c206c05e69242058c389784b293e4cc10e69c19e7dbf45986a300748",
+          "path": "blobs/86/865b7642c206c05e69242058c389784b293e4cc10e69c19e7dbf45986a300748",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 49,
+          "kind": "orphan_blob",
+          "sha256": "72b1a27bc2ea5bdc9f5bb4b9a680daced44ff941c08b06ff337c46eedce0d6a0",
+          "path": "blobs/72/72b1a27bc2ea5bdc9f5bb4b9a680daced44ff941c08b06ff337c46eedce0d6a0",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 50,
+          "kind": "orphan_blob",
+          "sha256": "44f4d283d0efed804980faadd66247ae5598e12e2c15d622349c28b9fb039162",
+          "path": "blobs/44/44f4d283d0efed804980faadd66247ae5598e12e2c15d622349c28b9fb039162",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 51,
+          "kind": "orphan_blob",
+          "sha256": "43a2107e8cb64cc29579c1fb61c5a5119d3047e91a20cefb075d7087bbc22fcb",
+          "path": "blobs/43/43a2107e8cb64cc29579c1fb61c5a5119d3047e91a20cefb075d7087bbc22fcb",
+          "expectedBytes": null,
+          "actualBytes": 38,
+          "references": 0
+        },
+        {
+          "sequence": 52,
+          "kind": "orphan_blob",
+          "sha256": "079d72efe61ad2892d2b34d66dfc672dff8ef0291eb7996456064d3cd85bb29b",
+          "path": "blobs/07/079d72efe61ad2892d2b34d66dfc672dff8ef0291eb7996456064d3cd85bb29b",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 53,
+          "kind": "orphan_blob",
+          "sha256": "9af35870525167f4842b7d7cc3d17e50eca66d23d8af8d4efa967671b29f5c79",
+          "path": "blobs/9a/9af35870525167f4842b7d7cc3d17e50eca66d23d8af8d4efa967671b29f5c79",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 54,
+          "kind": "orphan_blob",
+          "sha256": "9a679ec2d799ee788e2a1beb7275a9a30ccc71ccde90eb1e2dfe07cc77288315",
+          "path": "blobs/9a/9a679ec2d799ee788e2a1beb7275a9a30ccc71ccde90eb1e2dfe07cc77288315",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 55,
+          "kind": "orphan_blob",
+          "sha256": "36646ab525d45de966f4f1ba07d71c4fded005b3c88d912dbeb6aadaecbcc62f",
+          "path": "blobs/36/36646ab525d45de966f4f1ba07d71c4fded005b3c88d912dbeb6aadaecbcc62f",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 56,
+          "kind": "orphan_blob",
+          "sha256": "31ab7e09e5b861571648cb7e1e0cd7d506c5c241df610a61e78f773a797534c0",
+          "path": "blobs/31/31ab7e09e5b861571648cb7e1e0cd7d506c5c241df610a61e78f773a797534c0",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 57,
+          "kind": "orphan_blob",
+          "sha256": "65fdf090079198fb29061705ad2c63142637839ae9a636bd52c4951b13e40f16",
+          "path": "blobs/65/65fdf090079198fb29061705ad2c63142637839ae9a636bd52c4951b13e40f16",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 58,
+          "kind": "orphan_blob",
+          "sha256": "62d6c6c8ea5f7342ee7c401c19bb1ba37b8746e55bac51a5585f8c42336c42cf",
+          "path": "blobs/62/62d6c6c8ea5f7342ee7c401c19bb1ba37b8746e55bac51a5585f8c42336c42cf",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 59,
+          "kind": "orphan_blob",
+          "sha256": "62038ff0527cf34426e8157063b866d461ca8948fad73ef91c19466e5af14802",
+          "path": "blobs/62/62038ff0527cf34426e8157063b866d461ca8948fad73ef91c19466e5af14802",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 60,
+          "kind": "orphan_blob",
+          "sha256": "54075d292a38de7e33909ebfa765e2b4e53b96fc10bc4d4d9927e9f34005aa77",
+          "path": "blobs/54/54075d292a38de7e33909ebfa765e2b4e53b96fc10bc4d4d9927e9f34005aa77",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 61,
+          "kind": "orphan_blob",
+          "sha256": "3fc57da403574535ddd644fe9509faac76050e25db25220fbd2e7fea9d768b7a",
+          "path": "blobs/3f/3fc57da403574535ddd644fe9509faac76050e25db25220fbd2e7fea9d768b7a",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 62,
+          "kind": "orphan_blob",
+          "sha256": "37a54d89b5434f8a5f07805ac4771a3690c79b978b1b32fd118099d5cb24841f",
+          "path": "blobs/37/37a54d89b5434f8a5f07805ac4771a3690c79b978b1b32fd118099d5cb24841f",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 63,
+          "kind": "orphan_blob",
+          "sha256": "6d350bda1172028b6c377721095e063534dd40b6ebbc6b7ab383ae69980b3397",
+          "path": "blobs/6d/6d350bda1172028b6c377721095e063534dd40b6ebbc6b7ab383ae69980b3397",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 64,
+          "kind": "orphan_blob",
+          "sha256": "998a9ff66ac7c194d7d739927340d905579ee857a4d3e87a9e92cef6476d14c0",
+          "path": "blobs/99/998a9ff66ac7c194d7d739927340d905579ee857a4d3e87a9e92cef6476d14c0",
+          "expectedBytes": null,
+          "actualBytes": 38,
+          "references": 0
+        },
+        {
+          "sequence": 65,
+          "kind": "orphan_blob",
+          "sha256": "55b85d0b00cc9bde98b6afffabe412068078ed4989efd70917adbe7edea38756",
+          "path": "blobs/55/55b85d0b00cc9bde98b6afffabe412068078ed4989efd70917adbe7edea38756",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 66,
+          "kind": "orphan_blob",
+          "sha256": "55200f816311714b4e2ea663d5a99e87ab3d4731e8bb1b8dd1b967cb9710b5ae",
+          "path": "blobs/55/55200f816311714b4e2ea663d5a99e87ab3d4731e8bb1b8dd1b967cb9710b5ae",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 67,
+          "kind": "orphan_blob",
+          "sha256": "97bbb5295ff0e6d0163406b78c3c95f0d900045bfaf14efc3cb5bc4878a781d7",
+          "path": "blobs/97/97bbb5295ff0e6d0163406b78c3c95f0d900045bfaf14efc3cb5bc4878a781d7",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 68,
+          "kind": "orphan_blob",
+          "sha256": "63c0d1c689ff34db00903d5f7a328766364d13ffa4fd1c6bb1d8791dbb41ed0f",
+          "path": "blobs/63/63c0d1c689ff34db00903d5f7a328766364d13ffa4fd1c6bb1d8791dbb41ed0f",
+          "expectedBytes": null,
+          "actualBytes": 38,
+          "references": 0
+        },
+        {
+          "sequence": 69,
+          "kind": "orphan_blob",
+          "sha256": "bfb804424608b391c05eccd7cb2029d9025a803576603cb4ebefad2d5ffc1bb0",
+          "path": "blobs/bf/bfb804424608b391c05eccd7cb2029d9025a803576603cb4ebefad2d5ffc1bb0",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 70,
+          "kind": "orphan_blob",
+          "sha256": "d4e79f2f8e2b3b6a80a6b7c1ac427513bef75d7b5380c739623d55a2883864d8",
+          "path": "blobs/d4/d4e79f2f8e2b3b6a80a6b7c1ac427513bef75d7b5380c739623d55a2883864d8",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 71,
+          "kind": "orphan_blob",
+          "sha256": "ba407841951fbfaf7724394825ecb3b7ea0eef166fc389233209f8e9549ff090",
+          "path": "blobs/ba/ba407841951fbfaf7724394825ecb3b7ea0eef166fc389233209f8e9549ff090",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 72,
+          "kind": "orphan_blob",
+          "sha256": "a02222a5246fd7f0c666041ff35fb55268a14ea0aca185c764f465f2755ba754",
+          "path": "blobs/a0/a02222a5246fd7f0c666041ff35fb55268a14ea0aca185c764f465f2755ba754",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 73,
+          "kind": "orphan_blob",
+          "sha256": "ddb7b85a322f643e5f4dd3eb523f95ce0f22b818cda69e66e779c7bfd9a4e060",
+          "path": "blobs/dd/ddb7b85a322f643e5f4dd3eb523f95ce0f22b818cda69e66e779c7bfd9a4e060",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 74,
+          "kind": "unrecognized_entry",
+          "sha256": null,
+          "path": null,
+          "expectedBytes": null,
+          "actualBytes": null,
+          "references": 0
+        },
+        {
+          "sequence": 75,
+          "kind": "orphan_blob",
+          "sha256": "a80890c31418d9158adc45364f40c0f89e0f9d10219028e8420b2e71ff778ba7",
+          "path": "blobs/a8/a80890c31418d9158adc45364f40c0f89e0f9d10219028e8420b2e71ff778ba7",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 76,
+          "kind": "orphan_blob",
+          "sha256": "defd65c8c226d57ac04c4e19da4d51606e405d0444ddae46c3a8f82c5fff37c7",
+          "path": "blobs/de/defd65c8c226d57ac04c4e19da4d51606e405d0444ddae46c3a8f82c5fff37c7",
+          "expectedBytes": null,
+          "actualBytes": 38,
+          "references": 0
+        },
+        {
+          "sequence": 77,
+          "kind": "orphan_blob",
+          "sha256": "a14eea996950099864fe382c7fe6426e2392a359a9c7fba23a201bd2d96c4afc",
+          "path": "blobs/a1/a14eea996950099864fe382c7fe6426e2392a359a9c7fba23a201bd2d96c4afc",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 78,
+          "kind": "orphan_blob",
+          "sha256": "a1634d189795976c6f1704529338c266159ae1abafd737d8ffe764b6a6b74b54",
+          "path": "blobs/a1/a1634d189795976c6f1704529338c266159ae1abafd737d8ffe764b6a6b74b54",
+          "expectedBytes": null,
+          "actualBytes": 38,
+          "references": 0
+        },
+        {
+          "sequence": 79,
+          "kind": "orphan_blob",
+          "sha256": "ef10fb9b34066435e4de636838574eb7c3761a5a904e0c83372975bb12c0a1d5",
+          "path": "blobs/ef/ef10fb9b34066435e4de636838574eb7c3761a5a904e0c83372975bb12c0a1d5",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 80,
+          "kind": "orphan_blob",
+          "sha256": "c4edf6c2de1cb6cdd8f432b5ce25d3a33004c842a39ef45a2b0bd0a2582efa05",
+          "path": "blobs/c4/c4edf6c2de1cb6cdd8f432b5ce25d3a33004c842a39ef45a2b0bd0a2582efa05",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 81,
+          "kind": "orphan_blob",
+          "sha256": "ea218e462bf093e9a5d9221e65729b09a2b1a0614ad510cdf636e41cf84de336",
+          "path": "blobs/ea/ea218e462bf093e9a5d9221e65729b09a2b1a0614ad510cdf636e41cf84de336",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 82,
+          "kind": "orphan_blob",
+          "sha256": "cc6abe17979296e55be18e15dba9f8118fa0887ba0d8ba59ee2d91e97bcac10b",
+          "path": "blobs/cc/cc6abe17979296e55be18e15dba9f8118fa0887ba0d8ba59ee2d91e97bcac10b",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 83,
+          "kind": "orphan_blob",
+          "sha256": "cc8b0f420c3e2fb51da030839d5acfb73e9e7267b23eb683b56d9ac7b5ce4053",
+          "path": "blobs/cc/cc8b0f420c3e2fb51da030839d5acfb73e9e7267b23eb683b56d9ac7b5ce4053",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 84,
+          "kind": "orphan_blob",
+          "sha256": "f7f04c5620814ad3d51f5eb00d6cadc31f3a4507346b99476e44b915807729f5",
+          "path": "blobs/f7/f7f04c5620814ad3d51f5eb00d6cadc31f3a4507346b99476e44b915807729f5",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 85,
+          "kind": "orphan_blob",
+          "sha256": "e8949c9daeea3ca27c320d2b7df322871c42282315cf8df5af156244c8599fe6",
+          "path": "blobs/e8/e8949c9daeea3ca27c320d2b7df322871c42282315cf8df5af156244c8599fe6",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 86,
+          "kind": "orphan_blob",
+          "sha256": "e821996f84e3d8f40e1682e4c091c6b4ef8cf61d37f7d3f84215386e0366ee24",
+          "path": "blobs/e8/e821996f84e3d8f40e1682e4c091c6b4ef8cf61d37f7d3f84215386e0366ee24",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 87,
+          "kind": "orphan_blob",
+          "sha256": "fafcd042547100346fc14ecb09a08df2e073b5951cf8ef248ca8c501df50f2fa",
+          "path": "blobs/fa/fafcd042547100346fc14ecb09a08df2e073b5951cf8ef248ca8c501df50f2fa",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 88,
+          "kind": "orphan_blob",
+          "sha256": "f1140d603aa92c52f4f1e93bd3f11d0e22be8a107391bf6a04cd317996b00a1f",
+          "path": "blobs/f1/f1140d603aa92c52f4f1e93bd3f11d0e22be8a107391bf6a04cd317996b00a1f",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 89,
+          "kind": "orphan_blob",
+          "sha256": "e0036a2b5449bb0f3f1c857385bae0691f0c452c25165c83118bd15f21cab0cd",
+          "path": "blobs/e0/e0036a2b5449bb0f3f1c857385bae0691f0c452c25165c83118bd15f21cab0cd",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 90,
+          "kind": "orphan_blob",
+          "sha256": "2cd483d6468d882f778ef39d9eac0f94cc65ce629020f7f06cd941e188ad970f",
+          "path": "blobs/2c/2cd483d6468d882f778ef39d9eac0f94cc65ce629020f7f06cd941e188ad970f",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 91,
+          "kind": "orphan_blob",
+          "sha256": "4175271c306c176cc4f12928c088d9b2d22f068151a5be44012e510961bd1c72",
+          "path": "blobs/41/4175271c306c176cc4f12928c088d9b2d22f068151a5be44012e510961bd1c72",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 92,
+          "kind": "orphan_blob",
+          "sha256": "41bd066575ada784c2608f1e581937df16106f6cc3b6bc6993cb361f02a44126",
+          "path": "blobs/41/41bd066575ada784c2608f1e581937df16106f6cc3b6bc6993cb361f02a44126",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 93,
+          "kind": "orphan_blob",
+          "sha256": "48befe43705958a0a0486ce3f8b85dd247a7210f519f1a31d5c18b75f4fc227b",
+          "path": "blobs/48/48befe43705958a0a0486ce3f8b85dd247a7210f519f1a31d5c18b75f4fc227b",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 94,
+          "kind": "orphan_blob",
+          "sha256": "1e1394c7d4d69f14b25ceee73d1ca46de45883b6e8ab572bfc8dae9be85ca7a1",
+          "path": "blobs/1e/1e1394c7d4d69f14b25ceee73d1ca46de45883b6e8ab572bfc8dae9be85ca7a1",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 95,
+          "kind": "orphan_blob",
+          "sha256": "84131a9febe2c7736245bd5760e3c3a4d41db3efd0c47ee2f9a25453eb9d46c4",
+          "path": "blobs/84/84131a9febe2c7736245bd5760e3c3a4d41db3efd0c47ee2f9a25453eb9d46c4",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 96,
+          "kind": "orphan_blob",
+          "sha256": "23494ff708068e6927d489ae8ae1ca50c20894c742fb709aa8e3c80a33cd1969",
+          "path": "blobs/23/23494ff708068e6927d489ae8ae1ca50c20894c742fb709aa8e3c80a33cd1969",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 97,
+          "kind": "orphan_blob",
+          "sha256": "12cd4d2dc1df5e59cb514d4892f7d97175ce3e2d4273fa758d0aab092e4c68d3",
+          "path": "blobs/12/12cd4d2dc1df5e59cb514d4892f7d97175ce3e2d4273fa758d0aab092e4c68d3",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 98,
+          "kind": "orphan_blob",
+          "sha256": "120d904bc287fa01a035839586e2ae7656efead9c83d440b4c31ad0018438e81",
+          "path": "blobs/12/120d904bc287fa01a035839586e2ae7656efead9c83d440b4c31ad0018438e81",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 99,
+          "kind": "orphan_blob",
+          "sha256": "85ba678ea6e93c10073256d9e39a382f648416b4135f4add460653230499f847",
+          "path": "blobs/85/85ba678ea6e93c10073256d9e39a382f648416b4135f4add460653230499f847",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 100,
+          "kind": "orphan_blob",
+          "sha256": "7167d25f6d0e35682a6b116bf678526c180ee49f29a08ba7c9ec84c8ec224600",
+          "path": "blobs/71/7167d25f6d0e35682a6b116bf678526c180ee49f29a08ba7c9ec84c8ec224600",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 101,
+          "kind": "orphan_blob",
+          "sha256": "1c3fd31af11f8790f7425e1423d812d4ba186a1e74b4766e1a6e79ed41cf7159",
+          "path": "blobs/1c/1c3fd31af11f8790f7425e1423d812d4ba186a1e74b4766e1a6e79ed41cf7159",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 102,
+          "kind": "orphan_blob",
+          "sha256": "2ebea8ca37850f16070db0e88e041b7608d56d20ad71dd15548d721c50c05f27",
+          "path": "blobs/2e/2ebea8ca37850f16070db0e88e041b7608d56d20ad71dd15548d721c50c05f27",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 103,
+          "kind": "orphan_blob",
+          "sha256": "14c8c99aeab6b11808fdda03741edc2c13144cf2a8ceb20b457ee48512c4ab96",
+          "path": "blobs/14/14c8c99aeab6b11808fdda03741edc2c13144cf2a8ceb20b457ee48512c4ab96",
+          "expectedBytes": null,
+          "actualBytes": 39,
+          "references": 0
+        },
+        {
+          "sequence": 104,
+          "kind": "orphan_blob",
+          "sha256": "22d0dab406101287cac1c9bca4cbdeab507b0c9236c00f5d52fc0bff10a878c9",
+          "path": "blobs/22/22d0dab406101287cac1c9bca4cbdeab507b0c9236c00f5d52fc0bff10a878c9",
+          "expectedBytes": null,
+          "actualBytes": 38,
+          "references": 0
+        },
+        {
+          "sequence": 105,
+          "kind": "orphan_blob",
+          "sha256": "25033bbb81f3228facf2a7c3c1b286627679fcdd27e3dd5375a7ea47cc100207",
+          "path": "blobs/25/25033bbb81f3228facf2a7c3c1b286627679fcdd27e3dd5375a7ea47cc100207",
+          "expectedBytes": null,
+          "actualBytes": 38,
+          "references": 0
+        },
+        {
+          "sequence": 106,
+          "kind": "size_mismatch",
+          "sha256": "41a8f1707651a49f81213c3f94b1cfad5cded4a3bf52afa76be34df9a4ab2011",
+          "path": "blobs/41/41a8f1707651a49f81213c3f94b1cfad5cded4a3bf52afa76be34df9a4ab2011",
+          "expectedBytes": 76,
+          "actualBytes": 5,
+          "references": 1
+        },
+        {
+          "sequence": 107,
+          "kind": "protected_blob",
+          "sha256": "442229b676ff246160b8cb7a89d2a6bb01666290c1721e4e718847b178659b5c",
+          "path": "blobs/44/442229b676ff246160b8cb7a89d2a6bb01666290c1721e4e718847b178659b5c",
+          "expectedBytes": 85,
+          "actualBytes": 85,
+          "references": 0
+        },
+        {
+          "sequence": 108,
+          "kind": "missing_catalog",
+          "sha256": "5f0978d41bb3b65cb5de7f47f29137b4de75f0afefbc9fb321d11a11f3785801",
+          "path": "blobs/5f/5f0978d41bb3b65cb5de7f47f29137b4de75f0afefbc9fb321d11a11f3785801",
+          "expectedBytes": 81,
+          "actualBytes": 81,
+          "references": 1
+        },
+        {
+          "sequence": 109,
+          "kind": "protected_blob",
+          "sha256": "ada37e179cb77ae848b8cbe74032119b8882045915e9a3d5d881f8ee1c8ca149",
+          "path": "blobs/ad/ada37e179cb77ae848b8cbe74032119b8882045915e9a3d5d881f8ee1c8ca149",
+          "expectedBytes": 82,
+          "actualBytes": 82,
+          "references": 0
+        },
+        {
+          "sequence": 110,
+          "kind": "missing_blob",
+          "sha256": "f2f99d3cc6038a6e8f11d9b5b06ebe0357341b367f47b60e26949d054b2ce49f",
+          "path": "blobs/f2/f2f99d3cc6038a6e8f11d9b5b06ebe0357341b367f47b60e26949d054b2ce49f",
+          "expectedBytes": 74,
+          "actualBytes": null,
+          "references": 1
+        },
+        {
+          "sequence": 111,
+          "kind": "protected_blob",
+          "sha256": "f49de1866cfd2f38ab511f76b9941c3461765f0c61852b2318b53baeb5e00a34",
+          "path": "blobs/f4/f49de1866cfd2f38ab511f76b9941c3461765f0c61852b2318b53baeb5e00a34",
+          "expectedBytes": 84,
+          "actualBytes": null,
+          "references": 0
+        }
+      ],
+      "preserved": {
+        "canonicalSha256": "8b3ba2595508a5d1ebd2726f24c019f7cbdd945ec034dae6c29ad73f04a70213",
+        "operationsSha256": "609e1adf58cd3b97334dbf8d5015225b98ca64446c774b57b0ff7828927f9f99",
+        "blobOperationsSha256": "0b33612a74a626f7c2e0c3e4dcffaf729fb68a0906c791870b74eb9a13eeb4d8",
+        "blobCatalogSha256": "5155ee5f09fdeb05a961b57e53bf52885120709f7a16bc81d2395f0f13e05106",
+        "blobTransfersSha256": "1002ecde0095c7f6f29fc8aa53706c1db7232b55908aca8d7790661c4a40f1e7",
+        "blobsSha256": "64d549d16e51b7a063b6a0a283ab8107af6618dea86e5d8c99598c5807fdeb45",
+        "canonicalRecords": 106,
+        "syncOperations": 103,
+        "physicalFiles": 112,
+        "sqliteTemporaryStore": 1,
+        "sqliteTemporaryCacheKiB": -1024
+      },
+      "activeTransferId": "b1dd918f-5b43-4146-8f0e-060f1f1c2495",
+      "activeStatus": {
+        "scanId": "0e171dda-549c-47a5-b151-9ae1348f3c2d",
+        "state": "complete",
+        "phase": "finished",
+        "startedAt": 1789072559578,
+        "updatedAt": 1789072559652,
+        "scannedRecords": 107,
+        "scannedTransfers": 12,
+        "scannedCatalogEntries": 8,
+        "scannedFiles": 201,
+        "counts": {
+          "missing_blob": 1,
+          "missing_catalog": 1,
+          "orphan_blob": 98,
+          "size_mismatch": 1,
+          "protected_blob": 3,
+          "staged_file": 5,
+          "unrecognized_entry": 3
+        },
+        "message": null
+      },
+      "beforeRestart": {
+        "canonicalSha256": "a00809bdbe66dfc9f21d9d08cf63ae4147928ff96bb88c6c5a8ffa3305bdc48f",
+        "operationsSha256": "19472e8496422b30fa5645005b9370a7725d7845bbcea53a9bc394d4a8328439",
+        "blobOperationsSha256": "7522f2ef1b59a0dc9973c7f21b340f583cd7b2ca3ad7798a8f0ec52aecb1ebba",
+        "blobCatalogSha256": "5155ee5f09fdeb05a961b57e53bf52885120709f7a16bc81d2395f0f13e05106",
+        "blobTransfersSha256": "39adc1f89ab941aed75c490f66624407696873e538ca7772a13dee07127ae637",
+        "blobsSha256": "466b8781761f198f801ea8f69a15ec3e6b0bb82d547795e4e6b32fdd1d234958",
+        "canonicalRecords": 106,
+        "syncOperations": 105,
+        "physicalFiles": 113,
+        "sqliteTemporaryStore": 1,
+        "sqliteTemporaryCacheKiB": -1024
+      },
+      "restarted": {
+        "canonicalSha256": "a00809bdbe66dfc9f21d9d08cf63ae4147928ff96bb88c6c5a8ffa3305bdc48f",
+        "operationsSha256": "19472e8496422b30fa5645005b9370a7725d7845bbcea53a9bc394d4a8328439",
+        "blobOperationsSha256": "7522f2ef1b59a0dc9973c7f21b340f583cd7b2ca3ad7798a8f0ec52aecb1ebba",
+        "blobCatalogSha256": "5155ee5f09fdeb05a961b57e53bf52885120709f7a16bc81d2395f0f13e05106",
+        "blobTransfersSha256": "39adc1f89ab941aed75c490f66624407696873e538ca7772a13dee07127ae637",
+        "blobsSha256": "466b8781761f198f801ea8f69a15ec3e6b0bb82d547795e4e6b32fdd1d234958",
+        "canonicalRecords": 106,
+        "syncOperations": 105,
+        "physicalFiles": 113,
+        "sqliteTemporaryStore": 1,
+        "sqliteTemporaryCacheKiB": -1024
+      },
+      "malformedStatus": {
+        "scanId": "01432ffc-c06c-4ed1-857d-6aeaef0ee97a",
+        "state": "failed",
+        "phase": "references",
+        "startedAt": 1789072560982,
+        "updatedAt": 1789072561002,
+        "scannedRecords": 107,
+        "scannedTransfers": 0,
+        "scannedCatalogEntries": 0,
+        "scannedFiles": 0,
+        "counts": {
+          "missing_blob": 0,
+          "missing_catalog": 0,
+          "orphan_blob": 0,
+          "size_mismatch": 0,
+          "protected_blob": 0,
+          "staged_file": 0,
+          "unrecognized_entry": 0
+        },
+        "message": "Blob inventory could not finish; start a new scan."
+      }
+    }
+  ],
+  "changedSources": [],
+  "completedAt": "2026-09-10T20:36:01.214Z"
+}

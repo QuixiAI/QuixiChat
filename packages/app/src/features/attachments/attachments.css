@@ -1,0 +1,51 @@
+.composer-attachments {
+  margin-top: 0.6rem;
+}
+.composer-attachments-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+.composer-attachment-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  padding: 0;
+  margin: 0.6rem 0 0;
+}
+.composer-attachment-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid #bdcdbb;
+  border-radius: 8px;
+  padding: 0.35rem 0.5rem;
+  font-size: 0.8rem;
+  max-width: 100%;
+}
+.composer-attachment-list img {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 4px;
+  background: #eef2ee;
+}
+.composer-attachment-list span {
+  overflow-wrap: anywhere;
+}
+.composer-attachment-file {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  flex: 0 0 48px;
+  border-radius: 4px;
+  background: #eef2ee;
+  font-weight: 600;
+}
+.composer.dropping {
+  outline: 2px dashed #4f7a55;
+  outline-offset: 2px;
+}

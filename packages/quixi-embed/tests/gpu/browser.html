@@ -1,0 +1,6 @@
+<!doctype html><html><head><title>Quixi GPU graph checks</title></head><body><script type="module">
+const worker=new Worker(new URL(new URLSearchParams(location.search).has('lifecycle')?'./lifecycle-worker.ts':new URLSearchParams(location.search).get('kernels')?'./kernels-worker.ts':'./worker.ts',import.meta.url),{type:'module'});
+worker.onmessage=event=>{window.quixiResult=event.data;};
+worker.onerror=event=>{window.quixiResult={passed:false,error:event.message};};
+worker.postMessage(Object.fromEntries(['tiled','half','subgroups'].map(flag=>[flag,new URLSearchParams(location.search).has(flag)])));
+</script></body></html>

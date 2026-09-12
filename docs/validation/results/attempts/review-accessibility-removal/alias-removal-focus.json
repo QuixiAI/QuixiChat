@@ -1,0 +1,14 @@
+{
+  "scope": "Synthetic temporary alias in the production local registry; keyboard removal and confirmation focus, with no provider dispatch.",
+  "initialRevision": 0,
+  "stages": [
+    {
+      "stage": "failure",
+      "remaining": [],
+      "activeTag": "BODY",
+      "activeText": "BODY"
+    }
+  ],
+  "status": "failed",
+  "error": "Error: expect(locator).toBeFocused() failed\n\nLocator:  getByRole('region', { name: 'Routing aliases', exact: true }).getByRole('heading', { name: 'Routing aliases', exact: true })\nExpected: focused\nReceived: inactive\nTimeout:  5000ms\n\nCall log:\n  - Expect \"toBeFocused\" getByRole('region', { name: 'Routing aliases', exact: true }).getByRole('heading', { name: 'Routing aliases', exact: true }) with timeout 5000ms\n  - waiting for getByRole('region', { name: 'Routing aliases', exact: true }).getByRole('heading', { name: 'Routing aliases', exact: true })\n    14 × locator resolved to <h2 tabindex=\"-1\" class=\"focus-anchor\">Routing aliases</h2>\n       - unexpected value \"inactive\"\n"
+}

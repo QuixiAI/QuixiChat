@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "versions": {
+    "1.0.0": {
+      "quixi-scalar.wasm": "7475f90c777ab324ef2de5ae9f7f03df14c07177c5e4788358f52c3603a04fb1",
+      "quixi-simd.wasm": "85cf1fd1fc4b7609d9ac997d684afbef90ad7793e6a66358f1b6681288c6b547"
+    },
+    "1.0.1": {
+      "quixi-scalar.wasm": "4a9a7e01712db5868864104a259aaaeb73af74bb8830d9f54700af67b506dd74",
+      "quixi-simd.wasm": "aa6b6265d68d0e145c56804f8ae4950827f48ef40b2f3b8ce4a87fce1ca1050e"
+    },
+    "1.0.2": {
+      "quixi-scalar.wasm": "e477d3e35b6e83c39e206e76079a4d5136a227711a0124b64bf885f3165cee65",
+      "quixi-simd.wasm": "d07bbc26c3f35731d7e2c6885405205a64852f40f9d7c5878c6efe77e8f9b198"
+    }
+  }
+}

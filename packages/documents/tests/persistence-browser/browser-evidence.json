@@ -1,0 +1,424 @@
+{
+  "status": "passed",
+  "selectedEngines": [
+    "chromium",
+    "webkit"
+  ],
+  "startedAt": "2026-09-09T08:29:10.901Z",
+  "environment": {
+    "platform": "darwin",
+    "release": "25.6.0",
+    "arch": "arm64",
+    "osVersion": "26.6.2",
+    "node": "v22.23.1"
+  },
+  "sourceSha256": {
+    "tooling/browser-engines.mjs": "136f16e63e905ae4c8305c7adedfce2411eff13b04f914054f8fb718155d0df1",
+    "packages/documents/src/persist.ts": "0147935193b28e8533561ad07d3fcc093ad4be79eb95e76343f9f7a1c4466f51",
+    "packages/documents/src/persist-mutation.ts": "179c6d56c36bda9b73e2b9afb7d15ad41008f459763a7167397b0e4df2aacc58",
+    "packages/documents/src/storage-source.ts": "e689652883932e8a7b710c4ab78c8b780b364fdd020e11446c47104721f4b9ef",
+    "packages/documents/src/storage.ts": "49a62000284495b50e9dbf71120d86e36b0ba2770038d45c96a5a495fbe47fe7",
+    "packages/documents/src/index.ts": "23aae9a175165715b60def7aa636404e9c2a2efd860f4158346c94a0d4301abc",
+    "packages/documents/src/contracts.ts": "53858a5acfe929579206f3276de5c2d39362aa146ca70e45402387b90d9d4f6d",
+    "packages/documents/src/worker/index.ts": "065ba329499630f2194ab1ef5c12b60382d4aeae7d1bd322121c6db7ff9ac7c4",
+    "packages/documents/src/worker/parser.ts": "f54aefa10a479d57a9a67d5050b631dde51c2278cbb93664a7a6ed2a280e4a1e",
+    "packages/documents/src/worker/assets.ts": "2883011039c6da2f7a7b8452ab6e687ec73fc41514fd776997b01f94d9c6a54a",
+    "packages/documents/tests/fixtures/pages-1.pdf": "3e318e5196a931424d1801943726943d492e5a020f764a9e8aaaf5924f5be846",
+    "packages/documents/tests/fixtures/pages-100.pdf": "6f70ed0674549f75fcaf6577c88d8c19539b168f1e0a05180b048c50878a2785",
+    "node_modules/pdfjs-dist/build/pdf.worker.mjs": "f2870db902eaff8397442c912b69459980ac91f6f4b5ed827167b12cf7057930",
+    "packages/documents/tests/persistence-browser/index.ts": "f10e55b6f7c415cd3fdfa9d99819e2fa16d3721a8de5c2210be62c50d975e5de",
+    "packages/documents/tests/persistence-browser/run.mjs": "8326286fb2b16bb7603abc65c9a4915bd44e23f0cb5f9e22ec456b40fcc69e3b",
+    "packages/storage/src/client/archive.ts": "844981f196ebee613c584dadf3d1cef2c1af15f3aa06daf253d6d48c3b553c24",
+    "packages/storage/src/worker/archive-database.ts": "ef3b2f9bb448307a16634d7c69cfd9bb2bc3d5ac525f4338ecdb3b1365d8b192",
+    "packages/storage/src/worker/archive-runtime.ts": "81f238dd54d48b607323710c4159e4518007c7a034dc371b477754f15e61e26b",
+    "packages/storage/src/worker/extraction/index.ts": "28a72e177cacc9f9231c52e078c794d2f273110da9886f5cb96c13380a6a2f41",
+    "packages/storage/src/worker/extraction/schema.ts": "97782b22ed5586d10724c03fa59ea30f09865377d330da6e2b0a345433a2ae5e",
+    "packages/storage/src/worker/operation-claims.ts": "b90a22768dd7797058221fd509b1f02bd34e4e54a7aa77c15304e7cb19b0725b",
+    "packages/storage/src/worker/search/index.ts": "677c6d528c9e1248d3674a0ab6bb775163ac0c55585eeb396fd607b3b8b88d59",
+    "packages/storage/src/worker/search/sources.ts": "6bb753c9c70999088a4bd79f5655db6ec40a903fccffd82927f11d09a1b47fad",
+    "packages/storage/src/worker/search/extraction.ts": "ba85bc1954ce553a3268e1b924f8eeed879f0b1dad694108090de77301096033",
+    "packages/storage/src/worker/search/schema.ts": "27f06f47227d4a0871724fdecba334229d3320909a6e4ace3c93f6e066c6a9ba",
+    "packages/core/src/contracts/extraction.ts": "c8cd99d7b6e81aee05da891142ef61156e939283f71836e90adcc29f354fbed7",
+    "packages/storage/sqlite/dist/sqlite3.wasm": "dd7c22431a3b8ad51ab5e6ed91065593574c34c5959d2efdef2f17484eedcb2c"
+  },
+  "hosts": [
+    {
+      "name": "chromium",
+      "status": "passed",
+      "checks": [
+        "actual pinned PDF.js publishes and indexes page1 of a100-page real PDF before completion; source ref and bounded maps retain original PDF item coordinates",
+        "awaited downstream page1 progress pauses the real parser pipeline while a competing producer tab is refused and canonical chat commit/read stays usable",
+        "cancellation terminates both parser workers, durably interrupts the run and preserves published page1, exact source bytes and canonical/sync state",
+        "resume actually starts the parser at page2, preserves page1 reference/maps and completes all100 pages with indexed page100",
+        "a separate actual one-page PDF completes using the same released worker/source resources",
+        "a real stage reply dropped inside persistPdfDocument resolves through one exact-digest receipt lookup and the original operation ID, without another stage dispatch or canonical/source changes",
+        "full browser-process restart preserves completed extraction/search, original PDF bytes and concurrent canonical chat"
+      ],
+      "external": [],
+      "consoleErrors": [],
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36",
+      "initialOpfs": [],
+      "paused": {
+        "outcome": {
+          "state": "running"
+        },
+        "paused": true,
+        "latest": {
+          "phase": "indexing",
+          "runId": "55b1e807-d9e9-41b8-ac12-e6fb8f6dd4d5",
+          "page": 1,
+          "pages": 100,
+          "indexedThroughPage": 1
+        },
+        "firstExtractingPage": 1,
+        "parserStartPages": [
+          1
+        ],
+        "activePdfWorkers": 2,
+        "parserWorkersStarted": 1
+      },
+      "navigation": {
+        "documentId": "582235e8-b4ac-4c66-80b8-6aa955d7925a",
+        "sourceSha256": "6f70ed0674549f75fcaf6577c88d8c19539b168f1e0a05180b048c50878a2785",
+        "pageRef": {
+          "pageAttemptId": "85220e32-9a8d-42ba-b285-f1abc9c2e537",
+          "runId": "55b1e807-d9e9-41b8-ac12-e6fb8f6dd4d5",
+          "page": 1,
+          "identity": {
+            "attachmentByteLength": 65679,
+            "attachmentId": "ec081117-0713-44c7-aa57-9074ceeb8a5c",
+            "attachmentSha256": "6f70ed0674549f75fcaf6577c88d8c19539b168f1e0a05180b048c50878a2785",
+            "documentId": "582235e8-b4ac-4c66-80b8-6aa955d7925a",
+            "extractorVersion": "quixi-extract-1/pdfjs-6.3.289",
+            "normalizerVersion": "quixi-layout-1"
+          },
+          "sourceDigest": "2616055b8b33325c729f48b518195d7128e935a4250313caa8d83cba66ad2e19",
+          "publicationRevision": 1
+        },
+        "firstOriginalSpan": {
+          "end": 29,
+          "source": {
+            "direction": "ltr",
+            "height": 16,
+            "itemEnd": 29,
+            "itemIndex": 0,
+            "itemStart": 0,
+            "transform": [
+              16,
+              0,
+              0,
+              16,
+              40,
+              780
+            ],
+            "width": 212.54400000000004
+          },
+          "start": 0
+        },
+        "offsetUnit": "page-local UTF-16; original PDF item coordinates"
+      },
+      "competingProducer": {
+        "state": "failed",
+        "error": {
+          "code": "CAPACITY",
+          "message": "ExtractionError: A PDF extraction producer is already active for this document."
+        }
+      },
+      "cancelled": {
+        "outcome": {
+          "state": "failed",
+          "error": {
+            "code": "CANCELLED",
+            "message": "ExtractionError: Document extraction cancelled; published pages remain available."
+          }
+        },
+        "latest": {
+          "phase": "interrupted",
+          "runId": "55b1e807-d9e9-41b8-ac12-e6fb8f6dd4d5",
+          "page": 1,
+          "pages": 100,
+          "indexedThroughPage": 1
+        }
+      },
+      "resumed": {
+        "outcome": {
+          "state": "completed",
+          "result": {
+            "runId": "55b1e807-d9e9-41b8-ac12-e6fb8f6dd4d5",
+            "identity": {
+              "attachmentByteLength": 65679,
+              "attachmentId": "ec081117-0713-44c7-aa57-9074ceeb8a5c",
+              "attachmentSha256": "6f70ed0674549f75fcaf6577c88d8c19539b168f1e0a05180b048c50878a2785",
+              "documentId": "582235e8-b4ac-4c66-80b8-6aa955d7925a",
+              "extractorVersion": "quixi-extract-1/pdfjs-6.3.289",
+              "normalizerVersion": "quixi-layout-1"
+            },
+            "state": "completed",
+            "writerEpoch": 2,
+            "pageCount": 100,
+            "completedPage": 100,
+            "currentPage": null,
+            "visibleRunId": "55b1e807-d9e9-41b8-ac12-e6fb8f6dd4d5",
+            "documentRevision": 2,
+            "retainedBytes": 446303,
+            "failure": null
+          }
+        },
+        "paused": false,
+        "latest": {
+          "phase": "completed",
+          "runId": "55b1e807-d9e9-41b8-ac12-e6fb8f6dd4d5",
+          "page": 100,
+          "pages": 100,
+          "indexedThroughPage": 100
+        },
+        "firstExtractingPage": 2,
+        "parserStartPages": [
+          1,
+          2
+        ],
+        "activePdfWorkers": 0,
+        "parserWorkersStarted": 2
+      },
+      "small": {
+        "outcome": {
+          "state": "completed",
+          "result": {
+            "runId": "6abe934b-35d0-4a44-875a-99e16de53775",
+            "identity": {
+              "attachmentByteLength": 1683,
+              "attachmentId": "d8c192dc-e812-4060-8558-77794ffb5f5a",
+              "attachmentSha256": "3e318e5196a931424d1801943726943d492e5a020f764a9e8aaaf5924f5be846",
+              "documentId": "22072948-3df7-49fe-94af-a8cb36ec6013",
+              "extractorVersion": "quixi-extract-1/pdfjs-6.3.289",
+              "normalizerVersion": "quixi-layout-1"
+            },
+            "state": "completed",
+            "writerEpoch": 1,
+            "pageCount": 1,
+            "completedPage": 1,
+            "currentPage": null,
+            "visibleRunId": "6abe934b-35d0-4a44-875a-99e16de53775",
+            "documentRevision": 2,
+            "retainedBytes": 7861,
+            "failure": null
+          }
+        },
+        "paused": false,
+        "latest": {
+          "phase": "completed",
+          "runId": "6abe934b-35d0-4a44-875a-99e16de53775",
+          "page": 1,
+          "pages": 1,
+          "indexedThroughPage": 1
+        },
+        "firstExtractingPage": 1,
+        "parserStartPages": [
+          1,
+          2,
+          1
+        ],
+        "activePdfWorkers": 0,
+        "parserWorkersStarted": 3
+      },
+      "droppedStage": {
+        "requestId": "94f1ebe4-379c-4198-a1ed-94d946c21eb8",
+        "operationId": "7b3ab293-4671-40a5-bc9a-2b385b9ca6eb",
+        "requestDigest": "75a49745314f1577119d34a5f2ddc5f9e7c39b67feff39ab9b57b6499cfce372",
+        "repliesSuppressed": 1,
+        "recoveryLookups": 1,
+        "stageDispatches": 1
+      }
+    },
+    {
+      "name": "webkit",
+      "status": "passed",
+      "checks": [
+        "actual pinned PDF.js publishes and indexes page1 of a100-page real PDF before completion; source ref and bounded maps retain original PDF item coordinates",
+        "awaited downstream page1 progress pauses the real parser pipeline while a competing producer tab is refused and canonical chat commit/read stays usable",
+        "cancellation terminates both parser workers, durably interrupts the run and preserves published page1, exact source bytes and canonical/sync state",
+        "resume actually starts the parser at page2, preserves page1 reference/maps and completes all100 pages with indexed page100",
+        "a separate actual one-page PDF completes using the same released worker/source resources",
+        "a real stage reply dropped inside persistPdfDocument resolves through one exact-digest receipt lookup and the original operation ID, without another stage dispatch or canonical/source changes",
+        "full browser-process restart preserves completed extraction/search, original PDF bytes and concurrent canonical chat"
+      ],
+      "external": [],
+      "consoleErrors": [],
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+      "initialOpfs": [],
+      "paused": {
+        "outcome": {
+          "state": "running"
+        },
+        "paused": true,
+        "latest": {
+          "phase": "indexing",
+          "runId": "32833375-3c59-4aae-9de0-108a89b24d4a",
+          "page": 1,
+          "pages": 100,
+          "indexedThroughPage": 1
+        },
+        "firstExtractingPage": 1,
+        "parserStartPages": [
+          1
+        ],
+        "activePdfWorkers": 2,
+        "parserWorkersStarted": 1
+      },
+      "navigation": {
+        "documentId": "cad9b926-30af-43f4-b28b-e03182010842",
+        "sourceSha256": "6f70ed0674549f75fcaf6577c88d8c19539b168f1e0a05180b048c50878a2785",
+        "pageRef": {
+          "pageAttemptId": "15672f1f-fe83-4a3d-b8e3-493b0acf6943",
+          "runId": "32833375-3c59-4aae-9de0-108a89b24d4a",
+          "page": 1,
+          "identity": {
+            "attachmentByteLength": 65679,
+            "attachmentId": "a231e015-86ef-4545-a862-23b514a9abdc",
+            "attachmentSha256": "6f70ed0674549f75fcaf6577c88d8c19539b168f1e0a05180b048c50878a2785",
+            "documentId": "cad9b926-30af-43f4-b28b-e03182010842",
+            "extractorVersion": "quixi-extract-1/pdfjs-6.3.289",
+            "normalizerVersion": "quixi-layout-1"
+          },
+          "sourceDigest": "27333f8b65f71e177b0e5b8ed0aa7926a8278f7610235654496cb9ce551d9833",
+          "publicationRevision": 1
+        },
+        "firstOriginalSpan": {
+          "end": 29,
+          "source": {
+            "direction": "ltr",
+            "height": 16,
+            "itemEnd": 29,
+            "itemIndex": 0,
+            "itemStart": 0,
+            "transform": [
+              16,
+              0,
+              0,
+              16,
+              40,
+              780
+            ],
+            "width": 212.54400000000004
+          },
+          "start": 0
+        },
+        "offsetUnit": "page-local UTF-16; original PDF item coordinates"
+      },
+      "competingProducer": {
+        "state": "failed",
+        "error": {
+          "code": "CAPACITY",
+          "message": "ExtractionError: A PDF extraction producer is already active for this document."
+        }
+      },
+      "cancelled": {
+        "outcome": {
+          "state": "failed",
+          "error": {
+            "code": "CANCELLED",
+            "message": "ExtractionError: Document extraction cancelled; published pages remain available."
+          }
+        },
+        "latest": {
+          "phase": "interrupted",
+          "runId": "32833375-3c59-4aae-9de0-108a89b24d4a",
+          "page": 1,
+          "pages": 100,
+          "indexedThroughPage": 1
+        }
+      },
+      "resumed": {
+        "outcome": {
+          "state": "completed",
+          "result": {
+            "runId": "32833375-3c59-4aae-9de0-108a89b24d4a",
+            "identity": {
+              "attachmentByteLength": 65679,
+              "attachmentId": "a231e015-86ef-4545-a862-23b514a9abdc",
+              "attachmentSha256": "6f70ed0674549f75fcaf6577c88d8c19539b168f1e0a05180b048c50878a2785",
+              "documentId": "cad9b926-30af-43f4-b28b-e03182010842",
+              "extractorVersion": "quixi-extract-1/pdfjs-6.3.289",
+              "normalizerVersion": "quixi-layout-1"
+            },
+            "state": "completed",
+            "writerEpoch": 2,
+            "pageCount": 100,
+            "completedPage": 100,
+            "currentPage": null,
+            "visibleRunId": "32833375-3c59-4aae-9de0-108a89b24d4a",
+            "documentRevision": 2,
+            "retainedBytes": 446303,
+            "failure": null
+          }
+        },
+        "paused": false,
+        "latest": {
+          "phase": "completed",
+          "runId": "32833375-3c59-4aae-9de0-108a89b24d4a",
+          "page": 100,
+          "pages": 100,
+          "indexedThroughPage": 100
+        },
+        "firstExtractingPage": 2,
+        "parserStartPages": [
+          1,
+          2
+        ],
+        "activePdfWorkers": 0,
+        "parserWorkersStarted": 2
+      },
+      "small": {
+        "outcome": {
+          "state": "completed",
+          "result": {
+            "runId": "dda7ac65-ce90-45a9-b738-8df542bd3fcc",
+            "identity": {
+              "attachmentByteLength": 1683,
+              "attachmentId": "75eaae0a-6765-4db2-a688-27c4b8558550",
+              "attachmentSha256": "3e318e5196a931424d1801943726943d492e5a020f764a9e8aaaf5924f5be846",
+              "documentId": "88b7a5f9-490f-4665-8fb1-91a8a5cb4598",
+              "extractorVersion": "quixi-extract-1/pdfjs-6.3.289",
+              "normalizerVersion": "quixi-layout-1"
+            },
+            "state": "completed",
+            "writerEpoch": 1,
+            "pageCount": 1,
+            "completedPage": 1,
+            "currentPage": null,
+            "visibleRunId": "dda7ac65-ce90-45a9-b738-8df542bd3fcc",
+            "documentRevision": 2,
+            "retainedBytes": 7861,
+            "failure": null
+          }
+        },
+        "paused": false,
+        "latest": {
+          "phase": "completed",
+          "runId": "dda7ac65-ce90-45a9-b738-8df542bd3fcc",
+          "page": 1,
+          "pages": 1,
+          "indexedThroughPage": 1
+        },
+        "firstExtractingPage": 1,
+        "parserStartPages": [
+          1,
+          2,
+          1
+        ],
+        "activePdfWorkers": 0,
+        "parserWorkersStarted": 3
+      },
+      "droppedStage": {
+        "requestId": "2efbb38d-5181-4cce-9628-84a12b9b3568",
+        "operationId": "5f4c1289-936f-4336-ae32-4c1fda991eec",
+        "requestDigest": "deea661c51b2508897456ac16703d226db5a1ff3d5e194cb047f46d412bd7628",
+        "repliesSuppressed": 1,
+        "recoveryLookups": 1,
+        "stageDispatches": 1
+      }
+    }
+  ],
+  "origin": "http://127.0.0.1:63930",
+  "finishedAt": "2026-09-09T08:29:37.449Z"
+}
