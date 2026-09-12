@@ -85,7 +85,7 @@ The [application report](results/blob-inventory-ui-macos.json) verifies all seve
 categories, unchanged fingerprints, bounded pages, keyboard focus, Stop,
 navigation during a scan, stale results and real storage-owner replacement,
 and since 2026-09-12 the plan 23 [diagnostics report and repair actions](./diagnostics.md)
-on the same fixture archive (12 checks per engine).
+on the same fixture archive (13 checks per engine).
 The [Chromium](results/storage-health-chromium-mobile.png) and
 [WebKit](results/storage-health-webkit-mobile.png) 390-pixel screenshots were
 visually inspected. Long identifiers wrap without horizontal page overflow.

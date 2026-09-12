@@ -303,7 +303,7 @@ export function AppRoot({
   const library = useMemo(() => createLibraryController(services), [services]);
   const preferences = useMemo(() => createPreferenceController(services.storage), [services]);
   const storageHealth = useMemo(() => createStorageHealthController(services.storage), [services]);
-  const diagnostics = useMemo(() => createDiagnosticsController(services.storage), [services]);
+  const diagnostics = useMemo(() => createDiagnosticsController(services.storage, services.host), [services]);
   const semantic = useMemo(() => createSemanticController({ storage: services.storage, embedding: services.embedding }), [services]);
   const semanticState = useSyncExternalStore(semantic.subscribe, semantic.getSnapshot);
   const onboarding = useMemo(() => createOnboardingController({ storage: services.storage, host: services.host, hostProvidesModel: !!services.embedding }), [services]);

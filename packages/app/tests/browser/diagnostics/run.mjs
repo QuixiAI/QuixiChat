@@ -12,7 +12,7 @@ let server;
 const save = async () => { await mkdir('test-results', { recursive: true }); await writeFile('test-results/app-storage-health-browser.json', JSON.stringify(proof, null, 2) + '\n'); };
 const sourceFiles = [
   'packages/app/src/AppRoot.tsx', 'packages/app/src/features/diagnostics/controller.ts', 'packages/app/src/features/diagnostics/StorageHealthPanel.tsx', 'packages/app/src/features/diagnostics/diagnostics.css',
-  'packages/app/src/features/diagnostics/report-controller.ts', 'packages/app/src/features/diagnostics/DiagnosticsPanel.tsx', 'packages/core/src/contracts/diagnostics.ts', 'packages/storage/src/worker/diagnostics.ts',
+  'packages/app/src/features/diagnostics/report-controller.ts', 'packages/app/src/features/diagnostics/DiagnosticsPanel.tsx', 'packages/app/src/features/diagnostics/export.ts', 'packages/core/src/contracts/diagnostics.ts', 'packages/storage/src/worker/diagnostics.ts',
   'packages/app/tests/browser/diagnostics/index.ts', 'packages/app/tests/browser/diagnostics/index.html', 'packages/app/tests/browser/diagnostics/run.mjs',
   'packages/core/src/contracts/blob-inventory.ts', 'packages/core/src/contracts/storage.ts', 'packages/storage/tests/blob-inventory/fixture.ts', 'packages/storage/tests/blob-inventory/fixture-worker.ts',
   'packages/storage/tests/isolated-client.ts', 'packages/storage/tests/isolated-worker.ts', 'packages/storage/src/worker/archive-runtime.ts', 'packages/storage/src/worker/archive-database.ts',
@@ -94,6 +94,20 @@ try {
       expect(references.measured.missingFiles).toBeGreaterThanOrEqual(1); expect(references.measured.missingCatalog).toBeGreaterThanOrEqual(1);
       evidence.diagnostics = { seeded, references: references.measured, persistence: report.checks.find(check => check.id === 'persistence').measured, sqliteVersion: report.sqliteVersion, schemaVersion: report.schemaVersion };
       evidence.checks.push(`Run diagnostics reports the seeded archive: SQLite integrity, schema, FTS5, sqlite-vec, ownership and both derived indexes OK and attachment references Missing data (${references.measured.missingFiles} referenced files absent, ${references.measured.missingCatalog} without metadata among ${references.measured.references} references); the report carries no filenames, content or private names`);
+      // Product §100 exportable report: the same report as one JSON file through the host save flow.
+      const downloading = page.waitForEvent('download');
+      await diagnostics.getByRole('button', { name: 'Save diagnostics report', exact: true }).click();
+      const download = await downloading;
+      const savedText = await readFile(await download.path(), 'utf8'), savedReport = JSON.parse(savedText);
+      await expect(diagnostics.getByTestId('diagnostic-notice')).toContainText(/Diagnostics report saved as quixi-diagnostics-.*\.json/);
+      expect(download.suggestedFilename()).toMatch(/^quixi-diagnostics-\d{4}-\d{2}-\d{2}T\d{2}-\d{2}-\d{2}\.json$/);
+      expect(savedReport.format).toBe('quixi-diagnostics'); expect(savedReport.contentPolicy).toBe('operational-metadata-only'); expect(savedReport.host.kind).toBe('web');
+      expect(Object.fromEntries(savedReport.storage.checks.map(check => [check.id, check.outcome]))).toEqual(seeded);
+      expect(savedReport.inference).toBe(null); expect(typeof savedReport.omitted.inference).toBe('string');
+      for (const secret of ['synthetic', 'unrecognized-private-name', 'private-child', 'original bytes', '.txt']) expect(savedText.toLowerCase()).not.toContain(secret);
+      expect(Object.keys(savedReport).sort()).toEqual(['contentPolicy', 'format', 'host', 'inference', 'omitted', 'producedAt', 'storage', 'version']);
+      evidence.savedReport = { name: download.suggestedFilename(), bytes: Buffer.byteLength(savedText), keys: Object.keys(savedReport) };
+      evidence.checks.push(`Save diagnostics report writes the shown report through the host save flow as ${download.suggestedFilename()} (${Buffer.byteLength(savedText)} bytes) with only the allow-listed sections, the storage checks equal to the panel, the inference section absent with a reason, and none of the fixture's private names or content`);
       // A rebuildable derived index, told apart from corruption and repaired in place.
       await page.evaluate(() => window.storageHealthAcceptance.fault('derived-failure'));
       await page.getByRole('button', { name: 'Library', exact: true }).click(); await page.getByRole('button', { name: 'Storage health', exact: true }).click();

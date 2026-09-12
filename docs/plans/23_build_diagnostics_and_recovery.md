@@ -1,6 +1,6 @@
 # 23 — Build diagnostics and archive recovery tools
 
-**Status:** In progress — the §100 diagnostics report with a fixed outcome vocabulary, the bounded read-only blob inventory, the shared Storage health UI, the distinct FTS/semantic repair actions and the inference self-test are implemented; the remaining Doctor audits, diagnostic export and reviewed cleanup remain open
+**Status:** In progress — the §100 diagnostics report with a fixed outcome vocabulary, the bounded read-only blob inventory, the shared Storage health UI, the distinct FTS/semantic repair actions, the inference self-test and the exportable report are implemented; the remaining Doctor audits and reviewed cleanup remain open
 
 **Workstream:** Product reliability — Quixi Doctor
 
@@ -31,7 +31,7 @@ Give users and developers inspectable storage health and narrowly targeted recov
 - [ ] Implement bounded scans with progress, cancellation, and resumable work where appropriate. Report findings before destructive cleanup and require explicit selection for deleting orphan blobs. The blob inventory now runs in capped worker slices, has bounded findings pages, progress/Stop and explicit new scans after stale inputs or owner loss; it preserves partial results without inventing a resumable OPFS iterator. The shared panel is keyboard and narrow-layout qualified in both engines. Other audit scans and explicitly reviewed cleanup remain open; no deletion operation is exposed ([validation](../validation/blob-inventory.md)).
 - [ ] Use archive export/restore as the recovery foundation. Define what remains accessible when schema initialization, a migration, or a derived index fails. [ADR 0016](../decisions/0016-startup-failure-and-schema-recovery.md) records the schema-failure answer (exact bytes via rescue export; bounded read-only history at a compatible prefix); derived-index failure never blocks startup because search data is rebuildable.
 - [x] Add QuixiEmbed diagnostics when that runtime is installed: model hash, tokenizer/reference self-test, scalar/SIMD parity, and available WebGPU routes. `EmbeddingService.selfTest()` re-hashes the model, runs three frozen golden cases through the tokenizer, the scalar and SIMD backends and the live WebGPU route, and probes WebGPU otherwise; Storage health runs it as "Run inference self-test" ([ADR 0040](../decisions/0040-diagnostics-outcomes.md) amendment 1, [validation](../validation/diagnostics.md): 7 Node classification tests, both engines in the semantic proof). It loads the runtime when needed and is absent on hosts without the model.
-- [ ] Provide an exportable diagnostic report that excludes credentials and defaults to operational metadata rather than raw conversation text.
+- [x] Provide an exportable diagnostic report that excludes credentials and defaults to operational metadata rather than raw conversation text. Storage health's "Save diagnostics report" writes the storage report and the inference self-test as one JSON file built from an allow-list of fields (long strings clipped, unknown fields dropped, absent sections named with a reason) through the host's verified `file_save` staging and save flow ([validation](../validation/diagnostics.md): 3 Node tests, both engines in the storage-health and semantic proofs). Credentials never reach the application (they stay behind the host secret boundary), so the file cannot carry them; conversation text is excluded by construction.
 - [ ] Create corruption/fault fixtures and verify every repair/rebuild operation against canonical record and blob inventories.
 
 ## Deliverables and interfaces
@@ -44,7 +44,7 @@ Give users and developers inspectable storage health and narrowly targeted recov
 - [x] Detected corruption is distinguished from unsupported capability, missing data, and a rebuildable derived index. One report on the fixture archive names SQLite corruption (unreferenced pages), missing data (a deleted file and a deleted catalog row) and, after a ledger fault, a rebuildable derived index, each on its own check; unsupported capabilities are classified from stated inputs because every host in the matrix has FTS5, sqlite-vec and the tokenizer ([validation](../validation/diagnostics.md)).
 - [x] FTS/semantic rebuilds preserve canonical rows, provenance, branches, and attachment bytes. The FTS rebuild (repair path) and the semantic delete run in both engines with the canonical record table (which holds provenance and branches), sync and blob operations, catalog, transfers and every stored file byte fingerprinted equal to the baseline; the semantic rebuild's storage effect is the same delete followed by enrolment and re-embedding, exercised by the [semantic proof](../validation/semantic-search.md).
 - [ ] Users can inspect the scope of cleanup before any canonical/blob deletion occurs.
-- [ ] Diagnostic exports contain no provider secrets or unsolicited history content.
+- [x] Diagnostic exports contain no provider secrets or unsolicited history content. The saved file's bytes are checked in both engines against the fixture's private names, original content and filenames (storage-health proof) and against the seeded conversation text (semantic proof); the builder's allow-list drops any field outside the two reports and the Node test proves a planted secret-looking field and planted payload text never reach the bytes ([validation](../validation/diagnostics.md)).
 
 ## Diagnostics report and repair actions — 2026-09-12
 
@@ -57,8 +57,8 @@ outcome vocabulary and the metadata-only content policy;
 [diagnostics.md](../validation/diagnostics.md) records the Node and
 two-engine evidence, including real corruption, missing-data and
 derived-failure fixtures on the blob-inventory archive. The inference
-self-test followed the same day. Still open: the hash/branch/provenance/
-sync-coverage audits, the exportable report file, fault fixtures for every
+self-test and the exportable report followed the same day. Still open: the
+hash/branch/provenance/sync-coverage audits, fault fixtures for every
 repair, and reviewed cleanup.
 
 ## Pending mutation recovery increment — 2026-09-10

@@ -87,6 +87,28 @@ re-hashes it; the reported digest equals the enrolment's source hash.
 
 Retained run: [semantic-search-app-macos.json](results/semantic-search-app-macos.json).
 
+## Exportable report (product §100, plan 23)
+
+**Builder (Node)** — `npm run test:app:storage-health` also runs
+`packages/app/tests/diagnostics/export.test.ts` (3 tests): the file is built
+from an allow-list (a planted secret-looking field and planted payload text
+never reach the bytes, long measurements are clipped, absent sections carry a
+reason), the name is `quixi-diagnostics-<UTC time>.json`, and saving stages
+every byte through the host's `file_save` transfer with the digest, then
+saves and releases.
+
+**Application (Chromium and WebKit)** — the storage-health proof (13 checks
+per engine, [retained](results/blob-inventory-ui-macos.json)) clicks "Save
+diagnostics report" after the seeded run, captures the browser download,
+parses it and checks: only the allow-listed top-level keys, storage checks
+equal to the panel, the inference section absent with a reason (no model on
+that host), and none of the fixture's private names, original content or
+`.txt` filenames in the bytes (about 3.7 KB). The semantic proof saves the
+file after the inference self-test and checks that its five inference checks
+equal the self-test's and that the seeded conversation text is absent.
+Headless engines cancel the native save picker, so the proofs disable it and
+take the download path, as the shared-app proof does.
+
 ## Limits
 
 - The reference check is bounded (newest 4,096 referencing records, first 64
@@ -100,6 +122,6 @@ Retained run: [semantic-search-app-macos.json](results/semantic-search-app-macos
   not by this report.
 - Semantic rebuild (re-embedding) is exercised by the semantic proof, not
   here; on this fixture host it is disabled because no model is provided.
-- The exportable report file is not implemented yet. The inference self-test
+- The inference self-test
   proves the routes present on the two Playwright engines; hardware WebGPU
   adapters on other machines remain plan 19/21/24 gates.

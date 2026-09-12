@@ -49,6 +49,15 @@ panel, but nothing named what a finding meant or offered the FTS rebuild.
    "Rebuild semantic index" reuse the semantic controller because it also owns
    the inference runtime. None of the three reads canonical rows for writing.
 
+5. **The exportable file is an allow-list projection of the two reports**
+   (amendment 2, 2026-09-12). `buildDiagnosticsExport` copies only the named
+   fields of the storage report and the inference self-test, clips string
+   measurements, records why a section is absent, and adds the host kind and
+   user agent; it is saved through the host's verified `file_save` staging.
+   Nothing else in the application is consulted, so provider credentials
+   (which never leave the host secret boundary) and conversation text cannot
+   appear in it.
+
 ## Consequences
 
 - The onboarding capability check keeps reading the lighter `diagnostics`

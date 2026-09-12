@@ -1,5 +1,6 @@
 import { expect } from '@playwright/test';
 import { randomUUID } from 'node:crypto';
+import { readFile } from 'node:fs/promises';
 
 const seeds = [
   { title: 'Feline care', text: 'Kittens purr when they are warm, fed and content beside their mother.' },
@@ -121,6 +122,16 @@ export async function exerciseSemanticSearch({ engine, profile, name, origin }) 
     expect(selfTest.checks.find(check => check.id === 'model_hash').measured.sha256).toBe(enrolled.model.sourceHash);
     expect(selfTest.cases).toHaveLength(3);
     evidence.checks.push(`the Storage health inference self-test re-hashes the model (${selfTest.checks.find(check => check.id === 'model_hash').measured.source}), reproduces the frozen token ids and reference vectors on the scalar and SIMD backends, and reports the WebGPU backend as ${inference.webgpu_backend} on the ${evidence.backend} route`);
+    // The saved diagnostics file carries the inference section once the self-test has run.
+    await diagnostics.getByRole('button', { name: /Run diagnostics/ }).click();
+    await expect(diagnostics.getByTestId('diagnostic-report-meta')).toBeVisible({ timeout: 30_000 });
+    const downloading = page.waitForEvent('download');
+    await diagnostics.getByRole('button', { name: 'Save diagnostics report', exact: true }).click();
+    const savedFile = JSON.parse(await readFile(await (await downloading).path(), 'utf8'));
+    expect(savedFile.inference.checks.map(check => [check.id, check.outcome])).toEqual(selfTest.checks.map(check => [check.id, check.outcome]));
+    expect(savedFile.storage.checks.find(check => check.id === 'semantic_index').outcome).toBe('ok');
+    expect(JSON.stringify(savedFile)).not.toContain('Feline care');
+    evidence.checks.push('the saved diagnostics file carries the storage report and the five inference checks, and none of the seeded conversation text');
     // Pause refuses new work; new content waits; resume indexes only it.
     await openPanel(page);
     await panel(page).getByRole('button', { name: 'Pause', exact: true }).click();

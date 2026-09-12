@@ -48,6 +48,12 @@ export function DiagnosticsPanel({ controller, semantic, semanticState, disabled
       </dl>
       <p className="muted" data-testid="diagnostic-report-meta">SQLite {report.sqliteVersion} · schema {report.schemaVersion} · {report.checks.find(check => check.id === 'persistence')?.measured.usage === null ? 'usage not reported' : `${sizes(Number(report.checks.find(check => check.id === 'persistence')?.measured.usage))} used`} · report produced {new Date(report.producedAt).toLocaleTimeString()}</p>
     </>}
+    <h3>Save report</h3>
+    <p>Saves the storage report and the inference self-test above as one JSON file: counts, versions, states and managed identifiers only. It never contains provider credentials or conversation text.</p>
+    <div className="storage-health-actions">
+      <button disabled={busy || !report} onClick={() => void controller.save(semanticState.selfTest, { inferenceOmitted: hostless ? 'This host does not provide the local embedding model.' : semanticState.selfTest ? null : 'The inference self-test was not run.' })}>Save diagnostics report</button>
+    </div>
+    {!report && <p className="muted">Run diagnostics first; the file is built from the report shown here.</p>}
     <h3>Repair actions</h3>
     <p>These recreate derived data only. Saved conversations, import provenance, branches and attachment bytes are never changed by them.</p>
     <div className="storage-health-actions" aria-label="Repair actions">

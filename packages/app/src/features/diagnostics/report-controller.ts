@@ -1,4 +1,6 @@
-import type { DiagnosticsReport, SearchIndexStatus, StorageClient } from '@quixi/core/contracts';
+import type { DiagnosticsReport, HostClient, SearchIndexStatus, StorageClient } from '@quixi/core/contracts';
+import type { InferenceSelfTest } from '@quixi/quixi-embed/service';
+import { buildDiagnosticsExport, saveDiagnosticsExport } from './export.ts';
 
 export interface DiagnosticsSnapshot {
   report: DiagnosticsReport | null;
@@ -14,7 +16,7 @@ const message = (error: unknown) => {
 /** Product §100/§101: an explicit, read-only diagnostics report and the two
  * derived-index repairs that never touch canonical rows. Semantic delete and
  * rebuild live in the semantic controller because they also own the runtime. */
-export function createDiagnosticsController(storage: StorageClient) {
+export function createDiagnosticsController(storage: StorageClient, host?: HostClient) {
   let state: DiagnosticsSnapshot = { report: null, running: false, notice: null, error: null };
   const listeners = new Set<() => void>();
   let disposed = false, epoch = 0;
@@ -58,6 +60,17 @@ export function createDiagnosticsController(storage: StorageClient) {
       const report = await guard(current, () => storage.request(crypto.randomUUID(), 'diagnosticsReport', null));
       if (disposed || current !== epoch) return;
       publish({ running: false, ...(report ? { report } : {}) });
+    },
+    /** Product §100 exportable report: the last storage report and inference self-test as one JSON file through the host save flow. */
+    async save(inference: InferenceSelfTest | null, options: { inferenceOmitted?: string | null } = {}) {
+      if (disposed || state.running || !host) return;
+      const current = ++epoch;
+      publish({ running: true, error: null, notice: null });
+      const kind = (await host.capabilities().catch(() => null))?.host ?? 'web';
+      const userAgent = typeof navigator === 'undefined' ? null : navigator.userAgent;
+      const saved = await guard(current, () => saveDiagnosticsExport(host, buildDiagnosticsExport({ storage: state.report, inference, host: kind, userAgent, inferenceOmitted: options.inferenceOmitted ?? null })));
+      if (disposed || current !== epoch) return;
+      publish({ running: false, ...(saved ? { notice: `Diagnostics report saved as ${saved.name} (${saved.byteLength.toLocaleString()} bytes; operational metadata only).` } : {}) });
     },
     invalidate() { if (disposed) return; epoch++; publish({ report: null, running: false, notice: null, error: null }); },
     dispose() { disposed = true; epoch++; listeners.clear(); },

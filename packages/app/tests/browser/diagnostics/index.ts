@@ -5,6 +5,8 @@ import { createIsolatedStorageClient } from '../../../../storage/tests/isolated-
 import { setupBlobInventoryFixture, fingerprintBlobInventoryFixture, cleanupBlobInventoryFixture, injectBlobInventoryFault } from '../../../../storage/tests/blob-inventory/fixture.ts';
 import type { BlobInventoryFault } from '../../../../storage/tests/blob-inventory/fixture.ts';
 
+// Headless engines cancel the native save picker; saving then takes the download path, as in the shared-app proof.
+Object.defineProperty(window, 'showSaveFilePicker', { value: undefined, configurable: true });
 const archiveId = new URL(location.href).searchParams.get('archive')!;
 // `reuse`: the archive was seeded by an earlier page on this origin (diagnostics faults reopen it).
 const fixture = new URL(location.href).searchParams.get('fixture') === 'reuse' ? null : await setupBlobInventoryFixture(archiveId, 96);

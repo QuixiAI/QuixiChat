@@ -4,7 +4,7 @@
     "webkit"
   ],
   "status": "passed",
-  "startedAt": "2026-09-12T20:24:42.705Z",
+  "startedAt": "2026-09-12T20:31:08.269Z",
   "hosts": [
     {
       "name": "chromium",
@@ -16,6 +16,7 @@
         "Best fuses lexical and semantic rankings by reciprocal rank: the dual-origin hit leads and every result explains its origin",
         "Exact mode stays purely lexical",
         "the Storage health inference self-test re-hashes the model (cache), reproduces the frozen token ids and reference vectors on the scalar and SIMD backends, and reports the WebGPU backend as unsupported on the WASM SIMD · CPU route",
+        "the saved diagnostics file carries the storage report and the five inference checks, and none of the seeded conversation text",
         "Pause keeps stored vectors searchable and refuses new claims; Resume indexes only the chunk added meanwhile",
         "on the CPU route a GPU device-loss injection is refused and the backend stays WASM SIMD · CPU",
         "after a browser restart the enrolment, generation and vectors persist, the verified model loads from its OPFS copy and semantic queries work without re-indexing",
@@ -25,8 +26,8 @@
       ],
       "backend": "WASM SIMD · CPU",
       "runtimeNote": "Local runtime ready on WASM SIMD · CPU. WebGPU was not used: No WebGPU adapter.",
-      "enableMs": 853,
-      "indexMs": 930,
+      "enableMs": 850,
+      "indexMs": 924,
       "model": {
         "chunkingVersion": "fts-v1:quixi-structural-utf16-v1:4096:64:arctic-xs-offsets-1.0.2:d15cd90acf9df739:256:code-v1:nul-space-v1",
         "dimensions": 384,
@@ -47,7 +48,7 @@
         },
         "route": "wasm-simd-fp32",
         "kind": "cpu",
-        "elapsedMs": 1174,
+        "elapsedMs": 1180,
         "checks": [
           {
             "id": "model_hash",
@@ -108,7 +109,7 @@
       },
       "faultInjected": false,
       "backendAfterFault": "WASM SIMD · CPU",
-      "restartMs": 818
+      "restartMs": 813
     },
     {
       "name": "webkit",
@@ -120,6 +121,7 @@
         "Best fuses lexical and semantic rankings by reciprocal rank: the dual-origin hit leads and every result explains its origin",
         "Exact mode stays purely lexical",
         "the Storage health inference self-test re-hashes the model (cache), reproduces the frozen token ids and reference vectors on the scalar and SIMD backends, and reports the WebGPU backend as ok on the WebGPU · FP32 route",
+        "the saved diagnostics file carries the storage report and the five inference checks, and none of the seeded conversation text",
         "Pause keeps stored vectors searchable and refuses new claims; Resume indexes only the chunk added meanwhile",
         "after an injected GPU device loss the query and the resumed chunk are embedded by the CPU fallback and the panel reports WASM SIMD · CPU instead of WebGPU · FP32",
         "after a browser restart the enrolment, generation and vectors persist, the verified model loads from its OPFS copy and semantic queries work without re-indexing",
@@ -129,8 +131,8 @@
       ],
       "backend": "WebGPU · FP32",
       "runtimeNote": "Local runtime ready on WebGPU · FP32 from the cached model.",
-      "enableMs": 855,
-      "indexMs": 858,
+      "enableMs": 857,
+      "indexMs": 860,
       "model": {
         "chunkingVersion": "fts-v1:quixi-structural-utf16-v1:4096:64:arctic-xs-offsets-1.0.2:d15cd90acf9df739:256:code-v1:nul-space-v1",
         "dimensions": 384,
@@ -151,7 +153,7 @@
         },
         "route": "webgpu-fp32",
         "kind": "gpu",
-        "elapsedMs": 1191,
+        "elapsedMs": 1212,
         "checks": [
           {
             "id": "model_hash",
@@ -212,17 +214,17 @@
       },
       "faultInjected": true,
       "backendAfterFault": "WASM SIMD · CPU",
-      "restartMs": 814
+      "restartMs": 808
     }
   ],
   "sourceSha256": {
     "packages/app/src/features/semantic/controller.ts": "f0c5a3966e94f5f599a30c20ec825c6baa45b2ffbe6e198e02526c18dd6ab22a",
     "packages/app/src/features/semantic/SemanticPanel.tsx": "e739c669d2956950793219687b8812ae554ec8b889e10b60afe07b28ee2972d4",
     "packages/app/src/features/semantic/assets.ts": "5a6a55354edb2ffc06b7d53b0a07c3dfd4ace0493d19e520c20976281e41b3b1",
-    "packages/app/src/AppRoot.tsx": "d64f8df7660cb3ef56f1ad7f8d53520ab6713da68c7a3d3dda925072e9ce762d",
+    "packages/app/src/AppRoot.tsx": "93e7dc8c9fe53d6bc85abf2b3667f558f8623e0a8521412a19e7e90c82df15c8",
     "packages/app/src/runtime/library.ts": "9a4516954eb0dd4e586a4d6331793f1e034fa86423a6eebb9f756df940666bc5",
     "packages/app/tests/browser/index.ts": "4761368ee50f4f6ca525d4070945cd28315ea20232bc6b7e2ff07fbed596a62e",
-    "packages/app/tests/browser/semantic.mjs": "9b8d29067de7fb6a5d5737a765ee926c33c22e3b866007306b6d070ffe9ffeac",
+    "packages/app/tests/browser/semantic.mjs": "e5d94827b5379bcd196ddbd8b5ae7a857f27628af03a87d7c13846de4093ee98",
     "packages/app/tests/browser/semantic-run.mjs": "82308e5d9612affa141c5f06509f6d77453b40cc64c0fce0f996bdfc19d9041d",
     "packages/search/src/semantic/indexer.ts": "04c924d291e51d069801163e30ea98129e3562a63aa664ba16b1c854edd680cb",
     "packages/search/src/fusion.ts": "b5a7935c62378f67009ce0b4269602ce91d87b604ccc0f5cc63427c4e76bc011",
@@ -247,8 +249,8 @@
     "tooling/embedding-assets.ts": "8bfb50600a3f08e102854c97ee4350eb5f98aff1f13ee6cc082ec408bb202cfb",
     "packages/quixi-embed/src/service/self-test.ts": "c267bbe54a6e6cb2d5719fd001919f33149042406b96b304245967c09e4fc50a",
     "packages/quixi-embed/src/service/self-test-cases.ts": "9e2779ef8dd4112fa62561ee602bfe087151710be886eb174915385dd43472c9",
-    "packages/app/src/features/diagnostics/DiagnosticsPanel.tsx": "1f6926cdf5cc1efed1aa7fd31469cfed4a31f31c06d3ac927326595946074772",
-    "packages/app/src/features/diagnostics/report-controller.ts": "35c7edae23e85c6dee7e338d0b642504b9f21bf1270867eb5831f3c5f8cbe8e6",
+    "packages/app/src/features/diagnostics/DiagnosticsPanel.tsx": "8ebe179661b7c28604f9c1aadd326203295c06f0a6d4586891d9a8b691f9f50d",
+    "packages/app/src/features/diagnostics/report-controller.ts": "498f66810d7e5d1135aebd1873ba494bb59744202b33ebdd02779e53f6c8bdfb",
     "/Users/eric/QuixiChat/packages/quixi-embed/build/arctic-xs.qxmodel": "e1ef345cd35088b06f70c199f5a4e0311bda5983716ad6a3e7d0a604202efffc"
   },
   "environment": {
@@ -263,5 +265,5 @@
     "provisioned": true
   },
   "sourceStable": true,
-  "finishedAt": "2026-09-12T20:25:04.272Z"
+  "finishedAt": "2026-09-12T20:31:30.031Z"
 }
