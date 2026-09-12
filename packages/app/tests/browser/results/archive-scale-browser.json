@@ -1,0 +1,273 @@
+{
+  "status": "passed",
+  "startedAt": "2026-09-12T18:00:14.749Z",
+  "sizes": {
+    "threads": 300,
+    "perThread": 100,
+    "planted": 0,
+    "messages": 30000
+  },
+  "stepBounds": {
+    "maxRecords": 128,
+    "maxBytes": 1048576
+  },
+  "selectedEngines": [
+    "chromium",
+    "webkit"
+  ],
+  "hosts": [
+    {
+      "name": "chromium",
+      "status": "passed",
+      "checks": [
+        "portable export of 30000 messages produced 106.1 MB in 1537 bounded steps (≤128 records, ≤1 MiB each) and streamed out in 1698 chunks whose digest matches the job's",
+        "the portable bytes restore into an isolated candidate with 60900 canonical records at schema 12 after 2713 bounded validation steps; the active archive is untouched (the candidate is released, never activated)",
+        "a container with 64 KiB zeroed fails validation with a named cause (IO_ERROR) and the active archive stays intact: integrity ok, an exact search still answers",
+        "the open export is a TAR the system tar lists and extracts (5 entries); its 2 JSONL files parse line by line with JSON.parse into 91503 records with no invalid line, and its 1 Markdown files carry all 30000 message passages as plain text"
+      ],
+      "phases": {
+        "seed": {
+          "ms": 33394,
+          "batches": 255
+        },
+        "lexical": {
+          "ms": 55567,
+          "indexedChunks": 30000
+        },
+        "storageBefore": {
+          "usage": 440404668,
+          "quota": 11177822908,
+          "schemaVersion": 12
+        },
+        "portableExport": {
+          "jobId": "d6bececb-8903-4943-b395-3aa03d2ffe6e",
+          "byteLength": 111262208,
+          "sha256": "1a3c0b494c338eabf876f1b5596a2c5dc0c50022db37504d1eaa91028c007264",
+          "producedMs": 430134.1999999881,
+          "readMs": 175.69999998807907,
+          "advances": 1537,
+          "chunks": 1698,
+          "phases": [
+            "snapshot",
+            "encoding",
+            "ready"
+          ],
+          "entryCount": 0,
+          "completedRecords": 0
+        },
+        "restore": {
+          "state": "ready",
+          "failure": null,
+          "candidate": {
+            "archiveId": "77591e65-8a74-47f8-bf17-005e1284665d",
+            "schemaVersion": 12,
+            "canonicalRecords": 60900,
+            "syncOperations": 30600,
+            "blobCount": 0,
+            "blobBytes": 0,
+            "streamingGenerations": 0,
+            "defaultWorkspaceId": "f4c33727-9af7-4c66-86f6-a1f4513ebf02",
+            "manifestSha256": "f192376a9f296dfc9d3e4db6b35b5d5eba1d6928eaeab54c79f3c16f80fb6a5f"
+          },
+          "sourceSchemaVersion": null,
+          "sentMs": 31268.100000023842,
+          "validatedMs": 146830.80000001192,
+          "advances": 2713,
+          "phases": [
+            "schema_validation",
+            "record_validation",
+            "blob_validation",
+            "ready"
+          ]
+        },
+        "corruptRestore": {
+          "state": "failed",
+          "failure": {
+            "code": "IO_ERROR",
+            "reason": "Archive checksum claim is duplicate, missing or mismatched."
+          },
+          "candidate": null,
+          "sourceSchemaVersion": null,
+          "sentMs": 30334.5,
+          "validatedMs": 17.30000001192093,
+          "advances": 0,
+          "phases": []
+        },
+        "storageAfter": {
+          "usage": 1030995986,
+          "quota": 11768414226,
+          "integrity": "ok"
+        },
+        "openExport": {
+          "jobId": "32ca4c8d-c87f-4e86-9f6c-c48eafce08c0",
+          "byteLength": 67945472,
+          "sha256": "a4e163b530be8bfd9f79e2643697d8c16749ed3fcdef249da5eb8cf0d34bccdc",
+          "producedMs": 399374,
+          "readMs": 109,
+          "advances": 2209,
+          "chunks": 1037,
+          "phases": [
+            "snapshot",
+            "encoding",
+            "ready"
+          ],
+          "entryCount": 0,
+          "completedRecords": 91500
+        }
+      },
+      "openFormat": {
+        "entries": 5,
+        "jsonlFiles": 2,
+        "markdownFiles": 1,
+        "jsonlRecords": 91503,
+        "jsonlInvalidLines": 0,
+        "jsonlMessageRecords": 30000,
+        "jsonlThreadRecords": 300,
+        "markdownBytes": 19219211,
+        "markdownMessagePassages": 30000,
+        "sample": [
+          "checksums.jsonl",
+          "format.json",
+          "history.md",
+          "manifest.json",
+          "records.jsonl"
+        ]
+      }
+    },
+    {
+      "name": "webkit",
+      "status": "passed",
+      "checks": [
+        "portable export of 30000 messages produced 106.2 MB in 1537 bounded steps (≤128 records, ≤1 MiB each) and streamed out in 1700 chunks whose digest matches the job's",
+        "the portable bytes restore into an isolated candidate with 60900 canonical records at schema 12 after 2713 bounded validation steps; the active archive is untouched (the candidate is released, never activated)",
+        "a container with 64 KiB zeroed fails validation with a named cause (IO_ERROR) and the active archive stays intact: integrity ok, an exact search still answers",
+        "the open export is a TAR the system tar lists and extracts (5 entries); its 2 JSONL files parse line by line with JSON.parse into 91503 records with no invalid line, and its 1 Markdown files carry all 30000 message passages as plain text"
+      ],
+      "phases": {
+        "seed": {
+          "ms": 24141,
+          "batches": 255
+        },
+        "lexical": {
+          "ms": 38899,
+          "indexedChunks": 30000
+        },
+        "storageBefore": {
+          "usage": 474466867,
+          "quota": 20615843021,
+          "schemaVersion": 12
+        },
+        "portableExport": {
+          "jobId": "ff91d9c6-53cf-449e-9cab-3fcccd59ddfe",
+          "byteLength": 111360512,
+          "sha256": "bb572985089e3521352504319a868f3808095c1fa253dd4bb4c7fb89c6270522",
+          "producedMs": 84737,
+          "readMs": 243,
+          "advances": 1537,
+          "chunks": 1700,
+          "phases": [
+            "snapshot",
+            "encoding",
+            "ready"
+          ],
+          "entryCount": 0,
+          "completedRecords": 0
+        },
+        "restore": {
+          "state": "ready",
+          "failure": null,
+          "candidate": {
+            "archiveId": "df96d93a-7f2b-4712-b79c-579aa490185b",
+            "schemaVersion": 12,
+            "canonicalRecords": 60900,
+            "syncOperations": 30600,
+            "blobCount": 0,
+            "blobBytes": 0,
+            "streamingGenerations": 0,
+            "defaultWorkspaceId": "0d9365aa-08b1-4dcb-9155-e8a4e4ef6260",
+            "manifestSha256": "be5b4162c4361eac014e7c26ee457df7aea88eb1a6df84a48ce1254f27673857"
+          },
+          "sourceSchemaVersion": null,
+          "sentMs": 10106,
+          "validatedMs": 122966,
+          "advances": 2713,
+          "phases": [
+            "schema_validation",
+            "record_validation",
+            "blob_validation",
+            "ready"
+          ]
+        },
+        "corruptRestore": {
+          "state": "failed",
+          "failure": {
+            "code": "IO_ERROR",
+            "reason": "Archive checksum claim is duplicate, missing or mismatched."
+          },
+          "candidate": null,
+          "sourceSchemaVersion": null,
+          "sentMs": 10291,
+          "validatedMs": 9,
+          "advances": 0,
+          "phases": []
+        },
+        "storageAfter": {
+          "usage": 1426573875,
+          "quota": 20615843021,
+          "integrity": "ok"
+        },
+        "openExport": {
+          "jobId": "3cff6a12-973f-4b09-ac8a-f947e7faa43b",
+          "byteLength": 67945472,
+          "sha256": "cd536db02dd4bff911b924c8d3155e72daa3003e3a57e4adfa6531ab8103f08b",
+          "producedMs": 87066,
+          "readMs": 140,
+          "advances": 2209,
+          "chunks": 1037,
+          "phases": [
+            "snapshot",
+            "encoding",
+            "ready"
+          ],
+          "entryCount": 0,
+          "completedRecords": 91500
+        }
+      },
+      "openFormat": {
+        "entries": 5,
+        "jsonlFiles": 2,
+        "markdownFiles": 1,
+        "jsonlRecords": 91503,
+        "jsonlInvalidLines": 0,
+        "jsonlMessageRecords": 30000,
+        "jsonlThreadRecords": 300,
+        "markdownBytes": 19219211,
+        "markdownMessagePassages": 30000,
+        "sample": [
+          "checksums.jsonl",
+          "format.json",
+          "history.md",
+          "manifest.json",
+          "records.jsonl"
+        ]
+      }
+    }
+  ],
+  "sourceSha256": {
+    "packages/storage/src/worker/archives/export.ts": "8b7ce6aba6b9045b17354464b720e07459672baf06accd7d5834c0e3bb07bcb7",
+    "packages/storage/src/worker/archives/index.ts": "f3425fec39bb0d372c715f4ef89f63adef7f4a1728dc4ac3c3a6af99c52d74c2",
+    "packages/core/src/contracts/archives.ts": "db664351740b6fa07eb08a285c9be6b123f7c6d8dde344d8b966d4a9f0ff442f",
+    "packages/app/tests/browser/index.ts": "82d96ea8a51492cf96727a83f194def7395aaa17302655f7ecf4861dde3cb57f",
+    "packages/app/tests/browser/archive-scale.mjs": "08a4e75f9b65899298a746c44d7c3c3aab25cdf9680ca24218be7e9664892663"
+  },
+  "environment": {
+    "platform": "darwin",
+    "release": "25.6.0",
+    "arch": "arm64",
+    "cpu": "Apple M5 Max",
+    "osVersion": "26.6.2",
+    "node": "v22.23.1"
+  },
+  "qualification": "Synthetic short messages seeded through the production worker; the page runs with the embedding model unprovisioned and no Cloud account. Timings are single runs under development load on one machine.",
+  "finishedAt": "2026-09-12T18:25:30.004Z"
+}

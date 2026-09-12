@@ -1,6 +1,6 @@
 # 09 — Add portable archives and open export
 
-**Status:** In progress — portable/open export, managed activation, shared replacement UI, retained-history recovery and schema-8 candidate upgrade pass production-path Chromium/WebKit checks; cross-host, scale and host gates remain open
+**Status:** In progress — portable/open export, managed activation, shared replacement UI, retained-history recovery and schema-8 candidate upgrade pass production-path Chromium/WebKit checks; cross-host and host gates remain open; the scale gate passed on 2026-09-12 ([archive-scale.md](../validation/archive-scale.md))
 
 **Workstream:** A7 — ownership and recovery
 
@@ -28,7 +28,7 @@ Let users export a complete local archive, restore it on another supported host,
 
 - [x] Freeze and document an archive manifest/version contract covering quixi.sqlite, blob references, included data, source schema version, and integrity checks.
 - [x] Implement a consistent database snapshot/export while the worker owns SQLite. Define how concurrent mutations are handled so exported metadata and blobs agree.
-- [ ] Stream archive production and consumption with bounded memory, progress, cancellation, temporary-file cleanup, and storage-capacity checks.
+- [ ] Stream archive production and consumption with bounded memory, progress, cancellation, temporary-file cleanup, and storage-capacity checks. — Production and consumption are bounded and streamed at scale ([archive-scale.md](../validation/archive-scale.md): 30,000 messages, 106 MB portable and 65 MB open exports in ≤ 1 MiB / ≤ 128-record steps with phase progress, an isolated restore validating 60,900 records in bounded steps); cancellation and cleanup are covered by the archive tests (allocation/cancellation failures unlink only private output). Open: an explicit storage-capacity check before an export or restore begins.
 - [x] Implement restore validation for manifest/schema compatibility, corrupt or missing blobs, and incomplete archives. Stage and validate restoration before replacing an active archive; make replacement intent explicit to the user. Manifest, container, schema, record, topology, journal and blob validation run in an isolated candidate ([archive proof](../../packages/storage/tests/archives/README.md)); rescue archives (`kind: "rescue"`, [ADR 0016](../decisions/0016-startup-failure-and-schema-recovery.md)) and portable archives whose ledger is a strict prefix from schema 8 are upgraded in that candidate through the fresh-schema copy before validation and review, while lower, newer or differing ledgers are refused by name ([retained proof](../../packages/storage/tests/retained/README.md#rescue-export)); replacement is an explicit reviewed action in the [shared UI](../../packages/app/src/features/archives/tests/browser/README.md).
 - [x] Implement JSONL and Markdown export plus attachment files. Preserve roles, branches, generation metadata, provenance, and unsupported-part descriptions sufficiently for independent interpretation.
 - [x] Allow derived search data to be excluded and schedule local rebuilds after restoration. Keep credentials and host secret material out of archive and open exports.
@@ -42,9 +42,9 @@ Let users export a complete local archive, restore it on another supported host,
 ## Acceptance criteria
 
 - [ ] An archive exported from one supported host restores on another with matching canonical records, branches, provenance, and blob hashes.
-- [ ] A restore failure leaves the previous usable archive intact and reports the cause.
-- [ ] JSONL and Markdown text can be read with ordinary tools without running Quixi.
-- [ ] Exports remain bounded at large archive sizes and do not require embeddings or a Cloud account.
+- [x] A restore failure leaves the previous usable archive intact and reports the cause. — [archive-scale.md](../validation/archive-scale.md): a 106 MB container with 64 KiB zeroed is refused at the checksum claim with a named code and reason in both engines, and the active archive keeps integrity "ok" and answers an exact search afterwards; the archive proofs cover corrupt graph/schema/journal refusals and schema-7 refusal by name.
+- [x] JSONL and Markdown text can be read with ordinary tools without running Quixi. — [archive-scale.md](../validation/archive-scale.md): the system `tar` lists and extracts the open export; `records.jsonl` and `checksums.jsonl` parse line by line with `JSON.parse` (91,503 records, no invalid line, 30,000 message and 300 thread records); `history.md` carries all 30,000 message passages as plain text.
+- [x] Exports remain bounded at large archive sizes and do not require embeddings or a Cloud account. — [archive-scale.md](../validation/archive-scale.md): 30,000 messages export in 1,537 (portable) and 2,209 (open) bounded steps and stream out in 64 KiB chunks in both engines, on a page with no embedding model and no Cloud account.
 
 ## Implementation evidence
 

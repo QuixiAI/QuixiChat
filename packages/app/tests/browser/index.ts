@@ -248,7 +248,7 @@ Object.assign(window, {
     async seedImageThread(pngBase64: string, title = "Image thread") {
       const id = () => crypto.randomUUID();
       const bytes = Uint8Array.from(atob(pngBase64), (character) => character.charCodeAt(0));
-      const sha256 = [...new Uint8Array(await crypto.subtle.digest("SHA-256", bytes))].map((byte) => byte.toString(16).padStart(2, "0")).join("");
+      const sha256 = [...new Uint8Array(await crypto.subtle.digest("SHA-256", new Uint8Array(bytes)))].map((byte) => byte.toString(16).padStart(2, "0")).join("");
       const { workspaceId } = await storage.request(id(), "archiveWorkspace", null);
       const stage = await storage.request(id(), "beginBlobTransfer", { operationId: id(), purpose: "attachment", expectedBytes: bytes.length, expectedSha256: sha256 });
       await storage.sendChunk({ transferId: stage.transferId, sequence: 0, offset: 0, bytes, final: false });
@@ -489,6 +489,90 @@ Object.assign(window, {
       }
       if (pending.length) await commit(pending);
       return { seedMs: performance.now() - started, batches, longThreadId: long.threadId };
+    },
+    /** Plan 09 scale proof: portable and open exports and an isolated restore
+     * of a large archive through the production client, with bounded advance
+     * steps; bytes stay in this page for the runner to read in slices. */
+    archiveScale: {
+      bytes: new Map<string, Uint8Array>(),
+      async export(options: { format: "portable" | "open" }) {
+        const id = () => crypto.randomUUID();
+        const started = performance.now();
+        const operationId = id();
+        let job = await storage.request(id(), "beginArchiveExport", { operationId, format: options.format });
+        let advances = 0;
+        const phases: string[] = [];
+        while (job.state === "working") {
+          job = await storage.request(id(), "advanceArchiveJob", { operationId: id(), jobId: job.jobId, maxRecords: 128, maxBytes: 1_048_576 });
+          advances++;
+          if (phases.at(-1) !== job.phase) phases.push(job.phase);
+          if (advances > 1_000_000) throw new Error("Export did not finish");
+        }
+        if (job.state !== "ready" || !job.output) throw new Error(`Export ended ${job.state}: ${job.failure?.reason ?? "no output"}`);
+        const producedMs = performance.now() - started;
+        const source = await storage.request(id(), "openArchiveExport", { jobId: job.jobId });
+        const parts: Uint8Array[] = [];
+        let received = 0, chunks = 0;
+        for (;;) {
+          const chunk = await storage.readChunk(source.transferId);
+          parts.push(chunk.bytes); received += chunk.bytes.length; chunks++;
+          await storage.acknowledgeChunk({ transferId: source.transferId, sequence: chunk.sequence, committedOffset: chunk.offset + chunk.bytes.length });
+          if (chunk.final) break;
+        }
+        const bytes = new Uint8Array(received);
+        let at = 0; for (const part of parts) { bytes.set(part, at); at += part.length; }
+        const digest = Array.from(new Uint8Array(await crypto.subtle.digest("SHA-256", new Uint8Array(bytes))), (b) => b.toString(16).padStart(2, "0")).join("");
+        if (digest !== source.sha256 || received !== source.byteLength) throw new Error("Export bytes do not match the job's digest");
+        this.bytes.set(options.format, bytes);
+        await storage.request(id(), "releaseArchiveJob", { operationId: id(), jobId: job.jobId });
+        return { jobId: job.jobId, byteLength: received, sha256: digest, producedMs, readMs: performance.now() - started - producedMs, advances, chunks, phases, entryCount: job.entryCount, completedRecords: job.completedRecords };
+      },
+      slice(format: "portable" | "open", offset: number, length: number) {
+        const bytes = this.bytes.get(format);
+        if (!bytes) throw new Error("No export bytes");
+        let text = ""; const part = bytes.subarray(offset, offset + length);
+        for (let i = 0; i < part.length; i += 0x8000) text += String.fromCharCode(...part.subarray(i, i + 0x8000));
+        return btoa(text);
+      },
+      /** Sends the retained portable bytes into an isolated restore candidate and validates it; never activates.
+       * With `corrupt`, a 64 KiB run in the middle of the container is zeroed first: the
+       * validation must fail with a named cause while the active archive stays usable. */
+      async restore(options: { corrupt?: boolean } = {}) {
+        const id = () => crypto.randomUUID();
+        const retained = this.bytes.get("portable");
+        if (!retained) throw new Error("No portable export to restore");
+        const bytes = options.corrupt ? (() => { const copy = new Uint8Array(retained); copy.fill(0, Math.floor(copy.length / 2), Math.floor(copy.length / 2) + 65536); return copy; })() : retained;
+        const started = performance.now();
+        const jobId = id();
+        const digest = Array.from(new Uint8Array(await crypto.subtle.digest("SHA-256", new Uint8Array(bytes))), (b) => b.toString(16).padStart(2, "0")).join("");
+        const begun = await storage.request(id(), "beginArchiveRestore", { operationId: jobId, expectedBytes: bytes.length, expectedSha256: digest });
+        let offset = 0, sequence = 0;
+        while (offset < bytes.length) {
+          const part = bytes.subarray(offset, offset + begun.inputTransfer.maxChunkBytes);
+          await storage.sendChunk({ transferId: begun.inputTransfer.transferId, sequence: sequence++, offset, bytes: part, final: offset + part.length === bytes.length });
+          offset += part.length;
+        }
+        const sentMs = performance.now() - started;
+        let advances = 0; const phases: string[] = [];
+        let result: { state: string; failure: { code: string; reason: string } | null; candidate: unknown; sourceSchemaVersion: number | null; sentMs: number; validatedMs: number; advances: number; phases: string[] };
+        try {
+          let job = await storage.request(id(), "finishArchiveRestore", { operationId: id(), jobId, byteLength: bytes.length, sha256: digest });
+          while (job.state === "working") {
+            job = await storage.request(id(), "advanceArchiveJob", { operationId: id(), jobId, maxRecords: 128, maxBytes: 1_048_576 });
+            advances++;
+            if (phases.at(-1) !== job.phase) phases.push(job.phase);
+            if (advances > 1_000_000) throw new Error("Restore validation did not finish");
+          }
+          result = { state: job.state, failure: job.failure, candidate: job.candidate, sourceSchemaVersion: job.sourceSchemaVersion ?? null, sentMs, validatedMs: performance.now() - started - sentMs, advances, phases };
+        } catch (error) {
+          // A refusal raised at the boundary is also a reported cause: the job never becomes ready.
+          const failure = error as { code?: string; message?: string };
+          result = { state: "failed", failure: { code: String(failure.code ?? "REFUSED"), reason: String(failure.message ?? error) }, candidate: null, sourceSchemaVersion: null, sentMs, validatedMs: performance.now() - started - sentMs, advances, phases };
+        }
+        await storage.request(id(), "cancelArchiveJob", { operationId: id(), jobId }).catch(() => {});
+        return result;
+      },
+      diagnostics: () => storage.request(crypto.randomUUID(), "diagnostics", null),
     },
     async prepareUnclaimedExport() {
       let job = await storage.request(
