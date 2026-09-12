@@ -14,7 +14,7 @@ Completed plans: **02, 03, 08, 14, 16, 17, 18, 20 and 22** (canonical contracts 
 the shared chat and library UI, document extraction/search, embedding reference, scalar
 encoder, SIMD and bounded embedding scheduler, compressed large-index retrieval). Plans **01, 04, 05, 06, 07, 09, 10, 11, 13, 19, 21 and 23** have work underway
 for platform qualification, imports, host adapters, providers, lexical search,
-shared UI, archives, provider switching, browser-extension import, WebGPU release qualification, semantic search and diagnostics. Two other in-scope plans remain planned; OCR and the two Cloud plans are deferred. Detailed evidence and
+archives, provider switching, browser-extension import, WebGPU release qualification, semantic search and diagnostics. Two other in-scope plans remain planned; OCR and the two Cloud plans are deferred. Detailed evidence and
 remaining gates live in each numbered file; this summary does not count a working
 feature slice as a completed plan. The [storage matrix](../validation/storage-proof.md)
 separates measured behavior from outstanding platform and release gates.
