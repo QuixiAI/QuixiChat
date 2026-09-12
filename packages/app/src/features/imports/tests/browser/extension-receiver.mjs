@@ -90,5 +90,33 @@ export async function exerciseExtensionReceiver({ page, fixtureBytes, host }) {
   await expect.poll(async () => (await replies()).find((reply) => reply.offerId === declineId)?.kind).toBe('rejected');
   await expect(page.getByRole('group', { name: 'Extension offer' })).toHaveCount(0);
   host.checks.push('declining an offer reports the refusal to the extension and leaves no staged bytes');
+  // 5. A storage fault during an accepted bundle's import is reported to the
+  // extension as paused with its cause, the run is saved, and Resume finishes
+  // it from the staged bytes without a second transfer; the saved report
+  // carries the extension's provenance and discovery counts.
+  const retryId = crypto.randomUUID();
+  await page.getByLabel('Source account label').fill('Extension retry');
+  await page.evaluate(() => window.panelTest.failNext('importWorkSeal'));
+  await page.evaluate(({ id, bundle, code }) => window.extensionSender.offer(id, code, bundle), { id: retryId, bundle: bundle(crypto.randomUUID()), code });
+  await page.getByRole('group', { name: 'Extension offer' }).getByRole('button', { name: 'Accept and import', exact: true }).click();
+  // A storage fault pauses the run with its cause (progress is retained, so it is resumable), and that is the outcome the extension receives.
+  await expect.poll(async () => (await replies()).find((reply) => reply.offerId === retryId && reply.kind === 'imported')?.outcome, { timeout: 60_000 }).toBe('paused');
+  const failedReport = (await replies()).find((reply) => reply.offerId === retryId && reply.kind === 'imported');
+  assert.match(String(failedReport.reason), /Synthetic storage failure/);
+  await expect(page.getByRole('alert')).toContainText('Synthetic storage failure');
+  const failedRun = (await page.evaluate(() => window.panelTest.runs())).items.find((run) => run.accountScope === 'Extension retry');
+  assert.equal(failedRun.state, 'paused', 'the failed accepted bundle is a saved run');
+  assert.match(String(failedRun.summary.lastMessage), /Synthetic storage failure/);
+  const transfersBefore = (await replies()).filter((reply) => reply.kind === 'accepted').length;
+  await page.getByRole('button', { name: 'Resume selected import', exact: true }).click();
+  await expect(page.getByRole('status').filter({ hasText: 'Import complete.' })).toBeVisible({ timeout: 60_000 });
+  assert.equal((await replies()).filter((reply) => reply.kind === 'accepted').length, transfersBefore, 'the retry uses the staged bytes; no second transfer');
+  const retriedRun = (await page.evaluate(() => window.panelTest.runs())).items.find((run) => run.accountScope === 'Extension retry');
+  assert.equal(retriedRun.state, 'complete');
+  const provenance = page.getByTestId('import-extension-provenance');
+  await expect(provenance).toContainText('Received from the browser extension');
+  await expect(provenance).toContainText('extractor synthetic-sender (page extraction)');
+  await expect(provenance).toContainText('discovered 1 conversation');
+  host.checks.push('a storage fault during an accepted bundle is reported to the extension as paused with its cause, the run is saved with that cause, Resume finishes it from the staged bytes without a second transfer, and the saved report shows the extension provenance and discovery counts');
   return { pairingCodeShape: 'six digits', sha256 };
 }

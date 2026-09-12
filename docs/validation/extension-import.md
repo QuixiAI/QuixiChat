@@ -88,3 +88,22 @@ not report its initial "offering" state.
 - Firefox/Safari extension platforms, desktop (Tauri) pairing and a resume
   after the extension page itself is closed (the OPFS stage survives; the UI
   has no "resume last bundle" control yet) remain open.
+
+## Retry and saved report — 2026-09-12
+
+The panel proof gained a fifth extension scenario, now 18 checks per engine
+in Chromium and WebKit (retained record refreshed): the fixture makes the
+next `importWorkSeal` storage request fail once while an accepted bundle is
+importing. The run is saved `paused` with that cause, the extension receives
+outcome `paused` with the same reason, the panel shows the error, and
+"Resume selected import" completes the run from the staged bytes with no
+second transfer (the count of `accepted` replies does not change). Import
+details then show "Received from the browser extension · extractor
+synthetic-sender (page extraction) · discovered 1 conversation, 1 attachment
+(1 unavailable) · from …", the discovery counts the extension reported.
+
+Environment note: WebKit shares one OPFS per origin across Playwright
+profiles, and the web host retains at most four temporary downloads per
+origin, so repeated WebKit runs that saved a report eventually refused the
+next save. The fixture now clears retained downloads before mounting; the
+product behaviour (bounded retention with explicit cleanup) is unchanged.
