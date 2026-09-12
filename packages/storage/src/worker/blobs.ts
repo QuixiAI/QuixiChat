@@ -438,6 +438,26 @@ export class OpfsBlobStore {
     try { return (await handle.getFile()).size; }
     catch (error) { throw ioError(error); }
   }
+  /** Reviewed cleanup (plan 23): removes one published content file. Refused
+   * while a verified read holds it; the caller has already established that
+   * nothing references the digest. Returns the removed size, or null when
+   * the file was already absent. */
+  async deletePublished(sha256: string): Promise<number | null> {
+    this.checkOpen();
+    if (!validDigest(sha256)) throw new BlobStorageError("INVALID_REQUEST", "Invalid blob digest");
+    if (this.readFiles.has(sha256)) throw new BlobStorageError("CONFLICT", "The file is open for a verified read");
+    try {
+      let directory: FileSystemDirectoryHandle;
+      try { directory = await this.blobs.getDirectoryHandle(sha256.slice(0, 2)); }
+      catch (error) { if (error instanceof DOMException && error.name === "NotFoundError") return null; throw error; }
+      const handle = await exists(directory, sha256);
+      if (!handle) return null;
+      const size = (await handle.getFile()).size;
+      await directory.removeEntry(sha256);
+      return size;
+    } catch (error) { throw ioError(error); }
+    finally { this.inventoryRevision++; }
+  }
   async *inspectInventory(): AsyncGenerator<{
     kind: 'prefix' | 'blob' | 'staged' | 'unknown';
     sha256: string | null; path: string | null; byteLength: number | null;

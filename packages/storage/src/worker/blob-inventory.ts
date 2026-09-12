@@ -1,6 +1,6 @@
 import {
   assertBlobInventoryArgs, BLOB_INVENTORY_KINDS,
-  type BlobInventoryFinding, type BlobInventoryFindingKind, type BlobInventoryPage,
+  type BlobInventoryFinding, type BlobInventoryFindingKind, type BlobInventoryPage, type BlobCleanupResult, type BlobCleanupRefusal,
   type BlobInventoryStatus, type PageBudget,
 } from '@quixi/core/contracts';
 import { BlobStorageError, type OpfsBlobStore } from './blobs.ts';
@@ -63,13 +63,16 @@ export class BlobInventoryRepository {
       sequence INTEGER PRIMARY KEY, kind TEXT NOT NULL, sha256 TEXT, path TEXT,
       expected_bytes INTEGER, actual_bytes INTEGER, refs INTEGER NOT NULL
     ) STRICT;
-    CREATE TEMP TABLE IF NOT EXISTS ${EPOCH}(revision INTEGER NOT NULL) STRICT;`);
+    CREATE TEMP TABLE IF NOT EXISTS ${EPOCH}(revision INTEGER NOT NULL, last_change TEXT NOT NULL DEFAULT '') STRICT;`);
     if (!this.rows(`SELECT revision FROM ${EPOCH} LIMIT 1`).length)
-      this.write(`INSERT INTO ${EPOCH} VALUES(0)`);
+      this.write(`INSERT INTO ${EPOCH}(revision) VALUES(0)`);
+    // The catalog's verification fields change when background indexing reads a
+    // text blob; findings depend only on digest and size, so those updates do
+    // not invalidate a scan.
     for (const table of SOURCES) {
       for (const operation of ['INSERT', 'UPDATE', 'DELETE'])
         this.write(`CREATE TEMP TRIGGER IF NOT EXISTS ${EPOCH}_${table}_${operation}
-          AFTER ${operation} ON main.${table} BEGIN UPDATE ${EPOCH} SET revision=revision+1; END;`);
+          AFTER ${operation} ON main.${table}${table === 'quixi_blob_catalog' && operation === 'UPDATE' ? ' WHEN NEW.sha256 IS NOT OLD.sha256 OR NEW.byte_length IS NOT OLD.byte_length' : ''} BEGIN UPDATE ${EPOCH} SET revision=revision+1,last_change='${table} ${operation.toLowerCase()}'; END;`);
     }
     this.initialized = true;
   }
@@ -87,10 +90,11 @@ export class BlobInventoryRepository {
   }
   private async refresh(scanId: string): Promise<BlobInventoryStatus> {
     const state = this.require(scanId);
-    if ((state.state === 'running' || state.state === 'complete') &&
-        (this.epoch() !== this.revision || this.bytes.inventoryEpoch !== this.fileRevision || this.externalVersion() !== this.dataVersion)) {
+    if (state.state === 'running' || state.state === 'complete') {
+      const changed = this.epoch() !== this.revision ? `saved records or transfers changed (${String(this.rows(`SELECT last_change FROM ${EPOCH} LIMIT 1`)[0]?.last_change ?? '')})` : this.bytes.inventoryEpoch !== this.fileRevision ? 'stored files changed' : this.externalVersion() !== this.dataVersion ? 'another connection wrote to the archive' : null;
+      if (!changed) return state;
       state.state = 'stale'; state.updatedAt = Date.now();
-      state.message = 'Archive or managed blob state changed; start a new scan.';
+      state.message = `Archive or managed blob state changed (${changed}); start a new scan.`;
       await this.releaseIterator();
     }
     return state;
@@ -264,6 +268,36 @@ export class BlobInventoryRepository {
       state.state = 'cancelled'; state.updatedAt = Date.now(); state.message = 'Blob inventory was cancelled.';
     }
     await this.releaseIterator(); return this.snapshot();
+  }
+  /** Reviewed cleanup: each digest must be an orphan finding of this complete,
+   * current scan and still unreferenced and unprotected in its scratch; the
+   * file (and a catalog row with no references) is then removed. Any refusal
+   * is named per digest; the scan reads stale afterwards because files changed. */
+  async deleteOrphans(scanId: string, sha256s: string[]): Promise<BlobCleanupResult> {
+    assertBlobInventoryArgs('deleteOrphanBlobs', { scanId, sha256s });
+    const state = await this.refresh(scanId);
+    const deleted: BlobCleanupResult['deleted'] = [], refused: BlobCleanupResult['refused'] = [];
+    const refuse = (sha256: string, reason: BlobCleanupRefusal) => refused.push({ sha256, reason });
+    if (state.state !== 'complete') { for (const sha256 of sha256s) refuse(sha256, 'stale'); return { scanId, deleted, refused, status: this.snapshot() }; }
+    for (const sha256 of sha256s) {
+      if (state.state !== 'complete') { refuse(sha256, 'stale'); continue; }
+      if (!this.rows(`SELECT 1 FROM ${FINDINGS} WHERE kind='orphan_blob' AND sha256=? LIMIT 1`, [sha256]).length) { refuse(sha256, 'not_a_finding'); continue; }
+      const row = this.rows(`SELECT refs,protected,catalog_bytes FROM ${REFS} WHERE sha256=?`, [sha256])[0];
+      if (row && Number(row.refs) > 0) { refuse(sha256, 'referenced'); continue; }
+      if (row && Number(row.protected) > 0) { refuse(sha256, 'protected'); continue; }
+      let byteLength: number | null;
+      try { byteLength = await this.bytes.deletePublished(sha256); }
+      catch (error) { refuse(sha256, error instanceof BlobStorageError && error.code === 'CONFLICT' ? 'in_use' : 'missing'); continue; }
+      if (byteLength === null) { refuse(sha256, 'missing'); continue; }
+      let catalogRemoved = false;
+      if (row && row.catalog_bytes !== null) { this.write('DELETE FROM quixi_blob_catalog WHERE sha256=?', [sha256]); catalogRemoved = true; }
+      deleted.push({ sha256, byteLength, catalogRemoved });
+      // Deleting changes the file and catalog epochs; later digests in the same
+      // request are still judged by this scan, which was current when it began.
+      this.revision = this.epoch(); this.fileRevision = this.bytes.inventoryEpoch; this.dataVersion = this.externalVersion();
+    }
+    if (deleted.length) { state.state = 'stale'; state.updatedAt = Date.now(); state.message = `${deleted.length} unreferenced file${deleted.length === 1 ? '' : 's'} deleted; start a new scan.`; }
+    return { scanId, deleted, refused, status: this.snapshot() };
   }
   async close(): Promise<void> {
     this.closed = true;

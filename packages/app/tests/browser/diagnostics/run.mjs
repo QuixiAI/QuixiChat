@@ -12,7 +12,7 @@ let server;
 const save = async () => { await mkdir('test-results', { recursive: true }); await writeFile('test-results/app-storage-health-browser.json', JSON.stringify(proof, null, 2) + '\n'); };
 const sourceFiles = [
   'packages/app/src/AppRoot.tsx', 'packages/app/src/features/diagnostics/controller.ts', 'packages/app/src/features/diagnostics/StorageHealthPanel.tsx', 'packages/app/src/features/diagnostics/diagnostics.css',
-  'packages/app/src/features/diagnostics/report-controller.ts', 'packages/app/src/features/diagnostics/DiagnosticsPanel.tsx', 'packages/app/src/features/diagnostics/export.ts', 'packages/app/src/features/diagnostics/DoctorAuditPanel.tsx', 'packages/app/src/features/diagnostics/BlobHashAuditPanel.tsx', 'packages/core/src/contracts/blob-hash-audit.ts', 'packages/storage/src/worker/blob-hash-audit.ts', 'packages/core/src/contracts/doctor-audit.ts', 'packages/storage/src/worker/doctor-audit.ts', 'packages/core/src/contracts/diagnostics.ts', 'packages/storage/src/worker/diagnostics.ts',
+  'packages/app/src/features/diagnostics/report-controller.ts', 'packages/app/src/features/diagnostics/DiagnosticsPanel.tsx', 'packages/app/src/features/diagnostics/export.ts', 'packages/app/src/features/diagnostics/DoctorAuditPanel.tsx', 'packages/app/src/features/diagnostics/BlobHashAuditPanel.tsx', 'packages/app/src/features/diagnostics/cleanup-controller.ts', 'packages/core/src/contracts/blob-hash-audit.ts', 'packages/storage/src/worker/blob-hash-audit.ts', 'packages/core/src/contracts/doctor-audit.ts', 'packages/storage/src/worker/doctor-audit.ts', 'packages/core/src/contracts/diagnostics.ts', 'packages/storage/src/worker/diagnostics.ts',
   'packages/app/tests/browser/diagnostics/index.ts', 'packages/app/tests/browser/diagnostics/index.html', 'packages/app/tests/browser/diagnostics/run.mjs',
   'packages/core/src/contracts/blob-inventory.ts', 'packages/core/src/contracts/storage.ts', 'packages/storage/tests/blob-inventory/fixture.ts', 'packages/storage/tests/blob-inventory/fixture-worker.ts',
   'packages/storage/tests/isolated-client.ts', 'packages/storage/tests/isolated-worker.ts', 'packages/storage/src/worker/archive-runtime.ts', 'packages/storage/src/worker/archive-database.ts',
@@ -38,7 +38,7 @@ try {
       await expect.poll(() => page.evaluate(() => !!window.storageHealthAcceptance)).toBe(true);
     };
     try {
-      await open(); const baseline = await page.evaluate(() => window.storageHealthAcceptance.fixture.baseline);
+      await open(); const baseline = await page.evaluate(() => window.storageHealthAcceptance.fixture.baseline); const digests = await page.evaluate(() => window.storageHealthAcceptance.fixture.digests);
       expect(await inventory(page)).toHaveLength(0);
       await page.getByRole('button', { name: 'Storage health', exact: true }).click(); expect(await inventory(page)).toHaveLength(0);
       await panel(page).getByRole('button', { name: 'Start storage scan', exact: true }).focus(); await page.keyboard.press('Enter');
@@ -54,8 +54,10 @@ try {
       for (const label of labels) await expect(panel(page).locator('.storage-health-counts dt').filter({ hasText: label })).toHaveCount(1);
       const counts = await panel(page).locator('.storage-health-counts dd').allTextContents(); expect(counts.every(value => Number(value.replaceAll(',', '')) > 0)).toBe(true);
       await expect(panel(page)).not.toContainText('unrecognized-private-name.txt'); await expect(panel(page)).not.toContainText('unrecognized-stage-name.tmp'); await expect(panel(page)).not.toContainText('private-child.txt'); await expect(panel(page)).not.toContainText('Original bytes must remain unchanged');
-      expect(await panel(page).getByRole('button').allTextContents()).toEqual(['Start a new scan', 'First findings', 'Next findings']);
-      evidence.checks.push('All seven finding categories have counts and plain-language guidance; managed identifiers reveal no synthetic private names or original content and no deletion control exists');
+      expect(await panel(page).getByRole('button').allTextContents()).toEqual(['Start a new scan', 'First findings', 'Next findings', 'Review deletion…']);
+      await expect(panel(page).getByRole('button', { name: 'Review deletion…', exact: true })).toBeDisabled();
+      await expect(panel(page).getByTestId('cleanup-scope')).toContainText('No files selected');
+      evidence.checks.push('All seven finding categories have counts and plain-language guidance; managed identifiers reveal no synthetic private names or original content, and the only deletion control is disabled until unreferenced files are ticked');
       const firstDigest = await panel(page).getByRole('list', { name: 'Storage findings', exact: true }).getAttribute('start');
       await panel(page).getByRole('button', { name: 'Next findings', exact: true }).focus(); await page.keyboard.press('Enter');
       await expect(panel(page).getByRole('heading', { name: 'Storage findings', exact: true })).toBeFocused();
@@ -187,6 +189,38 @@ try {
       await expect(hashing.getByRole('list', { name: 'Verification findings', exact: true }).getByRole('listitem').filter({ hasText: 'File content differs from its digest' })).toContainText(corrupted.sha256);
       evidence.hashAudit.corrupted = await hashCounts();
       evidence.checks.push('after the referenced attachment file is rewritten with different bytes of the same length, verification reports it as content differing from its digest, naming that digest, beside the size and missing findings');
+      // Reviewed cleanup (plan 23): explicit selection, visible scope, confirmation, worker re-check, named refusals.
+      await open(true); await page.getByRole('button', { name: 'Storage health', exact: true }).click();
+      await panel(page).getByRole('button', { name: 'Start storage scan', exact: true }).click(); await complete(page);
+      const orphansBefore = Number((await panel(page).locator('.storage-health-counts div').filter({ hasText: 'Unreferenced stored file' }).locator('dd').textContent()).replaceAll(',', ''));
+      const boxes = panel(page).getByRole('checkbox', { name: 'Select this unreferenced file for deletion' });
+      expect(await boxes.count()).toBeGreaterThanOrEqual(2);
+      await boxes.nth(0).check(); await boxes.nth(1).check();
+      await expect(panel(page).getByTestId('cleanup-scope')).toContainText('2 unreferenced files selected');
+      const selectedDigests = await panel(page).locator('.storage-health-findings li').filter({ has: page.getByRole('checkbox', { checked: true }) }).evaluateAll(nodes => nodes.map(node => node.querySelector('code').textContent));
+      expect(selectedDigests).toHaveLength(2);
+      await panel(page).getByRole('button', { name: 'Review deletion…', exact: true }).click();
+      const review = panel(page).getByTestId('cleanup-review');
+      await expect(review).toContainText('Delete 2 unreferenced files'); await expect(review).toContainText('cannot be undone');
+      for (const digest of selectedDigests) await expect(review).toContainText(digest);
+      await review.getByRole('button', { name: 'Keep the files', exact: true }).click(); await expect(panel(page).getByTestId('cleanup-review')).toHaveCount(0);
+      const untouched = await page.evaluate(() => window.storageHealthAcceptance.counts());
+      await panel(page).getByRole('button', { name: 'Review deletion…', exact: true }).click();
+      await review.getByRole('button', { name: 'Delete 2 files', exact: true }).click();
+      await expect(panel(page).getByTestId('cleanup-result')).toContainText('Deleted 2 unreferenced files');
+      await expect(panel(page).getByRole('status').filter({ hasText: 'Storage changed' })).toBeVisible();
+      const scanBefore = await page.evaluate(() => window.storageHealthAcceptance.scanId());
+      const staleRefusal = await page.evaluate(([scanId, digest]) => window.storageHealthAcceptance.deleteOrphans(scanId, [digest]), [scanBefore, selectedDigests[0]]);
+      expect(staleRefusal.refused.map(item => item.reason)).toEqual(['stale']); expect(staleRefusal.deleted).toEqual([]);
+      await panel(page).getByRole('button', { name: 'Start a new scan', exact: true }).click(); await complete(page);
+      const orphansAfter = Number((await panel(page).locator('.storage-health-counts div').filter({ hasText: 'Unreferenced stored file' }).locator('dd').textContent()).replaceAll(',', ''));
+      expect(orphansAfter).toBe(orphansBefore - 2);
+      const scanAfter = await page.evaluate(() => window.storageHealthAcceptance.scanId());
+      const refused = await page.evaluate(([scanId, referenced, protectedDigest]) => window.storageHealthAcceptance.deleteOrphans(scanId, [referenced, protectedDigest, 'f'.repeat(64)]), [scanAfter, digests.attachment, digests.publishedProtected]);
+      expect(refused.deleted).toEqual([]); expect(refused.refused.map(item => item.reason)).toEqual(['not_a_finding', 'not_a_finding', 'not_a_finding']);
+      expect((await page.evaluate(() => window.storageHealthAcceptance.counts()))).toEqual(untouched);
+      evidence.cleanup = { orphansBefore, orphansAfter, deleted: selectedDigests, refusals: refused.refused.map(item => item.reason) };
+      evidence.checks.push(`Reviewed cleanup: two ticked unreferenced files are shown with their digests and total size before a separate confirmation; Keep the files changes nothing; confirming deletes exactly those two (orphan count ${orphansBefore} → ${orphansAfter}), the scan reads stale until a new one, a stale scan refuses further deletion, and a referenced file, an import-protected file and an unknown digest are each refused as not a finding of the scan with canonical counts unchanged`);
       await page.evaluate(() => window.storageHealthAcceptance.cleanup());
       await open(); await page.getByRole('button', { name: 'Storage health', exact: true }).click(); await panel(page).getByRole('button', { name: 'Start storage scan', exact: true }).click(); await complete(page);
       await page.getByRole('button', { name: 'New conversation', exact: true }).click(); await expect(page.getByLabel('Message', { exact: true })).toBeVisible();

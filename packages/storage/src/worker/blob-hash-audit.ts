@@ -47,8 +47,9 @@ export class BlobHashAuditRepository {
     this.write(`CREATE TEMP TABLE IF NOT EXISTS ${FINDINGS}(sequence INTEGER PRIMARY KEY, kind TEXT NOT NULL, sha256 TEXT NOT NULL, expected INTEGER NOT NULL, actual INTEGER) STRICT;
     CREATE TEMP TABLE IF NOT EXISTS ${EPOCH}(revision INTEGER NOT NULL) STRICT;`);
     if (!this.rows(`SELECT revision FROM ${EPOCH} LIMIT 1`).length) this.write(`INSERT INTO ${EPOCH} VALUES(0)`);
+    // Verification-only catalog updates (background indexing) change neither digest nor size.
     for (const operation of ['INSERT', 'UPDATE', 'DELETE'])
-      this.write(`CREATE TEMP TRIGGER IF NOT EXISTS ${EPOCH}_catalog_${operation} AFTER ${operation} ON main.quixi_blob_catalog BEGIN UPDATE ${EPOCH} SET revision=revision+1; END;`);
+      this.write(`CREATE TEMP TRIGGER IF NOT EXISTS ${EPOCH}_catalog_${operation} AFTER ${operation} ON main.quixi_blob_catalog${operation === 'UPDATE' ? ' WHEN NEW.sha256 IS NOT OLD.sha256 OR NEW.byte_length IS NOT OLD.byte_length' : ''} BEGIN UPDATE ${EPOCH} SET revision=revision+1; END;`);
     this.initialized = true;
   }
   private epoch(): number { return Number(this.rows(`SELECT revision FROM ${EPOCH} LIMIT 1`)[0]!.revision); }

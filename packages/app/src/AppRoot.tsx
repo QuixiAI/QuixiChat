@@ -8,6 +8,7 @@ import { ModelSwitcher } from './features/preferences/ModelSwitcher.tsx';
 import { MessageTimestamp } from './features/preferences/MessageTimestamp.tsx';
 import { createStorageHealthController, createDoctorAuditController, createBlobHashAuditController } from './features/diagnostics/controller.ts';
 import { BlobHashAuditPanel } from './features/diagnostics/BlobHashAuditPanel.tsx';
+import { createCleanupController } from './features/diagnostics/cleanup-controller.ts';
 import { DoctorAuditPanel } from './features/diagnostics/DoctorAuditPanel.tsx';
 import { createDiagnosticsController } from './features/diagnostics/report-controller.ts';
 import { DiagnosticsPanel } from './features/diagnostics/DiagnosticsPanel.tsx';
@@ -308,6 +309,7 @@ export function AppRoot({
   const diagnostics = useMemo(() => createDiagnosticsController(services.storage, services.host), [services]);
   const doctorAudit = useMemo(() => createDoctorAuditController(services.storage), [services]);
   const hashAudit = useMemo(() => createBlobHashAuditController(services.storage), [services]);
+  const cleanup = useMemo(() => createCleanupController(services.storage, storageHealth), [services, storageHealth]);
   const semantic = useMemo(() => createSemanticController({ storage: services.storage, embedding: services.embedding }), [services]);
   const semanticState = useSyncExternalStore(semantic.subscribe, semantic.getSnapshot);
   const onboarding = useMemo(() => createOnboardingController({ storage: services.storage, host: services.host, hostProvidesModel: !!services.embedding }), [services]);
@@ -624,10 +626,11 @@ export function AppRoot({
         diagnostics.dispose(),
         doctorAudit.dispose(),
         hashAudit.dispose(),
+        cleanup.dispose(),
       ]).then(() => {});
       onShutdown?.(task);
     };
-  }, [library, chat, summaries, attachments, settings, content, conversationSearch, exports, restore, documents, storageHealth, diagnostics, doctorAudit, hashAudit, semantic, onboarding, onShutdown]);
+  }, [library, chat, summaries, attachments, settings, content, conversationSearch, exports, restore, documents, storageHealth, diagnostics, doctorAudit, hashAudit, cleanup, semantic, onboarding, onShutdown]);
   useEffect(() => {
     setPromptCount(null);
     setSwitchReviewed(null);
@@ -1386,7 +1389,7 @@ export function AppRoot({
             <StorageStatus status={onboardingState.storage} busy={onboardingState.busy} onRequestPersistence={() => void onboarding.requestPersistentStorage()} onExportBackup={() => setSection("exports")} notice={onboardingState.notice} />
           </section>
           <DiagnosticsPanel controller={diagnostics} semantic={semantic} semanticState={semanticState} disabled={selectionChanged} />
-          <StorageHealthPanel controller={storageHealth} disabled={selectionChanged} />
+          <StorageHealthPanel controller={storageHealth} cleanup={cleanup} disabled={selectionChanged} />
           <DoctorAuditPanel controller={doctorAudit} disabled={selectionChanged} />
           <BlobHashAuditPanel controller={hashAudit} disabled={selectionChanged} />
         </>}

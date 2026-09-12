@@ -534,11 +534,12 @@ export class ArchiveDatabase {
         this.inventory ??= new BlobInventoryRepository(this.db, this.blobs);
         return this.inventory.begin(request.args.scanId);
       case 'advanceBlobInventory': case 'blobInventoryStatus':
-      case 'readBlobInventoryFindings': case 'cancelBlobInventory': {
+      case 'readBlobInventoryFindings': case 'cancelBlobInventory': case 'deleteOrphanBlobs': {
         if (!this.inventory) throw new BlobStorageError('NOT_FOUND', 'Blob inventory belongs to a previous storage owner; start a new scan.');
         if (request.operation === 'advanceBlobInventory') return this.inventory.advance(request.args.scanId, request.args.maxItems, signal);
         if (request.operation === 'blobInventoryStatus') return this.inventory.status(request.args.scanId);
         if (request.operation === 'readBlobInventoryFindings') return this.inventory.findings(request.args.scanId, request.args.page);
+        if (request.operation === 'deleteOrphanBlobs') return this.inventory.deleteOrphans(request.args.scanId, request.args.sha256s);
         return this.inventory.cancel(request.args.scanId);
       }
       case 'getExtractionOperation': {

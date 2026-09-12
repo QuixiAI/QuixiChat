@@ -74,6 +74,11 @@ button:disabled {
   opacity: 0.5;
   cursor: default;
 }
+button.danger {
+  border-color: var(--danger-border);
+  color: var(--danger-text);
+  background: var(--danger-bg);
+}
 button.primary {
   background: var(--accent);
   color: var(--accent-contrast);

@@ -17,3 +17,7 @@
 .diagnostic-outcome { font-weight: 600; }
 .diagnostic-corruption, .diagnostic-missing_data { color: var(--danger-text, var(--text)); }
 .diagnostic-attention, .diagnostic-rebuildable { color: var(--warn-text, var(--text)); }
+.storage-health-select { display: block; margin-block-start: .5rem; }
+.storage-health-review { padding: 1rem; margin-block: 1rem; border: 1px solid var(--danger-border, var(--border)); border-radius: var(--radius-m, .5rem); background: var(--danger-bg, transparent); }
+.storage-health-scope { padding-inline-start: 1.25rem; }
+.storage-health-scope code { overflow-wrap: anywhere; }

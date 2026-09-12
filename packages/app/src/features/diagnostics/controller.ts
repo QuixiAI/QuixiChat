@@ -90,6 +90,8 @@ export function createScanController<TStatus extends { state: ScanState }, TFind
   return {
     getSnapshot: () => state,
     subscribe(listener: () => void) { listeners.add(listener); return () => { listeners.delete(listener); }; },
+    /** The active scan's identity, for operations bound to a reviewed scan (cleanup). */
+    scanId: () => scanId,
     start() {
       if (disposed || active || state.loading) return Promise.resolve();
       const current = ++epoch, previous = scanId, value = crypto.randomUUID(); scanId = value;

@@ -62,6 +62,9 @@ Object.assign(window, { storageHealthAcceptance: {
     return result;
   },
   report: () => current.request(crypto.randomUUID(), 'diagnosticsReport', null),
+  /** Plan 23 cleanup refusals: direct worker requests with digests the panel would never offer. */
+  deleteOrphans: (scanId: string, sha256s: string[]) => current.request(crypto.randomUUID(), 'deleteOrphanBlobs', { scanId, sha256s }),
+  scanId: () => calls.filter(call => call.operation === 'beginBlobInventory').at(-1)?.scanId ?? null,
   searchStatus: () => current.request(crypto.randomUUID(), 'searchStatus', null),
   semanticStatus: () => current.request(crypto.randomUUID(), 'semanticStatus', null),
   counts: async () => { const value = await current.request(crypto.randomUUID(), 'diagnostics', null); return { canonicalRecords: value.canonicalRecords, syncOperations: value.syncOperations }; },

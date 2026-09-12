@@ -184,7 +184,7 @@ export function assertPageBudget(page: PageBudget): void {
 export function assertStorageRequest(request: StorageRequest): void {
   if (!request || request.version !== 1 || !isQuixiId(request.requestId) || jsonByteLength(request) > MAX_TRANSFER_BYTES) throw new Error("Invalid or oversized storage request");
   switch (request.operation) {
-    case 'beginBlobInventory': case 'advanceBlobInventory': case 'blobInventoryStatus': case 'readBlobInventoryFindings': case 'cancelBlobInventory': assertBlobInventoryArgs(request.operation, request.args); break;
+    case 'beginBlobInventory': case 'advanceBlobInventory': case 'blobInventoryStatus': case 'readBlobInventoryFindings': case 'cancelBlobInventory': case 'deleteOrphanBlobs': assertBlobInventoryArgs(request.operation, request.args); break;
     case 'readLocalPreferences': case 'setSendKey': case 'setInteractionPreferences': case 'setOnboardingState': case 'setTheme': assertPreferenceArgs(request.operation, request.args); break;
     case 'readRoutingAliases': case 'putRoutingAlias': case 'removeRoutingAlias': assertRoutingAliasArgs(request.operation, request.args); break;
     case 'beginDocumentExtraction': case 'resumeDocumentExtraction': case 'beginExtractionPage': case 'stagePageText': case 'publishExtractionPage': case 'completeDocumentExtraction': case 'interruptDocumentExtraction': case 'getDocumentExtraction': case 'getExtractionOperation': case 'getPublishedExtractionPage': case 'readExtractedPageText': case 'readExtractedPageMap': case 'clearDocumentExtraction': case 'advanceExtractionPageIndex': assertExtractionArgs(request.operation, request.args); break;

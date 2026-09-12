@@ -1,6 +1,6 @@
 {
   "status": "passed",
-  "startedAt": "2026-09-12T20:15:00.192Z",
+  "startedAt": "2026-09-12T21:00:20.546Z",
   "selectedEngines": [
     "chromium",
     "webkit"
@@ -13,13 +13,13 @@
   },
   "scope": "Actual isolated canonical SQLite/OPFS and production archive-worker/client inventory API. Impossible byte/catalog states are seeded only by a separate fixture worker. No deletion, repair, hash verification, physical disk corruption recovery, native host or private archive claim.",
   "sourceSha256": {
-    "packages/core/src/contracts/blob-inventory.ts": "ca8fde78ea5dcc13d36264f806e22f5437cf2545dd5ca51f1273e1aefac3a886",
-    "packages/core/src/contracts/storage.ts": "b3f3c9cc855b97174c5f471a2a0d7dafb4d91dabad76032e8ca736fab2003812",
-    "packages/core/src/contracts/index.ts": "8e972803c082f24a4feb93bfe0751a7e4216753f2a1c082cc9b73e3610f8755d",
-    "packages/storage/src/worker/blob-inventory.ts": "525c798ec8ee0fd38c68ead55c321897cb23e9343f53aa1c1cb91bfd30f1d418",
-    "packages/storage/src/worker/blobs.ts": "20f883d087c60709cdc9b8755d39a1d26f97c5caa32063793abe38636b9f703f",
+    "packages/core/src/contracts/blob-inventory.ts": "887df36aae60d23335fed05beaba6f1671035f3f03da8f0912664d7df2281bec",
+    "packages/core/src/contracts/storage.ts": "0a98b3c60b64967099ffc11025f3846908db45721424e33ef27bbf954eebf565",
+    "packages/core/src/contracts/index.ts": "ef0dee93b4fa15b66a083d7833a9da78cd1701d354aad3c101703d10459dc3d4",
+    "packages/storage/src/worker/blob-inventory.ts": "0d3e0ba0494531cf0d12601b899a478d357063d39691e7726eb06df3ad4c0791",
+    "packages/storage/src/worker/blobs.ts": "59482f83430c9c96c841e436095944c88cf72ab00364745b6ca4f84da1a82428",
     "packages/storage/src/worker/blob-catalog.ts": "6004fc6398cf97b3af233e3016db3d4267a20ad7cd2b4b016ec0f9608cc4914f",
-    "packages/storage/src/worker/archive-database.ts": "82d8f10b25d1af0ebfea4874c6d7db615b8015a030737251c73e13669b81920e",
+    "packages/storage/src/worker/archive-database.ts": "905f431a4b07b49c580beab4f2ca7b4ff501ba0a25cd23c6ef96e9015ee4a616",
     "packages/storage/src/worker/archive-runtime.ts": "647e0c309c8defd42bb6e0f2a902e98d0a356bde1f75521a512fb23dd1453a2e",
     "packages/storage/src/client/archive.ts": "844981f196ebee613c584dadf3d1cef2c1af15f3aa06daf253d6d48c3b553c24",
     "packages/storage/src/archive-protocol.ts": "02bbc935808f8ebbf4aff19d11f811ec82b754e14b1741dec8d111deb8c9660d",
@@ -29,8 +29,8 @@
     "packages/storage/migrations/index.ts": "463331ffb83ce77bd759505d3e3b39376a193c146bb5e68fd5178af4c63867fd",
     "packages/storage/tests/isolated-worker.ts": "d05ffe2db78e7808bf7a99884477d11c36b762ff9ec1a4cdf80ed6bf491308bd",
     "packages/storage/tests/isolated-client.ts": "72b2ace2196bfc8f662b8108d30972da9fe4cf4cf5b4f18714449f08746a4776",
-    "packages/storage/tests/blob-inventory/fixture.ts": "76e1812a191f2ffee8baca6fdb8ad3a50433adb8a88adfc23195576fa9dc60b2",
-    "packages/storage/tests/blob-inventory/fixture-worker.ts": "1689e787bf466bf37e073fd05361a6a3aa70d7584ec03ddd94741a17e7258bba",
+    "packages/storage/tests/blob-inventory/fixture.ts": "b9fa3427fbf0cb08d3f96851c1ddb9ee4e3629d91130e3b24d922b3b4394bcd1",
+    "packages/storage/tests/blob-inventory/fixture-worker.ts": "549a20f6732539ea2aec248605e5dbecb18e029e259d0507ced7d1df37a617f1",
     "packages/storage/tests/blob-inventory/index.ts": "75e0efa9d4c46cc99f23c24970a21e002296ea2803523cddf38ef86e7fc6ba0a",
     "packages/storage/tests/blob-inventory/index.html": "1a126dbaff28fc68ee377732c6344d4d7bc39f2a5b5135d929fd26213017bdaa",
     "packages/storage/tests/blob-inventory/tsconfig.json": "1a48c964ebc5c001bfe65a61452125ef94fed58fee85b7436e86377964dd9382",
@@ -38,7 +38,7 @@
     "packages/storage/sqlite/dist/sqlite3.mjs": "127c4f37a4ce3449d464b976ac4979fc6b016ae974c0aea9ba8afef85d3b4d5d",
     "packages/storage/sqlite/dist/sqlite3.wasm": "dd7c22431a3b8ad51ab5e6ed91065593574c34c5959d2efdef2f17484eedcb2c",
     "tooling/browser-engines.mjs": "136f16e63e905ae4c8305c7adedfce2411eff13b04f914054f8fb718155d0df1",
-    "package.json": "ac548c4786c1f922caa5257b12fa20fcba977aaabce83a3e623090dd5cae0815",
+    "package.json": "89d1eb3330b460510c9e33ebc9ca56f542ac5ae125ded5ce9a572369f64d7113",
     "package-lock.json": "aadb456e2a567a2b91cbb81a502650ebac93541f0a59d54035bdde2cacd97672",
     ".github/workflows/check.yml": "ced1dd2ae91de8f801ffa611d6f10169115acfdb72272a27ca9459a90d343039"
   },
@@ -62,7 +62,7 @@
       "slices": [
         {
           "phase": "references",
-          "elapsedMs": 1.5429160000001048,
+          "elapsedMs": 5.119500000000016,
           "records": 4,
           "transfers": 0,
           "catalog": 0,
@@ -70,7 +70,7 @@
         },
         {
           "phase": "references",
-          "elapsedMs": 1.345540999999912,
+          "elapsedMs": 3.6673329999998714,
           "records": 7,
           "transfers": 0,
           "catalog": 0,
@@ -78,7 +78,7 @@
         },
         {
           "phase": "references",
-          "elapsedMs": 1.3966660000000957,
+          "elapsedMs": 3.2580829999999423,
           "records": 7,
           "transfers": 0,
           "catalog": 0,
@@ -86,7 +86,7 @@
         },
         {
           "phase": "references",
-          "elapsedMs": 1.2055829999999332,
+          "elapsedMs": 3.7043330000001333,
           "records": 7,
           "transfers": 0,
           "catalog": 0,
@@ -94,7 +94,7 @@
         },
         {
           "phase": "references",
-          "elapsedMs": 1.0426669999999376,
+          "elapsedMs": 4.933624999999893,
           "records": 7,
           "transfers": 0,
           "catalog": 0,
@@ -102,7 +102,7 @@
         },
         {
           "phase": "references",
-          "elapsedMs": 0.9318749999999909,
+          "elapsedMs": 2.2618750000001455,
           "records": 7,
           "transfers": 0,
           "catalog": 0,
@@ -110,7 +110,7 @@
         },
         {
           "phase": "references",
-          "elapsedMs": 1.0688330000000406,
+          "elapsedMs": 2.6251250000000255,
           "records": 7,
           "transfers": 0,
           "catalog": 0,
@@ -118,7 +118,7 @@
         },
         {
           "phase": "references",
-          "elapsedMs": 0.987999999999829,
+          "elapsedMs": 1.8868749999999181,
           "records": 7,
           "transfers": 0,
           "catalog": 0,
@@ -126,7 +126,7 @@
         },
         {
           "phase": "references",
-          "elapsedMs": 1.0335000000000036,
+          "elapsedMs": 1.9635000000000673,
           "records": 7,
           "transfers": 0,
           "catalog": 0,
@@ -134,7 +134,7 @@
         },
         {
           "phase": "references",
-          "elapsedMs": 1.1653329999999187,
+          "elapsedMs": 2.3029579999999896,
           "records": 7,
           "transfers": 0,
           "catalog": 0,
@@ -142,7 +142,7 @@
         },
         {
           "phase": "references",
-          "elapsedMs": 0.9839590000001408,
+          "elapsedMs": 2.423416999999972,
           "records": 7,
           "transfers": 0,
           "catalog": 0,
@@ -150,7 +150,7 @@
         },
         {
           "phase": "references",
-          "elapsedMs": 1.0369160000000193,
+          "elapsedMs": 2.2956669999998667,
           "records": 7,
           "transfers": 0,
           "catalog": 0,
@@ -158,7 +158,7 @@
         },
         {
           "phase": "references",
-          "elapsedMs": 1.7182499999998981,
+          "elapsedMs": 2.129457999999886,
           "records": 7,
           "transfers": 0,
           "catalog": 0,
@@ -166,7 +166,7 @@
         },
         {
           "phase": "references",
-          "elapsedMs": 0.9690829999999551,
+          "elapsedMs": 2.8902919999998176,
           "records": 7,
           "transfers": 0,
           "catalog": 0,
@@ -174,7 +174,7 @@
         },
         {
           "phase": "references",
-          "elapsedMs": 0.8247080000001006,
+          "elapsedMs": 2.2580410000000484,
           "records": 7,
           "transfers": 0,
           "catalog": 0,
@@ -182,7 +182,7 @@
         },
         {
           "phase": "references",
-          "elapsedMs": 0.9377920000001723,
+          "elapsedMs": 1.700207999999975,
           "records": 5,
           "transfers": 0,
           "catalog": 0,
@@ -190,7 +190,7 @@
         },
         {
           "phase": "transfers",
-          "elapsedMs": 0.6547920000000431,
+          "elapsedMs": 1.4170419999998103,
           "records": 0,
           "transfers": 6,
           "catalog": 0,
@@ -198,7 +198,7 @@
         },
         {
           "phase": "catalog",
-          "elapsedMs": 0.7389579999999114,
+          "elapsedMs": 1.8811249999998836,
           "records": 0,
           "transfers": 5,
           "catalog": 1,
@@ -206,7 +206,7 @@
         },
         {
           "phase": "catalog",
-          "elapsedMs": 0.8363749999998618,
+          "elapsedMs": 1.6961250000001655,
           "records": 0,
           "transfers": 0,
           "catalog": 7,
@@ -214,7 +214,7 @@
         },
         {
           "phase": "files",
-          "elapsedMs": 2.1539170000000922,
+          "elapsedMs": 3.857542000000194,
           "records": 0,
           "transfers": 0,
           "catalog": 0,
@@ -222,7 +222,7 @@
         },
         {
           "phase": "files",
-          "elapsedMs": 1.2637500000000728,
+          "elapsedMs": 4.160041999999976,
           "records": 0,
           "transfers": 0,
           "catalog": 0,
@@ -230,7 +230,7 @@
         },
         {
           "phase": "files",
-          "elapsedMs": 1.263832999999977,
+          "elapsedMs": 2.7221660000000156,
           "records": 0,
           "transfers": 0,
           "catalog": 0,
@@ -238,7 +238,7 @@
         },
         {
           "phase": "files",
-          "elapsedMs": 1.0843750000001364,
+          "elapsedMs": 2.6416250000002037,
           "records": 0,
           "transfers": 0,
           "catalog": 0,
@@ -246,7 +246,7 @@
         },
         {
           "phase": "files",
-          "elapsedMs": 1.256375000000162,
+          "elapsedMs": 5.652624999999944,
           "records": 0,
           "transfers": 0,
           "catalog": 0,
@@ -254,7 +254,7 @@
         },
         {
           "phase": "files",
-          "elapsedMs": 1.7983750000000782,
+          "elapsedMs": 7.058832999999822,
           "records": 0,
           "transfers": 0,
           "catalog": 0,
@@ -262,7 +262,7 @@
         },
         {
           "phase": "files",
-          "elapsedMs": 1.5747499999999945,
+          "elapsedMs": 3.2241659999999683,
           "records": 0,
           "transfers": 0,
           "catalog": 0,
@@ -270,7 +270,7 @@
         },
         {
           "phase": "files",
-          "elapsedMs": 2.106249999999818,
+          "elapsedMs": 2.7997080000000096,
           "records": 0,
           "transfers": 0,
           "catalog": 0,
@@ -278,7 +278,7 @@
         },
         {
           "phase": "files",
-          "elapsedMs": 1.492040999999972,
+          "elapsedMs": 2.407165999999961,
           "records": 0,
           "transfers": 0,
           "catalog": 0,
@@ -286,7 +286,7 @@
         },
         {
           "phase": "files",
-          "elapsedMs": 1.2099590000000262,
+          "elapsedMs": 2.1914170000000013,
           "records": 0,
           "transfers": 0,
           "catalog": 0,
@@ -294,7 +294,7 @@
         },
         {
           "phase": "files",
-          "elapsedMs": 1.2466249999999945,
+          "elapsedMs": 2.429834000000028,
           "records": 0,
           "transfers": 0,
           "catalog": 0,
@@ -302,7 +302,7 @@
         },
         {
           "phase": "files",
-          "elapsedMs": 1.278291999999965,
+          "elapsedMs": 2.5268330000001242,
           "records": 0,
           "transfers": 0,
           "catalog": 0,
@@ -310,7 +310,7 @@
         },
         {
           "phase": "files",
-          "elapsedMs": 1.406208000000106,
+          "elapsedMs": 2.671916999999894,
           "records": 0,
           "transfers": 0,
           "catalog": 0,
@@ -318,7 +318,7 @@
         },
         {
           "phase": "files",
-          "elapsedMs": 1.2333329999999023,
+          "elapsedMs": 3.5742499999998927,
           "records": 0,
           "transfers": 0,
           "catalog": 0,
@@ -326,7 +326,7 @@
         },
         {
           "phase": "files",
-          "elapsedMs": 1.4909170000000813,
+          "elapsedMs": 2.848500000000058,
           "records": 0,
           "transfers": 0,
           "catalog": 0,
@@ -334,7 +334,7 @@
         },
         {
           "phase": "files",
-          "elapsedMs": 1.211917000000085,
+          "elapsedMs": 2.7061670000000504,
           "records": 0,
           "transfers": 0,
           "catalog": 0,
@@ -342,7 +342,7 @@
         },
         {
           "phase": "files",
-          "elapsedMs": 1.1978340000000571,
+          "elapsedMs": 2.483791999999994,
           "records": 0,
           "transfers": 0,
           "catalog": 0,
@@ -350,7 +350,7 @@
         },
         {
           "phase": "files",
-          "elapsedMs": 1.2893749999998363,
+          "elapsedMs": 2.645458999999846,
           "records": 0,
           "transfers": 0,
           "catalog": 0,
@@ -358,7 +358,7 @@
         },
         {
           "phase": "files",
-          "elapsedMs": 1.2155420000001413,
+          "elapsedMs": 2.73441600000001,
           "records": 0,
           "transfers": 0,
           "catalog": 0,
@@ -366,7 +366,7 @@
         },
         {
           "phase": "files",
-          "elapsedMs": 1.1180409999999483,
+          "elapsedMs": 2.71870899999999,
           "records": 0,
           "transfers": 0,
           "catalog": 0,
@@ -374,7 +374,7 @@
         },
         {
           "phase": "files",
-          "elapsedMs": 1.3170419999999012,
+          "elapsedMs": 2.818917000000056,
           "records": 0,
           "transfers": 0,
           "catalog": 0,
@@ -382,7 +382,7 @@
         },
         {
           "phase": "files",
-          "elapsedMs": 1.19724999999994,
+          "elapsedMs": 2.7327080000000024,
           "records": 0,
           "transfers": 0,
           "catalog": 0,
@@ -390,7 +390,7 @@
         },
         {
           "phase": "files",
-          "elapsedMs": 1.2400420000001304,
+          "elapsedMs": 2.5225420000001577,
           "records": 0,
           "transfers": 0,
           "catalog": 0,
@@ -398,7 +398,7 @@
         },
         {
           "phase": "files",
-          "elapsedMs": 1.3039169999999558,
+          "elapsedMs": 2.793292000000065,
           "records": 0,
           "transfers": 0,
           "catalog": 0,
@@ -406,7 +406,7 @@
         },
         {
           "phase": "files",
-          "elapsedMs": 1.0998749999998836,
+          "elapsedMs": 2.4164579999999205,
           "records": 0,
           "transfers": 0,
           "catalog": 0,
@@ -414,7 +414,7 @@
         },
         {
           "phase": "files",
-          "elapsedMs": 1.3284590000000662,
+          "elapsedMs": 2.5421669999998358,
           "records": 0,
           "transfers": 0,
           "catalog": 0,
@@ -422,7 +422,7 @@
         },
         {
           "phase": "files",
-          "elapsedMs": 1.4258749999999054,
+          "elapsedMs": 2.89708399999995,
           "records": 0,
           "transfers": 0,
           "catalog": 0,
@@ -430,7 +430,7 @@
         },
         {
           "phase": "files",
-          "elapsedMs": 1.30987499999992,
+          "elapsedMs": 2.80074999999988,
           "records": 0,
           "transfers": 0,
           "catalog": 0,
@@ -438,7 +438,7 @@
         },
         {
           "phase": "files",
-          "elapsedMs": 1.2738330000001952,
+          "elapsedMs": 2.5887910000001284,
           "records": 0,
           "transfers": 0,
           "catalog": 0,
@@ -446,7 +446,7 @@
         },
         {
           "phase": "files",
-          "elapsedMs": 0.609958000000006,
+          "elapsedMs": 1.4532500000000255,
           "records": 0,
           "transfers": 0,
           "catalog": 0,
@@ -454,7 +454,7 @@
         },
         {
           "phase": "finished",
-          "elapsedMs": 0.4547909999998865,
+          "elapsedMs": 1.3287499999999,
           "records": 0,
           "transfers": 0,
           "catalog": 0,
@@ -556,8 +556,8 @@
         }
       ],
       "fixture": {
-        "archiveId": "test-inventory-f9091d22-e378-49b0-bfdc-9391770545c2",
-        "threadId": "5adf8b05-d0c6-41f1-aeba-c792e1f9d625",
+        "archiveId": "test-inventory-8796d55f-2430-429e-b54e-28202305a29b",
+        "threadId": "eca97ee3-1866-4c35-a559-04b5a175a72a",
         "orphanCount": 96,
         "digests": {
           "attachment": "18381629d89a6ec6f33e33fbe12d724685cff72bd786a8cdd9fbf970ecaf71a2",
@@ -574,26 +574,26 @@
           "activeProtected": "6a38b62bcb2c37cc675836a51f75c69d6a38554434d9344b9a871e4b0ae10bd6"
         },
         "transferIds": {
-          "attachment": "1e150eee-3aa8-485c-8d6d-8f7336a26425",
-          "raw": "4ce32f2e-cf4c-46ea-ad9b-8a76733fde1a",
-          "text": "1dfce3fb-2347-4434-8000-734b7d059322",
-          "missing": "629766a8-3846-41ee-aa1d-ce4be58ed624",
-          "catalogMissing": "679a3d55-b5fc-4380-b322-a091d35c3b8a",
-          "wrongSize": "1148d058-826f-476e-9795-ba948f90c107",
-          "registeredOrphan": "8f3f1a11-5d75-44ac-823b-b235c71ba642",
-          "publishedProtected": "472ca92d-814b-480a-8d0e-433a329baf4b",
-          "importProtected": "12085999-c39b-4242-a66c-cfc20825275a",
-          "verifiedProtected": "a491f3cc-60ca-492f-81d8-9aa1861ec81b",
-          "strayStage": "065a95f3-84e5-41f4-b687-c3ab29c4e224",
-          "activeProtected": "d989f893-3df9-42d7-b0cf-7072c8134aad"
+          "attachment": "f501c86f-b325-44d0-b6c8-69bb6cb1cec8",
+          "raw": "767d8ccf-6acc-42d0-9cf5-7ebadbeebc26",
+          "text": "befadce4-a2c8-4b6f-b8eb-1837eeae945b",
+          "missing": "3535da82-ba00-4b07-8b34-a9e0eed8692f",
+          "catalogMissing": "c49e985a-ed39-4808-b5bc-7c6c5b6ce4c3",
+          "wrongSize": "53b9cbb4-aa72-4e41-970f-2541d35536df",
+          "registeredOrphan": "77a715fc-c71e-4861-92f9-798dfc9358ef",
+          "publishedProtected": "d111e7e0-ad52-4da5-a279-b183dbf14eaf",
+          "importProtected": "4d074c04-424c-4630-a1fa-2dfa2b28e15d",
+          "verifiedProtected": "25e288ec-1c2d-4c7e-9a2a-6868d2ca97e1",
+          "strayStage": "6f677797-c421-453f-9560-2fe5a0f38dc5",
+          "activeProtected": "0c06c232-da81-4be6-8345-dcba7d8340db"
         },
         "baseline": {
-          "canonicalSha256": "761a6c509dabb4203a599aa3ba4dce8b94f99d51208366629dbafafd50d2f87b",
-          "operationsSha256": "27af4b1787e79e998f19d2340e1b9c8b7f53004932895b5080ce152d426a9645",
-          "blobOperationsSha256": "a28def63d2eb6a82ed9e06c731680ca2201f9684a5b151cbc7b864a8beca8187",
+          "canonicalSha256": "fef5e0a03d1bcd7626689b99f82bd0fa6bc57acf0654092821632eb040bf949f",
+          "operationsSha256": "70efc134d05816402b0cf91562d9e55c4a9128e2b75b1ebaaf917d7d1ae6b633",
+          "blobOperationsSha256": "2f010098c9a779b11930b78dcef8592730aea463e0b58cf8fb31a84b3a994352",
           "blobCatalogSha256": "5155ee5f09fdeb05a961b57e53bf52885120709f7a16bc81d2395f0f13e05106",
-          "blobTransfersSha256": "272610a085e4581498b2dcf3f52e5c5582f12bea9eb29eb827571c0a4b302ae4",
-          "blobsSha256": "0a060cff37cb04c0face39475ccbf5cbcb4363a468b7cef2aa8dd2cb3679a897",
+          "blobTransfersSha256": "55fbfb4d6467dd2e3bea77517b6c1d64c49d087863b06b6ffecfc405b99e2e96",
+          "blobsSha256": "d4031fe341326ae525a018dbf873d92e234b9e3cc2eee8c0ac16111a9e1ae343",
           "canonicalRecords": 106,
           "syncOperations": 103,
           "physicalFiles": 112,
@@ -606,11 +606,11 @@
         "bytes": 948
       },
       "statusAfterScan": {
-        "scanId": "57afb56d-4e6f-40ba-a4cc-c43ead236822",
+        "scanId": "95ece69f-930d-4bb8-a77f-6a2a83fbaf99",
         "state": "complete",
         "phase": "finished",
-        "startedAt": 1789244101216,
-        "updatedAt": 1789244101282,
+        "startedAt": 1789246822104,
+        "updatedAt": 1789246822268,
         "scannedRecords": 107,
         "scannedTransfers": 11,
         "scannedCatalogEntries": 8,
@@ -640,36 +640,36 @@
           "sequence": 2,
           "kind": "staged_file",
           "sha256": null,
-          "path": "temp/blob-transfers/d989f893-3df9-42d7-b0cf-7072c8134aad.stage",
+          "path": "temp/blob-transfers/d111e7e0-ad52-4da5-a279-b183dbf14eaf.stage",
           "expectedBytes": null,
-          "actualBytes": 3,
+          "actualBytes": 85,
           "references": 0
         },
         {
           "sequence": 3,
           "kind": "staged_file",
           "sha256": null,
-          "path": "temp/blob-transfers/a491f3cc-60ca-492f-81d8-9aa1861ec81b.stage",
+          "path": "temp/blob-transfers/6f677797-c421-453f-9560-2fe5a0f38dc5.stage",
           "expectedBytes": null,
-          "actualBytes": 84,
+          "actualBytes": 30,
           "references": 0
         },
         {
           "sequence": 4,
           "kind": "staged_file",
           "sha256": null,
-          "path": "temp/blob-transfers/472ca92d-814b-480a-8d0e-433a329baf4b.stage",
+          "path": "temp/blob-transfers/25e288ec-1c2d-4c7e-9a2a-6868d2ca97e1.stage",
           "expectedBytes": null,
-          "actualBytes": 85,
+          "actualBytes": 84,
           "references": 0
         },
         {
           "sequence": 5,
           "kind": "staged_file",
           "sha256": null,
-          "path": "temp/blob-transfers/065a95f3-84e5-41f4-b687-c3ab29c4e224.stage",
+          "path": "temp/blob-transfers/0c06c232-da81-4be6-8345-dcba7d8340db.stage",
           "expectedBytes": null,
-          "actualBytes": 30,
+          "actualBytes": 3,
           "references": 0
         },
         {
@@ -1628,25 +1628,25 @@
         }
       ],
       "preserved": {
-        "canonicalSha256": "761a6c509dabb4203a599aa3ba4dce8b94f99d51208366629dbafafd50d2f87b",
-        "operationsSha256": "27af4b1787e79e998f19d2340e1b9c8b7f53004932895b5080ce152d426a9645",
-        "blobOperationsSha256": "a28def63d2eb6a82ed9e06c731680ca2201f9684a5b151cbc7b864a8beca8187",
+        "canonicalSha256": "fef5e0a03d1bcd7626689b99f82bd0fa6bc57acf0654092821632eb040bf949f",
+        "operationsSha256": "70efc134d05816402b0cf91562d9e55c4a9128e2b75b1ebaaf917d7d1ae6b633",
+        "blobOperationsSha256": "2f010098c9a779b11930b78dcef8592730aea463e0b58cf8fb31a84b3a994352",
         "blobCatalogSha256": "5155ee5f09fdeb05a961b57e53bf52885120709f7a16bc81d2395f0f13e05106",
-        "blobTransfersSha256": "272610a085e4581498b2dcf3f52e5c5582f12bea9eb29eb827571c0a4b302ae4",
-        "blobsSha256": "0a060cff37cb04c0face39475ccbf5cbcb4363a468b7cef2aa8dd2cb3679a897",
+        "blobTransfersSha256": "55fbfb4d6467dd2e3bea77517b6c1d64c49d087863b06b6ffecfc405b99e2e96",
+        "blobsSha256": "d4031fe341326ae525a018dbf873d92e234b9e3cc2eee8c0ac16111a9e1ae343",
         "canonicalRecords": 106,
         "syncOperations": 103,
         "physicalFiles": 112,
         "sqliteTemporaryStore": 1,
         "sqliteTemporaryCacheKiB": -1024
       },
-      "activeTransferId": "d6e2e717-87b8-4422-bf31-76703f0aea2c",
+      "activeTransferId": "caeb9240-7e19-4ff2-adf8-a8fff7a19705",
       "activeStatus": {
-        "scanId": "70f3ab8e-d19b-48a0-b9b4-3dd40ea74f0d",
+        "scanId": "6f07f366-e3c3-4475-800e-ca5fbe12f0d0",
         "state": "complete",
         "phase": "finished",
-        "startedAt": 1789244101507,
-        "updatedAt": 1789244101543,
+        "startedAt": 1789246822591,
+        "updatedAt": 1789246822655,
         "scannedRecords": 107,
         "scannedTransfers": 12,
         "scannedCatalogEntries": 8,
@@ -1663,12 +1663,12 @@
         "message": null
       },
       "beforeRestart": {
-        "canonicalSha256": "31229f2bb9aa759822d66762008628b19136471ae14ea968da7cc46dbd8fe12a",
-        "operationsSha256": "f7b411559c87d1686401b89bd95f8815a51120a51d95e28ff903920a8a2c410e",
-        "blobOperationsSha256": "c31bf5615bb2dba97f50f23fed0d7e76bcae6d63a892a8621a6f4d6d64e892a1",
+        "canonicalSha256": "fe986e3cd0ce75d0ffb334d19162e9a2e8af688cbf21a33a566072f6f066bbbf",
+        "operationsSha256": "03acd38bfbbd653fecf0a39c14d6c06e8786e2835056d53019fdc3fb55451c47",
+        "blobOperationsSha256": "ba3b329a167cef66747165f3ccde0aacb32676ce2298a03a461f597215012a89",
         "blobCatalogSha256": "5155ee5f09fdeb05a961b57e53bf52885120709f7a16bc81d2395f0f13e05106",
-        "blobTransfersSha256": "c5793d5311d0da28e0cfa0cc92d4dafa957eedb6b31631d150ffaefb57b66236",
-        "blobsSha256": "7c4dc8d52eb69cded0a4af3a2c79d14e47b10b01c3e9fef50b5ed6b3ea8dde97",
+        "blobTransfersSha256": "1856f7354b9af5db3f992a107d9343542c4b86113beebe25d0928468d159d573",
+        "blobsSha256": "81d69baf7012c1329805dcc8944e7393a2776912834e32fadd2968789b916b0f",
         "canonicalRecords": 106,
         "syncOperations": 105,
         "physicalFiles": 113,
@@ -1676,12 +1676,12 @@
         "sqliteTemporaryCacheKiB": -1024
       },
       "restarted": {
-        "canonicalSha256": "31229f2bb9aa759822d66762008628b19136471ae14ea968da7cc46dbd8fe12a",
-        "operationsSha256": "f7b411559c87d1686401b89bd95f8815a51120a51d95e28ff903920a8a2c410e",
-        "blobOperationsSha256": "c31bf5615bb2dba97f50f23fed0d7e76bcae6d63a892a8621a6f4d6d64e892a1",
+        "canonicalSha256": "fe986e3cd0ce75d0ffb334d19162e9a2e8af688cbf21a33a566072f6f066bbbf",
+        "operationsSha256": "03acd38bfbbd653fecf0a39c14d6c06e8786e2835056d53019fdc3fb55451c47",
+        "blobOperationsSha256": "ba3b329a167cef66747165f3ccde0aacb32676ce2298a03a461f597215012a89",
         "blobCatalogSha256": "5155ee5f09fdeb05a961b57e53bf52885120709f7a16bc81d2395f0f13e05106",
-        "blobTransfersSha256": "c5793d5311d0da28e0cfa0cc92d4dafa957eedb6b31631d150ffaefb57b66236",
-        "blobsSha256": "7c4dc8d52eb69cded0a4af3a2c79d14e47b10b01c3e9fef50b5ed6b3ea8dde97",
+        "blobTransfersSha256": "1856f7354b9af5db3f992a107d9343542c4b86113beebe25d0928468d159d573",
+        "blobsSha256": "81d69baf7012c1329805dcc8944e7393a2776912834e32fadd2968789b916b0f",
         "canonicalRecords": 106,
         "syncOperations": 105,
         "physicalFiles": 113,
@@ -1689,11 +1689,11 @@
         "sqliteTemporaryCacheKiB": -1024
       },
       "malformedStatus": {
-        "scanId": "5a6c1115-5a4c-4e70-af33-50695728a60c",
+        "scanId": "522b3df3-f4a4-4b46-9c93-0286291e955c",
         "state": "failed",
         "phase": "references",
-        "startedAt": 1789244102188,
-        "updatedAt": 1789244102199,
+        "startedAt": 1789246823532,
+        "updatedAt": 1789246823553,
         "scannedRecords": 107,
         "scannedTransfers": 0,
         "scannedCatalogEntries": 0,
@@ -1729,7 +1729,7 @@
       "slices": [
         {
           "phase": "references",
-          "elapsedMs": 1.7872080000001915,
+          "elapsedMs": 2.71808400000009,
           "records": 4,
           "transfers": 0,
           "catalog": 0,
@@ -1737,7 +1737,7 @@
         },
         {
           "phase": "references",
-          "elapsedMs": 2.3453749999998763,
+          "elapsedMs": 2.984707999999955,
           "records": 7,
           "transfers": 0,
           "catalog": 0,
@@ -1745,7 +1745,7 @@
         },
         {
           "phase": "references",
-          "elapsedMs": 1.6379159999996773,
+          "elapsedMs": 2.762374999999338,
           "records": 7,
           "transfers": 0,
           "catalog": 0,
@@ -1753,7 +1753,7 @@
         },
         {
           "phase": "references",
-          "elapsedMs": 1.8104999999995925,
+          "elapsedMs": 3.621249999999236,
           "records": 7,
           "transfers": 0,
           "catalog": 0,
@@ -1761,7 +1761,7 @@
         },
         {
           "phase": "references",
-          "elapsedMs": 1.5826250000000073,
+          "elapsedMs": 2.4650000000001455,
           "records": 7,
           "transfers": 0,
           "catalog": 0,
@@ -1769,7 +1769,7 @@
         },
         {
           "phase": "references",
-          "elapsedMs": 1.6314170000000559,
+          "elapsedMs": 1.9832919999998921,
           "records": 7,
           "transfers": 0,
           "catalog": 0,
@@ -1777,7 +1777,7 @@
         },
         {
           "phase": "references",
-          "elapsedMs": 1.2085000000001855,
+          "elapsedMs": 1.673374999999396,
           "records": 7,
           "transfers": 0,
           "catalog": 0,
@@ -1785,7 +1785,7 @@
         },
         {
           "phase": "references",
-          "elapsedMs": 1.109124999999949,
+          "elapsedMs": 1.671875,
           "records": 7,
           "transfers": 0,
           "catalog": 0,
@@ -1793,7 +1793,7 @@
         },
         {
           "phase": "references",
-          "elapsedMs": 1.6763750000000073,
+          "elapsedMs": 2.020166999999674,
           "records": 7,
           "transfers": 0,
           "catalog": 0,
@@ -1801,7 +1801,7 @@
         },
         {
           "phase": "references",
-          "elapsedMs": 1.2289999999998145,
+          "elapsedMs": 1.9986670000007507,
           "records": 7,
           "transfers": 0,
           "catalog": 0,
@@ -1809,7 +1809,7 @@
         },
         {
           "phase": "references",
-          "elapsedMs": 1.2954170000002705,
+          "elapsedMs": 1.6059159999995245,
           "records": 7,
           "transfers": 0,
           "catalog": 0,
@@ -1817,7 +1817,7 @@
         },
         {
           "phase": "references",
-          "elapsedMs": 1.1825410000001284,
+          "elapsedMs": 1.768583000000035,
           "records": 7,
           "transfers": 0,
           "catalog": 0,
@@ -1825,7 +1825,7 @@
         },
         {
           "phase": "references",
-          "elapsedMs": 1.1336249999999382,
+          "elapsedMs": 2.228624999999738,
           "records": 7,
           "transfers": 0,
           "catalog": 0,
@@ -1833,7 +1833,7 @@
         },
         {
           "phase": "references",
-          "elapsedMs": 1.0587499999996908,
+          "elapsedMs": 1.7879999999995562,
           "records": 7,
           "transfers": 0,
           "catalog": 0,
@@ -1841,7 +1841,7 @@
         },
         {
           "phase": "references",
-          "elapsedMs": 1.1097499999996217,
+          "elapsedMs": 1.6395419999998921,
           "records": 7,
           "transfers": 0,
           "catalog": 0,
@@ -1849,7 +1849,7 @@
         },
         {
           "phase": "references",
-          "elapsedMs": 1.0622089999997115,
+          "elapsedMs": 1.699291999999332,
           "records": 5,
           "transfers": 0,
           "catalog": 0,
@@ -1857,7 +1857,7 @@
         },
         {
           "phase": "transfers",
-          "elapsedMs": 0.9046669999997903,
+          "elapsedMs": 1.7424160000000484,
           "records": 0,
           "transfers": 6,
           "catalog": 0,
@@ -1865,7 +1865,7 @@
         },
         {
           "phase": "catalog",
-          "elapsedMs": 1.5104999999998654,
+          "elapsedMs": 1.613166000000092,
           "records": 0,
           "transfers": 5,
           "catalog": 1,
@@ -1873,7 +1873,7 @@
         },
         {
           "phase": "catalog",
-          "elapsedMs": 1.0174999999999272,
+          "elapsedMs": 1.922708000000057,
           "records": 0,
           "transfers": 0,
           "catalog": 7,
@@ -1881,7 +1881,7 @@
         },
         {
           "phase": "files",
-          "elapsedMs": 3.473207999999886,
+          "elapsedMs": 5.820749999999862,
           "records": 0,
           "transfers": 0,
           "catalog": 0,
@@ -1889,7 +1889,7 @@
         },
         {
           "phase": "files",
-          "elapsedMs": 2.7392079999999623,
+          "elapsedMs": 5.58745799999997,
           "records": 0,
           "transfers": 0,
           "catalog": 0,
@@ -1897,7 +1897,7 @@
         },
         {
           "phase": "files",
-          "elapsedMs": 3.0407500000001164,
+          "elapsedMs": 4.858166999999412,
           "records": 0,
           "transfers": 0,
           "catalog": 0,
@@ -1905,7 +1905,7 @@
         },
         {
           "phase": "files",
-          "elapsedMs": 2.732499999999618,
+          "elapsedMs": 4.115791000000172,
           "records": 0,
           "transfers": 0,
           "catalog": 0,
@@ -1913,7 +1913,7 @@
         },
         {
           "phase": "files",
-          "elapsedMs": 2.6655839999998534,
+          "elapsedMs": 3.8997920000001614,
           "records": 0,
           "transfers": 0,
           "catalog": 0,
@@ -1921,7 +1921,7 @@
         },
         {
           "phase": "files",
-          "elapsedMs": 2.868083000000297,
+          "elapsedMs": 4.527791999999863,
           "records": 0,
           "transfers": 0,
           "catalog": 0,
@@ -1929,7 +1929,7 @@
         },
         {
           "phase": "files",
-          "elapsedMs": 2.4019160000002557,
+          "elapsedMs": 4.808500000000095,
           "records": 0,
           "transfers": 0,
           "catalog": 0,
@@ -1937,7 +1937,7 @@
         },
         {
           "phase": "files",
-          "elapsedMs": 2.6385840000002645,
+          "elapsedMs": 4.491792000000714,
           "records": 0,
           "transfers": 0,
           "catalog": 0,
@@ -1945,7 +1945,7 @@
         },
         {
           "phase": "files",
-          "elapsedMs": 2.3251250000002983,
+          "elapsedMs": 4.268875000000662,
           "records": 0,
           "transfers": 0,
           "catalog": 0,
@@ -1953,7 +1953,7 @@
         },
         {
           "phase": "files",
-          "elapsedMs": 2.340291999999863,
+          "elapsedMs": 4.0445419999996375,
           "records": 0,
           "transfers": 0,
           "catalog": 0,
@@ -1961,7 +1961,7 @@
         },
         {
           "phase": "files",
-          "elapsedMs": 2.6302919999998267,
+          "elapsedMs": 4.5344169999998485,
           "records": 0,
           "transfers": 0,
           "catalog": 0,
@@ -1969,7 +1969,7 @@
         },
         {
           "phase": "files",
-          "elapsedMs": 2.846791999999823,
+          "elapsedMs": 4.430166999999528,
           "records": 0,
           "transfers": 0,
           "catalog": 0,
@@ -1977,7 +1977,7 @@
         },
         {
           "phase": "files",
-          "elapsedMs": 2.719749999999749,
+          "elapsedMs": 4.248458000000028,
           "records": 0,
           "transfers": 0,
           "catalog": 0,
@@ -1985,7 +1985,7 @@
         },
         {
           "phase": "files",
-          "elapsedMs": 2.612333000000035,
+          "elapsedMs": 4.340083999999479,
           "records": 0,
           "transfers": 0,
           "catalog": 0,
@@ -1993,7 +1993,7 @@
         },
         {
           "phase": "files",
-          "elapsedMs": 3.0219170000000304,
+          "elapsedMs": 4.276834000000235,
           "records": 0,
           "transfers": 0,
           "catalog": 0,
@@ -2001,7 +2001,7 @@
         },
         {
           "phase": "files",
-          "elapsedMs": 4.101042000000234,
+          "elapsedMs": 4.171124999999847,
           "records": 0,
           "transfers": 0,
           "catalog": 0,
@@ -2009,7 +2009,7 @@
         },
         {
           "phase": "files",
-          "elapsedMs": 3.1508340000000317,
+          "elapsedMs": 4.26995800000077,
           "records": 0,
           "transfers": 0,
           "catalog": 0,
@@ -2017,7 +2017,7 @@
         },
         {
           "phase": "files",
-          "elapsedMs": 2.7052080000003116,
+          "elapsedMs": 4.128416999999899,
           "records": 0,
           "transfers": 0,
           "catalog": 0,
@@ -2025,7 +2025,7 @@
         },
         {
           "phase": "files",
-          "elapsedMs": 2.528124999999818,
+          "elapsedMs": 4.00933299999997,
           "records": 0,
           "transfers": 0,
           "catalog": 0,
@@ -2033,7 +2033,7 @@
         },
         {
           "phase": "files",
-          "elapsedMs": 2.5014170000004015,
+          "elapsedMs": 4.297082999999475,
           "records": 0,
           "transfers": 0,
           "catalog": 0,
@@ -2041,7 +2041,7 @@
         },
         {
           "phase": "files",
-          "elapsedMs": 2.27350000000024,
+          "elapsedMs": 3.6277090000003227,
           "records": 0,
           "transfers": 0,
           "catalog": 0,
@@ -2049,7 +2049,7 @@
         },
         {
           "phase": "files",
-          "elapsedMs": 2.5062920000000304,
+          "elapsedMs": 4.241917000000285,
           "records": 0,
           "transfers": 0,
           "catalog": 0,
@@ -2057,7 +2057,7 @@
         },
         {
           "phase": "files",
-          "elapsedMs": 2.6318340000002536,
+          "elapsedMs": 3.965874999999869,
           "records": 0,
           "transfers": 0,
           "catalog": 0,
@@ -2065,7 +2065,7 @@
         },
         {
           "phase": "files",
-          "elapsedMs": 2.6217499999997926,
+          "elapsedMs": 4.785917000000154,
           "records": 0,
           "transfers": 0,
           "catalog": 0,
@@ -2073,7 +2073,7 @@
         },
         {
           "phase": "files",
-          "elapsedMs": 2.4095420000003287,
+          "elapsedMs": 4.4403749999992215,
           "records": 0,
           "transfers": 0,
           "catalog": 0,
@@ -2081,7 +2081,7 @@
         },
         {
           "phase": "files",
-          "elapsedMs": 2.767124999999851,
+          "elapsedMs": 4.6325000000006185,
           "records": 0,
           "transfers": 0,
           "catalog": 0,
@@ -2089,7 +2089,7 @@
         },
         {
           "phase": "files",
-          "elapsedMs": 2.864749999999731,
+          "elapsedMs": 4.162583000000268,
           "records": 0,
           "transfers": 0,
           "catalog": 0,
@@ -2097,7 +2097,7 @@
         },
         {
           "phase": "files",
-          "elapsedMs": 2.18887500000028,
+          "elapsedMs": 4.001957999999831,
           "records": 0,
           "transfers": 0,
           "catalog": 0,
@@ -2105,7 +2105,7 @@
         },
         {
           "phase": "files",
-          "elapsedMs": 2.236000000000331,
+          "elapsedMs": 3.5928329999997004,
           "records": 0,
           "transfers": 0,
           "catalog": 0,
@@ -2113,7 +2113,7 @@
         },
         {
           "phase": "files",
-          "elapsedMs": 0.872957999999926,
+          "elapsedMs": 1.7099580000003698,
           "records": 0,
           "transfers": 0,
           "catalog": 0,
@@ -2121,7 +2121,7 @@
         },
         {
           "phase": "finished",
-          "elapsedMs": 0.6861669999998412,
+          "elapsedMs": 1.145792000000256,
           "records": 0,
           "transfers": 0,
           "catalog": 0,
@@ -2223,8 +2223,8 @@
         }
       ],
       "fixture": {
-        "archiveId": "test-inventory-d8143302-bb58-4692-8792-aa2ec040c5d9",
-        "threadId": "a6e6306b-81c2-45e0-bffe-cac8c52dea1c",
+        "archiveId": "test-inventory-548454ce-f7f7-461f-bd6a-6ed3d84cf26f",
+        "threadId": "00dccfe4-457b-4f66-b5d0-1747fb63c564",
         "orphanCount": 96,
         "digests": {
           "attachment": "18381629d89a6ec6f33e33fbe12d724685cff72bd786a8cdd9fbf970ecaf71a2",
@@ -2241,26 +2241,26 @@
           "activeProtected": "6a38b62bcb2c37cc675836a51f75c69d6a38554434d9344b9a871e4b0ae10bd6"
         },
         "transferIds": {
-          "attachment": "b6755c05-e457-401f-a334-f1ce14bdde4c",
-          "raw": "fe392d5a-fc49-47a3-939d-e998f075e74a",
-          "text": "865eff46-142f-49f3-a212-0e0ba68af9ee",
-          "missing": "984c755a-ae54-4ae4-b212-595c9d17d9ff",
-          "catalogMissing": "79678e1a-4f43-4986-8161-7b6c159ce9b4",
-          "wrongSize": "e8c9e2b7-30a2-48ab-abaa-35b26e508792",
-          "registeredOrphan": "8d1cf6ac-6de4-45a1-9e0c-e62493782aee",
-          "publishedProtected": "3803aa09-a21d-434e-8f38-b6a1b8be5710",
-          "importProtected": "4dec8fbc-c8cc-4b59-81b5-c7e33d1c9728",
-          "verifiedProtected": "34bbe1d4-0963-4e07-8825-5520059a19fd",
-          "strayStage": "83b3d4e7-35fe-4e31-9a78-7693f3fd29c5",
-          "activeProtected": "82ef3023-df16-4ee7-b6cc-f3b523ffcfef"
+          "attachment": "47f82928-3300-41d0-a260-f006cf626117",
+          "raw": "2422de2e-a730-4ef2-b920-e5ec842d75a9",
+          "text": "6a451d7f-ae22-4d6e-90d9-d656a06b4575",
+          "missing": "3962204a-7fa0-4ae7-bd83-bebac04bf547",
+          "catalogMissing": "b5a836d4-429c-4168-acaf-57fdffb4f949",
+          "wrongSize": "4e69f964-9b0e-4817-9c55-b5feaa212e13",
+          "registeredOrphan": "e8fc290b-1b8a-41f2-a151-c22992360270",
+          "publishedProtected": "36c46629-db89-4861-8c03-e0a43a098bc6",
+          "importProtected": "1e7342cd-1a6f-4c42-9950-6664364b6431",
+          "verifiedProtected": "e21ea0a9-a101-40af-a5d3-0d6bc9479467",
+          "strayStage": "9a2511eb-5b7d-4337-897b-07a043f7a463",
+          "activeProtected": "eba87c73-b727-4d92-a2c5-f7e25680741e"
         },
         "baseline": {
-          "canonicalSha256": "dfccacb426d44a48693baf84bdcfe4deb9c0bb788bc8281f1b865b85eecbb308",
-          "operationsSha256": "a23f9e0c741ae66ef591b448ffa98aa46be0b6cfd5f727e215bd25ffb4565d4e",
-          "blobOperationsSha256": "1653e3bc97554727fb453cafabdf331d619faf904c7b023128d3cce0328f2ade",
+          "canonicalSha256": "abc6ce5aeee949c37cec4c3a371444d374050c82ed0579f10be040f3cd50cec7",
+          "operationsSha256": "d4da4bf8ec053f769e5d6a8c3237625409597c9943fd67676dc2c3d0fd6ee32c",
+          "blobOperationsSha256": "7bcb9df079f542ff60f689ca8947b20dcfa6b431010b81a3bf68a925fa608dee",
           "blobCatalogSha256": "5155ee5f09fdeb05a961b57e53bf52885120709f7a16bc81d2395f0f13e05106",
-          "blobTransfersSha256": "dadba6fbf7eb3353488a899f1fbf35ef3fbf903f812e1393dedd8e12e70d6d6b",
-          "blobsSha256": "43412ad002c7c83036aa02bfe4030853fb37d5bb0852c1a59f1970bcb346e5d7",
+          "blobTransfersSha256": "66a371fd0c41f585df49401f342e6b7fa964018a41e06ecfc74b62705aa2f2fe",
+          "blobsSha256": "40ef2f61559b4f16f45747f7f805430cb6461a3b2481eda74ca3e9a9442fc9a1",
           "canonicalRecords": 106,
           "syncOperations": 103,
           "physicalFiles": 112,
@@ -2273,11 +2273,11 @@
         "bytes": 824
       },
       "statusAfterScan": {
-        "scanId": "88669bf1-1591-4441-8240-c9bac45788e8",
+        "scanId": "d3507b4b-6cad-44a1-9e56-5ce3ee751f1b",
         "state": "complete",
         "phase": "finished",
-        "startedAt": 1789244103703,
-        "updatedAt": 1789244103815,
+        "startedAt": 1789246825693,
+        "updatedAt": 1789246825872,
         "scannedRecords": 107,
         "scannedTransfers": 11,
         "scannedCatalogEntries": 8,
@@ -2298,45 +2298,45 @@
           "sequence": 1,
           "kind": "staged_file",
           "sha256": null,
-          "path": "temp/blob-transfers/83b3d4e7-35fe-4e31-9a78-7693f3fd29c5.stage",
+          "path": "temp/blob-transfers/e21ea0a9-a101-40af-a5d3-0d6bc9479467.stage",
           "expectedBytes": null,
-          "actualBytes": 30,
+          "actualBytes": 84,
           "references": 0
         },
         {
           "sequence": 2,
           "kind": "staged_file",
           "sha256": null,
-          "path": "temp/blob-transfers/82ef3023-df16-4ee7-b6cc-f3b523ffcfef.stage",
+          "path": "temp/blob-transfers/9a2511eb-5b7d-4337-897b-07a043f7a463.stage",
           "expectedBytes": null,
-          "actualBytes": 3,
+          "actualBytes": 30,
           "references": 0
         },
         {
           "sequence": 3,
           "kind": "staged_file",
           "sha256": null,
-          "path": "temp/blob-transfers/3803aa09-a21d-434e-8f38-b6a1b8be5710.stage",
+          "path": "temp/blob-transfers/36c46629-db89-4861-8c03-e0a43a098bc6.stage",
           "expectedBytes": null,
           "actualBytes": 85,
           "references": 0
         },
         {
           "sequence": 4,
-          "kind": "staged_file",
-          "sha256": null,
-          "path": "temp/blob-transfers/34bbe1d4-0963-4e07-8825-5520059a19fd.stage",
-          "expectedBytes": null,
-          "actualBytes": 84,
-          "references": 0
-        },
-        {
-          "sequence": 5,
           "kind": "unrecognized_entry",
           "sha256": null,
           "path": null,
           "expectedBytes": null,
           "actualBytes": null,
+          "references": 0
+        },
+        {
+          "sequence": 5,
+          "kind": "staged_file",
+          "sha256": null,
+          "path": "temp/blob-transfers/eba87c73-b727-4d92-a2c5-f7e25680741e.stage",
+          "expectedBytes": null,
+          "actualBytes": 3,
           "references": 0
         },
         {
@@ -3295,25 +3295,25 @@
         }
       ],
       "preserved": {
-        "canonicalSha256": "dfccacb426d44a48693baf84bdcfe4deb9c0bb788bc8281f1b865b85eecbb308",
-        "operationsSha256": "a23f9e0c741ae66ef591b448ffa98aa46be0b6cfd5f727e215bd25ffb4565d4e",
-        "blobOperationsSha256": "1653e3bc97554727fb453cafabdf331d619faf904c7b023128d3cce0328f2ade",
+        "canonicalSha256": "abc6ce5aeee949c37cec4c3a371444d374050c82ed0579f10be040f3cd50cec7",
+        "operationsSha256": "d4da4bf8ec053f769e5d6a8c3237625409597c9943fd67676dc2c3d0fd6ee32c",
+        "blobOperationsSha256": "7bcb9df079f542ff60f689ca8947b20dcfa6b431010b81a3bf68a925fa608dee",
         "blobCatalogSha256": "5155ee5f09fdeb05a961b57e53bf52885120709f7a16bc81d2395f0f13e05106",
-        "blobTransfersSha256": "dadba6fbf7eb3353488a899f1fbf35ef3fbf903f812e1393dedd8e12e70d6d6b",
-        "blobsSha256": "43412ad002c7c83036aa02bfe4030853fb37d5bb0852c1a59f1970bcb346e5d7",
+        "blobTransfersSha256": "66a371fd0c41f585df49401f342e6b7fa964018a41e06ecfc74b62705aa2f2fe",
+        "blobsSha256": "40ef2f61559b4f16f45747f7f805430cb6461a3b2481eda74ca3e9a9442fc9a1",
         "canonicalRecords": 106,
         "syncOperations": 103,
         "physicalFiles": 112,
         "sqliteTemporaryStore": 1,
         "sqliteTemporaryCacheKiB": -1024
       },
-      "activeTransferId": "c3e25c11-cc40-4587-8499-26937752cc1a",
+      "activeTransferId": "7d0beeb9-c828-4e20-ad87-ac5a5661aa13",
       "activeStatus": {
-        "scanId": "ba9bfd7e-3297-4bfc-be2f-5177b6b9a748",
+        "scanId": "bc7a76e3-74c4-4322-8c5a-d7fdb93e983e",
         "state": "complete",
         "phase": "finished",
-        "startedAt": 1789244104107,
-        "updatedAt": 1789244104187,
+        "startedAt": 1789246826312,
+        "updatedAt": 1789246826443,
         "scannedRecords": 107,
         "scannedTransfers": 12,
         "scannedCatalogEntries": 8,
@@ -3330,12 +3330,12 @@
         "message": null
       },
       "beforeRestart": {
-        "canonicalSha256": "d22cb708f8f4f42138b89ec3ede9fd418ac0f271fafea3445bc18e37b7c9ae6f",
-        "operationsSha256": "83702980dde31badcbff0948c691b461fad3ad7b7d0171df47ae562cd6913306",
-        "blobOperationsSha256": "c4e9e272f9eb5d44f93803afd518a96303126f8d450539772604f367beb3919a",
+        "canonicalSha256": "cc10cb4ae833cce1e4d7f36f7960c3bb70fb3917c185e0b957e416eebf48e34f",
+        "operationsSha256": "40fb6ff18cc215f06c54478513e5fb83de065470f305dee656cd8a13da91e9e2",
+        "blobOperationsSha256": "6dc3f2fa44072912c580b0a448344dbae553fc24c2e832741da715fbbc9e8712",
         "blobCatalogSha256": "5155ee5f09fdeb05a961b57e53bf52885120709f7a16bc81d2395f0f13e05106",
-        "blobTransfersSha256": "934350b1ae98887532bb7fb41bd7f5faa6b9f497524fcd2f5194171af0d8f1e0",
-        "blobsSha256": "1769cdcb526fffd07b611c8dd06ee4b0e324b9f0f5ae9fd87b523d2054c1b94c",
+        "blobTransfersSha256": "f712a95d182db936455486e876f50881d70a2e8e4ab5c8fab54431f900d857bc",
+        "blobsSha256": "8604b939d8d94875188109642437ad61a98329eefb8ae49c16f6762f69f595bd",
         "canonicalRecords": 106,
         "syncOperations": 105,
         "physicalFiles": 113,
@@ -3343,12 +3343,12 @@
         "sqliteTemporaryCacheKiB": -1024
       },
       "restarted": {
-        "canonicalSha256": "d22cb708f8f4f42138b89ec3ede9fd418ac0f271fafea3445bc18e37b7c9ae6f",
-        "operationsSha256": "83702980dde31badcbff0948c691b461fad3ad7b7d0171df47ae562cd6913306",
-        "blobOperationsSha256": "c4e9e272f9eb5d44f93803afd518a96303126f8d450539772604f367beb3919a",
+        "canonicalSha256": "cc10cb4ae833cce1e4d7f36f7960c3bb70fb3917c185e0b957e416eebf48e34f",
+        "operationsSha256": "40fb6ff18cc215f06c54478513e5fb83de065470f305dee656cd8a13da91e9e2",
+        "blobOperationsSha256": "6dc3f2fa44072912c580b0a448344dbae553fc24c2e832741da715fbbc9e8712",
         "blobCatalogSha256": "5155ee5f09fdeb05a961b57e53bf52885120709f7a16bc81d2395f0f13e05106",
-        "blobTransfersSha256": "934350b1ae98887532bb7fb41bd7f5faa6b9f497524fcd2f5194171af0d8f1e0",
-        "blobsSha256": "1769cdcb526fffd07b611c8dd06ee4b0e324b9f0f5ae9fd87b523d2054c1b94c",
+        "blobTransfersSha256": "f712a95d182db936455486e876f50881d70a2e8e4ab5c8fab54431f900d857bc",
+        "blobsSha256": "8604b939d8d94875188109642437ad61a98329eefb8ae49c16f6762f69f595bd",
         "canonicalRecords": 106,
         "syncOperations": 105,
         "physicalFiles": 113,
@@ -3356,11 +3356,11 @@
         "sqliteTemporaryCacheKiB": -1024
       },
       "malformedStatus": {
-        "scanId": "828ffeb0-216d-4435-a579-6fc9669dcc28",
+        "scanId": "68c72e3d-b83c-478f-91f6-b3bc2f012f11",
         "state": "failed",
         "phase": "references",
-        "startedAt": 1789244105798,
-        "updatedAt": 1789244105814,
+        "startedAt": 1789246828812,
+        "updatedAt": 1789246828834,
         "scannedRecords": 107,
         "scannedTransfers": 0,
         "scannedCatalogEntries": 0,
@@ -3379,5 +3379,5 @@
     }
   ],
   "changedSources": [],
-  "completedAt": "2026-09-12T20:15:06.013Z"
+  "completedAt": "2026-09-12T21:00:29.170Z"
 }

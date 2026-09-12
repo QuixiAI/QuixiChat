@@ -149,6 +149,33 @@ different bytes of the same length, the verification reports that digest as
 content differing, which only hashing can find. No filename or content
 appears in the panel.
 
+## Reviewed cleanup (product §101 "find orphan blobs", ADR 0041)
+
+**Controller (Node)** — `npm run test:app:storage-health` also runs
+`packages/app/tests/diagnostics/cleanup-controller.test.ts` (3 tests): only
+orphan findings can be ticked, at most thirty-two; nothing is sent without a
+review; confirming sends exactly the reviewed digests bound to the scan and
+records deletions and refusals; a new or stale scan drops the selection;
+errors are plain; disposal stops everything.
+
+**Application (Chromium and WebKit)** — the storage-health proof (18 checks
+per engine, [retained](results/blob-inventory-ui-macos.json)): the deletion
+control is disabled until files are ticked; two ticked unreferenced files
+are shown with their digests and total size in a review; "Keep the files"
+changes nothing (canonical counts equal); confirming deletes exactly those
+two (orphan count 98 → 96 after a new scan); the scan reads stale until a
+new one and a stale scan refuses further deletion; a referenced file, an
+import-protected file and an unknown digest are each refused as not a
+finding of the scan. The storage-level inventory proof was rerun after the
+staleness trigger change ([retained](results/blob-inventory-worker-macos.json),
+11 checks per engine).
+
+A race surfaced on the way: background lexical indexing marks catalog rows
+verified after reading text blobs, which made a completed scan stale before
+the user could confirm. The inventory and hash-audit triggers now ignore
+catalog updates that change neither digest nor size, and the stale message
+names what changed.
+
 ## Limits
 
 - The reference check is bounded (newest 4,096 referencing records, first 64
