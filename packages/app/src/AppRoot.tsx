@@ -9,6 +9,8 @@ import { MessageTimestamp } from './features/preferences/MessageTimestamp.tsx';
 import { createStorageHealthController, createDoctorAuditController, createBlobHashAuditController } from './features/diagnostics/controller.ts';
 import { BlobHashAuditPanel } from './features/diagnostics/BlobHashAuditPanel.tsx';
 import { createCleanupController } from './features/diagnostics/cleanup-controller.ts';
+import { createMigrationController } from './features/migration/controller.ts';
+import { MigrationPanel } from './features/migration/MigrationPanel.tsx';
 import { DoctorAuditPanel } from './features/diagnostics/DoctorAuditPanel.tsx';
 import { createDiagnosticsController } from './features/diagnostics/report-controller.ts';
 import { DiagnosticsPanel } from './features/diagnostics/DiagnosticsPanel.tsx';
@@ -361,6 +363,8 @@ export function AppRoot({
   );
   const [dropping, setDropping] = useState(false);
   const [providers, setProviders] = useState(services.providers ?? []);
+  const providersRef = useRef(providers); providersRef.current = providers;
+  const migration = useMemo(() => createMigrationController({ storage: services.storage, assess: (threadId, targets, settings) => chat.assessThreadPortability(threadId, targets, settings), providers: () => providersRef.current, settings: () => ({ maxOutputTokens: 1024 }) }), [services, chat]);
   // The device's own offline signal is authoritative when false; the
   // provider's answers establish everything else about a connection.
   const [online, setOnline] = useState(
@@ -388,7 +392,7 @@ export function AppRoot({
     [services],
   );
   const [section, setSection] = useState<
-    "library" | "imports" | "providers" | "exports" | "documents" | "preferences" | "storage-health" | "semantic"
+    "library" | "imports" | "providers" | "exports" | "documents" | "preferences" | "storage-health" | "semantic" | "portability"
   >("library");
   const [searchMode, setSearchMode] = useState<"best" | "exact" | "semantic">("best");
   const [searchNotice, setSearchNotice] = useState<string | null>(null);
@@ -627,10 +631,11 @@ export function AppRoot({
         doctorAudit.dispose(),
         hashAudit.dispose(),
         cleanup.dispose(),
+        migration.dispose(),
       ]).then(() => {});
       onShutdown?.(task);
     };
-  }, [library, chat, summaries, attachments, settings, content, conversationSearch, exports, restore, documents, storageHealth, diagnostics, doctorAudit, hashAudit, cleanup, semantic, onboarding, onShutdown]);
+  }, [library, chat, summaries, attachments, settings, content, conversationSearch, exports, restore, documents, storageHealth, diagnostics, doctorAudit, hashAudit, cleanup, migration, semantic, onboarding, onShutdown]);
   useEffect(() => {
     setPromptCount(null);
     setSwitchReviewed(null);
@@ -1221,6 +1226,7 @@ export function AppRoot({
             onClick={() => { setSection("preferences"); void preferences.refresh(); void aliases.refresh(); }}
           >Preferences</button>
           <button aria-current={section === 'storage-health' ? 'page' : undefined} onClick={() => { setSection('storage-health'); void onboarding.refresh(); }}>Storage health</button>
+          <button aria-current={section === 'portability' ? 'page' : undefined} onClick={() => setSection('portability')}>Portability</button>
           <button aria-current={section === 'semantic' ? 'page' : undefined} onClick={() => { setSection('semantic'); void semantic.refresh(); }}>Semantic search</button>
           <button
             aria-current={section === "library" ? "page" : undefined}
@@ -1394,6 +1400,7 @@ export function AppRoot({
           <BlobHashAuditPanel controller={hashAudit} disabled={selectionChanged} />
         </>}
         {section === 'semantic' && <SemanticPanel controller={semantic} snapshot={semanticState} />}
+        {section === 'portability' && <MigrationPanel controller={migration} onOpen={threadId => { setSection('library'); void library.open(threadId); }} disabled={selectionChanged} />}
         {section === "imports" && state.workspaceId && (
           <ImportPanel
             storage={services.storage}

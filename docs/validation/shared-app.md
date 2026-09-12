@@ -110,7 +110,8 @@ attempt qualification remains open.
 
 ## Recorded checks
 
-Since 2026-09-12 the proof records 91 checks per engine. The newest is the
+Since 2026-09-12 the proof records 96 checks per engine. The newest is the
+[bulk portability analysis](bulk-portability.md) of plan 12; before it, the
 [accessibility audit](accessibility-audit.md) across ten views. The two before it
 assert the empty states added by the [presentation review](presentation-review.md):
 a search with no matches and a conversation with no messages. Before them: a

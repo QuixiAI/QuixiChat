@@ -472,7 +472,7 @@ try {
     "packages/app/src/runtime/usage.ts",
     "packages/app/src/runtime/events.ts",
     "packages/app/src/runtime/switching.ts",
-    "packages/app/src/runtime/portability.ts",
+    "packages/app/src/runtime/portability.ts", "packages/app/src/features/migration/controller.ts", "packages/app/src/features/migration/MigrationPanel.tsx",
     "packages/app/src/runtime/fallback.ts",
     "packages/app/src/runtime/routing.ts",
     "packages/app/src/runtime/request-cost.ts",
@@ -2000,6 +2000,35 @@ try {
       evidence.checks.push(
         "the open conversation shows its portability status with one inspectable reason per configured target and what is never sent, and a path whose assistant turn carries a reasoning marker without a verified provider block is portable to every target with that omission named per target and no invented block",
       );
+      // Plan 12 bulk portability: every conversation's selected branch is
+      // analysed against the configured targets, paginated and cancellable,
+      // with counts per outcome and inspectable reasons per conversation.
+      await page.getByRole("button", { name: "Portability", exact: true }).click();
+      const bulk = page.getByRole("region", { name: "Bulk portability", exact: true });
+      await bulk.getByRole("button", { name: "Analyse the library", exact: true }).click();
+      await expect(bulk.getByTestId("bulk-status")).toContainText("Analysis complete", { timeout: 120_000 });
+      const libraryThreads = await page.evaluate(() => window.appAcceptance.libraryThreads());
+      const bulkCounts = Object.fromEntries(await bulk.locator("[data-testid='bulk-counts'] div[data-outcome]").evaluateAll(nodes => nodes.map(node => [node.dataset.outcome, Number(node.querySelector("dd").textContent.replaceAll(",", ""))])));
+      expect(bulkCounts.total).toBe(libraryThreads.length);
+      expect(Object.entries(bulkCounts).filter(([key]) => key !== "total").reduce((sum, [, value]) => sum + value, 0)).toBe(bulkCounts.total);
+      expect(bulkCounts.failed).toBe(0);
+      expect(bulkCounts.fully_portable + bulkCounts.portable_with_transformations).toBeGreaterThanOrEqual(1);
+      const bulkRows = bulk.getByRole("list", { name: "Conversation portability", exact: true });
+      const portabilityRow = bulkRows.locator("> li").filter({ hasText: "Portability thread" }).first();
+      await expect(portabilityRow).toContainText(/Portable with transformations|Fully portable/);
+      await portabilityRow.getByText(/^Reasons \(\d+\)$/).click();
+      await expect(portabilityRow).toContainText("Anthropic · Claude Haiku 4.5: carries all");
+      const rowCount = await bulkRows.locator("> li").count();
+      expect(rowCount).toBe(Math.min(32, libraryThreads.length));
+      await bulk.getByLabel("Show").selectOption("blocked");
+      const blockedRows = await bulkRows.locator("> li").count();
+      expect(blockedRows).toBe(Math.min(32, bulkCounts.blocked));
+      if (blockedRows > 0) await expect(bulkRows.locator("> li").first()).toContainText("Blocked.");
+      await bulk.getByLabel("Show").selectOption("all");
+      await portabilityRow.getByRole("button", { name: "Open conversation", exact: true }).click();
+      await expect(page.getByRole("heading", { name: "Portability thread", exact: true })).toBeVisible();
+      evidence.bulkPortability = { threads: libraryThreads.length, counts: bulkCounts };
+      evidence.checks.push(`bulk portability analyses all ${libraryThreads.length} library conversations page by page against the configured targets (${bulkCounts.fully_portable} fully portable, ${bulkCounts.portable_with_transformations} with transformations, ${bulkCounts.provider_dependent} provider-dependent, ${bulkCounts.blocked} blocked, ${bulkCounts.empty} without messages, 0 failed) with inspectable per-target reasons, an outcome filter, 32-row pages and a way to open each conversation`);
       // Plan 10 imported continuation: a ChatGPT export imported through the
       // production importer continues with the Anthropic connection. The
       // artifact-bearing branch is blocked, the text branch is chosen, the

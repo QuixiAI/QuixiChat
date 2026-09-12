@@ -1,6 +1,6 @@
 # 12 — Add compare, critique, and bulk migration
 
-**Status:** Planned
+**Status:** In progress — design fixed in [ADR 0042](../decisions/0042-compare-critique-bulk-migration.md); bulk portability analysis implemented and proven; compare, critique and the reviewed migration remain open
 
 **Workstream:** Product workflows — multiple generations and portability
 
@@ -28,7 +28,7 @@ Let users compare alternative model attempts, request critiques, and assess or m
 - [ ] Implement compare requests that create separate Generation attempts for selected models from the same canonical prompt/path.
 - [ ] Build comparison views with independent streaming/status, usage/cost metadata, candidate selection, and continuation from any alternative.
 - [ ] Implement critique as a new generation with an explicit reference to the reviewed answer; never overwrite the original generation.
-- [ ] Implement paginated bulk portability analysis with counts and inspectable reasons for fully portable, transformed, provider-dependent, and blocked threads.
+- [x] Implement paginated bulk portability analysis with counts and inspectable reasons for fully portable, transformed, provider-dependent, and blocked threads. The Portability section analyses every library conversation's selected branch in 32-conversation pages against every configured target through the same reports the open conversation shows, with counts per outcome, per-conversation reasons, an outcome filter, 32-row pages and a way to open each conversation ([ADR 0042](../decisions/0042-compare-critique-bulk-migration.md), [validation](../validation/bulk-portability.md)).
 - [ ] Reuse the compatibility inspector and context-compaction choices for bulk operations. Review transformations before committing routing or continuation changes.
 - [ ] Bound concurrent provider work and bulk storage reads, support cancellation/retry, and preserve successful independent results when another attempt fails.
 - [ ] Persist selection, critique relationships, migration events, and relevant routing changes through the canonical storage operations.
@@ -43,7 +43,7 @@ Let users compare alternative model attempts, request critiques, and assess or m
 - [ ] Failure or cancellation of one compared model does not discard other candidates.
 - [ ] Users can select and branch from any retained answer after reopening the thread.
 - [ ] Critiques and bulk transformations retain their source relationships and original history.
-- [ ] Bulk processing remains paginated and reports per-thread blocked/failed outcomes.
+- [x] Bulk processing remains paginated and reports per-thread blocked/failed outcomes. The analysis walks library pages one conversation at a time, can be stopped between conversations keeping what was analysed, records a per-conversation failed outcome with its reason (and a Retry) instead of stopping, and reports blocked conversations with the blocking parts named per target ([validation](../validation/bulk-portability.md): 3 controller tests, both engines in the shared-app proof).
 
 ## Boundaries and sequencing
 

@@ -515,6 +515,46 @@ export function createChatController(
     }
     return { messages: output, attachments, attachmentByteLength, reasoning, omitted, transformed };
   }
+  /** The selected path of one conversation analysed against every configured
+   * target's reviewed models, up to the portability target bound. */
+  async function inspectPath(
+    threadId: string,
+    leaf: string,
+    snapshot: ContextSnapshot,
+    providers: readonly ConfiguredProvider[],
+    parameters: GenerationSettings,
+  ): Promise<PortabilityInspection> {
+    const prior = await context(threadId, leaf, snapshot);
+    const targets: PortabilityInspection["targets"] = [];
+    for (const provider of providers)
+      for (const model of provider.models) {
+        if (targets.length >= PORTABILITY_TARGET_LIMIT) break;
+        const shaped = shapeReasoningForTarget({
+          requestId: id(),
+          modelId: model.id,
+          systemPrompt: snapshot.systemPrompt,
+          messages: prior.messages,
+          parameters: requestParameters(parameters),
+          reasoning: prior.reasoning,
+          ...(Object.keys(prior.attachments).length
+            ? { attachments: prior.attachments }
+            : {}),
+        }, { protocol: provider.adapter.protocol, modelId: model.id });
+        targets.push({
+          provider: { id: provider.id, label: provider.label },
+          model: { id: model.id, name: model.name },
+          report: provider.adapter.analyze(shaped.input),
+          ...(Object.keys(shaped.transformed).length ? { transformed: withReasoningShape(prior.transformed, shaped) } : {}),
+        });
+      }
+    return {
+      leaf,
+      empty: !prior.messages.length,
+      targets,
+      transformed: prior.transformed,
+      neverSent: prior.omitted,
+    };
+  }
   async function attempt(
     provider: ConfiguredProvider,
     modelId: string,
@@ -894,36 +934,22 @@ export function createChatController(
       cancelled = false;
       const current = library.getSnapshot();
       if (!current.thread || !current.leaf) return null;
-      const prior = await context(current.thread.thread.id, current.leaf, current.thread.context);
-      const targets: PortabilityInspection["targets"] = [];
-      for (const provider of providers)
-        for (const model of provider.models) {
-          if (targets.length >= PORTABILITY_TARGET_LIMIT) break;
-          const shaped = shapeReasoningForTarget({
-            requestId: id(),
-            modelId: model.id,
-            systemPrompt: current.thread.context.systemPrompt,
-            messages: prior.messages,
-            parameters: requestParameters(parameters),
-            reasoning: prior.reasoning,
-            ...(Object.keys(prior.attachments).length
-              ? { attachments: prior.attachments }
-              : {}),
-          }, { protocol: provider.adapter.protocol, modelId: model.id });
-          targets.push({
-            provider: { id: provider.id, label: provider.label },
-            model: { id: model.id, name: model.name },
-            report: provider.adapter.analyze(shaped.input),
-            ...(Object.keys(shaped.transformed).length ? { transformed: withReasoningShape(prior.transformed, shaped) } : {}),
-          });
-        }
-      return {
-        leaf: current.leaf,
-        empty: !prior.messages.length,
-        targets,
-        transformed: prior.transformed,
-        neverSent: prior.omitted,
-      };
+      return inspectPath(current.thread.thread.id, current.leaf, current.thread.context, providers, parameters);
+    },
+    /** Plan 12 bulk analysis: the same inspection for any conversation's
+     * selected path, read from storage rather than the open conversation.
+     * Null while a generation is in progress (the workflow is busy) or when
+     * the conversation has no selected message yet. */
+    async assessThreadPortability(
+      threadId: string,
+      providers: readonly ConfiguredProvider[],
+      parameters: GenerationSettings = { maxOutputTokens: 1024 },
+    ): Promise<PortabilityInspection | null | "busy"> {
+      if (busy || disposed) return "busy";
+      cancelled = false;
+      const view = await services.storage.request(id(), "readThreadView", { threadId });
+      if (!view.state.activeLeafMessageId) return null;
+      return inspectPath(threadId, view.state.activeLeafMessageId, view.context, providers, parameters);
     },
     /** Count the prompt a send would dispatch, through the provider's own
      * counting implementation when available. Nothing is committed. */

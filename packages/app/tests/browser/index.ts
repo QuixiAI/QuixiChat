@@ -334,6 +334,19 @@ Object.assign(window, {
       return seeded;
     },
     semanticStatus: () => storage.request(crypto.randomUUID(), "semanticStatus", null),
+    /** Plan 12: every library conversation (active, then archived) by title, as the bulk analysis walks them. */
+    async libraryThreads() {
+      const out: { threadId: string; title: string; archived: boolean }[] = [];
+      for (const archived of [false, true]) {
+        let cursor: string | null = null;
+        do {
+          const page: { items: { threadId: string; title: string; archived: boolean }[]; nextCursor: string | null } = await storage.request(crypto.randomUUID(), "listLibrary", { archived, title: "", page: { maxItems: 32, maxBytes: 65_536, cursor } });
+          out.push(...page.items.map(item => ({ threadId: item.threadId, title: item.title, archived: item.archived })));
+          cursor = page.nextCursor;
+        } while (cursor);
+      }
+      return out;
+    },
     /** Diagnostics hook: injects a GPU device loss into the live embedding service; false when the CPU route is active. */
     injectEmbeddingFault: (fault: "gpu-device-loss") => embeddingService ? embeddingService.injectFault(fault) : Promise.resolve(false),
     /** Plan 23: the last inference self-test result held by the semantic controller (null before one runs). */
