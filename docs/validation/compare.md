@@ -1,7 +1,7 @@
-# Compare mode
+# Compare and critique modes
 
 Plan [12](../plans/12_add_compare_critique_and_bulk_migration.md), product
-§39, [ADR 0042](../decisions/0042-compare-critique-bulk-migration.md). Last
+§39/§40, [ADR 0042](../decisions/0042-compare-critique-bulk-migration.md). Last
 run 2026-09-12 on macOS 25.6.0 (arm64), Node v22.23.1, Playwright Chromium
 and WebKit, against the proof's Anthropic and OpenAI fixtures.
 
@@ -45,9 +45,30 @@ the error line, and both attempts remain in history with sealed outputs.
 The scenario runs late in the proof, after a browser restart, so it
 reconnects both credentials, as every restart scenario does.
 
+## Critique
+
+`critique(reviewed, provider, model)` reads the branch through the reviewed
+answer, appends the fixed review instruction as the request's last user
+turn, and starts one ordinary attempt whose parent is the reviewed answer's
+parent turn, with a `Critique` event committed in the generation's own
+commit naming the reviewed message and generation and the critic's
+connection and model. The critique's article carries a badge naming what it
+reviewed; the event line says the reviewed answer is unchanged. Each
+assistant answer offers "Critique this answer" with the composer's selected
+connection and model as the critic.
+
+The shared-app proof (99 checks per engine) critiques the last
+answer after the compare scenario and checks: one new complete generation
+whose parent is the reviewed answer's parent, one Critique event naming the
+reviewed message and generation and the critic's model, the request's last
+turn carrying the review instruction after the reviewed assistant turn, the
+reviewed message and its parts byte-equal before and after, the badge on the
+critique's article and the event line.
+
 ## Limits
 
 - At most four candidates per comparison (ADR 0042 bound).
 - Compare attempts do not take the automatic fallback of an ordinary send;
   a failed candidate is reported, not retried on another connection.
-- Critique and the reviewed bulk migration are not yet implemented.
+- The reviewed bulk migration is not yet implemented. The critique's
+  instruction is fixed; a user-authored review prompt is a later refinement.

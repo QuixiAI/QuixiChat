@@ -3124,6 +3124,40 @@ try {
         await haikuBox.uncheck();
         await miniBox.uncheck();
       }
+      // Plan 12 critique (ADR 0042): a new generation by the composer's model
+      // reviews the last answer; the request carries the branch through that
+      // answer plus the review instruction, the output is a sibling of the
+      // reviewed answer's parent, a Critique event names both, and the
+      // reviewed answer is unchanged.
+      {
+        const reviewedArticle = page.locator("article.message.assistant").last();
+        const reviewedId = await reviewedArticle.getAttribute("data-message-id");
+        const reviewedBefore = (await records(page, "messages")).items.find((value) => value.id === reviewedId);
+        const reviewedPartsBefore = (await records(page, "parts")).items.filter((value) => value.messageId === reviewedId);
+        const generationsBeforeCritique = (await records(page, "generations")).items.length;
+        await reviewedArticle.getByRole("button", { name: /^Critique this answer/ }).click();
+        await expect.poll(async () => (await records(page, "generations")).items.length, { timeout: 60_000 }).toBe(generationsBeforeCritique + 1);
+        await expect(page.getByLabel("Provider", { exact: true })).toBeEnabled({ timeout: 30_000 });
+        const critique = (await records(page, "generations")).items.sort((a, b) => a.createdAt - b.createdAt).at(-1);
+        expect(critique.parentMessageId).toBe(reviewedBefore.parentId);
+        expect(critique.status).toBe("complete");
+        const critiqueEvents = (await records(page, "events")).items.filter((value) => value.type === "Critique");
+        expect(critiqueEvents).toHaveLength(1);
+        expect(critiqueEvents[0].messageId).toBe(reviewedId);
+        expect(critiqueEvents[0].generationId).toBe(critique.id);
+        expect(critiqueEvents[0].details.reviewed.generationId).toBe(reviewedBefore.generationId);
+        expect(critiqueEvents[0].details.critic.model).toBe(critique.model);
+        const critiqueRequest = requests.at(-1).body;
+        expect(JSON.stringify(critiqueRequest.messages.at(-1))).toContain("Review the previous answer critically");
+        expect(critiqueRequest.messages.at(-2).role).toBe("assistant");
+        expect((await records(page, "messages")).items.find((value) => value.id === reviewedId)).toEqual(reviewedBefore);
+        expect((await records(page, "parts")).items.filter((value) => value.messageId === reviewedId)).toEqual(reviewedPartsBefore);
+        const critiqueArticle = page.locator("article.message.assistant").last();
+        await expect(critiqueArticle.getByTestId("critique-badge")).toContainText(/^Critique of the .+ answer$/);
+        expect(await critiqueArticle.getAttribute("data-message-id")).toBe(critique.outputMessageId);
+        await expect(page.getByRole("list", { name: "Conversation events" })).toContainText("Critique of the");
+        evidence.checks.push("critique starts a new generation that reviews the last answer: the request carries the branch through that answer and the review instruction, the output is a sibling of the reviewed answer's parent with a badge naming what it reviewed, a Critique event names both generations, and the reviewed answer and its parts are unchanged");
+      }
       // The follow-up above added a user turn and a response.
       evidence.savedMessages = (await records(page, "messages")).items.length;
       await page.evaluate(() => window.appAcceptance.close());

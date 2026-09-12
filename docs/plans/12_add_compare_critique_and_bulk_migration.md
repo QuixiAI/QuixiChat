@@ -1,6 +1,6 @@
 # 12 — Add compare, critique, and bulk migration
 
-**Status:** In progress — design fixed in [ADR 0042](../decisions/0042-compare-critique-bulk-migration.md); bulk portability analysis and compare mode implemented and proven; critique and the reviewed migration remain open
+**Status:** In progress — design fixed in [ADR 0042](../decisions/0042-compare-critique-bulk-migration.md); bulk portability analysis, compare and critique implemented and proven; the reviewed migration remains open
 
 **Workstream:** Product workflows — multiple generations and portability
 
@@ -27,7 +27,7 @@ Let users compare alternative model attempts, request critiques, and assess or m
 
 - [x] Implement compare requests that create separate Generation attempts for selected models from the same canonical prompt/path. `compare` commits the user turn once with a `Compare` event naming each candidate's pre-allocated generation and output, then runs one coordinated attempt per candidate concurrently without moving the selection ([validation](../validation/compare.md)).
 - [x] Build comparison views with independent streaming/status, usage/cost metadata, candidate selection, and continuation from any alternative. The Compared answers section under the turn shows each candidate's live status, tokens and estimated cost with Select this answer; the selection and the view persist from the records after a reload and the next turn continues from the chosen answer ([validation](../validation/compare.md)).
-- [ ] Implement critique as a new generation with an explicit reference to the reviewed answer; never overwrite the original generation.
+- [x] Implement critique as a new generation with an explicit reference to the reviewed answer; never overwrite the original generation. `critique` starts an ordinary attempt whose parent is the reviewed answer's parent turn, with a `Critique` event in the same commit naming the reviewed message and generation; the proof checks the reviewed message and parts are byte-equal before and after ([validation](../validation/compare.md)).
 - [x] Implement paginated bulk portability analysis with counts and inspectable reasons for fully portable, transformed, provider-dependent, and blocked threads. The Portability section analyses every library conversation's selected branch in 32-conversation pages against every configured target through the same reports the open conversation shows, with counts per outcome, per-conversation reasons, an outcome filter, 32-row pages and a way to open each conversation ([ADR 0042](../decisions/0042-compare-critique-bulk-migration.md), [validation](../validation/bulk-portability.md)).
 - [ ] Reuse the compatibility inspector and context-compaction choices for bulk operations. Review transformations before committing routing or continuation changes.
 - [ ] Bound concurrent provider work and bulk storage reads, support cancellation/retry, and preserve successful independent results when another attempt fails.

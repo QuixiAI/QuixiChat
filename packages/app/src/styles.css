@@ -778,3 +778,4 @@ form label {
 .compare-candidates li { margin-block: .35rem; }
 .compare-candidates button { margin-inline-start: .5rem; }
 .compare-selected { font-weight: 600; }
+.critique-badge { display: inline-block; margin-inline-start: .5rem; padding: 0 .4rem; border: 1px solid var(--border); border-radius: var(--radius-md); font-size: .85em; }

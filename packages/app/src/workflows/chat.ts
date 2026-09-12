@@ -27,6 +27,8 @@ const id = () => crypto.randomUUID(),
   page = { maxItems: 64, maxBytes: 900_000, cursor: null };
 /** Product §39: answers compared at once (ADR 0042 bound). */
 export const COMPARE_LIMIT = 4;
+/** Product §40: the review instruction sent after the reviewed answer. */
+export const CRITIQUE_INSTRUCTION = "Review the previous answer critically. State what is correct, what is wrong or missing, and how it could be improved. Do not rewrite the answer.";
 /** Composer generation settings. An absent key keeps the provider default; the
  * adapter rejects keys the reviewed catalog does not permit before any commit. */
 export type GenerationSettings = ProviderInput["parameters"];
@@ -1227,6 +1229,62 @@ export function createChatController(
         library.patch({ busy: false });
       }
       return { saved, failures };
+    },
+    /** Product §40 critique (ADR 0042): a new Generation by the chosen model
+     * that reviews one answer. The request carries the branch through the
+     * reviewed answer plus the review instruction; the output is a sibling
+     * branch of the reviewed answer's parent, and a `Critique` event committed
+     * with the generation names the reviewed answer and generation. The
+     * reviewed answer is never changed. */
+    async critique(
+      reviewed: Message,
+      provider: ConfiguredProvider,
+      modelId: string,
+      parameters: GenerationSettings = { maxOutputTokens: 1024 },
+    ): Promise<boolean> {
+      if (busy || disposed || !reviewed.sealed || reviewed.role !== "assistant" || !reviewed.generationId || !reviewed.parentId) return false;
+      busy = true;
+      cancelled = false;
+      library.patch({ busy: true, error: null });
+      let started = false;
+      try {
+        const view = await services.storage.request(id(), "readThreadView", { threadId: reviewed.threadId });
+        const parent = (await services.storage.request(id(), "readEntity", { collection: "messages", id: reviewed.parentId })) as unknown as Message | null;
+        const reviewedGeneration = (await services.storage.request(id(), "readEntity", { collection: "generations", id: reviewed.generationId })) as unknown as Generation | null;
+        if (!parent || !parent.sealed || !reviewedGeneration) throw new Error("The reviewed answer's turn is not available for a critique.");
+        const prior = await context(reviewed.threadId, reviewed.id, view.context);
+        const instruction: ContentPart = { id: id(), messageId: reviewed.id, order: 0, kind: "Text", data: { text: CRITIQUE_INSTRUCTION } };
+        const unshaped: ProviderInput = {
+          requestId: id(), modelId, systemPrompt: view.context.systemPrompt,
+          messages: [...prior.messages, { role: "user", parts: [instruction] }],
+          parameters: requestParameters(parameters), reasoning: prior.reasoning,
+          ...(Object.keys(prior.attachments).length ? { attachments: prior.attachments } : {}),
+        };
+        const input = shapeReasoningForTarget(unshaped, { protocol: provider.adapter.protocol, modelId }).input;
+        const requirements = routingRequirements(view.state.routingProfile);
+        requireRegion(provider, modelId, requirements);
+        const evidence = processingRegionKey(provider);
+        const cost = await requestCost(provider, input, requirements);
+        if (!cost.allowed) throw new Error(`Request cost limit: ${cost.reason}. Review the limit before requesting a critique.`);
+        if (processingRegionKey(provider) !== evidence) throw new Error('The processing-region evidence changed. Review the connection again.');
+        provider.adapter.prepare(input);
+        started = true;
+        const critiqueEvent = (generationId: string): CanonicalMutation[] => {
+          const now = Date.now();
+          return [library.mutation("CreateThreadEvent", { event: {
+            id: id(), threadId: reviewed.threadId, type: "Critique", createdAt: now, recordedAt: now, messageId: reviewed.id, generationId,
+            details: { version: 1, reviewed: { generationId: reviewed.generationId, messageId: reviewed.id, provider: reviewedGeneration.provider, model: reviewedGeneration.model }, critic: { provider: provider.adapter.binding.providerId, connection: provider.id, model: modelId } } as unknown as JsonObject,
+          } })];
+        };
+        await attempt(provider, modelId, reviewed.threadId, parent, input, view.context.id, view.state.revision, critiqueEvent, requirements);
+      } catch (error) {
+        library.patch({ error: error instanceof Error ? error.message : String(error) });
+      } finally {
+        run = null;
+        busy = false;
+        library.patch({ busy: false });
+      }
+      return started;
     },
     async regenerate(
       parent: Message,

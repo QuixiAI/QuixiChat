@@ -1644,6 +1644,11 @@ export function AppRoot({
                           </small>
                         )}
                         {preference.value.showTimestamps && <MessageTimestamp message={item.message} />}
+                        {item.generation && state.events.some((event) => event.type === "Critique" && event.generationId === item.generation!.id) && (() => {
+                          const critique = state.events.find((event) => event.type === "Critique" && event.generationId === item.generation!.id)!;
+                          const reviewed = (critique.details as { reviewed?: { provider?: string; model?: string } }).reviewed;
+                          return <span className="critique-badge" data-testid="critique-badge">Critique of the {reviewed?.provider ?? "unknown"} · {reviewed?.model ?? "unknown"} answer</span>;
+                        })()}
                       </header>
                       {displayParts(item.parts, !!item.generation).map(
                         (part) => (
@@ -1770,6 +1775,15 @@ export function AppRoot({
                             disabled={state.busy || state.pendingMutation}
                             onSelect={(outputId) => void library.selectBranch(outputId)}
                           />
+                        )}
+                        {item.message.role === "assistant" && item.generation && item.message.sealed && (
+                          <button
+                            aria-label={`Critique this answer — Assistant, message ${messageIndex + 1} on this page`}
+                            disabled={!provider || !model || !validSettings || state.busy || state.pendingMutation || invalidRoutingCost || !target || !targetModel || switchBlocks}
+                            onClick={() => { if (target && targetModel) void chat.critique(item.message, target, targetModel.id, generationSettings); focusComposer(); }}
+                          >
+                            Critique this answer
+                          </button>
                         )}
                         {item.message.role === "user" && (
                           <button
