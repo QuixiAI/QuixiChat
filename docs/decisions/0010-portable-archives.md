@@ -50,3 +50,17 @@ A native browser save picker receives bounded writes and commits only by closing
 - Browser host acceptance includes an actual 32 MiB download in both engines, immediate transfer release, reload, digest verification by an independent Node stream, and explicit retained-file cleanup. Injected picker mechanics use real OPFS destination streams and prove 64 KiB writes plus cancellation preserving an existing file; this is not automated OS save-dialog acceptance.
 
 Cross-host portable file exchange, actual Tauri archive workflow/UI, very large archives, measured peak memory/disk amplification, capacity preflight, abrupt process/quota faults in every restore phase, pre-schema-8 compatibility and complete replacement UX remain release gates. Browser WebKit evidence is not installed Safari or Tauri evidence. Playwright WebKit required a regular persistent context for OPFS; test namespaces remain independently random because this runtime can share origin storage across profile paths.
+
+## Amendment (2026-09-12): capacity check before a job begins
+
+`beginArchiveExport` and `beginArchiveRestore` now compute what the job will
+write on OPFS — an export: the database file (`page_count × page_size`) plus
+every catalogued blob's bytes; a restore: twice the announced container size
+(the received bytes and their validated candidate copy) — add 8 MiB of slack
+and compare it with `navigator.storage.estimate()`. When the browser reports
+less free space, the job is refused before any output exists, as
+`QUOTA_EXCEEDED` with both numbers in the message; when the estimate is
+unavailable or malformed the job proceeds and the browser's own quota error
+still stops it safely, as before. The decision is a pure function
+(`packages/storage/src/worker/archives/capacity.ts`) with unit tests; the
+repository option `estimateStorage` lets tests inject an estimate.

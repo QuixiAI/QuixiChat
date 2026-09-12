@@ -1,6 +1,6 @@
 {
   "status": "passed",
-  "startedAt": "2026-09-09T20:19:04.052Z",
+  "startedAt": "2026-09-12T18:32:02.599Z",
   "selectedEngines": [
     "chromium",
     "webkit"
@@ -13,21 +13,21 @@
   },
   "sourceSha256": {
     "package-lock.json": "aadb456e2a567a2b91cbb81a502650ebac93541f0a59d54035bdde2cacd97672",
-    "apps/web/src/main.ts": "8e108e74813fcbb49de4d229b7848f25578881c57f9742d3b38d4cb8bf03c71d",
-    "apps/web/src/host/index.ts": "d79ac9b1392e706bad0d28e975f05bfa0cf95d6d137e0f1e28cfdd82324e830d",
-    "packages/app/src/AppRoot.tsx": "8e4c59a24a1713e24551faa2041c64e25bc1e90727498fbc2c6299e2b005b554",
-    "packages/app/src/styles.css": "7f3703e3f1c7be5348656b4669a8de9ff47e241ce30f6ca906ba9ce774d047ca",
+    "apps/web/src/main.ts": "156aa02138dbf9ca41fb973134fe352f0feb598f9048e34eccb85bcad91bbfa3",
+    "apps/web/src/host/index.ts": "b2e0dbba85b15c552fdd3111bb1af6a5231030fa478e883baba31695eba76dfd",
+    "packages/app/src/AppRoot.tsx": "1bf6515fbe9f40a16101ed0ded0b4250a757301856ca8e67128923cfb3b8119d",
+    "packages/app/src/styles.css": "a482ffc131ccc9039e0b1be7341cd1e6a2030d20c81b0aba7ed5f6dcd18421be",
     "apps/web/src/host/transfers.ts": "5718b2743caeffb00f4e736393ddff691b94fd896453aafbd696ac50d2e618f1",
     "packages/core/src/contracts/transfer.ts": "73563a59e5d0964657a88c025a1b0935a1ae7eb77161e96404a4d37b375d6a6f",
-    "packages/app/src/runtime/library.ts": "48c2b3623186066e09ad935640418c66df4b654d91c89d0d85e6bd3cf7bda334",
+    "packages/app/src/runtime/library.ts": "34fd344d87475fc5e49706124081734173842f9f5057c0ec6763a10c089ba9ca",
     "packages/app/src/features/archives/index.ts": "a470f9faf10c782b0b48a5b3124ff738d61b0f9faeb409165179b69eb5a74365",
     "packages/app/src/features/archives/restore-controller.ts": "6a87260dfd2b61c8b9d8b80c7a24d9c8ea853a0a831e4a045088c394ae624a01",
-    "packages/app/src/features/archives/RestorePanel.tsx": "5d84700555b349be1c742e58dd2ccd8faf2545ac8b6f83e9137767c2fa54ce5e",
-    "packages/app/src/features/archives/ExportPanel.tsx": "541243ffbad78622b562e0ec810d3c6a5b2a53bce83ce105a9b9bf61f994877e",
-    "packages/app/src/features/archives/controller.ts": "b3a4f113f7767f84dcc7b18f382d6f56b5922867efaca3302ce6a0c2892870f6",
+    "packages/app/src/features/archives/RestorePanel.tsx": "fd64e5c492a2cd894f54bdef7eccbfa085a00a2b65ce7963fd26ee6d6b7026c6",
+    "packages/app/src/features/archives/ExportPanel.tsx": "c50936ffe7326f220aa4525138031ba2352e863e1d5b18be9db6805876d6ddc7",
+    "packages/app/src/features/archives/controller.ts": "a0a77796f2893cf556aeeeebe4de6180b4127b5b71faacaeae3ef1ecc5ef6c76",
     "packages/storage/src/client/selection.ts": "3be6215f42123384024fe65de83577a46f82fbc4408270d75c7c0e399a66c59b",
     "packages/storage/src/worker/selection.ts": "281fd0f9088feec8906ce1923255eaff9fb998371e659c8f41d7cd7ed4b4d594",
-    "packages/storage/src/worker/archive-database.ts": "c0ee0ac2aa0003ba630c0c91b38269df903fb4e096f164210c07e002af2bbf6a",
+    "packages/storage/src/worker/archive-database.ts": "c34514044258a2cd5376c8b45b6a8d56d4232d6d65542970f3b8d7c309c3f7b4",
     "packages/app/src/features/archives/tests/browser/index.ts": "f34e5a45563c5b5b10ba11029fa7d5dbe5319c494820c3c386ec8a4c3698723d",
     "packages/app/src/features/archives/tests/browser/run.mjs": "475151e13acf43e788b32e9b4a87e38ac307ed01d99f70b50c313ec6d761c202"
   },
@@ -47,10 +47,10 @@
       "externalRequests": [],
       "pageErrors": [],
       "raw": {
-        "rawId": "34476068-790c-4062-b996-ea170cbc2ede",
+        "rawId": "4d3e549c-37e1-4f64-bd07-477d3258eb19",
         "digest": "b057f26faa652e9916aa08eed7e50906151f83de0e878173e9d06e359c0dd75e",
         "byteLength": 2097169,
-        "messageId": "c54ebf1d-c838-4bf3-aed7-4618eedaf120",
+        "messageId": "5e68bb6b-a520-4d99-9c15-286870d9b7bd",
         "text": "Saved archive message 🧪\nSecond preserved line."
       },
       "originalSelection": {
@@ -64,18 +64,18 @@
         "rawObjects": 1,
         "syncOperations": 5
       },
-      "schemaVersion": 10,
+      "schemaVersion": 12,
       "export": {
-        "name": "quixi-portable-c68e11fb-afae-4b1f-9e2a-82a7aaddb808.tar",
-        "byteLength": 2792448,
-        "sha256": "36fe5df6c767e281ba6b6b4f12988f38777a07f3d7ae6b850075e3063a5fd08a"
+        "name": "quixi-portable-142e43cb-dd2c-4328-87e8-c63bb831e26a.tar",
+        "byteLength": 2801152,
+        "sha256": "b9226d3897e5f8ecb2bab1c2164b9237b586cf115cd9037637ac07a89934a84b"
       },
       "resumedJob": {
-        "jobId": "477cb6ee-856d-4bdd-b6c0-e170b1a7bbac",
-        "candidateArchiveId": "0bd8cc5e-d0de-4919-a147-bfa32c531169"
+        "jobId": "674ef4c9-c56b-4716-af9a-c11f32c459f3",
+        "candidateArchiveId": "1e60ad50-3859-4263-8212-f9cd457ea50e"
       },
       "selected": {
-        "archiveId": "0bd8cc5e-d0de-4919-a147-bfa32c531169",
+        "archiveId": "1e60ad50-3859-4263-8212-f9cd457ea50e",
         "selectionRevision": 1
       },
       "verifiedRaw": {
@@ -101,10 +101,10 @@
       "externalRequests": [],
       "pageErrors": [],
       "raw": {
-        "rawId": "3f8eaa3e-e7b3-4c8b-a481-948a55b38e53",
+        "rawId": "5659b20f-1926-4ac1-8d0c-1325a16ec080",
         "digest": "b057f26faa652e9916aa08eed7e50906151f83de0e878173e9d06e359c0dd75e",
         "byteLength": 2097169,
-        "messageId": "c69f0bcf-72ac-4160-9726-353d92980ac9",
+        "messageId": "f206159b-6b41-4b63-9a63-893e2190ebc9",
         "text": "Saved archive message 🧪\nSecond preserved line."
       },
       "originalSelection": {
@@ -118,18 +118,18 @@
         "rawObjects": 1,
         "syncOperations": 5
       },
-      "schemaVersion": 10,
+      "schemaVersion": 12,
       "export": {
-        "name": "quixi-portable-7838ab3c-f922-4d69-91ea-f6ddbd16831c.tar",
-        "byteLength": 2792448,
-        "sha256": "1d16fcddb43964c1a75098074b37bbcee0793f755ab67ca85b4011adf305a268"
+        "name": "quixi-portable-67436326-4508-40cb-b962-842afc74433f.tar",
+        "byteLength": 2801152,
+        "sha256": "78910435eba4eb55585bfcb25d2a1f688139c826cb1d9912aa7b6381dcbc524c"
       },
       "resumedJob": {
-        "jobId": "e21a16ee-072a-4df4-941e-967bda96a29e",
-        "candidateArchiveId": "f3882743-faa9-4fe6-a507-1a69fe0ae25f"
+        "jobId": "c9212be8-4eb6-4c87-85b1-46a8da42e084",
+        "candidateArchiveId": "473e3ebc-d4b2-42b9-9d03-29730979c28c"
       },
       "selected": {
-        "archiveId": "f3882743-faa9-4fe6-a507-1a69fe0ae25f",
+        "archiveId": "473e3ebc-d4b2-42b9-9d03-29730979c28c",
         "selectionRevision": 1
       },
       "verifiedRaw": {
@@ -142,7 +142,7 @@
     }
   ],
   "qualification": "Actual production web main/shared UI, managed selection client and OPFS; optional showSaveFilePicker disabled to select the production browser-download path. No provider requests.",
-  "origin": "http://127.0.0.1:51604/",
+  "origin": "http://127.0.0.1:51690/",
   "sourceStable": true,
-  "finishedAt": "2026-09-09T20:19:24.649Z"
+  "finishedAt": "2026-09-12T18:32:18.660Z"
 }

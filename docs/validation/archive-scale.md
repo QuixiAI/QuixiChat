@@ -46,6 +46,14 @@ stays bounded and streams. Restoring the 106 MB container validated
 archive, and the corrupted copy was refused at the checksum claim with the
 cause reported and the active archive still answering searches.
 
+## Capacity check
+
+Since the run above, every export and restore begins with the storage-capacity
+check of ADR 0010's amendment; the small smoke run and the archive snapshot
+proof exercise the positive path with the browser's real estimate, and
+`capacity.test.ts` covers the refusal arithmetic and the unknown-estimate
+rule.
+
 ## Limits
 
 Single runs under development load on one machine; synthetic short

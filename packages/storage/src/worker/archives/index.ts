@@ -38,6 +38,8 @@ import {
 import type { ArchiveFileHandle } from "./files.ts";
 import { exportArchive } from "./export.ts";
 import type { ExportTick } from "./export.ts";
+import { archiveCapacityDecision, archiveCapacityRequirement } from "./capacity.ts";
+import type { StorageEstimate } from "./capacity.ts";
 import { ArchiveReceiver, ArchiveInventoryValidator } from "./receive.ts";
 import {
   ArchiveSchemaValidator,
@@ -53,6 +55,9 @@ export interface ArchiveRepositoryOptions {
   quixiDirectory: FileSystemDirectoryHandle;
   opfsRoot: FileSystemDirectoryHandle;
   blobs: SearchBlobAccess;
+  /** The browser's storage estimate for the capacity check before a job
+   * begins; defaults to `navigator.storage.estimate()`. Tests inject one. */
+  estimateStorage?: () => Promise<StorageEstimate | null>;
 }
 type Metadata = {
   status: ArchiveJobStatus;
@@ -371,11 +376,24 @@ CREATE INDEX IF NOT EXISTS quixi_archive_review_token ON quixi_archive_operation
     )[0];
     if (row) await this.release(String(row.id), false);
   }
+  /** Product §111: refuse up front, with the numbers, when the browser reports
+   * less free storage than the job will write; an unknown estimate never refuses. */
+  private async ensureCapacity(input: Parameters<typeof archiveCapacityRequirement>[0]): Promise<void> {
+    const requirement = archiveCapacityRequirement(input);
+    const estimate = await (this.options.estimateStorage ?? defaultStorageEstimate)().catch(() => null);
+    const decision = archiveCapacityDecision(requirement, estimate);
+    if (!decision.allowed) throw new BlobStorageError("QUOTA_EXCEEDED", decision.reason ?? "Not enough free local storage for this archive job.");
+  }
   private async beginExport(
     args: ArchivesOperations["beginArchiveExport"]["args"],
   ) {
     await this.cleanupFailed();
     this.admission();
+    await this.ensureCapacity({
+      kind: "export",
+      databaseBytes: Number(this.db.selectValue("SELECT (SELECT page_count FROM pragma_page_count)*(SELECT page_size FROM pragma_page_size)")),
+      blobBytes: Number(this.db.selectValue("SELECT coalesce(sum(byte_length),0) FROM quixi_blob_catalog")),
+    });
     const job: Metadata = {
       status: this.initial(args.operationId, "export", args.format),
       candidateId: null,
@@ -392,6 +410,7 @@ CREATE INDEX IF NOT EXISTS quixi_archive_review_token ON quixi_archive_operation
   ) {
     await this.cleanupFailed();
     this.admission();
+    if (args.expectedBytes !== null) await this.ensureCapacity({ kind: "restore", expectedBytes: args.expectedBytes });
     const job: Metadata = {
       status: this.initial(args.operationId, "restore", "portable"),
       candidateId: crypto.randomUUID(),
@@ -1388,4 +1407,9 @@ CREATE INDEX IF NOT EXISTS quixi_archive_review_token ON quixi_archive_operation
     this.transfers.clear();
     this.closed = true;
   }
+}
+async function defaultStorageEstimate(): Promise<StorageEstimate | null> {
+  if (typeof navigator === "undefined" || !navigator.storage?.estimate) return null;
+  const estimate = await navigator.storage.estimate();
+  return { usage: estimate.usage ?? null, quota: estimate.quota ?? null };
 }
