@@ -15,6 +15,7 @@ import type { ContentPart, JsonValue } from "@quixi/core/model";
 import { BlobCatalog } from "./blob-catalog.ts";
 import { BlobInventoryRepository } from './blob-inventory.ts';
 import { DoctorAuditRepository } from './doctor-audit.ts';
+import { BlobHashAuditRepository } from './blob-hash-audit.ts';
 import { OpfsBlobStore, BlobStorageError } from "./blobs.ts";
 import { CanonicalRepository } from "./canonical/index.ts";
 import type { CanonicalSqlite } from "./canonical/index.ts";
@@ -144,6 +145,7 @@ export class ArchiveDatabase {
   private search: SearchRepository | undefined;
   private inventory: BlobInventoryRepository | undefined;
   private doctor: DoctorAuditRepository | undefined;
+  private hashAudit: BlobHashAuditRepository | undefined;
   private searchFailure: unknown;
   private readonly tokenizerFailure: unknown;
   private readonly schemaVersion: number;
@@ -321,6 +323,7 @@ export class ArchiveDatabase {
     try {
       await this.inventory?.close();
       this.doctor?.close();
+      await this.hashAudit?.close();
       if (mode === 'handles') this.search?.abandon();
       else await this.search?.close();
     } finally {
@@ -507,6 +510,16 @@ export class ArchiveDatabase {
           "Operation identity belongs to a different storage journal",
         );
     switch (request.operation) {
+      case 'beginBlobHashAudit':
+        this.hashAudit ??= new BlobHashAuditRepository(this.db, this.blobs);
+        return this.hashAudit.begin(request.args.scanId);
+      case 'advanceBlobHashAudit': case 'blobHashAuditStatus': case 'readBlobHashAuditFindings': case 'cancelBlobHashAudit': {
+        if (!this.hashAudit) throw new BlobStorageError('NOT_FOUND', 'Blob hash audit belongs to a previous storage owner; start a new audit.');
+        if (request.operation === 'advanceBlobHashAudit') return this.hashAudit.advance(request.args.scanId, request.args.maxItems, signal);
+        if (request.operation === 'blobHashAuditStatus') return this.hashAudit.status(request.args.scanId);
+        if (request.operation === 'readBlobHashAuditFindings') return this.hashAudit.findings(request.args.scanId, request.args.page);
+        return this.hashAudit.cancel(request.args.scanId);
+      }
       case 'beginDoctorAudit':
         this.doctor ??= new DoctorAuditRepository(this.db);
         return this.doctor.begin(request.args.scanId);

@@ -54,11 +54,12 @@ Object.assign(window, { storageHealthAcceptance: {
   /** Plan 23: applies one fixture fault with no production owner open, then replaces the owner (as after a restart). */
   async fault(kind: BlobInventoryFault) {
     unchanges(); unprogress(); await current.close();
-    await injectBlobInventoryFault(archiveId, kind);
+    const result = await injectBlobInventoryFault(archiveId, kind);
     current = createIsolatedStorageClient({ archiveId });
     unchanges = current.onChange(ids => { for (const listener of changes) listener(ids); });
     unprogress = current.onProgress(value => { for (const listener of progress) listener(value); });
     await current.request(crypto.randomUUID(), 'diagnostics', null);
+    return result;
   },
   report: () => current.request(crypto.randomUUID(), 'diagnosticsReport', null),
   searchStatus: () => current.request(crypto.randomUUID(), 'searchStatus', null),

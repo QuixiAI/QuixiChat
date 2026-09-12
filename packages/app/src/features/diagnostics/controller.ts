@@ -1,4 +1,4 @@
-import type { BlobInventoryFinding, BlobInventoryStatus, DoctorAuditFinding, DoctorAuditStatus, StorageClient, StorageOperations } from '@quixi/core/contracts';
+import type { BlobHashAuditFinding, BlobHashAuditStatus, BlobInventoryFinding, BlobInventoryStatus, DoctorAuditFinding, DoctorAuditStatus, StorageClient, StorageOperations } from '@quixi/core/contracts';
 
 export const INVENTORY_PAGE = { maxItems: 32, maxBytes: 16_384 } as const;
 export const AUDIT_PAGE = { maxItems: 32, maxBytes: 16_384 } as const;
@@ -28,6 +28,12 @@ export const AUDIT_OPERATIONS: ScanOperations = {
   begin: 'beginDoctorAudit', advance: 'advanceDoctorAudit', status: 'doctorAuditStatus', read: 'readDoctorAuditFindings', cancel: 'cancelDoctorAudit',
   advanceItems: 64, page: AUDIT_PAGE,
   stale: 'Saved history changed during or after this audit. Start a new audit to see current findings.',
+  unavailable: 'This audit is no longer available. Storage may have restarted or become unavailable. Start a new audit; if that fails, reopen the app.',
+};
+export const HASH_AUDIT_OPERATIONS: ScanOperations = {
+  begin: 'beginBlobHashAudit', advance: 'advanceBlobHashAudit', status: 'blobHashAuditStatus', read: 'readBlobHashAuditFindings', cancel: 'cancelBlobHashAudit',
+  advanceItems: 16, page: AUDIT_PAGE,
+  stale: 'Stored files or their catalog changed during or after this audit. Start a new audit to see current findings.',
   unavailable: 'This audit is no longer available. Storage may have restarted or become unavailable. Start a new audit; if that fails, reopen the app.',
 };
 /** A scan is explicit, bounded and read-only. Its lifetime follows the app,
@@ -143,3 +149,5 @@ export const createStorageHealthController = (storage: StorageClient) => createS
 export type StorageHealthController = ReturnType<typeof createStorageHealthController>;
 export const createDoctorAuditController = (storage: StorageClient) => createScanController<DoctorAuditStatus, DoctorAuditFinding>(storage, AUDIT_OPERATIONS);
 export type DoctorAuditController = ReturnType<typeof createDoctorAuditController>;
+export const createBlobHashAuditController = (storage: StorageClient) => createScanController<BlobHashAuditStatus, BlobHashAuditFinding>(storage, HASH_AUDIT_OPERATIONS);
+export type BlobHashAuditController = ReturnType<typeof createBlobHashAuditController>;

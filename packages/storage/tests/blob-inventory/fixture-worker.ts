@@ -134,6 +134,13 @@ self.onmessage = async (event: MessageEvent<{ operation: string; archiveId: stri
           db.exec({ sql: "INSERT INTO quixi_sync_ops(operation_id,kind,recorded_at,identity,payload,affects,result) VALUES(?,?,?,?,?,?,?)", bind: [id(), 'SetTitle', at, 'fixture', '{}', JSON.stringify([{ kind: 'message', id: id() }]), '{}'] });
           return { fault: operation };
         }
+        if (operation === 'blob-corrupt') {
+          const db = (database as unknown as { db: CanonicalSqlite }).db;
+          const sha256 = String(rows(db, "SELECT json_extract(payload,'$.blobSha256') AS sha256 FROM quixi_records WHERE collection='attachments' AND json_extract(payload,'$.availability')='available' ORDER BY rowid LIMIT 1")[0]!.sha256);
+          const size = Number(rows(db, 'SELECT byte_length FROM quixi_blob_catalog WHERE sha256=?', [sha256])[0]!.byte_length);
+          await physical(directory, sha256, new Uint8Array(size).fill(0x58));
+          return { fault: operation, sha256 };
+        }
         if (operation === 'corrupt-database') {
           const db = (database as unknown as { db: CanonicalSqlite }).db;
           db.exec('CREATE INDEX quixi_fixture_damage ON quixi_records(collection)');

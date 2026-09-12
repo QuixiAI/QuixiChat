@@ -50,5 +50,6 @@ export const corruptBlobInventoryReference = (archiveId: string) => fixtureCall<
  * rows: a message with a missing parent, a message whose part count differs
  * from its parts, a provenance row for a missing import source, and a sync
  * operation whose affects name a missing record. */
-export type BlobInventoryFault = 'derived-failure' | 'corrupt-database' | 'doctor-faults';
-export const injectBlobInventoryFault = (archiveId: string, fault: BlobInventoryFault) => fixtureCall<{ fault: BlobInventoryFault }>(fault, archiveId);
+/** `blob-corrupt` rewrites the referenced attachment file with different bytes of the same length, so only its content differs from its digest. */
+export type BlobInventoryFault = 'derived-failure' | 'corrupt-database' | 'doctor-faults' | 'blob-corrupt';
+export const injectBlobInventoryFault = (archiveId: string, fault: BlobInventoryFault) => fixtureCall<{ fault: BlobInventoryFault; sha256?: string }>(fault, archiveId);

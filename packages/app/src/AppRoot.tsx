@@ -6,7 +6,8 @@ import { createPreferenceController } from './features/preferences/controller.ts
 import { PreferencesPanel } from './features/preferences/PreferencesPanel.tsx';
 import { ModelSwitcher } from './features/preferences/ModelSwitcher.tsx';
 import { MessageTimestamp } from './features/preferences/MessageTimestamp.tsx';
-import { createStorageHealthController, createDoctorAuditController } from './features/diagnostics/controller.ts';
+import { createStorageHealthController, createDoctorAuditController, createBlobHashAuditController } from './features/diagnostics/controller.ts';
+import { BlobHashAuditPanel } from './features/diagnostics/BlobHashAuditPanel.tsx';
 import { DoctorAuditPanel } from './features/diagnostics/DoctorAuditPanel.tsx';
 import { createDiagnosticsController } from './features/diagnostics/report-controller.ts';
 import { DiagnosticsPanel } from './features/diagnostics/DiagnosticsPanel.tsx';
@@ -306,6 +307,7 @@ export function AppRoot({
   const storageHealth = useMemo(() => createStorageHealthController(services.storage), [services]);
   const diagnostics = useMemo(() => createDiagnosticsController(services.storage, services.host), [services]);
   const doctorAudit = useMemo(() => createDoctorAuditController(services.storage), [services]);
+  const hashAudit = useMemo(() => createBlobHashAuditController(services.storage), [services]);
   const semantic = useMemo(() => createSemanticController({ storage: services.storage, embedding: services.embedding }), [services]);
   const semanticState = useSyncExternalStore(semantic.subscribe, semantic.getSnapshot);
   const onboarding = useMemo(() => createOnboardingController({ storage: services.storage, host: services.host, hostProvidesModel: !!services.embedding }), [services]);
@@ -500,7 +502,7 @@ export function AppRoot({
     canReplace: () => replacementBlockRef.current(),
   }) : null, [services]);
   useEffect(() => services.archiveSession?.onSelectionChange(() => setSelectionChanged(true)), [services]);
-  useEffect(() => { if (selectionChanged) { storageHealth.invalidate(); diagnostics.invalidate(); doctorAudit.invalidate(); } }, [selectionChanged, storageHealth, diagnostics, doctorAudit]);
+  useEffect(() => { if (selectionChanged) { storageHealth.invalidate(); diagnostics.invalidate(); doctorAudit.invalidate(); hashAudit.invalidate(); } }, [selectionChanged, storageHealth, diagnostics, doctorAudit, hashAudit]);
   const openSelectedArchive = async (expected?: ArchiveSelection) => {
     if (!services.archiveSession || openingArchive) return;
     const reason = replacementBlock();
@@ -621,10 +623,11 @@ export function AppRoot({
         storageHealth.dispose(),
         diagnostics.dispose(),
         doctorAudit.dispose(),
+        hashAudit.dispose(),
       ]).then(() => {});
       onShutdown?.(task);
     };
-  }, [library, chat, summaries, attachments, settings, content, conversationSearch, exports, restore, documents, storageHealth, diagnostics, doctorAudit, semantic, onboarding, onShutdown]);
+  }, [library, chat, summaries, attachments, settings, content, conversationSearch, exports, restore, documents, storageHealth, diagnostics, doctorAudit, hashAudit, semantic, onboarding, onShutdown]);
   useEffect(() => {
     setPromptCount(null);
     setSwitchReviewed(null);
@@ -1385,6 +1388,7 @@ export function AppRoot({
           <DiagnosticsPanel controller={diagnostics} semantic={semantic} semanticState={semanticState} disabled={selectionChanged} />
           <StorageHealthPanel controller={storageHealth} disabled={selectionChanged} />
           <DoctorAuditPanel controller={doctorAudit} disabled={selectionChanged} />
+          <BlobHashAuditPanel controller={hashAudit} disabled={selectionChanged} />
         </>}
         {section === 'semantic' && <SemanticPanel controller={semantic} snapshot={semanticState} />}
         {section === "imports" && state.workspaceId && (

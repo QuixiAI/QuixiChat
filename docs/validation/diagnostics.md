@@ -129,6 +129,26 @@ import source and a sync operation naming a missing record, the audit reports
 exactly those four kinds with `collection/id` identifiers and none of the
 fixture's titles, filenames or content.
 
+## File content verification: blob hashes (product §101)
+
+**Scan (Node, real SQLite WASM, in-memory verified-read store)** —
+`npm run test:storage:diagnostics` also runs
+`packages/storage/tests/diagnostics/blob-hash-audit.test.ts` (3 tests): intact
+files verify in blocks of at most 128 KiB with a large file spanning
+advances and every open read discarded; altered bytes, a shorter file, a
+missing file and an unreadable file are found by digest with sizes and no
+content; a completed audit turns stale when the files or the catalog change;
+cancellation releases the open read; a closed owner refuses.
+
+**Application (Chromium and WebKit)** — the storage-health proof (17 checks
+per engine, [retained](results/blob-inventory-ui-macos.json)): on the seeded
+archive the verification re-reads every catalogued file and reports the
+shortened file and the deleted file by digest and size while every other
+file verifies; after the fixture rewrites the referenced attachment with
+different bytes of the same length, the verification reports that digest as
+content differing, which only hashing can find. No filename or content
+appears in the panel.
+
 ## Limits
 
 - The reference check is bounded (newest 4,096 referencing records, first 64
@@ -142,10 +162,11 @@ fixture's titles, filenames or content.
   not by this report.
 - Semantic rebuild (re-embedding) is exercised by the semantic proof, not
   here; on this fixture host it is disabled because no model is provided.
-- The Doctor audit does not read blob bytes; the blob-hash audit (verifying
-  every stored file against its digest) is still open. Cycle detection in
-  parent chains is not attempted; a self-parent is found, a longer cycle is
-  not.
+- Cycle detection in parent chains is not attempted by the Doctor audit; a
+  self-parent is found, a longer cycle is not. The file verification reuses
+  a session's already-verified shared read when one is open for a digest,
+  so a file fully hashed earlier in the same owner session is not hashed
+  twice.
 - The inference self-test
   proves the routes present on the two Playwright engines; hardware WebGPU
   adapters on other machines remain plan 19/21/24 gates.

@@ -18,3 +18,4 @@ export * from './routing-aliases.ts';
 export * from './blob-inventory.ts';
 export * from './diagnostics.ts';
 export * from './doctor-audit.ts';
+export * from './blob-hash-audit.ts';

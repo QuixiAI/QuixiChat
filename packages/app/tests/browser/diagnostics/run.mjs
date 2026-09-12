@@ -12,7 +12,7 @@ let server;
 const save = async () => { await mkdir('test-results', { recursive: true }); await writeFile('test-results/app-storage-health-browser.json', JSON.stringify(proof, null, 2) + '\n'); };
 const sourceFiles = [
   'packages/app/src/AppRoot.tsx', 'packages/app/src/features/diagnostics/controller.ts', 'packages/app/src/features/diagnostics/StorageHealthPanel.tsx', 'packages/app/src/features/diagnostics/diagnostics.css',
-  'packages/app/src/features/diagnostics/report-controller.ts', 'packages/app/src/features/diagnostics/DiagnosticsPanel.tsx', 'packages/app/src/features/diagnostics/export.ts', 'packages/app/src/features/diagnostics/DoctorAuditPanel.tsx', 'packages/core/src/contracts/doctor-audit.ts', 'packages/storage/src/worker/doctor-audit.ts', 'packages/core/src/contracts/diagnostics.ts', 'packages/storage/src/worker/diagnostics.ts',
+  'packages/app/src/features/diagnostics/report-controller.ts', 'packages/app/src/features/diagnostics/DiagnosticsPanel.tsx', 'packages/app/src/features/diagnostics/export.ts', 'packages/app/src/features/diagnostics/DoctorAuditPanel.tsx', 'packages/app/src/features/diagnostics/BlobHashAuditPanel.tsx', 'packages/core/src/contracts/blob-hash-audit.ts', 'packages/storage/src/worker/blob-hash-audit.ts', 'packages/core/src/contracts/doctor-audit.ts', 'packages/storage/src/worker/doctor-audit.ts', 'packages/core/src/contracts/diagnostics.ts', 'packages/storage/src/worker/diagnostics.ts',
   'packages/app/tests/browser/diagnostics/index.ts', 'packages/app/tests/browser/diagnostics/index.html', 'packages/app/tests/browser/diagnostics/run.mjs',
   'packages/core/src/contracts/blob-inventory.ts', 'packages/core/src/contracts/storage.ts', 'packages/storage/tests/blob-inventory/fixture.ts', 'packages/storage/tests/blob-inventory/fixture-worker.ts',
   'packages/storage/tests/isolated-client.ts', 'packages/storage/tests/isolated-worker.ts', 'packages/storage/src/worker/archive-runtime.ts', 'packages/storage/src/worker/archive-database.ts',
@@ -147,6 +147,20 @@ try {
       expect(cleanRecords).toBeGreaterThanOrEqual(4);
       expect(await audit.getByRole('button').allTextContents()).toEqual(['Start a new audit']);
       evidence.checks.push(`the Doctor audit walks ${cleanRecords} saved records and every recorded operation of the seeded archive in bounded steps and reports no branch, provenance or sync-coverage finding, with no repair or deletion control`);
+      // Product §101 "verify blob hashes": the seeded archive's shortened and deleted files are found; intact bytes verify.
+      const hashing = page.getByRole('region', { name: 'File content verification', exact: true });
+      const hashComplete = async () => { await expect(hashing.getByTestId('hash-audit-status')).toContainText('Verification complete.', { timeout: 60000 }); };
+      await hashing.getByRole('button', { name: 'Verify file contents', exact: true }).click(); await hashComplete();
+      const hashCounts = async () => Object.fromEntries(await hashing.locator('.storage-health-counts div[data-kind]').evaluateAll(nodes => nodes.map(node => [node.dataset.kind, Number(node.querySelector('dd').textContent.replaceAll(',', ''))])));
+      const seededHashes = await hashCounts();
+      expect(seededHashes).toEqual({ size_mismatch: 1, missing_blob: 1 });
+      const hashFiles = await hashing.getByTestId('hash-audit-files').textContent();
+      expect(hashFiles).toMatch(/^(\d+) of \1$/);
+      const hashText = await hashing.innerText();
+      for (const secret of ['Synthetic', 'synthetic-', 'Original bytes']) expect(hashText).not.toContain(secret);
+      expect(await hashing.getByRole('button').allTextContents()).toEqual(['Verify again', 'First findings', 'Next findings']);
+      evidence.hashAudit = { seeded: seededHashes, files: hashFiles };
+      evidence.checks.push(`File content verification re-reads every catalogued file (${hashFiles}) in bounded blocks: the shortened file and the deleted file are reported by digest and size, every other file's bytes match its digest, and no filename or content appears`);
       const afterDiagnostics = await page.evaluate(() => window.storageHealthAcceptance.fingerprint());
       const compared = ['canonicalSha256', 'operationsSha256', 'blobOperationsSha256', 'blobCatalogSha256', 'blobTransfersSha256', 'blobsSha256', 'canonicalRecords', 'syncOperations', 'physicalFiles'];
       for (const key of compared) expect({ key, value: afterDiagnostics[key] }).toEqual({ key, value: baseline[key] });
@@ -165,6 +179,14 @@ try {
       expect(await audit.getByRole('button').allTextContents()).toEqual(['Start a new audit', 'First findings', 'Next findings']);
       evidence.doctorAudit = { clean: { records: cleanRecords }, planted: auditCounts };
       evidence.checks.push('after planting a message with a missing parent, a message whose part count differs from its parts, a provenance row for a missing import source and a sync operation naming a missing record, the Doctor audit reports exactly those four findings by kind with record identifiers and no titles or content, and offers no repair');
+      // Same-length altered bytes are found only by hashing, and the finding names the digest that was altered.
+      const corrupted = await page.evaluate(() => window.storageHealthAcceptance.fault('blob-corrupt'));
+      await open(true); await page.getByRole('button', { name: 'Storage health', exact: true }).click();
+      await hashing.getByRole('button', { name: 'Verify file contents', exact: true }).click(); await hashComplete();
+      expect(await hashCounts()).toEqual({ hash_mismatch: 1, size_mismatch: 1, missing_blob: 1 });
+      await expect(hashing.getByRole('list', { name: 'Verification findings', exact: true }).getByRole('listitem').filter({ hasText: 'File content differs from its digest' })).toContainText(corrupted.sha256);
+      evidence.hashAudit.corrupted = await hashCounts();
+      evidence.checks.push('after the referenced attachment file is rewritten with different bytes of the same length, verification reports it as content differing from its digest, naming that digest, beside the size and missing findings');
       await page.evaluate(() => window.storageHealthAcceptance.cleanup());
       await open(); await page.getByRole('button', { name: 'Storage health', exact: true }).click(); await panel(page).getByRole('button', { name: 'Start storage scan', exact: true }).click(); await complete(page);
       await page.getByRole('button', { name: 'New conversation', exact: true }).click(); await expect(page.getByLabel('Message', { exact: true })).toBeVisible();
