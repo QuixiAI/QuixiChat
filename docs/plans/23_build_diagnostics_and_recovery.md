@@ -1,6 +1,6 @@
 # 23 — Build diagnostics and archive recovery tools
 
-**Status:** In progress — the §100 diagnostics report with a fixed outcome vocabulary, the bounded read-only blob inventory, the shared Storage health UI, the distinct FTS/semantic repair actions, the inference self-test, the exportable report and every Doctor audit and reviewed cleanup are implemented; fault fixtures for every repair remain open
+**Status:** Complete (2026-09-13) — the §100 diagnostics report with a fixed outcome vocabulary, the bounded read-only blob inventory, the shared Storage health UI, the distinct FTS/semantic repair actions, the inference self-test, the exportable report, every Doctor audit, the reviewed cleanup, the fault fixtures for every repair and the recovery-foundation table are implemented and proven; the integrity check is bounded at scale under [ADR 0040](../decisions/0040-diagnostics-outcomes.md) amendment 3 (600 s report deadline, 256 MiB startup bound, measured on a 4.7 GB archive). The desktop entry's native exercise of the startup outcome stays a plan 01/24 host gate.
 
 **Workstream:** Product reliability — Quixi Doctor
 
@@ -73,9 +73,10 @@ The original immutable transaction is retried once for concurrent callers;
 previous-archive reconciliation remains bound to its operation IDs. Newer
 navigation and ordinary errors survive late completion, and post-acknowledgement
 read failures do not revive an unknown write. This closes the specific live-session
-navigation/search gap; the Doctor audits, derived-index rebuilds, diagnostic
-export and broader recovery criteria above remain open. No reload-persistent
-client pending-intent journal is claimed.
+navigation/search gap; at that date the Doctor audits, derived-index rebuilds,
+diagnostic export and broader recovery criteria above were still open (closed
+on 2026-09-12, see above). No reload-persistent client pending-intent journal
+is claimed.
 
 ## Boundaries and sequencing
 
