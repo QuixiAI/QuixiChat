@@ -276,3 +276,27 @@ test('receipt persistence refuses wrong protocol, absent source, duplicate index
     assert.match(value.result.error!.message, /thinking block receipt/);
   }
 });
+
+test('checkpoint density baseline: one raw checkpoint commit and one text-append commit per streamed record (plan 06 scale gate)', async () => {
+  // A synthetic stream of 1,000 small SSE records, each carrying one 32-character delta.
+  const events: ProviderEvent[] = [];
+  const encoder = new TextEncoder();
+  for (let i = 0; i < 1000; i++) {
+    events.push({ type: 'raw', sequence: i, bytes: encoder.encode(JSON.stringify({ delta: 'x'.repeat(32), i })) });
+    events.push(delta('x'.repeat(32)));
+  }
+  events.push(completed);
+  const run = await consume(events, { summary: false });
+  assert.equal(run.manifests.at(-1)?.terminal.status, 'complete', JSON.stringify({ terminal: run.manifests.at(-1)?.terminal ?? null, result: run.result, batches: run.batches.length, consumed: run.consumed }).slice(0, 600));
+  assert.equal(run.text.length, 32_000);
+  const commits = run.batches.length;
+  const rawCommits = run.batches.filter(b => b.mutations.some(m => m.kind === 'RegisterRawObject')).length;
+  const textAppends = run.batches.filter(b => b.mutations.some(m => m.kind === 'AppendGenerationOutput' && m.payload.textAppend)).length;
+  const textParts = run.parts.filter(p => p.kind === 'Text').length;
+  // Baseline as designed: creation + 1,000 raw checkpoints + 1,000 text appends (the first delta creates the part, later ones append) + the manifest.
+  assert.equal(rawCommits, 1001, 'one verified raw checkpoint per record plus the manifest');
+  assert.equal(textAppends + textParts, 1000, 'one text mutation per delta');
+  assert.equal(textParts, Math.ceil(32_000 / 8192), 'text parts are bounded at 8 KiB each');
+  assert.equal(commits, 1 + 1001 + 1000, `commits per streamed record: ${((commits - 2) / 1000).toFixed(2)}`);
+  assert.equal(run.manifests.at(-1)?.terminal.status, 'complete');
+});

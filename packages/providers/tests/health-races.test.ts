@@ -51,6 +51,7 @@ function harness(protocol: Protocol, foregroundStatus = 200) {
       return { transferId, bytes, sequence: 0, offset: 0, final: true };
     },
     async acknowledgeChunk() {},
+    async requestPersistentStorage() { return { persisted: false }; },
     async cancel(requestId) { cancelled.push(requestId); return { requestId, outcome: "cancelled" as const, externalEffect: "may_have_occurred" as const }; },
   } satisfies HostClient;
   const options = { host, binding: { providerId: protocol, accountId: "synthetic", destinationId: "synthetic", transportId: "synthetic" }, credential: null, catalog: [model(protocol)], nextId: () => crypto.randomUUID(), now: () => 1234 };
