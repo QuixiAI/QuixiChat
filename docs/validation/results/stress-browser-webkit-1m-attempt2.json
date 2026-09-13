@@ -1,0 +1,74 @@
+{
+  "status": "failed",
+  "startedAt": "2026-09-13T02:35:36.072Z",
+  "sizes": {
+    "threads": 100000,
+    "perThread": 10,
+    "planted": 0,
+    "messages": 1000000,
+    "seedSlice": 5000
+  },
+  "stepBounds": {
+    "maxRecords": 128,
+    "maxBytes": 1048576
+  },
+  "selectedEngines": [
+    "webkit"
+  ],
+  "hosts": [
+    {
+      "name": "webkit",
+      "status": "failed",
+      "checks": [
+        "100,000 conversations and 1,000,000 messages seeded through the production worker in 10,000 bounded commits (675 messages/s); the explicit report's integrity_check answers ok in 58.8 s over 2,300,000 canonical records (4696 MB file) and the startup read answers unchecked in 38 ms"
+      ],
+      "phases": {
+        "seed": {
+          "ms": 1481353,
+          "batches": 10000,
+          "messagesPerSecond": 675
+        },
+        "integrity": {
+          "ms": 59019,
+          "integrityMs": 58822,
+          "integrity": "ok",
+          "automaticIntegrity": "unchecked",
+          "lightMs": 38,
+          "databaseBytes": 4923752448,
+          "canonicalRecords": 2300000,
+          "syncOperations": 1200000,
+          "usage": 10147354204,
+          "quota": 20615843021
+        },
+        "libraryPaging": {
+          "pages": 20,
+          "items": 1280,
+          "totalMs": 515733,
+          "firstMs": 25437,
+          "maxMs": 26629,
+          "more": true
+        }
+      },
+      "error": "Error: expect(received).toBeLessThan(expected)\n\nExpected: < 5000\nReceived:   25437\n    at captureRawStack (/Users/eric/QuixiChat/node_modules/playwright-core/lib/coreBundle.js:8588:17)\n    at callMatcherAsStep (/Users/eric/QuixiChat/node_modules/playwright/lib/matchers/expect.js:13310:57)\n    at Object.toBeLessThan (/Users/eric/QuixiChat/node_modules/playwright/lib/matchers/expect.js:13302:23)\n    at /Users/eric/QuixiChat/packages/app/tests/browser/stress.mjs:74:30",
+      "pageErrors": []
+    }
+  ],
+  "sourceSha256": {
+    "packages/storage/src/worker/archives/export.ts": "8b7ce6aba6b9045b17354464b720e07459672baf06accd7d5834c0e3bb07bcb7",
+    "packages/storage/src/worker/archives/index.ts": "f86be726dcbb298934b564f44d32a201b98ea71e58cb18d8b296e775409a9698",
+    "packages/storage/src/worker/archive-database.ts": "768bb31b1d42aac9f6bcb73596772c256807dbc6bf2b908dcdd886c4c309a06d",
+    "packages/app/tests/browser/index.ts": "9f0bef0007dca30640ca479a9ed2f5b38b505f86a363b428359ad21da51224ed",
+    "packages/app/tests/browser/stress.mjs": "83c4efb26ba0a68996f820875e8d7fc595b7cf3daf3b7c781c5aa67da21e6ea2"
+  },
+  "environment": {
+    "platform": "darwin",
+    "release": "25.6.0",
+    "arch": "arm64",
+    "cpu": "Apple M5 Max",
+    "osVersion": "26.6.2",
+    "node": "v22.23.1"
+  },
+  "qualification": "Synthetic short messages seeded through the production worker; no embedding model, no provider, no Cloud account; timings are single runs under development load on one machine.",
+  "error": "Error: expect(received).toBeLessThan(expected)\n\nExpected: < 5000\nReceived:   25437\n    at captureRawStack (/Users/eric/QuixiChat/node_modules/playwright-core/lib/coreBundle.js:8588:17)\n    at callMatcherAsStep (/Users/eric/QuixiChat/node_modules/playwright/lib/matchers/expect.js:13310:57)\n    at Object.toBeLessThan (/Users/eric/QuixiChat/node_modules/playwright/lib/matchers/expect.js:13302:23)\n    at /Users/eric/QuixiChat/packages/app/tests/browser/stress.mjs:74:30",
+  "finishedAt": "2026-09-13T03:09:54.153Z"
+}

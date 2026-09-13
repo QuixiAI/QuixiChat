@@ -39,8 +39,12 @@ header still read "In progress … fault fixtures remain open" although every
 task and criterion was ticked and the roadmap counted it complete; the header
 now states Complete with the scale amendment. The relaunched 1M-message
 WebKit run passed the integrity phase (integrity_check ok in 58.8 s over a
-4,696 MB file; startup read unchecked in 38 ms) and is in its export and
-restore phases; its result is recorded next. Completed plans remain **12 of 23**.
+4,696 MB file; startup read unchecked in 38 ms) and then failed at library
+paging: the first page took 25.4 s against the 5 s bound because the library
+view recomputes and sorts every thread's activity once per item. Next
+concrete slice: **materialize per-thread library activity** (canonical
+triggers, ordered index, one statement per page), then rerun the 1M run.
+Completed plans remain **12 of 23**.
 
 Previous completed iteration (2026-09-13): **integrity check at scale** (plans
 24 and 23). The 1M-message WebKit stress run seeded 100,000 conversations

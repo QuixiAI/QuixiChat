@@ -69,6 +69,19 @@ check's elapsed time, and the startup read verifies integrity only for files
 up to 256 MiB, answering `unchecked` above that. The harness now measures
 both reads.
 
+**Second attempt (2026-09-13), failed at library paging**
+([stress-browser-webkit-1m-attempt2.json](results/stress-browser-webkit-1m-attempt2.json)):
+seeded in 1,481 s (675 messages/s); the explicit report's `integrity_check`
+answered ok in 58.8 s over the 4,696 MB file (2,300,000 canonical records)
+and the startup read answered `unchecked` in 38 ms, so the first finding is
+fixed. The library's first page then took 25,437 ms against the 5 s bound
+(twenty pages of 64 in 515.7 s, max 26.6 s per page). Cause: the library
+view computes every thread's activity with a correlated subquery over the
+whole `threadStates` set and sorts it, once per item (LIMIT 1 keyset loop),
+so a 64-item page costs 64 scans of 100,000 threads. The fix is the next
+slice: a materialized per-thread activity row kept by canonical triggers
+and read through an ordered index, one statement per page.
+
 FULL_RUN_RESULT
 
 ## Not covered by this run
