@@ -887,7 +887,16 @@ CREATE INDEX IF NOT EXISTS quixi_archive_review_token ON quixi_archive_operation
       return;
     }
     if (job.status.phase === "record_validation") {
-      const status = runtime.validator!.step(args.maxRecords);
+      // One transaction per step for the validator's scratch writes (nodes, parts, tombstones, coverage): autocommitting each was a sync per row.
+      this.db.exec("BEGIN");
+      let status;
+      try {
+        status = runtime.validator!.step(args.maxRecords);
+        this.db.exec("COMMIT");
+      } catch (error) {
+        try { this.db.exec("ROLLBACK"); } catch { /* the failed step's scratch rows are discarded either way */ }
+        throw error;
+      }
       job.status.completedRecords = status.checkedRecords;
       job.status.validationPhase = status.phase === "ready" ? null : status.phase;
       if (status.phase === "ready") {
