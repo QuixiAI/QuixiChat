@@ -1,7 +1,8 @@
 import { CanonicalRepository } from "../canonical/repository.ts";
 import type { CanonicalSqlite, SqlValue } from "../canonical/repository.ts";
 import type { FileDatabase, FileSqlite } from "./sqlite-file.ts";
-import { openSqliteFileReader, withSqliteFileReader } from "./sqlite-file.ts";
+import { openSqliteFileReader, openSqliteFileWriter, withSqliteFileReader } from "./sqlite-file.ts";
+import type { BoundedSqliteReader, BoundedSqliteWriter } from "./sqlite-file.ts";
 export interface ArchiveDatabaseFile extends FileDatabase {
   close(): void;
 }
@@ -75,31 +76,96 @@ export async function copySnapshot(
   name: string,
   signal?: AbortSignal,
 ): Promise<ArchiveDatabaseFile> {
-  if (!/^\/export-[a-f0-9-]{36}\.sqlite3$/.test(name))
-    throw new Error("Invalid snapshot identity.");
-  await pool.reserveMinimumCapacity(10);
+  const copier = new SnapshotCopier(sqlite, pool, source, name, signal);
   try {
-    await withSqliteFileReader(
-      sqlite,
-      source,
-      async (reader) => {
-        let offset = 0;
-        await pool.importDb(name, async () => {
-          if (offset === reader.byteLength) return undefined;
-          const bytes = reader.read(offset, 65536);
-          offset += bytes.length;
-          await new Promise((resolve) => setTimeout(resolve, 0));
-          return bytes;
-        });
-      },
-      signal,
-    );
-    const db = new pool.OpfsSAHPoolDb(name);
-    db.exec("PRAGMA temp_store=FILE; PRAGMA foreign_keys=ON;");
-    return db;
+    for (;;) {
+      const db = await copier.advance(Number.MAX_SAFE_INTEGER);
+      if (db) return db;
+    }
   } catch (error) {
-    pool.unlink(name);
+    copier.close();
     throw error;
+  }
+}
+/** A source snapshot copied in bounded steps (ADR 0010 amendment, 2026-09-13).
+ * The first step opens the source read transaction and the target pool file
+ * (already associated with its name, so no other file open can take its
+ * handle between steps); each `advance(maxBytes)` copies up to that many
+ * bytes in 64 KiB blocks through the VFS and returns the reopened snapshot
+ * database once the whole file is copied. `close` releases the read
+ * transaction and unlinks the private output unless the copy completed. */
+export class SnapshotCopier {
+  copiedBytes = 0;
+  totalBytes: number | null = null;
+  private reader: (BoundedSqliteReader & { close(): void }) | null = null;
+  private writer: BoundedSqliteWriter | null = null;
+  private target: ArchiveDatabaseFile | null = null;
+  private result: ArchiveDatabaseFile | null = null;
+  private opened = false;
+  private closed = false;
+  constructor(
+    private readonly sqlite: ArchiveSqlite,
+    private readonly pool: ArchivePool,
+    private readonly source: ArchiveDatabaseFile,
+    private readonly name: string,
+    private readonly signal?: AbortSignal,
+  ) {
+    if (!/^\/export-[a-f0-9-]{36}\.sqlite3$/.test(name))
+      throw new Error("Invalid snapshot identity.");
+  }
+  private async start(): Promise<void> {
+    await this.pool.reserveMinimumCapacity(10);
+    if (this.closed) throw new Error("Snapshot copy is closed.");
+    try {
+      this.opened = true; // an open attempt may leave the pool file behind; close unlinks it
+      this.target = new this.pool.OpfsSAHPoolDb(this.name);
+      this.writer = openSqliteFileWriter(this.sqlite, this.target);
+      this.writer.truncate(0);
+      this.reader = openSqliteFileReader(this.sqlite, this.source, this.signal);
+      this.totalBytes = this.reader.byteLength;
+    } catch (error) {
+      this.close();
+      throw error;
+    }
+  }
+  /** Copies up to `maxBytes` more; the snapshot database once complete, else null. */
+  async advance(maxBytes: number): Promise<ArchiveDatabaseFile | null> {
+    if (!Number.isSafeInteger(maxBytes) || maxBytes < 1) throw new Error("Invalid snapshot step budget.");
+    if (this.result) return this.result;
+    if (this.closed) throw new Error("Snapshot copy is closed.");
+    if (!this.reader) await this.start();
+    try {
+      const reader = this.reader!, writer = this.writer!;
+      let budget = maxBytes;
+      while (budget > 0 && this.copiedBytes < reader.byteLength) {
+        const bytes = reader.read(this.copiedBytes, Math.min(65536, budget));
+        writer.write(this.copiedBytes, bytes);
+        this.copiedBytes += bytes.length;
+        budget -= bytes.length;
+      }
+      if (this.copiedBytes < reader.byteLength) return null;
+      reader.close();
+      writer.close();
+      this.target!.close();
+      this.reader = null; this.writer = null; this.target = null;
+      const db = new this.pool.OpfsSAHPoolDb(this.name);
+      db.exec("PRAGMA temp_store=FILE; PRAGMA foreign_keys=ON;");
+      this.result = db;
+      return db;
+    } catch (error) {
+      this.close();
+      throw error;
+    }
+  }
+  /** Releases the read transaction and the target; an incomplete copy's private output is unlinked. */
+  close(): void {
+    if (this.closed) return;
+    this.closed = true;
+    for (const release of [() => this.reader?.close(), () => this.writer?.close(), () => this.target?.close()]) {
+      try { release(); } catch { /* every handle is attempted */ }
+    }
+    this.reader = null; this.writer = null; this.target = null;
+    if (this.opened && !this.result) this.pool.unlink(this.name);
   }
 }
 export async function* databaseChunks(

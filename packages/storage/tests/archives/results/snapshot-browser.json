@@ -4,8 +4,8 @@
     "webkit"
   ],
   "status": "passed",
-  "startedAt": "2026-09-13T03:18:41.258Z",
-  "finishedAt": "2026-09-13T03:19:02.676Z",
+  "startedAt": "2026-09-13T04:11:13.431Z",
+  "finishedAt": "2026-09-13T04:11:32.069Z",
   "environment": {
     "platform": "darwin",
     "release": "25.6.0",
@@ -30,7 +30,7 @@
     "packages/storage/tests/archives/schema-eight.ts": "f3f1677c3fed9e00c1c2011e296aec266d142b712f8bf73ca31110a93b37b3eb",
     "packages/storage/tests/archives/browser-client.ts": "145f9d0b703ad651f628e2d4e7b5a349697ca0d254f8519d219218c0d78a0829",
     "packages/storage/tests/archives/browser-workflows.ts": "fa215372d79ad4dceab38388d5d0f2bed505ce45fa44076de70fa7fd9c8f151b",
-    "packages/storage/src/worker/archives/index.ts": "f86be726dcbb298934b564f44d32a201b98ea71e58cb18d8b296e775409a9698",
+    "packages/storage/src/worker/archives/index.ts": "546b5c7e65080e9e68c2ab054c8839200f0f2873c22d919a070c7c62d96dfe97",
     "packages/storage/src/worker/archives/clean-copy.ts": "404bedbbecb57fedd86d957b51427cca3b5304339ff4120d6091114650c3046c",
     "packages/storage/src/worker/archives/schema-validation.ts": "ff3aecb064a430513890d9a66379b3904caa09de5f455580a98f299a74ebed22",
     "packages/storage/migrations/index.ts": "f39aab986efa92cc753cb10835681f6626ce880adbec723caa5495428746afdd",
@@ -39,7 +39,7 @@
     "package-lock.json": "aadb456e2a567a2b91cbb81a502650ebac93541f0a59d54035bdde2cacd97672"
   },
   "context": "fresh isolated persistent profiles",
-  "origin": "http://127.0.0.1:49426",
+  "origin": "http://127.0.0.1:50081",
   "hosts": [
     {
       "name": "chromium",
@@ -49,13 +49,13 @@
           "roundtrip": {
             "compaction": {
               "schemaVersion": 13,
-              "contextId": "396c29b5-476b-446b-b99e-216c5d906544",
-              "summaryContextId": "63696fb0-2546-4f9b-baa6-8940a04883c8",
-              "summaryProposalId": "619a4d78-c4c9-4b07-acd5-92573c0f9794",
+              "contextId": "5852f3c2-dd81-43cd-8e9f-4e85f6928dfe",
+              "summaryContextId": "042c4535-c089-43f9-9162-7dcb9391f051",
+              "summaryProposalId": "f05f0dea-2227-4dbf-8b7f-63cab6a6d22c",
               "frozenInputSha256": "37ef61ad3eb3570a959b301946aceb3cfa1e78a4d086b314c0571c1e6c4b77a2",
-              "partId": "d7ecf765-8418-44f8-9efb-9ca9334d3676",
-              "freshBranchContextId": "8e8d3496-3613-4a7f-89d8-78faee3ac8cc",
-              "branchEventId": "dc3b7d37-cf95-4ca1-9807-6bb917df2362",
+              "partId": "cf9011f3-248d-4645-a1a0-52268908b6c4",
+              "freshBranchContextId": "a2407829-fc12-42d1-8100-d92d1a400524",
+              "branchEventId": "96304ea9-af2e-4019-a5c3-329be94428fc",
               "emptySelectedBranch": true,
               "routingProfile": {
                 "version": 5,
@@ -80,7 +80,7 @@
               "archiveBytes": 1428480,
               "canonicalAndJournalExact": true
             },
-            "jobSteps": 164,
+            "jobSteps": 256,
             "schemaSevenRejection": {
               "sourceSchemaVersion": 7,
               "targetSchemaVersion": 13,
@@ -94,8 +94,8 @@
               "candidateReady": false
             },
             "schemaEightUpgrade": {
-              "jobId": "1b1941b0-66e4-4c10-a246-cc25f591efa0",
-              "candidateId": "c3ed56a2-a98f-4154-bffc-f0c6d1447071",
+              "jobId": "6c80e57d-12ac-4626-b5dc-9b0bdb55d80a",
+              "candidateId": "20c55337-ce6a-461d-8fc1-f07323b31cc4",
               "sourceSchemaVersion": 8,
               "targetSchemaVersion": 13,
               "canonicalRecords": 23,
@@ -198,7 +198,7 @@
               "Markdown includes full blob-backed tail"
             ]
           },
-          "origin": "http://127.0.0.1:49426",
+          "origin": "http://127.0.0.1:50081",
           "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36",
           "copiedBytes": 5259264,
           "peakBlock": 65536,
@@ -246,13 +246,13 @@
           "roundtrip": {
             "compaction": {
               "schemaVersion": 13,
-              "contextId": "3d3bfd97-f25c-4aba-8c74-36a586798212",
-              "summaryContextId": "50bfdd47-7c5b-4069-a1af-9e8cbd444de2",
-              "summaryProposalId": "65bfa6bf-d04f-4100-a565-93e1afc4772c",
+              "contextId": "b7cdb40c-de15-4fd4-8fc6-e6b0c3eb8079",
+              "summaryContextId": "3df63a50-2680-4c2a-8da5-310b04971ba6",
+              "summaryProposalId": "e6937c02-e38d-4fa7-9ec6-75cb8301ed6e",
               "frozenInputSha256": "37ef61ad3eb3570a959b301946aceb3cfa1e78a4d086b314c0571c1e6c4b77a2",
-              "partId": "c5aba185-04b5-49ab-a976-2a92851a200c",
-              "freshBranchContextId": "acc7d0f3-e2ad-4c42-ad44-44d9c9a4c9b8",
-              "branchEventId": "b0199ed8-6dae-40b6-99e2-35c6ae7c916c",
+              "partId": "06b8cbf8-10f3-4de8-8211-d0e87763ab5c",
+              "freshBranchContextId": "d22f9c7c-2bd8-4dfe-aaf0-c6bb0dec9169",
+              "branchEventId": "9fdf031f-57fa-458d-b067-f4565cd35c7c",
               "emptySelectedBranch": true,
               "routingProfile": {
                 "version": 5,
@@ -277,7 +277,7 @@
               "archiveBytes": 1428480,
               "canonicalAndJournalExact": true
             },
-            "jobSteps": 164,
+            "jobSteps": 256,
             "schemaSevenRejection": {
               "sourceSchemaVersion": 7,
               "targetSchemaVersion": 13,
@@ -291,8 +291,8 @@
               "candidateReady": false
             },
             "schemaEightUpgrade": {
-              "jobId": "144424b2-5803-4383-8bbe-a3f76eebf36c",
-              "candidateId": "c7cdc00c-f87f-43b4-a65a-5f234aa29d9f",
+              "jobId": "345804b9-888a-4f8d-8350-6da57a2111a1",
+              "candidateId": "82904c69-8f58-49f6-901c-f087cb1e612d",
               "sourceSchemaVersion": 8,
               "targetSchemaVersion": 13,
               "canonicalRecords": 23,
@@ -395,7 +395,7 @@
               "Markdown includes full blob-backed tail"
             ]
           },
-          "origin": "http://127.0.0.1:49426",
+          "origin": "http://127.0.0.1:50081",
           "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
           "copiedBytes": 5259264,
           "peakBlock": 65536,

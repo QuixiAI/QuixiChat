@@ -19,7 +19,7 @@ import { CANONICAL_MIGRATIONS } from "../../../migrations/index.ts";
 import { BlobStorageError } from "../blobs.ts";
 import type { SearchBlobAccess } from "../search/index.ts";
 import {
-  copySnapshot,
+  SnapshotCopier,
   approvedSchema,
   sqlRows,
   snapshotSummary,
@@ -77,6 +77,7 @@ type Runtime = {
   directory: FileSystemDirectoryHandle;
   candidate?: FileSystemDirectoryHandle;
   raw?: ArchiveDatabaseFile;
+  snapshot?: SnapshotCopier;
   clean?: ArchiveDatabaseFile;
   copier?: CleanSnapshotCopy;
   output?: ArchiveFileHandle;
@@ -565,13 +566,22 @@ CREATE INDEX IF NOT EXISTS quixi_archive_review_token ON quixi_archive_operation
     runtime.signal = signal;
     const id = job.status.jobId;
     if (!runtime.copier && !runtime.iterator) {
-      runtime.raw = await copySnapshot(
+      // The source snapshot is copied in steps of at most maxBytes; the read transaction stays open between them.
+      runtime.snapshot ??= new SnapshotCopier(
         this.options.sqlite,
         this.options.pool,
         this.db,
         `/export-${id}.sqlite3`,
         signal,
       );
+      const raw = await runtime.snapshot.advance(args.maxBytes);
+      job.status.completedBytes = runtime.snapshot.copiedBytes;
+      job.status.totalBytes = runtime.snapshot.totalBytes;
+      if (!raw) return;
+      delete runtime.snapshot;
+      runtime.raw = raw;
+      job.status.completedBytes = 0;
+      job.status.totalBytes = null;
       runtime.clean = new this.options.pool.OpfsSAHPoolDb(
         `/clean-${id}.sqlite3`,
       );
@@ -1299,6 +1309,7 @@ CREATE INDEX IF NOT EXISTS quixi_archive_review_token ON quixi_archive_operation
     if (!runtime) return;
     this.runtime.delete(id);
     const cleanup = [
+      () => runtime.snapshot?.close(),
       () => runtime.iterator?.return(undefined),
       () => runtime.receiver?.close(),
       () => runtime.inventory?.close(),

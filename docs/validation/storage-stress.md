@@ -84,6 +84,17 @@ materializes one activity row per thread, kept by canonical triggers and
 read through an ordered index in one statement per page; retained archives
 at older schemas keep the previous query.
 
+**Third attempt (2026-09-13), failed at the export snapshot**
+([stress-browser-webkit-1m-attempt3.json](results/stress-browser-webkit-1m-attempt3.json)):
+seeded in 1,557 s (642 messages/s); integrity ok in 58.2 s (4,713 MB file);
+library first page 9 ms, twenty pages in 30 ms (was 25.4 s and 515.7 s);
+cold reopen ready in 0.36 s with the first page in 42 ms; a second tab read
+three pages in 79 ms. The portable export then failed with the same reply
+deadline: its `snapshot` phase copied the whole 4.7 GB database inside one
+advance step, which ADR 0010 had recorded as not bounded by `maxBytes`.
+Fixed by the ADR 0010 amendment: the snapshot is copied in steps of at most
+`maxBytes`, with the read transaction held across steps.
+
 FULL_RUN_RESULT
 
 ## Not covered by this run

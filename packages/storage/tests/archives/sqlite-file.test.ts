@@ -195,45 +195,25 @@ test("bounded fresh-schema copy retains canonical bytes and omits residual priva
 });
 
 test("snapshot admission and mid-copy failures preserve source and unlink only private output", async () => {
-  const { copySnapshot } = await import(
-    "../../src/worker/archives/snapshot.ts"
-  );
+  const { copySnapshot } = await import("../../src/worker/archives/snapshot.ts");
   const source = new sqlite.oo1.DB("/archive-failed-copy.sqlite3", "c");
   source.exec("CREATE TABLE proof(id INTEGER); INSERT INTO proof VALUES(1)");
   const unlinked: string[] = [];
   const pool = {
-    async reserveMinimumCapacity() {
-      return 10;
-    },
-    async importDb(_name: string, read: () => Promise<Uint8Array | undefined>) {
-      assert((await read())!.length > 0);
-      throw new Error("Synthetic capacity write failure");
-    },
-    unlink(name: string) {
-      unlinked.push(name);
-      return true;
-    },
+    OpfsSAHPoolDb: class { constructor(_name: string) { throw new Error("Synthetic capacity write failure"); } },
+    async reserveMinimumCapacity() { return 10; },
+    unlink(name: string) { unlinked.push(name); return true; },
   };
   const name = "/export-00000000-0000-4000-8000-000000000010.sqlite3";
   try {
-    await assert.rejects(
-      copySnapshot(sqlite as any, pool as any, source, name),
-      /capacity write/,
-    );
+    await assert.rejects(copySnapshot(sqlite as any, pool as any, source, name), /capacity write/);
     assert.deepEqual(unlinked, [name]);
     assert.equal(source.selectValue("SELECT count(*) FROM proof"), 1);
     source.exec("INSERT INTO proof VALUES(2)");
-    const admission = {
-      ...pool,
-      async reserveMinimumCapacity() {
-        throw new Error("Synthetic pool admission failure");
-      },
-    };
-    await assert.rejects(
-      copySnapshot(sqlite as any, admission as any, source, name),
-      /admission/,
-    );
+    const admission = { ...pool, async reserveMinimumCapacity() { throw new Error("Synthetic pool admission failure"); } };
+    await assert.rejects(copySnapshot(sqlite as any, admission as any, source, name), /admission/);
     assert.equal(source.selectValue("SELECT count(*) FROM proof"), 2);
+    assert.deepEqual(unlinked, [name], "admission failure opens nothing, so nothing more is unlinked");
   } finally {
     source.close();
   }
@@ -475,3 +455,51 @@ for (const [name, damage, pattern] of [
       }
     },
   );
+
+test("stepped snapshot copy never exceeds a step's byte budget, matches the independent export and closes cleanly", async () => {
+  const { SnapshotCopier } = await import("../../src/worker/archives/snapshot.ts");
+  const source = new sqlite.oo1.DB("/archive-stepped-copy.sqlite3", "c");
+  try {
+    source.exec("PRAGMA journal_mode=DELETE; CREATE TABLE proof(id INTEGER PRIMARY KEY, body BLOB); INSERT INTO proof VALUES(1,zeroblob(1048577));");
+    const expected = createHash("sha256").update(sqlite.capi.sqlite3_js_db_export(source.pointer)).digest("hex");
+    const unlinked: string[] = [];
+    const pool = {
+      OpfsSAHPoolDb: class { constructor(name: string) { return new sqlite.oo1.DB(name, "c"); } },
+      async reserveMinimumCapacity() { return 10; },
+      unlink(name: string) { unlinked.push(name); return true; },
+    };
+    const name = "/export-00000000-0000-4000-8000-000000000011.sqlite3";
+    const copier = new SnapshotCopier(sqlite as any, pool as any, source, name);
+    const budget = 70_000; let steps = 0, previous = 0, db = null;
+    while (!db) {
+      db = await copier.advance(budget); steps++;
+      assert.ok(copier.copiedBytes - previous <= budget, "a step copied more than its budget");
+      assert.ok(db || copier.copiedBytes > previous, "a step made no progress");
+      previous = copier.copiedBytes;
+    }
+    assert.equal(copier.copiedBytes, copier.totalBytes);
+    assert.equal(steps, Math.ceil(copier.totalBytes! / budget));
+    const copy = db as unknown as FileDatabase & { close(): void };
+    assert.equal(createHash("sha256").update(sqlite.capi.sqlite3_js_db_export(copy.pointer)).digest("hex"), expected);
+    assert.equal(copy.selectValue("SELECT count(*) FROM proof"), 1);
+    copy.close();
+    // A completed copy is kept.
+    assert.deepEqual(unlinked, []);
+    // The source is writable again once the copy released its read transaction.
+    source.exec("INSERT INTO proof VALUES(2,zeroblob(1))");
+    // Closing between steps releases the transaction and unlinks the private output.
+    const released = new SnapshotCopier(sqlite as any, pool as any, source, name);
+    assert.equal(await released.advance(budget), null);
+    released.close();
+    await assert.rejects(released.advance(budget), /closed/);
+    assert.deepEqual(unlinked, [name]);
+    source.exec("INSERT INTO proof VALUES(3,zeroblob(1))");
+    // Closing before the first step.
+    const early = new SnapshotCopier(sqlite as any, pool as any, source, name);
+    early.close();
+    await assert.rejects(early.advance(budget), /closed/);
+    assert.equal(source.selectValue("SELECT count(*) FROM proof"), 3);
+  } finally {
+    source.close();
+  }
+});
