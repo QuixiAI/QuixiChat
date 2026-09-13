@@ -23,6 +23,8 @@ export interface ArchiveJobStatus {
   completedRecords: number;
   totalRecords: number | null;
   entryCount: number;
+  /** Restore only: the record validator's current sub-phase (records, topology, intervals, semantics, coverage, operations, receipts, ...), for progress reporting; null outside record validation. */
+  validationPhase?: string | null;
   /** Restore only: the migration ledger length the received database carried,
    * read from its own ledger. When it is below the candidate's schema, the
    * isolated candidate was upgraded through the fresh-schema copy before

@@ -40,9 +40,12 @@ first pass** (plans 24 and 09). The seventh 1M run completed its export
 visible progress, so it was stopped with its profile and 4.17 GB container
 kept. The harness now logs export and restore phases and progress, a
 restore-only probe replays the restore over a kept archive, and the
-validator's root-pick query gained the index it lacked (a likely quadratic
-at 100,000 threads). The probe is running; its result decides the next
-slice. Completed plans remain **13 of 23**.
+validator's root-pick query gained the index it lacked. The probe shows the
+restore is linear but slow: the 2.3 million records validate at about
+1,600 per second and the later graph, semantic, coverage and journal
+passes cost several statements per unit; the job status now exposes the
+validator's sub-phase for the harness. The probe is still running; a
+set-based topology and interval check is the next cost to cut. Completed plans remain **13 of 23**.
 
 Previous completed iteration (2026-09-13): **plan 01 complete**. Its last
 task (persistence requests, restart durability, quota exhaustion,

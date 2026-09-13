@@ -370,6 +370,7 @@ CREATE INDEX IF NOT EXISTS quixi_archive_review_token ON quixi_archive_operation
       completedRecords: 0,
       totalRecords: null,
       entryCount: 0,
+      validationPhase: null,
       sourceSchemaVersion: null,
       failure: null,
       output: null,
@@ -888,6 +889,7 @@ CREATE INDEX IF NOT EXISTS quixi_archive_review_token ON quixi_archive_operation
     if (job.status.phase === "record_validation") {
       const status = runtime.validator!.step(args.maxRecords);
       job.status.completedRecords = status.checkedRecords;
+      job.status.validationPhase = status.phase === "ready" ? null : status.phase;
       if (status.phase === "ready") {
         job.status.phase = "blob_validation";
         runtime.blobAfter = "";

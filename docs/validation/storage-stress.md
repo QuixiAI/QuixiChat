@@ -151,8 +151,17 @@ steps, and a restore-only probe (`probe-restore.mjs`) replays the restore
 over the kept archive. Suspected cause: the validator's root selection
 (`parent_id IS NULL AND tin IS NULL`) had no index covering the visited
 marker, so each of the 100,000 root picks rescanned the roots already
-visited; `archive_validation_roots` now covers it. The probe's result is
-recorded next.
+visited; `archive_validation_roots` now covers it. The probe (with that
+index) streamed the container back in 302 s, copied the 4.17 GB candidate
+in about four minutes over roughly 4,000 steps, reached record validation
+after 7,984 steps at 530 s, and validated the 2,300,000 records' shapes and
+edges at about 1,600 records per second (25,000 steps at 1,829 s). The
+validator's later sub-phases (message topology, DFS intervals, a second
+semantic pass and a coverage pass over every record, then 1,200,000
+journal operations and receipts) cost several statements per unit and are
+where the hours go; the job status now exposes the validator's sub-phase
+(`validationPhase`) so the harness names it. The probe's total is recorded
+when it finishes.
 
 FULL_RUN_RESULT
 

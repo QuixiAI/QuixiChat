@@ -4,8 +4,8 @@
     "webkit"
   ],
   "status": "passed",
-  "startedAt": "2026-09-13T14:59:40.626Z",
-  "finishedAt": "2026-09-13T15:00:00.398Z",
+  "startedAt": "2026-09-13T16:07:15.183Z",
+  "finishedAt": "2026-09-13T16:07:36.142Z",
   "environment": {
     "platform": "darwin",
     "release": "25.6.0",
@@ -30,7 +30,7 @@
     "packages/storage/tests/archives/schema-eight.ts": "f3f1677c3fed9e00c1c2011e296aec266d142b712f8bf73ca31110a93b37b3eb",
     "packages/storage/tests/archives/browser-client.ts": "145f9d0b703ad651f628e2d4e7b5a349697ca0d254f8519d219218c0d78a0829",
     "packages/storage/tests/archives/browser-workflows.ts": "fa215372d79ad4dceab38388d5d0f2bed505ce45fa44076de70fa7fd9c8f151b",
-    "packages/storage/src/worker/archives/index.ts": "d59373d710bbd255d6bdaf11489e1a78dd58ba46e7a18fb89dc7eb92530ce369",
+    "packages/storage/src/worker/archives/index.ts": "eba95e760da3cd088c553c6aa0c28805b9122ae903635a762f75ab51e3a74939",
     "packages/storage/src/worker/archives/clean-copy.ts": "1bb9d91152fba95b96ba8bc8209c3b55c86c458ea07d487ea048829be347c7ef",
     "packages/storage/src/worker/archives/schema-validation.ts": "ff3aecb064a430513890d9a66379b3904caa09de5f455580a98f299a74ebed22",
     "packages/storage/migrations/index.ts": "f39aab986efa92cc753cb10835681f6626ce880adbec723caa5495428746afdd",
@@ -39,7 +39,7 @@
     "package-lock.json": "aadb456e2a567a2b91cbb81a502650ebac93541f0a59d54035bdde2cacd97672"
   },
   "context": "fresh isolated persistent profiles",
-  "origin": "http://127.0.0.1:57179",
+  "origin": "http://127.0.0.1:57747",
   "hosts": [
     {
       "name": "chromium",
@@ -49,13 +49,13 @@
           "roundtrip": {
             "compaction": {
               "schemaVersion": 13,
-              "contextId": "73db4215-b707-4f04-af47-b01f858a95ce",
-              "summaryContextId": "7c51a761-0135-46c8-a068-f04741e4a32a",
-              "summaryProposalId": "8e3ab111-1630-4574-8c9e-09f06a518c19",
+              "contextId": "1270be9c-b60f-47c8-900d-7613259d0f60",
+              "summaryContextId": "27ab6045-7f1e-4d70-8a3a-59629ebfbfdc",
+              "summaryProposalId": "7e98aa0b-9572-4f72-b8db-2fa0effaef79",
               "frozenInputSha256": "37ef61ad3eb3570a959b301946aceb3cfa1e78a4d086b314c0571c1e6c4b77a2",
-              "partId": "a7bc9636-4a8e-469e-9de9-d4b16ce68a9b",
-              "freshBranchContextId": "d7fbaffc-869b-4ab1-b011-7c3474bf91fa",
-              "branchEventId": "365306cf-f4e8-4a49-8b98-f992862dc718",
+              "partId": "2defab3c-b460-4832-9f1c-acbf806202b6",
+              "freshBranchContextId": "218e2071-3e91-482d-9643-0f5135ec4890",
+              "branchEventId": "23aef402-3265-48a7-8715-cf5434c4e667",
               "emptySelectedBranch": true,
               "routingProfile": {
                 "version": 5,
@@ -94,8 +94,8 @@
               "candidateReady": false
             },
             "schemaEightUpgrade": {
-              "jobId": "b4fa9070-9dd4-43d5-9f2e-26a4a93a80d4",
-              "candidateId": "1a45c967-57b8-4cd1-a549-cf3f50d9b805",
+              "jobId": "18588421-36c3-47ae-abd8-d3205906c877",
+              "candidateId": "a808a423-d703-4e1c-962b-0b6e009b108a",
               "sourceSchemaVersion": 8,
               "targetSchemaVersion": 13,
               "canonicalRecords": 23,
@@ -198,7 +198,7 @@
               "Markdown includes full blob-backed tail"
             ]
           },
-          "origin": "http://127.0.0.1:57179",
+          "origin": "http://127.0.0.1:57747",
           "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36",
           "copiedBytes": 5259264,
           "peakBlock": 65536,
@@ -246,13 +246,13 @@
           "roundtrip": {
             "compaction": {
               "schemaVersion": 13,
-              "contextId": "aab51572-21a4-4ca2-b601-977d0c6fa737",
-              "summaryContextId": "3d525d84-090a-413a-b1aa-d847fda80b66",
-              "summaryProposalId": "ae270192-081f-4ae2-8b8d-185111d79488",
+              "contextId": "6aff7a5d-cffe-4362-be82-337f0fa753ae",
+              "summaryContextId": "725b363f-66f2-4804-8655-dfbcbf4f9cab",
+              "summaryProposalId": "d084ee1b-6799-491d-9433-2e5701ed44f7",
               "frozenInputSha256": "37ef61ad3eb3570a959b301946aceb3cfa1e78a4d086b314c0571c1e6c4b77a2",
-              "partId": "fa7f5c13-d619-414e-b70c-d9c919884297",
-              "freshBranchContextId": "13b5f750-5a40-4713-9206-d960263dbc14",
-              "branchEventId": "0a0eab71-662a-402b-abbd-6eca3c2a0af7",
+              "partId": "43592d01-bbb0-40e4-b0b7-32d40884c0e2",
+              "freshBranchContextId": "63ee1b3a-c92a-4a5b-bf4f-51e2389b6755",
+              "branchEventId": "366a6454-2ca8-4a84-98d2-d9821d93eae8",
               "emptySelectedBranch": true,
               "routingProfile": {
                 "version": 5,
@@ -291,8 +291,8 @@
               "candidateReady": false
             },
             "schemaEightUpgrade": {
-              "jobId": "8e0dd133-e400-49ed-9c84-49e14c3263e4",
-              "candidateId": "01cecf62-fab3-4baf-b71a-87eda9825621",
+              "jobId": "3af3b47e-bb97-427f-ab84-518151d81183",
+              "candidateId": "656fb70c-6ca0-4535-ab43-72aacdf7bf13",
               "sourceSchemaVersion": 8,
               "targetSchemaVersion": 13,
               "canonicalRecords": 23,
@@ -395,7 +395,7 @@
               "Markdown includes full blob-backed tail"
             ]
           },
-          "origin": "http://127.0.0.1:57179",
+          "origin": "http://127.0.0.1:57747",
           "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
           "copiedBytes": 5259264,
           "peakBlock": 65536,

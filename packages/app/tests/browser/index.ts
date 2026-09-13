@@ -663,8 +663,9 @@ Object.assign(window, {
         while (status.state === "working") {
           status = await storage.request(id(), "advanceArchiveJob", { operationId: id(), jobId: job.jobId, maxRecords: 128, maxBytes: 1_048_576 }, { timeoutMs: INTEGRITY_CHECK_DEADLINE_MS });
           advances++;
-          if (phases.at(-1) !== status.phase) { phases.push(status.phase); console.log(`[stress] restore phase ${status.phase} after ${advances} steps (${((performance.now() - started) / 1000).toFixed(0)} s)`); }
-          if (advances % 5000 === 0) console.log(`[stress] restore ${status.phase}: ${advances} steps, ${status.completedRecords}/${status.totalRecords ?? "?"} records, ${status.completedBytes}/${status.totalBytes ?? "?"} bytes (${((performance.now() - started) / 1000).toFixed(0)} s)`);
+          const stage = status.validationPhase ? `${status.phase}/${status.validationPhase}` : status.phase;
+          if (phases.at(-1) !== stage) { phases.push(stage); console.log(`[stress] restore phase ${stage} after ${advances} steps (${((performance.now() - started) / 1000).toFixed(0)} s)`); }
+          if (advances % 5000 === 0) console.log(`[stress] restore ${stage}: ${advances} steps, ${status.completedRecords}/${status.totalRecords ?? "?"} records, ${status.completedBytes}/${status.totalBytes ?? "?"} bytes (${((performance.now() - started) / 1000).toFixed(0)} s)`);
           if (advances > 5_000_000) throw new Error("Restore validation did not finish");
         }
         const result = { state: status.state, failure: status.failure, candidate: status.candidate, advances, phases, validatedMs: performance.now() - started };
