@@ -100,7 +100,8 @@
     "build:extension": "npm run build --workspace @quixi/extension",
     "test:extension": "npm run typecheck --workspace @quixi/extension && npm test --workspace @quixi/extension",
     "test:extension:e2e": "npm run test:e2e --workspace @quixi/extension",
-    "test:app:onboarding:browser": "tsc --noEmit -p packages/app/tsconfig.tests.json && node packages/app/tests/browser/onboarding-run.mjs"
+    "test:app:onboarding:browser": "tsc --noEmit -p packages/app/tsconfig.tests.json && node packages/app/tests/browser/onboarding-run.mjs",
+    "test:app:onboarding": "tsc --noEmit -p packages/app/tsconfig.tests.json && node --experimental-transform-types --test packages/app/tests/onboarding/*.test.ts"
   },
   "devDependencies": {
     "@playwright/test": "1.63.0",

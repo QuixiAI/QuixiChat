@@ -29,7 +29,8 @@ export function OnboardingPanel({ controller, snapshot, semantic, semanticState,
   const step = snapshot.step;
   const capabilities = snapshot.capabilities;
   const storage = snapshot.storage;
-  const semanticAvailable = snapshot.semantic.hostProvidesModel && snapshot.semantic.wasmSimd;
+  const modelState = snapshot.semantic.modelAvailability;
+  const semanticAvailable = snapshot.semantic.hostProvidesModel && snapshot.semantic.wasmSimd && modelState !== "missing";
   const footer = <div className="actions onboarding-nav">
     {step > 1 && <button disabled={snapshot.busy} onClick={() => controller.back()}>Back</button>}
     {step < 5 && <button className="primary" disabled={snapshot.busy} onClick={() => controller.next()}>Next</button>}
@@ -50,7 +51,7 @@ export function OnboardingPanel({ controller, snapshot, semantic, semanticState,
         <dt>Search</dt>
         <dd>{mark(snapshot.search ? snapshot.search.state !== "failed" : null)} FTS5{snapshot.search ? ` (${snapshot.search.state}, ${snapshot.search.indexedChunks} chunks indexed)` : ""}</dd>
         <dt>Semantic search</dt>
-        <dd>{mark(snapshot.semantic.wasmSimd)} WASM SIMD<br />{snapshot.semantic.webGpu === "available" ? "✓ WebGPU available" : snapshot.semantic.webGpu === "unavailable" ? "– WebGPU not available (optional)" : "? WebGPU unknown"}<br />{snapshot.semantic.hostProvidesModel ? "✓ Local model provided by this host" : "⚠ This host does not provide the local model"}</dd>
+        <dd>{mark(snapshot.semantic.wasmSimd)} WASM SIMD<br />{snapshot.semantic.webGpu === "available" ? "✓ WebGPU available" : snapshot.semantic.webGpu === "unavailable" ? "– WebGPU not available (optional)" : "? WebGPU unknown"}<br />{!snapshot.semantic.hostProvidesModel ? "⚠ This host does not provide the local model" : modelState === "missing" ? "⚠ This host names a local model it does not serve (the file is absent)" : modelState === "available" ? "✓ Local model provided by this host" : modelState === "unknown" ? "? Local model named by this host; availability could not be checked" : "… Checking the local model"}</dd>
         <dt>Files and extension</dt>
         <dd>{capabilities ? `${mark(capabilities.nativeFiles.available)} native file saving · ${mark(capabilities.extensionTransfers.available)} browser-extension transfers · ${mark(capabilities.notifications.available)} notifications` : "Reading host capabilities…"}</dd>
       </dl>
@@ -75,7 +76,7 @@ export function OnboardingPanel({ controller, snapshot, semantic, semanticState,
     {step === 5 && <>
       <h2 id="onboarding-title">Enable Local Semantic Search?</h2>
       <p>Quixi can locally index the meaning of your conversations and document text. All inference stays on this device.</p>
-      {!semanticAvailable && <p role="status">{!snapshot.semantic.hostProvidesModel ? "This host does not provide the local model; exact search stays available." : "This browser lacks WASM SIMD; semantic search is unavailable here."}</p>}
+      {!semanticAvailable && <p role="status">{!snapshot.semantic.hostProvidesModel ? "This host does not provide the local model; exact search stays available." : modelState === "missing" ? "The local model is not served by this host; exact search stays available." : "This browser lacks WASM SIMD; semantic search is unavailable here."}</p>}
       {semanticState.status?.state && semanticState.status.state !== "disabled" && <p role="status">Semantic search is already enabled ({backendLabel(semanticState)}).</p>}
       <div className="actions">
         <button className="primary" disabled={snapshot.busy || semanticState.busy || !semanticAvailable || (semanticState.status?.state !== undefined && semanticState.status?.state !== "disabled")} onClick={() => { void semantic.enable(); navigate.semantic(); void controller.complete(); }}>Enable</button>

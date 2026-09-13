@@ -28,19 +28,34 @@ export interface OnboardingSnapshot {
   storage: StorageStatus | null;
   capabilities: HostCapabilities | null;
   search: { state: string; indexedChunks: number; semanticReady: boolean; semanticReason: string | null } | null;
-  semantic: { hostProvidesModel: boolean; wasmSimd: boolean; webGpu: "available" | "unavailable" | "unknown" };
+  /** `modelAvailability`: what the configured model URL actually answered (a host may name a model it does not serve, as the Docker image does without a provisioned file). */
+  semantic: { hostProvidesModel: boolean; modelAvailability: ModelAvailability; wasmSimd: boolean; webGpu: "available" | "unavailable" | "unknown" };
   busy: boolean;
   error: string | null;
   notice: string | null;
 }
+export type ModelAvailability = "available" | "missing" | "unknown" | "unchecked";
 export interface OnboardingServices {
   storage: StorageClient;
   host: HostClient;
   hostProvidesModel: boolean;
+  /** Answers whether the host actually serves its named model; absent when the host names none. */
+  probeModel?: () => Promise<ModelAvailability>;
+}
+/** A same-origin HEAD of the model URL: `available` on a non-HTML success,
+ * `missing` on any other HTTP answer (including an application document
+ * returned by a SPA fallback), `unknown` when the request itself fails. */
+export async function probeModelUrl(url: string, fetchImpl: typeof fetch = fetch): Promise<ModelAvailability> {
+  try {
+    const response = await fetchImpl(url, { method: "HEAD", cache: "no-store" });
+    if (!response.ok) return "missing";
+    const type = response.headers.get("content-type") ?? "";
+    return /text\/html/i.test(type) ? "missing" : "available";
+  } catch { return "unknown"; }
 }
 const id = () => crypto.randomUUID();
 export function createOnboardingController(services: OnboardingServices) {
-  let state: OnboardingSnapshot = Object.freeze({ loaded: false, completedAt: undefined, revision: 0, step: 1, storage: null, capabilities: null, search: null, semantic: { hostProvidesModel: services.hostProvidesModel, wasmSimd: false, webGpu: "unknown" as const }, busy: false, error: null, notice: null });
+  let state: OnboardingSnapshot = Object.freeze({ loaded: false, completedAt: undefined, revision: 0, step: 1, storage: null, capabilities: null, search: null, semantic: { hostProvidesModel: services.hostProvidesModel, modelAvailability: "unchecked" as ModelAvailability, wasmSimd: false, webGpu: "unknown" as const }, busy: false, error: null, notice: null });
   const listeners = new Set<() => void>();
   let disposed = false;
   const patch = (change: Partial<OnboardingSnapshot>) => { if (disposed) return; state = Object.freeze({ ...state, ...change }); for (const listener of listeners) { try { listener(); } catch { /* isolate */ } } };
@@ -74,7 +89,9 @@ export function createOnboardingController(services: OnboardingServices) {
     } catch { webGpu = "unavailable"; }
     let wasmSimd = false;
     try { wasmSimd = supportsWasmSimd(); } catch { wasmSimd = false; }
-    patch({ capabilities, storage, search, semantic: { hostProvidesModel: services.hostProvidesModel, wasmSimd, webGpu } });
+    let modelAvailability: ModelAvailability = services.hostProvidesModel ? "unchecked" : "missing";
+    if (services.hostProvidesModel && services.probeModel) { try { modelAvailability = await services.probeModel(); } catch { modelAvailability = "unknown"; } }
+    patch({ capabilities, storage, search, semantic: { hostProvidesModel: services.hostProvidesModel, modelAvailability, wasmSimd, webGpu } });
   }
   async function setCompleted(completedAt: number | null): Promise<void> {
     if (state.busy) return;

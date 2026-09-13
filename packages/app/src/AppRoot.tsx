@@ -84,7 +84,7 @@ import type { PortabilityInspection } from "./workflows/chat.ts";
 import type { ProviderSwitch, SwitchInspection } from "./workflows/chat.ts";
 import { createDocumentController } from './features/documents/controller.ts';
 import { createSemanticController } from './features/semantic/controller.ts';
-import { createOnboardingController } from './features/onboarding/controller.ts';
+import { createOnboardingController, probeModelUrl } from './features/onboarding/controller.ts';
 import { OnboardingPanel, StorageStatus } from './features/onboarding/OnboardingPanel.tsx';
 import { SemanticPanel } from './features/semantic/SemanticPanel.tsx';
 import { DocumentPanel } from './features/documents/DocumentPanel.tsx';
@@ -316,7 +316,7 @@ export function AppRoot({
   const cleanup = useMemo(() => createCleanupController(services.storage, storageHealth), [services, storageHealth]);
   const semantic = useMemo(() => createSemanticController({ storage: services.storage, embedding: services.embedding }), [services]);
   const semanticState = useSyncExternalStore(semantic.subscribe, semantic.getSnapshot);
-  const onboarding = useMemo(() => createOnboardingController({ storage: services.storage, host: services.host, hostProvidesModel: !!services.embedding }), [services]);
+  const onboarding = useMemo(() => createOnboardingController({ storage: services.storage, host: services.host, hostProvidesModel: !!services.embedding, ...(services.embedding ? { probeModel: () => probeModelUrl(services.embedding!.modelUrl) } : {}) }), [services]);
   const onboardingState = useSyncExternalStore(onboarding.subscribe, onboarding.getSnapshot);
   const preference = useSyncExternalStore(preferences.subscribe, preferences.getSnapshot);
   // Product §92: the theme is a root attribute so tokens restyle the whole document.

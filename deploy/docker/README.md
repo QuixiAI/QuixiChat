@@ -17,7 +17,12 @@ The image contains no embedding model: the Docker context excludes `build/` and
 lexical Best keep working. To offer local semantic search, provision the pinned
 `arctic-xs.qxmodel` (SHA-256 in `packages/quixi-embed/artifacts/model/lock.json`)
 at `/usr/share/nginx/html/models/arctic-xs.qxmodel`, for example through a
-volume or a derived image; the browser verifies the digest before use.
+volume or a derived image; the browser verifies the digest before use. The
+`/models/` location answers a missing file with 404 (never the application
+document), which is what onboarding and the loader read as "not served".
+`node tests/hosts/web-hosting-proof.mjs` checks the built image's headers,
+media types, fallback behavior and both browser engines
+([web-hosting.md](../../docs/validation/web-hosting.md)).
 
 Use HTTPS for remote deployments; localhost is the development exception.
 Preserve the COOP/COEP response headers through any reverse proxy. Keep the origin

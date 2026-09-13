@@ -1,0 +1,104 @@
+{
+  "status": "passed",
+  "startedAt": "2026-09-13T07:37:30.726Z",
+  "image": "quixi-web:local",
+  "checks": [
+    "the server is published only on loopback",
+    "the root document is served as HTML",
+    "the root document carries COOP same-origin and COEP require-corp",
+    "the document references 3 same-origin assets",
+    "referenced asset /assets/app-CLPmQB_W.js is served",
+    "referenced asset /assets/app-CLPmQB_W.js carries the isolation headers",
+    "/assets/app-CLPmQB_W.js is served as javascript",
+    "referenced asset /assets/modulepreload-polyfill-P2Xu9kJm.js is served",
+    "referenced asset /assets/modulepreload-polyfill-P2Xu9kJm.js carries the isolation headers",
+    "/assets/modulepreload-polyfill-P2Xu9kJm.js is served as javascript",
+    "referenced asset /assets/app-O3lc3EtO.css is served",
+    "referenced asset /assets/app-O3lc3EtO.css carries the isolation headers",
+    "/assets/app-O3lc3EtO.css is served as text/css",
+    "/assets/quixi-scalar-CYrq2LQM.wasm is served as application/wasm",
+    "/assets/quixi-simd-DNAZ4B-2.wasm is served as application/wasm",
+    "/assets/sqlite3-BzAlo58v.wasm is served as application/wasm",
+    "an application route falls back to the root document",
+    "a missing asset is a 404, not the document",
+    "the embedding model is absent from the image (semantic search reports unavailable)",
+    "the assets directory is not listed",
+    "the OAuth callback document is served",
+    "the callback route sends referrer-policy",
+    "the callback route sends cache-control",
+    "the callback route sends content-security-policy",
+    "the callback route sends cross-origin-opener-policy",
+    "the callback route sends cross-origin-embedder-policy",
+    "the callback response does not reflect its query",
+    "callback requests are absent from nginx logs",
+    "ordinary requests are logged",
+    "chromium: the page is cross-origin isolated",
+    "chromium: onboarding reports the SQLite WASM / OPFS backend with integrity ok",
+    "chromium: the capability check reports SQLite WASM, OPFS and FTS5 on the container origin",
+    "chromium: the capability check does not claim a host-provided model (the image ships none)",
+    "chromium: isolation holds after a reload on the same origin",
+    "chromium: no page errors",
+    "webkit: the page is cross-origin isolated",
+    "webkit: onboarding reports the SQLite WASM / OPFS backend with integrity ok",
+    "webkit: the capability check reports SQLite WASM, OPFS and FTS5 on the container origin",
+    "webkit: the capability check does not claim a host-provided model (the image ships none)",
+    "webkit: isolation holds after a reload on the same origin",
+    "webkit: no page errors"
+  ],
+  "hosts": [
+    {
+      "name": "chromium",
+      "status": "passed",
+      "checks": [
+        "cross-origin isolated",
+        "landing rendered",
+        "storage backend reported",
+        "capabilities reported",
+        "no model claimed",
+        "isolation after reload",
+        "no page errors"
+      ],
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36",
+      "backend": "SQLite WASM / OPFS · schema 13 · integrity ok",
+      "capabilities": "Local storage✓ SQLite WASM✓ OPFSSearch✓ FTS5 (indexing, 0 chunks indexed)Semantic search✓ WASM SIMD– WebGPU not available (optional)⚠ This host names a local model it does not serve (the file is absent)Files and extension✓ native file saving · ✓ browser-extension transfers · ⚠ notifications"
+    },
+    {
+      "name": "webkit",
+      "status": "passed",
+      "checks": [
+        "cross-origin isolated",
+        "landing rendered",
+        "storage backend reported",
+        "capabilities reported",
+        "no model claimed",
+        "isolation after reload",
+        "no page errors"
+      ],
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+      "backend": "SQLite WASM / OPFS · schema 13 · integrity ok",
+      "capabilities": "Local storage✓ SQLite WASM✓ OPFSSearch✓ FTS5 (indexing, 0 chunks indexed)Semantic search✓ WASM SIMD✓ WebGPU available⚠ This host names a local model it does not serve (the file is absent)Files and extension⚠ native file saving · ✓ browser-extension transfers · ⚠ notifications"
+    }
+  ],
+  "environment": {
+    "platform": "darwin",
+    "release": "25.6.0",
+    "arch": "arm64",
+    "node": "v22.23.1",
+    "docker": "Docker version 29.7.2, build a7dcaa6"
+  },
+  "scope": "Locally built image served over loopback HTTP; no public proxy, TLS, CDN or registry claim. Browser engines are Playwright's Chromium and WebKit on macOS, not a Linux desktop result.",
+  "imageId": "sha256:2778ee3a69163c41b8807c939c34e9626f6abeba5dfdb78f1650a0ff6f112b3e",
+  "builtFiles": 136,
+  "wasmFiles": [
+    "/assets/quixi-scalar-CYrq2LQM.wasm",
+    "/assets/quixi-simd-DNAZ4B-2.wasm",
+    "/assets/sqlite3-BzAlo58v.wasm"
+  ],
+  "indexSha256": "081320924fc812c76fde47a6422a921ceaa305c2a3fb6e525728ee6a25793342",
+  "sourceSha256": {
+    "deploy/docker/Dockerfile": "5bd90568ad2b4b7e1c1a9406d7139a6ae63ca7c3b542887ffdb9c4f93f2ca076",
+    "deploy/docker/nginx.conf": "5d16bd9afe3599bb6fb489bce82d1154006001912f053280ccff1edccc79c5db",
+    "tests/hosts/web-hosting-proof.mjs": "e86e3083b67e0f4b856ed3ac0b48820d2c4b3fbef8dca77f7e747732b24cfb80"
+  },
+  "finishedAt": "2026-09-13T07:37:43.783Z"
+}

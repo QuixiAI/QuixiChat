@@ -32,7 +32,11 @@ npm run test:app:browser              # full application proof with the scenario
   usage/quota, the worker's `persisted` observation), host capabilities (native
   files, extension transfers, notifications, the new `persistentStorage`
   capability with its current grant), lexical search status, WASM SIMD support,
-  a WebGPU adapter probe and whether the host provides the local model.
+  a WebGPU adapter probe and whether the host provides the local model —
+  since 2026-09-13 verified by a same-origin HEAD of the configured model
+  URL (`probeModelUrl`), so a host that names a model it does not serve (the
+  Docker image without a provisioned file) is reported as such instead of
+  "provided" ([web-hosting.md](web-hosting.md); `npm run test:app:onboarding`).
 - Product §14: "Request persistent storage" calls the new
   `HostClient.requestPersistentStorage` (web: `navigator.storage.persist()`;
   desktop: unavailable with the reason that app-directory storage is not
