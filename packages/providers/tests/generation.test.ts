@@ -17,8 +17,8 @@ const delta = (text: string): ProviderEvent => ({ type: "text", key: "answer", t
  * Real worker persistence and restart remain covered by run-browser.mjs. */
 async function consume(
   events: ProviderEvent[],
-  { summary = true, rejectCancellation = false, initialThreadRevision, initialFailure, raceBeforeCreate = false, beforeDispatch, protocol = "openai-compatible", lostReceiptReply = false }: {
-    summary?: boolean; rejectCancellation?: boolean; initialThreadRevision?: number;
+  { summary = true, rejectCancellation = false, initialThreadRevision, initialFailure, raceBeforeCreate = false, beforeDispatch, protocol = "openai-compatible", lostReceiptReply = false, pauseMs = 0 }: {
+    summary?: boolean; rejectCancellation?: boolean; initialThreadRevision?: number; pauseMs?: number;
     initialFailure?: 'unknown_before' | 'unknown_after'; raceBeforeCreate?: boolean;
     beforeDispatch?: () => Promise<void>;
     protocol?: "openai-compatible" | "anthropic"; lostReceiptReply?: boolean;
@@ -48,7 +48,7 @@ async function consume(
       events: (async function* () {
         try {
           await guard?.();
-          for (const event of events) { consumed++; yield event; }
+          for (const event of events) { if ((event as { type: string }).type === 'pause') { await new Promise((resolve) => setTimeout(resolve, pauseMs)); continue; } consumed++; yield event; }
         } finally { iteratorClosed = true; }
       })(),
       cancel: async () => {
@@ -277,8 +277,8 @@ test('receipt persistence refuses wrong protocol, absent source, duplicate index
   }
 });
 
-test('checkpoint density baseline: one raw checkpoint commit and one text-append commit per streamed record (plan 06 scale gate)', async () => {
-  // A synthetic stream of 1,000 small SSE records, each carrying one 32-character delta.
+test('checkpoint density: a streamed record costs one commit; its text delta rides in the next raw checkpoint (plan 06 scale gate)', async () => {
+  // A synthetic stream of 1,000 small records, each carrying one 32-character delta.
   const events: ProviderEvent[] = [];
   const encoder = new TextEncoder();
   for (let i = 0; i < 1000; i++) {
@@ -287,16 +287,53 @@ test('checkpoint density baseline: one raw checkpoint commit and one text-append
   }
   events.push(completed);
   const run = await consume(events, { summary: false });
-  assert.equal(run.manifests.at(-1)?.terminal.status, 'complete', JSON.stringify({ terminal: run.manifests.at(-1)?.terminal ?? null, result: run.result, batches: run.batches.length, consumed: run.consumed }).slice(0, 600));
+  assert.equal(run.manifests.at(-1)?.terminal.status, 'complete');
   assert.equal(run.text.length, 32_000);
   const commits = run.batches.length;
   const rawCommits = run.batches.filter(b => b.mutations.some(m => m.kind === 'RegisterRawObject')).length;
-  const textAppends = run.batches.filter(b => b.mutations.some(m => m.kind === 'AppendGenerationOutput' && m.payload.textAppend)).length;
+  const textMutations = run.batches.flatMap(b => b.mutations).filter(m => m.kind === 'AppendGenerationOutput' && (m.payload.textAppend || m.payload.newParts.some(p => p.kind === 'Text'))).length;
   const textParts = run.parts.filter(p => p.kind === 'Text').length;
-  // Baseline as designed: creation + 1,000 raw checkpoints + 1,000 text appends (the first delta creates the part, later ones append) + the manifest.
   assert.equal(rawCommits, 1001, 'one verified raw checkpoint per record plus the manifest');
-  assert.equal(textAppends + textParts, 1000, 'one text mutation per delta');
+  assert.equal(textMutations, 1000, 'every delta is its own sequenced mutation');
   assert.equal(textParts, Math.ceil(32_000 / 8192), 'text parts are bounded at 8 KiB each');
-  assert.equal(commits, 1 + 1001 + 1000, `commits per streamed record: ${((commits - 2) / 1000).toFixed(2)}`);
+  // Before batching this was 2,002: the creation, 1,001 raw commits and 1,000 separate text commits.
+  assert.equal(commits, 1 + 1001, `commits per streamed record: ${((commits - 2) / 1000).toFixed(2)}`);
+  // Each delta was committed in the batch of the raw record that followed it, before that record's own mutations.
+  for (const batch of run.batches.slice(2, -1)) {
+    const kinds = batch.mutations.map(m => m.kind === 'AppendGenerationOutput' ? (m.payload.textAppend || m.payload.newParts.some(p => p.kind === 'Text') ? 'text' : 'part') : m.kind);
+    assert.deepEqual(kinds, ['text', 'RegisterRawObject', 'part']);
+  }
+});
+
+test('deltas without following raw records flush in bounded batches and the terminal manifest carries the rest', async () => {
+  const events: ProviderEvent[] = [{ type: 'raw', sequence: 0, bytes: new TextEncoder().encode('{"start":true}') }];
+  for (let i = 0; i < 100; i++) events.push(delta('y'.repeat(32)));
+  events.push(completed);
+  const run = await consume(events, { summary: false });
   assert.equal(run.manifests.at(-1)?.terminal.status, 'complete');
+  assert.equal(run.text, 'y'.repeat(3200));
+  // Creation, one raw checkpoint, six bounded flushes of 16 mutations, and the manifest carrying the last four deltas.
+  assert.equal(run.batches.length, 1 + 1 + 6 + 1);
+  const manifestBatch = run.batches.at(-1)!;
+  assert.equal(manifestBatch.mutations.filter(m => m.kind === 'AppendGenerationOutput' && m.payload.textAppend).length, 4);
+  assert.ok(run.sealed);
+});
+
+test('a delta a provider pauses after is committed by the idle flush before the next record', async () => {
+  const encoder = new TextEncoder();
+  const paused: ProviderEvent[] = [
+    { type: 'raw', sequence: 0, bytes: encoder.encode('{"a":1}') },
+    delta('first '),
+    { type: 'pause' } as unknown as ProviderEvent,
+    { type: 'raw', sequence: 1, bytes: encoder.encode('{"a":2}') },
+    delta('second'),
+    completed,
+  ];
+  // The fixture adapter yields events in order; a pause marker makes it wait longer than the idle flush window.
+  const run = await consume(paused, { summary: false, pauseMs: 300 });
+  assert.equal(run.manifests.at(-1)?.terminal.status, 'complete');
+  assert.equal(run.text, 'first second');
+  // Creation, raw 0, the idle flush carrying "first ", raw 1 (nothing pending), and the manifest carrying "second".
+  const kinds = run.batches.map(b => b.mutations.map(m => m.kind === 'AppendGenerationOutput' ? (m.payload.textAppend || m.payload.newParts.some(p => p.kind === 'Text') ? 'text' : 'part') : m.kind).join('+'));
+  assert.deepEqual(kinds, ['CreateGeneration', 'RegisterRawObject+part', 'text', 'RegisterRawObject+part', 'text+RegisterRawObject+part+CompleteGeneration']);
 });

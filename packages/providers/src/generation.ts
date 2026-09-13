@@ -261,20 +261,60 @@ export function startGeneration(options: GenerationRunOptions): GenerationRun {
     }) as ContentPart;
   let activeText: { key: string; partId: string; characters: number } | null =
     null;
+  // Text deltas are batched (plan 06): each delta becomes a sequenced mutation
+  // at once but rides in the next checkpoint's commit (the raw record that
+  // follows it, a non-text part, the terminal manifest) or a bounded flush,
+  // so a streamed record costs one commit instead of two. Mutation order
+  // keeps part order; raw bytes stay one verified blob per record; the
+  // terminal flush before sealing keeps every delivered delta in the
+  // committed prefix on stop or cancel. Checkpoint listeners are told only
+  // when a delta is durable.
+  const pending: CanonicalMutation[] = [];
+  let pendingBytes = 0, committing = false, flushFailure: unknown = null;
+  let flushTimer: ReturnType<typeof setTimeout> | null = null;
+  const PENDING_FLUSH_BYTES = 4096, PENDING_FLUSH_MUTATIONS = 16, PENDING_FLUSH_MS = 100;
+  const flush = async () => {
+    if (!pending.length) return;
+    const mutations = pending.splice(0);
+    pendingBytes = 0;
+    committing = true;
+    try { await commit(mutations); } finally { committing = false; }
+    notify();
+  };
+  // A provider that pauses after a delta must not leave it invisible: an idle
+  // flush commits pending deltas shortly after the last one arrived, never
+  // while another checkpoint commit is in flight (the loop's own commits
+  // carry the pending deltas first).
+  const scheduleFlush = () => {
+    if (flushTimer || !pending.length) return;
+    flushTimer = setTimeout(() => {
+      flushTimer = null;
+      if (committing || !pending.length) return;
+      flush().catch((error) => { flushFailure = error; });
+    }, PENDING_FLUSH_MS);
+  };
+  const withPending = (mutations: CanonicalMutation[]) => {
+    if (flushFailure) throw flushFailure;
+    const batch = [...pending.splice(0), ...mutations];
+    pendingBytes = 0;
+    return batch;
+  };
+  const settled = async () => { while (committing) await new Promise((resolve) => setTimeout(resolve, 5)); };
   const append = async (value: OutputPart) => {
+    await settled();
     if (partCount >= 100_000)
       throw new Error(
         "Generation exceeds its canonical checkpoint count bound.",
       );
     const item = part(value);
-    await commit([
+    await commit(withPending([
       mutation("AppendGenerationOutput", {
         generationId: generation.id,
         sequence: sequence + 1,
         newParts: [item],
         textAppend: null,
       }),
-    ]);
+    ]));
     sequence++;
     partCount++;
     notify();
@@ -282,7 +322,7 @@ export function startGeneration(options: GenerationRunOptions): GenerationRun {
   };
   // Raw transport checkpoints must not fragment a logical text block into
   // one SearchChunk source per network event. Bound each mutable text segment
-  // while committing every delta and its sequence before advancing the cursor.
+  // while sequencing every delta before advancing the cursor.
   const appendText = async (key: string, text: string) => {
     let offset = 0;
     while (offset < text.length) {
@@ -305,21 +345,38 @@ export function startGeneration(options: GenerationRunOptions): GenerationRun {
       }
       const piece = text.slice(offset, end);
       if (activeText) {
-        await commit([
+        pending.push(
           mutation("AppendGenerationOutput", {
             generationId: generation.id,
             sequence: sequence + 1,
             newParts: [],
             textAppend: { partId: activeText.partId, text: piece },
           }),
-        ]);
+        );
         sequence++;
         activeText.characters += piece.length;
-        notify();
       } else {
-        const item = await append({ kind: "Text", data: { text: piece } });
+        if (partCount >= 100_000)
+          throw new Error(
+            "Generation exceeds its canonical checkpoint count bound.",
+          );
+        const item = part({ kind: "Text", data: { text: piece } });
+        pending.push(
+          mutation("AppendGenerationOutput", {
+            generationId: generation.id,
+            sequence: sequence + 1,
+            newParts: [item],
+            textAppend: null,
+          }),
+        );
+        sequence++;
+        partCount++;
         activeText = { key, partId: item.id, characters: piece.length };
       }
+      pendingBytes += utf8ByteLength(piece);
+      if (flushFailure) throw flushFailure;
+      if (pendingBytes >= PENDING_FLUSH_BYTES || pending.length >= PENDING_FLUSH_MUTATIONS) await flush();
+      else scheduleFlush();
       offset = end;
     }
   };
@@ -334,6 +391,7 @@ export function startGeneration(options: GenerationRunOptions): GenerationRun {
       throw new Error(
         "Generation exceeds its canonical checkpoint count bound.",
       );
+    await settled();
     const rawObject: RawObject = {
       id: options.nextId(),
       availability: "available",
@@ -390,7 +448,7 @@ export function startGeneration(options: GenerationRunOptions): GenerationRun {
           }),
         );
     }
-    await commit(mutations, { raw: rawObject, bytes });
+    await commit(withPending(mutations), { raw: rawObject, bytes });
     sequence++;
     partCount++;
     notify(Boolean(final));
@@ -593,6 +651,7 @@ export function startGeneration(options: GenerationRunOptions): GenerationRun {
         "/",
         terminal,
       );
+      if (flushTimer) { clearTimeout(flushTimer); flushTimer = null; }
       return {
         generationId: generation.id,
         terminal,
@@ -600,6 +659,7 @@ export function startGeneration(options: GenerationRunOptions): GenerationRun {
         error: null,
       };
     } catch (error) {
+      if (flushTimer) { clearTimeout(flushTimer); flushTimer = null; }
       await stream?.cancel().catch(() => {});
       const code = (error as { code?: string }).code ?? "INTERNAL";
       return {
