@@ -57,6 +57,8 @@ try {
       await page.goto(url);
       await expect(page.getByRole("heading", { name: "Pick up where you left off." })).toBeVisible();
       // Seed in slices so the page never holds more than one slice of mutations.
+      const stale = await page.evaluate(() => window.appAcceptance.stress.removeStaleStressArchives());
+      if (stale.length) log(name, `removed ${stale.length} stale stress archive(s) from this origin`);
       const seedStarted = Date.now(); let batches = 0, seededThreads = 0;
       for (let done = 0; done < SIZES.threads; done += SLICE) {
         const slice = Math.min(SLICE, SIZES.threads - done);

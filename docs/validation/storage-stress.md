@@ -163,7 +163,32 @@ where the hours go; the job status now exposes the validator's sub-phase
 (`validationPhase`) so the harness names it. The probe's total is recorded
 when it finishes.
 
-FULL_RUN_RESULT
+Assembled from the seventh attempt (seed, integrity, cold reopen, export),
+the sixth (library paging, follower tab, export streaming) and the
+restore-only probe over the seventh attempt's kept archive and container
+after the validator rewrite
+([stress-restore-probe-webkit-1m.json](results/stress-restore-probe-webkit-1m.json));
+an eighth attempt with every fix in one bundle is recorded when it ends.
+
+| Phase | WebKit, 100,000 conversations / 1,000,000 messages (2,300,000 canonical records, 4,712 MB database) |
+| --- | --- |
+| seed (10,000 bounded commits) | 1,499 s (667 messages/s) |
+| startup read (file-size bound) / explicit integrity_check | 36 ms `unchecked` / 56.5 s ok |
+| library first page / twenty pages of 64 | 9 ms / 30 ms |
+| cold reopen: landing / first page | 0.3–0.5 s / 42 ms |
+| follower tab: 3 pages | 79 ms |
+| portable export: bytes / steps / produced | 3,980 MB (4,173,609,472 bytes) / 62,677 / 9,338 s (before the clean-copy batching) |
+| export streamed out (63,685 chunks) | 243 s, digest verified on disk |
+| restore: container received (4 MiB blocks) | 295 s |
+| restore validation: steps / time | 71,596 / 5,349 s |
+| — candidate import (4.17 GB, 1 MiB steps) + hash + schema + per-table integrity | 559 s |
+| — records (shape, identity, edges) | 1,442 s (about 1,600 records/s) |
+| — topology (set-based Kahn, 251 batches) | 55 s (was more than three hours per node) |
+| — semantics pass | 1,278 s |
+| — journal operations (1,200,000) | 782 s |
+| — coverage pass | 1,211 s |
+| — receipts, blob validation | 22 s |
+| candidate | 2,300,000 canonical records at schema 13, validated and released, never activated |
 
 ## Not covered by this run
 

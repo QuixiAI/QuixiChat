@@ -673,6 +673,15 @@ Object.assign(window, {
         this.restoreJob = null;
         return result;
       },
+      /** WebKit keeps OPFS per origin across Playwright profiles, so earlier stress archives accumulate (tens of GB); remove every other test-stress archive before a run. */
+      async removeStaleStressArchives() {
+        const root = await navigator.storage.getDirectory();
+        const removed: string[] = [];
+        for await (const [name] of root.entries()) {
+          if (name.startsWith("quixi-test-stress-") && name !== `quixi-${archiveId}`) { await root.removeEntry(name, { recursive: true }).catch(() => {}); removed.push(name); }
+        }
+        return removed;
+      },
       async libraryPages(count: number) {
         const started = performance.now(); let cursor: string | null = null, pages = 0, items = 0; const latencies: number[] = [];
         do {

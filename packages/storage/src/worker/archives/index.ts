@@ -1352,7 +1352,6 @@ CREATE INDEX IF NOT EXISTS quixi_archive_review_token ON quixi_archive_operation
   private clearValidation(id: string) {
     for (const table of [
       "nodes",
-      "stack",
       "coverage",
       "blobs",
       "parts",

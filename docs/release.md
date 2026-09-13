@@ -26,7 +26,7 @@ Single runs on one macOS machine under development load unless noted.
 | --- | --- | --- |
 | Archive size | 100,000 conversations / 1,000,000 messages seeded through the worker (4.7 GB database) | [storage-stress.md](validation/storage-stress.md) |
 | Startup at that size | landing 0.3–0.5 s after a cold reopen; first library page 9–42 ms; integrity check on request 56–67 s | same |
-| Portable export at that size | 3,980 MB in 10,214 s over 62,679 bounded steps before the clean-copy batching; streamed to disk in 243 s | same (sixth attempt) |
+| Portable export and restore at that size | export 3,980 MB in 9,338 s over 62,677 bounded steps (before the clean-copy batching), streamed to disk in 243 s; restore received in 295 s and validated in 5,349 s over 71,596 bounded steps | same |
 | Export and restore at 30,000 messages | export 106 MB in 85–430 s; restore validation 133–178 s | [archive-scale.md](validation/archive-scale.md) |
 | Lexical and semantic search | 101k chunks indexed; semantic query median about 0.45–0.49 s at 30,000 vectors | [search-scale.md](validation/search-scale.md), [semantic-search.md](validation/semantic-search.md) |
 | PDF extraction | 1,000 pages in 30.7–54.9 s end to end; 1,001+ pages and files above 32 MiB refused by declared limits | [pdf-scale.md](validation/pdf-scale.md) |
@@ -35,10 +35,11 @@ Single runs on one macOS machine under development load unless noted.
 
 ## Known issues
 
-- Exporting a million-message archive takes hours in the browser; the
-  per-step budgets (64 records / 256 KiB in the app) bound each step, not
-  the total. The clean copy's per-row statement cost was cut after the
-  sixth run; the seventh run measures the rest.
+- Exporting a million-message archive takes about 2.6 hours and validating
+  its restore about 1.5 hours in WebKit; the per-step budgets (64 records /
+  256 KiB in the app) bound each step, not the total. The clean copy's
+  per-row statement cost was cut after the sixth run; the eighth run measures
+  the export with that change.
 - The WebKit content process grew to about 5 GB resident during that
   export (observed, not yet attributed).
 - The macOS bundle is ad-hoc signed and has no updater; Gatekeeper on

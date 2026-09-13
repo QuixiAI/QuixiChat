@@ -49,7 +49,6 @@ export interface CanonicalArchiveValidationStatus {
   phase:
     | "records"
     | "topology"
-    | "intervals"
     | "semantics"
     | "operations"
     | "coverage"
@@ -71,8 +70,7 @@ export class CanonicalArchiveValidator {
   private checkedRecords = 0;
   private checkedOperations = 0;
   private checkedEdges = 0;
-  private topo: { id: string; after: string } | null = null;
-  private clock = 0;
+  private wave = 0;
   private importTable = 0;
   private importCursor = "";
   private importedIdentities = 0;
@@ -82,12 +80,11 @@ export class CanonicalArchiveValidator {
     private readonly jobId: string,
     private readonly manifest: ArchiveManifest,
   ) {
-    scratch.exec(`CREATE TEMP TABLE IF NOT EXISTS archive_validation_nodes(job_id TEXT NOT NULL,id TEXT NOT NULL,parent_id TEXT,edited_id TEXT,pending INTEGER NOT NULL,visited INTEGER NOT NULL DEFAULT 0,tin INTEGER,tout INTEGER,PRIMARY KEY(job_id,id)) STRICT;
+    scratch.exec(`CREATE TEMP TABLE IF NOT EXISTS archive_validation_nodes(job_id TEXT NOT NULL,id TEXT NOT NULL,parent_id TEXT,edited_id TEXT,pending INTEGER NOT NULL,visited INTEGER NOT NULL DEFAULT 0,wave INTEGER,PRIMARY KEY(job_id,id)) STRICT;
 CREATE INDEX IF NOT EXISTS archive_validation_parent ON archive_validation_nodes(job_id,parent_id,id);
 CREATE INDEX IF NOT EXISTS archive_validation_edited ON archive_validation_nodes(job_id,edited_id,id);
 CREATE INDEX IF NOT EXISTS archive_validation_ready ON archive_validation_nodes(job_id,pending,visited,id);
-CREATE INDEX IF NOT EXISTS archive_validation_roots ON archive_validation_nodes(job_id,parent_id,tin,id);
-CREATE TEMP TABLE IF NOT EXISTS archive_validation_stack(job_id TEXT NOT NULL,depth INTEGER NOT NULL,id TEXT NOT NULL,after_child TEXT NOT NULL,PRIMARY KEY(job_id,depth)) STRICT;
+CREATE INDEX IF NOT EXISTS archive_validation_wave ON archive_validation_nodes(job_id,wave);
 CREATE TEMP TABLE IF NOT EXISTS archive_validation_coverage(job_id TEXT NOT NULL,collection TEXT NOT NULL,id TEXT NOT NULL,PRIMARY KEY(job_id,collection,id)) STRICT;
 CREATE TEMP TABLE IF NOT EXISTS archive_validation_blobs(job_id TEXT NOT NULL,sha256 TEXT NOT NULL,byte_length INTEGER NOT NULL,utf8 INTEGER NOT NULL,PRIMARY KEY(job_id,sha256)) STRICT;
 CREATE TEMP TABLE IF NOT EXISTS archive_validation_parts(job_id TEXT NOT NULL,message_id TEXT NOT NULL,count INTEGER NOT NULL,first INTEGER NOT NULL,last INTEGER NOT NULL,PRIMARY KEY(job_id,message_id)) STRICT;
@@ -131,25 +128,27 @@ CREATE TEMP TABLE IF NOT EXISTS archive_validation_imports(job_id TEXT NOT NULL,
       [this.jobId, id],
     )[0];
   }
+  /** The message tree walked upward from `id` through parent links, the node
+   * itself included; topology has already proven the graph acyclic, and the
+   * depth cap bounds the walk regardless. */
+  private static readonly ANCESTORS =
+    "WITH RECURSIVE up(id,depth) AS (SELECT ?,0 UNION ALL SELECT n.parent_id,up.depth+1 FROM archive_validation_nodes n JOIN up ON n.id=up.id WHERE n.job_id=? AND n.parent_id IS NOT NULL AND up.depth<1000000) ";
   private ancestor(ancestor: string, descendant: string): boolean {
-    const a = this.node(ancestor),
-      b = this.node(descendant);
-    return (
-      !!a &&
-      !!b &&
-      a.tin !== null &&
-      a.tout !== null &&
-      Number(a.tin) <= Number(b.tin) &&
-      Number(a.tout) >= Number(b.tout)
+    return !!Number(
+      this.scratch.selectValue(
+        CanonicalArchiveValidator.ANCESTORS +
+          "SELECT EXISTS(SELECT 1 FROM archive_validation_nodes WHERE job_id=? AND id=?) AND EXISTS(SELECT 1 FROM archive_validation_nodes WHERE job_id=? AND id=?) AND EXISTS(SELECT 1 FROM up WHERE id=?)",
+        [descendant, this.jobId, this.jobId, ancestor, this.jobId, descendant, ancestor],
+      ),
     );
   }
   private visible(threadId: string, messageId: string): boolean {
-    const message = this.node(messageId);
-    assert(message, "Selected message has no topology position.");
+    assert(this.node(messageId), "Selected message has no topology position.");
     return !Number(
       this.scratch.selectValue(
-        "SELECT EXISTS(SELECT 1 FROM archive_validation_tombstones t LEFT JOIN archive_validation_nodes n ON n.job_id=t.job_id AND n.id=t.root_id WHERE t.job_id=? AND t.thread_id=? AND (t.root_id IS NULL OR(n.tin<=? AND n.tout>=?)))",
-        [this.jobId, threadId, Number(message.tin), Number(message.tout)],
+        CanonicalArchiveValidator.ANCESTORS +
+          "SELECT EXISTS(SELECT 1 FROM archive_validation_tombstones t WHERE t.job_id=? AND t.thread_id=? AND (t.root_id IS NULL OR t.root_id IN (SELECT id FROM up)))",
+        [messageId, this.jobId, this.jobId, threadId],
       ),
     );
   }
@@ -388,106 +387,39 @@ CREATE TEMP TABLE IF NOT EXISTS archive_validation_imports(job_id TEXT NOT NULL,
         "Canonical edge target differs.",
       );
   }
-  private topology(): boolean {
-    if (!this.topo) {
-      const node = sqlRows(
-        this.scratch,
-        "SELECT id FROM archive_validation_nodes WHERE job_id=? AND pending=0 AND visited=0 ORDER BY id LIMIT 1",
-        [this.jobId],
-      )[0];
-      if (!node) {
-        assert(
-          !Number(
-            this.scratch.selectValue(
-              "SELECT EXISTS(SELECT 1 FROM archive_validation_nodes WHERE job_id=? AND visited=0)",
-              [this.jobId],
-            ),
+  /** Kahn's algorithm in set operations: each step takes up to `limit` nodes
+   * whose parent and edit links are all visited, marks them as this wave and
+   * lowers their children's pending counts through the parent and edit
+   * indexes. Any node left unvisited when no node is ready lies on a cycle.
+   * (The earlier one-node-per-statement walk cost hours at a million
+   * messages.) Returns true once the whole graph is visited. */
+  private topology(limit: number): boolean {
+    this.wave++;
+    this.write(
+      "UPDATE archive_validation_nodes SET visited=1,wave=? WHERE job_id=? AND id IN (SELECT id FROM archive_validation_nodes WHERE job_id=? AND pending=0 AND visited=0 ORDER BY id LIMIT ?)",
+      [this.wave, this.jobId, this.jobId, limit],
+    );
+    const taken = Number(this.scratch.selectValue("SELECT changes()"));
+    if (!taken) {
+      assert(
+        !Number(
+          this.scratch.selectValue(
+            "SELECT EXISTS(SELECT 1 FROM archive_validation_nodes WHERE job_id=? AND visited=0)",
+            [this.jobId],
           ),
-          "Archive message/edit graph contains a cycle.",
-        );
-        return true;
-      }
-      this.topo = { id: String(node.id), after: "" };
-      this.write(
-        "UPDATE archive_validation_nodes SET visited=1 WHERE job_id=? AND id=?",
-        [this.jobId, this.topo.id],
+        ),
+        "Archive message/edit graph contains a cycle.",
       );
-    }
-    const child = sqlRows(
-      this.scratch,
-      "SELECT id,parent_id,edited_id FROM archive_validation_nodes WHERE job_id=? AND (parent_id=? OR edited_id=?) AND id>? ORDER BY id LIMIT 1",
-      [this.jobId, this.topo.id, this.topo.id, this.topo.after],
-    )[0];
-    if (!child) {
-      this.topo = null;
-      return false;
+      return true;
     }
     this.write(
-      "UPDATE archive_validation_nodes SET pending=pending-? WHERE job_id=? AND id=?",
-      [
-        Number(child.parent_id === this.topo.id) +
-          Number(child.edited_id === this.topo.id),
-        this.jobId,
-        String(child.id),
-      ],
+      "UPDATE archive_validation_nodes SET pending=pending-1 WHERE job_id=? AND parent_id IN (SELECT id FROM archive_validation_nodes WHERE job_id=? AND wave=?)",
+      [this.jobId, this.jobId, this.wave],
     );
-    this.topo.after = String(child.id);
-    return false;
-  }
-  private intervals(): boolean {
-    const top = sqlRows(
-      this.scratch,
-      "SELECT depth,id,after_child FROM archive_validation_stack WHERE job_id=? ORDER BY depth DESC LIMIT 1",
-      [this.jobId],
-    )[0];
-    if (!top) {
-      const root = sqlRows(
-        this.scratch,
-        "SELECT id FROM archive_validation_nodes WHERE job_id=? AND parent_id IS NULL AND tin IS NULL ORDER BY id LIMIT 1",
-        [this.jobId],
-      )[0];
-      if (!root) return true;
-      this.write("INSERT INTO archive_validation_stack VALUES(?,0,?,?)", [
-        this.jobId,
-        String(root.id),
-        "",
-      ]);
-      this.write(
-        "UPDATE archive_validation_nodes SET tin=? WHERE job_id=? AND id=?",
-        [this.clock++, this.jobId, String(root.id)],
-      );
-      return false;
-    }
-    const child = sqlRows(
-      this.scratch,
-      "SELECT id FROM archive_validation_nodes WHERE job_id=? AND parent_id=? AND id>? ORDER BY id LIMIT 1",
-      [this.jobId, String(top.id), String(top.after_child)],
-    )[0];
-    if (child) {
-      this.write(
-        "UPDATE archive_validation_stack SET after_child=? WHERE job_id=? AND depth=?",
-        [String(child.id), this.jobId, Number(top.depth)],
-      );
-      this.write("INSERT INTO archive_validation_stack VALUES(?,?,?,?)", [
-        this.jobId,
-        Number(top.depth) + 1,
-        String(child.id),
-        "",
-      ]);
-      this.write(
-        "UPDATE archive_validation_nodes SET tin=? WHERE job_id=? AND id=?",
-        [this.clock++, this.jobId, String(child.id)],
-      );
-    } else {
-      this.write(
-        "UPDATE archive_validation_nodes SET tout=? WHERE job_id=? AND id=?",
-        [this.clock++, this.jobId, String(top.id)],
-      );
-      this.write(
-        "DELETE FROM archive_validation_stack WHERE job_id=? AND depth=?",
-        [this.jobId, Number(top.depth)],
-      );
-    }
+    this.write(
+      "UPDATE archive_validation_nodes SET pending=pending-1 WHERE job_id=? AND edited_id IN (SELECT id FROM archive_validation_nodes WHERE job_id=? AND wave=?)",
+      [this.jobId, this.jobId, this.wave],
+    );
     return false;
   }
   private semantics(collection: Collection, id: string) {
@@ -1035,9 +967,9 @@ CREATE TEMP TABLE IF NOT EXISTS archive_validation_imports(job_id TEXT NOT NULL,
             "Canonical record has no journal coverage.",
           );
       } else if (this.phase === "topology") {
-        if (this.topology()) this.phase = "intervals";
-      } else if (this.phase === "intervals") {
-        if (this.intervals()) this.phase = "semantics";
+        // One batch of up to 32 nodes per budget unit consumes the whole step.
+        if (this.topology(maxRecords * 32)) this.phase = "semantics";
+        work = maxRecords;
       } else if (this.phase === "operations") {
         if (this.operation()) {
           assert(
