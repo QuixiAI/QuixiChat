@@ -1,0 +1,42 @@
+{
+  "status": "running",
+  "startedAt": "2026-09-13T08:55:13.498Z",
+  "sizes": {
+    "threads": 100000,
+    "perThread": 10,
+    "planted": 0,
+    "messages": 1000000,
+    "seedSlice": 5000
+  },
+  "stepBounds": {
+    "maxRecords": 128,
+    "maxBytes": 1048576
+  },
+  "selectedEngines": [
+    "webkit"
+  ],
+  "hosts": [
+    {
+      "name": "webkit",
+      "status": "running",
+      "checks": [],
+      "phases": {}
+    }
+  ],
+  "sourceSha256": {
+    "packages/storage/src/worker/archives/export.ts": "8b7ce6aba6b9045b17354464b720e07459672baf06accd7d5834c0e3bb07bcb7",
+    "packages/storage/src/worker/archives/index.ts": "d59373d710bbd255d6bdaf11489e1a78dd58ba46e7a18fb89dc7eb92530ce369",
+    "packages/storage/src/worker/archive-database.ts": "768bb31b1d42aac9f6bcb73596772c256807dbc6bf2b908dcdd886c4c309a06d",
+    "packages/app/tests/browser/index.ts": "668a6d5d8128781724527aeea494ab898393c00fde271425ad2c046ec02c1654",
+    "packages/app/tests/browser/stress.mjs": "b5b994240536a09433ecc6697240f6435d9e832353006ec296bea7ae2dcdbf91"
+  },
+  "environment": {
+    "platform": "darwin",
+    "release": "25.6.0",
+    "arch": "arm64",
+    "cpu": "Apple M5 Max",
+    "osVersion": "26.6.2",
+    "node": "v22.23.1"
+  },
+  "qualification": "Synthetic short messages seeded through the production worker; no embedding model, no provider, no Cloud account; timings are single runs under development load on one machine."
+}

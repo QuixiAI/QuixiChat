@@ -86,6 +86,7 @@ export class CanonicalArchiveValidator {
 CREATE INDEX IF NOT EXISTS archive_validation_parent ON archive_validation_nodes(job_id,parent_id,id);
 CREATE INDEX IF NOT EXISTS archive_validation_edited ON archive_validation_nodes(job_id,edited_id,id);
 CREATE INDEX IF NOT EXISTS archive_validation_ready ON archive_validation_nodes(job_id,pending,visited,id);
+CREATE INDEX IF NOT EXISTS archive_validation_roots ON archive_validation_nodes(job_id,parent_id,tin,id);
 CREATE TEMP TABLE IF NOT EXISTS archive_validation_stack(job_id TEXT NOT NULL,depth INTEGER NOT NULL,id TEXT NOT NULL,after_child TEXT NOT NULL,PRIMARY KEY(job_id,depth)) STRICT;
 CREATE TEMP TABLE IF NOT EXISTS archive_validation_coverage(job_id TEXT NOT NULL,collection TEXT NOT NULL,id TEXT NOT NULL,PRIMARY KEY(job_id,collection,id)) STRICT;
 CREATE TEMP TABLE IF NOT EXISTS archive_validation_blobs(job_id TEXT NOT NULL,sha256 TEXT NOT NULL,byte_length INTEGER NOT NULL,utf8 INTEGER NOT NULL,PRIMARY KEY(job_id,sha256)) STRICT;

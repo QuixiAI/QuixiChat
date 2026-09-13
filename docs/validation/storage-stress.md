@@ -139,6 +139,21 @@ candidate pool in one advance, and the candidate's whole-file
 are now stepped (ADR 0010 amendment: `BoundedFileCopier`; one table per
 integrity step) and archive advances carry the 600 s deadline.
 
+**Seventh attempt (2026-09-13), stopped during restore validation**: seeded
+in 1,563 s; integrity ok in 56.5 s; the portable export completed in
+9,338 s over 62,677 steps with the pre-batching bundle (the clean-copy
+batching landed while it ran); the container streamed to disk and was
+received by the stepped candidate import, and the validation then ran for
+over three hours at full CPU with no progress visible (the harness reported
+nothing between phases). The run was stopped with its profile and 4.17 GB
+container kept; the harness now logs phase changes and progress every 5,000
+steps, and a restore-only probe (`probe-restore.mjs`) replays the restore
+over the kept archive. Suspected cause: the validator's root selection
+(`parent_id IS NULL AND tin IS NULL`) had no index covering the visited
+marker, so each of the 100,000 root picks rescanned the roots already
+visited; `archive_validation_roots` now covers it. The probe's result is
+recorded next.
+
 FULL_RUN_RESULT
 
 ## Not covered by this run
