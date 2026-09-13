@@ -106,6 +106,22 @@ elapsed time and keeps the browser profile of a failed run, so the seeded
 archive can be probed without reseeding; the cause is recorded with the
 next attempt.
 
+**Fifth attempt (2026-09-13), failed at the diagnostics report; cause found**
+([stress-browser-webkit-1m-attempt5.json](results/stress-browser-webkit-1m-attempt5.json)):
+seeded in 1,615 s (619 messages/s); the report request, sent with the 600 s
+deadline, failed after 60,003 ms. Probing the kept profile
+(`node packages/app/tests/browser/probe-archive.mjs <profile> <dist>`, which
+logs the stack of every long timer the page arms) showed the 60 s timer
+armed from the client's `call` with the *default* deadline: the harness's
+own fault-injecting wrapper around `storage.request` forwarded three
+arguments and dropped the per-request options. The product's clients pass
+the options through (the Storage health panel calls the real client); the
+harness wrapper now forwards them, and the probe on the same archive then
+completed the report in 67.4 s (`integrity_check` 67.2 s over 4,942 MB)
+under the 600 s deadline. The fourth attempt's stall was the same defect:
+its light read succeeded and the report timed out at 60 s, reported by the
+harness against the wrong step before the instrumentation.
+
 FULL_RUN_RESULT
 
 ## Not covered by this run

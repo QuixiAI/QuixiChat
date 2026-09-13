@@ -119,14 +119,15 @@ let rejectNextCommit = false;
 let heldCommitReply: Promise<void> | null = null;
 let releaseCommitReply: (() => void) | null = null;
 let commitReplyWaiting = false;
-storage.request = (async (requestId: string, operation: string, args: unknown) => {
+// The fault-injecting wrapper must forward the per-request options (deadline): dropping them once cost a 1M-message run.
+storage.request = (async (requestId: string, operation: string, args: unknown, options?: { timeoutMs?: number }) => {
   const entry = (requestStats[operation] ??= { calls: 0, maxBytes: 0 });
   entry.calls++;
   if (operation === "commit" && rejectNextCommit) {
     rejectNextCommit = false;
     throw Object.assign(new Error("Synthetic storage quota refusal before commit"), { code: "QUOTA_EXCEEDED" });
   }
-  const result = await originalRequest(requestId, operation as never, args as never);
+  const result = await originalRequest(requestId, operation as never, args as never, options);
   if (operation === "commit" && heldCommitReply) {
     const held = heldCommitReply; heldCommitReply = null; commitReplyWaiting = true;
     try { await held; } finally { commitReplyWaiting = false; }
@@ -677,6 +678,12 @@ Object.assign(window, {
         return { pages, items, totalMs: performance.now() - started, firstMs: latencies[0] ?? 0, maxMs: Math.max(...latencies), more: !!cursor };
       },
       /** The light read (bounded by file size) for counts, then the explicit report whose integrity_check reads the whole file under its own deadline. */
+      /** One timed storage request with an explicit deadline, for probing a kept archive; failures are returned, not thrown. */
+      async request(operation: keyof StorageOperations, args: unknown, timeoutMs?: number) {
+        const at = performance.now();
+        try { const value = await storage.request(crypto.randomUUID(), operation, args as never, timeoutMs === undefined ? undefined : { timeoutMs }); return { ms: performance.now() - at, value, error: null }; }
+        catch (error) { const e = error as { code?: string; detail?: unknown; message?: string }; return { ms: performance.now() - at, value: null, error: { code: e?.code ?? null, message: String(e?.message ?? error), detail: e?.detail ?? null } }; }
+      },
       async timedDiagnostics() {
         const timed = async <T,>(step: string, run: () => Promise<T>) => {
           const at = performance.now();
