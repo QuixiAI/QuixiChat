@@ -191,15 +191,21 @@ export async function* exportArchive(
         markdownWriter,
         "# Quixi history\n\nThis export retains every message branch, including tombstones. IDs and parent IDs identify relationships. Raw and attachment bytes are in `blobs/`.\n\n",
       );
-      let after = 0;
+      // Rows are read in small blocks per statement and still yielded one per
+      // record, so step budgets are unchanged while the statement count falls.
+      const block = 64;
+      let after = 0, pending: ReturnType<typeof sqlRows> = [];
       while (true) {
         check(signal());
-        const row = sqlRows(
-          snapshot,
-          "SELECT rowid,collection,payload FROM quixi_records WHERE rowid>? ORDER BY rowid LIMIT 1",
-          [after],
-        )[0];
-        if (!row) break;
+        if (!pending.length) {
+          pending = sqlRows(
+            snapshot,
+            "SELECT rowid,collection,payload FROM quixi_records WHERE rowid>? ORDER BY rowid LIMIT ?",
+            [after, block],
+          );
+          if (!pending.length) break;
+        }
+        const row = pending.shift()!;
         after = Number(row.rowid);
         const value = JSON.parse(String(row.payload));
         let work = textWrite(
@@ -260,14 +266,18 @@ export async function* exportArchive(
         yield { bytes: null, records: 1, stagedBytes: work };
       }
       let sequence = 0;
+      pending = [];
       while (true) {
         check(signal());
-        const row = sqlRows(
-          snapshot,
-          "SELECT sequence,operation_id,kind,recorded_at,identity,payload,affects,result FROM quixi_sync_ops WHERE sequence>? ORDER BY sequence LIMIT 1",
-          [sequence],
-        )[0];
-        if (!row) break;
+        if (!pending.length) {
+          pending = sqlRows(
+            snapshot,
+            "SELECT sequence,operation_id,kind,recorded_at,identity,payload,affects,result FROM quixi_sync_ops WHERE sequence>? ORDER BY sequence LIMIT ?",
+            [sequence, block],
+          );
+          if (!pending.length) break;
+        }
+        const row = pending.shift()!;
         sequence = Number(row.sequence);
         const record = {
           ...row,

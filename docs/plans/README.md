@@ -37,8 +37,9 @@ Current interface work: PDF attachments and all five persisted interaction prefe
 Latest completed iteration (2026-09-13): **batched clean copy** (plan 09/24).
 The export's clean copy fetched every one of its 3.5 million rows with its
 own `LIMIT 1` statement; it now fetches a step's remaining row budget in
-one ordered statement (archives suite and browser proof pass). The encoding
-phase's one-record-per-statement read is the next cost to cut. The seventh
+one ordered statement, and the open format's encoder reads records and
+operations in blocks of 64 per statement (archives suite, browser proof and
+the archive-scale proof at small size pass in both engines). The seventh
 1M run (integrity 56.5 s) is exporting with the previous bundle; its restore
 phase is the first to exercise the stepped candidate import. Completed
 plans remain **12 of 23**.
