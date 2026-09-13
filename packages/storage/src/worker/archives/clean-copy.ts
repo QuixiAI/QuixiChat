@@ -120,38 +120,41 @@ export class CleanSnapshotCopy {
                 table === "quixi_import_operations"
               ? " AND import_id IN(SELECT id FROM quixi_import_jobs WHERE state='published')"
               : "";
-      const row = sqlRows(
+      // One ordered statement for the step's remaining row budget, not one per row: at a
+      // million messages the per-row form cost more than the copying itself.
+      const rows = sqlRows(
         this.source,
-        `SELECT rowid AS archive_rowid,${this.columns.join(",")} FROM ${table} WHERE rowid>?${filter} ORDER BY rowid LIMIT 1`,
-        [this.after],
-      )[0];
-      if (!row) {
+        `SELECT rowid AS archive_rowid,${this.columns.join(",")} FROM ${table} WHERE rowid>?${filter} ORDER BY rowid LIMIT ?`,
+        [this.after, maxRows - work],
+      );
+      if (!rows.length) {
         this.tableIndex++;
         this.after = 0;
         this.columns = [];
         continue;
       }
-      jsonByteLength(row, 4_194_304);
-      this.after = Number(row.archive_rowid);
-      if (table === "quixi_blob_catalog") {
-        const reference = sqlRows(
-          this.output,
-          "SELECT byte_length,utf8 FROM archive_blob_refs WHERE sha256=?",
-          [row.sha256!],
-        )[0];
-        if (!reference) continue;
-        if (reference.byte_length !== row.byte_length)
-          throw new Error("Canonical blob length differs from catalog.");
-        row.availability = "unverified";
-        row.verification_epoch = "";
+      const insert = `INSERT INTO ${table}(${this.columns.join(",")}) VALUES(${this.columns.map(() => "?").join(",")})`;
+      for (const row of rows) {
+        jsonByteLength(row, 4_194_304);
+        this.after = Number(row.archive_rowid);
+        if (table === "quixi_blob_catalog") {
+          const reference = sqlRows(
+            this.output,
+            "SELECT byte_length,utf8 FROM archive_blob_refs WHERE sha256=?",
+            [row.sha256!],
+          )[0];
+          if (!reference) continue;
+          if (reference.byte_length !== row.byte_length)
+            throw new Error("Canonical blob length differs from catalog.");
+          row.availability = "unverified";
+          row.verification_epoch = "";
+        }
+        this.output.exec({ sql: insert, bind: this.columns.map((column) => row[column]!) });
+        if (table === "quixi_records")
+          this.references(String(row.collection), String(row.payload));
+        this.copiedRows++;
       }
-      this.output.exec({
-        sql: `INSERT INTO ${table}(${this.columns.join(",")}) VALUES(${this.columns.map(() => "?").join(",")})`,
-        bind: this.columns.map((column) => row[column]!),
-      });
-      if (table === "quixi_records")
-        this.references(String(row.collection), String(row.payload));
-      this.copiedRows++;
+      work += rows.length - 1;
     }
     return false;
   }
