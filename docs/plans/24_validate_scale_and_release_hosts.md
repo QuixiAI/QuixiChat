@@ -33,7 +33,7 @@ Produce evidence-backed release candidates for supported web/desktop hosts, with
 
 ## Tasks
 
-- [ ] Create a traceability checklist mapping product success criteria to completed plans, automated scenarios, manual host checks, benchmark reports, and known limitations.
+- [x] Create a traceability checklist mapping product success criteria to completed plans, automated scenarios, manual host checks, benchmark reports, and known limitations. [traceability.md](../validation/traceability.md) maps every §115, §116 and §117 criterion to its plans, retained scenarios, host checks, benchmark reports and known limitations (dated 2026-09-12).
 - [ ] Run the first-usable gate once plans 01–03 and 05–09 are complete: local storage, two providers, chat/history, FTS, and portable export. Do not wait for embedding optimization.
 - [ ] Run the compelling-migration gate after plans 04, 10, and 11: import existing history, import incrementally, inspect compatibility, and continue with another provider.
 - [ ] Complete the local v1 feature gate with plans 12–14 and 23, including compare/critique, onboarding/themes/accessibility, documents, and recovery. OCR remains optional.
