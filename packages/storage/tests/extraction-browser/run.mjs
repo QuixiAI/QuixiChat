@@ -161,7 +161,7 @@ try {
       const ownerState = await call(owner, "open"),
         followerState = await call(follower, "open");
       expect(followerState.ownerId).toBe(ownerState.ownerId);
-      expect(ownerState.schemaVersion).toBe(12);
+      expect(ownerState.schemaVersion).toBe(13);
       fixture = await call(follower, "seed");
       host.original = await call(owner, "original", fixture.identity);
       expect(host.original.sha256).toBe(fixture.identity.attachmentSha256);

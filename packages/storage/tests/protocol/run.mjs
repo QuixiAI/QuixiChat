@@ -60,7 +60,7 @@ try {
       expect(archiveId).toBe('default'); host.observations.selection = selection;
       await call(page, 'bus', 'v1', archiveId, 1); await call(page, 'bus', 'v4', archiveId, 4); await call(page, 'bus', 'legacy-v2', archiveId, 2); await call(page, 'hello', 'legacy-v2', 2); await call(page, 'bus', 'legacy-v3', archiveId, 3); await call(page, 'hello', 'legacy-v3', 3);
       const owner = await call(page, 'request', 'owner', 'diagnostics');
-      expect(owner.integrity).toBe('ok'); expect(owner.schemaVersion).toBe(12);
+      expect(owner.integrity).toBe('ok'); expect(owner.schemaVersion).toBe(13);
       await call(page, 'write', 'owner', 'modern owner committed');
       expect(await call(page, 'client', 'follower')).toEqual(selection);
       expect((await call(page, 'request', 'follower', 'diagnostics')).ownerId).toBe(owner.ownerId);
@@ -134,7 +134,7 @@ try {
       await wait(page, async lock => { const q = await navigator.locks.query(); return ![...q.held, ...q.pending].some(item => item.name === lock); }, lockName);
       expect(await call(page, 'client', 'reopened')).toEqual(selection);
       const reopened = await call(page, 'request', 'reopened', 'diagnostics');
-      expect(snapshot(reopened)).toEqual(snapshot(final)); expect(reopened.schemaVersion).toBe(12);
+      expect(snapshot(reopened)).toEqual(snapshot(final)); expect(reopened.schemaVersion).toBe(13);
       await call(page, 'closeClient', 'reopened');
       host.checks.push('After modern owner exits, frozen schema8 waiter acquires the same lock and refuses the current schema before its queued mutation; modern reopen preserves six committed operations and integrity');
     } finally { await context.close(); }

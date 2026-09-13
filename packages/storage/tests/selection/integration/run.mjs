@@ -50,7 +50,7 @@ try {
       const opened = await call(owner, 'open'), followed = await call(follower, 'open');
       expect(opened.selection).toEqual({ archiveId: 'default', selectionRevision: 0 });
       expect(followed.selection).toEqual(opened.selection); expect(followed.diagnostics.ownerId).toBe(opened.diagnostics.ownerId);
-      expect(opened.diagnostics.schemaVersion).toBe(12);
+      expect(opened.diagnostics.schemaVersion).toBe(13);
       fixture = await call(follower, 'seed'); followerThread = await call(follower, 'write', 'Follower committed before portable snapshot');
       await call(owner, 'verify', fixture);
       await call(follower, 'close'); await call(owner, 'close');

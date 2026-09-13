@@ -5,5 +5,7 @@
 1. Canonical records, indexed ownership, deferred reference edges, atomic sync and transaction results.
 2. Native identity/candidate/part uniqueness and SQL immutability guards.
 3. Verified blob catalog, transfer state and local blob-operation idempotency.
+4–12. See each migration file's header comment.
+13. Materialized library activity (`library-activity.ts`): one row per thread (pinned, archived, deleted, latest activity) kept by triggers on canonical rows and backfilled on upgrade, read through one ordered index ([ADR 0043](../../../docs/decisions/0043-materialized-library-activity.md)).
 
 These migrations are unreleased. After release, append a migration instead of editing an applied entry. Do not initialize canonical/blob tables through a second independent DDL path. See [ADR 0006](../../../docs/decisions/0006-canonical-persistence.md) and [SQL acceptance tests](../tests/canonical/repository.test.ts).

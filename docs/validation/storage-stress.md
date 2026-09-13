@@ -78,9 +78,11 @@ fixed. The library's first page then took 25,437 ms against the 5 s bound
 (twenty pages of 64 in 515.7 s, max 26.6 s per page). Cause: the library
 view computes every thread's activity with a correlated subquery over the
 whole `threadStates` set and sorts it, once per item (LIMIT 1 keyset loop),
-so a 64-item page costs 64 scans of 100,000 threads. The fix is the next
-slice: a materialized per-thread activity row kept by canonical triggers
-and read through an ordered index, one statement per page.
+so a 64-item page cost 64 scans of 100,000 threads. Fixed under
+[ADR 0043](../decisions/0043-materialized-library-activity.md): schema 13
+materializes one activity row per thread, kept by canonical triggers and
+read through an ordered index in one statement per page; retained archives
+at older schemas keep the previous query.
 
 FULL_RUN_RESULT
 

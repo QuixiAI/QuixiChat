@@ -354,8 +354,8 @@ test('attachment exclusions commit with their event, replay once, reject stale a
   try { const next = new CanonicalRepository(reopened,{assertBlobAvailable:()=>{}}); next.migrate(); assert.deepEqual(next.get('contexts',context.id),context); assert.deepEqual(next.get('events',event.id),event); assert.deepEqual(next.get('parts',part.id),part); } finally {reopened.close();}
 });
 
-test('schema 10 and 11 upgrade without losing history and each older migration ceiling refuses schema 12', async () => {
-  for(const ceiling of [10,11]){
+test('schema 10, 11 and 12 upgrade without losing history and each older migration ceiling refuses schema 13', async () => {
+  for(const ceiling of [10,11,12]){
     const db=new sqlite.oo1.DB(`/upgrade-${serial++}.sqlite3`,'c');
     try { const repo=new CanonicalRepository(db,{assertBlobAvailable:()=>{}}); repo.migrate(ceiling); const h=await seed(repo); repo.migrate(); assert.deepEqual(repo.get('contexts',h.contexts[0]!.id),h.contexts[0]); assert.throws(()=>repo.migrate(ceiling), /newer|schema|migration/i); assert.equal(db.selectValue('PRAGMA integrity_check'),'ok'); } finally {db.close();}
   }

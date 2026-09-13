@@ -184,8 +184,8 @@ try {
       expect(initial).toEqual([]);
       host.initialOpfs = initial;
       const diagnostics = await call(page, "open");
-      // Canonical schema 12 (context compaction 11, summary proposals 12).
-      expect(diagnostics.schemaVersion).toBe(12);
+      // Canonical schema 13 (context compaction 11, summary proposals 12, library activity 13).
+      expect(diagnostics.schemaVersion).toBe(13);
       large = await call(page, "seed", 100);
       await call(page, "start", large.documentId, true);
       host.paused = await waitFor(page, (state) => state.paused);

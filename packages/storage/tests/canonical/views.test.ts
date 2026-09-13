@@ -545,3 +545,52 @@ test("thread view sums attempt usage in SQL, keeping unreported values out and o
   assert.equal(views.thread({ threadId }).usage.estimatedCost, null, "mixed currencies produce no total");
   db.close();
 });
+
+test("schema 13 library reads one ordered index walk that matches the per-item scan, after upgrade and every kind of change", () => {
+  const db = new sqlite.oo1.DB(`/${id()}.sqlite3`, "c");
+  const r = new CanonicalRepository(db, { assertBlobAvailable: () => {} });
+  try {
+    // Seed at schema 12 (no materialized rows), then upgrade: the backfill must equal what the triggers maintain.
+    r.migrate(12);
+    const threads = Array.from({ length: 9 }, (_, i) => thread(r, `Thread ${i}`, now + i));
+    message(r, threads[0]!, null, now + 100);
+    message(r, threads[2]!, null, now + 50);
+    const pin = (t: string, value: boolean) => commit(r, { version: 1, operationId: id(), recordedAt: now + 200, kind: "SetPinned", payload: { threadId: t, value } });
+    const archive = (t: string, value: boolean) => commit(r, { version: 1, operationId: id(), recordedAt: now + 200, kind: "SetArchived", payload: { threadId: t, value } });
+    pin(threads[4]!, true); archive(threads[5]!, true);
+    const legacy = new ViewRepository(db, r, { materializedLibrary: false });
+    const all = (v: ViewRepository, archived = false, title = "") => {
+      const items = []; let cursor: string | null = null;
+      do { const p = v.library({ archived, title, page: { maxItems: 3, maxBytes: 100_000, cursor } }); items.push(...p.items); cursor = p.nextCursor; } while (cursor);
+      return items;
+    };
+    const before = all(legacy);
+    assert.equal(db.selectValue("SELECT count(*) FROM sqlite_schema WHERE name='quixi_library_activity'"), 0);
+    r.migrate();
+    assert.equal(db.selectValue("SELECT count(*) FROM quixi_library_activity"), 9);
+    const fast = new ViewRepository(db, r);
+    assert.deepEqual(all(fast), before);
+    assert.equal(before[0]!.threadId, threads[4], "pinned first");
+    assert.equal(before[1]!.threadId, threads[0], "latest message wins over creation");
+    assert.deepEqual(all(fast, true), all(legacy, true));
+    // Every later change keeps both readings equal: new message, pin/unpin, archive/unarchive, whole-thread deletion, title filter.
+    message(r, threads[7]!, null, now + 300);
+    pin(threads[1]!, true); pin(threads[4]!, false); archive(threads[5]!, false); archive(threads[3]!, true);
+    const gone = fast.thread({ threadId: threads[8]! }).state;
+    commit(r, { version: 1, operationId: id(), recordedAt: now + 400, kind: "TombstoneThread", payload: { tombstone: { id: id(), threadId: threads[8]!, rootMessageId: null, createdAt: now + 400, reason: null }, state: { ...gone, activeLeafMessageId: null, revision: gone.revision + 1 } } });
+    for (const [archived, title] of [[false, ""], [true, ""], [false, "Thread 7"], [false, "%"]] as const) {
+      const expected = all(legacy, archived, title);
+      assert.deepEqual(all(fast, archived, title), expected, `archived=${archived} title=${JSON.stringify(title)}`);
+    }
+    const after = all(fast);
+    assert.equal(after[0]!.threadId, threads[1]);
+    assert.equal(after[1]!.threadId, threads[7]);
+    assert.ok(!after.some((item) => item.threadId === threads[8] || item.threadId === threads[3]));
+    assert.equal(all(fast, true).map((item) => item.threadId).join(), threads[3]);
+    // The walk is one statement per page: the materialized query never scans threads beyond the page and the cursor.
+    assert.equal(db.selectValue("SELECT count(*) FROM quixi_library_activity WHERE deleted=1"), 1);
+    assert.equal(db.selectValue("PRAGMA integrity_check"), "ok");
+  } finally {
+    db.close();
+  }
+});

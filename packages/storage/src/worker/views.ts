@@ -24,10 +24,13 @@ const fail = (
 const recency =
   "coalesce(json_extract(payload,'$.createdAt'),json_extract(payload,'$.recordedAt'))";
 export class ViewRepository {
+  /** Whether `quixi_library_activity` (schema 13) exists; retained archives at an older schema are read through the per-item scan. */
+  private materializedLibrary: boolean | undefined;
   constructor(
     private readonly db: CanonicalSqlite,
     private readonly canonical: CanonicalRepository,
-  ) {}
+    options: { materializedLibrary?: boolean } = {},
+  ) { this.materializedLibrary = options.materializedLibrary; }
   private rows(sql: string, bind: SqlValue[] = []): Row[] {
     return this.db.exec({
       sql,
@@ -160,32 +163,30 @@ export class ViewRepository {
       .replaceAll("\\", "\\\\")
       .replaceAll("%", "\\%")
       .replaceAll("_", "\\_");
-    const base = `SELECT s.id,json_extract(s.payload,'$.pinned') AS pinned,coalesce((SELECT ${recency} FROM quixi_records WHERE collection='messages' AND thread_id=s.id ORDER BY ${recency} DESC,id DESC LIMIT 1),json_extract(t.payload,'$.createdAt'),json_extract(t.payload,'$.recordedAt')) AS activity,substr(json_extract(s.payload,'$.title'),1,512) AS title,length(json_extract(s.payload,'$.title'))>512 AS title_long,(SELECT json_group_array(substr(value,1,128)) FROM (SELECT value FROM json_each(s.payload,'$.tags') LIMIT 8)) AS tags,json_array_length(s.payload,'$.tags')>8 OR EXISTS(SELECT 1 FROM json_each(s.payload,'$.tags') WHERE length(value)>128) AS tags_long,json_extract(s.payload,'$.revision') AS revision FROM quixi_records s JOIN quixi_records t ON t.collection='threads' AND t.id=s.id WHERE s.collection='threadStates' AND json_extract(s.payload,'$.archived')=? AND json_extract(s.payload,'$.title') LIKE ? ESCAPE '\\' AND NOT EXISTS(SELECT 1 FROM quixi_records d WHERE d.collection='tombstones' AND d.thread_id=s.id AND json_extract(d.payload,'$.rootMessageId') IS NULL)`;
+    const metadata = "substr(json_extract(s.payload,'$.title'),1,512) AS title,length(json_extract(s.payload,'$.title'))>512 AS title_long,(SELECT json_group_array(substr(value,1,128)) FROM (SELECT value FROM json_each(s.payload,'$.tags') LIMIT 8)) AS tags,json_array_length(s.payload,'$.tags')>8 OR EXISTS(SELECT 1 FROM json_each(s.payload,'$.tags') WHERE length(value)>128) AS tags_long,json_extract(s.payload,'$.revision') AS revision";
+    const keyset = "pinned<? OR (pinned=? AND activity<?) OR (pinned=? AND activity=? AND id>?)";
+    const keysetBind = (last: Record<string, unknown>) => [Number(last.pinned), Number(last.pinned), Number(last.activity), Number(last.pinned), Number(last.activity), String(last.id)];
+    this.materializedLibrary ??= this.scalar("SELECT count(*) FROM sqlite_schema WHERE type='table' AND name='quixi_library_activity'") === 1;
     const items: LibraryThread[] = [];
     let bytes = 2,
       last = cursor,
       more = false;
+    // Schema 13: one ordered index walk over the materialized rows, joined to each page's thread state only.
+    const materialized = this.materializedLibrary
+      ? this.rows(
+          `SELECT a.thread_id AS id,a.pinned AS pinned,a.activity AS activity,${metadata} FROM quixi_library_activity a JOIN quixi_records s ON s.collection='threadStates' AND s.id=a.thread_id WHERE a.archived=? AND a.deleted=0 AND json_extract(s.payload,'$.title') LIKE ? ESCAPE '\\'${last ? ` AND (${keyset.replaceAll("pinned", "a.pinned").replaceAll("activity", "a.activity").replaceAll("id>", "a.thread_id>")})` : ""} ORDER BY a.pinned DESC,a.activity DESC,a.thread_id LIMIT ?`,
+          [Number(args.archived), `%${escaped}%`, ...(last ? keysetBind(last) : []), args.page.maxItems + 1],
+        )
+      : null;
+    // Older schema (retained read-only archives): activity computed per thread from the message recency index, one item per statement.
+    const base = `SELECT s.id,json_extract(s.payload,'$.pinned') AS pinned,coalesce((SELECT ${recency} FROM quixi_records WHERE collection='messages' AND thread_id=s.id ORDER BY ${recency} DESC,id DESC LIMIT 1),json_extract(t.payload,'$.createdAt'),json_extract(t.payload,'$.recordedAt')) AS activity,${metadata} FROM quixi_records s JOIN quixi_records t ON t.collection='threads' AND t.id=s.id WHERE s.collection='threadStates' AND json_extract(s.payload,'$.archived')=? AND json_extract(s.payload,'$.title') LIKE ? ESCAPE '\\' AND NOT EXISTS(SELECT 1 FROM quixi_records d WHERE d.collection='tombstones' AND d.thread_id=s.id AND json_extract(d.payload,'$.rootMessageId') IS NULL)`;
     for (let index = 0; index <= args.page.maxItems; index++) {
-      const where = last
-        ? "WHERE pinned<? OR (pinned=? AND activity<?) OR (pinned=? AND activity=? AND id>?)"
-        : "";
-      const row = this.rows(
-        `SELECT * FROM (${base}) ${where} ORDER BY pinned DESC,activity DESC,id LIMIT 1`,
-        [
-          Number(args.archived),
-          `%${escaped}%`,
-          ...(last
-            ? [
-                Number(last.pinned),
-                Number(last.pinned),
-                Number(last.activity),
-                Number(last.pinned),
-                Number(last.activity),
-                String(last.id),
-              ]
-            : []),
-        ],
-      )[0];
+      const row = materialized
+        ? materialized[index]
+        : this.rows(
+            `SELECT * FROM (${base}) ${last ? `WHERE ${keyset}` : ""} ORDER BY pinned DESC,activity DESC,id LIMIT 1`,
+            [Number(args.archived), `%${escaped}%`, ...(last ? keysetBind(last) : [])],
+          )[0];
       if (!row) break;
       const item: LibraryThread = {
         threadId: String(row.id),

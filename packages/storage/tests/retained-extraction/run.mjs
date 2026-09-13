@@ -30,7 +30,7 @@ try {
       host.userAgent = await page.evaluate(() => navigator.userAgent);
       const fixture = await call(page, 'seed'); host.fixture = fixture;
       expect((await call(page, 'sameSelection')).code).toBe('CONFLICT');
-      expect((await call(page, 'diagnostics')).schemaVersion).toBe(12);
+      expect((await call(page, 'diagnostics')).schemaVersion).toBe(13);
       host.checks.push('Same selected archive is refused before closing the actual managed client; client diagnostics remain usable');
       const activation = await call(page, 'activate'); host.activation = activation;
       expect(activation.selected.archiveId).not.toBe('default');

@@ -4,8 +4,8 @@
     "webkit"
   ],
   "status": "passed",
-  "startedAt": "2026-09-12T18:30:46.175Z",
-  "finishedAt": "2026-09-12T18:31:07.728Z",
+  "startedAt": "2026-09-13T03:18:41.258Z",
+  "finishedAt": "2026-09-13T03:19:02.676Z",
   "environment": {
     "platform": "darwin",
     "release": "25.6.0",
@@ -19,7 +19,7 @@
     "packages/storage/tests/archives/browser-roundtrip.ts": "525aa456843aae1584d9db25638e0814a57698a0456e857681799147aa5d2d03",
     "packages/storage/tests/archives/compaction-roundtrip.ts": "92c2cac03b6a71c429d769b5624fe98f24f4ca56e25b14891912525eb26beff8",
     "packages/core/src/model/compaction.ts": "33e724d0610024ebe5b9247196beea0971d72afe77e53f8ccebacfada2c54d28",
-    "packages/core/src/model/validation.ts": "fccb9eb2d56a44697ac8b89fa97bb3418b9f4ee45a199f53fc5d68cf622a5756",
+    "packages/core/src/model/validation.ts": "b855e484440b43cb4b99c270b3bff0737f0109a97bfb21ab406409d247aa776e",
     "packages/storage/migrations/context-compaction.ts": "9f6457d0cbf08c9134279f5fb305b0af907478e9083294e06883422c1176d29b",
     "packages/storage/migrations/summary-proposals.ts": "a3500ade690d146e49e49e85895398866aaf6472254f2e20e0420a2baa485948",
     "packages/core/src/model/summaries.ts": "ebb396a3f6ec22c26d244845dbfef77a0de04dc9ddbc106263d81f3d8e4d7d86",
@@ -33,13 +33,13 @@
     "packages/storage/src/worker/archives/index.ts": "f86be726dcbb298934b564f44d32a201b98ea71e58cb18d8b296e775409a9698",
     "packages/storage/src/worker/archives/clean-copy.ts": "404bedbbecb57fedd86d957b51427cca3b5304339ff4120d6091114650c3046c",
     "packages/storage/src/worker/archives/schema-validation.ts": "ff3aecb064a430513890d9a66379b3904caa09de5f455580a98f299a74ebed22",
-    "packages/storage/migrations/index.ts": "463331ffb83ce77bd759505d3e3b39376a193c146bb5e68fd5178af4c63867fd",
+    "packages/storage/migrations/index.ts": "f39aab986efa92cc753cb10835681f6626ce880adbec723caa5495428746afdd",
     "packages/storage/migrations/operation-claims.ts": "b317daf1fe39656d98d58bb3418ed1f5da3687afa83da82a7281365bf61fb466",
     "packages/storage/sqlite/dist/sqlite3.wasm": "dd7c22431a3b8ad51ab5e6ed91065593574c34c5959d2efdef2f17484eedcb2c",
     "package-lock.json": "aadb456e2a567a2b91cbb81a502650ebac93541f0a59d54035bdde2cacd97672"
   },
   "context": "fresh isolated persistent profiles",
-  "origin": "http://127.0.0.1:51664",
+  "origin": "http://127.0.0.1:49426",
   "hosts": [
     {
       "name": "chromium",
@@ -48,14 +48,14 @@
         "snapshot": {
           "roundtrip": {
             "compaction": {
-              "schemaVersion": 12,
-              "contextId": "abf49dbb-3cdb-43ec-ae4a-35007efd6160",
-              "summaryContextId": "c6874837-5ff7-4515-9f20-b6cbd80982a6",
-              "summaryProposalId": "198054ca-0da3-41ba-bad0-fd2de516a3c3",
+              "schemaVersion": 13,
+              "contextId": "396c29b5-476b-446b-b99e-216c5d906544",
+              "summaryContextId": "63696fb0-2546-4f9b-baa6-8940a04883c8",
+              "summaryProposalId": "619a4d78-c4c9-4b07-acd5-92573c0f9794",
               "frozenInputSha256": "37ef61ad3eb3570a959b301946aceb3cfa1e78a4d086b314c0571c1e6c4b77a2",
-              "partId": "9daa77a1-8e22-473d-9666-41fa2bb2f3cb",
-              "freshBranchContextId": "250ea145-043f-44c8-be94-c5f793f5993d",
-              "branchEventId": "029558a0-a50e-44e3-a526-09b92ef7a293",
+              "partId": "d7ecf765-8418-44f8-9efb-9ca9334d3676",
+              "freshBranchContextId": "8e8d3496-3613-4a7f-89d8-78faee3ac8cc",
+              "branchEventId": "dc3b7d37-cf95-4ca1-9807-6bb917df2362",
               "emptySelectedBranch": true,
               "routingProfile": {
                 "version": 5,
@@ -77,15 +77,15 @@
                 },
                 "allowPrivacyChange": false
               },
-              "archiveBytes": 1395712,
+              "archiveBytes": 1428480,
               "canonicalAndJournalExact": true
             },
-            "jobSteps": 160,
+            "jobSteps": 164,
             "schemaSevenRejection": {
               "sourceSchemaVersion": 7,
-              "targetSchemaVersion": 12,
+              "targetSchemaVersion": 13,
               "historicalSchemaObjectCount": 90,
-              "currentSchemaObjectCount": 102,
+              "currentSchemaObjectCount": 110,
               "rejectionKind": "schema_floor",
               "archiveBytes": 669184,
               "rejectedAt": "schema_validation",
@@ -94,16 +94,16 @@
               "candidateReady": false
             },
             "schemaEightUpgrade": {
-              "jobId": "4e94fb6b-24e3-4639-82b8-80c5aef31bf1",
-              "candidateId": "1864f0ca-6e61-4037-8e2a-06980e8d52dc",
+              "jobId": "1b1941b0-66e4-4c10-a246-cc25f591efa0",
+              "candidateId": "c3ed56a2-a98f-4154-bffc-f0c6d1447071",
               "sourceSchemaVersion": 8,
-              "targetSchemaVersion": 12,
+              "targetSchemaVersion": 13,
               "canonicalRecords": 23,
               "syncOperations": 19,
               "archiveBytes": 1294848,
               "candidateReady": true
             },
-            "schemaVersion": 12,
+            "schemaVersion": 13,
             "migrations": [
               {
                 "checksum": "16724a690f441af0162c0b49f3256bac152fb98a31f1a99c6ef40076d7dfd7d5",
@@ -164,9 +164,14 @@
                 "checksum": "231dc27fdff21cd5a8c48722f34af18df2b939978f17be62de19dcd24c0427e8",
                 "name": "reviewed_summary_proposal_provenance",
                 "version": 12
+              },
+              {
+                "checksum": "07df73a1533dded4ef26d362e4f7e652903ed7751243d687b35bd7212b93badf",
+                "name": "materialized_library_activity",
+                "version": 13
               }
             ],
-            "archiveBytes": 1319936,
+            "archiveBytes": 1352704,
             "openBytes": 1360896,
             "canonicalRecords": 23,
             "syncOperations": 19,
@@ -193,7 +198,7 @@
               "Markdown includes full blob-backed tail"
             ]
           },
-          "origin": "http://127.0.0.1:51664",
+          "origin": "http://127.0.0.1:49426",
           "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36",
           "copiedBytes": 5259264,
           "peakBlock": 65536,
@@ -207,10 +212,10 @@
           "backend": "actual SQLite WASM OPFS SAH-pool"
         },
         "publicClient": {
-          "archiveBytes": 10141184,
+          "archiveBytes": 10173952,
           "blobBytes": 9437201,
           "peakTransferBytes": 65536,
-          "steps": 147,
+          "steps": 149,
           "checks": [
             "actual ArchiveStorageClient owner-worker job and transfer routes",
             "9 MiB blob streamed without whole-archive array",
@@ -240,14 +245,14 @@
         "snapshot": {
           "roundtrip": {
             "compaction": {
-              "schemaVersion": 12,
-              "contextId": "aa17e558-4224-4f49-907e-e40b0ec1cf44",
-              "summaryContextId": "196f47a2-266b-4880-9ad1-758d4537185f",
-              "summaryProposalId": "9957e06c-7bd4-4262-be1e-cf31e7cca407",
+              "schemaVersion": 13,
+              "contextId": "3d3bfd97-f25c-4aba-8c74-36a586798212",
+              "summaryContextId": "50bfdd47-7c5b-4069-a1af-9e8cbd444de2",
+              "summaryProposalId": "65bfa6bf-d04f-4100-a565-93e1afc4772c",
               "frozenInputSha256": "37ef61ad3eb3570a959b301946aceb3cfa1e78a4d086b314c0571c1e6c4b77a2",
-              "partId": "b6d42f99-1884-4c4c-91a9-6cdda69c855f",
-              "freshBranchContextId": "cb4eb2e6-30a7-4fe0-a056-75364e007c59",
-              "branchEventId": "c1af7c48-f76b-41db-ae5f-f477f0a9213e",
+              "partId": "c5aba185-04b5-49ab-a976-2a92851a200c",
+              "freshBranchContextId": "acc7d0f3-e2ad-4c42-ad44-44d9c9a4c9b8",
+              "branchEventId": "b0199ed8-6dae-40b6-99e2-35c6ae7c916c",
               "emptySelectedBranch": true,
               "routingProfile": {
                 "version": 5,
@@ -269,15 +274,15 @@
                 },
                 "allowPrivacyChange": false
               },
-              "archiveBytes": 1395712,
+              "archiveBytes": 1428480,
               "canonicalAndJournalExact": true
             },
-            "jobSteps": 160,
+            "jobSteps": 164,
             "schemaSevenRejection": {
               "sourceSchemaVersion": 7,
-              "targetSchemaVersion": 12,
+              "targetSchemaVersion": 13,
               "historicalSchemaObjectCount": 90,
-              "currentSchemaObjectCount": 102,
+              "currentSchemaObjectCount": 110,
               "rejectionKind": "schema_floor",
               "archiveBytes": 669184,
               "rejectedAt": "schema_validation",
@@ -286,16 +291,16 @@
               "candidateReady": false
             },
             "schemaEightUpgrade": {
-              "jobId": "b2b6bddb-9a96-467f-a37b-5ca8266ab86c",
-              "candidateId": "808ef4e8-ff55-4f13-a6ed-5ba92b7b4b91",
+              "jobId": "144424b2-5803-4383-8bbe-a3f76eebf36c",
+              "candidateId": "c7cdc00c-f87f-43b4-a65a-5f234aa29d9f",
               "sourceSchemaVersion": 8,
-              "targetSchemaVersion": 12,
+              "targetSchemaVersion": 13,
               "canonicalRecords": 23,
               "syncOperations": 19,
               "archiveBytes": 1294848,
               "candidateReady": true
             },
-            "schemaVersion": 12,
+            "schemaVersion": 13,
             "migrations": [
               {
                 "checksum": "16724a690f441af0162c0b49f3256bac152fb98a31f1a99c6ef40076d7dfd7d5",
@@ -356,9 +361,14 @@
                 "checksum": "231dc27fdff21cd5a8c48722f34af18df2b939978f17be62de19dcd24c0427e8",
                 "name": "reviewed_summary_proposal_provenance",
                 "version": 12
+              },
+              {
+                "checksum": "07df73a1533dded4ef26d362e4f7e652903ed7751243d687b35bd7212b93badf",
+                "name": "materialized_library_activity",
+                "version": 13
               }
             ],
-            "archiveBytes": 1319936,
+            "archiveBytes": 1352704,
             "openBytes": 1360896,
             "canonicalRecords": 23,
             "syncOperations": 19,
@@ -385,7 +395,7 @@
               "Markdown includes full blob-backed tail"
             ]
           },
-          "origin": "http://127.0.0.1:51664",
+          "origin": "http://127.0.0.1:49426",
           "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
           "copiedBytes": 5259264,
           "peakBlock": 65536,
@@ -399,10 +409,10 @@
           "backend": "actual SQLite WASM OPFS SAH-pool"
         },
         "publicClient": {
-          "archiveBytes": 10141184,
+          "archiveBytes": 10173952,
           "blobBytes": 9437201,
           "peakTransferBytes": 65536,
-          "steps": 147,
+          "steps": 149,
           "checks": [
             "actual ArchiveStorageClient owner-worker job and transfer routes",
             "9 MiB blob streamed without whole-archive array",

@@ -37,7 +37,7 @@ export async function exerciseOnboarding({ engine, profile, name, origin }) {
     await expect(check).toContainText(gpuActual ? '✓ WebGPU available' : 'WebGPU not available');
     await expect(check).toContainText('browser-extension transfers');
     const backend = await page.getByTestId('storage-backend').textContent();
-    expect(backend).toMatch(/SQLite WASM \/ OPFS · schema 12 · integrity ok/);
+    expect(backend).toMatch(/SQLite WASM \/ OPFS · schema 13 · integrity ok/);
     const persistedBefore = await page.evaluate(() => navigator.storage.persisted());
     const persistence = page.getByTestId('storage-persistence');
     await expect(persistence).toContainText(persistedBefore ? '✓ Granted' : 'Not granted');

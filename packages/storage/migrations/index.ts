@@ -1,4 +1,5 @@
 import { SUMMARY_PROPOSALS_MIGRATION } from './summary-proposals.ts';
+import { LIBRARY_ACTIVITY_MIGRATION } from './library-activity.ts';
 import {PRODUCER_MIGRATION} from './producers.ts';
 import {VIEW_MIGRATION} from './views.ts';
 import {STREAMING_TEXT_MIGRATION} from './streaming-text.ts';
@@ -245,4 +246,5 @@ CREATE TRIGGER quixi_blob_control_operation_fence BEFORE INSERT ON quixi_blob_op
   OPERATION_CLAIMS_MIGRATION,
   CONTEXT_COMPACTION_MIGRATION,
   SUMMARY_PROPOSALS_MIGRATION,
+  LIBRARY_ACTIVITY_MIGRATION,
 ] as const;

@@ -82,7 +82,7 @@ async function copy(): Promise<{ job: ArchiveJobStatus; peakChunkBytes: number; 
   await client!.request(id(), 'releaseArchiveJob', { operationId: id(), jobId: exported.job.jobId });
   const finished = await client!.request(id(), 'finishArchiveRestore', { operationId: id(), jobId: restore.job.jobId, byteLength: transfer.byteLength, sha256: transfer.sha256 });
   const restored = await advance(finished);
-  assert(restored.job.candidate?.schemaVersion === 12, 'Restore candidate did not validate canonical schema 12');
+  assert(restored.job.candidate?.schemaVersion === 13, 'Restore candidate did not validate canonical schema 12');
   return { job: restored.job, peakChunkBytes, byteLength: transfer.byteLength, steps: exported.steps + restored.steps };
 }
 async function review(jobId: string): Promise<ArchiveActivationArgs> {
@@ -92,7 +92,7 @@ async function review(jobId: string): Promise<ArchiveActivationArgs> {
 }
 async function verify(fixture: Fixture): Promise<unknown> {
   const diagnostics = await client!.request(id(), 'diagnostics', null);
-  assert(diagnostics.integrity === 'ok' && diagnostics.schemaVersion === 12, 'Selected archive integrity or version changed');
+  assert(diagnostics.integrity === 'ok' && diagnostics.schemaVersion === 13, 'Selected archive integrity or version changed');
   const parts = await client!.request(id(), 'readMessageParts', { messageId: fixture.messageId, page });
   const part = parts.items[0] as unknown as ContentPart;
   assert(parts.items.length === 1 && part.kind === 'Text' && part.data.text === text, 'Restored immutable message text changed');
