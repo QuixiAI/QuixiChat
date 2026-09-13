@@ -1,4 +1,5 @@
 import type { DiagnosticsReport, HostClient, SearchIndexStatus, StorageClient } from '@quixi/core/contracts';
+import { INTEGRITY_CHECK_DEADLINE_MS } from '@quixi/core/contracts';
 import type { InferenceSelfTest } from '@quixi/quixi-embed/service';
 import { buildDiagnosticsExport, saveDiagnosticsExport } from './export.ts';
 
@@ -36,7 +37,7 @@ export function createDiagnosticsController(storage: StorageClient, host?: HostC
       if (disposed || state.running) return;
       const current = ++epoch;
       publish({ running: true, error: null });
-      const report = await guard(current, () => storage.request(crypto.randomUUID(), 'diagnosticsReport', null));
+      const report = await guard(current, () => storage.request(crypto.randomUUID(), 'diagnosticsReport', null, { timeoutMs: INTEGRITY_CHECK_DEADLINE_MS }));
       if (disposed || current !== epoch) return;
       publish({ running: false, ...(report ? { report } : {}) });
     },
@@ -48,7 +49,7 @@ export function createDiagnosticsController(storage: StorageClient, host?: HostC
       const status = await guard(current, () => storage.request(crypto.randomUUID(), 'rebuildSearch', { operationId: crypto.randomUUID() }));
       if (disposed || current !== epoch) return;
       if (status) publish({ notice: describe(status) });
-      const report = await guard(current, () => storage.request(crypto.randomUUID(), 'diagnosticsReport', null));
+      const report = await guard(current, () => storage.request(crypto.randomUUID(), 'diagnosticsReport', null, { timeoutMs: INTEGRITY_CHECK_DEADLINE_MS }));
       if (disposed || current !== epoch) return;
       publish({ running: false, ...(report ? { report } : {}) });
     },
@@ -61,7 +62,7 @@ export function createDiagnosticsController(storage: StorageClient, host?: HostC
       try { notice = await action(); } catch (error) { notice = `The action did not complete: ${message(error)}`; }
       if (disposed || current !== epoch) return;
       publish({ notice });
-      const report = await guard(current, () => storage.request(crypto.randomUUID(), 'diagnosticsReport', null));
+      const report = await guard(current, () => storage.request(crypto.randomUUID(), 'diagnosticsReport', null, { timeoutMs: INTEGRITY_CHECK_DEADLINE_MS }));
       if (disposed || current !== epoch) return;
       publish({ running: false, ...(report ? { report } : {}) });
     },
@@ -70,7 +71,7 @@ export function createDiagnosticsController(storage: StorageClient, host?: HostC
       if (disposed) return;
       const current = ++epoch;
       publish({ running: true, error: null, notice });
-      const report = await guard(current, () => storage.request(crypto.randomUUID(), 'diagnosticsReport', null));
+      const report = await guard(current, () => storage.request(crypto.randomUUID(), 'diagnosticsReport', null, { timeoutMs: INTEGRITY_CHECK_DEADLINE_MS }));
       if (disposed || current !== epoch) return;
       publish({ running: false, ...(report ? { report } : {}) });
     },

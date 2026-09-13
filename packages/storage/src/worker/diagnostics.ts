@@ -5,7 +5,7 @@
  * operational metadata only: counts, versions, states and managed digests;
  * SQL here extracts fixed scalar fields and never returns record content. */
 import type { DiagnosticCheck, DiagnosticMeasure, DiagnosticOutcome, DiagnosticsReport, SearchIndexStatus, SemanticIndexStatus } from "@quixi/core/contracts";
-import { assertDiagnosticsReportContent } from "@quixi/core/contracts";
+import { AUTOMATIC_INTEGRITY_CHECK_MAX_BYTES, assertDiagnosticsReportContent } from "@quixi/core/contracts";
 
 export interface DiagnosticSqlite {
   exec(options: string | { sql: string; bind?: (string | number | null)[]; rowMode?: "object"; returnValue?: "resultRows" }): unknown;
@@ -37,6 +37,21 @@ const REQUIRED_TABLES = ["quixi_records", "quixi_sync_ops", "quixi_blob_catalog"
 const rows = (db: DiagnosticSqlite, sql: string, bind: (string | number | null)[] = []) =>
   db.exec({ sql, bind, rowMode: "object", returnValue: "resultRows" }) as Record<string, unknown>[];
 const check = (id: DiagnosticCheck["id"], outcome: DiagnosticOutcome, summary: string, measured: Record<string, DiagnosticMeasure> = {}): DiagnosticCheck => ({ id, outcome, summary, measured });
+const now = () => (typeof performance === "undefined" ? Date.now() : performance.now());
+/** Size of the main database file as SQLite accounts for it (pages × page size). */
+export function databaseBytes(db: DiagnosticSqlite): number {
+  const value = (name: string) => Number(Object.values(rows(db, `PRAGMA ${name}`)[0] ?? {})[0] ?? 0);
+  return value("page_count") * value("page_size");
+}
+/** The light startup integrity read: `ok` or SQLite's first finding for files
+ * up to `maxBytes`, `unchecked` above it (verified on request through the
+ * report). Deterministic in the file size, so opening a large archive never
+ * runs a whole-file scan. */
+export function automaticIntegrity(db: DiagnosticSqlite, maxBytes: number = AUTOMATIC_INTEGRITY_CHECK_MAX_BYTES): { integrity: string; databaseBytes: number } {
+  const bytes = databaseBytes(db);
+  if (bytes > maxBytes) return { integrity: "unchecked", databaseBytes: bytes };
+  return { integrity: String(Object.values(rows(db, "PRAGMA integrity_check(1)")[0] ?? {})[0] ?? ""), databaseBytes: bytes };
+}
 const reason = (error: unknown): string => {
   const text = error instanceof Error ? error.message : String(error);
   return text.length > 200 ? `${text.slice(0, 199)}…` : text;
@@ -69,12 +84,15 @@ export async function diagnose(input: DiagnoseInput): Promise<DiagnosticsReport>
   const bounds = { referenceRecords: input.bounds?.referenceRecords ?? DIAGNOSTIC_BOUNDS.referenceRecords, referenceFiles: input.bounds?.referenceFiles ?? DIAGNOSTIC_BOUNDS.referenceFiles };
   const checks: DiagnosticCheck[] = [];
   // 1. SQLite integrity: the only check that can name corruption of the file itself.
+  // It reads the whole file, so the caller requests the report with INTEGRITY_CHECK_DEADLINE_MS and the cost is recorded.
+  const integrityStarted = now();
   try {
     const found = rows(db, `PRAGMA integrity_check(${DIAGNOSTIC_BOUNDS.integrityErrors})`).map(row => String(Object.values(row)[0]));
-    if (found.length === 1 && found[0] === "ok") checks.push(check("sqlite_integrity", "ok", "SQLite reports no damage in the database file.", { errors: 0 }));
-    else checks.push(check("sqlite_integrity", "corruption", `SQLite found ${found.length}${found.length >= DIAGNOSTIC_BOUNDS.integrityErrors ? " or more" : ""} problems in the database file. Keep the file; export a backup before any repair.`, { errors: found.length, first: found[0]?.slice(0, 120) ?? null }));
+    const elapsedMs = Math.round(now() - integrityStarted);
+    if (found.length === 1 && found[0] === "ok") checks.push(check("sqlite_integrity", "ok", "SQLite reports no damage in the database file.", { errors: 0, elapsedMs, databaseBytes: databaseBytes(db) }));
+    else checks.push(check("sqlite_integrity", "corruption", `SQLite found ${found.length}${found.length >= DIAGNOSTIC_BOUNDS.integrityErrors ? " or more" : ""} problems in the database file. Keep the file; export a backup before any repair.`, { errors: found.length, first: found[0]?.slice(0, 120) ?? null, elapsedMs, databaseBytes: databaseBytes(db) }));
   } catch (error) {
-    checks.push(check("sqlite_integrity", "corruption", "SQLite could not complete its integrity check.", { errors: null, first: reason(error) }));
+    checks.push(check("sqlite_integrity", "corruption", "SQLite could not complete its integrity check.", { errors: null, first: reason(error), elapsedMs: Math.round(now() - integrityStarted) }));
   }
   // 2. Canonical schema: required tables at this build's version.
   try {

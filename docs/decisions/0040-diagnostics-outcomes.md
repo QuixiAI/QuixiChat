@@ -78,6 +78,23 @@ panel, but nothing named what a finding meant or offered the FTS rebuild.
   cannot be trusted, whatever the cause. The scheduler's memo is cleared
   before the GPU cases so they are computed, not recalled. The self-test
   loads the runtime if it is not loaded and leaves it loaded.
+- Integrity cost at scale (amendment 3, 2026-09-13). The 1M-message WebKit
+  stress run showed that `PRAGMA integrity_check` over a whole-archive file
+  outlives the storage client's default 60 s reply deadline, which then
+  reports an unknown outcome and the worker keeps scanning. Two changes:
+  the explicit report is requested with a per-request deadline
+  (`StorageRequestOptions.timeoutMs`, `INTEGRITY_CHECK_DEADLINE_MS` =
+  600 s, the client maximum) and its `sqlite_integrity` check records
+  `elapsedMs` and `databaseBytes`; and the light `diagnostics` operation
+  that onboarding and the import controller read at startup verifies
+  integrity only for files up to `AUTOMATIC_INTEGRITY_CHECK_MAX_BYTES`
+  (256 MiB, from `page_count × page_size`), answering `unchecked` above it
+  so opening a large archive never runs a whole-file scan. The bound is a
+  function of the file size alone, so the answer is deterministic for a
+  given archive; a large archive is verified on request from Storage health
+  (product §101 "SQLite integrity_check"). While the report's scan runs,
+  other requests to the same worker queue behind it under their own
+  deadlines; the report remains an explicit action for that reason.
 - Corruption fixtures create real inconsistencies (unreferenced b-tree pages
   after a `writable_schema` edit) rather than mocked results; a fixture that
   needs SQLite to *fail to open* is still outstanding and is covered by

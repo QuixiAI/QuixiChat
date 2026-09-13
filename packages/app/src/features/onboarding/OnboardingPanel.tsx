@@ -11,7 +11,7 @@ export function StorageStatus({ status, busy, onRequestPersistence, onExportBack
   const requestable = status.persistence?.available === true && !granted;
   return <dl className="storage-status" aria-label="Storage status">
     <dt>Location</dt><dd>{status.host === "desktop" ? "This computer (Quixi desktop app data)" : "This browser profile and origin"}</dd>
-    <dt>Database</dt><dd data-testid="storage-backend">{status.backend === "sqlite-wasm-opfs-sahpool" ? "SQLite WASM / OPFS" : status.backend} · schema {status.schemaVersion} · integrity {status.integrity}</dd>
+    <dt>Database</dt><dd data-testid="storage-backend">{status.backend === "sqlite-wasm-opfs-sahpool" ? "SQLite WASM / OPFS" : status.backend} · schema {status.schemaVersion} · integrity {status.integrity === "unchecked" ? "not checked at this size (verify from Storage health)" : status.integrity}</dd>
     <dt>Local storage</dt><dd>{status.usage === null || status.quota === null ? "Usage and quota are not reported by this browser." : `${sizes(status.usage)} used of about ${sizes(status.quota)} available`}</dd>
     <dt>Persistent storage</dt>
     <dd data-testid="storage-persistence">

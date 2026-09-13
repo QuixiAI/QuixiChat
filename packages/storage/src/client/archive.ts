@@ -15,6 +15,7 @@ import type {
   SearchIndexStatus,
   StorageClient,
   StorageOperations,
+  StorageRequestOptions,
   StorageRequest,
 } from "@quixi/core/contracts";
 import { isQuixiId } from "@quixi/core/model";
@@ -224,7 +225,7 @@ export class ArchiveStorageClient implements StorageClient {
     if (call.kind === "ack")
       this.downloads.delete(call.acknowledgement.transferId);
   }
-  private call(call: ArchiveCall): Promise<unknown> {
+  private call(call: ArchiveCall, timeoutMs: number = this.timeoutMs): Promise<unknown> {
     if (this.failure) return Promise.reject(this.failure);
     if (this.closed)
       return Promise.reject(
@@ -249,6 +250,8 @@ export class ArchiveStorageClient implements StorageClient {
           ),
         );
       this.assertAdmission(call);
+      if (!Number.isSafeInteger(timeoutMs) || timeoutMs < 1 || timeoutMs > 600_000)
+        throw new Error("Invalid request deadline");
     } catch (error) {
       return Promise.reject(
         error instanceof ArchiveStorageError
@@ -283,7 +286,7 @@ export class ArchiveStorageClient implements StorageClient {
           void this.cancel(call.id, callOperationId(call)).catch(
             () => undefined,
           );
-      }, this.timeoutMs);
+      }, timeoutMs);
       this.pending.set(call.id, { call, resolve, reject, timer });
       try {
         this.worker.postMessage({ version: ARCHIVE_PROTOCOL_VERSION, type: "call", selection: this.selection, call });
@@ -326,6 +329,7 @@ export class ArchiveStorageClient implements StorageClient {
     requestId: string,
     operation: K,
     args: StorageOperations[K]["args"],
+    options?: StorageRequestOptions,
   ): Promise<StorageOperations[K]["result"]> {
     const request = {
       version: 1,
@@ -356,7 +360,7 @@ export class ArchiveStorageClient implements StorageClient {
           "NOT_FOUND",
         ),
       );
-    const value = await this.call({ id: requestId, kind: "request", request });
+    const value = await this.call({ id: requestId, kind: "request", request }, options?.timeoutMs);
     if (
       request.operation === "readEntities" ||
       request.operation === "readMessageParts" ||

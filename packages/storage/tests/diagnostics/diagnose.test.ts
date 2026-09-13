@@ -10,9 +10,9 @@ import initialize from "../../sqlite/dist/sqlite3.mjs";
 import { CanonicalRepository } from "../../src/worker/canonical/index.ts";
 import type { CanonicalSqlite } from "../../src/worker/canonical/index.ts";
 import { CANONICAL_MIGRATIONS } from "../../migrations/index.ts";
-import { DIAGNOSTIC_BOUNDS, diagnose, probeCapabilities } from "../../src/worker/diagnostics.ts";
+import { DIAGNOSTIC_BOUNDS, automaticIntegrity, databaseBytes, diagnose, probeCapabilities } from "../../src/worker/diagnostics.ts";
 import type { DiagnoseInput } from "../../src/worker/diagnostics.ts";
-import { DIAGNOSTIC_CHECKS, assertDiagnosticsReportContent } from "@quixi/core/contracts";
+import { AUTOMATIC_INTEGRITY_CHECK_MAX_BYTES, DIAGNOSTIC_CHECKS, assertDiagnosticsReportContent } from "@quixi/core/contracts";
 import type { CanonicalMutation, DiagnosticsReport, SearchIndexStatus, SemanticIndexStatus } from "@quixi/core/contracts";
 
 const wasm = await readFile(new URL("../../sqlite/dist/sqlite3.wasm", import.meta.url));
@@ -202,5 +202,20 @@ test("a malformed blob reference in a saved record is corruption of that record"
   const report = await diagnose(input(db, schemaVersion, new Map()));
   assert.equal(outcome(report, "attachment_references").outcome, "corruption");
   assert.equal(outcome(report, "attachment_references").measured.malformed, 1);
+  db.close();
+});
+
+test("the integrity check records its cost and file size; the startup read is bounded by file size", async () => {
+  const { db, schemaVersion } = open();
+  const report = await diagnose(input(db, schemaVersion, new Map()));
+  const integrity = outcome(report, "sqlite_integrity");
+  assert.equal(integrity.outcome, "ok");
+  assert.equal(typeof integrity.measured.elapsedMs, "number");
+  assert.ok(Number(integrity.measured.databaseBytes) > 0);
+  assert.equal(integrity.measured.databaseBytes, databaseBytes(db));
+  // Small file: the light read verifies. Above the bound: it reports unchecked without scanning.
+  assert.deepEqual(automaticIntegrity(db), { integrity: "ok", databaseBytes: databaseBytes(db) });
+  assert.deepEqual(automaticIntegrity(db, databaseBytes(db) - 1), { integrity: "unchecked", databaseBytes: databaseBytes(db) });
+  assert.ok(databaseBytes(db) < AUTOMATIC_INTEGRITY_CHECK_MAX_BYTES);
   db.close();
 });

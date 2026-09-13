@@ -145,7 +145,8 @@ export interface SyncOperationPage { items: LocalSyncOperation[]; nextCursor: st
 export interface PageBudget { maxItems: number; maxBytes: number; cursor: string | null }
 export interface EntityPage { items: JsonValue[]; nextCursor: string | null; bytes: number }
 export interface StorageOperations extends DiagnosticsOperations, DoctorAuditOperations, BlobHashAuditOperations, PortabilityOperations, NormalizedImportOperations, ImportWorkOperations, SearchOperations, ProducerOperations, ViewOperations, ArchivesOperations, ArchiveSelectionOperations, ExtractionOperations, PreferenceOperations, RoutingAliasOperations, BlobInventoryOperations {
-  diagnostics: { args: null; result: {backend:'sqlite-wasm-opfs-sahpool';ownerId:string;schemaVersion:number;integrity:string;canonicalRecords:number;syncOperations:number;persisted:boolean|null;usage:number|null;quota:number|null} };
+  /** Light startup read. `integrity` is `ok`, `unchecked` (the file is larger than AUTOMATIC_INTEGRITY_CHECK_MAX_BYTES; verify through `diagnosticsReport`) or SQLite's first finding. */
+  diagnostics: { args: null; result: {backend:'sqlite-wasm-opfs-sahpool';ownerId:string;schemaVersion:number;integrity:string;databaseBytes:number;canonicalRecords:number;syncOperations:number;persisted:boolean|null;usage:number|null;quota:number|null} };
   commit: { args: MutationBatch; result: CommitResult };
   readEntities: { args: { threadId: QuixiId | null; collection: Exclude<keyof CanonicalHistory,"version">; page: PageBudget }; result: EntityPage };
   readSyncOperations: { args: { afterSequence: number; page: PageBudget }; result: SyncOperationPage };
@@ -167,8 +168,10 @@ export interface StorageOperations extends DiagnosticsOperations, DoctorAuditOpe
 export type BlobPurpose = "attachment" | "raw_source" | "archive" | "document" | "canonical_text";
 export type StorageRequest = { [K in keyof StorageOperations]: { version: 1; requestId: QuixiId; operation: K; args: StorageOperations[K]["args"] } }[keyof StorageOperations];
 export type StorageResponse = { version: 1; requestId: QuixiId; ok: true; result: JsonValue } | { version: 1; requestId: QuixiId; ok: false; error: BoundaryError };
+/** Per-request options. `timeoutMs` replaces the client's default reply deadline for one request (1..600000 ms), for explicit long reads such as the diagnostics report. */
+export interface StorageRequestOptions { timeoutMs?: number }
 export interface StorageClient {
-  request<K extends keyof StorageOperations>(requestId: QuixiId, operation: K, args: StorageOperations[K]["args"]): Promise<StorageOperations[K]["result"]>;
+  request<K extends keyof StorageOperations>(requestId: QuixiId, operation: K, args: StorageOperations[K]["args"], options?: StorageRequestOptions): Promise<StorageOperations[K]["result"]>;
   sendChunk(chunk: ByteChunk): Promise<ChunkAcknowledgement>;
   readChunk(transferId: QuixiId): Promise<ByteChunk>;
   acknowledgeChunk(ack: ChunkAcknowledgement): Promise<void>;

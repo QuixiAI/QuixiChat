@@ -26,7 +26,9 @@ npm run test:app:browser              # full application proof with the scenario
   `onboardingCompletedAt`) have no completion time; the landing's own actions
   stay usable beside them. Older v1/v2 rows normalize to v3 without a write and
   show the steps once, as a fresh device would.
-- Step 2 reads actual state: storage diagnostics (backend, schema, integrity,
+- Step 2 reads actual state: storage diagnostics (backend, schema, integrity —
+  `unchecked` for files above 256 MiB, shown as "not checked at this size";
+  ADR 0040 amendment 3 —,
   usage/quota, the worker's `persisted` observation), host capabilities (native
   files, extension transfers, notifications, the new `persistentStorage`
   capability with its current grant), lexical search status, WASM SIMD support,

@@ -34,7 +34,7 @@ import type {
   ArchiveSqlite,
 } from "./archives/snapshot.ts";
 import { installArchiveOperationFences } from "./archive-operation-fences.ts";
-import { diagnose, probeCapabilities } from "./diagnostics.ts";
+import { automaticIntegrity, diagnose, probeCapabilities } from "./diagnostics.ts";
 import { CANONICAL_MIGRATIONS } from "../../migrations/index.ts";
 import { OperationClaimError, OperationClaimRegistry, installArchiveOperationClaimFences } from './operation-claims.ts';
 import { ExtractionRepository } from './extraction/index.ts';
@@ -850,7 +850,7 @@ export class ArchiveDatabase {
           backend: "sqlite-wasm-opfs-sahpool",
           ownerId,
           schemaVersion: this.schemaVersion,
-          integrity: String(this.db.selectValue("PRAGMA integrity_check")),
+          ...automaticIntegrity(this.db),
           canonicalRecords: Number(
             this.db.selectValue("SELECT count(*) FROM quixi_records"),
           ),

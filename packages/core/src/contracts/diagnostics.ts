@@ -41,6 +41,15 @@ export interface DiagnosticsOperations {
   /** Read-only. Runs integrity_check, so it is an explicit action rather than a poll. */
   diagnosticsReport: { args: null; result: DiagnosticsReport };
 }
+/** The explicit report's `integrity_check` reads the whole database file, so
+ * its reply deadline is the storage client's maximum rather than the default
+ * request deadline; the `sqlite_integrity` check records `elapsedMs`. */
+export const INTEGRITY_CHECK_DEADLINE_MS = 600_000;
+/** The light `diagnostics` operation (read at startup by onboarding and the
+ * import controller) verifies integrity only for database files up to this
+ * size; larger archives report `unchecked` and are verified on request through
+ * the explicit report, so opening a large archive stays bounded. */
+export const AUTOMATIC_INTEGRITY_CHECK_MAX_BYTES = 256 * 1024 * 1024;
 export function assertDiagnosticsArgs(operation: keyof DiagnosticsOperations, value: unknown): void {
   if (operation === 'diagnosticsReport' && value !== null) throw new Error('Diagnostics report takes null arguments');
 }

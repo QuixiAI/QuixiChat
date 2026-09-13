@@ -14,8 +14,11 @@ Seeded through the production Storage Worker in bounded commits of at most
 125 mutations (synthetic short messages; no embedding model, provider or
 Cloud account), then in order:
 
-1. **Integrity** — `PRAGMA integrity_check` timed through the `diagnostics`
-   operation, with record and sync-operation counts and reported usage.
+1. **Integrity** — the light `diagnostics` read (record and sync-operation
+   counts, usage, file size; integrity only within the 256 MiB startup bound,
+   otherwise `unchecked`), then the explicit `diagnosticsReport` requested
+   with `INTEGRITY_CHECK_DEADLINE_MS`, whose full `PRAGMA integrity_check`
+   must answer `ok`; its own elapsed time is recorded.
 2. **Library paging** — the first library page and twenty consecutive pages
    of 64 conversations, timed individually; the archive is never listed whole.
 3. **Cold reopen (startup)** — the page and worker are closed and a fresh
@@ -49,6 +52,22 @@ Chromium's export is slower per step because of its OPFS commit cost, as
 [archive-scale.md](archive-scale.md) recorded at 30,000 messages.
 
 ## Full run (WebKit, 100,000 conversations, 1,000,000 messages)
+
+**First attempt (2026-09-13), failed after seeding**
+([stress-browser-webkit-1m-attempt1.json](results/stress-browser-webkit-1m-attempt1.json)):
+100,000 conversations / 1,000,000 messages seeded in 10,000 bounded commits
+in 1,570 s (637 messages/s); the integrity phase then failed with "Archive
+reply deadline elapsed after dispatch": the whole-file `integrity_check`
+outlived the storage client's default 60 s reply deadline, so the request
+was reported as an unknown outcome while the worker kept scanning. This
+was a product defect, not a harness one: the same operation ran at startup
+through onboarding and the import controller, so opening a 1M-message
+archive would have blocked or failed the same way. Fixed under
+[ADR 0040](../decisions/0040-diagnostics-outcomes.md) amendment 3: the
+explicit report carries a 600 s per-request deadline and records the
+check's elapsed time, and the startup read verifies integrity only for files
+up to 256 MiB, answering `unchecked` above that. The harness now measures
+both reads.
 
 FULL_RUN_RESULT
 

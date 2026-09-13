@@ -6,6 +6,7 @@ import { createIsolatedStorageClient as createStorageClient } from "../../../sto
 import { initialProviderCatalogs, openAIRegionalEvidence } from "@quixi/providers";
 import type { ProviderConnection } from "../../src/features/providers/types.ts";
 import type { StorageOperations } from "@quixi/core/contracts";
+import { INTEGRITY_CHECK_DEADLINE_MS } from "@quixi/core/contracts";
 import { createWebHost } from "../../../../apps/web/src/host/index.ts";
 import { configuredWebProviders } from "../../../../apps/web/src/configuration.ts";
 const archiveId =
@@ -675,7 +676,14 @@ Object.assign(window, {
         } while (cursor && pages < count);
         return { pages, items, totalMs: performance.now() - started, firstMs: latencies[0] ?? 0, maxMs: Math.max(...latencies), more: !!cursor };
       },
-      async timedDiagnostics() { const at = performance.now(); const value = await storage.request(crypto.randomUUID(), "diagnostics", null); return { ...value, ms: performance.now() - at }; },
+      /** The light read (bounded by file size) for counts, then the explicit report whose integrity_check reads the whole file under its own deadline. */
+      async timedDiagnostics() {
+        const lightAt = performance.now(); const light = await storage.request(crypto.randomUUID(), "diagnostics", null); const lightMs = performance.now() - lightAt;
+        const at = performance.now();
+        const report = await storage.request(crypto.randomUUID(), "diagnosticsReport", null, { timeoutMs: INTEGRITY_CHECK_DEADLINE_MS });
+        const integrity = report.checks.find((check) => check.id === "sqlite_integrity");
+        return { ...light, automaticIntegrity: light.integrity, lightMs, integrity: integrity?.outcome === "ok" ? "ok" : `${integrity?.outcome}: ${integrity?.measured.first ?? ""}`, integrityMs: Number(integrity?.measured.elapsedMs ?? 0), ms: performance.now() - at };
+      },
     },
     /** Plan 09 cross-host restore: this archive's record digests and blob hashes, for the native restore side to match. */
     crossHost: {

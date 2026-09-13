@@ -1,12 +1,12 @@
 {
   "status": "passed",
-  "startedAt": "2026-09-13T01:05:36.360Z",
+  "startedAt": "2026-09-13T02:33:42.382Z",
   "sizes": {
     "threads": 300,
     "perThread": 10,
     "planted": 0,
     "messages": 3000,
-    "seedSlice": 100
+    "seedSlice": 5000
   },
   "stepBounds": {
     "maxRecords": 128,
@@ -21,54 +21,58 @@
       "name": "chromium",
       "status": "passed",
       "checks": [
-        "300 conversations and 3,000 messages seeded through the production worker in 30 bounded commits (1003 messages/s); integrity_check answers ok in 0.0 s over 6,900 canonical records",
-        "the library's first page answers in 43 ms and twenty consecutive pages in 198 ms (max 43 ms) without listing the whole archive",
-        "a cold reopen of the persisted 3,000-message archive shows the landing in 0.2 s and answers the first library page in 81 ms",
-        "a second tab opens the same archive and reads three library pages through the owner in 163 ms",
-        "the portable export of 3,000 messages is 12 MB, produced in 176 bounded steps (47 s) and streamed out in 200 chunks (0 s) with its digest verified on disk",
+        "300 conversations and 3,000 messages seeded through the production worker in 30 bounded commits (1009 messages/s); the explicit report's integrity_check answers ok in 0.0 s over 6,900 canonical records (15 MB file) and the startup read answers ok in 42 ms",
+        "the library's first page answers in 45 ms and twenty consecutive pages in 203 ms (max 45 ms) without listing the whole archive",
+        "a cold reopen of the persisted 3,000-message archive shows the landing in 0.2 s and answers the first library page in 78 ms",
+        "a second tab opens the same archive and reads three library pages through the owner in 162 ms",
+        "the portable export of 3,000 messages is 12 MB, produced in 176 bounded steps (51 s) and streamed out in 200 chunks (0 s) with its digest verified on disk",
         "the container restores into an isolated candidate with 6,900 canonical records (equal to the source) after 297 bounded validation steps (6 s), streamed in from disk in 1 s; the candidate is released, never activated"
       ],
       "phases": {
         "seed": {
-          "ms": 2990,
+          "ms": 2974,
           "batches": 30,
-          "messagesPerSecond": 1003
+          "messagesPerSecond": 1009
         },
         "integrity": {
-          "ms": 40,
+          "ms": 46,
+          "integrityMs": 41,
           "integrity": "ok",
+          "automaticIntegrity": "ok",
+          "lightMs": 42,
+          "databaseBytes": 16056320,
           "canonicalRecords": 6900,
           "syncOperations": 3600,
-          "usage": 62917292,
-          "quota": 10800335532
+          "usage": 62917296,
+          "quota": 10800335536
         },
         "libraryPaging": {
           "pages": 5,
           "items": 300,
-          "totalMs": 197.80000001192093,
-          "firstMs": 42.80000001192093,
-          "maxMs": 42.80000001192093,
+          "totalMs": 203.4000000357628,
+          "firstMs": 45.10000002384186,
+          "maxMs": 45.10000002384186,
           "more": false
         },
         "coldReopen": {
-          "readyMs": 167,
-          "firstPageMs": 80.69999998807907
+          "readyMs": 166,
+          "firstPageMs": 77.89999997615814
         },
         "followerTab": {
-          "firstMs": 76,
-          "totalMs": 163
+          "firstMs": 76.30000001192093,
+          "totalMs": 161.9000000357628
         },
         "portableExport": {
           "byteLength": 13048320,
-          "sha256": "465e18750f108fb45a583f808d3c2918236183f4f39f318c40380ca439eb65f5",
-          "producedMs": 46554,
+          "sha256": "d219f236cf82029f6284dc457708802cd868e371a2fe813ec49748cf61cc7b4e",
+          "producedMs": 50881,
           "advances": 176,
           "phases": [
             "snapshot",
             "encoding",
             "ready"
           ],
-          "readMs": 305,
+          "readMs": 296,
           "chunks": 200,
           "entryCount": 0
         },
@@ -76,15 +80,15 @@
           "state": "ready",
           "failure": null,
           "candidate": {
-            "archiveId": "2ecdcb76-42cc-4ad6-8a09-17a0b14b02e6",
+            "archiveId": "7da6a2e3-d770-43c5-9faa-99cfc98d9376",
             "schemaVersion": 12,
             "canonicalRecords": 6900,
             "syncOperations": 3600,
             "blobCount": 0,
             "blobBytes": 0,
             "streamingGenerations": 0,
-            "defaultWorkspaceId": "df8df94f-2945-4984-bc1e-2e3f5a4baa02",
-            "manifestSha256": "9cea22976ee0f148f3955147033a780349b6fdb223095878e60c5e06d119ab12"
+            "defaultWorkspaceId": "41512956-d3b5-4042-bdd6-366cb7d8b00f",
+            "manifestSha256": "71061ae9cd856b1f098a1355d88e6390203a1da65698e7c8a822d2aec1cb8a30"
           },
           "advances": 297,
           "phases": [
@@ -93,8 +97,8 @@
             "blob_validation",
             "ready"
           ],
-          "sentMs": 1369,
-          "validatedMs": 6083,
+          "sentMs": 1365,
+          "validatedMs": 5960,
           "maxChunkBytes": 65536
         }
       }
@@ -103,25 +107,29 @@
       "name": "webkit",
       "status": "passed",
       "checks": [
-        "300 conversations and 3,000 messages seeded through the production worker in 30 bounded commits (1334 messages/s); integrity_check answers ok in 0.0 s over 6,900 canonical records",
+        "300 conversations and 3,000 messages seeded through the production worker in 30 bounded commits (1388 messages/s); the explicit report's integrity_check answers ok in 0.0 s over 6,900 canonical records (15 MB file) and the startup read answers ok in 39 ms",
         "the library's first page answers in 41 ms and twenty consecutive pages in 186 ms (max 41 ms) without listing the whole archive",
-        "a cold reopen of the persisted 3,000-message archive shows the landing in 0.4 s and answers the first library page in 45 ms",
-        "a second tab opens the same archive and reads three library pages through the owner in 122 ms",
-        "the portable export of 3,000 messages is 12 MB, produced in 176 bounded steps (9 s) and streamed out in 200 chunks (0 s) with its digest verified on disk",
+        "a cold reopen of the persisted 3,000-message archive shows the landing in 0.4 s and answers the first library page in 46 ms",
+        "a second tab opens the same archive and reads three library pages through the owner in 119 ms",
+        "the portable export of 3,000 messages is 12 MB, produced in 176 bounded steps (8 s) and streamed out in 200 chunks (0 s) with its digest verified on disk",
         "the container restores into an isolated candidate with 6,900 canonical records (equal to the source) after 297 bounded validation steps (4 s), streamed in from disk in 0 s; the candidate is released, never activated"
       ],
       "phases": {
         "seed": {
-          "ms": 2249,
+          "ms": 2162,
           "batches": 30,
-          "messagesPerSecond": 1334
+          "messagesPerSecond": 1388
         },
         "integrity": {
-          "ms": 39,
+          "ms": 41,
+          "integrityMs": 36,
           "integrity": "ok",
+          "automaticIntegrity": "ok",
+          "lightMs": 39,
+          "databaseBytes": 16097280,
           "canonicalRecords": 6900,
           "syncOperations": 3600,
-          "usage": 62914560,
+          "usage": 5029612334,
           "quota": 20615843021
         },
         "libraryPaging": {
@@ -133,24 +141,24 @@
           "more": false
         },
         "coldReopen": {
-          "readyMs": 384,
-          "firstPageMs": 45
+          "readyMs": 385,
+          "firstPageMs": 46
         },
         "followerTab": {
-          "firstMs": 42,
-          "totalMs": 122
+          "firstMs": 41,
+          "totalMs": 119
         },
         "portableExport": {
-          "byteLength": 13089280,
-          "sha256": "7435320e9fedf8323a2272d1a81caaeb081a4503474a5811b94f33d2314414f8",
-          "producedMs": 8819,
+          "byteLength": 13081088,
+          "sha256": "36c3af05873a4115f0dd2bd9794c3730c3ce8ebc651ad58ebf29422626141be2",
+          "producedMs": 8252,
           "advances": 176,
           "phases": [
             "snapshot",
             "encoding",
             "ready"
           ],
-          "readMs": 276,
+          "readMs": 285,
           "chunks": 200,
           "entryCount": 0
         },
@@ -158,15 +166,15 @@
           "state": "ready",
           "failure": null,
           "candidate": {
-            "archiveId": "c6ca6934-a217-45ca-971b-2de737effbeb",
+            "archiveId": "f20466aa-5a06-4cda-b392-dcaa8a348f43",
             "schemaVersion": 12,
             "canonicalRecords": 6900,
             "syncOperations": 3600,
             "blobCount": 0,
             "blobBytes": 0,
             "streamingGenerations": 0,
-            "defaultWorkspaceId": "9cc9d7ed-86f4-440f-91ca-cfe6a8c7d552",
-            "manifestSha256": "c673b069d033a13c6b2028850382286d21064fe6d001f261b8764ec9ddf8dbab"
+            "defaultWorkspaceId": "83f5a105-3d49-4b0d-a4a7-53c28c9aeacf",
+            "manifestSha256": "7d9a21a6336d8e60a77fc022722c0c37811cbdd971cf89fa88db8f94a6bcf9a5"
           },
           "advances": 297,
           "phases": [
@@ -176,7 +184,7 @@
             "ready"
           ],
           "sentMs": 496,
-          "validatedMs": 4477,
+          "validatedMs": 4357,
           "maxChunkBytes": 65536
         }
       }
@@ -185,9 +193,9 @@
   "sourceSha256": {
     "packages/storage/src/worker/archives/export.ts": "8b7ce6aba6b9045b17354464b720e07459672baf06accd7d5834c0e3bb07bcb7",
     "packages/storage/src/worker/archives/index.ts": "f86be726dcbb298934b564f44d32a201b98ea71e58cb18d8b296e775409a9698",
-    "packages/storage/src/worker/archive-database.ts": "d129a32a4afa29af38cb8eb2a6de2321104ccab616b3aea14d73aef6b81fce44",
-    "packages/app/tests/browser/index.ts": "07c85cb6d6705a2cb53ab37f0e3829c4322cb0f9dd2b620ad308b4f41e956041",
-    "packages/app/tests/browser/stress.mjs": "6db61c604d342cdc413947f6a3edca2f9491307dd74931b8df0af606ab22e449"
+    "packages/storage/src/worker/archive-database.ts": "768bb31b1d42aac9f6bcb73596772c256807dbc6bf2b908dcdd886c4c309a06d",
+    "packages/app/tests/browser/index.ts": "9f0bef0007dca30640ca479a9ed2f5b38b505f86a363b428359ad21da51224ed",
+    "packages/app/tests/browser/stress.mjs": "83c4efb26ba0a68996f820875e8d7fc595b7cf3daf3b7c781c5aa67da21e6ea2"
   },
   "environment": {
     "platform": "darwin",
@@ -198,5 +206,5 @@
     "node": "v22.23.1"
   },
   "qualification": "Synthetic short messages seeded through the production worker; no embedding model, no provider, no Cloud account; timings are single runs under development load on one machine.",
-  "finishedAt": "2026-09-13T01:06:54.864Z"
+  "finishedAt": "2026-09-13T02:35:05.179Z"
 }

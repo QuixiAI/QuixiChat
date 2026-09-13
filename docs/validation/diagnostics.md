@@ -8,7 +8,8 @@ WASM 3.53.4 with sqlite-vec, canonical schema 12.
 ## What is proven
 
 **Classification (Node, real SQLite WASM)** — `npm run test:storage:diagnostics`,
-12 tests, `packages/storage/tests/diagnostics/diagnose.test.ts`:
+`packages/storage/tests/diagnostics/diagnose.test.ts` (14 tests; the script's
+24 tests also cover the doctor audit, blob hash audit and the deadline below):
 
 - the bundled build reports FTS5 and sqlite-vec available;
 - a healthy archive reports every §100 check `ok`, in product order, with a
@@ -26,7 +27,18 @@ WASM 3.53.4 with sqlite-vec, canonical schema 12.
 - unreferenced b-tree pages (an index whose `sqlite_master` row was removed
   through `writable_schema`, reopened) are reported by `integrity_check` as
   `corruption` while the schema check stays `ok`; a dropped canonical table
-  is schema `corruption`; a malformed reference in a record is `corruption`.
+  is schema `corruption`; a malformed reference in a record is `corruption`;
+- the `sqlite_integrity` check records `elapsedMs` and `databaseBytes`, and
+  the light startup read (`automaticIntegrity`) answers `ok` for a file
+  within `AUTOMATIC_INTEGRITY_CHECK_MAX_BYTES` and `unchecked`, without a
+  scan, above it (ADR 0040 amendment 3).
+
+**Report deadline (Node, fake worker)** — `deadline.test.ts`, 3 tests: a
+per-request `timeoutMs` outlives the client default and dispatches no
+cancellation; without it the default deadline still yields `UNKNOWN_OUTCOME`;
+an invalid deadline (0, negative, fractional, above 600 s, NaN) is refused
+before dispatch. The report controller and the stress harness request
+`diagnosticsReport` with `INTEGRITY_CHECK_DEADLINE_MS`.
 
 **Application (Chromium and WebKit)** — `npm run test:app:storage-health:browser`,
 12 checks per engine, [retained report](results/blob-inventory-ui-macos.json).
