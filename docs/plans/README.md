@@ -43,8 +43,11 @@ found the bundle only linker-signed (deep verification failed); the config
 now ad-hoc signs by default so the bundle is sealed and verifies, with a
 Developer ID overriding through the environment. No identity exists here
 and no updater is configured; both are recorded as release-checklist
-gates. The 1M-message run is still exporting. Completed plans remain
-**12 of 23**.
+gates. The 1M-message run's portable export completed: 3,980 MB in
+10,214 s over 62,679 bounded steps (about 163 ms per step in WebKit, the
+per-step record budget of 128 dominating the step count); the restore
+validation is running and the full table is recorded next. Completed plans
+remain **12 of 23**.
 
 Previous completed iteration (2026-09-13): **self-hosted web hosting proof**
 (plan 24 task 7, web part). `tests/hosts/web-hosting-proof.mjs` runs the
