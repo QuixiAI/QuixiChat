@@ -1,6 +1,6 @@
 # 06 — Integrate the first live providers
 
-**Status:** In progress — shared composition, bounded transport/persistence, image/PDF/audio mappings, account health, explicit Anthropic counting, provenance-bound reasoning continuation with manual thinking and named handling of provider-specific output parts implemented; scale and live-provider qualification remain
+**Status:** In progress (two recorded gates: checkpoint batching at product scale, live-provider qualification) — shared composition, bounded transport/persistence, image/PDF/audio mappings, account health, explicit Anthropic counting, provenance-bound reasoning continuation with manual thinking and named handling of provider-specific output parts implemented; scale and live-provider qualification remain
 
 **Workstream:** A3 — provider adapters
 
@@ -42,6 +42,11 @@ Support OpenAI-compatible and Anthropic generation through one typed adapter con
 - [x] Stop/cancel releases transport resources and yields the correct terminal or partial state.
 - [x] Malformed or interrupted streams retain received content and expose an intelligible failure.
 - [x] Capabilities drive request validity; absent usage/cost values remain unknown rather than fabricated.
+
+## Outstanding gates (added 2026-09-13 so the task list matches the remaining-scope notes below)
+
+- [ ] Measure and batch fine-grained canonical checkpoints at product scale without breaking byte bounds, durable raw retention or stop behavior. The current finite attempt ceilings are documented, not scale validation.
+- [ ] Qualify the reviewed adapters against live provider responses. Every proof so far uses controlled HTTP fixtures; no real request is made without the user's authorization, so this is a user gate.
 
 ## Implementation evidence and remaining work
 
