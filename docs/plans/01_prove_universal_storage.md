@@ -1,6 +1,6 @@
 # 01 — Prove universal local storage
 
-**Status:** In progress — backend feasibility gate passed on measured web/Docker/macOS hosts; additional platform qualification remains open.
+**Status:** Complete (2026-09-13) — the universal SQLite WASM/OPFS path is proven on the web, Docker web and macOS desktop hosts with the go/no-go published in the [storage matrix](../validation/storage-proof.md); support is restricted where the path fails (Linux WebKitGTK 2.50.6 no-go) or cannot be verified here (installed Safari, Windows/WebView2, other combinations), and those remain release-host gates in plan 24 rather than a second backend.
 
 **Workstream:** A1 — platform gate
 
@@ -29,7 +29,7 @@ Prove that one Storage Worker → SQLite WASM → OPFS implementation can suppor
 - [x] Implement minimal worker startup, typed request/reply/error handling, database initialization, migration bootstrap, serialized transactions, shutdown, and OPFS directory ownership in the storage package.
 - [x] Implement one-owner coordination using a Web Lock and same-origin messaging. Define forwarding, owner loss, reconnect, and notification behavior without allowing a second SQLite owner.
 - [x] Add a developer storage-proof screen to the shared app and run the identical implementation through web, Docker web, and Tauri. Keep proof records separate from future user history.
-- [ ] Exercise persistence requests, reload/restart durability, quota exhaustion, interrupted transactions, migration failure, and multi-tab contention. Record Safari durability and WebKitGTK OPFS results explicitly.
+- [x] Exercise persistence requests, reload/restart durability, quota exhaustion, interrupted transactions, migration failure, and multi-tab contention. Record Safari durability and WebKitGTK OPFS results explicitly. — Ticked 2026-09-13 against retained evidence: persistence requests through the host with the browser's actual answer ([onboarding.md](../validation/onboarding.md)); reload and browser-process restart durability, interrupted transactions and owner takeover ([storage-proof.md](../validation/storage-proof.md), [archive-client.md](../validation/archive-client.md)); real OPFS quota exhaustion and recovery ([QUOTA.md](../../tests/diagnostics/QUOTA.md), `tests/e2e/storage-quota.spec.ts`); migration failure as a typed startup outcome with rescue export ([ADR 0016](../decisions/0016-startup-failure-and-schema-recovery.md)) and refused newer or altered ledgers (`repository.test.ts`); multi-tab contention through the owner/follower protocol proofs and a second tab reading a 1,000,000-message archive ([storage-stress.md](../validation/storage-stress.md)). Safari: unverified, remote automation disabled ([safari.md](../../tests/hosts/safari.md)); WebKitGTK 2.50.6: no-go for synchronous OPFS handles ([linux](../../tests/hosts/linux/README.md)).
 - [x] Publish the tested support matrix and a go/no-go decision. If the universal path fails on a host, document the blocker and restrict support instead of adding a second canonical backend.
 
 ## Deliverables and interfaces
