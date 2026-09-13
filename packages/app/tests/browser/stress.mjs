@@ -51,6 +51,8 @@ try {
     const container = resolve(temporary, `${name}.portable`);
     try {
       let page = await context.newPage();
+      const forward = (target) => target.on("console", (message) => { if (message.text().startsWith("[stress] ")) log(name, message.text().slice(9)); });
+      forward(page);
       page.on("pageerror", (error) => errors.push(String(error)));
       await page.goto(url);
       await expect(page.getByRole("heading", { name: "Pick up where you left off." })).toBeVisible();
@@ -77,7 +79,7 @@ try {
       await page.evaluate(() => window.appAcceptance.close());
       await page.close();
       const reopenStarted = Date.now();
-      page = await context.newPage(); page.on("pageerror", (error) => errors.push(String(error)));
+      page = await context.newPage(); page.on("pageerror", (error) => errors.push(String(error))); forward(page);
       await page.goto(url);
       await expect(page.getByRole("heading", { name: "Pick up where you left off." })).toBeVisible({ timeout: 120_000 });
       const reopenReadyMs = Date.now() - reopenStarted;

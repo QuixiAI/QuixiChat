@@ -611,7 +611,9 @@ Object.assign(window, {
         let advances = 0; const phases: string[] = [];
         while (job.state === "working") {
           job = await storage.request(id(), "advanceArchiveJob", { operationId: id(), jobId: job.jobId, maxRecords: 128, maxBytes: 1_048_576 }, { timeoutMs: INTEGRITY_CHECK_DEADLINE_MS });
-          advances++; if (phases.at(-1) !== job.phase) phases.push(job.phase);
+          advances++;
+          if (phases.at(-1) !== job.phase) { phases.push(job.phase); console.log(`[stress] export phase ${job.phase} after ${advances} steps (${((performance.now() - started) / 1000).toFixed(0)} s)`); }
+          if (advances % 5000 === 0) console.log(`[stress] export ${job.phase}: ${advances} steps, ${job.completedRecords} records, ${job.completedBytes}/${job.totalBytes ?? "?"} bytes (${((performance.now() - started) / 1000).toFixed(0)} s)`);
           if (advances > 5_000_000) throw new Error("Export did not finish");
         }
         if (job.state !== "ready" || !job.output) throw new Error(`Export ended ${job.state}: ${job.failure?.reason ?? "no output"}`);
@@ -660,7 +662,9 @@ Object.assign(window, {
         let advances = 0; const phases: string[] = [];
         while (status.state === "working") {
           status = await storage.request(id(), "advanceArchiveJob", { operationId: id(), jobId: job.jobId, maxRecords: 128, maxBytes: 1_048_576 }, { timeoutMs: INTEGRITY_CHECK_DEADLINE_MS });
-          advances++; if (phases.at(-1) !== status.phase) phases.push(status.phase);
+          advances++;
+          if (phases.at(-1) !== status.phase) { phases.push(status.phase); console.log(`[stress] restore phase ${status.phase} after ${advances} steps (${((performance.now() - started) / 1000).toFixed(0)} s)`); }
+          if (advances % 5000 === 0) console.log(`[stress] restore ${status.phase}: ${advances} steps, ${status.completedRecords}/${status.totalRecords ?? "?"} records, ${status.completedBytes}/${status.totalBytes ?? "?"} bytes (${((performance.now() - started) / 1000).toFixed(0)} s)`);
           if (advances > 5_000_000) throw new Error("Restore validation did not finish");
         }
         const result = { state: status.state, failure: status.failure, candidate: status.candidate, advances, phases, validatedMs: performance.now() - started };
