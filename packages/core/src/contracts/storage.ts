@@ -4,6 +4,8 @@ import type { BlobInventoryOperations } from './blob-inventory.ts';
 import { assertDiagnosticsArgs } from './diagnostics.ts';
 import { assertDoctorAuditArgs } from './doctor-audit.ts';
 import { assertBlobHashAuditArgs } from './blob-hash-audit.ts';
+import { assertPortabilityArgs } from './portability.ts';
+import type { PortabilityOperations } from './portability.ts';
 import type { BlobHashAuditOperations } from './blob-hash-audit.ts';
 import type { DoctorAuditOperations } from './doctor-audit.ts';
 import type { DiagnosticsOperations } from './diagnostics.ts';
@@ -142,7 +144,7 @@ export interface LocalSyncOperation extends SyncOperation { sequence: number }
 export interface SyncOperationPage { items: LocalSyncOperation[]; nextCursor: string | null; bytes: number; lastSequence: number; highWaterSequence: number }
 export interface PageBudget { maxItems: number; maxBytes: number; cursor: string | null }
 export interface EntityPage { items: JsonValue[]; nextCursor: string | null; bytes: number }
-export interface StorageOperations extends DiagnosticsOperations, DoctorAuditOperations, BlobHashAuditOperations, NormalizedImportOperations, ImportWorkOperations, SearchOperations, ProducerOperations, ViewOperations, ArchivesOperations, ArchiveSelectionOperations, ExtractionOperations, PreferenceOperations, RoutingAliasOperations, BlobInventoryOperations {
+export interface StorageOperations extends DiagnosticsOperations, DoctorAuditOperations, BlobHashAuditOperations, PortabilityOperations, NormalizedImportOperations, ImportWorkOperations, SearchOperations, ProducerOperations, ViewOperations, ArchivesOperations, ArchiveSelectionOperations, ExtractionOperations, PreferenceOperations, RoutingAliasOperations, BlobInventoryOperations {
   diagnostics: { args: null; result: {backend:'sqlite-wasm-opfs-sahpool';ownerId:string;schemaVersion:number;integrity:string;canonicalRecords:number;syncOperations:number;persisted:boolean|null;usage:number|null;quota:number|null} };
   commit: { args: MutationBatch; result: CommitResult };
   readEntities: { args: { threadId: QuixiId | null; collection: Exclude<keyof CanonicalHistory,"version">; page: PageBudget }; result: EntityPage };
@@ -198,6 +200,7 @@ export function assertStorageRequest(request: StorageRequest): void {
     case 'importRunList': case 'importWorkRead': case 'importRunReadGroups': assertImportWorkArgs(request.operation,request.args);assertPageBudget(request.args.page);if(request.args.page.maxItems>128)throw new Error('Import work page is too large');break;
     case 'diagnosticsReport': assertDiagnosticsArgs(request.operation, request.args); break;
     case 'beginBlobHashAudit': case 'advanceBlobHashAudit': case 'blobHashAuditStatus': case 'readBlobHashAuditFindings': case 'cancelBlobHashAudit': assertBlobHashAuditArgs(request.operation, request.args); break;
+    case 'recordPortabilityAssessments': case 'portabilityCoverage': assertPortabilityArgs(request.operation, request.args); break;
     case 'beginDoctorAudit': case 'advanceDoctorAudit': case 'doctorAuditStatus': case 'readDoctorAuditFindings': case 'cancelDoctorAudit': assertDoctorAuditArgs(request.operation, request.args); break;
     case 'diagnostics': case 'readArchiveActivationContext': if(request.args!==null)throw new Error('Operation requires null args');break;
     case 'activateRestoredArchive': assertArchiveActivationArgs(request.args);break;

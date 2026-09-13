@@ -2081,6 +2081,36 @@ try {
       expect((await records(page, "events")).items.filter((value) => value.type === "Migration")).toHaveLength(migrationEventsBefore + 2 * eligibleCount);
       evidence.bulkMigration = { target: targetKey, migrated: eligibleCount, titles: migratedTitles, restoredTo: backKey };
       evidence.checks.push(`reviewed migration routes the ${eligibleCount} eligible conversations to ${targetLabel}: the review lists each one with what it would carry, Keep the current routing changes nothing, confirming commits one SetRoutingProfile and one Migration event per conversation against its revision, messages are untouched, ineligible conversations are left alone, a migrated conversation opens on the target connection with its Migration event listed, and a second reviewed migration routes the same conversations back to ${backLabel} with one more event each`);
+      // Product §45 portability filter: search matches only conversations whose published status equals the filter.
+      const rowOutcomes = Object.fromEntries(await bulkRows.locator("> li").evaluateAll((nodes) => nodes.map((node) => [node.querySelector("h3").textContent.replace(/ · Migrated$/, ""), node.dataset.outcome])));
+      await page.getByRole("button", { name: "Library", exact: true }).click();
+      const portabilityStatuses = await page.evaluate(() => window.appAcceptance.request("portabilityCoverage", null));
+      expect(portabilityStatuses.assessed).toBe(libraryThreads.length - (bulkCounts.empty ?? 0) - (bulkCounts.failed ?? 0));
+      const searchWithFilter = async (filter, text) => {
+        // Close any open results first so the next results region is the new search's.
+        if (await page.getByRole("region", { name: "Search results" }).count()) { await page.getByRole("button", { name: "Close results", exact: true }).click(); await expect(page.getByRole("region", { name: "Search results" })).toHaveCount(0); }
+        await page.getByLabel("Portability filter", { exact: true }).selectOption(filter);
+        await page.getByLabel("Search mode", { exact: true }).selectOption("exact");
+        await page.getByLabel("Search your history", { exact: true }).fill(text);
+        await page.getByRole("button", { name: "Search", exact: true }).click();
+        await expect(page.getByRole("region", { name: "Search results" })).toBeVisible();
+        return page.getByRole("region", { name: "Search results" }).locator("article button").allTextContents();
+      };
+      const unfiltered = await searchWithFilter("", "comet");
+      expect(unfiltered.length).toBeGreaterThanOrEqual(1);
+      const dependentTitles = Object.entries(rowOutcomes).filter(([, outcome]) => outcome === "provider_dependent").map(([title]) => title);
+      const filtered = await searchWithFilter("provider_dependent", "comet");
+      console.log(`${name}: portability filter rows ${JSON.stringify(rowOutcomes)} unfiltered ${JSON.stringify(unfiltered)} filtered ${JSON.stringify(filtered)}`);
+      expect(filtered.every((title) => dependentTitles.includes(title))).toBe(true);
+      expect(filtered.length).toBe(unfiltered.filter((title) => dependentTitles.includes(title)).length);
+      await expect(page.getByTestId("search-portability-coverage")).toContainText(`Uses the library analysis: ${portabilityStatuses.assessed} conversations assessed`);
+      const blockedHits = await searchWithFilter("blocked", "comet");
+      expect(blockedHits).toHaveLength(0);
+      await page.getByLabel("Portability filter", { exact: true }).selectOption("");
+      await page.getByLabel("Search mode", { exact: true }).selectOption("best");
+      if (await page.getByRole("region", { name: "Search results" }).count()) await page.getByRole("button", { name: "Close results", exact: true }).click();
+      evidence.portabilityFilter = { assessed: portabilityStatuses.assessed, unfiltered: unfiltered.length, providerDependent: filtered.length, blocked: blockedHits.length };
+      evidence.checks.push(`the search form's portability filter uses the ${portabilityStatuses.assessed} statuses the library analysis published to the storage owner and is applied in the worker's SQL: a provider-dependent filter returns exactly the matching conversations' hits for the same query (${filtered.length} of ${unfiltered.length}), a blocked filter returns none, and the coverage note names the analysis`);
       await page.getByRole("button", { name: "Portability", exact: true }).click();
       await portabilityRow.getByRole("button", { name: "Open conversation", exact: true }).click();
       await expect(page.getByRole("heading", { name: "Portability thread", exact: true })).toBeVisible();

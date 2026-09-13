@@ -9,6 +9,7 @@ import type {
   SqlValue,
 } from "../../storage/src/worker/canonical/repository.ts";
 import { SearchRepository } from "../../storage/src/worker/search/index.ts";
+import { PortabilityRepository } from "../../storage/src/worker/portability.ts";
 import { SEARCH_TRIGGERS_LEGACY, SEARCH_SCHEMA_LEGACY_CHECKSUM } from "../../storage/src/worker/search/schema.ts";
 import type { SearchBlobAccess } from "../../storage/src/worker/search/index.ts";
 import type {
@@ -520,10 +521,22 @@ test("source/provider/model/date/tag/media/origin filters and explicit dependenc
     );
     assert.equal(query(search, "needle", { origin: "native" }).items.length, 0);
     assert.equal(query(search, "needle", { hasCode: false }).items.length, 1);
-    assert.throws(
-      () => query(search, "needle", { portability: "fully_portable" }),
-      /plan10/,
-    );
+    // Product §45: portability filters use the analysis statuses the
+    // application publishes; a conversation without one is not matched.
+    const portability = new PortabilityRepository(db);
+    portability.initialize();
+    assert.equal(query(search, "needle", { portability: "fully_portable" }).items.length, 0);
+    const needleThreads = [...new Set(query(search, "needle").items.map((hit) => hit.threadId))].filter((value): value is string => !!value);
+    assert.ok(needleThreads.length >= 1);
+    const recorded = portability.record({ items: [{ threadId: needleThreads[0]!, status: "portable_with_transformations", revision: 0 }], targetsKey: "anthropic|m,openai|m", assessedAt: now });
+    assert.equal(recorded.coverage.assessed, 1); assert.equal(recorded.coverage.byStatus.portable_with_transformations, 1);
+    assert.deepEqual([...new Set(query(search, "needle", { portability: "transformed" }).items.map((hit) => hit.threadId))], [needleThreads[0]]);
+    assert.equal(query(search, "needle", { portability: "blocked" }).items.length, 0);
+    // A new target set discards the earlier statuses.
+    portability.record({ items: [{ threadId: needleThreads[0]!, status: "blocked", revision: 1 }], targetsKey: "openai|m", assessedAt: now + 1 });
+    assert.equal(query(search, "needle", { portability: "transformed" }).items.length, 0);
+    assert.deepEqual([...new Set(query(search, "needle", { portability: "blocked" }).items.map((hit) => hit.threadId))], [needleThreads[0]]);
+    assert.equal(portability.coverage().targetsKey, "openai|m");
     assert.throws(
       () => query(search, "needle", { sourceTypes: ["ocr"] }),
       /plan15/,

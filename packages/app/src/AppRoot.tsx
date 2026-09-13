@@ -369,6 +369,7 @@ export function AppRoot({
   const [compareKeys, setCompareKeys] = useState<string[]>([]);
   const providersRef = useRef(providers); providersRef.current = providers;
   const migration = useMemo(() => createMigrationController({ storage: services.storage, assess: (threadId, targets, settings) => chat.assessThreadPortability(threadId, targets, settings), providers: () => providersRef.current, settings: () => ({ maxOutputTokens: 1024 }), onMigrated: () => { void library.refresh(); } }), [services, chat, library]);
+  const migrationState = useSyncExternalStore(migration.subscribe, migration.getSnapshot);
   // The device's own offline signal is authoritative when false; the
   // provider's answers establish everything else about a connection.
   const [online, setOnline] = useState(
@@ -400,6 +401,15 @@ export function AppRoot({
   >("library");
   const [searchMode, setSearchMode] = useState<"best" | "exact" | "semantic">("best");
   const [searchNotice, setSearchNotice] = useState<string | null>(null);
+  /** Product §45 portability filter, served from the statuses the library analysis published. */
+  const [searchPortability, setSearchPortability] = useState<"" | "fully_portable" | "transformed" | "provider_dependent" | "blocked">("");
+  const [portabilityCoverage, setPortabilityCoverage] = useState<{ assessed: number; assessedAt: number | null } | null>(null);
+  useEffect(() => {
+    if (section !== "library") return;
+    let active = true;
+    void services.storage.request(crypto.randomUUID(), "portabilityCoverage", null).then((coverage) => { if (active) setPortabilityCoverage({ assessed: coverage.assessed, assessedAt: coverage.assessedAt }); }, () => { if (active) setPortabilityCoverage(null); });
+    return () => { active = false; };
+  }, [section, services, migrationState.state]);
   const [filter, setFilter] = useState(""),
     [query, setQuery] = useState(""),
     [draft, setDraft] = useState(""),
@@ -674,7 +684,8 @@ export function AppRoot({
   const lastVector = useRef<{ query: string; vector: number[] } | null>(null);
   const runSearch = async (cursor: string | null) => {
     const text = cursor ? state.query : query;
-    if (searchMode === "exact") { setSearchNotice(null); lastVector.current = null; await library.search(text, cursor, { mode: "exact" }); return; }
+    const portabilityFilter = searchPortability ? { portability: searchPortability } : {};
+    if (searchMode === "exact") { setSearchNotice(null); lastVector.current = null; await library.search(text, cursor, { mode: "exact", ...portabilityFilter }); return; }
     let vector = cursor && lastVector.current?.query === text ? lastVector.current.vector : null;
     if (!vector) {
       const embedded = await semantic.embedQuery(text);
@@ -685,7 +696,7 @@ export function AppRoot({
         setSearchNotice(`Semantic ranking unavailable (${embedded.reason}). Showing text matches.`);
       }
     }
-    await library.search(text, cursor, { mode: searchMode, ...(vector ? { queryVector: vector } : {}) });
+    await library.search(text, cursor, { mode: searchMode, ...(vector ? { queryVector: vector } : {}), ...portabilityFilter });
   };
   const openConversationHit = async (hit: SearchHit) => {
     const current = library.getSnapshot();
@@ -1461,6 +1472,21 @@ export function AppRoot({
                 <option value="exact">Exact</option>
                 <option value="semantic">Semantic</option>
               </select>
+              <label htmlFor="search-portability">Portability filter</label>
+              <select id="search-portability" value={searchPortability} onChange={(event) => setSearchPortability(event.target.value as typeof searchPortability)}>
+                <option value="">Any portability</option>
+                <option value="fully_portable">Fully portable</option>
+                <option value="transformed">With transformations</option>
+                <option value="provider_dependent">Provider-dependent</option>
+                <option value="blocked">Blocked</option>
+              </select>
+              {searchPortability && (
+                <span className="muted" data-testid="search-portability-coverage">
+                  {portabilityCoverage && portabilityCoverage.assessed > 0
+                    ? `Uses the library analysis: ${portabilityCoverage.assessed.toLocaleString()} conversations assessed${portabilityCoverage.assessedAt ? ` on ${new Date(portabilityCoverage.assessedAt).toLocaleString()}` : ""}; unassessed conversations are not matched.`
+                    : "No conversation has a portability status yet: run Analyse the library under Portability first."}
+                </span>
+              )}
               <label>
                 Search your history
                 <input

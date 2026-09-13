@@ -5,6 +5,7 @@ import type { EmbeddingService } from "@quixi/quixi-embed/service";
 import { createIsolatedStorageClient as createStorageClient } from "../../../storage/tests/isolated-client.ts";
 import { initialProviderCatalogs, openAIRegionalEvidence } from "@quixi/providers";
 import type { ProviderConnection } from "../../src/features/providers/types.ts";
+import type { StorageOperations } from "@quixi/core/contracts";
 import { createWebHost } from "../../../../apps/web/src/host/index.ts";
 import { configuredWebProviders } from "../../../../apps/web/src/configuration.ts";
 const archiveId =
@@ -334,6 +335,8 @@ Object.assign(window, {
       return seeded;
     },
     semanticStatus: () => storage.request(crypto.randomUUID(), "semanticStatus", null),
+    /** Direct worker request for proofs that inspect a derived state. */
+    request: <K extends keyof StorageOperations>(operation: K, args: StorageOperations[K]["args"]) => storage.request(crypto.randomUUID(), operation, args),
     /** Plan 12: every library conversation (active, then archived) by title, as the bulk analysis walks them. */
     async libraryThreads() {
       const out: { threadId: string; title: string; archived: boolean }[] = [];

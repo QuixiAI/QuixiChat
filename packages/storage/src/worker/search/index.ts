@@ -41,6 +41,7 @@ import {
   searchVersion,
   VISIBLE_HEAD,
 } from "./schema.ts";
+import { PORTABILITY_FILTER_STATUS, PORTABILITY_STATUS_TABLE } from "../portability.ts";
 import { SemanticRepository } from "./semantic.ts";
 import type { SemanticInspect, VisibleChunkSql } from "./semantic.ts";
 import { resolveDocumentHitSource, resolveConversationHitSource } from "./navigation.ts";
@@ -1345,6 +1346,9 @@ export class SearchRepository {
     if (f.after !== undefined) { where.push("h.date>=?"); bind.push(f.after); }
     if (f.before !== undefined) { where.push("h.date<=?"); bind.push(f.before); }
     if (f.origin) { where.push("h.origin=?"); bind.push(f.origin); }
+    // Product §45: the application's analysis publishes one derived status per
+    // conversation (portability.ts); a conversation without one is not matched.
+    if (f.portability) { where.push(`h.thread_id IN(SELECT thread_id FROM ${PORTABILITY_STATUS_TABLE} WHERE status=?)`); bind.push(PORTABILITY_FILTER_STATUS[f.portability]); }
     if (f.hasCode !== undefined) { where.push("c.has_code=?"); bind.push(f.hasCode ? 1 : 0); }
     for (const tag of f.tags ?? []) { where.push("EXISTS(SELECT 1 FROM json_each(h.tags) WHERE value=?)"); bind.push(tag); }
     return { where, bind };
@@ -1383,11 +1387,6 @@ export class SearchRepository {
       throw new SearchError(
         "OVERLOADED",
         "Search page byte budget must hold an empty result array.",
-      );
-    if (args.filters.portability)
-      throw new SearchError(
-        "UNSUPPORTED",
-        "Portability filtering requires the plan10 compatibility analysis.",
       );
     if (args.filters.sourceTypes?.includes("ocr"))
       throw new SearchError(

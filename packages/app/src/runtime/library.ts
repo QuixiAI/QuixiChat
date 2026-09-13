@@ -703,13 +703,13 @@ export function createLibraryController(services: AppServices) {
     },
     /** Best is the default (product §44). A query vector embedded by the
      * local runtime turns Best into hybrid RRF and enables Semantic. */
-    async search(query: string, cursor: string | null = null, options: { mode?: "exact" | "best" | "semantic"; queryVector?: number[] } = {}) {
+    async search(query: string, cursor: string | null = null, options: { mode?: "exact" | "best" | "semantic"; queryVector?: number[]; portability?: "fully_portable" | "transformed" | "provider_dependent" | "blocked" } = {}) {
       const epoch = ++searchEpoch;
       await perform(async () => {
         const result = await storage.request(id(), "searchArchive", {
           query,
           mode: options.mode ?? "best",
-          filters: {},
+          filters: options.portability ? { portability: options.portability } : {},
           page: { ...budget, cursor },
           ...(options.queryVector ? { queryVector: options.queryVector } : {}),
         });

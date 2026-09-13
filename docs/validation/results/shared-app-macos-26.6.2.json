@@ -4,7 +4,7 @@
     "webkit"
   ],
   "status": "passed",
-  "startedAt": "2026-09-12T23:29:12.486Z",
+  "startedAt": "2026-09-13T00:31:38.342Z",
   "hosts": [
     {
       "name": "chromium",
@@ -50,6 +50,7 @@
         "the conversation's routing profile chooses the route before the first attempt: a selected connection that fails the minimum context requirement or whose credential the provider rejected is routed around with the reason recorded as an AutomaticFallback event on the attempt, no qualifying candidate refuses sending with every reason stated, and clearing the requirement restores the selected connection",
         "the open conversation shows its portability status with one inspectable reason per configured target and what is never sent, and a path whose assistant turn carries a reasoning marker without a verified provider block is portable to every target with that omission named per target and no invented block",
         "reviewed migration routes the 4 eligible conversations to OpenAI · GPT-4.1 mini: the review lists each one with what it would carry, Keep the current routing changes nothing, confirming commits one SetRoutingProfile and one Migration event per conversation against its revision, messages are untouched, ineligible conversations are left alone, a migrated conversation opens on the target connection with its Migration event listed, and a second reviewed migration routes the same conversations back to Anthropic · Claude Haiku 4.5 with one more event each",
+        "the search form's portability filter uses the 4 statuses the library analysis published to the storage owner and is applied in the worker's SQL: a provider-dependent filter returns exactly the matching conversations' hits for the same query (0 of 24), a blocked filter returns none, and the coverage note names the analysis",
         "bulk portability analyses all 4 library conversations page by page against the configured targets (2 fully portable, 1 with transformations, 1 provider-dependent, 0 blocked, 0 without messages, 0 failed) with inspectable per-target reasons, an outcome filter, 32-row pages and a way to open each conversation",
         "keyboard import picker, start and report preparation preserve focus through async work; opening the saved conversation focuses its heading, and import live progress announces phases without changing numeric counters",
         "settled compatibility announcements retain one atomic status node through repeated valid settings edits; blocked reasons remain readable without remounted alerts, focus and draft remain, and inspection sends no HTTP or canonical writes",
@@ -71,7 +72,7 @@
         "WAV/MP3 picker and drop retain exact Audio parts and verified bytes, refuse unsupported/mislabeled/oversized drafts, send and regenerate input_audio with text-only output, block unsupported models without dispatch, and preserve originals through portable restore and restored regeneration",
         "an Anthropic response with a citation and an unknown output block, and an OpenAI response with a URL annotation and a provider-specific delta, are retained as Citation and stream-located ProviderArtifact parts; the next send, count, regeneration and cross-provider switch carry the answer text plus a plain source note and none of the provider-specific records, with the switch report naming each transformation, while import-derived artifacts remain refused by name",
         "manual thinking for the reviewed Haiku 4.5 profile refuses budgets below 1,024, at or above the output limit, with temperature or an out-of-range top-p without writes or HTTP; a thinking-enabled send carries the enabled budget and records signed and redacted receipts beside their markers; count, a later send, and regeneration carry those blocks first and unchanged from verified receipts on the producing model; the OpenAI switch report and portability name the omitted blocks and the OpenAI request carries none; returning to Anthropic restores them with the response's records unchanged",
-        "accessibility audit passes on 10 views: every visible control named, visible text at 4.5:1 or better, unique landmark names, no skipped heading levels, no live region inside the message list, status regions with text, and outlines on keyboard-focused controls (548 controls, 842 text nodes)",
+        "accessibility audit passes on 10 views: every visible control named, visible text at 4.5:1 or better, unique landmark names, no skipped heading levels, no live region inside the message list, status regions with text, and outlines on keyboard-focused controls (551 controls, 851 text nodes)",
         "the conversation library and an open conversation with saved messages fit 320px at normal and 200% root text size without horizontal overflow",
         "a 180-character title with a 70-character unbroken token wraps in the library, the heading and the settings form at 320px and 200% text without overflow, and renaming back restores the original",
         "all four interaction preferences survive a fresh browser process with exact revision and send-key preserved; saved timestamps, hidden badges, compact composer and model list render without credentials or HTTP at 390px, then defaults are restored for subsequent checks",
@@ -114,9 +115,9 @@
       "audits": {
         "welcome": {
           "view": "welcome",
-          "controls": 24,
+          "controls": 25,
           "unnamed": [],
-          "textNodes": 31,
+          "textNodes": 34,
           "contrast": [],
           "landmarks": [
             {
@@ -164,9 +165,9 @@
         },
         "conversation": {
           "view": "conversation",
-          "controls": 164,
+          "controls": 165,
           "unnamed": [],
-          "textNodes": 269,
+          "textNodes": 272,
           "contrast": [],
           "landmarks": [
             {
@@ -298,9 +299,9 @@
         },
         "searchResults": {
           "view": "search results",
-          "controls": 76,
+          "controls": 77,
           "unnamed": [],
-          "textNodes": 105,
+          "textNodes": 108,
           "contrast": [],
           "landmarks": [
             {
@@ -2189,7 +2190,7 @@
         }
       ],
       "interactionPreferences": {
-        "canonicalSha256": "f201c817760a528f995db89352f8916fc7cfe9fa28688f881aece4271a0ac831",
+        "canonicalSha256": "dc1ad2ff40370a3cd5e8ca499430e0765e957d5914c84543ce86f381ff34c500",
         "syncHighWater": 80,
         "initialRevision": 17,
         "finalRevision": 25,
@@ -2214,13 +2215,13 @@
       "exports": [
         {
           "format": "portable",
-          "byteLength": 1474560,
-          "sha256": "8a228bd6e0a36f05227956d0ec636454428614870d33f5889c146e60e9798329"
+          "byteLength": 1482752,
+          "sha256": "f9f23297a411a7d3741ad94c25c80082111823aa2a070acb67091492b848d9e6"
         },
         {
           "format": "open",
           "byteLength": 608256,
-          "sha256": "2ee4309c007c0aea327f62693af416130e724a5951f35226c9e5d23d031dad57"
+          "sha256": "96816f6709701ad2918fe4b35f2b01e48925245292108618d653a437abb9b8a7"
         }
       ],
       "healthRefresh": {
@@ -2233,7 +2234,7 @@
           "offline-cancels-held-probe-without-poisoning-health"
         ],
         "scope": "Production shared UI, session controller, provider adapters and HTTP/OPFS; synthetic model responses and an advanced health clock, with real visibility/connectivity event handling.",
-        "canonicalAndContentSha256": "46bebef9ac56dd16861742c990ff74c21b69f34a84f5396c5ff01c0900758072",
+        "canonicalAndContentSha256": "657aa4a4718fd04f5aec3311b279bc9f0cfdc0234481c8d4b04988b4da598d81",
         "unchangedCanonicalAndContent": true,
         "modelRequests": [
           {
@@ -2314,6 +2315,12 @@
           "Image thread"
         ],
         "restoredTo": "anthropic|claude-haiku-4-5-20251001"
+      },
+      "portabilityFilter": {
+        "assessed": 4,
+        "unfiltered": 24,
+        "providerDependent": 0,
+        "blocked": 0
       },
       "bulkPortability": {
         "threads": 4,
@@ -3165,11 +3172,11 @@
           "labels": [
             {
               "text": "Routing alias",
-              "htmlFor": "_r_21_",
+              "htmlFor": "_r_24_",
               "sibling": true
             }
           ],
-          "id": "_r_21_",
+          "id": "_r_24_",
           "ariaLabel": null
         },
         "closedLayout": {
@@ -3380,7 +3387,7 @@
               "rootFontSize": "16px",
               "focused": {
                 "tag": "SELECT",
-                "id": "_r_21_",
+                "id": "_r_24_",
                 "label": "Routing alias",
                 "insideRegion": true
               },
@@ -3524,7 +3531,7 @@
               "rootFontSize": "32px",
               "focused": {
                 "tag": "SELECT",
-                "id": "_r_21_",
+                "id": "_r_24_",
                 "label": "Routing alias",
                 "insideRegion": true
               },
@@ -3684,20 +3691,20 @@
         },
         "allowPrivacyChange": false,
         "aliasSource": {
-          "id": "52c9cc34-be1b-4aaa-8ab9-0bb4f043230a",
+          "id": "e3bb77f6-8570-4024-a32c-1e2db275fcaf",
           "revision": 8
         }
       },
-      "exclusionPartId": "769016df-4578-4ffc-869d-0eb94c052a85",
+      "exclusionPartId": "6b7c20d9-8d3b-4a49-9599-4fce7cad42d1",
       "pendingRecovery": {
         "scope": "Actual durable lost-summary reply, dedicated recovery across error dismissal, thread navigation and lexical search; one precommit refusal and one held idempotent retry; no extra canonical writes or provider requests.",
         "status": "passed",
         "before": {
           "threadStates": [
             {
-              "activeLeafMessageId": "7a51c865-f37d-4184-96ab-dd6dda787803",
+              "activeLeafMessageId": "203a3d0c-48c7-48dd-b671-2e97c83d5908",
               "archived": false,
-              "contextSnapshotId": "24d7579b-e529-4406-ab09-1c715ca49524",
+              "contextSnapshotId": "7d42c41b-a271-4f9b-83e3-9d22406e57a2",
               "pinned": false,
               "revision": 55,
               "routingProfile": {
@@ -3720,13 +3727,13 @@
                 "space",
                 "ideas"
               ],
-              "threadId": "5ce89b0a-36f7-45ba-b678-ba21a51238d5",
+              "threadId": "06665e11-3792-4d29-9dc1-d39fec3dbf96",
               "title": "Comet notebook"
             },
             {
-              "activeLeafMessageId": "4c72b024-67c6-4163-92db-2da4e043f8fe",
+              "activeLeafMessageId": "c467f240-6bc7-4dea-b95d-75ecf962525c",
               "archived": false,
-              "contextSnapshotId": "a8b81ed4-b5f3-4b13-bfb5-bd0ed29c0f24",
+              "contextSnapshotId": "b61eee26-9f8f-4049-bff6-48533994f5ce",
               "pinned": false,
               "revision": 7,
               "routingProfile": {
@@ -3742,41 +3749,41 @@
                 "version": 2
               },
               "tags": [],
-              "threadId": "5f5e9e72-062d-4d0e-a96e-11e76d7c861d",
+              "threadId": "e184cef8-9060-4e21-bb62-1e704f223ab7",
               "title": "Summary notebook"
             }
           ],
           "collections": {
             "threadStates": {
               "count": 6,
-              "sha256": "a97fabca944ae417ca4cfdd1ca3a15005fac94acb5b46d641c216c585371edf8"
+              "sha256": "67536675a63f925a9e04ef0f14a36869b0e5b6a47ad6b2b68b0e60fa3cedd333"
             },
             "messages": {
               "count": 64,
-              "sha256": "32bd428a955bfab977217acb00c6e5ca91905bdba026548ccc11120bac77ae3b"
+              "sha256": "397c616ee64c26d10a7eb9bda9dde951bf7521e31f8e0c15c7d47f3e9f15aff3"
             },
             "parts": {
               "count": 331,
-              "sha256": "bfd8d7b0d5a29228f1329284e3e1b14f0942edf59010bea4c4a4422172484d3e"
+              "sha256": "7e1c1584d6db61ce4a3dab0bdee1942d9e83e5f81e096239168585728d2d27ac"
             },
             "events": {
               "count": 34,
-              "sha256": "f902bc0d71bc9da0e5b74b7486bd6da47f39282152008c0ed3582290ce3bc147"
+              "sha256": "84ed04913836333284485327b3c096358dd9a05d474d3861fbb731dc7642fe35"
             },
             "contexts": {
               "count": 13,
-              "sha256": "2c901adb20819c7d76e24c9b24c31e278df946d1fe1dc7cf81a37df2d1855dab"
+              "sha256": "cbea67023423aa021cb0712f394638124f7a220170299bbad9a5e66858aa555d"
             },
             "generations": {
               "count": 32,
-              "sha256": "73280765e347c994e879cd02f6118cd99696fdbf47fb63a0b910ce3805dbcebe"
+              "sha256": "c0160db088cfca0d10da22d8bb359ecacf8e1b41c77c880ce7e2f488812121cc"
             },
             "summaryProposals": {
               "count": 1,
-              "sha256": "b194f165711f17c3f7a210dc7c2752c58c1ed8e13378a7a43ec9b6e1acac4dbd"
+              "sha256": "9d99ee63374697d6342d6328a2b5cab6d84a3c5af3d09145ec0e52fd2d01a99e"
             }
           },
-          "syncSha256": "cc5c4256cca05d10132974af9722b5afafcb175a96922d1019264926da521e77",
+          "syncSha256": "41619c36440f69de79f803342116a01a7d1a69addf69c1fdcad327776856ac8f",
           "highWaterSequence": 1017,
           "providerDispatchCount": 49,
           "providerDispatchSha256": "b27c048efc9bc32edfa58dd78440c77beae76c75d1311e3fe3676c8b0728348c"
@@ -3793,9 +3800,9 @@
         "after": {
           "threadStates": [
             {
-              "activeLeafMessageId": "7a51c865-f37d-4184-96ab-dd6dda787803",
+              "activeLeafMessageId": "203a3d0c-48c7-48dd-b671-2e97c83d5908",
               "archived": false,
-              "contextSnapshotId": "24d7579b-e529-4406-ab09-1c715ca49524",
+              "contextSnapshotId": "7d42c41b-a271-4f9b-83e3-9d22406e57a2",
               "pinned": false,
               "revision": 55,
               "routingProfile": {
@@ -3818,13 +3825,13 @@
                 "space",
                 "ideas"
               ],
-              "threadId": "5ce89b0a-36f7-45ba-b678-ba21a51238d5",
+              "threadId": "06665e11-3792-4d29-9dc1-d39fec3dbf96",
               "title": "Comet notebook"
             },
             {
-              "activeLeafMessageId": "4c72b024-67c6-4163-92db-2da4e043f8fe",
+              "activeLeafMessageId": "c467f240-6bc7-4dea-b95d-75ecf962525c",
               "archived": false,
-              "contextSnapshotId": "a8b81ed4-b5f3-4b13-bfb5-bd0ed29c0f24",
+              "contextSnapshotId": "b61eee26-9f8f-4049-bff6-48533994f5ce",
               "pinned": false,
               "revision": 7,
               "routingProfile": {
@@ -3840,41 +3847,41 @@
                 "version": 2
               },
               "tags": [],
-              "threadId": "5f5e9e72-062d-4d0e-a96e-11e76d7c861d",
+              "threadId": "e184cef8-9060-4e21-bb62-1e704f223ab7",
               "title": "Summary notebook"
             }
           ],
           "collections": {
             "threadStates": {
               "count": 6,
-              "sha256": "a97fabca944ae417ca4cfdd1ca3a15005fac94acb5b46d641c216c585371edf8"
+              "sha256": "67536675a63f925a9e04ef0f14a36869b0e5b6a47ad6b2b68b0e60fa3cedd333"
             },
             "messages": {
               "count": 64,
-              "sha256": "32bd428a955bfab977217acb00c6e5ca91905bdba026548ccc11120bac77ae3b"
+              "sha256": "397c616ee64c26d10a7eb9bda9dde951bf7521e31f8e0c15c7d47f3e9f15aff3"
             },
             "parts": {
               "count": 331,
-              "sha256": "bfd8d7b0d5a29228f1329284e3e1b14f0942edf59010bea4c4a4422172484d3e"
+              "sha256": "7e1c1584d6db61ce4a3dab0bdee1942d9e83e5f81e096239168585728d2d27ac"
             },
             "events": {
               "count": 34,
-              "sha256": "f902bc0d71bc9da0e5b74b7486bd6da47f39282152008c0ed3582290ce3bc147"
+              "sha256": "84ed04913836333284485327b3c096358dd9a05d474d3861fbb731dc7642fe35"
             },
             "contexts": {
               "count": 13,
-              "sha256": "2c901adb20819c7d76e24c9b24c31e278df946d1fe1dc7cf81a37df2d1855dab"
+              "sha256": "cbea67023423aa021cb0712f394638124f7a220170299bbad9a5e66858aa555d"
             },
             "generations": {
               "count": 32,
-              "sha256": "73280765e347c994e879cd02f6118cd99696fdbf47fb63a0b910ce3805dbcebe"
+              "sha256": "c0160db088cfca0d10da22d8bb359ecacf8e1b41c77c880ce7e2f488812121cc"
             },
             "summaryProposals": {
               "count": 1,
-              "sha256": "b194f165711f17c3f7a210dc7c2752c58c1ed8e13378a7a43ec9b6e1acac4dbd"
+              "sha256": "9d99ee63374697d6342d6328a2b5cab6d84a3c5af3d09145ec0e52fd2d01a99e"
             }
           },
-          "syncSha256": "cc5c4256cca05d10132974af9722b5afafcb175a96922d1019264926da521e77",
+          "syncSha256": "41619c36440f69de79f803342116a01a7d1a69addf69c1fdcad327776856ac8f",
           "highWaterSequence": 1017,
           "providerDispatchCount": 49,
           "providerDispatchSha256": "b27c048efc9bc32edfa58dd78440c77beae76c75d1311e3fe3676c8b0728348c"
@@ -3885,7 +3892,7 @@
           "focused": true
         },
         "searchRestored": {
-          "value": "served by messages api",
+          "value": "comet",
           "resultsVisible": false
         },
         "returnedToOrigin": true
@@ -3898,28 +3905,28 @@
         "clipPath": "none"
       },
       "summary": {
-        "threadId": "5f5e9e72-062d-4d0e-a96e-11e76d7c861d",
-        "exclusionPartId": "a9a535bb-5f9b-49ef-9b63-2e005c7e6927",
-        "proposalId": "0b9faa89-53d6-4e59-ad11-64d4578752f1",
-        "stoppedProposalId": "04414391-3ccd-4d76-8fe1-8291d1848eeb",
-        "inputSha256": "75d67be9d44af6fb0519ecc1a9d8f586881e76dbfcaaa54123a40311e9768c10",
-        "reviewedText": "Reviewed synthetic summary: preserve the picture question and its unresolved details. Source d389b6c6-ef44-460c-9668-c70473060315.",
-        "cutoff": "d389b6c6-ef44-460c-9668-c70473060315"
+        "threadId": "e184cef8-9060-4e21-bb62-1e704f223ab7",
+        "exclusionPartId": "c2f4405e-88f0-47be-b611-4ec80247fa6d",
+        "proposalId": "3fad4188-8bf5-41bd-b05c-e74a91afde7a",
+        "stoppedProposalId": "f162d0c1-f429-4d48-9963-45046bc5ab3a",
+        "inputSha256": "637f28c09db12331ac0c3f170a091473c857fdc0cca58d9671796bed10befc5c",
+        "reviewedText": "Reviewed synthetic summary: preserve the picture question and its unresolved details. Source a67ceb93-0fe6-4562-82a6-8c9a9ae0d064.",
+        "cutoff": "a67ceb93-0fe6-4562-82a6-8c9a9ae0d064"
       },
       "branch": {
-        "threadId": "34601b76-156e-4c0c-a8cb-c7e334a0c8f1",
-        "oldRootId": "51ed724f-5f75-4039-868e-a1cf0f859bc9",
-        "newRootId": "0291dade-9ece-446a-ac27-46f45a5fb75e",
-        "freshContextId": "98183d39-37c3-42ca-9655-85cf17f5e6fb",
-        "restartContextId": "47922333-2720-4672-8b4f-59bb1a60f3a2",
-        "sourceLeafId": "d874fe07-2165-4194-bbe2-9cea8d6f5a87"
+        "threadId": "6a4fb2d1-da78-4712-84a5-c678dcb79824",
+        "oldRootId": "e4ca7511-1b78-4b2f-a6d0-13f5ebfbc222",
+        "newRootId": "ad1b5776-cce8-4255-b225-fe05e4fd9a54",
+        "freshContextId": "24b71e80-94b4-46e3-a3c9-f31478cc2405",
+        "restartContextId": "2b278c5b-9d5e-4206-affc-b260e359cd4a",
+        "sourceLeafId": "5ce49997-458a-4400-8aca-39f4f8433e71"
       },
       "cost": {
-        "threadId": "3a2e2dbe-eb6c-4b13-9c69-d7679ebcc833",
+        "threadId": "17f7cbab-ed68-458e-9c73-4c0f7129cc6d",
         "profile": {
           "alias": "Budget",
           "aliasSource": {
-            "id": "a53178fa-69ca-4949-b52e-d39a9a3d7ff6",
+            "id": "f1407e28-e420-47ed-8998-267639de6b77",
             "revision": 13
           },
           "allowPrivacyChange": false,
@@ -3938,16 +3945,16 @@
           },
           "version": 4
         },
-        "aliasId": "a53178fa-69ca-4949-b52e-d39a9a3d7ff6",
+        "aliasId": "f1407e28-e420-47ed-8998-267639de6b77",
         "blockedFallbackPrimaryRequests": 1,
         "allowedFallbackRequests": 2
       },
       "regions": {
-        "threadId": "85b93d02-5434-4433-b547-c02c083ffb40",
+        "threadId": "fd73b3ac-265f-4abd-8afa-3d5a2644b4a3",
         "profile": {
           "alias": "Regional",
           "aliasSource": {
-            "id": "fc3068a8-e599-4207-abae-dcec2ed4e2a7",
+            "id": "6d237279-cdf5-400f-b787-078372195326",
             "revision": 14
           },
           "allowPrivacyChange": false,
@@ -3966,17 +3973,17 @@
           },
           "version": 5
         },
-        "aliasId": "fc3068a8-e599-4207-abae-dcec2ed4e2a7",
+        "aliasId": "6d237279-cdf5-400f-b787-078372195326",
         "aliasCurrentRegion": "eu",
-        "freshContextId": "91fd790a-65b2-41c1-8006-18c13d6c50ac",
-        "oldLeaf": "bd58995b-5f00-4e02-9c36-d6807a06e2b5",
-        "summaryProposalId": "144012d3-df51-444d-954e-b482ca8110e4",
-        "initialEventId": "d1e3577c-5e99-468d-b1c6-d84f6ebfb49a",
+        "freshContextId": "bf0584e1-b86e-4243-b5af-9b0bf43fb390",
+        "oldLeaf": "cc82fd9c-84b6-4806-8886-57bc358935dc",
+        "summaryProposalId": "b96e7f33-7366-48d6-bc40-54b6a01bf9cb",
+        "initialEventId": "6ddbaaeb-aeec-4324-bbab-394b04dc5280",
         "generationIds": [
-          "9751dc2b-6e93-452f-a045-26baf8111165",
-          "a4d706df-680b-477c-98f1-d6b687267a73",
-          "4a74450f-da27-4a2c-9f13-543831bd99b6",
-          "b06f16f8-bd62-4235-a098-28115497ff11"
+          "6f9080ae-80a0-4e86-91c8-b939a457e236",
+          "1cbacfa9-2cb9-4bdd-ba82-adade9da08be",
+          "9fa5132e-0519-47af-bd2a-36aa70ddabee",
+          "759ee323-25d9-463e-b194-8393dedd10f5"
         ],
         "dispatchBinding": {
           "providerId": "openai",
@@ -3988,13 +3995,13 @@
       },
       "composerFiles": {
         "title": "PDF notebook",
-        "threadId": "d91786d8-0875-4835-a8c1-a2f33f632eb4",
-        "messageId": "c616e1da-d5b4-426c-a058-835b0717cbae",
+        "threadId": "0e991290-eb48-4fa4-833c-4f5ac41129d1",
+        "messageId": "9f43ca7e-a44d-47b2-b909-fa9b62dc6a26",
         "attachment": {
           "availability": "available",
           "blobSha256": "fc1f224f40483a95a367f1737828dc76fb910e1fbf6fb434ca5051632c7375d2",
           "filename": "original-synthetic.pdf",
-          "id": "a404bbb2-2808-4991-829a-85bc1c65f634",
+          "id": "a4439321-b918-4bb6-9b5f-70127a221b18",
           "mimeType": "application/pdf",
           "rawObjectId": null,
           "sizeBytes": 601
@@ -4004,25 +4011,25 @@
             "data": {
               "text": "Read the original synthetic PDF."
             },
-            "id": "2f32d41c-2d78-4679-9d6c-6482b274469e",
+            "id": "0b6cc314-be16-40e1-9fbf-b17c4d1d812c",
             "kind": "Text",
-            "messageId": "c616e1da-d5b4-426c-a058-835b0717cbae",
+            "messageId": "9f43ca7e-a44d-47b2-b909-fa9b62dc6a26",
             "order": 0
           },
           {
             "data": {
-              "attachmentId": "a404bbb2-2808-4991-829a-85bc1c65f634",
+              "attachmentId": "a4439321-b918-4bb6-9b5f-70127a221b18",
               "description": "original-synthetic.pdf"
             },
-            "id": "11778349-5e05-4813-933c-6e2e859c061f",
+            "id": "c9e2bed6-7f36-4096-aef8-039e37615239",
             "kind": "File",
-            "messageId": "c616e1da-d5b4-426c-a058-835b0717cbae",
+            "messageId": "9f43ca7e-a44d-47b2-b909-fa9b62dc6a26",
             "order": 1
           }
         ],
         "sha256": "fc1f224f40483a95a367f1737828dc76fb910e1fbf6fb434ca5051632c7375d2",
         "byteLength": 601,
-        "archiveSha256": "7c8afccebdf912335cd6906394ba873f5a7e52b694dfd2cd56674c91bffbdcd8",
+        "archiveSha256": "ebd82d67f7e1492935a2a8506b4354f49bc6a44007be4183df5c1b0425c91b40",
         "restoredRegeneration": true,
         "regionalFileRefusedBeforeDispatch": true,
         "regionalImageEligibilityReportRefreshed": true,
@@ -4030,36 +4037,36 @@
       },
       "audioInput": {
         "title": "Audio notebook",
-        "threadId": "3e11ffd1-e880-4a9a-aed6-95cad4a4e852",
-        "messageId": "acf74c0d-b645-4da1-aa21-2afd71eeddce",
+        "threadId": "9daac319-6e02-4d96-b8d7-172da73a40c7",
+        "messageId": "e750358a-2efc-4650-a73e-8e49b8f343c6",
         "parts": [
           {
             "data": {
               "text": "Describe these two original synthetic audio clips in text."
             },
-            "id": "dc78f2fa-99b7-423b-bead-7e9b1588fde4",
+            "id": "ccf6834e-b26c-4a84-ae2e-e5448c32fa29",
             "kind": "Text",
-            "messageId": "acf74c0d-b645-4da1-aa21-2afd71eeddce",
+            "messageId": "e750358a-2efc-4650-a73e-8e49b8f343c6",
             "order": 0
           },
           {
             "data": {
-              "attachmentId": "6c18a51a-cc51-4e47-91dc-c3f51a7a292d",
+              "attachmentId": "4a59235d-d634-4d34-ae32-dd815e7efe2d",
               "description": "original-synthetic.wav"
             },
-            "id": "74a148c0-9e1a-48a0-adea-8fb9c4abb1bf",
+            "id": "e7589f0a-d57f-45d9-9f6a-787bb2bc6789",
             "kind": "Audio",
-            "messageId": "acf74c0d-b645-4da1-aa21-2afd71eeddce",
+            "messageId": "e750358a-2efc-4650-a73e-8e49b8f343c6",
             "order": 1
           },
           {
             "data": {
-              "attachmentId": "633eb547-69f0-4def-826d-699d2113e9a9",
+              "attachmentId": "a4c04243-9e3b-4f0a-87a1-94d885de0347",
               "description": "original-synthetic.mp3"
             },
-            "id": "1935896c-cee7-416e-9fff-40e490007583",
+            "id": "cfd2d3eb-6446-4c4e-bb47-82cc3626b10c",
             "kind": "Audio",
-            "messageId": "acf74c0d-b645-4da1-aa21-2afd71eeddce",
+            "messageId": "e750358a-2efc-4650-a73e-8e49b8f343c6",
             "order": 2
           }
         ],
@@ -4068,7 +4075,7 @@
             "availability": "available",
             "blobSha256": "627ce34972f0cf95ed882ef9c4e7b5edcd222b39aa40aa334df3c1c49d75c1f1",
             "filename": "original-synthetic.wav",
-            "id": "6c18a51a-cc51-4e47-91dc-c3f51a7a292d",
+            "id": "4a59235d-d634-4d34-ae32-dd815e7efe2d",
             "mimeType": "audio/wav",
             "rawObjectId": null,
             "sizeBytes": 1644
@@ -4077,7 +4084,7 @@
             "availability": "available",
             "blobSha256": "a6c92fb7f5cda4fde942e35151c6fa9008fb929cd1f51ca49551568aa5f65f02",
             "filename": "original-synthetic.mp3",
-            "id": "633eb547-69f0-4def-826d-699d2113e9a9",
+            "id": "a4c04243-9e3b-4f0a-87a1-94d885de0347",
             "mimeType": "audio/mpeg",
             "rawObjectId": null,
             "sizeBytes": 522
@@ -4097,7 +4104,7 @@
             "byteLength": 522
           }
         ],
-        "archiveSha256": "6c32308f2f480b316e26902eec95c7ed5e9d0c7b663b6d3f8fab293a71bda6a3",
+        "archiveSha256": "5631aefd987ed24651b351e449157f4ceaf6036d47bee1494b0317678e17abd9",
         "restoredRegeneration": true,
         "unsupportedModels": [
           "gpt-4.1-mini-2025-04-14",
@@ -4107,38 +4114,38 @@
         "textOutputOnly": true
       },
       "outputParts": {
-        "threadId": "3071d65e-3a7f-4bc4-bfbb-74c4e4ea8007",
-        "citedMessageId": "ac79efd8-6a3a-426c-8162-c365182fb165",
-        "openaiMessageId": "32db3f21-6e9a-45b4-81e3-809ccfc306d8"
+        "threadId": "294f7352-14c6-4910-8038-ca7e4d13c94f",
+        "citedMessageId": "599e6d94-84aa-4424-bc42-781f5325b214",
+        "openaiMessageId": "f340d1de-01a3-4ba3-b1d6-86cd6815224d"
       },
       "reasoningContinuation": {
-        "threadId": "29c97c9a-8794-4f81-a569-3c0d70576d93",
-        "outputMessageId": "0a305254-9f42-4880-8273-8df0559e1fb0",
+        "threadId": "d59afa11-5295-491f-bf30-9f179b6662d8",
+        "outputMessageId": "41b9276a-a111-4cdb-9568-c106f7b6fcae",
         "receipts": [
-          "e4eaa58c-dd4c-4ecf-92e9-aff767982f79",
-          "97f528e4-69f9-492c-9d78-431bc5681085"
+          "9ae0b58a-f4f4-43e4-8d99-c255ee7ac311",
+          "e1c69644-59f3-4e26-9a66-15948d84a37b"
         ]
       },
       "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36",
       "unclaimedExport": {
         "candidate": null,
-        "completedBytes": 5625344,
+        "completedBytes": 5608960,
         "completedRecords": 0,
         "entryCount": 0,
         "failure": null,
         "format": "portable",
-        "jobId": "78c0fb3a-601c-46b0-aae8-d77a95d53a40",
+        "jobId": "0abdd408-68a3-42a0-aebd-4155aaa02369",
         "kind": "export",
         "output": {
-          "name": "quixi-portable-78c0fb3a-601c-46b0-aae8-d77a95d53a40.tar",
+          "name": "quixi-portable-0abdd408-68a3-42a0-aebd-4155aaa02369.tar",
           "mediaType": "application/x-tar",
-          "byteLength": 5625344,
-          "sha256": "8044ff64a44649ee42485a97fd92ee33491af86acc959217e4563b6bea6d9eab"
+          "byteLength": 5608960,
+          "sha256": "d025210fecc914966e3d61e7cef04bf2559a2e81efb0e9862e8c6f0201c0f071"
         },
         "phase": "ready",
         "sourceSchemaVersion": null,
         "state": "ready",
-        "totalBytes": 5625344,
+        "totalBytes": 5608960,
         "totalRecords": null
       },
       "savedMessages": 130,
@@ -4170,8 +4177,8 @@
         ],
         "backend": "WASM SIMD · CPU",
         "runtimeNote": "Local runtime ready on WASM SIMD · CPU. WebGPU was not used: No WebGPU adapter.",
-        "enableMs": 846,
-        "indexMs": 1024,
+        "enableMs": 1351,
+        "indexMs": 1353,
         "model": {
           "chunkingVersion": "fts-v1:quixi-structural-utf16-v1:4096:64:arctic-xs-offsets-1.0.2:d15cd90acf9df739:256:code-v1:nul-space-v1",
           "dimensions": 384,
@@ -4192,7 +4199,7 @@
           },
           "route": "wasm-simd-fp32",
           "kind": "cpu",
-          "elapsedMs": 1277,
+          "elapsedMs": 1259,
           "checks": [
             {
               "id": "model_hash",
@@ -4253,7 +4260,7 @@
         },
         "faultInjected": false,
         "backendAfterFault": "WASM SIMD · CPU",
-        "restartMs": 827,
+        "restartMs": 807,
         "rebuild": {
           "generationBefore": 2,
           "generationAfter": 4,
@@ -4328,6 +4335,7 @@
         "the conversation's routing profile chooses the route before the first attempt: a selected connection that fails the minimum context requirement or whose credential the provider rejected is routed around with the reason recorded as an AutomaticFallback event on the attempt, no qualifying candidate refuses sending with every reason stated, and clearing the requirement restores the selected connection",
         "the open conversation shows its portability status with one inspectable reason per configured target and what is never sent, and a path whose assistant turn carries a reasoning marker without a verified provider block is portable to every target with that omission named per target and no invented block",
         "reviewed migration routes the 4 eligible conversations to OpenAI · GPT-4.1 mini: the review lists each one with what it would carry, Keep the current routing changes nothing, confirming commits one SetRoutingProfile and one Migration event per conversation against its revision, messages are untouched, ineligible conversations are left alone, a migrated conversation opens on the target connection with its Migration event listed, and a second reviewed migration routes the same conversations back to Anthropic · Claude Haiku 4.5 with one more event each",
+        "the search form's portability filter uses the 4 statuses the library analysis published to the storage owner and is applied in the worker's SQL: a provider-dependent filter returns exactly the matching conversations' hits for the same query (0 of 24), a blocked filter returns none, and the coverage note names the analysis",
         "bulk portability analyses all 4 library conversations page by page against the configured targets (2 fully portable, 1 with transformations, 1 provider-dependent, 0 blocked, 0 without messages, 0 failed) with inspectable per-target reasons, an outcome filter, 32-row pages and a way to open each conversation",
         "keyboard import picker, start and report preparation preserve focus through async work; opening the saved conversation focuses its heading, and import live progress announces phases without changing numeric counters",
         "settled compatibility announcements retain one atomic status node through repeated valid settings edits; blocked reasons remain readable without remounted alerts, focus and draft remain, and inspection sends no HTTP or canonical writes",
@@ -4349,7 +4357,7 @@
         "WAV/MP3 picker and drop retain exact Audio parts and verified bytes, refuse unsupported/mislabeled/oversized drafts, send and regenerate input_audio with text-only output, block unsupported models without dispatch, and preserve originals through portable restore and restored regeneration",
         "an Anthropic response with a citation and an unknown output block, and an OpenAI response with a URL annotation and a provider-specific delta, are retained as Citation and stream-located ProviderArtifact parts; the next send, count, regeneration and cross-provider switch carry the answer text plus a plain source note and none of the provider-specific records, with the switch report naming each transformation, while import-derived artifacts remain refused by name",
         "manual thinking for the reviewed Haiku 4.5 profile refuses budgets below 1,024, at or above the output limit, with temperature or an out-of-range top-p without writes or HTTP; a thinking-enabled send carries the enabled budget and records signed and redacted receipts beside their markers; count, a later send, and regeneration carry those blocks first and unchanged from verified receipts on the producing model; the OpenAI switch report and portability name the omitted blocks and the OpenAI request carries none; returning to Anthropic restores them with the response's records unchanged",
-        "accessibility audit passes on 10 views: every visible control named, visible text at 4.5:1 or better, unique landmark names, no skipped heading levels, no live region inside the message list, status regions with text, and outlines on keyboard-focused controls (555 controls, 858 text nodes)",
+        "accessibility audit passes on 10 views: every visible control named, visible text at 4.5:1 or better, unique landmark names, no skipped heading levels, no live region inside the message list, status regions with text, and outlines on keyboard-focused controls (558 controls, 867 text nodes)",
         "the conversation library and an open conversation with saved messages fit 320px at normal and 200% root text size without horizontal overflow",
         "a 180-character title with a 70-character unbroken token wraps in the library, the heading and the settings form at 320px and 200% text without overflow, and renaming back restores the original",
         "all four interaction preferences survive a fresh browser process with exact revision and send-key preserved; saved timestamps, hidden badges, compact composer and model list render without credentials or HTTP at 390px, then defaults are restored for subsequent checks",
@@ -4392,9 +4400,9 @@
       "audits": {
         "welcome": {
           "view": "welcome",
-          "controls": 24,
+          "controls": 25,
           "unnamed": [],
-          "textNodes": 31,
+          "textNodes": 34,
           "contrast": [],
           "landmarks": [
             {
@@ -4442,9 +4450,9 @@
         },
         "conversation": {
           "view": "conversation",
-          "controls": 169,
+          "controls": 170,
           "unnamed": [],
-          "textNodes": 269,
+          "textNodes": 272,
           "contrast": [],
           "landmarks": [
             {
@@ -4576,9 +4584,9 @@
         },
         "searchResults": {
           "view": "search results",
-          "controls": 76,
+          "controls": 77,
           "unnamed": [],
-          "textNodes": 105,
+          "textNodes": 108,
           "contrast": [],
           "landmarks": [
             {
@@ -6467,7 +6475,7 @@
         }
       ],
       "interactionPreferences": {
-        "canonicalSha256": "6bbc5208d7489b2293099cedee3f22f906e7d19986a4dca22342175ddd0f9521",
+        "canonicalSha256": "c677571777bb4458ff154f2c61dfae97679281228e39df3508bf69d08866a488",
         "syncHighWater": 80,
         "initialRevision": 17,
         "finalRevision": 25,
@@ -6493,12 +6501,12 @@
         {
           "format": "portable",
           "byteLength": 1482752,
-          "sha256": "7e13f70438724f47c035ab8f1f2fa6b6fb672d0f0d616870b82e0bb87f86562c"
+          "sha256": "b96ac975ca06234bcc401150a3aa8f0c258c96586f48d0acc0682c6a9d7f1f57"
         },
         {
           "format": "open",
           "byteLength": 608256,
-          "sha256": "3a4f7b955861e97f310193d4926b58bdd09baf6a0761a0d512870d4a8bd9da7a"
+          "sha256": "6fa0c7de7cf107187fcbdd87fcbd0e0e206e789ecaa7530f89aae2ae04bfcf78"
         }
       ],
       "healthRefresh": {
@@ -6511,7 +6519,7 @@
           "offline-cancels-held-probe-without-poisoning-health"
         ],
         "scope": "Production shared UI, session controller, provider adapters and HTTP/OPFS; synthetic model responses and an advanced health clock, with real visibility/connectivity event handling.",
-        "canonicalAndContentSha256": "14600bbef084c1ffc9b1a85757f6bd6ac578628af0eb0d5d9350e765d2b7d52f",
+        "canonicalAndContentSha256": "78906837a3b1e6a9ac2c43a47f77d9e760837b1144ff68fb90fdc934e299f84e",
         "unchangedCanonicalAndContent": true,
         "modelRequests": [
           {
@@ -6592,6 +6600,12 @@
           "Image thread"
         ],
         "restoredTo": "anthropic|claude-haiku-4-5-20251001"
+      },
+      "portabilityFilter": {
+        "assessed": 4,
+        "unfiltered": 24,
+        "providerDependent": 0,
+        "blocked": 0
       },
       "bulkPortability": {
         "threads": 4,
@@ -7443,11 +7457,11 @@
           "labels": [
             {
               "text": "Routing alias",
-              "htmlFor": "_r_21_",
+              "htmlFor": "_r_24_",
               "sibling": true
             }
           ],
-          "id": "_r_21_",
+          "id": "_r_24_",
           "ariaLabel": null
         },
         "closedLayout": {
@@ -7658,7 +7672,7 @@
               "rootFontSize": "16px",
               "focused": {
                 "tag": "SELECT",
-                "id": "_r_21_",
+                "id": "_r_24_",
                 "label": "Routing alias",
                 "insideRegion": true
               },
@@ -7802,7 +7816,7 @@
               "rootFontSize": "32px",
               "focused": {
                 "tag": "SELECT",
-                "id": "_r_21_",
+                "id": "_r_24_",
                 "label": "Routing alias",
                 "insideRegion": true
               },
@@ -7962,20 +7976,20 @@
         },
         "allowPrivacyChange": false,
         "aliasSource": {
-          "id": "7b8c5f18-7d40-4626-b1f8-12b46696f2b7",
+          "id": "9ff50829-a9db-4fcb-bc16-ae9b53dd3e46",
           "revision": 8
         }
       },
-      "exclusionPartId": "aea13de1-cb59-411d-83f2-6015a99e46c9",
+      "exclusionPartId": "1825946c-c80e-4e87-8fc8-2cb958fca6ca",
       "pendingRecovery": {
         "scope": "Actual durable lost-summary reply, dedicated recovery across error dismissal, thread navigation and lexical search; one precommit refusal and one held idempotent retry; no extra canonical writes or provider requests.",
         "status": "passed",
         "before": {
           "threadStates": [
             {
-              "activeLeafMessageId": "4d48977e-3bb8-46f6-bfe4-1eec09a8044e",
+              "activeLeafMessageId": "906e1dda-313b-40a5-b5e1-752a7de78f7f",
               "archived": false,
-              "contextSnapshotId": "e712d3ac-b2fb-41f9-86c5-4251b7bd2d9d",
+              "contextSnapshotId": "3ce83c49-ef54-45f1-80be-79da8421bd7d",
               "pinned": false,
               "revision": 7,
               "routingProfile": {
@@ -7991,13 +8005,13 @@
                 "version": 2
               },
               "tags": [],
-              "threadId": "6c7a0693-fa1e-4a5f-9ceb-6c5666ef5650",
+              "threadId": "238f4e25-9f96-4537-bca6-af5f02c67e52",
               "title": "Summary notebook"
             },
             {
-              "activeLeafMessageId": "b22f029b-4e50-444d-8494-6875d37a48f5",
+              "activeLeafMessageId": "83e5314d-d8c6-453e-a6a3-8cf3ad3d70b0",
               "archived": false,
-              "contextSnapshotId": "30698ecc-a3e2-42d7-857d-1618f1769d25",
+              "contextSnapshotId": "49c25855-b641-43ac-8348-261023e54bdc",
               "pinned": false,
               "revision": 55,
               "routingProfile": {
@@ -8020,41 +8034,41 @@
                 "space",
                 "ideas"
               ],
-              "threadId": "6ef19dcd-888b-4408-a99d-d486812e0805",
+              "threadId": "8b65eb4e-8466-4588-a0a9-7ba5704bd614",
               "title": "Comet notebook"
             }
           ],
           "collections": {
             "threadStates": {
               "count": 6,
-              "sha256": "436c3c740ba53f7689fdd58806626c723e1d3555879315e6a8e2b4a92929c028"
+              "sha256": "e4f43d7dbce4086fc2c591227219572be41101712e35aef0a0963a54e1c5b1ca"
             },
             "messages": {
               "count": 64,
-              "sha256": "cc83c318e802b2b1c822dfdd96258543d4d119206f59f143ac75c7f88e632ac0"
+              "sha256": "ec6e068d144e289affaada4c7bf44d4d3a9be4c76b92cc0207ca4ea047435da2"
             },
             "parts": {
               "count": 331,
-              "sha256": "6d8db45d1b5ba444ad1a3683216df27b665886b01600cf47f0fdc4a06e0ca478"
+              "sha256": "a0ba87c5f94b1e19af9bc151c45140e29da3d0d04e5ae0100ce9ffc8abd0600a"
             },
             "events": {
               "count": 34,
-              "sha256": "c2bc09a105c07f1c66f025b73f7f40b1b3c76d7af5ff5fd80dca7c8bdf7b1ede"
+              "sha256": "caaf9cb4d187c0d2e594f8c25de9f0d102b3bb5c4da525e2015a5342b1c4b0bf"
             },
             "contexts": {
               "count": 13,
-              "sha256": "57c118dc294a701f3443144134c71e7fcb322e8dc1d43e9c1be74d2a9b395d07"
+              "sha256": "a5f0ab32d243185e90d4647fa3dc432b7f0da7fe98d9a5d08aa3bd15f735739f"
             },
             "generations": {
               "count": 32,
-              "sha256": "bacca0f06bf40a8bf39c662f4112a6e056e414f2469a32bfe9d9affec1fa8f36"
+              "sha256": "04087c284915022151c05077aa8ec45401af08c31ef6525cf974fa5baabd7f93"
             },
             "summaryProposals": {
               "count": 1,
-              "sha256": "54a68a0efcb8197919fdff8ecd388a72f51307243c65580b622902807b1bc5d2"
+              "sha256": "d8a3eb4650859f29c754470221f350b93d88038dfd293d14029300277da3f596"
             }
           },
-          "syncSha256": "2065fd359776a4115e87931246e0a6d460421ddf4547adf076785f5dd0184f5e",
+          "syncSha256": "a767ba8d676c3ab3131bb46fb6341b56c5a9f6ee85c0bb9730cc18124c822fef",
           "highWaterSequence": 1017,
           "providerDispatchCount": 49,
           "providerDispatchSha256": "b27c048efc9bc32edfa58dd78440c77beae76c75d1311e3fe3676c8b0728348c"
@@ -8071,9 +8085,9 @@
         "after": {
           "threadStates": [
             {
-              "activeLeafMessageId": "4d48977e-3bb8-46f6-bfe4-1eec09a8044e",
+              "activeLeafMessageId": "906e1dda-313b-40a5-b5e1-752a7de78f7f",
               "archived": false,
-              "contextSnapshotId": "e712d3ac-b2fb-41f9-86c5-4251b7bd2d9d",
+              "contextSnapshotId": "3ce83c49-ef54-45f1-80be-79da8421bd7d",
               "pinned": false,
               "revision": 7,
               "routingProfile": {
@@ -8089,13 +8103,13 @@
                 "version": 2
               },
               "tags": [],
-              "threadId": "6c7a0693-fa1e-4a5f-9ceb-6c5666ef5650",
+              "threadId": "238f4e25-9f96-4537-bca6-af5f02c67e52",
               "title": "Summary notebook"
             },
             {
-              "activeLeafMessageId": "b22f029b-4e50-444d-8494-6875d37a48f5",
+              "activeLeafMessageId": "83e5314d-d8c6-453e-a6a3-8cf3ad3d70b0",
               "archived": false,
-              "contextSnapshotId": "30698ecc-a3e2-42d7-857d-1618f1769d25",
+              "contextSnapshotId": "49c25855-b641-43ac-8348-261023e54bdc",
               "pinned": false,
               "revision": 55,
               "routingProfile": {
@@ -8118,41 +8132,41 @@
                 "space",
                 "ideas"
               ],
-              "threadId": "6ef19dcd-888b-4408-a99d-d486812e0805",
+              "threadId": "8b65eb4e-8466-4588-a0a9-7ba5704bd614",
               "title": "Comet notebook"
             }
           ],
           "collections": {
             "threadStates": {
               "count": 6,
-              "sha256": "436c3c740ba53f7689fdd58806626c723e1d3555879315e6a8e2b4a92929c028"
+              "sha256": "e4f43d7dbce4086fc2c591227219572be41101712e35aef0a0963a54e1c5b1ca"
             },
             "messages": {
               "count": 64,
-              "sha256": "cc83c318e802b2b1c822dfdd96258543d4d119206f59f143ac75c7f88e632ac0"
+              "sha256": "ec6e068d144e289affaada4c7bf44d4d3a9be4c76b92cc0207ca4ea047435da2"
             },
             "parts": {
               "count": 331,
-              "sha256": "6d8db45d1b5ba444ad1a3683216df27b665886b01600cf47f0fdc4a06e0ca478"
+              "sha256": "a0ba87c5f94b1e19af9bc151c45140e29da3d0d04e5ae0100ce9ffc8abd0600a"
             },
             "events": {
               "count": 34,
-              "sha256": "c2bc09a105c07f1c66f025b73f7f40b1b3c76d7af5ff5fd80dca7c8bdf7b1ede"
+              "sha256": "caaf9cb4d187c0d2e594f8c25de9f0d102b3bb5c4da525e2015a5342b1c4b0bf"
             },
             "contexts": {
               "count": 13,
-              "sha256": "57c118dc294a701f3443144134c71e7fcb322e8dc1d43e9c1be74d2a9b395d07"
+              "sha256": "a5f0ab32d243185e90d4647fa3dc432b7f0da7fe98d9a5d08aa3bd15f735739f"
             },
             "generations": {
               "count": 32,
-              "sha256": "bacca0f06bf40a8bf39c662f4112a6e056e414f2469a32bfe9d9affec1fa8f36"
+              "sha256": "04087c284915022151c05077aa8ec45401af08c31ef6525cf974fa5baabd7f93"
             },
             "summaryProposals": {
               "count": 1,
-              "sha256": "54a68a0efcb8197919fdff8ecd388a72f51307243c65580b622902807b1bc5d2"
+              "sha256": "d8a3eb4650859f29c754470221f350b93d88038dfd293d14029300277da3f596"
             }
           },
-          "syncSha256": "2065fd359776a4115e87931246e0a6d460421ddf4547adf076785f5dd0184f5e",
+          "syncSha256": "a767ba8d676c3ab3131bb46fb6341b56c5a9f6ee85c0bb9730cc18124c822fef",
           "highWaterSequence": 1017,
           "providerDispatchCount": 49,
           "providerDispatchSha256": "b27c048efc9bc32edfa58dd78440c77beae76c75d1311e3fe3676c8b0728348c"
@@ -8163,7 +8177,7 @@
           "focused": true
         },
         "searchRestored": {
-          "value": "served by messages api",
+          "value": "comet",
           "resultsVisible": false
         },
         "returnedToOrigin": true
@@ -8176,28 +8190,28 @@
         "clipPath": "none"
       },
       "summary": {
-        "threadId": "6c7a0693-fa1e-4a5f-9ceb-6c5666ef5650",
-        "exclusionPartId": "496c7ff0-c70d-48b1-8c54-56bf30f7a60a",
-        "proposalId": "6258def9-e9d1-4e25-850b-d7afbb9f246e",
-        "stoppedProposalId": "e6ae5eb0-c5b6-459d-8e4f-e8e2bb322d3e",
-        "inputSha256": "1d5616b91eb2dd483144966d429b42bcf7b60a90b823dfe4b0401a4c187499c7",
-        "reviewedText": "Reviewed synthetic summary: preserve the picture question and its unresolved details. Source 8113da43-10fd-4b2a-ac73-7ea1dea25382.",
-        "cutoff": "8113da43-10fd-4b2a-ac73-7ea1dea25382"
+        "threadId": "238f4e25-9f96-4537-bca6-af5f02c67e52",
+        "exclusionPartId": "ac099b1e-5331-4235-858f-43a59f7d4f6e",
+        "proposalId": "a0c7baa1-c6f6-4b0d-b790-091c6e99fec1",
+        "stoppedProposalId": "be69164e-54d9-4277-87db-aa5a99c3fdc2",
+        "inputSha256": "d7a37dc1e0c939e2e04eea2fc76e3cfddc6c050ce0b69b6c5c792a1021f43390",
+        "reviewedText": "Reviewed synthetic summary: preserve the picture question and its unresolved details. Source ff862778-f425-4566-8b22-0fab5a40ca9a.",
+        "cutoff": "ff862778-f425-4566-8b22-0fab5a40ca9a"
       },
       "branch": {
-        "threadId": "af0ca24a-57a3-4bb7-bcbd-ceae2fb51d2a",
-        "oldRootId": "9f973b6b-c9f8-4e89-81cf-c04e76019880",
-        "newRootId": "7b4c72ec-1e87-4dbf-9e80-d3942cd48b88",
-        "freshContextId": "6ddaed80-841b-4ae2-a73c-ba565c01b528",
-        "restartContextId": "eef801f0-722c-4bc9-bb67-1ca6470a1749",
-        "sourceLeafId": "57104030-3bb3-47b0-ad33-21697506f093"
+        "threadId": "8c89a2c3-bcc1-48d4-9d26-769af7003779",
+        "oldRootId": "de7f1469-37ac-421e-b5ad-9e987e21dfd3",
+        "newRootId": "649d6c91-57a0-44e4-9751-fde1c77e5eb7",
+        "freshContextId": "bc0cec43-1121-4fd6-b317-3a6d0d7ba444",
+        "restartContextId": "f60bc3f0-e49d-4dd5-be95-95b423b1d058",
+        "sourceLeafId": "3f8043aa-e2f1-46a1-a9c1-1c5d85579a3a"
       },
       "cost": {
-        "threadId": "ef1b2de9-de76-4304-8193-b54869a051dd",
+        "threadId": "5e82d36a-0b5c-49db-8673-d07536922049",
         "profile": {
           "alias": "Budget",
           "aliasSource": {
-            "id": "b68f6f70-3f4b-4bf7-b025-a8d383c3789a",
+            "id": "d70764d3-4a19-41b8-bdea-afee4c731bd5",
             "revision": 13
           },
           "allowPrivacyChange": false,
@@ -8216,16 +8230,16 @@
           },
           "version": 4
         },
-        "aliasId": "b68f6f70-3f4b-4bf7-b025-a8d383c3789a",
+        "aliasId": "d70764d3-4a19-41b8-bdea-afee4c731bd5",
         "blockedFallbackPrimaryRequests": 1,
         "allowedFallbackRequests": 2
       },
       "regions": {
-        "threadId": "7a497fa4-2916-457a-b788-b00e82457c17",
+        "threadId": "162685ed-454e-4945-8ded-6d49198c9167",
         "profile": {
           "alias": "Regional",
           "aliasSource": {
-            "id": "76287d80-7cee-4fab-879f-0b09f3d19976",
+            "id": "0ae42d15-8602-4f0b-9acb-4e91ec2d83f1",
             "revision": 14
           },
           "allowPrivacyChange": false,
@@ -8244,17 +8258,17 @@
           },
           "version": 5
         },
-        "aliasId": "76287d80-7cee-4fab-879f-0b09f3d19976",
+        "aliasId": "0ae42d15-8602-4f0b-9acb-4e91ec2d83f1",
         "aliasCurrentRegion": "eu",
-        "freshContextId": "f17f36b4-a130-44dd-845c-dbd70d205354",
-        "oldLeaf": "611cc4ae-78d3-42fa-9de5-d618b4295116",
-        "summaryProposalId": "328b3afb-5af2-49e8-a9c2-09d88f4598f6",
-        "initialEventId": "16e3cfc3-7203-441a-866a-afcad255a227",
+        "freshContextId": "3e91e2bc-d4b1-43ed-a19e-2c34cc11f4f1",
+        "oldLeaf": "20438350-1332-4d22-acf2-6b84dfdc88d1",
+        "summaryProposalId": "8f02f6d8-6871-4b6c-a6a5-e545040330c0",
+        "initialEventId": "80ff94ec-4d01-46a9-997a-82d92009775f",
         "generationIds": [
-          "2baa055a-f9ba-452e-a2d0-4d938f0d513f",
-          "22d51aa1-1904-4f0c-a186-e66cd91aa0db",
-          "76ccdf02-8095-4751-8998-0b5ff0146cee",
-          "77c99f1e-6c60-4f8d-8177-d4a0c9107a6c"
+          "f78f6265-4cb2-4f2c-aa28-085b90a32a9d",
+          "1095d81d-cb71-414a-b473-72ec61515766",
+          "8de4879d-489d-4c4a-8105-fef44a8ff866",
+          "b36b386f-dcbf-44d0-9e51-9d39a02b9fa8"
         ],
         "dispatchBinding": {
           "providerId": "openai",
@@ -8266,13 +8280,13 @@
       },
       "composerFiles": {
         "title": "PDF notebook",
-        "threadId": "776e8377-72cb-4ded-a0b8-e0c4e2efa60a",
-        "messageId": "a085d1a3-104d-4a44-b626-2a4bf006dfb1",
+        "threadId": "8babff6a-a260-4d22-9317-c0d08732def1",
+        "messageId": "ed86ffcb-ac99-4e61-a521-7645abc27a41",
         "attachment": {
           "availability": "available",
           "blobSha256": "fc1f224f40483a95a367f1737828dc76fb910e1fbf6fb434ca5051632c7375d2",
           "filename": "original-synthetic.pdf",
-          "id": "67f5b6b5-431d-454f-a1c9-e1c3589dfa41",
+          "id": "608221fd-5738-4df0-89d0-655a8d056b1e",
           "mimeType": "application/pdf",
           "rawObjectId": null,
           "sizeBytes": 601
@@ -8282,25 +8296,25 @@
             "data": {
               "text": "Read the original synthetic PDF."
             },
-            "id": "cb9ae58f-3320-43f9-867e-b0ec143a5473",
+            "id": "6fd0ad86-74ad-434c-b7d0-98e94698a3f4",
             "kind": "Text",
-            "messageId": "a085d1a3-104d-4a44-b626-2a4bf006dfb1",
+            "messageId": "ed86ffcb-ac99-4e61-a521-7645abc27a41",
             "order": 0
           },
           {
             "data": {
-              "attachmentId": "67f5b6b5-431d-454f-a1c9-e1c3589dfa41",
+              "attachmentId": "608221fd-5738-4df0-89d0-655a8d056b1e",
               "description": "original-synthetic.pdf"
             },
-            "id": "34eb66e4-901d-47b1-aab9-fd4247998c91",
+            "id": "4f87b17f-25c7-4869-8c3a-0f2f500c7bfd",
             "kind": "File",
-            "messageId": "a085d1a3-104d-4a44-b626-2a4bf006dfb1",
+            "messageId": "ed86ffcb-ac99-4e61-a521-7645abc27a41",
             "order": 1
           }
         ],
         "sha256": "fc1f224f40483a95a367f1737828dc76fb910e1fbf6fb434ca5051632c7375d2",
         "byteLength": 601,
-        "archiveSha256": "069fb017eb0f0abe919f1e9c196fbb82a8a9bcfd9778ca10e8225eb9b7e4d3c5",
+        "archiveSha256": "bf584d1d150747d9608f50436d703a99638c9ca3ac81f512d1e9ab330ef9d6d1",
         "restoredRegeneration": true,
         "regionalFileRefusedBeforeDispatch": true,
         "regionalImageEligibilityReportRefreshed": true,
@@ -8308,36 +8322,36 @@
       },
       "audioInput": {
         "title": "Audio notebook",
-        "threadId": "f620a5bf-50b1-4c61-8bf8-68e8a91d724a",
-        "messageId": "009d8365-b757-4edf-87c7-bacb317ecb87",
+        "threadId": "92f96f86-bbf4-469d-8107-a43ccf9fdd91",
+        "messageId": "f6183ce0-8b36-4b6a-b4c0-35c957245960",
         "parts": [
           {
             "data": {
               "text": "Describe these two original synthetic audio clips in text."
             },
-            "id": "c3410167-e5e7-4b83-aaed-efd7214c8ebd",
+            "id": "0cfa480d-f973-4fb7-9325-823889b2137c",
             "kind": "Text",
-            "messageId": "009d8365-b757-4edf-87c7-bacb317ecb87",
+            "messageId": "f6183ce0-8b36-4b6a-b4c0-35c957245960",
             "order": 0
           },
           {
             "data": {
-              "attachmentId": "c919d0f1-8423-4cd9-b740-c1eb53712346",
+              "attachmentId": "2ba532dc-4e7a-46fa-bcd7-28d82d20a54f",
               "description": "original-synthetic.wav"
             },
-            "id": "15ef17af-f4ef-4622-8a09-471f5389598a",
+            "id": "49371edc-c4a9-4d08-9cd9-2e0bfd05a6a4",
             "kind": "Audio",
-            "messageId": "009d8365-b757-4edf-87c7-bacb317ecb87",
+            "messageId": "f6183ce0-8b36-4b6a-b4c0-35c957245960",
             "order": 1
           },
           {
             "data": {
-              "attachmentId": "eb54c432-15b0-4be1-aedb-3728677ab401",
+              "attachmentId": "5f2f8f08-bb8b-49e4-bc47-acc591fb4653",
               "description": "original-synthetic.mp3"
             },
-            "id": "4d76cba6-a37b-4c74-9f32-479887079cff",
+            "id": "90245557-0be2-4cad-b41f-f37d5dcec6b2",
             "kind": "Audio",
-            "messageId": "009d8365-b757-4edf-87c7-bacb317ecb87",
+            "messageId": "f6183ce0-8b36-4b6a-b4c0-35c957245960",
             "order": 2
           }
         ],
@@ -8346,7 +8360,7 @@
             "availability": "available",
             "blobSha256": "627ce34972f0cf95ed882ef9c4e7b5edcd222b39aa40aa334df3c1c49d75c1f1",
             "filename": "original-synthetic.wav",
-            "id": "c919d0f1-8423-4cd9-b740-c1eb53712346",
+            "id": "2ba532dc-4e7a-46fa-bcd7-28d82d20a54f",
             "mimeType": "audio/wav",
             "rawObjectId": null,
             "sizeBytes": 1644
@@ -8355,7 +8369,7 @@
             "availability": "available",
             "blobSha256": "a6c92fb7f5cda4fde942e35151c6fa9008fb929cd1f51ca49551568aa5f65f02",
             "filename": "original-synthetic.mp3",
-            "id": "eb54c432-15b0-4be1-aedb-3728677ab401",
+            "id": "5f2f8f08-bb8b-49e4-bc47-acc591fb4653",
             "mimeType": "audio/mpeg",
             "rawObjectId": null,
             "sizeBytes": 522
@@ -8375,7 +8389,7 @@
             "byteLength": 522
           }
         ],
-        "archiveSha256": "34788f9d408494ce697f9d811a3346fd0deae7cc893dd76f40ccdd1b4daff672",
+        "archiveSha256": "d9a7df71768210fa72f1bf48c90837c5776aa48f13cbcde3cd77e63b188fe55c",
         "restoredRegeneration": true,
         "unsupportedModels": [
           "gpt-4.1-mini-2025-04-14",
@@ -8385,38 +8399,38 @@
         "textOutputOnly": true
       },
       "outputParts": {
-        "threadId": "ee044796-c5e8-49b5-a8da-1c9bbea2ee30",
-        "citedMessageId": "a0c0a1db-ea37-4483-b535-4b994d6633cb",
-        "openaiMessageId": "b3d3fe22-a1fd-48db-a21f-fe21cc873ddd"
+        "threadId": "762e916f-6d61-418b-bcae-3822e9d5bce0",
+        "citedMessageId": "97577d8d-352e-485b-90cb-aadf28d3eaff",
+        "openaiMessageId": "b9f9eb8b-bad0-461e-8551-273178b1a6c8"
       },
       "reasoningContinuation": {
-        "threadId": "e5279c5a-9eb8-4160-888f-4751ddc3c9cd",
-        "outputMessageId": "fef456f0-a30c-43b7-97bf-ce66f19fc460",
+        "threadId": "b0d1268e-f4b6-4113-82c4-e7dae0222c3f",
+        "outputMessageId": "6368d9df-5ea4-4263-b1b9-cb80af0a19a2",
         "receipts": [
-          "5f986d88-a183-442f-af08-c7de4f5a0746",
-          "e7bac1ca-1172-44e9-b430-78f42c187b53"
+          "e919e242-830c-46f7-8f91-c5d14e07f2db",
+          "79fe49ff-a398-434d-8d91-8f84868a4e67"
         ]
       },
       "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
       "unclaimedExport": {
         "candidate": null,
-        "completedBytes": 5608960,
+        "completedBytes": 5617152,
         "completedRecords": 0,
         "entryCount": 0,
         "failure": null,
         "format": "portable",
-        "jobId": "5652d313-a215-4950-8f5c-f18cecc235f7",
+        "jobId": "ca0b8b27-a9ad-4725-85a6-7bee3e084566",
         "kind": "export",
         "output": {
-          "name": "quixi-portable-5652d313-a215-4950-8f5c-f18cecc235f7.tar",
+          "name": "quixi-portable-ca0b8b27-a9ad-4725-85a6-7bee3e084566.tar",
           "mediaType": "application/x-tar",
-          "byteLength": 5608960,
-          "sha256": "c59bed951173e6b54e99b9edff730e06f1d22c6da0468682aeb0fa61d76fa2b1"
+          "byteLength": 5617152,
+          "sha256": "b0d7f2fb4adf854cfa463ee2a9e5f2e44607d03d42bba1319cb231c526767d70"
         },
         "phase": "ready",
         "sourceSchemaVersion": null,
         "state": "ready",
-        "totalBytes": 5608960,
+        "totalBytes": 5617152,
         "totalRecords": null
       },
       "savedMessages": 130,
@@ -8448,8 +8462,8 @@
         ],
         "backend": "WebGPU · FP32",
         "runtimeNote": "Local runtime ready on WebGPU · FP32 from the cached model.",
-        "enableMs": 850,
-        "indexMs": 852,
+        "enableMs": 854,
+        "indexMs": 856,
         "model": {
           "chunkingVersion": "fts-v1:quixi-structural-utf16-v1:4096:64:arctic-xs-offsets-1.0.2:d15cd90acf9df739:256:code-v1:nul-space-v1",
           "dimensions": 384,
@@ -8470,7 +8484,7 @@
           },
           "route": "webgpu-fp32",
           "kind": "gpu",
-          "elapsedMs": 1285,
+          "elapsedMs": 1253,
           "checks": [
             {
               "id": "model_hash",
@@ -8531,7 +8545,7 @@
         },
         "faultInjected": true,
         "backendAfterFault": "WASM SIMD · CPU",
-        "restartMs": 201,
+        "restartMs": 200,
         "rebuild": {
           "generationBefore": 2,
           "generationAfter": 4,
@@ -8574,11 +8588,11 @@
     "packages/app/tests/browser/health-refresh.mjs": "e43d4bd2e5122441e1813f63132d06d4adaa3a837577bcb15a8307f52580cbeb",
     "packages/storage/src/worker/blobs.ts": "59482f83430c9c96c841e436095944c88cf72ab00364745b6ca4f84da1a82428",
     "packages/storage/src/worker/blob-catalog.ts": "6004fc6398cf97b3af233e3016db3d4267a20ad7cd2b4b016ec0f9608cc4914f",
-    "packages/storage/src/worker/search/index.ts": "0b727270eb761e3b2accd561091264bcaf9a731ca71f61c908be5658c444e76f",
+    "packages/storage/src/worker/search/index.ts": "59aaa7b471e147e149b19393093aac7c5468ecd7c1f5c704991e289f38a7d10d",
     "packages/storage/tests/browser/search-verification.ts": "fd5f8c3a65d94f4185dbf4f81a4cf3274fed3728b6243de46d81ede438b08634",
     "packages/storage/tests/browser/archive-search-verification.ts": "1c2058e150adf248b052c432dab9d659b3dfca5406c79b90ffaa6587c71e06a5",
     "packages/storage/tests/incremental-blob-reads.test.ts": "6610a8481003e76ece50ba112070e1fcd84d7deb941ad08c57915bc497de473b",
-    "packages/search/tests/repository.test.ts": "9cdba71ea1b2f954c823c9cb944a6f1ae4e54640f76376dff4967f1a61c128b1",
+    "packages/search/tests/repository.test.ts": "2625bc9cbd8e676d280a695f39011f3f49c9bda3a8f4548df23132115e12e1ed",
     "packages/app/src/features/providers/health-refresh.ts": "100bf62f098deabd22eda5bb5fc64ddf77a5484634f0c5d756f5b6e343eb6fe5",
     "packages/app/src/features/providers/types.ts": "7fa14b0e053bea81390a206a1fd5359b5caf310c360faa53409b75726674c92c",
     "packages/app/tests/providers/health-refresh.test.ts": "f07ed1bfa3e1717cc168e902677ad6b962eab022c522ca030ca07e9fdeaf9c39",
@@ -8588,7 +8602,7 @@
     "packages/app/src/features/accessibility/CompatibilityAnnouncement.tsx": "7c586581a5333777d0cedfdd34039a935fca9b253fcd51462a24d7a02c4478ab",
     "packages/app/tests/browser/compatibility-announcements.mjs": "3c188088c2c28cd7827be5ca25cd46f70a80e9b304898ce04c3da16451d96e84",
     "packages/app/tests/browser/alias-application-accessibility.mjs": "581f95299594d3620f34078288df295c7176aef8439758b1dd1ca0ab67eb209d",
-    "packages/app/src/AppRoot.tsx": "da9961b4875e54a640c844bfd81f5a2ebae6d52357f2f4fd0161af0d32b4d2ee",
+    "packages/app/src/AppRoot.tsx": "eb1d281f1c645d3894bc362477b345fd163d68fd3f28a56897c6b24dacd9cff8",
     "packages/core/src/model/compaction.ts": "33e724d0610024ebe5b9247196beea0971d72afe77e53f8ccebacfada2c54d28",
     "packages/core/src/model/summaries.ts": "ebb396a3f6ec22c26d244845dbfef77a0de04dc9ddbc106263d81f3d8e4d7d86",
     "packages/storage/src/worker/canonical/summary-source.ts": "5fc70e1137f9630fa5975b4a3ae3a31bd7eba82e224e8777620ef75d5b6b865c",
@@ -8619,19 +8633,19 @@
     "packages/app/src/features/archives/RestorePanel.tsx": "fd64e5c492a2cd894f54bdef7eccbfa085a00a2b65ce7963fd26ee6d6b7026c6",
     "packages/app/src/features/archives/controller.ts": "a0a77796f2893cf556aeeeebe4de6180b4127b5b71faacaeae3ef1ecc5ef6c76",
     "packages/app/src/features/archives/tests/export-controller.test.mjs": "641e2b0225b9658029314ccf24ae918c19c7df4ec5c32673d4152a97b822299a",
-    "package.json": "94f82e2a7cea4c061b69e5825c4fbc5f9c0d481668a373717abe89a23da5c1b5",
+    "package.json": "41c5ee9d9c1359b5a2b49bb9133a9be3e6cc68705cc477e3c8c51c9c7d1012c5",
     "packages/app/src/features/preferences/send-key.ts": "2e985ef8ef08712b04fdc36bad04428650a2a7f2b5de8f4da7e9909a331387de",
     "packages/app/src/features/preferences/aliases-controller.ts": "2314b16457147f13da3501b2ebe533987c361dffdaf1cf3e3ca8ffaaa5fadb74",
     "packages/app/src/features/preferences/RoutingAliases.tsx": "b0d6e0ea57c32cfc8b3c3b281e50719aa6c65e022f0cc501d548abf8d7775059",
     "packages/core/src/contracts/routing-aliases.ts": "f43cd67e4e00cff69cbfdd51306b24a2dd234a729ca287b775f81bad74f47d42",
-    "packages/core/src/contracts/index.ts": "ef0dee93b4fa15b66a083d7833a9da78cd1701d354aad3c101703d10459dc3d4",
+    "packages/core/src/contracts/index.ts": "d1ffc80fe77995ef418a3392237b76311ee636377ef297fb25865e01e8b5e7dd",
     "packages/storage/src/worker/routing-aliases.ts": "534ee69d7275c1872a0a4e68ff77fed526f1efe09835c075445a392a3e7f45ba",
     "packages/core/src/contracts/preferences.ts": "b69d74a6b35c5b4218706dc3381f0528eee4c802828338b3ea5b1a4951feeef2",
-    "packages/core/src/contracts/storage.ts": "0a98b3c60b64967099ffc11025f3846908db45721424e33ef27bbf954eebf565",
+    "packages/core/src/contracts/storage.ts": "aa1a164ad24fa5c14448d4ebb94ad64a29f593ec660a42879c5d8afb83987f9e",
     "packages/storage/src/worker/preferences.ts": "b12bc9bafc6396c2db08df56b559867bbecb3e166316d83793fceab2aae9f769",
     "packages/app/src/index.ts": "0b1dd20ef2723bead5e1aceae4faac783abf717a37fef4be1edcd333608c8302",
-    "packages/app/src/styles.css": "3ab0d7ac3d58cb668683f63903da86722e9cae1a21940af848a0056f11ffb858",
-    "packages/app/src/runtime/library.ts": "9a4516954eb0dd4e586a4d6331793f1e034fa86423a6eebb9f756df940666bc5",
+    "packages/app/src/styles.css": "8d2e383a73c437ada4c4e3d6cf248b2382f74a9621b1e68002bf405a2f10f396",
+    "packages/app/src/runtime/library.ts": "b800c70d72f4b36dde9e5d6dc734a5b29705380feef826724027eab4ed8befb5",
     "packages/app/src/workflows/chat.ts": "5eecde90cac9939a9b7fcfaf74b18d906cab60c40e4df4b36e5d800b5560c3fb",
     "packages/app/src/features/attachments/staging.ts": "7ca327a1a66ee97c5560b7697a271231871c9ad0f5dc9f35fe58ba1820e5c4b2",
     "packages/app/src/features/attachments/composer-attachments.ts": "0b88189635dd4a505937d62d10ad1b1a61b0ab60fa5218e40a23c94adb2ea1b2",
@@ -8652,7 +8666,7 @@
     "packages/app/src/runtime/events.ts": "ffa6db8f643408ebc6fc3ceed238909a77a5bba7270869f9abbd8b5c86c6fceb",
     "packages/app/src/runtime/switching.ts": "7a56fcdd73c1307653713954e4ed0f2c1f28a4a69538e51a97d45710f9bc9f23",
     "packages/app/src/runtime/portability.ts": "b4ab7c84ed079b75df8246a4e87a56a90132db9e57f80348866471b02a4b62d5",
-    "packages/app/src/features/migration/controller.ts": "d852dad5df3c227018168743925ef49cf6fd8ac38e866db76d8a14d35f6da4fe",
+    "packages/app/src/features/migration/controller.ts": "a2e1ef2003ce01eb2457ca04a340621483b83cc14d86782e16fe5a11dfca00d9",
     "packages/app/src/features/migration/MigrationPanel.tsx": "aa7e38d108e75e2d40ffede87f5b9a91d8ff1393ea5f0237d1ea16db612edc2d",
     "packages/app/src/features/compare/CompareCandidates.tsx": "dc7e05c3f090ca030ec280e243a43c822191a1ffec00cf3d14a0d21db707c6b8",
     "packages/app/src/runtime/fallback.ts": "c3d7b0a42f7b0696e70b5e438358067f893496f3622b549047b19aacbde2cd53",
@@ -8661,7 +8675,7 @@
     "packages/app/src/runtime/processing-region.ts": "99099c37608edc288b082b03da24522a20f9a815366abe533d218e6932589aa5",
     "packages/app/src/features/providers/ProviderSettingsPanel.tsx": "571475bfa559f5f7381a4f5ee9c6fd1e04c3b73a8c5e82f1205f16740f8e89c8",
     "packages/providers/src/regional.ts": "1f09a2bf83e16d41aa4ca220c81b14c10b1ab719f5493e952d9371beefe835ca",
-    "packages/storage/src/worker/archive-database.ts": "905f431a4b07b49c580beab4f2ca7b4ff501ba0a25cd23c6ef96e9015ee4a616",
+    "packages/storage/src/worker/archive-database.ts": "d129a32a4afa29af38cb8eb2a6de2321104ccab616b3aea14d73aef6b81fce44",
     "packages/storage/migrations/views.ts": "49b3b6890c3711b2406db59c37979364a526bb99d7794d67ceeafb42838500aa",
     "packages/storage/migrations/streaming-text.ts": "e027dc12cf7d301359d0dfea7ef5de20eb3c6d1279d8dc94859b277cc0c4bc86",
     "packages/providers/src/generation.ts": "c47c0bf67d82a33ec52517b504a9595259e04a10e76338c2509e4fdd4112f561",
@@ -8675,7 +8689,7 @@
     "packages/providers/src/types.ts": "0d979f27cbfbe5f65724412fe87eb46c493a3dd2bbe2f165a3ae92378fbc45b6",
     "packages/core/src/model/provenance.ts": "190d7c5a1d55cbf3a3393c69b528cdad14cb1e2923b4f6555a2a3346256f4ecc",
     "apps/web/src/configuration.ts": "4bf0a495315142d50c9249423615279d25de0cbdaccc0fa60a900ec1e20d178e",
-    "packages/app/tests/browser/index.ts": "cb816935e80b0cf05a7282b91600127f197940bf4efda697cf6db1e96875b681",
+    "packages/app/tests/browser/index.ts": "61f0910ea9c50312339b2938182ad98780c846f2b8eab2a49db907afcb1d2df4",
     "packages/app/tests/browser/regions.mjs": "4fbb5bc1209e8945cdf042989eee7a936b3059781c69cfd0760cd3dc08a2d7a1",
     "packages/app/tests/browser/composer-files.mjs": "e0212549559ad40c1f4f7a39d6a0cf0024c026b0de0d1787fc997681ff83fafc",
     "packages/app/tests/browser/composer-files-storage.ts": "6117016481c24011ef654451bc66ec9e13ec368eace53e1445ea36bbc3fe905a",
@@ -8689,7 +8703,7 @@
     "packages/app/tests/attachments/controller.test.ts": "60dfbd9a2fb046b1337bdfdc6266ec662091d956120651ab6836f75c26c84797",
     "packages/app/src/features/providers/tests/controller.test.mjs": "88792587d4dcfc73d48a2ecf21514a8a5d4748014e6ead6f7689791533788bd5",
     "packages/app/tests/browser/composer-files-restore.html": "5c5523f111a36567f6e0e1ea7bba614e8ec26fd15a8c03416aabbc21c0810528",
-    "packages/app/tests/browser/run.mjs": "eebcac971640689a91cfdf0a739f826ea1c7fa8d3393d2825dd6b41bfaf02cc7",
+    "packages/app/tests/browser/run.mjs": "75d24f50376de99e96aaf8c2edade52e6be1dfaed2c63156d7722e0304e1ec84",
     "packages/app/tests/browser/semantic.mjs": "defe67b8b6333e990442cf48e737954c83904ea08b79df5a8a7890a5c3e7c800",
     "packages/app/tests/browser/onboarding.mjs": "f84735b9decf933654db47bf1f252730f6683fd36b5ae935a298149f53539ad7",
     "packages/app/src/features/onboarding/controller.ts": "49659b9b3e5c191220b74cd42364cd948242f399fbc301c5e0312cbce3615468",
@@ -8711,5 +8725,5 @@
     "node": "v22.23.1"
   },
   "sourceStable": true,
-  "finishedAt": "2026-09-12T23:34:30.510Z"
+  "finishedAt": "2026-09-13T00:36:55.700Z"
 }

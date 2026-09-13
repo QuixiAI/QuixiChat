@@ -289,6 +289,28 @@ form label {
   padding-bottom: 1.5rem;
   border-bottom: 1px solid var(--border);
 }
+.search {
+  flex-wrap: wrap;
+}
+.search .muted {
+  flex-basis: 100%;
+  overflow-wrap: anywhere;
+}
+.search select,
+.search input,
+.search button {
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+.search label {
+  flex: 1 1 12rem;
+}
+.compare-choices li {
+  flex: 1 1 100%;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
 .welcome {
   max-width: 600px;
   margin: 12vh auto;

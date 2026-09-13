@@ -1,6 +1,6 @@
 # 09 — Add portable archives and open export
 
-**Status:** In progress — portable/open export, managed activation, shared replacement UI, retained-history recovery, schema-8 candidate upgrade and the web-to-desktop cross-host restore pass production-path checks; cross-host and host gates remain open; the scale gate passed on 2026-09-12 ([archive-scale.md](../validation/archive-scale.md))
+**Status:** Complete — portable/open export, managed activation, shared replacement UI, retained-history recovery, schema-8 candidate upgrade, the scale gate and the web-to-desktop cross-host restore pass production-path checks in both browser engines and the native macOS WebView; every task and acceptance criterion is ticked with linked evidence ([cross-host-restore.md](../validation/cross-host-restore.md), [archive-scale.md](../validation/archive-scale.md))
 
 **Workstream:** A7 — ownership and recovery
 

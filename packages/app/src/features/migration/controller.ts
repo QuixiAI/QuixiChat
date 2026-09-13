@@ -127,10 +127,18 @@ export function createMigrationController(services: BulkServices) {
             do {
               if (disposed || current !== epoch) return;
               const page: { items: LibraryThread[]; nextCursor: string | null } = await services.storage.request(crypto.randomUUID(), 'listLibrary', { archived, title: '', page: { ...BULK_PAGE, cursor } });
+              const assessed: { threadId: string; status: 'fully_portable' | 'portable_with_transformations' | 'provider_dependent' | 'blocked' | 'unknown'; revision: number }[] = [];
               for (const thread of page.items) {
                 if (disposed || current !== epoch) return;
-                record(await analyse(current, thread));
+                const row = await analyse(current, thread);
+                record(row);
+                if (row.outcome !== 'failed' && row.outcome !== 'empty') assessed.push({ threadId: row.threadId, status: row.outcome, revision: thread.revision });
                 await yieldTurn();
+              }
+              // Product §45: publish this page's statuses so search can filter by portability early.
+              if (assessed.length && !disposed && current === epoch) {
+                const targetsKey = services.providers().flatMap(provider => provider.models.map(model => `${provider.id}|${model.id}`)).sort().join(',') || 'no-targets';
+                await services.storage.request(crypto.randomUUID(), 'recordPortabilityAssessments', { items: assessed, targetsKey, assessedAt: Date.now() }).catch(error => { publish({ error: `Statuses could not be published for search filters: ${describeError(error)}` }); });
               }
               cursor = page.nextCursor;
             } while (cursor);

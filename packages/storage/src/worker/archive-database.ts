@@ -16,6 +16,7 @@ import { BlobCatalog } from "./blob-catalog.ts";
 import { BlobInventoryRepository } from './blob-inventory.ts';
 import { DoctorAuditRepository } from './doctor-audit.ts';
 import { BlobHashAuditRepository } from './blob-hash-audit.ts';
+import { PortabilityRepository } from './portability.ts';
 import { OpfsBlobStore, BlobStorageError } from "./blobs.ts";
 import { CanonicalRepository } from "./canonical/index.ts";
 import type { CanonicalSqlite } from "./canonical/index.ts";
@@ -146,6 +147,7 @@ export class ArchiveDatabase {
   private inventory: BlobInventoryRepository | undefined;
   private doctor: DoctorAuditRepository | undefined;
   private hashAudit: BlobHashAuditRepository | undefined;
+  private readonly portability: PortabilityRepository;
   private searchFailure: unknown;
   private readonly tokenizerFailure: unknown;
   private readonly schemaVersion: number;
@@ -167,6 +169,9 @@ export class ArchiveDatabase {
     });
     this.schemaVersion = this.repository.migrate();
     this.catalog.initialize();
+    // Derived local portability statuses (product §45 filter); created before any search runs.
+    this.portability = new PortabilityRepository(db);
+    this.portability.initialize();
     this.catalog.reconcileOwnerStart();
     this.producers = new ProducerRepository(db, this.repository, archiveId);
     this.views = new ViewRepository(db, this.repository);
@@ -510,6 +515,8 @@ export class ArchiveDatabase {
           "Operation identity belongs to a different storage journal",
         );
     switch (request.operation) {
+      case 'recordPortabilityAssessments': return this.portability.record(request.args);
+      case 'portabilityCoverage': return this.portability.coverage();
       case 'beginBlobHashAudit':
         this.hashAudit ??= new BlobHashAuditRepository(this.db, this.blobs);
         return this.hashAudit.begin(request.args.scanId);

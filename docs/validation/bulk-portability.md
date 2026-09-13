@@ -67,6 +67,31 @@ conversation opens on the target connection with its event line.
 
 Last migration run: 4 conversations (Comet notebook, Keyboard notebook, Portability thread, Image thread) routed to openai|gpt-4.1-mini-2025-04-14 and back to anthropic|claude-haiku-4-5-20251001 in both engines, one Migration event per conversation per migration.
 
+## Portability search filter (product §45, plans 07/10)
+
+Each page of the bulk analysis publishes its conversations' statuses to the
+storage owner (`recordPortabilityAssessments`, up to 64 per request, keyed by
+the configured target set; a new target set discards earlier statuses), into
+a derived local table that never enters an export and is not part of the
+canonical audits. The search request's `portability` filter is then applied
+in the worker's SQL beside the other filters, before ranking, so a
+conversation without a published status is simply not matched. The search
+form offers the filter with a coverage note that names how many
+conversations the last analysis assessed, or says to run the analysis first.
+
+**Worker (Node)** — `npm run test:search`: with no statuses a portability
+filter matches nothing; after one conversation is recorded as portable with
+transformations only its hits match the `transformed` filter and none match
+`blocked`; recording under a new target set discards the earlier statuses
+and the new status applies.
+
+**Application (Chromium and WebKit)** — the shared-app proof (101
+checks per engine): after the analysis every assessed conversation has a
+published status, an exact search for "comet" with the provider-dependent
+filter returns exactly the hits of the provider-dependent conversations and
+no others, the blocked filter returns none, and the coverage note names the
+analysis.
+
 ## Limits
 
 - The analysis reads each conversation's selected branch through the chat
@@ -77,6 +102,9 @@ Last migration run: 4 conversations (Comet notebook, Keyboard notebook, Portabil
 - While a generation is in progress the workflow is busy; the analysis
   retries that conversation for up to ten seconds and then records it as
   failed with that reason, for Retry.
+- Statuses reflect the last analysis, not live changes; editing a
+  conversation does not update its published status until the library is
+  analysed again. The coverage note says when the statuses were assessed.
 - Context-compaction choices stay per conversation in the conversation view;
   the migration review shows the request transformations the inspector
   reports and does not change compaction.
