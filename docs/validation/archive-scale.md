@@ -1,6 +1,9 @@
 # Archives at scale: 30,000 messages exported, restored and read with ordinary tools
 
 Date: 2026-09-12. Plan: [09](../plans/09_add_archives_and_open_export.md).
+Updated 2026-09-13 (Chromium column rerun after the clean-copy batching and
+one transaction per export and restore step; the WebKit column is from the
+2026-09-12 run and is rerun once the 1M-message stress run releases WebKit).
 Decision context: [ADR 0010](../decisions/0010-portable-archives.md).
 Retained record: [archive-scale-browser.json](../../packages/app/tests/browser/results/archive-scale-browser.json).
 
@@ -30,11 +33,11 @@ extracted with the system `tar`, its JSONL parsed line by line with
 | 30,000 messages (300 threads × 100) | Chromium | WebKit |
 | --- | --- | --- |
 | archive on OPFS before export (with the lexical index) | 420 MB | 452 MB |
-| portable export: bytes / time / bounded steps | 106.1 MB / 430 s / 1537 | 106.2 MB / 85 s / 1537 |
+| portable export: bytes / time / bounded steps | 106.0 MB / 54 s (was 430 s) / 1722 | 106.2 MB / 85 s / 1537 (2026-09-12) |
 | portable export read out (streamed chunks, digest verified) | 1698 chunks, 0.2 s | 1700 chunks, 0.2 s |
-| isolated restore of those bytes: validation steps / time / records | 2713 / 178 s / 60900 at schema 12 | 2713 / 133 s / 60900 at schema 12 |
+| isolated restore of those bytes: validation steps / time / records | 2004 / 78 s (was 178 s) / 60900 at schema 13 | 2713 / 133 s / 60900 at schema 12 (2026-09-12) |
 | corrupted container (64 KiB zeroed) | refused: IO_ERROR; active archive integrity ok, exact search answers | refused: IO_ERROR; active archive integrity ok, exact search answers |
-| open export: bytes / time / bounded steps | 64.8 MB / 399 s / 2209 | 64.8 MB / 87 s / 2209 |
+| open export: bytes / time / bounded steps | 64.8 MB / 63 s (was 399 s) / 2395 | 64.8 MB / 87 s / 2209 (2026-09-12) |
 | system `tar -tf` entries; JSONL records parsed; invalid lines | 5; 91503 (30000 messages, 300 threads); 0 | 5; 91503 (30000 messages, 300 threads); 0 |
 | Markdown passages readable as text | 30000 of 30,000 | 30000 of 30,000 |
 

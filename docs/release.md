@@ -27,7 +27,7 @@ Single runs on one macOS machine under development load unless noted.
 | Archive size | 100,000 conversations / 1,000,000 messages seeded through the worker (4.7 GB database) | [storage-stress.md](validation/storage-stress.md) |
 | Startup at that size | landing 0.3–0.5 s after a cold reopen; first library page 9–42 ms; integrity check on request 56–67 s | same |
 | Portable export and restore at that size | export 3,980 MB in 9,338 s over 62,677 bounded steps (before the clean-copy batching), streamed to disk in 243 s; restore received in 295 s and validated in 5,349 s over 71,596 bounded steps | same |
-| Export and restore at 30,000 messages | export 106 MB in 85–430 s; restore validation 133–178 s | [archive-scale.md](validation/archive-scale.md) |
+| Export and restore at 30,000 messages | export 106 MB in 54 s (Chromium, after one transaction per step) to 85 s (WebKit, earlier bundle); restore validation 78–133 s | [archive-scale.md](validation/archive-scale.md) |
 | Lexical and semantic search | 101k chunks indexed; semantic query median about 0.45–0.49 s at 30,000 vectors | [search-scale.md](validation/search-scale.md), [semantic-search.md](validation/semantic-search.md) |
 | PDF extraction | 1,000 pages in 30.7–54.9 s end to end; 1,001+ pages and files above 32 MiB refused by declared limits | [pdf-scale.md](validation/pdf-scale.md) |
 | Attachments | quota on this machine about 10 GB (Chromium) and 20 GB (WebKit); 10–50 GB workloads not measurable here | [storage-stress.md](validation/storage-stress.md) |
