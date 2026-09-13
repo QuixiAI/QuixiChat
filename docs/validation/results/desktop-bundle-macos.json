@@ -1,0 +1,75 @@
+{
+  "status": "passed",
+  "startedAt": "2026-09-13T08:14:30.336Z",
+  "checks": [
+    "the release bundle Quixi.app exists",
+    "exactly one disk image was produced",
+    "the bundle identifier is ai.quixi.chat",
+    "the bundle version is 0.0.1",
+    "the disk image checksum verifies",
+    "the bundle carries a code signature (ad-hoc, no identity)",
+    "the code signature verifies against the bundle contents (deep, strict)",
+    "Gatekeeper assessments are disabled on this machine; distribution acceptance is not assessable here",
+    "updater is not configured in tauri.conf.json",
+    "the embedded frontend dist has 133 files including the SQLite and embedding WASM modules",
+    "the desktop CSP permits WASM and same-origin workers only"
+  ],
+  "environment": {
+    "platform": "darwin",
+    "release": "25.6.0",
+    "arch": "arm64",
+    "node": "v22.23.1",
+    "osVersion": "26.6.2"
+  },
+  "artifacts": {
+    "bundle": {
+      "path": "target/release/bundle/macos/Quixi.app",
+      "identifier": "ai.quixi.chat",
+      "version": "0.0.1",
+      "executable": "quixi-desktop",
+      "minimumSystem": "10.13"
+    },
+    "diskImage": {
+      "path": "target/release/bundle/dmg/Quixi_0.0.1_aarch64.dmg",
+      "bytes": 91183059,
+      "sha256": "9085f9d6bdd7f103e63a44dc8948d297ab0af22c6e82e90203806a4626e9caae"
+    },
+    "executable": {
+      "bytes": 95074000,
+      "sha256": "5735903e4985904994e75afd8116dc2e6d248c08a2815538e67a4e8499234341"
+    },
+    "bundleFiles": 4,
+    "frontend": {
+      "files": 133,
+      "sha256": "cdc448a85622ccc3fd0fd75b2a43b2a038236546745d73c03dac480f1d42fcab"
+    },
+    "csp": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' asset: http://asset.localhost data:; connect-src 'self' ipc: http://ipc.localhost"
+  },
+  "signature": {
+    "present": true,
+    "adhoc": true,
+    "authority": null,
+    "teamIdentifier": "not set",
+    "hardenedRuntime": true,
+    "identitiesOnMachine": 0,
+    "verifies": true,
+    "gatekeeper": {
+      "enabled": false,
+      "status": "assessments disabled",
+      "accepted": true,
+      "assessment": "/Users/eric/QuixiChat/target/release/bundle/macos/Quixi.app: accepted override=security disabled"
+    }
+  },
+  "updater": {
+    "configured": false,
+    "pluginsKey": null,
+    "bundleTargets": "all"
+  },
+  "scope": "Locally built, unsigned developer bundle on one macOS machine; no distribution, notarization or update-channel claim.",
+  "sourceSha256": {
+    "apps/desktop/src-tauri/tauri.conf.json": "aad6f6145493d6f4de3b35df1b56f4dd2d11a410f03da06b7395e14ef9acce24",
+    "apps/desktop/src-tauri/Cargo.toml": "2e226d0714f815ceb69a68b8ecf96a1dc9665e9ae261652c2ebb6b159b5d506c",
+    "tests/hosts/desktop-bundle-proof.mjs": "52e92eb9bb809ad182586316167f4e05a82680da22365989c8e426586db21cf4"
+  },
+  "finishedAt": "2026-09-13T08:14:33.371Z"
+}
