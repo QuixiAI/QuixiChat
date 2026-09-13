@@ -151,6 +151,8 @@ try {
   report.finishedAt = new Date().toISOString();
   await save();
   if (server) await new Promise((done) => server.httpServer.close(done));
-  await rm(temporary, { recursive: true, force: true });
+  // A failed run keeps its browser profiles so the seeded archive can be probed without reseeding (QUIXI_STRESS_KEEP=1 keeps a passing one too).
+  if (report.status === "passed" && !process.env.QUIXI_STRESS_KEEP) await rm(temporary, { recursive: true, force: true });
+  else { report.profileDirectory = temporary; await save(); console.log(`kept browser profiles at ${temporary}`); }
   console.log(JSON.stringify({ status: report.status, hosts: report.hosts.map((host) => ({ name: host.name, status: host.status, checks: host.checks.length })) }));
 }

@@ -95,6 +95,17 @@ advance step, which ADR 0010 had recorded as not bounded by `maxBytes`.
 Fixed by the ADR 0010 amendment: the snapshot is copied in steps of at most
 `maxBytes`, with the read transaction held across steps.
 
+**Fourth attempt (2026-09-13), failed at the startup diagnostics read**
+([stress-browser-webkit-1m-attempt4.json](results/stress-browser-webkit-1m-attempt4.json)):
+seeded in 1,621 s (617 messages/s); the run then failed exactly 60 s after
+the last seed commit, on the light `diagnostics` read (default reply
+deadline), before the report was requested. In the third attempt the same
+read answered in 38 ms, so something in the worker held the request for
+over a minute this time. The harness now names the failing request and its
+elapsed time and keeps the browser profile of a failed run, so the seeded
+archive can be probed without reseeding; the cause is recorded with the
+next attempt.
+
 FULL_RUN_RESULT
 
 ## Not covered by this run

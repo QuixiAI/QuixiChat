@@ -678,9 +678,14 @@ Object.assign(window, {
       },
       /** The light read (bounded by file size) for counts, then the explicit report whose integrity_check reads the whole file under its own deadline. */
       async timedDiagnostics() {
-        const lightAt = performance.now(); const light = await storage.request(crypto.randomUUID(), "diagnostics", null); const lightMs = performance.now() - lightAt;
+        const timed = async <T,>(step: string, run: () => Promise<T>) => {
+          const at = performance.now();
+          try { return { value: await run(), ms: performance.now() - at }; }
+          catch (error) { throw new Error(`${step} failed after ${(performance.now() - at).toFixed(0)} ms: ${String(error)}`); }
+        };
+        const { value: light, ms: lightMs } = await timed("light diagnostics read", () => storage.request(crypto.randomUUID(), "diagnostics", null));
         const at = performance.now();
-        const report = await storage.request(crypto.randomUUID(), "diagnosticsReport", null, { timeoutMs: INTEGRITY_CHECK_DEADLINE_MS });
+        const { value: report } = await timed(`diagnostics report (deadline ${INTEGRITY_CHECK_DEADLINE_MS} ms)`, () => storage.request(crypto.randomUUID(), "diagnosticsReport", null, { timeoutMs: INTEGRITY_CHECK_DEADLINE_MS }));
         const integrity = report.checks.find((check) => check.id === "sqlite_integrity");
         return { ...light, automaticIntegrity: light.integrity, lightMs, integrity: integrity?.outcome === "ok" ? "ok" : `${integrity?.outcome}: ${integrity?.measured.first ?? ""}`, integrityMs: Number(integrity?.measured.elapsedMs ?? 0), ms: performance.now() - at };
       },

@@ -1,0 +1,52 @@
+{
+  "status": "failed",
+  "startedAt": "2026-09-13T04:11:58.045Z",
+  "sizes": {
+    "threads": 100000,
+    "perThread": 10,
+    "planted": 0,
+    "messages": 1000000,
+    "seedSlice": 5000
+  },
+  "stepBounds": {
+    "maxRecords": 128,
+    "maxBytes": 1048576
+  },
+  "selectedEngines": [
+    "webkit"
+  ],
+  "hosts": [
+    {
+      "name": "webkit",
+      "status": "failed",
+      "checks": [],
+      "phases": {
+        "seed": {
+          "ms": 1621319,
+          "batches": 10000,
+          "messagesPerSecond": 617
+        }
+      },
+      "error": "page.evaluate: ArchiveStorageError: Archive reply deadline elapsed after dispatch. Inspect canonical operation status before retrying a write; restart byte transfers after an unknown chunk outcome.\n    at /Users/eric/QuixiChat/packages/app/tests/browser/stress.mjs:66:38",
+      "pageErrors": []
+    }
+  ],
+  "sourceSha256": {
+    "packages/storage/src/worker/archives/export.ts": "8b7ce6aba6b9045b17354464b720e07459672baf06accd7d5834c0e3bb07bcb7",
+    "packages/storage/src/worker/archives/index.ts": "546b5c7e65080e9e68c2ab054c8839200f0f2873c22d919a070c7c62d96dfe97",
+    "packages/storage/src/worker/archive-database.ts": "768bb31b1d42aac9f6bcb73596772c256807dbc6bf2b908dcdd886c4c309a06d",
+    "packages/app/tests/browser/index.ts": "9f0bef0007dca30640ca479a9ed2f5b38b505f86a363b428359ad21da51224ed",
+    "packages/app/tests/browser/stress.mjs": "83c4efb26ba0a68996f820875e8d7fc595b7cf3daf3b7c781c5aa67da21e6ea2"
+  },
+  "environment": {
+    "platform": "darwin",
+    "release": "25.6.0",
+    "arch": "arm64",
+    "cpu": "Apple M5 Max",
+    "osVersion": "26.6.2",
+    "node": "v22.23.1"
+  },
+  "qualification": "Synthetic short messages seeded through the production worker; no embedding model, no provider, no Cloud account; timings are single runs under development load on one machine.",
+  "error": "page.evaluate: ArchiveStorageError: Archive reply deadline elapsed after dispatch. Inspect canonical operation status before retrying a write; restart byte transfers after an unknown chunk outcome.\n    at /Users/eric/QuixiChat/packages/app/tests/browser/stress.mjs:66:38",
+  "finishedAt": "2026-09-13T04:40:01.392Z"
+}
