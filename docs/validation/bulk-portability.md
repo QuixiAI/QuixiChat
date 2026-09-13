@@ -87,10 +87,12 @@ and the new status applies.
 
 **Application (Chromium and WebKit)** — the shared-app proof (101
 checks per engine): after the analysis every assessed conversation has a
-published status, an exact search for "comet" with the provider-dependent
-filter returns exactly the hits of the provider-dependent conversations and
-no others, the blocked filter returns none, and the coverage note names the
-analysis.
+published status; an exact search for "comet" (hits only in fully portable
+conversations) keeps every hit under the fully-portable filter; a search
+for "picture" (which also hits the provider-dependent image conversation)
+loses that hit under the fully-portable filter and keeps exactly it under
+the provider-dependent filter; the blocked filter returns none; and the
+coverage note names the analysis.
 
 ## Limits
 
