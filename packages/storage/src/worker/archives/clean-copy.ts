@@ -82,6 +82,19 @@ export class CleanSnapshotCopy {
     if (!Number.isSafeInteger(maxRows) || maxRows < 1 || maxRows > 128)
       throw new Error("Invalid snapshot row budget.");
     if (this.complete) return true;
+    // One transaction per step: autocommitting each copied row cost a journal
+    // write and sync per row, which dominated the export at a million messages.
+    this.output.exec("BEGIN");
+    try {
+      const done = this.copy(maxRows);
+      this.output.exec("COMMIT");
+      return done;
+    } catch (error) {
+      try { this.output.exec("ROLLBACK"); } catch { /* the failed step's rows are discarded either way */ }
+      throw error;
+    }
+  }
+  private copy(maxRows: number): boolean {
     for (let work = 0; work < maxRows; work++) {
       const table = copyTables[this.tableIndex];
       if (!table) {
