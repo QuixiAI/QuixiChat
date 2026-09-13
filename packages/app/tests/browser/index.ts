@@ -596,6 +596,87 @@ Object.assign(window, {
       },
       diagnostics: () => storage.request(crypto.randomUUID(), "diagnostics", null),
     },
+    /** Plan 24 stress: export and restore streamed through the runner's disk
+     * in bounded blocks, so a multi-gigabyte container never sits in page
+     * memory; every step is the production bounded job protocol. */
+    stress: {
+      exportJob: null as null | { jobId: string; transferId: string; byteLength: number; sha256: string; received: number; final: boolean },
+      restoreJob: null as null | { jobId: string; transferId: string; maxChunkBytes: number; offset: number; sequence: number; byteLength: number; sha256: string },
+      async beginExport(format: "portable" | "open") {
+        const id = () => crypto.randomUUID();
+        const started = performance.now(), operationId = id();
+        let job = await storage.request(id(), "beginArchiveExport", { operationId, format });
+        let advances = 0; const phases: string[] = [];
+        while (job.state === "working") {
+          job = await storage.request(id(), "advanceArchiveJob", { operationId: id(), jobId: job.jobId, maxRecords: 128, maxBytes: 1_048_576 });
+          advances++; if (phases.at(-1) !== job.phase) phases.push(job.phase);
+          if (advances > 5_000_000) throw new Error("Export did not finish");
+        }
+        if (job.state !== "ready" || !job.output) throw new Error(`Export ended ${job.state}: ${job.failure?.reason ?? "no output"}`);
+        const source = await storage.request(id(), "openArchiveExport", { jobId: job.jobId });
+        this.exportJob = { jobId: job.jobId, transferId: source.transferId, byteLength: source.byteLength, sha256: source.sha256, received: 0, final: false };
+        return { jobId: job.jobId, byteLength: source.byteLength, sha256: source.sha256, producedMs: performance.now() - started, advances, phases, entryCount: job.entryCount };
+      },
+      /** Up to `count` streamed chunks concatenated as base64; `final` once the container is fully read. */
+      async readExportChunks(count: number) {
+        const job = this.exportJob; if (!job) throw new Error("No export open");
+        const parts: Uint8Array[] = []; let bytes = 0, chunks = 0;
+        while (!job.final && chunks < count) {
+          const chunk = await storage.readChunk(job.transferId);
+          parts.push(chunk.bytes); bytes += chunk.bytes.length; chunks++; job.received += chunk.bytes.length;
+          await storage.acknowledgeChunk({ transferId: chunk.transferId, sequence: chunk.sequence, committedOffset: chunk.offset + chunk.bytes.length });
+          if (chunk.final) job.final = true;
+        }
+        const joined = new Uint8Array(bytes); let at = 0; for (const part of parts) { joined.set(part, at); at += part.length; }
+        let text = ""; for (let i = 0; i < joined.length; i += 0x8000) text += String.fromCharCode(...joined.subarray(i, i + 0x8000));
+        return { base64: btoa(text), bytes, chunks, final: job.final, received: job.received };
+      },
+      async releaseExport() {
+        const job = this.exportJob; this.exportJob = null; if (!job) return;
+        await storage.request(crypto.randomUUID(), "releaseArchiveJob", { operationId: crypto.randomUUID(), jobId: job.jobId }).catch(() => {});
+      },
+      async beginRestore(byteLength: number, sha256: string) {
+        const id = () => crypto.randomUUID(), jobId = id();
+        const begun = await storage.request(id(), "beginArchiveRestore", { operationId: jobId, expectedBytes: byteLength, expectedSha256: sha256 });
+        this.restoreJob = { jobId, transferId: begun.inputTransfer.transferId, maxChunkBytes: begun.inputTransfer.maxChunkBytes, offset: 0, sequence: 0, byteLength, sha256 };
+        return { jobId, maxChunkBytes: begun.inputTransfer.maxChunkBytes };
+      },
+      async sendRestoreBytes(base64: string) {
+        const job = this.restoreJob; if (!job) throw new Error("No restore open");
+        const bytes = Uint8Array.from(atob(base64), (character) => character.charCodeAt(0));
+        for (let at = 0; at < bytes.length; at += job.maxChunkBytes) {
+          const part = bytes.subarray(at, at + job.maxChunkBytes);
+          await storage.sendChunk({ transferId: job.transferId, sequence: job.sequence++, offset: job.offset, bytes: part, final: job.offset + part.length === job.byteLength });
+          job.offset += part.length;
+        }
+        return job.offset;
+      },
+      async finishRestore() {
+        const id = () => crypto.randomUUID(); const job = this.restoreJob; if (!job) throw new Error("No restore open");
+        const started = performance.now();
+        let status = await storage.request(id(), "finishArchiveRestore", { operationId: id(), jobId: job.jobId, byteLength: job.byteLength, sha256: job.sha256 });
+        let advances = 0; const phases: string[] = [];
+        while (status.state === "working") {
+          status = await storage.request(id(), "advanceArchiveJob", { operationId: id(), jobId: job.jobId, maxRecords: 128, maxBytes: 1_048_576 });
+          advances++; if (phases.at(-1) !== status.phase) phases.push(status.phase);
+          if (advances > 5_000_000) throw new Error("Restore validation did not finish");
+        }
+        const result = { state: status.state, failure: status.failure, candidate: status.candidate, advances, phases, validatedMs: performance.now() - started };
+        await storage.request(id(), "cancelArchiveJob", { operationId: id(), jobId: job.jobId }).catch(() => {});
+        this.restoreJob = null;
+        return result;
+      },
+      async libraryPages(count: number) {
+        const started = performance.now(); let cursor: string | null = null, pages = 0, items = 0; const latencies: number[] = [];
+        do {
+          const at = performance.now();
+          const page: { items: unknown[]; nextCursor: string | null } = await storage.request(crypto.randomUUID(), "listLibrary", { archived: false, title: "", page: { maxItems: 64, maxBytes: 65_536, cursor } });
+          latencies.push(performance.now() - at); pages++; items += page.items.length; cursor = page.nextCursor;
+        } while (cursor && pages < count);
+        return { pages, items, totalMs: performance.now() - started, firstMs: latencies[0] ?? 0, maxMs: Math.max(...latencies), more: !!cursor };
+      },
+      async timedDiagnostics() { const at = performance.now(); const value = await storage.request(crypto.randomUUID(), "diagnostics", null); return { ...value, ms: performance.now() - at }; },
+    },
     /** Plan 09 cross-host restore: this archive's record digests and blob hashes, for the native restore side to match. */
     crossHost: {
       async dump() {
