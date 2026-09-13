@@ -1,9 +1,11 @@
 # Diagnostics report and derived-index actions
 
 Plan [23](../plans/23_build_diagnostics_and_recovery.md), product §100/§101,
-[ADR 0040](../decisions/0040-diagnostics-outcomes.md). Last run 2026-09-12 on
-macOS 25.6.0 (arm64), Node v22.23.1, Playwright Chromium and WebKit, SQLite
-WASM 3.53.4 with sqlite-vec, canonical schema 12.
+[ADR 0040](../decisions/0040-diagnostics-outcomes.md). Last run 2026-09-13 on
+macOS 26.6.2 (arm64), Node v22.23.1, Playwright Chromium and WebKit, SQLite
+WASM 3.53.4 with sqlite-vec, canonical schema 13 (the browser proof was
+rerun after the schema-13 library activity migration and the bounded
+integrity read; both engines pass).
 
 ## What is proven
 
@@ -41,7 +43,7 @@ before dispatch. The report controller and the stress harness request
 `diagnosticsReport` with `INTEGRITY_CHECK_DEADLINE_MS`.
 
 **Application (Chromium and WebKit)** — `npm run test:app:storage-health:browser`,
-12 checks per engine, [retained report](results/blob-inventory-ui-macos.json).
+19 checks per engine, [retained report](results/blob-inventory-ui-macos.json).
 On the blob-inventory fixture archive (one referenced file deleted, one
 catalog row deleted, one file shortened, orphans, staged and unrecognized
 entries):
