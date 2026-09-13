@@ -1,0 +1,101 @@
+{
+  "status": "failed",
+  "startedAt": "2026-09-13T05:20:19.391Z",
+  "sizes": {
+    "threads": 100000,
+    "perThread": 10,
+    "planted": 0,
+    "messages": 1000000,
+    "seedSlice": 5000
+  },
+  "stepBounds": {
+    "maxRecords": 128,
+    "maxBytes": 1048576
+  },
+  "selectedEngines": [
+    "webkit"
+  ],
+  "hosts": [
+    {
+      "name": "webkit",
+      "status": "failed",
+      "checks": [
+        "100,000 conversations and 1,000,000 messages seeded through the production worker in 10,000 bounded commits (608 messages/s); the explicit report's integrity_check answers ok in 66.3 s over 2,300,000 canonical records (4713 MB file) and the startup read answers unchecked in 40 ms",
+        "the library's first page answers in 12 ms and twenty consecutive pages in 35 ms (max 12 ms) without listing the whole archive",
+        "a cold reopen of the persisted 1,000,000-message archive shows the landing in 0.5 s and answers the first library page in 122 ms",
+        "a second tab opens the same archive and reads three library pages through the owner in 98 ms",
+        "the portable export of 1,000,000 messages is 3980 MB, produced in 62,679 bounded steps (10214 s) and streamed out in 63,685 chunks (243 s) with its digest verified on disk"
+      ],
+      "phases": {
+        "seed": {
+          "ms": 1645298,
+          "batches": 10000,
+          "messagesPerSecond": 608
+        },
+        "integrity": {
+          "ms": 66519,
+          "integrityMs": 66312,
+          "integrity": "ok",
+          "automaticIntegrity": "unchecked",
+          "lightMs": 40,
+          "databaseBytes": 4942315520,
+          "canonicalRecords": 2300000,
+          "syncOperations": 1200000,
+          "usage": 30001171904,
+          "quota": 82463372084
+        },
+        "libraryPaging": {
+          "pages": 20,
+          "items": 1280,
+          "totalMs": 35,
+          "firstMs": 12,
+          "maxMs": 12,
+          "more": true
+        },
+        "coldReopen": {
+          "readyMs": 472,
+          "firstPageMs": 122
+        },
+        "followerTab": {
+          "firstMs": 34,
+          "totalMs": 98
+        },
+        "portableExport": {
+          "byteLength": 4173609472,
+          "sha256": "1fd640e9ea1e354bb335299dc332b0fe950bfd6e805c4f3fa87f5bb051dd0e94",
+          "producedMs": 10214156,
+          "advances": 62679,
+          "phases": [
+            "snapshot",
+            "encoding",
+            "ready"
+          ],
+          "readMs": 243484,
+          "chunks": 63685,
+          "entryCount": 0
+        }
+      },
+      "error": "page.evaluate: ArchiveStorageError: Archive reply deadline elapsed after dispatch. Inspect canonical operation status before retrying a write; restart byte transfers after an unknown chunk outcome.\n    at /Users/eric/QuixiChat/packages/app/tests/browser/stress.mjs:127:35",
+      "pageErrors": []
+    }
+  ],
+  "sourceSha256": {
+    "packages/storage/src/worker/archives/export.ts": "8b7ce6aba6b9045b17354464b720e07459672baf06accd7d5834c0e3bb07bcb7",
+    "packages/storage/src/worker/archives/index.ts": "546b5c7e65080e9e68c2ab054c8839200f0f2873c22d919a070c7c62d96dfe97",
+    "packages/storage/src/worker/archive-database.ts": "768bb31b1d42aac9f6bcb73596772c256807dbc6bf2b908dcdd886c4c309a06d",
+    "packages/app/tests/browser/index.ts": "2cb28f271a4265821031d02cde1b789e9c73c139258528c6a1b338799fcbec11",
+    "packages/app/tests/browser/stress.mjs": "b5b994240536a09433ecc6697240f6435d9e832353006ec296bea7ae2dcdbf91"
+  },
+  "environment": {
+    "platform": "darwin",
+    "release": "25.6.0",
+    "arch": "arm64",
+    "cpu": "Apple M5 Max",
+    "osVersion": "26.6.2",
+    "node": "v22.23.1"
+  },
+  "qualification": "Synthetic short messages seeded through the production worker; no embedding model, no provider, no Cloud account; timings are single runs under development load on one machine.",
+  "error": "page.evaluate: ArchiveStorageError: Archive reply deadline elapsed after dispatch. Inspect canonical operation status before retrying a write; restart byte transfers after an unknown chunk outcome.\n    at /Users/eric/QuixiChat/packages/app/tests/browser/stress.mjs:127:35",
+  "finishedAt": "2026-09-13T08:49:12.382Z",
+  "profileDirectory": "/var/folders/6m/094x3gh52ns_ds_zfts928rc0000gn/T/quixi-stress-tOJH1X"
+}

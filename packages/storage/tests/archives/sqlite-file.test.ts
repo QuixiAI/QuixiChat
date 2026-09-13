@@ -503,3 +503,27 @@ test("stepped snapshot copy never exceeds a step's byte budget, matches the inde
     source.close();
   }
 });
+
+test("a bounded copy from a plain byte source lands the exact bytes as a pool database in budgeted steps", async () => {
+  const { BoundedFileCopier } = await import("../../src/worker/archives/snapshot.ts");
+  const source = new sqlite.oo1.DB("/archive-byte-source.sqlite3", "c");
+  try {
+    source.exec("PRAGMA journal_mode=DELETE; CREATE TABLE proof(id INTEGER PRIMARY KEY, body BLOB); INSERT INTO proof VALUES(1,zeroblob(524289)), (2,zeroblob(7));");
+    const bytes = sqlite.capi.sqlite3_js_db_export(source.pointer);
+    const expected = createHash("sha256").update(bytes).digest("hex");
+    const unlinked: string[] = [];
+    const pool = { OpfsSAHPoolDb: class { constructor(name: string) { return new sqlite.oo1.DB(name, "c"); } }, async reserveMinimumCapacity() { return 10; }, unlink(name: string) { unlinked.push(name); return true; } };
+    let closedSource = 0;
+    const open = () => ({ byteLength: bytes.length, read: (offset: number, max: number) => bytes.slice(offset, Math.min(offset + max, bytes.length)), close: () => { closedSource++; } });
+    const copier = new BoundedFileCopier(sqlite as any, pool as any, "/archive.sqlite3", open, () => "finished");
+    let steps = 0, previous = 0, value: string | null = null;
+    while (!value) { value = await copier.advance(100_000); steps++; assert.ok(copier.copiedBytes - previous <= 100_000); previous = copier.copiedBytes; }
+    assert.equal(value, "finished"); assert.equal(steps, Math.ceil(bytes.length / 100_000)); assert.equal(closedSource, 1);
+    const copy = new sqlite.oo1.DB("/archive.sqlite3", "r");
+    try { assert.equal(createHash("sha256").update(sqlite.capi.sqlite3_js_db_export(copy.pointer)).digest("hex"), expected); assert.equal(copy.selectValue("SELECT count(*) FROM proof"), 2); } finally { copy.close(); }
+    assert.deepEqual(unlinked, []);
+    const released = new BoundedFileCopier(sqlite as any, pool as any, "/archive-released.sqlite3", open, () => true);
+    assert.equal(await released.advance(65_536), null); released.close();
+    await assert.rejects(released.advance(65_536), /closed/); assert.deepEqual(unlinked, ["/archive-released.sqlite3"]); assert.equal(closedSource, 2);
+  } finally { source.close(); }
+});

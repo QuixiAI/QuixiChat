@@ -1,5 +1,6 @@
 import { sha256 } from "@noble/hashes/sha2.js";
 import { bytesToHex } from "@noble/hashes/utils.js";
+import { INTEGRITY_CHECK_DEADLINE_MS } from "@quixi/core/contracts";
 import type {
   ArchiveExportFormat,
   ArchiveJobStatus,
@@ -7,6 +8,7 @@ import type {
   HostFile,
   StorageClient,
   StorageOperations,
+  StorageRequestOptions,
 } from "@quixi/core/contracts";
 export interface ArchiveWorkflowOptions {
   signal?: AbortSignal;
@@ -39,6 +41,7 @@ async function request<K extends keyof StorageOperations>(
   operation: K,
   args: StorageOperations[K]["args"],
   signal?: AbortSignal,
+  options?: StorageRequestOptions,
 ): Promise<StorageOperations[K]["result"]> {
   stopped(signal);
   const requestId = id(),
@@ -51,7 +54,7 @@ async function request<K extends keyof StorageOperations>(
   };
   signal?.addEventListener("abort", abort, { once: true });
   try {
-    const result = await storage.request(requestId, operation, args);
+    const result = await storage.request(requestId, operation, args, options);
     stopped(signal);
     return result;
   } finally {
@@ -70,6 +73,8 @@ async function finishJob(
       "advanceArchiveJob",
       { operationId: id(), jobId: job.jobId, maxRecords: 64, maxBytes: 262144 },
       options.signal,
+      // Every step is bounded by records/bytes except restore validation's per-table integrity check, whose cost is that table's size.
+      { timeoutMs: INTEGRITY_CHECK_DEADLINE_MS },
     );
     notify(options, job);
     await new Promise((resolve) => setTimeout(resolve, 0));

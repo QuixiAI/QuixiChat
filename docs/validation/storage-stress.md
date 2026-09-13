@@ -122,6 +122,23 @@ under the 600 s deadline. The fourth attempt's stall was the same defect:
 its light read succeeded and the report timed out at 60 s, reported by the
 harness against the wrong step before the instrumentation.
 
+**Sixth attempt (2026-09-13), failed at the restore's candidate import**
+([stress-browser-webkit-1m-attempt6.json](results/stress-browser-webkit-1m-attempt6.json)):
+seeded in 1,645 s (608 messages/s); integrity ok in 66.3 s; library first
+page 9 ms; cold reopen 0.5 s; a second tab's three pages in 79 ms; the
+portable export **completed**: 4,173,609,472 bytes (3,980 MB) produced in
+10,214 s over 62,679 bounded steps (about 163 ms per step: the per-step
+record budget of 128 and one statement per copied row dominate), streamed
+out in 63,685 chunks in 243 s with the digest verified on disk. The WebKit
+content process grew from about 1.7 GB to 5.3 GB resident over the export
+(observed with `ps`, not measured by the harness). The restore then failed
+on the reply deadline: after the container was received, the first
+validation step copied the whole 4.7 GB received database into the
+candidate pool in one advance, and the candidate's whole-file
+`integrity_check` later in the same phase would have done the same. Both
+are now stepped (ADR 0010 amendment: `BoundedFileCopier`; one table per
+integrity step) and archive advances carry the 600 s deadline.
+
 FULL_RUN_RESULT
 
 ## Not covered by this run

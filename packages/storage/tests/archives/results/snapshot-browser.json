@@ -4,8 +4,8 @@
     "webkit"
   ],
   "status": "passed",
-  "startedAt": "2026-09-13T04:11:13.431Z",
-  "finishedAt": "2026-09-13T04:11:32.069Z",
+  "startedAt": "2026-09-13T08:53:12.195Z",
+  "finishedAt": "2026-09-13T08:53:33.051Z",
   "environment": {
     "platform": "darwin",
     "release": "25.6.0",
@@ -30,7 +30,7 @@
     "packages/storage/tests/archives/schema-eight.ts": "f3f1677c3fed9e00c1c2011e296aec266d142b712f8bf73ca31110a93b37b3eb",
     "packages/storage/tests/archives/browser-client.ts": "145f9d0b703ad651f628e2d4e7b5a349697ca0d254f8519d219218c0d78a0829",
     "packages/storage/tests/archives/browser-workflows.ts": "fa215372d79ad4dceab38388d5d0f2bed505ce45fa44076de70fa7fd9c8f151b",
-    "packages/storage/src/worker/archives/index.ts": "546b5c7e65080e9e68c2ab054c8839200f0f2873c22d919a070c7c62d96dfe97",
+    "packages/storage/src/worker/archives/index.ts": "d59373d710bbd255d6bdaf11489e1a78dd58ba46e7a18fb89dc7eb92530ce369",
     "packages/storage/src/worker/archives/clean-copy.ts": "404bedbbecb57fedd86d957b51427cca3b5304339ff4120d6091114650c3046c",
     "packages/storage/src/worker/archives/schema-validation.ts": "ff3aecb064a430513890d9a66379b3904caa09de5f455580a98f299a74ebed22",
     "packages/storage/migrations/index.ts": "f39aab986efa92cc753cb10835681f6626ce880adbec723caa5495428746afdd",
@@ -39,7 +39,7 @@
     "package-lock.json": "aadb456e2a567a2b91cbb81a502650ebac93541f0a59d54035bdde2cacd97672"
   },
   "context": "fresh isolated persistent profiles",
-  "origin": "http://127.0.0.1:50081",
+  "origin": "http://127.0.0.1:54157",
   "hosts": [
     {
       "name": "chromium",
@@ -49,13 +49,13 @@
           "roundtrip": {
             "compaction": {
               "schemaVersion": 13,
-              "contextId": "5852f3c2-dd81-43cd-8e9f-4e85f6928dfe",
-              "summaryContextId": "042c4535-c089-43f9-9162-7dcb9391f051",
-              "summaryProposalId": "f05f0dea-2227-4dbf-8b7f-63cab6a6d22c",
+              "contextId": "dc5004db-5d4e-48fe-a4d5-0c581493a08c",
+              "summaryContextId": "8770591c-ea6c-44f7-bdb6-bb3c619508b6",
+              "summaryProposalId": "88199d84-ab1a-491a-913e-e40619612be4",
               "frozenInputSha256": "37ef61ad3eb3570a959b301946aceb3cfa1e78a4d086b314c0571c1e6c4b77a2",
-              "partId": "cf9011f3-248d-4645-a1a0-52268908b6c4",
-              "freshBranchContextId": "a2407829-fc12-42d1-8100-d92d1a400524",
-              "branchEventId": "96304ea9-af2e-4019-a5c3-329be94428fc",
+              "partId": "927fbfc9-8f1e-4540-80c7-3ba9f3147527",
+              "freshBranchContextId": "c8b0a796-30aa-4024-8e02-09ab6eaa64ef",
+              "branchEventId": "158a5c9b-54e9-4ca4-94c2-2497317f567d",
               "emptySelectedBranch": true,
               "routingProfile": {
                 "version": 5,
@@ -80,7 +80,7 @@
               "archiveBytes": 1428480,
               "canonicalAndJournalExact": true
             },
-            "jobSteps": 256,
+            "jobSteps": 289,
             "schemaSevenRejection": {
               "sourceSchemaVersion": 7,
               "targetSchemaVersion": 13,
@@ -94,8 +94,8 @@
               "candidateReady": false
             },
             "schemaEightUpgrade": {
-              "jobId": "6c80e57d-12ac-4626-b5dc-9b0bdb55d80a",
-              "candidateId": "20c55337-ce6a-461d-8fc1-f07323b31cc4",
+              "jobId": "49946af4-369e-424c-9dca-38083d1600a5",
+              "candidateId": "1c1c8643-2b5a-44e6-954c-4b3a6d8e1764",
               "sourceSchemaVersion": 8,
               "targetSchemaVersion": 13,
               "canonicalRecords": 23,
@@ -198,7 +198,7 @@
               "Markdown includes full blob-backed tail"
             ]
           },
-          "origin": "http://127.0.0.1:50081",
+          "origin": "http://127.0.0.1:54157",
           "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36",
           "copiedBytes": 5259264,
           "peakBlock": 65536,
@@ -215,7 +215,7 @@
           "archiveBytes": 10173952,
           "blobBytes": 9437201,
           "peakTransferBytes": 65536,
-          "steps": 149,
+          "steps": 195,
           "checks": [
             "actual ArchiveStorageClient owner-worker job and transfer routes",
             "9 MiB blob streamed without whole-archive array",
@@ -246,13 +246,13 @@
           "roundtrip": {
             "compaction": {
               "schemaVersion": 13,
-              "contextId": "b7cdb40c-de15-4fd4-8fc6-e6b0c3eb8079",
-              "summaryContextId": "3df63a50-2680-4c2a-8da5-310b04971ba6",
-              "summaryProposalId": "e6937c02-e38d-4fa7-9ec6-75cb8301ed6e",
+              "contextId": "fb5a55ca-9dd2-4d2d-a38d-b2a15e61c35d",
+              "summaryContextId": "643042f0-f538-4da4-9c41-63b163860356",
+              "summaryProposalId": "743a9a4b-f521-44b8-bcd4-e22c391933af",
               "frozenInputSha256": "37ef61ad3eb3570a959b301946aceb3cfa1e78a4d086b314c0571c1e6c4b77a2",
-              "partId": "06b8cbf8-10f3-4de8-8211-d0e87763ab5c",
-              "freshBranchContextId": "d22f9c7c-2bd8-4dfe-aaf0-c6bb0dec9169",
-              "branchEventId": "9fdf031f-57fa-458d-b067-f4565cd35c7c",
+              "partId": "90c0c512-2d23-48f9-a628-35a172324af1",
+              "freshBranchContextId": "311a87ef-c44f-40a0-a9eb-fc2aad56a459",
+              "branchEventId": "4d3c278e-127f-416f-8782-487b5a857231",
               "emptySelectedBranch": true,
               "routingProfile": {
                 "version": 5,
@@ -277,7 +277,7 @@
               "archiveBytes": 1428480,
               "canonicalAndJournalExact": true
             },
-            "jobSteps": 256,
+            "jobSteps": 289,
             "schemaSevenRejection": {
               "sourceSchemaVersion": 7,
               "targetSchemaVersion": 13,
@@ -291,8 +291,8 @@
               "candidateReady": false
             },
             "schemaEightUpgrade": {
-              "jobId": "345804b9-888a-4f8d-8350-6da57a2111a1",
-              "candidateId": "82904c69-8f58-49f6-901c-f087cb1e612d",
+              "jobId": "ade2be1c-2f1b-48f9-b76c-e875bb1d0057",
+              "candidateId": "20436d45-b3f3-4f58-9d9f-ee6203154220",
               "sourceSchemaVersion": 8,
               "targetSchemaVersion": 13,
               "canonicalRecords": 23,
@@ -395,7 +395,7 @@
               "Markdown includes full blob-backed tail"
             ]
           },
-          "origin": "http://127.0.0.1:50081",
+          "origin": "http://127.0.0.1:54157",
           "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
           "copiedBytes": 5259264,
           "peakBlock": 65536,
@@ -412,7 +412,7 @@
           "archiveBytes": 10173952,
           "blobBytes": 9437201,
           "peakTransferBytes": 65536,
-          "steps": 149,
+          "steps": 195,
           "checks": [
             "actual ArchiveStorageClient owner-worker job and transfer routes",
             "9 MiB blob streamed without whole-archive array",

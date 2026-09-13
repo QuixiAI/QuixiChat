@@ -527,7 +527,7 @@ Object.assign(window, {
         let advances = 0;
         const phases: string[] = [];
         while (job.state === "working") {
-          job = await storage.request(id(), "advanceArchiveJob", { operationId: id(), jobId: job.jobId, maxRecords: 128, maxBytes: 1_048_576 });
+          job = await storage.request(id(), "advanceArchiveJob", { operationId: id(), jobId: job.jobId, maxRecords: 128, maxBytes: 1_048_576 }, { timeoutMs: INTEGRITY_CHECK_DEADLINE_MS });
           advances++;
           if (phases.at(-1) !== job.phase) phases.push(job.phase);
           if (advances > 1_000_000) throw new Error("Export did not finish");
@@ -582,7 +582,7 @@ Object.assign(window, {
         try {
           let job = await storage.request(id(), "finishArchiveRestore", { operationId: id(), jobId, byteLength: bytes.length, sha256: digest });
           while (job.state === "working") {
-            job = await storage.request(id(), "advanceArchiveJob", { operationId: id(), jobId, maxRecords: 128, maxBytes: 1_048_576 });
+            job = await storage.request(id(), "advanceArchiveJob", { operationId: id(), jobId, maxRecords: 128, maxBytes: 1_048_576 }, { timeoutMs: INTEGRITY_CHECK_DEADLINE_MS });
             advances++;
             if (phases.at(-1) !== job.phase) phases.push(job.phase);
             if (advances > 1_000_000) throw new Error("Restore validation did not finish");
@@ -610,7 +610,7 @@ Object.assign(window, {
         let job = await storage.request(id(), "beginArchiveExport", { operationId, format });
         let advances = 0; const phases: string[] = [];
         while (job.state === "working") {
-          job = await storage.request(id(), "advanceArchiveJob", { operationId: id(), jobId: job.jobId, maxRecords: 128, maxBytes: 1_048_576 });
+          job = await storage.request(id(), "advanceArchiveJob", { operationId: id(), jobId: job.jobId, maxRecords: 128, maxBytes: 1_048_576 }, { timeoutMs: INTEGRITY_CHECK_DEADLINE_MS });
           advances++; if (phases.at(-1) !== job.phase) phases.push(job.phase);
           if (advances > 5_000_000) throw new Error("Export did not finish");
         }
@@ -659,7 +659,7 @@ Object.assign(window, {
         let status = await storage.request(id(), "finishArchiveRestore", { operationId: id(), jobId: job.jobId, byteLength: job.byteLength, sha256: job.sha256 });
         let advances = 0; const phases: string[] = [];
         while (status.state === "working") {
-          status = await storage.request(id(), "advanceArchiveJob", { operationId: id(), jobId: job.jobId, maxRecords: 128, maxBytes: 1_048_576 });
+          status = await storage.request(id(), "advanceArchiveJob", { operationId: id(), jobId: job.jobId, maxRecords: 128, maxBytes: 1_048_576 }, { timeoutMs: INTEGRITY_CHECK_DEADLINE_MS });
           advances++; if (phases.at(-1) !== status.phase) phases.push(status.phase);
           if (advances > 5_000_000) throw new Error("Restore validation did not finish");
         }

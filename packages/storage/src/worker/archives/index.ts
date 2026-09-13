@@ -19,6 +19,7 @@ import { CANONICAL_MIGRATIONS } from "../../../migrations/index.ts";
 import { BlobStorageError } from "../blobs.ts";
 import type { SearchBlobAccess } from "../search/index.ts";
 import {
+  BoundedFileCopier,
   SnapshotCopier,
   approvedSchema,
   sqlRows,
@@ -78,6 +79,11 @@ type Runtime = {
   candidate?: FileSystemDirectoryHandle;
   raw?: ArchiveDatabaseFile;
   snapshot?: SnapshotCopier;
+  /** Restore: the received database copied into the candidate pool in bounded steps. */
+  candidateImport?: BoundedFileCopier<boolean>;
+  candidateImported?: boolean;
+  /** Restore: tables still to integrity-check, one per step. */
+  integrityTables?: string[];
   clean?: ArchiveDatabaseFile;
   copier?: CleanSnapshotCopy;
   output?: ArchiveFileHandle;
@@ -711,30 +717,28 @@ CREATE INDEX IF NOT EXISTS quixi_archive_review_token ON quixi_archive_operation
           },
         );
         await runtime.candidatePool.unpauseVfs();
-        const cleaned = viaRaw && (runtime.revalidate || job.rescueCleaned);
-        if (!runtime.revalidate && !cleaned) {
-          const input = await openArchiveFile(candidate, "incoming.sqlite3");
-          let offset = 0;
-          try {
-            await runtime.candidatePool.importDb(
-              viaRaw ? "/rescue-raw.sqlite3" : "/archive.sqlite3",
-              async () => {
-                stopped(signal);
-                if (offset === input.getSize()) return undefined;
-                const bytes = readArchiveBytes(
-                  input,
-                  offset,
-                  Math.min(65536, input.getSize() - offset),
-                );
-                offset += bytes.length;
-                await new Promise((resolve) => setTimeout(resolve, 0));
-                return bytes;
-              },
-            );
-          } finally {
-            input.close();
-          }
-        }
+      }
+      const cleaned = viaRaw && (runtime.revalidate || job.rescueCleaned);
+      if (!runtime.revalidate && !cleaned && !runtime.candidateImported) {
+        // The received database is copied into the candidate pool at most maxBytes per step (ADR 0010 amendment).
+        runtime.candidateImport ??= new BoundedFileCopier<boolean>(
+          this.options.sqlite,
+          runtime.candidatePool,
+          viaRaw ? "/rescue-raw.sqlite3" : "/archive.sqlite3",
+          async () => {
+            const input = await openArchiveFile(candidate, "incoming.sqlite3");
+            return { byteLength: input.getSize(), read: (offset, maxBytes) => readArchiveBytes(input, offset, Math.min(maxBytes, input.getSize() - offset)), close: () => input.close() };
+          },
+          () => true,
+        );
+        const done = await runtime.candidateImport.advance(args.maxBytes);
+        job.status.completedBytes = runtime.candidateImport.copiedBytes;
+        job.status.totalBytes = runtime.candidateImport.totalBytes;
+        if (!done) return;
+        delete runtime.candidateImport;
+        runtime.candidateImported = true;
+      }
+      if (!runtime.raw && !runtime.candidateDb) {
         if (viaRaw && !cleaned) {
           // The received bytes are verified on the raw copy, then cleaned
           // into a fresh candidate exactly as a portable export is cleaned.
@@ -862,8 +866,16 @@ CREATE INDEX IF NOT EXISTS quixi_archive_review_token ON quixi_archive_operation
         json(job.manifest!.source.migrations) !== json(expected)
       )
         throw new Error("Archive migration history is unsupported.");
-      if (runtime.candidateDb!.selectValue("PRAGMA integrity_check") !== "ok")
-        throw new Error("Restored SQLite integrity check failed.");
+      // One table (with its indexes) per step: the whole-file check outlives a step on multi-gigabyte candidates.
+      runtime.integrityTables ??= sqlRows(runtime.candidateDb!, "SELECT name FROM sqlite_schema WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name").map((row) => String(row.name));
+      const table = runtime.integrityTables.shift();
+      if (table !== undefined) {
+        if (!/^[A-Za-z_][A-Za-z0-9_]*$/.test(table)) throw new Error("Restored SQLite schema names an unsupported table.");
+        if (runtime.candidateDb!.selectValue(`PRAGMA integrity_check(${table})`) !== "ok")
+          throw new Error("Restored SQLite integrity check failed.");
+        if (runtime.integrityTables.length) return;
+      }
+      delete runtime.integrityTables;
       runtime.validator = new CanonicalArchiveValidator(
         runtime.candidateDb!,
         this.db,
@@ -1310,6 +1322,7 @@ CREATE INDEX IF NOT EXISTS quixi_archive_review_token ON quixi_archive_operation
     this.runtime.delete(id);
     const cleanup = [
       () => runtime.snapshot?.close(),
+      () => runtime.candidateImport?.close(),
       () => runtime.iterator?.return(undefined),
       () => runtime.receiver?.close(),
       () => runtime.inventory?.close(),

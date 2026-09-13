@@ -1,3 +1,4 @@
+import { INTEGRITY_CHECK_DEADLINE_MS } from "@quixi/core/contracts";
 import type {
   ArchiveActivationArgs,
   ArchiveActivationReceipt,
@@ -297,6 +298,7 @@ export function createRestoreController(options: RestoreControllerOptions) {
                   maxRecords: 64,
                   maxBytes: 262144,
                 },
+                { timeoutMs: INTEGRITY_CHECK_DEADLINE_MS },
               );
             } finally {
               signal.removeEventListener("abort", cancel);
